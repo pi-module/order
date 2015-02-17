@@ -75,7 +75,7 @@ abstract class AbstractGateway
         foreach ($allPath as $path) {
             $dir = sprintf(Pi::path('usr/module/order/src/Gateway/%s'), $path);
             if (is_dir($dir)) {
-                $class = sprintf('Module\order\Gateway\%s\Gateway', $path);
+                $class = sprintf('Module\Order\Gateway\%s\Gateway', $path);
                 if (class_exists($class)) {
                     $gateway = new $class;
                     if (is_object($gateway)) {

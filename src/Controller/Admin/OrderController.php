@@ -11,19 +11,19 @@
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 
-namespace Module\Shop\Controller\Admin;
+namespace Module\Order\Controller\Admin;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Module\Shop\Form\OrderSettingForm;
-use Module\Shop\Form\OrderSettingFilter;
-use Module\Shop\Form\UpdateDeliveryForm;
-use Module\Shop\Form\UpdateDeliveryFilter;
-use Module\Shop\Form\UpdateOrderForm;
-use Module\Shop\Form\UpdateOrderFilter;
-use Module\Shop\Form\UpdatePaymentForm;
-use Module\Shop\Form\UpdatePaymentFilter;
+use Module\Order\Form\OrderSettingForm;
+use Module\Order\Form\OrderSettingFilter;
+use Module\Order\Form\UpdateDeliveryForm;
+use Module\Order\Form\UpdateDeliveryFilter;
+use Module\Order\Form\UpdateOrderForm;
+use Module\Order\Form\UpdateOrderFilter;
+use Module\Order\Form\UpdatePaymentForm;
+use Module\Order\Form\UpdatePaymentFilter;
 
 class OrderController extends ActionController
 {
@@ -54,7 +54,7 @@ class OrderController extends ActionController
         $rowset = $this->getModel('order')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
-            $list[$row->id] = Pi::api('order', 'shop')->canonizeOrder($row);
+            $list[$row->id] = Pi::api('order', 'order')->canonizeOrder($row);
         }
         // Set paginator
         $count = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
@@ -85,7 +85,7 @@ class OrderController extends ActionController
         $form->setAttribute('action', $this->url('', array('action' => 'process')));
         $form->setData($values);
     	// Set view
-    	$this->view()->setTemplate('order_index');
+    	$this->view()->setTemplate('order-index');
     	$this->view()->assign('list', $list);
     	$this->view()->assign('paginator', $paginator);
         $this->view()->assign('form', $form);
@@ -146,10 +146,10 @@ class OrderController extends ActionController
                 }
                 $order->save();
                 // Add log
-                Pi::api('log', 'shop')->addLog('order', $order->id, 'update');
+                //Pi::api('log', 'shop')->addLog('order', $order->id, 'update');
                 // Set return
                 $return['status'] = 1;
-                $return['data'] = Pi::api('order', 'shop')->orderStatus($order->status_order);
+                $return['data'] = Pi::api('order', 'order')->orderStatus($order->status_order);
                 $return['data']['time_finish_view'] = ($order->time_finish) ? _date($order->time_finish) : __('Not Finish');
             } else {
                 $return['status'] = 0;
@@ -183,7 +183,7 @@ class OrderController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                $gateway = Pi::api('gateway', 'payment')->getGatewayInfo($values['payment_adapter'][0]);
+                $gateway = Pi::api('gateway', 'order')->getGatewayInfo($values['payment_adapter'][0]);
                 $order->status_payment = $values['status_payment'];
                 $order->payment_adapter = $gateway['path'];
                 $order->payment_method = $gateway['type'];
@@ -194,10 +194,10 @@ class OrderController extends ActionController
                 }
                 $order->save();
                 // Add log
-                Pi::api('log', 'shop')->addLog('payment', $order->id, 'update');
+                //Pi::api('log', 'shop')->addLog('payment', $order->id, 'update');
                 // Set return
                 $return['status'] = 1;
-                $return['data'] = Pi::api('order', 'shop')->paymentStatus($order->status_payment);
+                $return['data'] = Pi::api('order', 'order')->paymentStatus($order->status_payment);
                 $return['data']['payment_adapter'] = $order->payment_adapter;
                 $return['data']['payment_method'] = $order->payment_method;
                 $return['data']['time_payment_view'] = ($order->time_payment) ? _date($order->time_payment) : __('Not Paid');
@@ -241,10 +241,10 @@ class OrderController extends ActionController
                 }
                 $order->save();
                 // Add log
-                Pi::api('log', 'shop')->addLog('delivery', $order->id, 'update');
+                //Pi::api('log', 'shop')->addLog('delivery', $order->id, 'update');
                 // Set return
                 $return['status'] = 1;
-                $return['data'] = Pi::api('order', 'shop')->deliveryStatus($order->status_delivery);
+                $return['data'] = Pi::api('order', 'order')->deliveryStatus($order->status_delivery);
                 $return['data']['time_delivery_view'] = ($order->time_delivery) ? _date($order->time_delivery) : __('Not Delivery');
             } else {
                 $return['status'] = 0;
@@ -269,10 +269,10 @@ class OrderController extends ActionController
         $module = $this->params('module');
         // Get order
         $order = $this->getModel('order')->find($id);
-        $order = Pi::api('order', 'shop')->canonizeOrder($order);
-        $order['product'] = Pi::api('order', 'shop')->listProduct($order['id']);
+        $order = Pi::api('order', 'order')->canonizeOrder($order);
+        $order['product'] = Pi::api('order', 'order')->listProduct($order['id']);
         // Add log
-        Pi::api('log', 'shop')->addLog('order', $order['id'], 'view');
+        //Pi::api('log', 'shop')->addLog('order', $order['id'], 'view');
         // Set view
         $this->view()->setTemplate('order_view');
         $this->view()->assign('order', $order);

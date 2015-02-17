@@ -29,7 +29,7 @@ class GatewayController extends ActionController
     {
     	$list = Pi::api('gateway', 'order')->getAllGatewayList();
     	$this->view()->assign('list', $list);
-    	$this->view()->setTemplate('gateway_index');
+    	$this->view()->setTemplate('gateway-index');
     }	
     
     public function updateAction()

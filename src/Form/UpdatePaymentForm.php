@@ -11,7 +11,7 @@
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 
-namespace Module\Shop\Form;
+namespace Module\Order\Form;
 
 use Pi;
 use Pi\Form\Form as BaseForm;
@@ -45,13 +45,13 @@ class UpdatePaymentForm  extends BaseForm
                 ),
             ),
         ));
-        // payment_adapter
+        // gateway
         $this->add(array(
-            'name' => 'payment_adapter',
-            'type' => 'Module\Shop\Form\Element\Gateway',
+            'name' => 'gateway',
+            'type' => 'Module\Order\Form\Element\Gateway',
             'options' => array(
                 'label' => __('Adapter'),
-                'payment_adapter' => '',
+                'gateway' => '',
             ),
         ));
         // Save

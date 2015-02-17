@@ -11,7 +11,7 @@
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 
-namespace Module\Shop\Form\Element;
+namespace Module\Order\Form\Element;
 
 use Pi;
 use Zend\Form\Element\Select;
@@ -30,8 +30,8 @@ class Location extends Select
             {
                 $list[0] = '';
             }
-            $select = Pi::model('location', 'shop')->select();
-            $rowset = Pi::model('location', 'shop')->selectWith($select);
+            $select = Pi::model('location', 'order')->select();
+            $rowset = Pi::model('location', 'order')->selectWith($select);
             foreach ($rowset as $row) {
                 $list[$row->id] = $row->title;
             }

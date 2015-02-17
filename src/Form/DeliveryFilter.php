@@ -11,7 +11,7 @@
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 
-namespace Module\Shop\Form;
+namespace Module\Order\Form;
 
 use Pi;
 use Zend\InputFilter\InputFilter;
@@ -40,9 +40,9 @@ class DeliveryFilter extends InputFilter
             'name' => 'status',
             'required' => true,
         ));
-        // payment_adapter
+        // gateway
         $this->add(array(
-            'name' => 'payment',
+            'name' => 'gateway',
             'required' => true,
         ));
     }

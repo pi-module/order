@@ -11,7 +11,7 @@
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 
-namespace Module\Shop\Form;
+namespace Module\Order\Form;
 
 use Pi;
 use Zend\InputFilter\InputFilter;
@@ -25,9 +25,9 @@ class UpdatePaymentFilter extends InputFilter
             'name' => 'status_payment',
             'required' => true,
         ));
-        // payment_adapter
+        // gateway
         $this->add(array(
-            'name' => 'payment_adapter',
+            'name' => 'gateway',
             'required' => true,
         ));
     }

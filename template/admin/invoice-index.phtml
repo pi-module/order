@@ -1,6 +1,7 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="clearfix">
-	<h3><?php _e('List of Invoices'); ?></h3>
+	<h3><?php _e('List of invoices'); ?></h3>
+    <?php if (!empty($list)) { ?>
 	<table class="table table-striped table-bordered table-condensed">
 		<tr>
 			<th><?php _e('ID'); ?></th>
@@ -41,4 +42,15 @@
 		<span class="label label-warning"><?php _e('Unpaid'); ?></span>
 		<span class="label label-danger"><?php _e('Canceled'); ?></span>
 	</p>
+    <?php } else { ?>
+    <div class="alert alert-warning" role="alert"><?php _e('No invoice is not created yet'); ?></div>
+    <div class="alert alert-info" role="alert">
+        <h4><?php _e('Todo list for fist time'); ?></h4>
+        <ul>
+            <li><?php _e('1- Setup payment gateway from gateway tap'); ?></li>
+            <li><?php _e('2- Setup delivery method from delivery tap'); ?></li>
+            <li><?php _e('3- Setup location from location tap'); ?></li>
+        </ul>
+    </div>  
+    <?php } ?>
 </div>

@@ -33,10 +33,10 @@ return array(
             'controller'  => 'logs',
             'action'      => 'index',
         ),
-        'location' => array(
-            'label'       => _a('Location'),
+        'gateway' => array(
+            'label'       => _a('Gateway'),
             'route'       => 'admin',
-            'controller'  => 'location',
+            'controller'  => 'gateway',
             'action'      => 'index',
         ),
         'delivery' => array(
@@ -45,10 +45,10 @@ return array(
             'controller'  => 'delivery',
             'action'      => 'index',
         ),
-        'gateway' => array(
-            'label'       => _a('Gateway'),
+        'location' => array(
+            'label'       => _a('Location'),
             'route'       => 'admin',
-            'controller'  => 'gateway',
+            'controller'  => 'location',
             'action'      => 'index',
         ),
     ),

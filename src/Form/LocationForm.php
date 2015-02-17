@@ -58,7 +58,7 @@ class LocationForm  extends BaseForm
         // parent
         $this->add(array(
             'name' => 'parent',
-            'type' => 'Module\Shop\Form\Element\Location',
+            'type' => 'Module\Order\Form\Element\Location',
             'options' => array(
                 'label' => __('Parent'),
                 'parent' => 1,

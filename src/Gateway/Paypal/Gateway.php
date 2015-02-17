@@ -245,7 +245,7 @@ class Gateway extends AbstractGateway
             'type'      => 'hidden',
         );
         // Set for test mode
-        if ($this->gatewayOption['test_mode']) {
+        if (isset($this->gatewayOption['test_mode']) && $this->gatewayOption['test_mode']) {
             // username
             $form['username'] = array(
                 'name'      => 'username',
@@ -262,6 +262,7 @@ class Gateway extends AbstractGateway
                 'type'      => 'hidden',
             );
         }
+        // Set form
         $this->gatewayPayForm = $form;
         return $this;
     }
