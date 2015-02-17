@@ -11,7 +11,7 @@
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 
-namespace Module\Shop\Form;
+namespace Module\Order\Form;
 
 use Pi;
 use Zend\InputFilter\InputFilter;
@@ -20,8 +20,8 @@ class OrderFilter extends InputFilter
 {
     public function __construct()
     {
-        $config = Pi::service('registry')->config->read('shop', 'order');
-        $checkout = Pi::api('order', 'shop')->checkoutConfig();
+        //$config = Pi::service('registry')->config->read('order', 'order');
+        //$checkout = Pi::api('order', 'order')->checkoutConfig();
         // name
         if ($config['order_name']) {
             // first_name

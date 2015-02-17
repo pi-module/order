@@ -23,14 +23,6 @@ use Zend\Json\Json;
 
 class IndexController extends ActionController
 {
-    /*
-
-    $order = array();
-    $order['gateway'] = 'Gateway Name';
-
-
-    */
-
     public function checkoutAction()
     {
         // Check user
@@ -39,18 +31,18 @@ class IndexController extends ActionController
         $config = Pi::service('registry')->config->read($this->getModule());
         // Set cart
         $order = $_SESSION['order'];
-        if (empty($cart)) {
+        if (empty($order)) {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
             $this->jump($url, __('Your cart is empty.'), 'error');
         }
         // Check order is active or inactive
-        if ($config['order_method'] == 'inactive') {
+        /* if ($config['order_method'] == 'inactive') {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
             $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
-        }
+        } */
         // Set order form
         $form = new OrderForm('order');
-        if ($this->request->isPost()) {
+        /* if ($this->request->isPost()) {
             $data = $this->request->getPost();
             $form->setInputFilter(new OrderFilter);
             $form->setData($data);
@@ -149,15 +141,10 @@ class IndexController extends ActionController
             $message = '';
             $user = Pi::api('user', 'shop')->getUserInfo();
             $form->setData($user);
-        }
-        // Set cart
-        $cart = $_SESSION['shop']['cart'];
+        } */
         // Set view
-        $this->view()->setTemplate('checkout_information');
+        $this->view()->setTemplate('checkout');
         $this->view()->assign('form', $form);
-        $this->view()->assign('title', __('Checkout'));
-        $this->view()->assign('message', $message);
-        $this->view()->assign('cart', $cart);
     }
 
     /* public function indexAction()

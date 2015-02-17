@@ -11,7 +11,7 @@
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 
-namespace Module\Shop\Form;
+namespace Module\Order\Form;
 
 use Pi;
 use Pi\Form\Form as BaseForm;
@@ -20,8 +20,8 @@ class OrderForm  extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {
-        $this->config = Pi::service('registry')->config->read('shop', 'order');
-        $this->checkout = Pi::api('order', 'shop')->checkoutConfig();
+        $this->config = Pi::service('registry')->config->read('order', 'order');
+        //$this->checkout = Pi::api('order', 'order')->checkoutConfig();
         parent::__construct($name);
     }
 
@@ -121,15 +121,26 @@ class OrderForm  extends BaseForm
         // address
         if ($this->config['order_address']) {
             $this->add(array(
-                'name' => 'address',
+                'name' => 'address1',
                 'options' => array(
-                    'label' => __('Address'),
+                    'label' => __('Address 1'),
                 ),
                 'attributes' => array(
                     'type' => 'textarea',
-                    'rows' => '3',
+                    'rows' => '2',
                     'cols' => '40',
-                    
+                    'description' => '',
+                )
+            ));
+            $this->add(array(
+                'name' => 'address2',
+                'options' => array(
+                    'label' => __('Address 2'),
+                ),
+                'attributes' => array(
+                    'type' => 'textarea',
+                    'rows' => '2',
+                    'cols' => '40',
                     'description' => '',
                 )
             ));

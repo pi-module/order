@@ -28,7 +28,7 @@ class Order extends Standard
     );
 
     protected $actionList = array(
-        'invoice', 'pay', 'result', 'notify', 'remove', 'cancel', 'finish', 'error'
+        'checkout', 'invoice', 'pay', 'result', 'notify', 'remove', 'cancel', 'finish', 'error'
     );
 
     /**
