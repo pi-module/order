@@ -47,7 +47,7 @@ class Processing extends AbstractApi
         if (!empty($random_id)) {
             $row = Pi::model('processing', $this->getModule())->find($random_id, 'random_id');
         } else {
-            if ($config['payment_anonymous'] == 0) {
+            if ($config['order_anonymous'] == 0) {
                 $uid = Pi::user()->getId();
                 $row = Pi::model('processing', $this->getModule())->find($uid, 'uid');
             } else {
@@ -69,7 +69,7 @@ class Processing extends AbstractApi
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Check config
-        if ($config['payment_anonymous'] == 0) {
+        if ($config['order_anonymous'] == 0) {
             $uid = Pi::user()->getId();
             $row = Pi::model('processing', $this->getModule())->find($uid, 'uid');
         } else {
@@ -98,7 +98,7 @@ class Processing extends AbstractApi
         if (!empty($random_id)) {
             $row = Pi::model('processing', $this->getModule())->find($random_id, 'random_id');
         } else {
-            if ($config['payment_anonymous'] == 0) {
+            if ($config['order_anonymous'] == 0) {
                 $uid = Pi::user()->getId();
                 $row = Pi::model('processing', $this->getModule())->find($uid, 'uid');
             } else {

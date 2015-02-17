@@ -41,7 +41,7 @@ class Invoice extends AbstractApi
     	$uid = Pi::user()->getId();
         $config = Pi::service('registry')->config->read($this->getModule());
         // Check user
-        if ($config['payment_anonymous'] == 0 && $uid == 0) {
+        if ($config['order_anonymous'] == 0 && $uid == 0) {
             $result['status'] = 0;
             $result['pay_url'] = '';
             $result['message'] = __('Please login for create invoice');
@@ -85,7 +85,7 @@ class Invoice extends AbstractApi
                 )));
                 $result['message'] = __('Your invoice create successfully');
                 // Set invoice information on session
-                if ($config['payment_anonymous'] == 1) {
+                if ($config['order_anonymous'] == 1) {
                     $_SESSION['order']['process'] = 1;
                     $_SESSION['order']['process_start'] = time();
                     $_SESSION['order']['invoice_id'] = $row->id;

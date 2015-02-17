@@ -17,10 +17,149 @@ use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Module\Order\Form\PayForm;
 use Module\Order\Form\RemoveForm;
+use Module\Order\Form\OrderForm;
+use Module\Order\Form\OrderFilter;
 use Zend\Json\Json;
 
 class IndexController extends ActionController
 {
+    /*
+
+    $order = array();
+    $order['gateway'] = 'Gateway Name';
+
+
+    */
+
+    public function checkoutAction()
+    {
+        // Check user
+        $this->checkUser();
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Set cart
+        $order = $_SESSION['order'];
+        if (empty($cart)) {
+            $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
+            $this->jump($url, __('Your cart is empty.'), 'error');
+        }
+        // Check order is active or inactive
+        if ($config['order_method'] == 'inactive') {
+            $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
+            $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
+        }
+        // Set order form
+        $form = new OrderForm('order');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new OrderFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Set gateway
+                $gateway = Pi::api('gateway', 'payment')->getGatewayInfo($order['gateway']);
+                // Set values
+                $values['code'] = Pi::api('order', 'order')->codeOrder();
+                $values['uid'] = Pi::user()->getId();
+                $values['ip'] = Pi::user()->getIp();
+                $values['status_order'] = 1;
+                $values['status_payment'] = 1;
+                $values['status_delivery'] = 1;
+                $values['time_create'] = time();
+
+
+                $values['number'] = $cart['invoice']['total']['number'];
+                $values['product_price'] = $cart['invoice']['total']['price'];
+                $values['discount_price'] = $cart['invoice']['total']['discount'];
+                $values['shipping_price'] = $cart['invoice']['total']['shipping'];
+                $values['packing_price'] = 0;
+                $values['total_price'] = $cart['invoice']['total']['total_price'];
+                $values['delivery'] = $cart['invoice']['total']['delivery'];
+                $values['location'] = $cart['invoice']['total']['location'];
+                
+                // Save values to order
+                $row = $this->getModel('order')->createRow();
+                $row->assign($values);
+                $row->save();
+
+                // Save order basket
+                foreach ($cart['invoice']['product'] as $product) {
+                    $basket = $this->getModel('order_basket')->createRow();
+                    $basket->order = $row->id;
+                    $basket->product = $product['id'];
+                    $basket->product_price = $product['price'];
+                    $basket->discount_price = $product['discount'];
+                    $basket->total_price = $product['total'];
+                    $basket->number = $product['number'];
+                    $basket->save();
+                }
+                // Set payment information
+                if ($row->payment_method == 'offline') {
+                    $result['status'] = 1;
+                    $result['message'] = __('Your order saved and we will call you soon');
+                    $result['invoice_url'] = Pi::url($this->url('', array(
+                        'module'        => $this->params('module'), 
+                        'controller'    => 'checkout',
+                        'action'        => 'finish',
+                        'id'            => $row->id,
+                    )));
+                } else {
+                    // Set invoice description
+                    $description = array();
+                    foreach ($cart['product'] as $product) {
+                        $item = array();
+                        $item['id'] = $product['id'];
+                        $item['title'] = $product['title'];
+                        $item['price'] = $product['price'];
+                        $item['number'] = $product['number'];
+                        $item['total'] = $product['total'];
+                        $description[$product['id']] = $item;
+                    }
+                    // Set order array
+                    $order = array();
+                    $order['module'] = $this->getModule();
+                    $order['part'] = 'order';
+                    $order['id'] = $row->id;
+                    $order['amount'] = $row->total_price;
+                    $order['adapter'] = $row->payment_adapter;
+                    $order['description'] = Json::encode($description);
+                    // Payment module
+                    $result = Pi::api('invoice', 'payment')->createInvoice(
+                        $order['module'], 
+                        $order['part'], 
+                        $order['id'], 
+                        $order['amount'], 
+                        $order['adapter'], 
+                        $order['description']
+                    );
+                }
+                // Check it save or not
+                if ($result['status']) {
+                    // unset cart
+                    $this->setEmpty();
+                    // Go to payment
+                    $this->jump($result['invoice_url'], $result['message'], 'success');
+                } else {
+                    $message = __('Checkout data not saved.');
+                }
+            } else {
+                $message = __('Invalid data, please check and re-submit.');
+            }   
+        } else {
+            $message = '';
+            $user = Pi::api('user', 'shop')->getUserInfo();
+            $form->setData($user);
+        }
+        // Set cart
+        $cart = $_SESSION['shop']['cart'];
+        // Set view
+        $this->view()->setTemplate('checkout_information');
+        $this->view()->assign('form', $form);
+        $this->view()->assign('title', __('Checkout'));
+        $this->view()->assign('message', $message);
+        $this->view()->assign('cart', $cart);
+    }
+
     /* public function indexAction()
     {
         // Check user is login or not
@@ -344,7 +483,7 @@ class IndexController extends ActionController
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Check config
-        if ($config['payment_anonymous'] == 0) {
+        if ($config['order_anonymous'] == 0) {
             // Check user is login or not
             Pi::service('authentication')->requireLogin();
         }

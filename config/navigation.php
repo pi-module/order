@@ -15,6 +15,12 @@
 
 return array(
     'admin' => array(
+        'order' => array(
+            'label'       => _a('Orders'),
+            'route'       => 'admin',
+            'controller'  => 'order',
+            'action'      => 'index',
+        ),
         'invoice' => array(
             'label'       => _a('Invoice'),
             'route'       => 'admin',
@@ -25,6 +31,18 @@ return array(
             'label'       => _a('Logs'),
             'route'       => 'admin',
             'controller'  => 'logs',
+            'action'      => 'index',
+        ),
+        'location' => array(
+            'label'       => _a('Location'),
+            'route'       => 'admin',
+            'controller'  => 'location',
+            'action'      => 'index',
+        ),
+        'delivery' => array(
+            'label'       => _a('Delivery'),
+            'route'       => 'admin',
+            'controller'  => 'delivery',
             'action'      => 'index',
         ),
         'gateway' => array(
