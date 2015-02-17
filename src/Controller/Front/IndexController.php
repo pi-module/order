@@ -36,57 +36,81 @@ class IndexController extends ActionController
             $this->jump($url, __('Your cart is empty.'), 'error');
         }
         // Check order is active or inactive
-        /* if ($config['order_method'] == 'inactive') {
+        if ($config['order_method'] == 'inactive') {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
             $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
-        } */
+        }
         // Set order form
         $form = new OrderForm('order');
-        /* if ($this->request->isPost()) {
+        if ($this->request->isPost()) {
             $data = $this->request->getPost();
             $form->setInputFilter(new OrderFilter);
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                // Set gateway
-                $gateway = Pi::api('gateway', 'payment')->getGatewayInfo($order['gateway']);
                 // Set values
-                $values['code'] = Pi::api('order', 'order')->codeOrder();
+                $values['code'] = Pi::api('order', 'order')->generatCode();
                 $values['uid'] = Pi::user()->getId();
                 $values['ip'] = Pi::user()->getIp();
                 $values['status_order'] = 1;
                 $values['status_payment'] = 1;
                 $values['status_delivery'] = 1;
                 $values['time_create'] = time();
-
-
-                $values['number'] = $cart['invoice']['total']['number'];
-                $values['product_price'] = $cart['invoice']['total']['price'];
-                $values['discount_price'] = $cart['invoice']['total']['discount'];
-                $values['shipping_price'] = $cart['invoice']['total']['shipping'];
+                // Set type
+                if (isset($_SESSION['order']['type']) && in_array($_SESSION['order']['type'], array('free','onetime','recurring','installment'))) {
+                    $values['type'] = $_SESSION['order']['type'];
+                }
+                // Set module_name
+                if (isset($_SESSION['order']['module_name']) && !empty($_SESSION['order']['module_name'])) {
+                    $values['type'] = $_SESSION['order']['module_name'];
+                }
+                // Set module_table
+                if (isset($_SESSION['order']['module_table']) && !empty($_SESSION['order']['module_table'])) {
+                    $values['type'] = $_SESSION['order']['module_table'];
+                }
+                // Set module_item
+                if (isset($_SESSION['order']['module_item']) && !empty($_SESSION['order']['module_item'])) {
+                    $values['type'] = $_SESSION['order']['module_item'];
+                }
+                // Set price
+                $values['product_price'] = 0;
+                $values['discount_price'] = 0;
+                $values['shipping_price'] = 0;
                 $values['packing_price'] = 0;
-                $values['total_price'] = $cart['invoice']['total']['total_price'];
-                $values['delivery'] = $cart['invoice']['total']['delivery'];
-                $values['location'] = $cart['invoice']['total']['location'];
-                
+                $values['vat_price'] = 0;
+                // Check order
+                if (!empty($_SESSION['order']['product'])) {
+                    foreach ($_SESSION['order']['product'] as $product) {
+                        $values['product_price'] = $product['product_price'] + $values['product_price'];
+                        $values['discount_price'] = $product['discount_price'] + $values['discount_price'];
+                        $values['shipping_price'] = $product['shipping_price'] + $values['shipping_price'];
+                        $values['packing_price'] = $product['packing_price'] + $values['packing_price'];
+                        $values['vat_price'] = $product['vat_price'] + $values['vat_price'];
+                    }
+                }
+                // Set total price
+                $values['total_price'] = $values['product_price'] + $values['discount_price'] + $values['shipping_price'] + $values['packing_price'] + $values['vat_price'];
                 // Save values to order
                 $row = $this->getModel('order')->createRow();
                 $row->assign($values);
                 $row->save();
-
                 // Save order basket
-                foreach ($cart['invoice']['product'] as $product) {
-                    $basket = $this->getModel('order_basket')->createRow();
-                    $basket->order = $row->id;
-                    $basket->product = $product['id'];
-                    $basket->product_price = $product['price'];
-                    $basket->discount_price = $product['discount'];
-                    $basket->total_price = $product['total'];
-                    $basket->number = $product['number'];
-                    $basket->save();
+                if (!empty($_SESSION['order']['product'])) {
+                    foreach ($_SESSION['order']['product'] as $product) {
+                        $basket = $this->getModel('basket')->createRow();
+                        $basket->order = $row->id;
+                        $basket->product = $product['product'];
+                        $basket->product_price = $product['product_price'];
+                        $basket->discount_price = $product['discount_price'];
+                        $basket->shipping_price = $product['shipping_price'];
+                        $basket->packing_price = $product['packing_price'];
+                        $basket->vat_price = $product['vat_price'];
+                        $basket->number = $product['number'];
+                        $basket->save();
+                    }
                 }
                 // Set payment information
-                if ($row->payment_method == 'offline') {
+                /* if ($row->gateway == 'offline') {
                     $result['status'] = 1;
                     $result['message'] = __('Your order saved and we will call you soon');
                     $result['invoice_url'] = Pi::url($this->url('', array(
@@ -133,15 +157,12 @@ class IndexController extends ActionController
                     $this->jump($result['invoice_url'], $result['message'], 'success');
                 } else {
                     $message = __('Checkout data not saved.');
-                }
-            } else {
-                $message = __('Invalid data, please check and re-submit.');
+                } */
             }   
         } else {
-            $message = '';
-            $user = Pi::api('user', 'shop')->getUserInfo();
-            $form->setData($user);
-        } */
+            //$user = Pi::api('user', 'shop')->getUserInfo();
+            //$form->setData($user);
+        }
         // Set view
         $this->view()->setTemplate('checkout');
         $this->view()->assign('form', $form);

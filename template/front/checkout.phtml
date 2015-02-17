@@ -77,34 +77,32 @@
 EOT;
     $script =  sprintf(
         $script,
-        Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'location', 'id' => ''))),
+        Pi::url($this->url('', array('controller' => 'index', 'action' => 'levelAjax', 'process' => 'location', 'id' => ''))),
         __('Price : '),
         __('Time : '),
         __('Days'),
-        Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'delivery', 'id' => ''))),
-        Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'payment', 'id' => '')))
+        Pi::url($this->url('', array('controller' => 'index', 'action' => 'levelAjax', 'process' => 'delivery', 'id' => ''))),
+        Pi::url($this->url('', array('controller' => 'index', 'action' => 'levelAjax', 'process' => 'payment', 'id' => '')))
     );
     $this->footScript()->appendScript($script);
 
 ?>
 <div id="js-order" class="clearfix">
-    <h1><?php _e('Test'); ?></h1>
+    <h1><?php _e('Checkout'); ?></h1>
     <div class="col-md-8"><?php echo $this->form($form); ?></div>
-    <div class="col-md-4 ">
-        <div data-spy="affix" class="cartInfo">
-            <div class="panel panel-default">
-                <div class="panel-heading"><?php _e('Pre Invoice'); ?></div>
-                <div class="panel-body">
-                    <p><strong><?php _e('Total Price'); ?></strong> : <span id="cart-total-price"><?php echo $this->escape($cart['invoice']['total']['price_view']); ?></span></p>
-                    <p><strong><?php _e('Total Discount'); ?></strong> : <span id="cart-total-discount"><?php echo $this->escape($cart['invoice']['total']['discount_view']); ?></span></p>
-                    <p><strong><?php _e('Total Number'); ?></strong> : <span id="cart-total-number"><?php echo $this->escape($cart['invoice']['total']['number']); ?></span></p>
-                    <p><strong><?php _e('Total Shipping'); ?></strong> : <span id="cart-total-shipping"><?php echo $this->escape($cart['invoice']['total']['shipping_view']); ?></span></p>
-                    <p><strong><?php _e('Final Price'); ?></strong> : <span  id="cart-total-total" class="label label-success"><?php echo $this->escape($cart['invoice']['total']['total_price_view']); ?></span></p>
-                    <p><strong><?php _e('Location'); ?></strong> : <span id="cart-location"></span></p>
-                    <p><strong><?php _e('Delivery'); ?></strong> : <span id="cart-delivery"></span></p>
-                    <p><strong><?php _e('Payment'); ?></strong> : <span id="cart-payment"></span></p>
-                </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading"><?php _e('Pre Invoice'); ?></div>
+            <div class="panel-body">
+                <p><strong><?php _e('Total Price'); ?></strong> : <span id="cart-total-price"><?php echo $this->escape($cart['invoice']['total']['price_view']); ?></span></p>
+                <p><strong><?php _e('Total Discount'); ?></strong> : <span id="cart-total-discount"><?php echo $this->escape($cart['invoice']['total']['discount_view']); ?></span></p>
+                <p><strong><?php _e('Total Number'); ?></strong> : <span id="cart-total-number"><?php echo $this->escape($cart['invoice']['total']['number']); ?></span></p>
+                <p><strong><?php _e('Total Shipping'); ?></strong> : <span id="cart-total-shipping"><?php echo $this->escape($cart['invoice']['total']['shipping_view']); ?></span></p>
+                <p><strong><?php _e('Final Price'); ?></strong> : <span  id="cart-total-total" class="label label-success"><?php echo $this->escape($cart['invoice']['total']['total_price_view']); ?></span></p>
+                <p><strong><?php _e('Location'); ?></strong> : <span id="cart-location"></span></p>
+                <p><strong><?php _e('Delivery'); ?></strong> : <span id="cart-delivery"></span></p>
+                <p><strong><?php _e('Payment'); ?></strong> : <span id="cart-payment"></span></p>
             </div>
-        </div>    
+        </div>
     </div>
 </div>

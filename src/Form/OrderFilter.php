@@ -20,8 +20,8 @@ class OrderFilter extends InputFilter
 {
     public function __construct()
     {
-        //$config = Pi::service('registry')->config->read('order', 'order');
-        //$checkout = Pi::api('order', 'order')->checkoutConfig();
+        $config = Pi::service('registry')->config->read('order', 'order');
+        $checkout = Pi::api('order', 'order')->checkoutConfig();
         // name
         if ($config['order_name']) {
             // first_name
@@ -97,8 +97,29 @@ class OrderFilter extends InputFilter
         }
         // company
         if ($config['order_company']) {
+            // company
             $this->add(array(
                 'name' => 'company',
+                'required' => false,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+            ));
+            // company_id
+            $this->add(array(
+                'name' => 'company_id',
+                'required' => false,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+            ));
+            // company_vat
+            $this->add(array(
+                'name' => 'company_vat',
                 'required' => false,
                 'filters' => array(
                     array(
@@ -110,8 +131,17 @@ class OrderFilter extends InputFilter
         // address
         if ($config['order_address']) {
             $this->add(array(
-                'name' => 'address',
+                'name' => 'address1',
                 'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+            ));
+            $this->add(array(
+                'name' => 'address2',
+                'required' => false,
                 'filters' => array(
                     array(
                         'name' => 'StringTrim',
@@ -124,6 +154,18 @@ class OrderFilter extends InputFilter
             $this->add(array(
                 'name' => 'country',
                 'required' => false,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+            ));
+        }
+        // state
+        if ($config['order_state']) {
+            $this->add(array(
+                'name' => 'state',
+                'required' => true,
                 'filters' => array(
                     array(
                         'name' => 'StringTrim',
@@ -184,7 +226,7 @@ class OrderFilter extends InputFilter
                 ),
             ));
         }
-        // delivery
+        // gateway
         if ($config['order_payment'] 
             && ($config['order_method'] != 'offline') 
             && $checkout['location'] 
@@ -192,7 +234,7 @@ class OrderFilter extends InputFilter
             && $checkout['payment']) 
         {
             $this->add(array(
-                'name' => 'payment_adapter',
+                'name' => 'gateway',
                 'required' => true,
                 'filters' => array(
                     array(

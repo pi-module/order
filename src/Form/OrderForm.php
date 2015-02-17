@@ -21,7 +21,7 @@ class OrderForm  extends BaseForm
     public function __construct($name = null, $option = array())
     {
         $this->config = Pi::service('registry')->config->read('order', 'order');
-        //$this->checkout = Pi::api('order', 'order')->checkoutConfig();
+        $this->checkout = Pi::api('order', 'order')->checkoutConfig();
         parent::__construct($name);
     }
 
@@ -106,6 +106,7 @@ class OrderForm  extends BaseForm
         }
         // company
         if ($this->config['order_company']) {
+            // company
             $this->add(array(
                 'name' => 'company',
                 'options' => array(
@@ -114,7 +115,28 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    
+                )
+            ));
+            // company_id
+            $this->add(array(
+                'name' => 'company_id',
+                'options' => array(
+                    'label' => __('Company id'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                )
+            ));
+            // company_vat
+            $this->add(array(
+                'name' => 'company_vat',
+                'options' => array(
+                    'label' => __('Company vat'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
                 )
             ));
         }
@@ -126,10 +148,9 @@ class OrderForm  extends BaseForm
                     'label' => __('Address 1'),
                 ),
                 'attributes' => array(
-                    'type' => 'textarea',
-                    'rows' => '2',
-                    'cols' => '40',
+                    'type' => 'text',
                     'description' => '',
+                    
                 )
             ));
             $this->add(array(
@@ -138,10 +159,9 @@ class OrderForm  extends BaseForm
                     'label' => __('Address 2'),
                 ),
                 'attributes' => array(
-                    'type' => 'textarea',
-                    'rows' => '2',
-                    'cols' => '40',
+                    'type' => 'text',
                     'description' => '',
+                    
                 )
             ));
         }
@@ -151,6 +171,20 @@ class OrderForm  extends BaseForm
                 'name' => 'country',
                 'options' => array(
                     'label' => __('Country'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    
+                )
+            ));
+        }
+        // state
+        if ($this->config['order_state']) {
+            $this->add(array(
+                'name' => 'state',
+                'options' => array(
+                    'label' => __('State'),
                 ),
                 'attributes' => array(
                     'type' => 'text',
@@ -221,7 +255,7 @@ class OrderForm  extends BaseForm
                 )
             ));
         }
-        // payment_adapter
+        // gateway
         if ($this->config['order_payment'] 
             && ($this->config['order_method'] != 'offline') 
             && $this->checkout['location'] 
@@ -229,7 +263,7 @@ class OrderForm  extends BaseForm
             && $this->checkout['payment']) 
         {
             $this->add(array(
-                'name' => 'payment_adapter',
+                'name' => 'gateway',
                 'type' => 'select',
                 'options' => array(
                     'label' => __('Adapter'),

@@ -47,7 +47,7 @@ CREATE TABLE `{order}` (
     `total_price` decimal(16,2) NOT NULL default '0.00',
     `paid_price` decimal(16,2) NOT NULL default '0.00',
     # Checkout
-    `gateway` varchar(64) NOT NULL default '',
+    `gateway` varchar(64) NOT NULL default 'offline',
     `delivery` int(10) unsigned NOT NULL default '0',
     `location` int(10) unsigned NOT NULL default '0',
     `packing` tinyint(1) unsigned NOT NULL default '0',
