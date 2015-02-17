@@ -28,7 +28,7 @@ class Order extends Standard
     );
 
     protected $actionList = array(
-        'checkout', 'invoice', 'pay', 'result', 'notify', 'remove', 'cancel', 'finish', 'error'
+        'checkout', 'invoice', 'pay', 'result', 'notify', 'remove', 'cancel', 'finish', 'error', 'levelAjax'
     );
 
     /**
@@ -47,8 +47,19 @@ class Order extends Standard
         $matches = array_merge($this->defaults, $matches);
         if (isset($parts[0]) && in_array($parts[0], $this->actionList)) {
             $matches['action'] = $this->decode($parts[0]);
-            if (isset($parts[1]) && is_numeric($parts[1])) {
-                $matches['id'] = intval($parts[1]);
+            if ($matches['action'] == 'levelAjax') {
+                $matches['process'] = $this->decode($parts[1]);
+                if (is_numeric($parts[2])) {
+                    $matches['id'] = intval($parts[2]);
+                } elseif ($parts[1] == 'payment') {
+                    $matches['id'] = $this->decode($parts[2]);
+                }
+                //print_r($matches);
+                //print_r($matches);
+            } else {
+                if (isset($parts[1]) && is_numeric($parts[1])) {
+                    $matches['id'] = intval($parts[1]);
+                }
             }
         }
         // return
@@ -83,9 +94,14 @@ class Order extends Standard
         {
             $url['action'] = $mergedParams['action'];
         }
-        
+
         // Set id
-        if (!empty($mergedParams['id'])) {
+        if (!empty($mergedParams['process'])) {
+            $url['process'] = $mergedParams['process'];
+        }
+
+        // Set id
+        if (isset($mergedParams['id'])) {
             $url['id'] = $mergedParams['id'];
         }
 

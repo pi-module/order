@@ -49,9 +49,9 @@ class Order extends AbstractApi
         $select = Pi::model('delivery', 'order')->select();
         $delivery = Pi::model('delivery', 'order')->selectWith($select)->toArray();
         $return['delivery'] = (empty($delivery)) ? 0 : 1;
-        // Set payment
-        $payment = Pi::api('gateway', 'order')->getActiveGatewayList();
-        $return['payment'] = (empty($payment)) ? 0 : 1;
+        // Set gateway
+        $gateway = Pi::api('gateway', 'order')->getActiveGatewayList();
+        $return['gateway'] = (empty($gateway)) ? 0 : 1;
         // return
         return $return;
     }

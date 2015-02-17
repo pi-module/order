@@ -31,7 +31,7 @@ class IndexController extends ActionController
         $config = Pi::service('registry')->config->read($this->getModule());
         // Set cart
         $cart = $_SESSION['order'];
-        if (empty($order)) {
+        if (empty($cart)) {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
             $this->jump($url, __('Your cart is empty.'), 'error');
         }
@@ -124,6 +124,109 @@ class IndexController extends ActionController
         // Set view
         $this->view()->setTemplate('checkout');
         $this->view()->assign('form', $form);
+        $this->view()->assign('cart', $cart);
+    }
+
+    public function levelAjaxAction()
+    {
+        // Check user
+        $this->checkUser();
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Get info from url
+        $id = $this->params('id');
+        $process = $this->params('process');
+        $module = $this->params('module');
+        $return = array();
+        $return['status'] = 0;
+        $return['data'] = '';
+        $data = array();
+        switch ($process) {
+            case 'location':
+                if ($id) {
+                    // Set location
+                    $location = $this->getModel('location')->find($id)->toArray();
+                    $_SESSION['checkout']['location'] = $location['id'];
+                    $_SESSION['checkout']['location_title'] = $location['title'];
+                    // Get location
+                    $where = array('location' => $id);
+                    $select = $this->getModel('location_delivery')->select()->where($where);
+                    $rowset = $this->getModel('location_delivery')->selectWith($select);
+                    foreach ($rowset as $row) {
+                        $delivery = $this->getModel('delivery')->find($row->delivery)->toArray();
+                        if($delivery['status']) {
+                            $data[$row->id] = $row->toArray();
+                            $data[$row->id]['title'] = $delivery['title'];
+                            $data[$row->id]['status'] = $delivery['status'];
+                        }
+                    }
+                    // Set return
+                    $return['status'] = 1;
+                    $return['data'] = $data;
+                    $return['location'] = $location['title'];
+                }
+                break;
+
+            case 'delivery':
+                if ($id) {
+                    // Set delivery
+                    $delivery = $this->getModel('delivery')->find($id)->toArray();
+                    $_SESSION['checkout']['delivery'] = $delivery['id'];
+                    $_SESSION['checkout']['delivery_title'] = $delivery['title'];
+                    // Get location_delivery
+                    $location = $_SESSION['checkout']['location'];
+                    $where = array('location' => $location, 'delivery' => $id);
+                    $select = $this->getModel('location_delivery')->select()->where($where)->limit(1);
+                    $row = $this->getModel('location_delivery')->selectWith($select)->current();
+                    // Set shipping price
+                    $_SESSION['checkout']['shipping'] = $row->price;
+                    // Get delivery_payment
+                    $where = array('delivery' => $id);
+                    $select = $this->getModel('delivery_gateway')->select()->where($where);
+                    $rowset = $this->getModel('delivery_gateway')->selectWith($select);
+                    foreach ($rowset as $row) {
+                        if ($row->gateway == 'offline') {
+                            $data['payment'][$row->id]['title'] = 'Offline';
+                            $data['payment'][$row->id]['path'] = 'offline';
+                            $data['payment'][$row->id]['status'] = 1;
+                        } else {
+                            $gateway = Pi::api('gateway', 'order')->getGatewayInfo($row->gateway);
+                            if($gateway['status']) {
+                                $data['payment'][$row->id]['title'] = $gateway['title'];
+                                $data['payment'][$row->id]['path'] = $gateway['path'];
+                                $data['payment'][$row->id]['status'] = $gateway['status'];
+                            }  
+                        }
+                    }
+                    // Set return
+                    $return['status'] = 1;
+                    $return['data'] = $data;
+                    $return['data']['shipping'] = $invoice['total']['shipping'];
+                    $return['data']['total'] = $invoice['total']['total_price'];
+                    $return['delivery'] = $delivery['title'];
+                    $return['payment'] = ($config['order_method'] == 'offline') ? __('Offline') : '';
+                }
+                break; 
+
+            case 'payment':  
+                if ($id) {
+                    // Set delivery
+                    $_SESSION['checkout']['payment'] = $id;
+                    $_SESSION['checkout']['payment_title'] = $id;
+                    // Set return
+                    $data = array(
+                        'location' => $_SESSION['checkout']['location_title'],
+                        'delivery' => $_SESSION['checkout']['delivery_title'],
+                        'payment' => $_SESSION['checkout']['payment_title'],
+                    );
+                    // Set return
+                    $return['status'] = 1;
+                    $return['data'] = $data;
+                }
+                break;   
+        }
+        // return
+        return $return;
     }
 
     public function invoiceAction()
@@ -227,41 +330,6 @@ class IndexController extends ActionController
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('form', $form);
     }
-
-    /* public function indexAction()
-    {
-        // Check user is login or not
-        Pi::service('authentication')->requireLogin();
-        // Get module 
-        $module = $this->params('module');
-        // Get config
-        $config = Pi::service('registry')->config->read($module);
-        // Get info
-        $list = array();
-        $order = array('id DESC', 'time_create DESC');
-        $where = array('uid' => Pi::user()->getId());
-        if (!$config['payment_shownotpay']) {
-            $where['status'] = 1;
-        }
-        $select = $this->getModel('invoice')->select()->where($where)->order($order);
-        $rowset = $this->getModel('invoice')->selectWith($select);
-        // Make list
-        foreach ($rowset as $row) {
-            $list[$row->id] = $row->toArray();
-            $list[$row->id]['description'] = Json::decode($list[$row->id]['description'], true);
-            $list[$row->id]['user'] = Pi::user()->get($list[$row->id]['uid'], array('id', 'identity', 'name', 'email'));
-            $list[$row->id]['time_create_view'] = _date($list[$row->id]['time_create']);
-            $list[$row->id]['time_payment_view'] = ($list[$row->id]['time_payment']) ? _date($list[$row->id]['time_payment']) : __('Not yet');
-            $list[$row->id]['amount_view'] = _currency($list[$row->id]['amount']);
-        }
-        // Set view
-        $this->view()->setTemplate('list');
-        $this->view()->assign('list', $list);
-    } */
-
-
-
-
 
     public function resultAction()
     {

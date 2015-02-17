@@ -227,11 +227,11 @@ class OrderFilter extends InputFilter
             ));
         }
         // gateway
-        if ($config['order_payment'] 
-            && ($config['order_method'] != 'offline') 
+        if ($config['order_gateway'] 
+            //&& ($config['order_method'] != 'offline') 
             && $checkout['location'] 
             && $checkout['delivery'] 
-            && $checkout['payment']) 
+            && $checkout['gateway']) 
         {
             $this->add(array(
                 'name' => 'gateway',

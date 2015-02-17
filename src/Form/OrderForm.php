@@ -227,7 +227,7 @@ class OrderForm  extends BaseForm
         {
             $this->add(array(
                 'name' => 'location',
-                'type' => 'Module\Shop\Form\Element\Location',
+                'type' => 'Module\Order\Form\Element\Location',
                 'options' => array(
                     'label' => __('Location'),
                     'parent' => 1,
@@ -256,11 +256,10 @@ class OrderForm  extends BaseForm
             ));
         }
         // gateway
-        if ($this->config['order_payment'] 
-            && ($this->config['order_method'] != 'offline') 
+        if ($this->config['order_gateway'] 
             && $this->checkout['location'] 
             && $this->checkout['delivery'] 
-            && $this->checkout['payment']) 
+            && $this->checkout['gateway']) 
         {
             $this->add(array(
                 'name' => 'gateway',
