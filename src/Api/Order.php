@@ -18,6 +18,7 @@ use Pi\Application\Api\AbstractApi;
 use Zend\Json\Json;
 
 /*
+ * Pi::api('order', 'order')->getOrder($id);
  * Pi::api('order', 'order')->checkoutConfig();
  * Pi::api('order', 'order')->generatCode();
  * Pi::api('order', 'order')->viewPrice($price);
@@ -30,6 +31,13 @@ use Zend\Json\Json;
 
 class Order extends AbstractApi
 {
+    public function getOrder($id)
+    {
+        $order = Pi::model('order', $this->getModule())->find($id);
+        $order = $this->canonizeOrder($order);
+        return $order;
+    }
+
     public function checkoutConfig()
     {
         $return = array();

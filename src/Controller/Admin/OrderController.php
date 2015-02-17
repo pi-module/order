@@ -183,10 +183,9 @@ class OrderController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                $gateway = Pi::api('gateway', 'order')->getGatewayInfo($values['payment_adapter'][0]);
+                $gateway = Pi::api('gateway', 'order')->getGatewayInfo($values['gateway'][0]);
                 $order->status_payment = $values['status_payment'];
-                $order->payment_adapter = $gateway['path'];
-                $order->payment_method = $gateway['type'];
+                $order->gateway = $gateway['path'];
                 if ($values['status_payment'] == 2) {
                     $order->time_payment = time();
                 } else {
@@ -198,8 +197,7 @@ class OrderController extends ActionController
                 // Set return
                 $return['status'] = 1;
                 $return['data'] = Pi::api('order', 'order')->paymentStatus($order->status_payment);
-                $return['data']['payment_adapter'] = $order->payment_adapter;
-                $return['data']['payment_method'] = $order->payment_method;
+                $return['data']['gateway'] = $order->gateway;
                 $return['data']['time_payment_view'] = ($order->time_payment) ? _date($order->time_payment) : __('Not Paid');
             } else {
                 $return['status'] = 0;

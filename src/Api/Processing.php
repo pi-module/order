@@ -34,7 +34,7 @@ class Processing extends AbstractApi
         $row->ip = Pi::user()->getIp();
         $row->invoice = $invoice['id'];
         $row->random_id = $invoice['random_id'];
-        $row->adapter = $invoice['adapter'];
+        $row->gateway = $invoice['gateway'];
         $row->time_create = time();
         $row->save();
     }

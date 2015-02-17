@@ -18,8 +18,7 @@ use Zend\Json\Json;
 use Zend\Math\Rand;
 
 /*
- * Pi::api('invoice', 'order')->createInvoice($module, $part, $item, $amount, $adapter, $description);
- * Pi::api('invoice', 'order')->createPaidInvoice($uid, $module, $part, $item, $amount, $adapter, $description);
+ * Pi::api('invoice', 'order')->createInvoice($order);
  * Pi::api('invoice', 'order')->getInvoice($id);
  * Pi::api('invoice', 'order')->getInvoiceFromItem($module, $part, $item);
  * Pi::api('invoice', 'order')->getInvoiceRandomId($id);
@@ -35,83 +34,95 @@ class Invoice extends AbstractApi
      *
      * @return array
      */
-    public function createInvoice($module, $part, $item, $amount, $adapter, $description)
+    public function createInvoice($order)
     {
-    	$result = array();
-    	$uid = Pi::user()->getId();
+        // Get order
+        $order = Pi::api('order', 'order')->getOrder($order);
+        // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+        // Get user
+        $uid = Pi::user()->getId();
         // Check user
         if ($config['order_anonymous'] == 0 && $uid == 0) {
             $result['status'] = 0;
             $result['pay_url'] = '';
             $result['message'] = __('Please login for create invoice');
         } else {
-            if (empty($module) || 
-                empty($part) || 
-                empty($item) || 
-                empty($amount) || 
-                empty($adapter) || 
-                empty($description)) 
-            {
-                $result['status'] = 0;
-                $result['pay_url'] = '';
-                $result['message'] = __('Please send all informations for create invoice');
-            } else {
-                // create invoice
-                $row = Pi::model('invoice', $this->getModule())->createRow();
-                $row->random_id = time();
-                $row->module = $module;
-                $row->part = $part;
-                $row->item = $item;
-                $row->amount = $amount;
-                $row->adapter = $adapter;
-                $row->description = $description;
-                $row->uid = $uid;
-                $row->ip = Pi::user()->getIp();
-                $row->status = 2;
-                $row->time_create = time();
-                $row->save();
-                // return array
-                $result['status'] = $row->status;
-                $result['invoice_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                    'module'        => $this->getModule(),
-                    'action'        => 'invoice',
-                    'id'            => $row->id,
-                )));
-                $result['pay_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                    'module'        => $this->getModule(),
-                    'action'        => 'pay',
-                    'id'            => $row->id,
-                )));
-                $result['message'] = __('Your invoice create successfully');
-                // Set invoice information on session
-                if ($config['order_anonymous'] == 1) {
-                    $_SESSION['order']['process'] = 1;
-                    $_SESSION['order']['process_start'] = time();
-                    $_SESSION['order']['invoice_id'] = $row->id;
-                    $_SESSION['order']['adapter'] = $adapter;
-                }
+            // Check order type
+            switch ($order['type']) {
+                case 'free':
+                    // Set invoice
+                    $row = Pi::model('invoice', $this->getModule())->createRow();
+                    $row->random_id = time();
+                    $row->uid = $uid;
+                    $row->ip = Pi::user()->getIp();
+                    $row->status = 1;
+                    $row->time_create = time();
+                    $row->order = $order['id'];
+                    $row->product_price = $order['product_price'];
+                    $row->discount_price = $order['discount_price'];
+                    $row->shipping_price = $order['shipping_price'];
+                    $row->packing_price = $order['packing_price'];
+                    $row->vat_price = $order['vat_price'];
+                    $row->total_price = $order['total_price'];
+                    $row->paid_price = $order['paid_price'];
+                    $row->gateway = $order['gateway'];
+                    $row->save();
+                    break;
+            
+                case 'onetime':
+                case 'recurring':
+                    // Set invoice
+                    $row = Pi::model('invoice', $this->getModule())->createRow();
+                    $row->random_id = time();
+                    $row->uid = $uid;
+                    $row->ip = Pi::user()->getIp();
+                    $row->status = 2;
+                    $row->time_create = time();
+                    $row->order = $order['id'];
+                    $row->product_price = $order['product_price'];
+                    $row->discount_price = $order['discount_price'];
+                    $row->shipping_price = $order['shipping_price'];
+                    $row->packing_price = $order['packing_price'];
+                    $row->vat_price = $order['vat_price'];
+                    $row->total_price = $order['total_price'];
+                    $row->paid_price = $order['paid_price'];
+                    $row->gateway = $order['gateway'];
+                    $row->save();
+                    // return array
+                    $result['status'] = $row->status;
+                    $result['message'] = __('Your invoice create successfully');
+                    $result['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+                        'module'        => $this->getModule(),
+                        'action'        => 'order',
+                        'id'            => $row->order,
+                    )));
+                    $result['invoice_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+                        'module'        => $this->getModule(),
+                        'action'        => 'invoice',
+                        'id'            => $row->id,
+                    )));
+                    $result['pay_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+                        'module'        => $this->getModule(),
+                        'action'        => 'pay',
+                        'id'            => $row->id,
+                    )));
+                    // Set invoice information on session
+                    if ($config['order_anonymous']] == 1 && $uid == 0) {
+                        $_SESSION['payment']['process'] = 1;
+                        $_SESSION['payment']['process_start'] = time();
+                        $_SESSION['payment']['invoice_id'] = $row->id;
+                        $_SESSION['payment']['gateway'] = $row->gateway;
+                    }
+                    break;
+
+                case 'installment':
+
+                    break;  
             }
         }
-    	return $result;
-    }
-
-    public function createPaidInvoice($uid, $module, $part, $item, $amount, $adapter, $description)
-    {
-        // create invoice
-        $row = Pi::model('invoice', $this->getModule())->createRow();
-        $row->random_id = time();
-        $row->module = $module;
-        $row->part = $part;
-        $row->item = $item;
-        $row->amount = $amount;
-        $row->adapter = $adapter;
-        $row->description = $description;
-        $row->uid = $uid;
-        $row->ip = Pi::user()->getIp();
-        $row->status = 1;
-        $row->time_create = time();
-        $row->save();
+        // return
+        return $result;
     }
 
     public function getInvoice($id)
@@ -198,7 +209,7 @@ class Invoice extends AbstractApi
         return Pi::api($invoice['part'], $invoice['module'])->updatePayment(
             $invoice['item'], 
             $invoice['amount'], 
-            $invoice['adapter']);
+            $invoice['gateway']);
     }
 
     public function setBackUrl($id, $url)
