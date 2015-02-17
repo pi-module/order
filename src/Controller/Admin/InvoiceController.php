@@ -58,7 +58,7 @@ class InvoiceController extends ActionController
             )),
         ));
         // Set view
-        $this->view()->setTemplate('invoice_index');
+        $this->view()->setTemplate('invoice-index');
         $this->view()->assign('list', $list);
         $this->view()->assign('paginator', $paginator);
     }
@@ -77,13 +77,13 @@ class InvoiceController extends ActionController
         $invoice['amount_view'] = _currency($invoice['amount']);
         $invoice['log'] = Pi::api('log', 'order')->getLog($invoice['id']);
         // Set view
-        $this->view()->setTemplate('invoice_view');
+        $this->view()->setTemplate('invoice-view');
         $this->view()->assign('invoice', $invoice);
     }	
 
     public function updateAction()
     {
         // Set view
-        $this->view()->setTemplate('invoice_update');
+        $this->view()->setTemplate('invoice-update');
     }	
 }

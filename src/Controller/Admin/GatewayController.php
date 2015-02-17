@@ -86,6 +86,6 @@ class GatewayController extends ActionController
         $this->view()->assign('form', $form);
         $this->view()->assign('title', __('Install gateway'));
         $this->view()->assign('message', $message);
-    	$this->view()->setTemplate('gateway_update');
+    	$this->view()->setTemplate('gateway-update');
     }
 }
