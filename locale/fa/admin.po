@@ -1,0 +1,395 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pi payment module\n"
+"POT-Creation-Date: 2014-10-07 16:04+0330\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Pi\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _a;_t\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-release-2.4.0/usr/module/"
+"payment\n"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/config/navigation.php:19
+msgid "Invoice"
+msgstr "فاکتور"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/config/navigation.php:25
+msgid "Logs"
+msgstr "گزارش ها"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/config/navigation.php:31
+msgid "Gateway"
+msgstr "دروازه"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/config/module.php:16
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/config/config.php:21
+msgid "Payment"
+msgstr "پرداخت"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/config/module.php:17
+msgid "Payment gateway"
+msgstr "دروازه پرداخت"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/config/config.php:17
+msgid "Admin"
+msgstr "مدیریت"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/config/config.php:29
+msgid "Perpage"
+msgstr "تعداد در هر صفحه"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/config/config.php:38
+msgid "Payment gateway error url"
+msgstr "لینک برگشت در خطای دروازه پرداخت"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/config/config.php:39
+msgid "Set back url when gateway have error, set empty for default url"
+msgstr ""
+"تنظیم لینک برگشت وقتی که خطایی در روند پرداخت روی داده باشد، برای استفاده از "
+"آدرس پیش فرض این گزینه را خالی رها کنید."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/config/config.php:45
+msgid "Show not pay payments"
+msgstr "نمایش فاکتور های پرداخت نشده به کاربر"
+
+#~ msgid "Paypal"
+#~ msgstr "پی پال"
+
+#~ msgid "email"
+#~ msgstr "ایمیل"
+
+#~ msgid "test"
+#~ msgstr "تست"
+
+#~ msgid "money"
+#~ msgstr "پول"
+
+#~ msgid "Bank Mellat (Iran)"
+#~ msgstr "بانک ملت"
+
+#~ msgid "path"
+#~ msgstr "مسیر"
+
+#~ msgid "pin"
+#~ msgstr "شماره پایانه"
+
+#~ msgid "username"
+#~ msgstr "نام کاربری"
+
+#~ msgid "password"
+#~ msgstr "واژه رمز"
+
+#~ msgid "Your payment were successfully."
+#~ msgstr "پرداخت شما موفقیت آمیز بود."
+
+#, fuzzy
+#~ msgid "Your order id not true."
+#~ msgstr "شناسه سفارش شما صحیح نیست."
+
+#~ msgid "Bank Mellat error 0"
+#~ msgstr "سرور بانک دچار مشکل می باشد."
+
+#~ msgid "Bank Mellat error 41"
+#~ msgstr "شماره درخواست تکراری است."
+
+#~ msgid "Bank Mellat error 43"
+#~ msgstr "عملیات قبلا انجام شده است."
+
+#~ msgid "Bank Mellat error 17"
+#~ msgstr "لغو عملیات پرداخت توسط کاربر صورت گرفته است."
+
+#~ msgid "Bank Mellat error 415"
+#~ msgstr "زمان شما برای انجام عملیات پرداخت به پایان رسیده است."
+
+#~ msgid "Bank Mellat error 417"
+#~ msgstr "شناسه پرداخت کننده نامعتبر است."
+
+#~ msgid "Bank Mellat error 11"
+#~ msgstr "شماره كارت نامعتبر است."
+
+#~ msgid "Bank Mellat error 12"
+#~ msgstr "موجودي كافي نيست."
+
+#~ msgid "Bank Mellat error 13"
+#~ msgstr "رمز نادرست است."
+
+#~ msgid "Bank Mellat error 14"
+#~ msgstr "تعداد دفعات وارد كردن رمز بيش از حد مجاز است."
+
+#~ msgid "Bank Mellat error 15"
+#~ msgstr "كارت نامعتبر است."
+
+#~ msgid "Bank Mellat error 16"
+#~ msgstr "دفعات برداشت وجه بيش از حد مجاز است."
+
+#~ msgid "Bank Mellat error 18"
+#~ msgstr "تاريخ انقضاي كارت گذشته است."
+
+#~ msgid "Bank Mellat error 19"
+#~ msgstr "مبلغ برداشت وجه بيش از حد مجاز است."
+
+#~ msgid "Bank Mellat error 111"
+#~ msgstr "صادر كننده كارت نامعتبر است."
+
+#~ msgid "Bank Mellat error 112"
+#~ msgstr "خطاي سوييچ صادر كننده كارت."
+
+#~ msgid "Bank Mellat error 113"
+#~ msgstr "پاسخي از صادر كننده كارت دريافت نشد."
+
+#~ msgid "Bank Mellat error 114"
+#~ msgstr "دارنده كارت مجاز به انجام اين تراكنش نيست."
+
+#~ msgid "Bank Mellat error 21"
+#~ msgstr "پذيرنده نامعتبر است."
+
+#~ msgid "Bank Mellat error 23"
+#~ msgstr "خطاي امنيتي رخ داده است."
+
+#~ msgid "Bank Mellat error 24"
+#~ msgstr "اطلاعات كاربري پذيرنده نامعتبر است."
+
+#~ msgid "Bank Mellat error 25"
+#~ msgstr "مبلغ نامعتبر است."
+
+#~ msgid "Bank Mellat error 31"
+#~ msgstr "پاسخ نامعتبر است."
+
+#~ msgid "Bank Mellat error 32"
+#~ msgstr "فرمت اطلاعات وارد شده صحيح نمي باشد."
+
+#~ msgid "Bank Mellat error 33"
+#~ msgstr "حساب نامعتبر است."
+
+#~ msgid "Bank Mellat error 34"
+#~ msgstr "خطاي سيستمي."
+
+#~ msgid "Bank Mellat error 35"
+#~ msgstr "تاريخ نامعتبر است."
+
+#~ msgid "Bank Mellat error 42"
+#~ msgstr "خریدی با این شماره درخواست یافت نشد."
+
+#~ msgid "Bank Mellat error 44"
+#~ msgstr "کسر پول از حساب مشتری صورت نگرفته است."
+
+#~ msgid "Bank Mellat error 45"
+#~ msgstr "واریز پول قبلا انجام شده است."
+
+#~ msgid "Bank Mellat error 46"
+#~ msgstr "واریز پول به حساب پذیرنده انجام نشده است."
+
+#~ msgid "Bank Mellat error 47"
+#~ msgstr "واریز پول به حساب پذیرنده انجام نشده است."
+
+#~ msgid "Bank Mellat error 48"
+#~ msgstr "پول مشتری به حساب او بازگشت داده شده است."
+
+#~ msgid "Bank Mellat error 49"
+#~ msgstr "تراکنش استرداد وجه دلخواه یافت نشد."
+
+#~ msgid "Bank Mellat error 412"
+#~ msgstr "شناسه قبض نادرست است."
+
+#~ msgid "Bank Mellat error 413"
+#~ msgstr "شناسه پرداخت نادرست است."
+
+#~ msgid "Bank Mellat error 414"
+#~ msgstr "سازمان صادر كننده قبض نامعتبر است."
+
+#~ msgid "Bank Mellat error 416"
+#~ msgstr "در ثبت اطلاعات پرداخت شما در بانک ملت خطایی رخ داده است."
+
+#~ msgid "Bank Mellat error 418"
+#~ msgstr "در تعریف اطلاعات شما نزد بانک ملت خطایی پدید آمده است."
+
+#~ msgid "Bank Mellat error 419"
+#~ msgstr "تعداد دفعات ورود اطلاعات از حد مجاز گذشته است."
+
+#~ msgid "Bank Mellat error 421"
+#~ msgstr "IP نامعتبر است."
+
+#~ msgid "Bank Mellat error 51"
+#~ msgstr "تراکنش تکراری است."
+
+#~ msgid "Bank Mellat error 54"
+#~ msgstr "تراکنش مرجع موجود نیست."
+
+#~ msgid "Bank Mellat error 55"
+#~ msgstr "تراکنش نامعتبر است."
+
+#~ msgid "Bank Mellat error 61"
+#~ msgstr "خطا در واریز وجه."
+
+#~ msgid "Bank Mellat error %s"
+#~ msgstr "شماره خطای اعلام شده توسط بانک: %s"
+
+#~ msgid "Please send all informations for create invoice"
+#~ msgstr "لطفا تمام اطلاعات مورد نیاز برای ساخت فاکتور را ارسال کنید"
+
+#~ msgid "Your invoice create successfully"
+#~ msgstr "فاکتور شما با موفقیت ایجاد شد"
+
+#~ msgid "Please login for create invoice"
+#~ msgstr "لطفا برای ایجاد فاکتور به سایت وارد شوید"
+
+#~ msgid "Submit"
+#~ msgstr "ارسال"
+
+#~ msgid "Not yet"
+#~ msgstr "هنوز پرداخت نشده"
+
+#~ msgid "The invoice not found."
+#~ msgstr "فاکتور یافت نشد"
+
+#~ msgid "Gateway data saved successfully."
+#~ msgstr "اطلاعات دروازه پرداخت با موفقیت ذخیره شد"
+
+#~ msgid "Invalid data, please check and re-submit."
+#~ msgstr ""
+#~ "اطلاعات اشتباه است، لطفا اطلاعات وارده را بررسی کرده و جددا تلاش کنید"
+
+#~ msgid "Install gateway"
+#~ msgstr "نصب دروازه پرداخت"
+
+#~ msgid "This is not your invoice."
+#~ msgstr "این فاکتور متعلق به شما نیست"
+
+#~ msgid "The invoice payd."
+#~ msgstr "فاکتور پرداخت شد"
+
+#~ msgid ""
+#~ "Another payment at process by you, Please finish that payment first or "
+#~ "try after 30 minutes"
+#~ msgstr ""
+#~ "یک پرداخت دیگر توسط حساب کاربری شما در حال انجام است. لطفا ابتدا ان "
+#~ "پرداخت را تکمیل کنید و یا ۳۰ دقیقه صبر کنید"
+
+#~ msgid "Error to get %s."
+#~ msgstr "خطا در گرفتن %s"
+
+#~ msgid "Error to get information."
+#~ msgstr "خطا در گرفتن اطلاعات"
+
+#~ msgid "Your running pay processing not set"
+#~ msgstr "پروسه پرداخت در حال اجرای شما تنظیم نشده است"
+
+#~ msgid "Your IP address changed and processing not valid"
+#~ msgstr ""
+#~ "آدرس آی پی شما در هنگام پرداخت تغییر کرده است و این روند خرید صحیح نیست"
+
+#~ msgid "Your payment were successfully. Back to module"
+#~ msgstr ""
+#~ "پرداخت شما با موفقیت به انجام رسید. به صفحه اتمام خرید منتقل می شوید"
+
+#~ msgid "Your payment wont successfully."
+#~ msgstr "پرداخت شما موفقیت آمیز نبود"
+
+#~ msgid "Did not set any request"
+#~ msgstr "هیچ درخواستی ذخیره نشده است"
+
+#~ msgid "List of Invoices"
+#~ msgstr "فهرست فاکتور ها"
+
+#~ msgid "ID"
+#~ msgstr "شناسه"
+
+#~ msgid "Order"
+#~ msgstr "سفارش"
+
+#~ msgid "Amount"
+#~ msgstr "مقدار"
+
+#~ msgid "User"
+#~ msgstr "کاربر"
+
+#~ msgid "Time Create"
+#~ msgstr "زمان ایجاد"
+
+#~ msgid "Time pay"
+#~ msgstr "زمان پرداخت"
+
+#~ msgid "Action"
+#~ msgstr "عملکرد"
+
+#~ msgid "Edit"
+#~ msgstr "ویرایش"
+
+#~ msgid "View"
+#~ msgstr "مشاهده"
+
+#~ msgid "Paid"
+#~ msgstr "پرداخت شده"
+
+#~ msgid "Unpaid"
+#~ msgstr "پرداخت نشده"
+
+#~ msgid "Canceled"
+#~ msgstr "لغو شده"
+
+#~ msgid "List of all available gateways"
+#~ msgstr "فهرست پایانه های پرداخت در دسترس"
+
+#~ msgid "Description"
+#~ msgstr "توضیحات"
+
+#~ msgid "Version"
+#~ msgstr "نسخه"
+
+#~ msgid "Author"
+#~ msgstr "سازنده"
+
+#~ msgid "Credits"
+#~ msgstr "کریدیت"
+
+#~ msgid "Release Date"
+#~ msgstr "تاریخ انتشار"
+
+#~ msgid "Inactive"
+#~ msgstr "غیر فعال"
+
+#~ msgid "UnInstall"
+#~ msgstr "خارج کردن از نصب"
+
+#~ msgid "Active"
+#~ msgstr "فعال"
+
+#~ msgid "Install"
+#~ msgstr "نصب"
+
+#~ msgid "Invoice %s"
+#~ msgstr "فاکتور %s"
+
+#~ msgid "Status"
+#~ msgstr "وضعیت"
+
+#~ msgid "Module"
+#~ msgstr "بخش"
+
+#~ msgid "Create"
+#~ msgstr "زمان ایجاد"
+
+#~ msgid "Adapter"
+#~ msgstr "پایانه پرداخت"
+
+#~ msgid "Ip"
+#~ msgstr "آی پی"
+
+#~ msgid "Error"
+#~ msgstr "خطا"
+
+#~ msgid "Pay"
+#~ msgstr "پرداخت"
+
+#~ msgid "View / Pay"
+#~ msgstr "مشاهده / پرداخت"
+
+#~ msgid "Test"
+#~ msgstr "تست"

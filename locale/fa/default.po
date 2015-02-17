@@ -1,0 +1,598 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pi payment module\n"
+"POT-Creation-Date: 2014-10-07 16:04+0330\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Pi\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-release-2.4.0/usr/module/"
+"payment\n"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Api/Invoice.php:50
+msgid "Please send all informations for create invoice"
+msgstr "لطفا تمام اطلاعات مورد نیاز برای ساخت فاکتور را ارسال کنید"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Api/Invoice.php:73
+msgid "Your invoice create successfully"
+msgstr "فاکتور شما با موفقیت ایجاد شد"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Api/Invoice.php:78
+msgid "Please login for create invoice"
+msgstr "لطفا برای ایجاد فاکتور به سایت وارد شوید"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Form/RemoveForm.php:39
+msgid "Attention"
+msgstr "توجه"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Form/RemoveForm.php:43
+msgid ""
+"You have another open payment process, if have have another page for online "
+"payment, please fish for courent payment and after that start new one. But "
+"is you cancel your old payment or it have any other problem and you want "
+"close all old proess and start new one, Please conferm this meaasage and "
+"select other payment"
+msgstr ""
+"شما یک پرداخت فعال دیگر دارید، اگر یک صفحه وب دیگر برای پرداخت باز کرده اید "
+"و مشغول پرداخت یک فاکتور دیگر هستید ، لطفا ابتدا آن فاکتور را پرداخت "
+"نمایید ، سپس یک درخواست پرداخت جدید به سیستم بدهید. در غیر این صورت اگر "
+"اشتباهی روی داده یا پرداخت قبلی شما به هر دلیلی کنسل شده است و میخواید یک "
+"پرداخت جدید انجام دهید ، لطفا با تایید این متن و فشردن دکمه تایید ، تمام "
+"تراکنش های معلق در سیستم رو حذف کنید تا بتوانید پرداخت جدید داشته باشید. در "
+"غیر این صورت حداقل ۱۵ دقیقه صبر کرده و مججد تلاش کنید."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Form/RemoveForm.php:52
+msgid "Conferm"
+msgstr "تایید"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Form/GatewayForm.php:65
+msgid "Submit"
+msgstr "ارسال"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:30
+msgid "Paypal"
+msgstr "پی پال"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:48
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:48
+msgid "path"
+msgstr "مسیر"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:54
+msgid "Paypal email address"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:60
+msgid "Paypal currency"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:66
+msgid "Paypal currency symbol"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:72
+msgid "Location code (ex GB)"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:78
+msgid "Custom attribute"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:215
+msgid "Back to website"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:321
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:153
+msgid "Your payment were successfully."
+msgstr "پرداخت شما موفقیت آمیز بود."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:339
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/result.phtml:4
+msgid "Error"
+msgstr "خطا"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:30
+msgid "Bank Mellat (Iran)"
+msgstr "بانک ملت"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:54
+msgid "pin"
+msgstr "شماره پایانه"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:60
+msgid "username"
+msgstr "نام کاربری"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:66
+msgid "password"
+msgstr "واژه رمز"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:178
+msgid "Your order id not true."
+msgstr "شماره سفارش شما صحیح نیست."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:188
+#, php-format
+msgid "Your track code is : %s"
+msgstr "کد پیگیری تراکنش شما %s می باشد."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:205
+msgid "Bank Mellat error 0"
+msgstr "سرور بانک دچار مشکل می باشد."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:209
+msgid "Bank Mellat error 41"
+msgstr "شماره درخواست تکراری است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:213
+msgid "Bank Mellat error 43"
+msgstr "عملیات قبلا انجام شده است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:217
+msgid "Bank Mellat error 17"
+msgstr "لغو عملیات پرداخت توسط کاربر صورت گرفته است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:221
+msgid "Bank Mellat error 415"
+msgstr "زمان شما برای انجام عملیات پرداخت به پایان رسیده است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:225
+msgid "Bank Mellat error 417"
+msgstr "شناسه پرداخت کننده نامعتبر است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:229
+msgid "Bank Mellat error 11"
+msgstr "شماره كارت نامعتبر است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:233
+msgid "Bank Mellat error 12"
+msgstr "موجودي كافي نيست."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:237
+msgid "Bank Mellat error 13"
+msgstr "رمز نادرست است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:241
+msgid "Bank Mellat error 14"
+msgstr "تعداد دفعات وارد كردن رمز بيش از حد مجاز است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:245
+msgid "Bank Mellat error 15"
+msgstr "كارت نامعتبر است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:249
+msgid "Bank Mellat error 16"
+msgstr "دفعات برداشت وجه بيش از حد مجاز است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:253
+msgid "Bank Mellat error 18"
+msgstr "تاريخ انقضاي كارت گذشته است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:257
+msgid "Bank Mellat error 19"
+msgstr "مبلغ برداشت وجه بيش از حد مجاز است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:261
+msgid "Bank Mellat error 111"
+msgstr "صادر كننده كارت نامعتبر است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:265
+msgid "Bank Mellat error 112"
+msgstr "خطاي سوييچ صادر كننده كارت."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:269
+msgid "Bank Mellat error 113"
+msgstr "پاسخي از صادر كننده كارت دريافت نشد."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:273
+msgid "Bank Mellat error 114"
+msgstr "دارنده كارت مجاز به انجام اين تراكنش نيست."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:277
+msgid "Bank Mellat error 21"
+msgstr "پذيرنده نامعتبر است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:281
+msgid "Bank Mellat error 23"
+msgstr "خطاي امنيتي رخ داده است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:285
+msgid "Bank Mellat error 24"
+msgstr "اطلاعات كاربري پذيرنده نامعتبر است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:289
+msgid "Bank Mellat error 25"
+msgstr "مبلغ نامعتبر است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:293
+msgid "Bank Mellat error 31"
+msgstr "پاسخ نامعتبر است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:297
+msgid "Bank Mellat error 32"
+msgstr "فرمت اطلاعات وارد شده صحيح نمي باشد."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:301
+msgid "Bank Mellat error 33"
+msgstr "حساب نامعتبر است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:305
+msgid "Bank Mellat error 34"
+msgstr "خطاي سيستمي."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:309
+msgid "Bank Mellat error 35"
+msgstr "تاريخ نامعتبر است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:313
+msgid "Bank Mellat error 42"
+msgstr "خریدی با این شماره درخواست یافت نشد."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:317
+msgid "Bank Mellat error 44"
+msgstr "کسر پول از حساب مشتری صورت نگرفته است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:321
+msgid "Bank Mellat error 45"
+msgstr "واریز پول قبلا انجام شده است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:325
+msgid "Bank Mellat error 46"
+msgstr "واریز پول به حساب پذیرنده انجام نشده است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:329
+msgid "Bank Mellat error 47"
+msgstr "واریز پول به حساب پذیرنده انجام نشده است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:333
+msgid "Bank Mellat error 48"
+msgstr "پول مشتری به حساب او بازگشت داده شده است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:337
+msgid "Bank Mellat error 49"
+msgstr "تراکنش استرداد وجه دلخواه یافت نشد."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:341
+msgid "Bank Mellat error 412"
+msgstr "شناسه قبض نادرست است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:345
+msgid "Bank Mellat error 413"
+msgstr "شناسه پرداخت نادرست است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:349
+msgid "Bank Mellat error 414"
+msgstr "سازمان صادر كننده قبض نامعتبر است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:353
+msgid "Bank Mellat error 416"
+msgstr "در ثبت اطلاعات پرداخت شما در بانک ملت خطایی رخ داده است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:357
+msgid "Bank Mellat error 418"
+msgstr "در تعریف اطلاعات شما نزد بانک ملت خطایی پدید آمده است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:361
+msgid "Bank Mellat error 419"
+msgstr "تعداد دفعات ورود اطلاعات از حد مجاز گذشته است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:365
+msgid "Bank Mellat error 421"
+msgstr "IP نامعتبر است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:369
+msgid "Bank Mellat error 51"
+msgstr "تراکنش تکراری است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:373
+msgid "Bank Mellat error 54"
+msgstr "تراکنش مرجع موجود نیست."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:377
+msgid "Bank Mellat error 55"
+msgstr "تراکنش نامعتبر است."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:381
+msgid "Bank Mellat error 61"
+msgstr "خطا در واریز وجه."
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:385
+#, php-format
+msgid "Bank Mellat error %s"
+msgstr "شماره خطای اعلام شده توسط بانک: %s"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:47
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Admin/InvoiceController.php:41
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Admin/InvoiceController.php:76
+msgid "Not yet"
+msgstr "هنوز پرداخت نشده"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:64
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:84
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Admin/InvoiceController.php:73
+msgid "The invoice not found."
+msgstr "فاکتور یافت نشد"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:68
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:92
+msgid "This is not your invoice."
+msgstr "این فاکتور متعلق به شما نیست"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:88
+msgid "The invoice payd."
+msgstr "فاکتور پرداخت شد"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:124
+#, php-format
+msgid "Error to get %s."
+msgstr "خطا در گرفتن %s"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:131
+msgid "Error to get information."
+msgstr "خطا در گرفتن اطلاعات"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:161
+msgid "Your running pay processing not set"
+msgstr "پروسه پرداخت در حال اجرای شما تنظیم نشده است"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:166
+msgid "Your IP address changed and processing not valid"
+msgstr ""
+"آدرس آی پی شما در هنگام پرداخت تغییر کرده است و این روند خرید صحیح نیست"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:193
+msgid "Your payment were successfully. Back to module"
+msgstr "پرداخت شما با موفقیت به انجام رسید. به صفحه اتمام خرید منتقل می شوید"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:198
+msgid "Your payment wont successfully."
+msgstr "پرداخت شما موفقیت آمیز نبود"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:203
+msgid "Did not set any request"
+msgstr "هیچ درخواستی ذخیره نشده است"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:217
+msgid "Your old payment process remove, please try new payment ation"
+msgstr "پرداخت قبلی شما از سیستم حذف شد، لطفا یک تراکش جدید انجام دهید"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:219
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:227
+msgid "Payment is clean"
+msgstr "دروازه پرداخت پاک است"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Admin/GatewayController.php:71
+msgid "Gateway data saved successfully."
+msgstr "اطلاعات دروازه پرداخت با موفقیت ذخیره شد"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Admin/GatewayController.php:75
+msgid "Invalid data, please check and re-submit."
+msgstr "اطلاعات اشتباه است، لطفا اطلاعات وارده را بررسی کرده و جددا تلاش کنید"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Admin/GatewayController.php:87
+msgid "Install gateway"
+msgstr "نصب دروازه پرداخت"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:3
+msgid "Your invoices list"
+msgstr "فهرست تمام فاکتور های شما"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:6
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:6
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:6
+msgid "ID"
+msgstr "شناسه"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:7
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:13
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:7
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:13
+msgid "Order"
+msgstr "سفارش"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:8
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:15
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:9
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:8
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:15
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:35
+msgid "Amount"
+msgstr "مقدار"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:9
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:11
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:10
+msgid "Time Create"
+msgstr "زمان ایجاد"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:10
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:11
+msgid "Time pay"
+msgstr "زمان پرداخت"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:11
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:12
+msgid "Action"
+msgstr "عملکرد"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:30
+msgid "View / Pay"
+msgstr "مشاهده / پرداخت"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:36
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:7
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:37
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:40
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:6
+msgid "Paid"
+msgstr "پرداخت شده"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:37
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:9
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:38
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:41
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:8
+msgid "Unpaid"
+msgstr "پرداخت نشده"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:38
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:11
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:39
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:42
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:10
+msgid "Canceled"
+msgstr "لغو شده"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:6
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:5
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:37
+msgid "Status"
+msgstr "وضعیت"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:14
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:14
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:32
+msgid "Gateway"
+msgstr "دروازه"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:16
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:16
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:33
+msgid "Create"
+msgstr "زمان ایجاد"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:32
+msgid "Pay"
+msgstr "پرداخت"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:3
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:3
+msgid "List of Invoices"
+msgstr "فهرست فاکتور ها"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:7
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:31
+msgid "Invoice"
+msgstr "فاکتور"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:8
+msgid "Adapter"
+msgstr "پایانه پرداخت"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:10
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:9
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:34
+msgid "User"
+msgstr "کاربر"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:12
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:38
+msgid "Ip"
+msgstr "آی پی"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:32
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:30
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:36
+msgid "Edit"
+msgstr "ویرایش"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:33
+msgid "View"
+msgstr "مشاهده"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:3
+msgid "List of all available gateways"
+msgstr "فهرست پایانه های پرداخت در دسترس"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:10
+msgid "Description"
+msgstr "توضیحات"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:11
+msgid "Version"
+msgstr "نسخه"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:12
+msgid "Author"
+msgstr "سازنده"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:13
+msgid "Credits"
+msgstr "کریدیت"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:14
+msgid "Release Date"
+msgstr "تاریخ انتشار"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:31
+msgid "Inactive"
+msgstr "غیر فعال"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:32
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:38
+msgid "UnInstall"
+msgstr "خارج کردن از نصب"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:37
+msgid "Active"
+msgstr "فعال"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:43
+msgid "Install"
+msgstr "نصب"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:3
+#, php-format
+msgid "Invoice %s"
+msgstr "فاکتور %s"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:12
+msgid "Module"
+msgstr "بخش"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:30
+msgid "Id"
+msgstr "شناسه"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:36
+msgid "Authority"
+msgstr "اعتبار"
+
+#~ msgid "email"
+#~ msgstr "ایمیل"
+
+#~ msgid "test"
+#~ msgstr "تست"
+
+#~ msgid "money"
+#~ msgstr "پول"
+
+#~ msgid ""
+#~ "Another payment at process by you, Please finish that payment first or "
+#~ "try after 30 minutes"
+#~ msgstr ""
+#~ "یک پرداخت دیگر توسط حساب کاربری شما در حال انجام است. لطفا ابتدا ان "
+#~ "پرداخت را تکمیل کنید و یا ۳۰ دقیقه صبر کنید"
+
+#~ msgid "Logs"
+#~ msgstr "گزارش ها"
+
+#~ msgid "Payment"
+#~ msgstr "پرداخت"
+
+#~ msgid "Admin"
+#~ msgstr "مدیریت"
+
+#~ msgid "Perpage"
+#~ msgstr "تعداد در هر صفحه"
+
+#~ msgid "Test"
+#~ msgstr "تست"

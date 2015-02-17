@@ -1,0 +1,798 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pi payment module\n"
+"POT-Creation-Date: 2015-02-12 22:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Marc Desrousseaux\n"
+"Language-Team: Pi\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SearchPath-0: C:\\Users\\LAPTOP MARC\\Documents\\GitHub\\payment\n"
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/src/Api/Invoice.php:47
+msgid "Please login for create invoice"
+msgstr "Merci de vous connecter pour créer la facture"
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/src/Api/Invoice.php:58
+msgid "Please send all informations for create invoice"
+msgstr "Merci de fournir toutes les informations pour créer la facture"
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/src/Api/Invoice.php:86
+msgid "Your invoice create successfully"
+msgstr "Votre facture a été payée avec succès"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Admin/GatewayController.php:71
+msgid "Gateway data saved successfully."
+msgstr "Les paramètres de la passerelles ont été sauvegardés avec succès."
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Admin/GatewayController.php:75
+msgid "Invalid data, please check and re-submit."
+msgstr "Donnée non valide, merci de vérifier et de re-soumettre."
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Admin/GatewayController.php:87
+msgid "Install gateway"
+msgstr "Installer la passerelle"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Admin/InvoiceController.php:41
+#: MARC\Documents\GitHub\payment/src/Controller/Admin/InvoiceController.php:76
+msgid "Not yet"
+msgstr "Pas encore."
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Admin/InvoiceController.php:73
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:64
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:92
+msgid "The invoice not found."
+msgstr "La facture n'a pas été trouvée."
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:69
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:73
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:101
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:105
+msgid "This is not your invoice."
+msgstr "Ce n'est pas votre facture."
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:96
+msgid "The invoice payd."
+msgstr "La facture est réglée."
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:141
+#, php-format
+msgid "Error to get %s."
+msgstr "Impossible d'obtenir %s."
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:148
+msgid "Error to get information."
+msgstr "Impossible de récupérer l'information"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:174
+msgid "Your running pay processing not set"
+msgstr "Votre process de paimeent n'est pas défini"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:179
+msgid "Your IP address changed and processing not valid"
+msgstr "Votre adresse IP a a changé :le process de paiement n'est pas valide"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:206
+msgid "Your payment were successfully. Back to module"
+msgstr "Votre paiement a été un succès. Retour au module."
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:211
+msgid "Your payment wont successfully."
+msgstr "Votre paiement a échoué"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:216
+msgid "Did not set any request"
+msgstr "Aucune demande effectuée."
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:268
+msgid "Your old payment process remove, please try new payment ation"
+msgstr ""
+"Votre ancienne commande a été supprimée, merci de passer une nouvelle "
+"commande"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:270
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:278
+msgid "Payment is clean"
+msgstr "Le paiement est sûr"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Controller/Front/IndexController.php:313
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:157
+#: MARC\Documents\GitHub\payment/src/Gateway/Paypal/Gateway.php:388
+msgid "Your payment were successfully."
+msgstr "Votre paiement a réussi."
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/src/Form/GatewayForm.php:73
+msgid "Submit"
+msgstr "Soumettre"
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/src/Form/RemoveForm.php:39
+msgid "Attention"
+msgstr "Attention"
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/src/Form/RemoveForm.php:43
+msgid ""
+"You have another open payment process, if have have another page for online "
+"payment, please fish for courent payment and after that start new one. But "
+"is you cancel your old payment or it have any other problem and you want "
+"close all old proess and start new one, Please conferm this meaasage and "
+"select other payment"
+msgstr ""
+"Vous avez une autre commande en cours. Pour procéder à un nouveau "
+"règlement, merci de d'abord solder votre commande en cours avant d'en "
+"commencer un autre. Pour annuler cette commande en cours, cliquer sur "
+"confirmer."
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/src/Form/RemoveForm.php:52
+msgid "Conferm"
+msgstr "Confirmer"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:30
+msgid "Bank Mellat (Iran)"
+msgstr "Bank Mellat (Iran)"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:48
+#: MARC\Documents\GitHub\payment/src/Gateway/Paypal/Gateway.php:48
+msgid "path"
+msgstr "chemin"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:55
+msgid "pin"
+msgstr "pin"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:62
+msgid "username"
+msgstr "nom utilisateur"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:69
+msgid "password"
+msgstr "mot de passe"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:182
+msgid "Your order id not true."
+msgstr "Votre numéro de commande n'existe pas."
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:192
+#, php-format
+msgid "Your track code is : %s"
+msgstr "Votre code suivi est : %s"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:209
+msgid "Bank Mellat error 0"
+msgstr "Bank Mellat error 0"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:213
+msgid "Bank Mellat error 41"
+msgstr "Bank Mellat error 41"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:217
+msgid "Bank Mellat error 43"
+msgstr "Bank Mellat error 43"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:221
+msgid "Bank Mellat error 17"
+msgstr "Bank Mellat error 17"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:225
+msgid "Bank Mellat error 415"
+msgstr "Bank Mellat error 415"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:229
+msgid "Bank Mellat error 417"
+msgstr "Bank Mellat error 417"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:233
+msgid "Bank Mellat error 11"
+msgstr "Bank Mellat error 11"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:237
+msgid "Bank Mellat error 12"
+msgstr "Bank Mellat error 12"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:241
+msgid "Bank Mellat error 13"
+msgstr "Bank Mellat error 13"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:245
+msgid "Bank Mellat error 14"
+msgstr "Bank Mellat error 14"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:249
+msgid "Bank Mellat error 15"
+msgstr "Bank Mellat error 15"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:253
+msgid "Bank Mellat error 16"
+msgstr "Bank Mellat error 16"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:257
+msgid "Bank Mellat error 18"
+msgstr "Bank Mellat error 18"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:261
+msgid "Bank Mellat error 19"
+msgstr "Bank Mellat error 19"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:265
+msgid "Bank Mellat error 111"
+msgstr "Bank Mellat error 111"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:269
+msgid "Bank Mellat error 112"
+msgstr "Bank Mellat error 112"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:273
+msgid "Bank Mellat error 113"
+msgstr "Bank Mellat error 113"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:277
+msgid "Bank Mellat error 114"
+msgstr "Bank Mellat error 114"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:281
+msgid "Bank Mellat error 21"
+msgstr "Bank Mellat error 21"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:285
+msgid "Bank Mellat error 23"
+msgstr "Bank Mellat error 23"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:289
+msgid "Bank Mellat error 24"
+msgstr "Bank Mellat error 24"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:293
+msgid "Bank Mellat error 25"
+msgstr "Bank Mellat error 25"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:297
+msgid "Bank Mellat error 31"
+msgstr "Bank Mellat error 31"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:301
+msgid "Bank Mellat error 32"
+msgstr "Bank Mellat error 32"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:305
+msgid "Bank Mellat error 33"
+msgstr "Bank Mellat error 33"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:309
+msgid "Bank Mellat error 34"
+msgstr "Bank Mellat error 34"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:313
+msgid "Bank Mellat error 35"
+msgstr "Bank Mellat error 35"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:317
+msgid "Bank Mellat error 42"
+msgstr "Bank Mellat error 42"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:321
+msgid "Bank Mellat error 44"
+msgstr "Bank Mellat error 44"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:325
+msgid "Bank Mellat error 45"
+msgstr "Bank Mellat error 45"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:329
+msgid "Bank Mellat error 46"
+msgstr "Bank Mellat error 46"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:333
+msgid "Bank Mellat error 47"
+msgstr "Bank Mellat error 47"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:337
+msgid "Bank Mellat error 48"
+msgstr "Bank Mellat error 48"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:341
+msgid "Bank Mellat error 49"
+msgstr "Bank Mellat error 49"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:345
+msgid "Bank Mellat error 412"
+msgstr "Bank Mellat error 412"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:349
+msgid "Bank Mellat error 413"
+msgstr "Bank Mellat error 413"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:353
+msgid "Bank Mellat error 414"
+msgstr "Bank Mellat error 414"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:357
+msgid "Bank Mellat error 416"
+msgstr "Bank Mellat error 416"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:361
+msgid "Bank Mellat error 418"
+msgstr "Bank Mellat error 418"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:365
+msgid "Bank Mellat error 419"
+msgstr "Bank Mellat error 419"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:369
+msgid "Bank Mellat error 421"
+msgstr "Bank Mellat error 421"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:373
+msgid "Bank Mellat error 51"
+msgstr "Bank Mellat error 51"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:377
+msgid "Bank Mellat error 54"
+msgstr "Bank Mellat error 54"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:381
+msgid "Bank Mellat error 55"
+msgstr "Bank Mellat error 55"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:385
+msgid "Bank Mellat error 61"
+msgstr "Bank Mellat error 61"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Mellat/Gateway.php:389
+#, php-format
+msgid "Bank Mellat error %s"
+msgstr "Bank Mellat error %s"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Paypal/Gateway.php:30
+msgid "Paypal"
+msgstr "Paypal"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Paypal/Gateway.php:55
+msgid "Paypal email address"
+msgstr "Adresse email Paypal"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Paypal/Gateway.php:62
+msgid "Paypal currency"
+msgstr "Devise Paypal"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Paypal/Gateway.php:69
+msgid "Paypal currency symbol"
+msgstr "Symbole devise Paypal"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Paypal/Gateway.php:76
+msgid "Location code (ex GB)"
+msgstr "Code pays (ex GB)"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Paypal/Gateway.php:83
+msgid "Custom attribute"
+msgstr "Attribut personnel"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Paypal/Gateway.php:90
+msgid "Test mode by sandbox"
+msgstr "Mot Test pour la Sandbox"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Paypal/Gateway.php:97
+msgid "Username for sandbox"
+msgstr "Nom utilisateur pour la Sandbox"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Paypal/Gateway.php:104
+msgid "Password for sandbox"
+msgstr "Mot de passe pour la Sandbox"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Paypal/Gateway.php:111
+msgid "Signature for sandbox"
+msgstr "Signature pour la Sandbox"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/src/Gateway/Paypal/Gateway.php:393
+#: MARC\Documents\GitHub\payment/template/admin/log_index.phtml:59
+#: MARC\Documents\GitHub\payment/template/front/result.phtml:4
+msgid "Error"
+msgstr "Erreur"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/gateway_index.phtml:3
+msgid "List of all available gateways"
+msgstr "Liste des passerelles disponibles"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/gateway_index.phtml:10
+msgid "Description"
+msgstr "Description"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/gateway_index.phtml:11
+msgid "Version"
+msgstr "Version"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/gateway_index.phtml:12
+msgid "Author"
+msgstr "Auteur"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/gateway_index.phtml:13
+msgid "Credits"
+msgstr "Crédits"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/gateway_index.phtml:14
+msgid "Release Date"
+msgstr "Date de Sortie"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/gateway_index.phtml:30
+#: MARC\Documents\GitHub\payment/template/admin/gateway_index.phtml:36
+#: MARC\Documents\GitHub\payment/template/admin/invoice_index.phtml:32
+msgid "Edit"
+msgstr "Editer"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/gateway_index.phtml:31
+msgid "Inactive"
+msgstr "Désactiver"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/gateway_index.phtml:32
+#: MARC\Documents\GitHub\payment/template/admin/gateway_index.phtml:38
+msgid "UnInstall"
+msgstr "Désinstaller"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/gateway_index.phtml:37
+msgid "Active"
+msgstr "Activer"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/gateway_index.phtml:43
+msgid "Install"
+msgstr "Installer"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_index.phtml:3
+#: MARC\Documents\GitHub\payment/template/admin/log_index.phtml:3
+msgid "List of Invoices"
+msgstr "Liste des Factures"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_index.phtml:6
+#: MARC\Documents\GitHub\payment/template/admin/log_index.phtml:6
+#: MARC\Documents\GitHub\payment/template/front/list.phtml:6
+msgid "ID"
+msgstr "ID"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_index.phtml:7
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:13
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:13
+#: MARC\Documents\GitHub\payment/template/front/list.phtml:7
+msgid "Order"
+msgstr "Ordre"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_index.phtml:8
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:15
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:25
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:96
+#: MARC\Documents\GitHub\payment/template/admin/log_index.phtml:9
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:15
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:28
+#: MARC\Documents\GitHub\payment/template/front/list.phtml:8
+msgid "Amount"
+msgstr "Montant"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_index.phtml:9
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:95
+#: MARC\Documents\GitHub\payment/template/admin/log_index.phtml:10
+msgid "User"
+msgstr "Utilisateur"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_index.phtml:10
+#: MARC\Documents\GitHub\payment/template/admin/log_index.phtml:11
+#: MARC\Documents\GitHub\payment/template/front/list.phtml:9
+msgid "Time Create"
+msgstr "Date de création"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_index.phtml:11
+#: MARC\Documents\GitHub\payment/template/front/list.phtml:10
+msgid "Time pay"
+msgstr "Date de règlement"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_index.phtml:12
+#: MARC\Documents\GitHub\payment/template/front/list.phtml:11
+msgid "Action"
+msgstr "Action"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_index.phtml:33
+msgid "View"
+msgstr "Voir"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_index.phtml:40
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:6
+#: MARC\Documents\GitHub\payment/template/admin/log_index.phtml:57
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:7
+#: MARC\Documents\GitHub\payment/template/front/list.phtml:36
+msgid "Paid"
+msgstr "Réglé"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_index.phtml:41
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:8
+#: MARC\Documents\GitHub\payment/template/admin/log_index.phtml:58
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:9
+#: MARC\Documents\GitHub\payment/template/front/list.phtml:37
+msgid "Unpaid"
+msgstr "Non réglé"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_index.phtml:42
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:10
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:11
+#: MARC\Documents\GitHub\payment/template/front/list.phtml:38
+msgid "Canceled"
+msgstr "Annulé"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:3
+#, php-format
+msgid "Invoice %s"
+msgstr "Facture %s"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:5
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:98
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:6
+msgid "Status"
+msgstr "Statut"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:12
+msgid "Module"
+msgstr "Module"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:14
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:93
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:14
+msgid "Gateway"
+msgstr "Passerelle"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:16
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:94
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:16
+msgid "Create"
+msgstr "Créer"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:21
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:24
+msgid "Title"
+msgstr "Titre"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:29
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:32
+msgid "Vat"
+msgstr "TVA"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:33
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:36
+msgid "Total"
+msgstr "Total"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:37
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:40
+msgid "Number"
+msgstr "Valeur"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:42
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:45
+msgid "Name"
+msgstr "Nom"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:47
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:50
+msgid "Address"
+msgstr "Adresse"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:51
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:54
+msgid "City"
+msgstr "Ville"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:55
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:58
+msgid "State"
+msgstr "Département-Province"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:59
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:62
+msgid "Country"
+msgstr "Pays"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:63
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:66
+msgid "Zip code"
+msgstr "Code Postal"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:67
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:70
+msgid "Email"
+msgstr "Email"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:71
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:74
+msgid "Phone"
+msgstr "Téléphone"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:75
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:78
+msgid "Mobile"
+msgstr "Mobile"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:88
+msgid "Logs"
+msgstr "Logs"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:91
+msgid "Id"
+msgstr "Id"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:92
+#: MARC\Documents\GitHub\payment/template/admin/log_index.phtml:7
+msgid "Invoice"
+msgstr "Facture"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:97
+msgid "Authority"
+msgstr "Autorité"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:99
+msgid "Ip"
+msgstr "Ip"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/invoice_view.phtml:100
+msgid "Message"
+msgstr "Message"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/log_index.phtml:8
+msgid "Adapter"
+msgstr "Adapteur"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/log_index.phtml:12
+msgid "Details"
+msgstr "Détails"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/log_index.phtml:33
+msgid "Show details"
+msgstr "Voir les détails"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/admin/log_index.phtml:40
+msgid "Log details"
+msgstr "Details Logs"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/template/front/invoice.phtml:92
+msgid "Pay"
+msgstr "Payer"
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/template/front/list.phtml:3
+msgid "Your invoices list"
+msgstr "Votre liste de factures"
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/template/front/list.phtml:30
+msgid "View / Pay"
+msgstr "Voir / Payer"

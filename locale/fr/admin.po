@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pi payment module\n"
+"POT-Creation-Date: 2015-02-12 23:02+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Marc Desrousseaux\n"
+"Language-Team: Pi\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _a;_t\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SearchPath-0: C:\\Users\\LAPTOP MARC\\Documents\\GitHub"
+"\\payment\n"
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/config.php:17
+msgid "Admin"
+msgstr "Admin"
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/config.php:21
+#: MARC\Documents\GitHub\payment/config/module.php:16
+msgid "Payment"
+msgstr "Paiement"
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/config.php:29
+msgid "Perpage"
+msgstr "Par page"
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/config.php:38
+msgid "Payment gateway error url"
+msgstr "Url pour l'erreur de passerelle de paiement"
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/config.php:39
+msgid "Set back url when gateway have error, set empty for default url"
+msgstr ""
+"Définir l'url de retour lorsqu'une la passerelle rencontre une erreur, "
+"laisser vide pour l'url par défaut"
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/config.php:45
+msgid "Show not pay payments"
+msgstr "Montrer les commandes non payées"
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/config.php:53
+msgid "Anonymous users can pay"
+msgstr "Les utilisateurs Anonymes peuvent payer"
+
+#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/module.php:17
+msgid "Payment gateway"
+msgstr "Passerelle de paiement"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/config/navigation.php:19
+msgid "Invoice"
+msgstr "Facture"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/config/navigation.php:25
+msgid "Logs"
+msgstr "Logs"
+
+#: C:\Users\LAPTOP
+#: MARC\Documents\GitHub\payment/config/navigation.php:31
+msgid "Gateway"
+msgstr "Passerelle"

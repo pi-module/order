@@ -1,0 +1,95 @@
+<?php $this->css($this->assetModule('css/front.css')); ?>
+<div class="clearfix">
+	<div class="well">
+		<div class="clearfix">
+			<div class="col-md-8">
+				<p><strong><?php _e('Status'); ?></strong> : <?php if ($invoice['status'] == 1) { ?>
+					<span class="label label-success"><?php _e('Paid'); ?><span>
+				<?php } elseif ($invoice['status'] == 2) { ?>
+					<span class="label label-warning"><?php _e('Unpaid'); ?><span>
+				<?php } else { ?>
+					<span class="label label-danger"><?php _e('Canceled'); ?><span>
+				<?php } ?>
+				<p><strong><?php _e('Order'); ?></strong> : <span><?php echo $this->escape($invoice['item_view']); ?> </span></p>
+				<p><strong><?php _e('Gateway'); ?></strong> : <span><?php echo $this->escape($invoice['adapter']); ?> </span></p>
+				<!-- <p><strong><?php _e('Amount'); ?></strong> : <span><?php echo $this->escape($invoice['amount_view']); ?> </span></p> -->
+				<p><strong><?php _e('Create'); ?></strong> : <span><?php echo $this->escape($invoice['time_create_view']); ?> </span></p>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+	</div>	
+	<div class="clearfix">
+		<div class="well">
+            <?php if (isset($invoice['description']['title'])) { ?>
+			<p><strong><?php _e('Title'); ?></strong> : <span><?php echo $this->escape($invoice['description']['title']); ?></span></p>
+            <?php unset($invoice['description']['title']); ?>
+			<?php } ?>
+			<?php if (isset($invoice['description']['price'])) { ?>
+			<p><strong><?php _e('Amount'); ?></strong> : <span><?php echo _currency($invoice['description']['price']); ?></span></p>
+            <?php unset($invoice['description']['price']); ?>
+			<?php } ?>
+			<?php if (isset($invoice['description']['vat'])) { ?>
+			<p><strong><?php _e('Vat'); ?></strong> : <span><?php echo _currency($invoice['description']['vat']); ?></span></p>
+            <?php unset($invoice['description']['vat']); ?>
+			<?php } ?>
+			<?php if (isset($invoice['description']['total'])) { ?>
+			<p><strong><?php _e('Total'); ?></strong> : <span><?php echo _currency($invoice['description']['total']); ?></span></p>
+            <?php unset($invoice['description']['total']); ?>
+			<?php } ?>
+			<?php if (isset($invoice['description']['number'])) { ?>
+			<p><strong><?php _e('Number'); ?></strong> : <span><?php echo _number($invoice['description']['number']); ?></span></p>
+            <?php unset($invoice['description']['number']); ?>
+			<?php } ?>
+			<hr />
+			<?php if (isset($invoice['description']['first_name']) && isset($invoice['description']['last_name'])) { ?>
+			<p><strong><?php _e('Name'); ?></strong> : <span><?php echo $this->escape($invoice['description']['first_name']); ?> <?php echo $this->escape($invoice['description']['last_name']); ?></span></p>
+            <?php unset($invoice['description']['first_name']); ?>
+            <?php unset($invoice['description']['last_name']); ?>
+			<?php } ?>
+			<?php if (isset($invoice['description']['address'])) { ?>
+			<p><strong><?php _e('Address'); ?></strong> : <span><?php echo $this->escape($invoice['description']['address']); ?></span></p>
+            <?php unset($invoice['description']['address']); ?>
+			<?php } ?>
+			<?php if (isset($invoice['description']['city'])) { ?>
+			<p><strong><?php _e('City'); ?></strong> : <span><?php echo $this->escape($invoice['description']['city']); ?></span></p>
+            <?php unset($invoice['description']['city']); ?>
+			<?php } ?>
+			<?php if (isset($invoice['description']['state'])) { ?>
+			<p><strong><?php _e('State'); ?></strong> : <span><?php echo $this->escape($invoice['description']['state']); ?></span></p>
+            <?php unset($invoice['description']['state']); ?>
+			<?php } ?>
+			<?php if (isset($invoice['description']['country'])) { ?>
+			<p><strong><?php _e('Country'); ?></strong> : <span><?php echo $this->escape($invoice['description']['country']); ?></span></p>
+            <?php unset($invoice['description']['country']); ?>
+			<?php } ?>
+			<?php if (isset($invoice['description']['zip'])) { ?>
+			<p><strong><?php _e('Zip code'); ?></strong> : <span><?php echo $this->escape($invoice['description']['zip']); ?></span></p>
+            <?php unset($invoice['description']['zip']); ?>
+			<?php } ?>
+			<?php if (isset($invoice['description']['email'])) { ?>
+			<p><strong><?php _e('Email'); ?></strong> : <span><?php echo $this->escape($invoice['description']['email']); ?></span></p>
+            <?php unset($invoice['description']['email']); ?>
+			<?php } ?>
+			<?php if (isset($invoice['description']['phone'])) { ?>
+			<p><strong><?php _e('Phone'); ?></strong> : <span><?php echo $this->escape($invoice['description']['phone']); ?></span></p>
+            <?php unset($invoice['description']['phone']); ?>
+			<?php } ?>
+			<?php if (isset($invoice['description']['mobile'])) { ?>
+			<p><strong><?php _e('Mobile'); ?></strong> : <span><?php echo $this->escape($invoice['description']['mobile']); ?></span></p>
+            <?php unset($invoice['description']['mobile']); ?>
+			<?php } ?>
+			<?php if (!empty($invoice['description'])) { ?>
+			<?php foreach ($invoice['description'] as $key => $value) { ?>
+            <?php if (!empty($value)) { ?>
+			<p><strong><?php echo $this->escape($key); ?></strong> : <span><?php echo $this->escape($value); ?></span></p>
+            <?php } ?>
+			<?php } ?>
+			<?php } ?>
+    	</div>
+	</div>
+	<?php if ($invoice['status'] == 2) {  ?>
+	<div class="clearfix">
+		<a class="btn btn-primary" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay']); ?>"><?php _e('Pay'); ?></a>
+	</div>
+	<?php } ?>
+</div>

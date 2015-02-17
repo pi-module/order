@@ -1,0 +1,559 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pi payment module\n"
+"POT-Creation-Date: 2014-10-07 16:03+0330\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Pi\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-release-2.4.0/usr/module/"
+"payment\n"
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Api/Invoice.php:50
+msgid "Please send all informations for create invoice"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Api/Invoice.php:73
+msgid "Your invoice create successfully"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Api/Invoice.php:78
+msgid "Please login for create invoice"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Form/RemoveForm.php:39
+msgid "Attention"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Form/RemoveForm.php:43
+msgid ""
+"You have another open payment process, if have have another page for online "
+"payment, please fish for courent payment and after that start new one. But "
+"is you cancel your old payment or it have any other problem and you want "
+"close all old proess and start new one, Please conferm this meaasage and "
+"select other payment"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Form/RemoveForm.php:52
+msgid "Conferm"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Form/GatewayForm.php:65
+msgid "Submit"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:30
+msgid "Paypal"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:48
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:48
+msgid "path"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:54
+msgid "Paypal email address"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:60
+msgid "Paypal currency"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:66
+msgid "Paypal currency symbol"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:72
+msgid "Location code (ex GB)"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:78
+msgid "Custom attribute"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:215
+msgid "Back to website"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:321
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:153
+msgid "Your payment were successfully."
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Paypal/Gateway.php:339
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/result.phtml:4
+msgid "Error"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:30
+msgid "Bank Mellat (Iran)"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:54
+msgid "pin"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:60
+msgid "username"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:66
+msgid "password"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:178
+msgid "Your order id not true."
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:188
+#, php-format
+msgid "Your track code is : %s"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:205
+msgid "Bank Mellat error 0"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:209
+msgid "Bank Mellat error 41"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:213
+msgid "Bank Mellat error 43"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:217
+msgid "Bank Mellat error 17"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:221
+msgid "Bank Mellat error 415"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:225
+msgid "Bank Mellat error 417"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:229
+msgid "Bank Mellat error 11"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:233
+msgid "Bank Mellat error 12"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:237
+msgid "Bank Mellat error 13"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:241
+msgid "Bank Mellat error 14"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:245
+msgid "Bank Mellat error 15"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:249
+msgid "Bank Mellat error 16"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:253
+msgid "Bank Mellat error 18"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:257
+msgid "Bank Mellat error 19"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:261
+msgid "Bank Mellat error 111"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:265
+msgid "Bank Mellat error 112"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:269
+msgid "Bank Mellat error 113"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:273
+msgid "Bank Mellat error 114"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:277
+msgid "Bank Mellat error 21"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:281
+msgid "Bank Mellat error 23"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:285
+msgid "Bank Mellat error 24"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:289
+msgid "Bank Mellat error 25"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:293
+msgid "Bank Mellat error 31"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:297
+msgid "Bank Mellat error 32"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:301
+msgid "Bank Mellat error 33"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:305
+msgid "Bank Mellat error 34"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:309
+msgid "Bank Mellat error 35"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:313
+msgid "Bank Mellat error 42"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:317
+msgid "Bank Mellat error 44"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:321
+msgid "Bank Mellat error 45"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:325
+msgid "Bank Mellat error 46"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:329
+msgid "Bank Mellat error 47"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:333
+msgid "Bank Mellat error 48"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:337
+msgid "Bank Mellat error 49"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:341
+msgid "Bank Mellat error 412"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:345
+msgid "Bank Mellat error 413"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:349
+msgid "Bank Mellat error 414"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:353
+msgid "Bank Mellat error 416"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:357
+msgid "Bank Mellat error 418"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:361
+msgid "Bank Mellat error 419"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:365
+msgid "Bank Mellat error 421"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:369
+msgid "Bank Mellat error 51"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:373
+msgid "Bank Mellat error 54"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:377
+msgid "Bank Mellat error 55"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:381
+msgid "Bank Mellat error 61"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Gateway/Mellat/Gateway.php:385
+#, php-format
+msgid "Bank Mellat error %s"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:47
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Admin/InvoiceController.php:41
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Admin/InvoiceController.php:76
+msgid "Not yet"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:64
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:84
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Admin/InvoiceController.php:73
+msgid "The invoice not found."
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:68
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:92
+msgid "This is not your invoice."
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:88
+msgid "The invoice payd."
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:124
+#, php-format
+msgid "Error to get %s."
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:131
+msgid "Error to get information."
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:161
+msgid "Your running pay processing not set"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:166
+msgid "Your IP address changed and processing not valid"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:193
+msgid "Your payment were successfully. Back to module"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:198
+msgid "Your payment wont successfully."
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:203
+msgid "Did not set any request"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:217
+msgid "Your old payment process remove, please try new payment ation"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:219
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Front/IndexController.php:227
+msgid "Payment is clean"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Admin/GatewayController.php:71
+msgid "Gateway data saved successfully."
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Admin/GatewayController.php:75
+msgid "Invalid data, please check and re-submit."
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/src/Controller/Admin/GatewayController.php:87
+msgid "Install gateway"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:3
+msgid "Your invoices list"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:6
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:6
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:6
+msgid "ID"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:7
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:13
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:7
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:13
+msgid "Order"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:8
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:15
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:9
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:8
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:15
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:35
+msgid "Amount"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:9
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:11
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:10
+msgid "Time Create"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:10
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:11
+msgid "Time pay"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:11
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:12
+msgid "Action"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:30
+msgid "View / Pay"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:36
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:7
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:37
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:40
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:6
+msgid "Paid"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:37
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:9
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:38
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:41
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:8
+msgid "Unpaid"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/list.phtml:38
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:11
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:39
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:42
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:10
+msgid "Canceled"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:6
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:5
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:37
+msgid "Status"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:14
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:14
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:32
+msgid "Gateway"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:16
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:16
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:33
+msgid "Create"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/front/invoice.phtml:32
+msgid "Pay"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:3
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:3
+msgid "List of Invoices"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:7
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:31
+msgid "Invoice"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:8
+msgid "Adapter"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:10
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:9
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:34
+msgid "User"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/log_index.phtml:12
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:38
+msgid "Ip"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:32
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:30
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:36
+msgid "Edit"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_index.phtml:33
+msgid "View"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:3
+msgid "List of all available gateways"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:10
+msgid "Description"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:11
+msgid "Version"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:12
+msgid "Author"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:13
+msgid "Credits"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:14
+msgid "Release Date"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:31
+msgid "Inactive"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:32
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:38
+msgid "UnInstall"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:37
+msgid "Active"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/gateway_index.phtml:43
+msgid "Install"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:3
+#, php-format
+msgid "Invoice %s"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:12
+msgid "Module"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:30
+msgid "Id"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/payment/template/admin/invoice_view.phtml:36
+msgid "Authority"
+msgstr ""

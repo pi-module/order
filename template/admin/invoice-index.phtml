@@ -1,0 +1,44 @@
+<?php $this->css($this->assetModule('css/admin.css')); ?>
+<div class="clearfix">
+	<h3><?php _e('List of Invoices'); ?></h3>
+	<table class="table table-striped table-bordered table-condensed">
+		<tr>
+			<th><?php _e('ID'); ?></th>
+			<th><?php _e('Order'); ?></th>
+			<th><?php _e('Amount'); ?></th>
+			<th><?php _e('User'); ?></th>
+			<th><?php _e('Time Create'); ?></th>
+			<th><?php _e('Time pay'); ?></th>
+			<th><?php _e('Action'); ?></th>
+		</tr>
+		<?php foreach($list as $invoice) { ?>
+		<?php
+		if($invoice['status'] == 1) {
+			$labelIdClass = 'label-success';	
+		} elseif($invoice['status'] == 2) {
+			$labelIdClass = 'label-warning';	
+		} elseif($invoice['status'] == 3) {
+			$labelIdClass = 'label-danger';	
+		}
+		?>
+		<tr>
+			<td><span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($invoice['id']); ?></span></td>
+			<td><?php echo $this->escape($invoice['item']); ?> - <?php echo $this->escape($invoice['module']); ?> - <?php echo $this->escape($invoice['part']); ?> </td>
+			<td><?php echo $this->escape($invoice['amount_view']); ?> ( <?php echo $this->escape($invoice['adapter']); ?> )</td>
+			<td><?php echo $this->escape($invoice['user']['identity']); ?></td>
+			<td><?php echo $this->escape($invoice['time_create_view']); ?></td>
+			<td><?php echo $this->escape($invoice['time_payment_view']); ?></td>
+			<td>
+				<!-- <a class="btn btn-primary" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'update', 'id' => $invoice['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Edit'); ?></a> -->
+				<a class="btn btn-primary" title="<?php _e('View'); ?>" href="<?php echo $this->url('', array('action' => 'view', 'id' => $invoice['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('View'); ?></a>
+			</td>
+		</tr>
+		<?php } ?>
+	</table>
+	<div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
+	<p>
+		<span class="label label-success"><?php _e('Paid'); ?></span>
+		<span class="label label-warning"><?php _e('Unpaid'); ?></span>
+		<span class="label label-danger"><?php _e('Canceled'); ?></span>
+	</p>
+</div>
