@@ -95,17 +95,20 @@ class Invoice extends AbstractApi
                     $result['message'] = __('Your invoice create successfully');
                     $result['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
                         'module'        => $this->getModule(),
-                        'action'        => 'detail',
+                        'controller'    => 'detail',
+                        'action'        => 'index',
                         'id'            => $row->order,
                     )));
                     $result['invoice_url'] = Pi::url(Pi::service('url')->assemble('order', array(
                         'module'        => $this->getModule(),
-                        'action'        => 'invoice',
+                        'controller'    => 'invoice',
+                        'action'        => 'index',
                         'id'            => $row->id,
                     )));
                     $result['pay_url'] = Pi::url(Pi::service('url')->assemble('order', array(
                         'module'        => $this->getModule(),
-                        'action'        => 'pay',
+                        'controller'    => 'payment',
+                        'action'        => 'index',
                         'id'            => $row->id,
                     )));
                     // Set invoice information on session
@@ -131,6 +134,52 @@ class Invoice extends AbstractApi
         $invoice = Pi::model('invoice', $this->getModule())->find($id);
         $invoice = $this->canonizeInvoice($invoice);
         return $invoice;
+    }
+
+    public function canonizeInvoice($invoice)
+    {
+        // Check
+        if (empty($invoice)) {
+            return '';
+        }
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // boject to array
+        $invoice = $invoice->toArray();
+        // Set time
+        $invoice['time_create_view'] = _date($invoice['time_create']);
+        $invoice['time_payment_view'] = _date($invoice['time_payment']);
+        $invoice['time_cancel_view'] = _date($invoice['time_cancel']);
+        // Set order id
+        $invoice['order_view'] = _number($invoice['order']);
+        // Set price
+        $invoice['product_price_view'] = _currency($invoice['product_price']);
+        $invoice['shipping_price_view'] = _currency($invoice['shipping_price']);
+        $invoice['packing_price_view'] = _currency($invoice['packing_price']);
+        $invoice['vat_price_view'] = _currency($invoice['vat_price']);
+        $invoice['total_price_view'] = _currency($invoice['total_price']);
+        $invoice['paid_price_view'] = _currency($invoice['paid_price']);
+        // Set url
+        $invoice['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+            'module'        => $this->getModule(),
+            'controller'    => 'detail',
+            'action'        => 'index',
+            'id'            => $invoice['order'],
+        )));
+        $invoice['invoice_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+            'module'        => $this->getModule(),
+            'controller'    => 'invoice',
+            'action'        => 'index',
+            'id'            => $invoice['id'],
+        )));
+        $invoice['pay_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+            'module'        => $this->getModule(),
+            'controller'    => 'payment',
+            'action'        => 'index',
+            'id'            => $invoice['id'],
+        )));
+        // return order
+        return $invoice; 
     }
 
     public function getInvoiceRandomId($id)
@@ -195,46 +244,5 @@ class Invoice extends AbstractApi
         $row->save();
     }
 
-    public function canonizeInvoice($invoice)
-    {
-        // Check
-        if (empty($invoice)) {
-            return '';
-        }
-        // Get config
-        $config = Pi::service('registry')->config->read($this->getModule());
-        // boject to array
-        $invoice = $invoice->toArray();
-        // Set time
-        $invoice['time_create_view'] = _date($invoice['time_create']);
-        $invoice['time_payment_view'] = _date($invoice['time_payment']);
-        $invoice['time_cancel_view'] = _date($invoice['time_cancel']);
-        // Set order id
-        $invoice['order_view'] = _number($invoice['order']);
-        // Set price
-        $invoice['product_price_view'] = _currency($invoice['product_price']);
-        $invoice['shipping_price_view'] = _currency($invoice['shipping_price']);
-        $invoice['packing_price_view'] = _currency($invoice['packing_price']);
-        $invoice['vat_price_view'] = _currency($invoice['vat_price']);
-        $invoice['total_price_view'] = _currency($invoice['total_price']);
-        $invoice['paid_price_view'] = _currency($invoice['paid_price']);
-        // Set url
-        $invoice['invoice_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'        => $this->getModule(),
-            'action'        => 'invoice',
-            'id'            => $rowset->id,
-        )));
-        $invoice['pay_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'        => $this->getModule(),
-            'action'        => 'pay',
-            'id'            => $invoice['id'],
-        )));
-        $invoice['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'        => $this->getModule(),
-            'action'        => 'detail',
-            'id'            => $invoice['order'],
-        )));
-        // return order
-        return $invoice; 
-    }
+
 }	

@@ -27,8 +27,8 @@ class Order extends Standard
         'action'        => 'index'
     );
 
-    protected $actionList = array(
-        'checkout', 'detail', 'invoice', 'pay', 'result', 'notify', 'remove', 'cancel', 'finish', 'error', 'checkoutLevel'
+    protected $controllerList = array(
+        'checkout', 'detail', 'index', 'invoice', 'payment'
     );
 
     /**
@@ -43,26 +43,53 @@ class Order extends Standard
     {
         $matches = array();
         $parts = array_filter(explode($this->structureDelimiter, $path));
-        // Set matches
+
+        // Set controller
         $matches = array_merge($this->defaults, $matches);
-        if (isset($parts[0]) && in_array($parts[0], $this->actionList)) {
-            $matches['action'] = $this->decode($parts[0]);
-            if ($matches['action'] == 'checkoutLevel') {
-                $matches['process'] = $this->decode($parts[1]);
-                if (is_numeric($parts[2])) {
-                    $matches['id'] = intval($parts[2]);
-                } elseif ($parts[1] == 'payment') {
-                    $matches['id'] = $this->decode($parts[2]);
-                }
-                //print_r($matches);
-                //print_r($matches);
-            } else {
-                if (isset($parts[1]) && is_numeric($parts[1])) {
-                    $matches['id'] = intval($parts[1]);
-                }
-            }
+        if (isset($parts[0]) && in_array($parts[0], $this->controllerList)) {
+            $matches['controller'] = $this->decode($parts[0]);
         }
-        // return
+
+        // Make Match
+        if (isset($matches['controller']) && !empty($parts[1])) {
+            switch ($matches['controller']) {
+                
+                case 'checkout':
+                    switch ($parts[1]) {
+                        case 'level':
+                            $matches['action'] = 'level';
+                            $matches['process'] = $this->decode($parts[2]);
+                            $matches['id'] = $this->decode($parts[3]);
+                            break;
+                        
+                        case 'index':
+                            $matches['action'] = 'index';
+                            break;
+                    }
+                    break;
+
+                case 'detail':
+                    $matches['id'] = $this->decode($parts[2]);
+                    break;
+
+                case 'index':
+
+                    break; 
+
+                case 'invoice':
+                    $matches['id'] = $this->decode($parts[1]);
+                    break;
+
+                case 'payment':
+                    if (in_array($parts[0], array('index', 'result', 'notify', 'cancel'))) {
+                        $matches['action'] = $this->decode($parts[1]);
+                    } else {
+                        $matches['id'] = $this->decode($parts[1]);
+                    }
+                    break;  
+            }    
+        } 
+
         return $matches;
     }
 
@@ -86,6 +113,14 @@ class Order extends Standard
         // Set module
         if (!empty($mergedParams['module'])) {
             $url['module'] = $mergedParams['module'];
+        }
+
+        // Set controller
+        if (!empty($mergedParams['controller']) 
+                && $mergedParams['controller'] != 'index'
+                && in_array($mergedParams['controller'], $this->controllerList)) 
+        {
+            $url['controller'] = $mergedParams['controller'];
         }
 
         // Set action
