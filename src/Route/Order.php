@@ -28,7 +28,7 @@ class Order extends Standard
     );
 
     protected $actionList = array(
-        'checkout', 'invoice', 'pay', 'result', 'notify', 'remove', 'cancel', 'finish', 'error', 'levelAjax'
+        'checkout', 'detail', 'invoice', 'pay', 'result', 'notify', 'remove', 'cancel', 'finish', 'error', 'checkoutLevel'
     );
 
     /**
@@ -47,7 +47,7 @@ class Order extends Standard
         $matches = array_merge($this->defaults, $matches);
         if (isset($parts[0]) && in_array($parts[0], $this->actionList)) {
             $matches['action'] = $this->decode($parts[0]);
-            if ($matches['action'] == 'levelAjax') {
+            if ($matches['action'] == 'checkoutLevel') {
                 $matches['process'] = $this->decode($parts[1]);
                 if (is_numeric($parts[2])) {
                     $matches['id'] = intval($parts[2]);

@@ -77,12 +77,12 @@
 EOT;
     $script =  sprintf(
         $script,
-        Pi::url($this->url('', array('controller' => 'index', 'action' => 'levelAjax', 'process' => 'location', 'id' => ''))),
+        Pi::url($this->url('', array('controller' => 'index', 'action' => 'checkoutLevel', 'process' => 'location', 'id' => ''))),
         __('Price : '),
         __('Time : '),
         __('Days'),
-        Pi::url($this->url('', array('controller' => 'index', 'action' => 'levelAjax', 'process' => 'delivery', 'id' => ''))),
-        Pi::url($this->url('', array('controller' => 'index', 'action' => 'levelAjax', 'process' => 'payment', 'id' => '')))
+        Pi::url($this->url('', array('controller' => 'index', 'action' => 'checkoutLevel', 'process' => 'delivery', 'id' => ''))),
+        Pi::url($this->url('', array('controller' => 'index', 'action' => 'checkoutLevel', 'process' => 'payment', 'id' => '')))
     );
     $this->footScript()->appendScript($script);
 

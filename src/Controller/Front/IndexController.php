@@ -62,15 +62,15 @@ class IndexController extends ActionController
                 }
                 // Set module_name values
                 if (isset($cart['module_name']) && !empty($cart['module_name'])) {
-                    $values['type'] = $cart['module_name'];
+                    $values['module_name'] = $cart['module_name'];
                 }
                 // Set module_table values
                 if (isset($cart['module_table']) && !empty($cart['module_table'])) {
-                    $values['type'] = $cart['module_table'];
+                    $values['module_table'] = $cart['module_table'];
                 }
                 // Set module_item values
                 if (isset($cart['module_item']) && !empty($cart['module_item'])) {
-                    $values['type'] = $cart['module_item'];
+                    $values['module_item'] = $cart['module_item'];
                 }
                 // Set price values
                 $values['product_price'] = 0;
@@ -127,7 +127,7 @@ class IndexController extends ActionController
         $this->view()->assign('cart', $cart);
     }
 
-    public function levelAjaxAction()
+    public function checkoutLevelAction()
     {
         // Check user
         $this->checkUser();
@@ -229,6 +229,26 @@ class IndexController extends ActionController
         return $return;
     }
 
+    public function detailAction()
+    {
+        // Check user
+        $this->checkUser();
+        // Get order
+        $id = $this->params('id');
+        $order = Pi::api('order', 'order')->getOrder($id);
+        // Check order
+        if (empty($order)) {
+           $this->jump(array('', 'action' => 'error'), __('The order not found.'));
+        }
+        // Check order is for this user
+        if ($order['uid'] != Pi::user()->getId()) {
+            $this->jump(array('', 'action' => 'error'), __('This is not your order.'));
+        }
+        // set view
+        $this->view()->setTemplate('empty');
+        $this->view()->assign('order', $order);
+    }
+
     public function invoiceAction()
     {
         // Check user
@@ -236,8 +256,9 @@ class IndexController extends ActionController
         // Get invoice
         $id = $this->params('id');
         $invoice = Pi::api('invoice', 'order')->getInvoice($id);
+        $order = Pi::api('order', 'order')->getOrder($invoice['order']);
         // Check invoice
-        if (empty($invoice)) {
+        if (empty($invoice) || empty($order)) {
            $this->jump(array('', 'action' => 'error'), __('The invoice not found.'));
         }
         // Check invoice is for this user
@@ -255,6 +276,7 @@ class IndexController extends ActionController
         // set view
         $this->view()->setTemplate('invoice');
         $this->view()->assign('invoice', $invoice);
+        $this->view()->assign('order', $order);
     }
 
     public function payAction()

@@ -16,6 +16,7 @@ namespace Module\Order\Api;
 use Pi;
 use Pi\Application\Api\AbstractApi;
 use Zend\Json\Json;
+use Zend\Math\Rand;
 
 /*
  * Pi::api('order', 'order')->getOrder($id);
@@ -26,7 +27,7 @@ use Zend\Json\Json;
  * Pi::api('order', 'order')->paymentStatus($status);
  * Pi::api('order', 'order')->deliveryStatus($status);
  * Pi::api('order', 'order')->canonizeOrder($order);
-
+ * Pi::api('order', 'order')->listProduct($order);
  */
 
 class Order extends AbstractApi
@@ -248,5 +249,10 @@ class Order extends AbstractApi
         $order['deliveryTitle'] = $status_delivery['deliveryTitle'];
         // return order
         return $order; 
+    }
+
+    public function listProduct($order)
+    {
+
     }
 }	

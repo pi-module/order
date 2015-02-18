@@ -268,7 +268,8 @@ class OrderController extends ActionController
         // Get order
         $order = $this->getModel('order')->find($id);
         $order = Pi::api('order', 'order')->canonizeOrder($order);
-        $order['product'] = Pi::api('order', 'order')->listProduct($order['id']);
+        $order['product'] = Pi::api('order', 'order')->listProduct($order);
+        $order['invoice'] = Pi::api('invoice', 'order')->listOrderInvoice($order['id']);
         // Add log
         //Pi::api('log', 'shop')->addLog('order', $order['id'], 'view');
         // Set view

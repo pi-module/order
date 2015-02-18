@@ -68,6 +68,7 @@ class InvoiceController extends ActionController
         // Get invoice
         $id = $this->params('id');
         $invoice = Pi::api('invoice', 'order')->getInvoice($id);
+        $order = Pi::api('order', 'order')->getOrder($invoice['order']);
         // Check invoice
         if (empty($invoice)) {
            $this->jump(array('', 'action' => 'index'), __('The invoice not found.'));
@@ -79,6 +80,7 @@ class InvoiceController extends ActionController
         // Set view
         $this->view()->setTemplate('invoice-view');
         $this->view()->assign('invoice', $invoice);
+        $this->view()->assign('order', $order);
     }	
 
     public function updateAction()
