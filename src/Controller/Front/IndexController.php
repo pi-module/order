@@ -110,4 +110,14 @@ class IndexController extends ActionController
         //
         return true;
     }
+
+    public function planAction()
+    {
+        $price = 125000;
+        $list = Pi::api('installment', 'order')->setPriceForView($price);
+        // Set view
+        $this->view()->setTemplate('empty')->setLayout('layout-content');
+        $this->view()->assign('test', $list);
+        //return Json::encode($list);  
+    }
 }

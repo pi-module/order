@@ -51,7 +51,7 @@ class Order extends Standard
         }
 
         // Make Match
-        if (isset($matches['controller']) && !empty($parts[1])) {
+        if (isset($matches['controller'])) {
             switch ($matches['controller']) {
                 
                 case 'checkout':
@@ -73,7 +73,7 @@ class Order extends Standard
                     break;
 
                 case 'index':
-
+                    $matches['action'] = $this->decode($parts[0]);
                     break; 
 
                 case 'invoice':
@@ -89,6 +89,9 @@ class Order extends Standard
                     break;  
             }    
         } 
+
+        //print_r($parts);
+        //print_r($matches);
 
         return $matches;
     }
