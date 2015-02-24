@@ -23,7 +23,7 @@
 			<td><span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($location['id']); ?></span></td>
 			<td><?php echo $this->escape($location['title']); ?></td>
 			<td>
-				<a class="btn btn-primary" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'locationUpdate', 'id' => $location['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
+				<a class="btn btn-primary" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'update', 'id' => $location['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
 			</td>
 		</tr>
 		<?php } ?>

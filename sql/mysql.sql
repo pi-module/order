@@ -89,6 +89,7 @@ CREATE TABLE `{invoice}` (
     `gateway` varchar(64) NOT NULL default 'offline',
     `status` tinyint(1) unsigned NOT NULL default '0',
     `time_create` int(10) unsigned NOT NULL default '0',
+    `time_duedate` int(10) unsigned NOT NULL default '0',
     `time_payment` int(10) unsigned NOT NULL default '0',
     `time_cancel` int(10) unsigned NOT NULL default '0',
     `back_url` varchar(255) NOT NULL default '',
@@ -100,7 +101,9 @@ CREATE TABLE `{invoice}` (
     KEY `status` (`status`),
     KEY `uid_status` (`uid`, `status`),
     KEY `time_create` (`time_create`),
-    KEY `id_time_create` (`id`, `time_create`)
+    KEY `time_duedate` (`time_duedate`),
+    KEY `id_time_create` (`id`, `time_create`),
+    KEY `id_time_duedate` (`id`, `time_duedate`)
 );
 
 CREATE TABLE `{processing}` (

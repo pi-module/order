@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Order\Api;
 
 use Pi;
@@ -59,6 +60,7 @@ class Invoice extends AbstractApi
                     $row->ip = Pi::user()->getIp();
                     $row->status = 1;
                     $row->time_create = time();
+                    $row->time_duedate = time();
                     $row->order = $order['id'];
                     $row->product_price = $order['product_price'];
                     $row->discount_price = $order['discount_price'];
@@ -66,7 +68,7 @@ class Invoice extends AbstractApi
                     $row->packing_price = $order['packing_price'];
                     $row->vat_price = $order['vat_price'];
                     $row->total_price = $order['total_price'];
-                    $row->paid_price = $order['paid_price'];
+                    $row->paid_price = 0;
                     $row->gateway = $order['gateway'];
                     $row->save();
                     break;
@@ -80,6 +82,7 @@ class Invoice extends AbstractApi
                     $row->ip = Pi::user()->getIp();
                     $row->status = 2;
                     $row->time_create = time();
+                    $row->time_duedate = time();
                     $row->order = $order['id'];
                     $row->product_price = $order['product_price'];
                     $row->discount_price = $order['discount_price'];
@@ -87,7 +90,7 @@ class Invoice extends AbstractApi
                     $row->packing_price = $order['packing_price'];
                     $row->vat_price = $order['vat_price'];
                     $row->total_price = $order['total_price'];
-                    $row->paid_price = $order['paid_price'];
+                    $row->paid_price = 0;
                     $row->gateway = $order['gateway'];
                     $row->save();
                     // return array
@@ -121,6 +124,28 @@ class Invoice extends AbstractApi
                     break;
 
                 case 'installment':
+                    $invoices = Pi::api('installment', 'order')->setPriceForInvoice($order['total_price'], 4);
+                    // Set invoices
+                    foreach ($invoices as $invoice) {
+                        // Set invoice
+                        $row = Pi::model('invoice', $this->getModule())->createRow();
+                        $row->random_id = time();
+                        $row->uid = $uid;
+                        $row->ip = Pi::user()->getIp();
+                        $row->status = 2;
+                        $row->time_create = time();
+                        $row->time_duedate = $invoice['duedate'];
+                        $row->order = $order['id'];
+                        $row->product_price = $invoice['price'];
+                        $row->discount_price = 0;
+                        $row->shipping_price = 0;
+                        $row->packing_price = 0;
+                        $row->vat_price = 0;
+                        $row->total_price = $invoice['price'];
+                        $row->paid_price = 0;
+                        $row->gateway = $order['gateway'];
+                        $row->save();
+                    }
 
                     break;  
             }
