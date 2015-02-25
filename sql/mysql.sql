@@ -4,6 +4,7 @@ CREATE TABLE `{order}` (
     `uid` int(10) unsigned NOT NULL default '0',
     `code` varchar(16) NOT NULL default '',
     `type` enum('free','onetime','recurring','installment') NOT NULL default 'onetime',
+    `plan` int(10) unsigned NOT NULL default '0',
     # Module
     `module_name` varchar(64) NOT NULL default '',
     `module_table` varchar(64) NOT NULL default '',

@@ -29,6 +29,8 @@ use Zend\Math\Rand;
  * Pi::api('order', 'order')->canonizeOrder($order);
  * Pi::api('order', 'order')->listProduct($order);
  * Pi::api('order', 'order')->setOrder($order);
+ * Pi::api('order', 'order')->getOrder();
+ * Pi::api('order', 'order')->unsetOrder();
  */
 
 class Order extends AbstractApi
@@ -257,7 +259,7 @@ class Order extends AbstractApi
 
     }
 
-    public function setOrder($order)
+    public function setOrderInfo($order)
     {
         // Empty order
         if (isset($_SESSION['order'])) {
@@ -272,5 +274,20 @@ class Order extends AbstractApi
             'action'        => 'index',
         )));
         return $checkout;
+    }
+
+    public function getOrderInfo()
+    {
+        if (isset($_SESSION['order']) && !empty($_SESSION['order'])) {
+            return $_SESSION['order'];
+        }
+        return '';
+    }
+
+    public function unsetOrderInfo()
+    {
+        if (isset($_SESSION['order']) && !empty($_SESSION['order'])) {
+            unset($_SESSION['order']);
+        }
     }
 }	

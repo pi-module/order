@@ -124,12 +124,12 @@ class Invoice extends AbstractApi
                     break;
 
                 case 'installment':
-                    $invoices = Pi::api('installment', 'order')->setPriceForInvoice($order['total_price'], 4);
+                    $invoices = Pi::api('installment', 'order')->setPriceForInvoice($order['total_price'], $order['plan']);
                     // Set invoices
-                    foreach ($invoices as $invoice) {
+                    foreach ($invoices as $key => $invoice) {
                         // Set invoice
                         $row = Pi::model('invoice', $this->getModule())->createRow();
-                        $row->random_id = time();
+                        $row->random_id = time() + rand(100, 999);
                         $row->uid = $uid;
                         $row->ip = Pi::user()->getIp();
                         $row->status = 2;
@@ -145,8 +145,35 @@ class Invoice extends AbstractApi
                         $row->paid_price = 0;
                         $row->gateway = $order['gateway'];
                         $row->save();
+                        // Set return
+                        if ($key == 0) {
+                            $information = array(
+                                'status'   => $row->status,
+                                'invoice'  => $row->id,
+                            );
+                        }
                     }
-
+                    // return array
+                    $result['status'] = $information['status'];
+                    $result['message'] = __('Your invoice create successfully');
+                    $result['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+                        'module'        => $this->getModule(),
+                        'controller'    => 'detail',
+                        'action'        => 'index',
+                        'id'            => $row->order,
+                    )));
+                    $result['invoice_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+                        'module'        => $this->getModule(),
+                        'controller'    => 'invoice',
+                        'action'        => 'index',
+                        'id'            => $information['invoice'],
+                    )));
+                    $result['pay_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+                        'module'        => $this->getModule(),
+                        'controller'    => 'payment',
+                        'action'        => 'index',
+                        'id'            => $information['invoice'],
+                    )));
                     break;  
             }
         }

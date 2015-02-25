@@ -27,7 +27,7 @@ class CheckoutController extends IndexController
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Set cart
-        $cart = $_SESSION['order'];
+        $cart = Pi::api('order', 'order')->getOrderInfo();
         if (empty($cart)) {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
             $this->jump($url, __('Your cart is empty.'), 'error');
@@ -56,6 +56,10 @@ class CheckoutController extends IndexController
                 // Set type values
                 if (isset($cart['type']) && in_array($cart['type'], array('free','onetime','recurring','installment'))) {
                     $values['type'] = $cart['type'];
+                }
+                // Set plan values
+                if (isset($cart['plan']) && !empty($cart['plan'])) {
+                    $values['plan'] = $cart['plan'];
                 }
                 // Set module_name values
                 if (isset($cart['module_name']) && !empty($cart['module_name'])) {
@@ -109,8 +113,8 @@ class CheckoutController extends IndexController
                 }
                 // Set invoice
                 $result = Pi::api('invoice', 'order')->createInvoice($order->id);
-                // unset cart
-                unset($_SESSION['order']);
+                // unset order
+                Pi::api('order', 'order')->unsetOrderInfo();
                 // Go to payment
                 $this->jump($result['invoice_url'], $result['message'], 'success');
             }   

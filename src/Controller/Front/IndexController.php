@@ -114,7 +114,7 @@ class IndexController extends ActionController
     public function planAction()
     {
         $price = 125000;
-        $list = Pi::api('installment', 'order')->setPriceForView($price);
+        $list = Pi::api('installment', 'order')->setPriceForInvoice($price, 4);
         // Set view
         $this->view()->setTemplate('empty')->setLayout('layout-content');
         $this->view()->assign('test', $list);
