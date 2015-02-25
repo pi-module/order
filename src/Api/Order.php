@@ -20,6 +20,7 @@ use Zend\Math\Rand;
 
 /*
  * Pi::api('order', 'order')->getOrder($id);
+ * Pi::api('order', 'order')->getOrderFromUser($uid);
  * Pi::api('order', 'order')->checkoutConfig();
  * Pi::api('order', 'order')->generatCode();
  * Pi::api('order', 'order')->viewPrice($price);
@@ -27,7 +28,7 @@ use Zend\Math\Rand;
  * Pi::api('order', 'order')->paymentStatus($status);
  * Pi::api('order', 'order')->deliveryStatus($status);
  * Pi::api('order', 'order')->canonizeOrder($order);
- * Pi::api('order', 'order')->listProduct($order);
+ * Pi::api('order', 'order')->listProduct($id, $module);
  * Pi::api('order', 'order')->setOrder($order);
  * Pi::api('order', 'order')->getOrder();
  * Pi::api('order', 'order')->unsetOrder();
@@ -40,6 +41,18 @@ class Order extends AbstractApi
         $order = Pi::model('order', $this->getModule())->find($id);
         $order = $this->canonizeOrder($order);
         return $order;
+    }
+
+    public function getOrderFromUser($uid)
+    {
+        $invoices = array();
+        $where = array('uid' => $uid);
+        $select = Pi::model('order', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('order', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $invoices[$row->id] = $this->canonizeOrder($row);
+        }
+        return $invoices;
     }
 
     public function checkoutConfig()
@@ -188,6 +201,10 @@ class Order extends AbstractApi
         $order['time_delivery_view'] = ($order['time_delivery']) ? _date($order['time_delivery']) : __('Not Delivery');
         // Set time_finish_view
         $order['time_finish_view'] = ($order['time_finish']) ? _date($order['time_finish']) : __('Not Finish');
+        // Set time_finish_view
+        $order['time_start_view'] = ($order['time_start']) ? _date($order['time_start']) : __('Not Start');
+        // Set time_finish_view
+        $order['time_end_view'] = ($order['time_end']) ? _date($order['time_end']) : __('Not End');
         // Set product_price_view
         $order['product_price_view'] = $this->viewPrice($order['product_price']);
         // Set discount_price_view
@@ -201,39 +218,39 @@ class Order extends AbstractApi
         // Set paid_price_view
         $order['paid_price_view'] = $this->viewPrice($order['paid_price']);
         // Set user
-        $order['user'] = Pi::user()->get($order['uid'], array('id', 'identity', 'name', 'email'));
+        $order['user'] = Pi::api('user', 'order')->getUserInformation($order['uid']);
         // Set url_update_order
-        $order['url_update_order'] = Pi::url(Pi::service('url')->assemble('', array(
+        $order['url_update_order'] = Pi::url(Pi::service('url')->assemble('admin', array(
             'controller'    => 'order',
             'action'        => 'updateOrder',
             'id'            => $order['id'],
         )));
         // Set url_update_payment
-        $order['url_update_payment'] = Pi::url(Pi::service('url')->assemble('', array(
+        $order['url_update_payment'] = Pi::url(Pi::service('url')->assemble('admin', array(
             'controller'    => 'order',
             'action'        => 'updatePayment',
             'id'            => $order['id'],
         )));
         // Set url_update_delivery
-        $order['url_update_delivery'] = Pi::url(Pi::service('url')->assemble('', array(
+        $order['url_update_delivery'] = Pi::url(Pi::service('url')->assemble('admin', array(
             'controller'    => 'order',
             'action'        => 'updateDelivery',
             'id'            => $order['id'],
         )));
         // Set url_edit
-        $order['url_edit'] = Pi::url(Pi::service('url')->assemble('', array(
+        $order['url_edit'] = Pi::url(Pi::service('url')->assemble('admin', array(
             'controller'    => 'order',
             'action'        => 'edit',
             'id'            => $order['id'],
         )));
         // Set url_print
-        $order['url_print'] = Pi::url(Pi::service('url')->assemble('', array(
+        $order['url_print'] = Pi::url(Pi::service('url')->assemble('admin', array(
             'controller'    => 'order',
             'action'        => 'print',
             'id'            => $order['id'],
         )));
         // Set url_view
-        $order['url_view'] = Pi::url(Pi::service('url')->assemble('', array(
+        $order['url_view'] = Pi::url(Pi::service('url')->assemble('admin', array(
             'controller'    => 'order',
             'action'        => 'view',
             'id'            => $order['id'],
@@ -254,9 +271,17 @@ class Order extends AbstractApi
         return $order; 
     }
 
-    public function listProduct($order)
+    public function listProduct($id, $module)
     {
-
+        $list = array();
+        $where = array('order' => $id);
+        $select = Pi::model('basket', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('basket', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $list[$row->id] = $row->toArray();
+            $list[$row->id]['details'] = Pi::api('order', $module)->getProductDetails($row->product);
+        }
+        return $list;
     }
 
     public function setOrderInfo($order)

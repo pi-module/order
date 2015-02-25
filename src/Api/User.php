@@ -18,12 +18,33 @@ use Pi\Application\Api\AbstractApi;
 use Zend\Json\Json;
 
 /*
+ * Pi::api('user', 'order')->getUserInformation($user);
  * Pi::api('user', 'order')->getPaymentHistory($user);
  */
 
 class User extends AbstractApi
 {
-	public function getPaymentHistory($user = '', $module = '')
+	public function getUserInformation($user = '')
+    {
+        // Get user id if not set
+        if (empty($user)) {
+            $user = Pi::user()->getId();
+        }
+        // Check user id
+        if (!$user || $user == 0) {
+            return array();
+        }
+        // Set user
+        $user = Pi::user()->get($user, array(
+            'id', 'identity', 'name', 'email', 'first_name', 'last_name', 'phone', 'mobile', 
+            'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 
+        ));
+
+
+        return $user;
+    }
+
+    public function getPaymentHistory($user = '', $module = '')
 	{
 		// Get user id if not set
 		if (empty($user)) {

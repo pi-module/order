@@ -69,11 +69,13 @@ class Order extends Standard
                     break;
 
                 case 'detail':
-                    $matches['id'] = $this->decode($parts[2]);
+                    $matches['id'] = $this->decode($parts[1]);
                     break;
 
                 case 'index':
-                    $matches['action'] = $this->decode($parts[0]);
+                    if (!empty($parts[0])) {
+                        $matches['action'] = $this->decode($parts[0]);
+                    }
                     break; 
 
                 case 'invoice':

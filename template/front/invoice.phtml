@@ -11,8 +11,8 @@
 				<?php } else { ?>
 					<span class="label label-danger"><?php _e('Canceled'); ?><span>
 				<?php } ?>
-				<p><strong><?php _e('Order'); ?></strong> : <span><?php echo $this->escape($invoice['order_view']); ?> </span></p>
-				<p><strong><?php _e('Gateway'); ?></strong> : <span><?php echo $this->escape($invoice['gateway']); ?> </span></p>
+				<p><strong><?php _e('Order'); ?></strong> : <span><?php echo $this->escape($order['code']); ?></span></p>
+				<p><strong><?php _e('Gateway'); ?></strong> : <span><?php echo $this->escape($invoice['gateway']); ?></span></p>
 				<p><strong><?php _e('Create'); ?></strong> : <span><?php echo $this->escape($invoice['time_create_view']); ?> </span></p>
 				<?php if ($invoice['product_price'] > 0) { ?>
 				<p><strong><?php _e('Product price'); ?></strong> : <span><?php echo $this->escape($invoice['product_price_view']); ?></span></p>
@@ -71,7 +71,7 @@
 	<div class="clearfix">
 		<div class="col-md-6">
 		<?php if ($invoice['status'] == 2) {  ?>
-			<a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay_url']); ?>"><?php _e('Pay'); ?></a>
+			<a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay_url']); ?>"><i class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
 		<?php } ?>
 		</div>
 		<div class="col-md-6 text-right">
@@ -80,5 +80,3 @@
 	</div>
 	<?php } ?>
 </div>
-<pre><?php print_r($invoice); ?></pre>
-<pre><?php print_r($order); ?></pre>

@@ -19,8 +19,14 @@ use Zend\Json\Json;
 use Zend\Math\Rand;
 
 /*
- * Pi::api('invoice', 'order')->createInvoice($order);
+ * Pi::api('invoice', 'order')->createInvoice($id);
  * Pi::api('invoice', 'order')->getInvoice($id);
+ * Pi::api('invoice', 'order')->getInvoiceFromOrder($id);
+ * Pi::api('invoice', 'order')->getInvoiceFromUser($uid);
+ * Pi::api('invoice', 'order')->canonizeInvoice($invoice);
+ *
+ *
+ *
  * Pi::api('invoice', 'order')->getInvoiceFromItem($module, $part, $item);
  * Pi::api('invoice', 'order')->getInvoiceRandomId($id);
  * Pi::api('invoice', 'order')->listOrderInvoice($order);
@@ -55,7 +61,7 @@ class Invoice extends AbstractApi
                 case 'free':
                     // Set invoice
                     $row = Pi::model('invoice', $this->getModule())->createRow();
-                    $row->random_id = time();
+                    $row->random_id = time() + rand(100, 999);
                     $row->uid = $uid;
                     $row->ip = Pi::user()->getIp();
                     $row->status = 1;
@@ -77,7 +83,7 @@ class Invoice extends AbstractApi
                 case 'recurring':
                     // Set invoice
                     $row = Pi::model('invoice', $this->getModule())->createRow();
-                    $row->random_id = time();
+                    $row->random_id = time() + rand(100, 999);
                     $row->uid = $uid;
                     $row->ip = Pi::user()->getIp();
                     $row->status = 2;
@@ -188,6 +194,30 @@ class Invoice extends AbstractApi
         return $invoice;
     }
 
+    public function getInvoiceFromOrder($id)
+    {
+        $invoices = array();
+        $where = array('order' => $id);
+        $select = Pi::model('invoice', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $invoices[$row->id] = $this->canonizeInvoice($row);
+        }
+        return $invoices;
+    }
+
+    public function getInvoiceFromUser($uid)
+    {
+        $invoices = array();
+        $where = array('uid' => $uid);
+        $select = Pi::model('invoice', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $invoices[$row->id] = $this->canonizeInvoice($row);
+        }
+        return $invoices;
+    }
+
     public function canonizeInvoice($invoice)
     {
         // Check
@@ -200,10 +230,9 @@ class Invoice extends AbstractApi
         $invoice = $invoice->toArray();
         // Set time
         $invoice['time_create_view'] = _date($invoice['time_create']);
-        $invoice['time_payment_view'] = _date($invoice['time_payment']);
-        $invoice['time_cancel_view'] = _date($invoice['time_cancel']);
-        // Set order id
-        $invoice['order_view'] = _number($invoice['order']);
+        $invoice['time_duedate_view'] = _date($invoice['time_duedate']);
+        $invoice['time_payment_view'] = $invoice['time_payment'] ? _date($invoice['time_payment']) : __('Not pay');
+        $invoice['time_cancel_view'] = $invoice['time_cancel'] ? _date($invoice['time_cancel']) : __('Not canceled');
         // Set price
         $invoice['product_price_view'] = _currency($invoice['product_price']);
         $invoice['shipping_price_view'] = _currency($invoice['shipping_price']);
@@ -233,6 +262,19 @@ class Invoice extends AbstractApi
         // return order
         return $invoice; 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function getInvoiceRandomId($id)
     {

@@ -20,6 +20,19 @@ use Zend\Json\Json;
 
 class IndexController extends ActionController
 {
+    public function indexAction()
+    {
+        // Check user is login or not
+        Pi::service('authentication')->requireLogin();
+        // Get user info
+        $user = Pi::api('user', 'order')->getUserInformation();
+        $user['orders'] = Pi::api('order', 'order')->getOrderFromUser($user['id']);
+        $user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id']);
+        // Set view
+        $this->view()->setTemplate('list');
+        $this->view()->assign('user', $user);
+    }
+
     public function removeAction()
     {
         // Get invoice id

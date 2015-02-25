@@ -79,18 +79,21 @@ class CheckoutController extends IndexController
                 $values['shipping_price'] = 0;
                 $values['packing_price'] = 0;
                 $values['vat_price'] = 0;
+                $values['total_price'] = 0;
                 // Check order values
                 if (!empty($cart['product'])) {
                     foreach ($cart['product'] as $product) {
+                        // Set price
                         $values['product_price'] = $product['product_price'] + $values['product_price'];
                         $values['discount_price'] = $product['discount_price'] + $values['discount_price'];
                         $values['shipping_price'] = $product['shipping_price'] + $values['shipping_price'];
                         $values['packing_price'] = $product['packing_price'] + $values['packing_price'];
                         $values['vat_price'] = $product['vat_price'] + $values['vat_price'];
+                        // Set total
+                        $total = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']) * $product['number'];
+                        $values['total_price'] = $product['total_price'] + $values['total_price'];
                     }
                 }
-                // Set total price values
-                $values['total_price'] = $values['product_price'] + $values['discount_price'] + $values['shipping_price'] + $values['packing_price'] + $values['vat_price'];
                 // Save values to order
                 $order = $this->getModel('order')->createRow();
                 $order->assign($values);
@@ -107,6 +110,7 @@ class CheckoutController extends IndexController
                         $basket->shipping_price = $product['shipping_price'];
                         $basket->packing_price = $product['packing_price'];
                         $basket->vat_price = $product['vat_price'];
+                        $basket->total_price = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']) * $product['number'];
                         $basket->number = $product['number'];
                         $basket->save();
                     }

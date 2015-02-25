@@ -33,9 +33,12 @@ class DetailController extends IndexController
         if ($order['uid'] != Pi::user()->getId()) {
             $this->jump(array('', 'action' => 'error'), __('This is not your order.'));
         }
+        // set Products
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        // set Products
+        $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
         // set view
-        $this->view()->setTemplate('empty');
+        $this->view()->setTemplate('detail');
         $this->view()->assign('order', $order);
     }
-
 }
