@@ -91,7 +91,7 @@ class CheckoutController extends IndexController
                         $values['vat_price'] = $product['vat_price'] + $values['vat_price'];
                         // Set total
                         $total = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']) * $product['number'];
-                        $values['total_price'] = $product['total_price'] + $values['total_price'];
+                        $values['total_price'] = $total + $values['total_price'];
                     }
                 }
                 // Save values to order
