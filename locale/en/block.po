@@ -1,0 +1,143 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pi shop module\n"
+"POT-Creation-Date: 2015-03-05 16:57+0330\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Pi\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.3\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _b\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/order\n"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:4
+msgid "Invoices"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:5
+msgid "Orders"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:6
+msgid "User informations"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:12
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:50
+msgid "ID"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:13
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:53
+msgid "Price"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:14
+msgid "Time Create"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:15
+msgid "Due date"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:16
+msgid "Time pay"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:55
+msgid "Action"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:36
+msgid "View / Pay"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:42
+msgid "Paid"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:43
+msgid "Unpaid"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:44
+msgid "Canceled"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:51
+msgid "Time create"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:52
+msgid "Type"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:54
+msgid "Gateway"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:65
+msgid "View"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:76
+msgid "Name"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:79
+msgid "City"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:82
+msgid "State"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:85
+msgid "Country"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:88
+msgid "Zip code"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:93
+msgid "Email"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:96
+msgid "Phone"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:99
+msgid "Mobile"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:102
+msgid "Company"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:105
+msgid "Company ID"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:108
+msgid "Company VAT"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:113
+msgid "Address 1"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:116
+msgid "Address 2"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:125
+msgid "More informations"
+msgstr ""
