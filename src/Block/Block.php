@@ -21,7 +21,12 @@ class Block
         // Set options
         $block = array();
         $block = array_merge($block, $options);
-
+        // Get user info
+        $user = Pi::api('user', 'order')->getUserInformation();
+        $user['orders'] = Pi::api('order', 'order')->getOrderFromUser($user['id']);
+        $user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id']);
+        // Set block array
+        $block['resources'] = $user;
         return $block;
     }
 }
