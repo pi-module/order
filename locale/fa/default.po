@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-03-05 17:00+0330\n"
+"POT-Creation-Date: 2015-03-05 17:24+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -16,23 +16,47 @@ msgstr ""
 "X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/order\n"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:33
-msgid "2 months"
+msgid "One time"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:41
-msgid "3 months"
+msgid "1 months"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:49
-msgid "4 months"
+msgid "2 months"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:57
-msgid "5 months"
+msgid "3 months"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:65
+msgid "4 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:73
+msgid "5 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:81
 msgid "6 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:89
+msgid "7 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:97
+msgid "8 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:105
+msgid "9 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:113
+msgid "10 months"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:57
