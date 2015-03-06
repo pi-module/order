@@ -28,16 +28,16 @@ class InvoiceController extends IndexController
         $order = Pi::api('order', 'order')->getOrder($invoice['order']);
         // Check invoice
         if (empty($invoice) || empty($order)) {
-           $this->jump(array('', 'action' => 'error'), __('The invoice not found.'));
+           $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('The invoice not found.'));
         }
         // Check invoice is for this user
         if (Pi::service('authentication')->hasIdentity()) {
             if ($invoice['uid'] != Pi::user()->getId()) {
-                $this->jump(array('', 'action' => 'error'), __('This is not your invoice.'));
+                $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('This is not your invoice.'));
             }
         } else {
             if (!isset($_SESSION['payment']['invoice_id']) || $_SESSION['payment']['invoice_id'] != $invoice['id']) {
-                $this->jump(array('', 'action' => 'error'), __('This is not your invoice.'));
+                $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('This is not your invoice.'));
             }
             // Set session
             $_SESSION['payment']['process_update'] = time();

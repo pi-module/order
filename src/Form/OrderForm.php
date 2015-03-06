@@ -46,7 +46,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    
+                    'required' => true,
                 )
             ));
             // last_name
@@ -58,7 +58,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    
+                    'required' => true,
                 )
             ));
         }
@@ -72,7 +72,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    
+                    'required' => true,
                 )
             ));
         }
@@ -100,7 +100,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    
+                    'required' => true,
                 )
             ));
         }
@@ -150,7 +150,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    
+                    'required' => true,
                 )
             ));
             $this->add(array(
@@ -161,7 +161,6 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    
                 )
             ));
         }
@@ -217,7 +216,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    
+                    'required' => true,
                 )
             ));
         }
@@ -234,6 +233,7 @@ class OrderForm  extends BaseForm
                 ),
                 'attributes' => array(
                     'id'    => 'select-location',
+                    'required' => true,
                 )
             ));
         }
@@ -251,7 +251,8 @@ class OrderForm  extends BaseForm
                 ),
                 'attributes' => array(
                     'id'    => 'select-delivery',
-                    'size'  => 5
+                    'size'  => 5,
+                    'required' => true,
                 )
             ));
         }
@@ -270,7 +271,8 @@ class OrderForm  extends BaseForm
                 ),
                 'attributes' => array(
                     'id'    => 'select-payment',
-                    'size'  => 5
+                    'size'  => 5,
+                    'required' => true,
                 )
             ));
         }

@@ -46,14 +46,14 @@ class IndexController extends ActionController
             } else {
                 $message = __('Payment is clean');
             }
-            $this->jump(array('', 'action' => 'invoice', 'id' => $id), $message);
+            $this->jump(array('', 'controller' => 'invoice', 'action' => 'index', 'id' => $id), $message);
         } else {
             $processing = Pi::api('processing', 'order')->getProcessing();
             if (isset($processing['id']) && !empty($processing['id'])) {
                 $values['id'] = $processing['id'];
             } else {
                 $message = __('Payment is clean');
-                $this->jump(array('', 'action' => 'invoice', 'id' => $id), $message);
+                $this->jump(array('', 'controller' => 'invoice', 'action' => 'index', 'id' => $id), $message);
             }
             // Set form
             $form = new RemoveForm('Remove');
@@ -91,16 +91,8 @@ class IndexController extends ActionController
 
     public function errorAction()
     {
-        // Set return
-        $return = array(
-            'website' => Pi::url(),
-            'module' => $this->params('module'),
-            'message' => 'error',
-            'id' => $this->params('id'),
-        );
         // Set view
-        $this->view()->setTemplate(false)->setLayout('layout-content');
-        return Json::encode($return);  
+        $this->view()->setTemplate('error'); 
     }
 
     public function checkUser()
@@ -115,7 +107,7 @@ class IndexController extends ActionController
         // Check
         if (!Pi::service('authentication')->hasIdentity()) {
             if (!isset($_SESSION['payment']['process']) || $_SESSION['payment']['process'] != 1) {
-                $this->jump(array('', 'action' => 'error'));
+                $this->jump(array('', 'controller' => 'index', 'action' => 'error'));
             }
             // Set session
             $_SESSION['payment']['process_update'] = time();
@@ -124,7 +116,7 @@ class IndexController extends ActionController
         return true;
     }
 
-    public function planAction()
+    /* public function planAction()
     {
         $price = 125000;
         $list = Pi::api('installment', 'order')->setPriceForInvoice($price, 4);
@@ -132,5 +124,5 @@ class IndexController extends ActionController
         $this->view()->setTemplate('empty')->setLayout('layout-content');
         $this->view()->assign('test', $list);
         //return Json::encode($list);  
-    }
+    } */
 }

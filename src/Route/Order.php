@@ -53,7 +53,6 @@ class Order extends Standard
         // Make Match
         if (isset($matches['controller'])) {
             switch ($matches['controller']) {
-                
                 case 'checkout':
                     switch ($parts[1]) {
                         case 'level':
@@ -73,20 +72,49 @@ class Order extends Standard
                     break;
 
                 case 'index':
-                    if (!empty($parts[0])) {
-                        $matches['action'] = $this->decode($parts[0]);
+                    switch ($parts[0]) {
+                        case 'index':
+                            $matches['action'] = 'index';
+                            break;
+
+                        case 'finish':
+                            $matches['action'] = 'finish';
+                            break;
+
+                        case 'error':
+                            $matches['action'] = 'error';
+                            break;
+                        
+                        case 'remove':
+                            $matches['action'] = 'remove';
+                            $matches['id'] = intval($this->decode($parts[1]));
+                            break;
                     }
                     break; 
 
                 case 'invoice':
-                    $matches['id'] = $this->decode($parts[1]);
+                    $matches['id'] = intval($this->decode($parts[1]));
                     break;
 
                 case 'payment':
-                    if (in_array($parts[0], array('index', 'result', 'notify', 'cancel'))) {
-                        $matches['action'] = $this->decode($parts[1]);
-                    } else {
-                        $matches['id'] = $this->decode($parts[1]);
+                    switch ($parts[0]) {
+                        case 'result':
+                            $matches['action'] = 'result';
+                            break;
+
+                        case 'notify':
+                            $matches['action'] = 'notify';
+                            break;
+                        
+                        case 'cancel':
+                            $matches['action'] = 'cancel';
+                            break;
+
+                        case 'index':
+                        default:
+                            $matches['action'] = 'index';
+                            $matches['id'] = $this->decode($parts[1]);
+                            break;
                     }
                     break;  
             }    

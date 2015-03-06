@@ -27,11 +27,11 @@ class DetailController extends IndexController
         $order = Pi::api('order', 'order')->getOrder($id);
         // Check order
         if (empty($order)) {
-           $this->jump(array('', 'action' => 'error'), __('The order not found.'));
+           $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('The order not found.'));
         }
         // Check order is for this user
         if ($order['uid'] != Pi::user()->getId()) {
-            $this->jump(array('', 'action' => 'error'), __('This is not your order.'));
+            $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('This is not your order.'));
         }
         // set Products
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);

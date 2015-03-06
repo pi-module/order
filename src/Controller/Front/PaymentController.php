@@ -29,7 +29,7 @@ class PaymentController extends IndexController
         $invoice = Pi::api('invoice', 'order')->getInvoiceRandomId($id);
         // Check invoice
         if (empty($invoice)) {
-           $this->jump(array('', 'controller' => 'index', 'action' => 'error', 'id' => 1), __('The invoice not found.'));
+           $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('The invoice not found.'));
         }
         // Check invoice not payd
         if ($invoice['status'] != 2) {
@@ -38,11 +38,11 @@ class PaymentController extends IndexController
         // Check invoice is for this user
         if (Pi::service('authentication')->hasIdentity()) {
             if ($invoice['uid'] != Pi::user()->getId()) {
-                $this->jump(array('', 'controller' => 'index', 'action' => 'error', 'id' => 2), __('This is not your invoice.'));
+                $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('This is not your invoice.'));
             }
         } else {
             if (!isset($_SESSION['payment']['invoice_id']) || $_SESSION['payment']['invoice_id'] != $invoice['id']) {
-                $this->jump(array('', 'controller' => 'index', 'action' => 'error', 'id' => 3), __('This is not your invoice.'));
+                $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('This is not your invoice.'));
             }
             // Set session
             $_SESSION['payment']['process_update'] = time();
@@ -65,7 +65,7 @@ class PaymentController extends IndexController
         if ($gateway->gatewayError) {
             // Remove processing
             Pi::api('processing', 'order')->removeProcessing();
-            $this->jump(array('', 'action' => 'result'), $gateway->gatewayError);
+            $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), $gateway->gatewayError);
         }
         // Set form
         $form = new PayForm('pay', $gateway->gatewayPayForm);
@@ -78,14 +78,14 @@ class PaymentController extends IndexController
                 } else {
                     // Get gateway object
                     $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
-                    $this->jump(array('', 'action' => 'result'), sprintf(__('Error to get %s.'), $key)); 
+                    $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), sprintf(__('Error to get %s.'), $key)); 
                 }
             }
             $form->setData($values);
         } else {
             // Get gateway object
             $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
-            $this->jump(array('', 'action' => 'result'), __('Error to get information.')); 
+            $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), __('Error to get information.')); 
         }
         // Set view
         $this->view()->setLayout('layout-content');
@@ -112,12 +112,12 @@ class PaymentController extends IndexController
             // Check processing
             if (!$processing) {
                 $message = __('Your running pay processing not set');
-                $this->jump(array('', 'action' => 'error'), $message);
+                $this->jump(array('', 'controller' => 'index', 'action' => 'error'), $message);
             }
             // Check ip
             if ($processing['ip'] != Pi::user()->getIp()) {
                 $message = __('Your IP address changed and processing not valid');
-                $this->jump(array('', 'action' => 'error'), $message);
+                $this->jump(array('', 'controller' => 'index', 'action' => 'error'), $message);
             }
             // Get gateway
             $gateway = Pi::api('gateway', 'order')->getGateway($processing['gateway']);
@@ -131,7 +131,7 @@ class PaymentController extends IndexController
                 if (!empty($config['payment_gateway_error_url'])) {
                     $url = $config['payment_gateway_error_url'];
                 } else {
-                    $url = $this->url(array('', 'action' => 'error'));
+                    $url = $this->url(array('', 'controller' => 'index', 'action' => 'error'));
                 }
                 // jump
                 $this->jump($url, $gateway->gatewayError);

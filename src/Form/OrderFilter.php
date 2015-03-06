@@ -166,7 +166,7 @@ class OrderFilter extends InputFilter
         if ($config['order_state']) {
             $this->add(array(
                 'name' => 'state',
-                'required' => true,
+                'required' => false,
                 'filters' => array(
                     array(
                         'name' => 'StringTrim',
@@ -178,7 +178,7 @@ class OrderFilter extends InputFilter
         if ($config['order_city']) {
             $this->add(array(
                 'name' => 'city',
-                'required' => true,
+                'required' => false,
                 'filters' => array(
                     array(
                         'name' => 'StringTrim',
