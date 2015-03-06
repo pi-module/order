@@ -29,20 +29,20 @@ class PaymentController extends IndexController
         $invoice = Pi::api('invoice', 'order')->getInvoiceRandomId($id);
         // Check invoice
         if (empty($invoice)) {
-           $this->jump(array('', 'action' => 'error', 'id' => 1), __('The invoice not found.'));
+           $this->jump(array('', 'controller' => 'index', 'action' => 'error', 'id' => 1), __('The invoice not found.'));
         }
         // Check invoice not payd
         if ($invoice['status'] != 2) {
-            $this->jump(array('', 'action' => 'error', 'id' => 2), __('The invoice payd.'));
+            $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $invoice['order']), __('You pay this invoice before this time'));
         }
         // Check invoice is for this user
         if (Pi::service('authentication')->hasIdentity()) {
             if ($invoice['uid'] != Pi::user()->getId()) {
-                $this->jump(array('', 'action' => 'error', 'id' => 3), __('This is not your invoice.'));
+                $this->jump(array('', 'controller' => 'index', 'action' => 'error', 'id' => 2), __('This is not your invoice.'));
             }
         } else {
             if (!isset($_SESSION['payment']['invoice_id']) || $_SESSION['payment']['invoice_id'] != $invoice['id']) {
-                $this->jump(array('', 'action' => 'error', 'id' => 4), __('This is not your invoice.'));
+                $this->jump(array('', 'controller' => 'index', 'action' => 'error', 'id' => 3), __('This is not your invoice.'));
             }
             // Set session
             $_SESSION['payment']['process_update'] = time();

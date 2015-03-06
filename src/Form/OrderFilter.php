@@ -15,6 +15,7 @@ namespace Module\Order\Form;
 
 use Pi;
 use Zend\InputFilter\InputFilter;
+use Module\System\Validator\UserEmail as UserEmailValidator;
 
 class OrderFilter extends InputFilter
 {
@@ -64,9 +65,9 @@ class OrderFilter extends InputFilter
                             'useDomainCheck'    => false,
                         ),
                     ),
-                    new \Module\System\Validator\UserEmail(array(
-                        'backlist'          => '',
-                        'checkDuplication'  => false,
+                    new UserEmailValidator(array(
+                        'blacklist'         => false,
+                        'check_duplication' => false,
                     )),
                 ),
             ));

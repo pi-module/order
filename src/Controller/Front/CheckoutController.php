@@ -53,6 +53,64 @@ class CheckoutController extends IndexController
                 $values['status_payment'] = 1;
                 $values['status_delivery'] = 1;
                 $values['time_create'] = time();
+                // Check user informations
+                $user = Pi::api('user', 'order')->getUserInformation();
+                // Check user email
+                if (!isset($values['email']) || empty($values['email'])) {
+                    $values['email'] = $user['email'];
+                }
+                // Check user first_name
+                if (!isset($values['first_name']) || empty($values['first_name'])) {
+                    $values['first_name'] = $user['first_name'];
+                }
+                // Check user last_name
+                if (!isset($values['last_name']) || empty($values['last_name'])) {
+                    $values['last_name'] = $user['last_name'];
+                }
+                // Check user phone
+                if (!isset($values['phone']) || empty($values['phone'])) {
+                    $values['phone'] = $user['phone'];
+                }
+                // Check user mobile
+                if (!isset($values['mobile']) || empty($values['mobile'])) {
+                    $values['mobile'] = $user['mobile'];
+                }
+                // Check user address1
+                if (!isset($values['address1']) || empty($values['address1'])) {
+                    $values['address1'] = $user['address1'];
+                }
+                // Check user address2
+                if (!isset($values['address2']) || empty($values['address2'])) {
+                    $values['address2'] = $user['address2'];
+                }
+                // Check user country
+                if (!isset($values['country']) || empty($values['country'])) {
+                    $values['country'] = $user['country'];
+                }
+                // Check user state
+                if (!isset($values['state']) || empty($values['state'])) {
+                    $values['state'] = $user['state'];
+                }
+                // Check user city
+                if (!isset($values['city']) || empty($values['city'])) {
+                    $values['city'] = $user['city'];
+                }
+                // Check user zip_code
+                if (!isset($values['zip_code']) || empty($values['zip_code'])) {
+                    $values['zip_code'] = $user['zip_code'];
+                }
+                // Check user company
+                if (!isset($values['company']) || empty($values['company'])) {
+                    $values['company'] = $user['company'];
+                }
+                // Check user company_id
+                if (!isset($values['company_id']) || empty($values['company_id'])) {
+                    $values['company_id'] = $user['company_id'];
+                }
+                // Check user company_vat
+                if (!isset($values['company_vat']) || empty($values['company_vat'])) {
+                    $values['company_vat'] = $user['company_vat'];
+                }
                 // Set type values
                 if (isset($cart['type']) && in_array($cart['type'], array('free','onetime','recurring','installment'))) {
                     $values['type'] = $cart['type'];
@@ -123,8 +181,8 @@ class CheckoutController extends IndexController
                 $this->jump($result['invoice_url'], $result['message'], 'success');
             }   
         } else {
-            //$user = Pi::api('user', 'shop')->getUserInfo();
-            //$form->setData($user);
+            $user = Pi::api('user', 'order')->getUserInformation();
+            $form->setData($user);
         }
         // Set view
         $this->view()->setTemplate('checkout');

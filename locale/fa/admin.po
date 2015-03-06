@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-03-05 17:24+0330\n"
+"POT-Creation-Date: 2015-03-06 12:22+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -17,11 +17,11 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/block.php:16
 msgid "Orders detail"
-msgstr ""
+msgstr "جززیات سفارش"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/block.php:17
 msgid "Simple orders detail"
-msgstr ""
+msgstr "جززیات ساده سفارش"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:17
 msgid "Admin"
@@ -41,19 +41,19 @@ msgstr "تعداد در هر صفحه"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:41
 msgid "Order method"
-msgstr ""
+msgstr "روش ثبت سفارش"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:47
 msgid "Both"
-msgstr ""
+msgstr "هر دو"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:48
 msgid "Online"
-msgstr ""
+msgstr "آنلاین"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:49
 msgid "Offline"
-msgstr ""
+msgstr "آفلاین"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:50
 msgid "Inactive"
@@ -61,79 +61,79 @@ msgstr "غیر فعال"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:60
 msgid "Anonymous users can pay"
-msgstr ""
+msgstr "کاربر مهمان بتواند پرداخت کند"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:68
 msgid "Code Prefix"
-msgstr ""
+msgstr "پیشوند کد"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:76
 msgid "List of mails for send order notification"
-msgstr ""
+msgstr "فهرست ایمیل ها برای ارسال اطلاعات رسانی ثبت سفارش"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:77
 msgid "Use `|` as delimiter to separate mails"
-msgstr ""
+msgstr "از `|` به عنوان جدا کننده ایمیل ها استفاده نمایید"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:84
 msgid "Show name"
-msgstr ""
+msgstr "نمایش نام"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:92
 msgid "Show email"
-msgstr ""
+msgstr "نمایش ایمیل"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:100
 msgid "Show phone"
-msgstr ""
+msgstr "نمایش تلفن"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:108
 msgid "Show mobile"
-msgstr ""
+msgstr "نمایش موبایل"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:116
 msgid "Show company"
-msgstr ""
+msgstr "نمایش شرکت"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:124
 msgid "Show address"
-msgstr ""
+msgstr "نمایش آدرس"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:132
 msgid "Show country"
-msgstr ""
+msgstr "نمایش کشور"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:140
 msgid "Show state"
-msgstr ""
+msgstr "نمایش استان"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:148
 msgid "Show city"
-msgstr ""
+msgstr "نمایش شهر"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:156
 msgid "Show Zip code"
-msgstr ""
+msgstr "نمایش کد پستی"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:164
 msgid "Show packing"
-msgstr ""
+msgstr "نمایش بسته بندی"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:172
 msgid "Show location"
-msgstr ""
+msgstr "نمایش انتخاب مکان"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:180
 msgid "Show delivery"
-msgstr ""
+msgstr "نمایش انتخاب روش ارسال"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:188
 msgid "Show gateway"
-msgstr ""
+msgstr "نمایش انتخاب دروازه پرداخت"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:196
 msgid "Show promo"
-msgstr ""
+msgstr "نمایش کد تخفیف"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:205
 msgid "Payment gateway error url"
@@ -151,91 +151,47 @@ msgstr "نمایش فاکتور های پرداخت نشده به کاربر"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/module.php:16
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:19
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:17
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:17
 msgid "Orders"
-msgstr ""
+msgstr "سفارش ها"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/module.php:17
 msgid "Manage order process and payment"
-msgstr ""
+msgstr "مدیریت مراحل سفارش و پرداخت"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:25
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:22
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:23
 msgid "Invoice"
 msgstr "فاکتور"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:31
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:47
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:27
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:29
 msgid "Logs"
 msgstr "گزارش ها"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:32
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:35
 msgid "Gateway"
-msgstr "دروازه"
+msgstr "دروازه پرداخت"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:37
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:41
 msgid "Delivery"
-msgstr ""
+msgstr "روش ارسال"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:49
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:42
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:47
 msgid "Location"
-msgstr ""
+msgstr "مکان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:17
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:72
-msgid "Product"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:22
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:66
-msgid "Category"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:27
-msgid "Attribute"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:32
-msgid "Attach"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:42
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:97
-msgid "Checkout"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:52
-msgid "Tools"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:60
-msgid "Index page"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:79
-msgid "Tags"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:85
-msgid "User panel"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:91
-msgid "Search"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:103
-msgid "Category list"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:110
-msgid "Tag list"
-msgstr ""
+#~ msgid "Tag list"
+#~ msgstr "فهرست "
 
 #~ msgid "Payment gateway"
 #~ msgstr "دروازه پرداخت"

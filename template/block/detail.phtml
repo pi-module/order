@@ -7,6 +7,7 @@
 		</ul>
 		<div class="tab-content">
     		<div role="tabpanel" class="tab-pane active" id="invoice">
+    			<?php if ($block['resources']['invoices']) { ?>
 				<table class="table table-striped table-bordered table-condensed">
 					<tr>
 						<th><?php echo _b('ID'); ?></th>
@@ -43,8 +44,12 @@
 					<span class="label label-warning"><?php echo _b('Unpaid'); ?></span>
 					<span class="label label-danger"><?php echo _b('Canceled'); ?></span>
 				</p>
+				<?php } else { ?>
+				<div class="alert alert-warning" role="alert"><?php echo _b('You dont have any invoice yet'); ?></div>
+				<?php } ?>
     		</div>
     		<div role="tabpanel" class="tab-pane" id="order">
+    			<?php if ($block['resources']['orders']) { ?>
 				<table class="table table-striped table-bordered table-condensed">
 					<tr>
 						<th><?php echo _b('ID'); ?></th>
@@ -67,11 +72,17 @@
 					</tr>
 					<?php } ?>
 				</table>
+				<?php } else { ?>
+				<div class="alert alert-warning" role="alert"><?php echo _b('You dont have any order yet'); ?></div>
+				<?php } ?>
     		</div>
     		<div role="tabpanel" class="tab-pane" id="user">
 				<div class="well">
 					<div class="clearfix">
 						<div class="col-md-6">
+							<?php if (!empty($block['resources']['credit'])) { ?>
+							<p><strong><?php echo _b('Credit'); ?></strong> : <span class="label label-success"><?php echo _currency($this->escape($block['resources']['credit'])); ?></span></p>
+							<?php } ?>
 							<?php if (!empty($block['resources']['first_name']) && !empty($block['resources']['last_name'])) { ?>
 							<p><strong><?php echo _b('Name'); ?></strong> : <span><?php echo $this->escape($block['resources']['first_name']); ?> <?php echo $this->escape($block['resources']['last_name']); ?></span></p>
 							<?php } ?>
