@@ -278,30 +278,32 @@ class Gateway extends AbstractGateway
 
     public function getAuthority()
     {
-        // Temporary solution for guide module
-        if ($this->gatewayInvoice['module'] == 'guide') {
-            $this->gatewayPayInformation['first_name'] = $this->gatewayInvoice['description']['first_name'];
-            $this->gatewayPayInformation['last_name'] = $this->gatewayInvoice['description']['last_name'];
-            $this->gatewayPayInformation['address1'] = $this->gatewayInvoice['description']['address'];
-            $this->gatewayPayInformation['city'] = $this->gatewayInvoice['description']['city'];
-            $this->gatewayPayInformation['state'] = '';
-            $this->gatewayPayInformation['country'] = $this->gatewayInvoice['description']['country'];
-            $this->gatewayPayInformation['zip'] = $this->gatewayInvoice['description']['zip'];
-            $this->gatewayPayInformation['email'] = $this->gatewayInvoice['description']['email'];
-            $this->gatewayPayInformation['night_phone_b'] = $this->gatewayInvoice['description']['phone'];
-            $this->gatewayPayInformation['item_name_1'] = $this->gatewayInvoice['description']['title'];
-            $this->gatewayPayInformation['item_number_1'] = $this->gatewayInvoice['description']['number'];
-            $this->gatewayPayInformation['quantity_1'] = 1;
-            $this->gatewayPayInformation['amount_1'] = $this->gatewayInvoice['description']['price'];
-            $this->gatewayPayInformation['tax_1'] = $this->gatewayInvoice['description']['vat'];
-            $this->gatewayPayInformation['no_shipping'] = 1;
-            $this->gatewayPayInformation['address_override'] = 1;
-        } else {
-            $this->gatewayPayInformation['item_name_1'] = $this->gatewayInvoice['description']['title'];
-            $this->gatewayPayInformation['item_number_1'] = $this->gatewayInvoice['description']['number'];
-            $this->gatewayPayInformation['quantity_1'] = 1;
-            $this->gatewayPayInformation['amount_1'] = $this->gatewayInvoice['amount'];
+        // Get order
+        $order = Pi::api('order', 'order')->getOrder($this->gatewayInvoice['ordere']);
+        // Get product list
+        $products = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        // Set products to payment
+        $i = 1;
+        foreach ($products as $product) {
+            $this->gatewayPayInformation['item_name_' . $i] = $product['details']['title'];
+            $this->gatewayPayInformation['item_number_' . $i] = $product['number'];
+            $this->gatewayPayInformation['quantity_' . $i] = 1;
+            $this->gatewayPayInformation['amount_' . $i] = $product['product_price'];
+            $this->gatewayPayInformation['tax_' . $i] = $product['vat_price'];
+            $i++;
         }
+        // Set payment information
+        $this->gatewayPayInformation['no_shipping'] = 1;
+        $this->gatewayPayInformation['first_name'] = $order['first_name'];
+        $this->gatewayPayInformation['last_name'] = $order['last_name'];
+        $this->gatewayPayInformation['address1'] = $order['address1'];
+        $this->gatewayPayInformation['address_override'] = 1;
+        $this->gatewayPayInformation['city'] = $order['city'];
+        $this->gatewayPayInformation['state'] = $order['state'];
+        $this->gatewayPayInformation['country'] = $order['country'];
+        $this->gatewayPayInformation['zip'] = $order['zip_code'];
+        $this->gatewayPayInformation['email'] = $order['email'];
+        $this->gatewayPayInformation['night_phone_b'] = $order['phone'];
         $this->gatewayPayInformation['cmd'] = '_cart';
         $this->gatewayPayInformation['upload'] = 1;
         $this->gatewayPayInformation['return'] = $this->gatewayFinishUrl;
@@ -384,7 +386,7 @@ class Gateway extends AbstractGateway
             $log['authority'] = '';
             $log['value'] = Json::encode($request);
             $log['invoice'] = $invoice['id'];
-            $log['amount'] = $invoice['amount'];
+            $log['amount'] = $invoice['total_price'];
             $log['status'] = $result['status'];
             $log['message'] = __('Your payment were successfully.');
             Pi::api('log', 'order')->setLog($log);

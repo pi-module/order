@@ -161,7 +161,7 @@ class Gateway extends AbstractGateway
                 $log['authority'] = $request['RefId'];
                 $log['value'] = Json::encode($request);
                 $log['invoice'] = $invoice['id'];
-                $log['amount'] = $invoice['amount'];
+                $log['amount'] = $invoice['paid_price'];
                 $log['status'] = $result['status'];
                 $log['message'] = $message;
                 Pi::api('log', 'order')->setLog($log);
