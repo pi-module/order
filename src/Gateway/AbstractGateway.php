@@ -203,33 +203,37 @@ abstract class AbstractGateway
     protected function setBackUrl()
     {
         $this->gatewayBackUrl = Pi::url(Pi::service('url')->assemble('order', array(
-                    'module'        => 'order',
-                    'action'        => 'result',
-                )));
+            'module'        => 'order',
+            'controller'    => 'payment',
+            'action'        => 'result',
+        )));
     }
 
     protected function setCancelUrl()
     {
         $this->gatewayCancelUrl = Pi::url(Pi::service('url')->assemble('order', array(
-                    'module'        => 'order',
-                    'action'        => 'cancel',
-                )));
+            'module'        => 'order',
+            'controller'    => 'payment',
+            'action'        => 'cancel',
+        )));
     }
 
     protected function setFinishUrl()
     {
         $this->gatewayFinishUrl = Pi::url(Pi::service('url')->assemble('order', array(
-                    'module'        => 'order',
-                    'action'        => 'finish',
-                )));
+            'module'        => 'order',
+            'controller'    => 'payment',
+            'action'        => 'finish',
+        )));
     }
 
     protected function setNotifyUrl()
     {
         $this->gatewayNotifyUrl = Pi::url(Pi::service('url')->assemble('order', array(
-                    'module'        => 'order',
-                    'action'        => 'notify',
-                )));
+            'module'        => 'order',
+            'controller'    => 'payment',
+            'action'        => 'notify',
+        )));
     }
 
     public function setInvoice($invoice = array())

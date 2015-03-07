@@ -196,6 +196,31 @@ class PaymentController extends IndexController
         }
     }
 
+    public function finishAction()
+    {
+        $processing = Pi::api('processing', 'order')->getProcessing();
+        if (!empty($processing['invoice'])) {
+            $invoice = $processing['invoice'];
+            // remove
+            Pi::api('processing', 'order')->removeProcessing();
+            //
+            $invoice = Pi::api('invoice', 'order')->getInvoice($invoice);
+            // jump to module
+            $message = __('Your payment were successfully.');
+            $this->jump($invoice['back_url'], $message);
+        } else {
+            // Set return
+            $return = array(
+                'website' => Pi::url(),
+                'module' => $this->params('module'),
+                'message' => 'finish',
+            );
+            // Set view
+            $this->view()->setTemplate(false)->setLayout('layout-content');
+            return Json::encode($return);
+        }
+    }
+
     public function cancelAction()
     {
         // Set return

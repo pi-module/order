@@ -77,10 +77,6 @@ class Order extends Standard
                             $matches['action'] = 'index';
                             break;
 
-                        case 'finish':
-                            $matches['action'] = 'finish';
-                            break;
-
                         case 'error':
                             $matches['action'] = 'error';
                             break;
@@ -108,6 +104,10 @@ class Order extends Standard
                         
                         case 'cancel':
                             $matches['action'] = 'cancel';
+                            break;
+
+                        case 'finish':
+                            $matches['action'] = 'finish';
                             break;
 
                         case 'index':
