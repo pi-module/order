@@ -391,7 +391,7 @@ class Gateway extends AbstractGateway
             $log['message'] = __('Your payment were successfully.');
             Pi::api('log', 'order')->setLog($log);
         } elseif (strcmp ($res, "INVALID") == 0) {
-            $invoice = Pi::api('invoice', 'order')->getInvoice($request['invoice']);
+            $invoice = Pi::api('invoice', 'order')->getInvoice($request['invoice'], 'random_id');
             $result['status'] = 0;
             $message = __('Error');
         }
@@ -399,6 +399,7 @@ class Gateway extends AbstractGateway
         // Set result
         $result['adapter'] = $this->gatewayAdapter;
         $result['invoice'] = $invoice['id'];
+        $result['order'] = $invoice['order'];
         return $result;
     }
 

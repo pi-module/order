@@ -139,7 +139,7 @@ class PaymentController extends IndexController
             // Check status
             if ($verify['status'] == 1) {
                 // Update module order / invoice and get back url
-                $url = Pi::api('invoice', 'order')->updateModuleInvoice($verify['invoice']);
+                $url = Pi::api('order', 'order')->updateOrder($verify['order']);
                 // Remove processing
                 Pi::api('processing', 'order')->removeProcessing();
                 // jump to module
@@ -188,7 +188,7 @@ class PaymentController extends IndexController
                     Pi::api('processing', 'order')->removeProcessing($request['invoice']);
                 } else {
                     if ($verify['status'] == 1) {
-                        $url = Pi::api('invoice', 'order')->updateModuleInvoice($verify['invoice']);
+                        $url = Pi::api('order', 'order')->updateOrder($verify['order']);
                         Pi::api('invoice', 'order')->setBackUrl($verify['invoice'], $url);
                     }
                 }

@@ -29,6 +29,7 @@ use Zend\Math\Rand;
  * Pi::api('order', 'order')->deliveryStatus($status);
  * Pi::api('order', 'order')->canonizeOrder($order);
  * Pi::api('order', 'order')->listProduct($id, $module);
+ * Pi::api('order', 'order')->updateOrder($id);
  * Pi::api('order', 'order')->setOrder($order);
  * Pi::api('order', 'order')->getOrder();
  * Pi::api('order', 'order')->unsetOrder();
@@ -282,6 +283,29 @@ class Order extends AbstractApi
             $list[$row->id]['details'] = Pi::api('order', $module)->getProductDetails($row->product);
         }
         return $list;
+    }
+
+    public function updateOrder($id)
+    {
+        // Get order
+        $order = Pi::model('order', $this->getModule())->find($id);
+        // Update order
+        $order->time_payment = time();
+        $order->status_payment = 2;
+        $order->save();
+        // Canonize order
+        $order = $this->canonizeOrder($order);
+        // Get order basket
+        $basket = array();
+        $where = array('order' => $id);
+        $select = Pi::model('basket', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('basket', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $basket[$row->id] = $row->toArray();
+        }
+        // Update module and get back url
+        $backUrl = Pi::api('order', $order['module_name'])->getProductDetails($order, $basket);
+        return $backUrl;
     }
 
     public function setOrderInfo($order)

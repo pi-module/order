@@ -21,12 +21,11 @@ use Zend\Math\Rand;
 /*
  * Pi::api('invoice', 'order')->createInvoice($id);
  * Pi::api('invoice', 'order')->getInvoice($id);
- * Pi::api('invoice', 'order')->getInvoiceFromOrder($id);
+ * Pi::api('invoice', 'order')->getInvoiceFromOrder($order);
  * Pi::api('invoice', 'order')->getInvoiceFromUser($uid);
  * Pi::api('invoice', 'order')->getInvoiceForPayment($id);
  * Pi::api('invoice', 'order')->updateInvoice($randomId);
  * Pi::api('invoice', 'order')->canonizeInvoice($invoice);
- * Pi::api('invoice', 'order')->updateModuleInvoice($id);
  * Pi::api('invoice', 'order')->setBackUrl($id, $url);
  */
 
@@ -182,9 +181,9 @@ class Invoice extends AbstractApi
         return $result;
     }
 
-    public function getInvoice($id)
+    public function getInvoice($parameter, $type = 'id')
     {
-        $invoice = Pi::model('invoice', $this->getModule())->find($id);
+        $invoice = Pi::model('invoice', $this->getModule())->find($parameter, $type);
         $invoice = $this->canonizeInvoice($invoice);
         return $invoice;
     }
@@ -197,6 +196,7 @@ class Invoice extends AbstractApi
         $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $invoices[$row->id] = $this->canonizeInvoice($row);
+            $invoices[$row->id]['log'] = Pi::api('log', 'payment')->getTrueLog($row->id);
         }
         return $invoices;
     }
@@ -283,15 +283,6 @@ class Invoice extends AbstractApi
         )));
         // return order
         return $invoice; 
-    }
-
-    public function updateModuleInvoice($id)
-    {
-        $invoice = $this->getInvoice($id);
-        return Pi::api($invoice['part'], $invoice['module'])->updatePayment(
-            $invoice['item'], 
-            $invoice['amount'], 
-            $invoice['gateway']);
     }
 
     public function setBackUrl($id, $url)
