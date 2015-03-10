@@ -196,7 +196,7 @@ class Invoice extends AbstractApi
         $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $invoices[$row->id] = $this->canonizeInvoice($row);
-            $invoices[$row->id]['log'] = Pi::api('log', 'payment')->getTrueLog($row->id);
+            $invoices[$row->id]['log'] = Pi::api('log', 'order')->getTrueLog($row->id);
         }
         return $invoices;
     }

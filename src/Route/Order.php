@@ -54,16 +54,10 @@ class Order extends Standard
         if (isset($matches['controller'])) {
             switch ($matches['controller']) {
                 case 'checkout':
-                    switch ($parts[1]) {
-                        case 'level':
-                            $matches['action'] = 'level';
-                            $matches['process'] = $this->decode($parts[2]);
-                            $matches['id'] = $this->decode($parts[3]);
-                            break;
-                        
-                        case 'index':
-                            $matches['action'] = 'index';
-                            break;
+                    if (isset($parts[1]) && $parts[1] == 'level') {
+                        $matches['action'] = 'level';
+                        $matches['process'] = $this->decode($parts[2]);
+                        $matches['id'] = $this->decode($parts[3]);
                     }
                     break;
 

@@ -304,7 +304,7 @@ class Order extends AbstractApi
             $basket[$row->id] = $row->toArray();
         }
         // Update module and get back url
-        $backUrl = Pi::api('order', $order['module_name'])->getProductDetails($order, $basket);
+        $backUrl = Pi::api('order', $order['module_name'])->postPaymentUpdate($order, $basket);
         return $backUrl;
     }
 
