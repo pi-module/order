@@ -31,4 +31,20 @@ class Block
         $block['resources'] = $user;
         return $block;
     }
+
+    public static function installment($options = array(), $module = null)
+    {
+        // Set options
+        $block = array();
+        $block = array_merge($block, $options);
+        // Get user info
+        $user = Pi::api('user', 'order')->getUserInformation();
+        $user['orders'] = Pi::api('order', 'order')->getOrderFromUser($user['id'], true);
+        $user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id'], true);
+        // Set more link 
+        $block['more'] = Pi::url('order');
+        // Set block array
+        $block['resources'] = $user;
+        return $block;
+    }
 }

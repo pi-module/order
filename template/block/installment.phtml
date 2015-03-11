@@ -1,0 +1,174 @@
+<div class="order-block-installment">
+	<div class="order-block-detail-tab" role="tabpanel">
+		<ul class="nav nav-tabs">
+			<li role="presentation" class="active">
+				<a href="#summery" aria-controls="summery" role="tab" data-toggle="tab"><?php echo _b('Summery'); ?></a>
+			</li>
+			<li role="presentation">
+				<a href="#invoice" aria-controls="invoice" role="tab" data-toggle="tab">
+					<?php echo _b('Invoices'); ?>
+                    <?php if (count($block['resources']['invoices']) > 0) { ?>
+                    <span class="label label-danger"><?php echo _number(count($block['resources']['invoices'])); ?></span>
+                    <?php } else { ?>
+                    <span class="label label-success"><?php echo _number(count($block['resources']['invoices'])); ?></span>
+                    <?php } ?>
+				</a>
+			</li>
+    		<li role="presentation">
+    			<a href="#order" aria-controls="order" role="tab" data-toggle="tab"><?php echo _b('Orders'); ?></a>
+    		</li>
+		</ul>
+		<div class="tab-content">
+    		<div role="tabpanel" class="tab-pane active" id="summery">
+				<table class="table table-striped table-bordered table-condensed small">
+					<tr>
+						<th colspan="13" class="text-center"><?php echo _b('Desc'); ?></th>
+					</tr>
+					<tr>
+						<th class="text-center"><?php echo _b('Fifth'); ?></th>
+			            <td class="text-center"><?php echo _b('Arrears'); ?></td>
+			            <td class="text-center">94/01/05</td>
+			            <td class="text-center">94/02/05</td>
+			            <td class="text-center">94/03/05</td>
+			            <td class="text-center">94/04/05</td>
+			            <td class="text-center">94/05/05</td>
+			            <td class="text-center">94/06/05</td>
+			            <td class="text-center">94/07/05</td>
+			            <td class="text-center">94/08/05</td>
+			            <td class="text-center">94/09/05</td>
+			            <td class="text-center">94/10/05</td>
+			            <td class="text-center">مجموع</td>
+					</tr>
+					<tr>
+						<th class="text-center"><?php echo _b('Amount'); ?></th>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+					</tr>
+					<tr>
+						<th class="text-center"><?php echo _b('XV'); ?></th>
+			            <td class="text-center"><?php echo _b('Arrears'); ?></td>
+			            <td class="text-center">94/01/15</td>
+			            <td class="text-center">94/02/15</td>
+			            <td class="text-center">94/03/15</td>
+			            <td class="text-center">94/04/15</td>
+			            <td class="text-center">94/05/15</td>
+			            <td class="text-center">94/06/15</td>
+			            <td class="text-center">94/07/15</td>
+			            <td class="text-center">94/08/15</td>
+			            <td class="text-center">94/09/15</td>
+			            <td class="text-center">94/10/15</td>
+			            <td class="text-center">مجموع</td>
+					</tr>
+					<tr>
+						<th class="text-center"><?php echo _b('Amount'); ?></th>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+					</tr>
+					<tr>
+						<th class="text-center"><?php echo _b('Twenty-fifth'); ?></th>
+			            <td class="text-center"><?php echo _b('Arrears'); ?></td>
+			            <td class="text-center">94/01/25</td>
+			            <td class="text-center">94/02/25</td>
+			            <td class="text-center">94/03/25</td>
+			            <td class="text-center">94/04/25</td>
+			            <td class="text-center">94/05/25</td>
+			            <td class="text-center">94/06/25</td>
+			            <td class="text-center">94/07/25</td>
+			            <td class="text-center">94/08/25</td>
+			            <td class="text-center">94/09/25</td>
+			            <td class="text-center">94/10/25</td>
+			            <td class="text-center">مجموع</td>
+					</tr>
+					<tr>
+						<th class="text-center"><?php echo _b('Amount'); ?></th>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+			            <td class="text-center">-</td>
+					</tr>		
+				</table>
+    		</div>
+    		<div role="tabpanel" class="tab-pane" id="invoice">
+    			<?php if ($block['resources']['invoices']) { ?>
+				<table class="table table-striped table-bordered table-condensed small">
+					<tr>
+						<th class="text-center"><?php echo _b('Amount'); ?></th>
+						<th class="text-center"><?php echo _b('Time Create'); ?></th>
+						<th class="text-center"><?php echo _b('Due date'); ?></th>
+						<th class="text-center"><?php echo _b('Action'); ?></th>
+					</tr>
+					<?php foreach($block['resources']['invoices'] as $invoice) { ?>
+					<tr>
+						<td class="text-center"><?php echo $this->escape($invoice['total_price_view']); ?></td>
+						<td class="text-center"><?php echo $this->escape($invoice['time_create_view']); ?></td>
+						<td class="text-center"><?php echo $this->escape($invoice['time_duedate_view']); ?></td>
+						<td class="text-center">
+							<a class="btn btn-primary" title="<?php echo _b('View / Pay'); ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'invoice', 'id' => $invoice['id'])); ?>"><i class="fa fa-edit"></i> <?php echo _b('View / Pay'); ?></a>
+						</td>
+					</tr>
+					<?php } ?>
+				</table>
+				<?php } else { ?>
+				<div class="alert alert-warning" role="alert"><?php echo _b('You dont have any invoice yet'); ?></div>
+				<?php } ?>
+    		</div>
+    		<div role="tabpanel" class="tab-pane" id="order">
+    			<?php if ($block['resources']['orders']) { ?>
+				<table class="table table-striped table-bordered table-condensed small">
+					<tr>
+						<th class="text-center"><?php echo _b('ID'); ?></th>
+						<th class="text-center"><?php echo _b('Time create'); ?></th>
+						<th class="text-center"><?php echo _b('Amount'); ?></th>
+						<th class="text-center"><?php echo _b('Gateway'); ?></th>
+						<th class="text-center"><?php echo _b('Action'); ?></th>
+					</tr>
+					<?php foreach($block['resources']['orders'] as $order) { ?>
+					<tr>
+						<td class="text-center"><?php echo $this->escape($order['code']); ?></td>
+						<td class="text-center"><?php echo $this->escape($order['time_create_view']); ?></td>
+						<td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
+						<td class="text-center"><?php echo $this->escape($order['gateway']); ?></td>
+						<td class="text-center">
+							<a class="btn btn-primary" title="<?php echo _b('View'); ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $order['id'])); ?>"><i class="fa fa-edit"></i> <?php echo _b('View'); ?></a>
+						</td>
+					</tr>
+					<?php } ?>
+				</table>
+				<?php } else { ?>
+				<div class="alert alert-warning" role="alert"><?php echo _b('You dont have any order yet'); ?></div>
+				<?php } ?>
+    		</div>
+		</div>
+	</div>
+	<div class="order-block-detail-more text-right">
+		<a class="btn btn-success btn-sm" title="<?php echo _b('More informations'); ?>" href="<?php echo $this->escape($block['more']); ?>"><?php echo _b('More informations'); ?></a>
+	</div>
+</div>

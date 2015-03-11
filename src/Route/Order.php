@@ -58,6 +58,8 @@ class Order extends Standard
                         $matches['action'] = 'level';
                         $matches['process'] = $this->decode($parts[2]);
                         $matches['id'] = $this->decode($parts[3]);
+                    } elseif (isset($parts[1]) && $parts[1] == 'installment') {
+                        $matches['action'] = 'installment';
                     }
                     break;
 

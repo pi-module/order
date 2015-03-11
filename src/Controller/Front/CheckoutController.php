@@ -190,6 +190,67 @@ class CheckoutController extends IndexController
         $this->view()->assign('cart', $cart);
     }
 
+    public function installmentAction()
+    {
+        // Check user
+        $this->checkUser();
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Set cart
+        $cart = Pi::api('order', 'order')->getOrderInfo();
+        if (empty($cart)) {
+            $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
+            $this->jump($url, __('Your cart is empty.'), 'error');
+        }
+        // Check order is active or inactive
+        if ($config['order_method'] == 'inactive') {
+            $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
+            $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
+        }
+        // check post
+        if ($this->request->isPost()) {
+            // Get from post
+            $data = $this->request->getPost();
+            $data = $data->toArray();
+            // Update order info
+            Pi::api('order', 'order')->updateOrderInfo($data);
+            // Go to checkout
+            $url = array('', 'controller' => 'checkout', 'action' => 'index');
+            $this->jump($url, __('Your installment plan save, please complete your information and payment.'));
+
+        } else {
+            // Set price
+            $price = array();
+            $price['product_price'] = 0;
+            $price['discount_price'] = 0;
+            $price['shipping_price'] = 0;
+            $price['packing_price'] = 0;
+            $price['vat_price'] = 0;
+            $price['total_price'] = 0;
+            // Check order price
+            if (!empty($cart['product'])) {
+                foreach ($cart['product'] as $product) {
+                    // Set price
+                    $price['product_price'] = $product['product_price'] + $price['product_price'];
+                    $price['discount_price'] = $product['discount_price'] + $price['discount_price'];
+                    $price['shipping_price'] = $product['shipping_price'] + $price['shipping_price'];
+                    $price['packing_price'] = $product['packing_price'] + $price['packing_price'];
+                    $price['vat_price'] = $product['vat_price'] + $price['vat_price'];
+                    // Set total
+                    $total = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']) * $product['number'];
+                    $price['total_price'] = $total + $price['total_price'];
+                }
+            }
+            // Set installment
+            $installments = Pi::api('installment', 'order')->setPriceForView($price['total_price']);
+                // Set view
+            $this->view()->setTemplate('installment');
+            $this->view()->assign('cart', $cart);
+            $this->view()->assign('price', $price);
+            $this->view()->assign('installments', $installments);
+        }
+    }
+
     public function levelAction()
     {
         // Check user

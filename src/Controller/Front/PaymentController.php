@@ -26,7 +26,7 @@ class PaymentController extends IndexController
         $this->checkUser();
         // Get invoice
         $id = $this->params('id');
-        $invoice = Pi::api('invoice', 'order')->getInvoiceRandomId($id);
+        $invoice = Pi::api('invoice', 'order')->getInvoiceForPayment($id);
         // Check invoice
         if (empty($invoice)) {
            $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('The invoice not found.'));

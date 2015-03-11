@@ -18,4 +18,11 @@ return array(
         'render'        => array('block', 'detail'),
         'template'      => 'detail',
     ),
+    'installment'    => array(
+        'name'          => 'installment',
+        'title'         => _a('Installment'),
+        'description'   => _a('Installment orders detail'),
+        'render'        => array('block', 'installment'),
+        'template'      => 'installment',
+    ),
 );

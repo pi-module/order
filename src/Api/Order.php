@@ -20,7 +20,7 @@ use Zend\Math\Rand;
 
 /*
  * Pi::api('order', 'order')->getOrder($id);
- * Pi::api('order', 'order')->getOrderFromUser($uid);
+ * Pi::api('order', 'order')->getOrderFromUser($uid, $compressed);
  * Pi::api('order', 'order')->checkoutConfig();
  * Pi::api('order', 'order')->generatCode();
  * Pi::api('order', 'order')->viewPrice($price);
@@ -32,6 +32,7 @@ use Zend\Math\Rand;
  * Pi::api('order', 'order')->updateOrder($id);
  * Pi::api('order', 'order')->setOrder($order);
  * Pi::api('order', 'order')->getOrder();
+ * Pi::api('order', 'order')->updateOrderInfo($order);
  * Pi::api('order', 'order')->unsetOrder();
  */
 
@@ -44,10 +45,16 @@ class Order extends AbstractApi
         return $order;
     }
 
-    public function getOrderFromUser($uid)
+    public function getOrderFromUser($uid, $compressed = false)
     {
         $invoices = array();
-        $where = array('uid' => $uid);
+        // Check compressed
+        if ($compressed) {
+            $where = array('uid' => $uid, 'status_order' => array(1, 2, 3));
+        } else {
+            $where = array('uid' => $uid);
+        }
+        // Select
         $select = Pi::model('order', $this->getModule())->select()->where($where);
         $rowset = Pi::model('order', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
@@ -317,11 +324,19 @@ class Order extends AbstractApi
         // Set order to session
         $_SESSION['order'] = $order;
         // Set checkout url
-        $checkout = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'        => 'order',
-            'controller'    => 'checkout',
-            'action'        => 'index',
-        )));
+        if (isset($order['type']) && $order['type'] == 'installment') {
+            $checkout = Pi::url(Pi::service('url')->assemble('order', array(
+                'module'        => 'order',
+                'controller'    => 'checkout',
+                'action'        => 'installment',
+            )));
+        } else {
+            $checkout = Pi::url(Pi::service('url')->assemble('order', array(
+                'module'        => 'order',
+                'controller'    => 'checkout',
+                'action'        => 'index',
+            )));
+        }
         return $checkout;
     }
 
@@ -331,6 +346,13 @@ class Order extends AbstractApi
             return $_SESSION['order'];
         }
         return '';
+    }
+
+    public function updateOrderInfo($data)
+    {
+        if (isset($data['plan'])) {
+            $_SESSION['order']['plan'] = $data['plan'];
+        }
     }
 
     public function unsetOrderInfo()

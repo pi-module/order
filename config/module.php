@@ -15,7 +15,7 @@ return array(
     'meta'         => array(
         'title'         => _a('Orders'),
         'description'   => _a('Manage order process and payment'),
-        'version'       => '1.3.4',
+        'version'       => '1.3.5',
         'license'       => 'New BSD',
         'logo'          => 'image/logo.png',
         'readme'        => 'docs/readme.txt',

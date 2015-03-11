@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-03-06 16:53+0330\n"
+"POT-Creation-Date: 2015-03-11 12:14+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -22,6 +22,14 @@ msgstr "جززیات سفارش"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/block.php:17
 msgid "Simple orders detail"
 msgstr "جززیات ساده سفارش"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/block.php:23
+msgid "Installment"
+msgstr "قسطی"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/block.php:24
+msgid "Installment orders detail"
+msgstr "جزییات سفارش های قسطی"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:17
 msgid "Admin"

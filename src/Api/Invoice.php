@@ -22,7 +22,7 @@ use Zend\Math\Rand;
  * Pi::api('invoice', 'order')->createInvoice($id);
  * Pi::api('invoice', 'order')->getInvoice($id);
  * Pi::api('invoice', 'order')->getInvoiceFromOrder($order);
- * Pi::api('invoice', 'order')->getInvoiceFromUser($uid);
+ * Pi::api('invoice', 'order')->getInvoiceFromUser($uid, $compressed);
  * Pi::api('invoice', 'order')->getInvoiceForPayment($id);
  * Pi::api('invoice', 'order')->updateInvoice($randomId);
  * Pi::api('invoice', 'order')->canonizeInvoice($invoice);
@@ -126,6 +126,7 @@ class Invoice extends AbstractApi
                 case 'installment':
                     $invoices = Pi::api('installment', 'order')->setPriceForInvoice($order['total_price'], $order['plan']);
                     // Set invoices
+                    unset($invoices['total']);
                     foreach ($invoices as $key => $invoice) {
                         // Set invoice
                         $row = Pi::model('invoice', $this->getModule())->createRow();
@@ -201,10 +202,16 @@ class Invoice extends AbstractApi
         return $invoices;
     }
 
-    public function getInvoiceFromUser($uid)
+    public function getInvoiceFromUser($uid, $compressed = false)
     {
         $invoices = array();
-        $where = array('uid' => $uid);
+        // Check compressed
+        if ($compressed) {
+            $where = array('uid' => $uid, 'status' => 2, 'time_duedate < ?' => strtotime('+1 month'));
+        } else {
+            $where = array('uid' => $uid);
+        }
+        // Select
         $select = Pi::model('invoice', $this->getModule())->select()->where($where);
         $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-03-06 12:11+0330\n"
+"POT-Creation-Date: 2015-03-11 12:20+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -22,6 +22,14 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/block.php:17
 msgid "Simple orders detail"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/block.php:23
+msgid "Installment"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/block.php:24
+msgid "Installment orders detail"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:17
@@ -150,7 +158,7 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/module.php:16
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:19
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:17
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:17
 msgid "Orders"
 msgstr ""
@@ -160,78 +168,31 @@ msgid "Manage order process and payment"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:25
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:22
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:23
 msgid "Invoice"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:31
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:47
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:27
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:29
 msgid "Logs"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:32
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:35
 msgid "Gateway"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:37
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:41
 msgid "Delivery"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:49
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:42
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:47
 msgid "Location"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:17
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:72
-msgid "Product"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:22
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:66
-msgid "Category"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:27
-msgid "Attribute"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:32
-msgid "Attach"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:42
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:97
-msgid "Checkout"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:52
-msgid "Tools"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:60
-msgid "Index page"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:79
-msgid "Tags"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:85
-msgid "User panel"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:91
-msgid "Search"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:103
-msgid "Category list"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:110
-msgid "Tag list"
 msgstr ""

@@ -1,0 +1,140 @@
+<?php
+    $this->jQuery();
+
+    $script =<<<'EOT'
+(function($) {
+    $('#check0').change(function() {
+        if($(this).is(':checked')) {
+            $('.check0').attr('class', 'show check0');
+        } else {
+            $('.check0').attr('class', 'hidden check0');
+        }
+    });
+    $('#check1').change(function() {
+        if($(this).is(':checked')) {
+            $('.check1').attr('class', 'show check1');
+        } else {
+            $('.check1').attr('class', 'hidden check1');
+        }
+    });
+    $('#check2').change(function() {
+        if($(this).is(':checked')) {
+            $('.check2').attr('class', 'show check2');
+        } else {
+            $('.check2').attr('class', 'hidden check2');
+        }
+    });
+    $('#check3').change(function() {
+        if($(this).is(':checked')) {
+            $('.check3').attr('class', 'show check3');
+        } else {
+            $('.check3').attr('class', 'hidden check3');
+        }
+    });
+    $('#check4').change(function() {
+        if($(this).is(':checked')) {
+            $('.check4').attr('class', 'show check4');
+        } else {
+            $('.check4').attr('class', 'hidden check4');
+        }
+    });
+    $('#check5').change(function() {
+        if($(this).is(':checked')) {
+            $('.check5').attr('class', 'show check5');
+        } else {
+            $('.check5').attr('class', 'hidden check5');
+        }
+    });
+    $('#check6').change(function() {
+        if($(this).is(':checked')) {
+            $('.check6').attr('class', 'show check6');
+        } else {
+            $('.check6').attr('class', 'hidden check6');
+        }
+    });
+    $('#check7').change(function() {
+        if($(this).is(':checked')) {
+            $('.check7').attr('class', 'show check7');
+        } else {
+            $('.check7').attr('class', 'hidden check7');
+        }
+    });
+    $('#check8').change(function() {
+        if($(this).is(':checked')) {
+            $('.check8').attr('class', 'show check8');
+        } else {
+            $('.check8').attr('class', 'hidden check8');
+        }
+    });
+    $('#check9').change(function() {
+        if($(this).is(':checked')) {
+            $('.check9').attr('class', 'show check9');
+        } else {
+            $('.check9').attr('class', 'hidden check9');
+        }
+    });
+    $('#check10').change(function() {
+        if($(this).is(':checked')) {
+            $('.check10').attr('class', 'show check10');
+        } else {
+            $('.check10').attr('class', 'hidden check10');
+        }
+    });
+})(jQuery)
+EOT;
+    $this->footScript()->appendScript($script);
+?>
+<div id="js-installment" class="clearfix">
+    <h1><?php _e('Installment plans'); ?></h1>
+	<table class="table table-striped table-bordered table-condensed small">
+		<tr>
+			<th class="text-center"><?php _e('Number'); ?></th>
+			<th class="text-center"><?php _e('Select'); ?></th>
+			<th class="text-center"><?php _e('Per Payment'); ?></th>
+			<th class="text-center"><?php _e('1 months'); ?></th>
+			<th class="text-center"><?php _e('2 months'); ?></th>
+			<th class="text-center"><?php _e('3 months'); ?></th>
+			<th class="text-center"><?php _e('4 months'); ?></th>
+			<th class="text-center"><?php _e('5 months'); ?></th>
+			<th class="text-center"><?php _e('6 months'); ?></th>
+			<th class="text-center"><?php _e('7 months'); ?></th>
+			<th class="text-center"><?php _e('8 months'); ?></th>
+			<th class="text-center"><?php _e('9 months'); ?></th>
+			<th class="text-center"><?php _e('10 months'); ?></th>
+			<th class="text-center"><?php _e('Total'); ?></th>
+			<th class="text-center"><?php _e('Buy'); ?></th>
+		</tr>
+		<?php foreach($installments as $key => $installment) { ?>
+		<tr>
+			<td class="text-center">
+				<?php if ($installment['total'] == 0) { ?>
+                <?php _e('Cash purchase'); ?>
+				<?php } else { ?>
+				<?php echo sprintf(__('%s months'), _number($installment['total'])); ?>
+				<?php } ?>
+			</td>
+			<td class="text-center"><input id="check<?php echo $key;?>" type="checkbox"></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo _currency($this->escape($installment['invoices'][0]['price'])); ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][1]['price']) ? _currency($this->escape($installment['invoices'][1]['price'])) : ' - '; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][2]['price']) ? _currency($this->escape($installment['invoices'][2]['price'])) : ' - '; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][3]['price']) ? _currency($this->escape($installment['invoices'][3]['price'])) : ' - '; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][4]['price']) ? _currency($this->escape($installment['invoices'][4]['price'])) : ' - '; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][5]['price']) ? _currency($this->escape($installment['invoices'][5]['price'])) : ' - '; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][6]['price']) ? _currency($this->escape($installment['invoices'][6]['price'])) : ' - '; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][7]['price']) ? _currency($this->escape($installment['invoices'][7]['price'])) : ' - '; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][8]['price']) ? _currency($this->escape($installment['invoices'][8]['price'])) : ' - '; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][9]['price']) ? _currency($this->escape($installment['invoices'][9]['price'])) : ' - '; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][10]['price']) ? _currency($this->escape($installment['invoices'][10]['price'])) : ' - '; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo _currency($this->escape($installment['invoices']['total']['price'])); ?></span></td>
+			<td class="text-center">
+				<span class="hidden check<?php echo $key;?>">
+					<form action="" method="POST" name="product" class="form-inline">
+						<input name="plan" type="hidden" value="<?php echo $this->escape($installment['id']); ?>">
+						<button type="submit" class="btn btn-success btn-xs"><?php _e('Buy'); ?></button>
+					</form>
+				</span>
+			</td>
+		</tr>
+		<?php } ?>
+	</table>
+</div>

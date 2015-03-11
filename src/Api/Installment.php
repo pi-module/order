@@ -129,7 +129,12 @@ class Installment extends AbstractApi
         $step1 = $remainingPrice * ($planList['profit'] / 100);
         $step2 = $step1 * $planList['total'];
         $step3 = $step2 + $remainingPrice;
-        $installmentPrice = $step3 / $planList['total'];
+        // Check total
+        if ($planList['total'] > 0) {
+            $installmentPrice = $step3 / $planList['total'];
+        } else {
+            $installmentPrice = $step3;
+        }
         // Set prepayment invoices
         $invoices = array();
         $invoices[0] = array(
@@ -137,6 +142,7 @@ class Installment extends AbstractApi
             'duedate'  => time(),
             'b'        => date('Y-m-d'),
         );
+        $total = $prepaymentPrice;
         // Set all other invoices
         for ($i=1; $i <= $planList['total']; $i++) {
             $invoices[$i] = array(
@@ -144,7 +150,14 @@ class Installment extends AbstractApi
                 'duedate'  => strtotime(sprintf('+%s month', $i)),
                 'b'        => date('Y-m-d', strtotime(sprintf('+%s month', $i))),
             );
+            $total = $total + $installmentPrice;
         }
+        // Set total
+        $invoices['total'] = array(
+            'price'    => $total,
+            'duedate'  => '',
+            'b'        => '',
+        );
         return $invoices;
     }
 
