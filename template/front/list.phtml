@@ -9,6 +9,9 @@
 				<?php if (!empty($user['first_name']) && !empty($user['last_name'])) { ?>
 				<p><strong><?php _e('Name'); ?></strong> : <span><?php echo $this->escape($user['first_name']); ?> <?php echo $this->escape($user['last_name']); ?></span></p>
 				<?php } ?>
+				<?php if (!empty($order['id_number'])) { ?>
+				<p><strong><?php _e('ID number'); ?></strong> : <span><?php echo $this->escape($order['id_number']); ?></span></p>
+				<?php } ?>
 				<?php if (!empty($user['city'])) { ?>
 				<p><strong><?php _e('City'); ?></strong> : <span><?php echo $this->escape($user['city']); ?></span></p>
 				<?php } ?>

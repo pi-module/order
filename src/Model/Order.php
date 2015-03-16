@@ -22,7 +22,7 @@ class Order extends Model
      */
     protected $columns = array(
     	'id', 'uid', 'code', 'type', 'plan', 'module_name', 'module_table', 'module_item', 'ip', 
-    	'first_name', 'last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 
+    	'id_number', 'first_name', 'last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 
     	'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 'user_note', 
     	'admin_note', 'time_create', 'time_payment', 'time_delivery', 'time_finish', 'time_start', 
     	'time_end', 'status_order', 'status_payment', 'status_delivery', 'product_price', 

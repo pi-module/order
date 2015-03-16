@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-03-11 12:14+0330\n"
+"POT-Creation-Date: 2015-03-16 14:04+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -84,76 +84,80 @@ msgid "Use `|` as delimiter to separate mails"
 msgstr "از `|` به عنوان جدا کننده ایمیل ها استفاده نمایید"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:84
+msgid "Show ID number"
+msgstr "نمایش کد ملی"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:92
 msgid "Show name"
 msgstr "نمایش نام"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:92
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:100
 msgid "Show email"
 msgstr "نمایش ایمیل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:100
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:108
 msgid "Show phone"
 msgstr "نمایش تلفن"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:108
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:116
 msgid "Show mobile"
 msgstr "نمایش موبایل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:116
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:124
 msgid "Show company"
 msgstr "نمایش شرکت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:124
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:132
 msgid "Show address"
 msgstr "نمایش آدرس"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:132
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:140
 msgid "Show country"
 msgstr "نمایش کشور"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:140
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:148
 msgid "Show state"
 msgstr "نمایش استان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:148
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:156
 msgid "Show city"
 msgstr "نمایش شهر"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:156
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:164
 msgid "Show Zip code"
 msgstr "نمایش کد پستی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:164
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:172
 msgid "Show packing"
 msgstr "نمایش بسته بندی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:172
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:180
 msgid "Show location"
 msgstr "نمایش انتخاب مکان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:180
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:188
 msgid "Show delivery"
 msgstr "نمایش انتخاب روش ارسال"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:188
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:196
 msgid "Show gateway"
 msgstr "نمایش انتخاب دروازه پرداخت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:196
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:204
 msgid "Show promo"
 msgstr "نمایش کد تخفیف"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:205
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:213
 msgid "Payment gateway error url"
 msgstr "لینک برگشت در خطای دروازه پرداخت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:206
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:214
 msgid "Set back url when gateway have error, set empty for default url"
 msgstr ""
 "تنظیم لینک برگشت وقتی که خطایی در روند پرداخت روی داده باشد، برای استفاده از "
 "آدرس پیش فرض این گزینه را خالی رها کنید."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:212
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:220
 msgid "Show not pay payments"
 msgstr "نمایش فاکتور های پرداخت نشده به کاربر"
 

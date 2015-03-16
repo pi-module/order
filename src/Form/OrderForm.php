@@ -62,6 +62,20 @@ class OrderForm  extends BaseForm
                 )
             ));
         }
+        // id_number
+        if ($this->config['order_idnumber']) {
+            $this->add(array(
+                'name' => 'id_number',
+                'options' => array(
+                    'label' => __('ID number'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    'required' => true,
+                )
+            ));
+        }
         // email
         if ($this->config['order_email']) {
             $this->add(array(

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-03-11 12:20+0330\n"
+"POT-Creation-Date: 2015-03-16 14:04+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -144,10 +144,10 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:41
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:6
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:58
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:62
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:140
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:63
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:143
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:8
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:111
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:114
 msgid "Paid"
 msgstr ""
 
@@ -262,21 +262,21 @@ msgid "Update delivery"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:33
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:203
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:207
 msgid "Your cart is empty."
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:208
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:212
 msgid "So sorry, At this moment order is inactive"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:219
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:223
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:331
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:335
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/Element/Gateway.php:28
 msgid "Offline"
 msgstr ""
@@ -357,9 +357,9 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:5
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:98
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:16
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:31
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:39
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:48
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:32
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:40
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:49
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:6
 msgid "Status"
 msgstr ""
@@ -385,10 +385,10 @@ msgid "Private"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:75
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:269
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:283
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:53
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:9
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:42
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:43
 msgid "Adapter"
 msgstr ""
 
@@ -408,12 +408,12 @@ msgid "Is active %s ?"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:106
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:55
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:57
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:84
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:111
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:61
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:82
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:56
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:58
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:87
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:114
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:64
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:85
 msgid "Price"
 msgstr ""
 
@@ -430,117 +430,125 @@ msgid "Last name"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:70
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:67
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:18
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:29
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:59
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:27
-msgid "Email"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:11
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:41
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:13
+msgid "ID number"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:84
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:71
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:67
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:19
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:32
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:62
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:30
-msgid "Phone"
+msgid "Email"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:98
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:75
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:71
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:20
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:35
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:65
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:33
+msgid "Phone"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:112
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:75
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:21
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:38
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:68
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:36
 msgid "Mobile"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:113
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:21
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:127
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:22
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:41
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:39
 msgid "Company"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:124
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:138
 msgid "Company id"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:135
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:149
 msgid "Company vat"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:148
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:11
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:47
-msgid "Address 1"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:159
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:162
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:14
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:44
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:50
+msgid "Address 1"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:173
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:47
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:53
 msgid "Address 2"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:172
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:59
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:22
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:23
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:53
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:19
-msgid "Country"
-msgstr ""
-
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:186
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:55
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:20
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:50
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:16
-msgid "State"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:200
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:51
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:59
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:23
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:17
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:47
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:13
-msgid "City"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:214
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:63
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:24
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:26
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:56
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:22
+msgid "Country"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:200
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:55
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:23
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:53
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:19
+msgid "State"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:214
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:51
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:24
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:20
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:50
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:16
+msgid "City"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:228
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:63
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:25
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:29
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:59
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:25
 msgid "Zip code"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:231
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:245
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:101
 msgid "Location"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:249
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:263
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:72
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:46
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:47
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:102
 msgid "Delivery"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:285
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:51
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:60
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:86
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:299
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:52
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:61
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:89
 msgid "Packing"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:297
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:311
 msgid "Next"
 msgstr ""
 
@@ -548,7 +556,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:41
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:8
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:13
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:29
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:30
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:14
 msgid "Order"
 msgstr ""
@@ -561,7 +569,7 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:59
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:38
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:103
 msgid "Payment"
 msgstr ""
@@ -867,9 +875,9 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:10
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:7
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:13
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:110
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:58
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:81
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:113
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:61
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:84
 msgid "ID"
 msgstr ""
 
@@ -877,9 +885,9 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:13
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:12
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:18
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:115
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:63
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:86
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:118
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:66
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:89
 msgid "Action"
 msgstr ""
 
@@ -888,7 +896,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:36
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:33
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:26
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:87
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:88
 msgid "Edit"
 msgstr ""
 
@@ -989,37 +997,37 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:11
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:12
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:112
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:83
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:115
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:86
 msgid "Time Create"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:12
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:114
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:85
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:117
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:88
 msgid "Time pay"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:34
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:44
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:73
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:76
 msgid "View"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:42
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:8
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:59
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:141
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:144
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:10
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:112
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:115
 msgid "Unpaid"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:43
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:10
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:142
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:145
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:12
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:113
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:116
 msgid "Canceled"
 msgstr ""
 
@@ -1039,9 +1047,9 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:14
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:93
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:57
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:60
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:15
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:65
 msgid "Gateway"
 msgstr ""
 
@@ -1052,19 +1060,19 @@ msgid "Create"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:29
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:87
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:90
 msgid "Vat"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:33
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:61
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:88
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:91
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:104
 msgid "Total"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:37
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:83
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:86
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:91
 msgid "Number"
 msgstr ""
@@ -1077,7 +1085,7 @@ msgid "Name"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:47
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:25
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:26
 msgid "Address"
 msgstr ""
 
@@ -1152,7 +1160,7 @@ msgid "Customer"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:17
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:71
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:74
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:30
 msgid "Total price"
 msgstr ""
@@ -1165,59 +1173,59 @@ msgstr ""
 msgid "User Name"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:18
 msgid "Order Email"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:32
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:40
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:49
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:33
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:41
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:50
 msgid "Time"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:33
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:34
 msgid "Finish"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:50
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:42
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:51
 msgid "Method"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:58
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:59
 msgid "Discount"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:59
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:85
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:60
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:88
 msgid "Shipping"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:66
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:67
 msgid "Products"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:75
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:76
 msgid "Current Price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:76
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:77
 msgid "Order price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:77
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:78
 msgid "Order discount"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:78
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:79
 msgid "Order number"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:79
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:80
 msgid "Order total"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:88
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:89
 msgid "Print"
 msgstr ""
 
@@ -1266,97 +1274,97 @@ msgstr ""
 msgid "Order %s details"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:39
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:44
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:42
 msgid "Company ID"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:44
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:42
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:47
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:45
 msgid "Company VAT"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:48
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:51
 msgid "Order status"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:49
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:52
 msgid "Payment status"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:50
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:53
 msgid "Delivery status"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:51
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:59
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:54
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:62
 msgid "Time create"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:52
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:55
 msgid "Time payment"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:53
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:56
 msgid "Time delivery"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:54
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:57
 msgid "Time finish"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:55
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:58
 msgid "Time start"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:56
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:59
 msgid "Time end"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:59
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:62
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:18
 msgid "Product price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:65
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:21
 msgid "Shipping price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:65
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:68
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:24
 msgid "Packing price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:68
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:71
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:27
 msgid "Vat price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:74
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:77
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:33
 msgid "Paid price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:79
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:82
 msgid "This order products or services list"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:82
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:85
 msgid "Product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:107
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:110
 msgid "This order invoices list"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:113
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:84
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:116
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:87
 msgid "Due date"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:134
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:105
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:137
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:108
 msgid "View / Pay"
 msgstr ""
 
@@ -1390,11 +1398,11 @@ msgstr ""
 msgid "%s months"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:74
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:77
 msgid "Pay"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:78
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:81
 msgid "Back to order"
 msgstr ""
 
@@ -1402,14 +1410,14 @@ msgstr ""
 msgid "User information"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:55
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:58
 msgid "List of your order"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:60
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:63
 msgid "Type"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:78
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:81
 msgid "List of your invoice"
 msgstr ""

@@ -37,6 +37,26 @@ class Update extends BasicUpdate
     public function updateSchema(Event $e)
     {
         $moduleVersion    = $e->getParam('version');
+
+        // Set order model
+        $orderModel     = Pi::model('order', $this->module);
+        $orderTable     = $orderModel->getTable();
+        $orderAdapter   = $orderModel->getAdapter();
+
+        if (version_compare($moduleVersion, '1.3.6', '<')) {
+            // Alter table field add id_number
+            $sql = sprintf("ALTER TABLE %s ADD `id_number` varchar(255) NOT NULL default ''", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
         
         return true;
     }

@@ -14,7 +14,8 @@
 			<ul class="clearfix list-unstyled">
         		<li class="col-md-4"><strong><?php _e('Order Name'); ?></strong> : <?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></li>
         		<li class="col-md-4"><strong><?php _e('User Name'); ?></strong> : <?php echo $this->escape($order['user']['identity']); ?> ( <?php echo $this->escape($order['user']['name']); ?> ) <span class="label label-info"><?php echo $this->escape($order['user']['id']); ?></span></li>
-        		<li class="col-md-4"><strong><?php _e('Order Email'); ?></strong> : <?php echo $this->escape($order['email']); ?></li>
+        		<li class="col-md-4"><strong><?php _e('ID number'); ?></strong> : <?php echo $this->escape($order['id_number']); ?></li>
+                <li class="col-md-4"><strong><?php _e('Order Email'); ?></strong> : <?php echo $this->escape($order['email']); ?></li>
         		<li class="col-md-4"><strong><?php _e('Email'); ?></strong> : <?php echo $this->escape($order['user']['email']); ?></li>
         		<li class="col-md-4"><strong><?php _e('Phone'); ?></strong> : <?php echo $this->escape($order['phone']); ?></li>
         		<li class="col-md-4"><strong><?php _e('Mobile'); ?></strong> : <?php echo $this->escape($order['mobile']); ?></li>

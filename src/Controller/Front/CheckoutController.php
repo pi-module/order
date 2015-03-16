@@ -59,6 +59,10 @@ class CheckoutController extends IndexController
                 if (!isset($values['email']) || empty($values['email'])) {
                     $values['email'] = $user['email'];
                 }
+                // Check user id_number
+                if (!isset($values['id_number']) || empty($values['id_number'])) {
+                    $values['id_number'] = $user['id_number'];
+                }
                 // Check user first_name
                 if (!isset($values['first_name']) || empty($values['first_name'])) {
                     $values['first_name'] = $user['first_name'];

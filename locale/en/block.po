@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-03-11 12:20+0330\n"
+"POT-Creation-Date: 2015-03-16 14:04+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -37,8 +37,6 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:14
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:58
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:123
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:149
 msgid "Price"
 msgstr ""
 
@@ -191,6 +189,8 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:43
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:73
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:103
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:123
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:149
 msgid "Amount"
 msgstr ""
 

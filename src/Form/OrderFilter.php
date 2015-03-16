@@ -46,6 +46,18 @@ class OrderFilter extends InputFilter
                 ),
             ));
         }
+        // id_number
+        if ($config['order_idnumber']) {
+            $this->add(array(
+                'name' => 'id_number',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+            ));
+        }
         // email
         if ($config['order_email']) {
             $this->add(array(

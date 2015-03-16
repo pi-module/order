@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-03-11 12:20+0330\n"
+"POT-Creation-Date: 2015-03-16 14:04+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -85,74 +85,78 @@ msgid "Use `|` as delimiter to separate mails"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:84
-msgid "Show name"
+msgid "Show ID number"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:92
-msgid "Show email"
+msgid "Show name"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:100
-msgid "Show phone"
+msgid "Show email"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:108
-msgid "Show mobile"
+msgid "Show phone"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:116
-msgid "Show company"
+msgid "Show mobile"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:124
-msgid "Show address"
+msgid "Show company"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:132
-msgid "Show country"
+msgid "Show address"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:140
-msgid "Show state"
+msgid "Show country"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:148
-msgid "Show city"
+msgid "Show state"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:156
-msgid "Show Zip code"
+msgid "Show city"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:164
-msgid "Show packing"
+msgid "Show Zip code"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:172
-msgid "Show location"
+msgid "Show packing"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:180
-msgid "Show delivery"
+msgid "Show location"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:188
-msgid "Show gateway"
+msgid "Show delivery"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:196
+msgid "Show gateway"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:204
 msgid "Show promo"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:205
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:213
 msgid "Payment gateway error url"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:206
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:214
 msgid "Set back url when gateway have error, set empty for default url"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:212
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:220
 msgid "Show not pay payments"
 msgstr ""
 

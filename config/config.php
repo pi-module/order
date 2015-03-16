@@ -79,6 +79,14 @@ return array(
             'filter'       => 'string',
             'value'        => ''
         ),
+        'order_idnumber' => array(
+            'category'     => 'order',
+            'title'        => _a('Show ID number'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 1
+        ),
         'order_name' => array(
             'category'     => 'order',
             'title'        => _a('Show name'),

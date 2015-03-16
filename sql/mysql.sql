@@ -11,6 +11,7 @@ CREATE TABLE `{order}` (
     `module_item` int(10) unsigned NOT NULL default '0',
     # Customer information
     `ip` char(15) NOT NULL default '',
+    `id_number` varchar(255) NOT NULL default '',
     `first_name` varchar(255) NOT NULL default '',
     `last_name` varchar(255) NOT NULL default '',
     `email` varchar(64) NOT NULL default '',
