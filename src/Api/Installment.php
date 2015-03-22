@@ -26,7 +26,10 @@ class Installment extends AbstractApi
 {
     public function planList()
     {
-    	$list = array();
+    	// Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Set list
+        $list = array();
     	// Plan 0
         $list[0] = array(
             'id'          => 0,
@@ -38,82 +41,42 @@ class Installment extends AbstractApi
         // Plan 1
         $list[1] = array(
             'id'          => 1,
-            'title'       => __('1 months'),
-            'prepayment'  => '20',
-            'profit'      => '0',
-            'total'       => '1',
+            'title'       => $config['plan_1_title'],
+            'prepayment'  => $config['plan_1_prepayment'],
+            'profit'      => $config['plan_1_profit'],
+            'total'       => $config['plan_1_total'],
         );
     	// Plan 2
-    	$list[2] = array(
-    		'id'          => 2,
-        	'title'       => __('2 months'),
-        	'prepayment'  => '20',
-        	'profit'      => '1.5',
-        	'total'       => '2',
-    	);
-    	// Plan 3
-    	$list[3] = array(
-    		'id'          => 3,
-        	'title'       => __('3 months'),
-        	'prepayment'  => '20',
-        	'profit'      => '1.6',
-        	'total'       => '3',
-    	);
-    	// Plan 4
-    	$list[4] = array(
-    		'id'          => 4,
-        	'title'       => __('4 months'),
-        	'prepayment'  => '20',
-        	'profit'      => '1.7',
-        	'total'       => '4',
-    	);
-    	// Plan 5
+        $list[2] = array(
+            'id'          => 2,
+            'title'       => $config['plan_2_title'],
+            'prepayment'  => $config['plan_2_prepayment'],
+            'profit'      => $config['plan_2_profit'],
+            'total'       => $config['plan_2_total'],
+        );
+        // Plan 3
+        $list[3] = array(
+            'id'          => 3,
+            'title'       => $config['plan_3_title'],
+            'prepayment'  => $config['plan_3_prepayment'],
+            'profit'      => $config['plan_3_profit'],
+            'total'       => $config['plan_3_total'],
+        );
+        // Plan 4
+        $list[4] = array(
+            'id'          => 4,
+            'title'       => $config['plan_4_title'],
+            'prepayment'  => $config['plan_4_prepayment'],
+            'profit'      => $config['plan_4_profit'],
+            'total'       => $config['plan_4_total'],
+        );
+        // Plan 5
         $list[5] = array(
             'id'          => 5,
-            'title'       => __('5 months'),
-            'prepayment'  => '20',
-            'profit'      => '1.8',
-            'total'       => '5',
-        );
-        // Plan 6
-        $list[6] = array(
-            'id'          => 6,
-            'title'       => __('6 months'),
-            'prepayment'  => '20',
-            'profit'      => '1.9',
-            'total'       => '6',
-        );
-        // Plan 7
-        $list[7] = array(
-            'id'          => 7,
-            'title'       => __('7 months'),
-            'prepayment'  => '20',
-            'profit'      => '2',
-            'total'       => '7',
-        );
-        // Plan 8
-        $list[8] = array(
-            'id'          => 8,
-            'title'       => __('8 months'),
-            'prepayment'  => '20',
-            'profit'      => '2.1',
-            'total'       => '8',
-        );
-        // Plan 9
-        $list[9] = array(
-            'id'          => 9,
-            'title'       => __('9 months'),
-            'prepayment'  => '20',
-            'profit'      => '2.5',
-            'total'       => '9',
-        );
-        // Plan 10
-        $list[10] = array(
-            'id'          => 10,
-            'title'       => __('10 months'),
-            'prepayment'  => '20',
-            'profit'      => '2.9',
-            'total'       => '10',
+            'title'       => $config['plan_5_title'],
+            'prepayment'  => $config['plan_5_prepayment'],
+            'profit'      => $config['plan_5_profit'],
+            'total'       => $config['plan_5_total'],
         );
     	return $list;
     }

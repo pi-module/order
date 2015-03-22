@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-03-22 13:22+0330\n"
+"POT-Creation-Date: 2015-03-22 13:42+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -16,58 +16,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/order\n"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:33
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:36
 msgid "One time"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:94
-msgid "1 months"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:49
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:95
-msgid "2 months"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:57
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:96
-msgid "3 months"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:65
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:97
-msgid "4 months"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:73
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:98
-msgid "5 months"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:81
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:99
-msgid "6 months"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:89
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:100
-msgid "7 months"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:97
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:101
-msgid "8 months"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:105
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:102
-msgid "9 months"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:113
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:103
-msgid "10 months"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:51
@@ -1414,6 +1364,46 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:93
 msgid "Per Payment"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:94
+msgid "1 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:95
+msgid "2 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:96
+msgid "3 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:97
+msgid "4 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:98
+msgid "5 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:99
+msgid "6 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:100
+msgid "7 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:101
+msgid "8 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:102
+msgid "9 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:103
+msgid "10 months"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:105
