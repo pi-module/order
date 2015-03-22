@@ -35,12 +35,23 @@ class OrderController extends ActionController
         $status_order = $this->params('status_order');
         $status_payment = $this->params('status_payment');
         $status_delivery = $this->params('status_delivery');
+        $code = $this->params('code');
+        $mobile = $this->params('mobile');
+        $email = $this->params('email');
+        $city = $this->params('city');
+        $uid = $this->params('uid');
+        $id_number = $this->params('id_number');
+        $first_name = $this->params('first_name');
+        $last_name = $this->params('last_name');
+        $zip_code = $this->params('zip_code');
+        $company = $this->params('company');
         // Get info
         $list = array();
         $order = array('id DESC', 'time_create DESC');
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit = intval($this->config('admin_perpage'));
         $where = array();
+        // Set where
         if ($status_order) {
             $where['status_order'] = $status_order;
         }
@@ -50,6 +61,37 @@ class OrderController extends ActionController
         if ($status_delivery) {
             $where['status_delivery'] = $status_delivery;
         }
+        if ($code) {
+            $where['code LIKE ?'] = '%' . $code . '%';
+        }
+        if ($mobile) {
+            $where['mobile LIKE ?'] = '%' . $mobile . '%';
+        }
+        if ($email) {
+            $where['email LIKE ?'] = '%' . $email . '%';
+        }
+        if ($city) {
+            $where['city LIKE ?'] = '%' . $city . '%';
+        }
+        if ($uid) {
+            $where['uid'] = $uid;
+        }
+        if ($id_number) {
+            $where['id_number LIKE ?'] = '%' . $id_number . '%';
+        }
+        if ($first_name) {
+            $where['first_name LIKE ?'] = '%' . $first_name . '%';
+        }
+        if ($last_name) {
+            $where['last_name LIKE ?'] = '%' . $last_name . '%';
+        }
+        if ($zip_code) {
+            $where['zip_code LIKE ?'] = '%' . $zip_code . '%';
+        }
+        if ($company) {
+            $where['company LIKE ?'] = '%' . $company . '%';
+        }
+        // Select
         $select = $this->getModel('order')->select()->where($where)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('order')->selectWith($select);
         // Make list
@@ -73,13 +115,33 @@ class OrderController extends ActionController
                 'status_order'    => $status_order,
                 'status_payment'  => $status_payment,
                 'status_delivery' => $status_delivery,
+                'code'            => $code,
+                'mobile'          => $mobile,
+                'email'           => $email,
+                'city'            => $city,
+                'uid'             => $uid,
+                'id_number'       => $id_number,
+                'first_name'      => $first_name,
+                'last_name'       => $last_name,
+                'zip_code'        => $zip_code,
+                'company'         => $company,
             )),
         ));
         // Set form
         $values = array(
-            'status_order' => $status_order,
-            'status_payment' => $status_payment,
+            'status_order'    => $status_order,
+            'status_payment'  => $status_payment,
             'status_delivery' => $status_delivery,
+            'code'            => $code,
+            'mobile'          => $mobile,
+            'email'           => $email,
+            'city'            => $city,
+            'uid'             => $uid,
+            'id_number'       => $id_number,
+            'first_name'      => $first_name,
+            'last_name'       => $last_name,
+            'zip_code'        => $zip_code,
+            'company'         => $company,
         );
         $form = new OrderSettingForm('setting');
         $form->setAttribute('action', $this->url('', array('action' => 'process')));
@@ -102,10 +164,20 @@ class OrderController extends ActionController
                 $values = $form->getData();
                 $message = __('Go to filter');
                 $url = array(
-                    'action' => 'index',
-                    'status_order' => $values['status_order'],
-                    'status_payment' => $values['status_payment'],
+                    'action'          => 'index',
+                    'status_order'    => $values['status_order'],
+                    'status_payment'  => $values['status_payment'],
                     'status_delivery' => $values['status_delivery'],
+                    'code'            => $values['code'],
+                    'mobile'          => $values['mobile'],
+                    'email'           => $values['email'],
+                    'city'            => $values['city'],
+                    'uid'             => $values['uid'],
+                    'id_number'       => $values['id_number'],
+                    'first_name'      => $values['first_name'],
+                    'last_name'       => $values['last_name'],
+                    'zip_code'        => $values['zip_code'],
+                    'company'         => $values['company'],
                 );
             } else {
                 $message = __('Not valid');
@@ -275,7 +347,7 @@ class OrderController extends ActionController
         // Add log
         //Pi::api('log', 'shop')->addLog('order', $order['id'], 'view');
         // Set view
-        $this->view()->setTemplate('order_view');
+        $this->view()->setTemplate('order-view');
         $this->view()->assign('order', $order);
     }
 

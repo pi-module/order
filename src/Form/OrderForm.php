@@ -41,7 +41,7 @@ class OrderForm  extends BaseForm
             $this->add(array(
                 'name' => 'first_name',
                 'options' => array(
-                    'label' => __('First Name'),
+                    'label' => __('First name'),
                 ),
                 'attributes' => array(
                     'type' => 'text',

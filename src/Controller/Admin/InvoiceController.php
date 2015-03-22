@@ -16,6 +16,8 @@ namespace Module\Order\Controller\Admin;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
+use Module\Order\Form\InvoiceSettingForm;
+use Module\Order\Form\InvoiceSettingFilter;
 use Zend\Json\Json;
 
 class InvoiceController extends ActionController
@@ -25,21 +27,44 @@ class InvoiceController extends ActionController
         // Get page
         $page = $this->params('page', 1);
         $module = $this->params('module');
+        $orderid = $this->params('orderid');
+        $uid = $this->params('uid');
+        $payment_status = $this->params('payment_status');
+        $start = $this->params('start');
+        $end = $this->params('end');
         // Get info
         $list = array();
         $order = array('id DESC', 'time_create DESC');
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit = intval($this->config('admin_perpage'));
-        $select = $this->getModel('invoice')->select()->order($order)->offset($offset)->limit($limit);
+        $where = array();
+        // Set where
+        if ($orderid) {
+            $where['order'] = $orderid;
+        }
+        if ($uid) {
+            $where['uid'] = $uid;
+        }
+        if ($payment_status) {
+            if ($payment_status == 'delayed') {
+                $where['status'] = 2;
+                $where['time_duedate <= ?'] = time();
+            } elseif (in_array($payment_status, array(1, 2))) {
+                $where['status'] = $payment_status;
+            }
+        }
+        if ($start) {
+            $where['time_duedate >= ?'] = strtotime($start);
+        }
+        if ($end) {
+            $where['time_duedate <= ?'] = strtotime($end);
+        }
+        // Select
+        $select = $this->getModel('invoice')->select()->where($where)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('invoice')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
-            $list[$row->id] = $row->toArray();
-            $list[$row->id]['description'] = Json::decode($list[$row->id]['description'], true);
-            $list[$row->id]['user'] = Pi::user()->get($list[$row->id]['uid'], array('id', 'identity', 'name', 'email'));
-            $list[$row->id]['time_create_view'] = _date($list[$row->id]['time_create']);
-            $list[$row->id]['time_payment_view'] = ($list[$row->id]['time_payment']) ? _date($list[$row->id]['time_payment']) : __('Not yet');
-            $list[$row->id]['amount_view'] = _currency($list[$row->id]['amount']);
+            $list[$row->id] = Pi::api('invoice', 'order')->canonizeInvoice($row);
         }
         // Set paginator
         $count = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
@@ -52,15 +77,65 @@ class InvoiceController extends ActionController
             'router'    => $this->getEvent()->getRouter(),
             'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
             'params'    => array_filter(array(
-                'module'        => $this->getModule(),
-                'controller'    => 'invoice',
-                'action'        => 'index',
+                'module'         => $this->getModule(),
+                'controller'     => 'invoice',
+                'action'         => 'index',
+                'orderid'        => $orderid,
+                'uid'            => $uid,
+                'payment_status' => $payment_status,
+                'start'          => $start,
+                'end'            => $end,
             )),
         ));
+        // Set form
+        $values = array(
+            'orderid'        => $orderid,
+            'uid'            => $uid,
+            'payment_status' => $payment_status,
+            'start'          => $start,
+            'end'            => $end,
+        );
+        $form = new InvoiceSettingForm('setting');
+        $form->setAttribute('action', $this->url('', array('action' => 'process')));
+        $form->setData($values);
         // Set view
         $this->view()->setTemplate('invoice-index');
         $this->view()->assign('list', $list);
         $this->view()->assign('paginator', $paginator);
+        $this->view()->assign('form', $form);
+    }
+
+    public function processAction()
+    {
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form = new InvoiceSettingForm('setting');
+            $form->setInputFilter(new InvoiceSettingFilter());
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                $message = __('Go to filter');
+                $url = array(
+                    'action'         => 'index',
+                    'orderid'        => $values['orderid'],
+                    'uid'            => $values['uid'],
+                    'payment_status' => $values['payment_status'],
+                    'start'          => $values['start'],
+                    'end'            => $values['end'],
+                );
+            } else {
+                $message = __('Not valid');
+                $url = array(
+                    'action' => 'index',
+                );
+            }
+        } else {
+            $message = __('Not set');
+            $url = array(
+                'action' => 'index',
+            );
+        } 
+        return $this->jump($url, $message);  
     }
 
     public function viewAction()
@@ -70,14 +145,12 @@ class InvoiceController extends ActionController
         $invoice = Pi::api('invoice', 'order')->getInvoice($id);
         $order = Pi::api('order', 'order')->getOrder($invoice['order']);
         // Check invoice
-        if (empty($invoice)) {
+        if (empty($invoice) || empty($order)) {
            $this->jump(array('', 'action' => 'index'), __('The invoice not found.'));
         }
-        $invoice['time_create_view'] = _date($invoice['time_create']);
-        $invoice['time_payment_view'] = ($invoice['time_payment']) ? _date($invoice['time_payment']) : __('Not yet');
-        $invoice['amount_view'] = _currency($invoice['amount']);
+        // Get logs
         $invoice['log'] = Pi::api('log', 'order')->getLog($invoice['id']);
-        // Set view
+        // set view
         $this->view()->setTemplate('invoice-view');
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('order', $order);

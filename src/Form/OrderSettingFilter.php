@@ -35,5 +35,55 @@ class OrderSettingFilter extends InputFilter
             'name' => 'status_delivery',
             'required' => true,
         ));
+        // code
+        $this->add(array(
+            'name' => 'code',
+            'required' => false,
+        ));
+        // mobile
+        $this->add(array(
+            'name' => 'mobile',
+            'required' => false,
+        ));
+        // email
+        $this->add(array(
+            'name' => 'email',
+            'required' => false,
+        ));
+        // city
+        $this->add(array(
+            'name' => 'city',
+            'required' => false,
+        ));
+        // uid
+        $this->add(array(
+            'name' => 'uid',
+            'required' => false,
+        ));
+        // id_number
+        $this->add(array(
+            'name' => 'id_number',
+            'required' => false,
+        ));
+        // first_name
+        $this->add(array(
+            'name' => 'first_name',
+            'required' => false,
+        ));
+        // last_name
+        $this->add(array(
+            'name' => 'last_name',
+            'required' => false,
+        ));
+        // zip_code
+        $this->add(array(
+            'name' => 'zip_code',
+            'required' => false,
+        ));
+        // company
+        $this->add(array(
+            'name' => 'company',
+            'required' => false,
+        ));
     }
 }    	
