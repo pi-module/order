@@ -60,7 +60,7 @@ class Log extends AbstractApi
             $list[$row->id] = $row->toArray();
             $list[$row->id]['value'] = Json::decode($list[$row->id]['value'], true);
             $list[$row->id]['time_create_view'] = _date($list[$row->id]['time_create']);
-            $list[$row->id]['amount_view'] = _currency($list[$row->id]['amount']);
+            $list[$row->id]['amount_view'] = Pi::api('api', 'order')->viewPrice($list[$row->id]['amount']);
         }
         // return
         return $list;
@@ -78,7 +78,7 @@ class Log extends AbstractApi
             $log = $rowset->toArray();
             $log['value'] = Json::decode($log['value'], true);
             $log['time_create_view'] = _date($log['time_create']);
-            $log['amount_view'] = _currency($log['amount']);
+            $log['amount_view'] = Pi::api('api', 'order')->viewPrice($log['amount']);
             $log['gatewayMessage'] = Pi::api('gateway', 'order')->getGatewayMessage($log['gateway'], $log['value']);
         }
         // return

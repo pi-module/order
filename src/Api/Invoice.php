@@ -263,12 +263,12 @@ class Invoice extends AbstractApi
         $invoice['time_payment_view'] = $invoice['time_payment'] ? _date($invoice['time_payment']) : __('Not pay');
         $invoice['time_cancel_view'] = $invoice['time_cancel'] ? _date($invoice['time_cancel']) : __('Not canceled');
         // Set price
-        $invoice['product_price_view'] = _currency($invoice['product_price']);
-        $invoice['shipping_price_view'] = _currency($invoice['shipping_price']);
-        $invoice['packing_price_view'] = _currency($invoice['packing_price']);
-        $invoice['vat_price_view'] = _currency($invoice['vat_price']);
-        $invoice['total_price_view'] = _currency($invoice['total_price']);
-        $invoice['paid_price_view'] = _currency($invoice['paid_price']);
+        $invoice['product_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['product_price']);
+        $invoice['shipping_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['shipping_price']);
+        $invoice['packing_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['packing_price']);
+        $invoice['vat_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['vat_price']);
+        $invoice['total_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['total_price']);
+        $invoice['paid_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['paid_price']);
         // Set url
         $invoice['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
             'module'        => $this->getModule(),

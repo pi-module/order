@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-03-22 13:42+0330\n"
+"POT-Creation-Date: 2015-03-22 19:34+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -15,6 +15,10 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/order\n"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Api.php:36
+msgid "Toman"
+msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:36
 msgid "One time"
@@ -37,8 +41,8 @@ msgstr ""
 msgid "Not canceled"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:102
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:161
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:101
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:160
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:44
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:75
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:43
@@ -46,50 +50,50 @@ msgstr ""
 msgid "Not processed"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:107
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:106
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:45
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:44
 msgid "Orders validated"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:112
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:111
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:46
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:45
 msgid "Orders pending"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:117
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:116
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:47
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:46
 msgid "Orders failed"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:122
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:121
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:48
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:47
 msgid "Orders cancelled"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:127
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:126
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:49
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:48
 msgid "Fraudulent orders"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:132
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:131
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:50
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:49
 msgid "Orders finished"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:144
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:143
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:67
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:62
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:43
 msgid "UnPaid"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:149
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:148
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:66
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:63
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:44
@@ -104,50 +108,50 @@ msgstr ""
 msgid "Paid"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:166
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:165
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:76
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:44
 msgid "Packed"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:171
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:170
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:77
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:45
 msgid "Posted"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:176
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:175
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:78
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:46
 msgid "Delivered"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:181
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:180
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:79
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:47
 msgid "Back eaten"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:207
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:195
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:273
 msgid "Not Paid"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:209
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:197
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:318
 msgid "Not Delivery"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:211
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:199
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:225
 msgid "Not Finish"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:213
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:201
 msgid "Not Start"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:215
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:203
 msgid "Not End"
 msgstr ""
 

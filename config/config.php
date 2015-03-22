@@ -22,6 +22,10 @@ return array(
             'name'   => 'order'
         ),
         array(
+            'title'  => _a('Price'),
+            'name'   => 'price'
+        ),
+        array(
             'title'  => _a('Payment'),
             'name'   => 'payment'
         ),
@@ -210,6 +214,15 @@ return array(
             'edit'         => 'checkbox',
             'filter'       => 'number_int',
             'value'        => 1
+        ),
+        // Price
+        'price_custom' => array(
+            'category'     => 'price',
+            'title'        => _a('Use custom price'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 0
         ),
         // Payment
         'payment_gateway_error_url' => array(

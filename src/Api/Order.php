@@ -23,7 +23,6 @@ use Zend\Math\Rand;
  * Pi::api('order', 'order')->getOrderFromUser($uid, $compressed);
  * Pi::api('order', 'order')->checkoutConfig();
  * Pi::api('order', 'order')->generatCode();
- * Pi::api('order', 'order')->viewPrice($price);
  * Pi::api('order', 'order')->orderStatus($status);
  * Pi::api('order', 'order')->paymentStatus($status);
  * Pi::api('order', 'order')->deliveryStatus($status);
@@ -184,17 +183,6 @@ class Order extends AbstractApi
         return $return;
     }
 
-    public function viewPrice($price)
-    {
-        if ($price > 0) {
-            $viewPrice = _currency($price);
-        } else {
-            $viewPrice = 0;
-        }
-        return $viewPrice;
-
-    }
-
     public function canonizeOrder($order)
     {
         // Get config
@@ -214,17 +202,17 @@ class Order extends AbstractApi
         // Set time_finish_view
         $order['time_end_view'] = ($order['time_end']) ? _date($order['time_end']) : __('Not End');
         // Set product_price_view
-        $order['product_price_view'] = $this->viewPrice($order['product_price']);
+        $order['product_price_view'] = Pi::api('api', 'order')->viewPrice($order['product_price']);
         // Set discount_price_view
-        $order['discount_price_view'] = $this->viewPrice($order['discount_price']);
+        $order['discount_price_view'] = Pi::api('api', 'order')->viewPrice($order['discount_price']);
         // Set shipping_price_view
-        $order['shipping_price_view'] = $this->viewPrice($order['shipping_price']);
+        $order['shipping_price_view'] = Pi::api('api', 'order')->viewPrice($order['shipping_price']);
         // Set packing_price_view
-        $order['packing_price_view'] = $this->viewPrice($order['packing_price']);
+        $order['packing_price_view'] = Pi::api('api', 'order')->viewPrice($order['packing_price']);
         // Set total_price_view
-        $order['total_price_view'] = $this->viewPrice($order['total_price']);
+        $order['total_price_view'] = Pi::api('api', 'order')->viewPrice($order['total_price']);
         // Set paid_price_view
-        $order['paid_price_view'] = $this->viewPrice($order['paid_price']);
+        $order['paid_price_view'] = Pi::api('api', 'order')->viewPrice($order['paid_price']);
         // Set user
         $order['user'] = Pi::api('user', 'order')->getUserInformation($order['uid']);
         // Set url_update_order

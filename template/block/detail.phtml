@@ -81,7 +81,7 @@
 					<div class="clearfix">
 						<div class="col-md-6">
 							<?php if (!empty($block['resources']['credit'])) { ?>
-							<p><strong><?php echo _b('Credit'); ?></strong> : <span class="label label-success"><?php echo _currency($this->escape($block['resources']['credit'])); ?></span></p>
+							<p><strong><?php echo _b('Credit'); ?></strong> : <span class="label label-success"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($block['resources']['credit'])); ?></span></p>
 							<?php } ?>
 							<?php if (!empty($block['resources']['first_name']) && !empty($block['resources']['last_name'])) { ?>
 							<p><strong><?php echo _b('Name'); ?></strong> : <span><?php echo $this->escape($block['resources']['first_name']); ?> <?php echo $this->escape($block['resources']['last_name']); ?></span></p>

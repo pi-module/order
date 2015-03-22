@@ -101,7 +101,7 @@ class Installment extends AbstractApi
         // Set prepayment invoices
         $invoices = array();
         $invoices[0] = array(
-            'price'    => $prepaymentPrice,
+            'price'    => Pi::api('api', 'order')->makePrice($prepaymentPrice),
             'duedate'  => time(),
             'b'        => date('Y-m-d'),
         );
@@ -109,7 +109,7 @@ class Installment extends AbstractApi
         // Set all other invoices
         for ($i=1; $i <= $planList['total']; $i++) {
             $invoices[$i] = array(
-                'price'    => $installmentPrice,
+                'price'    => Pi::api('api', 'order')->makePrice($installmentPrice),
                 'duedate'  => strtotime(sprintf('+%s month', $i)),
                 'b'        => date('Y-m-d', strtotime(sprintf('+%s month', $i))),
             );

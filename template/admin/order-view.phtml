@@ -142,12 +142,12 @@
                     <?php echo $this->escape($product['details']['title']); ?>
                     </a>
                 </td>
-                <td><?php echo _currency($this->escape($product['number'])); ?></td>
-                <td><?php echo _currency($this->escape($product['product_price'])); ?></td>
-                <td><?php echo _currency($this->escape($product['shipping_price'])); ?></td>
-                <td><?php echo _currency($this->escape($product['packing_price'])); ?></td>
-                <td><?php echo _currency($this->escape($product['vat_price'])); ?></td>
-                <td><?php echo _currency($this->escape($product['total_price'])); ?></td>
+                <td><?php echo _number($this->escape($product['number'])); ?></td>
+                <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?></td>
+                <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['shipping_price'])); ?></td>
+                <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['packing_price'])); ?></td>
+                <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['vat_price'])); ?></td>
+                <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['total_price'])); ?></td>
             </tr>
             <?php } ?>
         </table>
