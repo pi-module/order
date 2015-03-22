@@ -102,16 +102,14 @@ class Installment extends AbstractApi
         $invoices = array();
         $invoices[0] = array(
             'price'    => Pi::api('api', 'order')->makePrice($prepaymentPrice),
-            'duedate'  => time(),
-            'b'        => date('Y-m-d'),
+            'duedate'  => $this->makeTime(),
         );
         $total = $prepaymentPrice;
         // Set all other invoices
         for ($i=1; $i <= $planList['total']; $i++) {
             $invoices[$i] = array(
                 'price'    => Pi::api('api', 'order')->makePrice($installmentPrice),
-                'duedate'  => strtotime(sprintf('+%s month', $i)),
-                'b'        => date('Y-m-d', strtotime(sprintf('+%s month', $i))),
+                'duedate'  => $this->makeTime($i),
             );
             $total = $total + $installmentPrice;
         }
@@ -141,5 +139,45 @@ class Installment extends AbstractApi
     		);
     	}
     	return $list;
+    }
+
+    public function makeTime($i = 0)
+    {
+        switch (Pi::config('date_calendar')) {
+            // Set for Iran time
+            case 'persian':
+                require_once Pi::path('module') . '/order/src/Api/pdate.php';
+                // Set day
+                if (in_array(pdate('d'), array('01','02','03','04','05','06','07','08','09','10'))) {
+                    $day = 10;
+                } elseif (in_array(pdate('d'), array('11','12','13','14','15','16','17','18','19','20'))) {
+                    $day = 20;
+                } elseif (in_array(pdate('d'), array('21','22','23','24','25','26','27','28','29','30','31'))) {
+                    if (pdate('m') == 12) {
+                        $day = 29;
+                    } else {
+                        $day = 30;
+                    }
+                }
+                // make time
+                $month = pdate('m') + $i;
+                $year = pdate('Y');
+                if ($month > 12) {
+                    $month = $month - 12;
+                    $year = $year + 1;
+                }
+                $time = pmktime(0, 0, 0, $month, $day, $year);
+                break;
+                
+            default:
+                if ($i > 0) {
+                    $time = strtotime(sprintf('+%s month', $i)),
+                } else {
+                    $time = time(),
+                }
+                break;
+        }
+
+        return $time;
     }
 }
