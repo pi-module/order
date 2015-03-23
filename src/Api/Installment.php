@@ -102,7 +102,7 @@ class Installment extends AbstractApi
         $invoices = array();
         $invoices[0] = array(
             'price'    => Pi::api('api', 'order')->makePrice($prepaymentPrice),
-            'duedate'  => $this->makeTime(),
+            'duedate'  => time(),
         );
         $total = $prepaymentPrice;
         // Set all other invoices
@@ -141,7 +141,7 @@ class Installment extends AbstractApi
     	return $list;
     }
 
-    public function makeTime($i = 0)
+    public function makeTime($i)
     {
         switch (Pi::config('date_calendar')) {
             // Set for Iran time
@@ -170,11 +170,7 @@ class Installment extends AbstractApi
                 break;
                 
             default:
-                if ($i > 0) {
-                    $time = strtotime(sprintf('+%s month', $i)),
-                } else {
-                    $time = time(),
-                }
+                $time = strtotime(sprintf('+%s month', $i));
                 break;
         }
 
