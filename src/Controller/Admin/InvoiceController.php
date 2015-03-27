@@ -68,7 +68,7 @@ class InvoiceController extends ActionController
         }
         // Set paginator
         $count = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
-        $select = $this->getModel('invoice')->select()->columns($count);
+        $select = $this->getModel('invoice')->select()->where($where)->columns($count);
         $count = $this->getModel('invoice')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
