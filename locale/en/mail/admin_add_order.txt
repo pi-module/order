@@ -1,0 +1,16 @@
+[comment]Add order to admin[/comment]
+
+[format]html[/format]
+
+[subject]Add new order[/subject]
+
+[body]
+<div style="padding: 1px; direction: ltr;">
+	<h3 style="font-size: 1.1em;">Dear %site_name% admin</h3>
+	<div style="padding: 3px; margin: 2px;">New order added on website, please visit website admin to see details</div>
+	<div style="padding: 3px; margin: 2px;">Dont reply to this email</div>
+	<div style="margin-top: 10px">
+        <a href="%site_url%" title="%site_name%">%site_name%</a>
+    </divp>
+</div>
+[/body]

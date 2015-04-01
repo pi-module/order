@@ -1,0 +1,19 @@
+[comment]Add order to user[/comment]
+
+[format]html[/format]
+
+[subject]Your order[/subject]
+
+[body]
+<div style="padding: 1px; direction: ltr;">
+	<h3 style="font-size: 1.1em;">Dear %first_name% %last_name%</h3>
+	<div style="padding: 3px; margin: 2px;">Your new order by <strong>%order_id%</strong> ID added on system. please click on this link to see details</div>
+	<div style="padding: 3px; margin: 2px;">
+        <a href="%order_link%" title="Order details">%order_link%</a>
+	</div>
+	<div style="padding: 3px; margin: 2px;">Dont reply to this email</div>
+	<div style="margin-top: 10px">
+        <a href="%site_url%" title="%site_name%">%site_name%</a>
+    </divp>
+</div>
+[/body]

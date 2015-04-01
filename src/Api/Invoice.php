@@ -259,6 +259,8 @@ class Invoice extends AbstractApi
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+        // Get user
+        $user = Pi::api('user', 'order')->getUserInformation();
         // Get invoice
         $invoice = Pi::model('invoice', $this->getModule())->find($randomId, 'random_id');
         $order = Pi::api('order', 'order')->getOrder($invoice['order']);
@@ -268,15 +270,14 @@ class Invoice extends AbstractApi
         $invoice->save();
         // Update user credit
         if ($config['installment_credit'] && $order['type'] == 'installment') {
-            // Get user
             $uid = Pi::user()->getId();
-            $user = Pi::api('user', 'order')->getUserInformation();
-            // Update credit
             $credit = $user['credit'] + $invoice->credit_price;
             Pi::model('profile', 'user')->update(array('credit' => $credit), array('uid' => $uid));
         }
         // Canonize invoice
         $invoice = $this->canonizeInvoice($invoice);
+        // Send notification
+        Pi::api('notification', 'order')->payInvoice($user, $invoice);
         return $invoice;
     }
 

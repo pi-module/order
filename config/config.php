@@ -30,6 +30,10 @@ return array(
             'name'   => 'payment'
         ),
         array(
+            'title'  => _a('Sms'),
+            'name'   => 'sms'
+        ),
+        array(
             'title'  => _a('Installment'),
             'name'   => 'installment'
         ),
@@ -239,6 +243,39 @@ return array(
             'edit'         => 'checkbox',
             'filter'       => 'number_int',
             'value'        => 1
+        ),
+        // Sms
+        'sms_order_user' => array(
+            'category'     => 'sms',
+            'title'        => _a('New order notification to user'),
+            'description'  => _a('Dear %s %s, Your order added on system'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Dear %s %s, Your order added on system'),
+        ),
+        'sms_order_admin' => array(
+            'category'     => 'sms',
+            'title'        => _a('New order notification to admin'),
+            'description'  => _a('Dear admin, New order added on system'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Dear admin, New order added on system'),
+        ),
+        'sms_invoice_user' => array(
+            'category'     => 'sms',
+            'title'        => _a('Pay invoice notification to user'),
+            'description'  => _a('Dear %s %s, Your invoice paid successfully'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Dear %s %s, Your invoice paid successfully'),
+        ),
+        'sms_invoice_admin' => array(
+            'category'     => 'sms',
+            'title'        => _a('Pay invoice notification to admin'),
+            'description'  => _a('Dear admin, Your customer paid invoice successfully'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Dear admin, Your customer paid invoice successfully'),
         ),
         // Installment
         'installment_credit' => array(

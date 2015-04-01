@@ -177,6 +177,8 @@ class CheckoutController extends IndexController
                         $basket->save();
                     }
                 }
+                // Send notification
+                Pi::api('notification', 'order')->addOrder($user, $order->toArray());
                 // Set invoice
                 $result = Pi::api('invoice', 'order')->createInvoice($order->id);
                 // unset order
