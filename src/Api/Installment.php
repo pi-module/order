@@ -105,7 +105,10 @@ class Installment extends AbstractApi
             $installmentPrice = $step3;
         }
         // Set credit
-        $credit = $remainingPrice / $planList['total'];
+        $credit = 0;
+        if ($remainingPrice > 0) {
+            $credit = $remainingPrice / $planList['total'];
+        }
         // Set prepayment invoices
         $invoices = array();
         $invoices[0] = array(
