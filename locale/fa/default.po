@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-03-22 19:35+0330\n"
+"POT-Creation-Date: 2015-04-01 12:28+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.3\n"
+"X-Generator: Poedit 1.7.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
@@ -27,16 +27,20 @@ msgstr "خرید نقدی"
 msgid "Please login for create invoice"
 msgstr "لطفا برای ایجاد فاکتور به سایت وارد شوید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:98
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:159
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:100
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:173
 msgid "Your invoice create successfully"
 msgstr "فاکتور شما با موفقیت ایجاد شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:263
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:194
+msgid "Not allowed to create invoice by this user credit"
+msgstr "با توجه به میزان اعتبار کاربر امکان ایجاد فاکتور وجود ندارد"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:296
 msgid "Not pay"
 msgstr "پرداخت نشده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:264
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:297
 msgid "Not canceled"
 msgstr "لغو نشده"
 
@@ -216,23 +220,23 @@ msgid "Update delivery"
 msgstr "به روز رسانی تحویل"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:33
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:207
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:212
 msgid "Your cart is empty."
 msgstr "سبد خرید شما خالی است"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:212
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:217
 msgid "So sorry, At this moment order is inactive"
 msgstr "متاسفانه در این لحظه امکان ثبت سفارش وجود ندارد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:223
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:228
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 "پلن قسطی سفارش شما با موفقت ذخیره شد، لطفا اطلاعات مورد نیاز را تکمیل "
 "فرمایید و بعد از آن پیش قسط مربوط به این سفارش را پرداخت نمایید."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:335
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:344
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/Element/Gateway.php:28
 msgid "Offline"
 msgstr "آفلاین"
@@ -1287,7 +1291,7 @@ msgstr "هزینه ارسال"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:122
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:135
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:91
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:104
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:109
 msgid "Total"
 msgstr "مجموع"
 
@@ -1303,7 +1307,7 @@ msgstr "محصول"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:130
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:86
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:91
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:96
 msgid "Number"
 msgstr "تعداد"
 
@@ -1371,64 +1375,68 @@ msgstr "خطا در پردازش مراحل سفارش، لطفا با مدیر 
 msgid "Installment plans"
 msgstr "روش های خرید قسطی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:92
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:91
+msgid "Your credit"
+msgstr "اعتبار شما"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:97
 msgid "Select"
 msgstr "انتخاب"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:93
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:98
 msgid "Per Payment"
 msgstr "پیش قسط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:94
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:99
 msgid "1 months"
 msgstr "۱ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:95
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:100
 msgid "2 months"
 msgstr "۲ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:96
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:101
 msgid "3 months"
 msgstr "۳ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:97
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:102
 msgid "4 months"
 msgstr "۴ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:103
 msgid "5 months"
 msgstr "۵ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:99
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:104
 msgid "6 months"
 msgstr "۶ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:100
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:105
 msgid "7 months"
 msgstr "۷ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:101
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:106
 msgid "8 months"
 msgstr "۸ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:102
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:107
 msgid "9 months"
 msgstr "۹ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:103
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:108
 msgid "10 months"
 msgstr "۱۰ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:105
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:133
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:110
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:144
 msgid "Buy"
 msgstr "خرید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:111
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:121
 msgid "Cash purchase"
 msgstr "خرید نقدی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:113
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:123
 #, php-format
 msgid "%s months"
 msgstr "%s ماه"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-03-22 19:34+0330\n"
+"POT-Creation-Date: 2015-04-01 12:29+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.3\n"
+"X-Generator: Poedit 1.7.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
@@ -28,16 +28,20 @@ msgstr ""
 msgid "Please login for create invoice"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:98
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:159
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:100
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:173
 msgid "Your invoice create successfully"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:263
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:194
+msgid "Not allowed to create invoice by this user credit"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:296
 msgid "Not pay"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:264
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:297
 msgid "Not canceled"
 msgstr ""
 
@@ -217,21 +221,21 @@ msgid "Update delivery"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:33
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:207
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:212
 msgid "Your cart is empty."
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:212
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:217
 msgid "So sorry, At this moment order is inactive"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:223
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:228
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:335
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:344
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/Element/Gateway.php:28
 msgid "Offline"
 msgstr ""
@@ -1278,7 +1282,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:122
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:135
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:91
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:104
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:109
 msgid "Total"
 msgstr ""
 
@@ -1294,7 +1298,7 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:130
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:86
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:91
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:96
 msgid "Number"
 msgstr ""
 
@@ -1362,64 +1366,68 @@ msgstr ""
 msgid "Installment plans"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:92
-msgid "Select"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:93
-msgid "Per Payment"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:94
-msgid "1 months"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:95
-msgid "2 months"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:96
-msgid "3 months"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:91
+msgid "Your credit"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:97
-msgid "4 months"
+msgid "Select"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:98
-msgid "5 months"
+msgid "Per Payment"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:99
-msgid "6 months"
+msgid "1 months"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:100
-msgid "7 months"
+msgid "2 months"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:101
-msgid "8 months"
+msgid "3 months"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:102
-msgid "9 months"
+msgid "4 months"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:103
-msgid "10 months"
+msgid "5 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:104
+msgid "6 months"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:105
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:133
+msgid "7 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:106
+msgid "8 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:107
+msgid "9 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:108
+msgid "10 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:110
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:144
 msgid "Buy"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:111
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:121
 msgid "Cash purchase"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:113
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:123
 #, php-format
 msgid "%s months"
 msgstr ""
