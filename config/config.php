@@ -241,6 +241,14 @@ return array(
             'value'        => 1
         ),
         // Installment
+        'installment_credit' => array(
+            'category'     => 'installment',
+            'title'        => _a('Reduce from user credit'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 1
+        ),
         'plan_1_title' => array(
             'category'     => 'installment',
             'title'        => _a('Plan 1 : Title'),

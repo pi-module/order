@@ -43,11 +43,31 @@ class Update extends BasicUpdate
         $orderTable     = $orderModel->getTable();
         $orderAdapter   = $orderModel->getAdapter();
 
+        // Set invoice model
+        $invoiceModel     = Pi::model('invoice', $this->module);
+        $invoiceTable     = $invoiceModel->getTable();
+        $invoiceAdapter   = $invoiceModel->getAdapter();
+
         if (version_compare($moduleVersion, '1.3.6', '<')) {
             // Alter table field add id_number
             $sql = sprintf("ALTER TABLE %s ADD `id_number` varchar(255) NOT NULL default ''", $orderTable);
             try {
                 $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
+        if (version_compare($moduleVersion, '1.4.1', '<')) {
+            // Alter table field add credit_price
+            $sql = sprintf("ALTER TABLE %s ADD `credit_price` decimal(16,8) NOT NULL default '0.00000000'", $invoiceTable);
+            try {
+                $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
                     'status'    => false,

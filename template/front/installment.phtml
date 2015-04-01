@@ -86,6 +86,11 @@ EOT;
 ?>
 <div id="js-installment" class="clearfix">
     <h1><?php _e('Installment plans'); ?></h1>
+    <?php if ($config['installment_credit']) { ?>
+    <div class="well">
+        <span><?php _e('Your credit'); ?></span> : <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($user['credit'])); ?></strong>
+    </div>
+    <?php } ?>
 	<table class="table table-striped table-bordered table-condensed small">
 		<tr>
 			<th class="text-center"><?php _e('Number'); ?></th>
@@ -105,7 +110,12 @@ EOT;
 			<th class="text-center"><?php _e('Buy'); ?></th>
 		</tr>
 		<?php foreach($installments as $key => $installment) { ?>
-		<tr>
+        <?php if ($installment['invoices']['total']['allowed']) {
+            $trClass = '';
+        } else {
+            $trClass = ' class="danger"';
+        } ?>
+		<tr<?php echo $trClass; ?>>
 			<td class="text-center">
 				<?php if ($installment['total'] == 0) { ?>
                 <?php _e('Cash purchase'); ?>
@@ -128,10 +138,12 @@ EOT;
 			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices']['total']['price']), true); ?></span></td>
 			<td class="text-center">
 				<span class="hidden check<?php echo $key;?>">
+                    <?php if ($installment['invoices']['total']['allowed']) { ?>
 					<form action="" method="POST" name="product" class="form-inline">
 						<input name="plan" type="hidden" value="<?php echo $this->escape($installment['id']); ?>">
 						<button type="submit" class="btn btn-success btn-xs"><?php _e('Buy'); ?></button>
 					</form>
+                    <?php } ?>
 				</span>
 			</td>
 		</tr>

@@ -182,7 +182,12 @@ class CheckoutController extends IndexController
                 // unset order
                 Pi::api('order', 'order')->unsetOrderInfo();
                 // Go to payment
-                $this->jump($result['invoice_url'], $result['message'], 'success');
+                if ($result['status'] == 0) {
+                    $url = array('', 'controller' => 'index', 'action' => 'index');
+                    $this->jump($url, $result['message'], 'error');
+                } else {
+                    $this->jump($result['invoice_url'], $result['message'], 'success');
+                }
             }   
         } else {
             $user = Pi::api('user', 'order')->getUserInformation();
@@ -223,6 +228,8 @@ class CheckoutController extends IndexController
             $this->jump($url, __('Your installment plan save, please complete your information and payment.'));
 
         } else {
+            // Set user
+            $user = Pi::api('user', 'order')->getUserInformation();
             // Set price
             $price = array();
             $price['product_price'] = 0;
@@ -246,12 +253,14 @@ class CheckoutController extends IndexController
                 }
             }
             // Set installment
-            $installments = Pi::api('installment', 'order')->setPriceForView($price['total_price']);
-                // Set view
+            $installments = Pi::api('installment', 'order')->setPriceForView($price['total_price'], $user);
+            // Set view
             $this->view()->setTemplate('installment');
             $this->view()->assign('cart', $cart);
             $this->view()->assign('price', $price);
             $this->view()->assign('installments', $installments);
+            $this->view()->assign('user', $user);
+            $this->view()->assign('config', $config);
         }
     }
 

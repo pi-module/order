@@ -89,6 +89,7 @@ CREATE TABLE `{invoice}` (
     `vat_price` decimal(16,2) NOT NULL default '0.00',
     `total_price` decimal(16,2) NOT NULL default '0.00',
     `paid_price` decimal(16,2) NOT NULL default '0.00',
+    `credit_price` decimal(16,8) NOT NULL default '0.00000000',
     `gateway` varchar(64) NOT NULL default 'offline',
     `status` tinyint(1) unsigned NOT NULL default '0',
     `time_create` int(10) unsigned NOT NULL default '0',

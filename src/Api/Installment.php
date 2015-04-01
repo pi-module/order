@@ -18,8 +18,8 @@ use Pi\Application\Api\AbstractApi;
 
 /*
  * Pi::api('installment', 'order')->planList();
- * Pi::api('installment', 'order')->setPriceForInvoice($price, $plan);
- * Pi::api('installment', 'order')->setPriceForView($price);
+ * Pi::api('installment', 'order')->setPriceForInvoice($price, $plan, $user);
+ * Pi::api('installment', 'order')->setPriceForView($price, $user);
  */
 
 class Installment extends AbstractApi
@@ -81,9 +81,15 @@ class Installment extends AbstractApi
     	return $list;
     }
 
-    public function setPriceForInvoice($price, $plan)
+    public function setPriceForInvoice($price, $plan, $user = array())
     {
-    	// Get plan
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Get user
+        if (empty($user) && $config['installment_credit']) {
+            $user = Pi::api('user', 'order')->getUserInformation();
+        }
+        // Get plan
     	$planList = $this->planList();
     	$planList = $planList[$plan];
         // Set price
@@ -98,31 +104,47 @@ class Installment extends AbstractApi
         } else {
             $installmentPrice = $step3;
         }
+        // Set credit
+        $credit = $remainingPrice / $planList['total'];
         // Set prepayment invoices
         $invoices = array();
         $invoices[0] = array(
-            'price'    => Pi::api('api', 'order')->makePrice($prepaymentPrice),
-            'duedate'  => time(),
+            'price'   => Pi::api('api', 'order')->makePrice($prepaymentPrice),
+            'duedate' => time(),
+            'credit'  => 0,
         );
         $total = $prepaymentPrice;
         // Set all other invoices
         for ($i=1; $i <= $planList['total']; $i++) {
+            // Set price
+            $price = Pi::api('api', 'order')->makePrice($installmentPrice);
+            // Set array
             $invoices[$i] = array(
-                'price'    => Pi::api('api', 'order')->makePrice($installmentPrice),
-                'duedate'  => $this->makeTime($i),
+                'price'   => $price,
+                'duedate' => $this->makeTime($i),
+                'credit'  => $credit,
             );
+            // Set total
             $total = $total + $installmentPrice;
+        }
+        // Check allow
+        $allowed = 1;
+        if ($config['installment_credit']) {
+            if ($remainingPrice > $user['credit']) {
+                $allowed = 0;
+            }
         }
         // Set total
         $invoices['total'] = array(
-            'price'    => $total,
-            'duedate'  => '',
-            'b'        => '',
+            'price'        => $total,
+            'duedate'      => '',
+            'allowed'      => $allowed,
+            'installment'  => $remainingPrice,
         );
         return $invoices;
     }
 
-    public function setPriceForView($price)
+    public function setPriceForView($price, $user = array())
     {
     	// Get plan
     	$plans = $this->planList();
@@ -135,7 +157,7 @@ class Installment extends AbstractApi
         		'prepayment'  => $plan['prepayment'],
         		'profit'      => $plan['profit'],
         		'total'       => $plan['total'],
-        		'invoices'    => $this->setPriceForInvoice($price, $plan['id']),
+        		'invoices'    => $this->setPriceForInvoice($price, $plan['id'], $user),
     		);
     	}
     	return $list;
