@@ -2,7 +2,7 @@
 
 [format]html[/format]
 
-[subject]Your order[/subject]
+[subject]سفارش شما[/subject]
 
 [body]
 <div style="padding: 1px; direction: ltr;">

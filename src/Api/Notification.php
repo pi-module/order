@@ -61,7 +61,7 @@ class Notification extends AbstractApi
 
         // Send mail to user
         $toUser = array(
-        	$user['email'] => sprintf('%s %s', $user['first_name'], $user['last_name']);
+        	$user['email'] => sprintf('%s %s', $user['first_name'], $user['last_name']),
         );
         Pi::api('mail', 'notification')->send($toUser, 'user_add_order', $information, Pi::service('module')->current());
 
@@ -69,7 +69,7 @@ class Notification extends AbstractApi
         Pi::api('sms', 'notification')->sendToAdmin($config['sms_order_admin']);
 
         // Send sms to user
-        $content = sprintf($config['sms_order_user'], $user['first_name'], $user['last_name'])
+        $content = sprintf($config['sms_order_user'], $user['first_name'], $user['last_name']);
         Pi::api('sms', 'notification')->send($content, $user['mobile']);
     }
 
@@ -111,7 +111,7 @@ class Notification extends AbstractApi
 
         // Send mail to user
         $toUser = array(
-        	$user['email'] => sprintf('%s %s', $user['first_name'], $user['last_name']);
+        	$user['email'] => sprintf('%s %s', $user['first_name'], $user['last_name']),
         );
         Pi::api('mail', 'notification')->send($toUser, 'user_pay_invoice', $information, Pi::service('module')->current());
 
@@ -119,7 +119,7 @@ class Notification extends AbstractApi
         Pi::api('sms', 'notification')->sendToAdmin($config['sms_invoice_admin']);
 
         // Send sms to user
-        $content = sprintf($config['sms_invoice_user'], $user['first_name'], $user['last_name'])
+        $content = sprintf($config['sms_invoice_user'], $user['first_name'], $user['last_name']);
         Pi::api('sms', 'notification')->send($content, $user['mobile']);
     }
 }
