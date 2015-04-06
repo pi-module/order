@@ -89,28 +89,12 @@ class Order extends Standard
                     break;
 
                 case 'payment':
-                    switch ($parts[0]) {
-                        case 'result':
-                            $matches['action'] = 'result';
-                            break;
-
-                        case 'notify':
-                            $matches['action'] = 'notify';
-                            break;
-                        
-                        case 'cancel':
-                            $matches['action'] = 'cancel';
-                            break;
-
-                        case 'finish':
-                            $matches['action'] = 'finish';
-                            break;
-
-                        case 'index':
-                        default:
-                            $matches['action'] = 'index';
-                            $matches['id'] = $this->decode($parts[1]);
-                            break;
+                    $actionList = array('result', 'notify', 'cancel', 'finish', 'index');
+                    if (in_array($parts[1], $actionList)) {
+                        $matches['action'] = $this->decode($parts[1]);
+                    } elseif (is_numeric($parts[1])) {
+                        $matches['action'] = 'index';
+                        $matches['id'] = intval($parts[1]);
                     }
                     break;  
             }    

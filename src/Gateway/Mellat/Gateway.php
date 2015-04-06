@@ -103,7 +103,7 @@ class Gateway extends AbstractGateway
         $parameters['userName'] = $this->gatewayOption['username'];
         $parameters['userPassword'] = $this->gatewayOption['password'];
         $parameters['orderId'] = $this->gatewayInvoice['random_id'];
-        $parameters['total_price'] = intval($this->gatewayInvoice['total_price']);
+        $parameters['amount'] = intval($this->gatewayInvoice['total_price']);
         $parameters['localDate'] = date('Ymd'); 
         $parameters['localTime'] = date('His');
         $parameters['additionalData'] = isset($this->gatewayOption['additionalData']) ? $this->gatewayOption['additionalData'] : '';
@@ -122,7 +122,7 @@ class Gateway extends AbstractGateway
             $log['authority'] = $result[0];
             $log['value'] = Json::encode($this->gatewayInvoice);
             $log['invoice'] = $this->gatewayInvoice['id'];
-            $log['total_price'] = intval($this->gatewayInvoice['total_price']);
+            $log['amount'] = intval($this->gatewayInvoice['total_price']);
             $log['status'] = 0;
             $log['message'] = $this->gatewayError;
             Pi::api('log', 'order')->setLog($log);
