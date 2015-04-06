@@ -50,8 +50,8 @@ class Invoice extends AbstractApi
             $result['pay_url'] = '';
             $result['message'] = __('Please login for create invoice');
         } else {
-            // Check order type
-            switch ($order['type']) {
+            // Check type_payment
+            switch ($order['type_payment']) {
                 case 'free':
                     // Set invoice
                     $row = Pi::model('invoice', $this->getModule())->createRow();
@@ -259,8 +259,6 @@ class Invoice extends AbstractApi
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
-        // Get user
-        $user = Pi::api('user', 'order')->getUserInformation();
         // Get invoice
         $invoice = Pi::model('invoice', $this->getModule())->find($randomId, 'random_id');
         $order = Pi::api('order', 'order')->getOrder($invoice['order']);
@@ -269,15 +267,18 @@ class Invoice extends AbstractApi
         $invoice->time_payment = time();
         $invoice->save();
         // Update user credit
-        if ($config['installment_credit'] && $order['type'] == 'installment') {
+        if ($config['installment_credit'] && $order['type_payment'] == 'installment') {
+            // Get user
+            $user = Pi::api('user', 'order')->getUserInformation();
             $uid = Pi::user()->getId();
+            // Update
             $credit = $user['credit'] + $invoice->credit_price;
             Pi::model('profile', 'user')->update(array('credit' => $credit), array('uid' => $uid));
         }
         // Canonize invoice
         $invoice = $this->canonizeInvoice($invoice);
         // Send notification
-        Pi::api('notification', 'order')->payInvoice($user, $invoice);
+        Pi::api('notification', 'order')->payInvoice($order, $invoice);
         return $invoice;
     }
 

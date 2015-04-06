@@ -139,6 +139,14 @@ return array(
             'filter'       => 'number_int',
             'value'        => 1
         ),
+        'order_company_extra' => array(
+            'category'     => 'order',
+            'title'        => _a('Show company extra'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 1
+        ),
         'order_address' => array(
             'category'     => 'order',
             'title'        => _a('Show address'),
@@ -187,17 +195,9 @@ return array(
             'filter'       => 'number_int',
             'value'        => 1
         ),
-        'order_location' => array(
+        'order_location_delivery' => array(
             'category'     => 'order',
-            'title'        => _a('Show location'),
-            'description'  => '',
-            'edit'         => 'checkbox',
-            'filter'       => 'number_int',
-            'value'        => 1
-        ),
-        'order_delivery' => array(
-            'category'     => 'order',
-            'title'        => _a('Show delivery'),
+            'title'        => _a('Show location and delivery'),
             'description'  => '',
             'edit'         => 'checkbox',
             'filter'       => 'number_int',

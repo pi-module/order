@@ -77,6 +77,33 @@ class Update extends BasicUpdate
                 return false;
             }
         }
+
+        if (version_compare($moduleVersion, '1.4.3', '<')) {
+            // Alter table field change type_payment
+            $sql = sprintf("ALTER TABLE `p562_order_order` CHANGE `type` `type_payment` enum('free','onetime','recurring','installment') NOT NULL default 'onetime'", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+            // Alter table field add id_number
+            $sql = sprintf("ALTER TABLE %s ADD `type_commodity` enum('product','service') NOT NULL default 'product'", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
         
         return true;
     }

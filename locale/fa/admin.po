@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-04-01 14:58+0330\n"
+"POT-Creation-Date: 2015-04-06 14:17+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -117,36 +117,36 @@ msgid "Show company"
 msgstr "نمایش شرکت"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:144
+msgid "Show company extra"
+msgstr "نمایش اطلاعات اضافی شرکت"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:152
 msgid "Show address"
 msgstr "نمایش آدرس"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:152
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:160
 msgid "Show country"
 msgstr "نمایش کشور"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:160
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:168
 msgid "Show state"
 msgstr "نمایش استان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:168
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:176
 msgid "Show city"
 msgstr "نمایش شهر"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:176
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:184
 msgid "Show Zip code"
 msgstr "نمایش کد پستی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:184
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:192
 msgid "Show packing"
 msgstr "نمایش بسته بندی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:192
-msgid "Show location"
-msgstr "نمایش انتخاب مکان"
-
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:200
-msgid "Show delivery"
-msgstr "نمایش انتخاب روش ارسال"
+msgid "Show location and delivery"
+msgstr "نمایش مکان و روش تحویل"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:208
 msgid "Show gateway"
@@ -356,6 +356,12 @@ msgstr "روش ارسال"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:47
 msgid "Location"
 msgstr "مکان تحویل"
+
+#~ msgid "Show location"
+#~ msgstr "نمایش انتخاب مکان"
+
+#~ msgid "Show delivery"
+#~ msgstr "نمایش انتخاب روش ارسال"
 
 #~ msgid "Tag list"
 #~ msgstr "فهرست "

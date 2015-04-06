@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-04-01 14:58+0330\n"
+"POT-Creation-Date: 2015-04-06 14:18+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -220,23 +220,23 @@ msgid "Update delivery"
 msgstr "به روز رسانی تحویل"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:33
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:214
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:222
 msgid "Your cart is empty."
 msgstr "سبد خرید شما خالی است"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:219
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:227
 msgid "So sorry, At this moment order is inactive"
 msgstr "متاسفانه در این لحظه امکان ثبت سفارش وجود ندارد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:230
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:238
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 "پلن قسطی سفارش شما با موفقت ذخیره شد، لطفا اطلاعات مورد نیاز را تکمیل "
 "فرمایید و بعد از آن پیش قسط مربوط به این سفارش را پرداخت نمایید."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:346
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:354
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/Element/Gateway.php:28
 msgid "Offline"
 msgstr "آفلاین"
@@ -345,7 +345,9 @@ msgid "Private"
 msgstr "خصوصی"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:75
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:283
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:290
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:305
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:323
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:53
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:9
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:103
@@ -422,17 +424,17 @@ msgstr "قیمت"
 msgid "Time ( days )"
 msgstr "زمان ( روز )"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:44
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:45
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:153
 msgid "First name"
 msgstr "نام"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:56
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:57
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:164
 msgid "Last name"
 msgstr "نام خانوادگی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:70
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:71
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:142
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:42
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:19
@@ -442,7 +444,7 @@ msgstr "نام خانوادگی"
 msgid "ID number"
 msgstr "کد ملی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:84
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:85
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:109
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:63
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:40
@@ -452,7 +454,7 @@ msgstr "کد ملی"
 msgid "Email"
 msgstr "ایمیل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:99
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:66
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:43
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:35
@@ -461,7 +463,7 @@ msgstr "ایمیل"
 msgid "Phone"
 msgstr "تلفن"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:112
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:113
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:98
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:69
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:46
@@ -471,7 +473,7 @@ msgstr "تلفن"
 msgid "Mobile"
 msgstr "موبایل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:127
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:128
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:186
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:49
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:41
@@ -479,15 +481,15 @@ msgstr "موبایل"
 msgid "Company"
 msgstr "شرکت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:138
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:142
 msgid "Company id"
 msgstr "کد اقتصادی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:149
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:153
 msgid "Company vat"
 msgstr "کد مالیات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:162
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:166
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:45
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:22
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:14
@@ -496,7 +498,7 @@ msgstr "کد مالیات"
 msgid "Address 1"
 msgstr "آدرس"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:173
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:177
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:48
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:25
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:17
@@ -505,7 +507,7 @@ msgstr "آدرس"
 msgid "Address 2"
 msgstr "آدرس ۲"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:186
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:190
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:57
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:34
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:26
@@ -514,7 +516,7 @@ msgstr "آدرس ۲"
 msgid "Country"
 msgstr "کشور"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:200
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:204
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:54
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:31
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:23
@@ -523,7 +525,7 @@ msgstr "کشور"
 msgid "State"
 msgstr "استان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:214
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:218
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:120
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:51
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:28
@@ -533,7 +535,7 @@ msgstr "استان"
 msgid "City"
 msgstr "شهر"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:228
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:232
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:175
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:60
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:37
@@ -543,20 +545,7 @@ msgstr "شهر"
 msgid "Zip code"
 msgstr "کد پستی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:245
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:101
-msgid "Location"
-msgstr "مکان"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:263
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:72
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:107
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:102
-msgid "Delivery"
-msgstr "روش تحویل"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:299
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:247
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:112
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:121
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:133
@@ -564,7 +553,20 @@ msgstr "روش تحویل"
 msgid "Packing"
 msgstr "بسته بندی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:311
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:263
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:101
+msgid "Location"
+msgstr "مکان"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:276
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:72
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:41
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:107
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:102
+msgid "Delivery"
+msgstr "روش تحویل"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:339
 msgid "Next"
 msgstr "مرحله بعد"
 

@@ -37,11 +37,15 @@ class CheckoutController extends IndexController
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
             $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
         }
+        // Sety form option
+        $option = array(
+            'type_commodity' => $cart['type_commodity'],
+        );
         // Set order form
-        $form = new OrderForm('order');
+        $form = new OrderForm('order', $option);
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            $form->setInputFilter(new OrderFilter);
+            $form->setInputFilter(new OrderFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
@@ -115,9 +119,13 @@ class CheckoutController extends IndexController
                 if (!isset($values['company_vat']) || empty($values['company_vat'])) {
                     $values['company_vat'] = $user['company_vat'];
                 }
-                // Set type values
-                if (isset($cart['type']) && in_array($cart['type'], array('free','onetime','recurring','installment'))) {
-                    $values['type'] = $cart['type'];
+                // Set type_payment values
+                if (isset($cart['type_payment']) && in_array($cart['type_payment'], array('free','onetime','recurring','installment'))) {
+                    $values['type_payment'] = $cart['type_payment'];
+                }
+                // Set type_payment values
+                if (isset($cart['type_commodity']) && in_array($cart['type_commodity'], array('product','service'))) {
+                    $values['type_commodity'] = $cart['type_commodity'];
                 }
                 // Set plan values
                 if (isset($cart['plan']) && !empty($cart['plan'])) {
@@ -178,7 +186,7 @@ class CheckoutController extends IndexController
                     }
                 }
                 // Send notification
-                Pi::api('notification', 'order')->addOrder($user, $order->toArray());
+                Pi::api('notification', 'order')->addOrder($order->toArray());
                 // Set invoice
                 $result = Pi::api('invoice', 'order')->createInvoice($order->id);
                 // unset order

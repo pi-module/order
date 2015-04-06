@@ -20,15 +20,16 @@ class OrderForm  extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {
+        $this->option = $option;
         $this->config = Pi::service('registry')->config->read('order', 'order');
-        $this->checkout = Pi::api('order', 'order')->checkoutConfig();
+        //$this->checkout = Pi::api('order', 'order')->checkoutConfig();
         parent::__construct($name);
     }
 
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new OrderFilter;
+            $this->filter = new OrderFilter($this->option);
         }
         return $this->filter;
     }
@@ -131,6 +132,9 @@ class OrderForm  extends BaseForm
                     'description' => '',
                 )
             ));
+        }
+        // company extra
+        if ($this->config['order_company_extra']) {
             // company_id
             $this->add(array(
                 'name' => 'company_id',
@@ -234,62 +238,6 @@ class OrderForm  extends BaseForm
                 )
             ));
         }
-        // location
-        if ($this->config['order_location'] 
-            && $this->checkout['location']) 
-        {
-            $this->add(array(
-                'name' => 'location',
-                'type' => 'Module\Order\Form\Element\Location',
-                'options' => array(
-                    'label' => __('Location'),
-                    'parent' => 1,
-                ),
-                'attributes' => array(
-                    'id'    => 'select-location',
-                    'required' => true,
-                )
-            ));
-        }
-        // delivery
-        if ($this->config['order_delivery'] 
-            && $this->checkout['location'] 
-            && $this->checkout['delivery']) 
-        {
-            $this->add(array(
-                'name' => 'delivery',
-                'type' => 'select',
-                'options' => array(
-                    'label' => __('Delivery'),
-                    'value_options' => array(),
-                ),
-                'attributes' => array(
-                    'id'    => 'select-delivery',
-                    'size'  => 5,
-                    'required' => true,
-                )
-            ));
-        }
-        // gateway
-        if ($this->config['order_gateway'] 
-            && $this->checkout['location'] 
-            && $this->checkout['delivery'] 
-            && $this->checkout['gateway']) 
-        {
-            $this->add(array(
-                'name' => 'gateway',
-                'type' => 'select',
-                'options' => array(
-                    'label' => __('Adapter'),
-                    'value_options' => array(),
-                ),
-                'attributes' => array(
-                    'id'    => 'select-payment',
-                    'size'  => 5,
-                    'required' => true,
-                )
-            ));
-        }
         // packing
         if ($this->config['order_packing']) {
             $this->add(array(
@@ -302,6 +250,86 @@ class OrderForm  extends BaseForm
                     'description' => '',
                 )
             ));
+        }
+        // Check type_commodity
+        switch ($this->option['type_commodity']) {
+            case 'product':
+                if ($this->config['order_location_delivery']) {
+                    // location
+                    $this->add(array(
+                        'name' => 'location',
+                        'type' => 'Module\Order\Form\Element\Location',
+                        'options' => array(
+                            'label' => __('Location'),
+                            'parent' => 1,
+                        ),
+                        'attributes' => array(
+                            'id'    => 'select-location',
+                            'required' => true,
+                        )
+                    ));
+                    // delivery
+                    $this->add(array(
+                        'name' => 'delivery',
+                        'type' => 'select',
+                        'options' => array(
+                            'label' => __('Delivery'),
+                            'value_options' => array(),
+                        ),
+                        'attributes' => array(
+                            'id'    => 'select-delivery',
+                            'size'  => 5,
+                            'required' => true,
+                        )
+                    ));
+                    // gateway
+                    $this->add(array(
+                        'name' => 'gateway',
+                        'type' => 'select',
+                        'options' => array(
+                            'label' => __('Adapter'),
+                            'value_options' => array(),
+                        ),
+                        'attributes' => array(
+                            'id'    => 'select-payment',
+                            'size'  => 5,
+                            'required' => true,
+                        )
+                    ));
+                } else {
+                    // gateway
+                    $this->add(array(
+                        'name' => 'gateway',
+                        'type' => 'Module\Order\Form\Element\Gateway',
+                        'options' => array(
+                            'label' => __('Adapter'),
+                            'value_options' => array(),
+                        ),
+                        'attributes' => array(
+                            'id'    => 'select-payment',
+                            'size'  => 5,
+                            'required' => true,
+                        )
+                    ));
+                }
+                break;
+            
+            case 'service':
+                // gateway
+                $this->add(array(
+                    'name' => 'gateway',
+                    'type' => 'Module\Order\Form\Element\Gateway',
+                    'options' => array(
+                        'label' => __('Adapter'),
+                        'value_options' => array(),
+                    ),
+                    'attributes' => array(
+                        'id'    => 'select-payment',
+                        'size'  => 5,
+                        'required' => true,
+                    )
+                ));
+                break;
         }
         // Save
         $this->add(array(

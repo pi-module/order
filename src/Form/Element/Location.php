@@ -18,7 +18,6 @@ use Zend\Form\Element\Select;
 
 class Location extends Select
 {
-
     /**
      * @return array
      */

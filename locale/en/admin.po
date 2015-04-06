@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-04-01 14:58+0330\n"
+"POT-Creation-Date: 2015-04-06 14:17+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -118,35 +118,35 @@ msgid "Show company"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:144
-msgid "Show address"
+msgid "Show company extra"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:152
-msgid "Show country"
+msgid "Show address"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:160
-msgid "Show state"
+msgid "Show country"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:168
-msgid "Show city"
+msgid "Show state"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:176
-msgid "Show Zip code"
+msgid "Show city"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:184
-msgid "Show packing"
+msgid "Show Zip code"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:192
-msgid "Show location"
+msgid "Show packing"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:200
-msgid "Show delivery"
+msgid "Show location and delivery"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:208

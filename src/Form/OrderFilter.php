@@ -19,10 +19,10 @@ use Module\System\Validator\UserEmail as UserEmailValidator;
 
 class OrderFilter extends InputFilter
 {
-    public function __construct()
+    public function __construct($option = array())
     {
         $config = Pi::service('registry')->config->read('order', 'order');
-        $checkout = Pi::api('order', 'order')->checkoutConfig();
+        //$checkout = Pi::api('order', 'order')->checkoutConfig();
         // name
         if ($config['order_name']) {
             // first_name
@@ -120,6 +120,9 @@ class OrderFilter extends InputFilter
                     ),
                 ),
             ));
+        }
+        // company extra
+        if ($config['order_company_extra']) {
             // company_id
             $this->add(array(
                 'name' => 'company_id',
@@ -210,52 +213,6 @@ class OrderFilter extends InputFilter
                 ),
             ));
         }
-        // location
-        if ($config['order_location'] 
-            && $checkout['location']) 
-        {
-            $this->add(array(
-                'name' => 'location',
-                'required' => true,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
-        }
-        // delivery
-        if ($config['order_delivery'] 
-            && $checkout['location'] 
-            && $checkout['delivery']) 
-        {
-            $this->add(array(
-                'name' => 'delivery',
-                'required' => true,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
-        }
-        // gateway
-        if ($config['order_gateway'] 
-            //&& ($config['order_method'] != 'offline') 
-            && $checkout['location'] 
-            && $checkout['delivery'] 
-            && $checkout['gateway']) 
-        {
-            $this->add(array(
-                'name' => 'gateway',
-                'required' => true,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
-        }
         // packing
         if ($config['order_packing']) {
             $this->add(array(
@@ -267,6 +224,67 @@ class OrderFilter extends InputFilter
                     ),
                 ),
             ));
+        }
+        // Check type_commodity
+        switch ($option['type_commodity']) {
+            case 'product':
+                if ($config['order_location_delivery']) {
+                    // location
+                    $this->add(array(
+                        'name' => 'location',
+                        'required' => true,
+                        'filters' => array(
+                            array(
+                                'name' => 'StringTrim',
+                            ),
+                        ),
+                    ));
+                    // delivery
+                    $this->add(array(
+                        'name' => 'delivery',
+                        'required' => true,
+                        'filters' => array(
+                            array(
+                                'name' => 'StringTrim',
+                            ),
+                        ),
+                    ));
+                    // gateway
+                    $this->add(array(
+                        'name' => 'gateway',
+                        'required' => true,
+                        'filters' => array(
+                            array(
+                                'name' => 'StringTrim',
+                            ),
+                        ),
+                    ));
+                } else {
+                    // gateway
+                    $this->add(array(
+                        'name' => 'gateway',
+                        'required' => true,
+                        'filters' => array(
+                            array(
+                                'name' => 'StringTrim',
+                            ),
+                        ),
+                    ));
+                }
+                break;
+            
+            case 'service':
+                // gateway
+                $this->add(array(
+                    'name' => 'gateway',
+                    'required' => true,
+                    'filters' => array(
+                        array(
+                            'name' => 'StringTrim',
+                        ),
+                    ),
+                ));
+                break;
         }
     }
 }    	

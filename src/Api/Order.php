@@ -62,7 +62,7 @@ class Order extends AbstractApi
         return $invoices;
     }
 
-    public function checkoutConfig()
+    /* public function checkoutConfig()
     {
         $return = array();
         // Set location
@@ -78,7 +78,7 @@ class Order extends AbstractApi
         $return['gateway'] = (empty($gateway)) ? 0 : 1;
         // return
         return $return;
-    }
+    } */
 
     public function generatCode()
     {
@@ -312,7 +312,7 @@ class Order extends AbstractApi
         // Set order to session
         $_SESSION['order'] = $order;
         // Set checkout url
-        if (isset($order['type']) && $order['type'] == 'installment') {
+        if (isset($order['type_payment']) && $order['type_payment'] == 'installment') {
             $checkout = Pi::url(Pi::service('url')->assemble('order', array(
                 'module'        => 'order',
                 'controller'    => 'checkout',
