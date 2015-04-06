@@ -143,6 +143,10 @@ class CheckoutController extends IndexController
                 if (isset($cart['module_item']) && !empty($cart['module_item'])) {
                     $values['module_item'] = $cart['module_item'];
                 }
+                // Check gateway
+                if (is_array($values['gateway'])) {
+                    $values['gateway'] = $values['gateway'][0];
+                }
                 // Set price values
                 $values['product_price'] = 0;
                 $values['discount_price'] = 0;
