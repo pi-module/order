@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-04-06 14:18+0330\n"
+"POT-Creation-Date: 2015-04-07 10:58+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -32,7 +32,7 @@ msgstr "اطلاعات کاربری"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:13
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:55
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:147
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:151
 msgid "ID"
 msgstr "شناسه"
 
@@ -42,12 +42,12 @@ msgid "Price"
 msgstr "قیمت"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:15
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:124
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:127
 msgid "Time Create"
 msgstr "تاریخ ایجاد"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:16
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:125
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:128
 msgid "Due date"
 msgstr "سررسید پرداخت"
 
@@ -57,13 +57,13 @@ msgstr "تاریخ پرداخت"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:18
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:60
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:126
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:151
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:129
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:155
 msgid "Action"
 msgstr "عملکرد"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:37
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:134
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:137
 msgid "View / Pay"
 msgstr "مشاهده / پرداخت"
 
@@ -80,12 +80,12 @@ msgid "Canceled"
 msgstr "لغو شده"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:48
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:140
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:143
 msgid "You dont have any invoice yet"
 msgstr "شما هیچ فاکتوری ندارید"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:56
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:148
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:152
 msgid "Time create"
 msgstr "تاریخ ایجاد"
 
@@ -94,17 +94,17 @@ msgid "Type"
 msgstr "نوع"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:59
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:150
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:154
 msgid "Gateway"
 msgstr "دروازه پرداخت"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:70
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:160
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:164
 msgid "View"
 msgstr "نمایش"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:76
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:166
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:170
 msgid "You dont have any order yet"
 msgstr "شما هنوز هیچ سفارشی ثبت نکرده اید"
 
@@ -165,7 +165,7 @@ msgid "Address 2"
 msgstr "آدرس ۲"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:136
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:172
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:176
 msgid "More informations"
 msgstr "اطلاعات بیشتر"
 
@@ -173,32 +173,46 @@ msgstr "اطلاعات بیشتر"
 msgid "Summery"
 msgstr "خلاصه وضعیت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:25
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:23
 msgid "Desc"
 msgstr "آخرین وضعیت مانده اقساط قابل پرداخت شما"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:28
-msgid "Fifth"
-msgstr "پنجم"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:26
+msgid "10 th"
+msgstr "۱۰ ام"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:29
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:59
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:89
-msgid "Arrears"
-msgstr "معوقه"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:43
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:73
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:103
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:123
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:149
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:40
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:70
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:100
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:126
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:153
 msgid "Amount"
 msgstr "مبلغ"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:58
-msgid "XV"
-msgstr "پانزدهم"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:56
+msgid "20 th"
+msgstr "۲۰ ام"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:88
-msgid "Twenty-fifth"
-msgstr "بیت و پنجم"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:86
+msgid "30 th"
+msgstr "۳۰ ام"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:122
+msgid "Invoices list"
+msgstr "فهرست سررسید فاکتور ها"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:147
+msgid "Orders list"
+msgstr "فهرست سفارش ها"
+
+#~ msgid "Fifth"
+#~ msgstr "پنجم"
+
+#~ msgid "Arrears"
+#~ msgstr "معوقه"
+
+#~ msgid "XV"
+#~ msgstr "پانزدهم"
+
+#~ msgid "Twenty-fifth"
+#~ msgstr "بیت و پنجم"

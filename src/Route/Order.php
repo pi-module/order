@@ -68,20 +68,23 @@ class Order extends Standard
                     break;
 
                 case 'index':
-                    switch ($parts[0]) {
-                        case 'index':
-                            $matches['action'] = 'index';
-                            break;
+                    if (isset($parts[0]) && !empty($parts[0])) {
+                        switch ($parts[0]) {
+                            case 'index':
+                                $matches['action'] = 'index';
+                                break;
 
-                        case 'error':
-                            $matches['action'] = 'error';
-                            break;
+                            case 'error':
+                                $matches['action'] = 'error';
+                                break;
                         
-                        case 'remove':
-                            $matches['action'] = 'remove';
-                            $matches['id'] = intval($this->decode($parts[1]));
-                            break;
+                            case 'remove':
+                                $matches['action'] = 'remove';
+                                $matches['id'] = intval($this->decode($parts[1]));
+                                break;
+                        }
                     }
+
                     break; 
 
                 case 'invoice':

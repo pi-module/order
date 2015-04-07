@@ -20,103 +20,106 @@
 		</ul>
 		<div class="tab-content">
     		<div role="tabpanel" class="tab-pane active" id="summery">
+    			<h3 class="text-center"><?php echo _b('Desc'); ?></h3>
 				<table class="table table-striped table-bordered table-condensed small">
 					<tr>
-						<th colspan="13" class="text-center"><?php echo _b('Desc'); ?></th>
-					</tr>
-					<tr>
-						<th class="text-center"><?php echo _b('Fifth'); ?></th>
-			            <td class="text-center"><?php echo _b('Arrears'); ?></td>
-			            <td class="text-center">94/01/05</td>
-			            <td class="text-center">94/02/05</td>
-			            <td class="text-center">94/03/05</td>
-			            <td class="text-center">94/04/05</td>
-			            <td class="text-center">94/05/05</td>
-			            <td class="text-center">94/06/05</td>
-			            <td class="text-center">94/07/05</td>
-			            <td class="text-center">94/08/05</td>
-			            <td class="text-center">94/09/05</td>
-			            <td class="text-center">94/10/05</td>
-			            <td class="text-center">مجموع</td>
+						<th class="text-center col-md-1"><?php echo _b('10 th'); ?></th>
+			            <td class="text-center col-md-1"><?php echo $block['d'][0]['10-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][1]['10-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][2]['10-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][3]['10-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][4]['10-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][5]['10-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][6]['10-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][7]['10-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][8]['10-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][9]['10-view']; ?></td>
+			            <td class="text-center col-md-1">مجموع</td>
 					</tr>
 					<tr>
 						<th class="text-center"><?php echo _b('Amount'); ?></th>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
+			            <td class="text-center"><?php echo $block['d'][0]['10-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][1]['10-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][2]['10-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][3]['10-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][4]['10-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][5]['10-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][6]['10-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][7]['10-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][8]['10-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][9]['10-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d']['all']['10-sun-view']; ?></td>
 					</tr>
+				</table>
+				<table class="table table-striped table-bordered table-condensed small">
 					<tr>
-						<th class="text-center"><?php echo _b('XV'); ?></th>
-			            <td class="text-center"><?php echo _b('Arrears'); ?></td>
-			            <td class="text-center">94/01/15</td>
-			            <td class="text-center">94/02/15</td>
-			            <td class="text-center">94/03/15</td>
-			            <td class="text-center">94/04/15</td>
-			            <td class="text-center">94/05/15</td>
-			            <td class="text-center">94/06/15</td>
-			            <td class="text-center">94/07/15</td>
-			            <td class="text-center">94/08/15</td>
-			            <td class="text-center">94/09/15</td>
-			            <td class="text-center">94/10/15</td>
-			            <td class="text-center">مجموع</td>
-					</tr>
-					<tr>
-						<th class="text-center"><?php echo _b('Amount'); ?></th>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-					</tr>
-					<tr>
-						<th class="text-center"><?php echo _b('Twenty-fifth'); ?></th>
-			            <td class="text-center"><?php echo _b('Arrears'); ?></td>
-			            <td class="text-center">94/01/25</td>
-			            <td class="text-center">94/02/25</td>
-			            <td class="text-center">94/03/25</td>
-			            <td class="text-center">94/04/25</td>
-			            <td class="text-center">94/05/25</td>
-			            <td class="text-center">94/06/25</td>
-			            <td class="text-center">94/07/25</td>
-			            <td class="text-center">94/08/25</td>
-			            <td class="text-center">94/09/25</td>
-			            <td class="text-center">94/10/25</td>
-			            <td class="text-center">مجموع</td>
+						<th class="text-center col-md-1"><?php echo _b('20 th'); ?></th>
+			            <td class="text-center col-md-1"><?php echo $block['d'][0]['20-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][1]['20-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][2]['20-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][3]['20-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][4]['20-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][5]['20-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][6]['20-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][7]['20-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][8]['20-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][9]['20-view']; ?></td>
+			            <td class="text-center col-md-1">مجموع</td>
 					</tr>
 					<tr>
 						<th class="text-center"><?php echo _b('Amount'); ?></th>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
-			            <td class="text-center">-</td>
+			            <td class="text-center"><?php echo $block['d'][0]['20-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][1]['20-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][2]['20-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][3]['20-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][4]['20-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][5]['20-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][6]['20-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][7]['20-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][8]['20-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][9]['20-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d']['all']['20-sun-view']; ?></td>
+					</tr>
+				</table>
+				<table class="table table-striped table-bordered table-condensed small">
+					<tr>
+						<th class="text-center col-md-1"><?php echo _b('30 th'); ?></th>
+			            <td class="text-center col-md-1"><?php echo $block['d'][0]['30-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][1]['30-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][2]['30-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][3]['30-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][4]['30-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][5]['30-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][6]['30-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][7]['30-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][8]['30-view']; ?></td>
+			            <td class="text-center col-md-1"><?php echo $block['d'][9]['30-view']; ?></td>
+			            <td class="text-center col-md-1">مجموع</td>
+					</tr>
+					<tr>
+						<th class="text-center"><?php echo _b('Amount'); ?></th>
+			            <td class="text-center"><?php echo $block['d'][0]['30-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][1]['30-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][2]['30-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][3]['30-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][4]['30-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][5]['30-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][6]['30-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][7]['30-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][8]['30-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d'][9]['30-sun']; ?></td>
+			            <td class="text-center"><?php echo $block['d']['all']['30-sun-view']; ?></td>
 					</tr>		
+				</table>
+				<table class="table table-striped table-bordered table-condensed small">
+					<tr>
+						<th class="text-center col-md-11">جمع کل</th>
+			            <td class="text-center col-md-1"><?php echo $block['d']['total-view']; ?></td>
+					</tr>
 				</table>
     		</div>
     		<div role="tabpanel" class="tab-pane" id="invoice">
+    			<h3 class="text-center"><?php echo _b('Invoices list'); ?></h3>
     			<?php if ($block['resources']['invoices']) { ?>
 				<table class="table table-striped table-bordered table-condensed small">
 					<tr>
@@ -141,6 +144,7 @@
 				<?php } ?>
     		</div>
     		<div role="tabpanel" class="tab-pane" id="order">
+    			<h3 class="text-center"><?php echo _b('Orders list'); ?></h3>
     			<?php if ($block['resources']['orders']) { ?>
 				<table class="table table-striped table-bordered table-condensed small">
 					<tr>

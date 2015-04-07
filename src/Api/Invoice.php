@@ -293,10 +293,10 @@ class Invoice extends AbstractApi
         // boject to array
         $invoice = $invoice->toArray();
         // Set time
-        $invoice['time_create_view'] = _date($invoice['time_create']);
-        $invoice['time_duedate_view'] = _date($invoice['time_duedate']);
-        $invoice['time_payment_view'] = $invoice['time_payment'] ? _date($invoice['time_payment']) : __('Not pay');
-        $invoice['time_cancel_view'] = $invoice['time_cancel'] ? _date($invoice['time_cancel']) : __('Not canceled');
+        $invoice['time_create_view'] = _date($invoice['time_create'], array('pattern' => 'yyyy-MM-dd'));
+        $invoice['time_duedate_view'] = _date($invoice['time_duedate'], array('pattern' => 'yyyy-MM-dd'));
+        $invoice['time_payment_view'] = $invoice['time_payment'] ? _date($invoice['time_payment'], array('pattern' => 'yyyy-MM-dd')) : __('Not pay');
+        $invoice['time_cancel_view'] = $invoice['time_cancel'] ? _date($invoice['time_cancel'], array('pattern' => 'yyyy-MM-dd')) : __('Not canceled');
         // Set price
         $invoice['product_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['product_price']);
         $invoice['shipping_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['shipping_price']);

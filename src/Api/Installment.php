@@ -20,6 +20,7 @@ use Pi\Application\Api\AbstractApi;
  * Pi::api('installment', 'order')->planList();
  * Pi::api('installment', 'order')->setPriceForInvoice($price, $plan, $user);
  * Pi::api('installment', 'order')->setPriceForView($price, $user);
+ * Pi::api('installment', 'order')->blockTable($user);
  */
 
 class Installment extends AbstractApi
@@ -200,5 +201,115 @@ class Installment extends AbstractApi
         }
 
         return $time;
+    }
+
+    public function blockTable($user)
+    {
+        require_once Pi::path('module') . '/order/src/Api/pdate.php';
+
+        $invoices = Pi::api('invoice', 'order')->getInvoiceFromUser($user['uid']);
+        
+        $d = array();
+        $d['all']['10-sun'] = 0;
+        $d['all']['20-sun'] = 0;
+        $d['all']['30-sun'] = 0;
+
+        $month = pdate('m', strtotime('now'));
+        $year = pdate('Y', strtotime('now'));
+
+        $d[0]['10'] = pmktime(0, 0, 0, $month, 10, $year);
+        $d[0]['10-view'] = _date(pmktime(0, 0, 0, $month, 10, $year), array('pattern' => 'yyyy-MM-dd'));
+        $d[0]['10-sun'] = 0;
+        $d[0]['10-invoice'] = array();
+        foreach ($invoices as $invoice) {
+            if ($invoice['time_duedate'] == pmktime(0, 0, 0, $month, 10, $year)) {
+                $d[0]['10-invoice'][$invoice['id']] = $invoice;
+                $d[0]['10-sun'] = $d[0]['10-sun'] + $invoice['total_price'];
+            }
+        }
+        $d['all']['10-sun'] = $d['all']['10-sun'] + $d[0]['10-sun'];
+        $d[0]['10-sun'] = Pi::api('api', 'order')->viewPrice($d[0]['10-sun'], true);
+
+        $d[0]['20'] = pmktime(0, 0, 0, $month, 20, $year);
+        $d[0]['20-view'] = _date(pmktime(0, 0, 0, $month, 20, $year), array('pattern' => 'yyyy-MM-dd'));
+        $d[0]['20-sun'] = 0;
+        $d[0]['20-invoice'] = array();
+        foreach ($invoices as $invoice) {
+            if ($invoice['time_duedate'] == pmktime(0, 0, 0, $month, 20, $year)) {
+                $d[0]['20-invoice'][$invoice['id']] = $invoice;
+                $d[0]['20-sun'] = $d[0]['20-sun'] + $invoice['total_price'];
+            }
+        }
+        $d['all']['20-sun'] = $d['all']['20-sun'] + $d[0]['20-sun'];
+        $d[0]['20-sun'] = Pi::api('api', 'order')->viewPrice($d[0]['20-sun'], true);
+
+        $d[0]['30'] = pmktime(0, 0, 0, $month, 30, $year);
+        $d[0]['30-view'] = _date(pmktime(0, 0, 0, $month, 30, $year), array('pattern' => 'yyyy-MM-dd'));
+        $d[0]['30-sun'] = 0;
+        $d[0]['30-invoice'] = array();
+        foreach ($invoices as $invoice) {
+            if ($invoice['time_duedate'] == pmktime(0, 0, 0, $month, 30, $year)) {
+                $d[0]['30-invoice'][$invoice['id']] = $invoice;
+                $d[0]['30-sun'] = $d[0]['30-sun'] + $invoice['total_price'];
+            }
+        }
+        $d['all']['30-sun'] = $d['all']['30-sun'] + $d[0]['30-sun'];
+        $d[0]['30-sun'] = Pi::api('api', 'order')->viewPrice($d[0]['30-sun'], true);
+
+        for ($i=1; $i < 10; $i++) {
+
+            $month = pdate('m', strtotime(sprintf('+%s month', $i)));
+            $year = pdate('Y', strtotime(sprintf('+%s month', $i)));
+
+            $d[$i]['10'] = pmktime(0, 0, 0, $month, 10, $year);
+            $d[$i]['10-view'] = _date(pmktime(0, 0, 0, $month, 10, $year), array('pattern' => 'yyyy-MM-dd'));
+            $d[$i]['10-sun'] = 0;
+            $d[$i]['10-invoice'] = array();
+            foreach ($invoices as $invoice) {
+                if ($invoice['time_duedate'] == pmktime(0, 0, 0, $month, 10, $year)) {
+                    $d[$i]['10-invoice'][$invoice['id']] = $invoice;
+                    $d[$i]['10-sun'] = $d[$i]['10-sun'] + $invoice['total_price'];
+                }
+            }
+            $d['all']['10-sun'] = $d['all']['10-sun'] + $d[$i]['10-sun'];
+            $d[$i]['10-sun'] = Pi::api('api', 'order')->viewPrice($d[$i]['10-sun'], true);
+
+            $d[$i]['20'] = pmktime(0, 0, 0, $month, 20, $year);
+            $d[$i]['20-view'] = _date(pmktime(0, 0, 0, $month, 20, $year), array('pattern' => 'yyyy-MM-dd'));
+            $d[$i]['20-sun'] = 0;
+            $d[$i]['20-invoice'] = array();
+            foreach ($invoices as $invoice) {
+                if ($invoice['time_duedate'] == pmktime(0, 0, 0, $month, 20, $year)) {
+                    $d[$i]['20-invoice'][$invoice['id']] = $invoice;
+                    $d[$i]['20-sun'] = $d[$i]['20-sun'] + $invoice['total_price'];
+                }
+            }
+            $d['all']['20-sun'] = $d['all']['20-sun'] + $d[$i]['20-sun'];
+            $d[$i]['20-sun'] = Pi::api('api', 'order')->viewPrice($d[$i]['20-sun'], true);
+
+            $d[$i]['30'] = pmktime(0, 0, 0, $month, 30, $year);
+            $d[$i]['30-view'] = _date(pmktime(0, 0, 0, $month, 30, $year), array('pattern' => 'yyyy-MM-dd'));
+            $d[$i]['30-sun'] = 0;
+            $d[$i]['30-invoice'] = array();
+            foreach ($invoices as $invoice) {
+                if ($invoice['time_duedate'] == pmktime(0, 0, 0, $month, 30, $year)) {
+                    $d[$i]['30-invoice'][$invoice['id']] = $invoice;
+                    $d[$i]['30-sun'] = $d[$i]['30-sun'] + $invoice['total_price'];
+                }
+            }
+            $d['all']['30-sun'] = $d['all']['30-sun'] + $d[$i]['30-sun'];
+            $d[$i]['30-sun'] = Pi::api('api', 'order')->viewPrice($d[$i]['30-sun'], true);
+        }
+
+        
+        $d['all']['10-sun-view'] = Pi::api('api', 'order')->viewPrice($d['all']['10-sun'], true);
+        $d['all']['20-sun-view'] = Pi::api('api', 'order')->viewPrice($d['all']['20-sun'], true);
+        $d['all']['30-sun-view'] = Pi::api('api', 'order')->viewPrice($d['all']['30-sun'], true);
+        $d['total'] = $d['all']['10-sun'] + $d['all']['20-sun'] + $d['all']['30-sun'];
+        $d['total-view'] = Pi::api('api', 'order')->viewPrice($d['total'], true);
+
+
+
+        return $d;
     }
 }

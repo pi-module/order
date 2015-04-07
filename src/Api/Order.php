@@ -190,17 +190,17 @@ class Order extends AbstractApi
         // boject to array
         $order = $order->toArray();
         // Set time_create_view
-        $order['time_create_view'] = _date($order['time_create']);
+        $order['time_create_view'] = _date($order['time_create'], array('pattern' => 'yyyy-MM-dd'));
         // Set time_payment_view
-        $order['time_payment_view'] = ($order['time_payment']) ? _date($order['time_payment']) : __('Not Paid');
+        $order['time_payment_view'] = ($order['time_payment']) ? _date($order['time_payment'], array('pattern' => 'yyyy-MM-dd')) : __('Not Paid');
         // Set time_delivery_view
-        $order['time_delivery_view'] = ($order['time_delivery']) ? _date($order['time_delivery']) : __('Not Delivery');
+        $order['time_delivery_view'] = ($order['time_delivery']) ? _date($order['time_delivery'], array('pattern' => 'yyyy-MM-dd')) : __('Not Delivery');
         // Set time_finish_view
-        $order['time_finish_view'] = ($order['time_finish']) ? _date($order['time_finish']) : __('Not Finish');
+        $order['time_finish_view'] = ($order['time_finish']) ? _date($order['time_finish'], array('pattern' => 'yyyy-MM-dd')) : __('Not Finish');
         // Set time_finish_view
-        $order['time_start_view'] = ($order['time_start']) ? _date($order['time_start']) : __('Not Start');
+        $order['time_start_view'] = ($order['time_start']) ? _date($order['time_start'], array('pattern' => 'yyyy-MM-dd')) : __('Not Start');
         // Set time_finish_view
-        $order['time_end_view'] = ($order['time_end']) ? _date($order['time_end']) : __('Not End');
+        $order['time_end_view'] = ($order['time_end']) ? _date($order['time_end'], array('pattern' => 'yyyy-MM-dd')) : __('Not End');
         // Set product_price_view
         $order['product_price_view'] = Pi::api('api', 'order')->viewPrice($order['product_price']);
         // Set discount_price_view

@@ -45,6 +45,8 @@ class Block
         $block['more'] = Pi::url('order');
         // Set block array
         $block['resources'] = $user;
+
+        $block['d'] = Pi::api('installment', 'order')->blockTable($user);
         return $block;
     }
 }

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-04-06 14:18+0330\n"
+"POT-Creation-Date: 2015-04-07 10:58+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "Toman"
 msgstr "تومان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:37
 msgid "One time"
 msgstr "خرید نقدی"
 
@@ -36,11 +36,11 @@ msgstr "فاکتور شما با موفقیت ایجاد شد"
 msgid "Not allowed to create invoice by this user credit"
 msgstr "با توجه به میزان اعتبار کاربر امکان ایجاد فاکتور وجود ندارد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:297
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:298
 msgid "Not pay"
 msgstr "پرداخت نشده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:298
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:299
 msgid "Not canceled"
 msgstr "لغو نشده"
 
@@ -220,23 +220,23 @@ msgid "Update delivery"
 msgstr "به روز رسانی تحویل"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:33
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:222
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:226
 msgid "Your cart is empty."
 msgstr "سبد خرید شما خالی است"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:227
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:231
 msgid "So sorry, At this moment order is inactive"
 msgstr "متاسفانه در این لحظه امکان ثبت سفارش وجود ندارد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:238
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:242
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 "پلن قسطی سفارش شما با موفقت ذخیره شد، لطفا اطلاعات مورد نیاز را تکمیل "
 "فرمایید و بعد از آن پیش قسط مربوط به این سفارش را پرداخت نمایید."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:354
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:358
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/Element/Gateway.php:28
 msgid "Offline"
 msgstr "آفلاین"

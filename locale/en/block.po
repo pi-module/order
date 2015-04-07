@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-04-06 14:17+0330\n"
+"POT-Creation-Date: 2015-04-07 10:59+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -31,7 +31,7 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:13
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:55
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:147
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:151
 msgid "ID"
 msgstr ""
 
@@ -41,12 +41,12 @@ msgid "Price"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:15
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:124
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:127
 msgid "Time Create"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:16
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:125
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:128
 msgid "Due date"
 msgstr ""
 
@@ -56,13 +56,13 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:18
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:60
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:126
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:151
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:129
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:155
 msgid "Action"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:37
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:134
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:137
 msgid "View / Pay"
 msgstr ""
 
@@ -79,12 +79,12 @@ msgid "Canceled"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:48
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:140
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:143
 msgid "You dont have any invoice yet"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:56
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:148
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:152
 msgid "Time create"
 msgstr ""
 
@@ -93,17 +93,17 @@ msgid "Type"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:59
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:150
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:154
 msgid "Gateway"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:70
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:160
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:164
 msgid "View"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:76
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:166
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:170
 msgid "You dont have any order yet"
 msgstr ""
 
@@ -164,7 +164,7 @@ msgid "Address 2"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:136
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:172
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:176
 msgid "More informations"
 msgstr ""
 
@@ -172,32 +172,34 @@ msgstr ""
 msgid "Summery"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:25
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:23
 msgid "Desc"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:28
-msgid "Fifth"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:26
+msgid "10 th"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:29
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:59
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:89
-msgid "Arrears"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:43
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:73
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:103
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:123
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:149
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:40
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:70
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:100
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:126
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:153
 msgid "Amount"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:58
-msgid "XV"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:56
+msgid "20 th"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:88
-msgid "Twenty-fifth"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:86
+msgid "30 th"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:122
+msgid "Invoices list"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:147
+msgid "Orders list"
 msgstr ""
