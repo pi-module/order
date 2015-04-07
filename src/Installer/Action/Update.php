@@ -80,7 +80,7 @@ class Update extends BasicUpdate
 
         if (version_compare($moduleVersion, '1.4.3', '<')) {
             // Alter table field change type_payment
-            $sql = sprintf("ALTER TABLE `p562_order_order` CHANGE `type` `type_payment` enum('free','onetime','recurring','installment') NOT NULL default 'onetime'", $orderTable);
+            $sql = sprintf("ALTER TABLE %s CHANGE `type` `type_payment` enum('free','onetime','recurring','installment') NOT NULL default 'onetime'", $orderTable);
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
