@@ -7,7 +7,7 @@
 [body]
 <div style="padding: 1px; direction: ltr;">
 	<h3 style="font-size: 1.1em;">Dear %first_name% %last_name%</h3>
-	<div style="padding: 3px; margin: 2px;">Your new order by <strong>%order_id%</strong> ID added on system. please click on this link to see details</div>
+	<div style="padding: 3px; margin: 2px;">Your new order by <strong>%order_id%</strong> ID added on %site_name% website. please click on this link to see details</div>
 	<div style="padding: 3px; margin: 2px;">
         <a href="%order_link%" title="Order details">%order_link%</a>
 	</div>

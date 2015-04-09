@@ -331,6 +331,19 @@ class OrderForm  extends BaseForm
                 ));
                 break;
         }
+        // Update profile confirmation
+        if ($this->config['order_update_user']) {
+            $this->add(array(
+                'name' => 'update_user',
+                'type' => 'checkbox',
+                'options' => array(
+                    'label' => __('Update your profile by this informations?'),
+                ),
+                'attributes' => array(
+                    'description' => '',
+                )
+            ));
+        }
         // Save
         $this->add(array(
             'name' => 'submit',

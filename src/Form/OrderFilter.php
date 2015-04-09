@@ -286,5 +286,17 @@ class OrderFilter extends InputFilter
                 ));
                 break;
         }
+        // Update profile confirmation
+        if ($config['order_update_user']) {
+            $this->add(array(
+                'name' => 'update_user',
+                'required' => false,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+            ));
+        }
     }
 }    	

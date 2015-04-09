@@ -7,7 +7,7 @@
 [body]
 <div style="padding: 1px; direction: ltr;">
 	<h3 style="font-size: 1.1em;">%first_name% %last_name% عزیز</h3>
-	<div style="padding: 3px; margin: 2px;">فاکتور شماره <strong>%invoice_id%</strong> شما با موفقیت پرداخت گردید. برای مشاهده جزئیات فاکتور بر روی لینک زیر کلیک نمایید</div>
+	<div style="padding: 3px; margin: 2px;">فاکتور شماره <strong>%invoice_id%</strong> شما با موفقیت در وب سایت %site_name% پرداخت گردید. برای مشاهده جزئیات فاکتور بر روی لینک زیر کلیک نمایید</div>
 	<div style="padding: 3px; margin: 2px;">
         <a href="%invoice_link%" title="Invoice details">%invoice_link%</a>
 	</div>

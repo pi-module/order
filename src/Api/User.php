@@ -19,7 +19,7 @@ use Zend\Json\Json;
 
 /*
  * Pi::api('user', 'order')->getUserInformation($user);
- * Pi::api('user', 'order')->getPaymentHistory($user);
+ * Pi::api('user', 'order')->updateUserInformation($user, $uid);
  */
 
 class User extends AbstractApi
@@ -98,7 +98,33 @@ class User extends AbstractApi
         return $user;
     }
 
-    public function getPaymentHistory($user = '', $module = '')
+    public function updateUserInformation($user, $uid = '')
+    {
+        // Set uid
+        if (empty($uid)) {
+            if (isset($user['uid']) && !empty($user['uid'])) {
+                $uid = $user['uid'];
+            } else {
+                $uid = Pi::user()->getId();
+            }
+        }
+        // Fields
+        $fields = Pi::api('user', 'user')->getFields($uid, 'profile');
+        // Set just needed fields
+        foreach (array_keys($user) as $key) {
+            if (!in_array($key, array_keys($fields))) {
+                unset($user[$key]);
+            }
+        }
+        // From user module
+        $user['last_modified'] = time();
+        $status = Pi::api('user', 'user')->updateUser($uid, $user);
+        if ($status == 1) {
+            Pi::service('event')->trigger('user_update', $uid);
+        }
+    }
+
+    /* public function getPaymentHistory($user = '', $module = '')
 	{
 		// Get user id if not set
 		if (empty($user)) {
@@ -117,9 +143,9 @@ class User extends AbstractApi
         $order = array('id DESC', 'time_create DESC');
         $where = array('uid' => $user);
         //
-        /* if (!$config['payment_shownotpay']) {
-            $where['status'] = 1;
-        } */
+        //if (!$config['payment_shownotpay']) {
+        //    $where['status'] = 1;
+        //}
         // 
         if (!empty($module)) {
         	$where['module'] = $module;
@@ -147,5 +173,5 @@ class User extends AbstractApi
         }
         // return
         return $list;
-	}
+	} */
 }	

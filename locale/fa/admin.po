@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-04-07 10:58+0330\n"
+"POT-Creation-Date: 2015-04-09 11:16+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -85,12 +85,13 @@ msgid "Code Prefix"
 msgstr "پیشوند کد سفارش"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:88
-msgid "List of mails for send order notification"
-msgstr "فهرست ایمیل ها برای ارسال اطلاعات رسانی ثبت سفارش"
+msgid "Update user profile"
+msgstr "به روز رسانی پروفایل کاربر"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:89
-msgid "Use `|` as delimiter to separate mails"
-msgstr "از `|` به عنوان جدا کننده ایمیل ها استفاده نمایید"
+msgid "Update user profile by order informations by user confirmation"
+msgstr ""
+"به روز رسانی پروفایل کاربر بر اساس اطلاعات ثبت شده در سفارش با تایید کاربر"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:96
 msgid "Show ID number"
@@ -356,6 +357,12 @@ msgstr "روش ارسال"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:47
 msgid "Location"
 msgstr "مکان تحویل"
+
+#~ msgid "List of mails for send order notification"
+#~ msgstr "فهرست ایمیل ها برای ارسال اطلاعات رسانی ثبت سفارش"
+
+#~ msgid "Use `|` as delimiter to separate mails"
+#~ msgstr "از `|` به عنوان جدا کننده ایمیل ها استفاده نمایید"
 
 #~ msgid "Show location"
 #~ msgstr "نمایش انتخاب مکان"

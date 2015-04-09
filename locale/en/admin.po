@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-04-07 10:59+0330\n"
+"POT-Creation-Date: 2015-04-09 11:16+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -86,11 +86,11 @@ msgid "Code Prefix"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:88
-msgid "List of mails for send order notification"
+msgid "Update user profile"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:89
-msgid "Use `|` as delimiter to separate mails"
+msgid "Update user profile by order informations by user confirmation"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:96

@@ -83,13 +83,13 @@ return array(
             'filter'       => 'string',
             'value'        => 'Pi' 
         ),
-        'order_mail' => array(
+        'order_update_user' => array(
             'category'     => 'order',
-            'title'        => _a('List of mails for send order notification'),
-            'description'  => _a('Use `|` as delimiter to separate mails'),
-            'edit'         => 'textarea',
-            'filter'       => 'string',
-            'value'        => ''
+            'title'        => _a('Update user profile'),
+            'description'  => _a('Update user profile by order informations by user confirmation'),
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 0
         ),
         'order_idnumber' => array(
             'category'     => 'order',

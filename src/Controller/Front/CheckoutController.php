@@ -49,6 +49,8 @@ class CheckoutController extends IndexController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+                // Check user informations
+                $user = Pi::api('user', 'order')->getUserInformation();
                 // Set values
                 $values['code'] = Pi::api('order', 'order')->generatCode();
                 $values['uid'] = Pi::user()->getId();
@@ -57,8 +59,6 @@ class CheckoutController extends IndexController
                 $values['status_payment'] = 1;
                 $values['status_delivery'] = 1;
                 $values['time_create'] = time();
-                // Check user informations
-                $user = Pi::api('user', 'order')->getUserInformation();
                 // Check user email
                 if (!isset($values['email']) || empty($values['email'])) {
                     $values['email'] = $user['email'];
@@ -188,6 +188,10 @@ class CheckoutController extends IndexController
                         $basket->number = $product['number'];
                         $basket->save();
                     }
+                }
+                // Update user information
+                if ($config['order_update_user'] && $values['update_user']) {
+                    Pi::api('user', 'order')->updateUserInformation($values);
                 }
                 // Send notification
                 Pi::api('notification', 'order')->addOrder($order->toArray());

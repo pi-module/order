@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-04-07 10:59+0330\n"
+"POT-Creation-Date: 2015-04-09 11:16+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -221,21 +221,21 @@ msgid "Update delivery"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:33
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:226
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:230
 msgid "Your cart is empty."
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:231
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:235
 msgid "So sorry, At this moment order is inactive"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:242
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:246
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:358
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:362
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/Element/Gateway.php:28
 msgid "Offline"
 msgstr ""
@@ -564,7 +564,11 @@ msgstr ""
 msgid "Delivery"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:339
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:340
+msgid "Update your profile by this informations?"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:352
 msgid "Next"
 msgstr ""
 
