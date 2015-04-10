@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-04-09 11:16+0330\n"
+"POT-Creation-Date: 2015-04-10 14:34+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -1288,7 +1288,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:122
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:135
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:91
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:109
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:111
 msgid "Total"
 msgstr ""
 
@@ -1424,16 +1424,24 @@ msgstr ""
 msgid "10 months"
 msgstr ""
 
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:109
+msgid "11 months"
+msgstr ""
+
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:110
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:144
+msgid "12 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:112
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:148
 msgid "Buy"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:121
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:123
 msgid "Cash purchase"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:123
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:125
 #, php-format
 msgid "%s months"
 msgstr ""

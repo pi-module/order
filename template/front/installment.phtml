@@ -85,29 +85,32 @@ EOT;
     $this->footScript()->appendScript($script);
 ?>
 <div id="js-installment" class="clearfix">
-    <h1><?php _e('Installment plans'); ?></h1>
+    <h1><?php _e('Installment plans'); ?> <small>قیمت ها به تومان می باشد</small></h1>
     <?php if ($config['installment_credit']) { ?>
-    <div class="well">
-        <span><?php _e('Your credit'); ?></span> : <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($user['credit'])); ?></strong>
+    <div class="well clearfix">
+        <div class="col-md-12"><span><?php _e('Your credit'); ?></span> : <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($user['credit'])); ?></strong></div>
+        <div class="col-md-12"><?php _e('Read lines are our of your credit'); ?></div>
     </div>
     <?php } ?>
 	<table class="table table-striped table-bordered table-condensed small">
 		<tr>
-			<th class="text-center"><?php _e('Number'); ?></th>
-			<th class="text-center"><?php _e('Select'); ?></th>
-			<th class="text-center"><?php _e('Per Payment'); ?></th>
-			<th class="text-center"><?php _e('1 months'); ?></th>
-			<th class="text-center"><?php _e('2 months'); ?></th>
-			<th class="text-center"><?php _e('3 months'); ?></th>
-			<th class="text-center"><?php _e('4 months'); ?></th>
-			<th class="text-center"><?php _e('5 months'); ?></th>
-			<th class="text-center"><?php _e('6 months'); ?></th>
-			<th class="text-center"><?php _e('7 months'); ?></th>
-			<th class="text-center"><?php _e('8 months'); ?></th>
-			<th class="text-center"><?php _e('9 months'); ?></th>
-			<th class="text-center"><?php _e('10 months'); ?></th>
-			<th class="text-center"><?php _e('Total'); ?></th>
-			<th class="text-center"><?php _e('Buy'); ?></th>
+			<th class="text-center col-md-table-17"><?php _e('Number'); ?></th>
+			<th class="text-center col-md-table-17"><?php _e('Select'); ?></th>
+			<th class="text-center col-md-table-17"><?php _e('Per Payment'); ?></th>
+			<th class="text-center col-md-table-17"><?php _e('1 months'); ?></th>
+			<th class="text-center col-md-table-17"><?php _e('2 months'); ?></th>
+			<th class="text-center col-md-table-17"><?php _e('3 months'); ?></th>
+			<th class="text-center col-md-table-17"><?php _e('4 months'); ?></th>
+			<th class="text-center col-md-table-17"><?php _e('5 months'); ?></th>
+			<th class="text-center col-md-table-17"><?php _e('6 months'); ?></th>
+			<th class="text-center col-md-table-17"><?php _e('7 months'); ?></th>
+			<th class="text-center col-md-table-17"><?php _e('8 months'); ?></th>
+			<th class="text-center col-md-table-17"><?php _e('9 months'); ?></th>
+			<th class="text-center col-md-table-17"><?php _e('10 months'); ?></th>
+            <th class="text-center col-md-table-17"><?php _e('11 months'); ?></th>
+            <th class="text-center col-md-table-17"><?php _e('12 months'); ?></th>
+			<th class="text-center col-md-table-17"><?php _e('Total'); ?></th>
+			<th class="text-center col-md-table-17"><?php _e('Buy'); ?></th>
 		</tr>
 		<?php foreach($installments as $key => $installment) { ?>
         <?php if ($installment['invoices']['total']['allowed']) {
@@ -135,6 +138,8 @@ EOT;
 			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][8]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][8]['price']), true) : ' - '; ?></span></td>
 			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][9]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][9]['price']), true) : ' - '; ?></span></td>
 			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][10]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][10]['price']), true) : ' - '; ?></span></td>
+            <td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][11]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][11]['price']), true) : ' - '; ?></span></td>
+            <td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][12]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][12]['price']), true) : ' - '; ?></span></td>
 			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices']['total']['price']), true); ?></span></td>
 			<td class="text-center">
 				<span class="hidden check<?php echo $key;?>">

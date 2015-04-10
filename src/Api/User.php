@@ -18,24 +18,24 @@ use Pi\Application\Api\AbstractApi;
 use Zend\Json\Json;
 
 /*
- * Pi::api('user', 'order')->getUserInformation($user);
+ * Pi::api('user', 'order')->getUserInformation($uid);
  * Pi::api('user', 'order')->updateUserInformation($user, $uid);
  */
 
 class User extends AbstractApi
 {
-	public function getUserInformation($user = '')
+	public function getUserInformation($uid = '')
     {
         // Get user id if not set
-        if (empty($user)) {
-            $user = Pi::user()->getId();
+        if (empty($uid)) {
+            $uid = Pi::user()->getId();
         }
         // Check user id
-        if (!$user || $user == 0) {
+        if (!$uid || $uid == 0) {
             return array();
         }
         // Get user info
-        $user = Pi::user()->get($user, array(
+        $user = Pi::user()->get($uid, array(
             'id', 'identity', 'name', 'email', 'first_name', 'last_name', 'id_number', 'phone', 'mobile', 'credit', 
             'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 
         ));

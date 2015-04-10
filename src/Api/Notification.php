@@ -19,6 +19,7 @@ use Pi\Application\Api\AbstractApi;
 /*
  * Pi::api('notification', 'order')->addOrder($order);
  * Pi::api('notification', 'order')->payInvoice($order, $invoice);
+ * Pi::api('notification', 'order')->doCron();
  */
 
 class Notification extends AbstractApi
@@ -121,5 +122,10 @@ class Notification extends AbstractApi
         // Send sms to user
         $content = sprintf($config['sms_invoice_user'], $order['first_name'], $order['last_name']);
         Pi::api('sms', 'notification')->send($content, $order['mobile']);
+    }
+
+    public function doCron()
+    {
+        
     }
 }
