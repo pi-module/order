@@ -260,6 +260,7 @@ class PaymentController extends IndexController
         // Get invoice
         $id = $this->params('id');
         $invoice = Pi::api('invoice', 'order')->getInvoice($id);
+        $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
         // Update module order / invoice and get back url
         $url = Pi::api('order', 'order')->updateOrder($invoice['order']);
         // Remove processing

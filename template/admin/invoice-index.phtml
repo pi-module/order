@@ -28,7 +28,9 @@
 		}
 		// Set row class
 		$rowClass = '';
-		if ($invoice['time_duedate'] < strtotime("-1 day")) {
+		if ($invoice['status'] == 1) {
+			$rowClass = ' class="success"';
+		} elseif ($invoice['time_duedate'] < strtotime("-1 day")) {
 			$rowClass = ' class="danger"';
 		} elseif ($invoice['time_duedate'] < strtotime("+1 day")) {
             $rowClass = ' class="warning"';
