@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-04-13 14:42+0330\n"
+"POT-Creation-Date: 2015-04-13 15:13+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -195,7 +195,7 @@ msgstr "تنظیم نشده"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/InvoiceController.php:149
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:30
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:32
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:34
 msgid "The invoice not found."
 msgstr "فاکتور یافت نشد"
 
@@ -260,57 +260,62 @@ msgstr "دروازه پرداخت پاک است"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:35
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:39
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:45
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:47
 msgid "This is not your invoice."
 msgstr "این فاکتور متعلق به شما نیست"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:38
 msgid "You pay this invoice before this time"
 msgstr "شما قبلا این فاکتور را پرداخت کرده اید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:81
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:91
 #, php-format
 msgid "Error to get %s."
 msgstr "خطا در گرفتن %s"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:88
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:98
 msgid "Error to get information."
 msgstr "خطا در گرفتن اطلاعات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:114
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:124
 msgid "Your running pay processing not set"
 msgstr "پروسه پرداخت در حال اجرای شما تنظیم نشده است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:119
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:129
 msgid "Your IP address changed and processing not valid"
 msgstr ""
 "آدرس آی پی شما در هنگام پرداخت تغییر کرده است و این روند خرید صحیح نیست"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:146
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:156
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:268
 msgid "Your payment were successfully. Back to module"
 msgstr "پرداخت شما با موفقیت به انجام رسید. به صفحه اتمام خرید منتقل می شوید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:151
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:161
 msgid "Your payment wont successfully."
 msgstr "پرداخت شما موفقیت آمیز نبود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:156
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:166
 msgid "Did not set any request"
 msgstr "هیچ درخواستی ذخیره نشده است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:209
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:219
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:157
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:391
 msgid "Your payment were successfully."
 msgstr "پرداخت شما موفقیت آمیز بود."
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:257
+msgid "Test mode not active."
+msgstr "حالت تست فعال نیست"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:48
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:50
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:11
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:11
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:94
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:129
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:130
 msgid "Title"
 msgstr "عنوان"
 
@@ -1012,7 +1017,7 @@ msgstr "فهرست فاکتور ها"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:87
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:10
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:95
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:130
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:131
 msgid "Amount"
 msgstr "مقدار"
 
@@ -1096,7 +1101,7 @@ msgstr "زمان ایجاد"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:70
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:62
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:98
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:133
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:134
 msgid "Product price"
 msgstr "قیمت محصول"
 
@@ -1295,7 +1300,7 @@ msgstr "تخفیف"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:88
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:60
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:104
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:141
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:142
 msgid "Shipping"
 msgstr "هزینه ارسال"
 
@@ -1305,7 +1310,7 @@ msgstr "هزینه ارسال"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:112
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:63
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:116
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:157
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:158
 msgid "Total"
 msgstr "مجموع"
 
@@ -1332,7 +1337,7 @@ msgstr "تعداد"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:90
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:62
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:110
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:149
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:150
 msgid "Vat"
 msgstr "مالیات"
 
@@ -1487,15 +1492,15 @@ msgstr "مبلغ قابل پرداخت"
 msgid "Payment price on this installment is"
 msgstr "مبلغ قابل پرداخت برای این قسط برابر است با"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:126
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:127
 msgid "Total invoice price"
 msgstr "مجموع مبلغ فاکتور"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:171
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:172
 msgid "Pay"
 msgstr "پرداخت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:175
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:176
 msgid "Back to order"
 msgstr "بازگشت به سفارش"
 

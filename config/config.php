@@ -67,6 +67,14 @@ return array(
             'value'        => 'both',
             'category'     => 'order',
         ),
+        'order_testmode' => array(
+            'category'     => 'order',
+            'title'        => _a('Test mode'),
+            'description'  => _a('By test mode , you can disable payment on bank and test order level. dont use it on active websites'),
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 0
+        ),
         'order_anonymous' => array(
             'category'     => 'order',
             'title'        => _a('Anonymous users can pay'),

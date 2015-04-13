@@ -24,6 +24,8 @@ class PaymentController extends IndexController
     {
         // Check user
         $this->checkUser();
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
         // Get invoice
         $id = $this->params('id');
         $invoice = Pi::api('invoice', 'order')->getInvoiceForPayment($id);
@@ -58,6 +60,14 @@ class PaymentController extends IndexController
         }
         // Set pay processing
         Pi::api('processing', 'order')->setProcessing($invoice);
+        // Check test mode
+        if ($config['order_testmode']) {
+            return $this->redirect()->toRoute('', array(
+                'controller' => 'payment',
+                'action'     => 'test',
+                'id'         => $invoice['id'],
+            ));
+        }
         // Get gateway object
         $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
         $gateway->setInvoice($invoice);
@@ -232,5 +242,30 @@ class PaymentController extends IndexController
         // Set view
         $this->view()->setTemplate(false)->setLayout('layout-content');
         return Json::encode($return);
+    }
+
+    public function testAction()
+    {
+        // Check user
+        $this->checkUser();
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Check test mode
+        if (!$config['order_testmode']) {
+            // jump to module
+            $url = array('', 'controller' => 'index', 'action' => 'index');
+            $message = __('Test mode not active.');
+            $this->jump($url, $message);
+        }
+        // Get invoice
+        $id = $this->params('id');
+        $invoice = Pi::api('invoice', 'order')->getInvoice($id);
+        // Update module order / invoice and get back url
+        $url = Pi::api('order', 'order')->updateOrder($invoice['order']);
+        // Remove processing
+        Pi::api('processing', 'order')->removeProcessing();
+        // jump to module
+        $message = __('Your payment were successfully. Back to module');
+        $this->jump($url, $message);
     }
 }
