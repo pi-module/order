@@ -25,9 +25,8 @@ class InvoiceController extends IndexController
         // Get invoice
         $id = $this->params('id');
         $invoice = Pi::api('invoice', 'order')->getInvoice($id);
-        $order = Pi::api('order', 'order')->getOrder($invoice['order']);
         // Check invoice
-        if (empty($invoice) || empty($order)) {
+        if (empty($invoice)) {
            $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('The invoice not found.'));
         }
         // Check invoice is for this user
@@ -42,6 +41,9 @@ class InvoiceController extends IndexController
             // Set session
             $_SESSION['payment']['process_update'] = time();
         }
+        // set Products
+        $order = Pi::api('order', 'order')->getOrder($invoice['order']);
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
         // set view
         $this->view()->setTemplate('invoice');
         $this->view()->assign('invoice', $invoice);

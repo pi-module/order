@@ -240,7 +240,7 @@ class Installment extends AbstractApi
                     $day = 20;
                 } elseif (in_array(pdate('d'), array('21','22','23','24','25','26','27','28','29','30','31'))) {
                     if (pdate('m') == 12) {
-                        $day = 29;
+                        $day = 28;
                     } else {
                         $day = 30;
                     }
@@ -314,12 +314,13 @@ class Installment extends AbstractApi
         }
         
         /* Line 3 */
-        $d['m']['30'] = pmktime(0, 0, 0, $month, 30, $year);
-        $d['m']['30-view'] = _date(pmktime(0, 0, 0, $month, 30, $year), array('pattern' => 'yyyy/MM/dd'));
+        $dayM = ($month == 12) ? 28 : 30;
+        $d['m']['30'] = pmktime(0, 0, 0, $month, $dayM, $year);
+        $d['m']['30-view'] = _date(pmktime(0, 0, 0, $month, $dayM, $year), array('pattern' => 'yyyy/MM/dd'));
         $d['m']['30-sun'] = 0;
         $d['m']['30-invoice'] = array();
         foreach ($invoices as $invoice) {
-            if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, 30, $year)) {
+            if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, $dayM, $year)) {
                 $d['m']['30-invoice'][$invoice['id']] = $invoice;
                 $d['m']['30-sun'] = $d['m']['30-sun'] + $invoice['total_price'];
             }
@@ -332,7 +333,7 @@ class Installment extends AbstractApi
         }
         
         /* Make other lines */
-        for ($i=0; $i < 12; $i++) {
+        for ($i=0; $i < 13; $i++) {
 
             if ($i == 0) {
                 $month = pdate('m', strtotime('now'));
@@ -348,7 +349,8 @@ class Installment extends AbstractApi
             $d[$i]['10-sun'] = 0;
             $d[$i]['10-invoice'] = array();
             foreach ($invoices as $invoice) {
-                if ($invoice['time_duedate'] == pmktime(0, 0, 0, $month, 10, $year)) {
+                //if ($invoice['time_duedate'] == pmktime(0, 0, 0, $month, 10, $year)) {
+                if ($invoice['time_duedate'] > pmktime(0, 0, 0, $month, 8, $year) && $invoice['time_duedate'] < pmktime(0, 0, 0, $month, 12, $year)) {    
                     $d[$i]['10-invoice'][$invoice['id']] = $invoice;
                     $d[$i]['10-sun'] = $d[$i]['10-sun'] + $invoice['total_price'];
                 }
@@ -366,7 +368,8 @@ class Installment extends AbstractApi
             $d[$i]['20-sun'] = 0;
             $d[$i]['20-invoice'] = array();
             foreach ($invoices as $invoice) {
-                if ($invoice['time_duedate'] == pmktime(0, 0, 0, $month, 20, $year)) {
+                //if ($invoice['time_duedate'] == pmktime(0, 0, 0, $month, 20, $year)) {
+                if ($invoice['time_duedate'] > pmktime(0, 0, 0, $month, 18, $year) && $invoice['time_duedate'] < pmktime(0, 0, 0, $month, 22, $year)) {    
                     $d[$i]['20-invoice'][$invoice['id']] = $invoice;
                     $d[$i]['20-sun'] = $d[$i]['20-sun'] + $invoice['total_price'];
                 }
@@ -379,12 +382,17 @@ class Installment extends AbstractApi
             }
 
             /* Line 3 */
-            $d[$i]['30'] = pmktime(0, 0, 0, $month, 30, $year);
-            $d[$i]['30-view'] = _date(pmktime(0, 0, 0, $month, 30, $year), array('pattern' => 'yyyy/MM/dd'));
+            $dayI = ($month == 12) ? 28 : 30;
+            $d[$i]['30'] = pmktime(0, 0, 0, $month, $dayI, $year);
+            $d[$i]['30-view'] = _date(pmktime(0, 0, 0, $month, $dayI, $year), array('pattern' => 'yyyy/MM/dd'));
             $d[$i]['30-sun'] = 0;
             $d[$i]['30-invoice'] = array();
             foreach ($invoices as $invoice) {
-                if ($invoice['time_duedate'] == pmktime(0, 0, 0, $month, 30, $year)) {
+                $nextI = $i + 1;
+                $monthNext = pdate('m', strtotime(sprintf('+%s month', $nextI)));
+                $yearNext = pdate('Y', strtotime(sprintf('+%s month', $nextI)));
+                //if ($invoice['time_duedate'] == pmktime(0, 0, 0, $month, 30, $year)) {
+                if ($invoice['time_duedate'] > pmktime(0, 0, 0, $month, 28, $year) && $invoice['time_duedate'] < pmktime(0, 0, 0, $monthNext, 2, $yearNext)) {    
                     $d[$i]['30-invoice'][$invoice['id']] = $invoice;
                     $d[$i]['30-sun'] = $d[$i]['30-sun'] + $invoice['total_price'];
                 }

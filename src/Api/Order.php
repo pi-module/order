@@ -209,6 +209,8 @@ class Order extends AbstractApi
         $order['shipping_price_view'] = Pi::api('api', 'order')->viewPrice($order['shipping_price']);
         // Set packing_price_view
         $order['packing_price_view'] = Pi::api('api', 'order')->viewPrice($order['packing_price']);
+        // Set packing_price_view
+        $order['vat_price_view'] = Pi::api('api', 'order')->viewPrice($order['vat_price']);
         // Set total_price_view
         $order['total_price_view'] = Pi::api('api', 'order')->viewPrice($order['total_price']);
         // Set paid_price_view
@@ -349,4 +351,4 @@ class Order extends AbstractApi
             unset($_SESSION['order']);
         }
     }
-}	
+}
