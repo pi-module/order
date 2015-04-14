@@ -5,7 +5,7 @@
 [subject]سفارش شما[/subject]
 
 [body]
-<div style="padding: 1px; direction: ltr;">
+<div style="padding: 1px; direction: rtl;">
 	<h3 style="font-size: 1.1em;">%first_name% %last_name% عزیز</h3>
 	<div style="padding: 3px; margin: 2px;">سفارش شما با شماره <strong>%order_id%</strong> در وب سایت %site_name% ثبت گردید. برای مشاهده جزئیات سفارش بر روی لینک زیر کلیک نمایید</div>
 	<div style="padding: 3px; margin: 2px;">

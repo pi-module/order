@@ -5,7 +5,7 @@
 [subject]ثبت سفارش جدید[/subject]
 
 [body]
-<div style="padding: 1px; direction: ltr;">
+<div style="padding: 1px; direction: rtl;">
 	<h3 style="font-size: 1.1em;">مدیر سایت %site_name%</h3>
 	<div style="padding: 3px; margin: 2px;">یک سفارش جدید در وب سایت %site_name% به ثبت رسیده است، لطفا برای مشاهده جزئیات و بررسی سفارش به وب سایت مراجعه نمایید</div>
 	<div style="padding: 3px; margin: 2px;">لطفا به این پیام پاسخی ندهید</div>

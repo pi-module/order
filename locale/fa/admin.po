@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-04-14 12:58+0330\n"
+"POT-Creation-Date: 2015-04-14 13:37+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -49,8 +49,8 @@ msgid "Payment"
 msgstr "پرداخت"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:33
-msgid "Sms"
-msgstr "پیامک"
+msgid "Notification"
+msgstr "آگاهی رسانی"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:45
 msgid "Perpage"
@@ -225,247 +225,285 @@ msgstr "اطلاع رسانی پرداخت فاکتور به مدیر"
 msgid "Dear admin, Your customer paid invoice successfully"
 msgstr "مدیر عزیز، مشتری شما یک فاکتور را پرداخت کرد"
 
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:290
+msgid "Set X day before due date"
+msgstr "تنظیم X روز قبل از سر رسید"
+
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:291
+msgid "Notification invoice due date, X day before invoice time by cron"
+msgstr ""
+"آگاهی رسانی تاریخ سررسید فاکتور، X روز قبل از تاریخ سررسید به وسیله کرون جاب"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:298
+msgid "Duedate invoice notification to user"
+msgstr "اطلاع رسانی تاریخ سررسید فاکتور به کاربر"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:299
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:302
+#, php-format
+msgid "Dear %s %s, You have duedate invoice on next %s days"
+msgstr "%s %s عزیز، سر رسید یک فاکتور شما طی %s آینده فرا می رسد."
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:306
+msgid "Set X day after expired"
+msgstr "تنظیم X روز بعد از ابطال"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:307
+msgid "Notification invoice expired, X day after invoice time by cron"
+msgstr ""
+"آگاهی رسانی تاریخ گذشتن فاکتور، X روز بعد از تاریخ سررسید به وسیله کرون جاب"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:314
+msgid "Expired invoice notification to user"
+msgstr "اطلاع رسانی فاکتور منقضی شده به کاربر"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:315
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:318
+#, php-format
+msgid "Dear %s %s, You have expired invoice on %s days ago"
+msgstr "%s %s عزیز، شما یک فاکتور پرداخت نشده برای %s روز قبل دارید"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:323
 msgid "Reduce from user credit"
 msgstr "کسر از اعتبار کاربر"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:299
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:331
 msgid "Show plan 1"
 msgstr "نمایش پلن ۱"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:307
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:339
 msgid "Plan 1 : Title"
 msgstr "پلن ۱ : عنوان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:311
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:343
 msgid "1 month"
 msgstr "۱ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:315
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:347
 msgid "Plan 1 : Prepayment"
 msgstr "پلن ۱ : پیش قسط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:323
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:355
 msgid "Plan 1 : Profit"
 msgstr "پلن ۱ : سود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:331
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:363
 msgid "Plan 1 : Total"
 msgstr "پلن ۱ : تعداد اقساط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:339
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:371
 msgid "Show plan 2"
 msgstr "نمایش پلن ۲"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:347
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:379
 msgid "Plan 2 : Title"
 msgstr "پلن ۲ : عنوان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:351
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:383
 msgid "2 months"
 msgstr "۲ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:355
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:387
 msgid "Plan 2 : Prepayment"
 msgstr "پلن ۲ : پیش قسط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:363
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:395
 msgid "Plan 2 : Profit"
 msgstr "پلن ۲ : سود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:371
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:403
 msgid "Plan 2 : Total"
 msgstr "پلن ۲ : تعداد اقساط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:379
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:411
 msgid "Show plan 3"
 msgstr "نمایش پلن ۳"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:387
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:419
 msgid "Plan 3 : Title"
 msgstr "پلن ۳ : عنوان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:391
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:423
 msgid "3 months"
 msgstr "۳ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:395
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:427
 msgid "Plan 3 : Prepayment"
 msgstr "پلن ۳ : پیش قسط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:403
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:435
 msgid "Plan 3 : Profit"
 msgstr "پلن ۳ : سود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:411
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:443
 msgid "Plan 3 : Total"
 msgstr "پلن ۳ : تعداد اقساط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:419
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:451
 msgid "Show plan 4"
 msgstr "نمایش پلن ۴"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:427
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:459
 msgid "Plan 4 : Title"
 msgstr "پلن ۴ : عنوان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:431
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:463
 msgid "4 months"
 msgstr "۴ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:435
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:467
 msgid "Plan 4 : Prepayment"
 msgstr "پلن ۴ : پیش قسط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:443
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:475
 msgid "Plan 4 : Profit"
 msgstr "پلن ۴ : سود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:451
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:483
 msgid "Plan 4 : Total"
 msgstr "پلن ۴ : تعداد اقساط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:459
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:491
 msgid "Show plan 5"
 msgstr "نمایش پلن ۵"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:467
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:499
 msgid "Plan 5 : Title"
 msgstr "پلن ۵ : عنوان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:471
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:503
 msgid "5 months"
 msgstr "۵ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:475
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:507
 msgid "Plan 5 : Prepayment"
 msgstr "پلن ۵ : پیش قسط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:483
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:515
 msgid "Plan 5 : Profit"
 msgstr "پلن ۵ : سود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:491
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:523
 msgid "Plan 5 : Total"
 msgstr "پلن ۵ : تعداد اقساط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:499
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:531
 msgid "Show plan 6"
 msgstr "نمایش پلن ۶"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:507
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:539
 msgid "Plan 6 : Title"
 msgstr "پلن ۶ : عنوان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:511
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:543
 msgid "6 months"
 msgstr "۶ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:515
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:547
 msgid "Plan 6 : Prepayment"
 msgstr "پلن ۶ : پیش قسط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:523
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:555
 msgid "Plan 6 : Profit"
 msgstr "پلن ۶ : سود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:531
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:563
 msgid "Plan 6 : Total"
 msgstr "پلن ۶ : تعداد اقساط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:539
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:571
 msgid "Show plan 7"
 msgstr "نمایش پلن ۷"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:547
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:579
 msgid "Plan 7 : Title"
 msgstr "پلن ۷ : عنوان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:551
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:583
 msgid "7 months"
 msgstr "۷ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:555
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:587
 msgid "Plan 7 : Prepayment"
 msgstr "پلن ۷ : پیش قسط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:563
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:595
 msgid "Plan 7 : Profit"
 msgstr "پلن ۷ : سود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:571
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:603
 msgid "Plan 7 : Total"
 msgstr "پلن ۷ : تعداد اقساط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:579
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:611
 msgid "Show plan 8"
 msgstr "نمایش پلن ۸"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:587
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:619
 msgid "Plan 8 : Title"
 msgstr "پلن ۸ : عنوان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:591
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:623
 msgid "8 months"
 msgstr "۸ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:595
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:627
 msgid "Plan 8 : Prepayment"
 msgstr "پلن ۸ : پیش قسط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:603
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:635
 msgid "Plan 8 : Profit"
 msgstr "پلن ۸ : سود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:611
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:643
 msgid "Plan 8 : Total"
 msgstr "پلن ۸ : تعداد اقساط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:619
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:651
 msgid "Show plan 9"
 msgstr "نمایش پلن ۹"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:627
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:659
 msgid "Plan 9 : Title"
 msgstr "پلن ۹ : عنوان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:631
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:663
 msgid "9 months"
 msgstr "۹ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:635
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:667
 msgid "Plan 9 : Prepayment"
 msgstr "پلن ۹ : پیش قسط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:643
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:675
 msgid "Plan 9 : Profit"
 msgstr "پلن ۹ : سود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:651
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:683
 msgid "Plan 9 : Total"
 msgstr "پلن ۹ : تعداد اقساط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:659
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:691
 msgid "Show plan 10"
 msgstr "نمایش پلن ۱۰"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:667
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:699
 msgid "Plan 10 : Title"
 msgstr "پلن ۱۰ : عنوان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:671
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:703
 msgid "10 months"
 msgstr "۱۰ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:675
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:707
 msgid "Plan 10 : Prepayment"
 msgstr "پلن ۱۰ : پیش قسط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:683
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:715
 msgid "Plan 10 : Profit"
 msgstr "پلن ۱۰ : سود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:691
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:723
 msgid "Plan 10 : Total"
 msgstr "پلن ۱۰ : تعداد اقساط"
 
@@ -509,6 +547,9 @@ msgstr "روش ارسال"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:47
 msgid "Location"
 msgstr "مکان تحویل"
+
+#~ msgid "Sms"
+#~ msgstr "پیامک"
 
 #~ msgid "List of mails for send order notification"
 #~ msgstr "فهرست ایمیل ها برای ارسال اطلاعات رسانی ثبت سفارش"

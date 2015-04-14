@@ -30,8 +30,8 @@ return array(
             'name'   => 'payment'
         ),
         array(
-            'title'  => _a('Sms'),
-            'name'   => 'sms'
+            'title'  => _a('Notification'),
+            'name'   => 'notification'
         ),
         array(
             'title'  => _a('Installment'),
@@ -252,9 +252,9 @@ return array(
             'filter'       => 'number_int',
             'value'        => 1
         ),
-        // Sms
+        // Notification
         'sms_order_user' => array(
-            'category'     => 'sms',
+            'category'     => 'notification',
             'title'        => _a('New order notification to user'),
             'description'  => _a('Dear %s %s, Your order added on system'),
             'edit'         => 'text',
@@ -262,7 +262,7 @@ return array(
             'value'        => _a('Dear %s %s, Your order added on system'),
         ),
         'sms_order_admin' => array(
-            'category'     => 'sms',
+            'category'     => 'notification',
             'title'        => _a('New order notification to admin'),
             'description'  => _a('Dear admin, New order added on system'),
             'edit'         => 'text',
@@ -270,7 +270,7 @@ return array(
             'value'        => _a('Dear admin, New order added on system'),
         ),
         'sms_invoice_user' => array(
-            'category'     => 'sms',
+            'category'     => 'notification',
             'title'        => _a('Pay invoice notification to user'),
             'description'  => _a('Dear %s %s, Your invoice paid successfully'),
             'edit'         => 'text',
@@ -278,12 +278,44 @@ return array(
             'value'        => _a('Dear %s %s, Your invoice paid successfully'),
         ),
         'sms_invoice_admin' => array(
-            'category'     => 'sms',
+            'category'     => 'notification',
             'title'        => _a('Pay invoice notification to admin'),
             'description'  => _a('Dear admin, Your customer paid invoice successfully'),
             'edit'         => 'text',
             'filter'       => 'string',
             'value'        => _a('Dear admin, Your customer paid invoice successfully'),
+        ),
+        'notification_cron_invoice' => array(
+            'category'     => 'notification',
+            'title'        => _a('Set X day before due date'),
+            'description'  => _a('Notification invoice due date, X day before invoice time by cron'),
+            'edit'         => 'text',
+            'filter'       => 'number_int',
+            'value'        => 2
+        ),
+        'sms_invoice_duedate' => array(
+            'category'     => 'notification',
+            'title'        => _a('Duedate invoice notification to user'),
+            'description'  => _a('Dear %s %s, You have duedate invoice on next %s days'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Dear %s %s, You have duedate invoice on next %s days'),
+        ),
+        'notification_cron_expired' => array(
+            'category'     => 'notification',
+            'title'        => _a('Set X day after expired'),
+            'description'  => _a('Notification invoice expired, X day after invoice time by cron'),
+            'edit'         => 'text',
+            'filter'       => 'number_int',
+            'value'        => 1
+        ),
+        'user_expired_invoice' => array(
+            'category'     => 'notification',
+            'title'        => _a('Expired invoice notification to user'),
+            'description'  => _a('Dear %s %s, You have expired invoice on %s days ago'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Dear %s %s, You have expired invoice on %s days ago'),
         ),
         // Installment
         'installment_credit' => array(
