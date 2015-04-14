@@ -320,6 +320,10 @@ class Installment extends AbstractApi
         $d['all']['20-sun'] = 0;
         $d['all']['30-sun'] = 0;
 
+        $d['all']['10-invoice'] = array();
+        $d['all']['20-invoice'] = array();
+        $d['all']['30-invoice'] = array();
+
         $d['all']['10-order'] = array();
         $d['all']['20-order'] = array();
         $d['all']['30-order'] = array();
@@ -337,6 +341,7 @@ class Installment extends AbstractApi
                 $d['m']['10-invoice'][$invoice['id']] = $invoice;
                 $d['m']['10-sun'] = $d['m']['10-sun'] + $invoice['total_price'];
                 $d['all']['10-order'][] = $invoice['order'];
+                $d['all']['10-invoice'][$invoice['id']] = $invoice;
             }
         }
         $d['all']['10-sun'] = $d['all']['10-sun'] + $d['m']['10-sun'];
@@ -356,6 +361,7 @@ class Installment extends AbstractApi
                 $d['m']['20-invoice'][$invoice['id']] = $invoice;
                 $d['m']['20-sun'] = $d['m']['20-sun'] + $invoice['total_price'];
                 $d['all']['20-order'][] = $invoice['order'];
+                $d['all']['20-invoice'][$invoice['id']] = $invoice;
             }
         }
         $d['all']['20-sun'] = $d['all']['20-sun'] + $d['m']['20-sun'];
@@ -376,6 +382,7 @@ class Installment extends AbstractApi
                 $d['m']['30-invoice'][$invoice['id']] = $invoice;
                 $d['m']['30-sun'] = $d['m']['30-sun'] + $invoice['total_price'];
                 $d['all']['30-order'][] = $invoice['order'];
+                $d['all']['30-invoice'][$invoice['id']] = $invoice;
             }
         }
         $d['all']['30-sun'] = $d['all']['30-sun'] + $d['m']['30-sun'];
@@ -407,6 +414,7 @@ class Installment extends AbstractApi
                     $d[$i]['10-invoice'][$invoice['id']] = $invoice;
                     $d[$i]['10-sun'] = $d[$i]['10-sun'] + $invoice['total_price'];
                     $d['all']['10-order'][] = $invoice['order'];
+                    $d['all']['10-invoice'][$invoice['id']] = $invoice;
                 }
             }
             $d['all']['10-sun'] = $d['all']['10-sun'] + $d[$i]['10-sun'];
@@ -427,6 +435,7 @@ class Installment extends AbstractApi
                     $d[$i]['20-invoice'][$invoice['id']] = $invoice;
                     $d[$i]['20-sun'] = $d[$i]['20-sun'] + $invoice['total_price'];
                     $d['all']['20-order'][] = $invoice['order'];
+                    $d['all']['20-invoice'][$invoice['id']] = $invoice;
                 }
             }
             $d['all']['20-sun'] = $d['all']['20-sun'] + $d[$i]['20-sun'];
@@ -451,6 +460,7 @@ class Installment extends AbstractApi
                     $d[$i]['30-invoice'][$invoice['id']] = $invoice;
                     $d[$i]['30-sun'] = $d[$i]['30-sun'] + $invoice['total_price'];
                     $d['all']['30-order'][] = $invoice['order'];
+                    $d['all']['30-invoice'][$invoice['id']] = $invoice;
                 }
             }
             $d['all']['30-sun'] = $d['all']['30-sun'] + $d[$i]['30-sun'];

@@ -58,7 +58,51 @@
 			            <td class="text-center"><?php echo $block['d'][12]['10-sun']; ?></td>
 			            <td class="text-center"><?php echo $block['d']['all']['10-sun-view']; ?></td>
 					</tr>
+					<tr>
+						<td colspan="16" class="text-right">
+							<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#10-Modal">
+								<?php echo _b('Details'); ?>
+							</button>
+						</td>
+					</tr>
 				</table>
+				<div class="modal fade" id="10-Modal" tabindex="-1" role="dialog" aria-labelledby="10-ModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="<?php echo _b('Close'); ?>"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="10-ModalLabel"><?php echo _b('10 th invoices'); ?></h4>
+							</div>
+							<div class="modal-body">
+        						<?php if (!empty($block['d']['all']['10-invoice'])) { ?>
+								<table class="table table-striped table-bordered table-condensed small">
+									<tr>
+										<th class="text-center"><?php echo _b('Amount'); ?></th>
+										<th class="text-center"><?php echo _b('Time Create'); ?></th>
+										<th class="text-center"><?php echo _b('Due date'); ?></th>
+										<th class="text-center"><?php echo _b('Action'); ?></th>
+									</tr>
+									<?php foreach($block['d']['all']['10-invoice'] as $invoice) { ?>
+									<tr>
+										<td class="text-center"><?php echo $this->escape($invoice['total_price_view']); ?></td>
+										<td class="text-center"><?php echo $this->escape($invoice['time_create_view']); ?></td>
+										<td class="text-center"><?php echo $this->escape($invoice['time_duedate_view']); ?></td>
+										<td class="text-center">
+											<a class="btn btn-primary" title="<?php echo _b('View / Pay'); ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'invoice', 'id' => $invoice['id'])); ?>"><i class="fa fa-edit"></i> <?php echo _b('View / Pay'); ?></a>
+										</td>
+									</tr>
+									<?php } ?>
+								</table>
+        						<?php } else { ?>
+        						<div class="alert alert-info" role="alert"><?php echo _b('You dont have any invoice on this time'); ?></div>
+        						<?php } ?>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo _b('Close'); ?></button>
+							</div>
+    					</div>
+					</div>
+				</div>
 				<table class="table table-striped table-bordered table-condensed small">
 					<tr>
 						<th class="text-center col-md-table-16"><?php echo _b('20 th'); ?></th>
@@ -96,7 +140,51 @@
 			            <td class="text-center"><?php echo $block['d'][12]['20-sun']; ?></td>
 			            <td class="text-center"><?php echo $block['d']['all']['20-sun-view']; ?></td>
 					</tr>
+					<tr>
+						<td colspan="16" class="text-right">
+							<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#20-Modal">
+								<?php echo _b('Details'); ?>
+							</button>
+						</td>
+					</tr>
 				</table>
+				<div class="modal fade" id="20-Modal" tabindex="-1" role="dialog" aria-labelledby="20-ModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="<?php echo _b('Close'); ?>"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="20-ModalLabel"><?php echo _b('20 th invoices'); ?></h4>
+							</div>
+							<div class="modal-body">
+        						<?php if (!empty($block['d']['all']['20-invoice'])) { ?>
+								<table class="table table-striped table-bordered table-condensed small">
+									<tr>
+										<th class="text-center"><?php echo _b('Amount'); ?></th>
+										<th class="text-center"><?php echo _b('Time Create'); ?></th>
+										<th class="text-center"><?php echo _b('Due date'); ?></th>
+										<th class="text-center"><?php echo _b('Action'); ?></th>
+									</tr>
+									<?php foreach($block['d']['all']['20-invoice'] as $invoice) { ?>
+									<tr>
+										<td class="text-center"><?php echo $this->escape($invoice['total_price_view']); ?></td>
+										<td class="text-center"><?php echo $this->escape($invoice['time_create_view']); ?></td>
+										<td class="text-center"><?php echo $this->escape($invoice['time_duedate_view']); ?></td>
+										<td class="text-center">
+											<a class="btn btn-primary" title="<?php echo _b('View / Pay'); ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'invoice', 'id' => $invoice['id'])); ?>"><i class="fa fa-edit"></i> <?php echo _b('View / Pay'); ?></a>
+										</td>
+									</tr>
+									<?php } ?>
+								</table>
+        						<?php } else { ?>
+        						<div class="alert alert-info" role="alert"><?php echo _b('You dont have any invoice on this time'); ?></div>
+        						<?php } ?>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo _b('Close'); ?></button>
+							</div>
+    					</div>
+					</div>
+				</div>
 				<table class="table table-striped table-bordered table-condensed small">
 					<tr>
 						<th class="text-center col-md-table-16"><?php echo _b('30 th'); ?></th>
@@ -133,8 +221,52 @@
 			            <td class="text-center"><?php echo $block['d'][11]['30-sun']; ?></td>
 			            <td class="text-center"><?php echo $block['d'][12]['30-sun']; ?></td>
 			            <td class="text-center"><?php echo $block['d']['all']['30-sun-view']; ?></td>
-					</tr>		
+					</tr>
+					<tr>
+						<td colspan="16" class="text-right">
+							<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#30-Modal">
+								<?php echo _b('Details'); ?>
+							</button>
+						</td>
+					</tr>
 				</table>
+				<div class="modal fade" id="30-Modal" tabindex="-1" role="dialog" aria-labelledby="30-ModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="<?php echo _b('Close'); ?>"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="30-ModalLabel"><?php echo _b('30 th invoices'); ?></h4>
+							</div>
+							<div class="modal-body">
+        						<?php if (!empty($block['d']['all']['30-invoice'])) { ?>
+								<table class="table table-striped table-bordered table-condensed small">
+									<tr>
+										<th class="text-center"><?php echo _b('Amount'); ?></th>
+										<th class="text-center"><?php echo _b('Time Create'); ?></th>
+										<th class="text-center"><?php echo _b('Due date'); ?></th>
+										<th class="text-center"><?php echo _b('Action'); ?></th>
+									</tr>
+									<?php foreach($block['d']['all']['30-invoice'] as $invoice) { ?>
+									<tr>
+										<td class="text-center"><?php echo $this->escape($invoice['total_price_view']); ?></td>
+										<td class="text-center"><?php echo $this->escape($invoice['time_create_view']); ?></td>
+										<td class="text-center"><?php echo $this->escape($invoice['time_duedate_view']); ?></td>
+										<td class="text-center">
+											<a class="btn btn-primary" title="<?php echo _b('View / Pay'); ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'invoice', 'id' => $invoice['id'])); ?>"><i class="fa fa-edit"></i> <?php echo _b('View / Pay'); ?></a>
+										</td>
+									</tr>
+									<?php } ?>
+								</table>
+        						<?php } else { ?>
+        						<div class="alert alert-info" role="alert"><?php echo _b('You dont have any invoice on this time'); ?></div>
+        						<?php } ?>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo _b('Close'); ?></button>
+							</div>
+    					</div>
+					</div>
+				</div>
 				<table class="table table-striped table-bordered table-condensed small">
 					<tr>
 						<th class="text-center col-md-11">جمع کل</th>
