@@ -28,6 +28,7 @@ use Zend\Math\Rand;
  * Pi::api('order', 'order')->deliveryStatus($status);
  * Pi::api('order', 'order')->canonizeOrder($order);
  * Pi::api('order', 'order')->listProduct($id, $module);
+ * Pi::api('order', 'order')->listAllProduct($module);
  * Pi::api('order', 'order')->updateOrder($id);
  * Pi::api('order', 'order')->setOrder($order);
  * Pi::api('order', 'order')->getOrder();
@@ -278,6 +279,28 @@ class Order extends AbstractApi
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
             $list[$row->id]['details'] = Pi::api('order', $module)->getProductDetails($row->product);
+            if (empty($row->extra)) {
+                $list[$row->id]['extra'] = array();
+            } else {
+                $list[$row->id]['extra'] = json::decode($row->extra, true);
+            }
+        }
+        return $list;
+    }
+
+    public function listAllProduct($module)
+    {
+        $list = array();
+        $select = Pi::model('basket', $this->getModule())->select();
+        $rowset = Pi::model('basket', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $list[$row->id] = $row->toArray();
+            $list[$row->id]['details'] = Pi::api('order', $module)->getProductDetails($row->product);
+            if (empty($row->extra)) {
+                $list[$row->id]['extra'] = array();
+            } else {
+                $list[$row->id]['extra'] = json::decode($row->extra, true);
+            }
         }
         return $list;
     }

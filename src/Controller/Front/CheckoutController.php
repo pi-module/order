@@ -17,6 +17,7 @@ use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Module\Order\Form\OrderForm;
 use Module\Order\Form\OrderFilter;
+use Zend\Json\Json;
 
 class CheckoutController extends IndexController
 {
@@ -186,6 +187,12 @@ class CheckoutController extends IndexController
                         $basket->vat_price = $product['vat_price'];
                         $basket->total_price = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']) * $product['number'];
                         $basket->number = $product['number'];
+                        // Set installment to extra
+                        if ($order->type_payment == 'installment') {
+                            $extra = array();
+                            $extra['installment'] = Pi::api('installment', 'order')->setPriceForProduct($basket->total_price, $order->plan);
+                            $basket->extra = json::encode($extra);
+                        }
                         $basket->save();
                     }
                 }

@@ -19,6 +19,7 @@ use Pi\Application\Api\AbstractApi;
 /*
  * Pi::api('installment', 'order')->planList();
  * Pi::api('installment', 'order')->setPriceForInvoice($price, $plan, $user);
+ * Pi::api('installment', 'order')->setPriceForProduct($price, $plan);
  * Pi::api('installment', 'order')->setPriceForView($price, $user);
  * Pi::api('installment', 'order')->blockTable($user);
  */
@@ -208,6 +209,51 @@ class Installment extends AbstractApi
         return $invoices;
     }
 
+    public function setPriceForProduct($price, $plan)
+    {
+        // Get plan
+        $planList = $this->planList();
+        $planList = $planList[$plan];
+        // Set price
+        $prepaymentPrice = ($price / 100) * $planList['prepayment'];
+        $remainingPrice = $price - $prepaymentPrice;
+        $step1 = $remainingPrice * ($planList['profit'] / 100);
+        $step2 = $step1 * $planList['total'];
+        $step3 = $step2 + $remainingPrice;
+        // Check total
+        if ($planList['total'] > 0) {
+            $installmentPrice = $step3 / $planList['total'];
+        } else {
+            $installmentPrice = $step3;
+        }
+        // Set prepayment invoices
+        $invoices = array();
+        $invoices[0] = array(
+            'price'   => Pi::api('api', 'order')->makePrice($prepaymentPrice),
+            'duedate' => time(),
+            'month'   => 0,
+        );
+        $total = $prepaymentPrice;
+        // Set all other invoices
+        for ($i=1; $i <= $planList['total']; $i++) {
+            // Set price
+            $price = Pi::api('api', 'order')->makePrice($installmentPrice);
+            // Set array
+            $invoices[$i] = array(
+                'price'   => $price,
+                'duedate' => $this->makeTime($i),
+                'month'    => $i,
+            );
+            // Set total
+            $total = $total + $installmentPrice;
+        }
+        // Set total
+        $invoices['total'] = array(
+            'price'        => $total,
+        );
+        return $invoices;
+    }
+
     public function setPriceForView($price, $user = array())
     {
     	// Get plan
@@ -274,6 +320,10 @@ class Installment extends AbstractApi
         $d['all']['20-sun'] = 0;
         $d['all']['30-sun'] = 0;
 
+        $d['all']['10-order'] = array();
+        $d['all']['20-order'] = array();
+        $d['all']['30-order'] = array();
+
         $month = pdate('m', strtotime('now'));
         $year = pdate('Y', strtotime('now'));
 
@@ -286,6 +336,7 @@ class Installment extends AbstractApi
             if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, 10, $year)) {
                 $d['m']['10-invoice'][$invoice['id']] = $invoice;
                 $d['m']['10-sun'] = $d['m']['10-sun'] + $invoice['total_price'];
+                $d['all']['10-order'][] = $invoice['order'];
             }
         }
         $d['all']['10-sun'] = $d['all']['10-sun'] + $d['m']['10-sun'];
@@ -304,6 +355,7 @@ class Installment extends AbstractApi
             if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, 20, $year)) {
                 $d['m']['20-invoice'][$invoice['id']] = $invoice;
                 $d['m']['20-sun'] = $d['m']['20-sun'] + $invoice['total_price'];
+                $d['all']['20-order'][] = $invoice['order'];
             }
         }
         $d['all']['20-sun'] = $d['all']['20-sun'] + $d['m']['20-sun'];
@@ -323,6 +375,7 @@ class Installment extends AbstractApi
             if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, $dayM, $year)) {
                 $d['m']['30-invoice'][$invoice['id']] = $invoice;
                 $d['m']['30-sun'] = $d['m']['30-sun'] + $invoice['total_price'];
+                $d['all']['30-order'][] = $invoice['order'];
             }
         }
         $d['all']['30-sun'] = $d['all']['30-sun'] + $d['m']['30-sun'];
@@ -353,6 +406,7 @@ class Installment extends AbstractApi
                 if ($invoice['time_duedate'] > pmktime(0, 0, 0, $month, 8, $year) && $invoice['time_duedate'] < pmktime(0, 0, 0, $month, 12, $year)) {    
                     $d[$i]['10-invoice'][$invoice['id']] = $invoice;
                     $d[$i]['10-sun'] = $d[$i]['10-sun'] + $invoice['total_price'];
+                    $d['all']['10-order'][] = $invoice['order'];
                 }
             }
             $d['all']['10-sun'] = $d['all']['10-sun'] + $d[$i]['10-sun'];
@@ -372,6 +426,7 @@ class Installment extends AbstractApi
                 if ($invoice['time_duedate'] > pmktime(0, 0, 0, $month, 18, $year) && $invoice['time_duedate'] < pmktime(0, 0, 0, $month, 22, $year)) {    
                     $d[$i]['20-invoice'][$invoice['id']] = $invoice;
                     $d[$i]['20-sun'] = $d[$i]['20-sun'] + $invoice['total_price'];
+                    $d['all']['20-order'][] = $invoice['order'];
                 }
             }
             $d['all']['20-sun'] = $d['all']['20-sun'] + $d[$i]['20-sun'];
@@ -395,6 +450,7 @@ class Installment extends AbstractApi
                 if ($invoice['time_duedate'] > pmktime(0, 0, 0, $month, 28, $year) && $invoice['time_duedate'] < pmktime(0, 0, 0, $monthNext, 2, $yearNext)) {    
                     $d[$i]['30-invoice'][$invoice['id']] = $invoice;
                     $d[$i]['30-sun'] = $d[$i]['30-sun'] + $invoice['total_price'];
+                    $d['all']['30-order'][] = $invoice['order'];
                 }
             }
             $d['all']['30-sun'] = $d['all']['30-sun'] + $d[$i]['30-sun'];
@@ -423,6 +479,10 @@ class Installment extends AbstractApi
         } else {
             $d['all']['30-sun-view'] = '';
         }
+
+        $d['all']['10-order'] = array_unique($d['all']['10-order']);
+        $d['all']['20-order'] = array_unique($d['all']['20-order']);
+        $d['all']['30-order'] = array_unique($d['all']['30-order']);
         
         $d['total'] = $d['all']['10-sun'] + $d['all']['20-sun'] + $d['all']['30-sun'];
         if ($d['total']) {

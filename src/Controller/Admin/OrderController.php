@@ -358,6 +358,22 @@ class OrderController extends ActionController
 
     public function printAction()
     {
-        $this->view()->setTemplate('empty');
+        // Get id
+        $id = $this->params('id');
+        $module = $this->params('module');
+        // Get order
+        $order = $this->getModel('order')->find($id);
+        $order = Pi::api('order', 'order')->canonizeOrder($order);
+        // Set Products
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        // Set Products
+        $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
+        // Set installment
+        $order['installment'] = Pi::api('installment', 'order')->blockTable($order['user']);
+        // Get all products
+        $order['allproducts'] = Pi::api('order', 'order')->listAllProduct('shop');
+        // Set view
+        $this->view()->setTemplate('order-print')->setLayout('layout-content');
+        $this->view()->assign('order', $order);
     }
 }

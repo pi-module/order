@@ -72,6 +72,7 @@ CREATE TABLE `{basket}` (
     `vat_price` decimal(16,2) NOT NULL default '0.00',
     `total_price` decimal(16,2) NOT NULL default '0.00',
     `number` int(10) unsigned NOT NULL default '0',
+    `extra` text,
     PRIMARY KEY (`id`),
     KEY `order` (`order`),
     KEY `product` (`product`)

@@ -39,14 +39,19 @@ class Update extends BasicUpdate
         $moduleVersion    = $e->getParam('version');
 
         // Set order model
-        $orderModel     = Pi::model('order', $this->module);
-        $orderTable     = $orderModel->getTable();
-        $orderAdapter   = $orderModel->getAdapter();
+        $orderModel       = Pi::model('order', $this->module);
+        $orderTable       = $orderModel->getTable();
+        $orderAdapter     = $orderModel->getAdapter();
 
         // Set invoice model
         $invoiceModel     = Pi::model('invoice', $this->module);
         $invoiceTable     = $invoiceModel->getTable();
         $invoiceAdapter   = $invoiceModel->getAdapter();
+
+        // Set basket model
+        $basketModel      = Pi::model('basket', $this->module);
+        $basketTable      = $basketModel->getTable();
+        $basketAdapter    = $basketModel->getAdapter();
 
         if (version_compare($moduleVersion, '1.3.6', '<')) {
             // Alter table field add id_number
@@ -95,6 +100,21 @@ class Update extends BasicUpdate
             $sql = sprintf("ALTER TABLE %s ADD `type_commodity` enum('product','service') NOT NULL default 'product'", $orderTable);
             try {
                 $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
+        if (version_compare($moduleVersion, '1.4.8', '<')) {
+            // Alter table field add credit_price
+            $sql = sprintf("ALTER TABLE %s ADD `extra` text", $basketTable);
+            try {
+                $basketAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
                     'status'    => false,

@@ -172,7 +172,9 @@
             }
             // Set row class
             $rowClass = '';
-            if ($invoice['time_duedate'] < strtotime("-1 day")) {
+            if ($invoice['status'] == 1) {
+                $rowClass = ' class="success"';
+            } elseif ($invoice['time_duedate'] < strtotime("-1 day")) {
                 $rowClass = ' class="danger"';
             } elseif ($invoice['time_duedate'] < strtotime("+1 day")) {
                 $rowClass = ' class="warning"';
@@ -196,7 +198,12 @@
             <span class="label label-danger"><?php _e('Canceled'); ?></span>
         </p>
 	</div>
-</div>
+    <div class="clearfix">
+        <div class="col-md-12 text-right">
+            <a class="btn btn-success btn-lg" title="<?php _e('Print'); ?>" href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'print', 'id' => $order['id'])); ?>" target="_blank"><i class="fa fa-print"></i> <?php _e('Print'); ?></a>
+        </div>
+    </div>
+</div> 
 <script>
 (function($) {
     var page = {
