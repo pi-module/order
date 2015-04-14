@@ -337,7 +337,7 @@ class Installment extends AbstractApi
         $d['m']['10-sun'] = 0;
         $d['m']['10-invoice'] = array();
         foreach ($invoices as $invoice) {
-            if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, 10, $year)) {
+            if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, 10, $year) && $invoice['status'] == 2) {
                 $d['m']['10-invoice'][$invoice['id']] = $invoice;
                 $d['m']['10-sun'] = $d['m']['10-sun'] + $invoice['total_price'];
                 $d['all']['10-order'][] = $invoice['order'];
@@ -357,7 +357,7 @@ class Installment extends AbstractApi
         $d['m']['20-sun'] = 0;
         $d['m']['20-invoice'] = array();
         foreach ($invoices as $invoice) {
-            if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, 20, $year)) {
+            if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, 20, $year) && $invoice['status'] == 2) {
                 $d['m']['20-invoice'][$invoice['id']] = $invoice;
                 $d['m']['20-sun'] = $d['m']['20-sun'] + $invoice['total_price'];
                 $d['all']['20-order'][] = $invoice['order'];
@@ -378,7 +378,7 @@ class Installment extends AbstractApi
         $d['m']['30-sun'] = 0;
         $d['m']['30-invoice'] = array();
         foreach ($invoices as $invoice) {
-            if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, $dayM, $year)) {
+            if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, $dayM, $year) && $invoice['status'] == 2) {
                 $d['m']['30-invoice'][$invoice['id']] = $invoice;
                 $d['m']['30-sun'] = $d['m']['30-sun'] + $invoice['total_price'];
                 $d['all']['30-order'][] = $invoice['order'];
