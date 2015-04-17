@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-04-17 18:56+0330\n"
+"POT-Creation-Date: 2015-04-17 20:09+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -939,6 +939,10 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:60
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/result.phtml:4
 msgid "Error"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Validator/Term.php:36
+msgid "You need accept our Terms & Conditions for checkout"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:4

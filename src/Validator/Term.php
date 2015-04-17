@@ -23,11 +23,21 @@ class Term extends AbstractValidator
     /**
      * @var array
      */
-    protected $messageTemplates = array(
-        self::TAKEN     => 'You need accept our Accept Terms & Conditions for checkout',
-    );
+    protected $messageTemplates = array();
 
     protected $options = array();
+
+    /**
+     * {@inheritDoc}
+     */
+    public function __construct($options = null)
+    {
+        $this->messageTemplates = $this->messageTemplates + array(
+            self::TAKEN     => __('You need accept our Terms & Conditions for checkout'),
+        );
+
+        parent::__construct($options);
+    }
 
     /**
      * Slug validate

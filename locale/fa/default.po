@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-04-17 18:16+0330\n"
+"POT-Creation-Date: 2015-04-17 20:01+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -264,23 +264,23 @@ msgid "Update delivery"
 msgstr "به روز رسانی تحویل"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:34
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:262
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:263
 msgid "Your cart is empty."
 msgstr "سبد خرید شما خالی است"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:39
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:267
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:268
 msgid "So sorry, At this moment order is inactive"
 msgstr "متاسفانه در این لحظه امکان ثبت سفارش وجود ندارد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:278
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:279
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 "پلن قسطی سفارش شما با موفقت ذخیره شد، لطفا اطلاعات مورد نیاز را تکمیل "
 "فرمایید و بعد از آن پیش قسط مربوط به این سفارش را پرداخت نمایید."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:394
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:395
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/Element/Gateway.php:28
 msgid "Offline"
 msgstr "آفلاین"
@@ -608,7 +608,7 @@ msgid "Packing"
 msgstr "بسته بندی"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:263
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:121
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:120
 msgid "Location"
 msgstr "مکان"
 
@@ -617,7 +617,7 @@ msgstr "مکان"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:41
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:19
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:112
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:122
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:121
 msgid "Delivery"
 msgstr "روش تحویل"
 
@@ -650,7 +650,7 @@ msgstr "سفارش"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:41
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:18
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:104
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:123
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:122
 msgid "Payment"
 msgstr "پرداخت"
 
@@ -949,6 +949,10 @@ msgstr "امضای sandbox"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/result.phtml:4
 msgid "Error"
 msgstr "خطا"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Validator/Term.php:36
+msgid "You need accept our Terms & Conditions for checkout"
+msgstr "به منظور ثبت سفارش ، باید شرایط و مقررات فروش ما را بپذیرید."
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:4
 msgid "Add delivery methods"
@@ -1604,18 +1608,14 @@ msgid "Total Discount"
 msgstr "مجموع تخفیف"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:118
-msgid "Total Number"
-msgstr "مجموع تعداد"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:119
 msgid "Total Shipping"
 msgstr "مجموع هزینه ارسال"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:120
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:119
 msgid "Final Price"
 msgstr "قیمت نهایی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:130
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:129
 msgid "Terms & Conditions"
 msgstr "شرایط و مقررات"
 
@@ -1637,7 +1637,7 @@ msgstr "روش های خرید قسطی"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:91
 msgid "Your total invoices"
-msgstr ""
+msgstr "مجموع فاکتور های شما"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:92
 msgid "Read lines are our of your credit"
@@ -1698,6 +1698,9 @@ msgstr "نوع"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:81
 msgid "List of your invoice"
 msgstr "فهرست فاکتور های شما"
+
+#~ msgid "Total Number"
+#~ msgstr "مجموع تعداد"
 
 #~ msgid "Your credit"
 #~ msgstr "اعتبار شما"
