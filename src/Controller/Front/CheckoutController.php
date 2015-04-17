@@ -218,10 +218,36 @@ class CheckoutController extends IndexController
             $user = Pi::api('user', 'order')->getUserInformation();
             $form->setData($user);
         }
+        // Set price
+        $price['product'] = 0;
+        $price['discount'] = 0;
+        $price['shipping'] = 0;
+        $price['packing'] = 0;
+        $price['vat'] = 0;
+        $price['total'] = 0;
+        foreach ($cart['product'] as $product) {
+            // Set price
+            $price['product'] = $product['product_price'] + $price['product'];
+            $price['discount'] = $product['discount_price'] + $price['discount'];
+            $price['shipping'] = $product['shipping_price'] + $price['shipping'];
+            $price['packing'] = $product['packing_price'] + $price['packing'];
+            $price['vat'] = $product['vat_price'] + $price['vat'];
+            // Set total
+            $total = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']) * $product['number'];
+            $price['total'] = $total + $price['total'];
+        }
+        // Set plan
+        if ($cart['type_payment'] == 'installment') {
+            $user = Pi::api('user', 'order')->getUserInformation();
+            $plan = Pi::api('installment', 'order')->setPriceForInvoice($price['total'], $cart['plan'], $user);
+            $this->view()->assign('plan', $plan);
+        }
         // Set view
         $this->view()->setTemplate('checkout');
         $this->view()->assign('form', $form);
         $this->view()->assign('cart', $cart);
+        $this->view()->assign('price', $price);
+        $this->view()->assign('config', $config);
     }
 
     public function installmentAction()

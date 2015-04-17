@@ -155,7 +155,7 @@ class OrderFilter extends InputFilter
                     ),
                 ),
             ));
-            $this->add(array(
+            /* $this->add(array(
                 'name' => 'address2',
                 'required' => false,
                 'filters' => array(
@@ -163,7 +163,7 @@ class OrderFilter extends InputFilter
                         'name' => 'StringTrim',
                     ),
                 ),
-            ));
+            )); */
         }
         // country
         if ($config['order_country']) {
@@ -286,6 +286,18 @@ class OrderFilter extends InputFilter
                 ));
                 break;
         }
+        // user_note
+        if ($config['order_usernote']) {
+            $this->add(array(
+                'name' => 'user_note',
+                'required' => false,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+            ));
+        }
         // Update profile confirmation
         if ($config['order_update_user']) {
             $this->add(array(
@@ -295,6 +307,21 @@ class OrderFilter extends InputFilter
                     array(
                         'name' => 'StringTrim',
                     ),
+                ),
+            ));
+        }
+        // order_term
+        if ($config['order_term']) {
+            $this->add(array(
+                'name' => 'order_term',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+                'validators'    => array(
+                    new \Module\Order\Validator\Term,
                 ),
             ));
         }

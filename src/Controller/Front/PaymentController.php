@@ -49,6 +49,12 @@ class PaymentController extends IndexController
             // Set session
             $_SESSION['payment']['process_update'] = time();
         }
+        // set Products
+        $order = Pi::api('order', 'order')->getOrder($invoice['order']);
+        // Check order is for this user
+        if (!in_array($order['status_order'], array(1, 2, 3))) {
+            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This order not avtice.'));
+        }
         // Check running pay processing
         $processing = Pi::api('processing', 'order')->checkProcessing();
         if (!$processing) {

@@ -39,14 +39,21 @@ class Block
         $block = array_merge($block, $options);
         // Get user info
         $user = Pi::api('user', 'order')->getUserInformation();
+        // Get order
         $user['orders'] = Pi::api('order', 'order')->getOrderFromUser($user['id'], true);
-        $user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id'], true);
+        // Set order ids
+        $orderIds = array();
+        foreach ($user['orders'] as $order) {
+            $orderIds[] = $order['id'];
+        }
+        // Get invoice
+        $user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id'], true, $orderIds);
         // Set more link 
         $block['more'] = Pi::url('order');
         // Set block array
         $block['resources'] = $user;
 
-        $block['d'] = Pi::api('installment', 'order')->blockTable($user);
+        $block['d'] = Pi::api('installment', 'order')->blockTable($user, $orderIds);
         return $block;
     }
 }

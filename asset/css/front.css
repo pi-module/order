@@ -1,0 +1,53 @@
+ul.progtrckr {
+    margin: 0;
+    padding: 0;
+    list-style-type none;
+}
+
+ul.progtrckr li {
+    display: inline-block;
+    text-align: center;
+    line-height: 3em;
+    width: 19.7%;
+}
+
+ul.progtrckr li.progtrckr-done {
+    color: black;
+    border-bottom: 4px solid yellowgreen;
+}
+ul.progtrckr li.progtrckr-todo {
+    color: silver; 
+    border-bottom: 4px solid silver;
+}
+ul.progtrckr li.progtrckr-error {
+    color: red; 
+    border-bottom: 4px solid red;
+}
+
+ul.progtrckr li:after {
+    content: "\00a0\00a0";
+}
+ul.progtrckr li:before {
+    position: relative;
+    bottom: -2.5em;
+    float: left;
+    left: 50%;
+    line-height: 1em;
+}
+ul.progtrckr li.progtrckr-done:before {
+    content: "\2713";
+    color: white;
+    background-color: yellowgreen;
+    height: 1.2em;
+    width: 1.2em;
+    line-height: 1.2em;
+    border: none;
+    border-radius: 1.2em;
+}
+ul.progtrckr li.progtrckr-todo:before {
+    content: "\039F";
+    color: silver;
+    background-color: white;
+    font-size: 1.5em;
+    bottom: -1.6em;
+}

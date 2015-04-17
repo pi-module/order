@@ -18,6 +18,7 @@ use Pi\Application\Api\AbstractApi;
 
 /*
  * Pi::api('notification', 'order')->addOrder($order);
+ * Pi::api('notification', 'order')->processOrder($order, $type);
  * Pi::api('notification', 'order')->payInvoice($order, $invoice);
  * Pi::api('notification', 'order')->duedateInvoice($order, $invoice);
  * Pi::api('notification', 'order')->expiredInvoice($order, $invoice);
@@ -48,11 +49,11 @@ class Notification extends AbstractApi
             'id'           => $order['id'],
         )));
 
-        // Set info
+        // Set mail information
         $information = array(
             'first_name'   => $order['first_name'],
         	'last_name'    => $order['last_name'], 
-        	'order_id'     => $order['id'],
+        	'order_id'     => $order['code'],
         	'order_link'   => $link,
         );
 
@@ -73,6 +74,121 @@ class Notification extends AbstractApi
 
         // Send sms to user
         $content = sprintf($config['sms_order_user'], $order['first_name'], $order['last_name']);
+        Pi::api('sms', 'notification')->send($content, $order['mobile']);
+    }
+
+    public function processOrder($order, $type)
+    {
+        // Check notification module
+        if (!Pi::service('module')->isActive('notification')) {
+            return false;
+        }
+
+        // Get sitename
+        $sitename = Pi::config('sitename');
+
+        // Set status
+        $status = '';
+        switch ($type) {
+            case 'order':
+                switch ($order['status_order']) {
+                    // Orders validated
+                    case 2:
+                        $status = __('Confirmed');
+                        break;
+
+                    // Orders pending
+                    case 3:
+                        $status = __('has pending to confirme');
+                        break;
+
+                    // Orders finished
+                    case 7:
+                        $status = __('Finished');
+                        break;
+
+                }                
+                break;
+
+            case 'payment':
+                switch ($order['status_order']) {
+                    // Paid
+                    case 2:
+                        $status = __('Paid');
+                        break;
+                }  
+                break;
+
+            case 'delivery':
+                switch ($order['status_order']) {
+                    // Packed
+                    case 2:
+                        $status = __('Packed');
+                        break;
+
+                    // Posted
+                    case 3:
+                        $status = __('Posted');
+                        break;
+
+                    // Delivered
+                    case 4:
+                        $status = __('Delivered');
+                        break;
+
+                    // Back eaten
+                    case 5:
+                        $status = __('Back eaten');
+                        break;
+                } 
+                break;
+        }
+
+        // Check status
+        if (empty($status)) {
+            return false;
+        }
+        
+        // Set mail text
+        $text = sprintf(
+            __('Your order by %s ID %s on %s website'), 
+            $order['code'], 
+            $status,
+            $sitename
+        );
+
+        // Set sms content
+        $content = sprintf(
+            __('Dear %s %s, Your order by %s ID %s'), 
+            $order['first_name'], 
+            $order['last_name'], 
+            $order['code'],
+            $status
+        );
+
+        // Set link
+        $link = Pi::url(Pi::service('url')->assemble('order', array(
+            'module'       => $this->getModule(),
+            'controller'   => 'detail',
+            'action'       => 'index',
+            'id'           => $order['id'],
+        )));
+
+        // Set mail information
+        $information = array(
+            'first_name'   => $order['first_name'],
+            'last_name'    => $order['last_name'], 
+            'order_link'   => $link,
+            'text'         => $text,
+        );
+
+        // Send mail to user
+        $toUser = array(
+            $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
+        );
+        Pi::api('mail', 'notification')->send($toUser, 'user_process_order', $information, Pi::service('module')->current());
+
+        // Send sms to user
         Pi::api('sms', 'notification')->send($content, $order['mobile']);
     }
 
@@ -98,7 +214,7 @@ class Notification extends AbstractApi
             'id'           => $invoice['id'],
         )));
 
-        // Set info
+        // Set mail information
         $information = array(
             'first_name'   => $order['first_name'],
             'last_name'    => $order['last_name'], 
@@ -144,7 +260,7 @@ class Notification extends AbstractApi
             'id'           => $invoice['id'],
         )));
 
-        // Set info
+        // Set mail information
         $information = array(
             'first_name'   => $order['first_name'],
             'last_name'    => $order['last_name'], 
@@ -182,7 +298,7 @@ class Notification extends AbstractApi
             'id'           => $invoice['id'],
         )));
 
-        // Set info
+        // Set mail information
         $information = array(
             'first_name'   => $order['first_name'],
             'last_name'    => $order['last_name'], 

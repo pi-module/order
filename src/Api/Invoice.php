@@ -22,7 +22,7 @@ use Zend\Math\Rand;
  * Pi::api('invoice', 'order')->createInvoice($id);
  * Pi::api('invoice', 'order')->getInvoice($id);
  * Pi::api('invoice', 'order')->getInvoiceFromOrder($order);
- * Pi::api('invoice', 'order')->getInvoiceFromUser($uid, $compressed);
+ * Pi::api('invoice', 'order')->getInvoiceFromUser($uid, $compressed, $orderIds);
  * Pi::api('invoice', 'order')->getInvoiceForPayment($id);
  * Pi::api('invoice', 'order')->updateInvoice($randomId);
  * Pi::api('invoice', 'order')->canonizeInvoice($invoice);
@@ -223,7 +223,7 @@ class Invoice extends AbstractApi
         return $invoices;
     }
 
-    public function getInvoiceFromUser($uid, $compressed = false)
+    public function getInvoiceFromUser($uid, $compressed = false, $orderIds = array())
     {
         $invoices = array();
         // Check compressed
@@ -231,6 +231,10 @@ class Invoice extends AbstractApi
             $where = array('uid' => $uid, 'status' => 2, 'time_duedate < ?' => strtotime('+1 month'));
         } else {
             $where = array('uid' => $uid);
+        }
+        // Check order ids
+        if (!empty($orderIds)) {
+            $where['order'] = $orderIds;
         }
         // Select
         $select = Pi::model('invoice', $this->getModule())->select()->where($where);

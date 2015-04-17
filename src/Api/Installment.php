@@ -21,7 +21,7 @@ use Pi\Application\Api\AbstractApi;
  * Pi::api('installment', 'order')->setPriceForInvoice($price, $plan, $user);
  * Pi::api('installment', 'order')->setPriceForProduct($price, $plan);
  * Pi::api('installment', 'order')->setPriceForView($price, $user);
- * Pi::api('installment', 'order')->blockTable($user);
+ * Pi::api('installment', 'order')->blockTable($user, $orderIds);
  */
 
 class Installment extends AbstractApi
@@ -309,11 +309,11 @@ class Installment extends AbstractApi
         return $time;
     }
 
-    public function blockTable($user)
+    public function blockTable($user, $orderIds)
     {
         require_once Pi::path('module') . '/order/src/Api/pdate.php';
 
-        $invoices = Pi::api('invoice', 'order')->getInvoiceFromUser($user['uid']);
+        $invoices = Pi::api('invoice', 'order')->getInvoiceFromUser($user['uid'], false, $orderIds);
         
         $d = array();
         $d['all']['10-sun'] = 0;

@@ -47,7 +47,7 @@ class Order extends AbstractApi
 
     public function getOrderFromUser($uid, $compressed = false)
     {
-        $invoices = array();
+        $orders = array();
         // Check compressed
         if ($compressed) {
             $where = array('uid' => $uid, 'status_order' => array(1, 2, 3));
@@ -58,9 +58,9 @@ class Order extends AbstractApi
         $select = Pi::model('order', $this->getModule())->select()->where($where);
         $rowset = Pi::model('order', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
-            $invoices[$row->id] = $this->canonizeOrder($row);
+            $orders[$row->id] = $this->canonizeOrder($row);
         }
-        return $invoices;
+        return $orders;
     }
 
     /* public function checkoutConfig()

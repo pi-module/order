@@ -211,14 +211,6 @@ return array(
             'filter'       => 'number_int',
             'value'        => 1
         ),
-        'order_gateway' => array(
-            'category'     => 'order',
-            'title'        => _a('Show gateway'),
-            'description'  => '',
-            'edit'         => 'checkbox',
-            'filter'       => 'number_int',
-            'value'        => 1
-        ),
         'order_promo' => array(
             'category'     => 'order',
             'title'        => _a('Show promo'),
@@ -226,6 +218,28 @@ return array(
             'edit'         => 'checkbox',
             'filter'       => 'number_int',
             'value'        => 1
+        ),
+        'order_usernote' => array(
+            'category'     => 'order',
+            'title'        => _a('Show user note'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 1
+        ),
+        'order_term' => array(
+            'category'     => 'order',
+            'title'        => _a('Show order term'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 0
+        ),
+        'order_termtext' => array(
+            'category'     => 'order',
+            'title'        => _a('Order term'),
+            'description'  => '',
+            'edit'         => 'textarea',
         ),
         // Price
         'price_custom' => array(

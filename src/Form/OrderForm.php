@@ -163,7 +163,7 @@ class OrderForm  extends BaseForm
             $this->add(array(
                 'name' => 'address1',
                 'options' => array(
-                    'label' => __('Address 1'),
+                    'label' => __('Delivery address'),
                 ),
                 'attributes' => array(
                     'type' => 'text',
@@ -171,7 +171,7 @@ class OrderForm  extends BaseForm
                     'required' => true,
                 )
             ));
-            $this->add(array(
+            /* $this->add(array(
                 'name' => 'address2',
                 'options' => array(
                     'label' => __('Address 2'),
@@ -180,7 +180,7 @@ class OrderForm  extends BaseForm
                     'type' => 'text',
                     'description' => '',
                 )
-            ));
+            )); */
         }
         // country
         if ($this->config['order_country']) {
@@ -307,7 +307,7 @@ class OrderForm  extends BaseForm
                         ),
                         'attributes' => array(
                             'id'    => 'select-payment',
-                            'size'  => 5,
+                            'size'  => 1,
                             'required' => true,
                         )
                     ));
@@ -325,11 +325,26 @@ class OrderForm  extends BaseForm
                     ),
                     'attributes' => array(
                         'id'    => 'select-payment',
-                        'size'  => 5,
+                        'size'  => 1,
                         'required' => true,
                     )
                 ));
                 break;
+        }
+        // user_note
+        if ($this->config['order_usernote']) {
+            $this->add(array(
+                'name' => 'user_note',
+                'options' => array(
+                    'label' => __('User note'),
+                ),
+                'attributes' => array(
+                    'type' => 'textarea',
+                    'rows' => '5',
+                    'cols' => '40',
+                    'description' => '',
+                )
+            ));
         }
         // Update profile confirmation
         if ($this->config['order_update_user']) {
@@ -344,12 +359,25 @@ class OrderForm  extends BaseForm
                 )
             ));
         }
+        // order_term
+        if ($this->config['order_term']) {
+            $this->add(array(
+                'name' => 'order_term',
+                'type' => 'checkbox',
+                'options' => array(
+                    'label' => __('Accept Terms & Conditions'),
+                ),
+                'attributes' => array(
+                    'description' => '',
+                )
+            ));
+        }
         // Save
         $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
-                'value' => __('Next'),
+                'value' => __('Save order'),
                 'class' => 'btn btn-primary',
             )
         ));

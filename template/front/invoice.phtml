@@ -17,37 +17,25 @@
 				<?php if (!empty($order['id_number'])) { ?>
 				<p><strong><?php _e('ID number'); ?></strong> : <span><?php echo $this->escape($order['id_number']); ?></span></p>
 				<?php } ?>
-				<?php if (!empty($order['email'])) { ?>
-				<p><strong><?php _e('Email'); ?></strong> : <span><?php echo $this->escape($order['email']); ?></span></p>
-				<?php } ?>
 				<p><strong><?php _e('Order'); ?></strong> : <span><?php echo $this->escape($order['code']); ?></span></p>
-				<p><strong><?php _e('Gateway'); ?></strong> : <span><?php echo $this->escape($invoice['gateway']); ?></span></p>
-				<p><strong><?php _e('Create'); ?></strong> : <span><?php echo $this->escape($invoice['time_create_view']); ?> </span></p>
 			</div>
 			<div class="col-md-6">
-				<?php if (!empty($order['address1'])) { ?>
-				<p><strong><?php _e('Address 1'); ?></strong> : <span><?php echo $this->escape($order['address1']); ?></span></p>
-				<?php } ?>
-				<?php if (!empty($order['address2'])) { ?>
-				<p><strong><?php _e('Address 2'); ?></strong> : <span><?php echo $this->escape($order['address2']); ?></span></p>
-				<?php } ?>
-				<?php if (!empty($order['city'])) { ?>
-				<p><strong><?php _e('City'); ?></strong> : <span><?php echo $this->escape($order['city']); ?></span></p>
-				<?php } ?>
-				<?php if (!empty($order['state'])) { ?>
-				<p><strong><?php _e('State'); ?></strong> : <span><?php echo $this->escape($order['state']); ?></span></p>
-				<?php } ?>
-				<?php if (!empty($order['country'])) { ?>
-				<p><strong><?php _e('Country'); ?></strong> : <span><?php echo $this->escape($order['country']); ?></span></p>
-				<?php } ?>
-				<?php if (!empty($order['zip'])) { ?>
-				<p><strong><?php _e('Zip code'); ?></strong> : <span><?php echo $this->escape($order['zip']); ?></span></p>
-				<?php } ?>
 				<?php if (!empty($order['phone'])) { ?>
 				<p><strong><?php _e('Phone'); ?></strong> : <span><?php echo $this->escape($order['phone']); ?></span></p>
 				<?php } ?>
 				<?php if (!empty($order['mobile'])) { ?>
 				<p><strong><?php _e('Mobile'); ?></strong> : <span><?php echo $this->escape($order['mobile']); ?></span></p>
+				<?php } ?>
+				<?php if (!empty($order['email'])) { ?>
+				<p><strong><?php _e('Email'); ?></strong> : <span><?php echo $this->escape($order['email']); ?></span></p>
+				<?php } ?>
+				<?php if (!empty($order['address1'])) { ?>
+				<p>
+					<strong><?php _e('Delivery address'); ?></strong> : <span><?php echo $this->escape($order['address1']); ?></span>
+					<?php if (!empty($order['address2'])) { ?>
+					<span><?php echo $this->escape($order['address2']); ?></span>
+					<?php } ?>
+				</p>
 				<?php } ?>
 			</div>
 		</div>
@@ -88,7 +76,7 @@
 			<?php } ?>
 		</table>
 		<?php if ($order['type_payment'] == 'installment') { ?>
-		<h3><?php _e('Total order price'); ?></h3>
+		<!-- <h3><?php _e('Total order price'); ?></h3>
 		<table class="table table-striped table-bordered table-condensed small">
 			<tr>
 				<th class="col-md-4"><?php _e('Title'); ?></th>
@@ -118,10 +106,9 @@
 					<strong><?php echo $this->escape($order['total_price_view']); ?></strong>
 				</td>
 			</tr>
-		</table>
+		</table> -->
 		<div class="alert alert-success" role="alert">
-			<h3><?php _e('Payment price'); ?></h3>
-			<p><?php _e('Payment price on this installment is'); ?> : <strong><?php echo $this->escape($invoice['total_price_view']); ?></strong></p>
+			<h2><?php _e('Payment price'); ?> : <strong><?php echo $this->escape($invoice['total_price_view']); ?></strong></h2>
 		</div>
 		<?php } else { ?>
 		<h3><?php _e('Total invoice price'); ?></h3>

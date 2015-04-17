@@ -26,8 +26,15 @@ class IndexController extends ActionController
         Pi::service('authentication')->requireLogin();
         // Get user info
         $user = Pi::api('user', 'order')->getUserInformation();
-        $user['orders'] = Pi::api('order', 'order')->getOrderFromUser($user['id']);
-        $user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id']);
+        // Get order
+        $user['orders'] = Pi::api('order', 'order')->getOrderFromUser($user['id'], true);
+        // Set order ids
+        $orderIds = array();
+        foreach ($user['orders'] as $order) {
+            $orderIds[] = $order['id'];
+        }
+        // Get invoice
+        $user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id'], false, $orderIds);
         // Set view
         $this->view()->setTemplate('list');
         $this->view()->assign('user', $user);

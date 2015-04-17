@@ -219,6 +219,8 @@ class OrderController extends ActionController
                 $order->save();
                 // Add log
                 //Pi::api('log', 'shop')->addLog('order', $order->id, 'update');
+                // Send notification
+                Pi::api('notification', 'order')->processOrder($order->toArray(), 'order');
                 // Set return
                 $return['status'] = 1;
                 $return['data'] = Pi::api('order', 'order')->orderStatus($order->status_order);
@@ -266,6 +268,8 @@ class OrderController extends ActionController
                 $order->save();
                 // Add log
                 //Pi::api('log', 'shop')->addLog('payment', $order->id, 'update');
+                // Send notification
+                Pi::api('notification', 'order')->processOrder($order->toArray(), 'payment');
                 // Set return
                 $return['status'] = 1;
                 $return['data'] = Pi::api('order', 'order')->paymentStatus($order->status_payment);
@@ -312,6 +316,8 @@ class OrderController extends ActionController
                 $order->save();
                 // Add log
                 //Pi::api('log', 'shop')->addLog('delivery', $order->id, 'update');
+                // Send notification
+                Pi::api('notification', 'order')->processOrder($order->toArray(), 'delivery');
                 // Set return
                 $return['status'] = 1;
                 $return['data'] = Pi::api('order', 'order')->deliveryStatus($order->status_delivery);

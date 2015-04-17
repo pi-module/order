@@ -86,22 +86,54 @@ EOT;
     );
     $this->footScript()->appendScript($script);
 ?>
-<div id="js-order" class="clearfix">
-    <h1><?php _e('Checkout'); ?></h1>
-    <div class="col-md-8"><?php echo $this->form($form); ?></div>
-    <div class="col-md-4">
+<div id="js-order" class="clearfix row">
+    <div class="col-md-8">
         <div class="panel panel-default">
-            <div class="panel-heading"><?php _e('Pre Invoice'); ?></div>
+            <div class="panel-heading">
+                <h1 class="panel-title"><?php _e('Checkout'); ?></h1>
+            </div>
             <div class="panel-body">
-                <!-- <p><strong><?php _e('Total Price'); ?></strong> : <span id="cart-total-price"><?php //echo $this->escape($cart['invoice']['total']['price_view']); ?></span></p>
-                <p><strong><?php _e('Total Discount'); ?></strong> : <span id="cart-total-discount"><?php //echo $this->escape($cart['invoice']['total']['discount_view']); ?></span></p>
-                <p><strong><?php _e('Total Number'); ?></strong> : <span id="cart-total-number"><?php //echo $this->escape($cart['invoice']['total']['number']); ?></span></p>
-                <p><strong><?php _e('Total Shipping'); ?></strong> : <span id="cart-total-shipping"><?php //echo $this->escape($cart['invoice']['total']['shipping_view']); ?></span></p>
-                <p><strong><?php _e('Final Price'); ?></strong> : <span  id="cart-total-total" class="label label-success"><?php //echo $this->escape($cart['invoice']['total']['total_price_view']); ?></span></p> -->
+                <?php echo $this->form($form); ?>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <?php if ($cart['type_payment'] == 'installment') { ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title"><?php _e('Terms of payment'); ?></h2>
+            </div>
+            <div class="panel-body">
+                <?php echo sprintf(__('You buy this products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 1), Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])), Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))); ?>
+            </div>
+        </div> 
+        <?php } else { ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title"><?php _e('Pre Invoice'); ?></h2>
+            </div>
+            <div class="panel-body">
+                <p><strong><?php _e('Total Price'); ?></strong> : <span id="cart-total-price"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'])); ?></span></p>
+                <p><strong><?php _e('Total Discount'); ?></strong> : <span id="cart-total-discount"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['discount'])); ?></span></p>
+                <p><strong><?php _e('Total Shipping'); ?></strong> : <span id="cart-total-shipping"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['shipping'])); ?></span></p>
+                <p><strong><?php _e('Final Price'); ?></strong> : <span  id="cart-total-total" class="label label-success"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?></span></p>
                 <p><strong><?php _e('Location'); ?></strong> : <span id="cart-location"></span></p>
                 <p><strong><?php _e('Delivery'); ?></strong> : <span id="cart-delivery"></span></p>
                 <p><strong><?php _e('Payment'); ?></strong> : <span id="cart-payment"></span></p>
             </div>
         </div>
+        <?php } ?>
+        <?php if ($config['order_term']) { ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title"><?php _e('Terms & Conditions'); ?></h2>
+            </div>
+            <div class="panel-body">
+                <textarea class="form-control" rows="25">
+                <?php echo $config['order_termtext']; ?>
+                </textarea>
+            </div>
+        </div>
+        <?php } ?>
     </div>
 </div>

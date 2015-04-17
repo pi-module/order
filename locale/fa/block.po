@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-04-14 13:39+0330\n"
+"POT-Creation-Date: 2015-04-17 17:05+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -17,7 +17,6 @@ msgstr ""
 "X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/order\n"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/detail.phtml:4
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:9
 msgid "Invoices"
 msgstr "فاکتور ها"
 
@@ -184,6 +183,10 @@ msgstr "اطلاعات بیشتر"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:5
 msgid "Summery"
 msgstr "خلاصه وضعیت"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:9
+msgid "Payable invoices"
+msgstr "فاکتور های قابل پرداخت"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/block/installment.phtml:23
 msgid "Desc"

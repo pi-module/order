@@ -88,7 +88,7 @@ EOT;
     <h1><?php _e('Installment plans'); ?> <small>قیمت ها به تومان می باشد</small></h1>
     <?php if ($config['installment_credit']) { ?>
     <div class="well clearfix">
-        <div class="col-md-12"><span><?php _e('Your credit'); ?></span> : <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($user['credit'])); ?></strong></div>
+        <div class="col-md-12"><span><?php _e('Your total invoices'); ?></span> : <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($installments[0]['invoices']['total']['price'])); ?></strong></div>
         <div class="col-md-12"><?php _e('Read lines are our of your credit'); ?></div>
     </div>
     <?php } ?>
@@ -128,18 +128,18 @@ EOT;
 			</td>
 			<td class="text-center"><input id="check<?php echo $key;?>" type="checkbox"></td>
 			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][0]['price']), true); ?></span></td>
-			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][1]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][1]['price']), true) : ' - '; ?></span></td>
-			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][2]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][2]['price']), true) : ' - '; ?></span></td>
-			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][3]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][3]['price']), true) : ' - '; ?></span></td>
-			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][4]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][4]['price']), true) : ' - '; ?></span></td>
-			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][5]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][5]['price']), true) : ' - '; ?></span></td>
-			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][6]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][6]['price']), true) : ' - '; ?></span></td>
-			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][7]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][7]['price']), true) : ' - '; ?></span></td>
-			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][8]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][8]['price']), true) : ' - '; ?></span></td>
-			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][9]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][9]['price']), true) : ' - '; ?></span></td>
-			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][10]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][10]['price']), true) : ' - '; ?></span></td>
-            <td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][11]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][11]['price']), true) : ' - '; ?></span></td>
-            <td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][12]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][12]['price']), true) : ' - '; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][1]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][1]['price']), true) : ''; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][2]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][2]['price']), true) : ''; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][3]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][3]['price']), true) : ''; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][4]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][4]['price']), true) : ''; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][5]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][5]['price']), true) : ''; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][6]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][6]['price']), true) : ''; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][7]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][7]['price']), true) : ''; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][8]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][8]['price']), true) : ''; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][9]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][9]['price']), true) : ''; ?></span></td>
+			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][10]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][10]['price']), true) : ''; ?></span></td>
+            <td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][11]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][11]['price']), true) : ''; ?></span></td>
+            <td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo isset($installment['invoices'][12]['price']) ? Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices'][12]['price']), true) : ''; ?></span></td>
 			<td class="text-center"><span class="hidden check<?php echo $key;?>"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($installment['invoices']['total']['price']), true); ?></span></td>
 			<td class="text-center">
 				<span class="hidden check<?php echo $key;?>">
