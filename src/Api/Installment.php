@@ -167,10 +167,10 @@ class Installment extends AbstractApi
             $installmentPrice = $step3;
         }
         // Set credit
-        $credit = 0;
+        /* $credit = 0;
         if ($remainingPrice > 0) {
             $credit = $remainingPrice / $planList['total'];
-        }
+        } */
         // Set prepayment invoices
         $invoices = array();
         $invoices[0] = array(
@@ -179,6 +179,7 @@ class Installment extends AbstractApi
             'credit'  => 0,
         );
         $total = $prepaymentPrice;
+        $installmentCredit = 0;
         // Set all other invoices
         for ($i=1; $i <= $planList['total']; $i++) {
             // Set price
@@ -187,15 +188,17 @@ class Installment extends AbstractApi
             $invoices[$i] = array(
                 'price'   => $price,
                 'duedate' => $this->makeTime($i),
-                'credit'  => $credit,
+                //'credit'  => $credit,
+                'credit'  => $price,
             );
             // Set total
             $total = $total + $installmentPrice;
+            $installmentCredit = $price + $installmentCredit;
         }
         // Check allow
         $allowed = 1;
         if ($config['installment_credit']) {
-            if ($remainingPrice > $user['credit']) {
+            if ($installmentCredit > $user['credit']) {
                 $allowed = 0;
             }
         }
@@ -204,7 +207,7 @@ class Installment extends AbstractApi
             'price'        => $total,
             'duedate'      => '',
             'allowed'      => $allowed,
-            'installment'  => $remainingPrice,
+            'installment'  => $installmentCredit,
         );
         return $invoices;
     }
@@ -320,9 +323,9 @@ class Installment extends AbstractApi
         $d['all']['20-sun'] = 0;
         $d['all']['30-sun'] = 0;
 
-        $d['all']['10-invoice'] = array();
-        $d['all']['20-invoice'] = array();
-        $d['all']['30-invoice'] = array();
+        //$d['all']['10-invoice'] = array();
+        //$d['all']['20-invoice'] = array();
+        //$d['all']['30-invoice'] = array();
 
         $d['all']['10-order'] = array();
         $d['all']['20-order'] = array();
@@ -337,11 +340,12 @@ class Installment extends AbstractApi
         $d['m']['10-sun'] = 0;
         $d['m']['10-invoice'] = array();
         foreach ($invoices as $invoice) {
-            if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, 10, $year) && $invoice['status'] == 2) {
-                $d['m']['10-invoice'][$invoice['id']] = $invoice;
+            if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, 10, $year) && $invoice['status'] == 2 && $invoice['extra']['type'] == 'installment') {
+                $invoice['total_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['total_price'], true);
+                $d['m']['10-invoice'][$invoice['order']] = $invoice;
                 $d['m']['10-sun'] = $d['m']['10-sun'] + $invoice['total_price'];
                 $d['all']['10-order'][] = $invoice['order'];
-                $d['all']['10-invoice'][$invoice['id']] = $invoice;
+                //$d['all']['10-invoice'][$invoice['id']] = $invoice;
             }
         }
         $d['all']['10-sun'] = $d['all']['10-sun'] + $d['m']['10-sun'];
@@ -357,11 +361,12 @@ class Installment extends AbstractApi
         $d['m']['20-sun'] = 0;
         $d['m']['20-invoice'] = array();
         foreach ($invoices as $invoice) {
-            if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, 20, $year) && $invoice['status'] == 2) {
-                $d['m']['20-invoice'][$invoice['id']] = $invoice;
+            if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, 20, $year) && $invoice['status'] == 2 && $invoice['extra']['type'] == 'installment') {
+                $invoice['total_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['total_price'], true);
+                $d['m']['20-invoice'][$invoice['order']] = $invoice;
                 $d['m']['20-sun'] = $d['m']['20-sun'] + $invoice['total_price'];
                 $d['all']['20-order'][] = $invoice['order'];
-                $d['all']['20-invoice'][$invoice['id']] = $invoice;
+                //$d['all']['20-invoice'][$invoice['id']] = $invoice;
             }
         }
         $d['all']['20-sun'] = $d['all']['20-sun'] + $d['m']['20-sun'];
@@ -378,11 +383,12 @@ class Installment extends AbstractApi
         $d['m']['30-sun'] = 0;
         $d['m']['30-invoice'] = array();
         foreach ($invoices as $invoice) {
-            if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, $dayM, $year) && $invoice['status'] == 2) {
-                $d['m']['30-invoice'][$invoice['id']] = $invoice;
+            if ($invoice['time_duedate'] < pmktime(0, 0, 0, $month, $dayM, $year) && $invoice['status'] == 2 && $invoice['extra']['type'] == 'installment') {
+                $invoice['total_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['total_price'], true);
+                $d['m']['30-invoice'][$invoice['order']] = $invoice;
                 $d['m']['30-sun'] = $d['m']['30-sun'] + $invoice['total_price'];
                 $d['all']['30-order'][] = $invoice['order'];
-                $d['all']['30-invoice'][$invoice['id']] = $invoice;
+                //$d['all']['30-invoice'][$invoice['id']] = $invoice;
             }
         }
         $d['all']['30-sun'] = $d['all']['30-sun'] + $d['m']['30-sun'];
@@ -395,14 +401,18 @@ class Installment extends AbstractApi
         /* Make other lines */
         for ($i=0; $i < 13; $i++) {
 
+            $subtract = 0;
             if ($i == 0) {
                 $month = pdate('m', strtotime('now'));
                 $year = pdate('Y', strtotime('now'));
             } else {
-                $month = pdate('m', strtotime(sprintf('+%s month', $i)));
-                $year = pdate('Y', strtotime(sprintf('+%s month', $i)));
+                if (in_array(pdate('d'), array(29 ,30 ,31))) {
+                    $subtract = 60 * 60 * 24 * 3;
+                }
+                $month = pdate('m', strtotime(sprintf('+%s month', $i)) - $subtract);
+                $year = pdate('Y', strtotime(sprintf('+%s month', $i)) - $subtract);
             }
-            
+           
             /* Line 1 */
             $d[$i]['10'] = pmktime(0, 0, 0, $month, 10, $year);
             $d[$i]['10-view'] = _date(pmktime(0, 0, 0, $month, 10, $year), array('pattern' => 'yyyy/MM/dd'));
@@ -410,11 +420,12 @@ class Installment extends AbstractApi
             $d[$i]['10-invoice'] = array();
             foreach ($invoices as $invoice) {
                 //if ($invoice['time_duedate'] == pmktime(0, 0, 0, $month, 10, $year)) {
-                if ($invoice['time_duedate'] > pmktime(0, 0, 0, $month, 8, $year) && $invoice['time_duedate'] < pmktime(0, 0, 0, $month, 12, $year)) {    
-                    $d[$i]['10-invoice'][$invoice['id']] = $invoice;
+                if ($invoice['time_duedate'] > pmktime(0, 0, 0, $month, 8, $year) && $invoice['time_duedate'] < pmktime(0, 0, 0, $month, 12, $year) && $invoice['status'] == 2 && $invoice['extra']['type'] == 'installment') {    
+                    $invoice['total_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['total_price'], true);
+                    $d[$i]['10-invoice'][$invoice['order']] = $invoice;
                     $d[$i]['10-sun'] = $d[$i]['10-sun'] + $invoice['total_price'];
                     $d['all']['10-order'][] = $invoice['order'];
-                    $d['all']['10-invoice'][$invoice['id']] = $invoice;
+                    //$d['all']['10-invoice'][$invoice['id']] = $invoice;
                 }
             }
             $d['all']['10-sun'] = $d['all']['10-sun'] + $d[$i]['10-sun'];
@@ -431,11 +442,12 @@ class Installment extends AbstractApi
             $d[$i]['20-invoice'] = array();
             foreach ($invoices as $invoice) {
                 //if ($invoice['time_duedate'] == pmktime(0, 0, 0, $month, 20, $year)) {
-                if ($invoice['time_duedate'] > pmktime(0, 0, 0, $month, 18, $year) && $invoice['time_duedate'] < pmktime(0, 0, 0, $month, 22, $year)) {    
-                    $d[$i]['20-invoice'][$invoice['id']] = $invoice;
+                if ($invoice['time_duedate'] > pmktime(0, 0, 0, $month, 18, $year) && $invoice['time_duedate'] < pmktime(0, 0, 0, $month, 22, $year) && $invoice['status'] == 2 && $invoice['extra']['type'] == 'installment') {    
+                    $invoice['total_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['total_price'], true);
+                    $d[$i]['20-invoice'][$invoice['order']] = $invoice;
                     $d[$i]['20-sun'] = $d[$i]['20-sun'] + $invoice['total_price'];
                     $d['all']['20-order'][] = $invoice['order'];
-                    $d['all']['20-invoice'][$invoice['id']] = $invoice;
+                    //$d['all']['20-invoice'][$invoice['id']] = $invoice;
                 }
             }
             $d['all']['20-sun'] = $d['all']['20-sun'] + $d[$i]['20-sun'];
@@ -453,14 +465,15 @@ class Installment extends AbstractApi
             $d[$i]['30-invoice'] = array();
             foreach ($invoices as $invoice) {
                 $nextI = $i + 1;
-                $monthNext = pdate('m', strtotime(sprintf('+%s month', $nextI)));
-                $yearNext = pdate('Y', strtotime(sprintf('+%s month', $nextI)));
+                $monthNext = pdate('m', strtotime(sprintf('+%s month', $nextI)) - $subtract);
+                $yearNext = pdate('Y', strtotime(sprintf('+%s month', $nextI)) - $subtract);
                 //if ($invoice['time_duedate'] == pmktime(0, 0, 0, $month, 30, $year)) {
-                if ($invoice['time_duedate'] > pmktime(0, 0, 0, $month, 28, $year) && $invoice['time_duedate'] < pmktime(0, 0, 0, $monthNext, 2, $yearNext)) {    
-                    $d[$i]['30-invoice'][$invoice['id']] = $invoice;
+                if ($invoice['time_duedate'] > pmktime(0, 0, 0, $month, 28, $year) && $invoice['time_duedate'] < pmktime(0, 0, 0, $monthNext, 2, $yearNext) && $invoice['status'] == 2 && $invoice['extra']['type'] == 'installment') {    
+                    $invoice['total_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['total_price'], true);
+                    $d[$i]['30-invoice'][$invoice['order']] = $invoice;
                     $d[$i]['30-sun'] = $d[$i]['30-sun'] + $invoice['total_price'];
                     $d['all']['30-order'][] = $invoice['order'];
-                    $d['all']['30-invoice'][$invoice['id']] = $invoice;
+                    //$d['all']['30-invoice'][$invoice['id']] = $invoice;
                 }
             }
             $d['all']['30-sun'] = $d['all']['30-sun'] + $d[$i]['30-sun'];

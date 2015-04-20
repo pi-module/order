@@ -70,7 +70,7 @@ class Update extends BasicUpdate
 
         if (version_compare($moduleVersion, '1.4.1', '<')) {
             // Alter table field add credit_price
-            $sql = sprintf("ALTER TABLE %s ADD `credit_price` decimal(16,8) NOT NULL default '0.00000000'", $invoiceTable);
+            $sql = sprintf("ALTER TABLE %s ADD `credit_price` decimal(16,8) NOT NULL default '0.00'", $invoiceTable);
             try {
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
@@ -115,6 +115,21 @@ class Update extends BasicUpdate
             $sql = sprintf("ALTER TABLE %s ADD `extra` text", $basketTable);
             try {
                 $basketAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
+        if (version_compare($moduleVersion, '1.5.3', '<')) {
+            // Alter table field add credit_price
+            $sql = sprintf("ALTER TABLE %s ADD `extra` text", $invoiceTable);
+            try {
+                $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
                     'status'    => false,

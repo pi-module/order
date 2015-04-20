@@ -136,6 +136,16 @@ class Invoice extends AbstractApi
                     if ($total['allowed']) {
                         // Set invoices
                         foreach ($invoices as $key => $invoice) {
+                            // Set extra
+                            $extra = array();
+                            $extra['order']['type_payment'] = $order['type_payment'];
+                            $extra['order']['type_commodity'] = $order['type_commodity'];
+                            $extra['number'] = $key;
+                            if ($key == 0) {
+                                $extra['type'] = 'prepayment';
+                            } else {
+                                $extra['type'] = 'installment';
+                            }
                             // Set invoice
                             $row = Pi::model('invoice', $this->getModule())->createRow();
                             $row->random_id = time() + rand(100, 999);
@@ -154,6 +164,7 @@ class Invoice extends AbstractApi
                             $row->paid_price = 0;
                             $row->credit_price = $invoice['credit'];
                             $row->gateway = $order['gateway'];
+                            $row->extra = json::encode($extra);
                             $row->save();
                             // Set return
                             if ($key == 0) {
@@ -327,6 +338,10 @@ class Invoice extends AbstractApi
             'action'        => 'index',
             'id'            => $invoice['id'],
         )));
+        // Set extra
+        if (!empty($invoice['extra'])) {
+            $invoice['extra'] = json::decode($invoice['extra'], true);
+        }
         // return order
         return $invoice; 
     }
