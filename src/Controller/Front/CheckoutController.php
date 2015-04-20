@@ -182,12 +182,17 @@ class CheckoutController extends IndexController
                         $basket = $this->getModel('basket')->createRow();
                         $basket->order = $order->id;
                         $basket->product = $product['product'];
-                        $basket->product_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
                         $basket->discount_price = $product['discount_price'];
                         $basket->shipping_price = $product['shipping_price'];
                         $basket->packing_price = $product['packing_price'];
                         $basket->vat_price = $product['vat_price'];
-                        $basket->total_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
+                        if ($order->type_payment == 'installment') {
+                            $basket->product_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
+                            $basket->total_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
+                        } else {
+                            $basket->product_price = $price;
+                            $basket->total_price = $total; 
+                        }
                         $basket->number = $product['number'];
                         // Set installment to extra
                         if ($order->type_payment == 'installment') {
