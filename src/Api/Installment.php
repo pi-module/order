@@ -19,6 +19,7 @@ use Pi\Application\Api\AbstractApi;
 /*
  * Pi::api('installment', 'order')->planList();
  * Pi::api('installment', 'order')->setPriceForInvoice($price, $plan, $user);
+ * Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $plan);
  * Pi::api('installment', 'order')->setPriceForProduct($price, $plan);
  * Pi::api('installment', 'order')->setPriceForView($price, $user);
  * Pi::api('installment', 'order')->blockTable($user, $orderIds);
@@ -152,8 +153,8 @@ class Installment extends AbstractApi
             $user = Pi::api('user', 'order')->getUserInformation();
         }
         // Get plan
-    	$planList = $this->planList();
-    	$planList = $planList[$plan];
+        $planList = $this->planList();
+        $planList = $planList[$plan];
         // Set price
         $prepaymentPrice = ($price / 100) * $planList['prepayment'];
         $remainingPrice = $price - $prepaymentPrice;
@@ -178,7 +179,7 @@ class Installment extends AbstractApi
             'duedate' => time(),
             'credit'  => 0,
         );
-        $total = $prepaymentPrice;
+        $total = Pi::api('api', 'order')->makePrice($prepaymentPrice);
         $installmentCredit = 0;
         // Set all other invoices
         for ($i=1; $i <= $planList['total']; $i++) {
@@ -192,8 +193,8 @@ class Installment extends AbstractApi
                 'credit'  => $price,
             );
             // Set total
-            $total = $total + $installmentPrice;
-            $installmentCredit = $price + $installmentCredit;
+            $total = $total + $price;
+            $installmentCredit = $installmentCredit + $price;
         }
         // Check allow
         $allowed = 1;
@@ -210,6 +211,36 @@ class Installment extends AbstractApi
             'installment'  => $installmentCredit,
         );
         return $invoices;
+    }
+
+    public function setTotlaPriceForInvoice($price, $plan)
+    {
+        // Get plan
+        $planList = $this->planList();
+        $planList = $planList[$plan];
+        // Set price
+        $prepaymentPrice = ($price / 100) * $planList['prepayment'];
+        $remainingPrice = $price - $prepaymentPrice;
+        $step1 = $remainingPrice * ($planList['profit'] / 100);
+        $step2 = $step1 * $planList['total'];
+        $step3 = $step2 + $remainingPrice;
+        // Check total
+        if ($planList['total'] > 0) {
+            $installmentPrice = $step3 / $planList['total'];
+        } else {
+            $installmentPrice = $step3;
+        }
+        // Set prepayment invoices
+        $total = Pi::api('api', 'order')->makePrice($prepaymentPrice);
+        // Set all other invoices
+        for ($i=1; $i <= $planList['total']; $i++) {
+            // Set price
+            $price = Pi::api('api', 'order')->makePrice($installmentPrice);
+            // Set total
+            $total = $total + $price;
+        }
+        // Set total
+        return $total;
     }
 
     public function setPriceForProduct($price, $plan)

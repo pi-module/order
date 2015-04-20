@@ -179,6 +179,12 @@ class Invoice extends AbstractApi
                             $credit = $user['credit'] - $total['installment'];
                             Pi::model('profile', 'user')->update(array('credit' => $credit), array('uid' => $uid));
                         }
+                        // Update order
+                        $totalPrice = ($total['price'] + $order['shipping_price'] + $order['packing_price'] + $order['vat_price']) - $order['discount_price'];
+                        Pi::model('order', 'order')->update(
+                            array('product_price' => $total['price'], 'total_price' => $totalPrice), 
+                            array('id' => $order['id'])
+                        );
                         // return array
                         $result['status'] = $information['status'];
                         $result['message'] = __('Your invoice create successfully');

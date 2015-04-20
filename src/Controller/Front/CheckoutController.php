@@ -158,7 +158,7 @@ class CheckoutController extends IndexController
                 // Check order values
                 if (!empty($cart['product'])) {
                     foreach ($cart['product'] as $product) {
-                        // Set price
+                        // Set other price
                         $values['product_price'] = $product['product_price'] + $values['product_price'];
                         $values['discount_price'] = $product['discount_price'] + $values['discount_price'];
                         $values['shipping_price'] = $product['shipping_price'] + $values['shipping_price'];
@@ -176,21 +176,23 @@ class CheckoutController extends IndexController
                 // Save order basket
                 if (!empty($cart['product'])) {
                     foreach ($cart['product'] as $product) {
+                        $price = $product['product_price'];
+                        $total = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']) * $product['number'];
                         // Save basket
                         $basket = $this->getModel('basket')->createRow();
                         $basket->order = $order->id;
                         $basket->product = $product['product'];
-                        $basket->product_price = $product['product_price'];
+                        $basket->product_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
                         $basket->discount_price = $product['discount_price'];
                         $basket->shipping_price = $product['shipping_price'];
                         $basket->packing_price = $product['packing_price'];
                         $basket->vat_price = $product['vat_price'];
-                        $basket->total_price = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']) * $product['number'];
+                        $basket->total_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
                         $basket->number = $product['number'];
                         // Set installment to extra
                         if ($order->type_payment == 'installment') {
                             $extra = array();
-                            $extra['installment'] = Pi::api('installment', 'order')->setPriceForProduct($basket->total_price, $order->plan);
+                            $extra['installment'] = Pi::api('installment', 'order')->setPriceForProduct($total, $order->plan);
                             $basket->extra = json::encode($extra);
                         }
                         $basket->save();
