@@ -434,19 +434,20 @@ class Installment extends AbstractApi
 
             $subtract = 0;
             if ($i == 0) {
-                if (in_array(pdate('d'), array(1))) {
-                    $month = pdate('m', strtotime('-1 month'));
-                    $year = pdate('Y', strtotime('-1 month'));
-                } else {
-                    $month = pdate('m', strtotime('now'));
-                    $year = pdate('Y', strtotime('now'));
-                }
+                $month = pdate('m', strtotime('now'));
+                $year = pdate('Y', strtotime('now'));
             } else {
                 if (in_array(pdate('d'), array(29 ,30 ,31))) {
                     $subtract = 60 * 60 * 24 * 3;
+                    $month = pdate('m', strtotime(sprintf('+%s month', $i)) - $subtract);
+                    $year = pdate('Y', strtotime(sprintf('+%s month', $i)) - $subtract);
                 }
-                $month = pdate('m', strtotime(sprintf('+%s month', $i)) - $subtract);
-                $year = pdate('Y', strtotime(sprintf('+%s month', $i)) - $subtract);
+
+                if (in_array(pdate('d'), array(1 ,2 ,3))) {
+                    $subtract = 60 * 60 * 24 * 2;
+                    $month = pdate('m', strtotime(sprintf('+%s month', $i)) + $subtract);
+                    $year = pdate('Y', strtotime(sprintf('+%s month', $i)) + $subtract);
+                }
             }
            
             /* Line 1 */
