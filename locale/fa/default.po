@@ -1633,7 +1633,7 @@ msgstr "خطا در پردازش مراحل سفارش، لطفا با مدیر 
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:88
 msgid "Installment plans"
-msgstr "روش های خرید قسطی"
+msgstr "لطفاً روش پرداخت قسطی خود را انتخاب نمایید"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:91
 msgid "Your total invoices"
