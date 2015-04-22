@@ -119,7 +119,7 @@ abstract class AbstractGateway
         $rowset = Pi::model('gateway', 'order')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
-            $list[$row->path] = $row->path;
+            $list[$row->path] = $row->title;
         }
         return $list;
     }

@@ -104,7 +104,7 @@ EOT;
                 <h2 class="panel-title"><?php _e('Terms of payment'); ?></h2>
             </div>
             <div class="panel-body">
-                <?php echo sprintf(__('You buy this products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 1), Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])), Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))); ?>
+                <?php echo sprintf(__('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2), Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])), Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))); ?>
             </div>
         </div> 
         <?php } else { ?>
