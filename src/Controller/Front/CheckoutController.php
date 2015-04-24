@@ -186,6 +186,7 @@ class CheckoutController extends IndexController
                         $basket->shipping_price = $product['shipping_price'];
                         $basket->packing_price = $product['packing_price'];
                         $basket->vat_price = $product['vat_price'];
+                        // Set price
                         if ($order->type_payment == 'installment') {
                             $basket->product_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
                             $basket->total_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
@@ -197,7 +198,12 @@ class CheckoutController extends IndexController
                         // Set installment to extra
                         if ($order->type_payment == 'installment') {
                             $extra = array();
+                            $extra['product'] = json::decode($product['extra'], true);
                             $extra['installment'] = Pi::api('installment', 'order')->setPriceForProduct($total, $order->plan);
+                            $basket->extra = json::encode($extra);
+                        } else {
+                            $extra = array();
+                            $extra['product'] = json::decode($product['extra'], true);
                             $basket->extra = json::encode($extra);
                         }
                         $basket->save();

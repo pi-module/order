@@ -104,7 +104,16 @@ $locale = 'fa';
                     <?php foreach ($order['products'] as $product) { ?>
                     <tr>
                         <td class="text-center text-small"><?php echo $i; ?></td>
-                        <td><?php echo $this->escape($product['details']['title']); ?></td>
+                        <td>
+                            <?php echo $this->escape($product['details']['title']); ?>
+                            <?php if (isset($product['extra']['product']) && !empty($product['extra']['product'])) { ?>
+                            <?php foreach ($product['extra']['product'] as $extraProduct) { ?>
+                            <div class="productItem">
+                                <span><?php echo $this->escape($extraProduct['title']); ?></span> : <strong><?php echo $this->escape($extraProduct['value']); ?></strong>
+                            </div>
+                            <?php } ?>
+                            <?php } ?>
+                        </td>
                         <td class="text-center text-small"><?php echo _number($this->escape($product['number'])); ?></td>
                         <td class="text-center text-small">
                             <?php if ($product['extra']['installment'][0]['price']) { ?>

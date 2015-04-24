@@ -145,10 +145,19 @@
             <?php foreach($order['products'] as $product) { ?>
             <tr>
                 <td>
-                    <a title="<?php echo $this->escape($product['details']['title']); ?>" href="<?php echo $this->escape($product['details']['productUrl']); ?>">
-                        <img width="32" height="32" src="<?php echo $this->escape($product['details']['thumbUrl']); ?>" alt="<?php echo $this->escape($product['details']['title']); ?>">
-                    <?php echo $this->escape($product['details']['title']); ?>
-                    </a>
+                    <div class="productItem">
+                        <a title="<?php echo $this->escape($product['details']['title']); ?>" href="<?php echo $this->escape($product['details']['productUrl']); ?>">
+                            <img width="32" height="32" src="<?php echo $this->escape($product['details']['thumbUrl']); ?>" alt="<?php echo $this->escape($product['details']['title']); ?>">
+                            <?php echo $this->escape($product['details']['title']); ?>
+                        </a>
+                    </div>
+                    <?php if (isset($product['extra']['product']) && !empty($product['extra']['product'])) { ?>
+                    <?php foreach ($product['extra']['product'] as $extraProduct) { ?>
+                    <div class="productItem">
+                        <span><?php echo $this->escape($extraProduct['title']); ?></span> : <strong><?php echo $this->escape($extraProduct['value']); ?></strong>
+                    </div>
+                    <?php } ?>
+                    <?php } ?>
                 </td>
                 <td><?php echo _number($this->escape($product['number'])); ?></td>
                 <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?></td>
