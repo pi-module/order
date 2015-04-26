@@ -147,7 +147,9 @@
                 <td>
                     <div class="productItem">
                         <a title="<?php echo $this->escape($product['details']['title']); ?>" href="<?php echo $this->escape($product['details']['productUrl']); ?>">
+                            <?php if (isset($product['details']['thumbUrl']) && !empty($product['details']['thumbUrl'])) { ?>
                             <img width="32" height="32" src="<?php echo $this->escape($product['details']['thumbUrl']); ?>" alt="<?php echo $this->escape($product['details']['title']); ?>">
+                            <?php } ?>
                             <?php echo $this->escape($product['details']['title']); ?>
                         </a>
                     </div>
