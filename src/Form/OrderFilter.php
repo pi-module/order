@@ -155,7 +155,10 @@ class OrderFilter extends InputFilter
                     ),
                 ),
             ));
-            /* $this->add(array(
+        }
+        // address 2
+        if ($config['order_address2']) {
+            $this->add(array(
                 'name' => 'address2',
                 'required' => false,
                 'filters' => array(
@@ -163,7 +166,7 @@ class OrderFilter extends InputFilter
                         'name' => 'StringTrim',
                     ),
                 ),
-            )); */
+            ));
         }
         // country
         if ($config['order_country']) {

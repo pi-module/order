@@ -171,7 +171,10 @@ class OrderForm  extends BaseForm
                     'required' => true,
                 )
             ));
-            /* $this->add(array(
+        }
+        // address 2
+        if ($this->config['order_address2']) {
+            $this->add(array(
                 'name' => 'address2',
                 'options' => array(
                     'label' => __('Address 2'),
@@ -180,7 +183,7 @@ class OrderForm  extends BaseForm
                     'type' => 'text',
                     'description' => '',
                 )
-            )); */
+            ));
         }
         // country
         if ($this->config['order_country']) {

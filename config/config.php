@@ -163,6 +163,14 @@ return array(
             'filter'       => 'number_int',
             'value'        => 1
         ),
+        'order_address2' => array(
+            'category'     => 'order',
+            'title'        => _a('Show address 2'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 1
+        ),
         'order_country' => array(
             'category'     => 'order',
             'title'        => _a('Show country'),
