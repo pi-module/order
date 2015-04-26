@@ -21,7 +21,6 @@ use Zend\Math\Rand;
 /*
  * Pi::api('order', 'order')->getOrder($id);
  * Pi::api('order', 'order')->getOrderFromUser($uid, $compressed);
- * Pi::api('order', 'order')->checkoutConfig();
  * Pi::api('order', 'order')->generatCode();
  * Pi::api('order', 'order')->orderStatus($status);
  * Pi::api('order', 'order')->paymentStatus($status);
@@ -30,10 +29,10 @@ use Zend\Math\Rand;
  * Pi::api('order', 'order')->listProduct($id, $module);
  * Pi::api('order', 'order')->listAllProduct($module);
  * Pi::api('order', 'order')->updateOrder($id);
- * Pi::api('order', 'order')->setOrder($order);
- * Pi::api('order', 'order')->getOrder();
+ * Pi::api('order', 'order')->setOrderInfo($order);
+ * Pi::api('order', 'order')->getOrderInfo();
  * Pi::api('order', 'order')->updateOrderInfo($order);
- * Pi::api('order', 'order')->unsetOrder();
+ * Pi::api('order', 'order')->unsetOrderInfo();
  */
 
 class Order extends AbstractApi
@@ -62,24 +61,6 @@ class Order extends AbstractApi
         }
         return $orders;
     }
-
-    /* public function checkoutConfig()
-    {
-        $return = array();
-        // Set location
-        $select = Pi::model('location', 'order')->select();
-        $location = Pi::model('location', 'order')->selectWith($select)->toArray();
-        $return['location'] = (empty($location)) ? 0 : 1;
-        // Set delivery
-        $select = Pi::model('delivery', 'order')->select();
-        $delivery = Pi::model('delivery', 'order')->selectWith($select)->toArray();
-        $return['delivery'] = (empty($delivery)) ? 0 : 1;
-        // Set gateway
-        $gateway = Pi::api('gateway', 'order')->getActiveGatewayList();
-        $return['gateway'] = (empty($gateway)) ? 0 : 1;
-        // return
-        return $return;
-    } */
 
     public function generatCode()
     {

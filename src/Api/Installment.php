@@ -443,7 +443,7 @@ class Installment extends AbstractApi
                     $year = pdate('Y', strtotime(sprintf('+%s month', $i)) - $subtract);
                 }
 
-                if (in_array(pdate('d'), array(1 ,2 ,3))) {
+                if (in_array(pdate('d'), array(1 ,2 ,3, 4, 5, 6, 7, 8, 9))) {
                     $subtract = 60 * 60 * 24 * 2;
                     $month = pdate('m', strtotime(sprintf('+%s month', $i)) + $subtract);
                     $year = pdate('Y', strtotime(sprintf('+%s month', $i)) + $subtract);

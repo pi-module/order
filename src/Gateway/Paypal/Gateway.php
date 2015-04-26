@@ -279,7 +279,7 @@ class Gateway extends AbstractGateway
     public function getAuthority()
     {
         // Get order
-        $order = Pi::api('order', 'order')->getOrder($this->gatewayInvoice['ordere']);
+        $order = Pi::api('order', 'order')->getOrder($this->gatewayInvoice['order']);
         // Get product list
         $products = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
         // Set products to payment
