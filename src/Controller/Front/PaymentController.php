@@ -191,13 +191,33 @@ class PaymentController extends IndexController
         }
         // Check request
         if (!empty($request)) {
+            // Set log
+            $log = array();
+            $log['gateway'] = 'paypal';
+            $log['value'] = Json::encode(array(1, $request));
+            Pi::api('log', 'order')->setLog($log);
             // Get processing
             $processing = Pi::api('processing', 'order')->getProcessing($request['invoice']);
+            // Set log
+            $log = array();
+            $log['gateway'] = 'paypal';
+            $log['value'] = Json::encode(array(3, $request));
+            Pi::api('log', 'order')->setLog($log);
             // Check processing
             if ($processing) {
+                // Set log
+                $log = array();
+                $log['gateway'] = 'paypal';
+                $log['value'] = Json::encode(array(4, $request));
+                Pi::api('log', 'order')->setLog($log);
                 // Get gateway
                 $gateway = Pi::api('gateway', 'order')->getGateway($processing['gateway']);
                 $verify = $gateway->verifyPayment($request, $processing);
+                // Set log
+                $log = array();
+                $log['gateway'] = 'paypal';
+                $log['value'] = Json::encode(array(5, $verify));
+                Pi::api('log', 'order')->setLog($log);
                 // Check error
                 if ($gateway->gatewayError) {
                     // Remove processing
@@ -209,6 +229,12 @@ class PaymentController extends IndexController
                     }
                 }
             }
+        } else {
+            // Set log
+            $log = array();
+            $log['gateway'] = 'paypal';
+            $log['value'] = Json::encode(array(2, $request));
+            Pi::api('log', 'order')->setLog($log);
         }
     }
 

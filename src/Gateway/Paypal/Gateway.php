@@ -352,6 +352,12 @@ class Gateway extends AbstractGateway
         foreach ($request as $key => $value) {
             $req .= sprintf('&%s=%s', urldecode($key), urldecode($value));
         }
+
+        // Set log
+        $log = array();
+        $log['gateway'] = 'paypal';
+        $log['value'] = Json::encode(array(6, $req));
+        Pi::api('log', 'order')->setLog($log);
  
         // Step 2: POST IPN data back to PayPal to validate
         if ($this->gatewayOption['test_mode']) {
@@ -378,6 +384,12 @@ class Gateway extends AbstractGateway
         }
         curl_close($ch);
 
+        // Set log
+        $log = array();
+        $log['gateway'] = 'paypal';
+        $log['value'] = Json::encode(array(7, $req));
+        Pi::api('log', 'order')->setLog($log);
+
         // STEP 3: Inspect IPN validation result and act accordingly
         if (strcmp ($res, "VERIFIED") == 0) {
             $invoice = Pi::api('invoice', 'order')->updateInvoice($request['invoice']);
@@ -397,6 +409,12 @@ class Gateway extends AbstractGateway
             $result['status'] = 0;
             $message = __('Error');
         }
+
+        // Set log
+        $log = array();
+        $log['gateway'] = 'paypal';
+        $log['value'] = Json::encode(array(8, $req));
+        Pi::api('log', 'order')->setLog($log);
         
         // Set result
         $result['adapter'] = $this->gatewayAdapter;
