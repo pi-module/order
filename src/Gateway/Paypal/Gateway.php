@@ -278,6 +278,8 @@ class Gateway extends AbstractGateway
 
     public function getAuthority()
     {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
         // Get order
         $order = Pi::api('order', 'order')->getOrder($this->gatewayInvoice['order']);
         // Get product list
@@ -312,7 +314,7 @@ class Gateway extends AbstractGateway
         $this->gatewayPayInformation['invoice'] = $this->gatewayInvoice['random_id'];
         $this->gatewayPayInformation['business'] = $this->gatewayOption['business'];
         $this->gatewayPayInformation['currency_code'] = $this->gatewayOption['currency'];
-        $this->gatewayPayInformation['image_url'] = 'https://www.envie-de-queyras.com/asset/theme-izoard/image/paypal.png';
+        $this->gatewayPayInformation['image_url'] = $config['payment_image'];
         // Set for test mode
         if ($this->gatewayOption['test_mode']) {
             $this->gatewayPayInformation['username'] = $this->gatewayOption['username'];

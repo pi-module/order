@@ -365,6 +365,16 @@ class OrderForm  extends BaseForm
         // order_term
         if ($this->config['order_term']) {
             $this->add(array(
+                'name' => 'order_term_text',
+                'type' => 'description',
+                'options' => array(
+                    'label' => __('Terms & Conditions'),
+                ),
+                'attributes' => array(
+                    'description' => $this->config['order_termtext'],
+                ),
+            ));
+            $this->add(array(
                 'name' => 'order_term',
                 'type' => 'checkbox',
                 'options' => array(

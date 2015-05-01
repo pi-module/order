@@ -87,27 +87,28 @@ EOT;
     $this->footScript()->appendScript($script);
 ?>
 <div id="js-order" class="clearfix row">
+    <?php if ($cart['type_payment'] == 'installment') { ?>
+    <div class="col-md-12">
+    <?php } else { ?>
     <div class="col-md-8">
+    <?php } ?>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h1 class="panel-title"><?php _e('Checkout'); ?></h1>
             </div>
             <div class="panel-body">
+                <?php if ($cart['type_payment'] == 'installment') { ?>
+                <div class="alert alert-info" role="alert">
+                    <h2><?php _e('Terms of payment'); ?></h2>
+                    <p><?php echo sprintf(__('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2), Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])), Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))); ?></p>
+                </div>
+                <?php } ?>
                 <?php echo $this->form($form); ?>
             </div>
         </div>
     </div>
+    <?php if ($cart['type_payment'] != 'installment') { ?>
     <div class="col-md-4">
-        <?php if ($cart['type_payment'] == 'installment') { ?>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="panel-title"><?php _e('Terms of payment'); ?></h2>
-            </div>
-            <div class="panel-body">
-                <?php echo sprintf(__('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2), Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])), Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))); ?>
-            </div>
-        </div> 
-        <?php } else { ?>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2 class="panel-title"><?php _e('Pre Invoice'); ?></h2>
@@ -122,18 +123,6 @@ EOT;
                 <p><strong><?php _e('Payment'); ?></strong> : <span id="cart-payment"></span></p>
             </div>
         </div>
-        <?php } ?>
-        <?php if ($config['order_term']) { ?>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="panel-title"><?php _e('Terms & Conditions'); ?></h2>
-            </div>
-            <div class="panel-body">
-                <textarea class="form-control" rows="25">
-                <?php echo $config['order_termtext']; ?>
-                </textarea>
-            </div>
-        </div>
-        <?php } ?>
     </div>
+    <?php } ?>
 </div>

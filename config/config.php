@@ -274,6 +274,13 @@ return array(
             'filter'       => 'number_int',
             'value'        => 1
         ),
+        'payment_image' => array(
+            'category'     => 'payment',
+            'title'        => _a('Website image URL'),
+            'description'  => _a('Use on some payment gateway like paypal.'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+        ),
         // Notification
         'sms_order_user' => array(
             'category'     => 'notification',
