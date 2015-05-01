@@ -201,7 +201,7 @@ class PaymentController extends IndexController
             // Set log
             $log = array();
             $log['gateway'] = 'paypal';
-            $log['value'] = Json::encode(array(3, $request));
+            $log['value'] = Json::encode(array(3, $request, $processing));
             Pi::api('log', 'order')->setLog($log);
             // Check processing
             if ($processing) {
@@ -228,6 +228,12 @@ class PaymentController extends IndexController
                         Pi::api('invoice', 'order')->setBackUrl($verify['invoice'], $url);
                     }
                 }
+            } else {
+                // Set log
+                $log = array();
+                $log['gateway'] = 'paypal';
+                $log['value'] = Json::encode(array(9, $request));
+                Pi::api('log', 'order')->setLog($log); 
             }
         } else {
             // Set log
