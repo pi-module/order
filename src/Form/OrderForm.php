@@ -187,17 +187,27 @@ class OrderForm  extends BaseForm
         }
         // country
         if ($this->config['order_country']) {
-            $this->add(array(
-                'name' => 'country',
-                'options' => array(
-                    'label' => __('Country'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                    
-                )
-            ));
+            if (!empty($this->config['order_countrylist'])) {
+                $this->add(array(
+                    'name' => 'country',
+                    'type' => 'select',
+                    'options' => array(
+                        'label' => __('Country'),
+                        'value_options' => explode('|', $this->config['order_countrylist']),
+                    ),
+                ));
+            } else {
+                $this->add(array(
+                    'name' => 'country',
+                    'options' => array(
+                        'label' => __('Country'),
+                    ),
+                    'attributes' => array(
+                        'type' => 'text',
+                        'description' => '',
+                    )
+                ));
+            }
         }
         // state
         if ($this->config['order_state']) {

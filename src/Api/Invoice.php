@@ -311,13 +311,15 @@ class Invoice extends AbstractApi
         }
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+        // Set date_format
+        $pattern = !empty($config['date_format']) ? $config['date_format'] : 'yyyy-MM-dd';
         // boject to array
         $invoice = $invoice->toArray();
         // Set time
-        $invoice['time_create_view'] = _date($invoice['time_create'], array('pattern' => 'yyyy-MM-dd'));
-        $invoice['time_duedate_view'] = _date($invoice['time_duedate'], array('pattern' => 'yyyy-MM-dd'));
-        $invoice['time_payment_view'] = $invoice['time_payment'] ? _date($invoice['time_payment'], array('pattern' => 'yyyy-MM-dd')) : __('Not pay');
-        $invoice['time_cancel_view'] = $invoice['time_cancel'] ? _date($invoice['time_cancel'], array('pattern' => 'yyyy-MM-dd')) : __('Not canceled');
+        $invoice['time_create_view'] = _date($invoice['time_create'], array('pattern' => $pattern));
+        $invoice['time_duedate_view'] = _date($invoice['time_duedate'], array('pattern' => $pattern));
+        $invoice['time_payment_view'] = $invoice['time_payment'] ? _date($invoice['time_payment'], array('pattern' => $pattern)) : __('Not pay');
+        $invoice['time_cancel_view'] = $invoice['time_cancel'] ? _date($invoice['time_cancel'], array('pattern' => $pattern)) : __('Not canceled');
         // Set price
         $invoice['product_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['product_price']);
         $invoice['shipping_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['shipping_price']);

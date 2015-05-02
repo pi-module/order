@@ -22,8 +22,8 @@ return array(
             'name'   => 'order'
         ),
         array(
-            'title'  => _a('Price'),
-            'name'   => 'price'
+            'title'  => _a('Customize'),
+            'name'   => 'customize'
         ),
         array(
             'title'  => _a('Payment'),
@@ -179,6 +179,12 @@ return array(
             'filter'       => 'number_int',
             'value'        => 1
         ),
+        'order_countrylist' => array(
+            'category'     => 'order',
+            'title'        => _a('Country list'),
+            'description'  => _a('Use `|` as delimiter to separate countres'),
+            'edit'         => 'textarea',
+        ),
         'order_state' => array(
             'category'     => 'order',
             'title'        => _a('Show state'),
@@ -249,14 +255,22 @@ return array(
             'description'  => '',
             'edit'         => 'textarea',
         ),
-        // Price
+        // Customize
         'price_custom' => array(
-            'category'     => 'price',
+            'category'     => 'customize',
             'title'        => _a('Use custom price'),
             'description'  => '',
             'edit'         => 'checkbox',
             'filter'       => 'number_int',
             'value'        => 0
+        ),
+        'date_format' => array(
+            'category'     => 'customize',
+            'title'        => _a('Date format'),
+            'description'  => _a('For example : yyyy-MM-dd'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => 'yyyy-MM-dd'
         ),
         // Payment
         'payment_gateway_error_url' => array(

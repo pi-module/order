@@ -62,15 +62,18 @@ class Order extends AbstractApi
         return $orders;
     }
 
-    public function generatCode()
+    public function generatCode($id = '')
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         $prefix = $config['order_code_prefix'];
-        // Generate random code
-        $rand = Rand::getInteger(10000000, 99999999);
+        // Check ID
+        if (empty($id)) {
+            // Generate random code
+            $id = Rand::getInteger(10000000, 99999999);
+        }
         // Generate order code
-        $code = sprintf('%s-%s', $prefix, $rand);
+        $code = sprintf('%s-%s', $prefix, $id);
         return $code;
     }
 
@@ -169,20 +172,22 @@ class Order extends AbstractApi
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+        // Set date_format
+        $pattern = !empty($config['date_format']) ? $config['date_format'] : 'yyyy-MM-dd';
         // boject to array
         $order = $order->toArray();
         // Set time_create_view
-        $order['time_create_view'] = _date($order['time_create'], array('pattern' => 'yyyy-MM-dd'));
+        $order['time_create_view'] = _date($order['time_create'], array('pattern' => $pattern));
         // Set time_payment_view
-        $order['time_payment_view'] = ($order['time_payment']) ? _date($order['time_payment'], array('pattern' => 'yyyy-MM-dd')) : __('Not Paid');
+        $order['time_payment_view'] = ($order['time_payment']) ? _date($order['time_payment'], array('pattern' => $pattern)) : __('Not Paid');
         // Set time_delivery_view
-        $order['time_delivery_view'] = ($order['time_delivery']) ? _date($order['time_delivery'], array('pattern' => 'yyyy-MM-dd')) : __('Not Delivery');
+        $order['time_delivery_view'] = ($order['time_delivery']) ? _date($order['time_delivery'], array('pattern' => $pattern)) : __('Not Delivery');
         // Set time_finish_view
-        $order['time_finish_view'] = ($order['time_finish']) ? _date($order['time_finish'], array('pattern' => 'yyyy-MM-dd')) : __('Not Finish');
+        $order['time_finish_view'] = ($order['time_finish']) ? _date($order['time_finish'], array('pattern' => $pattern)) : __('Not Finish');
         // Set time_finish_view
-        $order['time_start_view'] = ($order['time_start']) ? _date($order['time_start'], array('pattern' => 'yyyy-MM-dd')) : __('Not Start');
+        $order['time_start_view'] = ($order['time_start']) ? _date($order['time_start'], array('pattern' => $pattern)) : __('Not Start');
         // Set time_finish_view
-        $order['time_end_view'] = ($order['time_end']) ? _date($order['time_end'], array('pattern' => 'yyyy-MM-dd')) : __('Not End');
+        $order['time_end_view'] = ($order['time_end']) ? _date($order['time_end'], array('pattern' => $pattern)) : __('Not End');
         // Set product_price_view
         $order['product_price_view'] = Pi::api('api', 'order')->viewPrice($order['product_price']);
         // Set discount_price_view

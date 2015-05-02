@@ -53,7 +53,7 @@ class CheckoutController extends IndexController
                 // Check user informations
                 $user = Pi::api('user', 'order')->getUserInformation();
                 // Set values
-                $values['code'] = Pi::api('order', 'order')->generatCode();
+                //$values['code'] = Pi::api('order', 'order')->generatCode();
                 $values['uid'] = Pi::user()->getId();
                 $values['ip'] = Pi::user()->getIp();
                 $values['status_order'] = 1;
@@ -173,6 +173,12 @@ class CheckoutController extends IndexController
                 $order = $this->getModel('order')->createRow();
                 $order->assign($values);
                 $order->save();
+                // Set order ID
+                $code = Pi::api('order', 'order')->generatCode($order->id);
+                $this->getModel('order')->update(
+                    array('code' => $code), 
+                    array('id' => $order->id)
+                );
                 // Save order basket
                 if (!empty($cart['product'])) {
                     foreach ($cart['product'] as $product) {
