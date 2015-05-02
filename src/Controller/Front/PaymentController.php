@@ -248,20 +248,25 @@ class PaymentController extends IndexController
     {
         $processing = Pi::api('processing', 'order')->getProcessing();
         if (!empty($processing['invoice'])) {
-            $invoice = $processing['invoice'];
-            // remove
+            // Get invoice
+            $invoice = Pi::api('invoice', 'order')->getInvoice($processing['invoice']);
+            // Remove
             Pi::api('processing', 'order')->removeProcessing();
-            //
-            $invoice = Pi::api('invoice', 'order')->getInvoice($invoice);
+            // Set back url
+            if (isset($invoice['back_url']) && !empty($invoice['back_url'])) {
+                $url = $invoice['back_url'];
+            } else {
+                $url = Pi::url('guide/manage/add');
+            }
             // jump to module
             $message = __('Your payment were successfully.');
-            $this->jump($invoice['back_url'], $message);
+            $this->jump($url, $message);
         } else {
             // Set return
             $return = array(
-                'website' => Pi::url(),
-                'module' => $this->params('module'),
-                'message' => 'finish',
+                'website'  => Pi::url(),
+                'module'   => $this->params('module'),
+                'message'  => 'finish',
             );
             // Set view
             $this->view()->setTemplate(false)->setLayout('layout-content');
@@ -273,9 +278,9 @@ class PaymentController extends IndexController
     {
         // Set return
         $return = array(
-            'website' => Pi::url(),
-            'module' => $this->params('module'),
-            'message' => 'finish',
+            'website'  => Pi::url(),
+            'module'   => $this->params('module'),
+            'message'  => 'cancel',
         );
         // Set view
         $this->view()->setTemplate(false)->setLayout('layout-content');
