@@ -311,7 +311,7 @@ class OrderForm  extends BaseForm
                     ));
                 } else {
                     $gatewayList = Pi::api('gateway', 'order')->getActiveGatewayName();
-                    if (!count($gatewayList) == 1) {
+                    if (count($gatewayList) == 1) {
                         $gatewayList = array_keys($gatewayList);
                         // gateway
                         $this->add(array(
@@ -342,7 +342,7 @@ class OrderForm  extends BaseForm
             
             case 'service':
                 $gatewayList = Pi::api('gateway', 'order')->getActiveGatewayName();
-                if (!count($gatewayList) == 1) {
+                if (count($gatewayList) == 1) {
                     $gatewayList = array_keys($gatewayList);
                     // gateway
                     $this->add(array(
