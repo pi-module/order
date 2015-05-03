@@ -156,13 +156,13 @@
 	</div>	
 	<?php if ($invoice['status'] == 2) {  ?>
 	<div class="clearfix">
+		<div class="col-md-6 text-right">
+			<a class="btn btn-primary btn-sm" title="<?php _e('Back to order'); ?>" href="<?php echo $this->escape($invoice['order_url']); ?>"><?php _e('Back to order'); ?></a>
+		</div>
 		<div class="col-md-6">
 		<?php if ($invoice['status'] == 2) {  ?>
 			<a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay_url']); ?>"><i class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
 		<?php } ?>
-		</div>
-		<div class="col-md-6 text-right">
-			<a class="btn btn-primary btn-sm" title="<?php _e('Back to order'); ?>" href="<?php echo $this->escape($invoice['order_url']); ?>"><?php _e('Back to order'); ?></a>
 		</div>
 	</div>
 	<?php } ?>

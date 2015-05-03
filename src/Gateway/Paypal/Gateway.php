@@ -199,6 +199,11 @@ class Gateway extends AbstractGateway
             'name'      => 'address1',
             'type'      => 'hidden',
         );
+        // address2
+        $form['address2'] = array(
+            'name'      => 'address2',
+            'type'      => 'hidden',
+        );
         // city
         $form['city'] = array(
             'name'      => 'city',
@@ -299,6 +304,7 @@ class Gateway extends AbstractGateway
         $this->gatewayPayInformation['first_name'] = $order['first_name'];
         $this->gatewayPayInformation['last_name'] = $order['last_name'];
         $this->gatewayPayInformation['address1'] = $order['address1'];
+        $this->gatewayPayInformation['address2'] = $order['address2'];
         $this->gatewayPayInformation['address_override'] = 1;
         $this->gatewayPayInformation['city'] = $order['city'];
         $this->gatewayPayInformation['state'] = $order['state'];

@@ -310,13 +310,56 @@ class OrderForm  extends BaseForm
                         )
                     ));
                 } else {
+                    $gatewayList = Pi::api('gateway', 'order')->getActiveGatewayName();
+                    if (!count($gatewayList) == 1) {
+                        $gatewayList = array_keys($gatewayList);
+                        // gateway
+                        $this->add(array(
+                            'name' => 'gateway',
+                            'attributes' => array(
+                                'type'  => 'hidden',
+                                'value' => $gatewayList['0'],
+                            ),
+                        ));
+                    } else {
+                        // gateway
+                        $this->add(array(
+                            'name' => 'gateway',
+                            'type' => 'select',
+                            'options' => array(
+                                    'label' => __('Adapter'),
+                                'value_options' => $gatewayList,
+                            ),
+                            'attributes' => array(
+                                'id'    => 'select-payment',
+                                'size'  => 1,
+                                'required' => true,
+                            )
+                        ));
+                    }
+                }
+                break;
+            
+            case 'service':
+                $gatewayList = Pi::api('gateway', 'order')->getActiveGatewayName();
+                if (!count($gatewayList) == 1) {
+                    $gatewayList = array_keys($gatewayList);
                     // gateway
                     $this->add(array(
                         'name' => 'gateway',
-                        'type' => 'Module\Order\Form\Element\Gateway',
+                        'attributes' => array(
+                            'type'  => 'hidden',
+                            'value' => $gatewayList['0'],
+                        ),
+                    ));
+                } else {
+                    // gateway
+                    $this->add(array(
+                        'name' => 'gateway',
+                        'type' => 'select',
                         'options' => array(
                             'label' => __('Adapter'),
-                            'value_options' => array(),
+                            'value_options' => $gatewayList,
                         ),
                         'attributes' => array(
                             'id'    => 'select-payment',
@@ -325,23 +368,6 @@ class OrderForm  extends BaseForm
                         )
                     ));
                 }
-                break;
-            
-            case 'service':
-                // gateway
-                $this->add(array(
-                    'name' => 'gateway',
-                    'type' => 'Module\Order\Form\Element\Gateway',
-                    'options' => array(
-                        'label' => __('Adapter'),
-                        'value_options' => array(),
-                    ),
-                    'attributes' => array(
-                        'id'    => 'select-payment',
-                        'size'  => 1,
-                        'required' => true,
-                    )
-                ));
                 break;
         }
         // user_note
