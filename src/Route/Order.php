@@ -92,7 +92,7 @@ class Order extends Standard
                     break;
 
                 case 'payment':
-                    $actionList = array('result', 'notify', 'cancel', 'finish', 'index', 'test');
+                    $actionList = array('result', 'notify', 'cancel', 'finish', 'index', 'test', 'process');
                     if (in_array($parts[1], $actionList)) {
                         $matches['action'] = $this->decode($parts[1]);
                         if (isset($parts[2]) && is_numeric($parts[2])) {

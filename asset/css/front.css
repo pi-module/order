@@ -58,3 +58,11 @@ ul.progtrckr li.progtrckr-todo:before {
     border: 1px solid #ccc;
     padding: 10px;
 }
+
+#pi-order .finishBox {
+    margin-top: 80px;
+}
+
+#pi-order .finishBox .finishLogo {
+    padding-bottom: 20px;
+}

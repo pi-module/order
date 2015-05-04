@@ -256,6 +256,18 @@ class PaymentController extends IndexController
 
     public function finishAction()
     {
+        $url = Pi::url($this->url('', array(
+            'module'        => $this->getModule(),
+            'controller'    => 'payment',
+            'action'        => 'process',
+        )));
+        // Set view
+        $this->view()->setTemplate('finish')->setLayout('layout-style');
+        $this->view()->assign('url', $url);
+    }
+
+    public function processAction()
+    {
         $processing = Pi::api('processing', 'order')->getProcessing();
         if (!empty($processing['invoice'])) {
             // Get invoice
@@ -276,7 +288,7 @@ class PaymentController extends IndexController
             $return = array(
                 'website'  => Pi::url(),
                 'module'   => $this->params('module'),
-                'message'  => 'finish',
+                'message'  => 'process',
             );
             // Set view
             $this->view()->setTemplate(false)->setLayout('layout-content');

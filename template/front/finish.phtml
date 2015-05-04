@@ -1,0 +1,36 @@
+<?php 
+    $this->css($this->assetModule('css/front.css'));
+    $this->jquery();
+    $script =<<<'EOT'
+    var delay = 30000;
+    setTimeout(function(){ window.location = '%s'; }, delay);
+EOT;
+    $script = sprintf($script, $url);
+    $this->footScript()->appendScript($script);
+
+        $script =<<<'EOT'
+var count=30;
+var counter=setInterval(timer, 1000);
+function timer()
+{
+  count=count-1;
+  if (count <= 0)
+  {
+     clearInterval(counter);
+     return;
+  }
+
+ document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
+}
+EOT;
+    $this->footScript()->appendScript($script);
+?>
+<div class="clearfix finishBox">
+	<div class="text-center finishLogo">
+		<img src="<?php echo $this->logo(); ?>" alt="">
+	</div>
+	<div class="alert alert-success" role="alert">
+		<h1><?php _e('Congratulations'); ?></h1>
+		<p><?php echo sprintf(__('Your payment finish successfully, we need %s time to prossee it, please wait to redirect to new page'), '<strong><span id="timer"></span></strong>'); ?></p>
+	</div>
+</div>
