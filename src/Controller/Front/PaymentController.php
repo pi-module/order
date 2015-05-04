@@ -226,6 +226,16 @@ class PaymentController extends IndexController
                     if ($verify['status'] == 1) {
                         $url = Pi::api('order', 'order')->updateOrder($verify['order']);
                         Pi::api('invoice', 'order')->setBackUrl($verify['invoice'], $url);
+
+                        $log = array();
+                        $log['gateway'] = 'paypal';
+                        $log['value'] = Json::encode(array(10, $verify, $url));
+                        Pi::api('log', 'order')->setLog($log);
+                    } else {
+                        $log = array();
+                        $log['gateway'] = 'paypal';
+                        $log['value'] = Json::encode(array(11, $verify));
+                        Pi::api('log', 'order')->setLog($log);
                     }
                 }
             } else {
