@@ -393,5 +393,10 @@ class Invoice extends AbstractApi
         $invoice = Pi::model('invoice', $this->getModule())->find($id);
         $invoice->back_url = $url;
         $invoice->save();
+
+        $log = array();
+        $log['gateway'] = 'paypal';
+        $log['value'] = Json::encode(array(12, $invoice->toArray()));
+        Pi::api('log', 'order')->setLog($log);
     }
 }	
