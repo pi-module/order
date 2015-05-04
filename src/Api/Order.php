@@ -21,7 +21,7 @@ use Zend\Math\Rand;
 /*
  * Pi::api('order', 'order')->getOrder($id);
  * Pi::api('order', 'order')->getOrderFromUser($uid, $compressed);
- * Pi::api('order', 'order')->generatCode();
+ * Pi::api('order', 'order')->generatCode($id);
  * Pi::api('order', 'order')->orderStatus($status);
  * Pi::api('order', 'order')->paymentStatus($status);
  * Pi::api('order', 'order')->deliveryStatus($status);

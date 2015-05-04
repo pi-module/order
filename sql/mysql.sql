@@ -84,6 +84,7 @@ CREATE TABLE `{invoice}` (
     `order` int(10) unsigned NOT NULL default '0',
     `uid` int(10) unsigned NOT NULL default '0',
     `ip` char(15) NOT NULL default '',
+    `code` varchar(16) NOT NULL default '',
     `product_price` decimal(16,2) NOT NULL default '0.00',
     `discount_price` decimal(16,2) NOT NULL default '0.00',
     `shipping_price` decimal(16,2) NOT NULL default '0.00',

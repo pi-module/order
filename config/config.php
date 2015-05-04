@@ -85,7 +85,15 @@ return array(
         ),
         'order_code_prefix' => array(
             'category'     => 'order',
-            'title'        => _a('Code Prefix'),
+            'title'        => _a('Order code Prefix'),
+            'description'  => '',
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => 'Pi' 
+        ),
+        'invoice_code_prefix' => array(
+            'category'     => 'order',
+            'title'        => _a('Invoice code Prefix'),
             'description'  => '',
             'edit'         => 'text',
             'filter'       => 'string',

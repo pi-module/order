@@ -20,6 +20,7 @@ use Zend\Math\Rand;
 
 /*
  * Pi::api('invoice', 'order')->createInvoice($id);
+ * Pi::api('invoice', 'order')->generatCode($id);
  * Pi::api('invoice', 'order')->getInvoice($id);
  * Pi::api('invoice', 'order')->getInvoiceFromOrder($order);
  * Pi::api('invoice', 'order')->getInvoiceFromUser($uid, $compressed, $orderIds);
@@ -72,6 +73,12 @@ class Invoice extends AbstractApi
                     $row->credit_price = 0;
                     $row->gateway = $order['gateway'];
                     $row->save();
+                    // Set order ID
+                    $code = $this->generatCode($row->id);
+                    Pi::model('invoice', $this->getModule())->update(
+                        array('code' => $code), 
+                        array('id' => $row->id)
+                    );
                     break;
             
                 case 'onetime':
@@ -95,6 +102,12 @@ class Invoice extends AbstractApi
                     $row->credit_price = 0;
                     $row->gateway = $order['gateway'];
                     $row->save();
+                    // Set order ID
+                    $code = $this->generatCode($row->id);
+                    Pi::model('invoice', $this->getModule())->update(
+                        array('code' => $code), 
+                        array('id' => $row->id)
+                    );
                     // return array
                     $result['status'] = $row->status;
                     $result['message'] = __('Your invoice create successfully');
@@ -166,6 +179,12 @@ class Invoice extends AbstractApi
                             $row->gateway = $order['gateway'];
                             $row->extra = json::encode($extra);
                             $row->save();
+                            // Set order ID
+                            $code = $this->generatCode($row->id);
+                            Pi::model('invoice', $this->getModule())->update(
+                                array('code' => $code), 
+                                array('id' => $row->id)
+                            );
                             // Set return
                             if ($key == 0) {
                                 $information = array(
@@ -218,6 +237,21 @@ class Invoice extends AbstractApi
         }
         // return
         return $result;
+    }
+
+    public function generatCode($id = '')
+    {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        $prefix = $config['invoice_code_prefix'];
+        // Check ID
+        if (empty($id)) {
+            // Generate random code
+            $id = Rand::getInteger(10000000, 99999999);
+        }
+        // Generate order code
+        $code = sprintf('%s-%s', $prefix, $id);
+        return $code;
     }
 
     public function getInvoice($parameter, $type = 'id')

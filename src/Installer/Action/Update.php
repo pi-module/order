@@ -139,6 +139,29 @@ class Update extends BasicUpdate
                 return false;
             }
         }
+
+        if (version_compare($moduleVersion, '1.5.9', '<')) {
+            // Alter table field add code
+            $sql = sprintf("ALTER TABLE %s ADD `code` varchar(16) NOT NULL default ''", $invoiceTable);
+            try {
+                $invoiceAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+
+            // Add code for all old invoices
+            $select = $invoiceModel->select();
+            $rowset = $invoiceModel->selectWith($select);
+            foreach ($rowset as $row) {
+                $row->code = Pi::api('invoice', 'order')->generatCode($row->id);
+                $row->save();
+            }
+        }
         
         return true;
     }
