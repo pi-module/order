@@ -49,6 +49,14 @@ class InvoiceController extends IndexController
         }
         // Get product list
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        // Check invoice prive
+        if (in_array($order['status_order'], array(1, 2, 3)) && $invoice['status'] == 2 && $invoice['total_price'] == 0) {
+            $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
+            $url = Pi::api('order', 'order')->updateOrder($invoice['order']);
+            // jump to module
+            $message = __('Your payment were successfully. Back to module');
+            $this->jump($url, $message);
+        }
         // set view
         $this->view()->setTemplate('invoice');
         $this->view()->assign('invoice', $invoice);
