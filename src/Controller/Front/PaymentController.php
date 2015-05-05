@@ -74,6 +74,16 @@ class PaymentController extends IndexController
                 'id'         => $invoice['id'],
             ));
         }
+        // Check invoice prive
+        if (in_array($order['status_order'], array(1, 2, 3)) && $invoice['status'] == 2 && $invoice['total_price'] == 0) {
+            $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
+            $url = Pi::api('order', 'order')->updateOrder($invoice['order']);
+            // Remove processing
+            Pi::api('processing', 'order')->removeProcessing();
+            // jump to module
+            $message = __('Your payment were successfully. Back to module');
+            $this->jump($url, $message);
+        }
         // Get gateway object
         $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
         $gateway->setInvoice($invoice);
