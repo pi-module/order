@@ -155,6 +155,12 @@ class CheckoutController extends IndexController
                 $values['packing_price'] = 0;
                 $values['vat_price'] = 0;
                 $values['total_price'] = 0;
+                // Set extra price
+                if ($values['type_commodity'] == 'product') {
+                    $values['shipping_price'] = $config['order_additional_price_product'];
+                } elseif ($values['type_commodity'] == 'service') {
+                    $values['shipping_price'] = $config['order_additional_price_service'];
+                }
                 // Check order values
                 if (!empty($cart['product'])) {
                     foreach ($cart['product'] as $product) {

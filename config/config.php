@@ -263,6 +263,22 @@ return array(
             'description'  => '',
             'edit'         => 'textarea',
         ),
+        'order_additional_price_product' => array(
+            'category'     => 'order',
+            'title'        => _a('Product additional price'),
+            'description'  => _a('Additional price as ready and delivery, just for products'),
+            'edit'         => 'text',
+            'filter'       => 'number_int',
+            'value'        => 0
+        ),
+        'order_additional_price_service' => array(
+            'category'     => 'order',
+            'title'        => _a('Service additional price'),
+            'description'  => _a('Additional price as setup, just for servicies'),
+            'edit'         => 'text',
+            'filter'       => 'number_int',
+            'value'        => 0
+        ),
         // Customize
         'price_custom' => array(
             'category'     => 'customize',
