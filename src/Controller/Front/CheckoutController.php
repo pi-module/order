@@ -155,12 +155,6 @@ class CheckoutController extends IndexController
                 $values['packing_price'] = 0;
                 $values['vat_price'] = 0;
                 $values['total_price'] = 0;
-                // Set extra price
-                if ($values['type_commodity'] == 'product') {
-                    $values['shipping_price'] = $config['order_additional_price_product'];
-                } elseif ($values['type_commodity'] == 'service') {
-                    $values['shipping_price'] = $config['order_additional_price_service'];
-                }
                 // Check order values
                 if (!empty($cart['product'])) {
                     foreach ($cart['product'] as $product) {
@@ -171,10 +165,18 @@ class CheckoutController extends IndexController
                         $values['packing_price'] = $product['packing_price'] + $values['packing_price'];
                         $values['vat_price'] = $product['vat_price'] + $values['vat_price'];
                         // Set total
-                        $total = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']) * $product['number'];
+                        $total = (($values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['vat_price']) - $values['discount_price']) * $product['number'];
                         $values['total_price'] = $total + $values['total_price'];
                     }
                 }
+                // Set additional price
+                $additional = 0;
+                if ($values['type_commodity'] == 'product') {
+                    $additional = $config['order_additional_price_product'];
+                } elseif ($values['type_commodity'] == 'service') {
+                    $additional = $config['order_additional_price_service'];
+                }
+                $values['total_price'] = $values['total_price'] + $additional;
                 // Save values to order
                 $order = $this->getModel('order')->createRow();
                 $order->assign($values);
