@@ -46,7 +46,9 @@
                 <span id="update-payment-<?php echo $this->escape($order['id']); ?>" class="update-payment btn <?php echo $this->escape($order['paymentClass']); ?> "><?php echo $this->escape($order['paymentTitle']); ?></span>
 			</td>
             <td>
+                <?php if ($order['type_commodity'] == 'product') { ?>
                 <span id="update-delivery-<?php echo $this->escape($order['id']); ?>" class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> "><?php echo $this->escape($order['deliveryTitle']); ?></span>
+                <?php } ?>
 			</td>
 			<td>
 				<a class="btn btn-primary" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
