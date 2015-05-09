@@ -159,20 +159,20 @@ class CheckoutController extends IndexController
                 if (!empty($cart['product'])) {
                     foreach ($cart['product'] as $product) {
                         // Set other price
-                        $values['product_price'] = $product['product_price'] + $values['product_price'];
-                        $values['discount_price'] = $product['discount_price'] + $values['discount_price'];
-                        $values['shipping_price'] = $product['shipping_price'] + $values['shipping_price'];
-                        $values['packing_price'] = $product['packing_price'] + $values['packing_price'];
-                        $values['vat_price'] = $product['vat_price'] + $values['vat_price'];
-                        // Set total
-                        $total = (($values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['vat_price']) - $values['discount_price']) * $product['number'];
-                        $values['total_price'] = $total + $values['total_price'];
+                        $values['product_price'] = ($product['product_price'] * $product['number']) + $values['product_price'];
+                        $values['discount_price'] = ($product['discount_price'] * $product['number']) + $values['discount_price'];
+                        $values['shipping_price'] = ($product['shipping_price'] * $product['number']) + $values['shipping_price'];
+                        $values['packing_price'] = ($product['packing_price'] * $product['number']) + $values['packing_price'];
+                        $values['vat_price'] = ($product['vat_price'] * $product['number']) + $values['vat_price'];
                     }
                 }
+                // Set total
+                $values['total_price'] = (($values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['vat_price']) - $values['discount_price']);
                 // Set additional price
                 $additional = 0;
                 if ($values['type_commodity'] == 'product') {
                     $additional = $config['order_additional_price_product'];
+                    $values['shipping_price'] = $config['order_additional_price_product'];
                 } elseif ($values['type_commodity'] == 'service') {
                     $additional = $config['order_additional_price_service'];
                 }
