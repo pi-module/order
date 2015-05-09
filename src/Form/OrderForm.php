@@ -408,7 +408,6 @@ class OrderForm  extends BaseForm
                 ),
                 'attributes' => array(
                     'description' => $this->config['order_termtext'],
-                    'class'       => 'order-term',
                 ),
             ));
             $this->add(array(

@@ -52,12 +52,12 @@ ul.progtrckr li.progtrckr-todo:before {
     bottom: -1.6em;
 }
 
-#pi-order .order-checkout .description {
+/* #pi-order .order-checkout .description {
     height: 100px;
     overflow-y: scroll;
     border: 1px solid #ccc;
     padding: 10px;
-}
+} */
 
 #pi-order .finishBox {
     margin-top: 80px;
