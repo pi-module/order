@@ -422,11 +422,16 @@ class OrderForm  extends BaseForm
             ));
         }
         // Save
+        if ($this->config['order_payment'] == 'payment') {
+            $title = __('Pay');
+        } else {
+            $title = __('Save order');
+        }    
         $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
-                'value' => __('Save order'),
+                'value' => $title,
                 'class' => 'btn btn-primary',
             )
         ));

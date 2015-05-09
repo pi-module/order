@@ -238,7 +238,12 @@ class CheckoutController extends IndexController
                     $url = array('', 'controller' => 'index', 'action' => 'index');
                     $this->jump($url, $result['message'], 'error');
                 } else {
-                    $this->jump($result['invoice_url'], $result['message'], 'success');
+                    if ($config['order_payment'] == 'payment') {
+                        $url = $result['pay_url'];
+                    } else {
+                        $url = $result['invoice_url'];
+                    }
+                    $this->jump($url, $result['message'], 'success');
                 }
             }   
         } else {
@@ -254,15 +259,23 @@ class CheckoutController extends IndexController
         $price['total'] = 0;
         foreach ($cart['product'] as $product) {
             // Set price
-            $price['product'] = $product['product_price'] + $price['product'];
-            $price['discount'] = $product['discount_price'] + $price['discount'];
-            $price['shipping'] = $product['shipping_price'] + $price['shipping'];
-            $price['packing'] = $product['packing_price'] + $price['packing'];
+            $price['product'] = ($product['product_price'] * $product['number']) + $price['product'];
+            $price['discount'] = ($product['discount_price'] * $product['number']) + $price['discount'];
+            $price['shipping'] = ($product['shipping_price'] * $product['number']) + $price['shipping'];
+            $price['packing'] = ($product['packing_price'] * $product['number']) + $price['packing'];
             $price['vat'] = $product['vat_price'] + $price['vat'];
-            // Set total
-            $total = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']) * $product['number'];
-            $price['total'] = $total + $price['total'];
         }
+        // Set total
+        $price['total'] = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']);
+        // Set additional price
+        $additional = 0;
+        if ($cart['type_commodity'] == 'product') {
+            $additional = $config['order_additional_price_product'];
+            $price['shipping'] = $config['order_additional_price_product'];
+        } elseif ($cart['type_commodity'] == 'service') {
+            $additional = $config['order_additional_price_service'];
+        }
+        $price['total'] = $price['total'] + $additional;
         // Set plan
         if ($cart['type_payment'] == 'installment') {
             $user = Pi::api('user', 'order')->getUserInformation();

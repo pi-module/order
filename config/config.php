@@ -279,6 +279,22 @@ return array(
             'filter'       => 'number_int',
             'value'        => 0
         ),
+        'order_payment' => array(
+            'title'        => _a('After save order'),
+            'description'  => '',
+            'edit'         => array(
+                'type'     => 'select',
+                'options'  => array(
+                    'options' => array(
+                        'invoice' => _a('Go to invoice page'),
+                        'payment' => _a('Go to payment page'),
+                    ),
+                ),
+            ),
+            'filter'       => 'text',
+            'value'        => 'invoice',
+            'category'     => 'order',
+        ),
         // Customize
         'price_custom' => array(
             'category'     => 'customize',
