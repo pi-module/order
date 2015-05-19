@@ -162,6 +162,53 @@ class Update extends BasicUpdate
                 $row->save();
             }
         }
+
+        if (version_compare($moduleVersion, '1.6.2', '<')) {
+            // Add table : event
+            $sql =<<<'EOD'
+CREATE TABLE `{customer}` (
+    `id` int(10) unsigned NOT NULL auto_increment,
+    `uid` int(10) unsigned NOT NULL default '0',
+    `ip` char(15) NOT NULL default '',
+    `id_number` varchar(255) NOT NULL default '',
+    `first_name` varchar(255) NOT NULL default '',
+    `last_name` varchar(255) NOT NULL default '',
+    `email` varchar(64) NOT NULL default '',
+    `phone` varchar(16) NOT NULL default '',
+    `mobile` varchar(16) NOT NULL default '',
+    `address1` text,
+    `address2` text,
+    `country` varchar(64) NOT NULL default '',
+    `state` varchar(64) NOT NULL default '',
+    `city` varchar(64) NOT NULL default '',
+    `zip_code` varchar(16) NOT NULL default '',
+    `company` varchar(255) NOT NULL default '',
+    `company_id` varchar(255) NOT NULL default '',
+    `company_vat` varchar(255) NOT NULL default '',
+    `user_note` text,
+    `time_create` int(10) unsigned NOT NULL default '0',
+    `time_update` int(10) unsigned NOT NULL default '0',
+    `status` tinyint(1) unsigned NOT NULL default '0',
+    PRIMARY KEY  (`id`),
+    KEY `uid` (`uid`),
+    KEY `status` (`status`),
+    KEY `time_create` (`time_create`)
+);
+EOD;
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'SQL schema query for author table failed: '
+                                   . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+        }
         
         return true;
     }
