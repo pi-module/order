@@ -400,26 +400,40 @@ class OrderForm  extends BaseForm
         }
         // order_term
         if ($this->config['order_term']) {
-            $this->add(array(
-                'name' => 'order_term_text',
-                'type' => 'description',
-                'options' => array(
-                    'label' => __('Terms & Conditions'),
-                ),
-                'attributes' => array(
-                    'description' => $this->config['order_termtext'],
-                ),
-            ));
-            $this->add(array(
-                'name' => 'order_term',
-                'type' => 'checkbox',
-                'options' => array(
-                    'label' => __('Accept Terms & Conditions'),
-                ),
-                'attributes' => array(
-                    'description' => '',
-                )
-            ));
+            if (!empty($this->config['order_termurl'])) {
+                $term = sprintf('<a href="%s" target="_blank">%s</a>', $this->config['order_termurl'], __('Terms & Conditions'));
+                $this->add(array(
+                    'name' => 'order_term',
+                    'type' => 'checkbox',
+                    'options' => array(
+                        'label' => '',
+                    ),
+                    'attributes' => array(
+                        'description' => sprintf(__('Accept %s'), $term),
+                    )
+                ));
+            } else {
+                $this->add(array(
+                    'name' => 'order_term_text',
+                    'type' => 'description',
+                    'options' => array(
+                        'label' => __('Terms & Conditions'),
+                    ),
+                    'attributes' => array(
+                        'description' => $this->config['order_termtext'],
+                    ),
+                ));
+                $this->add(array(
+                    'name' => 'order_term',
+                    'type' => 'checkbox',
+                    'options' => array(
+                        'label' => __('Accept Terms & Conditions'),
+                    ),
+                    'attributes' => array(
+                        'description' => '',
+                    )
+                ));
+            }
         }
         // Save
         if ($this->config['order_payment'] == 'payment') {

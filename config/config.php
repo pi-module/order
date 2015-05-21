@@ -259,9 +259,15 @@ return array(
         ),
         'order_termtext' => array(
             'category'     => 'order',
-            'title'        => _a('Order term'),
+            'title'        => _a('Order term text'),
             'description'  => '',
             'edit'         => 'textarea',
+        ),
+        'order_termurl' => array(
+            'category'     => 'order',
+            'title'        => _a('Order term url'),
+            'description'  => '',
+            'edit'         => 'text',
         ),
         'order_additional_price_product' => array(
             'category'     => 'order',
