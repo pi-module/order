@@ -36,6 +36,13 @@ class OrderForm  extends BaseForm
 
     public function init()
     {
+        // customer_id
+        $this->add(array(
+            'name' => 'customer_id',
+            'attributes' => array(
+                'type' => 'hidden',
+            ),
+        ));
         // name
         if ($this->config['order_name']) {
             // first_name

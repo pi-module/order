@@ -53,6 +53,11 @@ class Update extends BasicUpdate
         $basketTable      = $basketModel->getTable();
         $basketAdapter    = $basketModel->getAdapter();
 
+        // Set customer model
+        $customerModel      = Pi::model('customer', $this->module);
+        $customerTable      = $customerModel->getTable();
+        $customerAdapter    = $customerModel->getAdapter();
+
         if (version_compare($moduleVersion, '1.3.6', '<')) {
             // Alter table field add id_number
             $sql = sprintf("ALTER TABLE %s ADD `id_number` varchar(255) NOT NULL default ''", $orderTable);
@@ -206,6 +211,21 @@ EOD;
                                    . $exception->getMessage(),
                 ));
 
+                return false;
+            }
+        }
+
+        if (version_compare($moduleVersion, '1.6.4', '<')) {
+            // Alter table field add code
+            $sql = sprintf("ALTER TABLE %s ADD `address_type` enum('delivery','invoicing') NOT NULL default 'delivery'", $customerTable);
+            try {
+                $customerAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
                 return false;
             }
         }

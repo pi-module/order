@@ -141,6 +141,7 @@ CREATE TABLE `{customer}` (
     `mobile` varchar(16) NOT NULL default '',
     `address1` text,
     `address2` text,
+    `address_type` enum('delivery','invoicing') NOT NULL default 'delivery',
     `country` varchar(64) NOT NULL default '',
     `state` varchar(64) NOT NULL default '',
     `city` varchar(64) NOT NULL default '',

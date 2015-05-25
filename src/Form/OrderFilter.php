@@ -23,6 +23,11 @@ class OrderFilter extends InputFilter
     {
         $config = Pi::service('registry')->config->read('order', 'order');
         //$checkout = Pi::api('order', 'order')->checkoutConfig();
+        // customer_id
+        $this->add(array(
+            'name' => 'customer_id',
+            'required' => false,
+        ));
         // name
         if ($config['order_name']) {
             // first_name
@@ -317,7 +322,7 @@ class OrderFilter extends InputFilter
         if ($config['order_promo']) {
             $this->add(array(
                 'name' => 'promo_value',
-                'required' => true,
+                'required' => false,
                 'filters' => array(
                     array(
                         'name' => 'StringTrim',

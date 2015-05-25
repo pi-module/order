@@ -38,14 +38,17 @@ class CheckoutController extends IndexController
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
             $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
         }
+        // Get customer
+        $customers = Pi::api('customer', 'order')->findCustomer();
         // Sety form option
         $option = array(
             'type_commodity' => $cart['type_commodity'],
+            'customers'      => $customers,
         );
-        // Set order form
-        $form = new OrderForm('order', $option);
+        // Check post
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
+            $form = new OrderForm('order', $option);
             $form->setInputFilter(new OrderFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
@@ -177,6 +180,12 @@ class CheckoutController extends IndexController
                     $additional = $config['order_additional_price_service'];
                 }
                 $values['total_price'] = $values['total_price'] + $additional;
+                // Set customer
+                if ($values['customer_id'] == 0) {
+                    Pi::api('customer', 'order')->addCustomer($values);
+                } else {
+                    Pi::api('customer', 'order')->updateCustomer($values);
+                }
                 // Save values to order
                 $order = $this->getModel('order')->createRow();
                 $order->assign($values);
@@ -245,10 +254,21 @@ class CheckoutController extends IndexController
                     }
                     $this->jump($url, $result['message'], 'success');
                 }
-            }   
+            }
         } else {
+            // Set new form
             $user = Pi::api('user', 'order')->getUserInformation();
-            $form->setData($user);
+            $user['customer_id'] = 0;
+            $forms['new'] = new OrderForm('order', $option);
+            $forms['new']->setData($user);
+            // Set customer forms
+            if (!empty($customers)) {
+                foreach ($customers as $customer) {
+                    $key = sprintf('customer-%s', $customer['id']);
+                    $forms[$key] = new OrderForm('order', $option);
+                    $forms[$key]->setData($customer);
+                }
+            }
         }
         // Set price
         $price['product'] = 0;
@@ -284,10 +304,11 @@ class CheckoutController extends IndexController
         }
         // Set view
         $this->view()->setTemplate('checkout');
-        $this->view()->assign('form', $form);
+        $this->view()->assign('forms', $forms);
         $this->view()->assign('cart', $cart);
         $this->view()->assign('price', $price);
         $this->view()->assign('config', $config);
+        $this->view()->assign('customers', $customers);
     }
 
     public function installmentAction()
