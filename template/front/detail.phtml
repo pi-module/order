@@ -1,5 +1,8 @@
 <?php $this->css($this->assetModule('css/front.css')); ?>
-<div class="clearfix">
+<div class="col-md-3">
+	<?php include $this->templateModule('front/user-profile-sidebar.phtml', 'user'); ?>
+</div>
+<div class="col-md-9">
 	<h1><?php echo sprintf(__('Order %s details'), $order['code']); ?></h1>
     <?php if ($order['type_commodity'] == 'product') { ?>
     <?php /* From : http://blog.sathomas.me/post/tracking-progress-in-pure-css */ ?>
