@@ -104,6 +104,7 @@ EOT;
             <p><?php echo sprintf(__('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2), Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])), Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))); ?></p>
         </div>
         <?php } ?>
+        <div class="well"><?php _e('Select your invoicing address for your order'); ?></div>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
             <?php foreach($customers as $customer) { ?>
             <div class="panel panel-default">
@@ -126,7 +127,7 @@ EOT;
                 <div class="panel-heading" role="tab" id="new-address">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse-new-address" aria-expanded="false" aria-controls="collapse-new-address">
-                            <?php _e('New address'); ?>
+                            <?php _e('Add a new invoicing address'); ?>
                         </a>
                     </h4>
                 </div>
