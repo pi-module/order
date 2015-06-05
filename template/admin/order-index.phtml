@@ -1,6 +1,6 @@
-<?php 
-    $this->css($this->assetModule('css/admin.css'));
-    $this->backbone();
+<?php
+$this->css($this->assetModule('css/admin.css'));
+$this->backbone();
 ?>
 <div id="js-order" class="clearfix">
     <div class="well">
@@ -8,107 +8,107 @@
         <?php echo $this->form($form); ?>
     </div>
     <h3><?php _e('List of orders'); ?></h3>
-	<table class="table table-striped table-bordered table-condensed">
-		<tr>
-			<th><?php _e('ID'); ?></th>
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th><?php _e('ID'); ?></th>
             <th><?php _e('Code'); ?></th>
-			<th><?php _e('Customer'); ?></th>
+            <th><?php _e('Customer'); ?></th>
             <th><?php _e('Total price'); ?></th>
-			<th><?php _e('Status'); ?></th>
+            <th><?php _e('Status'); ?></th>
             <th><?php _e('Payment'); ?></th>
             <th><?php _e('Delivery'); ?></th>
-			<th><?php _e('Action'); ?></th>
-		</tr>
-		<?php foreach($list as $order) { ?>
-		<tr 
-            data-id="<?php echo $this->escape($order['id']); ?>" 
-            data-order="<?php echo $this->escape($order['url_update_order']); ?>" 
-            data-payment="<?php echo $this->escape($order['url_update_payment']); ?>" 
-            data-delivery="<?php echo $this->escape($order['url_update_delivery']); ?>"
-        >
-			<td><?php echo $this->escape($order['id']); ?></td>
-            <td><?php echo $this->escape($order['code']); ?></td>
-			<td class="clearfix">
+            <th><?php _e('Action'); ?></th>
+        </tr>
+        <?php foreach($list as $order) { ?>
+            <tr
+                data-id="<?php echo $this->escape($order['id']); ?>"
+                data-order="<?php echo $this->escape($order['url_update_order']); ?>"
+                data-payment="<?php echo $this->escape($order['url_update_payment']); ?>"
+                data-delivery="<?php echo $this->escape($order['url_update_delivery']); ?>"
+                >
+                <td><?php echo $this->escape($order['id']); ?></td>
+                <td><?php echo $this->escape($order['code']); ?></td>
+                <td class="clearfix">
 				<span class="pull-left">
-                    <?php echo $this->escape($order['first_name']); ?> 
-                    <?php echo $this->escape($order['last_name']); ?> 
+                    <?php echo $this->escape($order['first_name']); ?>
+                    <?php echo $this->escape($order['last_name']); ?>
                 </span>
 				<span class="pull-right label label-info">
-					<?php echo $this->escape($order['user']['identity']); ?> 
-					( <?php echo $this->escape($order['user']['name']); ?> ) 
+					<?php echo $this->escape($order['user']['identity']); ?>
+                    ( <?php echo $this->escape($order['user']['name']); ?> )
 				</span>
-			</td>
-            <td><?php echo $this->escape($order['total_price_view']); ?></td>
-			<td>
-				<span id="update-order-<?php echo $this->escape($order['id']); ?>" class="update-order btn <?php echo $this->escape($order['orderClass']); ?> "><?php echo $this->escape($order['orderTitle']); ?></span>
-			</td>
-            <td>	
-                <span id="update-payment-<?php echo $this->escape($order['id']); ?>" class="update-payment btn <?php echo $this->escape($order['paymentClass']); ?> "><?php echo $this->escape($order['paymentTitle']); ?></span>
-			</td>
-            <td>
-                <?php if ($order['type_commodity'] == 'product') { ?>
-                <span id="update-delivery-<?php echo $this->escape($order['id']); ?>" class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> "><?php echo $this->escape($order['deliveryTitle']); ?></span>
-                <?php } ?>
-			</td>
-			<td>
-				<a class="btn btn-primary" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
-			</td>
-		</tr>
-		<?php } ?>
-	</table>
-	<div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
+                </td>
+                <td><?php echo $this->escape($order['total_price_view']); ?></td>
+                <td>
+                    <span id="update-order-<?php echo $this->escape($order['id']); ?>" class="update-order btn <?php echo $this->escape($order['orderClass']); ?> "><?php echo $this->escape($order['orderTitle']); ?></span>
+                </td>
+                <td>
+                    <span id="update-payment-<?php echo $this->escape($order['id']); ?>" class="update-payment btn <?php echo $this->escape($order['paymentClass']); ?> "><?php echo $this->escape($order['paymentTitle']); ?></span>
+                </td>
+                <td>
+                    <?php if ($order['type_commodity'] == 'product') { ?>
+                        <span id="update-delivery-<?php echo $this->escape($order['id']); ?>" class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> "><?php echo $this->escape($order['deliveryTitle']); ?></span>
+                    <?php } ?>
+                </td>
+                <td>
+                    <a class="btn btn-primary" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
+                </td>
+            </tr>
+        <?php } ?>
+    </table>
+    <div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
 </div>
 <script>
-(function($) {
-    var page = {
-        el: $('#js-order'),
-        modal: $('<div class="modal fade">').appendTo(document.body),
-        $: function(selector) {
-            return this.el.find(selector);
-        },
-        init: function() {
-            _.bindAll(this);
-            this.$('.update-order').click(this.orderAction);
-            this.$('.update-payment').click(this.paymentAction);
-            this.$('.update-delivery').click(this.deliveryAction);
-        },
-        orderAction: function(e) {
-            var p = $(e.target).parents('tr'),
-                self =this;
-            $.get(p.attr('data-order')).done(function(res) {
-                self.modal.html(res).modal('show');
-                formModule.success = function(res) {
-                    var d = res.data;
-                    self.modal.html(res).modal('hide');
-                    $('#update-order-' + p.attr('data-id')).attr('class', 'update-order btn ' + d.orderClass).html(d.orderTitle);
-                };
-            });
-        },
-        paymentAction: function(e) {
-            var p = $(e.target).parents('tr'),
-                self =this;
-            $.get(p.attr('data-payment')).done(function(res) {
-                self.modal.html(res).modal('show');
-                formModule.success = function(res) {
-                    var d = res.data;
-                    self.modal.html(res).modal('hide');
-                    $('#update-payment-' + p.attr('data-id')).attr('class', 'update-payment btn ' + d.paymentClass).html(d.paymentTitle);
-                };
-            });
-        },
-        deliveryAction: function(e) {
-            var p = $(e.target).parents('tr'),
-                self =this;
-            $.get(p.attr('data-delivery')).done(function(res) {
-                self.modal.html(res).modal('show');
-                formModule.success = function(res) {
-                    var d = res.data;
-                    self.modal.html(res).modal('hide');
-                    $('#update-delivery-' + p.attr('data-id')).attr('class', 'update-delivery btn ' + d.deliveryClass).html(d.deliveryTitle);
-                };
-            });
-        },
-    }
-    page.init();
-})(jQuery)
+    (function($) {
+        var page = {
+            el: $('#js-order'),
+            modal: $('<div class="modal fade">').appendTo(document.body),
+            $: function(selector) {
+                return this.el.find(selector);
+            },
+            init: function() {
+                _.bindAll(this);
+                this.$('.update-order').click(this.orderAction);
+                this.$('.update-payment').click(this.paymentAction);
+                this.$('.update-delivery').click(this.deliveryAction);
+            },
+            orderAction: function(e) {
+                var p = $(e.target).parents('tr'),
+                    self =this;
+                $.get(p.attr('data-order')).done(function(res) {
+                    self.modal.html(res).modal('show');
+                    formModule.success = function(res) {
+                        var d = res.data;
+                        self.modal.html(res).modal('hide');
+                        $('#update-order-' + p.attr('data-id')).attr('class', 'update-order btn ' + d.orderClass).html(d.orderTitle);
+                    };
+                });
+            },
+            paymentAction: function(e) {
+                var p = $(e.target).parents('tr'),
+                    self =this;
+                $.get(p.attr('data-payment')).done(function(res) {
+                    self.modal.html(res).modal('show');
+                    formModule.success = function(res) {
+                        var d = res.data;
+                        self.modal.html(res).modal('hide');
+                        $('#update-payment-' + p.attr('data-id')).attr('class', 'update-payment btn ' + d.paymentClass).html(d.paymentTitle);
+                    };
+                });
+            },
+            deliveryAction: function(e) {
+                var p = $(e.target).parents('tr'),
+                    self =this;
+                $.get(p.attr('data-delivery')).done(function(res) {
+                    self.modal.html(res).modal('show');
+                    formModule.success = function(res) {
+                        var d = res.data;
+                        self.modal.html(res).modal('hide');
+                        $('#update-delivery-' + p.attr('data-id')).attr('class', 'update-delivery btn ' + d.deliveryClass).html(d.deliveryTitle);
+                    };
+                });
+            },
+        }
+        page.init();
+    })(jQuery)
 </script>

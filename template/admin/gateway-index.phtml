@@ -1,48 +1,48 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="clearfix">
-	<h3><?php _e('List of all available gateways'); ?></h3>
-	<?php foreach($list as $item) { ?>
-	<div class="well">
-		<h4><?php echo $item['title']; ?></h4>
-		<div class="clearfix">
-			<div class="col-md-6">
-				<ul class="list-unstyled">
-					<li><strong><?php _e('Description'); ?></strong> : <?php echo $item['description']; ?></li>
-					<li><strong><?php _e('Version'); ?></strong> : <?php echo $item['version']; ?></li>
-					<li><strong><?php _e('Author'); ?></strong> : <?php echo $item['author']; ?></li>
-					<li><strong><?php _e('Credits'); ?></strong> : <?php echo $item['credits']; ?></li>
-					<li><strong><?php _e('Release Date'); ?></strong> : <?php echo _date($item['releaseDate']); ?></li>
-				</ul>
-			</div>
-			<div class="col-md-6">
-				<?php if(isset($item['option']) && !empty($item['option'])) { ?>
-				<ul class="list-unstyled">
-				<?php foreach($item['option'] as $key => $value) { ?>
-					<li><strong><?php _e($key); ?></strong> : <?php echo $value; ?></li>
-				<?php } ?>
-				</ul>
-				<?php } ?>
-			</div>
-		</div>
-		<?php if($item['status'] != -1) { ?>
-			<?php if($item['status']) { ?>
-			<p>
-				<a class="btn btn-primary" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Edit'); ?></a>
-				<a class="btn btn-warning" title="<?php _e('Inactive'); ?>" href=""><?php _e('Inactive'); ?></a>
-				<a class="btn btn-danger" title="<?php _e('UnInstall'); ?>" href=""><?php _e('UnInstall'); ?></a>
-			</p>
-			<?php } else { ?>
-			<p>
-				<a class="btn btn-primary" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Edit'); ?></a>
-				<a class="btn btn-success" title="<?php _e('Active'); ?>" href=""><?php _e('Active'); ?></a>
-				<a class="btn btn-danger" title="<?php _e('UnInstall'); ?>" href=""><?php _e('UnInstall'); ?></a>
-			</p>
-			<?php } ?>
-		<?php } else { ?>
-		<p>
-			<a class="btn btn-success" title="<?php _e('Install'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Install'); ?></a>
-		</p>
-		<?php } ?>
-	</div>
-	<?php } ?>
+    <h3><?php _e('List of all available gateways'); ?></h3>
+    <?php foreach($list as $item) { ?>
+        <div class="well">
+            <h4><?php echo $item['title']; ?></h4>
+            <div class="clearfix">
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li><strong><?php _e('Description'); ?></strong> : <?php echo $item['description']; ?></li>
+                        <li><strong><?php _e('Version'); ?></strong> : <?php echo $item['version']; ?></li>
+                        <li><strong><?php _e('Author'); ?></strong> : <?php echo $item['author']; ?></li>
+                        <li><strong><?php _e('Credits'); ?></strong> : <?php echo $item['credits']; ?></li>
+                        <li><strong><?php _e('Release Date'); ?></strong> : <?php echo _date($item['releaseDate']); ?></li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <?php if(isset($item['option']) && !empty($item['option'])) { ?>
+                        <ul class="list-unstyled">
+                            <?php foreach($item['option'] as $key => $value) { ?>
+                                <li><strong><?php _e($key); ?></strong> : <?php echo $value; ?></li>
+                            <?php } ?>
+                        </ul>
+                    <?php } ?>
+                </div>
+            </div>
+            <?php if($item['status'] != -1) { ?>
+                <?php if($item['status']) { ?>
+                    <p>
+                        <a class="btn btn-primary" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Edit'); ?></a>
+                        <a class="btn btn-warning" title="<?php _e('Inactive'); ?>" href=""><?php _e('Inactive'); ?></a>
+                        <a class="btn btn-danger" title="<?php _e('UnInstall'); ?>" href=""><?php _e('UnInstall'); ?></a>
+                    </p>
+                <?php } else { ?>
+                    <p>
+                        <a class="btn btn-primary" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Edit'); ?></a>
+                        <a class="btn btn-success" title="<?php _e('Active'); ?>" href=""><?php _e('Active'); ?></a>
+                        <a class="btn btn-danger" title="<?php _e('UnInstall'); ?>" href=""><?php _e('UnInstall'); ?></a>
+                    </p>
+                <?php } ?>
+            <?php } else { ?>
+                <p>
+                    <a class="btn btn-success" title="<?php _e('Install'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Install'); ?></a>
+                </p>
+            <?php } ?>
+        </div>
+    <?php } ?>
 </div>
