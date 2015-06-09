@@ -4,7 +4,9 @@
         <?php include $this->templateModule('front/user-profile-sidebar.phtml', 'user'); ?>
     </div>
     <div class="col-md-9">
-        <h1><?php echo sprintf(__('Invoice %s'), $this->escape($invoice['code'])); ?></h1>
+        <div class="page-header">
+            <h1><?php echo sprintf(__('Invoice %s'), $this->escape($invoice['code'])); ?></h1>
+        </div>
         <div class="well">
             <div class="clearfix">
                 <div class="col-md-6">
