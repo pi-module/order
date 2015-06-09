@@ -73,19 +73,17 @@ class Notification extends AbstractApi
             $lists = explode("|", $config['order_notification_email']);
             foreach ($lists as $items) {
                 $list = explode(",", $items);
-                foreach ($list as $module => $email) {
-                    if ($module == $order['module_name']) {
-                        // Send mail to admin
-                        $toAdmin = array(
-                            $email => $adminname,
-                        );
-                        Pi::api('mail', 'notification')->send(
-                            $toAdmin,
-                            'admin_add_order',
-                            $information,
-                            Pi::service('module')->current()
-                        );
-                    }
+                if ($list[0] == $order['module_name']) {
+                    // Send mail to admin
+                    $toAdmin = array(
+                        $list[1] => $adminname,
+                    );
+                    Pi::api('mail', 'notification')->send(
+                        $toAdmin,
+                        'admin_add_order',
+                        $information,
+                        Pi::service('module')->current()
+                    );
                 }
             }
         }
