@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-04-22 11:10+0330\n"
+"POT-Creation-Date: 2015-06-09 11:15+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,661 +9,716 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.7.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /home/voltan/Documents/git/order\n"
+"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/order\n"
 
-#: /home/voltan/Documents/git/order/src/Api/Api.php:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Api.php:36
 msgid "Toman"
 msgstr "تومان"
 
-#: /home/voltan/Documents/git/order/src/Api/Installment.php:39
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:39
 msgid "One time"
 msgstr "خرید نقدی"
 
-#: /home/voltan/Documents/git/order/src/Api/Invoice.php:51
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:52
 msgid "Please login for create invoice"
 msgstr "لطفا برای ایجاد فاکتور به سایت وارد شوید"
 
-#: /home/voltan/Documents/git/order/src/Api/Invoice.php:100
-#: /home/voltan/Documents/git/order/src/Api/Invoice.php:190
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:113
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:209
 msgid "Your invoice create successfully"
 msgstr "فاکتور شما با موفقیت ایجاد شد"
 
-#: /home/voltan/Documents/git/order/src/Api/Invoice.php:211
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:230
 msgid "Not allowed to create invoice by this user credit"
 msgstr "با توجه به میزان اعتبار کاربر امکان ایجاد فاکتور وجود ندارد"
 
-#: /home/voltan/Documents/git/order/src/Api/Invoice.php:319
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:355
 msgid "Not pay"
 msgstr "پرداخت نشده"
 
-#: /home/voltan/Documents/git/order/src/Api/Invoice.php:320
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:356
 msgid "Not canceled"
 msgstr "لغو نشده"
 
-#: /home/voltan/Documents/git/order/src/Api/Notification.php:97
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:97
 msgid "Confirmed"
 msgstr "تایید شد"
 
-#: /home/voltan/Documents/git/order/src/Api/Notification.php:102
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:102
 msgid "has pending to confirme"
 msgstr "در انتظار تایید است"
 
-#: /home/voltan/Documents/git/order/src/Api/Notification.php:107
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:107
 msgid "Finished"
 msgstr "تکمیل شد"
 
-#: /home/voltan/Documents/git/order/src/Api/Notification.php:117
-#: /home/voltan/Documents/git/order/src/Api/Order.php:149
-#: /home/voltan/Documents/git/order/src/Form/InvoiceSettingForm.php:66
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:63
-#: /home/voltan/Documents/git/order/src/Form/UpdatePaymentForm.php:44
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:54
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:9
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:58
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:128
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:204
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:9
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:198
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:8
-#: /home/voltan/Documents/git/order/template/front/list.phtml:123
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:117
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:133
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:66
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:63
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:44
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:55
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:59
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:9
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:58
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:128
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:215
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:12
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:212
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:59
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:28
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:124
 msgid "Paid"
 msgstr "پرداخت شده"
 
-#: /home/voltan/Documents/git/order/src/Api/Notification.php:126
-#: /home/voltan/Documents/git/order/src/Api/Order.php:166
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:76
-#: /home/voltan/Documents/git/order/src/Form/UpdateDeliveryForm.php:44
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:19
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:23
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:27
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:31
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:35
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:126
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:150
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:76
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:44
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:22
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:26
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:30
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:34
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:38
 msgid "Packed"
 msgstr "بسته بندی شده"
 
-#: /home/voltan/Documents/git/order/src/Api/Notification.php:131
-#: /home/voltan/Documents/git/order/src/Api/Order.php:171
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:77
-#: /home/voltan/Documents/git/order/src/Form/UpdateDeliveryForm.php:45
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:20
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:24
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:28
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:32
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:131
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:155
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:77
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:45
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:23
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:27
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:31
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:35
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:39
 msgid "Posted"
 msgstr "ارسال شده"
 
-#: /home/voltan/Documents/git/order/src/Api/Notification.php:136
-#: /home/voltan/Documents/git/order/src/Api/Order.php:176
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:78
-#: /home/voltan/Documents/git/order/src/Form/UpdateDeliveryForm.php:46
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:21
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:25
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:29
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:33
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:136
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:160
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:78
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:46
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:24
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:28
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:32
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:36
 msgid "Delivered"
 msgstr "تحویل شده"
 
-#: /home/voltan/Documents/git/order/src/Api/Notification.php:141
-#: /home/voltan/Documents/git/order/src/Api/Order.php:181
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:79
-#: /home/voltan/Documents/git/order/src/Form/UpdateDeliveryForm.php:47
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:141
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:165
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:79
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:47
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:40
 msgid "Back eaten"
 msgstr "برگشت خورده"
 
-#: /home/voltan/Documents/git/order/src/Api/Notification.php:154
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:154
 #, php-format
 msgid "Your order by %s ID %s on %s website"
 msgstr "سفارش شما با شناسه %s در وب سایت %s ، %s"
 
-#: /home/voltan/Documents/git/order/src/Api/Notification.php:162
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:162
 #, php-format
 msgid "Dear %s %s, Your order by %s ID %s"
 msgstr "%s %s عزیز، سفارش شما با شماره %s %s"
 
-#: /home/voltan/Documents/git/order/src/Api/Order.php:102
-#: /home/voltan/Documents/git/order/src/Api/Order.php:161
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:44
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:75
-#: /home/voltan/Documents/git/order/src/Form/UpdateDeliveryForm.php:43
-#: /home/voltan/Documents/git/order/src/Form/UpdateOrderForm.php:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:86
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:145
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:44
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:75
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:43
 msgid "Not processed"
 msgstr "پردازش نشده"
 
-#: /home/voltan/Documents/git/order/src/Api/Order.php:107
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:45
-#: /home/voltan/Documents/git/order/src/Form/UpdateOrderForm.php:44
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:91
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:45
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:44
 msgid "Orders validated"
 msgstr "سفارش های تایید شده"
 
-#: /home/voltan/Documents/git/order/src/Api/Order.php:112
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:46
-#: /home/voltan/Documents/git/order/src/Form/UpdateOrderForm.php:45
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:96
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:46
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:45
 msgid "Orders pending"
 msgstr "سفارش های در انتظار تایید"
 
-#: /home/voltan/Documents/git/order/src/Api/Order.php:117
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:47
-#: /home/voltan/Documents/git/order/src/Form/UpdateOrderForm.php:46
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:101
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:47
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:46
 msgid "Orders failed"
 msgstr "سفارش های خراب"
 
-#: /home/voltan/Documents/git/order/src/Api/Order.php:122
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:48
-#: /home/voltan/Documents/git/order/src/Form/UpdateOrderForm.php:47
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:106
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:48
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:47
 msgid "Orders cancelled"
 msgstr "سفارش های لغو شده"
 
-#: /home/voltan/Documents/git/order/src/Api/Order.php:127
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:49
-#: /home/voltan/Documents/git/order/src/Form/UpdateOrderForm.php:48
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:111
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:49
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:48
 msgid "Fraudulent orders"
 msgstr "سفارش های فریب آمیز"
 
-#: /home/voltan/Documents/git/order/src/Api/Order.php:132
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:50
-#: /home/voltan/Documents/git/order/src/Form/UpdateOrderForm.php:49
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:116
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:50
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:49
 msgid "Orders finished"
 msgstr "سفارش های تکمیل شده"
 
-#: /home/voltan/Documents/git/order/src/Api/Order.php:144
-#: /home/voltan/Documents/git/order/src/Form/InvoiceSettingForm.php:67
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:62
-#: /home/voltan/Documents/git/order/src/Form/UpdatePaymentForm.php:43
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:11
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:128
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:67
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:14
 msgid "UnPaid"
 msgstr "پرداخت نشده"
 
-#: /home/voltan/Documents/git/order/src/Api/Order.php:196
-#: /home/voltan/Documents/git/order/src/Controller/Admin/OrderController.php:277
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:182
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:277
 msgid "Not Paid"
 msgstr "پرداخت نشده"
 
-#: /home/voltan/Documents/git/order/src/Api/Order.php:198
-#: /home/voltan/Documents/git/order/src/Controller/Admin/OrderController.php:324
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:184
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:324
 msgid "Not Delivery"
 msgstr "تحویل نشده"
 
-#: /home/voltan/Documents/git/order/src/Api/Order.php:200
-#: /home/voltan/Documents/git/order/src/Controller/Admin/OrderController.php:227
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:186
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:227
 msgid "Not Finish"
 msgstr "تکمیل نشده"
 
-#: /home/voltan/Documents/git/order/src/Api/Order.php:202
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:188
 msgid "Not Start"
 msgstr "شروع نشده"
 
-#: /home/voltan/Documents/git/order/src/Api/Order.php:204
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:190
 msgid "Not End"
 msgstr "پایان نیافته"
 
-#: /home/voltan/Documents/git/order/src/Controller/Admin/DeliveryController.php:94
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/DeliveryController.php:94
 msgid "Delivery data saved successfully."
 msgstr "اطلاعات روش تحویل با موفقیت ذخیره شد"
 
-#: /home/voltan/Documents/git/order/src/Controller/Admin/DeliveryController.php:114
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/DeliveryController.php:114
 msgid "Add a delivery"
 msgstr "روش تحویل جدید"
 
-#: /home/voltan/Documents/git/order/src/Controller/Admin/GatewayController.php:71
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/GatewayController.php:71
 msgid "Gateway data saved successfully."
 msgstr "اطلاعات دروازه پرداخت با موفقیت ذخیره شد"
 
-#: /home/voltan/Documents/git/order/src/Controller/Admin/GatewayController.php:75
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/GatewayController.php:75
 msgid "Invalid data, please check and re-submit."
 msgstr "اطلاعات اشتباه است، لطفا اطلاعات وارده را بررسی کرده و جددا تلاش کنید"
 
-#: /home/voltan/Documents/git/order/src/Controller/Admin/GatewayController.php:87
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/GatewayController.php:87
 msgid "Install gateway"
 msgstr "نصب دروازه پرداخت"
 
-#: /home/voltan/Documents/git/order/src/Controller/Admin/InvoiceController.php:117
-#: /home/voltan/Documents/git/order/src/Controller/Admin/OrderController.php:165
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/InvoiceController.php:117
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:165
 msgid "Go to filter"
 msgstr "فیلتر کن"
 
-#: /home/voltan/Documents/git/order/src/Controller/Admin/InvoiceController.php:127
-#: /home/voltan/Documents/git/order/src/Controller/Admin/OrderController.php:183
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/InvoiceController.php:127
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:183
 msgid "Not valid"
 msgstr "معتبر نیست"
 
-#: /home/voltan/Documents/git/order/src/Controller/Admin/InvoiceController.php:133
-#: /home/voltan/Documents/git/order/src/Controller/Admin/OrderController.php:189
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/InvoiceController.php:133
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:189
 msgid "Not set"
 msgstr "تنظیم نشده"
 
-#: /home/voltan/Documents/git/order/src/Controller/Admin/InvoiceController.php:149
-#: /home/voltan/Documents/git/order/src/Controller/Front/InvoiceController.php:30
-#: /home/voltan/Documents/git/order/src/Controller/Front/PaymentController.php:34
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/InvoiceController.php:154
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/InvoiceController.php:178
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:32
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:80
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:34
 msgid "The invoice not found."
 msgstr "فاکتور یافت نشد"
 
-#: /home/voltan/Documents/git/order/src/Controller/Admin/LocationController.php:121
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/LocationController.php:121
 msgid "Location data saved successfully."
 msgstr "اطلاعات مکان با موفقیت ذخیره شد"
 
-#: /home/voltan/Documents/git/order/src/Controller/Admin/LocationController.php:143
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/LocationController.php:143
 msgid "Add a location"
 msgstr "مکان جدید"
 
-#: /home/voltan/Documents/git/order/src/Controller/Admin/OrderController.php:240
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:240
 msgid "Update order"
 msgstr "به روز رسانی سفارش"
 
-#: /home/voltan/Documents/git/order/src/Controller/Admin/OrderController.php:290
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:290
 msgid "Update payment"
 msgstr "به روز رسانی پرداخت"
 
-#: /home/voltan/Documents/git/order/src/Controller/Admin/OrderController.php:337
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:337
 msgid "Update delivery"
 msgstr "به روز رسانی تحویل"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/CheckoutController.php:34
-#: /home/voltan/Documents/git/order/src/Controller/Front/CheckoutController.php:270
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:34
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:324
 msgid "Your cart is empty."
 msgstr "سبد خرید شما خالی است"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/CheckoutController.php:39
-#: /home/voltan/Documents/git/order/src/Controller/Front/CheckoutController.php:275
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:39
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:329
 msgid "So sorry, At this moment order is inactive"
 msgstr "متاسفانه در این لحظه امکان ثبت سفارش وجود ندارد"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/CheckoutController.php:286
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:340
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 "پلن قسطی سفارش شما با موفقت ذخیره شد، لطفا اطلاعات مورد نیاز را تکمیل "
 "فرمایید و بعد از آن پیش قسط مربوط به این سفارش را پرداخت نمایید."
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/CheckoutController.php:402
-#: /home/voltan/Documents/git/order/src/Form/Element/Gateway.php:28
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:456
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/Element/Gateway.php:28
 msgid "Offline"
 msgstr "آفلاین"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/DetailController.php:30
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/DetailController.php:30
 msgid "The order not found."
 msgstr "سفارش یافت نشد"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/DetailController.php:34
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/DetailController.php:34
 msgid "This is not your order."
 msgstr "این سفارش متعلق به شما نیست"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/DetailController.php:38
-#: /home/voltan/Documents/git/order/src/Controller/Front/InvoiceController.php:48
-#: /home/voltan/Documents/git/order/src/Controller/Front/PaymentController.php:56
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/DetailController.php:38
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:50
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:56
 msgid "This order not avtice."
 msgstr "سفارش فعال نیست"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/IndexController.php:52
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/IndexController.php:52
 msgid "Your old payment process remove, please try new payment ation"
 msgstr "پرداخت قبلی شما از سیستم حذف شد، لطفا یک تراکش جدید انجام دهید"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/IndexController.php:54
-#: /home/voltan/Documents/git/order/src/Controller/Front/IndexController.php:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/IndexController.php:54
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/IndexController.php:62
 msgid "Payment is clean"
 msgstr "دروازه پرداخت پاک است"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/InvoiceController.php:35
-#: /home/voltan/Documents/git/order/src/Controller/Front/InvoiceController.php:39
-#: /home/voltan/Documents/git/order/src/Controller/Front/PaymentController.php:43
-#: /home/voltan/Documents/git/order/src/Controller/Front/PaymentController.php:47
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:41
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:85
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:89
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:47
 msgid "This is not your invoice."
 msgstr "این فاکتور متعلق به شما نیست"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/PaymentController.php:38
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:59
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:107
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:84
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:172
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:344
+msgid "Your payment were successfully. Back to module"
+msgstr "پرداخت شما با موفقیت به انجام رسید. به صفحه اتمام خرید منتقل می شوید"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:38
 msgid "You pay this invoice before this time"
 msgstr "شما قبلا این فاکتور را پرداخت کرده اید"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/PaymentController.php:97
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:107
 #, php-format
 msgid "Error to get %s."
 msgstr "خطا در گرفتن %s"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/PaymentController.php:104
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:114
 msgid "Error to get information."
 msgstr "خطا در گرفتن اطلاعات"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/PaymentController.php:130
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:140
 msgid "Your running pay processing not set"
 msgstr "پروسه پرداخت در حال اجرای شما تنظیم نشده است"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/PaymentController.php:135
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:145
 msgid "Your IP address changed and processing not valid"
 msgstr ""
 "آدرس آی پی شما در هنگام پرداخت تغییر کرده است و این روند خرید صحیح نیست"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/PaymentController.php:162
-#: /home/voltan/Documents/git/order/src/Controller/Front/PaymentController.php:275
-msgid "Your payment were successfully. Back to module"
-msgstr "پرداخت شما با موفقیت به انجام رسید. به صفحه اتمام خرید منتقل می شوید"
-
-#: /home/voltan/Documents/git/order/src/Controller/Front/PaymentController.php:167
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:177
 msgid "Your payment wont successfully."
 msgstr "پرداخت شما موفقیت آمیز نبود"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/PaymentController.php:172
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:182
 msgid "Did not set any request"
 msgstr "هیچ درخواستی ذخیره نشده است"
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/PaymentController.php:225
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:157
-#: /home/voltan/Documents/git/order/src/Gateway/Paypal/Gateway.php:391
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:294
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:157
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:411
 msgid "Your payment were successfully."
 msgstr "پرداخت شما موفقیت آمیز بود."
 
-#: /home/voltan/Documents/git/order/src/Controller/Front/PaymentController.php:263
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:332
 msgid "Test mode not active."
 msgstr "حالت تست فعال نیست"
 
-#: /home/voltan/Documents/git/order/src/Form/DeliveryForm.php:48
-#: /home/voltan/Documents/git/order/src/Form/LocationForm.php:50
-#: /home/voltan/Documents/git/order/template/admin/delivery-index.phtml:11
-#: /home/voltan/Documents/git/order/template/admin/location-index.phtml:11
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:82
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:117
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:48
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:50
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:11
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:151
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:11
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:151
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:122
 msgid "Title"
 msgstr "عنوان"
 
-#: /home/voltan/Documents/git/order/src/Form/DeliveryForm.php:61
-#: /home/voltan/Documents/git/order/src/Form/LocationForm.php:72
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:7
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:89
-#: /home/voltan/Documents/git/order/template/admin/order-index.phtml:17
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:98
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:106
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:114
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:6
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:61
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:72
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:57
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:7
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:89
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:106
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:114
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:57
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:26
 msgid "Status"
 msgstr "وضعیت"
 
-#: /home/voltan/Documents/git/order/src/Form/DeliveryForm.php:63
-#: /home/voltan/Documents/git/order/src/Form/LocationForm.php:74
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:63
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:74
 msgid "Published"
 msgstr "منتشر شده"
 
-#: /home/voltan/Documents/git/order/src/Form/DeliveryForm.php:64
-#: /home/voltan/Documents/git/order/src/Form/LocationForm.php:75
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:64
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:75
 msgid "Pending review"
 msgstr "در انتظار تایید"
 
-#: /home/voltan/Documents/git/order/src/Form/DeliveryForm.php:65
-#: /home/voltan/Documents/git/order/src/Form/LocationForm.php:76
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:65
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:76
 msgid "Draft"
 msgstr "پیش نویس"
 
-#: /home/voltan/Documents/git/order/src/Form/DeliveryForm.php:66
-#: /home/voltan/Documents/git/order/src/Form/LocationForm.php:77
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:66
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:77
 msgid "Private"
 msgstr "خصوصی"
 
-#: /home/voltan/Documents/git/order/src/Form/DeliveryForm.php:75
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:290
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:305
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:323
-#: /home/voltan/Documents/git/order/src/Form/UpdatePaymentForm.php:53
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:9
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:108
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:75
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:310
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:337
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:368
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:53
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:9
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:108
 msgid "Adapter"
 msgstr "پایانه پرداخت"
 
-#: /home/voltan/Documents/git/order/src/Form/DeliveryForm.php:83
-#: /home/voltan/Documents/git/order/src/Form/GatewayForm.php:73
-#: /home/voltan/Documents/git/order/src/Form/LocationForm.php:130
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:83
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/GatewayForm.php:73
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:130
 msgid "Submit"
 msgstr "ارسال"
 
-#: /home/voltan/Documents/git/order/src/Form/InvoiceSettingForm.php:40
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:40
 msgid "Order ID"
 msgstr "شناسه سفارش"
 
-#: /home/voltan/Documents/git/order/src/Form/InvoiceSettingForm.php:51
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:131
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:51
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:131
 msgid "User ID"
 msgstr "شناسه کاربر"
 
-#: /home/voltan/Documents/git/order/src/Form/InvoiceSettingForm.php:63
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:60
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:63
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:60
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:101
 msgid "Payment status"
 msgstr "وضعیت پرداخت"
 
-#: /home/voltan/Documents/git/order/src/Form/InvoiceSettingForm.php:65
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:43
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:61
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:74
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:65
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:61
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:74
 msgid "All"
 msgstr "همه"
 
-#: /home/voltan/Documents/git/order/src/Form/InvoiceSettingForm.php:68
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:273
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:400
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:527
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:68
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:282
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:409
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:536
 msgid "Delayed"
 msgstr "معوقه"
 
-#: /home/voltan/Documents/git/order/src/Form/InvoiceSettingForm.php:77
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:77
 msgid "Start from"
 msgstr "شروع از"
 
-#: /home/voltan/Documents/git/order/src/Form/InvoiceSettingForm.php:91
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:91
 msgid "End to"
 msgstr "پایان تا"
 
-#: /home/voltan/Documents/git/order/src/Form/InvoiceSettingForm.php:105
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:198
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:105
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:198
 msgid "Filter"
 msgstr "فیلتر"
 
-#: /home/voltan/Documents/git/order/src/Form/LocationForm.php:63
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:63
 msgid "Parent"
 msgstr "والد"
 
-#: /home/voltan/Documents/git/order/src/Form/LocationForm.php:96
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:96
 #, php-format
 msgid "Is active %s ?"
 msgstr "آیا %s فعال باشد؟"
 
-#: /home/voltan/Documents/git/order/src/Form/LocationForm.php:106
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:121
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:123
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:139
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:166
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:133
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:160
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:47
-#: /home/voltan/Documents/git/order/template/front/list.phtml:64
-#: /home/voltan/Documents/git/order/template/front/list.phtml:85
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:106
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:101
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:121
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:123
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:139
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:177
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:136
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:174
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:101
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:70
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:65
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:86
 msgid "Price"
 msgstr "قیمت"
 
-#: /home/voltan/Documents/git/order/src/Form/LocationForm.php:117
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:117
 msgid "Time ( days )"
 msgstr "زمان ( روز )"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:45
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:153
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:52
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:153
 msgid "First name"
 msgstr "نام"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:57
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:164
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:64
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:164
 msgid "Last name"
 msgstr "نام خانوادگی"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:71
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:142
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:42
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:40
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:19
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:57
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:18
-#: /home/voltan/Documents/git/order/template/front/list.phtml:13
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:78
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:142
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:73
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:42
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:40
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:19
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:60
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:73
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:42
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:14
 msgid "ID number"
 msgstr "کد ملی"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:85
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:109
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:63
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:48
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:40
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:78
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:30
-#: /home/voltan/Documents/git/order/template/front/list.phtml:30
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:92
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:109
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:82
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:63
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:48
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:40
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:81
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:82
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:51
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:31
 msgid "Email"
 msgstr "ایمیل"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:99
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:66
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:51
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:43
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:81
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:24
-#: /home/voltan/Documents/git/order/template/front/list.phtml:33
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:106
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:76
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:66
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:51
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:84
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:76
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:45
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:34
 msgid "Phone"
 msgstr "تلفن"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:113
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:98
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:69
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:54
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:46
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:84
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:27
-#: /home/voltan/Documents/git/order/template/front/list.phtml:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:120
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:79
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:69
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:54
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:46
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:87
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:79
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:48
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:37
 msgid "Mobile"
 msgstr "موبایل"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:128
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:186
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:43
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:49
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:87
-#: /home/voltan/Documents/git/order/template/front/list.phtml:39
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:135
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:186
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:49
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:90
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:40
 msgid "Company"
 msgstr "شرکت"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:142
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:149
 msgid "Company id"
 msgstr "کد اقتصادی"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:153
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:160
 msgid "Company vat"
 msgstr "کد مالیات"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:166
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:34
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:173
 msgid "Delivery address"
 msgstr "آدرس تحویل"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:190
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:57
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:66
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:34
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:72
-#: /home/voltan/Documents/git/order/template/front/list.phtml:22
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:187
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:48
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:75
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:25
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:66
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:54
+msgid "Address 2"
+msgstr "آدرس ۲"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:202
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:210
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:57
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:66
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:34
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:75
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:23
 msgid "Country"
 msgstr "کشور"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:204
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:54
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:63
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:31
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:69
-#: /home/voltan/Documents/git/order/template/front/list.phtml:19
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:224
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:54
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:63
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:31
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:72
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:20
 msgid "State"
 msgstr "استان"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:218
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:120
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:51
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:60
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:28
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:66
-#: /home/voltan/Documents/git/order/template/front/list.phtml:16
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:238
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:120
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:51
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:60
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:28
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:69
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:17
 msgid "City"
 msgstr "شهر"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:232
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:175
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:60
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:69
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:37
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:75
-#: /home/voltan/Documents/git/order/template/front/list.phtml:25
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:252
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:175
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:60
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:69
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:78
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:26
 msgid "Zip code"
 msgstr "کد پستی"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:247
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:117
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:126
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:141
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:135
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:49
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:267
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:103
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:117
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:126
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:141
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:138
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:103
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:72
 msgid "Packing"
 msgstr "بسته بندی"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:263
-#: /home/voltan/Documents/git/order/template/front/checkout.phtml:120
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:283
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:169
 msgid "Location"
 msgstr "مکان"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:276
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:72
-#: /home/voltan/Documents/git/order/src/Form/UpdateDeliveryForm.php:41
-#: /home/voltan/Documents/git/order/template/admin/order-index.phtml:19
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:112
-#: /home/voltan/Documents/git/order/template/front/checkout.phtml:121
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:296
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:72
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:41
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:19
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:112
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:170
 msgid "Delivery"
 msgstr "روش تحویل"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:339
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:90
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:385
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:90
 msgid "User note"
 msgstr "توضیح مشتری"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:355
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:401
 msgid "Update your profile by this informations?"
 msgstr "حساب کاربری شما با اطلاعات وارد شده در این فرم به روز شود؟"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:368
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:413
+msgid "Promo"
+msgstr "کد تخفیف"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:424
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:440
+msgid "Terms & Conditions"
+msgstr "شرایط و مقررات"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:432
+#, php-format
+msgid "Accept %s"
+msgstr "تایید %s"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:450
 msgid "Accept Terms & Conditions"
 msgstr "تایید شرایط و مقررات"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderForm.php:380
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:460
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:168
+msgid "Pay"
+msgstr "پرداخت"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:462
 msgid "Save order"
 msgstr "ثبت سفارش"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:41
-#: /home/voltan/Documents/git/order/src/Form/UpdateOrderForm.php:41
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:15
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:96
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:20
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:41
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:41
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:56
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:15
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:96
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:56
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:25
 msgid "Order"
 msgstr "سفارش"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:59
-#: /home/voltan/Documents/git/order/src/Form/UpdatePaymentForm.php:41
-#: /home/voltan/Documents/git/order/template/admin/order-index.phtml:18
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:104
-#: /home/voltan/Documents/git/order/template/front/checkout.phtml:122
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:59
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:41
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:18
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:104
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:171
 msgid "Payment"
 msgstr "پرداخت"
 
-#: /home/voltan/Documents/git/order/src/Form/OrderSettingForm.php:87
-#: /home/voltan/Documents/git/order/template/admin/order-index.phtml:14
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:87
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:14
 msgid "Code"
 msgstr "کد"
 
-#: /home/voltan/Documents/git/order/src/Form/RemoveForm.php:39
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/RemoveForm.php:39
 msgid "Attention"
 msgstr "توجه"
 
-#: /home/voltan/Documents/git/order/src/Form/RemoveForm.php:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/RemoveForm.php:43
 msgid ""
 "You have another open payment process, if have have another page for online "
 "payment, please fish for courent payment and after that start new one. But "
@@ -679,914 +734,987 @@ msgstr ""
 "تراکنش های معلق در سیستم رو حذف کنید تا بتوانید پرداخت جدید داشته باشید. در "
 "غیر این صورت حداقل ۱۵ دقیقه صبر کرده و مججد تلاش کنید."
 
-#: /home/voltan/Documents/git/order/src/Form/RemoveForm.php:52
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/RemoveForm.php:52
 msgid "Conferm"
 msgstr "تایید"
 
-#: /home/voltan/Documents/git/order/src/Form/UpdateDeliveryForm.php:56
-#: /home/voltan/Documents/git/order/src/Form/UpdateOrderForm.php:58
-#: /home/voltan/Documents/git/order/src/Form/UpdatePaymentForm.php:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:56
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:58
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:62
 msgid "Update"
 msgstr "به روز رسانی"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:30
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:30
 msgid "Bank Mellat (Iran)"
 msgstr "بانک ملت"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:48
-#: /home/voltan/Documents/git/order/src/Gateway/Paypal/Gateway.php:48
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:48
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:48
 msgid "path"
 msgstr "مسیر"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:55
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:55
 msgid "pin"
 msgstr "شماره پایانه"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:62
 msgid "username"
 msgstr "نام کاربری"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:69
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:69
 msgid "password"
 msgstr "واژه رمز"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:182
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:182
 msgid "Your order id not true."
 msgstr "شماره سفارش شما صحیح نیست."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:193
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:193
 #, php-format
 msgid "Your track code is : %s"
 msgstr "کد پیگیری تراکنش شما %s می باشد."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:210
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:210
 msgid "Bank Mellat error 0"
 msgstr "سرور بانک دچار مشکل می باشد."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:214
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:214
 msgid "Bank Mellat error 41"
 msgstr "شماره درخواست تکراری است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:218
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:218
 msgid "Bank Mellat error 43"
 msgstr "عملیات قبلا انجام شده است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:222
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:222
 msgid "Bank Mellat error 17"
 msgstr "لغو عملیات پرداخت توسط کاربر صورت گرفته است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:226
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:226
 msgid "Bank Mellat error 415"
 msgstr "زمان شما برای انجام عملیات پرداخت به پایان رسیده است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:230
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:230
 msgid "Bank Mellat error 417"
 msgstr "شناسه پرداخت کننده نامعتبر است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:234
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:234
 msgid "Bank Mellat error 11"
 msgstr "شماره كارت نامعتبر است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:238
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:238
 msgid "Bank Mellat error 12"
 msgstr "موجودي كافي نيست."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:242
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:242
 msgid "Bank Mellat error 13"
 msgstr "رمز نادرست است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:246
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:246
 msgid "Bank Mellat error 14"
 msgstr "تعداد دفعات وارد كردن رمز بيش از حد مجاز است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:250
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:250
 msgid "Bank Mellat error 15"
 msgstr "كارت نامعتبر است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:254
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:254
 msgid "Bank Mellat error 16"
 msgstr "دفعات برداشت وجه بيش از حد مجاز است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:258
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:258
 msgid "Bank Mellat error 18"
 msgstr "تاريخ انقضاي كارت گذشته است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:262
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:262
 msgid "Bank Mellat error 19"
 msgstr "مبلغ برداشت وجه بيش از حد مجاز است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:266
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:266
 msgid "Bank Mellat error 111"
 msgstr "صادر كننده كارت نامعتبر است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:270
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:270
 msgid "Bank Mellat error 112"
 msgstr "خطاي سوييچ صادر كننده كارت."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:274
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:274
 msgid "Bank Mellat error 113"
 msgstr "پاسخي از صادر كننده كارت دريافت نشد."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:278
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:278
 msgid "Bank Mellat error 114"
 msgstr "دارنده كارت مجاز به انجام اين تراكنش نيست."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:282
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:282
 msgid "Bank Mellat error 21"
 msgstr "پذيرنده نامعتبر است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:286
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:286
 msgid "Bank Mellat error 23"
 msgstr "خطاي امنيتي رخ داده است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:290
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:290
 msgid "Bank Mellat error 24"
 msgstr "اطلاعات كاربري پذيرنده نامعتبر است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:294
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:294
 msgid "Bank Mellat error 25"
 msgstr "مبلغ نامعتبر است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:298
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:298
 msgid "Bank Mellat error 31"
 msgstr "پاسخ نامعتبر است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:302
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:302
 msgid "Bank Mellat error 32"
 msgstr "فرمت اطلاعات وارد شده صحيح نمي باشد."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:306
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:306
 msgid "Bank Mellat error 33"
 msgstr "حساب نامعتبر است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:310
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:310
 msgid "Bank Mellat error 34"
 msgstr "خطاي سيستمي."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:314
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:314
 msgid "Bank Mellat error 35"
 msgstr "تاريخ نامعتبر است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:318
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:318
 msgid "Bank Mellat error 42"
 msgstr "خریدی با این شماره درخواست یافت نشد."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:322
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:322
 msgid "Bank Mellat error 44"
 msgstr "کسر پول از حساب مشتری صورت نگرفته است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:326
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:326
 msgid "Bank Mellat error 45"
 msgstr "واریز پول قبلا انجام شده است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:330
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:330
 msgid "Bank Mellat error 46"
 msgstr "واریز پول به حساب پذیرنده انجام نشده است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:334
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:334
 msgid "Bank Mellat error 47"
 msgstr "واریز پول به حساب پذیرنده انجام نشده است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:338
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:338
 msgid "Bank Mellat error 48"
 msgstr "پول مشتری به حساب او بازگشت داده شده است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:342
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:342
 msgid "Bank Mellat error 49"
 msgstr "تراکنش استرداد وجه دلخواه یافت نشد."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:346
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:346
 msgid "Bank Mellat error 412"
 msgstr "شناسه قبض نادرست است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:350
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:350
 msgid "Bank Mellat error 413"
 msgstr "شناسه پرداخت نادرست است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:354
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:354
 msgid "Bank Mellat error 414"
 msgstr "سازمان صادر كننده قبض نامعتبر است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:358
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:358
 msgid "Bank Mellat error 416"
 msgstr "در ثبت اطلاعات پرداخت شما در بانک ملت خطایی رخ داده است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:362
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:362
 msgid "Bank Mellat error 418"
 msgstr "در تعریف اطلاعات شما نزد بانک ملت خطایی پدید آمده است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:366
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:366
 msgid "Bank Mellat error 419"
 msgstr "تعداد دفعات ورود اطلاعات از حد مجاز گذشته است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:370
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:370
 msgid "Bank Mellat error 421"
 msgstr "IP نامعتبر است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:374
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:374
 msgid "Bank Mellat error 51"
 msgstr "تراکنش تکراری است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:378
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:378
 msgid "Bank Mellat error 54"
 msgstr "تراکنش مرجع موجود نیست."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:382
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:382
 msgid "Bank Mellat error 55"
 msgstr "تراکنش نامعتبر است."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:386
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:386
 msgid "Bank Mellat error 61"
 msgstr "خطا در واریز وجه."
 
-#: /home/voltan/Documents/git/order/src/Gateway/Mellat/Gateway.php:390
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:390
 #, php-format
 msgid "Bank Mellat error %s"
 msgstr "شماره خطای اعلام شده توسط بانک: %s"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Paypal/Gateway.php:30
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:30
 msgid "Paypal"
 msgstr "پی پال"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Paypal/Gateway.php:55
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:55
 msgid "Paypal email address"
 msgstr "آدرس ایمیل Paypal"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Paypal/Gateway.php:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:62
 msgid "Paypal currency"
 msgstr "واحد پول Paypal"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Paypal/Gateway.php:69
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:69
 msgid "Paypal currency symbol"
 msgstr "نماد واحد پول"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Paypal/Gateway.php:76
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:76
 msgid "Location code (ex GB)"
 msgstr "کد مکان"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Paypal/Gateway.php:83
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:83
 msgid "Custom attribute"
 msgstr "اطلاعات اضافی"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Paypal/Gateway.php:90
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:90
 msgid "Test mode by sandbox"
 msgstr "روش تستی با sandbox"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Paypal/Gateway.php:97
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:97
 msgid "Username for sandbox"
 msgstr "نام کاربری sandbox"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Paypal/Gateway.php:104
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:104
 msgid "Password for sandbox"
 msgstr "واژه رمز sandbox"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Paypal/Gateway.php:111
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:111
 msgid "Signature for sandbox"
 msgstr "امضای sandbox"
 
-#: /home/voltan/Documents/git/order/src/Gateway/Paypal/Gateway.php:396
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:60
-#: /home/voltan/Documents/git/order/template/front/result.phtml:4
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:416
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:60
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/result.phtml:4
 msgid "Error"
 msgstr "خطا"
 
-#: /home/voltan/Documents/git/order/src/Validator/Term.php:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Validator/Term.php:36
 msgid "You need accept our Terms & Conditions for checkout"
 msgstr "به منظور ثبت سفارش ، باید شرایط و مقررات فروش ما را بپذیرید."
 
-#: /home/voltan/Documents/git/order/template/admin/delivery-index.phtml:4
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:4
 msgid "Add delivery methods"
 msgstr "درج روش تحویل"
 
-#: /home/voltan/Documents/git/order/template/admin/delivery-index.phtml:6
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:6
 msgid "List of Delivery methods"
 msgstr "فهرست روش های تحویل"
 
-#: /home/voltan/Documents/git/order/template/admin/delivery-index.phtml:10
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:12
-#: /home/voltan/Documents/git/order/template/admin/location-index.phtml:10
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:7
-#: /home/voltan/Documents/git/order/template/admin/order-index.phtml:13
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:165
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:159
-#: /home/voltan/Documents/git/order/template/front/list.phtml:61
-#: /home/voltan/Documents/git/order/template/front/list.phtml:84
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:10
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:12
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:10
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:7
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:13
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:176
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:173
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:85
 msgid "ID"
 msgstr "شناسه"
 
-#: /home/voltan/Documents/git/order/template/admin/delivery-index.phtml:12
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:17
-#: /home/voltan/Documents/git/order/template/admin/location-index.phtml:12
-#: /home/voltan/Documents/git/order/template/admin/order-index.phtml:20
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:170
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:164
-#: /home/voltan/Documents/git/order/template/front/list.phtml:66
-#: /home/voltan/Documents/git/order/template/front/list.phtml:89
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:12
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:12
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:20
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:181
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:178
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:67
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:90
 msgid "Action"
 msgstr "عملکرد"
 
-#: /home/voltan/Documents/git/order/template/admin/delivery-index.phtml:26
-#: /home/voltan/Documents/git/order/template/admin/gateway-index.phtml:30
-#: /home/voltan/Documents/git/order/template/admin/gateway-index.phtml:36
-#: /home/voltan/Documents/git/order/template/admin/location-index.phtml:26
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:26
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:30
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:26
 msgid "Edit"
 msgstr "ویرایش"
 
-#: /home/voltan/Documents/git/order/template/admin/delivery-index.phtml:32
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:32
 msgid "No delivery methods is not created yet"
 msgstr "هیچ روش تحویلی هنوز ایجاد نشده است"
 
-#: /home/voltan/Documents/git/order/template/admin/delivery-index.phtml:34
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:61
-#: /home/voltan/Documents/git/order/template/admin/location-index.phtml:34
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:65
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:34
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:34
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:65
 msgid "Todo list for fist time"
 msgstr "فهرست موارد لازم الجرا برای اولین استفاده"
 
-#: /home/voltan/Documents/git/order/template/admin/delivery-index.phtml:36
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:63
-#: /home/voltan/Documents/git/order/template/admin/location-index.phtml:36
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:67
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:64
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:67
 msgid "1- Setup payment gateway from gateway tap"
 msgstr "۱- تنظیم اطلاعات دروازه پرداخت"
 
-#: /home/voltan/Documents/git/order/template/admin/delivery-index.phtml:37
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:64
-#: /home/voltan/Documents/git/order/template/admin/location-index.phtml:37
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:68
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:65
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:68
 msgid "2- Setup delivery method from delivery tap"
 msgstr "۲- تنظیم روش تحویل"
 
-#: /home/voltan/Documents/git/order/template/admin/delivery-index.phtml:38
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:65
-#: /home/voltan/Documents/git/order/template/admin/location-index.phtml:38
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:69
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:38
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:66
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:38
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:69
 msgid "3- Setup location from location tap"
 msgstr "۳- تنظیم مکان"
 
-#: /home/voltan/Documents/git/order/template/admin/gateway-index.phtml:3
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:3
 msgid "List of all available gateways"
 msgstr "فهرست پایانه های پرداخت در دسترس"
 
-#: /home/voltan/Documents/git/order/template/admin/gateway-index.phtml:10
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:10
 msgid "Description"
 msgstr "توضیحات"
 
-#: /home/voltan/Documents/git/order/template/admin/gateway-index.phtml:11
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:11
 msgid "Version"
 msgstr "نسخه"
 
-#: /home/voltan/Documents/git/order/template/admin/gateway-index.phtml:12
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:12
 msgid "Author"
 msgstr "سازنده"
 
-#: /home/voltan/Documents/git/order/template/admin/gateway-index.phtml:13
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:13
 msgid "Credits"
 msgstr "کریدیت"
 
-#: /home/voltan/Documents/git/order/template/admin/gateway-index.phtml:14
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:14
 msgid "Release Date"
 msgstr "تاریخ انتشار"
 
-#: /home/voltan/Documents/git/order/template/admin/gateway-index.phtml:31
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:31
 msgid "Inactive"
 msgstr "غیر فعال"
 
-#: /home/voltan/Documents/git/order/template/admin/gateway-index.phtml:32
-#: /home/voltan/Documents/git/order/template/admin/gateway-index.phtml:38
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:32
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:38
 msgid "UnInstall"
 msgstr "خارج کردن از نصب"
 
-#: /home/voltan/Documents/git/order/template/admin/gateway-index.phtml:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:37
 msgid "Active"
 msgstr "فعال"
 
-#: /home/voltan/Documents/git/order/template/admin/gateway-index.phtml:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:43
 msgid "Install"
 msgstr "نصب"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:5
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:5
 msgid "Filter invoices"
 msgstr "فیلتر کردن فاکتور ها"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:8
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:8
 msgid "List of invoices"
 msgstr "فهرست فاکتور ها"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:13
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:87
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:10
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:83
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:118
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:13
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:152
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:87
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:10
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:152
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:123
 msgid "Amount"
 msgstr "مقدار"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:14
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:12
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:167
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:161
-#: /home/voltan/Documents/git/order/template/front/list.phtml:86
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:14
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:12
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:178
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:175
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:87
 msgid "Time Create"
 msgstr "زمان ایجاد"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:15
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:168
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:162
-#: /home/voltan/Documents/git/order/template/front/list.phtml:87
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:15
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:63
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:179
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:176
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:63
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:32
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:88
 msgid "Due date"
 msgstr "سررسید پرداخت"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:16
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:169
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:163
-#: /home/voltan/Documents/git/order/template/front/list.phtml:88
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:16
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:180
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:177
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:89
 msgid "Time pay"
 msgstr "زمان پرداخت"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:46
-#: /home/voltan/Documents/git/order/template/admin/order-index.phtml:52
-#: /home/voltan/Documents/git/order/template/front/list.phtml:76
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:46
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:54
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:77
 msgid "View"
 msgstr "مشاهده"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:47
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:73
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:47
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:73
 msgid "View order"
 msgstr "نمایش سفارش"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:55
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:11
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:59
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:205
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:199
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:10
-#: /home/voltan/Documents/git/order/template/front/list.phtml:124
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:48
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:31
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:31
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:163
+msgid "Print invoice"
+msgstr "چاپ فاکتور"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:56
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:11
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:59
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:216
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:213
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:31
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:125
 msgid "Unpaid"
 msgstr "پرداخت نشده"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:56
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:13
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:206
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:200
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:12
-#: /home/voltan/Documents/git/order/template/front/list.phtml:125
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:57
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:65
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:13
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:217
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:214
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:65
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:34
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:126
 msgid "Canceled"
 msgstr "لغو شده"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-index.phtml:59
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:60
 msgid "No invoice is not created yet"
 msgstr "هنوز هیچ فاکتوری ایجاد نشده است"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:3
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:34
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:3
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:34
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:7
 #, php-format
 msgid "Invoice %s"
 msgstr "فاکتور %s"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:16
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:84
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:68
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:106
-#: /home/voltan/Documents/git/order/template/front/list.phtml:65
-msgid "Gateway"
-msgstr "دروازه"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:52
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:52
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:21
+msgid "Order date"
+msgstr "تاریخ ثبت سفارش"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:17
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:85
-msgid "Create"
-msgstr "زمان ایجاد"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:53
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:53
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:22
+msgid "Invoice date"
+msgstr "تاریخ ساخت فاکتور"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:19
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:70
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:108
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:86
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:121
-msgid "Product price"
-msgstr "قیمت محصول"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:60
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:66
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:60
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:66
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:29
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:35
+msgid "On"
+msgstr "در"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:22
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:73
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:111
-msgid "Shipping price"
-msgstr "هزینه ارسال"
-
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:25
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:76
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:114
-msgid "Packing price"
-msgstr "هزینه بسته بندی"
-
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:28
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:79
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:117
-msgid "Vat price"
-msgstr "مالیات"
-
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:31
-#: /home/voltan/Documents/git/order/template/admin/order-index.phtml:16
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:82
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:120
-msgid "Total price"
-msgstr "مجموع قیمت"
-
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:34
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:85
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:123
-msgid "Paid price"
-msgstr "مبلغ پرداخت شده"
-
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:39
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:37
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:16
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:54
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:15
-#: /home/voltan/Documents/git/order/template/front/list.phtml:10
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:70
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:39
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:16
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:57
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:70
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:39
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:11
 msgid "Name"
 msgstr "نام"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:45
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:72
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:22
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:60
-#: /home/voltan/Documents/git/order/template/front/list.phtml:50
-msgid "Address 1"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:86
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:86
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:55
+msgid "Address"
 msgstr "آدرس"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:48
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:75
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:25
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:63
-#: /home/voltan/Documents/git/order/template/front/list.phtml:53
-msgid "Address 2"
-msgstr "آدرس ۲"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:95
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:134
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:131
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:95
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:64
+msgid "This order products or services list"
+msgstr "فهرست محصولات و خدمات"
 
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:79
-msgid "Logs"
-msgstr "گزارش ها"
-
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:82
-msgid "Id"
-msgstr "شناسه"
-
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:83
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:8
-msgid "Invoice"
-msgstr "فاکتور"
-
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:86
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:11
-msgid "User"
-msgstr "کاربر"
-
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:88
-msgid "Authority"
-msgstr "اعتبار"
-
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:90
-msgid "Ip"
-msgstr "آی پی"
-
-#: /home/voltan/Documents/git/order/template/admin/invoice-view.phtml:91
-msgid "Message"
-msgstr "پیام"
-
-#: /home/voltan/Documents/git/order/template/admin/location-index.phtml:4
-msgid "Add Location"
-msgstr "مکان جدید"
-
-#: /home/voltan/Documents/git/order/template/admin/location-index.phtml:6
-msgid "List of Location"
-msgstr "فهرست مکان ها"
-
-#: /home/voltan/Documents/git/order/template/admin/location-index.phtml:32
-msgid "No location is not created yet"
-msgstr "هنوز هیچ مکانی ایجاد نشده است"
-
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:3
-msgid "List of logs"
-msgstr "فهرست گزارش ها"
-
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:13
-msgid "Details"
-msgstr "جزییات"
-
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:34
-msgid "Show details"
-msgstr "نمایش جزئیات"
-
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:41
-msgid "Log details"
-msgstr "جزئیات گزارش"
-
-#: /home/voltan/Documents/git/order/template/admin/log-index.phtml:63
-msgid "No invoice is not set yet"
-msgstr "هنوز هیچ فاکتوری ایجاد نشده است"
-
-#: /home/voltan/Documents/git/order/template/admin/order-index.phtml:7
-msgid "Filter orders"
-msgstr "فیلتر کردن سفارش ها"
-
-#: /home/voltan/Documents/git/order/template/admin/order-index.phtml:10
-msgid "List of orders"
-msgstr "فهرست سفارش ها"
-
-#: /home/voltan/Documents/git/order/template/admin/order-index.phtml:15
-msgid "Customer"
-msgstr "مشتری"
-
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:31
-msgid "Order invoice"
-msgstr "فاکتور فروش"
-
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:84
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:270
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:397
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:524
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:84
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:279
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:406
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:533
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:67
 msgid "Row"
 msgstr "ردیف"
 
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:85
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:271
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:398
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:525
-msgid "Product name"
-msgstr "شرح کالا"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:99
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:137
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:134
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:99
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:68
+msgid "Product"
+msgstr "محصول"
 
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:86
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:272
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:399
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:526
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:138
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:132
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:97
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:46
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:100
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:86
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:281
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:408
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:535
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:138
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:135
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:97
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:100
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:69
 msgid "Number"
 msgstr "تعداد"
 
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:87
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:99
-msgid "Per Payment"
-msgstr "پیش قسط"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:102
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:163
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:125
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:140
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:137
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:102
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:163
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:71
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:134
+msgid "Shipping"
+msgstr "هزینه ارسال"
 
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:88
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:100
-msgid "1 months"
-msgstr "۱ ماه"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:104
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:171
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:142
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:139
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:104
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:171
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:73
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:142
+msgid "Vat"
+msgstr "مالیات"
 
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:89
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:101
-msgid "2 months"
-msgstr "۲ ماه"
-
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:90
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:102
-msgid "3 months"
-msgstr "۳ ماه"
-
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:91
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:103
-msgid "4 months"
-msgstr "۴ ماه"
-
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:92
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:104
-msgid "5 months"
-msgstr "۵ ماه"
-
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:93
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:105
-msgid "6 months"
-msgstr "۶ ماه"
-
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:94
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:106
-msgid "7 months"
-msgstr "۷ ماه"
-
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:95
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:107
-msgid "8 months"
-msgstr "۸ ماه"
-
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:96
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:108
-msgid "9 months"
-msgstr "۹ ماه"
-
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:97
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:109
-msgid "10 months"
-msgstr "۱۰ ماه"
-
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:98
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:110
-msgid "11 months"
-msgstr "۱۱ ماه"
-
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:99
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:111
-msgid "12 months"
-msgstr "۱۲ ماه"
-
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:100
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:184
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:287
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:370
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:414
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:497
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:541
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:624
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:127
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:143
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:137
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:112
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:51
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:104
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:145
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:105
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:179
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:100
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:193
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:296
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:379
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:423
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:506
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:550
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:633
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:127
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:143
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:140
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:112
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:105
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:179
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:74
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:150
 msgid "Total"
 msgstr "مجموع"
 
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:261
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:145
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:145
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:116
+msgid "Payment price"
+msgstr "مبلغ قابل پرداخت"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:148
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:148
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:119
+msgid "Total invoice price"
+msgstr "مجموع مبلغ فاکتور"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:155
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:19
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:70
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:111
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:155
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:126
+msgid "Product price"
+msgstr "قیمت محصول"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:16
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:84
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:68
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:109
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:66
+msgid "Gateway"
+msgstr "دروازه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:85
+msgid "Create"
+msgstr "زمان ایجاد"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:22
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:73
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:114
+msgid "Shipping price"
+msgstr "هزینه ارسال"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:25
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:76
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:117
+msgid "Packing price"
+msgstr "هزینه بسته بندی"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:28
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:79
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:120
+msgid "Vat price"
+msgstr "مالیات"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:31
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:16
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:82
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:123
+msgid "Total price"
+msgstr "مجموع قیمت"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:34
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:85
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:126
+msgid "Paid price"
+msgstr "مبلغ پرداخت شده"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:45
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:72
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:22
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:63
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:51
+msgid "Address 1"
+msgstr "آدرس"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:79
+msgid "Logs"
+msgstr "گزارش ها"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:82
+msgid "Id"
+msgstr "شناسه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:83
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:8
+msgid "Invoice"
+msgstr "فاکتور"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:86
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:11
+msgid "User"
+msgstr "کاربر"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:88
+msgid "Authority"
+msgstr "اعتبار"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:90
+msgid "Ip"
+msgstr "آی پی"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:91
+msgid "Message"
+msgstr "پیام"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:4
+msgid "Add Location"
+msgstr "مکان جدید"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:6
+msgid "List of Location"
+msgstr "فهرست مکان ها"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:32
+msgid "No location is not created yet"
+msgstr "هنوز هیچ مکانی ایجاد نشده است"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:3
+msgid "List of logs"
+msgstr "فهرست گزارش ها"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:13
+msgid "Details"
+msgstr "جزییات"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:34
+msgid "Show details"
+msgstr "نمایش جزئیات"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:41
+msgid "Log details"
+msgstr "جزئیات گزارش"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:63
+msgid "No invoice is not set yet"
+msgstr "هنوز هیچ فاکتوری ایجاد نشده است"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:7
+msgid "Filter orders"
+msgstr "فیلتر کردن سفارش ها"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:10
+msgid "List of orders"
+msgstr "فهرست سفارش ها"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:15
+msgid "Customer"
+msgstr "مشتری"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:31
+msgid "Order invoice"
+msgstr "فاکتور فروش"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:85
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:280
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:407
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:534
+msgid "Product name"
+msgstr "شرح کالا"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:87
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:99
+msgid "Per Payment"
+msgstr "پیش قسط"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:88
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:100
+msgid "1 months"
+msgstr "۱ ماه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:89
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:101
+msgid "2 months"
+msgstr "۲ ماه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:90
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:102
+msgid "3 months"
+msgstr "۳ ماه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:91
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:103
+msgid "4 months"
+msgstr "۴ ماه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:92
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:104
+msgid "5 months"
+msgstr "۵ ماه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:93
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:105
+msgid "6 months"
+msgstr "۶ ماه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:94
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:106
+msgid "7 months"
+msgstr "۷ ماه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:95
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:107
+msgid "8 months"
+msgstr "۸ ماه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:96
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:108
+msgid "9 months"
+msgstr "۹ ماه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:97
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:109
+msgid "10 months"
+msgstr "۱۰ ماه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:110
+msgid "11 months"
+msgstr "۱۱ ماه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:99
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:111
+msgid "12 months"
+msgstr "۱۲ ماه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:270
 msgid "Order invoice desc"
 msgstr "آخرین وضعیت مانده اقساط و سر رسید های شما با احتساب خرید های قبلی"
 
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:261
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:270
 msgid "Order invoice desc price"
 msgstr "مبلغ به تومان"
 
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:267
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:276
 msgid "10 th"
 msgstr "سررسید های دهم"
 
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:394
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:403
 msgid "20 th"
 msgstr "سررسید های بیستم"
 
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:521
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:530
 msgid "30 th"
 msgstr "سررسید های سی ام"
 
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:646
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:655
 msgid "Seller signature"
 msgstr "امضای فروشنده"
 
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:648
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:657
 msgid "Stamp"
 msgstr "مهر"
 
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:651
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:660
 msgid "Buyer signature"
 msgstr "امضای خریدار"
 
-#: /home/voltan/Documents/git/order/template/admin/order-print.phtml:653
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:662
 msgid "Stamp / fingerprint"
 msgstr "مهر شرکت / اثر انگشت"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:11
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:3
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:11
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:6
 #, php-format
 msgid "Order %s details"
 msgstr "جزئیات سفارش %s"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:52
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:90
-#: /home/voltan/Documents/git/order/template/front/list.phtml:42
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:52
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:93
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:43
 msgid "Company ID"
 msgstr "کد اقتصادی"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:55
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:93
-#: /home/voltan/Documents/git/order/template/front/list.phtml:45
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:55
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:96
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:46
 msgid "Company VAT"
 msgstr "کد مالیات"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:59
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:97
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:59
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:100
 msgid "Order status"
 msgstr "وضعیت سفارش"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:61
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:99
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:61
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:102
 msgid "Delivery status"
 msgstr "وضعیت ارسال"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:62
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:100
-#: /home/voltan/Documents/git/order/template/front/list.phtml:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:103
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:63
 msgid "Time create"
 msgstr "تاریخ ایجاد"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:63
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:101
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:63
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:104
 msgid "Time payment"
 msgstr "تاریخ پرداخت"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:64
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:102
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:64
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:105
 msgid "Time delivery"
 msgstr "تاریخ تحویل"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:65
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:103
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:65
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:106
 msgid "Time finish"
 msgstr "تاریخ تکمیل"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:66
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:104
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:66
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:107
 msgid "Time start"
 msgstr "تاریخ شروع"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:67
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:105
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:67
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:108
 msgid "Time end"
 msgstr "تاریخ پایان"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:99
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:107
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:115
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:99
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:107
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:115
 msgid "Time"
 msgstr "زمان"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:100
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:100
 msgid "Finish"
 msgstr "پایان"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:116
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:116
 msgid "Method"
 msgstr "روش"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:124
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:124
 msgid "Discount"
 msgstr "تخفیف"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:125
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:140
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:134
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:48
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:92
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:129
-msgid "Shipping"
-msgstr "هزینه ارسال"
-
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:130
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:130
 msgid "Installment numbers"
 msgstr "تعداد اقساط"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:134
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:128
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:42
-msgid "This order products or services list"
-msgstr "فهرست محصولات و خدمات"
-
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:137
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:131
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:45
-msgid "Product"
-msgstr "محصول"
-
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:142
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:136
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:50
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:98
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:137
-msgid "Vat"
-msgstr "مالیات"
-
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:162
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:156
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:173
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:170
 msgid "This order invoices list"
 msgstr "فهرست فاکتور ها"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:198
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:192
-#: /home/voltan/Documents/git/order/template/front/list.phtml:117
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:209
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:206
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:118
 msgid "View / Pay"
 msgstr "مشاهده / پرداخت"
 
-#: /home/voltan/Documents/git/order/template/admin/order-view.phtml:211
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:222
 msgid "Print"
 msgstr "چاپ"
 
-#: /home/voltan/Documents/git/order/template/front/checkout.phtml:81
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:80
 msgid "Price : "
 msgstr "مبلغ : "
 
-#: /home/voltan/Documents/git/order/template/front/checkout.phtml:82
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:81
 msgid "Time : "
 msgstr "زمان : "
 
-#: /home/voltan/Documents/git/order/template/front/checkout.phtml:83
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:82
 msgid "Days"
 msgstr "روز"
 
-#: /home/voltan/Documents/git/order/template/front/checkout.phtml:93
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:91
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:143
 msgid "Checkout"
 msgstr "تسویه حساب"
 
-#: /home/voltan/Documents/git/order/template/front/checkout.phtml:104
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:102
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:148
 msgid "Terms of payment"
 msgstr "شرایط پرداخت"
 
-#: /home/voltan/Documents/git/order/template/front/checkout.phtml:107
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:103
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:149
 #, php-format
 msgid ""
 "You buy products on %s installment by %s payment on each installment and %s "
@@ -1595,109 +1723,128 @@ msgstr ""
 "شما کالای خود را در تعداد %s قسط  به مبلغ %s و پیش پرداخت %s خریداری کرده "
 "اید."
 
-#: /home/voltan/Documents/git/order/template/front/checkout.phtml:113
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:106
+msgid "Select your invoicing address for your order"
+msgstr "انتخاب آدرس تحویل برای ثبت سفارش"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:129
+msgid "Add a new invoicing address"
+msgstr "درج آدرس جدید"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:161
 msgid "Pre Invoice"
 msgstr "پیش فاکتور"
 
-#: /home/voltan/Documents/git/order/template/front/checkout.phtml:116
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:164
 msgid "Total Price"
 msgstr "مجموع قیمت"
 
-#: /home/voltan/Documents/git/order/template/front/checkout.phtml:117
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:165
 msgid "Total Discount"
 msgstr "مجموع تخفیف"
 
-#: /home/voltan/Documents/git/order/template/front/checkout.phtml:118
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:166
 msgid "Total Shipping"
 msgstr "مجموع هزینه ارسال"
 
-#: /home/voltan/Documents/git/order/template/front/checkout.phtml:119
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:167
+msgid "Total Vat"
+msgstr "مجموع مالیات"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:168
 msgid "Final Price"
 msgstr "قیمت نهایی"
 
-#: /home/voltan/Documents/git/order/template/front/checkout.phtml:129
-msgid "Terms & Conditions"
-msgstr "شرایط و مقررات"
-
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:14
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:17
 msgid "validated"
 msgstr "تایید شده"
 
-#: /home/voltan/Documents/git/order/template/front/detail.phtml:16
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:19
 msgid "Not validated"
 msgstr "تایید نشده"
 
-#: /home/voltan/Documents/git/order/template/front/error.phtml:4
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/error.phtml:4
 msgid "Error on order processing, please contact to website admin"
 msgstr "خطا در پردازش مراحل سفارش، لطفا با مدیر وب سایت تماس بگیرید."
 
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:88
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/finish.phtml:31
+msgid "Thanks !"
+msgstr "تشکر !"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/finish.phtml:32
+#, php-format
+msgid ""
+"Your payment ends successfully, we need %s to obtain payment confirmation."
+msgstr ""
+"پرداخت شما با موفقیت انجام شد، ما به %s زمان برای تایید اطلاعات پرداخت شما "
+"نیاز داریم."
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/finish.phtml:33
+msgid ""
+"Once received, youll be redirected automatically to your dashboard, and will "
+"be able to create your item !"
+msgstr ""
+"بعد از دریافت اطلاعات ، شما به طور خودکار به صفحه بعدی منتقل می شوید و "
+"میتوانید مراحل سفارش را دنبال کنید."
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/finish.phtml:34
+msgid "Please wait !"
+msgstr "لطفا صبر کنید !"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:88
 msgid "Installment plans"
 msgstr "لطفاً روش پرداخت قسطی خود را انتخاب نمایید"
 
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:91
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:91
 msgid "Your total invoices"
 msgstr "مجموع فاکتور های شما"
 
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:92
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:92
 msgid "Read lines are our of your credit"
 msgstr ""
 "ردیف های قرمز رنگ خارج از میزان اعتبار شما است و نمی توانید بر اساس آن پلن "
 "ها خرید انجام دهید."
 
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:98
 msgid "Select"
 msgstr "انتخاب"
 
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:113
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:149
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:113
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:149
 msgid "Buy"
 msgstr "خرید"
 
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:124
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:124
 msgid "Cash purchase"
 msgstr "خرید نقدی"
 
-#: /home/voltan/Documents/git/order/template/front/installment.phtml:126
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:126
 #, php-format
 msgid "%s months"
 msgstr "%s ماه"
 
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:79
-msgid "Total order price"
-msgstr "مجموع مبلغ سفارش"
-
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:111
-msgid "Payment price"
-msgstr "مبلغ قابل پرداخت"
-
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:114
-msgid "Total invoice price"
-msgstr "مجموع مبلغ فاکتور"
-
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:159
-msgid "Pay"
-msgstr "پرداخت"
-
-#: /home/voltan/Documents/git/order/template/front/invoice.phtml:163
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:162
 msgid "Back to order"
 msgstr "بازگشت به سفارش"
 
-#: /home/voltan/Documents/git/order/template/front/list.phtml:5
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:6
 msgid "User information"
 msgstr "اطلاعات کاربر"
 
-#: /home/voltan/Documents/git/order/template/front/list.phtml:58
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:59
 msgid "List of your order"
 msgstr "فهرست سفارش های شما"
 
-#: /home/voltan/Documents/git/order/template/front/list.phtml:63
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:64
 msgid "Type"
 msgstr "نوع"
 
-#: /home/voltan/Documents/git/order/template/front/list.phtml:81
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:82
 msgid "List of your invoice"
 msgstr "فهرست فاکتور های شما"
+
+#~ msgid "Total order price"
+#~ msgstr "مجموع مبلغ سفارش"
 
 #~ msgid "Total Number"
 #~ msgstr "مجموع تعداد"
@@ -1734,9 +1881,6 @@ msgstr "فهرست فاکتور های شما"
 
 #~ msgid "Module"
 #~ msgstr "بخش"
-
-#~ msgid "Address"
-#~ msgstr "آدرس"
 
 #~ msgid "Order Name"
 #~ msgstr "نام سفارش"
