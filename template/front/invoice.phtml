@@ -10,16 +10,20 @@
         <div class="well">
             <div class="clearfix">
                 <div class="col-md-6">
-                    <div class="text-left">
-                        <img src="<?php echo $this->logo(); ?>" alt="">
+                    <div class="clearfix">
+                        <?php if (!empty($config['order_sellerlogo'])) { ?>
+                            <img src="<?php echo $config['order_sellerlogo']; ?>" alt="">
+                        <?php } else { ?>
+                            <img src="<?php echo $this->logo(); ?>" alt="">
+                        <?php } ?>
+                        <br />
                     </div>
                     <?php if (!empty($config['order_sellerinfo'])) { ?>
                         <div class="clearfix">
-                            <br />
                             <?php echo $config['order_sellerinfo']; ?>
+                            <br />
                         </div>
                     <?php } ?>
-                    <br />
                     <p><strong><?php _e('Order date'); ?></strong> : <span><?php echo $this->escape($order['time_create_view']); ?></span></p>
                     <p><strong><?php _e('Invoice date'); ?></strong> : <span><?php echo $this->escape($invoice['time_create_view']); ?></span></p>
                 </div>
