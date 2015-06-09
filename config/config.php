@@ -315,6 +315,13 @@ return array(
             'edit'         => 'textarea',
             'filter'       => 'string',
         ),
+        'order_notification_email' => array(
+            'category'     => 'order',
+            'title'        => _a('Notification email for each module'),
+            'description'  => _a('Setup format : shop,shop@mysite.com|guide,guide@mysite.com'),
+            'edit'         => 'textarea',
+            'filter'       => 'string',
+        ),
         // Customize
         'price_custom' => array(
             'category'     => 'customize',
