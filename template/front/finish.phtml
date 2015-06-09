@@ -5,7 +5,7 @@ $script1 =<<<'EOT'
     var delay = 15000;
     setTimeout(function(){ window.location = '%s'; }, delay);
 EOT;
-$script = sprintf($script1, $url);
+$script1 = sprintf($script1, $url);
 $this->footScript()->appendScript($script1);
 $script2 =<<<'EOT'
     var count=15;
