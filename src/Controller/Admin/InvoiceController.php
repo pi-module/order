@@ -140,13 +140,18 @@ class InvoiceController extends ActionController
 
     public function viewAction()
     {
-        // Get invoice
+        // Get id
         $id = $this->params('id');
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Get info
         $invoice = Pi::api('invoice', 'order')->getInvoice($id);
         $order = Pi::api('order', 'order')->getOrder($invoice['order']);
+        // Get product list
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
         // Check invoice
         if (empty($invoice) || empty($order)) {
-           $this->jump(array('', 'action' => 'index'), __('The invoice not found.'));
+            $this->jump(array('', 'action' => 'index'), __('The invoice not found.'));
         }
         // Get logs
         $invoice['log'] = Pi::api('log', 'order')->getLog($invoice['id']);
@@ -154,7 +159,30 @@ class InvoiceController extends ActionController
         $this->view()->setTemplate('invoice-view');
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('order', $order);
-    }	
+        $this->view()->assign('config', $config);
+    }
+
+    public function printAction()
+    {
+        // Get id
+        $id = $this->params('id');
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Get info
+        $invoice = Pi::api('invoice', 'order')->getInvoice($id);
+        $order = Pi::api('order', 'order')->getOrder($invoice['order']);
+        // Get product list
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        // Check invoice
+        if (empty($invoice) || empty($order)) {
+            $this->jump(array('', 'action' => 'index'), __('The invoice not found.'));
+        }
+        // set view
+        $this->view()->setTemplate('invoice-print')->setLayout('layout-content');
+        $this->view()->assign('invoice', $invoice);
+        $this->view()->assign('order', $order);
+        $this->view()->assign('config', $config);
+    }
 
     public function updateAction()
     {

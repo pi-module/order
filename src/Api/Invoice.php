@@ -380,6 +380,12 @@ class Invoice extends AbstractApi
             'action'        => 'index',
             'id'            => $invoice['id'],
         )));
+        $invoice['print_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+            'module'        => $this->getModule(),
+            'controller'    => 'invoice',
+            'action'        => 'print',
+            'id'            => $invoice['id'],
+        )));
         // Set extra
         if (!empty($invoice['extra'])) {
             $invoice['extra'] = json::decode($invoice['extra'], true);

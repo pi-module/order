@@ -77,18 +77,23 @@ class Order extends Standard
                             case 'error':
                                 $matches['action'] = 'error';
                                 break;
-                        
+
                             case 'remove':
                                 $matches['action'] = 'remove';
                                 $matches['id'] = intval($this->decode($parts[1]));
                                 break;
                         }
                     }
-
-                    break; 
+                    break;
 
                 case 'invoice':
-                    $matches['id'] = intval($this->decode($parts[1]));
+                    if ($parts[1] == 'print') {
+                        $matches['action'] = 'print';
+                        $matches['id'] = intval($this->decode($parts[2]));
+                    } else {
+                        $matches['action'] = 'index';
+                        $matches['id'] = intval($this->decode($parts[1]));
+                    }
                     break;
 
                 case 'payment':
@@ -102,9 +107,9 @@ class Order extends Standard
                         $matches['action'] = 'index';
                         $matches['id'] = intval($parts[1]);
                     }
-                    break;  
-            }    
-        } 
+                    break;
+            }
+        }
 
         //print_r($parts);
         //print_r($matches);
@@ -128,23 +133,23 @@ class Order extends Standard
         if (!$mergedParams) {
             return $this->prefix;
         }
-        
+
         // Set module
         if (!empty($mergedParams['module'])) {
             $url['module'] = $mergedParams['module'];
         }
 
         // Set controller
-        if (!empty($mergedParams['controller']) 
-                && $mergedParams['controller'] != 'index'
-                && in_array($mergedParams['controller'], $this->controllerList)) 
+        if (!empty($mergedParams['controller'])
+            && $mergedParams['controller'] != 'index'
+            && in_array($mergedParams['controller'], $this->controllerList))
         {
             $url['controller'] = $mergedParams['controller'];
         }
 
         // Set action
-        if (!empty($mergedParams['action']) 
-                && $mergedParams['action'] != 'index') 
+        if (!empty($mergedParams['action'])
+            && $mergedParams['action'] != 'index')
         {
             $url['action'] = $mergedParams['action'];
         }

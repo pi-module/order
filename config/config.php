@@ -301,6 +301,20 @@ return array(
             'value'        => 'invoice',
             'category'     => 'order',
         ),
+        'order_sellerlogo' => array(
+            'category'     => 'order',
+            'title'        => _a('Seller logo'),
+            'description'  => _a('Put logo full URL'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+        ),
+        'order_sellerinfo' => array(
+            'category'     => 'order',
+            'title'        => _a('Seller information'),
+            'description'  => _a('HTML tags supported, use on invoice page'),
+            'edit'         => 'textarea',
+            'filter'       => 'string',
+        ),
         // Customize
         'price_custom' => array(
             'category'     => 'customize',

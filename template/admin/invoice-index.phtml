@@ -45,6 +45,7 @@
                     <td>
                         <a class="btn btn-primary" title="<?php _e('View'); ?>" href="<?php echo $this->url('', array('action' => 'view', 'id' => $invoice['id'])); ?>"><i class="fa fa-eye" target="_blank"></i> <?php _e('View'); ?></a>
                         <a class="btn btn-primary" title="<?php _e('View order'); ?>" href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>" target="_blank"><i class="fa fa-eye"></i> <?php _e('View order'); ?></a>
+                        <a class="btn btn-primary" title="<?php _e('Print invoice'); ?>" href="<?php echo $this->url('', array('action' => 'print', 'id' => $invoice['id'])); ?>" target="_blank"><i class="fa fa-print"></i> <?php _e('Print invoice'); ?></a>
                     </td>
                 </tr>
             <?php } ?>
