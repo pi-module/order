@@ -90,6 +90,18 @@ $locale = 'en';
                                         <?php } ?>
                                     </p>
                                 <?php } ?>
+                                <?php if (!empty($order['city'])) { ?>
+                                    <p><strong><?php _e('City'); ?></strong> : <span><?php echo $this->escape($order['city']); ?></span></p>
+                                <?php } ?>
+                                <?php if (!empty($order['state'])) { ?>
+                                    <p><strong><?php _e('State'); ?></strong> : <span><?php echo $this->escape($order['state']); ?></span></p>
+                                <?php } ?>
+                                <?php if (!empty($order['country'])) { ?>
+                                    <p><strong><?php _e('Country'); ?></strong> : <span><?php echo $this->escape($order['country']); ?></span></p>
+                                <?php } ?>
+                                <?php if (!empty($order['zip'])) { ?>
+                                    <p><strong><?php _e('Zip code'); ?></strong> : <span><?php echo $this->escape($order['zip']); ?></span></p>
+                                <?php } ?>
                             </td>
                         </tr>
                     </table>
@@ -154,7 +166,7 @@ $locale = 'en';
                             <th class="col-md-8"><?php _e('Amount'); ?></th>
                         </tr>
                         <tr>
-                            <td class="col-md-4"><?php _e('Product price'); ?></td>
+                            <td class="col-md-4"><?php _e('Product price ex VAT'); ?></td>
                             <td class="col-md-8">
                                 <?php if ($invoice['product_price'] > 0) { ?>
                                     <?php echo $this->escape($invoice['product_price_view']); ?>
@@ -164,9 +176,7 @@ $locale = 'en';
                         <tr>
                             <td class="col-md-4"><?php _e('Shipping'); ?></td>
                             <td class="col-md-8">
-                                <?php if ($invoice['shipping_price'] > 0) { ?>
-                                    <?php echo $this->escape($invoice['shipping_price_view']); ?>
-                                <?php } ?>
+                                <?php echo $this->escape($invoice['shipping_price_view']); ?>
                             </td>
                         </tr>
                         <tr>
@@ -178,7 +188,7 @@ $locale = 'en';
                             </td>
                         </tr>
                         <tr>
-                            <td class="col-md-4"><?php _e('Total'); ?></td>
+                            <td class="col-md-4"><?php _e('Total all taxes included'); ?></td>
                             <td class="col-md-8">
                                 <?php if ($invoice['total_price'] > 0) { ?>
                                     <strong><?php echo $this->escape($invoice['total_price_view']); ?></strong>
