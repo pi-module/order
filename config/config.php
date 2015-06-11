@@ -257,12 +257,6 @@ return array(
             'filter'       => 'number_int',
             'value'        => 0
         ),
-        'order_termtext' => array(
-            'category'     => 'order',
-            'title'        => _a('Order term text'),
-            'description'  => '',
-            'edit'         => 'textarea',
-        ),
         'order_termurl' => array(
             'category'     => 'order',
             'title'        => _a('Order term url'),
