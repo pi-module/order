@@ -195,12 +195,18 @@ class OrderForm  extends BaseForm
         // country
         if ($this->config['order_country']) {
             if (!empty($this->config['order_countrylist'])) {
+                // Set list
+                $countries = explode('|', $this->config['order_countrylist']);
+                foreach ($countries as $country) {
+                    $countryList[$country] = $country;
+                }
+                // Make form
                 $this->add(array(
                     'name' => 'country',
                     'type' => 'select',
                     'options' => array(
                         'label' => __('Country'),
-                        'value_options' => explode('|', $this->config['order_countrylist']),
+                        'value_options' => $countryList,
                     ),
                 ));
             } else {

@@ -6,33 +6,34 @@
             <div class="col-md-6">
                 <p><strong><?php _e('Status'); ?></strong> :
                     <?php if ($invoice['status'] == 1) { ?>
-                    <span class="label label-success"><?php _e('Paid'); ?><span>
-				<?php } elseif ($invoice['status'] == 2) { ?>
-                            <span class="label label-warning"><?php _e('Unpaid'); ?><span>
-				<?php } else { ?>
-                                    <span class="label label-danger"><?php _e('Canceled'); ?><span>
-				<?php } ?>
-                                            <p><strong><?php _e('Order'); ?></strong> : <span><?php echo $this->escape($order['code']); ?></span></p>
-				<p><strong><?php _e('Gateway'); ?></strong> : <span><?php echo $this->escape($invoice['gateway']); ?></span></p>
-				<p><strong><?php _e('Create'); ?></strong> : <span><?php echo $this->escape($invoice['time_create_view']); ?> </span></p>
-                                            <?php if ($invoice['product_price'] > 0) { ?>
-                                                <p><strong><?php _e('Product price'); ?></strong> : <span><?php echo $this->escape($invoice['product_price_view']); ?></span></p>
-                                            <?php } ?>
-                                            <?php if ($invoice['shipping_price'] > 0) { ?>
-                                                <p><strong><?php _e('Shipping price'); ?></strong> : <span><?php echo $this->escape($invoice['shipping_price_view']); ?></span></p>
-                                            <?php } ?>
-                                            <?php if ($invoice['packing_price'] > 0) { ?>
-                                                <p><strong><?php _e('Packing price'); ?></strong> : <span><?php echo $this->escape($invoice['packing_price_view']); ?></span></p>
-                                            <?php } ?>
-                                            <?php if ($invoice['vat_price'] > 0) { ?>
-                                                <p><strong><?php _e('Vat price'); ?></strong> : <span><?php echo $this->escape($invoice['vat_price_view']); ?></span></p>
-                                            <?php } ?>
-                                            <?php if ($invoice['total_price'] > 0) { ?>
-                                                <p><strong><?php _e('Total price'); ?></strong> : <span><?php echo $this->escape($invoice['total_price_view']); ?></span></p>
-                                            <?php } ?>
-                                            <?php if ($invoice['paid_price'] > 0) { ?>
-                                                <p><strong><?php _e('Paid price'); ?></strong> : <span><?php echo $this->escape($invoice['paid_price_view']); ?></span></p>
-                                            <?php } ?>
+                        <span class="label label-success"><?php _e('Paid'); ?></span>
+                    <?php } elseif ($invoice['status'] == 2) { ?>
+                        <span class="label label-warning"><?php _e('Unpaid'); ?></span>
+                    <?php } else { ?>
+                        <span class="label label-danger"><?php _e('Canceled'); ?></span>
+                    <?php } ?>
+                </p>
+                <p><strong><?php _e('Order'); ?></strong> : <span><?php echo $this->escape($order['code']); ?></span></p>
+                <p><strong><?php _e('Gateway'); ?></strong> : <span><?php echo $this->escape($invoice['gateway']); ?></span></p>
+                <p><strong><?php _e('Create'); ?></strong> : <span><?php echo $this->escape($invoice['time_create_view']); ?> </span></p>
+                <?php if ($invoice['product_price'] > 0) { ?>
+                    <p><strong><?php _e('Product price'); ?></strong> : <span><?php echo $this->escape($invoice['product_price_view']); ?></span></p>
+                <?php } ?>
+                <?php if ($invoice['shipping_price'] > 0) { ?>
+                    <p><strong><?php _e('Shipping price'); ?></strong> : <span><?php echo $this->escape($invoice['shipping_price_view']); ?></span></p>
+                <?php } ?>
+                <?php if ($invoice['packing_price'] > 0) { ?>
+                    <p><strong><?php _e('Packing price'); ?></strong> : <span><?php echo $this->escape($invoice['packing_price_view']); ?></span></p>
+                <?php } ?>
+                <?php if ($invoice['vat_price'] > 0) { ?>
+                    <p><strong><?php _e('Vat price'); ?></strong> : <span><?php echo $this->escape($invoice['vat_price_view']); ?></span></p>
+                <?php } ?>
+                <?php if ($invoice['total_price'] > 0) { ?>
+                    <p><strong><?php _e('Total price'); ?></strong> : <span><?php echo $this->escape($invoice['total_price_view']); ?></span></p>
+                <?php } ?>
+                <?php if ($invoice['paid_price'] > 0) { ?>
+                    <p><strong><?php _e('Paid price'); ?></strong> : <span><?php echo $this->escape($invoice['paid_price_view']); ?></span></p>
+                <?php } ?>
             </div>
             <div class="col-md-6">
                 <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
@@ -71,6 +72,7 @@
             </div>
             <div class="col-md-12 text-right">
                 <a class="btn btn-primary" title="<?php _e('View order'); ?>" href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>" target="_blank"><i class="fa fa-eye"></i> <?php _e('View order'); ?></a>
+                <a class="btn btn-primary" title="<?php _e('Print'); ?>" href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'print', 'id' => $invoice['id'])); ?>" target="_blank"><i class="fa fa-print"></i> <?php _e('Print'); ?></a>
             </div>
         </div>
     </div>
