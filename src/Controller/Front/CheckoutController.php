@@ -56,7 +56,6 @@ class CheckoutController extends IndexController
                 // Check user informations
                 $user = Pi::api('user', 'order')->getUserInformation();
                 // Set values
-                //$values['code'] = Pi::api('order', 'order')->generatCode();
                 $values['uid'] = Pi::user()->getId();
                 $values['ip'] = Pi::user()->getIp();
                 $values['status_order'] = 1;
@@ -193,7 +192,7 @@ class CheckoutController extends IndexController
                 // Set order ID
                 $code = Pi::api('order', 'order')->generatCode($order->id);
                 $this->getModel('order')->update(
-                    array('code' => $code), 
+                    array('code' => $code),
                     array('id' => $order->id)
                 );
                 // Save order basket
@@ -215,7 +214,7 @@ class CheckoutController extends IndexController
                             $basket->total_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
                         } else {
                             $basket->product_price = $price;
-                            $basket->total_price = $total; 
+                            $basket->total_price = $total;
                         }
                         $basket->number = $product['number'];
                         // Set installment to extra
@@ -253,6 +252,20 @@ class CheckoutController extends IndexController
                         $url = $result['invoice_url'];
                     }
                     $this->jump($url, $result['message'], 'success');
+                }
+            } else {
+                // Set new form
+                $user = Pi::api('user', 'order')->getUserInformation();
+                $user['customer_id'] = 0;
+                $forms['new'] = new OrderForm('order', $option);
+                $forms['new']->setData($user);
+                // Set customer forms
+                if (!empty($customers)) {
+                    foreach ($customers as $customer) {
+                        $key = sprintf('customer-%s', $customer['id']);
+                        $forms[$key] = new OrderForm('order', $option);
+                        $forms[$key]->setData($data);
+                    }
                 }
             }
         } else {
@@ -444,7 +457,7 @@ class CheckoutController extends IndexController
                                 $data['payment'][$row->id]['title'] = $gateway['title'];
                                 $data['payment'][$row->id]['path'] = $gateway['path'];
                                 $data['payment'][$row->id]['status'] = $gateway['status'];
-                            }  
+                            }
                         }
                     }
                     // Set return
@@ -455,9 +468,9 @@ class CheckoutController extends IndexController
                     $return['delivery'] = $delivery['title'];
                     $return['payment'] = ($config['order_method'] == 'offline') ? __('Offline') : '';
                 }
-                break; 
+                break;
 
-            case 'payment':  
+            case 'payment':
                 if ($id) {
                     // Set delivery
                     $_SESSION['checkout']['payment'] = $id;
@@ -472,7 +485,7 @@ class CheckoutController extends IndexController
                     $return['status'] = 1;
                     $return['data'] = $data;
                 }
-                break;   
+                break;
         }
         // return
         return $return;
