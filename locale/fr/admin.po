@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-02-12 23:02+0100\n"
+"POT-Creation-Date: 2015-06-12 14:55+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -9,60 +9,632 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.7.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _a;_t\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Poedit-SearchPath-0: C:\\Users\\LAPTOP MARC\\Documents\\GitHub"
-"\\payment\n"
+"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/order\n"
 
-#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/config.php:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/block.php:16
+msgid "Orders detail"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/block.php:17
+msgid "Simple orders detail"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/block.php:23
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:37
+msgid "Installment"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/block.php:24
+msgid "Installment orders detail"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:17
 msgid "Admin"
 msgstr "Admin"
 
-#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/config.php:21
-#: MARC\Documents\GitHub\payment/config/module.php:16
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:21
+msgid "Order"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:25
+msgid "Customize"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:29
 msgid "Payment"
 msgstr "Paiement"
 
-#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/config.php:29
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:33
+msgid "Notification"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:45
 msgid "Perpage"
 msgstr "Par page"
 
-#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/config.php:38
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:53
+msgid "Order method"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:59
+msgid "Both"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:60
+msgid "Online"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:61
+msgid "Offline"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:62
+msgid "Inactive"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:72
+msgid "Test mode"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:73
+msgid ""
+"By test mode , you can disable payment on bank and test order level. dont "
+"use it on active websites"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:80
+msgid "Anonymous users can pay"
+msgstr "Les utilisateurs Anonymes peuvent payer"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:88
+msgid "Order code Prefix"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:96
+msgid "Invoice code Prefix"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:104
+msgid "Update user profile"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:105
+msgid "Update user profile by order informations by user confirmation"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:112
+msgid "Show ID number"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:120
+msgid "Show name"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:128
+msgid "Show email"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:136
+msgid "Show phone"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:144
+msgid "Show mobile"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:152
+msgid "Show company"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:160
+msgid "Show company extra"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:168
+msgid "Show address"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:176
+msgid "Show address 2"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:184
+msgid "Show country"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:192
+msgid "Country list"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:193
+msgid "Use `|` as delimiter to separate countres"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:198
+msgid "Show state"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:206
+msgid "Show city"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:214
+msgid "Show Zip code"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:222
+msgid "Show packing"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:230
+msgid "Show location and delivery"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:238
+msgid "Show promo"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:246
+msgid "Show user note"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:254
+msgid "Show order term"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:262
+msgid "Order term url"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:268
+msgid "Product additional price"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:269
+msgid "Additional price as ready and delivery, just for products"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:276
+msgid "Service additional price"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:277
+msgid "Additional price as setup, just for servicies"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:283
+msgid "After save order"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:289
+msgid "Go to invoice page"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:290
+msgid "Go to payment page"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:300
+msgid "Seller logo"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:301
+msgid "Put logo full URL"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:307
+msgid "Seller information"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:308
+msgid "HTML tags supported, use on invoice page"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:314
+msgid "Notification email for each module"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:315
+msgid "Setup format : shop,shop@mysite.com|guide,guide@mysite.com"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:322
+msgid "Use custom price"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:330
+msgid "Date format"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:331
+msgid "For example : yyyy-MM-dd"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:339
 msgid "Payment gateway error url"
 msgstr "Url pour l'erreur de passerelle de paiement"
 
-#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/config.php:39
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:340
 msgid "Set back url when gateway have error, set empty for default url"
 msgstr ""
 "Définir l'url de retour lorsqu'une la passerelle rencontre une erreur, "
 "laisser vide pour l'url par défaut"
 
-#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/config.php:45
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:346
 msgid "Show not pay payments"
 msgstr "Montrer les commandes non payées"
 
-#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/config.php:53
-msgid "Anonymous users can pay"
-msgstr "Les utilisateurs Anonymes peuvent payer"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:354
+msgid "Website image URL"
+msgstr ""
 
-#: C:\Users\LAPTOP MARC\Documents\GitHub\payment/config/module.php:17
-msgid "Payment gateway"
-msgstr "Passerelle de paiement"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:355
+msgid "Use on some payment gateway like paypal."
+msgstr ""
 
-#: C:\Users\LAPTOP
-#: MARC\Documents\GitHub\payment/config/navigation.php:19
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:362
+msgid "New order notification to user"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:363
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:366
+#, php-format
+msgid "Dear %s %s, Your order added on system"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:370
+msgid "New order notification to admin"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:371
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:374
+msgid "Dear admin, New order added on system"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:378
+msgid "Pay invoice notification to user"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:379
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:382
+#, php-format
+msgid "Dear %s %s, Your invoice paid successfully"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:386
+msgid "Pay invoice notification to admin"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:387
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:390
+msgid "Dear admin, Your customer paid invoice successfully"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:394
+msgid "Set X day before due date"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:395
+msgid "Notification invoice due date, X day before invoice time by cron"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:402
+msgid "Duedate invoice notification to user"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:403
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:406
+#, php-format
+msgid "Dear %s %s, You have duedate invoice on next %s days"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:410
+msgid "Set X day after expired"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:411
+msgid "Notification invoice expired, X day after invoice time by cron"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:418
+msgid "Expired invoice notification to user"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:419
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:422
+#, php-format
+msgid "Dear %s %s, You have expired invoice on %s days ago"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:427
+msgid "Reduce from user credit"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:435
+msgid "Show plan 1"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:443
+msgid "Plan 1 : Title"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:447
+msgid "1 month"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:451
+msgid "Plan 1 : Prepayment"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:459
+msgid "Plan 1 : Profit"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:467
+msgid "Plan 1 : Total"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:475
+msgid "Show plan 2"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:483
+msgid "Plan 2 : Title"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:487
+msgid "2 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:491
+msgid "Plan 2 : Prepayment"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:499
+msgid "Plan 2 : Profit"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:507
+msgid "Plan 2 : Total"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:515
+msgid "Show plan 3"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:523
+msgid "Plan 3 : Title"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:527
+msgid "3 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:531
+msgid "Plan 3 : Prepayment"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:539
+msgid "Plan 3 : Profit"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:547
+msgid "Plan 3 : Total"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:555
+msgid "Show plan 4"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:563
+msgid "Plan 4 : Title"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:567
+msgid "4 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:571
+msgid "Plan 4 : Prepayment"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:579
+msgid "Plan 4 : Profit"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:587
+msgid "Plan 4 : Total"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:595
+msgid "Show plan 5"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:603
+msgid "Plan 5 : Title"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:607
+msgid "5 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:611
+msgid "Plan 5 : Prepayment"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:619
+msgid "Plan 5 : Profit"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:627
+msgid "Plan 5 : Total"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:635
+msgid "Show plan 6"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:643
+msgid "Plan 6 : Title"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:647
+msgid "6 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:651
+msgid "Plan 6 : Prepayment"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:659
+msgid "Plan 6 : Profit"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:667
+msgid "Plan 6 : Total"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:675
+msgid "Show plan 7"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:683
+msgid "Plan 7 : Title"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:687
+msgid "7 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:691
+msgid "Plan 7 : Prepayment"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:699
+msgid "Plan 7 : Profit"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:707
+msgid "Plan 7 : Total"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:715
+msgid "Show plan 8"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:723
+msgid "Plan 8 : Title"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:727
+msgid "8 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:731
+msgid "Plan 8 : Prepayment"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:739
+msgid "Plan 8 : Profit"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:747
+msgid "Plan 8 : Total"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:755
+msgid "Show plan 9"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:763
+msgid "Plan 9 : Title"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:767
+msgid "9 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:771
+msgid "Plan 9 : Prepayment"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:779
+msgid "Plan 9 : Profit"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:787
+msgid "Plan 9 : Total"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:795
+msgid "Show plan 10"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:803
+msgid "Plan 10 : Title"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:807
+msgid "10 months"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:811
+msgid "Plan 10 : Prepayment"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:819
+msgid "Plan 10 : Profit"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/config.php:827
+msgid "Plan 10 : Total"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/module.php:16
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:19
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:17
+msgid "Orders"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/module.php:17
+msgid "Manage order process and payment"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:25
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:22
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:23
 msgid "Invoice"
 msgstr "Facture"
 
-#: C:\Users\LAPTOP
-#: MARC\Documents\GitHub\payment/config/navigation.php:25
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:31
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:27
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:29
 msgid "Logs"
 msgstr "Logs"
 
-#: C:\Users\LAPTOP
-#: MARC\Documents\GitHub\payment/config/navigation.php:31
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:32
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:35
 msgid "Gateway"
 msgstr "Passerelle"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:41
+msgid "Delivery"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/navigation.php:49
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/page.php:42
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/config/permission.php:47
+msgid "Location"
+msgstr ""
+
+#~ msgid "Payment gateway"
+#~ msgstr "Passerelle de paiement"
