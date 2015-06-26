@@ -24,7 +24,7 @@ use Zend\Json\Json;
 
 class User extends AbstractApi
 {
-	public function getUserInformation($uid = '')
+    public function getUserInformation($uid = '')
     {
         // Get user id if not set
         if (empty($uid)) {
@@ -36,8 +36,8 @@ class User extends AbstractApi
         }
         // Get user info
         $user = Pi::user()->get($uid, array(
-            'id', 'identity', 'name', 'email', 'first_name', 'last_name', 'id_number', 'phone', 'mobile', 'credit', 
-            'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 
+            'id', 'identity', 'name', 'email', 'first_name', 'last_name', 'id_number', 'phone', 'mobile', 'credit',
+            'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat',
         ));
         // Check user first_name
         if (!isset($user['first_name'])) {

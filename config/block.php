@@ -11,18 +11,18 @@
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 return array(
-    'detail'    => array(
-        'name'          => 'detail',
-        'title'         => _a('Orders detail'),
-        'description'   => _a('Simple orders detail'),
-        'render'        => array('block', 'detail'),
-        'template'      => 'detail',
+    'detail' => array(
+        'name' => 'detail',
+        'title' => _a('Orders detail'),
+        'description' => _a('Simple orders detail'),
+        'render' => array('block', 'detail'),
+        'template' => 'detail',
     ),
-    'installment'    => array(
-        'name'          => 'installment',
-        'title'         => _a('Installment'),
-        'description'   => _a('Installment orders detail'),
-        'render'        => array('block', 'installment'),
-        'template'      => 'installment',
+    'installment' => array(
+        'name' => 'installment',
+        'title' => _a('Installment'),
+        'description' => _a('Installment orders detail'),
+        'render' => array('block', 'installment'),
+        'template' => 'installment',
     ),
 );

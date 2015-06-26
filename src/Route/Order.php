@@ -22,9 +22,9 @@ class Order extends Standard
      * @var array
      */
     protected $defaults = array(
-        'module'        => 'order',
-        'controller'    => 'index',
-        'action'        => 'index'
+        'module' => 'order',
+        'controller' => 'index',
+        'action' => 'index'
     );
 
     protected $controllerList = array(
@@ -128,7 +128,8 @@ class Order extends Standard
     public function assemble(
         array $params = array(),
         array $options = array()
-    ) {
+    )
+    {
         $mergedParams = array_merge($this->defaults, $params);
         if (!$mergedParams) {
             return $this->prefix;
@@ -142,15 +143,15 @@ class Order extends Standard
         // Set controller
         if (!empty($mergedParams['controller'])
             && $mergedParams['controller'] != 'index'
-            && in_array($mergedParams['controller'], $this->controllerList))
-        {
+            && in_array($mergedParams['controller'], $this->controllerList)
+        ) {
             $url['controller'] = $mergedParams['controller'];
         }
 
         // Set action
         if (!empty($mergedParams['action'])
-            && $mergedParams['action'] != 'index')
-        {
+            && $mergedParams['action'] != 'index'
+        ) {
             $url['action'] = $mergedParams['action'];
         }
 

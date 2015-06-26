@@ -29,19 +29,19 @@ class Api extends AbstractApi
         $config = Pi::service('registry')->config->read($this->getModule());
         // Check custom price
         if ($config['price_custom']) {
-        	switch (Pi::config('number_currency')) {
-        		// Set for Iran Rial
-        		case 'IRR':
-        		    $price = ((int)($price/1000))*100;
-        		    $viewPrice = $short ? _number($price) : sprintf('%s %s', _number($price), __('Toman'));
-        			break;
-        		
-        		default:
-        			$viewPrice = _currency($price);
-        			break;
-        	}
+            switch (Pi::config('number_currency')) {
+                // Set for Iran Rial
+                case 'IRR':
+                    $price = ((int)($price / 1000)) * 100;
+                    $viewPrice = $short ? _number($price) : sprintf('%s %s', _number($price), __('Toman'));
+                    break;
+
+                default:
+                    $viewPrice = _currency($price);
+                    break;
+            }
         } else {
-        	$viewPrice = _currency($price);
+            $viewPrice = _currency($price);
         }
         return $viewPrice;
     }
@@ -52,12 +52,12 @@ class Api extends AbstractApi
         $config = Pi::service('registry')->config->read($this->getModule());
         // Check custom price
         if ($config['price_custom']) {
-        	switch (Pi::config('number_currency')) {
-        		// Set for Iran Rial
-        		case 'IRR':
-        		    $price = ((int)($price/1000))*1000;
-        			break;
-        	}
+            switch (Pi::config('number_currency')) {
+                // Set for Iran Rial
+                case 'IRR':
+                    $price = ((int)($price / 1000)) * 1000;
+                    break;
+            }
         }
         return $price;
     }

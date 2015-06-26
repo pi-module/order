@@ -73,17 +73,17 @@ class OrderFilter extends InputFilter
                         'name' => 'StringTrim',
                     ),
                 ),
-                'validators'    => array(
+                'validators' => array(
                     array(
-                        'name'      => 'EmailAddress',
-                        'options'   => array(
-                            'useMxCheck'        => false,
-                            'useDeepMxCheck'    => false,
-                            'useDomainCheck'    => false,
+                        'name' => 'EmailAddress',
+                        'options' => array(
+                            'useMxCheck' => false,
+                            'useDeepMxCheck' => false,
+                            'useDomainCheck' => false,
                         ),
                     ),
                     new UserEmailValidator(array(
-                        'blacklist'         => false,
+                        'blacklist' => false,
                         'check_duplication' => false,
                     )),
                 ),
@@ -280,7 +280,7 @@ class OrderFilter extends InputFilter
                     ));
                 }
                 break;
-            
+
             case 'service':
                 // gateway
                 $this->add(array(
@@ -340,7 +340,7 @@ class OrderFilter extends InputFilter
                         'name' => 'StringTrim',
                     ),
                 ),
-                'validators'    => array(
+                'validators' => array(
                     new \Module\Order\Validator\Term,
                 ),
             ));

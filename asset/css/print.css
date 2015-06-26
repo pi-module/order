@@ -1,47 +1,48 @@
-body{
-  -webkit-print-color-adjust:exact;
+body {
+    -webkit-print-color-adjust: exact;
 }
 
 @page {
-	size: a4 portrait;
-	margin: 20mm 10mm;
-	padding: 0;
+    size: a4 portrait;
+    margin: 20mm 10mm;
+    padding: 0;
 }
 
-#print {}
+#print {
+}
 
 .print-title {
-	border: 1px solid #333333 !important;
-	background: #cccccc !important;
-	color: #000000 !important;
-	padding: 12px;
-	font-weight: bold;
-	text-align: center;
-	margin-bottom: 15px;
+    border: 1px solid #333333 !important;
+    background: #cccccc !important;
+    color: #000000 !important;
+    padding: 12px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 .print-text {
-	border: 1px solid #333333 !important;
-	background: #cccccc !important;
-	color: #000000 !important;
-	padding: 12px;
-	text-align: center;
-	margin-bottom: 15px;
+    border: 1px solid #333333 !important;
+    background: #cccccc !important;
+    color: #000000 !important;
+    padding: 12px;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 .print-user {
-	border: 1px solid #333333 !important;
-	color: #000000 !important;
-	padding: 12px;
-	margin-bottom: 15px;
+    border: 1px solid #333333 !important;
+    color: #000000 !important;
+    padding: 12px;
+    margin-bottom: 15px;
 }
 
 .text-normal {
-	font-size: .9em;
+    font-size: .9em;
 }
 
 .text-small {
-	font-size: .7em;
+    font-size: .7em;
 }
 
 .table-bordered th,
@@ -50,7 +51,7 @@ body{
 }
 
 .table-striped > tbody > tr:nth-child(odd) {
-  background: #cccccc !important;
+    background: #cccccc !important;
 }
 
 .table td,
@@ -66,15 +67,19 @@ body{
 .table > tfoot > tr > td {
     border-top: 1px solid #333333 !important;
 }
+
 .table > thead > tr > th {
     border-bottom: 2px solid #333333 !important;
 }
+
 .table > tbody + tbody {
     border-top: 2px solid #333333 !important;
 }
+
 .table-bordered {
     border: 1px solid #333333 !important;
 }
+
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > th,
 .table-bordered > tfoot > tr > th,

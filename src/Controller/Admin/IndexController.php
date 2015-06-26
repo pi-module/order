@@ -22,7 +22,7 @@ class IndexController extends ActionController
     {
         return $this->redirect()->toRoute('', array(
             'controller' => 'order',
-            'action'     => 'index',
+            'action' => 'index',
         ));
     }
 }

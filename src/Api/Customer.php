@@ -39,6 +39,7 @@ class Customer extends AbstractApi
         return $customer;
 
     }
+
     public function updateCustomer($values)
     {
         // Set values
@@ -48,7 +49,7 @@ class Customer extends AbstractApi
         $customer = Pi::model('customer', $this->getModule())->find($values['customer_id']);
         // Check customer
         if ($customer->uid != Pi::user()->getId()) {
-        	return false;
+            return false;
         } else {
             // Save customer info
             $customer->assign($values);
@@ -61,10 +62,10 @@ class Customer extends AbstractApi
 
     public function findCustomer($uid = '')
     {
-    	// Check uid
-    	if (empty($uid)) {
-    		$uid = Pi::user()->getId();
-    	}
+        // Check uid
+        if (empty($uid)) {
+            $uid = Pi::user()->getId();
+        }
         // Select
         $customers = array();
         $where = array('uid' => $uid);

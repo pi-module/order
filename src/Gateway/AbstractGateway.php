@@ -132,9 +132,9 @@ abstract class AbstractGateway
                 $gateway = new $class;
                 if (is_object($gateway)) {
                     return $gateway;
-                }    
+                }
             }
-        } 
+        }
         return false;
     }
 
@@ -143,7 +143,7 @@ abstract class AbstractGateway
         if (!empty($adapter)) {
             $gateway = Pi::model('gateway', 'order')->find($adapter, 'path')->toArray();
             return $gateway;
-        } 
+        }
         return false;
     }
 
@@ -153,9 +153,9 @@ abstract class AbstractGateway
             $class = sprintf('Module\Order\Gateway\%s\Gateway', $adapter);
             if (class_exists($class)) {
                 $message = $class::setMessage($log);
-                return $message;  
+                return $message;
             }
-        } 
+        }
         return false;
     }
 
@@ -186,9 +186,9 @@ abstract class AbstractGateway
     protected function setOption()
     {
         if (is_array($this->gatewayRow) && isset($this->gatewayRow['option'])) {
-            $this->gatewayOption =  Json::decode($this->gatewayRow['option'], true);
+            $this->gatewayOption = Json::decode($this->gatewayRow['option'], true);
         }
-        return $this; 
+        return $this;
     }
 
     protected function setIsActive()
@@ -203,36 +203,36 @@ abstract class AbstractGateway
     protected function setBackUrl()
     {
         $this->gatewayBackUrl = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'        => 'order',
-            'controller'    => 'payment',
-            'action'        => 'result',
+            'module' => 'order',
+            'controller' => 'payment',
+            'action' => 'result',
         )));
     }
 
     protected function setCancelUrl()
     {
         $this->gatewayCancelUrl = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'        => 'order',
-            'controller'    => 'payment',
-            'action'        => 'cancel',
+            'module' => 'order',
+            'controller' => 'payment',
+            'action' => 'cancel',
         )));
     }
 
     protected function setFinishUrl()
     {
         $this->gatewayFinishUrl = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'        => 'order',
-            'controller'    => 'payment',
-            'action'        => 'finish',
+            'module' => 'order',
+            'controller' => 'payment',
+            'action' => 'finish',
         )));
     }
 
     protected function setNotifyUrl()
     {
         $this->gatewayNotifyUrl = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'        => 'order',
-            'controller'    => 'payment',
-            'action'        => 'notify',
+            'module' => 'order',
+            'controller' => 'payment',
+            'action' => 'notify',
         )));
     }
 

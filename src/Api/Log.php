@@ -36,11 +36,11 @@ class Log extends AbstractApi
         $row = Pi::model('log', $this->getModule())->createRow();
         $row->invoice = isset($log['invoice']) ? $log['invoice'] : '';
         $row->gateway = isset($log['gateway']) ? $log['gateway'] : '';
-        $row->amount = isset($log['amount'])? $log['amount'] : 0;
+        $row->amount = isset($log['amount']) ? $log['amount'] : 0;
         $row->authority = isset($log['authority']) ? $log['authority'] : 0;
         $row->status = isset($log['status']) ? $log['status'] : 0;
         $row->message = isset($log['message']) ? $log['message'] : '';
-        $row->value = isset($log['value'])? $log['value'] : '';
+        $row->value = isset($log['value']) ? $log['value'] : '';
         $row->time_create = time();
         $row->uid = Pi::user()->getId();
         $row->ip = Pi::user()->getIp();

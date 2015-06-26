@@ -16,7 +16,7 @@ namespace Module\Order\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class UpdateDeliveryForm  extends BaseForm
+class UpdateDeliveryForm extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {

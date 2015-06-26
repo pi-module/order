@@ -1,9 +1,12 @@
 <div class="order-block-detail">
     <div class="order-block-detail-tab" role="tabpanel">
         <ul class="nav nav-tabs">
-            <li role="presentation" class="active"><a href="#invoice" aria-controls="invoice" role="tab" data-toggle="tab"><?php echo _b('Invoices'); ?></a></li>
-            <li role="presentation"><a href="#order" aria-controls="order" role="tab" data-toggle="tab"><?php echo _b('Orders'); ?></a></li>
-            <li role="presentation"><a href="#user" aria-controls="user" role="tab" data-toggle="tab"><?php echo _b('User informations'); ?></a></li>
+            <li role="presentation" class="active"><a href="#invoice" aria-controls="invoice" role="tab"
+                                                      data-toggle="tab"><?php echo _b('Invoices'); ?></a></li>
+            <li role="presentation"><a href="#order" aria-controls="order" role="tab"
+                                       data-toggle="tab"><?php echo _b('Orders'); ?></a></li>
+            <li role="presentation"><a href="#user" aria-controls="user" role="tab"
+                                       data-toggle="tab"><?php echo _b('User informations'); ?></a></li>
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="invoice">
@@ -17,24 +20,28 @@
                             <th><?php echo _b('Time pay'); ?></th>
                             <th><?php echo _b('Action'); ?></th>
                         </tr>
-                        <?php foreach($block['resources']['invoices'] as $invoice) { ?>
+                        <?php foreach ($block['resources']['invoices'] as $invoice) { ?>
                             <?php
-                            if($invoice['status'] == 1) {
+                            if ($invoice['status'] == 1) {
                                 $labelIdClass = 'label-success';
-                            } elseif($invoice['status'] == 2) {
+                            } elseif ($invoice['status'] == 2) {
                                 $labelIdClass = 'label-warning';
-                            } elseif($invoice['status'] == 3) {
+                            } elseif ($invoice['status'] == 3) {
                                 $labelIdClass = 'label-danger';
                             }
                             ?>
                             <tr>
-                                <td><span class="label <?php echo $labelIdClass; ?>"><?php echo _number($this->escape($invoice['code'])); ?></span></td>
+                                <td><span
+                                        class="label <?php echo $labelIdClass; ?>"><?php echo _number($this->escape($invoice['code'])); ?></span>
+                                </td>
                                 <td><?php echo $this->escape($invoice['total_price_view']); ?></td>
                                 <td><?php echo $this->escape($invoice['time_create_view']); ?></td>
                                 <td><?php echo $this->escape($invoice['time_duedate_view']); ?></td>
                                 <td><?php echo $this->escape($invoice['time_payment_view']); ?></td>
                                 <td>
-                                    <a class="btn btn-primary" title="<?php echo _b('View / Pay'); ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'invoice', 'id' => $invoice['id'])); ?>"><i class="fa fa-edit"></i> <?php echo _b('View / Pay'); ?></a>
+                                    <a class="btn btn-primary" title="<?php echo _b('View / Pay'); ?>"
+                                       href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'invoice', 'id' => $invoice['id'])); ?>"><i
+                                            class="fa fa-edit"></i> <?php echo _b('View / Pay'); ?></a>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -45,7 +52,8 @@
                         <span class="label label-danger"><?php echo _b('Canceled'); ?></span>
                     </p>
                 <?php } else { ?>
-                    <div class="alert alert-warning" role="alert"><?php echo _b('You dont have any invoice yet'); ?></div>
+                    <div class="alert alert-warning"
+                         role="alert"><?php echo _b('You dont have any invoice yet'); ?></div>
                 <?php } ?>
             </div>
             <div role="tabpanel" class="tab-pane" id="order">
@@ -59,7 +67,7 @@
                             <th><?php echo _b('Gateway'); ?></th>
                             <th><?php echo _b('Action'); ?></th>
                         </tr>
-                        <?php foreach($block['resources']['orders'] as $order) { ?>
+                        <?php foreach ($block['resources']['orders'] as $order) { ?>
                             <tr>
                                 <td><?php echo $this->escape($order['code']); ?></td>
                                 <td><?php echo $this->escape($order['time_create_view']); ?></td>
@@ -67,7 +75,9 @@
                                 <td><?php echo $this->escape($order['total_price_view']); ?></td>
                                 <td><?php echo $this->escape($order['gateway']); ?></td>
                                 <td>
-                                    <a class="btn btn-primary" title="<?php echo _b('View'); ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $order['id'])); ?>"><i class="fa fa-edit"></i> <?php echo _b('View'); ?></a>
+                                    <a class="btn btn-primary" title="<?php echo _b('View'); ?>"
+                                       href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $order['id'])); ?>"><i
+                                            class="fa fa-edit"></i> <?php echo _b('View'); ?></a>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -81,50 +91,66 @@
                     <div class="clearfix">
                         <div class="col-md-6">
                             <?php if (!empty($block['resources']['credit'])) { ?>
-                                <p><strong><?php echo _b('Credit'); ?></strong> : <span class="label label-success"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($block['resources']['credit'])); ?></span></p>
+                                <p><strong><?php echo _b('Credit'); ?></strong> : <span
+                                        class="label label-success"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($block['resources']['credit'])); ?></span>
+                                </p>
                             <?php } ?>
                             <?php if (!empty($block['resources']['first_name']) && !empty($block['resources']['last_name'])) { ?>
-                                <p><strong><?php echo _b('Name'); ?></strong> : <span><?php echo $this->escape($block['resources']['first_name']); ?> <?php echo $this->escape($block['resources']['last_name']); ?></span></p>
+                                <p><strong><?php echo _b('Name'); ?></strong> :
+                                    <span><?php echo $this->escape($block['resources']['first_name']); ?> <?php echo $this->escape($block['resources']['last_name']); ?></span>
+                                </p>
                             <?php } ?>
                             <?php if (!empty($block['resources']['city'])) { ?>
-                                <p><strong><?php echo _b('City'); ?></strong> : <span><?php echo $this->escape($block['resources']['city']); ?></span></p>
+                                <p><strong><?php echo _b('City'); ?></strong> :
+                                    <span><?php echo $this->escape($block['resources']['city']); ?></span></p>
                             <?php } ?>
                             <?php if (!empty($block['resources']['state'])) { ?>
-                                <p><strong><?php echo _b('State'); ?></strong> : <span><?php echo $this->escape($block['resources']['state']); ?></span></p>
+                                <p><strong><?php echo _b('State'); ?></strong> :
+                                    <span><?php echo $this->escape($block['resources']['state']); ?></span></p>
                             <?php } ?>
                             <?php if (!empty($block['resources']['country'])) { ?>
-                                <p><strong><?php echo _b('Country'); ?></strong> : <span><?php echo $this->escape($block['resources']['country']); ?></span></p>
+                                <p><strong><?php echo _b('Country'); ?></strong> :
+                                    <span><?php echo $this->escape($block['resources']['country']); ?></span></p>
                             <?php } ?>
                             <?php if (!empty($block['resources']['zip'])) { ?>
-                                <p><strong><?php echo _b('Zip code'); ?></strong> : <span><?php echo $this->escape($block['resources']['zip']); ?></span></p>
+                                <p><strong><?php echo _b('Zip code'); ?></strong> :
+                                    <span><?php echo $this->escape($block['resources']['zip']); ?></span></p>
                             <?php } ?>
                         </div>
                         <div class="col-md-6">
                             <?php if (!empty($block['resources']['email'])) { ?>
-                                <p><strong><?php echo _b('Email'); ?></strong> : <span><?php echo $this->escape($block['resources']['email']); ?></span></p>
+                                <p><strong><?php echo _b('Email'); ?></strong> :
+                                    <span><?php echo $this->escape($block['resources']['email']); ?></span></p>
                             <?php } ?>
                             <?php if (!empty($block['resources']['phone'])) { ?>
-                                <p><strong><?php echo _b('Phone'); ?></strong> : <span><?php echo $this->escape($block['resources']['phone']); ?></span></p>
+                                <p><strong><?php echo _b('Phone'); ?></strong> :
+                                    <span><?php echo $this->escape($block['resources']['phone']); ?></span></p>
                             <?php } ?>
                             <?php if (!empty($block['resources']['mobile'])) { ?>
-                                <p><strong><?php echo _b('Mobile'); ?></strong> : <span><?php echo $this->escape($block['resources']['mobile']); ?></span></p>
+                                <p><strong><?php echo _b('Mobile'); ?></strong> :
+                                    <span><?php echo $this->escape($block['resources']['mobile']); ?></span></p>
                             <?php } ?>
                             <?php if (!empty($block['resources']['company'])) { ?>
-                                <p><strong><?php echo _b('Company'); ?></strong> : <span><?php echo $this->escape($block['resources']['company']); ?></span></p>
+                                <p><strong><?php echo _b('Company'); ?></strong> :
+                                    <span><?php echo $this->escape($block['resources']['company']); ?></span></p>
                             <?php } ?>
                             <?php if (!empty($block['resources']['company_id'])) { ?>
-                                <p><strong><?php echo _b('Company ID'); ?></strong> : <span><?php echo $this->escape($block['resources']['company_id']); ?></span></p>
+                                <p><strong><?php echo _b('Company ID'); ?></strong> :
+                                    <span><?php echo $this->escape($block['resources']['company_id']); ?></span></p>
                             <?php } ?>
                             <?php if (!empty($block['resources']['company_vat'])) { ?>
-                                <p><strong><?php echo _b('Company VAT'); ?></strong> : <span><?php echo $this->escape($block['resources']['company_vat']); ?></span></p>
+                                <p><strong><?php echo _b('Company VAT'); ?></strong> :
+                                    <span><?php echo $this->escape($block['resources']['company_vat']); ?></span></p>
                             <?php } ?>
                         </div>
                         <div class="col-md-12">
                             <?php if (!empty($block['resources']['address1'])) { ?>
-                                <p><strong><?php echo _b('Address 1'); ?></strong> : <span><?php echo $this->escape($block['resources']['address1']); ?></span></p>
+                                <p><strong><?php echo _b('Address 1'); ?></strong> :
+                                    <span><?php echo $this->escape($block['resources']['address1']); ?></span></p>
                             <?php } ?>
                             <?php if (!empty($block['resources']['address2'])) { ?>
-                                <p><strong><?php echo _b('Address 2'); ?></strong> : <span><?php echo $this->escape($block['resources']['address2']); ?></span></p>
+                                <p><strong><?php echo _b('Address 2'); ?></strong> :
+                                    <span><?php echo $this->escape($block['resources']['address2']); ?></span></p>
                             <?php } ?>
                         </div>
                     </div>
@@ -133,6 +159,7 @@
         </div>
     </div>
     <div class="order-block-detail-more text-right">
-        <a class="btn btn-success btn-sm" title="<?php echo _b('More informations'); ?>" href="<?php echo $this->escape($block['more']); ?>"><?php echo _b('More informations'); ?></a>
+        <a class="btn btn-success btn-sm" title="<?php echo _b('More informations'); ?>"
+           href="<?php echo $this->escape($block['more']); ?>"><?php echo _b('More informations'); ?></a>
     </div>
 </div>

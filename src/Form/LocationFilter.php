@@ -49,18 +49,18 @@ class LocationFilter extends InputFilter
         ));
         // delivery
         foreach ($this->delivery as $delivery) {
-        	// active
-        	$this->add(array(
+            // active
+            $this->add(array(
                 'name' => sprintf('delivery_active_%s', $delivery['id']),
                 'required' => false,
             ));
-        	// price
-        	$this->add(array(
+            // price
+            $this->add(array(
                 'name' => sprintf('delivery_price_%s', $delivery['id']),
                 'required' => false,
             ));
-        	// delivery_time
-        	$this->add(array(
+            // delivery_time
+            $this->add(array(
                 'name' => sprintf('delivery_time_%s', $delivery['id']),
                 'required' => false,
             ));

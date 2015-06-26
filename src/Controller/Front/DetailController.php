@@ -18,7 +18,7 @@ use Pi\Mvc\Controller\ActionController;
 
 class DetailController extends IndexController
 {
-	public function indexAction()
+    public function indexAction()
     {
         // Check user
         $this->checkUser();
@@ -27,7 +27,7 @@ class DetailController extends IndexController
         $order = Pi::api('order', 'order')->getOrder($id);
         // Check order
         if (empty($order)) {
-           $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('The order not found.'));
+            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('The order not found.'));
         }
         // Check order is for this user
         if ($order['uid'] != Pi::user()->getId()) {

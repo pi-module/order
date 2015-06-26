@@ -20,7 +20,7 @@ use Zend\Json\Json;
 
 class PaymentController extends IndexController
 {
-	public function indexAction()
+    public function indexAction()
     {
         // Check user
         $this->checkUser();
@@ -31,7 +31,7 @@ class PaymentController extends IndexController
         $invoice = Pi::api('invoice', 'order')->getInvoiceForPayment($id);
         // Check invoice
         if (empty($invoice)) {
-           $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('The invoice not found.'));
+            $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('The invoice not found.'));
         }
         // Check invoice not payd
         if ($invoice['status'] != 2) {
@@ -60,8 +60,8 @@ class PaymentController extends IndexController
         if (!$processing) {
             return $this->redirect()->toRoute('', array(
                 'controller' => 'index',
-                'action'     => 'remove',
-                'id'         => $invoice['id'],
+                'action' => 'remove',
+                'id' => $invoice['id'],
             ));
         }
         // Set pay processing
@@ -70,8 +70,8 @@ class PaymentController extends IndexController
         if ($config['order_testmode']) {
             return $this->redirect()->toRoute('', array(
                 'controller' => 'payment',
-                'action'     => 'test',
-                'id'         => $invoice['id'],
+                'action' => 'test',
+                'id' => $invoice['id'],
             ));
         }
         // Check invoice prive
@@ -104,14 +104,14 @@ class PaymentController extends IndexController
                 } else {
                     // Get gateway object
                     $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
-                    $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), sprintf(__('Error to get %s.'), $key)); 
+                    $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), sprintf(__('Error to get %s.'), $key));
                 }
             }
             $form->setData($values);
         } else {
             // Get gateway object
             $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
-            $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), __('Error to get information.')); 
+            $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), __('Error to get information.'));
         }
         // Set view
         $this->view()->setLayout('layout-content');
@@ -130,7 +130,7 @@ class PaymentController extends IndexController
         $request = '';
         if ($this->request->isPost()) {
             $request = $this->request->getPost();
-        }    
+        }
         // Check request
         if (!empty($request)) {
             // Get processing
@@ -253,7 +253,7 @@ class PaymentController extends IndexController
                 $log = array();
                 $log['gateway'] = 'paypal';
                 $log['value'] = Json::encode(array(9, $request));
-                Pi::api('log', 'order')->setLog($log); 
+                Pi::api('log', 'order')->setLog($log);
             }
         } else {
             // Set log
@@ -267,9 +267,9 @@ class PaymentController extends IndexController
     public function finishAction()
     {
         $url = Pi::url($this->url('', array(
-            'module'        => $this->getModule(),
-            'controller'    => 'payment',
-            'action'        => 'process',
+            'module' => $this->getModule(),
+            'controller' => 'payment',
+            'action' => 'process',
         )));
         // Set view
         $this->view()->setTemplate('finish')->setLayout('layout-style');
@@ -296,9 +296,9 @@ class PaymentController extends IndexController
         } else {
             // Set return
             $return = array(
-                'website'  => Pi::url(),
-                'module'   => $this->params('module'),
-                'message'  => 'process',
+                'website' => Pi::url(),
+                'module' => $this->params('module'),
+                'message' => 'process',
             );
             // Set view
             $this->view()->setTemplate(false)->setLayout('layout-content');
@@ -310,9 +310,9 @@ class PaymentController extends IndexController
     {
         // Set return
         $return = array(
-            'website'  => Pi::url(),
-            'module'   => $this->params('module'),
-            'message'  => 'cancel',
+            'website' => Pi::url(),
+            'module' => $this->params('module'),
+            'message' => 'cancel',
         );
         // Set view
         $this->view()->setTemplate(false)->setLayout('layout-content');

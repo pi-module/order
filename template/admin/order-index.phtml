@@ -19,7 +19,7 @@ $this->backbone();
             <th><?php _e('Delivery'); ?></th>
             <th><?php _e('Action'); ?></th>
         </tr>
-        <?php foreach($list as $order) { ?>
+        <?php foreach ($list as $order) { ?>
             <tr
                 data-id="<?php echo $this->escape($order['id']); ?>"
                 data-order="<?php echo $this->escape($order['url_update_order']); ?>"
@@ -40,22 +40,27 @@ $this->backbone();
                 </td>
                 <td><?php echo $this->escape($order['total_price_view']); ?></td>
                 <td>
-                    <?php if (in_array($order['status_order'], array(1,2,3,7))) { ?>
-                    <span id="update-order-<?php echo $this->escape($order['id']); ?>" class="update-order btn <?php echo $this->escape($order['orderClass']); ?> "><?php echo $this->escape($order['orderTitle']); ?></span>
+                    <?php if (in_array($order['status_order'], array(1, 2, 3, 7))) { ?>
+                        <span id="update-order-<?php echo $this->escape($order['id']); ?>"
+                              class="update-order btn <?php echo $this->escape($order['orderClass']); ?> "><?php echo $this->escape($order['orderTitle']); ?></span>
                     <?php } else { ?>
                         <span class="label label-danger"><?php echo $this->escape($order['orderTitle']); ?></span>
                     <?php } ?>
                 </td>
                 <td>
-                    <span id="update-payment-<?php echo $this->escape($order['id']); ?>" class="update-payment btn <?php echo $this->escape($order['paymentClass']); ?> "><?php echo $this->escape($order['paymentTitle']); ?></span>
+                    <span id="update-payment-<?php echo $this->escape($order['id']); ?>"
+                          class="update-payment btn <?php echo $this->escape($order['paymentClass']); ?> "><?php echo $this->escape($order['paymentTitle']); ?></span>
                 </td>
                 <td>
                     <?php if ($order['type_commodity'] == 'product') { ?>
-                        <span id="update-delivery-<?php echo $this->escape($order['id']); ?>" class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> "><?php echo $this->escape($order['deliveryTitle']); ?></span>
+                        <span id="update-delivery-<?php echo $this->escape($order['id']); ?>"
+                              class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> "><?php echo $this->escape($order['deliveryTitle']); ?></span>
                     <?php } ?>
                 </td>
                 <td>
-                    <a class="btn btn-primary" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
+                    <a class="btn btn-primary" title="<?php _e('View'); ?>"
+                       href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i
+                            class="fa fa-eye"></i> <?php _e('View'); ?></a>
                 </td>
             </tr>
         <?php } ?>
@@ -63,49 +68,49 @@ $this->backbone();
     <div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
 </div>
 <script>
-    (function($) {
+    (function ($) {
         var page = {
             el: $('#js-order'),
             modal: $('<div class="modal fade">').appendTo(document.body),
-            $: function(selector) {
+            $: function (selector) {
                 return this.el.find(selector);
             },
-            init: function() {
+            init: function () {
                 _.bindAll(this);
                 this.$('.update-order').click(this.orderAction);
                 this.$('.update-payment').click(this.paymentAction);
                 this.$('.update-delivery').click(this.deliveryAction);
             },
-            orderAction: function(e) {
+            orderAction: function (e) {
                 var p = $(e.target).parents('tr'),
-                    self =this;
-                $.get(p.attr('data-order')).done(function(res) {
+                    self = this;
+                $.get(p.attr('data-order')).done(function (res) {
                     self.modal.html(res).modal('show');
-                    formModule.success = function(res) {
+                    formModule.success = function (res) {
                         var d = res.data;
                         self.modal.html(res).modal('hide');
                         $('#update-order-' + p.attr('data-id')).attr('class', 'update-order btn ' + d.orderClass).html(d.orderTitle);
                     };
                 });
             },
-            paymentAction: function(e) {
+            paymentAction: function (e) {
                 var p = $(e.target).parents('tr'),
-                    self =this;
-                $.get(p.attr('data-payment')).done(function(res) {
+                    self = this;
+                $.get(p.attr('data-payment')).done(function (res) {
                     self.modal.html(res).modal('show');
-                    formModule.success = function(res) {
+                    formModule.success = function (res) {
                         var d = res.data;
                         self.modal.html(res).modal('hide');
                         $('#update-payment-' + p.attr('data-id')).attr('class', 'update-payment btn ' + d.paymentClass).html(d.paymentTitle);
                     };
                 });
             },
-            deliveryAction: function(e) {
+            deliveryAction: function (e) {
                 var p = $(e.target).parents('tr'),
-                    self =this;
-                $.get(p.attr('data-delivery')).done(function(res) {
+                    self = this;
+                $.get(p.attr('data-delivery')).done(function (res) {
                     self.modal.html(res).modal('show');
-                    formModule.success = function(res) {
+                    formModule.success = function (res) {
                         var d = res.data;
                         self.modal.html(res).modal('hide');
                         $('#update-delivery-' + p.attr('data-id')).attr('class', 'update-delivery btn ' + d.deliveryClass).html(d.deliveryTitle);

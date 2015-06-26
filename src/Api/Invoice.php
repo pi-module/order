@@ -77,11 +77,11 @@ class Invoice extends AbstractApi
                     // Set order ID
                     $code = $this->generatCode($row->id);
                     Pi::model('invoice', $this->getModule())->update(
-                        array('code' => $code), 
+                        array('code' => $code),
                         array('id' => $row->id)
                     );
                     break;
-            
+
                 case 'onetime':
                 case 'recurring':
                     // Set invoice
@@ -106,29 +106,29 @@ class Invoice extends AbstractApi
                     // Set order ID
                     $code = $this->generatCode($row->id);
                     Pi::model('invoice', $this->getModule())->update(
-                        array('code' => $code), 
+                        array('code' => $code),
                         array('id' => $row->id)
                     );
                     // return array
                     $result['status'] = $row->status;
                     $result['message'] = __('Your invoice create successfully');
                     $result['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                        'module'        => $this->getModule(),
-                        'controller'    => 'detail',
-                        'action'        => 'index',
-                        'id'            => $row->order,
+                        'module' => $this->getModule(),
+                        'controller' => 'detail',
+                        'action' => 'index',
+                        'id' => $row->order,
                     )));
                     $result['invoice_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                        'module'        => $this->getModule(),
-                        'controller'    => 'invoice',
-                        'action'        => 'index',
-                        'id'            => $row->id,
+                        'module' => $this->getModule(),
+                        'controller' => 'invoice',
+                        'action' => 'index',
+                        'id' => $row->id,
                     )));
                     $result['pay_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                        'module'        => $this->getModule(),
-                        'controller'    => 'payment',
-                        'action'        => 'index',
-                        'id'            => $row->id,
+                        'module' => $this->getModule(),
+                        'controller' => 'payment',
+                        'action' => 'index',
+                        'id' => $row->id,
                     )));
                     // Set invoice information on session
                     if ($config['order_anonymous'] == 1 && $uid == 0) {
@@ -183,14 +183,14 @@ class Invoice extends AbstractApi
                             // Set order ID
                             $code = $this->generatCode($row->id);
                             Pi::model('invoice', $this->getModule())->update(
-                                array('code' => $code), 
+                                array('code' => $code),
                                 array('id' => $row->id)
                             );
                             // Set return
                             if ($key == 0) {
                                 $information = array(
-                                    'status'   => $row->status,
-                                    'invoice'  => $row->id,
+                                    'status' => $row->status,
+                                    'invoice' => $row->id,
                                 );
                             }
                         }
@@ -202,29 +202,29 @@ class Invoice extends AbstractApi
                         // Update order
                         $totalPrice = ($total['price'] + $order['shipping_price'] + $order['packing_price'] + $order['vat_price']) - $order['discount_price'];
                         Pi::model('order', 'order')->update(
-                            array('product_price' => $total['price'], 'total_price' => $totalPrice), 
+                            array('product_price' => $total['price'], 'total_price' => $totalPrice),
                             array('id' => $order['id'])
                         );
                         // return array
                         $result['status'] = $information['status'];
                         $result['message'] = __('Your invoice create successfully');
                         $result['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                            'module'        => $this->getModule(),
-                            'controller'    => 'detail',
-                            'action'        => 'index',
-                            'id'            => $order['id'],
+                            'module' => $this->getModule(),
+                            'controller' => 'detail',
+                            'action' => 'index',
+                            'id' => $order['id'],
                         )));
                         $result['invoice_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                            'module'        => $this->getModule(),
-                            'controller'    => 'invoice',
-                            'action'        => 'index',
-                            'id'            => $information['invoice'],
+                            'module' => $this->getModule(),
+                            'controller' => 'invoice',
+                            'action' => 'index',
+                            'id' => $information['invoice'],
                         )));
                         $result['pay_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                            'module'        => $this->getModule(),
-                            'controller'    => 'payment',
-                            'action'        => 'index',
-                            'id'            => $information['invoice'],
+                            'module' => $this->getModule(),
+                            'controller' => 'payment',
+                            'action' => 'index',
+                            'id' => $information['invoice'],
                         )));
                     } else {
                         $result['status'] = 0;
@@ -233,7 +233,7 @@ class Invoice extends AbstractApi
                         $result['invoice_url'] = '';
                         $result['pay_url'] = '';
                     }
-                    break;  
+                    break;
             }
         }
         // return
@@ -311,7 +311,8 @@ class Invoice extends AbstractApi
         return $invoice;
     }
 
-    public function cancelInvoiceFromOrder($order) {
+    public function cancelInvoiceFromOrder($order)
+    {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Get invoice
@@ -387,35 +388,35 @@ class Invoice extends AbstractApi
         $invoice['paid_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['paid_price']);
         // Set url
         $invoice['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'        => $this->getModule(),
-            'controller'    => 'detail',
-            'action'        => 'index',
-            'id'            => $invoice['order'],
+            'module' => $this->getModule(),
+            'controller' => 'detail',
+            'action' => 'index',
+            'id' => $invoice['order'],
         )));
         $invoice['invoice_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'        => $this->getModule(),
-            'controller'    => 'invoice',
-            'action'        => 'index',
-            'id'            => $invoice['id'],
+            'module' => $this->getModule(),
+            'controller' => 'invoice',
+            'action' => 'index',
+            'id' => $invoice['id'],
         )));
         $invoice['pay_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'        => $this->getModule(),
-            'controller'    => 'payment',
-            'action'        => 'index',
-            'id'            => $invoice['id'],
+            'module' => $this->getModule(),
+            'controller' => 'payment',
+            'action' => 'index',
+            'id' => $invoice['id'],
         )));
         $invoice['print_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'        => $this->getModule(),
-            'controller'    => 'invoice',
-            'action'        => 'print',
-            'id'            => $invoice['id'],
+            'module' => $this->getModule(),
+            'controller' => 'invoice',
+            'action' => 'print',
+            'id' => $invoice['id'],
         )));
         // Set extra
         if (!empty($invoice['extra'])) {
             $invoice['extra'] = json::decode($invoice['extra'], true);
         }
         // return order
-        return $invoice; 
+        return $invoice;
     }
 
     public function setBackUrl($id, $url)

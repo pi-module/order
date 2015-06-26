@@ -14,34 +14,34 @@ return array(
     // Admin section
     'admin' => array(
         array(
-            'label'         => _a('Orders'),
-            'controller'    => 'order',
-            'permission'    => 'order',
+            'label' => _a('Orders'),
+            'controller' => 'order',
+            'permission' => 'order',
         ),
         array(
-            'label'         => _a('Invoice'),
-            'controller'    => 'invoice',
-            'permission'    => 'invoice',
+            'label' => _a('Invoice'),
+            'controller' => 'invoice',
+            'permission' => 'invoice',
         ),
         array(
-            'label'         => _a('Logs'),
-            'controller'    => 'logs',
-            'permission'    => 'logs',
+            'label' => _a('Logs'),
+            'controller' => 'logs',
+            'permission' => 'logs',
         ),
         array(
-            'label'         => _a('Gateway'),
-            'controller'    => 'gateway',
-            'permission'    => 'gateway',
+            'label' => _a('Gateway'),
+            'controller' => 'gateway',
+            'permission' => 'gateway',
         ),
         array(
-            'label'         => _a('Delivery'),
-            'controller'    => 'delivery',
-            'permission'    => 'delivery',
+            'label' => _a('Delivery'),
+            'controller' => 'delivery',
+            'permission' => 'delivery',
         ),
         array(
-            'label'         => _a('Location'),
-            'controller'    => 'location',
-            'permission'    => 'location',
+            'label' => _a('Location'),
+            'controller' => 'location',
+            'permission' => 'location',
         ),
     ),
 );

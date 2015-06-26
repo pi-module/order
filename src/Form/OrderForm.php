@@ -16,7 +16,7 @@ namespace Module\Order\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class OrderForm  extends BaseForm
+class OrderForm extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {
@@ -105,10 +105,10 @@ class OrderForm  extends BaseForm
                 'options' => array(
                     'label' => __('Phone'),
                 ),
-                    'attributes' => array(
+                'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    
+
                 )
             ));
         }
@@ -232,7 +232,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    
+
                 )
             ));
         }
@@ -246,7 +246,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    
+
                 )
             ));
         }
@@ -290,7 +290,7 @@ class OrderForm  extends BaseForm
                             'parent' => 1,
                         ),
                         'attributes' => array(
-                            'id'    => 'select-location',
+                            'id' => 'select-location',
                             'required' => true,
                         )
                     ));
@@ -303,8 +303,8 @@ class OrderForm  extends BaseForm
                             'value_options' => array(),
                         ),
                         'attributes' => array(
-                            'id'    => 'select-delivery',
-                            'size'  => 5,
+                            'id' => 'select-delivery',
+                            'size' => 5,
                             'required' => true,
                         )
                     ));
@@ -317,8 +317,8 @@ class OrderForm  extends BaseForm
                             'value_options' => array(),
                         ),
                         'attributes' => array(
-                            'id'    => 'select-payment',
-                            'size'  => 5,
+                            'id' => 'select-payment',
+                            'size' => 5,
                             'required' => true,
                         )
                     ));
@@ -330,7 +330,7 @@ class OrderForm  extends BaseForm
                         $this->add(array(
                             'name' => 'gateway',
                             'attributes' => array(
-                                'type'  => 'hidden',
+                                'type' => 'hidden',
                                 'value' => $gatewayList['0'],
                             ),
                         ));
@@ -340,19 +340,19 @@ class OrderForm  extends BaseForm
                             'name' => 'gateway',
                             'type' => 'select',
                             'options' => array(
-                                    'label' => __('Adapter'),
+                                'label' => __('Adapter'),
                                 'value_options' => $gatewayList,
                             ),
                             'attributes' => array(
-                                'id'    => 'select-payment',
-                                'size'  => 1,
+                                'id' => 'select-payment',
+                                'size' => 1,
                                 'required' => true,
                             )
                         ));
                     }
                 }
                 break;
-            
+
             case 'service':
                 $gatewayList = Pi::api('gateway', 'order')->getActiveGatewayName();
                 if (count($gatewayList) == 1) {
@@ -361,7 +361,7 @@ class OrderForm  extends BaseForm
                     $this->add(array(
                         'name' => 'gateway',
                         'attributes' => array(
-                            'type'  => 'hidden',
+                            'type' => 'hidden',
                             'value' => $gatewayList['0'],
                         ),
                     ));
@@ -375,8 +375,8 @@ class OrderForm  extends BaseForm
                             'value_options' => $gatewayList,
                         ),
                         'attributes' => array(
-                            'id'    => 'select-payment',
-                            'size'  => 1,
+                            'id' => 'select-payment',
+                            'size' => 1,
                             'required' => true,
                         )
                     ));
@@ -445,7 +445,7 @@ class OrderForm  extends BaseForm
             $title = __('Pay');
         } else {
             $title = __('Save order');
-        }    
+        }
         $this->add(array(
             'name' => 'submit',
             'type' => 'submit',

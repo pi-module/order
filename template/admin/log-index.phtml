@@ -12,39 +12,44 @@
                 <th><?php _e('Time Create'); ?></th>
                 <th><?php _e('Details'); ?></th>
             </tr>
-            <?php foreach($list as $log) { ?>
+            <?php foreach ($list as $log) { ?>
                 <?php
-                if($log['status'] == 1) {
+                if ($log['status'] == 1) {
                     $labelIdClass = 'label-success';
-                } elseif($log['status'] == 2) {
+                } elseif ($log['status'] == 2) {
                     $labelIdClass = 'label-warning';
-                } elseif($log['status'] == 0) {
+                } elseif ($log['status'] == 0) {
                     $labelIdClass = 'label-danger';
                 }
                 ?>
                 <tr>
-                    <td><span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($log['id']); ?></span></td>
+                    <td><span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($log['id']); ?></span>
+                    </td>
                     <td><?php echo $this->escape($log['invoice']); ?></td>
                     <td><?php echo $this->escape($log['gateway']); ?></td>
                     <td><?php echo $this->escape($log['amount']); ?></td>
                     <td><?php echo $this->escape($log['user']['identity']); ?></td>
                     <td><?php echo $this->escape($log['time_create_view']); ?></td>
                     <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#log-modal-<?php echo $this->escape($log['id']); ?>">
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#log-modal-<?php echo $this->escape($log['id']); ?>">
                             <?php _e('Show details'); ?>
                         </button>
-                        <div class="modal fade" id="log-modal-<?php echo $this->escape($log['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="log-modal-<?php echo $this->escape($log['id']); ?>" tabindex="-1"
+                             role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title"><?php _e('Log details'); ?></h4>
                                     </div>
                                     <div class="modal-body">
                                         <pre><?php print_r($log); ?></pre>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
                                     </div>
                                 </div>
                             </div>

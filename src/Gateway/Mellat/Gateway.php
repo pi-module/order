@@ -44,31 +44,31 @@ class Gateway extends AbstractGateway
         $form = array();
         // form path
         $form['path'] = array(
-            'name'      => 'path',
-            'label'     => __('path'),
-            'type'      => 'hidden',
-            'required'  => true,
+            'name' => 'path',
+            'label' => __('path'),
+            'type' => 'hidden',
+            'required' => true,
         );
         // form pin
         $form['pin'] = array(
-            'name'      => 'pin',
-            'label'     => __('pin'),
-            'type'      => 'text',
-            'required'  => true,
+            'name' => 'pin',
+            'label' => __('pin'),
+            'type' => 'text',
+            'required' => true,
         );
         // form username
         $form['username'] = array(
-            'name'      => 'username',
-            'label'     => __('username'),
-            'type'      => 'text',
-            'required'  => true,
+            'name' => 'username',
+            'label' => __('username'),
+            'type' => 'text',
+            'required' => true,
         );
         // form password
         $form['password'] = array(
-            'name'      => 'password',
-            'label'     => __('password'),
-            'type'      => 'text',
-            'required'  => true,
+            'name' => 'password',
+            'label' => __('password'),
+            'type' => 'text',
+            'required' => true,
         );
         $this->gatewaySettingForm = $form;
         return $this;
@@ -79,9 +79,9 @@ class Gateway extends AbstractGateway
         $form = array();
         // form RefId
         $form['RefId'] = array(
-                'name' => 'RefId',
-                'type' => 'hidden',
-            );
+            'name' => 'RefId',
+            'type' => 'hidden',
+        );
         $this->gatewayPayForm = $form;
         return $this;
     }
@@ -104,14 +104,14 @@ class Gateway extends AbstractGateway
         $parameters['userPassword'] = $this->gatewayOption['password'];
         $parameters['orderId'] = $this->gatewayInvoice['random_id'];
         $parameters['amount'] = intval($this->gatewayInvoice['total_price']);
-        $parameters['localDate'] = date('Ymd'); 
+        $parameters['localDate'] = date('Ymd');
         $parameters['localTime'] = date('His');
         $parameters['additionalData'] = isset($this->gatewayOption['additionalData']) ? $this->gatewayOption['additionalData'] : '';
         $parameters['callBackUrl'] = $this->gatewayBackUrl;
         $parameters['payerId'] = 0;
         // Check bank
         $result = $this->call('bpPayRequest', $parameters);
-        $result = explode (',', $result);
+        $result = explode(',', $result);
         if ($result[0] == 0) {
             $this->gatewayPayInformation['RefId'] = $result[1];
         } else {
@@ -209,185 +209,185 @@ class Gateway extends AbstractGateway
             case '':
                 $error = __('Bank Mellat error 0');
                 break;
-                
+
             case '41':
                 $error = __('Bank Mellat error 41');
                 break;
-                
+
             case '43':
                 $error = __('Bank Mellat error 43');
                 break;
-                
+
             case '17':
                 $error = __('Bank Mellat error 17');
                 break;
-                
+
             case '415':
                 $error = __('Bank Mellat error 415');
                 break;
-                
+
             case '417':
                 $error = __('Bank Mellat error 417');
                 break;
-                
+
             case '11':
                 $error = __('Bank Mellat error 11');
                 break;
-                
+
             case '12':
                 $error = __('Bank Mellat error 12');
                 break;
-                
+
             case '13':
                 $error = __('Bank Mellat error 13');
                 break;
-                
+
             case '14':
                 $error = __('Bank Mellat error 14');
                 break;
-                
+
             case '15':
                 $error = __('Bank Mellat error 15');
                 break;
-                
+
             case '16':
                 $error = __('Bank Mellat error 16');
                 break;
-                
+
             case '18':
                 $error = __('Bank Mellat error 18');
                 break;
-                
+
             case '19':
                 $error = __('Bank Mellat error 19');
                 break;
-                
+
             case '111':
                 $error = __('Bank Mellat error 111');
                 break;
-                
+
             case '112':
                 $error = __('Bank Mellat error 112');
                 break;
-                
+
             case '113':
                 $error = __('Bank Mellat error 113');
                 break;
-                
+
             case '114':
                 $error = __('Bank Mellat error 114');
                 break;
-                
+
             case '21':
                 $error = __('Bank Mellat error 21');
                 break;
-                
+
             case '23':
                 $error = __('Bank Mellat error 23');
                 break;
-                
+
             case '24':
                 $error = __('Bank Mellat error 24');
                 break;
-                
+
             case '25':
                 $error = __('Bank Mellat error 25');
                 break;
-                
+
             case '31':
                 $error = __('Bank Mellat error 31');
                 break;
-                
+
             case '32':
                 $error = __('Bank Mellat error 32');
                 break;
-                
+
             case '33':
                 $error = __('Bank Mellat error 33');
                 break;
-                
+
             case '34':
                 $error = __('Bank Mellat error 34');
                 break;
-                
+
             case '35':
                 $error = __('Bank Mellat error 35');
                 break;
-                
+
             case '42':
                 $error = __('Bank Mellat error 42');
                 break;
-                
+
             case '44':
                 $error = __('Bank Mellat error 44');
                 break;
-                
+
             case '45':
                 $error = __('Bank Mellat error 45');
                 break;
-                
+
             case '46':
                 $error = __('Bank Mellat error 46');
                 break;
-                
+
             case '47':
                 $error = __('Bank Mellat error 47');
                 break;
-                
+
             case '48':
                 $error = __('Bank Mellat error 48');
                 break;
-                
+
             case '49':
                 $error = __('Bank Mellat error 49');
                 break;
-                
+
             case '412':
                 $error = __('Bank Mellat error 412');
                 break;
-                
+
             case '413':
                 $error = __('Bank Mellat error 413');
                 break;
-                
+
             case '414':
                 $error = __('Bank Mellat error 414');
                 break;
-                
+
             case '416':
                 $error = __('Bank Mellat error 416');
                 break;
-                
+
             case '418':
                 $error = __('Bank Mellat error 418');
                 break;
-                
+
             case '419':
                 $error = __('Bank Mellat error 419');
                 break;
-                
+
             case '421':
                 $error = __('Bank Mellat error 421');
                 break;
-                
+
             case '51':
                 $error = __('Bank Mellat error 51');
                 break;
-                
+
             case '54':
                 $error = __('Bank Mellat error 54');
                 break;
-                
+
             case '55':
                 $error = __('Bank Mellat error 55');
                 break;
-                
+
             case '61':
                 $error = __('Bank Mellat error 61');
                 break;
 
             default:
-                $error = sprintf(__('Bank Mellat error %s'), $id); 
+                $error = sprintf(__('Bank Mellat error %s'), $id);
                 break;
         }
         // Set error

@@ -93,7 +93,7 @@ class DeliveryController extends ActionController
                 // Check it save or not
                 $message = __('Delivery data saved successfully.');
                 $this->jump(array('action' => 'index'), $message);
-            }  
+            }
         } else {
             if ($id) {
                 $values = $this->getModel('delivery')->find($id)->toArray();

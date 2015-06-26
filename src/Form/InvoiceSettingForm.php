@@ -16,7 +16,7 @@ namespace Module\Order\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class InvoiceSettingForm  extends BaseForm
+class InvoiceSettingForm extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {
@@ -35,24 +35,24 @@ class InvoiceSettingForm  extends BaseForm
     {
         // orderid
         $this->add(array(
-            'name'             => 'orderid',
-            'options'          => array(
-                'label'        => __('Order ID'),
+            'name' => 'orderid',
+            'options' => array(
+                'label' => __('Order ID'),
             ),
-            'attributes'       => array(
-                'type'         => 'text',
-                'description'  => '',
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
             )
         ));
         // uid
         $this->add(array(
-            'name'             => 'uid',
-            'options'          => array(
-                'label'        => __('User ID'),
+            'name' => 'uid',
+            'options' => array(
+                'label' => __('User ID'),
             ),
-            'attributes'       => array(
-                'type'         => 'text',
-                'description'  => '',
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
             )
         ));
         // payment_status
@@ -71,30 +71,30 @@ class InvoiceSettingForm  extends BaseForm
         ));
         // start
         $this->add(array(
-            'name'          => 'start',
-            'type'          => 'datepicker',
-            'options'   => array(
-                'label'         => __('Start from'),
-                'datepicker'    => array(
-                    'format'    => 'yyyy-mm-dd',
+            'name' => 'start',
+            'type' => 'datepicker',
+            'options' => array(
+                'label' => __('Start from'),
+                'datepicker' => array(
+                    'format' => 'yyyy-mm-dd',
                 ),
             ),
-            'attributes'    => array(
-                'id'    => 'time-start',
+            'attributes' => array(
+                'id' => 'time-start',
             )
         ));
         // end
         $this->add(array(
-            'name'          => 'end',
-            'type'          => 'datepicker',
-            'options'   => array(
-                'label'         => __('End to'),
-                'datepicker'    => array(
-                    'format'    => 'yyyy-mm-dd',
+            'name' => 'end',
+            'type' => 'datepicker',
+            'options' => array(
+                'label' => __('End to'),
+                'datepicker' => array(
+                    'format' => 'yyyy-mm-dd',
                 ),
             ),
-            'attributes'    => array(
-                'id'    => 'time-end',
+            'attributes' => array(
+                'id' => 'time-end',
             )
         ));
         // Save

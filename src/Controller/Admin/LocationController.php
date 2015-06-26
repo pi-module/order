@@ -120,7 +120,7 @@ class LocationController extends ActionController
                 // Check it save or not
                 $message = __('Location data saved successfully.');
                 $this->jump(array('action' => 'index'), $message);
-            }  
+            }
         } else {
             if ($id) {
                 $values = $this->getModel('location')->find($id)->toArray();
@@ -141,5 +141,5 @@ class LocationController extends ActionController
         $this->view()->setTemplate('location-update');
         $this->view()->assign('form', $form);
         $this->view()->assign('title', __('Add a location'));
-    }	
+    }
 }

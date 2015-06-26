@@ -12,31 +12,31 @@
  */
 return array(
     // Module meta
-    'meta'         => array(
-        'title'         => _a('Orders'),
-        'description'   => _a('Manage order process and payment'),
-        'version'       => '1.6.8',
-        'license'       => 'New BSD',
-        'logo'          => 'image/logo.png',
-        'readme'        => 'docs/readme.txt',
-        'demo'          => 'http://pialog.org',
-        'icon'          => 'fa-money',
+    'meta' => array(
+        'title' => _a('Orders'),
+        'description' => _a('Manage order process and payment'),
+        'version' => '1.6.8',
+        'license' => 'New BSD',
+        'logo' => 'image/logo.png',
+        'readme' => 'docs/readme.txt',
+        'demo' => 'http://pialog.org',
+        'icon' => 'fa-money',
     ),
     // Author information
-    'author'        => array(
-        'Name'          => 'Hossein Azizabadi',
-        'email'         => 'azizabadi@faragostaresh.com',
-        'website'       => 'http://pialog.org',
-        'credits'       => 'Pi Engine Team'
+    'author' => array(
+        'Name' => 'Hossein Azizabadi',
+        'email' => 'azizabadi@faragostaresh.com',
+        'website' => 'http://pialog.org',
+        'credits' => 'Pi Engine Team'
     ),
     // Resource
     'resource' => array(
-        'database'      => 'database.php',
-        'config'        => 'config.php',
-        'permission'    => 'permission.php',
-        'page'          => 'page.php',
-        'navigation'    => 'navigation.php',
-        'block'         => 'block.php',
-        'route'         => 'route.php',
+        'database' => 'database.php',
+        'config' => 'config.php',
+        'permission' => 'permission.php',
+        'page' => 'page.php',
+        'navigation' => 'navigation.php',
+        'block' => 'block.php',
+        'route' => 'route.php',
     ),
 );

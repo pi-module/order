@@ -25,7 +25,7 @@ class Gateway extends Select
     {
         $this->valueOptions = Pi::api('gateway', 'order')->getActiveGatewayName();
         if (empty($this->valueOptions)) {
-            $this->valueOptions['offline'] = __('Offline'); 
+            $this->valueOptions['offline'] = __('Offline');
         }
         return $this->valueOptions;
     }

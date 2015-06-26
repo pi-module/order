@@ -27,7 +27,7 @@ class Update extends BasicUpdate
         $events = $this->events;
         $events->attach('update.pre', array($this, 'updateSchema'));
         parent::attachDefaultListeners();
-        
+
         return $this;
     }
 
@@ -36,27 +36,27 @@ class Update extends BasicUpdate
      */
     public function updateSchema(Event $e)
     {
-        $moduleVersion    = $e->getParam('version');
+        $moduleVersion = $e->getParam('version');
 
         // Set order model
-        $orderModel       = Pi::model('order', $this->module);
-        $orderTable       = $orderModel->getTable();
-        $orderAdapter     = $orderModel->getAdapter();
+        $orderModel = Pi::model('order', $this->module);
+        $orderTable = $orderModel->getTable();
+        $orderAdapter = $orderModel->getAdapter();
 
         // Set invoice model
-        $invoiceModel     = Pi::model('invoice', $this->module);
-        $invoiceTable     = $invoiceModel->getTable();
-        $invoiceAdapter   = $invoiceModel->getAdapter();
+        $invoiceModel = Pi::model('invoice', $this->module);
+        $invoiceTable = $invoiceModel->getTable();
+        $invoiceAdapter = $invoiceModel->getAdapter();
 
         // Set basket model
-        $basketModel      = Pi::model('basket', $this->module);
-        $basketTable      = $basketModel->getTable();
-        $basketAdapter    = $basketModel->getAdapter();
+        $basketModel = Pi::model('basket', $this->module);
+        $basketTable = $basketModel->getTable();
+        $basketAdapter = $basketModel->getAdapter();
 
         // Set customer model
-        $customerModel      = Pi::model('customer', $this->module);
-        $customerTable      = $customerModel->getTable();
-        $customerAdapter    = $customerModel->getAdapter();
+        $customerModel = Pi::model('customer', $this->module);
+        $customerTable = $customerModel->getTable();
+        $customerAdapter = $customerModel->getAdapter();
 
         if (version_compare($moduleVersion, '1.3.6', '<')) {
             // Alter table field add id_number
@@ -65,9 +65,9 @@ class Update extends BasicUpdate
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -80,9 +80,9 @@ class Update extends BasicUpdate
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -95,9 +95,9 @@ class Update extends BasicUpdate
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -107,9 +107,9 @@ class Update extends BasicUpdate
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -122,9 +122,9 @@ class Update extends BasicUpdate
                 $basketAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -137,9 +137,9 @@ class Update extends BasicUpdate
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -152,9 +152,9 @@ class Update extends BasicUpdate
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -170,7 +170,7 @@ class Update extends BasicUpdate
 
         if (version_compare($moduleVersion, '1.6.2', '<')) {
             // Add table : event
-            $sql =<<<'EOD'
+            $sql = <<<'EOD'
 CREATE TABLE `{customer}` (
     `id` int(10) unsigned NOT NULL auto_increment,
     `uid` int(10) unsigned NOT NULL default '0',
@@ -206,9 +206,9 @@ EOD;
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'SQL schema query for author table failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'SQL schema query for author table failed: '
+                        . $exception->getMessage(),
                 ));
 
                 return false;
@@ -222,14 +222,14 @@ EOD;
                 $customerAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
         }
-        
+
         return true;
     }
 }   

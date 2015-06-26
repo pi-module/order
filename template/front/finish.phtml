@@ -1,13 +1,13 @@
 <?php
 $this->css($this->assetModule('css/front.css'));
 $this->jquery();
-$script1 =<<<'EOT'
+$script1 = <<<'EOT'
     var delay = 15000;
     setTimeout(function(){ window.location = '%s'; }, delay);
 EOT;
 $script1 = sprintf($script1, $url);
 $this->footScript()->appendScript($script1);
-$script2 =<<<'EOT'
+$script2 = <<<'EOT'
     var count=15;
     var counter=setInterval(timer, 1000);
     function timer()
@@ -29,8 +29,11 @@ $this->footScript()->appendScript($script2);
     </div>
     <div class="alert alert-success" role="alert">
         <h1><?php _e('Thanks !'); ?></h1>
+
         <p><?php echo sprintf(__('Your payment ends successfully, we need %s to obtain payment confirmation.'), '<strong><span id="timer"></span></strong>'); ?></p>
+
         <p><?php _e('Once received, youll be redirected automatically to your dashboard, and will be able to create your item !'); ?></p>
+
         <p><?php _e('Please wait !'); ?></p>
     </div>
 </div>

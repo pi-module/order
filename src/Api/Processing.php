@@ -55,13 +55,13 @@ class Processing extends AbstractApi
                 $row = Pi::model('processing', $this->getModule())->find($invoice, 'invoice');
             }
         }
-  	    // check
-    	if (is_object($row)) {
-    		$row = $row->toArray();
+        // check
+        if (is_object($row)) {
+            $row = $row->toArray();
             return $row;
-    	} else {
-    		return false;
-    	}
+        } else {
+            return false;
+        }
     }
 
     public function checkProcessing()
@@ -76,18 +76,18 @@ class Processing extends AbstractApi
             $invoice = $_SESSION['order']['invoice_id'];
             $row = Pi::model('processing', $this->getModule())->find($invoice, 'invoice');
         }
-    	// check row
-    	if (is_object($row)) {
-    		$time = time() - 900;
-    		if ($time > $row->time_create) {
-    			$this->removeProcessing();
+        // check row
+        if (is_object($row)) {
+            $time = time() - 900;
+            if ($time > $row->time_create) {
+                $this->removeProcessing();
                 return true;
-    		} else {
-    			return false;
-    		}	
-    	} else {
-    		return true;
-    	}
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
 
     public function removeProcessing($random_id = '')

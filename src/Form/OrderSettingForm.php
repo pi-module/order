@@ -16,7 +16,7 @@ namespace Module\Order\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class OrderSettingForm  extends BaseForm
+class OrderSettingForm extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {
@@ -39,7 +39,7 @@ class OrderSettingForm  extends BaseForm
             'type' => 'select',
             'options' => array(
                 'label' => __('Order'),
-                'value_options'  => array(
+                'value_options' => array(
                     0 => __('All'),
                     1 => __('Not processed'),
                     2 => __('Orders validated'),
@@ -82,112 +82,112 @@ class OrderSettingForm  extends BaseForm
         ));
         // code
         $this->add(array(
-            'name'             => 'code',
-            'options'          => array(
-                'label'        => __('Code'),
+            'name' => 'code',
+            'options' => array(
+                'label' => __('Code'),
             ),
-            'attributes'       => array(
-                'type'         => 'text',
-                'description'  => '',
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
             )
         ));
         // mobile
         $this->add(array(
-            'name'             => 'mobile',
-            'options'          => array(
-                'label'        => __('Mobile'),
+            'name' => 'mobile',
+            'options' => array(
+                'label' => __('Mobile'),
             ),
-            'attributes'       => array(
-                'type'         => 'text',
-                'description'  => '',
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
             )
         ));
         // email
         $this->add(array(
-            'name'             => 'email',
-            'options'          => array(
-                'label'        => __('Email'),
+            'name' => 'email',
+            'options' => array(
+                'label' => __('Email'),
             ),
-            'attributes'       => array(
-                'type'         => 'text',
-                'description'  => '',
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
             )
         ));
         // city
         $this->add(array(
-            'name'             => 'city',
-            'options'          => array(
-                'label'        => __('City'),
+            'name' => 'city',
+            'options' => array(
+                'label' => __('City'),
             ),
-            'attributes'       => array(
-                'type'         => 'text',
-                'description'  => '',
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
             )
         ));
         // uid
         $this->add(array(
-            'name'             => 'uid',
-            'options'          => array(
-                'label'        => __('User ID'),
+            'name' => 'uid',
+            'options' => array(
+                'label' => __('User ID'),
             ),
-            'attributes'       => array(
-                'type'         => 'text',
-                'description'  => '',
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
             )
         ));
         // id_number
         $this->add(array(
-            'name'             => 'id_number',
-            'options'          => array(
-                'label'        => __('ID number'),
+            'name' => 'id_number',
+            'options' => array(
+                'label' => __('ID number'),
             ),
-            'attributes'       => array(
-                'type'         => 'text',
-                'description'  => '',
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
             )
         ));
         // first_name
         $this->add(array(
-            'name'             => 'first_name',
-            'options'          => array(
-                'label'        => __('First name'),
+            'name' => 'first_name',
+            'options' => array(
+                'label' => __('First name'),
             ),
-            'attributes'       => array(
-                'type'         => 'text',
-                'description'  => '',
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
             )
         ));
         // last_name
         $this->add(array(
-            'name'             => 'last_name',
-            'options'          => array(
-                'label'        => __('Last name'),
+            'name' => 'last_name',
+            'options' => array(
+                'label' => __('Last name'),
             ),
-            'attributes'       => array(
-                'type'         => 'text',
-                'description'  => '',
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
             )
         ));
         // zip_code
         $this->add(array(
-            'name'             => 'zip_code',
-            'options'          => array(
-                'label'        => __('Zip code'),
+            'name' => 'zip_code',
+            'options' => array(
+                'label' => __('Zip code'),
             ),
-            'attributes'       => array(
-                'type'         => 'text',
-                'description'  => '',
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
             )
         ));
         // company
         $this->add(array(
-            'name'             => 'company',
-            'options'          => array(
-                'label'        => __('Company'),
+            'name' => 'company',
+            'options' => array(
+                'label' => __('Company'),
             ),
-            'attributes'       => array(
-                'type'         => 'text',
-                'description'  => '',
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
             )
         ));
         // Save

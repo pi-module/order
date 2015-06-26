@@ -21,9 +21,9 @@ class Customer extends Model
      * {@inheritDoc}
      */
     protected $columns = array(
-    	'id', 'uid', 'ip', 'id_number', 'first_name', 'last_name', 'email', 
-    	'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city', 
-    	'zip_code', 'company', 'company_id', 'company_vat', 'user_note', 
-    	'time_create', 'time_update', 'status', 'address_type'
+        'id', 'uid', 'ip', 'id_number', 'first_name', 'last_name', 'email',
+        'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city',
+        'zip_code', 'company', 'company_id', 'company_vat', 'user_note',
+        'time_create', 'time_update', 'status', 'address_type'
     );
 }

@@ -16,65 +16,82 @@
                         <?php } else { ?>
                             <img src="<?php echo $this->logo(); ?>" alt="">
                         <?php } ?>
-                        <br />
+                        <br/>
                     </div>
                     <?php if (!empty($config['order_sellerinfo'])) { ?>
                         <div class="clearfix">
                             <?php echo $config['order_sellerinfo']; ?>
-                            <br />
+                            <br/>
                         </div>
                     <?php } ?>
-                    <p><strong><?php _e('Order date'); ?></strong> : <span><?php echo $this->escape($order['time_create_view']); ?></span></p>
-                    <p><strong><?php _e('Invoice date'); ?></strong> : <span><?php echo $this->escape($invoice['time_create_view']); ?></span></p>
+                    <p><strong><?php _e('Order date'); ?></strong> :
+                        <span><?php echo $this->escape($order['time_create_view']); ?></span></p>
+
+                    <p><strong><?php _e('Invoice date'); ?></strong> :
+                        <span><?php echo $this->escape($invoice['time_create_view']); ?></span></p>
                 </div>
                 <div class="col-md-6">
-                    <p><strong><?php _e('Order'); ?></strong> : <span><?php echo $this->escape($order['code']); ?></span></p>
+                    <p><strong><?php _e('Order'); ?></strong> :
+                        <span><?php echo $this->escape($order['code']); ?></span></p>
+
                     <p><strong><?php _e('Status'); ?></strong> :
                         <?php if ($invoice['status'] == 1) { ?>
                             <span class="label label-success"><?php _e('Paid'); ?></span>
                             <span><?php _e('On'); ?> : <?php echo $this->escape($invoice['time_payment_view']) ?></span>
                         <?php } elseif ($invoice['status'] == 2) { ?>
                             <span class="label label-warning"><?php _e('Unpaid'); ?></span>
-                            <span><?php _e('Due date'); ?> : <?php echo $this->escape($invoice['time_duedate_view']) ?></span>
+                            <span><?php _e('Due date'); ?>
+                                : <?php echo $this->escape($invoice['time_duedate_view']) ?></span>
                         <?php } else { ?>
                             <span class="label label-danger"><?php _e('Canceled'); ?></span>
                             <span><?php _e('On'); ?> : <?php echo $this->escape($invoice['time_cancel_view']) ?></span>
                         <?php } ?>
                     </p>
                     <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
-                        <p><strong><?php _e('Name'); ?></strong> : <span><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></span></p>
+                        <p><strong><?php _e('Name'); ?></strong> :
+                            <span><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></span>
+                        </p>
                     <?php } ?>
                     <?php if (!empty($order['id_number'])) { ?>
-                        <p><strong><?php _e('ID number'); ?></strong> : <span><?php echo $this->escape($order['id_number']); ?></span></p>
+                        <p><strong><?php _e('ID number'); ?></strong> :
+                            <span><?php echo $this->escape($order['id_number']); ?></span></p>
                     <?php } ?>
                     <?php if (!empty($order['phone'])) { ?>
-                        <p><strong><?php _e('Phone'); ?></strong> : <span><?php echo $this->escape($order['phone']); ?></span></p>
+                        <p><strong><?php _e('Phone'); ?></strong> :
+                            <span><?php echo $this->escape($order['phone']); ?></span></p>
                     <?php } ?>
                     <?php if (!empty($order['mobile'])) { ?>
-                        <p><strong><?php _e('Mobile'); ?></strong> : <span><?php echo $this->escape($order['mobile']); ?></span></p>
+                        <p><strong><?php _e('Mobile'); ?></strong> :
+                            <span><?php echo $this->escape($order['mobile']); ?></span></p>
                     <?php } ?>
                     <?php if (!empty($order['email'])) { ?>
-                        <p><strong><?php _e('Email'); ?></strong> : <span><?php echo $this->escape($order['email']); ?></span></p>
+                        <p><strong><?php _e('Email'); ?></strong> :
+                            <span><?php echo $this->escape($order['email']); ?></span></p>
                     <?php } ?>
                     <?php if (!empty($order['address1'])) { ?>
                         <p>
-                            <strong><?php _e('Address'); ?></strong> : <span><?php echo $this->escape($order['address1']); ?></span>
+                            <strong><?php _e('Address'); ?></strong> :
+                            <span><?php echo $this->escape($order['address1']); ?></span>
                             <?php if (!empty($order['address2'])) { ?>
                                 <span><?php echo $this->escape($order['address2']); ?></span>
                             <?php } ?>
                         </p>
                     <?php } ?>
                     <?php if (!empty($order['city'])) { ?>
-                        <p><strong><?php _e('City'); ?></strong> : <span><?php echo $this->escape($order['city']); ?></span></p>
+                        <p><strong><?php _e('City'); ?></strong> :
+                            <span><?php echo $this->escape($order['city']); ?></span></p>
                     <?php } ?>
                     <?php if (!empty($order['state'])) { ?>
-                        <p><strong><?php _e('State'); ?></strong> : <span><?php echo $this->escape($order['state']); ?></span></p>
+                        <p><strong><?php _e('State'); ?></strong> :
+                            <span><?php echo $this->escape($order['state']); ?></span></p>
                     <?php } ?>
                     <?php if (!empty($order['country'])) { ?>
-                        <p><strong><?php _e('Country'); ?></strong> : <span><?php echo $this->escape($order['country']); ?></span></p>
+                        <p><strong><?php _e('Country'); ?></strong> :
+                            <span><?php echo $this->escape($order['country']); ?></span></p>
                     <?php } ?>
                     <?php if (!empty($order['zip_code'])) { ?>
-                        <p><strong><?php _e('Zip code'); ?></strong> : <span><?php echo $this->escape($order['zip_code']); ?></span></p>
+                        <p><strong><?php _e('Zip code'); ?></strong> :
+                            <span><?php echo $this->escape($order['zip_code']); ?></span></p>
                     <?php } ?>
                 </div>
             </div>
@@ -91,14 +108,17 @@
                 <th><?php _e('Total'); ?></th>
             </tr>
             <?php $i = 1; ?>
-            <?php foreach($order['products'] as $product) { ?>
+            <?php foreach ($order['products'] as $product) { ?>
                 <tr>
                     <td><?php echo _number($i++); ?></td>
                     <td>
                         <div class="productItem">
-                            <a title="<?php echo $this->escape($product['details']['title']); ?>" href="<?php echo $this->escape($product['details']['productUrl']); ?>">
+                            <a title="<?php echo $this->escape($product['details']['title']); ?>"
+                               href="<?php echo $this->escape($product['details']['productUrl']); ?>">
                                 <?php if (isset($product['details']['thumbUrl']) && !empty($product['details']['thumbUrl'])) { ?>
-                                    <img width="32" height="32" src="<?php echo $this->escape($product['details']['thumbUrl']); ?>" alt="<?php echo $this->escape($product['details']['title']); ?>">
+                                    <img width="32" height="32"
+                                         src="<?php echo $this->escape($product['details']['thumbUrl']); ?>"
+                                         alt="<?php echo $this->escape($product['details']['title']); ?>">
                                 <?php } ?>
                                 <?php echo $this->escape($product['details']['title']); ?>
                             </a>
@@ -106,7 +126,8 @@
                         <?php if (isset($product['extra']['product']) && !empty($product['extra']['product'])) { ?>
                             <?php foreach ($product['extra']['product'] as $extraProduct) { ?>
                                 <div class="productItem">
-                                    <span><?php echo $this->escape($extraProduct['title']); ?></span> : <strong><?php echo $this->escape($extraProduct['value']); ?></strong>
+                                    <span><?php echo $this->escape($extraProduct['title']); ?></span> :
+                                    <strong><?php echo $this->escape($extraProduct['value']); ?></strong>
                                 </div>
                             <?php } ?>
                         <?php } ?>
@@ -121,7 +142,8 @@
         </table>
         <?php if ($order['type_payment'] == 'installment') { ?>
             <div class="alert alert-success" role="alert">
-                <h2><?php _e('Payment price'); ?> : <strong><?php echo $this->escape($invoice['total_price_view']); ?></strong></h2>
+                <h2><?php _e('Payment price'); ?> :
+                    <strong><?php echo $this->escape($invoice['total_price_view']); ?></strong></h2>
             </div>
         <?php } else { ?>
             <h3><?php _e('Total invoice price'); ?></h3>
@@ -144,20 +166,26 @@
                 </tr>
                 <tr>
                     <td class="col-md-4"><?php _e('Total all taxes included'); ?></td>
-                    <td class="col-md-8"><strong><?php echo $this->escape($invoice['total_price_view']); ?></strong></td>
+                    <td class="col-md-8"><strong><?php echo $this->escape($invoice['total_price_view']); ?></strong>
+                    </td>
                 </tr>
             </table>
         <?php } ?>
         <div class="clearfix row">
             <div class="col-md-6">
                 <div class="btn-group" role="group">
-                    <a class="btn btn-primary btn-sm" title="<?php _e('Back to order'); ?>" href="<?php echo $this->escape($invoice['order_url']); ?>"><?php _e('Back to order'); ?></a>
-                    <a class="btn btn-primary btn-sm" title="<?php _e('Print invoice'); ?>" href="<?php echo $this->escape($invoice['print_url']); ?>" target="_blank"><i class="fa fa-print"></i> <?php _e('Print invoice'); ?></a>
+                    <a class="btn btn-primary btn-sm" title="<?php _e('Back to order'); ?>"
+                       href="<?php echo $this->escape($invoice['order_url']); ?>"><?php _e('Back to order'); ?></a>
+                    <a class="btn btn-primary btn-sm" title="<?php _e('Print invoice'); ?>"
+                       href="<?php echo $this->escape($invoice['print_url']); ?>" target="_blank"><i
+                            class="fa fa-print"></i> <?php _e('Print invoice'); ?></a>
                 </div>
             </div>
             <div class="col-md-6 text-right">
-                <?php if ($invoice['status'] == 2) {  ?>
-                    <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay_url']); ?>"><i class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
+                <?php if ($invoice['status'] == 2) { ?>
+                    <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>"
+                       href="<?php echo $this->escape($invoice['pay_url']); ?>"><i
+                            class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
                 <?php } ?>
             </div>
         </div>

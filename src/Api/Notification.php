@@ -31,7 +31,7 @@ class Notification extends AbstractApi
     {
         // Check notification module
         if (!Pi::service('module')->isActive('notification')) {
-        	return false;
+            return false;
         }
 
         // Get config
@@ -43,18 +43,18 @@ class Notification extends AbstractApi
 
         // Set link
         $link = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'       => $this->getModule(),
-            'controller'   => 'detail',
-            'action'       => 'index',
-            'id'           => $order['id'],
+            'module' => $this->getModule(),
+            'controller' => 'detail',
+            'action' => 'index',
+            'id' => $order['id'],
         )));
 
         // Set mail information
         $information = array(
-            'first_name'   => $order['first_name'],
-        	'last_name'    => $order['last_name'], 
-        	'order_id'     => $order['code'],
-        	'order_link'   => $link,
+            'first_name' => $order['first_name'],
+            'last_name' => $order['last_name'],
+            'order_id' => $order['code'],
+            'order_link' => $link,
         );
 
         // Send mail to admin
@@ -90,7 +90,7 @@ class Notification extends AbstractApi
 
         // Send mail to user
         $toUser = array(
-        	$order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
+            $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
         );
         Pi::api('mail', 'notification')->send(
             $toUser,
@@ -137,7 +137,7 @@ class Notification extends AbstractApi
                         $status = __('Finished');
                         break;
 
-                }                
+                }
                 break;
 
             case 'payment':
@@ -146,7 +146,7 @@ class Notification extends AbstractApi
                     case 2:
                         $status = __('Paid');
                         break;
-                }  
+                }
                 break;
 
             case 'delivery':
@@ -170,7 +170,7 @@ class Notification extends AbstractApi
                     case 5:
                         $status = __('Back eaten');
                         break;
-                } 
+                }
                 break;
         }
 
@@ -178,38 +178,38 @@ class Notification extends AbstractApi
         if (empty($status)) {
             return false;
         }
-        
+
         // Set mail text
         $text = sprintf(
-            __('Your order by %s ID %s on %s website'), 
-            $order['code'], 
+            __('Your order by %s ID %s on %s website'),
+            $order['code'],
             $status,
             $sitename
         );
 
         // Set sms content
         $content = sprintf(
-            __('Dear %s %s, Your order by %s ID %s'), 
-            $order['first_name'], 
-            $order['last_name'], 
+            __('Dear %s %s, Your order by %s ID %s'),
+            $order['first_name'],
+            $order['last_name'],
             $order['code'],
             $status
         );
 
         // Set link
         $link = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'       => $this->getModule(),
-            'controller'   => 'detail',
-            'action'       => 'index',
-            'id'           => $order['id'],
+            'module' => $this->getModule(),
+            'controller' => 'detail',
+            'action' => 'index',
+            'id' => $order['id'],
         )));
 
         // Set mail information
         $information = array(
-            'first_name'   => $order['first_name'],
-            'last_name'    => $order['last_name'], 
-            'order_link'   => $link,
-            'text'         => $text,
+            'first_name' => $order['first_name'],
+            'last_name' => $order['last_name'],
+            'order_link' => $link,
+            'text' => $text,
         );
 
         // Send mail to user
@@ -228,7 +228,7 @@ class Notification extends AbstractApi
         if (!Pi::service('module')->isActive('notification')) {
             return false;
         }
-        
+
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
@@ -238,17 +238,17 @@ class Notification extends AbstractApi
 
         // Set link
         $link = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'       => $this->getModule(),
-            'controller'   => 'invoice',
-            'action'       => 'index',
-            'id'           => $invoice['id'],
+            'module' => $this->getModule(),
+            'controller' => 'invoice',
+            'action' => 'index',
+            'id' => $invoice['id'],
         )));
 
         // Set mail information
         $information = array(
-            'first_name'   => $order['first_name'],
-            'last_name'    => $order['last_name'], 
-            'invoice_id'   => $invoice['id'],
+            'first_name' => $order['first_name'],
+            'last_name' => $order['last_name'],
+            'invoice_id' => $invoice['id'],
             'invoice_link' => $link,
         );
 
@@ -288,25 +288,25 @@ class Notification extends AbstractApi
         if (!Pi::service('module')->isActive('notification')) {
             return false;
         }
-        
+
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
         // Set link
         $link = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'       => $this->getModule(),
-            'controller'   => 'invoice',
-            'action'       => 'index',
-            'id'           => $invoice['id'],
+            'module' => $this->getModule(),
+            'controller' => 'invoice',
+            'action' => 'index',
+            'id' => $invoice['id'],
         )));
 
         // Set mail information
         $information = array(
-            'first_name'   => $order['first_name'],
-            'last_name'    => $order['last_name'], 
-            'invoice_id'   => $invoice['id'],
+            'first_name' => $order['first_name'],
+            'last_name' => $order['last_name'],
+            'invoice_id' => $invoice['id'],
             'invoice_link' => $link,
-            'day'          => $config['notification_cron_invoice'],
+            'day' => $config['notification_cron_invoice'],
         );
 
         // Send mail to user
@@ -331,25 +331,25 @@ class Notification extends AbstractApi
         if (!Pi::service('module')->isActive('notification')) {
             return false;
         }
-        
+
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
         // Set link
         $link = Pi::url(Pi::service('url')->assemble('order', array(
-            'module'       => $this->getModule(),
-            'controller'   => 'invoice',
-            'action'       => 'index',
-            'id'           => $invoice['id'],
+            'module' => $this->getModule(),
+            'controller' => 'invoice',
+            'action' => 'index',
+            'id' => $invoice['id'],
         )));
 
         // Set mail information
         $information = array(
-            'first_name'   => $order['first_name'],
-            'last_name'    => $order['last_name'], 
-            'invoice_id'   => $invoice['id'],
+            'first_name' => $order['first_name'],
+            'last_name' => $order['last_name'],
+            'invoice_id' => $invoice['id'],
             'invoice_link' => $link,
-            'day'          => $config['notification_cron_expired'],
+            'day' => $config['notification_cron_expired'],
         );
 
         // Send mail to user

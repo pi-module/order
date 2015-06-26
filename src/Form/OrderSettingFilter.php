@@ -20,7 +20,7 @@ class OrderSettingFilter extends InputFilter
 {
     public function __construct()
     {
-    	// status_order
+        // status_order
         $this->add(array(
             'name' => 'status_order',
             'required' => true,

@@ -18,7 +18,7 @@ use Zend\Validator\AbstractValidator;
 
 class Term extends AbstractValidator
 {
-    const TAKEN        = 'termExists';
+    const TAKEN = 'termExists';
 
     /**
      * @var array
@@ -33,8 +33,8 @@ class Term extends AbstractValidator
     public function __construct($options = null)
     {
         $this->messageTemplates = $this->messageTemplates + array(
-            self::TAKEN     => __('You need accept our Terms & Conditions for checkout'),
-        );
+                self::TAKEN => __('You need accept our Terms & Conditions for checkout'),
+            );
 
         parent::__construct($options);
     }
@@ -51,10 +51,10 @@ class Term extends AbstractValidator
         $this->setValue($value);
         $value = intval($value);
         if ($value > 0) {
-        	return true;
+            return true;
         } else {
-        	$this->error(static::TAKEN);
-        	return false;
+            $this->error(static::TAKEN);
+            return false;
         }
     }
 }

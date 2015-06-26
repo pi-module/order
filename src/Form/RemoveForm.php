@@ -48,7 +48,7 @@ class RemoveForm extends BaseForm
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
-            	'class' => 'btn btn-danger',
+                'class' => 'btn btn-danger',
                 'value' => __('Conferm'),
             )
         ));

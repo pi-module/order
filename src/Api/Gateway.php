@@ -30,7 +30,7 @@ class Gateway extends AbstractApi
 {
     public function getAllGatewayList()
     {
-    	return AbstractGateway::getAllList();
+        return AbstractGateway::getAllList();
     }
 
     public function getActiveGatewayList()

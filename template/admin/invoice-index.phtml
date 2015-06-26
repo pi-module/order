@@ -1,6 +1,7 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="clearfix">
-    <br />
+    <br/>
+
     <div class="well">
         <h3><?php _e('Filter invoices'); ?></h3>
         <?php echo $this->form($form); ?>
@@ -16,14 +17,14 @@
                 <th><?php _e('Time pay'); ?></th>
                 <th><?php _e('Action'); ?></th>
             </tr>
-            <?php foreach($list as $invoice) { ?>
+            <?php foreach ($list as $invoice) { ?>
                 <?php
                 // Set lable
-                if($invoice['status'] == 1) {
+                if ($invoice['status'] == 1) {
                     $labelIdClass = 'label-success';
-                } elseif($invoice['status'] == 2) {
+                } elseif ($invoice['status'] == 2) {
                     $labelIdClass = 'label-warning';
-                } elseif($invoice['status'] == 0) {
+                } elseif ($invoice['status'] == 0) {
                     $labelIdClass = 'label-danger';
                 }
                 // Set row class
@@ -37,15 +38,23 @@
                 }
                 ?>
                 <tr<?php echo $rowClass; ?>>
-                    <td><span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($invoice['code']); ?></span></td>
+                    <td><span
+                            class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($invoice['code']); ?></span>
+                    </td>
                     <td><?php echo $this->escape($invoice['total_price_view']); ?></td>
                     <td><?php echo $this->escape($invoice['time_create_view']); ?></td>
                     <td><?php echo $this->escape($invoice['time_duedate_view']); ?></td>
                     <td><?php echo $this->escape($invoice['time_payment_view']); ?></td>
                     <td>
-                        <a class="btn btn-primary" title="<?php _e('View'); ?>" href="<?php echo $this->url('', array('action' => 'view', 'id' => $invoice['id'])); ?>"><i class="fa fa-eye" target="_blank"></i> <?php _e('View'); ?></a>
-                        <a class="btn btn-primary" title="<?php _e('View order'); ?>" href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>" target="_blank"><i class="fa fa-eye"></i> <?php _e('View order'); ?></a>
-                        <a class="btn btn-primary" title="<?php _e('Print invoice'); ?>" href="<?php echo $this->url('', array('action' => 'print', 'id' => $invoice['id'])); ?>" target="_blank"><i class="fa fa-print"></i> <?php _e('Print invoice'); ?></a>
+                        <a class="btn btn-primary" title="<?php _e('View'); ?>"
+                           href="<?php echo $this->url('', array('action' => 'view', 'id' => $invoice['id'])); ?>"><i
+                                class="fa fa-eye" target="_blank"></i> <?php _e('View'); ?></a>
+                        <a class="btn btn-primary" title="<?php _e('View order'); ?>"
+                           href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>"
+                           target="_blank"><i class="fa fa-eye"></i> <?php _e('View order'); ?></a>
+                        <a class="btn btn-primary" title="<?php _e('Print invoice'); ?>"
+                           href="<?php echo $this->url('', array('action' => 'print', 'id' => $invoice['id'])); ?>"
+                           target="_blank"><i class="fa fa-print"></i> <?php _e('Print invoice'); ?></a>
                     </td>
                 </tr>
             <?php } ?>

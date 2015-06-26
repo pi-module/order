@@ -68,13 +68,13 @@ class IndexController extends ActionController
             // Set view
             $this->view()->setTemplate('remove');
             $this->view()->assign('form', $form);
-        }    
+        }
     }
 
     public function errorAction()
     {
         // Set view
-        $this->view()->setTemplate('error'); 
+        $this->view()->setTemplate('error');
     }
 
     public function checkUser()

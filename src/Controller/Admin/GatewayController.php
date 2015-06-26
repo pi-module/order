@@ -14,7 +14,7 @@
 namespace Module\Order\Controller\Admin;
 
 use Pi;
-use Pi\Mvc\Controller\ActionController; 
+use Pi\Mvc\Controller\ActionController;
 use Module\Order\Form\GatewayForm;
 use Module\Order\Form\GatewayFilter;
 use Zend\Json\Json;
@@ -24,14 +24,14 @@ class GatewayController extends ActionController
     protected $gatewayColumns = array(
         'id', 'title', 'path', 'description', 'image', 'status', 'type', 'option'
     );
-    
+
     public function indexAction()
     {
-    	$list = Pi::api('gateway', 'order')->getAllGatewayList();
-    	$this->view()->assign('list', $list);
-    	$this->view()->setTemplate('gateway-index');
-    }	
-    
+        $list = Pi::api('gateway', 'order')->getAllGatewayList();
+        $this->view()->assign('list', $list);
+        $this->view()->setTemplate('gateway-index');
+    }
+
     public function updateAction()
     {
         $gateway = $this->params('path');
@@ -39,16 +39,16 @@ class GatewayController extends ActionController
         // Set form
         $form = new GatewayForm('gateway', $gateway->gatewaySettingForm);
         if ($this->request->isPost()) {
-        	$data = $this->request->getPost();
-        	$form->setInputFilter(new GatewayFilter($gateway->gatewaySettingForm));
+            $data = $this->request->getPost();
+            $form->setInputFilter(new GatewayFilter($gateway->gatewaySettingForm));
             $form->setData($data);
             if ($form->isValid()) {
-            	$values = $form->getData();
+                $values = $form->getData();
                 // Set option
                 foreach ($values as $key => $value) {
-                	$values['option'][$key] = $value;
+                    $values['option'][$key] = $value;
                 }
-            	// Set just gateway fields
+                // Set just gateway fields
                 foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->gatewayColumns)) {
                         unset($values[$key]);
@@ -73,19 +73,19 @@ class GatewayController extends ActionController
                 $this->jump($url, $message);
             } else {
                 $message = __('Invalid data, please check and re-submit.');
-            }	
+            }
         } else {
             $values['path'] = $gateway->gatewayAdapter;
             if (!empty($gateway->gatewayOption)) {
-            	foreach ($gateway->gatewayOption as $key => $value) {
-            		$values[$key] = $value;
-            	}
+                foreach ($gateway->gatewayOption as $key => $value) {
+                    $values[$key] = $value;
+                }
             }
             $form->setData($values);
         }
         $this->view()->assign('form', $form);
         $this->view()->assign('title', __('Install gateway'));
         $this->view()->assign('message', $message);
-    	$this->view()->setTemplate('gateway-update');
+        $this->view()->setTemplate('gateway-update');
     }
 }

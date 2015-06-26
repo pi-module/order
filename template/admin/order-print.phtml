@@ -34,45 +34,58 @@ $locale = 'fa';
                 <div class="clearfix text-normal">
                     <div class="col-xs-6">
                         <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
-                            <p><strong><?php _e('Name'); ?></strong> : <span><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></span></p>
+                            <p><strong><?php _e('Name'); ?></strong> :
+                                <span><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></span>
+                            </p>
                         <?php } ?>
                         <?php if (!empty($order['id_number'])) { ?>
-                            <p><strong><?php _e('ID number'); ?></strong> : <span><?php echo $this->escape($order['id_number']); ?></span></p>
+                            <p><strong><?php _e('ID number'); ?></strong> :
+                                <span><?php echo $this->escape($order['id_number']); ?></span></p>
                         <?php } ?>
                         <?php if (!empty($order['company'])) { ?>
-                            <p><strong><?php _e('Company'); ?></strong> : <span><?php echo $this->escape($order['company']); ?></span></p>
+                            <p><strong><?php _e('Company'); ?></strong> :
+                                <span><?php echo $this->escape($order['company']); ?></span></p>
                         <?php } ?>
                     </div>
                     <div class="col-xs-6">
                         <?php if (!empty($order['email'])) { ?>
-                            <p><strong><?php _e('Email'); ?></strong> : <span><?php echo $this->escape($order['email']); ?></span></p>
+                            <p><strong><?php _e('Email'); ?></strong> :
+                                <span><?php echo $this->escape($order['email']); ?></span></p>
                         <?php } ?>
                         <?php if (!empty($order['phone'])) { ?>
-                            <p><strong><?php _e('Phone'); ?></strong> : <span><?php echo $this->escape($order['phone']); ?></span></p>
+                            <p><strong><?php _e('Phone'); ?></strong> :
+                                <span><?php echo $this->escape($order['phone']); ?></span></p>
                         <?php } ?>
                         <?php if (!empty($order['mobile'])) { ?>
-                            <p><strong><?php _e('Mobile'); ?></strong> : <span><?php echo $this->escape($order['mobile']); ?></span></p>
+                            <p><strong><?php _e('Mobile'); ?></strong> :
+                                <span><?php echo $this->escape($order['mobile']); ?></span></p>
                         <?php } ?>
 
                     </div>
                     <div class="col-xs-12">
                         <?php if (!empty($order['city'])) { ?>
-                            <strong><?php _e('City'); ?></strong> : <span><?php echo $this->escape($order['city']); ?></span>
+                            <strong><?php _e('City'); ?></strong> :
+                            <span><?php echo $this->escape($order['city']); ?></span>
                         <?php } ?>
                         <?php if (!empty($order['state'])) { ?>
-                            <strong><?php _e('State'); ?></strong> : <span><?php echo $this->escape($order['state']); ?></span>
+                            <strong><?php _e('State'); ?></strong> :
+                            <span><?php echo $this->escape($order['state']); ?></span>
                         <?php } ?>
                         <?php if (!empty($order['country'])) { ?>
-                            <strong><?php _e('Country'); ?></strong> : <span><?php echo $this->escape($order['country']); ?></span>
+                            <strong><?php _e('Country'); ?></strong> :
+                            <span><?php echo $this->escape($order['country']); ?></span>
                         <?php } ?>
                         <?php if (!empty($order['zip'])) { ?>
-                            <strong><?php _e('Zip code'); ?></strong> : <span><?php echo $this->escape($order['zip']); ?></span>
+                            <strong><?php _e('Zip code'); ?></strong> :
+                            <span><?php echo $this->escape($order['zip']); ?></span>
                         <?php } ?>
                         <?php if (!empty($order['address1'])) { ?>
-                            <strong><?php _e('Address 1'); ?></strong> : <span><?php echo $this->escape($order['address1']); ?></span>
+                            <strong><?php _e('Address 1'); ?></strong> :
+                            <span><?php echo $this->escape($order['address1']); ?></span>
                         <?php } ?>
                         <?php if (!empty($order['address2'])) { ?>
-                            <strong><?php _e('Address 2'); ?></strong> : <span><?php echo $this->escape($order['address2']); ?></span>
+                            <strong><?php _e('Address 2'); ?></strong> :
+                            <span><?php echo $this->escape($order['address2']); ?></span>
                         <?php } ?>
                     </div>
                 </div>
@@ -109,7 +122,8 @@ $locale = 'fa';
                                     <?php if (isset($product['extra']['product']) && !empty($product['extra']['product'])) { ?>
                                         <?php foreach ($product['extra']['product'] as $extraProduct) { ?>
                                             <div class="productItem">
-                                                <span><?php echo $this->escape($extraProduct['title']); ?></span> : <strong><?php echo $this->escape($extraProduct['value']); ?></strong>
+                                                <span><?php echo $this->escape($extraProduct['title']); ?></span> :
+                                                <strong><?php echo $this->escape($extraProduct['value']); ?></strong>
                                             </div>
                                         <?php } ?>
                                     <?php } ?>
@@ -267,7 +281,8 @@ $locale = 'fa';
             </div>
             <?php if ($order['type_payment'] == 'installment') { ?>
                 <div class="col-xs-12 print-text">
-                    <?php _e('Order invoice desc'); ?> <small>(<?php _e('Order invoice desc price'); ?>)</small>
+                    <?php _e('Order invoice desc'); ?>
+                    <small>(<?php _e('Order invoice desc price'); ?>)</small>
                 </div>
                 <?php if (!empty($order['installment']['all']['10-order'])) { ?>
                     <div class="clearfix print-table">
@@ -280,20 +295,21 @@ $locale = 'fa';
                                 <th class="text-center text-small"><?php _e('Product name'); ?></th>
                                 <th class="text-center text-small"><?php _e('Number'); ?></th>
                                 <!-- <th class="text-center text-small"><?php _e('Delayed'); ?></th>
-                        <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][0]['10-view']); ?></th> -->
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][1]['10-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][2]['10-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][3]['10-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][4]['10-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][5]['10-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][6]['10-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][7]['10-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][8]['10-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][9]['10-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][10]['10-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][11]['10-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][12]['10-view']); ?></th>
-                                <th class="text-center text-small"><?php _e('Total'); ?></td>
+                        <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][0]['10-view']); ?></th> -->
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][1]['10-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][2]['10-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][3]['10-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][4]['10-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][5]['10-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][6]['10-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][7]['10-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][8]['10-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][9]['10-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][10]['10-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][11]['10-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][12]['10-view']); ?></th>
+                                <th class="text-center text-small">
+                                <?php _e('Total'); ?></td>
                             </tr>
                             <?php $i = 1; ?>
                             <?php $total = 0; ?>
@@ -407,20 +423,21 @@ $locale = 'fa';
                                 <th class="text-center text-small"><?php _e('Product name'); ?></th>
                                 <th class="text-center text-small"><?php _e('Number'); ?></th>
                                 <!-- <th class="text-center text-small"><?php _e('Delayed'); ?></th>
-                        <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][0]['20-view']); ?></th> -->
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][1]['20-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][2]['20-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][3]['20-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][4]['20-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][5]['20-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][6]['20-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][7]['20-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][8]['20-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][9]['20-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][10]['20-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][11]['20-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][12]['20-view']); ?></th>
-                                <th class="text-center text-small"><?php _e('Total'); ?></td>
+                        <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][0]['20-view']); ?></th> -->
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][1]['20-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][2]['20-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][3]['20-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][4]['20-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][5]['20-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][6]['20-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][7]['20-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][8]['20-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][9]['20-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][10]['20-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][11]['20-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][12]['20-view']); ?></th>
+                                <th class="text-center text-small">
+                                <?php _e('Total'); ?></td>
                             </tr>
                             <?php $i = 1; ?>
                             <?php $total = 0; ?>
@@ -534,20 +551,21 @@ $locale = 'fa';
                                 <th class="text-center text-small"><?php _e('Product name'); ?></th>
                                 <th class="text-center text-small"><?php _e('Number'); ?></th>
                                 <!-- <th class="text-center text-small"><?php _e('Delayed'); ?></th>
-                        <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][0]['30-view']); ?></th> -->
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][1]['30-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][2]['30-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][3]['30-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][4]['30-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][5]['30-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][6]['30-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][7]['30-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][8]['30-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][9]['30-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][10]['30-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][11]['30-view']); ?></th>
-                                <th class="text-center text-small"><?php echo str_replace("۱۳۹","۹",$order['installment'][12]['30-view']); ?></th>
-                                <th class="text-center text-small"><?php _e('Total'); ?></td>
+                        <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][0]['30-view']); ?></th> -->
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][1]['30-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][2]['30-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][3]['30-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][4]['30-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][5]['30-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][6]['30-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][7]['30-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][8]['30-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][9]['30-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][10]['30-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][11]['30-view']); ?></th>
+                                <th class="text-center text-small"><?php echo str_replace("۱۳۹", "۹", $order['installment'][12]['30-view']); ?></th>
+                                <th class="text-center text-small">
+                                <?php _e('Total'); ?></td>
                             </tr>
                             <?php $i = 1; ?>
                             <?php $total = 0; ?>
@@ -653,12 +671,12 @@ $locale = 'fa';
                 <div class="clearfix">
                     <div class="col-xs-6 text-center">
                         <?php _e('Seller signature'); ?>
-                        <br />
+                        <br/>
                         <?php _e('Stamp'); ?>
                     </div>
                     <div class="col-xs-6 text-center">
                         <?php _e('Buyer signature'); ?>
-                        <br />
+                        <br/>
                         <?php _e('Stamp / fingerprint'); ?>
                     </div>
                 </div>

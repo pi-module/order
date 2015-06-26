@@ -43,7 +43,7 @@ class CheckoutController extends IndexController
         // Sety form option
         $option = array(
             'type_commodity' => $cart['type_commodity'],
-            'customers'      => $customers,
+            'customers' => $customers,
         );
         // Check post
         if ($this->request->isPost()) {
@@ -123,11 +123,11 @@ class CheckoutController extends IndexController
                     $values['company_vat'] = $user['company_vat'];
                 }
                 // Set type_payment values
-                if (isset($cart['type_payment']) && in_array($cart['type_payment'], array('free','onetime','recurring','installment'))) {
+                if (isset($cart['type_payment']) && in_array($cart['type_payment'], array('free', 'onetime', 'recurring', 'installment'))) {
                     $values['type_payment'] = $cart['type_payment'];
                 }
                 // Set type_payment values
-                if (isset($cart['type_commodity']) && in_array($cart['type_commodity'], array('product','service'))) {
+                if (isset($cart['type_commodity']) && in_array($cart['type_commodity'], array('product', 'service'))) {
                     $values['type_commodity'] = $cart['type_commodity'];
                 }
                 // Set plan values
@@ -416,7 +416,7 @@ class CheckoutController extends IndexController
                     $rowset = $this->getModel('location_delivery')->selectWith($select);
                     foreach ($rowset as $row) {
                         $delivery = $this->getModel('delivery')->find($row->delivery)->toArray();
-                        if($delivery['status']) {
+                        if ($delivery['status']) {
                             $data[$row->id] = $row->toArray();
                             $data[$row->id]['title'] = $delivery['title'];
                             $data[$row->id]['status'] = $delivery['status'];
@@ -453,7 +453,7 @@ class CheckoutController extends IndexController
                             $data['payment'][$row->id]['status'] = 1;
                         } else {
                             $gateway = Pi::api('gateway', 'order')->getGatewayInfo($row->gateway);
-                            if($gateway['status']) {
+                            if ($gateway['status']) {
                                 $data['payment'][$row->id]['title'] = $gateway['title'];
                                 $data['payment'][$row->id]['path'] = $gateway['path'];
                                 $data['payment'][$row->id]['status'] = $gateway['status'];

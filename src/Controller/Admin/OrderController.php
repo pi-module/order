@@ -27,7 +27,7 @@ use Module\Order\Form\UpdatePaymentFilter;
 
 class OrderController extends ActionController
 {
-	public function indexAction()
+    public function indexAction()
     {
         // Get page
         $page = $this->params('page', 1);
@@ -106,50 +106,50 @@ class OrderController extends ActionController
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
         $paginator->setUrlOptions(array(
-            'router'    => $this->getEvent()->getRouter(),
-            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params'    => array_filter(array(
-                'module'          => $this->getModule(),
-                'controller'      => 'order',
-                'action'          => 'index',
-                'status_order'    => $status_order,
-                'status_payment'  => $status_payment,
+            'router' => $this->getEvent()->getRouter(),
+            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params' => array_filter(array(
+                'module' => $this->getModule(),
+                'controller' => 'order',
+                'action' => 'index',
+                'status_order' => $status_order,
+                'status_payment' => $status_payment,
                 'status_delivery' => $status_delivery,
-                'code'            => $code,
-                'mobile'          => $mobile,
-                'email'           => $email,
-                'city'            => $city,
-                'uid'             => $uid,
-                'id_number'       => $id_number,
-                'first_name'      => $first_name,
-                'last_name'       => $last_name,
-                'zip_code'        => $zip_code,
-                'company'         => $company,
+                'code' => $code,
+                'mobile' => $mobile,
+                'email' => $email,
+                'city' => $city,
+                'uid' => $uid,
+                'id_number' => $id_number,
+                'first_name' => $first_name,
+                'last_name' => $last_name,
+                'zip_code' => $zip_code,
+                'company' => $company,
             )),
         ));
         // Set form
         $values = array(
-            'status_order'    => $status_order,
-            'status_payment'  => $status_payment,
+            'status_order' => $status_order,
+            'status_payment' => $status_payment,
             'status_delivery' => $status_delivery,
-            'code'            => $code,
-            'mobile'          => $mobile,
-            'email'           => $email,
-            'city'            => $city,
-            'uid'             => $uid,
-            'id_number'       => $id_number,
-            'first_name'      => $first_name,
-            'last_name'       => $last_name,
-            'zip_code'        => $zip_code,
-            'company'         => $company,
+            'code' => $code,
+            'mobile' => $mobile,
+            'email' => $email,
+            'city' => $city,
+            'uid' => $uid,
+            'id_number' => $id_number,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'zip_code' => $zip_code,
+            'company' => $company,
         );
         $form = new OrderSettingForm('setting');
         $form->setAttribute('action', $this->url('', array('action' => 'process')));
         $form->setData($values);
-    	// Set view
-    	$this->view()->setTemplate('order-index');
-    	$this->view()->assign('list', $list);
-    	$this->view()->assign('paginator', $paginator);
+        // Set view
+        $this->view()->setTemplate('order-index');
+        $this->view()->assign('list', $list);
+        $this->view()->assign('paginator', $paginator);
         $this->view()->assign('form', $form);
     }
 
@@ -164,20 +164,20 @@ class OrderController extends ActionController
                 $values = $form->getData();
                 $message = __('Go to filter');
                 $url = array(
-                    'action'          => 'index',
-                    'status_order'    => $values['status_order'],
-                    'status_payment'  => $values['status_payment'],
+                    'action' => 'index',
+                    'status_order' => $values['status_order'],
+                    'status_payment' => $values['status_payment'],
                     'status_delivery' => $values['status_delivery'],
-                    'code'            => $values['code'],
-                    'mobile'          => $values['mobile'],
-                    'email'           => $values['email'],
-                    'city'            => $values['city'],
-                    'uid'             => $values['uid'],
-                    'id_number'       => $values['id_number'],
-                    'first_name'      => $values['first_name'],
-                    'last_name'       => $values['last_name'],
-                    'zip_code'        => $values['zip_code'],
-                    'company'         => $values['company'],
+                    'code' => $values['code'],
+                    'mobile' => $values['mobile'],
+                    'email' => $values['email'],
+                    'city' => $values['city'],
+                    'uid' => $values['uid'],
+                    'id_number' => $values['id_number'],
+                    'first_name' => $values['first_name'],
+                    'last_name' => $values['last_name'],
+                    'zip_code' => $values['zip_code'],
+                    'company' => $values['company'],
                 );
             } else {
                 $message = __('Not valid');
@@ -190,8 +190,8 @@ class OrderController extends ActionController
             $url = array(
                 'action' => 'index',
             );
-        } 
-        return $this->jump($url, $message);  
+        }
+        return $this->jump($url, $message);
     }
 
     public function updateOrderAction()
@@ -202,7 +202,7 @@ class OrderController extends ActionController
         $return = array();
         // Get order
         $order = $this->getModel('order')->find($id);
-        if (in_array($order->status_order, array(4,5,6))) {
+        if (in_array($order->status_order, array(4, 5, 6))) {
             $return['status'] = 0;
             $return['data'] = '';
             return $return;
@@ -223,7 +223,7 @@ class OrderController extends ActionController
                     }
                     $order->save();
                     // Check order status
-                    if (in_array($values['status_order'], array(4,5,6))) {
+                    if (in_array($values['status_order'], array(4, 5, 6))) {
                         Pi::api('invoice', 'order')->cancelInvoiceFromOrder($order->toArray());
                     }
                     // Add log
@@ -289,12 +289,12 @@ class OrderController extends ActionController
                 $return['status'] = 0;
                 $return['data'] = '';
             }
-            return $return; 
+            return $return;
         } else {
             $values['status_payment'] = $order->status_payment;
             $form->setData($values);
             $form->setAttribute('action', $this->url('', array('action' => 'updatePayment', 'id' => $order->id)));
-        }    
+        }
         // Set view
         $this->view()->setTemplate('system:component/form-popup');
         $this->view()->assign('title', __('Update payment'));
@@ -336,12 +336,12 @@ class OrderController extends ActionController
                 $return['status'] = 0;
                 $return['data'] = '';
             }
-            return $return; 
+            return $return;
         } else {
             $values['status_delivery'] = $order->status_delivery;
             $form->setData($values);
             $form->setAttribute('action', $this->url('', array('action' => 'updateDelivery', 'id' => $order->id)));
-        }    
+        }
         // Set view
         $this->view()->setTemplate('system:component/form-popup');
         $this->view()->assign('title', __('Update delivery'));

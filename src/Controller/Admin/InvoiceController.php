@@ -74,26 +74,26 @@ class InvoiceController extends ActionController
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
         $paginator->setUrlOptions(array(
-            'router'    => $this->getEvent()->getRouter(),
-            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params'    => array_filter(array(
-                'module'         => $this->getModule(),
-                'controller'     => 'invoice',
-                'action'         => 'index',
-                'orderid'        => $orderid,
-                'uid'            => $uid,
+            'router' => $this->getEvent()->getRouter(),
+            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params' => array_filter(array(
+                'module' => $this->getModule(),
+                'controller' => 'invoice',
+                'action' => 'index',
+                'orderid' => $orderid,
+                'uid' => $uid,
                 'payment_status' => $payment_status,
-                'start'          => $start,
-                'end'            => $end,
+                'start' => $start,
+                'end' => $end,
             )),
         ));
         // Set form
         $values = array(
-            'orderid'        => $orderid,
-            'uid'            => $uid,
+            'orderid' => $orderid,
+            'uid' => $uid,
             'payment_status' => $payment_status,
-            'start'          => $start,
-            'end'            => $end,
+            'start' => $start,
+            'end' => $end,
         );
         $form = new InvoiceSettingForm('setting');
         $form->setAttribute('action', $this->url('', array('action' => 'process')));
@@ -116,12 +116,12 @@ class InvoiceController extends ActionController
                 $values = $form->getData();
                 $message = __('Go to filter');
                 $url = array(
-                    'action'         => 'index',
-                    'orderid'        => $values['orderid'],
-                    'uid'            => $values['uid'],
+                    'action' => 'index',
+                    'orderid' => $values['orderid'],
+                    'uid' => $values['uid'],
                     'payment_status' => $values['payment_status'],
-                    'start'          => $values['start'],
-                    'end'            => $values['end'],
+                    'start' => $values['start'],
+                    'end' => $values['end'],
                 );
             } else {
                 $message = __('Not valid');
@@ -134,8 +134,8 @@ class InvoiceController extends ActionController
             $url = array(
                 'action' => 'index',
             );
-        } 
-        return $this->jump($url, $message);  
+        }
+        return $this->jump($url, $message);
     }
 
     public function viewAction()
@@ -188,5 +188,5 @@ class InvoiceController extends ActionController
     {
         // Set view
         $this->view()->setTemplate('invoice-update');
-    }	
+    }
 }

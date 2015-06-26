@@ -114,7 +114,7 @@ class Order extends AbstractApi
             case '7':
                 $return['orderClass'] = 'btn-inverse';
                 $return['orderTitle'] = __('Orders finished');
-                break;    
+                break;
         }
         return $return;
     }
@@ -163,7 +163,7 @@ class Order extends AbstractApi
             case '5':
                 $return['deliveryClass'] = 'btn-danger';
                 $return['deliveryTitle'] = __('Back eaten');
-                break; 
+                break;
         }
         return $return;
     }
@@ -206,39 +206,39 @@ class Order extends AbstractApi
         $order['user'] = Pi::api('user', 'order')->getUserInformation($order['uid']);
         // Set url_update_order
         $order['url_update_order'] = Pi::url(Pi::service('url')->assemble('admin', array(
-            'controller'    => 'order',
-            'action'        => 'updateOrder',
-            'id'            => $order['id'],
+            'controller' => 'order',
+            'action' => 'updateOrder',
+            'id' => $order['id'],
         )));
         // Set url_update_payment
         $order['url_update_payment'] = Pi::url(Pi::service('url')->assemble('admin', array(
-            'controller'    => 'order',
-            'action'        => 'updatePayment',
-            'id'            => $order['id'],
+            'controller' => 'order',
+            'action' => 'updatePayment',
+            'id' => $order['id'],
         )));
         // Set url_update_delivery
         $order['url_update_delivery'] = Pi::url(Pi::service('url')->assemble('admin', array(
-            'controller'    => 'order',
-            'action'        => 'updateDelivery',
-            'id'            => $order['id'],
+            'controller' => 'order',
+            'action' => 'updateDelivery',
+            'id' => $order['id'],
         )));
         // Set url_edit
         $order['url_edit'] = Pi::url(Pi::service('url')->assemble('admin', array(
-            'controller'    => 'order',
-            'action'        => 'edit',
-            'id'            => $order['id'],
+            'controller' => 'order',
+            'action' => 'edit',
+            'id' => $order['id'],
         )));
         // Set url_print
         $order['url_print'] = Pi::url(Pi::service('url')->assemble('admin', array(
-            'controller'    => 'order',
-            'action'        => 'print',
-            'id'            => $order['id'],
+            'controller' => 'order',
+            'action' => 'print',
+            'id' => $order['id'],
         )));
         // Set url_view
         $order['url_view'] = Pi::url(Pi::service('url')->assemble('admin', array(
-            'controller'    => 'order',
-            'action'        => 'view',
-            'id'            => $order['id'],
+            'controller' => 'order',
+            'action' => 'view',
+            'id' => $order['id'],
         )));
         // Status order
         $status_order = $this->orderStatus($order['status_order']);
@@ -253,7 +253,7 @@ class Order extends AbstractApi
         $order['deliveryClass'] = $status_delivery['deliveryClass'];
         $order['deliveryTitle'] = $status_delivery['deliveryTitle'];
         // return order
-        return $order; 
+        return $order;
     }
 
     public function listProduct($id, $module)
@@ -325,15 +325,15 @@ class Order extends AbstractApi
         // Set checkout url
         if (isset($order['type_payment']) && $order['type_payment'] == 'installment') {
             $checkout = Pi::url(Pi::service('url')->assemble('order', array(
-                'module'        => 'order',
-                'controller'    => 'checkout',
-                'action'        => 'installment',
+                'module' => 'order',
+                'controller' => 'checkout',
+                'action' => 'installment',
             )));
         } else {
             $checkout = Pi::url(Pi::service('url')->assemble('order', array(
-                'module'        => 'order',
-                'controller'    => 'checkout',
-                'action'        => 'index',
+                'module' => 'order',
+                'controller' => 'checkout',
+                'action' => 'index',
             )));
         }
         return $checkout;

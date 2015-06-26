@@ -37,14 +37,14 @@ class GatewayForm extends BaseForm
         // Set extra field
         if (!empty($this->field)) {
             foreach ($this->field as $field) {
-            	if ($field['type'] == 'hidden') {
+                if ($field['type'] == 'hidden') {
                     $this->add(array(
                         'name' => $field['name'],
                         'attributes' => array(
                             'type' => 'hidden',
                         ),
                     ));
-            	} elseif ($field['type'] == 'checkbox') {
+                } elseif ($field['type'] == 'checkbox') {
                     $this->add(array(
                         'name' => $field['name'],
                         'type' => 'checkbox',
@@ -52,7 +52,7 @@ class GatewayForm extends BaseForm
                             'label' => $field['label'],
                         ),
                     ));
-                } else {    
+                } else {
                     $this->add(array(
                         'name' => $field['name'],
                         'options' => array(
@@ -62,7 +62,7 @@ class GatewayForm extends BaseForm
                             'type' => $field['type'],
                         ),
                     ));
-            	}
+                }
             }
         }
         // Save

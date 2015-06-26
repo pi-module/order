@@ -18,7 +18,7 @@ use Module\Order\Gateway\AbstractGateway;
 use Zend\Json\Json;
 
 class Gateway extends AbstractGateway
-{  
+{
     public function setAdapter()
     {
         $this->gatewayAdapter = 'Paypal';
@@ -44,73 +44,73 @@ class Gateway extends AbstractGateway
         $form = array();
         // form path
         $form['path'] = array(
-            'name'      => 'path',
-            'label'     => __('path'),
-            'type'      => 'hidden',
-            'required'  => true,
+            'name' => 'path',
+            'label' => __('path'),
+            'type' => 'hidden',
+            'required' => true,
         );
         // business
         $form['business'] = array(
-            'name'      => 'business',
-            'label'     => __('Paypal email address'),
-            'type'      => 'text',
-            'required'  => true,
+            'name' => 'business',
+            'label' => __('Paypal email address'),
+            'type' => 'text',
+            'required' => true,
         );
         // currency
         $form['currency'] = array(
-            'name'      => 'currency',
-            'label'     => __('Paypal currency'),
-            'type'      => 'text',
-            'required'  => true,
+            'name' => 'currency',
+            'label' => __('Paypal currency'),
+            'type' => 'text',
+            'required' => true,
         );
         // cursymbol
         $form['cursymbol'] = array(
-            'name'      => 'cursymbol',
-            'label'     => __('Paypal currency symbol'),
-            'type'      => 'text',
-            'required'  => true,
+            'name' => 'cursymbol',
+            'label' => __('Paypal currency symbol'),
+            'type' => 'text',
+            'required' => true,
         );
         // location
         $form['location'] = array(
-            'name'      => 'location',
-            'label'     => __('Location code (ex GB)'),
-            'type'      => 'text',
-            'required'  => true,
+            'name' => 'location',
+            'label' => __('Location code (ex GB)'),
+            'type' => 'text',
+            'required' => true,
         );
         // custom
         $form['custom'] = array(
-            'name'      => 'custom',
-            'label'     => __('Custom attribute'),
-            'type'      => 'text',
-            'required'  => true,
+            'name' => 'custom',
+            'label' => __('Custom attribute'),
+            'type' => 'text',
+            'required' => true,
         );
         // test_mode
         $form['test_mode'] = array(
-            'name'      => 'test_mode',
-            'label'     => __('Test mode by sandbox'),
-            'type'      => 'checkbox',
-            'required'  => false,
+            'name' => 'test_mode',
+            'label' => __('Test mode by sandbox'),
+            'type' => 'checkbox',
+            'required' => false,
         );
         // Username
         $form['username'] = array(
-            'name'      => 'username',
-            'label'     => __('Username for sandbox'),
-            'type'      => 'text',
-            'required'  => false,
+            'name' => 'username',
+            'label' => __('Username for sandbox'),
+            'type' => 'text',
+            'required' => false,
         );
         // password
         $form['password'] = array(
-            'name'      => 'password',
-            'label'     => __('Password for sandbox'),
-            'type'      => 'text',
-            'required'  => false,
+            'name' => 'password',
+            'label' => __('Password for sandbox'),
+            'type' => 'text',
+            'required' => false,
         );
         // signature
         $form['signature'] = array(
-            'name'      => 'signature',
-            'label'     => __('Signature for sandbox'),
-            'type'      => 'text',
-            'required'  => false,
+            'name' => 'signature',
+            'label' => __('Signature for sandbox'),
+            'type' => 'text',
+            'required' => false,
         );
         $this->gatewaySettingForm = $form;
         return $this;
@@ -121,150 +121,150 @@ class Gateway extends AbstractGateway
         $form = array();
         // form cmd
         $form['cmd'] = array(
-            'name'      => 'cmd',
-            'type'      => 'hidden',
+            'name' => 'cmd',
+            'type' => 'hidden',
         );
         // form upload
         $form['upload'] = array(
-            'name'      => 'upload',
-            'type'      => 'hidden',
+            'name' => 'upload',
+            'type' => 'hidden',
         );
         // form return
         $form['return'] = array(
-            'name'      => 'return',
-            'type'      => 'hidden',
+            'name' => 'return',
+            'type' => 'hidden',
         );
         // form cancel_return
         $form['cancel_return'] = array(
-            'name'      => 'cancel_return',
-            'type'      => 'hidden',
+            'name' => 'cancel_return',
+            'type' => 'hidden',
         );
         // form notify_url
         $form['notify_url'] = array(
-            'name'      => 'notify_url',
-            'type'      => 'hidden',
+            'name' => 'notify_url',
+            'type' => 'hidden',
         );
         // form business
         $form['business'] = array(
-            'name'      => 'business',
-            'type'      => 'hidden',
+            'name' => 'business',
+            'type' => 'hidden',
         );
         // form currency_code
         $form['currency_code'] = array(
-            'name'      => 'currency_code',
-            'type'      => 'hidden',
+            'name' => 'currency_code',
+            'type' => 'hidden',
         );
         // form invoice
         $form['invoice'] = array(
-            'name'      => 'invoice',
-            'type'      => 'hidden',
+            'name' => 'invoice',
+            'type' => 'hidden',
         );
         // form item_name_1
         $form['item_name_1'] = array(
-            'name'      => 'item_name_1',
-            'type'      => 'hidden',
+            'name' => 'item_name_1',
+            'type' => 'hidden',
         );
         // form item_number_1
         $form['item_number_1'] = array(
-            'name'      => 'item_number_1',
-            'type'      => 'hidden',
+            'name' => 'item_number_1',
+            'type' => 'hidden',
         );
         // form quantity_1
         $form['quantity_1'] = array(
-            'name'      => 'quantity_1',
-            'type'      => 'hidden',
+            'name' => 'quantity_1',
+            'type' => 'hidden',
         );
         // form amount_1
         $form['amount_1'] = array(
-            'name'      => 'amount_1',
-            'type'      => 'hidden',
+            'name' => 'amount_1',
+            'type' => 'hidden',
         );
         // form amount_1
         $form['tax_1'] = array(
-            'name'      => 'tax_1',
-            'type'      => 'hidden',
+            'name' => 'tax_1',
+            'type' => 'hidden',
         );
         // first_name
         $form['first_name'] = array(
-            'name'      => 'first_name',
-            'type'      => 'hidden',
+            'name' => 'first_name',
+            'type' => 'hidden',
         );
         // last_name
         $form['last_name'] = array(
-            'name'      => 'last_name',
-            'type'      => 'hidden',
+            'name' => 'last_name',
+            'type' => 'hidden',
         );
         // address1
         $form['address1'] = array(
-            'name'      => 'address1',
-            'type'      => 'hidden',
+            'name' => 'address1',
+            'type' => 'hidden',
         );
         // address2
         $form['address2'] = array(
-            'name'      => 'address2',
-            'type'      => 'hidden',
+            'name' => 'address2',
+            'type' => 'hidden',
         );
         // city
         $form['city'] = array(
-            'name'      => 'city',
-            'type'      => 'hidden',
+            'name' => 'city',
+            'type' => 'hidden',
         );
         // state
         $form['state'] = array(
-            'name'      => 'state',
-            'type'      => 'hidden',
+            'name' => 'state',
+            'type' => 'hidden',
         );
         // country
         $form['country'] = array(
-            'name'      => 'country',
-            'type'      => 'hidden',
+            'name' => 'country',
+            'type' => 'hidden',
         );
         // zip
         $form['zip'] = array(
-            'name'      => 'zip',
-            'type'      => 'hidden',
+            'name' => 'zip',
+            'type' => 'hidden',
         );
         // email
         $form['email'] = array(
-            'name'      => 'email',
-            'type'      => 'hidden',
+            'name' => 'email',
+            'type' => 'hidden',
         );
         // night_phone_b
         $form['night_phone_b'] = array(
-            'name'      => 'night_phone_b',
-            'type'      => 'hidden',
+            'name' => 'night_phone_b',
+            'type' => 'hidden',
         );
         // image_url
         $form['image_url'] = array(
-            'name'      => 'image_url',
-            'type'      => 'hidden',
+            'name' => 'image_url',
+            'type' => 'hidden',
         );
         // no_shipping
         $form['no_shipping'] = array(
-            'name'      => 'no_shipping',
-            'type'      => 'hidden',
+            'name' => 'no_shipping',
+            'type' => 'hidden',
         );
         // address_override
         $form['address_override'] = array(
-            'name'      => 'address_override',
-            'type'      => 'hidden',
+            'name' => 'address_override',
+            'type' => 'hidden',
         );
         // Set for test mode
         if (isset($this->gatewayOption['test_mode']) && $this->gatewayOption['test_mode']) {
             // username
             $form['username'] = array(
-                'name'      => 'username',
-                'type'      => 'hidden',
+                'name' => 'username',
+                'type' => 'hidden',
             );
             // password
             $form['password'] = array(
-                'name'      => 'password',
-                'type'      => 'hidden',
+                'name' => 'password',
+                'type' => 'hidden',
             );
             // signature
             $form['signature'] = array(
-                'name'      => 'signature',
-                'type'      => 'hidden',
+                'name' => 'signature',
+                'type' => 'hidden',
             );
         }
         // Set form
@@ -338,7 +338,7 @@ class Gateway extends AbstractGateway
             $this->gatewayRedirectUrl = 'https://www.paypal.com/cgi-bin/webscr';
         }
     }
-    
+
     /**
      * Verify Payment
      *
@@ -350,7 +350,7 @@ class Gateway extends AbstractGateway
      *
      * Paypal verify method
      * Source : https://developer.paypal.com/docs/classic/ipn/ht_ipn/
-    */
+     */
     public function verifyPayment($request, $processing)
     {
         // STEP 1: read POST data
@@ -364,26 +364,26 @@ class Gateway extends AbstractGateway
         $log['gateway'] = 'paypal';
         $log['value'] = Json::encode(array(6, $req));
         Pi::api('log', 'order')->setLog($log);
- 
+
         // Step 2: POST IPN data back to PayPal to validate
         if ($this->gatewayOption['test_mode']) {
             $url_parsed = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
         } else {
             $url_parsed = 'https://www.paypal.com/cgi-bin/webscr';
         }
-        
+
         // Check by curl
         $ch = curl_init($url_parsed);
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
         curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
- 
-        if (!($res = curl_exec($ch)) ) {
+
+        if (!($res = curl_exec($ch))) {
             curl_close($ch);
             return false;
             exit;
@@ -397,7 +397,7 @@ class Gateway extends AbstractGateway
         Pi::api('log', 'order')->setLog($log);
 
         // STEP 3: Inspect IPN validation result and act accordingly
-        if (strcmp ($res, "VERIFIED") == 0) {
+        if (strcmp($res, "VERIFIED") == 0) {
             $invoice = Pi::api('invoice', 'order')->updateInvoice($request['invoice']);
             $result['status'] = 1;
             // Set log
@@ -410,7 +410,7 @@ class Gateway extends AbstractGateway
             $log['status'] = $result['status'];
             $log['message'] = __('Your payment were successfully.');
             Pi::api('log', 'order')->setLog($log);
-        } elseif (strcmp ($res, "INVALID") == 0) {
+        } elseif (strcmp($res, "INVALID") == 0) {
             $invoice = Pi::api('invoice', 'order')->getInvoice($request['invoice'], 'random_id');
             $result['status'] = 0;
             $message = __('Error');
@@ -421,7 +421,7 @@ class Gateway extends AbstractGateway
         $log['gateway'] = 'paypal';
         $log['value'] = Json::encode(array(8, $req));
         Pi::api('log', 'order')->setLog($log);
-        
+
         // Set result
         $result['adapter'] = $this->gatewayAdapter;
         $result['invoice'] = $invoice['id'];

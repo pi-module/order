@@ -12,15 +12,15 @@
  */
 return array(
     // route name
-    'order'  => array(
-        'name'      => 'order',
-        'type'      => 'Module\Order\Route\Order',
-        'options'   => array(
-            'route'     => '/order',
-            'defaults'  => array(
-                'module'        => 'order',
-                'controller'    => 'index',
-                'action'        => 'index'
+    'order' => array(
+        'name' => 'order',
+        'type' => 'Module\Order\Route\Order',
+        'options' => array(
+            'route' => '/order',
+            'defaults' => array(
+                'module' => 'order',
+                'controller' => 'index',
+                'action' => 'index'
             )
         ),
     )

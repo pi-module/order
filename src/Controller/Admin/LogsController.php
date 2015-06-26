@@ -14,7 +14,7 @@
 namespace Module\Order\Controller\Admin;
 
 use Pi;
-use Pi\Mvc\Controller\ActionController; 
+use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
 use Zend\Json\Json;
 
@@ -47,17 +47,17 @@ class LogsController extends ActionController
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
         $paginator->setUrlOptions(array(
-            'router'    => $this->getEvent()->getRouter(),
-            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params'    => array_filter(array(
-                'module'        => $this->getModule(),
-                'controller'    => 'log',
-                'action'        => 'index',
+            'router' => $this->getEvent()->getRouter(),
+            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params' => array_filter(array(
+                'module' => $this->getModule(),
+                'controller' => 'log',
+                'action' => 'index',
             )),
         ));
         // Set view
         $this->view()->setTemplate('log-index');
         $this->view()->assign('list', $list);
         $this->view()->assign('paginator', $paginator);
-    }	
+    }
 }
