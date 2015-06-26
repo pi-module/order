@@ -25,6 +25,7 @@ use Zend\Math\Rand;
  * Pi::api('invoice', 'order')->getInvoiceFromOrder($order);
  * Pi::api('invoice', 'order')->getInvoiceFromUser($uid, $compressed, $orderIds);
  * Pi::api('invoice', 'order')->getInvoiceForPayment($id);
+ * Pi::api('invoice', 'order')->cancelInvoiceFromOrder($order);
  * Pi::api('invoice', 'order')->updateInvoice($randomId);
  * Pi::api('invoice', 'order')->canonizeInvoice($invoice);
  * Pi::api('invoice', 'order')->setBackUrl($id, $url);
@@ -281,7 +282,7 @@ class Invoice extends AbstractApi
         if ($compressed) {
             $where = array('uid' => $uid, 'status' => 2, 'time_duedate < ?' => strtotime('+1 month'));
         } else {
-            $where = array('uid' => $uid);
+            $where = array('uid' => $uid, 'status' => array(1, 2));
         }
         // Check order ids
         if (!empty($orderIds)) {
@@ -308,6 +309,29 @@ class Invoice extends AbstractApi
         // Canonize invoice
         $invoice = $this->canonizeInvoice($invoice);
         return $invoice;
+    }
+
+    public function cancelInvoiceFromOrder($order) {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Get invoice
+        $where = array('order' => $order['id']);
+        $select = Pi::model('invoice', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
+        foreach ($rowset as $invoice) {
+            $invoice->status = 0;
+            $invoice->time_cancel = time();
+            $invoice->save();
+            // Update user credit
+            if ($config['installment_credit'] && $order['type_payment'] == 'installment') {
+                // Get user
+                $user = Pi::api('user', 'order')->getUserInformation();
+                $uid = Pi::user()->getId();
+                // Update
+                $credit = $user['credit'] + $invoice->credit_price;
+                Pi::model('profile', 'user')->update(array('credit' => $credit), array('uid' => $uid));
+            }
+        }
     }
 
     public function updateInvoice($randomId)

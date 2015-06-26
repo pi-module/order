@@ -94,7 +94,7 @@ class InvoiceController extends IndexController
         // set Products
         $order = Pi::api('order', 'order')->getOrder($invoice['order']);
         // Check order is for this user
-        if (!in_array($order['status_order'], array(1, 2, 3))) {
+        if (!in_array($order['status_order'], array(1, 2, 3, 7))) {
             $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This order not avtice.'));
         }
         // Get product list

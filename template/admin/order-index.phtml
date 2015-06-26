@@ -40,7 +40,11 @@ $this->backbone();
                 </td>
                 <td><?php echo $this->escape($order['total_price_view']); ?></td>
                 <td>
+                    <?php if (in_array($order['status_order'], array(1,2,3,7))) { ?>
                     <span id="update-order-<?php echo $this->escape($order['id']); ?>" class="update-order btn <?php echo $this->escape($order['orderClass']); ?> "><?php echo $this->escape($order['orderTitle']); ?></span>
+                    <?php } else { ?>
+                        <span class="label label-danger"><?php echo $this->escape($order['orderTitle']); ?></span>
+                    <?php } ?>
                 </td>
                 <td>
                     <span id="update-payment-<?php echo $this->escape($order['id']); ?>" class="update-payment btn <?php echo $this->escape($order['paymentClass']); ?> "><?php echo $this->escape($order['paymentTitle']); ?></span>

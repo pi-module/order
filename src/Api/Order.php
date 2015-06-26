@@ -49,7 +49,7 @@ class Order extends AbstractApi
         $orders = array();
         // Check compressed
         if ($compressed) {
-            $where = array('uid' => $uid, 'status_order' => array(1, 2, 3));
+            $where = array('uid' => $uid, 'status_order' => array(1, 2, 3, 7));
         } else {
             $where = array('uid' => $uid);
         }

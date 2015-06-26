@@ -202,39 +202,49 @@ class OrderController extends ActionController
         $return = array();
         // Get order
         $order = $this->getModel('order')->find($id);
-        // Set form
-        $form = new UpdateOrderForm('updateOrder');
-        if ($this->request->isPost()) {
-            $data = $this->request->getPost();
-            $form->setInputFilter(new UpdateOrderFilter);
-            $form->setData($data);
-            if ($form->isValid()) {
-                $values = $form->getData();
-                $order->status_order = $values['status_order'];
-                if ($values['status_order'] == 7) {
-                    $order->time_finish = time();
-                } else {
-                    $order->time_finish = 0;
-                }
-                $order->save();
-                // Add log
-                //Pi::api('log', 'shop')->addLog('order', $order->id, 'update');
-                // Send notification
-                Pi::api('notification', 'order')->processOrder($order->toArray(), 'order');
-                // Set return
-                $return['status'] = 1;
-                $return['data'] = Pi::api('order', 'order')->orderStatus($order->status_order);
-                $return['data']['time_finish_view'] = ($order->time_finish) ? _date($order->time_finish) : __('Not Finish');
-            } else {
-                $return['status'] = 0;
-                $return['data'] = '';
-            }
-            return $return; 
+        if (in_array($order->status_order, array(4,5,6))) {
+            $return['status'] = 0;
+            $return['data'] = '';
+            return $return;
         } else {
-            $values['status_order'] = $order->status_order;
-            $form->setData($values);
-            $form->setAttribute('action', $this->url('', array('action' => 'updateOrder', 'id' => $order->id)));
-        }    
+            // Set form
+            $form = new UpdateOrderForm('updateOrder');
+            if ($this->request->isPost()) {
+                $data = $this->request->getPost();
+                $form->setInputFilter(new UpdateOrderFilter);
+                $form->setData($data);
+                if ($form->isValid()) {
+                    $values = $form->getData();
+                    $order->status_order = $values['status_order'];
+                    if ($values['status_order'] == 7) {
+                        $order->time_finish = time();
+                    } else {
+                        $order->time_finish = 0;
+                    }
+                    $order->save();
+                    // Check order status
+                    if (in_array($values['status_order'], array(4,5,6))) {
+                        Pi::api('invoice', 'order')->cancelInvoiceFromOrder($order->toArray());
+                    }
+                    // Add log
+                    //Pi::api('log', 'shop')->addLog('order', $order->id, 'update');
+                    // Send notification
+                    Pi::api('notification', 'order')->processOrder($order->toArray(), 'order');
+                    // Set return
+                    $return['status'] = 1;
+                    $return['data'] = Pi::api('order', 'order')->orderStatus($order->status_order);
+                    $return['data']['time_finish_view'] = ($order->time_finish) ? _date($order->time_finish) : __('Not Finish');
+                } else {
+                    $return['status'] = 0;
+                    $return['data'] = '';
+                }
+                return $return;
+            } else {
+                $values['status_order'] = $order->status_order;
+                $form->setData($values);
+                $form->setAttribute('action', $this->url('', array('action' => 'updateOrder', 'id' => $order->id)));
+            }
+        }
         // Set view
         $this->view()->setTemplate('system:component/form-popup');
         $this->view()->assign('title', __('Update order'));
