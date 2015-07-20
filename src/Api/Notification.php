@@ -378,28 +378,51 @@ class Notification extends AbstractApi
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
+        // Set log
+        $file = Pi::path('upload/order/log.txt');
+        if (!Pi::service('file')->exists($file)) {
+            Pi::service('file')->mkdir(Pi::path('upload/order'));
+            $fp = fopen($file, "a+");
+            fclose($fp);
+        }
+        $buffer = json_encode(array('cron start on server time', date("Y-m-d H:i:s")));
+        if (file_exists($file)) {
+            $buffer = file_get_contents($file) . "\n" . $buffer;
+        }
+        file_put_contents($file, $buffer);
+
         // due date invoices
-        $duedate1 = time() + (86400 * (intval($config['notification_cron_invoice']) + 1));
+        // $duedate1 = time() + (86400 * intval($config['notification_cron_invoice']));
+        // $duedate2 = time() + (86400 * (intval($config['notification_cron_invoice']) + 1));
+        $duedate1 = time();
         $duedate2 = time() + (86400 * intval($config['notification_cron_invoice']));
-        $where = array('status' => 2, 'time_duedate < ?' => $duedate1, 'time_duedate > ?' => $duedate2);
+        $where = array('status' => 2, 'time_duedate > ?' => $duedate1, 'time_duedate < ?' => $duedate2);
         $select = Pi::model('invoice', $this->getModule())->select()->where($where);
         $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
-            $invoice = $this->canonizeInvoice($row);
+            $invoice = Pi::api('invoice', 'order')->canonizeInvoice($row);
             $order = Pi::api('order', 'order')->getOrder($row->order);
             $this->duedateInvoice($order, $invoice);
+            // Set log
+            $buffer = file_get_contents($file) . "\n" . json_encode(array('due date invoice', $order, $invoice));
+            file_put_contents($file, $buffer);
         }
 
         // expired invoices
-        $duedate1 = time() - (86400 * intval($config['notification_cron_invoice']));
-        $duedate2 = time() - (86400 * (intval($config['notification_cron_invoice']) + 1));
-        $where = array('status' => 2, 'time_duedate < ?' => $duedate1, 'time_duedate > ?' => $duedate2);
+        //$duedate1 = time() - (86400 * intval($config['notification_cron_invoice']));
+        //$duedate2 = time() - (86400 * (intval($config['notification_cron_invoice']) + 1));
+        //$where = array('status' => 2, 'time_duedate < ?' => $duedate1, 'time_duedate > ?' => $duedate2);
+        $time = time() - 86400;
+        $where = array('status' => 2, 'time_duedate < ?' => $time);
         $select = Pi::model('invoice', $this->getModule())->select()->where($where);
         $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
-            $invoice = $this->canonizeInvoice($row);
+            $invoice = Pi::api('invoice', 'order')->canonizeInvoice($row);
             $order = Pi::api('order', 'order')->getOrder($row->order);
             $this->expiredInvoice($order, $invoice);
+            // Set log
+            $buffer = file_get_contents($file) . "\n" . json_encode(array('expired invoice', $order, $invoice));
+            file_put_contents($file, $buffer);
         }
     }
 }
