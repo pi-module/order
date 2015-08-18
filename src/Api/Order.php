@@ -308,6 +308,11 @@ class Order extends AbstractApi
         $rowset = Pi::model('basket', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $basket[$row->id] = $row->toArray();
+            if (empty($row->extra)) {
+                $basket[$row->id]['extra'] = array();
+            } else {
+                $basket[$row->id]['extra'] = json::decode($row->extra, true);
+            }
         }
         // Update module and get back url
         $backUrl = Pi::api('order', $order['module_name'])->postPaymentUpdate($order, $basket);
