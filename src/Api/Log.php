@@ -45,6 +45,11 @@ class Log extends AbstractApi
         $row->uid = Pi::user()->getId();
         $row->ip = Pi::user()->getIp();
         $row->save();
+        if ($row->id) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function getLog($invoice)
