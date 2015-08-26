@@ -152,8 +152,8 @@ class Gateway extends AbstractGateway
             // Check bank
             $call = $this->call('bpVerifyRequest', $parameters);
             if ($call == 0) {
-                $invoice = Pi::api('invoice', 'order')->updateInvoice($request['SaleOrderId']);
-                $result['status'] = 1;
+                // Get invoice
+                $invoice = Pi::api('invoice', 'order')->getInvoice($request['SaleOrderId'], 'random_id');
                 $message = __('Your payment were successfully.');
                 // Set log
                 $log = array();
@@ -161,25 +161,28 @@ class Gateway extends AbstractGateway
                 $log['authority'] = $request['authority'];
                 $log['value'] = Json::encode($request);
                 $log['invoice'] = $invoice['id'];
-                $log['amount'] = $invoice['paid_price'];
+                $log['amount'] = $invoice['total_price'];
                 $log['status'] = $result['status'];
                 $log['message'] = $message;
                 Pi::api('log', 'order')->setLog($log);
+                // Update invoice
+                $invoice = Pi::api('invoice', 'order')->updateInvoice($request['SaleOrderId']);
+                $result['status'] = 1;
             } else {
                 $this->setPaymentError($call);
                 $invoice = Pi::api('invoice', 'order')->getInvoice($request['SaleOrderId'], 'random_id');
                 $result['status'] = 0;
-                $message = $this->gatewayError;
+                //$message = $this->gatewayError;
             }
         } elseif ($request['ResCode'] > 0) {
             $this->setPaymentError($request['ResCode']);
             $invoice = Pi::api('invoice', 'order')->getInvoice($request['SaleOrderId'], 'random_id');
             $result['status'] = 0;
-            $message = $this->gatewayError;
+            //$message = $this->gatewayError;
         } else {
             $invoice = Pi::api('invoice', 'order')->getInvoice($request['SaleOrderId'], 'random_id');
             $result['status'] = 0;
-            $message = __('Your order id not true.');
+            //$message = __('Your order id not true.');
         }
         // Set result
         $result['adapter'] = $this->gatewayAdapter;
