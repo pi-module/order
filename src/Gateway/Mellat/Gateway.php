@@ -147,14 +147,56 @@ class Gateway extends AbstractGateway
         $parameters['orderId'] = $request['SaleOrderId'];
         $parameters['saleOrderId'] = $request['SaleOrderId'];
         $parameters['saleReferenceId'] = $request['SaleReferenceId'];
+        // Get invoice
+        $invoice = Pi::api('invoice', 'order')->getInvoice($request['SaleOrderId'], 'random_id');
+        $result['status'] = 0;
         // Check 
         if ($processing['random_id'] == $request['SaleOrderId'] && $request['ResCode'] == 0) {
             // Check bank
             $call = $this->call('bpVerifyRequest', $parameters);
-            if ($call == 0) {
-                // Get invoice
-                $invoice = Pi::api('invoice', 'order')->getInvoice($request['SaleOrderId'], 'random_id');
-                $message = __('Your payment were successfully.');
+            if (!is_null($call)) {
+                if (is_numeric($call) && $call == 0) {
+                    // Get invoice
+                    $message = __('Your payment were successfully.');
+                    // Set log value
+                    $value = array();
+                    $value['request'] = $request;
+                    $value['bpVerifyRequest'] = $call;
+                    $value = Json::encode($value);
+                    // Set log
+                    $log = array();
+                    $log['gateway'] = $this->gatewayAdapter;
+                    $log['authority'] = $request['authority'];
+                    $log['value'] = $value;
+                    $log['invoice'] = $invoice['id'];
+                    $log['amount'] = $invoice['total_price'];
+                    $log['status'] = 1;
+                    $log['message'] = $message;
+                    $logResult = Pi::api('log', 'order')->setLog($log);
+                    // Update invoice
+                    if ($logResult) {
+                        $invoice = Pi::api('invoice', 'order')->updateInvoice($request['SaleOrderId']);
+                        $result['status'] = 1;
+                    }
+                } else {
+                    $error = $this->setPaymentError($call);
+                    // Set log value
+                    $value = array();
+                    $value['request'] = $request;
+                    $value['bpVerifyRequest'] = $call;
+                    $value = Json::encode($value);
+                    // Set log
+                    $log = array();
+                    $log['gateway'] = $this->gatewayAdapter;
+                    $log['authority'] = $request['authority'];
+                    $log['value'] = $value;
+                    $log['invoice'] = $invoice['id'];
+                    $log['amount'] = $invoice['total_price'];
+                    $log['status'] = 0;
+                    $log['message'] = $error;
+                    Pi::api('log', 'order')->setLog($log);
+                }
+            } else {
                 // Set log value
                 $value = array();
                 $value['request'] = $request;
@@ -167,31 +209,26 @@ class Gateway extends AbstractGateway
                 $log['value'] = $value;
                 $log['invoice'] = $invoice['id'];
                 $log['amount'] = $invoice['total_price'];
-                $log['status'] = 1;
-                $log['message'] = $message;
-                $logResult = Pi::api('log', 'order')->setLog($log);
-                // Update invoice
-                if ($logResult) {
-                    $invoice = Pi::api('invoice', 'order')->updateInvoice($request['SaleOrderId']);
-                    $result['status'] = 1;
-                } else {
-                    $result['status'] = 0;
-                }
-            } else {
-                $this->setPaymentError($call);
-                $invoice = Pi::api('invoice', 'order')->getInvoice($request['SaleOrderId'], 'random_id');
-                $result['status'] = 0;
-                //$message = $this->gatewayError;
+                $log['status'] = 0;
+                $log['message'] = __('bpVerifyRequest method is null');
+                Pi::api('log', 'order')->setLog($log);
             }
         } elseif ($request['ResCode'] > 0) {
-            $this->setPaymentError($request['ResCode']);
-            $invoice = Pi::api('invoice', 'order')->getInvoice($request['SaleOrderId'], 'random_id');
-            $result['status'] = 0;
-            //$message = $this->gatewayError;
-        } else {
-            $invoice = Pi::api('invoice', 'order')->getInvoice($request['SaleOrderId'], 'random_id');
-            $result['status'] = 0;
-            //$message = __('Your order id not true.');
+            $error = $this->setPaymentError($request['ResCode']);
+            // Set log value
+            $value = array();
+            $value['request'] = $request;
+            $value = Json::encode($value);
+            // Set log
+            $log = array();
+            $log['gateway'] = $this->gatewayAdapter;
+            $log['authority'] = $request['authority'];
+            $log['value'] = $value;
+            $log['invoice'] = $invoice['id'];
+            $log['amount'] = $invoice['total_price'];
+            $log['status'] = 0;
+            $log['message'] = $error;
+            Pi::api('log', 'order')->setLog($log);
         }
         // Set result
         $result['adapter'] = $this->gatewayAdapter;
@@ -217,6 +254,10 @@ class Gateway extends AbstractGateway
 
     public function setPaymentError($id = '')
     {
+        if (empty($id)) {
+            $this->gatewayError = __('Bank Mellat error empty');
+        }
+
         switch ($id) {
             case '':
                 $error = __('Bank Mellat error 0');
@@ -404,5 +445,6 @@ class Gateway extends AbstractGateway
         }
         // Set error
         $this->gatewayError = $error;
+        return $error;
     }
 }

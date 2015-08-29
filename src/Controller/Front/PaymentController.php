@@ -149,19 +149,6 @@ class PaymentController extends IndexController
             $gateway = Pi::api('gateway', 'order')->getGateway($processing['gateway']);
             // verify order
             $verify = $gateway->verifyPayment($request, $processing);
-            // Check error
-            if ($gateway->gatewayError) {
-                // Remove processing
-                Pi::api('processing', 'order')->removeProcessing();
-                // Url
-                if (!empty($config['payment_gateway_error_url'])) {
-                    $url = $config['payment_gateway_error_url'];
-                } else {
-                    $url = $this->url(array('', 'controller' => 'index', 'action' => 'error'));
-                }
-                // jump
-                $this->jump($url, $gateway->gatewayError);
-            }
             // Check status
             if ($verify['status'] == 1) {
                 // Update module order / invoice and get back url
@@ -172,9 +159,22 @@ class PaymentController extends IndexController
                 $message = __('Your payment were successfully. Back to module');
                 $this->jump($url, $message);
             } else {
-                // Remove processing
-                Pi::api('processing', 'order')->removeProcessing();
-                $message = __('Your payment wont successfully.');
+                // Check error
+                if ($gateway->gatewayError) {
+                    // Remove processing
+                    Pi::api('processing', 'order')->removeProcessing();
+                    // Url
+                    if (isset($config['payment_gateway_error_url']) && !empty($config['payment_gateway_error_url'])) {
+                        $url = $config['payment_gateway_error_url'];
+                        $this->jump($url);
+                    }
+                    // jump
+                    $message = $gateway->gatewayError;
+                } else {
+                    // Remove processing
+                    Pi::api('processing', 'order')->removeProcessing();
+                    $message = __('Your payment wont successfully.');
+                }
             }
         } else {
             // Remove processing
