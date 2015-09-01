@@ -47,10 +47,10 @@ class Processing extends AbstractApi
         if (!empty($random_id)) {
             $row = Pi::model('processing', $this->getModule())->find($random_id, 'random_id');
         } else {
-            if ($config['order_anonymous'] == 0) {
-                $uid = Pi::user()->getId();
+            $uid = Pi::user()->getId();
+            if ($uid) {
                 $row = Pi::model('processing', $this->getModule())->find($uid, 'uid');
-            } else {
+            } elseif ($config['order_anonymous']) {
                 $invoice = $_SESSION['order']['invoice_id'];
                 $row = Pi::model('processing', $this->getModule())->find($invoice, 'invoice');
             }
@@ -68,15 +68,18 @@ class Processing extends AbstractApi
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
-        // Check config
-        if ($config['order_anonymous'] == 0) {
-            $uid = Pi::user()->getId();
+        // Get user id
+        $uid = Pi::user()->getId();
+        // Check user
+        if ($uid) {
             $row = Pi::model('processing', $this->getModule())->find($uid, 'uid');
-        } else {
+        } elseif ($config['order_anonymous']) {
             $invoice = $_SESSION['order']['invoice_id'];
             $row = Pi::model('processing', $this->getModule())->find($invoice, 'invoice');
+        } else {
+            return false;
         }
-        // check row
+        // Check row
         if (is_object($row)) {
             $time = time() - 900;
             if ($time > $row->time_create) {
@@ -98,10 +101,10 @@ class Processing extends AbstractApi
         if (!empty($random_id)) {
             $row = Pi::model('processing', $this->getModule())->find($random_id, 'random_id');
         } else {
-            if ($config['order_anonymous'] == 0) {
-                $uid = Pi::user()->getId();
+            $uid = Pi::user()->getId();
+            if ($uid) {
                 $row = Pi::model('processing', $this->getModule())->find($uid, 'uid');
-            } else {
+            } elseif ($config['order_anonymous']) {
                 $invoice = $_SESSION['order']['invoice_id'];
                 $row = Pi::model('processing', $this->getModule())->find($invoice, 'invoice');
             }
@@ -111,4 +114,4 @@ class Processing extends AbstractApi
             $row->delete();
         }
     }
-}	
+}
