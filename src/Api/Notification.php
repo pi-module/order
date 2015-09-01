@@ -38,8 +38,19 @@ class Notification extends AbstractApi
         $config = Pi::service('registry')->config->read($this->getModule());
 
         // Get admin main
+        $sitename = Pi::config('sitename');
         $adminmail = Pi::config('adminmail');
         $adminname = Pi::config('adminname');
+
+        // Get product list
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        $productList = '';
+        $productPrice = '';
+        foreach ($order['products'] as $product) {
+            $productPrice = $productPrice + $product['total_price'];
+            $productList .= $product['details']['title'] . ' , ';
+        }
+        $productPrice = Pi::api('api', 'order')->viewPrice($productPrice);
 
         // Set link
         $link = Pi::url(Pi::service('url')->assemble('order', array(
@@ -55,6 +66,8 @@ class Notification extends AbstractApi
             'last_name' => $order['last_name'],
             'order_id' => $order['code'],
             'order_link' => $link,
+            'product_list' => $productList,
+            'product_price' => $productPrice,
         );
 
         // Send mail to admin
@@ -100,10 +113,25 @@ class Notification extends AbstractApi
         );
 
         // Send sms to admin
-        Pi::api('sms', 'notification')->sendToAdmin($config['sms_order_admin']);
+        $content = sprintf(
+            $config['sms_order_admin'],
+            $sitename,
+            $order['first_name'],
+            $order['last_name'],
+            $productList,
+            $productPrice
+        );
+        Pi::api('sms', 'notification')->sendToAdmin($content);
 
         // Send sms to user
-        $content = sprintf($config['sms_order_user'], $order['first_name'], $order['last_name']);
+        $content = sprintf(
+            $config['sms_order_user'],
+            $order['first_name'],
+            $order['last_name'],
+            $productList,
+            $productPrice,
+            $sitename
+        );
         Pi::api('sms', 'notification')->send($content, $order['mobile']);
     }
 
@@ -233,8 +261,16 @@ class Notification extends AbstractApi
         $config = Pi::service('registry')->config->read($this->getModule());
 
         // Get admin main
+        $sitename = Pi::config('sitename');
         $adminmail = Pi::config('adminmail');
         $adminname = Pi::config('adminname');
+
+        // Get product list
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        $productList = '';
+        foreach ($order['products'] as $product) {
+            $productList .= $product['details']['title'] . ' , ';
+        }
 
         // Set link
         $link = Pi::url(Pi::service('url')->assemble('order', array(
@@ -248,8 +284,11 @@ class Notification extends AbstractApi
         $information = array(
             'first_name' => $order['first_name'],
             'last_name' => $order['last_name'],
-            'invoice_id' => $invoice['id'],
+            'order_id' => $order['code'],
+            'invoice_id' => $invoice['code'],
             'invoice_link' => $link,
+            'invoice_price' => Pi::api('api', 'order')->viewPrice($invoice['total_price']),
+            'product_list' => $productList,
         );
 
         // Send mail to admin
@@ -275,10 +314,29 @@ class Notification extends AbstractApi
         );
 
         // Send sms to admin
-        Pi::api('sms', 'notification')->sendToAdmin($config['sms_invoice_admin']);
+        $content = sprintf(
+            $config['sms_invoice_admin'],
+            $sitename,
+            $order['first_name'],
+            $order['last_name'],
+            $invoice['code'],
+            Pi::api('api', 'order')->viewPrice($invoice['total_price']),
+            $order['code'],
+            $productList
+        );
+        Pi::api('sms', 'notification')->sendToAdmin($content);
 
         // Send sms to user
-        $content = sprintf($config['sms_invoice_user'], $order['first_name'], $order['last_name']);
+        $content = sprintf(
+            $config['sms_invoice_user'],
+            $order['first_name'],
+            $order['last_name'],
+            $invoice['code'],
+            Pi::api('api', 'order')->viewPrice($invoice['total_price']),
+            $order['code'],
+            $productList,
+            $sitename
+        );
         Pi::api('sms', 'notification')->send($content, $order['mobile']);
     }
 

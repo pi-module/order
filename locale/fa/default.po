@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-06-11 12:41+0330\n"
+"POT-Creation-Date: 2015-09-01 16:21+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,725 +9,644 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.6\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/order\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Api.php:36
+#: src/Api/Api.php:36
 msgid "Toman"
 msgstr "تومان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Installment.php:39
+#: src/Api/Installment.php:39
 msgid "One time"
 msgstr "خرید نقدی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:52
+#: src/Api/Invoice.php:53
 msgid "Please login for create invoice"
 msgstr "لطفا برای ایجاد فاکتور به سایت وارد شوید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:113
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:209
+#: src/Api/Invoice.php:114 src/Api/Invoice.php:210
 msgid "Your invoice create successfully"
 msgstr "فاکتور شما با موفقیت ایجاد شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:230
+#: src/Api/Invoice.php:231
 msgid "Not allowed to create invoice by this user credit"
 msgstr "با توجه به میزان اعتبار کاربر امکان ایجاد فاکتور وجود ندارد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:355
+#: src/Api/Invoice.php:380
 msgid "Not pay"
 msgstr "پرداخت نشده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Invoice.php:356
+#: src/Api/Invoice.php:381
 msgid "Not canceled"
 msgstr "لغو نشده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:127
+#: src/Api/Notification.php:155
 msgid "Confirmed"
 msgstr "تایید شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:132
+#: src/Api/Notification.php:160
 msgid "has pending to confirme"
 msgstr "در انتظار تایید است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:137
+#: src/Api/Notification.php:165
 msgid "Finished"
 msgstr "تکمیل شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:147
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:133
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:66
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:63
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:44
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:55
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:60
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:9
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:58
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:128
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:215
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:15
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:215
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:60
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:34
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:125
+#: src/Api/Notification.php:175 src/Api/Order.php:133
+#: src/Form/InvoiceSettingForm.php:66 src/Form/OrderSettingForm.php:63
+#: src/Form/UpdatePaymentForm.php:44 template/admin/invoice-index.phtml:64
+#: template/admin/invoice-print.phtml:65 template/admin/invoice-view.phtml:10
+#: template/admin/log-index.phtml:63 template/admin/order-view.phtml:209
+#: template/admin/order-view.phtml:310 template/front/detail.phtml:15
+#: template/front/detail.phtml:263 template/front/invoice-print.phtml:65
+#: template/front/invoice.phtml:39 template/front/list.phtml:146
 msgid "Paid"
 msgstr "پرداخت شده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:156
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:150
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:76
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:44
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:25
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:29
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:33
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:37
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:41
+#: src/Api/Notification.php:184 src/Api/Order.php:150
+#: src/Form/OrderSettingForm.php:76 src/Form/UpdateDeliveryForm.php:44
+#: template/front/detail.phtml:25 template/front/detail.phtml:29
+#: template/front/detail.phtml:33 template/front/detail.phtml:37
+#: template/front/detail.phtml:41
 msgid "Packed"
 msgstr "بسته بندی شده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:161
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:155
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:77
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:45
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:26
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:30
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:34
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:42
+#: src/Api/Notification.php:189 src/Api/Order.php:155
+#: src/Form/OrderSettingForm.php:77 src/Form/UpdateDeliveryForm.php:45
+#: template/front/detail.phtml:26 template/front/detail.phtml:30
+#: template/front/detail.phtml:34 template/front/detail.phtml:38
+#: template/front/detail.phtml:42
 msgid "Posted"
 msgstr "ارسال شده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:166
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:160
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:78
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:46
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:27
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:31
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:35
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:39
+#: src/Api/Notification.php:194 src/Api/Order.php:160
+#: src/Form/OrderSettingForm.php:78 src/Form/UpdateDeliveryForm.php:46
+#: template/front/detail.phtml:27 template/front/detail.phtml:31
+#: template/front/detail.phtml:35 template/front/detail.phtml:39
 msgid "Delivered"
 msgstr "تحویل شده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:171
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:165
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:79
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:47
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:43
+#: src/Api/Notification.php:199 src/Api/Order.php:165
+#: src/Form/OrderSettingForm.php:79 src/Form/UpdateDeliveryForm.php:47
+#: template/front/detail.phtml:43
 msgid "Back eaten"
 msgstr "برگشت خورده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:184
+#: src/Api/Notification.php:212
 #, php-format
 msgid "Your order by %s ID %s on %s website"
 msgstr "سفارش شما با شناسه %s در وب سایت %s ، %s"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Notification.php:192
+#: src/Api/Notification.php:220
 #, php-format
 msgid "Dear %s %s, Your order by %s ID %s"
 msgstr "%s %s عزیز، سفارش شما با شماره %s %s"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:86
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:145
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:44
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:75
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:43
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:43
+#: src/Api/Order.php:86 src/Api/Order.php:145 src/Form/OrderSettingForm.php:44
+#: src/Form/OrderSettingForm.php:75 src/Form/UpdateDeliveryForm.php:43
+#: src/Form/UpdateOrderForm.php:43
 msgid "Not processed"
 msgstr "پردازش نشده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:91
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:45
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:44
+#: src/Api/Order.php:91 src/Form/OrderSettingForm.php:45
+#: src/Form/UpdateOrderForm.php:44
 msgid "Orders validated"
 msgstr "سفارش های تایید شده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:96
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:46
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:45
+#: src/Api/Order.php:96 src/Form/OrderSettingForm.php:46
+#: src/Form/UpdateOrderForm.php:45
 msgid "Orders pending"
 msgstr "سفارش های در انتظار تایید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:101
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:47
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:46
+#: src/Api/Order.php:101 src/Form/OrderSettingForm.php:47
+#: src/Form/UpdateOrderForm.php:46
 msgid "Orders failed"
 msgstr "سفارش های خراب"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:106
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:48
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:47
+#: src/Api/Order.php:106 src/Form/OrderSettingForm.php:48
+#: src/Form/UpdateOrderForm.php:47
 msgid "Orders cancelled"
 msgstr "سفارش های لغو شده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:111
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:49
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:48
+#: src/Api/Order.php:111 src/Form/OrderSettingForm.php:49
+#: src/Form/UpdateOrderForm.php:48
 msgid "Fraudulent orders"
 msgstr "سفارش های فریب آمیز"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:116
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:50
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:49
+#: src/Api/Order.php:116 src/Form/OrderSettingForm.php:50
+#: src/Form/UpdateOrderForm.php:49
 msgid "Orders finished"
 msgstr "سفارش های تکمیل شده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:128
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:67
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:62
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:43
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:17
+#: src/Api/Order.php:128 src/Form/InvoiceSettingForm.php:67
+#: src/Form/OrderSettingForm.php:62 src/Form/UpdatePaymentForm.php:43
+#: template/front/detail.phtml:17
 msgid "UnPaid"
 msgstr "پرداخت نشده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:182
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:277
+#: src/Api/Order.php:182 src/Controller/Admin/OrderController.php:287
 msgid "Not Paid"
 msgstr "پرداخت نشده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:184
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:324
+#: src/Api/Order.php:184 src/Controller/Admin/OrderController.php:334
 msgid "Not Delivery"
 msgstr "تحویل نشده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:186
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:227
+#: src/Api/Order.php:186 src/Controller/Admin/OrderController.php:236
 msgid "Not Finish"
 msgstr "تکمیل نشده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:188
+#: src/Api/Order.php:188
 msgid "Not Start"
 msgstr "شروع نشده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Api/Order.php:190
+#: src/Api/Order.php:190
 msgid "Not End"
 msgstr "پایان نیافته"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/DeliveryController.php:94
+#: src/Controller/Admin/DeliveryController.php:94
 msgid "Delivery data saved successfully."
 msgstr "اطلاعات روش تحویل با موفقیت ذخیره شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/DeliveryController.php:114
+#: src/Controller/Admin/DeliveryController.php:114
 msgid "Add a delivery"
 msgstr "روش تحویل جدید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/GatewayController.php:71
+#: src/Controller/Admin/GatewayController.php:71
 msgid "Gateway data saved successfully."
 msgstr "اطلاعات دروازه پرداخت با موفقیت ذخیره شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/GatewayController.php:75
+#: src/Controller/Admin/GatewayController.php:75
 msgid "Invalid data, please check and re-submit."
 msgstr "اطلاعات اشتباه است، لطفا اطلاعات وارده را بررسی کرده و جددا تلاش کنید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/GatewayController.php:87
+#: src/Controller/Admin/GatewayController.php:87
 msgid "Install gateway"
 msgstr "نصب دروازه پرداخت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/InvoiceController.php:117
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:165
+#: src/Controller/Admin/InvoiceController.php:119
+#: src/Controller/Admin/OrderController.php:165
 msgid "Go to filter"
 msgstr "فیلتر کن"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/InvoiceController.php:127
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:183
+#: src/Controller/Admin/InvoiceController.php:129
+#: src/Controller/Admin/OrderController.php:183
 msgid "Not valid"
 msgstr "معتبر نیست"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/InvoiceController.php:133
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:189
+#: src/Controller/Admin/InvoiceController.php:135
+#: src/Controller/Admin/OrderController.php:189
 msgid "Not set"
 msgstr "تنظیم نشده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/InvoiceController.php:154
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/InvoiceController.php:178
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:32
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:80
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:34
+#: src/Controller/Admin/InvoiceController.php:156
+#: src/Controller/Admin/InvoiceController.php:180
+#: src/Controller/Front/InvoiceController.php:32
+#: src/Controller/Front/InvoiceController.php:80
+#: src/Controller/Front/PaymentController.php:34
 msgid "The invoice not found."
 msgstr "فاکتور یافت نشد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/LocationController.php:121
+#: src/Controller/Admin/InvoiceController.php:236
+msgid "New invoice data saved successfully."
+msgstr "اطلاعات فاکتور جدید با موفقیت ذخیره شد"
+
+#: src/Controller/Admin/LocationController.php:121
 msgid "Location data saved successfully."
 msgstr "اطلاعات مکان با موفقیت ذخیره شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/LocationController.php:143
+#: src/Controller/Admin/LocationController.php:143
 msgid "Add a location"
 msgstr "مکان جدید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:240
+#: src/Controller/Admin/OrderController.php:250
 msgid "Update order"
 msgstr "به روز رسانی سفارش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:290
+#: src/Controller/Admin/OrderController.php:300
 msgid "Update payment"
 msgstr "به روز رسانی پرداخت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Admin/OrderController.php:337
+#: src/Controller/Admin/OrderController.php:347
 msgid "Update delivery"
 msgstr "به روز رسانی تحویل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:34
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:324
+#: src/Controller/Front/CheckoutController.php:34
+#: src/Controller/Front/CheckoutController.php:337
 msgid "Your cart is empty."
 msgstr "سبد خرید شما خالی است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:39
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:329
+#: src/Controller/Front/CheckoutController.php:39
+#: src/Controller/Front/CheckoutController.php:342
 msgid "So sorry, At this moment order is inactive"
 msgstr "متاسفانه در این لحظه امکان ثبت سفارش وجود ندارد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:340
+#: src/Controller/Front/CheckoutController.php:353
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 "پلن قسطی سفارش شما با موفقت ذخیره شد، لطفا اطلاعات مورد نیاز را تکمیل "
 "فرمایید و بعد از آن پیش قسط مربوط به این سفارش را پرداخت نمایید."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/CheckoutController.php:456
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/Element/Gateway.php:28
+#: src/Controller/Front/CheckoutController.php:469
+#: src/Form/Element/Gateway.php:28
 msgid "Offline"
 msgstr "آفلاین"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/DetailController.php:30
+#: src/Controller/Front/DetailController.php:30
 msgid "The order not found."
 msgstr "سفارش یافت نشد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/DetailController.php:34
+#: src/Controller/Front/DetailController.php:34
 msgid "This is not your order."
 msgstr "این سفارش متعلق به شما نیست"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/DetailController.php:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:50
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:98
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:56
+#: src/Controller/Front/DetailController.php:38
+#: src/Controller/Front/InvoiceController.php:50
+#: src/Controller/Front/InvoiceController.php:98
+#: src/Controller/Front/PaymentController.php:56
 msgid "This order not avtice."
 msgstr "سفارش فعال نیست"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/IndexController.php:52
+#: src/Controller/Front/IndexController.php:52
 msgid "Your old payment process remove, please try new payment ation"
 msgstr "پرداخت قبلی شما از سیستم حذف شد، لطفا یک تراکش جدید انجام دهید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/IndexController.php:54
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/IndexController.php:62
+#: src/Controller/Front/IndexController.php:54
+#: src/Controller/Front/IndexController.php:62
 msgid "Payment is clean"
 msgstr "دروازه پرداخت پاک است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:37
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:85
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:89
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:43
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:47
+#: src/Controller/Front/InvoiceController.php:37
+#: src/Controller/Front/InvoiceController.php:41
+#: src/Controller/Front/InvoiceController.php:85
+#: src/Controller/Front/InvoiceController.php:89
+#: src/Controller/Front/PaymentController.php:43
+#: src/Controller/Front/PaymentController.php:47
 msgid "This is not your invoice."
 msgstr "این فاکتور متعلق به شما نیست"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:59
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/InvoiceController.php:107
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:84
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:172
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:344
+#: src/Controller/Front/InvoiceController.php:59
+#: src/Controller/Front/InvoiceController.php:107
+#: src/Controller/Front/PaymentController.php:84
+#: src/Controller/Front/PaymentController.php:159
+#: src/Controller/Front/PaymentController.php:344
 msgid "Your payment were successfully. Back to module"
 msgstr "پرداخت شما با موفقیت به انجام رسید. به صفحه اتمام خرید منتقل می شوید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:38
+#: src/Controller/Front/PaymentController.php:38
 msgid "You pay this invoice before this time"
 msgstr "شما قبلا این فاکتور را پرداخت کرده اید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:107
+#: src/Controller/Front/PaymentController.php:107
 #, php-format
 msgid "Error to get %s."
 msgstr "خطا در گرفتن %s"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:114
+#: src/Controller/Front/PaymentController.php:114
 msgid "Error to get information."
 msgstr "خطا در گرفتن اطلاعات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:140
+#: src/Controller/Front/PaymentController.php:140
 msgid "Your running pay processing not set"
 msgstr "پروسه پرداخت در حال اجرای شما تنظیم نشده است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:145
+#: src/Controller/Front/PaymentController.php:145
 msgid "Your IP address changed and processing not valid"
 msgstr ""
 "آدرس آی پی شما در هنگام پرداخت تغییر کرده است و این روند خرید صحیح نیست"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:177
+#: src/Controller/Front/PaymentController.php:176
 msgid "Your payment wont successfully."
 msgstr "پرداخت شما موفقیت آمیز نبود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:182
+#: src/Controller/Front/PaymentController.php:182
 msgid "Did not set any request"
 msgstr "هیچ درخواستی ذخیره نشده است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:294
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:157
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:411
+#: src/Controller/Front/PaymentController.php:294
+#: src/Gateway/Mellat/Gateway.php:160 src/Gateway/Paypal/Gateway.php:411
 msgid "Your payment were successfully."
 msgstr "پرداخت شما موفقیت آمیز بود."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Controller/Front/PaymentController.php:332
+#: src/Controller/Front/PaymentController.php:332
 msgid "Test mode not active."
 msgstr "حالت تست فعال نیست"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:48
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:50
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:11
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:155
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:11
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:155
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:130
+#: src/Form/DeliveryForm.php:48 src/Form/LocationForm.php:50
+#: template/admin/delivery-index.phtml:14
+#: template/admin/invoice-print.phtml:178
+#: template/admin/location-index.phtml:14
+#: template/front/invoice-print.phtml:178 template/front/invoice.phtml:152
 msgid "Title"
 msgstr "عنوان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:61
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:72
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:58
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:7
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:89
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:17
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:98
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:106
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:114
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:58
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:32
+#: src/Form/DeliveryForm.php:61 src/Form/LocationForm.php:72
+#: template/admin/invoice-print.phtml:63 template/admin/invoice-view.phtml:8
+#: template/admin/invoice-view.phtml:128 template/admin/order-index.phtml:17
+#: template/admin/order-view.phtml:157 template/admin/order-view.phtml:171
+#: template/admin/order-view.phtml:185 template/front/invoice-print.phtml:63
+#: template/front/invoice.phtml:37
 msgid "Status"
 msgstr "وضعیت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:63
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:74
+#: src/Form/DeliveryForm.php:63 src/Form/LocationForm.php:74
 msgid "Published"
 msgstr "منتشر شده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:64
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:75
+#: src/Form/DeliveryForm.php:64 src/Form/LocationForm.php:75
 msgid "Pending review"
 msgstr "در انتظار تایید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:65
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:76
+#: src/Form/DeliveryForm.php:65 src/Form/LocationForm.php:76
 msgid "Draft"
 msgstr "پیش نویس"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:66
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:77
+#: src/Form/DeliveryForm.php:66 src/Form/LocationForm.php:77
 msgid "Private"
 msgstr "خصوصی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:75
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:310
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:337
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:368
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:53
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:9
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:108
+#: src/Form/DeliveryForm.php:75 src/Form/OrderForm.php:316
+#: src/Form/OrderForm.php:343 src/Form/OrderForm.php:374
+#: src/Form/UpdatePaymentForm.php:53 template/admin/log-index.phtml:9
+#: template/admin/order-view.phtml:177
 msgid "Adapter"
 msgstr "پایانه پرداخت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/DeliveryForm.php:83
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/GatewayForm.php:73
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:130
+#: src/Form/DeliveryForm.php:83 src/Form/GatewayForm.php:73
+#: src/Form/LocationForm.php:130
 msgid "Submit"
 msgstr "ارسال"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:40
+#: src/Form/InvoiceForm.php:40 template/admin/invoice-update.phtml:96
+#: template/admin/invoice-view.phtml:27 template/admin/order-view.phtml:110
+#: template/front/detail.phtml:148
+msgid "Product price"
+msgstr "قیمت محصول"
+
+#: src/Form/InvoiceForm.php:51 template/admin/invoice-update.phtml:100
+#: template/admin/invoice-view.phtml:31 template/admin/order-view.phtml:114
+#: template/front/detail.phtml:152
+msgid "Shipping price"
+msgstr "هزینه ارسال"
+
+#: src/Form/InvoiceForm.php:62 template/admin/invoice-update.phtml:104
+#: template/admin/invoice-view.phtml:35 template/admin/order-view.phtml:118
+#: template/front/detail.phtml:156
+msgid "Packing price"
+msgstr "هزینه بسته بندی"
+
+#: src/Form/InvoiceForm.php:73 template/admin/invoice-update.phtml:108
+#: template/admin/invoice-view.phtml:39 template/admin/order-view.phtml:122
+#: template/front/detail.phtml:160
+msgid "Vat price"
+msgstr "مالیات"
+
+#: src/Form/InvoiceForm.php:85 template/admin/invoice-index.phtml:16
+#: template/admin/invoice-print.phtml:70 template/admin/order-view.phtml:267
+#: template/front/detail.phtml:223 template/front/invoice-print.phtml:70
+#: template/front/invoice.phtml:43 template/front/list.phtml:106
+msgid "Due date"
+msgstr "سررسید پرداخت"
+
+#: src/Form/InvoiceForm.php:100
+msgid "Save"
+msgstr "ذخیره"
+
+#: src/Form/InvoiceSettingForm.php:40
 msgid "Order ID"
 msgstr "شناسه سفارش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:51
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:131
+#: src/Form/InvoiceSettingForm.php:51 src/Form/OrderSettingForm.php:131
 msgid "User ID"
 msgstr "شناسه کاربر"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:63
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:60
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:104
+#: src/Form/InvoiceSettingForm.php:63 template/admin/invoice-update.phtml:69
+#: template/admin/order-view.phtml:83 template/front/detail.phtml:121
 msgid "Payment status"
 msgstr "وضعیت پرداخت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:65
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:43
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:61
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:74
+#: src/Form/InvoiceSettingForm.php:65 src/Form/OrderSettingForm.php:43
+#: src/Form/OrderSettingForm.php:61 src/Form/OrderSettingForm.php:74
 msgid "All"
 msgstr "همه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:68
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:282
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:409
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:536
+#: src/Form/InvoiceSettingForm.php:68 template/admin/order-print.phtml:297
+#: template/admin/order-print.phtml:425 template/admin/order-print.phtml:553
 msgid "Delayed"
 msgstr "معوقه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:77
+#: src/Form/InvoiceSettingForm.php:77
 msgid "Start from"
 msgstr "شروع از"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:91
+#: src/Form/InvoiceSettingForm.php:91
 msgid "End to"
 msgstr "پایان تا"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/InvoiceSettingForm.php:105
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:198
+#: src/Form/InvoiceSettingForm.php:105 src/Form/OrderSettingForm.php:198
 msgid "Filter"
 msgstr "فیلتر"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:63
+#: src/Form/LocationForm.php:63
 msgid "Parent"
 msgstr "والد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:96
+#: src/Form/LocationForm.php:96
 #, php-format
 msgid "Is active %s ?"
 msgstr "آیا %s فعال باشد؟"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:106
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:115
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:121
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:123
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:139
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:177
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:139
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:177
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:115
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:88
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:67
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:87
+#: src/Form/LocationForm.php:106 template/admin/invoice-print.phtml:134
+#: template/admin/order-view.phtml:197 template/admin/order-view.phtml:199
+#: template/admin/order-view.phtml:222 template/admin/order-view.phtml:265
+#: template/front/detail.phtml:179 template/front/detail.phtml:221
+#: template/front/invoice-print.phtml:134 template/front/invoice.phtml:105
+#: template/front/list.phtml:82 template/front/list.phtml:104
 msgid "Price"
 msgstr "قیمت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/LocationForm.php:117
+#: src/Form/LocationForm.php:117
 msgid "Time ( days )"
 msgstr "زمان ( روز )"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:52
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:153
+#: src/Form/OrderForm.php:52 src/Form/OrderSettingForm.php:153
 msgid "First name"
 msgstr "نام"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:64
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:164
+#: src/Form/OrderForm.php:64 src/Form/OrderSettingForm.php:164
 msgid "Last name"
 msgstr "نام خانوادگی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:78
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:142
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:74
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:42
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:40
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:19
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:63
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:74
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:48
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:17
+#: src/Form/OrderForm.php:78 src/Form/OrderSettingForm.php:142
+#: template/admin/invoice-print.phtml:84
+#: template/admin/invoice-update.phtml:13 template/admin/invoice-view.phtml:58
+#: template/admin/order-print.phtml:42 template/admin/order-view.phtml:27
+#: template/front/detail.phtml:65 template/front/invoice-print.phtml:84
+#: template/front/invoice.phtml:56 template/front/list.phtml:19
 msgid "ID number"
 msgstr "کد ملی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:92
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:109
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:83
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:63
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:48
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:40
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:84
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:83
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:57
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:34
+#: src/Form/OrderForm.php:92 src/Form/OrderSettingForm.php:109
+#: template/admin/invoice-print.phtml:96
+#: template/admin/invoice-update.phtml:41 template/admin/invoice-view.phtml:86
+#: template/admin/order-print.phtml:52 template/admin/order-view.phtml:55
+#: template/admin/order-view.phtml:146 template/front/detail.phtml:93
+#: template/front/invoice-print.phtml:96 template/front/invoice.phtml:68
+#: template/front/list.phtml:41
 msgid "Email"
 msgstr "ایمیل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:106
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:77
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:66
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:51
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:43
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:87
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:77
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:51
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:37
+#: src/Form/OrderForm.php:106 template/admin/invoice-print.phtml:88
+#: template/admin/invoice-update.phtml:45 template/admin/invoice-view.phtml:90
+#: template/admin/order-print.phtml:56 template/admin/order-view.phtml:59
+#: template/front/detail.phtml:97 template/front/invoice-print.phtml:88
+#: template/front/invoice.phtml:60 template/front/list.phtml:45
 msgid "Phone"
 msgstr "تلفن"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:120
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:98
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:80
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:69
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:54
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:46
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:90
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:80
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:54
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:40
+#: src/Form/OrderForm.php:120 src/Form/OrderSettingForm.php:98
+#: template/admin/invoice-print.phtml:92
+#: template/admin/invoice-update.phtml:49 template/admin/invoice-view.phtml:94
+#: template/admin/order-print.phtml:60 template/admin/order-view.phtml:63
+#: template/front/detail.phtml:101 template/front/invoice-print.phtml:92
+#: template/front/invoice.phtml:64 template/front/list.phtml:49
 msgid "Mobile"
 msgstr "موبایل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:135
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:186
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:43
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:49
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:93
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:43
+#: src/Form/OrderForm.php:135 src/Form/OrderSettingForm.php:186
+#: template/admin/invoice-update.phtml:53 template/admin/order-print.phtml:46
+#: template/admin/order-view.phtml:67 template/front/detail.phtml:105
+#: template/front/list.phtml:53
 msgid "Company"
 msgstr "شرکت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:149
+#: src/Form/OrderForm.php:149
 msgid "Company id"
 msgstr "کد اقتصادی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:160
+#: src/Form/OrderForm.php:160
 msgid "Company vat"
 msgstr "کد مالیات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:173
+#: src/Form/OrderForm.php:173
 msgid "Delivery address"
 msgstr "آدرس تحویل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:187
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:48
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:75
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:25
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:69
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:57
+#: src/Form/OrderForm.php:187 template/admin/invoice-update.phtml:21
+#: template/admin/invoice-view.phtml:66 template/admin/order-print.phtml:87
+#: template/admin/order-view.phtml:35 template/front/detail.phtml:73
+#: template/front/list.phtml:71
 msgid "Address 2"
 msgstr "آدرس ۲"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:202
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:210
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:100
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:57
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:66
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:34
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:78
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:100
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:74
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:26
+#: src/Form/OrderForm.php:208 src/Form/OrderForm.php:216
+#: template/admin/invoice-print.phtml:117
+#: template/admin/invoice-update.phtml:33 template/admin/invoice-view.phtml:78
+#: template/admin/order-print.phtml:75 template/admin/order-view.phtml:47
+#: template/front/detail.phtml:85 template/front/invoice-print.phtml:117
+#: template/front/invoice.phtml:89 template/front/list.phtml:31
 msgid "Country"
 msgstr "کشور"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:224
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:97
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:54
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:63
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:31
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:75
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:97
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:71
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:23
+#: src/Form/OrderForm.php:230 template/admin/invoice-print.phtml:113
+#: template/admin/invoice-update.phtml:29 template/admin/invoice-view.phtml:74
+#: template/admin/order-print.phtml:71 template/admin/order-view.phtml:43
+#: template/front/detail.phtml:81 template/front/invoice-print.phtml:113
+#: template/front/invoice.phtml:85 template/front/list.phtml:27
 msgid "State"
 msgstr "استان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:238
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:120
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:94
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:51
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:60
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:28
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:72
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:94
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:68
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:20
+#: src/Form/OrderForm.php:244 src/Form/OrderSettingForm.php:120
+#: template/admin/invoice-print.phtml:109
+#: template/admin/invoice-update.phtml:25 template/admin/invoice-view.phtml:70
+#: template/admin/order-print.phtml:67 template/admin/order-view.phtml:39
+#: template/front/detail.phtml:77 template/front/invoice-print.phtml:109
+#: template/front/invoice.phtml:81 template/front/list.phtml:23
 msgid "City"
 msgstr "شهر"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:252
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:175
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:103
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:60
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:69
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:37
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:81
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:103
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:77
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:29
+#: src/Form/OrderForm.php:258 src/Form/OrderSettingForm.php:175
+#: template/admin/invoice-print.phtml:121
+#: template/admin/invoice-update.phtml:37 template/admin/invoice-view.phtml:82
+#: template/admin/order-print.phtml:79 template/admin/order-view.phtml:51
+#: template/front/detail.phtml:89 template/front/invoice-print.phtml:121
+#: template/front/invoice.phtml:93 template/front/list.phtml:35
 msgid "Zip code"
 msgstr "کد پستی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:267
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:117
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:126
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:141
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:141
+#: src/Form/OrderForm.php:273 template/admin/order-view.phtml:193
+#: template/admin/order-view.phtml:205 template/admin/order-view.phtml:224
+#: template/front/detail.phtml:181
 msgid "Packing"
 msgstr "بسته بندی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:283
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:169
+#: src/Form/OrderForm.php:289 template/front/checkout.phtml:194
 msgid "Location"
 msgstr "مکان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:296
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:72
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:19
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:112
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:170
+#: src/Form/OrderForm.php:302 src/Form/OrderSettingForm.php:72
+#: src/Form/UpdateDeliveryForm.php:41 template/admin/order-index.phtml:19
+#: template/admin/order-view.phtml:183 template/front/checkout.phtml:196
 msgid "Delivery"
 msgstr "روش تحویل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:385
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:90
+#: src/Form/OrderForm.php:391 template/admin/invoice-update.phtml:122
+#: template/admin/order-view.phtml:136
 msgid "User note"
 msgstr "توضیح مشتری"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:401
+#: src/Form/OrderForm.php:407
 msgid "Update your profile by this informations?"
 msgstr "حساب کاربری شما با اطلاعات وارد شده در این فرم به روز شود؟"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:413
+#: src/Form/OrderForm.php:419
 msgid "Promo"
 msgstr "کد تخفیف"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:424
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:440
+#: src/Form/OrderForm.php:429
 msgid "Terms & Conditions"
 msgstr "شرایط و مقررات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:432
+#: src/Form/OrderForm.php:430
 #, php-format
 msgid "Accept %s"
 msgstr "تایید %s"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:450
-msgid "Accept Terms & Conditions"
-msgstr "تایید شرایط و مقررات"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:460
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:160
+#: src/Form/OrderForm.php:445 template/front/invoice.phtml:186
+#: template/front/invoice.phtml:188
 msgid "Pay"
 msgstr "پرداخت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderForm.php:462
+#: src/Form/OrderForm.php:447
 msgid "Save order"
 msgstr "ثبت سفارش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:57
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:15
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:96
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:57
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:31
+#: src/Form/OrderSettingForm.php:41 src/Form/UpdateOrderForm.php:41
+#: template/admin/invoice-print.phtml:60 template/admin/invoice-view.phtml:18
+#: template/admin/order-view.phtml:155 template/front/invoice-print.phtml:60
+#: template/front/invoice.phtml:34
 msgid "Order"
 msgstr "سفارش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:59
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:18
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:104
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:171
+#: src/Form/OrderSettingForm.php:59 src/Form/UpdatePaymentForm.php:41
+#: template/admin/order-index.phtml:18 template/admin/order-view.phtml:169
+#: template/front/checkout.phtml:198
 msgid "Payment"
 msgstr "پرداخت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/OrderSettingForm.php:87
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:14
+#: src/Form/OrderSettingForm.php:87 template/admin/order-index.phtml:14
 msgid "Code"
 msgstr "کد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/RemoveForm.php:39
+#: src/Form/RemoveForm.php:39
 msgid "Attention"
 msgstr "توجه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/RemoveForm.php:43
+#: src/Form/RemoveForm.php:43
 msgid ""
 "You have another open payment process, if have have another page for online "
 "payment, please fish for courent payment and after that start new one. But "
@@ -743,993 +662,895 @@ msgstr ""
 "تراکنش های معلق در سیستم رو حذف کنید تا بتوانید پرداخت جدید داشته باشید. در "
 "غیر این صورت حداقل ۱۵ دقیقه صبر کرده و مججد تلاش کنید."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/RemoveForm.php:52
+#: src/Form/RemoveForm.php:52
 msgid "Conferm"
 msgstr "تایید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateDeliveryForm.php:56
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdateOrderForm.php:58
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Form/UpdatePaymentForm.php:62
+#: src/Form/UpdateDeliveryForm.php:56 src/Form/UpdateOrderForm.php:58
+#: src/Form/UpdatePaymentForm.php:62
 msgid "Update"
 msgstr "به روز رسانی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:30
+#: src/Gateway/Mellat/Gateway.php:30
 msgid "Bank Mellat (Iran)"
 msgstr "بانک ملت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:48
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:48
+#: src/Gateway/Mellat/Gateway.php:48 src/Gateway/Paypal/Gateway.php:48
 msgid "path"
 msgstr "مسیر"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:55
+#: src/Gateway/Mellat/Gateway.php:55
 msgid "pin"
 msgstr "شماره پایانه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:62
+#: src/Gateway/Mellat/Gateway.php:62
 msgid "username"
 msgstr "نام کاربری"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:69
+#: src/Gateway/Mellat/Gateway.php:69
 msgid "password"
 msgstr "واژه رمز"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:182
-msgid "Your order id not true."
-msgstr "شماره سفارش شما صحیح نیست."
+#: src/Gateway/Mellat/Gateway.php:213
+msgid "bpVerifyRequest method is null"
+msgstr "روش تایید bpVerifyRequest خالی است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:193
+#: src/Gateway/Mellat/Gateway.php:242
 #, php-format
 msgid "Your track code is : %s"
 msgstr "کد پیگیری تراکنش شما %s می باشد."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:210
+#: src/Gateway/Mellat/Gateway.php:258
+msgid "Bank Mellat error empty"
+msgstr "خطا در بانک ملت ، مقدار دریافتی از بانک خالی است"
+
+#: src/Gateway/Mellat/Gateway.php:263
 msgid "Bank Mellat error 0"
 msgstr "سرور بانک دچار مشکل می باشد."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:214
+#: src/Gateway/Mellat/Gateway.php:267
 msgid "Bank Mellat error 41"
 msgstr "شماره درخواست تکراری است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:218
+#: src/Gateway/Mellat/Gateway.php:271
 msgid "Bank Mellat error 43"
 msgstr "عملیات قبلا انجام شده است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:222
+#: src/Gateway/Mellat/Gateway.php:275
 msgid "Bank Mellat error 17"
 msgstr "لغو عملیات پرداخت توسط کاربر صورت گرفته است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:226
+#: src/Gateway/Mellat/Gateway.php:279
 msgid "Bank Mellat error 415"
 msgstr "زمان شما برای انجام عملیات پرداخت به پایان رسیده است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:230
+#: src/Gateway/Mellat/Gateway.php:283
 msgid "Bank Mellat error 417"
 msgstr "شناسه پرداخت کننده نامعتبر است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:234
+#: src/Gateway/Mellat/Gateway.php:287
 msgid "Bank Mellat error 11"
 msgstr "شماره كارت نامعتبر است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:238
+#: src/Gateway/Mellat/Gateway.php:291
 msgid "Bank Mellat error 12"
 msgstr "موجودي كافي نيست."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:242
+#: src/Gateway/Mellat/Gateway.php:295
 msgid "Bank Mellat error 13"
 msgstr "رمز نادرست است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:246
+#: src/Gateway/Mellat/Gateway.php:299
 msgid "Bank Mellat error 14"
 msgstr "تعداد دفعات وارد كردن رمز بيش از حد مجاز است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:250
+#: src/Gateway/Mellat/Gateway.php:303
 msgid "Bank Mellat error 15"
 msgstr "كارت نامعتبر است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:254
+#: src/Gateway/Mellat/Gateway.php:307
 msgid "Bank Mellat error 16"
 msgstr "دفعات برداشت وجه بيش از حد مجاز است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:258
+#: src/Gateway/Mellat/Gateway.php:311
 msgid "Bank Mellat error 18"
 msgstr "تاريخ انقضاي كارت گذشته است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:262
+#: src/Gateway/Mellat/Gateway.php:315
 msgid "Bank Mellat error 19"
 msgstr "مبلغ برداشت وجه بيش از حد مجاز است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:266
+#: src/Gateway/Mellat/Gateway.php:319
 msgid "Bank Mellat error 111"
 msgstr "صادر كننده كارت نامعتبر است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:270
+#: src/Gateway/Mellat/Gateway.php:323
 msgid "Bank Mellat error 112"
 msgstr "خطاي سوييچ صادر كننده كارت."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:274
+#: src/Gateway/Mellat/Gateway.php:327
 msgid "Bank Mellat error 113"
 msgstr "پاسخي از صادر كننده كارت دريافت نشد."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:278
+#: src/Gateway/Mellat/Gateway.php:331
 msgid "Bank Mellat error 114"
 msgstr "دارنده كارت مجاز به انجام اين تراكنش نيست."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:282
+#: src/Gateway/Mellat/Gateway.php:335
 msgid "Bank Mellat error 21"
 msgstr "پذيرنده نامعتبر است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:286
+#: src/Gateway/Mellat/Gateway.php:339
 msgid "Bank Mellat error 23"
 msgstr "خطاي امنيتي رخ داده است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:290
+#: src/Gateway/Mellat/Gateway.php:343
 msgid "Bank Mellat error 24"
 msgstr "اطلاعات كاربري پذيرنده نامعتبر است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:294
+#: src/Gateway/Mellat/Gateway.php:347
 msgid "Bank Mellat error 25"
 msgstr "مبلغ نامعتبر است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:298
+#: src/Gateway/Mellat/Gateway.php:351
 msgid "Bank Mellat error 31"
 msgstr "پاسخ نامعتبر است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:302
+#: src/Gateway/Mellat/Gateway.php:355
 msgid "Bank Mellat error 32"
 msgstr "فرمت اطلاعات وارد شده صحيح نمي باشد."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:306
+#: src/Gateway/Mellat/Gateway.php:359
 msgid "Bank Mellat error 33"
 msgstr "حساب نامعتبر است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:310
+#: src/Gateway/Mellat/Gateway.php:363
 msgid "Bank Mellat error 34"
 msgstr "خطاي سيستمي."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:314
+#: src/Gateway/Mellat/Gateway.php:367
 msgid "Bank Mellat error 35"
 msgstr "تاريخ نامعتبر است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:318
+#: src/Gateway/Mellat/Gateway.php:371
 msgid "Bank Mellat error 42"
 msgstr "خریدی با این شماره درخواست یافت نشد."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:322
+#: src/Gateway/Mellat/Gateway.php:375
 msgid "Bank Mellat error 44"
 msgstr "کسر پول از حساب مشتری صورت نگرفته است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:326
+#: src/Gateway/Mellat/Gateway.php:379
 msgid "Bank Mellat error 45"
 msgstr "واریز پول قبلا انجام شده است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:330
+#: src/Gateway/Mellat/Gateway.php:383
 msgid "Bank Mellat error 46"
 msgstr "واریز پول به حساب پذیرنده انجام نشده است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:334
+#: src/Gateway/Mellat/Gateway.php:387
 msgid "Bank Mellat error 47"
 msgstr "واریز پول به حساب پذیرنده انجام نشده است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:338
+#: src/Gateway/Mellat/Gateway.php:391
 msgid "Bank Mellat error 48"
 msgstr "پول مشتری به حساب او بازگشت داده شده است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:342
+#: src/Gateway/Mellat/Gateway.php:395
 msgid "Bank Mellat error 49"
 msgstr "تراکنش استرداد وجه دلخواه یافت نشد."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:346
+#: src/Gateway/Mellat/Gateway.php:399
 msgid "Bank Mellat error 412"
 msgstr "شناسه قبض نادرست است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:350
+#: src/Gateway/Mellat/Gateway.php:403
 msgid "Bank Mellat error 413"
 msgstr "شناسه پرداخت نادرست است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:354
+#: src/Gateway/Mellat/Gateway.php:407
 msgid "Bank Mellat error 414"
 msgstr "سازمان صادر كننده قبض نامعتبر است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:358
+#: src/Gateway/Mellat/Gateway.php:411
 msgid "Bank Mellat error 416"
 msgstr "در ثبت اطلاعات پرداخت شما در بانک ملت خطایی رخ داده است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:362
+#: src/Gateway/Mellat/Gateway.php:415
 msgid "Bank Mellat error 418"
 msgstr "در تعریف اطلاعات شما نزد بانک ملت خطایی پدید آمده است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:366
+#: src/Gateway/Mellat/Gateway.php:419
 msgid "Bank Mellat error 419"
 msgstr "تعداد دفعات ورود اطلاعات از حد مجاز گذشته است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:370
+#: src/Gateway/Mellat/Gateway.php:423
 msgid "Bank Mellat error 421"
 msgstr "IP نامعتبر است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:374
+#: src/Gateway/Mellat/Gateway.php:427
 msgid "Bank Mellat error 51"
 msgstr "تراکنش تکراری است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:378
+#: src/Gateway/Mellat/Gateway.php:431
 msgid "Bank Mellat error 54"
 msgstr "تراکنش مرجع موجود نیست."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:382
+#: src/Gateway/Mellat/Gateway.php:435
 msgid "Bank Mellat error 55"
 msgstr "تراکنش نامعتبر است."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:386
+#: src/Gateway/Mellat/Gateway.php:439
 msgid "Bank Mellat error 61"
 msgstr "خطا در واریز وجه."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Mellat/Gateway.php:390
+#: src/Gateway/Mellat/Gateway.php:443
 #, php-format
 msgid "Bank Mellat error %s"
 msgstr "شماره خطای اعلام شده توسط بانک: %s"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:30
+#: src/Gateway/Paypal/Gateway.php:30
 msgid "Paypal"
 msgstr "پی پال"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:55
+#: src/Gateway/Paypal/Gateway.php:55
 msgid "Paypal email address"
 msgstr "آدرس ایمیل Paypal"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:62
+#: src/Gateway/Paypal/Gateway.php:62
 msgid "Paypal currency"
 msgstr "واحد پول Paypal"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:69
+#: src/Gateway/Paypal/Gateway.php:69
 msgid "Paypal currency symbol"
 msgstr "نماد واحد پول"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:76
+#: src/Gateway/Paypal/Gateway.php:76
 msgid "Location code (ex GB)"
 msgstr "کد مکان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:83
+#: src/Gateway/Paypal/Gateway.php:83
 msgid "Custom attribute"
 msgstr "اطلاعات اضافی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:90
+#: src/Gateway/Paypal/Gateway.php:90
 msgid "Test mode by sandbox"
 msgstr "روش تستی با sandbox"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:97
+#: src/Gateway/Paypal/Gateway.php:97
 msgid "Username for sandbox"
 msgstr "نام کاربری sandbox"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:104
+#: src/Gateway/Paypal/Gateway.php:104
 msgid "Password for sandbox"
 msgstr "واژه رمز sandbox"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:111
+#: src/Gateway/Paypal/Gateway.php:111
 msgid "Signature for sandbox"
 msgstr "امضای sandbox"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Gateway/Paypal/Gateway.php:416
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:60
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/result.phtml:4
+#: src/Gateway/Paypal/Gateway.php:416 template/admin/log-index.phtml:65
+#: template/front/result.phtml:4
 msgid "Error"
 msgstr "خطا"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/src/Validator/Term.php:36
+#: src/Validator/Term.php:36
 msgid "You need accept our Terms & Conditions for checkout"
 msgstr "به منظور ثبت سفارش ، باید شرایط و مقررات فروش ما را بپذیرید."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:4
+#: template/admin/delivery-index.phtml:4 template/admin/delivery-index.phtml:6
 msgid "Add delivery methods"
 msgstr "درج روش تحویل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:6
+#: template/admin/delivery-index.phtml:9
 msgid "List of Delivery methods"
 msgstr "فهرست روش های تحویل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:10
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:12
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:10
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:7
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:13
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:176
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:176
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:65
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:86
+#: template/admin/delivery-index.phtml:13
+#: template/admin/invoice-index.phtml:13
+#: template/admin/location-index.phtml:13 template/admin/log-index.phtml:7
+#: template/admin/order-index.phtml:13 template/admin/order-view.phtml:144
+#: template/admin/order-view.phtml:264 template/front/detail.phtml:220
+#: template/front/list.phtml:80 template/front/list.phtml:103
 msgid "ID"
 msgstr "شناسه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:12
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:17
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:12
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:20
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:181
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:181
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:69
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:91
+#: template/admin/delivery-index.phtml:15
+#: template/admin/invoice-index.phtml:18
+#: template/admin/location-index.phtml:15 template/admin/order-index.phtml:20
+#: template/admin/order-view.phtml:269 template/front/detail.phtml:225
+#: template/front/list.phtml:84 template/front/list.phtml:108
 msgid "Action"
 msgstr "عملکرد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:26
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:30
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:36
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:26
+#: template/admin/delivery-index.phtml:31
+#: template/admin/delivery-index.phtml:33
+#: template/admin/gateway-index.phtml:32 template/admin/gateway-index.phtml:33
+#: template/admin/gateway-index.phtml:40 template/admin/gateway-index.phtml:41
+#: template/admin/location-index.phtml:31
+#: template/admin/location-index.phtml:33
 msgid "Edit"
 msgstr "ویرایش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:32
+#: template/admin/delivery-index.phtml:39
 msgid "No delivery methods is not created yet"
 msgstr "هیچ روش تحویلی هنوز ایجاد نشده است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:34
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:62
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:34
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:65
+#: template/admin/delivery-index.phtml:41
+#: template/admin/invoice-index.phtml:71
+#: template/admin/location-index.phtml:41 template/admin/log-index.phtml:70
 msgid "Todo list for fist time"
 msgstr "فهرست موارد لازم الجرا برای اولین استفاده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:36
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:64
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:36
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:67
+#: template/admin/delivery-index.phtml:43
+#: template/admin/invoice-index.phtml:73
+#: template/admin/location-index.phtml:43 template/admin/log-index.phtml:72
 msgid "1- Setup payment gateway from gateway tap"
 msgstr "۱- تنظیم اطلاعات دروازه پرداخت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:37
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:65
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:37
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:68
+#: template/admin/delivery-index.phtml:44
+#: template/admin/invoice-index.phtml:74
+#: template/admin/location-index.phtml:44 template/admin/log-index.phtml:73
 msgid "2- Setup delivery method from delivery tap"
 msgstr "۲- تنظیم روش تحویل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/delivery-index.phtml:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:66
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:69
+#: template/admin/delivery-index.phtml:45
+#: template/admin/invoice-index.phtml:75
+#: template/admin/location-index.phtml:45 template/admin/log-index.phtml:74
 msgid "3- Setup location from location tap"
 msgstr "۳- تنظیم مکان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:3
+#: template/admin/gateway-index.phtml:3
 msgid "List of all available gateways"
 msgstr "فهرست پایانه های پرداخت در دسترس"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:10
+#: template/admin/gateway-index.phtml:11
 msgid "Description"
 msgstr "توضیحات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:11
+#: template/admin/gateway-index.phtml:12
 msgid "Version"
 msgstr "نسخه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:12
+#: template/admin/gateway-index.phtml:13
 msgid "Author"
 msgstr "سازنده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:13
+#: template/admin/gateway-index.phtml:14
 msgid "Credits"
 msgstr "کریدیت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:14
+#: template/admin/gateway-index.phtml:15
 msgid "Release Date"
 msgstr "تاریخ انتشار"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:31
+#: template/admin/gateway-index.phtml:34
 msgid "Inactive"
 msgstr "غیر فعال"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:32
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:38
+#: template/admin/gateway-index.phtml:35 template/admin/gateway-index.phtml:36
+#: template/admin/gateway-index.phtml:43 template/admin/gateway-index.phtml:44
 msgid "UnInstall"
 msgstr "خارج کردن از نصب"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:37
+#: template/admin/gateway-index.phtml:42
 msgid "Active"
 msgstr "فعال"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/gateway-index.phtml:43
+#: template/admin/gateway-index.phtml:49 template/admin/gateway-index.phtml:50
 msgid "Install"
 msgstr "نصب"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:5
+#: template/admin/invoice-index.phtml:6
 msgid "Filter invoices"
 msgstr "فیلتر کردن فاکتور ها"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:8
+#: template/admin/invoice-index.phtml:9
 msgid "List of invoices"
 msgstr "فهرست فاکتور ها"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:13
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:156
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:87
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:10
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:156
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:131
+#: template/admin/invoice-index.phtml:14
+#: template/admin/invoice-print.phtml:179
+#: template/admin/invoice-view.phtml:124 template/admin/log-index.phtml:10
+#: template/front/invoice-print.phtml:179 template/front/invoice.phtml:153
 msgid "Amount"
 msgstr "مقدار"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:14
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:12
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:178
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:178
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:88
+#: template/admin/invoice-index.phtml:15 template/admin/log-index.phtml:12
+#: template/admin/order-view.phtml:266 template/front/detail.phtml:222
+#: template/front/list.phtml:105
 msgid "Time Create"
 msgstr "زمان ایجاد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:15
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:64
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:179
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:179
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:64
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:89
-msgid "Due date"
-msgstr "سررسید پرداخت"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:16
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:180
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:180
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:90
+#: template/admin/invoice-index.phtml:17 template/admin/order-view.phtml:268
+#: template/front/detail.phtml:224 template/front/list.phtml:107
 msgid "Time pay"
 msgstr "زمان پرداخت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:46
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:54
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:78
+#: template/admin/invoice-index.phtml:49 template/admin/invoice-index.phtml:51
+#: template/admin/order-index.phtml:61 template/admin/order-index.phtml:63
+#: template/admin/order-view.phtml:299 template/admin/order-view.phtml:301
+#: template/front/list.phtml:93 template/front/list.phtml:95
 msgid "View"
 msgstr "مشاهده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:47
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:73
+#: template/admin/invoice-index.phtml:52 template/admin/invoice-index.phtml:54
+#: template/admin/invoice-view.phtml:99 template/admin/invoice-view.phtml:101
 msgid "View order"
 msgstr "نمایش سفارش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:48
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:155
+#: template/admin/invoice-index.phtml:55 template/admin/invoice-index.phtml:57
+#: template/front/invoice.phtml:179 template/front/invoice.phtml:181
 msgid "Print invoice"
 msgstr "چاپ فاکتور"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:56
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:63
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:11
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:59
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:216
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:216
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:63
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:37
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:126
+#: template/admin/invoice-index.phtml:65 template/admin/invoice-print.phtml:69
+#: template/admin/invoice-view.phtml:12 template/admin/log-index.phtml:64
+#: template/admin/order-view.phtml:311 template/front/detail.phtml:264
+#: template/front/invoice-print.phtml:69 template/front/invoice.phtml:42
+#: template/front/list.phtml:147
 msgid "Unpaid"
 msgstr "پرداخت نشده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:57
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:66
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:13
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:217
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:217
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:66
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:40
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:127
+#: template/admin/invoice-index.phtml:66 template/admin/invoice-print.phtml:73
+#: template/admin/invoice-view.phtml:14 template/admin/order-view.phtml:312
+#: template/front/detail.phtml:265 template/front/invoice-print.phtml:73
+#: template/front/invoice.phtml:46 template/front/list.phtml:148
 msgid "Canceled"
 msgstr "لغو شده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-index.phtml:60
+#: template/admin/invoice-index.phtml:69
 msgid "No invoice is not created yet"
 msgstr "هنوز هیچ فاکتوری ایجاد نشده است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:32
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:3
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:32
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:8
+#: template/admin/invoice-print.phtml:32 template/admin/invoice-view.phtml:3
+#: template/front/invoice-print.phtml:32 template/front/invoice.phtml:8
 #, php-format
 msgid "Invoice %s"
 msgstr "فاکتور %s"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:53
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:53
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:27
+#: template/admin/invoice-print.phtml:53 template/front/invoice-print.phtml:53
+#: template/front/invoice.phtml:27
 msgid "Order date"
 msgstr "تاریخ ثبت سفارش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:54
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:54
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:28
+#: template/admin/invoice-print.phtml:56 template/front/invoice-print.phtml:56
+#: template/front/invoice.phtml:30
 msgid "Invoice date"
 msgstr "تاریخ ساخت فاکتور"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:61
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:67
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:61
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:67
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:35
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:41
+#: template/admin/invoice-print.phtml:66 template/admin/invoice-print.phtml:74
+#: template/front/invoice-print.phtml:66 template/front/invoice-print.phtml:74
+#: template/front/invoice.phtml:40 template/front/invoice.phtml:47
 msgid "On"
 msgstr "در"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:71
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:39
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:37
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:16
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:60
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:71
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:45
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:14
+#: template/admin/invoice-print.phtml:79 template/admin/invoice-update.phtml:8
+#: template/admin/invoice-view.phtml:53 template/admin/order-print.phtml:37
+#: template/admin/order-view.phtml:22 template/admin/order-view.phtml:150
+#: template/front/detail.phtml:60 template/front/invoice-print.phtml:79
+#: template/front/invoice.phtml:51 template/front/list.phtml:14
 msgid "Name"
 msgstr "نام"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:87
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:87
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:61
+#: template/admin/invoice-print.phtml:101
+#: template/front/invoice-print.phtml:101 template/front/invoice.phtml:73
 msgid "Address"
 msgstr "آدرس"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:109
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:134
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:134
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:109
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:82
+#: template/admin/invoice-print.phtml:128 template/admin/order-view.phtml:217
+#: template/front/detail.phtml:174 template/front/invoice-print.phtml:128
+#: template/front/invoice.phtml:99
 msgid "This order products or services list"
 msgstr "فهرست محصولات و خدمات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:112
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:84
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:279
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:406
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:533
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:112
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:85
+#: template/admin/invoice-print.phtml:131 template/admin/order-print.phtml:97
+#: template/admin/order-print.phtml:294 template/admin/order-print.phtml:422
+#: template/admin/order-print.phtml:550 template/front/invoice-print.phtml:131
+#: template/front/invoice.phtml:102
 msgid "Row"
 msgstr "ردیف"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:113
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:137
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:137
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:113
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:86
+#: template/admin/invoice-print.phtml:132 template/admin/order-view.phtml:220
+#: template/front/detail.phtml:177 template/front/invoice-print.phtml:132
+#: template/front/invoice.phtml:103
 msgid "Product"
 msgstr "محصول"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:114
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:86
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:281
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:408
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:535
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:138
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:138
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:97
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:114
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:87
+#: template/admin/invoice-print.phtml:133 template/admin/order-print.phtml:99
+#: template/admin/order-print.phtml:296 template/admin/order-print.phtml:424
+#: template/admin/order-print.phtml:552 template/admin/order-view.phtml:221
+#: template/front/detail.phtml:178 template/front/installment.phtml:101
+#: template/front/invoice-print.phtml:133 template/front/invoice.phtml:104
 msgid "Number"
 msgstr "تعداد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:116
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:163
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:125
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:140
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:140
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:116
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:163
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:89
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:138
+#: template/admin/invoice-print.phtml:135
+#: template/admin/invoice-print.phtml:186 template/admin/order-view.phtml:203
+#: template/admin/order-view.phtml:223 template/front/detail.phtml:180
+#: template/front/invoice-print.phtml:135
+#: template/front/invoice-print.phtml:186 template/front/invoice.phtml:106
+#: template/front/invoice.phtml:160
 msgid "Shipping"
 msgstr "هزینه ارسال"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:117
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:167
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:142
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:142
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:117
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:167
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:90
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:142
+#: template/admin/invoice-print.phtml:136
+#: template/admin/invoice-print.phtml:190 template/admin/order-view.phtml:225
+#: template/front/detail.phtml:182 template/front/invoice-print.phtml:136
+#: template/front/invoice-print.phtml:190 template/front/invoice.phtml:107
+#: template/front/invoice.phtml:164
 msgid "Vat"
 msgstr "مالیات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:118
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:100
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:193
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:296
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:379
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:423
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:506
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:550
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:633
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:127
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:143
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:143
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:112
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:118
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:91
+#: template/admin/invoice-print.phtml:137 template/admin/order-print.phtml:113
+#: template/admin/order-print.phtml:207 template/admin/order-print.phtml:312
+#: template/admin/order-print.phtml:395 template/admin/order-print.phtml:440
+#: template/admin/order-print.phtml:523 template/admin/order-print.phtml:568
+#: template/admin/order-print.phtml:651 template/admin/order-view.phtml:207
+#: template/admin/order-view.phtml:226 template/front/detail.phtml:183
+#: template/front/installment.phtml:116 template/front/invoice-print.phtml:137
+#: template/front/invoice.phtml:108
 msgid "Total"
 msgstr "مجموع"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:149
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:149
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:124
+#: template/admin/invoice-print.phtml:171
+#: template/front/invoice-print.phtml:171 template/front/invoice.phtml:145
 msgid "Payment price"
 msgstr "مبلغ قابل پرداخت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:152
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:152
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:127
+#: template/admin/invoice-print.phtml:175
+#: template/front/invoice-print.phtml:175 template/front/invoice.phtml:149
 msgid "Total invoice price"
 msgstr "مجموع مبلغ فاکتور"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:159
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:159
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:134
+#: template/admin/invoice-print.phtml:182
+#: template/front/invoice-print.phtml:182 template/front/invoice.phtml:156
 msgid "Product price ex VAT"
 msgstr "قیمت محصول"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:171
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice-print.phtml:171
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:146
+#: template/admin/invoice-print.phtml:194
+#: template/front/invoice-print.phtml:194 template/front/invoice.phtml:168
 msgid "Total all taxes included"
 msgstr "مجموع قیمت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:179
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:655
+#: template/admin/invoice-print.phtml:203 template/admin/order-print.phtml:673
 msgid "Seller signature"
 msgstr "امضای فروشنده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-print.phtml:182
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:660
+#: template/admin/invoice-print.phtml:206 template/admin/order-print.phtml:678
 msgid "Buyer signature"
 msgstr "امضای خریدار"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:16
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:84
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:68
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:112
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:68
-msgid "Gateway"
-msgstr "دروازه"
+#: template/admin/invoice-update.phtml:2
+msgid "Update invoice"
+msgstr "به روز رسانی فاکتور"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:17
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:85
-msgid "Create"
-msgstr "زمان ایجاد"
+#: template/admin/invoice-update.phtml:4
+msgid "Order info"
+msgstr "اطلاعات سفارش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:19
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:70
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:114
-msgid "Product price"
-msgstr "قیمت محصول"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:22
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:73
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:117
-msgid "Shipping price"
-msgstr "هزینه ارسال"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:25
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:76
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:120
-msgid "Packing price"
-msgstr "هزینه بسته بندی"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:28
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:79
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:123
-msgid "Vat price"
-msgstr "مالیات"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:31
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:16
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:82
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:126
-msgid "Total price"
-msgstr "مجموع قیمت"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:34
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:85
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:129
-msgid "Paid price"
-msgstr "مبلغ پرداخت شده"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:45
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:72
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:22
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:66
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:54
+#: template/admin/invoice-update.phtml:17 template/admin/invoice-view.phtml:62
+#: template/admin/order-print.phtml:83 template/admin/order-view.phtml:31
+#: template/front/detail.phtml:69 template/front/list.phtml:67
 msgid "Address 1"
 msgstr "آدرس"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:79
+#: template/admin/invoice-update.phtml:57 template/admin/order-view.phtml:71
+#: template/front/detail.phtml:109 template/front/list.phtml:57
+msgid "Company ID"
+msgstr "کد اقتصادی"
+
+#: template/admin/invoice-update.phtml:61 template/admin/order-view.phtml:75
+#: template/front/detail.phtml:113 template/front/list.phtml:61
+msgid "Company VAT"
+msgstr "کد مالیات"
+
+#: template/admin/invoice-update.phtml:66 template/admin/order-view.phtml:80
+#: template/front/detail.phtml:118
+msgid "Order status"
+msgstr "وضعیت سفارش"
+
+#: template/admin/invoice-update.phtml:72 template/admin/order-view.phtml:86
+#: template/front/detail.phtml:124
+msgid "Delivery status"
+msgstr "وضعیت ارسال"
+
+#: template/admin/invoice-update.phtml:75 template/admin/order-view.phtml:89
+#: template/front/detail.phtml:127 template/front/list.phtml:81
+msgid "Time create"
+msgstr "تاریخ ایجاد"
+
+#: template/admin/invoice-update.phtml:78 template/admin/order-view.phtml:92
+#: template/front/detail.phtml:130
+msgid "Time payment"
+msgstr "تاریخ پرداخت"
+
+#: template/admin/invoice-update.phtml:81 template/admin/order-view.phtml:95
+#: template/front/detail.phtml:133
+msgid "Time delivery"
+msgstr "تاریخ تحویل"
+
+#: template/admin/invoice-update.phtml:84 template/admin/order-view.phtml:98
+#: template/front/detail.phtml:136
+msgid "Time finish"
+msgstr "تاریخ تکمیل"
+
+#: template/admin/invoice-update.phtml:87 template/admin/order-view.phtml:101
+#: template/front/detail.phtml:139
+msgid "Time start"
+msgstr "تاریخ شروع"
+
+#: template/admin/invoice-update.phtml:90 template/admin/order-view.phtml:104
+#: template/front/detail.phtml:142
+msgid "Time end"
+msgstr "تاریخ پایان"
+
+#: template/admin/invoice-update.phtml:93 template/admin/invoice-view.phtml:21
+#: template/admin/invoice-view.phtml:117 template/admin/order-view.phtml:107
+#: template/front/detail.phtml:145 template/front/list.phtml:83
+msgid "Gateway"
+msgstr "دروازه"
+
+#: template/admin/invoice-update.phtml:112
+#: template/admin/invoice-view.phtml:43 template/admin/order-index.phtml:16
+#: template/admin/order-view.phtml:126 template/front/detail.phtml:164
+msgid "Total price"
+msgstr "مجموع قیمت"
+
+#: template/admin/invoice-update.phtml:116
+#: template/admin/invoice-view.phtml:47 template/admin/order-view.phtml:130
+#: template/front/detail.phtml:168
+msgid "Paid price"
+msgstr "مبلغ پرداخت شده"
+
+#: template/admin/invoice-view.phtml:24 template/admin/invoice-view.phtml:119
+msgid "Create"
+msgstr "زمان ایجاد"
+
+#: template/admin/invoice-view.phtml:102 template/admin/invoice-view.phtml:104
+#: template/admin/order-view.phtml:302 template/admin/order-view.phtml:304
+#: template/admin/order-view.phtml:327 template/admin/order-view.phtml:329
+msgid "Print"
+msgstr "چاپ"
+
+#: template/admin/invoice-view.phtml:110
 msgid "Logs"
 msgstr "گزارش ها"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:82
+#: template/admin/invoice-view.phtml:113
 msgid "Id"
 msgstr "شناسه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:83
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:8
+#: template/admin/invoice-view.phtml:115 template/admin/log-index.phtml:8
 msgid "Invoice"
 msgstr "فاکتور"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:86
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:11
+#: template/admin/invoice-view.phtml:122 template/admin/log-index.phtml:11
+#: template/admin/order-view.phtml:142
 msgid "User"
 msgstr "کاربر"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:88
+#: template/admin/invoice-view.phtml:126
 msgid "Authority"
 msgstr "اعتبار"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:90
+#: template/admin/invoice-view.phtml:130
 msgid "Ip"
 msgstr "آی پی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/invoice-view.phtml:91
+#: template/admin/invoice-view.phtml:132
 msgid "Message"
 msgstr "پیام"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:4
+#: template/admin/location-index.phtml:4 template/admin/location-index.phtml:6
 msgid "Add Location"
 msgstr "مکان جدید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:6
+#: template/admin/location-index.phtml:9
 msgid "List of Location"
 msgstr "فهرست مکان ها"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/location-index.phtml:32
+#: template/admin/location-index.phtml:39
 msgid "No location is not created yet"
 msgstr "هنوز هیچ مکانی ایجاد نشده است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:3
+#: template/admin/log-index.phtml:3
 msgid "List of logs"
 msgstr "فهرست گزارش ها"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:13
+#: template/admin/log-index.phtml:13
 msgid "Details"
 msgstr "جزییات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:34
+#: template/admin/log-index.phtml:36
 msgid "Show details"
 msgstr "نمایش جزئیات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:41
+#: template/admin/log-index.phtml:45
 msgid "Log details"
 msgstr "جزئیات گزارش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/log-index.phtml:63
+#: template/admin/log-index.phtml:68
 msgid "No invoice is not set yet"
 msgstr "هنوز هیچ فاکتوری ایجاد نشده است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:7
+#: template/admin/order-index.phtml:7
 msgid "Filter orders"
 msgstr "فیلتر کردن سفارش ها"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:10
+#: template/admin/order-index.phtml:10
 msgid "List of orders"
 msgstr "فهرست سفارش ها"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-index.phtml:15
+#: template/admin/order-index.phtml:15
 msgid "Customer"
 msgstr "مشتری"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:31
+#: template/admin/order-print.phtml:31
 msgid "Order invoice"
 msgstr "فاکتور فروش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:85
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:280
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:407
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:534
+#: template/admin/order-print.phtml:98 template/admin/order-print.phtml:295
+#: template/admin/order-print.phtml:423 template/admin/order-print.phtml:551
 msgid "Product name"
 msgstr "شرح کالا"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:87
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:99
+#: template/admin/order-print.phtml:100 template/front/installment.phtml:103
 msgid "Per Payment"
 msgstr "پیش قسط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:88
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:100
+#: template/admin/order-print.phtml:101 template/front/installment.phtml:104
 msgid "1 months"
 msgstr "۱ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:89
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:101
+#: template/admin/order-print.phtml:102 template/front/installment.phtml:105
 msgid "2 months"
 msgstr "۲ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:90
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:102
+#: template/admin/order-print.phtml:103 template/front/installment.phtml:106
 msgid "3 months"
 msgstr "۳ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:91
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:103
+#: template/admin/order-print.phtml:104 template/front/installment.phtml:107
 msgid "4 months"
 msgstr "۴ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:92
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:104
+#: template/admin/order-print.phtml:105 template/front/installment.phtml:108
 msgid "5 months"
 msgstr "۵ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:93
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:105
+#: template/admin/order-print.phtml:106 template/front/installment.phtml:109
 msgid "6 months"
 msgstr "۶ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:94
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:106
+#: template/admin/order-print.phtml:107 template/front/installment.phtml:110
 msgid "7 months"
 msgstr "۷ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:95
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:107
+#: template/admin/order-print.phtml:108 template/front/installment.phtml:111
 msgid "8 months"
 msgstr "۸ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:96
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:108
+#: template/admin/order-print.phtml:109 template/front/installment.phtml:112
 msgid "9 months"
 msgstr "۹ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:97
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:109
+#: template/admin/order-print.phtml:110 template/front/installment.phtml:113
 msgid "10 months"
 msgstr "۱۰ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:98
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:110
+#: template/admin/order-print.phtml:111 template/front/installment.phtml:114
 msgid "11 months"
 msgstr "۱۱ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:99
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:111
+#: template/admin/order-print.phtml:112 template/front/installment.phtml:115
 msgid "12 months"
 msgstr "۱۲ ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:270
+#: template/admin/order-print.phtml:284
 msgid "Order invoice desc"
 msgstr "آخرین وضعیت مانده اقساط و سر رسید های شما با احتساب خرید های قبلی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:270
+#: template/admin/order-print.phtml:285
 msgid "Order invoice desc price"
 msgstr "مبلغ به تومان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:276
+#: template/admin/order-print.phtml:291
 msgid "10 th"
 msgstr "سررسید های دهم"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:403
+#: template/admin/order-print.phtml:419
 msgid "20 th"
 msgstr "سررسید های بیستم"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:530
+#: template/admin/order-print.phtml:547
 msgid "30 th"
 msgstr "سررسید های سی ام"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:657
+#: template/admin/order-print.phtml:675
 msgid "Stamp"
 msgstr "مهر"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-print.phtml:662
+#: template/admin/order-print.phtml:680
 msgid "Stamp / fingerprint"
 msgstr "مهر شرکت / اثر انگشت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:11
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:8
+#: template/admin/order-view.phtml:14 template/front/detail.phtml:8
 #, php-format
 msgid "Order %s details"
 msgstr "جزئیات سفارش %s"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:52
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:96
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:46
-msgid "Company ID"
-msgstr "کد اقتصادی"
+#: template/admin/order-view.phtml:17
+msgid "Information"
+msgstr "اطلاعات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:55
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:99
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:49
-msgid "Company VAT"
-msgstr "کد مالیات"
+#: template/admin/order-view.phtml:148
+msgid "Identity"
+msgstr "هویت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:59
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:103
-msgid "Order status"
-msgstr "وضعیت سفارش"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:61
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:105
-msgid "Delivery status"
-msgstr "وضعیت ارسال"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:62
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:106
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:66
-msgid "Time create"
-msgstr "تاریخ ایجاد"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:63
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:107
-msgid "Time payment"
-msgstr "تاریخ پرداخت"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:64
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:108
-msgid "Time delivery"
-msgstr "تاریخ تحویل"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:65
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:109
-msgid "Time finish"
-msgstr "تاریخ تکمیل"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:66
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:110
-msgid "Time start"
-msgstr "تاریخ شروع"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:67
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:111
-msgid "Time end"
-msgstr "تاریخ پایان"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:99
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:107
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:115
+#: template/admin/order-view.phtml:161 template/admin/order-view.phtml:175
+#: template/admin/order-view.phtml:189
 msgid "Time"
 msgstr "زمان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:100
+#: template/admin/order-view.phtml:163
 msgid "Finish"
 msgstr "پایان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:116
+#: template/admin/order-view.phtml:192
 msgid "Method"
 msgstr "روش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:124
+#: template/admin/order-view.phtml:201
 msgid "Discount"
 msgstr "تخفیف"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:130
+#: template/admin/order-view.phtml:212
 msgid "Installment numbers"
 msgstr "تعداد اقساط"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:173
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:173
+#: template/admin/order-view.phtml:261 template/front/detail.phtml:217
 msgid "This order invoices list"
 msgstr "فهرست فاکتور ها"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:209
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:209
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:119
-msgid "View / Pay"
-msgstr "مشاهده / پرداخت"
+#: template/admin/order-view.phtml:316
+msgid "Add extra invoice to this order"
+msgstr "درج یک فاکتور اضافی برای این سفارش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/admin/order-view.phtml:222
-msgid "Print"
-msgstr "چاپ"
+#: template/admin/order-view.phtml:317
+msgid ""
+"If you want your user pay new price for this order, you can add new invoice "
+"for him by new price, use below button to add new invoice"
+msgstr ""
+"اگر میخواهید کاربر وب سایت شما یک مبلغ اضافی را برای این سفارش پرداخت "
+"نمایید، می تمانید یک فاکتور جدید با یه مبلغ جدید برای او صادر کنید. برای این "
+"کار از دکمه زیر استفاده نمایید."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:80
+#: template/admin/order-view.phtml:320 template/admin/order-view.phtml:321
+msgid "New invoice"
+msgstr "فاکتور جدید"
+
+#: template/front/checkout.phtml:80
 msgid "Price : "
 msgstr "مبلغ : "
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:81
+#: template/front/checkout.phtml:81
 msgid "Time : "
 msgstr "زمان : "
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:82
+#: template/front/checkout.phtml:82
 msgid "Days"
 msgstr "روز"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:91
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:143
+#: template/front/checkout.phtml:91 template/front/checkout.phtml:152
 msgid "Checkout"
 msgstr "تسویه حساب"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:102
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:148
+#: template/front/checkout.phtml:102 template/front/checkout.phtml:157
 msgid "Terms of payment"
 msgstr "شرایط پرداخت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:103
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:149
+#: template/front/checkout.phtml:104 template/front/checkout.phtml:159
 #, php-format
 msgid ""
 "You buy products on %s installment by %s payment on each installment and %s "
@@ -1738,55 +1559,60 @@ msgstr ""
 "شما کالای خود را در تعداد %s قسط  به مبلغ %s و پیش پرداخت %s خریداری کرده "
 "اید."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:106
+#: template/front/checkout.phtml:107
 msgid "Select your invoicing address for your order"
 msgstr "انتخاب آدرس تحویل برای ثبت سفارش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:129
+#: template/front/checkout.phtml:137
 msgid "Add a new invoicing address"
 msgstr "درج آدرس جدید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:161
+#: template/front/checkout.phtml:171
 msgid "Pre Invoice"
 msgstr "پیش فاکتور"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:164
+#: template/front/checkout.phtml:174
 msgid "Total Price"
 msgstr "مجموع قیمت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:165
+#: template/front/checkout.phtml:178
 msgid "Total Discount"
 msgstr "مجموع تخفیف"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:166
+#: template/front/checkout.phtml:182
 msgid "Total Shipping"
 msgstr "مجموع هزینه ارسال"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:167
+#: template/front/checkout.phtml:186
 msgid "Total Vat"
 msgstr "مجموع مالیات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/checkout.phtml:168
+#: template/front/checkout.phtml:190
 msgid "Final Price"
 msgstr "قیمت نهایی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:20
+#: template/front/detail.phtml:20
 msgid "validated"
 msgstr "تایید شده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/detail.phtml:22
+#: template/front/detail.phtml:22
 msgid "Not validated"
 msgstr "تایید نشده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/error.phtml:4
+#: template/front/detail.phtml:255 template/front/detail.phtml:257
+#: template/front/list.phtml:138 template/front/list.phtml:140
+msgid "View / Pay"
+msgstr "مشاهده / پرداخت"
+
+#: template/front/error.phtml:4
 msgid "Error on order processing, please contact to website admin"
 msgstr "خطا در پردازش مراحل سفارش، لطفا با مدیر وب سایت تماس بگیرید."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/finish.phtml:31
+#: template/front/finish.phtml:31
 msgid "Thanks !"
 msgstr "تشکر !"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/finish.phtml:32
+#: template/front/finish.phtml:33
 #, php-format
 msgid ""
 "Your payment ends successfully, we need %s to obtain payment confirmation."
@@ -1794,7 +1620,7 @@ msgstr ""
 "پرداخت شما با موفقیت انجام شد، ما به %s زمان برای تایید اطلاعات پرداخت شما "
 "نیاز داریم."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/finish.phtml:33
+#: template/front/finish.phtml:35
 msgid ""
 "Once received, youll be redirected automatically to your dashboard, and will "
 "be able to create your item !"
@@ -1802,57 +1628,65 @@ msgstr ""
 "بعد از دریافت اطلاعات ، شما به طور خودکار به صفحه بعدی منتقل می شوید و "
 "میتوانید مراحل سفارش را دنبال کنید."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/finish.phtml:34
+#: template/front/finish.phtml:37
 msgid "Please wait !"
 msgstr "لطفا صبر کنید !"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:88
+#: template/front/installment.phtml:88
 msgid "Installment plans"
 msgstr "لطفاً روش پرداخت قسطی خود را انتخاب نمایید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:91
+#: template/front/installment.phtml:93
 msgid "Your total invoices"
 msgstr "مجموع فاکتور های شما"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:92
+#: template/front/installment.phtml:96
 msgid "Read lines are our of your credit"
 msgstr ""
 "ردیف های قرمز رنگ خارج از میزان اعتبار شما است و نمی توانید بر اساس آن پلن "
 "ها خرید انجام دهید."
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:98
+#: template/front/installment.phtml:102
 msgid "Select"
 msgstr "انتخاب"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:113
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:149
+#: template/front/installment.phtml:117 template/front/installment.phtml:181
 msgid "Buy"
 msgstr "خرید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:124
+#: template/front/installment.phtml:128
 msgid "Cash purchase"
 msgstr "خرید نقدی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/installment.phtml:126
+#: template/front/installment.phtml:130
 #, php-format
 msgid "%s months"
 msgstr "%s ماه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/invoice.phtml:154
+#: template/front/invoice.phtml:177 template/front/invoice.phtml:178
 msgid "Back to order"
 msgstr "بازگشت به سفارش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:8
-msgid "User information"
-msgstr "اطلاعات کاربر"
+#: template/front/list.phtml:8
+msgid "All your orders and invoices"
+msgstr "فهرست تمام سفارش ها و فاکتور های شما"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:62
+#: template/front/list.phtml:77
 msgid "List of your order"
 msgstr "فهرست سفارش های شما"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/order/template/front/list.phtml:83
+#: template/front/list.phtml:100
 msgid "List of your invoice"
 msgstr "فهرست فاکتور های شما"
+
+#~ msgid "Accept Terms & Conditions"
+#~ msgstr "تایید شرایط و مقررات"
+
+#~ msgid "Your order id not true."
+#~ msgstr "شماره سفارش شما صحیح نیست."
+
+#~ msgid "User information"
+#~ msgstr "اطلاعات کاربر"
 
 #~ msgid "Type"
 #~ msgstr "نوع"

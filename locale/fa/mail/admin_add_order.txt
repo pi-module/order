@@ -7,7 +7,7 @@
 [body]
 <div style="padding: 1px; direction: rtl;">
 	<h3 style="font-size: 1.1em;">مدیر سایت %site_name%</h3>
-	<div style="padding: 3px; margin: 2px;">یک سفارش جدید در وب سایت %site_name% به ثبت رسیده است، لطفا برای مشاهده جزئیات و بررسی سفارش به وب سایت مراجعه نمایید</div>
+	<div style="padding: 3px; margin: 2px;">مدیر عزیز وب سایت %site_name% ، یک سفارش جدید به شماره %order_id% توسط %first_name% %last_name% به مبلغ %product_price% و شامل موارد %product_list% در وب سایت %site_name% به ثبت رسیده است، لطفا برای مشاهده جزئیات و بررسی سفارش به وب سایت مراجعه نمایید</div>
 	<div style="padding: 3px; margin: 2px;">لطفا به این پیام پاسخی ندهید</div>
 	<div style="margin-top: 10px">
         <a href="%site_url%" title="%site_name%">%site_name%</a>

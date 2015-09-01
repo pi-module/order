@@ -18,6 +18,8 @@ use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
 use Module\Order\Form\InvoiceSettingForm;
 use Module\Order\Form\InvoiceSettingFilter;
+use Module\Order\Form\InvoiceForm;
+use Module\Order\Form\InvoiceFilter;
 use Zend\Json\Json;
 
 class InvoiceController extends ActionController
@@ -186,7 +188,58 @@ class InvoiceController extends ActionController
 
     public function updateAction()
     {
+        // Get id
+        $order = $this->params('order');
+        // Get order
+        $order = $this->getModel('order')->find($order);
+        $order = Pi::api('order', 'order')->canonizeOrder($order);
+        // Set form
+        $form = new InvoiceForm('setting');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new InvoiceFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                $values['time_duedate'] = strtotime($values['time_duedate']);
+                $values['total_price'] = $values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['vat_price'];
+                $values['random_id'] = time() + rand(100, 999);
+                $values['uid'] = Pi::user()->getId();
+                $values['ip'] = Pi::user()->getIp();
+                $values['status'] = 2;
+                $values['time_create'] = time();
+                $values['order'] = $order['id'];
+                $values['discount_price'] = 0;
+                $values['paid_price'] = 0;
+                $values['credit_price'] = 0;
+                $values['gateway'] = $order['gateway'];
+                // Set extra
+                if ($order['type_payment'] == 'installment') {
+                    $extra = array();
+                    $extra['order']['type_payment'] = $order['type_payment'];
+                    $extra['order']['type_commodity'] = $order['type_commodity'];
+                    $extra['number'] = '';
+                    $extra['type'] = 'additional';
+                    $values['extra'] = json::encode($extra);
+                }
+                // Save values
+                $row = $this->getModel('invoice')->createRow();
+                $row->assign($values);
+                $row->save();
+                // Set order ID
+                $code = Pi::api('invoice', 'order')->generatCode($row->id);
+                $this->getModel('invoice')->update(
+                    array('code' => $code),
+                    array('id' => $row->id)
+                );
+                // Check it save or not
+                $message = __('New invoice data saved successfully.');
+                $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message);
+            }
+        }
         // Set view
         $this->view()->setTemplate('invoice-update');
+        $this->view()->assign('form', $form);
+        $this->view()->assign('order', $order);
     }
 }

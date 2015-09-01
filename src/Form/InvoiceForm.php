@@ -16,7 +16,7 @@ namespace Module\Order\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class InvoiceSettingForm extends BaseForm
+class InvoiceForm extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {
@@ -26,75 +26,70 @@ class InvoiceSettingForm extends BaseForm
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new InvoiceSettingFilter;
+            $this->filter = new InvoiceFilter;
         }
         return $this->filter;
     }
 
     public function init()
     {
-        // orderid
+        // product_price
         $this->add(array(
-            'name' => 'orderid',
+            'name' => 'product_price',
             'options' => array(
-                'label' => __('Order ID'),
+                'label' => __('Product price'),
             ),
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
             )
         ));
-        // uid
+        // shipping_price
         $this->add(array(
-            'name' => 'uid',
+            'name' => 'shipping_price',
             'options' => array(
-                'label' => __('User ID'),
+                'label' => __('Shipping price'),
             ),
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
             )
         ));
-        // payment_status
+        // packing_price
         $this->add(array(
-            'name' => 'payment_status',
-            'type' => 'select',
+            'name' => 'packing_price',
             'options' => array(
-                'label' => __('Payment status'),
-                'value_options' => array(
-                    '' => __('All'),
-                    1 => __('Paid'),
-                    2 => __('UnPaid'),
-                    'delayed' => __('Delayed'),
-                ),
+                'label' => __('Packing price'),
             ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+            )
         ));
-        // start
+        // vat_price
         $this->add(array(
-            'name' => 'start',
+            'name' => 'vat_price',
+            'options' => array(
+                'label' => __('Vat price'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+            )
+        ));
+        // time_duedate
+        $this->add(array(
+            'name' => 'time_duedate',
             'type' => 'datepicker',
             'options' => array(
-                'label' => __('Start from'),
+                'label' => __('Due date'),
                 'datepicker' => array(
                     'format' => 'yyyy-mm-dd',
                 ),
             ),
             'attributes' => array(
                 'id' => 'time-start',
-            )
-        ));
-        // end
-        $this->add(array(
-            'name' => 'end',
-            'type' => 'datepicker',
-            'options' => array(
-                'label' => __('End to'),
-                'datepicker' => array(
-                    'format' => 'yyyy-mm-dd',
-                ),
-            ),
-            'attributes' => array(
-                'id' => 'time-end',
+                'required' => true,
             )
         ));
         // Save
@@ -102,7 +97,7 @@ class InvoiceSettingForm extends BaseForm
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
-                'value' => __('Filter'),
+                'value' => __('Save'),
                 'class' => 'btn btn-primary',
             )
         ));

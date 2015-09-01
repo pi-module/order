@@ -20,7 +20,7 @@ $this->backbone();
                 <div class="col-md-6">
                     <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
                         <p><strong><?php _e('Name'); ?></strong> :
-                            <span><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></span>
+                            <span><?php echo $this->escape($order['first_name']); ?><?php echo $this->escape($order['last_name']); ?></span>
                         </p>
                     <?php } ?>
                     <?php if (!empty($order['id_number'])) { ?>
@@ -312,13 +312,21 @@ $this->backbone();
                 <span class="label label-danger"><?php _e('Canceled'); ?></span>
             </p>
         <?php } ?>
+        <div class="well">
+            <h3><?php _e('Add extra invoice to this order'); ?></h3>
+            <p><?php _e('If you want your user pay new price for this order, you can add new invoice for him by new price, use below button to add new invoice'); ?></p>
+            <p><a class="btn btn-success"
+                  href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'update', 'order' => $order['id'])); ?>"
+                  title="<?php _e('New invoice'); ?>" target="_blank"><i
+                        class="fa fa-plus"></i> <?php _e('New invoice'); ?></a></p>
+        </div>
     </div>
     <?php if ($order['type_payment'] == 'installment') { ?>
         <div class="clearfix">
             <div class="col-md-12 text-right">
                 <a class="btn btn-success btn-lg" title="<?php _e('Print'); ?>"
-                   href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'print', 'id' => $order['id'])); ?>"
-                   target="_blank"><i class="fa fa-print"></i> <?php _e('Print'); ?></a>
+                   href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'print', 'id' => $order['id'])); ?>"><i
+                        class="fa fa-print"></i> <?php _e('Print'); ?></a>
             </div>
         </div>
     <?php } ?>
