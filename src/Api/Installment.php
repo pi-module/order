@@ -580,6 +580,31 @@ class Installment extends AbstractApi
 
         }
 
+        // additional
+        $d['additional']['sun'] = 0;
+        $d['additional']['invoice'] = array();
+        // Check all invoices
+        foreach ($invoices as $invoice) {
+            if ($invoice['status'] == 2
+                && $invoice['extra']['type'] == 'additional'
+            ) {
+                // Set price view
+                $invoice['total_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['total_price'], true);
+                // Set ['m'] sub array
+                $d['additional']['invoice'][$invoice['order']] = $invoice;
+                $d['additional']['sun'] = $d['additional']['sun'] + $invoice['total_price'];
+                // Set ['all'] sub array
+                $d['all']['additional-order'][] = $invoice['order'];
+            }
+        }
+        // Set ['all'] ['m'] sub array
+        $d['all']['additional-sun'] = $d['all']['additional-sun'] + $d['additional']['sun'];
+        if ($d['additional']['sun']) {
+            $d['additional']['sun'] = Pi::api('api', 'order')->viewPrice($d['additional']['sun'], true);
+        } else {
+            $d['additional']['sun'] = '';
+        }
+
         if ($d['all']['10-sun']) {
             $d['all']['10-sun-view'] = Pi::api('api', 'order')->viewPrice($d['all']['10-sun'], true);
         } else {
@@ -598,11 +623,18 @@ class Installment extends AbstractApi
             $d['all']['30-sun-view'] = '';
         }
 
+        if ($d['all']['additional-sun']) {
+            $d['all']['additional-sun-view'] = Pi::api('api', 'order')->viewPrice($d['all']['additional-sun'], true);
+        } else {
+            $d['all']['additional-sun-view'] = '';
+        }
+
         $d['all']['10-order'] = array_unique($d['all']['10-order']);
         $d['all']['20-order'] = array_unique($d['all']['20-order']);
         $d['all']['30-order'] = array_unique($d['all']['30-order']);
+        $d['all']['additional-order'] = array_unique($d['all']['additional-order']);
 
-        $d['total'] = $d['all']['10-sun'] + $d['all']['20-sun'] + $d['all']['30-sun'];
+        $d['total'] = $d['all']['10-sun'] + $d['all']['20-sun'] + $d['all']['30-sun'] + $d['all']['additional-sun'];
         if ($d['total']) {
             $d['total-view'] = Pi::api('api', 'order')->viewPrice($d['total'], true);
         } else {

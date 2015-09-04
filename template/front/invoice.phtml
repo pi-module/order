@@ -183,9 +183,17 @@
             </div>
             <div class="col-md-6 text-right">
                 <?php if ($invoice['status'] == 2 && $allowPayment) { ?>
-                    <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>"
-                       href="<?php echo $this->escape($invoice['pay_url']); ?>"><i
-                            class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
+                    <?php if ($allowPayment) { ?>
+                        <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>"
+                           href="<?php echo $this->escape($invoice['pay_url']); ?>"><i
+                                class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
+                    <?php } else { ?>
+                        <span class="label label-danger">
+                            <?php echo sprintf(__('You can pay this invoice after %s'),
+                                _date($invoice['time_duedate'] - (60 * 60 * 24 * 14),
+                                    array('pattern' => 'yyyy-MM-dd')))? ?>
+                        </span>
+                    <?php } ?>
                 <?php } ?>
             </div>
         </div>
