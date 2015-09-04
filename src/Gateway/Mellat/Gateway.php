@@ -239,7 +239,13 @@ class Gateway extends AbstractGateway
 
     public function setMessage($log)
     {
-        $message = sprintf(__('Your track code is : %s'), $log['SaleReferenceId']);
+        if (isset($log['SaleReferenceId']) && !empty($log['SaleReferenceId'])) {
+            $message = sprintf(__('Your track code is : %s'), $log['SaleReferenceId']);
+        } elseif (isset($log['request']['SaleReferenceId']) && !empty($log['request']['SaleReferenceId'])) {
+            $message = sprintf(__('Your track code is : %s'), $log['request']['SaleReferenceId']);
+        } else {
+            $message = '';
+        }
         return $message;
     }
 

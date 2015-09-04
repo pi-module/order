@@ -59,6 +59,8 @@ class InvoiceController extends IndexController
             $message = __('Your payment were successfully. Back to module');
             $this->jump($url, $message);
         }
+        // Get logs
+        $invoice['log'] = Pi::api('log', 'order')->getTrueLog($invoice['id']);
         // Check allow payment
         if ($order['type_payment'] == 'installment') {
             if ($invoice['extra']['type'] == 'installment') {

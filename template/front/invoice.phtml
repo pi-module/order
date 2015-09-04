@@ -8,6 +8,13 @@
             <h1><?php echo sprintf(__('Invoice %s'), $this->escape($invoice['code'])); ?></h1>
         </div>
         <div class="well">
+            <?php if ($invoice['status'] == 1 && !empty($invoice['log'])) { ?>
+                <div class="clearfix">
+                    <div class="alert alert-success">
+                        <?php echo $this->escape($invoice['log']['message']); ?> <?php echo $this->escape($invoice['log']['gatewayMessage']); ?>
+                    </div>
+                </div>
+            <?php } ?>
             <div class="clearfix">
                 <div class="col-md-6">
                     <div class="clearfix">
@@ -191,7 +198,7 @@
                         <span class="label label-danger">
                             <?php echo sprintf(__('You can pay this invoice after %s'),
                                 _date($invoice['time_duedate'] - (60 * 60 * 24 * 14),
-                                    array('pattern' => 'yyyy-MM-dd'))); ?>
+                                    array('pattern' => 'dd-MM-yyyy'))); ?>
                         </span>
                     <?php } ?>
                 <?php } ?>
