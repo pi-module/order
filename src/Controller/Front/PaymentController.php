@@ -77,7 +77,7 @@ class PaymentController extends IndexController
         // Check invoice prive
         if (in_array($order['status_order'], array(1, 2, 3)) && $invoice['status'] == 2 && $invoice['total_price'] == 0) {
             $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
-            $url = Pi::api('order', 'order')->updateOrder($invoice['order']);
+            $url = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
             // Remove processing
             Pi::api('processing', 'order')->removeProcessing();
             // jump to module
@@ -152,7 +152,7 @@ class PaymentController extends IndexController
             // Check status
             if ($verify['status'] == 1) {
                 // Update module order / invoice and get back url
-                $url = Pi::api('order', 'order')->updateOrder($verify['order']);
+                $url = Pi::api('order', 'order')->updateOrder($verify['order'], $verify['invoice']);
                 // Remove processing
                 Pi::api('processing', 'order')->removeProcessing();
                 // jump to module
@@ -234,7 +234,7 @@ class PaymentController extends IndexController
                     Pi::api('processing', 'order')->removeProcessing($request['invoice']);
                 } else {
                     if ($verify['status'] == 1) {
-                        $url = Pi::api('order', 'order')->updateOrder($verify['order']);
+                        $url = Pi::api('order', 'order')->updateOrder($verify['order'], $verify['invoice']);
                         Pi::api('invoice', 'order')->setBackUrl($verify['invoice'], $url);
 
                         $log = array();
@@ -337,7 +337,7 @@ class PaymentController extends IndexController
         $invoice = Pi::api('invoice', 'order')->getInvoice($id);
         $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
         // Update module order / invoice and get back url
-        $url = Pi::api('order', 'order')->updateOrder($invoice['order']);
+        $url = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
         // Remove processing
         Pi::api('processing', 'order')->removeProcessing();
         // jump to module

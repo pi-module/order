@@ -54,16 +54,32 @@ class InvoiceController extends IndexController
         // Check invoice prive
         if (in_array($order['status_order'], array(1, 2, 3)) && $invoice['status'] == 2 && $invoice['total_price'] == 0) {
             $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
-            $url = Pi::api('order', 'order')->updateOrder($invoice['order']);
+            $url = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
             // jump to module
             $message = __('Your payment were successfully. Back to module');
             $this->jump($url, $message);
+        }
+        // Check allow payment
+        if ($order['type_payment'] == 'installment') {
+            if ($invoice['extra']['type'] == 'installment') {
+                $time = time() + (60 * 60 * 24 * 14);
+                if ($invoice['time_duedate'] < $time) {
+                    $allowPayment = true;
+                } else {
+                    $allowPayment = false;
+                }
+            } else {
+                $allowPayment = true;
+            }
+        } else {
+            $allowPayment = true;
         }
         // set view
         $this->view()->setTemplate('invoice');
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('order', $order);
         $this->view()->assign('config', $config);
+        $this->view()->assign('allowPayment', $allowPayment);
     }
 
     public function printAction()
@@ -112,5 +128,6 @@ class InvoiceController extends IndexController
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('order', $order);
         $this->view()->assign('config', $config);
+
     }
 }

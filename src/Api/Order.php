@@ -28,7 +28,7 @@ use Zend\Math\Rand;
  * Pi::api('order', 'order')->canonizeOrder($order);
  * Pi::api('order', 'order')->listProduct($id, $module);
  * Pi::api('order', 'order')->listAllProduct($module);
- * Pi::api('order', 'order')->updateOrder($id);
+ * Pi::api('order', 'order')->updateOrder($id, $invoice);
  * Pi::api('order', 'order')->setOrderInfo($order);
  * Pi::api('order', 'order')->getOrderInfo();
  * Pi::api('order', 'order')->updateOrderInfo($order);
@@ -119,7 +119,7 @@ class Order extends AbstractApi
         return $return;
     }
 
-    public function paymentStatus($status)
+    public function paymentStatus($status, $type)
     {
         $return = array();
         switch ($status) {
@@ -130,7 +130,7 @@ class Order extends AbstractApi
 
             case '2':
                 $return['paymentClass'] = 'btn-success';
-                $return['paymentTitle'] = __('Paid');
+                $return['paymentTitle'] = ($type == 'installment') ? __('Paid perpayment') : __('Paid');
                 break;
         }
         return $return;
@@ -245,7 +245,7 @@ class Order extends AbstractApi
         $order['orderClass'] = $status_order['orderClass'];
         $order['orderTitle'] = $status_order['orderTitle'];
         // Status payment
-        $status_payment = $this->paymentStatus($order['status_payment']);
+        $status_payment = $this->paymentStatus($order['status_payment'], $order['type_payment']);
         $order['paymentClass'] = $status_payment['paymentClass'];
         $order['paymentTitle'] = $status_payment['paymentTitle'];
         // Status delivery
@@ -291,31 +291,62 @@ class Order extends AbstractApi
         return $list;
     }
 
-    public function updateOrder($id)
+    public function updateOrder($id, $invoice)
     {
         // Get order
         $order = Pi::model('order', $this->getModule())->find($id);
-        // Update order
-        $order->time_payment = time();
-        $order->status_payment = 2;
-        $order->save();
-        // Canonize order
-        $order = $this->canonizeOrder($order);
-        // Get order basket
-        $basket = array();
-        $where = array('order' => $id);
-        $select = Pi::model('basket', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('basket', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
-            $basket[$row->id] = $row->toArray();
-            if (empty($row->extra)) {
-                $basket[$row->id]['extra'] = array();
+        // Checl for installment
+        if ($order->type_payment == 'installment') {
+            $invoice = Pi::api('invoice', 'order')->getInvoice($invoice);
+            if ($invoice['extra']['type'] == 'prepayment') {
+                // Update order
+                $order->time_payment = time();
+                $order->status_payment = 2;
+                $order->save();
+                // Canonize order
+                $order = $this->canonizeOrder($order);
+                // Get order basket
+                $basket = array();
+                $where = array('order' => $id);
+                $select = Pi::model('basket', $this->getModule())->select()->where($where);
+                $rowset = Pi::model('basket', $this->getModule())->selectWith($select);
+                foreach ($rowset as $row) {
+                    $basket[$row->id] = $row->toArray();
+                    if (empty($row->extra)) {
+                        $basket[$row->id]['extra'] = array();
+                    } else {
+                        $basket[$row->id]['extra'] = json::decode($row->extra, true);
+                    }
+                }
+                // Update module and get back url
+                $backUrl = Pi::api('order', $order['module_name'])->postPaymentUpdate($order, $basket);
             } else {
-                $basket[$row->id]['extra'] = json::decode($row->extra, true);
+                // Get back url
+                $backUrl = $invoice['invoice_url'];
             }
+        } else {
+            // Update order
+            $order->time_payment = time();
+            $order->status_payment = 2;
+            $order->save();
+            // Canonize order
+            $order = $this->canonizeOrder($order);
+            // Get order basket
+            $basket = array();
+            $where = array('order' => $id);
+            $select = Pi::model('basket', $this->getModule())->select()->where($where);
+            $rowset = Pi::model('basket', $this->getModule())->selectWith($select);
+            foreach ($rowset as $row) {
+                $basket[$row->id] = $row->toArray();
+                if (empty($row->extra)) {
+                    $basket[$row->id]['extra'] = array();
+                } else {
+                    $basket[$row->id]['extra'] = json::decode($row->extra, true);
+                }
+            }
+            // Update module and get back url
+            $backUrl = Pi::api('order', $order['module_name'])->postPaymentUpdate($order, $basket);
         }
-        // Update module and get back url
-        $backUrl = Pi::api('order', $order['module_name'])->postPaymentUpdate($order, $basket);
         return $backUrl;
     }
 

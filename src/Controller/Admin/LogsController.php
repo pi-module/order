@@ -51,7 +51,7 @@ class LogsController extends ActionController
             'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
             'params' => array_filter(array(
                 'module' => $this->getModule(),
-                'controller' => 'log',
+                'controller' => 'logs',
                 'action' => 'index',
             )),
         ));
