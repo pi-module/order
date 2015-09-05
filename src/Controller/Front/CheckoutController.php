@@ -235,12 +235,12 @@ class CheckoutController extends IndexController
                 if ($config['order_update_user'] && $values['update_user']) {
                     Pi::api('user', 'order')->updateUserInformation($values);
                 }
-                // Send notification
-                Pi::api('notification', 'order')->addOrder($order->toArray());
                 // Set invoice
                 $result = Pi::api('invoice', 'order')->createInvoice($order->id);
                 // unset order
                 Pi::api('order', 'order')->unsetOrderInfo();
+                // Send notification
+                Pi::api('notification', 'order')->addOrder($order->toArray());
                 // Go to payment
                 if ($result['status'] == 0) {
                     $url = array('', 'controller' => 'index', 'action' => 'index');
