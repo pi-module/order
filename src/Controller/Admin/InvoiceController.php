@@ -204,7 +204,7 @@ class InvoiceController extends ActionController
                 $values['time_duedate'] = strtotime($values['time_duedate']);
                 $values['total_price'] = $values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['vat_price'];
                 $values['random_id'] = time() + rand(100, 999);
-                $values['uid'] = Pi::user()->getId();
+                $values['uid'] = $order['uid'];
                 $values['ip'] = Pi::user()->getIp();
                 $values['status'] = 2;
                 $values['time_create'] = time();

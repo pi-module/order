@@ -362,9 +362,11 @@ class Installment extends AbstractApi
         $d['all']['10-sun'] = 0;
         $d['all']['20-sun'] = 0;
         $d['all']['30-sun'] = 0;
+        $d['all']['additional-sun'] = 0;
         $d['all']['10-order'] = array();
         $d['all']['20-order'] = array();
         $d['all']['30-order'] = array();
+        $d['all']['additional-order'] = array();
 
 
 
@@ -591,7 +593,7 @@ class Installment extends AbstractApi
                 // Set price view
                 $invoice['total_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['total_price'], true);
                 // Set ['m'] sub array
-                $d['additional']['invoice'][$invoice['order']] = $invoice;
+                $d['additional']['invoice'][] = $invoice;
                 $d['additional']['sun'] = $d['additional']['sun'] + $invoice['total_price'];
                 // Set ['all'] sub array
                 $d['all']['additional-order'][] = $invoice['order'];
