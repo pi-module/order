@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-09-01 15:26+0430\n"
+"POT-Creation-Date: 2015-09-08 13:00+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -28,7 +28,7 @@ msgid "User informations"
 msgstr ""
 
 #: template/block/detail.phtml:16 template/block/detail.phtml:63
-#: template/block/installment.phtml:235
+#: template/block/installment.phtml:255
 msgid "ID"
 msgstr ""
 
@@ -36,11 +36,12 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-#: template/block/detail.phtml:18 template/block/installment.phtml:211
+#: template/block/detail.phtml:18 template/block/installment.phtml:231
 msgid "Time Create"
 msgstr ""
 
-#: template/block/detail.phtml:19 template/block/installment.phtml:212
+#: template/block/detail.phtml:19 template/block/installment.phtml:202
+#: template/block/installment.phtml:232
 msgid "Due date"
 msgstr ""
 
@@ -49,12 +50,12 @@ msgid "Time pay"
 msgstr ""
 
 #: template/block/detail.phtml:21 template/block/detail.phtml:68
-#: template/block/installment.phtml:213 template/block/installment.phtml:239
+#: template/block/installment.phtml:233 template/block/installment.phtml:259
 msgid "Action"
 msgstr ""
 
 #: template/block/detail.phtml:42 template/block/detail.phtml:44
-#: template/block/installment.phtml:221
+#: template/block/installment.phtml:241
 msgid "View / Pay"
 msgstr ""
 
@@ -70,11 +71,11 @@ msgstr ""
 msgid "Canceled"
 msgstr ""
 
-#: template/block/detail.phtml:56 template/block/installment.phtml:227
+#: template/block/detail.phtml:56 template/block/installment.phtml:247
 msgid "You dont have any invoice yet"
 msgstr ""
 
-#: template/block/detail.phtml:64 template/block/installment.phtml:236
+#: template/block/detail.phtml:64 template/block/installment.phtml:256
 msgid "Time create"
 msgstr ""
 
@@ -82,16 +83,16 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: template/block/detail.phtml:67 template/block/installment.phtml:238
+#: template/block/detail.phtml:67 template/block/installment.phtml:258
 msgid "Gateway"
 msgstr ""
 
 #: template/block/detail.phtml:78 template/block/detail.phtml:80
-#: template/block/installment.phtml:248
+#: template/block/installment.phtml:268
 msgid "View"
 msgstr ""
 
-#: template/block/detail.phtml:86 template/block/installment.phtml:254
+#: template/block/detail.phtml:86 template/block/installment.phtml:274
 msgid "You dont have any order yet"
 msgstr ""
 
@@ -152,7 +153,7 @@ msgid "Address 2"
 msgstr ""
 
 #: template/block/detail.phtml:162 template/block/detail.phtml:163
-#: template/block/installment.phtml:260
+#: template/block/installment.phtml:280
 msgid "More informations"
 msgstr ""
 
@@ -178,13 +179,13 @@ msgid "Debt"
 msgstr ""
 
 #: template/block/installment.phtml:41 template/block/installment.phtml:99
-#: template/block/installment.phtml:157
+#: template/block/installment.phtml:157 template/block/installment.phtml:203
 msgid "Total"
 msgstr ""
 
 #: template/block/installment.phtml:64 template/block/installment.phtml:122
-#: template/block/installment.phtml:180 template/block/installment.phtml:210
-#: template/block/installment.phtml:237
+#: template/block/installment.phtml:180 template/block/installment.phtml:213
+#: template/block/installment.phtml:230 template/block/installment.phtml:257
 msgid "Amount"
 msgstr ""
 
@@ -196,10 +197,14 @@ msgstr ""
 msgid "30 th"
 msgstr ""
 
-#: template/block/installment.phtml:206
+#: template/block/installment.phtml:201
+msgid "Additional invoices"
+msgstr ""
+
+#: template/block/installment.phtml:226
 msgid "Invoices list"
 msgstr ""
 
-#: template/block/installment.phtml:231
+#: template/block/installment.phtml:251
 msgid "Orders list"
 msgstr ""
