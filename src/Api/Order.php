@@ -62,19 +62,10 @@ class Order extends AbstractApi
         return $orders;
     }
 
-    public function generatCode($id = '')
+    public function generatCode($id)
     {
-        // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
-        $prefix = $config['order_code_prefix'];
-        // Check ID
-        if (empty($id)) {
-            // Generate random code
-            $id = Rand::getInteger(10000000, 99999999);
-        }
-        // Generate order code
-        $code = sprintf('%s-%s', $prefix, $id);
-        return $code;
+        return sprintf('%s-%s', $config['order_code_prefix'], $id);
     }
 
     public function orderStatus($status)

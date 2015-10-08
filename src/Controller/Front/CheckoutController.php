@@ -189,69 +189,80 @@ class CheckoutController extends IndexController
                 $order = $this->getModel('order')->createRow();
                 $order->assign($values);
                 $order->save();
-                // Set order ID
-                $code = Pi::api('order', 'order')->generatCode($order->id);
-                $this->getModel('order')->update(
-                    array('code' => $code),
-                    array('id' => $order->id)
-                );
-                // Save order basket
-                if (!empty($cart['product'])) {
-                    foreach ($cart['product'] as $product) {
-                        $price = $product['product_price'];
-                        $total = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']) * $product['number'];
-                        // Save basket
-                        $basket = $this->getModel('basket')->createRow();
-                        $basket->order = $order->id;
-                        $basket->product = $product['product'];
-                        $basket->discount_price = $product['discount_price'];
-                        $basket->shipping_price = $product['shipping_price'];
-                        $basket->packing_price = $product['packing_price'];
-                        $basket->vat_price = $product['vat_price'];
-                        // Set price
-                        if ($order->type_payment == 'installment') {
-                            $basket->product_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
-                            $basket->total_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
-                        } else {
-                            $basket->product_price = $price;
-                            $basket->total_price = $total;
+                // Check order save
+                if (isset($order->id) && intval($order->id) > 0) {
+                    // Set order ID
+                    $code = Pi::api('order', 'order')->generatCode($order->id);
+                    $this->getModel('order')->update(
+                        array('code' => $code),
+                        array('id' => $order->id)
+                    );
+                    // Save order basket
+                    if (!empty($cart['product'])) {
+                        foreach ($cart['product'] as $product) {
+                            $price = $product['product_price'];
+                            $total = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']) * $product['number'];
+                            // Save basket
+                            $basket = $this->getModel('basket')->createRow();
+                            $basket->order = $order->id;
+                            $basket->product = $product['product'];
+                            $basket->discount_price = $product['discount_price'];
+                            $basket->shipping_price = $product['shipping_price'];
+                            $basket->packing_price = $product['packing_price'];
+                            $basket->vat_price = $product['vat_price'];
+                            // Set price
+                            if ($order->type_payment == 'installment') {
+                                $basket->product_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
+                                $basket->total_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
+                            } else {
+                                $basket->product_price = $price;
+                                $basket->total_price = $total;
+                            }
+                            $basket->number = $product['number'];
+                            // Set installment to extra
+                            if ($order->type_payment == 'installment') {
+                                $extra = array();
+                                $extra['product'] = json::decode($product['extra'], true);
+                                $extra['installment'] = Pi::api('installment', 'order')->setPriceForProduct($total, $order->plan);
+                                $basket->extra = json::encode($extra);
+                            } else {
+                                $extra = array();
+                                $extra['product'] = json::decode($product['extra'], true);
+                                $basket->extra = json::encode($extra);
+                            }
+                            $basket->save();
                         }
-                        $basket->number = $product['number'];
-                        // Set installment to extra
-                        if ($order->type_payment == 'installment') {
-                            $extra = array();
-                            $extra['product'] = json::decode($product['extra'], true);
-                            $extra['installment'] = Pi::api('installment', 'order')->setPriceForProduct($total, $order->plan);
-                            $basket->extra = json::encode($extra);
-                        } else {
-                            $extra = array();
-                            $extra['product'] = json::decode($product['extra'], true);
-                            $basket->extra = json::encode($extra);
-                        }
-                        $basket->save();
                     }
-                }
-                // Update user information
-                if ($config['order_update_user'] && $values['update_user']) {
-                    Pi::api('user', 'order')->updateUserInformation($values);
-                }
-                // Set invoice
-                $result = Pi::api('invoice', 'order')->createInvoice($order->id);
-                // unset order
-                Pi::api('order', 'order')->unsetOrderInfo();
-                // Send notification
-                Pi::api('notification', 'order')->addOrder($order->toArray());
-                // Go to payment
-                if ($result['status'] == 0) {
-                    $url = array('', 'controller' => 'index', 'action' => 'index');
-                    $this->jump($url, $result['message'], 'error');
-                } else {
-                    if ($config['order_payment'] == 'payment') {
-                        $url = $result['pay_url'];
+                    // Update user information
+                    if ($config['order_update_user'] && $values['update_user']) {
+                        Pi::api('user', 'order')->updateUserInformation($values);
+                    }
+                    // Set invoice
+                    $result = Pi::api('invoice', 'order')->createInvoice($order->id);
+                    // unset order
+                    Pi::api('order', 'order')->unsetOrderInfo();
+                    // Send notification
+                    Pi::api('notification', 'order')->addOrder($order->toArray());
+                    // Go to payment
+                    if ($result['status'] == 0) {
+                        $url = array('', 'controller' => 'index', 'action' => 'index');
+                        $this->jump($url, $result['message'], 'error');
                     } else {
-                        $url = $result['invoice_url'];
+                        if ($config['order_payment'] == 'payment') {
+                            $url = $result['pay_url'];
+                        } else {
+                            $url = $result['invoice_url'];
+                        }
+                        $this->jump($url, $result['message'], 'success');
                     }
-                    $this->jump($url, $result['message'], 'success');
+                } else {
+                    $error = array(
+                        'values' => $values,
+                        'cart' => $cart,
+                        'customers' => $customers,
+                        'user' => $user,
+                    );
+                    $this->view()->assign('error', $error);
                 }
             } else {
                 // Set new form
