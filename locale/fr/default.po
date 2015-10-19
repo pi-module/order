@@ -1168,7 +1168,7 @@ msgstr "Produit"
 #: template/front/detail.phtml:178 template/front/installment.phtml:101
 #: template/front/invoice-print.phtml:133 template/front/invoice.phtml:111
 msgid "Number"
-msgstr "Valeur"
+msgstr "Quantité"
 
 #: template/admin/invoice-print.phtml:135
 #: template/admin/invoice-print.phtml:186 template/admin/order-view.phtml:203
