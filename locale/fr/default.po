@@ -637,7 +637,7 @@ msgstr "Enregistrer la commande"
 #: template/admin/order-view.phtml:155 template/front/invoice-print.phtml:60
 #: template/front/invoice.phtml:41
 msgid "Order"
-msgstr "Ordre"
+msgstr "Commande"
 
 #: src/Form/OrderSettingForm.php:59 src/Form/UpdatePaymentForm.php:41
 #: template/admin/order-index.phtml:18 template/admin/order-view.phtml:169
