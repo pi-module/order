@@ -417,7 +417,7 @@ msgstr "Montant TVA"
 #: template/front/detail.phtml:223 template/front/invoice-print.phtml:70
 #: template/front/invoice.phtml:50 template/front/list.phtml:106
 msgid "Due date"
-msgstr "Date effective"
+msgstr "Date échéance"
 
 #: src/Form/InvoiceForm.php:100
 msgid "Save"
@@ -589,7 +589,7 @@ msgstr "Code Postal"
 #: template/admin/order-view.phtml:205 template/admin/order-view.phtml:224
 #: template/front/detail.phtml:181
 msgid "Packing"
-msgstr "Emballage"
+msgstr "Emballage/Conditionnement"
 
 #: src/Form/OrderForm.php:289 template/front/checkout.phtml:194
 msgid "Location"
@@ -1128,7 +1128,7 @@ msgstr "Date de facturation"
 #: template/front/invoice-print.phtml:66 template/front/invoice-print.phtml:74
 #: template/front/invoice.phtml:47 template/front/invoice.phtml:54
 msgid "On"
-msgstr "Sur"
+msgstr "Le"
 
 #: template/admin/invoice-print.phtml:79 template/admin/invoice-update.phtml:8
 #: template/admin/invoice-view.phtml:53 template/admin/order-print.phtml:37
@@ -1253,7 +1253,7 @@ msgstr "N° TVA Entreprise"
 #: template/admin/invoice-update.phtml:66 template/admin/order-view.phtml:80
 #: template/front/detail.phtml:118
 msgid "Order status"
-msgstr "Statut des commandes"
+msgstr "Statut de la commande"
 
 #: template/admin/invoice-update.phtml:72 template/admin/order-view.phtml:86
 #: template/front/detail.phtml:124
@@ -1516,7 +1516,7 @@ msgstr "Nombre d'installations"
 
 #: template/admin/order-view.phtml:261 template/front/detail.phtml:217
 msgid "This order invoices list"
-msgstr "Liste des commandes et factures"
+msgstr "Liste des factures associées à cette commande"
 
 #: template/admin/order-view.phtml:316
 msgid "Add extra invoice to this order"
