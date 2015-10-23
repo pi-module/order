@@ -174,28 +174,23 @@ $this->footScript()->appendScript($script);
                             <p><strong><?php _e('Total Price'); ?></strong> : <span
                                     id="cart-total-price"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'])); ?></span>
                             </p>
-
                             <p><strong><?php _e('Total Discount'); ?></strong> : <span
                                     id="cart-total-discount"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['discount'])); ?></span>
                             </p>
-
                             <p><strong><?php _e('Total Shipping'); ?></strong> : <span
                                     id="cart-total-shipping"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['shipping'])); ?></span>
                             </p>
-
                             <p><strong><?php _e('Total Vat'); ?></strong> : <span
                                     id="cart-total-vat"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?></span>
                             </p>
-
                             <p><strong><?php _e('Final Price'); ?></strong> : <span id="cart-total-total"
                                                                                     class="label label-success"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?></span>
                             </p>
-
-                            <p><strong><?php _e('Location'); ?></strong> : <span id="cart-location"></span></p>
-
+                            <?php if ($config['order_location_delivery'] && $cart['type_commodity'] == 'product') { ?>
+                            <p><strong> <?php _e('Location'); ?></strong> : <span id="cart-location"></span></p>
                             <p><strong><?php _e('Delivery'); ?></strong> : <span id="cart-delivery"></span></p>
-
                             <p><strong><?php _e('Payment'); ?></strong> : <span id="cart-payment"></span></p>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
