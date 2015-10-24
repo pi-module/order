@@ -1300,7 +1300,7 @@ msgstr "Passerelle"
 #: template/admin/invoice-view.phtml:43 template/admin/order-index.phtml:16
 #: template/admin/order-view.phtml:126 template/front/detail.phtml:164
 msgid "Total price"
-msgstr "Prix Total"
+msgstr "Prix Total TTC"
 
 #: template/admin/invoice-update.phtml:116
 #: template/admin/invoice-view.phtml:47 template/admin/order-view.phtml:130
@@ -1581,7 +1581,7 @@ msgstr "Total Remise"
 
 #: template/front/checkout.phtml:182
 msgid "Total Shipping"
-msgstr "TVA Transport"
+msgstr "Total Transport"
 
 #: template/front/checkout.phtml:186
 msgid "Total Vat"
@@ -1589,7 +1589,7 @@ msgstr "Total TVA"
 
 #: template/front/checkout.phtml:190
 msgid "Final Price"
-msgstr "Prix final"
+msgstr "Prix Total"
 
 #: template/front/detail.phtml:20
 msgid "validated"
