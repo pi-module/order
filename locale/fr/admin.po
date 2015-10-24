@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-10-19 23:27+0100\n"
+"POT-Creation-Date: 2015-10-24 18:02+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -107,8 +107,8 @@ msgstr "Mettre à jour le profil utilisateur"
 #: config/config.php:105
 msgid "Update user profile by order informations by user confirmation"
 msgstr ""
-"Mettre à jour le profil utilisateur avec les informations de commande, "
-"après confirmation utilisateur"
+"Mettre à jour le profil utilisateur avec les informations de commande, après "
+"confirmation utilisateur"
 
 #: config/config.php:112
 msgid "Show ID number"
@@ -311,9 +311,9 @@ msgid ""
 "Dear %s %s, You paid invoice %s by %s price for %s order included % product "
 "on %s website successfully"
 msgstr ""
-"Cher/Chère %s %s, votre règlement de la facture %s pour un prix de %s , "
-"pour la commande %s comprenant le produit % , depuis le site %s, a été "
-"finalisé avec succès."
+"Cher/Chère %s %s, votre règlement de la facture %s pour un prix de %s , pour "
+"la commande %s comprenant le produit % , depuis le site %s, a été finalisé "
+"avec succès."
 
 #: config/config.php:386
 msgid "Pay invoice notification to admin"
@@ -324,8 +324,8 @@ msgid ""
 "Dear %s admin, %s %s User paid invoice %s by %s price for %s order included "
 "% product successfully"
 msgstr ""
-"Cher Admin %s, l'utilisateur %s %s a réglé avec succès la facture %s au "
-"prix de  %s price pour la commande %s order incluant le produit %"
+"Cher Admin %s, l'utilisateur %s %s a réglé avec succès la facture %s au prix "
+"de  %s price pour la commande %s order incluant le produit %"
 
 #: config/config.php:394
 msgid "Set X day before due date"
