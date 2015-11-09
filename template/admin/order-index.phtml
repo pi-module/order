@@ -3,9 +3,21 @@ $this->css($this->assetModule('css/admin.css'));
 $this->backbone();
 ?>
 <div id="js-order" class="clearfix">
-    <div class="well">
-        <h3><?php _e('Filter orders'); ?></h3>
-        <?php echo $this->form($form); ?>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingForm">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
+                        <?php _e('Filter orders'); ?>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseForm" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingForm">
+                <div class="panel-body">
+                    <?php echo $this->form($form); ?>
+                </div>
+            </div>
+        </div>
     </div>
     <h3><?php _e('List of orders'); ?></h3>
     <table class="table table-striped table-bordered table-condensed">
