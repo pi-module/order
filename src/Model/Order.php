@@ -26,7 +26,7 @@ class Order extends Model
         'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 'user_note',
         'admin_note', 'time_create', 'time_payment', 'time_delivery', 'time_finish', 'time_start',
         'time_end', 'status_order', 'status_payment', 'status_delivery', 'product_price',
-        'discount_price', 'shipping_price', 'packing_price', 'vat_price', 'total_price',
+        'discount_price', 'shipping_price', 'packing_price', 'setup_price', 'vat_price', 'total_price',
         'paid_price', 'gateway', 'delivery', 'location', 'packing', 'promo_type', 'promo_value'
     );
 }

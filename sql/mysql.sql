@@ -1,16 +1,16 @@
 CREATE TABLE `{order}` (
-# General
+  # General
   `id`              INT(10) UNSIGNED                                    NOT NULL AUTO_INCREMENT,
   `uid`             INT(10) UNSIGNED                                    NOT NULL DEFAULT '0',
   `code`            VARCHAR(16)                                         NOT NULL DEFAULT '',
   `type_payment`    ENUM('free', 'onetime', 'recurring', 'installment') NOT NULL DEFAULT 'onetime',
   `type_commodity`  ENUM('product', 'service')                          NOT NULL DEFAULT 'product',
   `plan`            INT(10) UNSIGNED                                    NOT NULL DEFAULT '0',
-# Module
+  # Module
   `module_name`     VARCHAR(64)                                         NOT NULL DEFAULT '',
   `module_table`    VARCHAR(64)                                         NOT NULL DEFAULT '',
   `module_item`     INT(10) UNSIGNED                                    NOT NULL DEFAULT '0',
-# Customer information
+  # Customer information
   `ip`              CHAR(15)                                            NOT NULL DEFAULT '',
   `id_number`       VARCHAR(255)                                        NOT NULL DEFAULT '',
   `first_name`      VARCHAR(255)                                        NOT NULL DEFAULT '',
@@ -27,34 +27,35 @@ CREATE TABLE `{order}` (
   `company`         VARCHAR(255)                                        NOT NULL DEFAULT '',
   `company_id`      VARCHAR(255)                                        NOT NULL DEFAULT '',
   `company_vat`     VARCHAR(255)                                        NOT NULL DEFAULT '',
-# Notes
+  # Notes
   `user_note`       TEXT,
   `admin_note`      TEXT,
-# Needed times
+  # Needed times
   `time_create`     INT(10) UNSIGNED                                    NOT NULL DEFAULT '0',
   `time_payment`    INT(10) UNSIGNED                                    NOT NULL DEFAULT '0',
   `time_delivery`   INT(10) UNSIGNED                                    NOT NULL DEFAULT '0',
   `time_finish`     INT(10) UNSIGNED                                    NOT NULL DEFAULT '0',
   `time_start`      INT(10) UNSIGNED                                    NOT NULL DEFAULT '0',
   `time_end`        INT(10) UNSIGNED                                    NOT NULL DEFAULT '0',
-# Needed status
+  # Needed status
   `status_order`    TINYINT(1) UNSIGNED                                 NOT NULL DEFAULT '0',
   `status_payment`  TINYINT(1) UNSIGNED                                 NOT NULL DEFAULT '0',
   `status_delivery` TINYINT(1) UNSIGNED                                 NOT NULL DEFAULT '0',
-# Needed prices
+  # Needed prices
   `product_price`   DECIMAL(16, 2)                                      NOT NULL DEFAULT '0.00',
   `discount_price`  DECIMAL(16, 2)                                      NOT NULL DEFAULT '0.00',
   `shipping_price`  DECIMAL(16, 2)                                      NOT NULL DEFAULT '0.00',
   `packing_price`   DECIMAL(16, 2)                                      NOT NULL DEFAULT '0.00',
+  `setup_price`     DECIMAL(16, 2)                                      NOT NULL DEFAULT '0.00',
   `vat_price`       DECIMAL(16, 2)                                      NOT NULL DEFAULT '0.00',
   `total_price`     DECIMAL(16, 2)                                      NOT NULL DEFAULT '0.00',
   `paid_price`      DECIMAL(16, 2)                                      NOT NULL DEFAULT '0.00',
-# Checkout
+  # Checkout
   `gateway`         VARCHAR(64)                                         NOT NULL DEFAULT 'offline',
   `delivery`        INT(10) UNSIGNED                                    NOT NULL DEFAULT '0',
   `location`        INT(10) UNSIGNED                                    NOT NULL DEFAULT '0',
   `packing`         TINYINT(1) UNSIGNED                                 NOT NULL DEFAULT '0',
-# promos as gift
+  # promos as gift
   `promo_type`      VARCHAR(64)                                         NOT NULL DEFAULT '',
   `promo_value`     VARCHAR(64)                                         NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
@@ -69,6 +70,7 @@ CREATE TABLE `{basket}` (
   `discount_price` DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
   `shipping_price` DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
   `packing_price`  DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+  `setup_price`    DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
   `vat_price`      DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
   `total_price`    DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
   `number`         INT(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -89,6 +91,7 @@ CREATE TABLE `{invoice}` (
   `discount_price` DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
   `shipping_price` DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
   `packing_price`  DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
+  `setup_price`    DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
   `vat_price`      DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
   `total_price`    DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
   `paid_price`     DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',

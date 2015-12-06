@@ -50,6 +50,16 @@ class InvoiceFilter extends InputFilter
                 ),
             ),
         ));
+        // setup_price
+        $this->add(array(
+            'name' => 'setup_price',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
         // vat_price
         $this->add(array(
             'name' => 'vat_price',

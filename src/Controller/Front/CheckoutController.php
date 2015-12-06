@@ -150,13 +150,16 @@ class CheckoutController extends IndexController
                 if (is_array($values['gateway'])) {
                     $values['gateway'] = $values['gateway'][0];
                 }
+
                 // Set price values
                 $values['product_price'] = 0;
                 $values['discount_price'] = 0;
                 $values['shipping_price'] = 0;
                 $values['packing_price'] = 0;
+                $values['setup_price'] = 0;
                 $values['vat_price'] = 0;
                 $values['total_price'] = 0;
+
                 // Check order values
                 if (!empty($cart['product'])) {
                     foreach ($cart['product'] as $product) {
@@ -165,20 +168,36 @@ class CheckoutController extends IndexController
                         $values['discount_price'] = ($product['discount_price'] * $product['number']) + $values['discount_price'];
                         $values['shipping_price'] = ($product['shipping_price'] * $product['number']) + $values['shipping_price'];
                         $values['packing_price'] = ($product['packing_price'] * $product['number']) + $values['packing_price'];
+                        $values['setup_price'] = ($product['setup_price'] * $product['number']) + $values['setup_price'];
                         $values['vat_price'] = ($product['vat_price'] * $product['number']) + $values['vat_price'];
                     }
                 }
-                // Set total
-                $values['total_price'] = (($values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['vat_price']) - $values['discount_price']);
-                // Set additional price
-                $additional = 0;
-                if ($values['type_commodity'] == 'product') {
-                    $additional = $config['order_additional_price_product'];
-                    $values['shipping_price'] = $config['order_additional_price_product'];
-                } elseif ($values['type_commodity'] == 'service') {
-                    $additional = $config['order_additional_price_service'];
+
+                // Check delivery and location for get price
+                if (isset($values['location'])
+                    && intval($values['location']) > 0
+                    && isset($values['delivery'])
+                    && intval($values['delivery']) > 0
+                ) {
+                    $shippingPrice = Pi::api('delivery', 'order')->getPrice($values['location'], $values['delivery']);
+                    $values['shipping_price'] = $values['shipping_price'] + $shippingPrice;
                 }
-                $values['total_price'] = $values['total_price'] + $additional;
+
+                // Set additional price
+                if ($values['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
+                    $values['shipping_price'] = $values['shipping_price'] + $config['order_additional_price_product'];
+                } elseif ($values['type_commodity'] == 'service' && $config['order_additional_price_service'] >0 ) {
+                    $values['setup_price'] = $values['setup_price'] + $config['order_additional_price_service'];
+                }
+
+                // Set total
+                $values['total_price'] = (($values['product_price'] +
+                        $values['shipping_price'] +
+                        $values['packing_price'] +
+                        $values['setup_price'] +
+                        $values['vat_price']
+                    ) - $values['discount_price']);
+
                 // Set customer
                 if ($values['customer_id'] == 0) {
                     Pi::api('customer', 'order')->addCustomer($values);
@@ -201,13 +220,19 @@ class CheckoutController extends IndexController
                     if (!empty($cart['product'])) {
                         foreach ($cart['product'] as $product) {
                             $price = $product['product_price'];
-                            $total = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']) * $product['number'];
+                            $total = (($product['product_price'] +
+                                        $product['shipping_price'] +
+                                        $product['packing_price'] +
+                                        $product['setup_price'] +
+                                        $product['vat_price']
+                                    ) - $product['discount_price']) * $product['number'];
                             // Save basket
                             $basket = $this->getModel('basket')->createRow();
                             $basket->order = $order->id;
                             $basket->product = $product['product'];
                             $basket->discount_price = $product['discount_price'];
                             $basket->shipping_price = $product['shipping_price'];
+                            $basket->setup_price = $product['setup_price'];
                             $basket->packing_price = $product['packing_price'];
                             $basket->vat_price = $product['vat_price'];
                             // Set price
@@ -306,11 +331,17 @@ class CheckoutController extends IndexController
             $price['product'] = ($product['product_price'] * $product['number']) + $price['product'];
             $price['discount'] = ($product['discount_price'] * $product['number']) + $price['discount'];
             $price['shipping'] = ($product['shipping_price'] * $product['number']) + $price['shipping'];
+            $price['setup'] = ($product['setup_price'] * $product['number']) + $price['setup'];
             $price['packing'] = ($product['packing_price'] * $product['number']) + $price['packing'];
             $price['vat'] = $product['vat_price'] + $price['vat'];
         }
         // Set total
-        $price['total'] = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']);
+        $price['total'] = (($product['product_price'] +
+                $product['shipping_price'] +
+                $product['packing_price'] +
+                $product['setup_price'] +
+                $product['vat_price']
+            ) - $product['discount_price']);
         // Set additional price
         $additional = 0;
         if ($cart['type_commodity'] == 'product') {
@@ -371,6 +402,7 @@ class CheckoutController extends IndexController
             $price['product_price'] = 0;
             $price['discount_price'] = 0;
             $price['shipping_price'] = 0;
+            $price['setup_price'] = 0;
             $price['packing_price'] = 0;
             $price['vat_price'] = 0;
             $price['total_price'] = 0;
@@ -381,10 +413,16 @@ class CheckoutController extends IndexController
                     $price['product_price'] = $product['product_price'] + $price['product_price'];
                     $price['discount_price'] = $product['discount_price'] + $price['discount_price'];
                     $price['shipping_price'] = $product['shipping_price'] + $price['shipping_price'];
+                    $price['setup_price'] = $product['setup_price'] + $price['setup_price'];
                     $price['packing_price'] = $product['packing_price'] + $price['packing_price'];
                     $price['vat_price'] = $product['vat_price'] + $price['vat_price'];
                     // Set total
-                    $total = (($product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['vat_price']) - $product['discount_price']) * $product['number'];
+                    $total = (($product['product_price'] +
+                                $product['shipping_price'] +
+                                $product['packing_price'] +
+                                $product['setup_price'] +
+                                $product['vat_price']
+                            ) - $product['discount_price']) * $product['number'];
                     $price['total_price'] = $total + $price['total_price'];
                 }
             }

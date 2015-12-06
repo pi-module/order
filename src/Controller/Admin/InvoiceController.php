@@ -202,7 +202,7 @@ class InvoiceController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 $values['time_duedate'] = strtotime($values['time_duedate']);
-                $values['total_price'] = $values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['vat_price'];
+                $values['total_price'] = $values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['setup_price'] + $values['vat_price'];
                 $values['random_id'] = time() + rand(100, 999);
                 $values['uid'] = $order['uid'];
                 $values['ip'] = Pi::user()->getIp();

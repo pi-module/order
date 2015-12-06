@@ -68,6 +68,7 @@ class Invoice extends AbstractApi
                     $row->discount_price = $order['discount_price'];
                     $row->shipping_price = $order['shipping_price'];
                     $row->packing_price = $order['packing_price'];
+                    $row->setup_price = $order['setup_price'];
                     $row->vat_price = $order['vat_price'];
                     $row->total_price = $order['total_price'];
                     $row->paid_price = 0;
@@ -97,6 +98,7 @@ class Invoice extends AbstractApi
                     $row->discount_price = $order['discount_price'];
                     $row->shipping_price = $order['shipping_price'];
                     $row->packing_price = $order['packing_price'];
+                    $row->setup_price = $order['setup_price'];
                     $row->vat_price = $order['vat_price'];
                     $row->total_price = $order['total_price'];
                     $row->paid_price = 0;
@@ -172,6 +174,7 @@ class Invoice extends AbstractApi
                             $row->product_price = $invoice['price'];
                             $row->discount_price = 0;
                             $row->shipping_price = 0;
+                            $row->setup_price = 0;
                             $row->packing_price = 0;
                             $row->vat_price = 0;
                             $row->total_price = $invoice['price'];
@@ -200,7 +203,7 @@ class Invoice extends AbstractApi
                             Pi::model('profile', 'user')->update(array('credit' => $credit), array('uid' => $uid));
                         }
                         // Update order
-                        $totalPrice = ($total['price'] + $order['shipping_price'] + $order['packing_price'] + $order['vat_price']) - $order['discount_price'];
+                        $totalPrice = ($total['price'] + $order['shipping_price'] + $order['packing_price'] + $order['setup_price'] + $order['vat_price']) - $order['discount_price'];
                         Pi::model('order', 'order')->update(
                             array('product_price' => $total['price'], 'total_price' => $totalPrice),
                             array('id' => $order['id'])
@@ -383,6 +386,7 @@ class Invoice extends AbstractApi
         $invoice['product_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['product_price']);
         $invoice['shipping_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['shipping_price']);
         $invoice['packing_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['packing_price']);
+        $invoice['setup_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['setup_price']);
         $invoice['vat_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['vat_price']);
         $invoice['total_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['total_price']);
         $invoice['paid_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['paid_price']);

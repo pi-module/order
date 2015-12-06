@@ -66,6 +66,17 @@ class InvoiceForm extends BaseForm
                 'description' => '',
             )
         ));
+        // setup_price
+        $this->add(array(
+            'name' => 'setup_price',
+            'options' => array(
+                'label' => __('Setup price'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+            )
+        ));
         // vat_price
         $this->add(array(
             'name' => 'vat_price',

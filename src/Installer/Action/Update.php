@@ -230,6 +230,47 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '1.7.0', '<')) {
+            // Alter table field add
+            $sql = sprintf("ALTER TABLE %s ADD `setup_price` DECIMAL(16, 2) NOT NULL DEFAULT '0.00'", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+
+            // Alter table field add
+            $sql = sprintf("ALTER TABLE %s ADD `setup_price` DECIMAL(16, 2) NOT NULL DEFAULT '0.00'", $basketTable);
+            try {
+                $basketAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+
+            // Alter table field add
+            $sql = sprintf("ALTER TABLE %s ADD `setup_price` DECIMAL(16, 2) NOT NULL DEFAULT '0.00'", $invoiceTable);
+            try {
+                $invoiceAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }
 }   

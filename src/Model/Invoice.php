@@ -22,7 +22,7 @@ class Invoice extends Model
      */
     protected $columns = array(
         'id', 'random_id', 'order',  'uid', 'ip', 'code', 'product_price', 'discount_price',
-        'shipping_price', 'packing_price', 'vat_price', 'total_price', 'paid_price',
+        'shipping_price', 'packing_price', 'setup_price', 'vat_price', 'total_price', 'paid_price',
         'credit_price', 'gateway', 'status',  'time_create', 'time_duedate', 'time_payment',
         'time_cancel',  'back_url', 'extra'
     );
