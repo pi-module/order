@@ -300,7 +300,7 @@ class OrderForm extends BaseForm
                         'name' => 'delivery',
                         'type' => 'select',
                         'options' => array(
-                            'label' => __('Delivery'),
+                            'label' => __('Delivery methods'),
                             'value_options' => array(),
                         ),
                         'attributes' => array(
