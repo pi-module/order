@@ -278,6 +278,7 @@ class OrderForm extends BaseForm
             ));
         }
         // Check type_commodity
+        $gatewayList = Pi::api('gateway', 'order')->getActiveGatewayName();
         switch ($this->option['type_commodity']) {
             case 'product':
                 if ($this->config['order_location_delivery']) {
@@ -308,28 +309,42 @@ class OrderForm extends BaseForm
                             'required' => true,
                         )
                     ));
-                    // gateway
-                    $this->add(array(
-                        'name' => 'gateway',
-                        'type' => 'select',
-                        'options' => array(
-                            'label' => __('Adapter'),
-                            'value_options' => array(),
-                        ),
-                        'attributes' => array(
-                            'id' => 'select-payment',
-                            'size' => 5,
-                            'required' => true,
-                        )
-                    ));
-                } else {
-                    $gatewayList = Pi::api('gateway', 'order')->getActiveGatewayName();
+                    // check gateway
                     if (count($gatewayList) == 1) {
                         $gatewayList = array_keys($gatewayList);
                         // gateway
                         $this->add(array(
                             'name' => 'gateway',
                             'attributes' => array(
+                                'id' => 'select-payment',
+                                'type' => 'hidden',
+                                'value' => $gatewayList['0'],
+                            ),
+                        ));
+                    } else {
+                        // gateway
+                        $this->add(array(
+                            'name' => 'gateway',
+                            'type' => 'select',
+                            'options' => array(
+                                'label' => __('Adapter'),
+                                'value_options' => array(),
+                            ),
+                            'attributes' => array(
+                                'id' => 'select-payment',
+                                'size' => 5,
+                                'required' => true,
+                            )
+                        ));
+                    }
+                } else {
+                    if (count($gatewayList) == 1) {
+                        $gatewayList = array_keys($gatewayList);
+                        // gateway
+                        $this->add(array(
+                            'name' => 'gateway',
+                            'attributes' => array(
+                                'id' => 'select-payment',
                                 'type' => 'hidden',
                                 'value' => $gatewayList['0'],
                             ),

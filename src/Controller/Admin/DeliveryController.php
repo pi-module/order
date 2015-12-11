@@ -81,10 +81,17 @@ class DeliveryController extends ActionController
                 $row->save();
                 // Save gateway
                 $this->getModel('delivery_gateway')->delete(array('delivery' => $row->id));
-                foreach ($gateways as $gateway) {
+                if (is_array($gateways)) {
+                    foreach ($gateways as $gateway) {
+                        $delivery_gateway = $this->getModel('delivery_gateway')->createRow();
+                        $delivery_gateway->delivery = $row->id;
+                        $delivery_gateway->gateway = $gateway;
+                        $delivery_gateway->save();
+                    }
+                } else {
                     $delivery_gateway = $this->getModel('delivery_gateway')->createRow();
                     $delivery_gateway->delivery = $row->id;
-                    $delivery_gateway->gateway = $gateway;
+                    $delivery_gateway->gateway = $gateways;
                     $delivery_gateway->save();
                 }
                 // Add log
@@ -99,11 +106,9 @@ class DeliveryController extends ActionController
                 $values = $this->getModel('delivery')->find($id)->toArray();
                 // Get gateways
                 $where = array('delivery' => $id);
-                $select = $this->getModel('delivery_gateway')->select()->where($where);
-                $rowset = $this->getModel('delivery_gateway')->selectWith($select)->toArray();
-                foreach ($rowset as $gateway) {
-                    $values['gateway'][] = $gateway['gateway'];
-                }
+                $select = $this->getModel('delivery_gateway')->select()->where($where)->limit(1);
+                $gateway = $this->getModel('delivery_gateway')->selectWith($select)->current();
+                $values['gateway'] = $gateway['gateway'];
                 // Set form data
                 $form->setData($values);
             }

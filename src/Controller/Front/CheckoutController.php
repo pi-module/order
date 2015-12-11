@@ -230,11 +230,11 @@ class CheckoutController extends IndexController
                             $basket = $this->getModel('basket')->createRow();
                             $basket->order = $order->id;
                             $basket->product = $product['product'];
-                            $basket->discount_price = $product['discount_price'];
-                            $basket->shipping_price = $product['shipping_price'];
-                            $basket->setup_price = $product['setup_price'];
-                            $basket->packing_price = $product['packing_price'];
-                            $basket->vat_price = $product['vat_price'];
+                            $basket->discount_price = isset($product['discount_price']) ? $product['discount_price'] : 0;
+                            $basket->shipping_price = isset($product['shipping_price']) ? $product['shipping_price'] : 0;
+                            $basket->setup_price = isset($product['setup_price']) ? $product['setup_price'] : 0;
+                            $basket->packing_price = isset($product['packing_price']) ? $product['packing_price'] : 0;
+                            $basket->vat_price = isset($product['vat_price']) ? $product['vat_price'] : 0;
                             // Set price
                             if ($order->type_payment == 'installment') {
                                 $basket->product_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);

@@ -106,29 +106,6 @@ $this->footScript()->appendScript($script);
                     <?php } ?>
                     <div class="well"><?php _e('Select your invoicing address for your order'); ?></div>
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
-                        <?php foreach ($customers as $customer) { ?>
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab"
-                                     id="customer-<?php echo $this->escape($customer['id']); ?>">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion"
-                                           href="#collapse-customer-<?php echo $this->escape($customer['id']); ?>"
-                                           aria-expanded="false"
-                                           aria-controls="collapse-customer-<?php echo $this->escape($customer['id']); ?>">
-                                            <?php echo $this->escape($customer['address1']); ?>
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapse-customer-<?php echo $this->escape($customer['id']); ?>"
-                                     class="panel-collapse collapse" role="tabpanel"
-                                     aria-labelledby="customer-<?php echo $this->escape($customer['id']); ?>">
-                                    <div class="panel-body">
-                                        <?php $key = sprintf('customer-%s', $customer['id']); ?>
-                                        <?php echo $this->form($forms[$key]); ?>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } ?>
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="new-address">
                                 <h4 class="panel-title">
@@ -145,6 +122,33 @@ $this->footScript()->appendScript($script);
                                 </div>
                             </div>
                         </div>
+                        <?php $i = 1; ?>
+                        <?php foreach ($customers as $customer) { ?>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab"
+                                     id="customer-<?php echo $this->escape($customer['id']); ?>">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion"
+                                           href="#collapse-customer-<?php echo $this->escape($customer['id']); ?>"
+                                           aria-expanded="<?php if ($i == 1) {echo 'true';} else {echo 'false';} ?>"
+                                           aria-controls="collapse-customer-<?php echo $this->escape($customer['id']); ?>">
+                                            <?php echo $this->escape($customer['first_name']); ?>
+                                            <?php echo $this->escape($customer['last_name']); ?> :
+                                            <?php echo $this->escape($customer['address1']); ?>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse-customer-<?php echo $this->escape($customer['id']); ?>"
+                                     class="panel-collapse collapse<?php if ($i == 1) {echo ' in';} ?>" role="tabpanel"
+                                     aria-labelledby="customer-<?php echo $this->escape($customer['id']); ?>">
+                                    <div class="panel-body">
+                                        <?php $key = sprintf('customer-%s', $customer['id']); ?>
+                                        <?php echo $this->form($forms[$key]); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php $i++; ?>
+                        <?php } ?>
                     </div>
                 <?php } else { ?>
                     <div class="panel panel-default">
