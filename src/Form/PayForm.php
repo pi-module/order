@@ -66,4 +66,4 @@ class PayForm extends BaseForm
             )
         )); */
     }
-}	
+}

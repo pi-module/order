@@ -114,7 +114,7 @@ class PaymentController extends IndexController
             $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), __('Error to get information.'));
         }
         // Set view
-        $this->view()->setLayout('layout-content');
+        $this->view()->setLayout('layout-style');
         $this->view()->setTemplate('pay');
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('form', $form);
