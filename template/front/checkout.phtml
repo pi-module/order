@@ -113,18 +113,15 @@ $this->footScript()->appendScript($script);
                             <div role="tabpanel" class="tab-pane active" id="customer-list-tab">
                                 <div class="customer-list">
                                     <?php foreach ($customers as $customer) { ?>
-                                        <div class="customer-single">
-                                            <table class="table table-bordered">
+                                        <div class="customer-single table-responsive">
+                                            <table class="table table-bordered table-condensed table-striped">
                                                 <tr>
-                                                    <td colspan="2" class="col-md-9">
+                                                    <td colspan="3" class="col-md-12">
                                                         <strong>
                                                             <?php echo $this->escape($customer['first_name']); ?>
                                                             <?php echo $this->escape($customer['last_name']); ?>
                                                             ( <?php echo $this->escape($customer['email']); ?> )
                                                         </strong>
-                                                    </td>
-                                                    <td class="col-md-3 text-center">
-                                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#customerModal<?php echo $customer['id']; ?>"><?php _e('Save order'); ?></button>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -141,6 +138,10 @@ $this->footScript()->appendScript($script);
                                                         <p><strong><?php _e('Mobile'); ?></strong> : <?php echo $this->escape($customer['mobile']); ?></p>
                                                     </td>
                                                 </tr>
+                                                <td colspan="2" class="col-md-9"></td>
+                                                <td colspan="1" class="col-md-3 text-center">
+                                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#customerModal<?php echo $customer['id']; ?>"><?php _e('Save order'); ?></button>
+                                                </td>
                                             </table>
                                         </div>
                                         <!-- Modal -->
