@@ -271,6 +271,33 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '1.7.1', '<')) {
+            // Alter table field add
+            $sql = sprintf("ALTER TABLE %s ADD `delivery` INT(10) UNSIGNED NOT NULL DEFAULT '0'", $customerTable);
+            try {
+                $customerAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            // Alter table field add
+            $sql = sprintf("ALTER TABLE %s ADD `location` INT(10) UNSIGNED NOT NULL DEFAULT '0'", $customerTable);
+            try {
+                $customerAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }
 }   

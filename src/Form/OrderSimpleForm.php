@@ -16,20 +16,19 @@ namespace Module\Order\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class OrderForm extends BaseForm
+class OrderSimpleForm extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {
         $this->option = $option;
         $this->config = Pi::service('registry')->config->read('order', 'order');
-        //$this->checkout = Pi::api('order', 'order')->checkoutConfig();
         parent::__construct($name);
     }
 
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new OrderFilter($this->option);
+            $this->filter = new OrderSimpleFilter($this->option);
         }
         return $this->filter;
     }
@@ -52,8 +51,7 @@ class OrderForm extends BaseForm
                     'label' => __('First name'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
+                    'type' => 'hidden',
                     'required' => true,
                 )
             ));
@@ -64,8 +62,7 @@ class OrderForm extends BaseForm
                     'label' => __('Last name'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
+                    'type' => 'hidden',
                     'required' => true,
                 )
             ));
@@ -78,8 +75,7 @@ class OrderForm extends BaseForm
                     'label' => __('ID number'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
+                    'type' => 'hidden',
                     'required' => true,
                 )
             ));
@@ -92,8 +88,7 @@ class OrderForm extends BaseForm
                     'label' => __('Email'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
+                    'type' => 'hidden',
                     'required' => true,
                 )
             ));
@@ -106,9 +101,7 @@ class OrderForm extends BaseForm
                     'label' => __('Phone'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-
+                    'type' => 'hidden',
                 )
             ));
         }
@@ -120,8 +113,7 @@ class OrderForm extends BaseForm
                     'label' => __('Mobile'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
+                    'type' => 'hidden',
                     'required' => true,
                 )
             ));
@@ -135,8 +127,7 @@ class OrderForm extends BaseForm
                     'label' => __('Company'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
+                    'type' => 'hidden',
                 )
             ));
         }
@@ -149,8 +140,7 @@ class OrderForm extends BaseForm
                     'label' => __('Company id'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
+                    'type' => 'hidden',
                 )
             ));
             // company_vat
@@ -160,8 +150,7 @@ class OrderForm extends BaseForm
                     'label' => __('Company vat'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
+                    'type' => 'hidden',
                 )
             ));
         }
@@ -173,8 +162,7 @@ class OrderForm extends BaseForm
                     'label' => __('Delivery address'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
+                    'type' => 'hidden',
                     'required' => true,
                 )
             ));
@@ -187,40 +175,21 @@ class OrderForm extends BaseForm
                     'label' => __('Address 2'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
+                    'type' => 'hidden',
                 )
             ));
         }
         // country
         if ($this->config['order_country']) {
-            if (!empty($this->config['order_countrylist'])) {
-                // Set list
-                $countries = explode('|', $this->config['order_countrylist']);
-                foreach ($countries as $country) {
-                    $countryList[$country] = $country;
-                }
-                // Make form
-                $this->add(array(
-                    'name' => 'country',
-                    'type' => 'select',
-                    'options' => array(
-                        'label' => __('Country'),
-                        'value_options' => $countryList,
-                    ),
-                ));
-            } else {
-                $this->add(array(
-                    'name' => 'country',
-                    'options' => array(
-                        'label' => __('Country'),
-                    ),
-                    'attributes' => array(
-                        'type' => 'text',
-                        'description' => '',
-                    )
-                ));
-            }
+            $this->add(array(
+                'name' => 'country',
+                'options' => array(
+                    'label' => __('Country'),
+                ),
+                'attributes' => array(
+                    'type' => 'hidden',
+                )
+            ));
         }
         // state
         if ($this->config['order_state']) {
@@ -230,9 +199,7 @@ class OrderForm extends BaseForm
                     'label' => __('State'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-
+                    'type' => 'hidden',
                 )
             ));
         }
@@ -244,9 +211,7 @@ class OrderForm extends BaseForm
                     'label' => __('City'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-
+                    'type' => 'hidden',
                 )
             ));
         }
@@ -258,8 +223,7 @@ class OrderForm extends BaseForm
                     'label' => __('Zip code'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
+                    'type' => 'hidden',
                     'required' => true,
                 )
             ));
@@ -285,26 +249,25 @@ class OrderForm extends BaseForm
                     // location
                     $this->add(array(
                         'name' => 'location',
-                        'type' => 'Module\Order\Form\Element\Location',
                         'options' => array(
                             'label' => __('Location'),
-                            'parent' => 1,
                         ),
                         'attributes' => array(
-                            'id' => 'select-location',
+                            'type' => 'hidden',
                             'required' => true,
                         )
                     ));
                     // delivery
                     $this->add(array(
                         'name' => 'delivery',
-                        'type' => 'select',
+                        'type' => 'Module\Order\Form\Element\Delivery',
                         'options' => array(
                             'label' => __('Delivery methods'),
                             'value_options' => array(),
+                            'location' => $this->option['location'],
                         ),
                         'attributes' => array(
-                            'id' => 'select-delivery',
+                            'id' => 'customer-select-delivery',
                             'size' => 3,
                             'required' => true,
                         )
@@ -316,7 +279,7 @@ class OrderForm extends BaseForm
                         $this->add(array(
                             'name' => 'gateway',
                             'attributes' => array(
-                                'id' => 'select-payment',
+                                'id' => 'customer-select-payment',
                                 'type' => 'hidden',
                                 'value' => $gatewayList['0'],
                             ),
@@ -331,7 +294,7 @@ class OrderForm extends BaseForm
                                 'value_options' => array(),
                             ),
                             'attributes' => array(
-                                'id' => 'select-payment',
+                                'id' => 'customer-select-payment',
                                 'size' => 3,
                                 'required' => true,
                             )
@@ -344,7 +307,7 @@ class OrderForm extends BaseForm
                         $this->add(array(
                             'name' => 'gateway',
                             'attributes' => array(
-                                'id' => 'select-payment',
+                                'id' => 'customer-select-payment',
                                 'type' => 'hidden',
                                 'value' => $gatewayList['0'],
                             ),
@@ -359,7 +322,7 @@ class OrderForm extends BaseForm
                                 'value_options' => $gatewayList,
                             ),
                             'attributes' => array(
-                                'id' => 'select-payment',
+                                'id' => 'customer-select-payment',
                                 'size' => 1,
                                 'required' => true,
                             )
@@ -389,7 +352,7 @@ class OrderForm extends BaseForm
                             'value_options' => $gatewayList,
                         ),
                         'attributes' => array(
-                            'id' => 'select-payment',
+                            'id' => 'customer-select-payment',
                             'size' => 1,
                             'required' => true,
                         )
@@ -408,19 +371,6 @@ class OrderForm extends BaseForm
                     'type' => 'textarea',
                     'rows' => '5',
                     'cols' => '40',
-                    'description' => '',
-                )
-            ));
-        }
-        // Update profile confirmation
-        if ($this->config['order_update_user']) {
-            $this->add(array(
-                'name' => 'update_user',
-                'type' => 'checkbox',
-                'options' => array(
-                    'label' => __('Update your profile by this informations?'),
-                ),
-                'attributes' => array(
                     'description' => '',
                 )
             ));

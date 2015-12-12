@@ -17,6 +17,8 @@ use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Module\Order\Form\OrderForm;
 use Module\Order\Form\OrderFilter;
+use Module\Order\Form\OrderSimpleForm;
+use Module\Order\Form\OrderSimpleFilter;
 use Zend\Json\Json;
 
 class CheckoutController extends IndexController
@@ -293,13 +295,15 @@ class CheckoutController extends IndexController
                 // Set new form
                 $user = Pi::api('user', 'order')->getUserInformation();
                 $user['customer_id'] = 0;
+                $forms = array();
                 $forms['new'] = new OrderForm('order', $option);
                 $forms['new']->setData($user);
                 // Set customer forms
                 if (!empty($customers)) {
                     foreach ($customers as $customer) {
                         $key = sprintf('customer-%s', $customer['id']);
-                        $forms[$key] = new OrderForm('order', $option);
+                        $option['location'] = $customer['location'];
+                        $forms[$key] = new OrderSimpleForm('order', $option);
                         $forms[$key]->setData($data);
                     }
                 }
@@ -308,13 +312,17 @@ class CheckoutController extends IndexController
             // Set new form
             $user = Pi::api('user', 'order')->getUserInformation();
             $user['customer_id'] = 0;
+            $forms = array();
             $forms['new'] = new OrderForm('order', $option);
             $forms['new']->setData($user);
             // Set customer forms
             if (!empty($customers)) {
                 foreach ($customers as $customer) {
                     $key = sprintf('customer-%s', $customer['id']);
-                    $forms[$key] = new OrderForm('order', $option);
+                    $option['location'] = $customer['location'];
+                    unset($customer['delivery']);
+                    unset($customer['user_note']);
+                    $forms[$key] = new OrderSimpleForm('order', $option);
                     $forms[$key]->setData($customer);
                 }
             }
@@ -324,6 +332,7 @@ class CheckoutController extends IndexController
         $price['discount'] = 0;
         $price['shipping'] = 0;
         $price['packing'] = 0;
+        $price['setup'] = 0;
         $price['vat'] = 0;
         $price['total'] = 0;
         foreach ($cart['product'] as $product) {
@@ -356,6 +365,11 @@ class CheckoutController extends IndexController
             $user = Pi::api('user', 'order')->getUserInformation();
             $plan = Pi::api('installment', 'order')->setPriceForInvoice($price['total'], $cart['plan'], $user);
             $this->view()->assign('plan', $plan);
+        }
+        // Set products
+        foreach ($cart['product'] as $product) {
+            $cart['product'][$product['product']]['details'] = Pi::api('order', $cart['module_name'])->getProductDetails($product['product']);
+            $cart['product'][$product['product']]['product_price_view'] = Pi::api('api', 'order')->viewPrice($product['product_price']);
         }
         // Set view
         $this->view()->setTemplate('checkout');

@@ -1,7 +1,7 @@
 ul.progtrckr {
     margin: 0;
     padding: 0;
-    list-style-type none;
+    list-style-type: none;
 }
 
 ul.progtrckr li {
@@ -70,4 +70,18 @@ ul.progtrckr li.progtrckr-todo:before {
 
 #pi-order .finishBox .finishLogo {
     padding-bottom: 20px;
+}
+
+.cart-product .panel-body {
+    padding: 5px;
+}
+
+.cart-product-list {
+    margin-bottom: 10px;
+}
+
+.cart-product-single {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
 }

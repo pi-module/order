@@ -29,7 +29,8 @@ class Customer extends AbstractApi
     {
         // Set values
         $values['time_update'] = $values['time_create'];
-        $values['state'] = 1;
+        $values['status'] = 1;
+        unset($values['user_note']);
         // Save customer info
         $customer = Pi::model('customer', $this->getModule())->createRow();
         $customer->assign($values);
@@ -44,7 +45,8 @@ class Customer extends AbstractApi
     {
         // Set values
         $values['time_update'] = time();
-        $values['state'] = 1;
+        $values['status'] = 1;
+        unset($values['user_note']);
         // Find customer info
         $customer = Pi::model('customer', $this->getModule())->find($values['customer_id']);
         // Check customer

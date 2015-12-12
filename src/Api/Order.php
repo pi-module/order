@@ -103,7 +103,7 @@ class Order extends AbstractApi
                 break;
 
             case '7':
-                $return['orderClass'] = 'btn-inverse';
+                $return['orderClass'] = 'btn-primary';
                 $return['orderTitle'] = __('Orders finished');
                 break;
         }

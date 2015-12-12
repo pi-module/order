@@ -24,6 +24,6 @@ class Customer extends Model
         'id', 'uid', 'ip', 'id_number', 'first_name', 'last_name', 'email',
         'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city',
         'zip_code', 'company', 'company_id', 'company_vat', 'user_note',
-        'time_create', 'time_update', 'status', 'address_type'
+        'time_create', 'time_update', 'status', 'address_type', 'delivery', 'location'
     );
 }

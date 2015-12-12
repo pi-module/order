@@ -85,7 +85,152 @@ $script = sprintf(
 );
 $this->footScript()->appendScript($script);
 ?>
-    <div id="js-order" class="clearfix row order-checkout">
+    <div id="js-order" class="clearfix order-checkout">
+        <div class="page-header">
+            <h1><?php _e('Checkout'); ?></h1>
+        </div>
+        <?php if ($cart['type_payment'] == 'installment') { ?>
+            <div class="alert alert-info" role="alert">
+                <h2><?php _e('Terms of payment'); ?></h2>
+                <p><?php echo sprintf(__('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2), Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])), Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))); ?></p>
+            </div>
+        <?php } ?>
+        <div class="clearfix">
+            <div class="col-md-9">
+                <?php if (!empty($customers)) { ?>
+                    <div class="clearfix">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#customer-list-tab" aria-controls="customer-list-tab" role="tab" data-toggle="tab"><?php _e('Use current address'); ?></a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#customer-new-tab" aria-controls="customer-new-tab" role="tab" data-toggle="tab"><?php _e('Add new address'); ?></a>
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="customer-list-tab">
+                                <div class="customer-list">
+                                    <?php foreach ($customers as $customer) { ?>
+                                        <div class="customer-single">
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <td colspan="2" class="col-md-9">
+                                                        <strong>
+                                                            <?php echo $this->escape($customer['first_name']); ?>
+                                                            <?php echo $this->escape($customer['last_name']); ?>
+                                                            ( <?php echo $this->escape($customer['email']); ?> )
+                                                        </strong>
+                                                    </td>
+                                                    <td class="col-md-3 text-center">
+                                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#customerModal<?php echo $customer['id']; ?>"><?php _e('Save order'); ?></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3">
+                                                        <p><strong><?php _e('State'); ?></strong> : <?php echo $this->escape($customer['state']); ?></p>
+                                                        <p><strong><?php _e('City'); ?></strong> : <?php echo $this->escape($customer['city']); ?></p>
+                                                    </td>
+                                                    <td class="col-md-6">
+                                                        <p><strong><?php _e('Address'); ?></strong> : <?php echo $this->escape($customer['address1']); ?></p>
+                                                        <p><strong><?php _e('Zip code'); ?></strong> : <?php echo $this->escape($customer['zip_code']); ?></p>
+                                                    </td>
+                                                    <td class="col-md-3">
+                                                        <p><strong><?php _e('Phone'); ?></strong> : <?php echo $this->escape($customer['phone']); ?></p>
+                                                        <p><strong><?php _e('Mobile'); ?></strong> : <?php echo $this->escape($customer['mobile']); ?></p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="customerModal<?php echo $customer['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="customerModalLabel<?php echo $customer['id']; ?>">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="<?php _e('Close'); ?>"><span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title" id="customerModalLabel<?php echo $customer['id']; ?>">
+                                                            <?php echo $this->escape($customer['first_name']); ?> <?php echo $this->escape($customer['last_name']); ?>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <?php $key = sprintf('customer-%s', $customer['id']); ?>
+                                                        <?php echo $this->form($forms[$key]); ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="customer-new-tab">
+                                <?php echo $this->form($forms['new']); ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php } else { ?>
+                    <?php echo $this->form($forms['new']); ?>
+                <?php } ?>
+            </div>
+            <div class="col-md-3 cart-product">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><?php _e('Your products or services'); ?></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="cart-product-list">
+                            <?php foreach ($cart['product'] as $product) { ?>
+                                <div class="clearfix cart-product-single">
+                                    <div class="row">
+                                        <h5 class="col-xs-12">
+                                            <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
+                                                <?php echo $this->escape($product['details']['title']); ?>
+                                            </a>
+                                        </h5>
+                                        <div class="col-xs-5">
+                                            <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
+                                                <img class="img-responsive" src="<?php echo $this->escape($product['details']['thumbUrl']); ?>">
+                                            </a>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <div class="small">
+                                                <strong><?php _e('Price') ?></strong> : <?php echo $this->escape($product['product_price_view']); ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        </div>
+                        <p class="small">
+                            <strong><?php _e('Total Price'); ?></strong> :
+                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'])); ?>
+                        </p>
+                        <p class="small">
+                            <strong><?php _e('Total Discount'); ?></strong> :
+                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['discount'])); ?>
+                        </p>
+                        <p class="small">
+                            <strong><?php _e('Total Shipping'); ?></strong> :
+                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['shipping'])); ?>
+                        </p>
+                        <p class="small">
+                            <strong><?php _e('Total Vat'); ?></strong> :
+                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?>
+                        </p>
+                        <p class="small">
+                            <strong><?php _e('Final Price'); ?></strong> :
+                            <span class="label label-success">
+                                <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php /*
+ <pre><?php //print_r($cart); ?></pre>
+ <div id="js-order" class="clearfix row order-checkout">
         <?php if (!empty($customers)) { ?>
             <div class="page-header">
                 <h1><?php _e('Checkout'); ?></h1>
@@ -204,3 +349,4 @@ $this->footScript()->appendScript($script);
 <?php if (isset($error) && !empty($error)) { ?>
 <pre><?php print_r($error); ?></pre>
 <?php } ?>
+ */ ?>
