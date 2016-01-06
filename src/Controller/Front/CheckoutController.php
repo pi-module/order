@@ -26,7 +26,20 @@ class CheckoutController extends IndexController
     public function indexAction()
     {
         // Check user
-        $this->checkUser();
+        if (!Pi::service('authentication')->hasIdentity()) {
+            if (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
+                $formLogin = new LoginForm('login');
+                $formLogin->setAttribute(
+                    'action',
+                    $this->url('default', array('module' => 'system', 'controller' => 'login', 'action' => 'process'))
+                );
+                $formLogin->setData(array('redirect' => $this->url('', array('controller' => 'checkout', 'action' => 'index'))));
+                $this->view()->assign('formLogin', $formLogin);
+            } else {
+                $url = array('home');
+                $this->jump($url, __('Your cart is empty.'), 'error');
+            }
+        }
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Set cart
@@ -55,10 +68,52 @@ class CheckoutController extends IndexController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                // Check user informations
-                $user = Pi::api('user', 'order')->getUserInformation();
+                // Register user
+                if (!Pi::service('authentication')->hasIdentity() && isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
+                    // Check email force set on register form
+                    if (!isset($values['email']) || empty($values['email'])) {
+                        $result['message'] = __('User information was not completed and user account was not saved.');
+                        return $result;
+                    }
+
+                    // Set email as identity if not set on register form
+                    if (!isset($values['identity']) || empty($values['identity'])) {
+                        $values['identity'] = $values['email'];
+                    }
+
+                    // Set name if not set on register form
+                    if (!isset($values['name']) || empty($values['name'])) {
+                        if (isset($values['first_name']) || isset($values['last_name'])) {
+                            $values['name'] = $values['first_name'] . ' ' . $values['last_name'];
+                        } else {
+                            $values['name'] = $values['identity'];
+                        }
+                    }
+
+                    // Set values
+                    $values['last_modified'] = time();
+                    $values['ip_register']   = Pi::user()->getIp();
+
+                    // Add user
+                    $uid = Pi::api('user', 'user')->addUser($values);
+                    if (!$uid || !is_int($uid)) {
+                        $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
+                        $this->jump($url, __('User account was not saved.'), 'error');
+                    }
+
+                    // Set user role
+                    Pi::api('user', 'user')->setRole($uid, 'member');
+
+                    // Check user informations
+                    $user = Pi::api('user', 'order')->getUserInformation($uid);
+                } else {
+                    // Get user id
+                    $uid = Pi::user()->getId();
+                    // Check user informations
+                    $user = Pi::api('user', 'order')->getUserInformation();
+                }
                 // Set values
-                $values['uid'] = Pi::user()->getId();
+                $values['uid'] = $uid;
                 $values['ip'] = Pi::user()->getIp();
                 $values['status_order'] = 1;
                 $values['status_payment'] = 1;

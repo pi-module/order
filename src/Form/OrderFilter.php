@@ -23,6 +23,14 @@ class OrderFilter extends InputFilter
     {
         $config = Pi::service('registry')->config->read('order', 'order');
         //$checkout = Pi::api('order', 'order')->checkoutConfig();
+
+        // Check for load register form
+        if (!Pi::service('authentication')->hasIdentity() && isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
+            $registerFilters = Pi::api('form', 'user')->loadFilters('register');
+            foreach ($registerFilters as $filter) {
+                $this->add($filter);
+            }
+        }
         // customer_id
         $this->add(array(
             'name' => 'customer_id',

@@ -36,6 +36,32 @@ class OrderForm extends BaseForm
 
     public function init()
     {
+        // Check for load register form
+        if (!Pi::service('authentication')->hasIdentity() && isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
+            // extra_register
+            $this->add(array(
+                'name' => 'extra_register',
+                'type' => 'fieldset',
+                'options' => array(
+                    'label' => __('Register new user account information'),
+                ),
+            ));
+            $registerFields = Pi::api('form', 'user')->loadFields('register');
+            foreach ($registerFields as $field) {
+                $type = (isset($field['type'])) ? $field['type'] : $field['attributes']['type'];
+                if ($type != 'captcha') {
+                    $this->add($field);
+                }
+            }
+            // extra_order
+            $this->add(array(
+                'name' => 'extra_order',
+                'type' => 'fieldset',
+                'options' => array(
+                    'label' => __('Make order information'),
+                ),
+            ));
+        }
         // customer_id
         $this->add(array(
             'name' => 'customer_id',
