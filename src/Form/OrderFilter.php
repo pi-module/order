@@ -21,13 +21,19 @@ class OrderFilter extends InputFilter
 {
     public function __construct($option = array())
     {
+        // Get config
         $config = Pi::service('registry')->config->read('order', 'order');
-        //$checkout = Pi::api('order', 'order')->checkoutConfig();
 
         // Check for load register form
-        if (!Pi::service('authentication')->hasIdentity() && isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
+        $registerFiltersName = array();
+        if (Pi::service('module')->isActive('user')
+            && !Pi::service('authentication')->hasIdentity()
+            && isset($_SESSION['session_order'])
+            && !empty($_SESSION['session_order'])
+        ) {
             $registerFilters = Pi::api('form', 'user')->loadFilters('register');
             foreach ($registerFilters as $filter) {
+                $registerFiltersName[] = $filter['name'];
                 $this->add($filter);
             }
         }
@@ -39,28 +45,32 @@ class OrderFilter extends InputFilter
         // name
         if ($config['order_name']) {
             // first_name
-            $this->add(array(
-                'name' => 'first_name',
-                'required' => true,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
+            if (!in_array('first_name', $registerFiltersName)) {
+                $this->add(array(
+                    'name' => 'first_name',
+                    'required' => true,
+                    'filters' => array(
+                        array(
+                            'name' => 'StringTrim',
+                        ),
                     ),
-                ),
-            ));
+                ));
+            }
             // last_name
-            $this->add(array(
-                'name' => 'last_name',
-                'required' => true,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
+            if (!in_array('last_name', $registerFiltersName)) {
+                $this->add(array(
+                    'name' => 'last_name',
+                    'required' => true,
+                    'filters' => array(
+                        array(
+                            'name' => 'StringTrim',
+                        ),
                     ),
-                ),
-            ));
+                ));
+            }
         }
         // id_number
-        if ($config['order_idnumber']) {
+        if ($config['order_idnumber'] && !in_array('id_number', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'id_number',
                 'required' => true,
@@ -72,7 +82,7 @@ class OrderFilter extends InputFilter
             ));
         }
         // email
-        if ($config['order_email']) {
+        if ($config['order_email'] && !in_array('email', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'email',
                 'required' => true,
@@ -98,7 +108,7 @@ class OrderFilter extends InputFilter
             ));
         }
         // phone
-        if ($config['order_phone']) {
+        if ($config['order_phone'] && !in_array('phone', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'phone',
                 'required' => false,
@@ -110,7 +120,7 @@ class OrderFilter extends InputFilter
             ));
         }
         // mobile
-        if ($config['order_mobile']) {
+        if ($config['order_mobile'] && !in_array('mobile', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'mobile',
                 'required' => true,
@@ -122,7 +132,7 @@ class OrderFilter extends InputFilter
             ));
         }
         // company
-        if ($config['order_company']) {
+        if ($config['order_company'] && !in_array('company', $registerFiltersName)) {
             // company
             $this->add(array(
                 'name' => 'company',
@@ -137,28 +147,32 @@ class OrderFilter extends InputFilter
         // company extra
         if ($config['order_company_extra']) {
             // company_id
-            $this->add(array(
-                'name' => 'company_id',
-                'required' => false,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
+            if (!in_array('company_id', $registerFiltersName)) {
+                $this->add(array(
+                    'name' => 'company_id',
+                    'required' => false,
+                    'filters' => array(
+                        array(
+                            'name' => 'StringTrim',
+                        ),
                     ),
-                ),
-            ));
+                ));
+            }
             // company_vat
-            $this->add(array(
-                'name' => 'company_vat',
-                'required' => false,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
+            if (!in_array('company_vat', $registerFiltersName)) {
+                $this->add(array(
+                    'name' => 'company_vat',
+                    'required' => false,
+                    'filters' => array(
+                        array(
+                            'name' => 'StringTrim',
+                        ),
                     ),
-                ),
-            ));
+                ));
+            }
         }
         // address
-        if ($config['order_address']) {
+        if ($config['order_address'] && !in_array('address1', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'address1',
                 'required' => true,
@@ -170,7 +184,7 @@ class OrderFilter extends InputFilter
             ));
         }
         // address 2
-        if ($config['order_address2']) {
+        if ($config['order_address2'] && !in_array('address2', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'address2',
                 'required' => false,
@@ -182,7 +196,7 @@ class OrderFilter extends InputFilter
             ));
         }
         // country
-        if ($config['order_country']) {
+        if ($config['order_country'] && !in_array('country', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'country',
                 'required' => false,
@@ -194,7 +208,7 @@ class OrderFilter extends InputFilter
             ));
         }
         // state
-        if ($config['order_state']) {
+        if ($config['order_state'] && !in_array('state', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'state',
                 'required' => false,
@@ -206,7 +220,7 @@ class OrderFilter extends InputFilter
             ));
         }
         // city
-        if ($config['order_city']) {
+        if ($config['order_city'] && !in_array('city', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'city',
                 'required' => false,
@@ -218,7 +232,7 @@ class OrderFilter extends InputFilter
             ));
         }
         // zip_code
-        if ($config['order_zip']) {
+        if ($config['order_zip'] && !in_array('zip_code', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'zip_code',
                 'required' => true,
@@ -230,7 +244,7 @@ class OrderFilter extends InputFilter
             ));
         }
         // packing
-        if ($config['order_packing']) {
+        if ($config['order_packing'] && !in_array('packing', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'packing',
                 'required' => false,
@@ -315,7 +329,7 @@ class OrderFilter extends InputFilter
             ));
         }
         // Update profile confirmation
-        if ($config['order_update_user']) {
+        if ($config['order_update_user'] && empty($registerFiltersName)) {
             $this->add(array(
                 'name' => 'update_user',
                 'required' => false,
@@ -354,4 +368,4 @@ class OrderFilter extends InputFilter
             ));
         }
     }
-}    	
+}

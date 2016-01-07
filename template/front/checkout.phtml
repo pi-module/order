@@ -98,102 +98,89 @@ $this->footScript()->appendScript($script);
         <div class="clearfix">
             <div class="col-md-9">
                 <?php if (isset($formLogin) && !empty($formLogin)) { ?>
-                    <div class="clearfix">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#customer-list-tab" aria-controls="customer-list-tab" role="tab" data-toggle="tab"><?php _e('Login'); ?></a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#customer-new-tab" aria-controls="customer-new-tab" role="tab" data-toggle="tab"><?php _e('Register'); ?></a>
-                            </li>
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="customer-list-tab">
-                                <?php echo $this->form($formLogin); ?>
+                    <div class="alert alert-info" role="alert">
+                        <?php _e('If you registered on website before this time and have user account, please login to system and continue ordering, and if you dont have user account here, please fill register new user account and make order form'); ?>
+                    </div>
+                    <div class="page-header">
+                        <h3><?php _e('Login'); ?></h3>
+                    </div>
+                    <?php echo $this->form($formLogin); ?>
+                    <div class="page-header">
+                        <h3><?php _e('Register new user account and make order'); ?></h3>
+                    </div>
+                <?php } ?>
+                <?php if (!empty($customers)) { ?>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#customer-list-tab" aria-controls="customer-list-tab" role="tab" data-toggle="tab"><?php _e('Use current address'); ?></a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#customer-new-tab" aria-controls="customer-new-tab" role="tab" data-toggle="tab"><?php _e('Add new address'); ?></a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="customer-list-tab">
+                            <div class="customer-list">
+                                <?php foreach ($customers as $customer) { ?>
+                                    <div class="customer-single table-responsive">
+                                        <table class="table table-bordered table-condensed table-striped">
+                                            <tr>
+                                                <td colspan="3" class="col-md-12">
+                                                    <strong>
+                                                        <?php echo $this->escape($customer['first_name']); ?>
+                                                        <?php echo $this->escape($customer['last_name']); ?>
+                                                        ( <?php echo $this->escape($customer['email']); ?> )
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-3">
+                                                    <p><strong><?php _e('State'); ?></strong> : <?php echo $this->escape($customer['state']); ?></p>
+                                                    <p><strong><?php _e('City'); ?></strong> : <?php echo $this->escape($customer['city']); ?></p>
+                                                </td>
+                                                <td class="col-md-6">
+                                                    <p><strong><?php _e('Address'); ?></strong> : <?php echo $this->escape($customer['address1']); ?></p>
+                                                    <p><strong><?php _e('Zip code'); ?></strong> : <?php echo $this->escape($customer['zip_code']); ?></p>
+                                                </td>
+                                                <td class="col-md-3">
+                                                    <p><strong><?php _e('Phone'); ?></strong> : <?php echo $this->escape($customer['phone']); ?></p>
+                                                    <p><strong><?php _e('Mobile'); ?></strong> : <?php echo $this->escape($customer['mobile']); ?></p>
+                                                </td>
+                                            </tr>
+                                            <td colspan="2" class="col-md-9"></td>
+                                            <td colspan="1" class="col-md-3 text-center">
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#customerModal<?php echo $customer['id']; ?>"><?php _e('Save order'); ?></button>
+                                            </td>
+                                        </table>
+                                    </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="customerModal<?php echo $customer['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="customerModalLabel<?php echo $customer['id']; ?>">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="<?php _e('Close'); ?>"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="customerModalLabel<?php echo $customer['id']; ?>">
+                                                        <?php echo $this->escape($customer['first_name']); ?> <?php echo $this->escape($customer['last_name']); ?>
+                                                    </h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <?php $key = sprintf('customer-%s', $customer['id']); ?>
+                                                    <?php echo $this->form($forms[$key]); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="customer-new-tab">
-                                <?php echo $this->form($forms['new']); ?>
-                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="customer-new-tab">
+                            <?php echo $this->form($forms['new']); ?>
                         </div>
                     </div>
                 <?php } else { ?>
-                    <?php if (!empty($customers)) { ?>
-                        <div class="clearfix">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active">
-                                    <a href="#customer-list-tab" aria-controls="customer-list-tab" role="tab" data-toggle="tab"><?php _e('Use current address'); ?></a>
-                                </li>
-                                <li role="presentation">
-                                    <a href="#customer-new-tab" aria-controls="customer-new-tab" role="tab" data-toggle="tab"><?php _e('Add new address'); ?></a>
-                                </li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="customer-list-tab">
-                                    <div class="customer-list">
-                                        <?php foreach ($customers as $customer) { ?>
-                                            <div class="customer-single table-responsive">
-                                                <table class="table table-bordered table-condensed table-striped">
-                                                    <tr>
-                                                        <td colspan="3" class="col-md-12">
-                                                            <strong>
-                                                                <?php echo $this->escape($customer['first_name']); ?>
-                                                                <?php echo $this->escape($customer['last_name']); ?>
-                                                                ( <?php echo $this->escape($customer['email']); ?> )
-                                                            </strong>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-md-3">
-                                                            <p><strong><?php _e('State'); ?></strong> : <?php echo $this->escape($customer['state']); ?></p>
-                                                            <p><strong><?php _e('City'); ?></strong> : <?php echo $this->escape($customer['city']); ?></p>
-                                                        </td>
-                                                        <td class="col-md-6">
-                                                            <p><strong><?php _e('Address'); ?></strong> : <?php echo $this->escape($customer['address1']); ?></p>
-                                                            <p><strong><?php _e('Zip code'); ?></strong> : <?php echo $this->escape($customer['zip_code']); ?></p>
-                                                        </td>
-                                                        <td class="col-md-3">
-                                                            <p><strong><?php _e('Phone'); ?></strong> : <?php echo $this->escape($customer['phone']); ?></p>
-                                                            <p><strong><?php _e('Mobile'); ?></strong> : <?php echo $this->escape($customer['mobile']); ?></p>
-                                                        </td>
-                                                    </tr>
-                                                    <td colspan="2" class="col-md-9"></td>
-                                                    <td colspan="1" class="col-md-3 text-center">
-                                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#customerModal<?php echo $customer['id']; ?>"><?php _e('Save order'); ?></button>
-                                                    </td>
-                                                </table>
-                                            </div>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="customerModal<?php echo $customer['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="customerModalLabel<?php echo $customer['id']; ?>">
-                                                <div class="modal-dialog modal-lg" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="<?php _e('Close'); ?>"><span aria-hidden="true">&times;</span></button>
-                                                            <h4 class="modal-title" id="customerModalLabel<?php echo $customer['id']; ?>">
-                                                                <?php echo $this->escape($customer['first_name']); ?> <?php echo $this->escape($customer['last_name']); ?>
-                                                            </h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <?php $key = sprintf('customer-%s', $customer['id']); ?>
-                                                            <?php echo $this->form($forms[$key]); ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="customer-new-tab">
-                                    <?php echo $this->form($forms['new']); ?>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } else { ?>
-                        <?php echo $this->form($forms['new']); ?>
-                    <?php } ?>
+                    <?php echo $this->form($forms['new']); ?>
                 <?php } ?>
             </div>
             <div class="col-md-3 cart-product">
@@ -212,11 +199,11 @@ $this->footScript()->appendScript($script);
                                             </a>
                                         </h5>
                                         <?php if (!empty($product['details']['thumbUrl'])) { ?>
-                                        <div class="col-xs-5">
-                                            <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
-                                                <img class="img-responsive" src="<?php echo $this->escape($product['details']['thumbUrl']); ?>">
-                                            </a>
-                                        </div>
+                                            <div class="col-xs-5">
+                                                <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
+                                                    <img class="img-responsive" src="<?php echo $this->escape($product['details']['thumbUrl']); ?>">
+                                                </a>
+                                            </div>
                                         <?php } ?>
                                         <div class="col-xs-7">
                                             <div class="small">

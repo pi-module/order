@@ -15,10 +15,13 @@ namespace Module\Order\Controller\Front;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
+//use Pi\Authentication\Result;
 use Module\Order\Form\OrderForm;
 use Module\Order\Form\OrderFilter;
 use Module\Order\Form\OrderSimpleForm;
 use Module\Order\Form\OrderSimpleFilter;
+use Module\System\Form\LoginForm;
+use Module\System\Form\LoginFilter;
 use Zend\Json\Json;
 
 class CheckoutController extends IndexController
@@ -27,7 +30,10 @@ class CheckoutController extends IndexController
     {
         // Check user
         if (!Pi::service('authentication')->hasIdentity()) {
-            if (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
+            if (Pi::service('module')->isActive('user')
+                && isset($_SESSION['session_order'])
+                && !empty($_SESSION['session_order'])
+            ) {
                 $formLogin = new LoginForm('login');
                 $formLogin->setAttribute(
                     'action',
@@ -68,19 +74,27 @@ class CheckoutController extends IndexController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                // Register user
-                if (!Pi::service('authentication')->hasIdentity() && isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
+
+                /*
+                 * Register user codes from user module register controller
+                 */
+                if (Pi::service('module')->isActive('user')
+                    && !Pi::service('authentication')->hasIdentity()
+                    && isset($_SESSION['session_order'])
+                    && !empty($_SESSION['session_order'])
+                ) {
+                    /*
+                     * Register part
+                     */
                     // Check email force set on register form
                     if (!isset($values['email']) || empty($values['email'])) {
                         $result['message'] = __('User information was not completed and user account was not saved.');
                         return $result;
                     }
-
                     // Set email as identity if not set on register form
                     if (!isset($values['identity']) || empty($values['identity'])) {
                         $values['identity'] = $values['email'];
                     }
-
                     // Set name if not set on register form
                     if (!isset($values['name']) || empty($values['name'])) {
                         if (isset($values['first_name']) || isset($values['last_name'])) {
@@ -89,21 +103,30 @@ class CheckoutController extends IndexController
                             $values['name'] = $values['identity'];
                         }
                     }
-
                     // Set values
                     $values['last_modified'] = time();
                     $values['ip_register']   = Pi::user()->getIp();
-
                     // Add user
                     $uid = Pi::api('user', 'user')->addUser($values);
                     if (!$uid || !is_int($uid)) {
-                        $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
+                        $url = Pi::url(Pi::service('user')->getUrl('register', array()));
                         $this->jump($url, __('User account was not saved.'), 'error');
                     }
-
                     // Set user role
                     Pi::api('user', 'user')->setRole($uid, 'member');
 
+                    /*
+                     * Active user
+                     */
+                    $status = Pi::api('user', 'user')->activateUser($uid);
+                    if ($status) {
+                        // Target activate user event
+                        Pi::service('event')->trigger('user_activate', $uid);
+                    }
+
+                    /*
+                     * Get user information
+                     */
                     // Check user informations
                     $user = Pi::api('user', 'order')->getUserInformation($uid);
                 } else {
@@ -254,7 +277,6 @@ class CheckoutController extends IndexController
                         $values['setup_price'] +
                         $values['vat_price']
                     ) - $values['discount_price']);
-
                 // Set customer
                 if ($values['customer_id'] == 0) {
                     Pi::api('customer', 'order')->addCustomer($values);
@@ -316,11 +338,11 @@ class CheckoutController extends IndexController
                         }
                     }
                     // Update user information
-                    if ($config['order_update_user'] && $values['update_user']) {
+                    if ($config['order_update_user'] && isset($values['update_user']) && $values['update_user']) {
                         Pi::api('user', 'order')->updateUserInformation($values);
                     }
                     // Set invoice
-                    $result = Pi::api('invoice', 'order')->createInvoice($order->id);
+                    $result = Pi::api('invoice', 'order')->createInvoice($order->id, $uid);
                     // unset order
                     Pi::api('order', 'order')->unsetOrderInfo();
                     // Send notification
@@ -346,13 +368,9 @@ class CheckoutController extends IndexController
                     );
                     $this->view()->assign('error', $error);
                 }
-            } else {
-                // Set new form
-                $user = Pi::api('user', 'order')->getUserInformation();
-                $user['customer_id'] = 0;
+            } elseif (Pi::service('authentication')->hasIdentity()) {
                 $forms = array();
-                $forms['new'] = new OrderForm('order', $option);
-                $forms['new']->setData($user);
+                $forms['new'] = $form;
                 // Set customer forms
                 if (!empty($customers)) {
                     foreach ($customers as $customer) {
@@ -362,6 +380,9 @@ class CheckoutController extends IndexController
                         $forms[$key]->setData($data);
                     }
                 }
+            } else {
+                $forms = array();
+                $forms['new'] = $form;
             }
         } else {
             // Set new form
@@ -392,6 +413,7 @@ class CheckoutController extends IndexController
         $price['total'] = 0;
         foreach ($cart['product'] as $product) {
             // Set price
+            $product['setup_price'] = isset($product['setup_price']) ? $product['setup_price'] : 0;
             $price['product'] = ($product['product_price'] * $product['number']) + $price['product'];
             $price['discount'] = ($product['discount_price'] * $product['number']) + $price['discount'];
             $price['shipping'] = ($product['shipping_price'] * $product['number']) + $price['shipping'];
@@ -400,6 +422,7 @@ class CheckoutController extends IndexController
             $price['vat'] = $product['vat_price'] + $price['vat'];
         }
         // Set total
+        $product['setup_price'] = isset($product['setup_price']) ? $product['setup_price'] : 0;
         $price['total'] = (($product['product_price'] +
                 $product['shipping_price'] +
                 $product['packing_price'] +
@@ -608,4 +631,9 @@ class CheckoutController extends IndexController
         // return
         return $return;
     }
+
+    /* protected function verifyResult(Result $result)
+    {
+        return $result;
+    } */
 }

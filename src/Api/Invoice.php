@@ -38,14 +38,14 @@ class Invoice extends AbstractApi
      *
      * @return array
      */
-    public function createInvoice($id)
+    public function createInvoice($id, $uid = null)
     {
         // Get order
         $order = Pi::api('order', 'order')->getOrder($id);
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Get user
-        $uid = Pi::user()->getId();
+        $uid = (is_null($uid)) ? Pi::user()->getId() : $uid;
         // Check user
         if ($config['order_anonymous'] == 0 && $uid == 0) {
             $result['status'] = 0;

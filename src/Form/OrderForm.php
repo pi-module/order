@@ -22,7 +22,6 @@ class OrderForm extends BaseForm
     {
         $this->option = $option;
         $this->config = Pi::service('registry')->config->read('order', 'order');
-        //$this->checkout = Pi::api('order', 'order')->checkoutConfig();
         parent::__construct($name);
     }
 
@@ -37,30 +36,19 @@ class OrderForm extends BaseForm
     public function init()
     {
         // Check for load register form
-        if (!Pi::service('authentication')->hasIdentity() && isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
-            // extra_register
-            $this->add(array(
-                'name' => 'extra_register',
-                'type' => 'fieldset',
-                'options' => array(
-                    'label' => __('Register new user account information'),
-                ),
-            ));
+        $registerFieldsName = array();
+        if (Pi::service('module')->isActive('user')
+            && !Pi::service('authentication')->hasIdentity()
+            && isset($_SESSION['session_order'])
+            && !empty($_SESSION['session_order'])
+        ) {
             $registerFields = Pi::api('form', 'user')->loadFields('register');
             foreach ($registerFields as $field) {
-                $type = (isset($field['type'])) ? $field['type'] : $field['attributes']['type'];
-                if ($type != 'captcha') {
+                $registerFieldsName[] = $field['name'];
+                if ($field['name'] != 'captcha') {
                     $this->add($field);
                 }
             }
-            // extra_order
-            $this->add(array(
-                'name' => 'extra_order',
-                'type' => 'fieldset',
-                'options' => array(
-                    'label' => __('Make order information'),
-                ),
-            ));
         }
         // customer_id
         $this->add(array(
@@ -72,32 +60,36 @@ class OrderForm extends BaseForm
         // name
         if ($this->config['order_name']) {
             // first_name
-            $this->add(array(
-                'name' => 'first_name',
-                'options' => array(
-                    'label' => __('First name'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                    'required' => true,
-                )
-            ));
+            if (!in_array('first_name', $registerFieldsName)) {
+                $this->add(array(
+                    'name' => 'first_name',
+                    'options' => array(
+                        'label' => __('First name'),
+                    ),
+                    'attributes' => array(
+                        'type' => 'text',
+                        'description' => '',
+                        'required' => true,
+                    )
+                ));
+            }
             // last_name
-            $this->add(array(
-                'name' => 'last_name',
-                'options' => array(
-                    'label' => __('Last name'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                    'required' => true,
-                )
-            ));
+            if (!in_array('last_name', $registerFieldsName)) {
+                $this->add(array(
+                    'name' => 'last_name',
+                    'options' => array(
+                        'label' => __('Last name'),
+                    ),
+                    'attributes' => array(
+                        'type' => 'text',
+                        'description' => '',
+                        'required' => true,
+                    )
+                ));
+            }
         }
         // id_number
-        if ($this->config['order_idnumber']) {
+        if ($this->config['order_idnumber'] && !in_array('id_number', $registerFieldsName)) {
             $this->add(array(
                 'name' => 'id_number',
                 'options' => array(
@@ -111,7 +103,7 @@ class OrderForm extends BaseForm
             ));
         }
         // email
-        if ($this->config['order_email']) {
+        if ($this->config['order_email'] && !in_array('email', $registerFieldsName)) {
             $this->add(array(
                 'name' => 'email',
                 'options' => array(
@@ -125,7 +117,7 @@ class OrderForm extends BaseForm
             ));
         }
         // phone
-        if ($this->config['order_phone']) {
+        if ($this->config['order_phone'] && !in_array('phone', $registerFieldsName)) {
             $this->add(array(
                 'name' => 'phone',
                 'options' => array(
@@ -139,7 +131,7 @@ class OrderForm extends BaseForm
             ));
         }
         // mobile
-        if ($this->config['order_mobile']) {
+        if ($this->config['order_mobile'] && !in_array('mobile', $registerFieldsName)) {
             $this->add(array(
                 'name' => 'mobile',
                 'options' => array(
@@ -153,7 +145,7 @@ class OrderForm extends BaseForm
             ));
         }
         // company
-        if ($this->config['order_company']) {
+        if ($this->config['order_company'] && !in_array('company', $registerFieldsName)) {
             // company
             $this->add(array(
                 'name' => 'company',
@@ -169,30 +161,34 @@ class OrderForm extends BaseForm
         // company extra
         if ($this->config['order_company_extra']) {
             // company_id
-            $this->add(array(
-                'name' => 'company_id',
-                'options' => array(
-                    'label' => __('Company id'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                )
-            ));
+            if (!in_array('company_id', $registerFieldsName)) {
+                $this->add(array(
+                    'name' => 'company_id',
+                    'options' => array(
+                        'label' => __('Company id'),
+                    ),
+                    'attributes' => array(
+                        'type' => 'text',
+                        'description' => '',
+                    )
+                ));
+            }
             // company_vat
-            $this->add(array(
-                'name' => 'company_vat',
-                'options' => array(
-                    'label' => __('Company vat'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                )
-            ));
+            if (!in_array('company_vat', $registerFieldsName)) {
+                $this->add(array(
+                    'name' => 'company_vat',
+                    'options' => array(
+                        'label' => __('Company vat'),
+                    ),
+                    'attributes' => array(
+                        'type' => 'text',
+                        'description' => '',
+                    )
+                ));
+            }
         }
         // address
-        if ($this->config['order_address']) {
+        if ($this->config['order_address'] && !in_array('address1', $registerFieldsName)) {
             $this->add(array(
                 'name' => 'address1',
                 'options' => array(
@@ -206,7 +202,7 @@ class OrderForm extends BaseForm
             ));
         }
         // address 2
-        if ($this->config['order_address2']) {
+        if ($this->config['order_address2'] && !in_array('address2', $registerFieldsName)) {
             $this->add(array(
                 'name' => 'address2',
                 'options' => array(
@@ -219,7 +215,7 @@ class OrderForm extends BaseForm
             ));
         }
         // country
-        if ($this->config['order_country']) {
+        if ($this->config['order_country'] && !in_array('country', $registerFieldsName)) {
             if (!empty($this->config['order_countrylist'])) {
                 // Set list
                 $countries = explode('|', $this->config['order_countrylist']);
@@ -249,7 +245,7 @@ class OrderForm extends BaseForm
             }
         }
         // state
-        if ($this->config['order_state']) {
+        if ($this->config['order_state'] && !in_array('state', $registerFieldsName)) {
             $this->add(array(
                 'name' => 'state',
                 'options' => array(
@@ -263,7 +259,7 @@ class OrderForm extends BaseForm
             ));
         }
         // city
-        if ($this->config['order_city']) {
+        if ($this->config['order_city'] && !in_array('city', $registerFieldsName)) {
             $this->add(array(
                 'name' => 'city',
                 'options' => array(
@@ -277,7 +273,7 @@ class OrderForm extends BaseForm
             ));
         }
         // zip_code
-        if ($this->config['order_zip']) {
+        if ($this->config['order_zip'] && !in_array('zip_code', $registerFieldsName)) {
             $this->add(array(
                 'name' => 'zip_code',
                 'options' => array(
@@ -439,12 +435,12 @@ class OrderForm extends BaseForm
             ));
         }
         // Update profile confirmation
-        if ($this->config['order_update_user']) {
+        if ($this->config['order_update_user'] && empty($registerFieldsName)) {
             $this->add(array(
                 'name' => 'update_user',
                 'type' => 'checkbox',
                 'options' => array(
-                    'label' => __('Update your profile by this informations?'),
+                    'label' => __('Update your profile by this information?'),
                 ),
                 'attributes' => array(
                     'description' => '',
@@ -481,11 +477,24 @@ class OrderForm extends BaseForm
             ));
         }
         // Save
-        if ($this->config['order_payment'] == 'payment') {
-            $title = __('Pay');
+        if (Pi::service('module')->isActive('user')
+            && !Pi::service('authentication')->hasIdentity()
+            && isset($_SESSION['session_order'])
+            && !empty($_SESSION['session_order'])
+        ) {
+            if ($this->config['order_payment'] == 'payment') {
+                $title = __('Register and pay');
+            } else {
+                $title = __('Register and save order');
+            }
         } else {
-            $title = __('Save order');
+            if ($this->config['order_payment'] == 'payment') {
+                $title = __('Pay');
+            } else {
+                $title = __('Save order');
+            }
         }
+
         $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
