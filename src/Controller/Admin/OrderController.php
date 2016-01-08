@@ -359,7 +359,7 @@ class OrderController extends ActionController
         // set Products
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
         // set Products
-        $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
+        $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order);
         // Add log
         //Pi::api('log', 'shop')->addLog('order', $order['id'], 'view');
         // Set view
@@ -383,7 +383,7 @@ class OrderController extends ActionController
         // Set Products
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
         // Set Products
-        $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
+        $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order);
         // Set installment
         $order['installment'] = Pi::api('installment', 'order')->blockTable($order['user']);
         // Get all products

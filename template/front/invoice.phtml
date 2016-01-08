@@ -7,6 +7,52 @@
         <div class="page-header">
             <h1><?php echo sprintf(__('Invoice %s'), $this->escape($invoice['code'])); ?></h1>
         </div>
+        <?php if ($order['type_commodity'] == 'product') { ?>
+            <?php /* From : http://blog.sathomas.me/post/tracking-progress-in-pure-css */ ?>
+            <div class="clearfix">
+                <ul class="progtrckr" data-progtrckr-steps="5">
+                    <?php if ($order['status_payment'] == '2') { ?>
+                        <li class="progtrckr-done"><?php _e('Paid'); ?></li>
+                    <?php } else { ?>
+                        <li class="progtrckr-todo"><?php _e('UnPaid'); ?></li>
+                    <?php } ?>
+                    <?php if ($order['status_order'] == '2') { ?>
+                        <li class="progtrckr-done"><?php _e('validated'); ?></li>
+                    <?php } else { ?>
+                        <li class="progtrckr-todo"><?php _e('Not validated'); ?></li>
+                    <?php } ?>
+                    <?php if ($order['status_delivery'] == '1') { ?>
+                        <li class="progtrckr-todo"><?php _e('Packed'); ?></li>
+                        <li class="progtrckr-todo"><?php _e('Posted'); ?></li>
+                        <li class="progtrckr-todo"><?php _e('Delivered'); ?></li>
+                    <?php } elseif ($order['status_delivery'] == '2') { ?>
+                        <li class="progtrckr-done"><?php _e('Packed'); ?></li>
+                        <li class="progtrckr-todo"><?php _e('Posted'); ?></li>
+                        <li class="progtrckr-todo"><?php _e('Delivered'); ?></li>
+                    <?php } elseif ($order['status_delivery'] == '3') { ?>
+                        <li class="progtrckr-done"><?php _e('Packed'); ?></li>
+                        <li class="progtrckr-done"><?php _e('Posted'); ?></li>
+                        <li class="progtrckr-todo"><?php _e('Delivered'); ?></li>
+                    <?php } elseif ($order['status_delivery'] == '4') { ?>
+                        <li class="progtrckr-done"><?php _e('Packed'); ?></li>
+                        <li class="progtrckr-done"><?php _e('Posted'); ?></li>
+                        <li class="progtrckr-done"><?php _e('Delivered'); ?></li>
+                    <?php } elseif ($order['status_delivery'] == '5') { ?>
+                        <li class="progtrckr-done"><?php _e('Packed'); ?></li>
+                        <li class="progtrckr-done"><?php _e('Posted'); ?></li>
+                        <li class="progtrckr-error"><?php _e('Back eaten'); ?></li>
+                    <?php } ?>
+                </ul>
+            </div>
+            <?php /* <script type="text/javascript">
+	$(window).load(function(){
+    	$("ul.progtrckr").each(function(){
+        	$(this).attr("data-progtrckr-steps",
+            	$(this).children("li").length);
+    	});
+	})
+	</script> */ ?>
+        <?php } ?>
         <div class="well">
             <?php if ($invoice['status'] == 1 && !empty($invoice['log'])) { ?>
                 <div class="clearfix">

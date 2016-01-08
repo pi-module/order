@@ -268,12 +268,28 @@ class Invoice extends AbstractApi
     public function getInvoiceFromOrder($order)
     {
         $invoices = array();
-        $where = array('order' => $order);
+        $where = array('order' => $order['id']);
         $select = Pi::model('invoice', $this->getModule())->select()->where($where);
         $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $invoices[$row->id] = $this->canonizeInvoice($row);
+            // Get log
             $invoices[$row->id]['log'] = Pi::api('log', 'order')->getTrueLog($row->id);
+            // Check allow payment
+            if ($order['type_payment'] == 'installment') {
+                if ($invoices[$row->id]['extra']['type'] == 'installment') {
+                    $time = time() + (60 * 60 * 24 * 14);
+                    if ($invoices[$row->id]['time_duedate'] < $time) {
+                        $invoices[$row->id]['allowPayment'] = true;
+                    } else {
+                        $invoices[$row->id]['allowPayment'] = false;
+                    }
+                } else {
+                    $invoices[$row->id]['allowPayment'] = true;
+                }
+            } else {
+                $invoices[$row->id]['allowPayment'] = true;
+            }
         }
         return $invoices;
     }
