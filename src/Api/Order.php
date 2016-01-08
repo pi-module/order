@@ -229,6 +229,12 @@ class Order extends AbstractApi
             'action' => 'updateDelivery',
             'id' => $order['id'],
         )));
+        //
+        $order['url_update_note'] = Pi::url(Pi::service('url')->assemble('admin', array(
+            'controller' => 'order',
+            'action' => 'updateNote',
+            'id' => $order['id'],
+        )));
         // Set url_edit
         $order['url_edit'] = Pi::url(Pi::service('url')->assemble('admin', array(
             'controller' => 'order',
@@ -286,6 +292,10 @@ class Order extends AbstractApi
             $order['shortStatus'] = $order['orderTitle'];
             $order['shortLabel'] = $order['orderLabel'];
         }
+        // Set text_summary
+        $order['user_note'] = Pi::service('markup')->render($order['user_note'], 'html', 'text');
+        // Set text_summary
+        $order['admin_note'] = Pi::service('markup')->render($order['admin_note'], 'html', 'text');
         // return order
         return $order;
     }

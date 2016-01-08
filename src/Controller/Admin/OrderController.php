@@ -24,6 +24,8 @@ use Module\Order\Form\UpdateOrderForm;
 use Module\Order\Form\UpdateOrderFilter;
 use Module\Order\Form\UpdatePaymentForm;
 use Module\Order\Form\UpdatePaymentFilter;
+use Module\Order\Form\UpdateNoteForm;
+use Module\Order\Form\UpdateNoteFilter;
 
 class OrderController extends ActionController
 {
@@ -345,6 +347,45 @@ class OrderController extends ActionController
         // Set view
         $this->view()->setTemplate('system:component/form-popup');
         $this->view()->assign('title', __('Update delivery'));
+        $this->view()->assign('form', $form);
+    }
+
+    public function updateNoteAction()
+    {
+        // Get id
+        $id = $this->params('id');
+        $module = $this->params('module');
+        $return = array();
+        // Get order
+        $order = $this->getModel('order')->find($id);
+        // Set form
+        $form = new UpdateNoteForm('updateOrder');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new UpdateNoteFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                $order->admin_note = $values['admin_note'];
+                $order->save();
+                // Send notification
+                Pi::api('notification', 'order')->processOrderNote($order->toArray());
+                // Set return
+                $return['status'] = 1;
+                $return['data']['admin_note'] = Pi::service('markup')->render($order->admin_note, 'html', 'text');
+            } else {
+                $return['status'] = 0;
+                $return['data'] = '';
+            }
+            return $return;
+        } else {
+            $values['admin_note'] = $order->admin_note;
+            $form->setData($values);
+            $form->setAttribute('action', $this->url('', array('action' => 'updateNote', 'id' => $order->id)));
+        }
+        // Set view
+        $this->view()->setTemplate('system:component/form-popup');
+        $this->view()->assign('title', __('Add / edit admin note'));
         $this->view()->assign('form', $form);
     }
 

@@ -10,7 +10,8 @@ $this->backbone();
     <div class="order-form" data-id="<?php echo $this->escape($order['id']); ?>"
          data-order="<?php echo $this->escape($order['url_update_order']); ?>"
          data-payment="<?php echo $this->escape($order['url_update_payment']); ?>"
-         data-delivery="<?php echo $this->escape($order['url_update_delivery']); ?>">
+         data-delivery="<?php echo $this->escape($order['url_update_delivery']); ?>"
+         data-note="<?php echo $this->escape($order['url_update_note']); ?>">
         <h3><?php echo sprintf(__('Order %s details'), $order['code']); ?></h3>
 
         <div class="well">
@@ -131,11 +132,30 @@ $this->backbone();
                             <span><?php echo $this->escape($order['paid_price_view']); ?></span></p>
                     <?php } ?>
                 </div>
-                <?php if (!empty($order['user_note'])) { ?>
-                    <div class="col-md-12">
-                        <strong><?php _e('User note'); ?></strong> : <?php echo $this->escape($order['user_note']); ?>
+            </div>
+        </div>
+        <?php if (!empty($order['user_note'])) { ?>
+            <div class="well clearfix">
+                <h3><?php _e('User note'); ?></h3>
+                <div class="col-md-12">
+                    <div class="clearfix">
+                        <?php echo $order['user_note']; ?>
                     </div>
-                <?php } ?>
+                </div>
+            </div>
+        <?php } ?>
+        <div class="well clearfix">
+            <h3><?php _e('Admin note'); ?></h3>
+            <div class="col-md-12">
+                <div id="update-note-<?php echo $this->escape($order['id']); ?>" class="clearfix">
+                    <?php echo $order['admin_note']; ?>
+                </div>
+                <hr />
+            </div>
+            <div class="col-md-12">
+                <a class="update-note btn btn-primary">
+                    <?php _e('Add / edit admin note'); ?>
+                </a>
             </div>
         </div>
         <div class="well">
@@ -344,6 +364,7 @@ $this->backbone();
                 this.$('.update-order').click(this.orderAction);
                 this.$('.update-payment').click(this.paymentAction);
                 this.$('.update-delivery').click(this.deliveryAction);
+                this.$('.update-note').click(this.noteAction);
             },
             orderAction: function (e) {
                 var p = $(e.target).parents('div.order-form'),
@@ -383,6 +404,18 @@ $this->backbone();
                         self.modal.html(res).modal('hide');
                         $('#update-delivery-' + p.attr('data-id')).attr('class', 'update-delivery btn ' + d.deliveryClass).html(d.deliveryTitle);
                         $('#update-delivery-' + p.attr('data-id') + '-time').html(d.time_delivery_view);
+                    };
+                });
+            },
+            noteAction: function (e) {
+                var p = $(e.target).parents('div.order-form'),
+                    self = this;
+                $.get(p.attr('data-note')).done(function (res) {
+                    self.modal.html(res).modal('show');
+                    formModule.success = function (res) {
+                        var d = res.data;
+                        self.modal.html(res).modal('hide');
+                        $('#update-note-' + p.attr('data-id')).attr('class', 'clearfix').html(d.admin_note);
                     };
                 });
             },

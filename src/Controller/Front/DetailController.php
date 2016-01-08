@@ -43,7 +43,8 @@ class DetailController extends IndexController
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
         // set Products
         $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order);
-        //
+        // set delivery information
+        $order['deliveryInformation'] = '';
         if ($order['delivery'] > 0 && $order['location'] > 0) {
             $order['deliveryInformation'] = Pi::api('delivery', 'order')->getDeliveryInformation($order['location'], $order['delivery']);
         }
