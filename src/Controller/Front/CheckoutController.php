@@ -37,7 +37,7 @@ class CheckoutController extends IndexController
                 $formLogin = new LoginForm('login');
                 $formLogin->setAttribute(
                     'action',
-                    $this->url('default', array('module' => 'system', 'controller' => 'login', 'action' => 'process'))
+                    $this->url('user', array('module' => 'user', 'controller' => 'login', 'action' => 'process'))
                 );
                 $formLogin->setData(array('redirect' => $this->url('', array('controller' => 'checkout', 'action' => 'index'))));
                 $this->view()->assign('formLogin', $formLogin);
