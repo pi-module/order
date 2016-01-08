@@ -53,8 +53,9 @@ class Order extends AbstractApi
         } else {
             $where = array('uid' => $uid);
         }
+        $order = array('time_create DESC', 'id DESC');
         // Select
-        $select = Pi::model('order', $this->getModule())->select()->where($where);
+        $select = Pi::model('order', $this->getModule())->select()->where($where)->order($order);;
         $rowset = Pi::model('order', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $orders[$row->id] = $this->canonizeOrder($row);
