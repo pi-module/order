@@ -209,12 +209,6 @@
                 <td><strong><?php echo $this->escape($order['total_price_view']); ?></strong></td>
             </tr>
         </table>
-
-        <?php if ($order['paid_price'] > 0) { ?>
-            <p><strong><?php _e('Paid price'); ?></strong> :
-                <span><?php echo $this->escape($order['paid_price_view']); ?></span></p>
-        <?php } ?>
-
         <?php foreach ($order['invoices'] as $invoice) { ?>
             <hr />
             <h4><?php echo sprintf(__('Invoice %s'), $this->escape($invoice['code'])); ?></h4>
