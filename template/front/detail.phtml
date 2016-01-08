@@ -63,14 +63,41 @@
                             <br/>
                         </p>
                     <?php } ?>
+                    <!-- <p><strong><?php _e('Order status'); ?></strong> :
+                        <span><?php echo $this->escape($order['orderTitle']); ?> </span></p>
+
+                    <p><strong><?php _e('Payment status'); ?></strong> :
+                        <span><?php echo $this->escape($order['paymentTitle']); ?> </span></p>
+
+                    <p><strong><?php _e('Delivery status'); ?></strong> :
+                        <span><?php echo $this->escape($order['deliveryTitle']); ?> </span></p> -->
+
+                    <p><strong><?php _e('Time order'); ?></strong> :
+                        <span><?php echo $this->escape($order['time_create_view']); ?> </span></p>
+
+                    <p><strong><?php _e('Time payment'); ?></strong> :
+                        <span><?php echo $this->escape($order['time_payment_view']); ?> </span></p>
+
+                    <p><strong><?php _e('Time delivery'); ?></strong> :
+                        <span><?php echo $this->escape($order['time_delivery_view']); ?> </span></p>
+
+                    <p><strong><?php _e('Time finish'); ?></strong> :
+                        <span><?php echo $this->escape($order['time_finish_view']); ?> </span></p>
+
+                    <!-- <p><strong><?php _e('Time start'); ?></strong> :
+                        <span><?php echo $this->escape($order['time_start_view']); ?> </span></p>
+
+                    <p><strong><?php _e('Time end'); ?></strong> :
+                        <span><?php echo $this->escape($order['time_end_view']); ?> </span></p> -->
+
+                    <p><strong><?php _e('Gateway'); ?></strong> :
+                        <span><?php echo $this->escape($order['gateway']); ?> </span></p>
+                </div>
+                <div class="col-md-6">
                     <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
                         <p><strong><?php _e('Name'); ?></strong> :
                             <span><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></span>
                         </p>
-                    <?php } ?>
-                    <?php if (!empty($order['id_number'])) { ?>
-                        <p><strong><?php _e('ID number'); ?></strong> :
-                            <span><?php echo $this->escape($order['id_number']); ?></span></p>
                     <?php } ?>
                     <?php if (!empty($order['address1'])) { ?>
                         <p><strong><?php _e('Address 1'); ?></strong> :
@@ -95,6 +122,10 @@
                     <?php if (!empty($order['zip'])) { ?>
                         <p><strong><?php _e('Zip code'); ?></strong> :
                             <span><?php echo $this->escape($order['zip']); ?></span></p>
+                    <?php } ?>
+                    <?php if (!empty($order['id_number'])) { ?>
+                        <p><strong><?php _e('ID number'); ?></strong> :
+                            <span><?php echo $this->escape($order['id_number']); ?></span></p>
                     <?php } ?>
                     <?php if (!empty($order['email'])) { ?>
                         <p><strong><?php _e('Email'); ?></strong> :
@@ -121,37 +152,14 @@
                             <span><?php echo $this->escape($order['company_vat']); ?></span></p>
                     <?php } ?>
                 </div>
-                <div class="col-md-6">
-                    <p><strong><?php _e('Order status'); ?></strong> :
-                        <span><?php echo $this->escape($order['orderTitle']); ?> </span></p>
-
-                    <p><strong><?php _e('Payment status'); ?></strong> :
-                        <span><?php echo $this->escape($order['paymentTitle']); ?> </span></p>
-
-                    <p><strong><?php _e('Delivery status'); ?></strong> :
-                        <span><?php echo $this->escape($order['deliveryTitle']); ?> </span></p>
-
-                    <p><strong><?php _e('Time create'); ?></strong> :
-                        <span><?php echo $this->escape($order['time_create_view']); ?> </span></p>
-
-                    <p><strong><?php _e('Time payment'); ?></strong> :
-                        <span><?php echo $this->escape($order['time_payment_view']); ?> </span></p>
-
-                    <p><strong><?php _e('Time delivery'); ?></strong> :
-                        <span><?php echo $this->escape($order['time_delivery_view']); ?> </span></p>
-
-                    <p><strong><?php _e('Time finish'); ?></strong> :
-                        <span><?php echo $this->escape($order['time_finish_view']); ?> </span></p>
-
-                    <p><strong><?php _e('Time start'); ?></strong> :
-                        <span><?php echo $this->escape($order['time_start_view']); ?> </span></p>
-
-                    <p><strong><?php _e('Time end'); ?></strong> :
-                        <span><?php echo $this->escape($order['time_end_view']); ?> </span></p>
-
-                    <p><strong><?php _e('Gateway'); ?></strong> :
-                        <span><?php echo $this->escape($order['gateway']); ?> </span></p>
-
+                <div class="col-md-12">
+                    <hr />
+                    <?php echo sprintf(
+                        __('This order delivery time is <strong>%s</strong> in <strong>%s</strong> by <strong>%s</strong>'),
+                        $this->escape($order['deliveryInformation']['delivery_time_view']),
+                        $this->escape($order['deliveryInformation']['location_title']),
+                        $this->escape($order['deliveryInformation']['delivery_title'])
+                    ); ?>
                 </div>
             </div>
         </div>
@@ -161,8 +169,8 @@
                 <th><?php _e('Product'); ?></th>
                 <th><?php _e('Number'); ?></th>
                 <th><?php _e('Price'); ?></th>
-                <th><?php _e('Shipping'); ?></th>
-                <th><?php _e('Packing'); ?></th>
+                <!-- <th><?php _e('Shipping'); ?></th>
+                <th><?php _e('Packing'); ?></th> -->
                 <th><?php _e('Vat'); ?></th>
                 <th><?php _e('Total'); ?></th>
             </tr>
@@ -193,13 +201,13 @@
                     </td>
                     <td><?php echo _number($this->escape($product['number'])); ?></td>
                     <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?></td>
-                    <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['shipping_price'])); ?></td>
-                    <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['packing_price'])); ?></td>
+                    <!-- <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['shipping_price'])); ?></td>
+                    <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['packing_price'])); ?></td> -->
                     <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['vat_price'])); ?></td>
                     <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['total_price'])); ?></td>
                 </tr>
             <?php } ?>
-            <tr class="success">
+            <!-- <tr class="success">
                 <td><strong><?php _e('Total'); ?></strong></td>
                 <td><strong><?php echo _number($number); ?></strong></td>
                 <td><strong><?php echo $this->escape($order['product_price_view']); ?></strong></td>
@@ -207,7 +215,7 @@
                 <td><strong><?php echo $this->escape($order['packing_price_view']); ?></strong></td>
                 <td><strong><?php echo $this->escape($order['vat_price_view']); ?></strong></td>
                 <td><strong><?php echo $this->escape($order['total_price_view']); ?></strong></td>
-            </tr>
+            </tr> -->
         </table>
         <?php foreach ($order['invoices'] as $invoice) { ?>
             <hr />

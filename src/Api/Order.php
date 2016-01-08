@@ -74,36 +74,43 @@ class Order extends AbstractApi
         switch ($status) {
             case '1':
                 $return['orderClass'] = 'btn-warning';
+                $return['orderLabel'] = 'label-warning';
                 $return['orderTitle'] = __('Not processed');
                 break;
 
             case '2':
                 $return['orderClass'] = 'btn-success';
+                $return['orderLabel'] = 'label-success';
                 $return['orderTitle'] = __('Orders validated');
                 break;
 
             case '3':
                 $return['orderClass'] = 'btn-danger';
+                $return['orderLabel'] = 'label-danger';
                 $return['orderTitle'] = __('Orders pending');
                 break;
 
             case '4':
                 $return['orderClass'] = 'btn-danger';
+                $return['orderLabel'] = 'label-danger';
                 $return['orderTitle'] = __('Orders failed');
                 break;
 
             case '5':
                 $return['orderClass'] = 'btn-danger';
+                $return['orderLabel'] = 'label-danger';
                 $return['orderTitle'] = __('Orders cancelled');
                 break;
 
             case '6':
                 $return['orderClass'] = 'btn-danger';
+                $return['orderLabel'] = 'label-danger';
                 $return['orderTitle'] = __('Fraudulent orders');
                 break;
 
             case '7':
                 $return['orderClass'] = 'btn-primary';
+                $return['orderLabel'] = 'label-primary';
                 $return['orderTitle'] = __('Orders finished');
                 break;
         }
@@ -116,12 +123,14 @@ class Order extends AbstractApi
         switch ($status) {
             case '1':
                 $return['paymentClass'] = 'btn-warning';
+                $return['paymentLabel'] = 'label-warning';
                 $return['paymentTitle'] = __('UnPaid');
                 break;
 
             case '2':
                 $return['paymentClass'] = 'btn-success';
-                $return['paymentTitle'] = ($type == 'installment') ? __('Paid perpayment') : __('Paid');
+                $return['paymentLabel'] = 'label-success';
+                $return['paymentTitle'] = ($type == 'installment') ? __('Paid prepayment') : __('Paid');
                 break;
         }
         return $return;
@@ -133,26 +142,31 @@ class Order extends AbstractApi
         switch ($status) {
             case '1':
                 $return['deliveryClass'] = 'btn-warning';
+                $return['deliveryLabel'] = 'label-warning';
                 $return['deliveryTitle'] = __('Not processed');
                 break;
 
             case '2':
                 $return['deliveryClass'] = 'btn-info';
+                $return['deliveryLabel'] = 'label-info';
                 $return['deliveryTitle'] = __('Packed');
                 break;
 
             case '3':
                 $return['deliveryClass'] = 'btn-info';
+                $return['deliveryLabel'] = 'label-info';
                 $return['deliveryTitle'] = __('Posted');
                 break;
 
             case '4':
                 $return['deliveryClass'] = 'btn-success';
+                $return['deliveryLabel'] = 'label-success';
                 $return['deliveryTitle'] = __('Delivered');
                 break;
 
             case '5':
                 $return['deliveryClass'] = 'btn-danger';
+                $return['deliveryLabel'] = 'label-danger';
                 $return['deliveryTitle'] = __('Back eaten');
                 break;
         }
@@ -236,15 +250,42 @@ class Order extends AbstractApi
         // Status order
         $status_order = $this->orderStatus($order['status_order']);
         $order['orderClass'] = $status_order['orderClass'];
+        $order['orderLabel'] = $status_order['orderLabel'];
         $order['orderTitle'] = $status_order['orderTitle'];
         // Status payment
         $status_payment = $this->paymentStatus($order['status_payment'], $order['type_payment']);
         $order['paymentClass'] = $status_payment['paymentClass'];
+        $order['paymentLabel'] = $status_payment['paymentLabel'];
         $order['paymentTitle'] = $status_payment['paymentTitle'];
         // Status delivery
         $status_delivery = $this->deliveryStatus($order['status_delivery']);
         $order['deliveryClass'] = $status_delivery['deliveryClass'];
+        $order['deliveryLabel'] = $status_delivery['deliveryLabel'];
         $order['deliveryTitle'] = $status_delivery['deliveryTitle'];
+        //
+        if ($order['type_commodity'] == 'product') {
+            $order['type_commodity_view'] = __('Product');
+        } elseif ($order['type_commodity'] == 'service') {
+            $order['type_commodity_view'] = __('Service');
+        }
+        //
+        if (in_array($order['status_order'], array(1, 2, 3))) {
+            if ($order['status_payment'] == 2) {
+                if ($order['status_delivery'] == 1) {
+                    $order['shortStatus'] = $order['paymentTitle'];
+                    $order['shortLabel'] = $order['paymentLabel'];
+                } else {
+                    $order['shortStatus'] = $order['deliveryTitle'];
+                    $order['shortLabel'] = $order['deliveryLabel'];
+                }
+            } else {
+                $order['shortStatus'] = $order['paymentTitle'];
+                $order['shortLabel'] = $order['paymentLabel'];
+            }
+        } else {
+            $order['shortStatus'] = $order['orderTitle'];
+            $order['shortLabel'] = $order['orderLabel'];
+        }
         // return order
         return $order;
     }

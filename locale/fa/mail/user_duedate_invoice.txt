@@ -9,7 +9,7 @@
 	<h3 style="font-size: 1.1em;">%first_name% %last_name% عزیز</h3>
 	<div style="padding: 3px; margin: 2px;">تاریخ سر رسید فاکتور شماره <strong>%invoice_id%</strong> شما در وب سایت %site_name% طی %day% روز آینده فرا می رسد. برای مشاهده جزئیات فاکتور بر روی لینک زیر کلیک نمایید</div>
 	<div style="padding: 3px; margin: 2px;">
-        <a href="%invoice_link%" title="جزییات سفارش">%invoice_link%</a>
+        <a href="%order_link%" title="جزییات سفارش">%order_link%</a>
 	</div>
 	<div style="padding: 3px; margin: 2px;">لطفا به این پیام پاسخی ندهید</div>
 	<div style="margin-top: 10px">

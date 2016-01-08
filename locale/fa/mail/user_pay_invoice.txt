@@ -10,7 +10,7 @@
 	<div style="padding: 3px; margin: 2px;">
 فاکتور شماره <strong>%invoice_id%</strong> مربوط به سفارش %order_id% و به مبلغ %invoice_price% و شامل موارد %product_list% در وب سایت %site_name% پرداخت گردید. برای مشاهده جزئیات فاکتور بر روی لینک زیر کلیک نمایید</div>
 	<div style="padding: 3px; margin: 2px;">
-        <a href="%invoice_link%" title="جزییات فاکتور">%invoice_link%</a>
+        <a href="%order_link%" title="جزییات فاکتور">%order_link%</a>
 	</div>
 	<div style="padding: 3px; margin: 2px;">لطفا به این پیام پاسخی ندهید</div>
 	<div style="margin-top: 10px">

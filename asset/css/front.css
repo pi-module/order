@@ -1,6 +1,6 @@
 ul.progtrckr {
     margin: 0;
-    padding: 0;
+    padding: 5px 0 25px 0;
     list-style-type: none;
 }
 
@@ -8,7 +8,7 @@ ul.progtrckr li {
     display: inline-block;
     text-align: center;
     line-height: 3em;
-    width: 19.5%;
+    width: 19.6%;
 }
 
 ul.progtrckr li.progtrckr-done {

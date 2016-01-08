@@ -77,24 +77,32 @@
         <h3><?php _e('List of your order'); ?></h3>
         <table class="table table-striped table-bordered table-condensed">
             <tr>
-                <th><?php _e('ID'); ?></th>
-                <th><?php _e('Time create'); ?></th>
-                <th><?php _e('Price'); ?></th>
-                <th><?php _e('Gateway'); ?></th>
-                <th><?php _e('Action'); ?></th>
+                <th class="text-center"><?php _e('ID'); ?></th>
+                <th class="text-center"><?php _e('Code'); ?></th>
+                <th class="text-center"><?php _e('Time'); ?></th>
+                <th class="text-center"><?php _e('Price'); ?></th>
+                <th class="text-center"><?php _e('Status'); ?></th>
+                <th class="text-center"><?php _e('Type'); ?></th>
+                <th class="text-center"><?php _e('Action'); ?></th>
             </tr>
+            <?php $i = 1; ?>
             <?php foreach ($user['orders'] as $order) { ?>
                 <tr>
-                    <td><?php echo $this->escape($order['code']); ?></td>
-                    <td><?php echo $this->escape($order['time_create_view']); ?></td>
-                    <td><?php echo $this->escape($order['total_price_view']); ?></td>
-                    <td><?php echo $this->escape($order['gateway']); ?></td>
-                    <td>
+                    <td class="text-center"><?php echo _number($i); ?></td>
+                    <td class="text-center"><?php echo $this->escape($order['code']); ?></td>
+                    <td class="text-center"><?php echo $this->escape($order['time_create_view']); ?></td>
+                    <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
+
+                    <td class="text-center"><span class="label <?php echo $this->escape($order['shortLabel']); ?>"><?php echo $this->escape($order['shortStatus']); ?></span></td>
+                    <td class="text-center"><?php echo $this->escape($order['type_commodity_view']); ?></td>
+
+                    <td class="text-center">
                         <a class="btn btn-primary" title="<?php _e('View'); ?>"
                            href="<?php echo $this->url('', array('controller' => 'detail', 'id' => $order['id'])); ?>"><i
                                 class="fa fa-edit"></i> <?php _e('View'); ?></a>
                     </td>
                 </tr>
+                <?php $i++; ?>
             <?php } ?>
         </table>
         <?php /* <h3><?php _e('List of your invoice'); ?></h3>
@@ -149,3 +157,4 @@
         </p> */ ?>
     </div>
 </div>
+<pre><?php print_r($user); ?></pre>

@@ -275,9 +275,9 @@ class Notification extends AbstractApi
         // Set link
         $link = Pi::url(Pi::service('url')->assemble('order', array(
             'module' => $this->getModule(),
-            'controller' => 'invoice',
+            'controller' => 'order',
             'action' => 'index',
-            'id' => $invoice['id'],
+            'id' => $order['id'],
         )));
 
         // Set mail information
@@ -286,7 +286,7 @@ class Notification extends AbstractApi
             'last_name' => $order['last_name'],
             'order_id' => $order['code'],
             'invoice_id' => $invoice['code'],
-            'invoice_link' => $link,
+            'order_link' => $link,
             'invoice_price' => Pi::api('api', 'order')->viewPrice($invoice['total_price']),
             'product_list' => $productList,
         );
@@ -353,9 +353,9 @@ class Notification extends AbstractApi
         // Set link
         $link = Pi::url(Pi::service('url')->assemble('order', array(
             'module' => $this->getModule(),
-            'controller' => 'invoice',
+            'controller' => 'order',
             'action' => 'index',
-            'id' => $invoice['id'],
+            'id' => $order['id'],
         )));
 
         // Set mail information
@@ -363,7 +363,7 @@ class Notification extends AbstractApi
             'first_name' => $order['first_name'],
             'last_name' => $order['last_name'],
             'invoice_id' => $invoice['id'],
-            'invoice_link' => $link,
+            'order_link' => $link,
             'day' => $config['notification_cron_invoice'],
         );
 
@@ -396,9 +396,9 @@ class Notification extends AbstractApi
         // Set link
         $link = Pi::url(Pi::service('url')->assemble('order', array(
             'module' => $this->getModule(),
-            'controller' => 'invoice',
+            'controller' => 'order',
             'action' => 'index',
-            'id' => $invoice['id'],
+            'id' => $order['id'],
         )));
 
         // Set mail information
@@ -406,7 +406,7 @@ class Notification extends AbstractApi
             'first_name' => $order['first_name'],
             'last_name' => $order['last_name'],
             'invoice_id' => $invoice['id'],
-            'invoice_link' => $link,
+            'order_link' => $link,
             'day' => $config['notification_cron_expired'],
         );
 
