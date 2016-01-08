@@ -7,11 +7,11 @@
 [body]
 <div style="padding: 1px; direction: rtl;">
 	<h3 style="font-size: 1.1em;">مدیر سایت %site_name%</h3>
-	<div style="padding: 3px; margin: 2px;">
+	<div style="padding: 3px 0; margin: 1px; 0">
 مدیر عزیز وب سایت %site_name% ،فاکتور شماره %invoice_id% توسط %first_name% %last_name% مربوط به سفارش %order_id% و به مبلغ %invoice_price% و شامل موارد %product_list% در وب سایت %site_name% پرداخت گردید ، لطفا برای مشاهده جزئیات و بررسی فاکتور به وب سایت مراجعه نمایید</div>
-	<div style="padding: 3px; margin: 2px;">لطفا به این پیام پاسخی ندهید</div>
+	<div style="padding: 3px 0; margin: 1px; 0">لطفا به این پیام پاسخی ندهید</div>
 	<div style="margin-top: 10px">
         <a href="%site_url%" title="%site_name%">%site_name%</a>
-    </divp>
+    </div>
 </div>
 [/body]

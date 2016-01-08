@@ -7,13 +7,13 @@
 [body]
 <div style="padding: 1px; direction: rtl;">
 	<h3 style="font-size: 1.1em;">%first_name% %last_name% عزیز</h3>
-	<div style="padding: 3px; margin: 2px;">مدت %day% روز از تاریخ سررسید فاکتور شماره <strong>%invoice_id%</strong> شما در وب سایت %site_name% گذشته است. برای مشاهده جزئیات فاکتور بر روی لینک زیر کلیک نمایید</div>
-	<div style="padding: 3px; margin: 2px;">
+	<div style="padding: 3px 0; margin: 1px; 0">مدت %day% روز از تاریخ سررسید فاکتور شماره <strong>%invoice_id%</strong> شما در وب سایت %site_name% گذشته است. برای مشاهده جزئیات فاکتور بر روی لینک زیر کلیک نمایید</div>
+	<div style="padding: 3px 0; margin: 1px; 0">
         <a href="%order_link%" title="جزییات فاکتور">%order_link%</a>
 	</div>
-	<div style="padding: 3px; margin: 2px;">لطفا به این پیام پاسخی ندهید</div>
+	<div style="padding: 3px 0; margin: 1px; 0">لطفا به این پیام پاسخی ندهید</div>
 	<div style="margin-top: 10px">
         <a href="%site_url%" title="%site_name%">%site_name%</a>
-    </divp>
+    </div>
 </div>
 [/body]
