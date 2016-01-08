@@ -532,10 +532,6 @@ class CheckoutController extends IndexController
 
     public function levelAction()
     {
-        // Check user
-        $this->checkUser();
-        // Get config
-        $config = Pi::service('registry')->config->read($this->getModule());
         // Get info from url
         $id = $this->params('id');
         $process = $this->params('process');
@@ -544,6 +540,18 @@ class CheckoutController extends IndexController
         $return['status'] = 0;
         $return['data'] = '';
         $data = array();
+        // Check user
+        if (!Pi::service('authentication')->hasIdentity()) {
+            if (!Pi::service('module')->isActive('user')
+                && !isset($_SESSION['session_order'])
+                && empty($_SESSION['session_order'])
+            ) {
+                return $return;
+            }
+        }
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+        // process
         switch ($process) {
             case 'location':
                 if ($id) {
