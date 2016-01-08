@@ -34,7 +34,7 @@ class IndexController extends ActionController
             $orderIds[] = $order['id'];
         }
         // Get invoice
-        $user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id'], false, $orderIds);
+        //$user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id'], false, $orderIds);
         // Set view
         $this->view()->setTemplate('list');
         $this->view()->assign('user', $user);

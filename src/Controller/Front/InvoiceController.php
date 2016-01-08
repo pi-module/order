@@ -18,7 +18,7 @@ use Pi\Mvc\Controller\ActionController;
 
 class InvoiceController extends IndexController
 {
-    public function indexAction()
+    /* public function indexAction()
     {
         // Check user
         $this->checkUser();
@@ -82,7 +82,7 @@ class InvoiceController extends IndexController
         $this->view()->assign('order', $order);
         $this->view()->assign('config', $config);
         $this->view()->assign('allowPayment', $allowPayment);
-    }
+    } */
 
     public function printAction()
     {

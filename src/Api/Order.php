@@ -315,7 +315,7 @@ class Order extends AbstractApi
                 $backUrl = Pi::api('order', $order['module_name'])->postPaymentUpdate($order, $basket);
             } else {
                 // Get back url
-                $backUrl = $invoice['invoice_url'];
+                $backUrl = $invoice['order_url'];
             }
         } else {
             // Update order

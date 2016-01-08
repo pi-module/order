@@ -355,7 +355,7 @@ class CheckoutController extends IndexController
                         if ($config['order_payment'] == 'payment') {
                             $url = $result['pay_url'];
                         } else {
-                            $url = $result['invoice_url'];
+                            $url = $result['order_url'];
                         }
                         $this->jump($url, $result['message'], 'success');
                     }

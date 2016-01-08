@@ -22,6 +22,8 @@ class DetailController extends IndexController
     {
         // Check user
         $this->checkUser();
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
         // Get order
         $id = $this->params('id');
         $order = Pi::api('order', 'order')->getOrder($id);
@@ -35,7 +37,7 @@ class DetailController extends IndexController
         }
         // Check order is for this user
         if (!in_array($order['status_order'], array(1, 2, 3, 7))) {
-            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This order not avtice.'));
+            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This order not active.'));
         }
         // set Products
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
@@ -44,5 +46,6 @@ class DetailController extends IndexController
         // set view
         $this->view()->setTemplate('detail');
         $this->view()->assign('order', $order);
+        $this->view()->assign('config', $config);
     }
 }
