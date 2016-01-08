@@ -152,38 +152,35 @@
                             <span><?php echo $this->escape($order['company_vat']); ?></span></p>
                     <?php } ?>
                 </div>
-                <?php if (!empty($order['deliveryInformation']) && $order['type_commodity'] == 'product') { ?>
-                <div class="col-md-12">
-                    <hr />
-                    <h4><?php _e('Delivery method'); ?></h4>
-                    <?php echo sprintf(
-                        __('This order delivery time is <strong>%s</strong> in <strong>%s</strong> by <strong>%s</strong>'),
-                        $this->escape($order['deliveryInformation']['delivery_time_view']),
-                        $this->escape($order['deliveryInformation']['location_title']),
-                        $this->escape($order['deliveryInformation']['delivery_title'])
-                    ); ?>
-                </div>
-                <?php } ?>
-                <?php if (!empty($order['user_note'])) { ?>
-                    <div class="col-md-12">
-                        <hr />
-                        <h4><?php _e('User note'); ?></h4>
-                        <div class="clearfix">
-                            <?php echo $order['user_note']; ?>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if (!empty($order['admin_note'])) { ?>
-                    <div class="col-md-12">
-                        <hr />
-                        <h4><?php _e('Admin note'); ?></h4>
-                        <div class="clearfix">
-                            <?php echo $order['admin_note']; ?>
-                        </div>
-                    </div>
-                <?php } ?>
             </div>
         </div>
+        <?php if (!empty($order['deliveryInformation']) && $order['type_commodity'] == 'product') { ?>
+            <div class="alert alert-success">
+                <h4><?php _e('Delivery method'); ?></h4>
+                <?php echo sprintf(
+                    __('This order delivery time is <strong>%s</strong> in <strong>%s</strong> by <strong>%s</strong>'),
+                    $this->escape($order['deliveryInformation']['delivery_time_view']),
+                    $this->escape($order['deliveryInformation']['location_title']),
+                    $this->escape($order['deliveryInformation']['delivery_title'])
+                ); ?>
+            </div>
+        <?php } ?>
+        <?php if (!empty($order['user_note'])) { ?>
+            <div class="alert alert-success">
+                <h4><?php _e('User note'); ?></h4>
+                <div class="clearfix">
+                    <?php echo $order['user_note']; ?>
+                </div>
+            </div>
+        <?php } ?>
+        <?php if (!empty($order['admin_note'])) { ?>
+            <div class="alert alert-danger">
+                <h4><?php _e('Admin note'); ?></h4>
+                <div class="clearfix">
+                    <?php echo $order['admin_note']; ?>
+                </div>
+            </div>
+        <?php } ?>
         <h4><?php _e('This order products or services list'); ?></h4>
         <table class="table table-striped table-bordered table-condensed">
             <tr>
