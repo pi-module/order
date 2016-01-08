@@ -109,7 +109,8 @@ class Notification extends AbstractApi
             $toUser,
             'user_add_order',
             $information,
-            Pi::service('module')->current()
+            Pi::service('module')->current(),
+            $order['uid']
         );
 
         // Send sms to admin
@@ -244,7 +245,13 @@ class Notification extends AbstractApi
         $toUser = array(
             $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
         );
-        Pi::api('mail', 'notification')->send($toUser, 'user_process_order', $information, Pi::service('module')->current());
+        Pi::api('mail', 'notification')->send(
+            $toUser,
+            'user_process_order',
+            $information,
+            Pi::service('module')->current(),
+            $order['uid']
+        );
 
         // Send sms to user
         Pi::api('sms', 'notification')->send($content, $order['mobile']);
@@ -310,7 +317,8 @@ class Notification extends AbstractApi
             $toUser,
             'user_pay_invoice',
             $information,
-            Pi::service('module')->current()
+            Pi::service('module')->current(),
+            $order['uid']
         );
 
         // Send sms to admin
@@ -375,7 +383,8 @@ class Notification extends AbstractApi
             $toUser,
             'user_duedate_invoice',
             $information,
-            Pi::service('module')->current()
+            Pi::service('module')->current(),
+            $order['uid']
         );
 
         // Send sms to user
@@ -418,7 +427,8 @@ class Notification extends AbstractApi
             $toUser,
             'user_expired_invoice',
             $information,
-            Pi::service('module')->current()
+            Pi::service('module')->current(),
+            $order['uid']
         );
 
         // Send sms to user
