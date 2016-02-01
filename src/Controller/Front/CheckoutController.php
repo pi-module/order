@@ -135,6 +135,7 @@ class CheckoutController extends IndexController
                     // Check user informations
                     $user = Pi::api('user', 'order')->getUserInformation();
                 }
+
                 // Set values
                 $values['uid'] = $uid;
                 $values['ip'] = Pi::user()->getIp();
@@ -142,6 +143,7 @@ class CheckoutController extends IndexController
                 $values['status_payment'] = 1;
                 $values['status_delivery'] = 1;
                 $values['time_create'] = time();
+
                 // Check user email
                 if (!isset($values['email']) || empty($values['email'])) {
                     $values['email'] = $user['email'];
@@ -226,6 +228,10 @@ class CheckoutController extends IndexController
                 if (isset($cart['module_item']) && !empty($cart['module_item'])) {
                     $values['module_item'] = $cart['module_item'];
                 }
+                // Set can_pay values
+                if (isset($cart['can_pay']) && !empty($cart['can_pay'])) {
+                    $values['can_pay'] = $cart['can_pay'];
+                }
                 // Check gateway
                 if (is_array($values['gateway'])) {
                     $values['gateway'] = $values['gateway'][0];
@@ -277,16 +283,19 @@ class CheckoutController extends IndexController
                         $values['setup_price'] +
                         $values['vat_price']
                     ) - $values['discount_price']);
+
                 // Set customer
                 if ($values['customer_id'] == 0) {
                     Pi::api('customer', 'order')->addCustomer($values);
                 } else {
                     Pi::api('customer', 'order')->updateCustomer($values);
                 }
+
                 // Save values to order
                 $order = $this->getModel('order')->createRow();
                 $order->assign($values);
                 $order->save();
+
                 // Check order save
                 if (isset($order->id) && intval($order->id) > 0) {
                     // Set order ID

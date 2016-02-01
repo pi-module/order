@@ -235,7 +235,7 @@
                 </div>
             </div>
             <div class="col-md-6 text-right">
-                <?php if ($invoice['status'] == 2 && $allowPayment) { ?>
+                <?php if ($invoice['status'] == 2 && $invoice['can_pay'] == 1 && $allowPayment) { ?>
                     <?php if ($allowPayment) { ?>
                         <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>"
                            href="<?php echo $this->escape($invoice['pay_url']); ?>"><i
@@ -247,6 +247,10 @@
                                     array('pattern' => 'dd-MM-yyyy'))); ?>
                         </span>
                     <?php } ?>
+                <?php } elseif ($invoice['status'] == 2 && $invoice['can_pay'] != 1) { ?>
+                    <span class="label label-danger">
+                            <?php _e('You can pay this invoice after admin review'); ?>
+                        </span>
                 <?php } ?>
             </div>
         </div>

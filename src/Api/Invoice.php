@@ -61,6 +61,7 @@ class Invoice extends AbstractApi
                     $row->uid = $uid;
                     $row->ip = Pi::user()->getIp();
                     $row->status = 1;
+                    $row->can_pay = $order['can_pay'];
                     $row->time_create = time();
                     $row->time_duedate = time();
                     $row->order = $order['id'];
@@ -91,6 +92,7 @@ class Invoice extends AbstractApi
                     $row->uid = $uid;
                     $row->ip = Pi::user()->getIp();
                     $row->status = 2;
+                    $row->can_pay = $order['can_pay'];
                     $row->time_create = time();
                     $row->time_duedate = time();
                     $row->order = $order['id'];
@@ -168,6 +170,7 @@ class Invoice extends AbstractApi
                             $row->uid = $uid;
                             $row->ip = Pi::user()->getIp();
                             $row->status = 2;
+                            $row->can_pay = $order['can_pay'];
                             $row->time_create = time();
                             $row->time_duedate = $invoice['duedate'];
                             $row->order = $order['id'];

@@ -27,6 +27,6 @@ class Order extends Model
         'admin_note', 'time_create', 'time_payment', 'time_delivery', 'time_finish', 'time_start',
         'time_end', 'status_order', 'status_payment', 'status_delivery', 'product_price',
         'discount_price', 'shipping_price', 'packing_price', 'setup_price', 'vat_price', 'total_price',
-        'paid_price', 'gateway', 'delivery', 'location', 'packing', 'promo_type', 'promo_value'
+        'paid_price', 'gateway', 'delivery', 'location', 'packing', 'promo_type', 'promo_value', 'can_pay'
     );
 }

@@ -16,7 +16,7 @@ namespace Module\Order\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class UpdatePaymentForm extends BaseForm
+class UpdateCanPayForm extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {
@@ -26,34 +26,25 @@ class UpdatePaymentForm extends BaseForm
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new UpdatePaymentFilter;
+            $this->filter = new UpdateCanPayFilter;
         }
         return $this->filter;
     }
 
     public function init()
     {
-        // status_payment
+        // status_delivery
         $this->add(array(
-            'name' => 'status_payment',
+            'name' => 'can_pay',
             'type' => 'select',
             'options' => array(
-                'label' => __('Payment'),
+                'label' => __('Customer can make payment ?'),
                 'value_options' => array(
-                    1 => __('UnPaid'),
-                    2 => __('Paid'),
+                    1 => __('Yes'),
+                    2 => __('No'),
                 ),
             ),
         ));
-        // gateway
-        /* $this->add(array(
-            'name' => 'gateway',
-            'type' => 'Module\Order\Form\Element\Gateway',
-            'options' => array(
-                'label' => __('Adapter'),
-                'gateway' => '',
-            ),
-        )); */
         // Save
         $this->add(array(
             'name' => 'submit',

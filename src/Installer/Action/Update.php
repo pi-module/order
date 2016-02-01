@@ -298,6 +298,33 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '1.7.2', '<')) {
+            // Alter table field add
+            $sql = sprintf("ALTER TABLE %s ADD `can_pay` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1'", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            // Alter table field add
+            $sql = sprintf("ALTER TABLE %s ADD `can_pay` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1'", $invoiceTable);
+            try {
+                $invoiceAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }
 }   

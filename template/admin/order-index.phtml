@@ -25,55 +25,50 @@ $this->backbone();
             <tr>
                 <th><?php _e('ID'); ?></th>
                 <th><?php _e('Code'); ?></th>
-                <th><?php _e('Customer'); ?></th>
                 <th><?php _e('Total price'); ?></th>
-                <th><?php _e('Status'); ?></th>
-                <th><?php _e('Payment'); ?></th>
-                <th><?php _e('Delivery'); ?></th>
-                <th><?php _e('Action'); ?></th>
+                <th><?php _e('Information'); ?></th>
             </tr>
             <?php foreach ($list as $order) { ?>
                 <tr
                     data-id="<?php echo $this->escape($order['id']); ?>"
                     data-order="<?php echo $this->escape($order['url_update_order']); ?>"
+                    data-canPay="<?php echo $this->escape($order['url_update_canPay']); ?>"
                     data-payment="<?php echo $this->escape($order['url_update_payment']); ?>"
                     data-delivery="<?php echo $this->escape($order['url_update_delivery']); ?>"
                 >
                     <td><?php echo $this->escape($order['id']); ?></td>
                     <td><?php echo $this->escape($order['code']); ?></td>
-                    <td class="clearfix">
-				<span class="pull-left">
-                    <?php echo $this->escape($order['first_name']); ?>
-                    <?php echo $this->escape($order['last_name']); ?>
-                </span>
-				<span class="pull-right label label-info">
-					<?php echo $this->escape($order['user']['identity']); ?>
-                    ( <?php echo $this->escape($order['user']['name']); ?> )
-				</span>
-                    </td>
                     <td><?php echo $this->escape($order['total_price_view']); ?></td>
-                    <td>
-                        <?php if (in_array($order['status_order'], array(1, 2, 3, 7))) { ?>
-                            <span id="update-order-<?php echo $this->escape($order['id']); ?>"
-                                  class="update-order btn <?php echo $this->escape($order['orderClass']); ?> "><?php echo $this->escape($order['orderTitle']); ?></span>
-                        <?php } else { ?>
-                            <span class="label label-danger"><?php echo $this->escape($order['orderTitle']); ?></span>
-                        <?php } ?>
-                    </td>
-                    <td>
-                    <span id="update-payment-<?php echo $this->escape($order['id']); ?>"
-                          class="update-payment btn <?php echo $this->escape($order['paymentClass']); ?> "><?php echo $this->escape($order['paymentTitle']); ?></span>
-                    </td>
-                    <td>
-                        <?php if ($order['type_commodity'] == 'product') { ?>
-                            <span id="update-delivery-<?php echo $this->escape($order['id']); ?>"
-                                  class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> "><?php echo $this->escape($order['deliveryTitle']); ?></span>
-                        <?php } ?>
-                    </td>
-                    <td>
-                        <a class="btn btn-primary" title="<?php _e('View'); ?>"
-                           href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i
-                                class="fa fa-eye"></i> <?php _e('View'); ?></a>
+                    <td class="clearfix">
+				        <div class="col-xs-4">
+                            <ul class="list-inline small">
+                                <li>
+                                    <?php echo $this->escape($order['first_name']); ?>
+                                    <?php echo $this->escape($order['last_name']); ?>
+                                </li>
+                                <li class="label label-info">
+                                    <?php echo $this->escape($order['user']['identity']); ?>
+                                    ( <?php echo $this->escape($order['user']['name']); ?> )
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-8">
+                            <ul class="list-inline">
+                                <?php if (in_array($order['status_order'], array(1, 2, 3, 7))) { ?>
+                                    <li class="col-xs-3"><span id="update-order-<?php echo $this->escape($order['id']); ?>" class="update-order btn btn-xs <?php echo $this->escape($order['orderClass']); ?>"><?php echo $this->escape($order['orderTitle']); ?></span></li>
+                                <?php } else { ?>
+                                    <li class="col-xs-3"><span class="label label-danger"><?php echo $this->escape($order['orderTitle']); ?></span></li>
+                                <?php } ?>
+                                <li class="col-xs-2"><span id="update-canPay-<?php echo $this->escape($order['id']); ?>" class="update-canPay btn btn-xs <?php echo $this->escape($order['canPayClass']); ?>"><?php echo $this->escape($order['canPayTitle']); ?></span></li>
+                                <li class="col-xs-2"><span id="update-payment-<?php echo $this->escape($order['id']); ?>" class="update-payment btn btn-xs <?php echo $this->escape($order['paymentClass']); ?>"><?php echo $this->escape($order['paymentTitle']); ?></span></li>
+                                <?php if ($order['type_commodity'] == 'product') { ?>
+                                    <li class="col-xs-3"><span id="update-delivery-<?php echo $this->escape($order['id']); ?>" class="update-delivery btn btn-xs <?php echo $this->escape($order['deliveryClass']); ?>"><?php echo $this->escape($order['deliveryTitle']); ?></span></li>
+                                <?php } else { ?>
+                                    <li class="col-xs-3"><span class="label label-default"><?php _e('Its service'); ?></span></li>
+                                <?php } ?>
+                                <li class="col-xs-2"><a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i class="fa fa-eye"></i> <?php _e('View'); ?></a></li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
             <?php } ?>
@@ -104,6 +99,7 @@ $this->backbone();
                 this.$('.update-order').click(this.orderAction);
                 this.$('.update-payment').click(this.paymentAction);
                 this.$('.update-delivery').click(this.deliveryAction);
+                this.$('.update-canPay').click(this.canPayAction);
             },
             orderAction: function (e) {
                 var p = $(e.target).parents('tr'),
@@ -113,7 +109,7 @@ $this->backbone();
                     formModule.success = function (res) {
                         var d = res.data;
                         self.modal.html(res).modal('hide');
-                        $('#update-order-' + p.attr('data-id')).attr('class', 'update-order btn ' + d.orderClass).html(d.orderTitle);
+                        $('#update-order-' + p.attr('data-id')).attr('class', 'update-order btn btn-xs ' + d.orderClass).html(d.orderTitle);
                     };
                 });
             },
@@ -125,7 +121,7 @@ $this->backbone();
                     formModule.success = function (res) {
                         var d = res.data;
                         self.modal.html(res).modal('hide');
-                        $('#update-payment-' + p.attr('data-id')).attr('class', 'update-payment btn ' + d.paymentClass).html(d.paymentTitle);
+                        $('#update-payment-' + p.attr('data-id')).attr('class', 'update-payment btn btn-xs ' + d.paymentClass).html(d.paymentTitle);
                     };
                 });
             },
@@ -137,7 +133,19 @@ $this->backbone();
                     formModule.success = function (res) {
                         var d = res.data;
                         self.modal.html(res).modal('hide');
-                        $('#update-delivery-' + p.attr('data-id')).attr('class', 'update-delivery btn ' + d.deliveryClass).html(d.deliveryTitle);
+                        $('#update-delivery-' + p.attr('data-id')).attr('class', 'update-delivery btn btn-xs ' + d.deliveryClass).html(d.deliveryTitle);
+                    };
+                });
+            },
+            canPayAction: function (e) {
+                var p = $(e.target).parents('tr'),
+                    self = this;
+                $.get(p.attr('data-canPay')).done(function (res) {
+                    self.modal.html(res).modal('show');
+                    formModule.success = function (res) {
+                        var d = res.data;
+                        self.modal.html(res).modal('hide');
+                        $('#update-canPay-' + p.attr('data-id')).attr('class', 'update-canPay btn btn-xs ' + d.canPayClass).html(d.canPayTitle);
                     };
                 });
             },

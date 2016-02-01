@@ -5,6 +5,7 @@ CREATE TABLE `{order}` (
   `code`            VARCHAR(16)                                         NOT NULL DEFAULT '',
   `type_payment`    ENUM('free', 'onetime', 'recurring', 'installment') NOT NULL DEFAULT 'onetime',
   `type_commodity`  ENUM('product', 'service')                          NOT NULL DEFAULT 'product',
+  `can_pay`         TINYINT(1) UNSIGNED                                 NOT NULL DEFAULT '1',
   `plan`            INT(10) UNSIGNED                                    NOT NULL DEFAULT '0',
   # Module
   `module_name`     VARCHAR(64)                                         NOT NULL DEFAULT '',
@@ -87,6 +88,7 @@ CREATE TABLE `{invoice}` (
   `uid`            INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `ip`             CHAR(15)            NOT NULL DEFAULT '',
   `code`           VARCHAR(16)         NOT NULL DEFAULT '',
+  `can_pay`        TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
   `product_price`  DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
   `discount_price` DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
   `shipping_price` DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',

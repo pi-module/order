@@ -118,6 +118,25 @@ class Order extends AbstractApi
         return $return;
     }
 
+    public function canPayStatus($status)
+    {
+        $return = array();
+        switch ($status) {
+            case '1':
+                $return['canPayClass'] = 'btn-success';
+                $return['canPayLabel'] = 'label-success';
+                $return['canPayTitle'] = __('Can pay');
+                break;
+
+            case '2':
+                $return['canPayClass'] = 'btn-warning';
+                $return['canPayLabel'] = 'label-warning';
+                $return['canPayTitle'] = __('Can not pay');
+                break;
+        }
+        return $return;
+    }
+
     public function paymentStatus($status, $type)
     {
         $return = array();
@@ -230,6 +249,12 @@ class Order extends AbstractApi
             'action' => 'updateDelivery',
             'id' => $order['id'],
         )));
+        // Set url_update_delivery
+        $order['url_update_canPay'] = Pi::url(Pi::service('url')->assemble('admin', array(
+            'controller' => 'order',
+            'action' => 'updateCanPay',
+            'id' => $order['id'],
+        )));
         //
         $order['url_update_note'] = Pi::url(Pi::service('url')->assemble('admin', array(
             'controller' => 'order',
@@ -269,6 +294,11 @@ class Order extends AbstractApi
         $order['deliveryClass'] = $status_delivery['deliveryClass'];
         $order['deliveryLabel'] = $status_delivery['deliveryLabel'];
         $order['deliveryTitle'] = $status_delivery['deliveryTitle'];
+        //
+        $can_pay = $this->canPayStatus($order['can_pay']);
+        $order['canPayClass'] = $can_pay['canPayClass'];
+        $order['canPayLabel'] = $can_pay['canPayLabel'];
+        $order['canPayTitle'] = $can_pay['canPayTitle'];
         //
         if ($order['type_commodity'] == 'product') {
             $order['type_commodity_view'] = __('Product');

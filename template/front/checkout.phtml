@@ -85,281 +85,168 @@ $script = sprintf(
 );
 $this->footScript()->appendScript($script);
 ?>
-    <div id="js-order" class="clearfix order-checkout">
-        <div class="page-header">
-            <h1><?php _e('Checkout'); ?></h1>
-        </div>
-        <?php if ($cart['type_payment'] == 'installment') { ?>
+<div id="js-order" class="clearfix order-checkout">
+    <div class="page-header">
+        <h1><?php _e('Checkout'); ?></h1>
+    </div>
+    <?php if ($cart['type_payment'] == 'installment') { ?>
+        <div class="col-md-12">
             <div class="alert alert-info" role="alert">
                 <h2><?php _e('Terms of payment'); ?></h2>
                 <p><?php echo sprintf(__('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2), Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])), Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))); ?></p>
             </div>
-        <?php } ?>
-        <div class="clearfix">
-            <div class="col-md-9">
-                <?php if (isset($formLogin) && !empty($formLogin)) { ?>
-                    <div class="alert alert-info" role="alert">
-                        <?php _e('If you registered on website before this time and have user account, please login to system and continue ordering, and if you dont have user account here, please fill register new user account and make order form'); ?>
-                    </div>
-                    <div class="page-header">
-                        <h3><?php _e('Login'); ?></h3>
-                    </div>
-                    <?php echo $this->form($formLogin); ?>
-                    <div class="page-header">
-                        <h3><?php _e('Register new user account and make order'); ?></h3>
-                    </div>
-                <?php } ?>
-                <?php if (!empty($customers)) { ?>
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="#customer-list-tab" aria-controls="customer-list-tab" role="tab" data-toggle="tab"><?php _e('Use current address'); ?></a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#customer-new-tab" aria-controls="customer-new-tab" role="tab" data-toggle="tab"><?php _e('Add new address'); ?></a>
-                        </li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="customer-list-tab">
-                            <div class="customer-list">
-                                <?php foreach ($customers as $customer) { ?>
-                                    <div class="customer-single table-responsive">
-                                        <table class="table table-bordered table-condensed table-striped">
-                                            <tr>
-                                                <td colspan="3" class="col-md-12">
-                                                    <strong>
-                                                        <?php echo $this->escape($customer['first_name']); ?>
-                                                        <?php echo $this->escape($customer['last_name']); ?>
-                                                        ( <?php echo $this->escape($customer['email']); ?> )
-                                                    </strong>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="col-md-3">
-                                                    <p><strong><?php _e('State'); ?></strong> : <?php echo $this->escape($customer['state']); ?></p>
-                                                    <p><strong><?php _e('City'); ?></strong> : <?php echo $this->escape($customer['city']); ?></p>
-                                                </td>
-                                                <td class="col-md-6">
-                                                    <p><strong><?php _e('Address'); ?></strong> : <?php echo $this->escape($customer['address1']); ?></p>
-                                                    <p><strong><?php _e('Zip code'); ?></strong> : <?php echo $this->escape($customer['zip_code']); ?></p>
-                                                </td>
-                                                <td class="col-md-3">
-                                                    <p><strong><?php _e('Phone'); ?></strong> : <?php echo $this->escape($customer['phone']); ?></p>
-                                                    <p><strong><?php _e('Mobile'); ?></strong> : <?php echo $this->escape($customer['mobile']); ?></p>
-                                                </td>
-                                            </tr>
-                                            <td colspan="2" class="col-md-9"></td>
-                                            <td colspan="1" class="col-md-3 text-center">
-                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#customerModal<?php echo $customer['id']; ?>"><?php _e('Save order'); ?></button>
-                                            </td>
-                                        </table>
-                                    </div>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="customerModal<?php echo $customer['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="customerModalLabel<?php echo $customer['id']; ?>">
-                                        <div class="modal-dialog modal-lg" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="<?php _e('Close'); ?>"><span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="customerModalLabel<?php echo $customer['id']; ?>">
-                                                        <?php echo $this->escape($customer['first_name']); ?> <?php echo $this->escape($customer['last_name']); ?>
-                                                    </h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <?php $key = sprintf('customer-%s', $customer['id']); ?>
-                                                    <?php echo $this->form($forms[$key]); ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="customer-new-tab">
-                            <?php echo $this->form($forms['new']); ?>
-                        </div>
-                    </div>
-                <?php } else { ?>
-                    <?php echo $this->form($forms['new']); ?>
-                <?php } ?>
+        </div>
+    <?php } ?>
+    <?php if ($cart['can_pay'] == 2) { ?>
+        <div class="col-md-12">
+            <div class="alert alert-danger"  role="alert">
+                <p><?php echo __('One of your select products or services have variable stock, than your payment option is disable, we will review your order and if your selected products or services be in stock we active payment option and send notification for you'); ?></p>
             </div>
-            <div class="col-md-3 cart-product">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><?php _e('Your products or services'); ?></h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="cart-product-list">
-                            <?php foreach ($cart['product'] as $product) { ?>
-                                <div class="clearfix cart-product-single">
-                                    <div class="row">
-                                        <h5 class="col-xs-12">
-                                            <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
-                                                <?php echo $this->escape($product['details']['title']); ?>
-                                            </a>
-                                        </h5>
-                                        <?php if (!empty($product['details']['thumbUrl'])) { ?>
-                                            <div class="col-xs-5">
-                                                <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
-                                                    <img class="img-responsive" src="<?php echo $this->escape($product['details']['thumbUrl']); ?>">
-                                                </a>
+        </div>
+    <?php } ?>
+    <div class="clearfix">
+        <div class="col-md-9">
+            <?php if (isset($formLogin) && !empty($formLogin)) { ?>
+                <div class="alert alert-info" role="alert">
+                    <?php _e('If you registered on website before this time and have user account, please login to system and continue ordering, and if you dont have user account here, please fill register new user account and make order form'); ?>
+                </div>
+                <div class="page-header">
+                    <h3><?php _e('Login'); ?></h3>
+                </div>
+                <?php echo $this->form($formLogin); ?>
+                <div class="page-header">
+                    <h3><?php _e('Register new user account and make order'); ?></h3>
+                </div>
+            <?php } ?>
+            <?php if (!empty($customers)) { ?>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#customer-list-tab" aria-controls="customer-list-tab" role="tab" data-toggle="tab"><?php _e('Use current address'); ?></a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#customer-new-tab" aria-controls="customer-new-tab" role="tab" data-toggle="tab"><?php _e('Add new address'); ?></a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="customer-list-tab">
+                        <div class="customer-list">
+                            <?php foreach ($customers as $customer) { ?>
+                                <div class="customer-single table-responsive">
+                                    <table class="table table-bordered table-condensed table-striped">
+                                        <tr>
+                                            <td colspan="3" class="col-md-12">
+                                                <strong>
+                                                    <?php echo $this->escape($customer['first_name']); ?>
+                                                    <?php echo $this->escape($customer['last_name']); ?>
+                                                    ( <?php echo $this->escape($customer['email']); ?> )
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3">
+                                                <p><strong><?php _e('State'); ?></strong> : <?php echo $this->escape($customer['state']); ?></p>
+                                                <p><strong><?php _e('City'); ?></strong> : <?php echo $this->escape($customer['city']); ?></p>
+                                            </td>
+                                            <td class="col-md-6">
+                                                <p><strong><?php _e('Address'); ?></strong> : <?php echo $this->escape($customer['address1']); ?></p>
+                                                <p><strong><?php _e('Zip code'); ?></strong> : <?php echo $this->escape($customer['zip_code']); ?></p>
+                                            </td>
+                                            <td class="col-md-3">
+                                                <p><strong><?php _e('Phone'); ?></strong> : <?php echo $this->escape($customer['phone']); ?></p>
+                                                <p><strong><?php _e('Mobile'); ?></strong> : <?php echo $this->escape($customer['mobile']); ?></p>
+                                            </td>
+                                        </tr>
+                                        <td colspan="2" class="col-md-9"></td>
+                                        <td colspan="1" class="col-md-3 text-center">
+                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#customerModal<?php echo $customer['id']; ?>"><?php _e('Save order'); ?></button>
+                                        </td>
+                                    </table>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="customerModal<?php echo $customer['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="customerModalLabel<?php echo $customer['id']; ?>">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="<?php _e('Close'); ?>"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="customerModalLabel<?php echo $customer['id']; ?>">
+                                                    <?php echo $this->escape($customer['first_name']); ?> <?php echo $this->escape($customer['last_name']); ?>
+                                                </h4>
                                             </div>
-                                        <?php } ?>
-                                        <div class="col-xs-7">
-                                            <div class="small">
-                                                <strong><?php _e('Price') ?></strong> : <?php echo $this->escape($product['product_price_view']); ?>
+                                            <div class="modal-body">
+                                                <?php $key = sprintf('customer-%s', $customer['id']); ?>
+                                                <?php echo $this->form($forms[$key]); ?>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             <?php } ?>
                         </div>
-                        <p class="small">
-                            <strong><?php _e('Total Price'); ?></strong> :
-                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'])); ?>
-                        </p>
-                        <p class="small">
-                            <strong><?php _e('Total Discount'); ?></strong> :
-                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['discount'])); ?>
-                        </p>
-                        <p class="small">
-                            <strong><?php _e('Total Shipping'); ?></strong> :
-                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['shipping'])); ?>
-                        </p>
-                        <p class="small">
-                            <strong><?php _e('Total Vat'); ?></strong> :
-                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?>
-                        </p>
-                        <p class="small">
-                            <strong><?php _e('Final Price'); ?></strong> :
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="customer-new-tab">
+                        <?php echo $this->form($forms['new']); ?>
+                    </div>
+                </div>
+            <?php } else { ?>
+                <?php echo $this->form($forms['new']); ?>
+            <?php } ?>
+        </div>
+        <div class="col-md-3 cart-product">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><?php _e('Your products or services'); ?></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="cart-product-list">
+                        <?php foreach ($cart['product'] as $product) { ?>
+                            <div class="clearfix cart-product-single">
+                                <div class="row">
+                                    <h5 class="col-xs-12">
+                                        <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
+                                            <?php echo $this->escape($product['details']['title']); ?>
+                                        </a>
+                                    </h5>
+                                    <?php if (!empty($product['details']['thumbUrl'])) { ?>
+                                        <div class="col-xs-5">
+                                            <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
+                                                <img class="img-responsive" src="<?php echo $this->escape($product['details']['thumbUrl']); ?>">
+                                            </a>
+                                        </div>
+                                    <?php } ?>
+                                    <div class="col-xs-7">
+                                        <div class="small">
+                                            <strong><?php _e('Price') ?></strong> : <?php echo $this->escape($product['product_price_view']); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <p class="small">
+                        <strong><?php _e('Total Price'); ?></strong> :
+                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'])); ?>
+                    </p>
+                    <p class="small">
+                        <strong><?php _e('Total Discount'); ?></strong> :
+                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['discount'])); ?>
+                    </p>
+                    <p class="small">
+                        <strong><?php _e('Total Shipping'); ?></strong> :
+                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['shipping'])); ?>
+                    </p>
+                    <p class="small">
+                        <strong><?php _e('Total Vat'); ?></strong> :
+                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?>
+                    </p>
+                    <p class="small">
+                        <strong><?php _e('Final Price'); ?></strong> :
                             <span class="label label-success">
                                 <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?>
                             </span>
-                        </p>
-                    </div>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
-<?php /*
- <pre><?php //print_r($cart); ?></pre>
- <div id="js-order" class="clearfix row order-checkout">
-        <?php if (!empty($customers)) { ?>
-            <div class="page-header">
-                <h1><?php _e('Checkout'); ?></h1>
-            </div>
-        <?php } ?>
-        <?php if ($cart['type_payment'] == 'installment') { ?>
-        <div class="col-md-12">
-            <?php } else { ?>
-            <div class="col-md-8">
-                <?php } ?>
-                <?php if (!empty($customers)) { ?>
-                    <?php if ($cart['type_payment'] == 'installment') { ?>
-                        <div class="alert alert-info" role="alert">
-                            <h2><?php _e('Terms of payment'); ?></h2>
-
-                            <p><?php echo sprintf(__('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2), Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])), Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))); ?></p>
-                        </div>
-                    <?php } ?>
-                    <div class="well"><?php _e('Select your invoicing address for your order'); ?></div>
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="new-address">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-new-address"
-                                       aria-expanded="false" aria-controls="collapse-new-address">
-                                        <?php _e('Add a new invoicing address'); ?>
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapse-new-address" class="panel-collapse collapse" role="tabpanel"
-                                 aria-labelledby="new-address">
-                                <div class="panel-body">
-                                    <?php echo $this->form($forms['new']); ?>
-                                </div>
-                            </div>
-                        </div>
-                        <?php $i = 1; ?>
-                        <?php foreach ($customers as $customer) { ?>
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab"
-                                     id="customer-<?php echo $this->escape($customer['id']); ?>">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion"
-                                           href="#collapse-customer-<?php echo $this->escape($customer['id']); ?>"
-                                           aria-expanded="<?php if ($i == 1) {echo 'true';} else {echo 'false';} ?>"
-                                           aria-controls="collapse-customer-<?php echo $this->escape($customer['id']); ?>">
-                                            <?php echo $this->escape($customer['first_name']); ?>
-                                            <?php echo $this->escape($customer['last_name']); ?> :
-                                            <?php echo $this->escape($customer['address1']); ?>
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapse-customer-<?php echo $this->escape($customer['id']); ?>"
-                                     class="panel-collapse collapse<?php if ($i == 1) {echo ' in';} ?>" role="tabpanel"
-                                     aria-labelledby="customer-<?php echo $this->escape($customer['id']); ?>">
-                                    <div class="panel-body">
-                                        <?php $key = sprintf('customer-%s', $customer['id']); ?>
-                                        <?php echo $this->form($forms[$key]); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php $i++; ?>
-                        <?php } ?>
-                    </div>
-                <?php } else { ?>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h1 class="panel-title"><?php _e('Checkout'); ?></h1>
-                        </div>
-                        <div class="panel-body">
-                            <?php if ($cart['type_payment'] == 'installment') { ?>
-                                <div class="alert alert-info" role="alert">
-                                    <h2><?php _e('Terms of payment'); ?></h2>
-
-                                    <p><?php echo sprintf(__('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2), Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])), Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))); ?></p>
-                                </div>
-                            <?php } ?>
-                            <?php echo $this->form($forms['new']); ?>
-                        </div>
-                    </div>
-                <?php } ?>
-            </div>
-            <?php if ($cart['type_payment'] != 'installment') { ?>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h2 class="panel-title"><?php _e('Pre Invoice'); ?></h2>
-                        </div>
-                        <div class="panel-body">
-                            <p><strong><?php _e('Total Price'); ?></strong> : <span
-                                    id="cart-total-price"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'])); ?></span>
-                            </p>
-                            <p><strong><?php _e('Total Discount'); ?></strong> : <span
-                                    id="cart-total-discount"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['discount'])); ?></span>
-                            </p>
-                            <p><strong><?php _e('Total Shipping'); ?></strong> : <span
-                                    id="cart-total-shipping"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['shipping'])); ?></span>
-                            </p>
-                            <p><strong><?php _e('Total Vat'); ?></strong> : <span
-                                    id="cart-total-vat"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?></span>
-                            </p>
-                            <p><strong><?php _e('Final Price'); ?></strong> : <span id="cart-total-total"
-                                                                                    class="label label-success"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?></span>
-                            </p>
-                            <?php if ($config['order_location_delivery'] && $cart['type_commodity'] == 'product') { ?>
-                            <p><strong> <?php _e('Location'); ?></strong> : <span id="cart-location"></span></p>
-                            <p><strong><?php _e('Delivery'); ?></strong> : <span id="cart-delivery"></span></p>
-                            <p><strong><?php _e('Payment'); ?></strong> : <span id="cart-payment"></span></p>
-                            <?php } ?>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-    </div>
-<?php if (isset($error) && !empty($error)) { ?>
-<pre><?php print_r($error); ?></pre>
-<?php } ?>
- */ ?>
+</div>

@@ -33,9 +33,13 @@ class PaymentController extends IndexController
         if (empty($invoice)) {
             $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('The invoice not found.'));
         }
-        // Check invoice not payd
+        // Check invoice not paid
         if ($invoice['status'] != 2) {
             $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $invoice['order']), __('You pay this invoice before this time'));
+        }
+        // Check invoice can pay
+        if ($invoice['can_pay'] != 1) {
+            $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $invoice['order']), __('You can pay this invoice after admin review'));
         }
         // Check invoice is for this user
         if (Pi::service('authentication')->hasIdentity()) {

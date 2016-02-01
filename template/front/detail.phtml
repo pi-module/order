@@ -277,8 +277,9 @@
                     </div>
                 </div>
             <?php } ?>
+
             <div class="clearfix row">
-                <div class="col-md-10">
+                <div class="<?php if ($invoice['status'] == 1) { echo 'col-md-12';} else { echo 'col-md-8';} ?>">
                     <ul class="list-inline">
                         <li>
                             <a class="btn btn-primary btn-sm" title="<?php _e('Print invoice'); ?>"
@@ -303,8 +304,9 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-2 text-right">
-                    <?php if ($invoice['status'] == 2 && $invoice['allowPayment']) { ?>
+                <?php if ($invoice['status'] == 2) { ?>
+                <div class="col-md-4 text-right">
+                    <?php if ($invoice['can_pay'] == 1 && $invoice['allowPayment']) { ?>
                         <?php if ($invoice['allowPayment']) { ?>
                             <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>"
                                href="<?php echo $this->escape($invoice['pay_url']); ?>"><i
@@ -316,8 +318,13 @@
                                     array('pattern' => 'dd-MM-yyyy'))); ?>
                         </span>
                         <?php } ?>
+                    <?php } elseif ($invoice['can_pay'] != 1) { ?>
+                        <span class="label label-danger">
+                            <?php _e('You can pay this invoice after admin review'); ?>
+                        </span>
                     <?php } ?>
                 </div>
+                <?php } ?>
             </div>
         <?php } ?>
     </div>

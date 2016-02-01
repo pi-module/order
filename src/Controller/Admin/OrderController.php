@@ -24,6 +24,8 @@ use Module\Order\Form\UpdateOrderForm;
 use Module\Order\Form\UpdateOrderFilter;
 use Module\Order\Form\UpdatePaymentForm;
 use Module\Order\Form\UpdatePaymentFilter;
+use Module\Order\Form\UpdateCanPayForm;
+use Module\Order\Form\UpdateCanPayFilter;
 use Module\Order\Form\UpdateNoteForm;
 use Module\Order\Form\UpdateNoteFilter;
 
@@ -269,19 +271,36 @@ class OrderController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                $gateway = Pi::api('gateway', 'order')->getGatewayInfo($values['gateway'][0]);
-                $order->status_payment = $values['status_payment'];
-                $order->gateway = $gateway['path'];
-                if ($values['status_payment'] == 2) {
-                    $order->time_payment = time();
-                } else {
-                    $order->time_payment = 0;
+                // Check status_payment
+                if ($values['status_payment'] != $order->status_payment) {
+                    switch ($values['status_payment']) {
+                        // Set order is not pay
+                        case 1:
+                            $order->status_payment = 1;
+                            $order->time_payment = 0;
+                            // Update invoice
+                            $this->getModel('invoice')->update(
+                                array('status' => 2),
+                                array('order' => $order->id)
+                            );
+                            break;
+
+                        // Set order is pay
+                        case 2:
+                            $order->status_payment = 2;
+                            $order->time_payment = time();
+                            $order->gateway = 'Offline';
+                            // Update invoice
+                            $this->getModel('invoice')->update(
+                                array('status' => 1, 'gateway' => 'Offline'),
+                                array('order' => $order->id)
+                            );
+                            break;
+                    }
+                    $order->save();
+                    // Send notification
+                    Pi::api('notification', 'order')->processOrder($order->toArray(), 'payment');
                 }
-                $order->save();
-                // Add log
-                //Pi::api('log', 'shop')->addLog('payment', $order->id, 'update');
-                // Send notification
-                Pi::api('notification', 'order')->processOrder($order->toArray(), 'payment');
                 // Set return
                 $return['status'] = 1;
                 $return['data'] = Pi::api('order', 'order')->paymentStatus($order->status_payment);
@@ -347,6 +366,51 @@ class OrderController extends ActionController
         // Set view
         $this->view()->setTemplate('system:component/form-popup');
         $this->view()->assign('title', __('Update delivery'));
+        $this->view()->assign('form', $form);
+    }
+
+    public function updateCanPayAction()
+    {
+        // Get id
+        $id = $this->params('id');
+        $module = $this->params('module');
+        $return = array();
+        // Get order
+        $order = $this->getModel('order')->find($id);
+        // Set form
+        $form = new UpdateCanPayForm('updateOrder');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new UpdateCanPayFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Update order
+                $order->can_pay = $values['can_pay'];
+                $order->save();
+                // Update invoice
+                $this->getModel('invoice')->update(
+                    array('can_pay' => $order->can_pay),
+                    array('order' => $order->id)
+                );
+                // Send notification
+                //Pi::api('notification', 'order')->processOrderNote($order->toArray());
+                // Set return
+                $return['status'] = 1;
+                $return['data'] = Pi::api('order', 'order')->canPayStatus($order->can_pay);
+            } else {
+                $return['status'] = 0;
+                $return['data'] = '';
+            }
+            return $return;
+        } else {
+            $values['can_pay'] = $order->can_pay;
+            $form->setData($values);
+            $form->setAttribute('action', $this->url('', array('action' => 'updateCanPay', 'id' => $order->id)));
+        }
+        // Set view
+        $this->view()->setTemplate('system:component/form-popup');
+        $this->view()->assign('title', __('Add / edit admin note'));
         $this->view()->assign('form', $form);
     }
 
