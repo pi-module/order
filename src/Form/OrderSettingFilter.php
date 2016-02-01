@@ -35,6 +35,21 @@ class OrderSettingFilter extends InputFilter
             'name' => 'status_delivery',
             'required' => true,
         ));
+        // can_pay
+        $this->add(array(
+            'name' => 'can_pay',
+            'required' => true,
+        ));
+        // type_payment
+        $this->add(array(
+            'name' => 'type_payment',
+            'required' => true,
+        ));
+        // type_commodity
+        $this->add(array(
+            'name' => 'type_commodity',
+            'required' => true,
+        ));
         // code
         $this->add(array(
             'name' => 'code',

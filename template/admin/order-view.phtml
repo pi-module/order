@@ -11,6 +11,7 @@ $this->backbone();
          data-order="<?php echo $this->escape($order['url_update_order']); ?>"
          data-payment="<?php echo $this->escape($order['url_update_payment']); ?>"
          data-delivery="<?php echo $this->escape($order['url_update_delivery']); ?>"
+         data-canPay="<?php echo $this->escape($order['url_update_canPay']); ?>"
          data-note="<?php echo $this->escape($order['url_update_note']); ?>">
         <h3><?php echo sprintf(__('Order %s details'), $order['code']); ?></h3>
 
@@ -188,13 +189,17 @@ $this->backbone();
         <div class="well">
             <h3><?php _e('Payment'); ?></h3>
             <ul class="clearfix list-unstyled">
-                <li class="col-md-4"><strong><?php _e('Status'); ?></strong> : <span
+                <li class="col-md-3"><strong><?php _e('Status'); ?></strong> : <span
                         id="update-payment-<?php echo $this->escape($order['id']); ?>"
                         class="update-payment btn <?php echo $this->escape($order['paymentClass']); ?> "><?php echo $this->escape($order['paymentTitle']); ?></span>
                 </li>
-                <li class="col-md-4"><strong><?php _e('Time'); ?></strong>
+                <li class="col-md-3"><strong><?php _e('Can pay?'); ?></strong> : <span
+                        id="update-canPay-<?php echo $this->escape($order['id']); ?>"
+                        class="update-canPay btn <?php echo $this->escape($order['canPayClass']); ?> "><?php echo $this->escape($order['canPayTitle']); ?></span>
+                </li>
+                <li class="col-md-3"><strong><?php _e('Time'); ?></strong>
                     : <?php echo $this->escape($order['time_payment_view']); ?></li>
-                <li class="col-md-4"><strong><?php _e('Adapter'); ?></strong> : <span
+                <li class="col-md-3"><strong><?php _e('Adapter'); ?></strong> : <span
                         id="update-payment-<?php echo $this->escape($order['id']); ?>-adapter"><?php echo $this->escape($order['gateway']); ?></span>
                 </li>
             </ul>
@@ -364,6 +369,7 @@ $this->backbone();
                 this.$('.update-order').click(this.orderAction);
                 this.$('.update-payment').click(this.paymentAction);
                 this.$('.update-delivery').click(this.deliveryAction);
+                this.$('.update-canPay').click(this.canPayAction);
                 this.$('.update-note').click(this.noteAction);
             },
             orderAction: function (e) {
@@ -404,6 +410,18 @@ $this->backbone();
                         self.modal.html(res).modal('hide');
                         $('#update-delivery-' + p.attr('data-id')).attr('class', 'update-delivery btn ' + d.deliveryClass).html(d.deliveryTitle);
                         $('#update-delivery-' + p.attr('data-id') + '-time').html(d.time_delivery_view);
+                    };
+                });
+            },
+            canPayAction: function (e) {
+                var p = $(e.target).parents('div.order-form'),
+                    self = this;
+                $.get(p.attr('data-canPay')).done(function (res) {
+                    self.modal.html(res).modal('show');
+                    formModule.success = function (res) {
+                        var d = res.data;
+                        self.modal.html(res).modal('hide');
+                        $('#update-canPay-' + p.attr('data-id')).attr('class', 'update-canPay btn ' + d.canPayClass).html(d.canPayTitle);
                     };
                 });
             },

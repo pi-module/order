@@ -35,10 +35,12 @@ class OrderController extends ActionController
     {
         // Get page
         $page = $this->params('page', 1);
-        $module = $this->params('module');
         $status_order = $this->params('status_order');
         $status_payment = $this->params('status_payment');
         $status_delivery = $this->params('status_delivery');
+        $can_pay = $this->params('can_pay');
+        $type_payment = $this->params('type_payment');
+        $type_commodity = $this->params('type_commodity');
         $code = $this->params('code');
         $mobile = $this->params('mobile');
         $email = $this->params('email');
@@ -64,6 +66,15 @@ class OrderController extends ActionController
         }
         if ($status_delivery) {
             $where['status_delivery'] = $status_delivery;
+        }
+        if ($can_pay) {
+            $where['can_pay'] = $can_pay;
+        }
+        if (in_array($type_payment, array('free', 'onetime', 'recurring', 'installment'))) {
+            $where['type_payment'] = $type_payment;
+        }
+        if (in_array($type_commodity, array('product', 'service'))) {
+            $where['type_commodity'] = $type_commodity;
         }
         if ($code) {
             $where['code LIKE ?'] = '%' . $code . '%';
@@ -119,6 +130,9 @@ class OrderController extends ActionController
                 'status_order' => $status_order,
                 'status_payment' => $status_payment,
                 'status_delivery' => $status_delivery,
+                'can_pay' => $can_pay,
+                'type_payment' => $type_payment,
+                'type_commodity' => $type_commodity,
                 'code' => $code,
                 'mobile' => $mobile,
                 'email' => $email,
@@ -136,6 +150,9 @@ class OrderController extends ActionController
             'status_order' => $status_order,
             'status_payment' => $status_payment,
             'status_delivery' => $status_delivery,
+            'can_pay' => $can_pay,
+            'type_payment' => $type_payment,
+            'type_commodity' => $type_commodity,
             'code' => $code,
             'mobile' => $mobile,
             'email' => $email,
@@ -172,6 +189,9 @@ class OrderController extends ActionController
                     'status_order' => $values['status_order'],
                     'status_payment' => $values['status_payment'],
                     'status_delivery' => $values['status_delivery'],
+                    'can_pay' => $values['can_pay'],
+                    'type_payment' => $values['type_payment'],
+                    'type_commodity' => $values['type_commodity'],
                     'code' => $values['code'],
                     'mobile' => $values['mobile'],
                     'email' => $values['email'],
@@ -394,7 +414,7 @@ class OrderController extends ActionController
                     array('order' => $order->id)
                 );
                 // Send notification
-                //Pi::api('notification', 'order')->processOrderNote($order->toArray());
+                Pi::api('notification', 'order')->processOrderCanPay($order->toArray());
                 // Set return
                 $return['status'] = 1;
                 $return['data'] = Pi::api('order', 'order')->canPayStatus($order->can_pay);

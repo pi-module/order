@@ -80,6 +80,47 @@ class OrderSettingForm extends BaseForm
                 ),
             ),
         ));
+        // can_pay
+        $this->add(array(
+            'name' => 'can_pay',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Can pay?'),
+                'value_options' => array(
+                    0 => __('All'),
+                    1 => __('Yes'),
+                    2 => __('No'),
+                ),
+            ),
+        ));
+        // type_payment
+        $this->add(array(
+            'name' => 'type_payment',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Type payment'),
+                'value_options' => array(
+                    'all' => __('All'),
+                    'free' => __('Free'),
+                    'onetime' => __('Onetime'),
+                    'recurring' => __('Recurring'),
+                    'installment' => __('Installment'),
+                ),
+            ),
+        ));
+        // type_commodity
+        $this->add(array(
+            'name' => 'type_commodity',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Type commodity'),
+                'value_options' => array(
+                    'all' => __('All'),
+                    'product' => __('Product'),
+                    'service' => __('Service'),
+                ),
+            ),
+        ));
         // code
         $this->add(array(
             'name' => 'code',

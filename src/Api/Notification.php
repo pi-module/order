@@ -20,6 +20,7 @@ use Pi\Application\Api\AbstractApi;
  * Pi::api('notification', 'order')->addOrder($order);
  * Pi::api('notification', 'order')->processOrder($order, $type);
  * Pi::api('notification', 'order')->processOrderNote($order);
+ * Pi::api('notification', 'order')->processOrderCanPay($order);
  * Pi::api('notification', 'order')->payInvoice($order, $invoice);
  * Pi::api('notification', 'order')->duedateInvoice($order, $invoice);
  * Pi::api('notification', 'order')->expiredInvoice($order, $invoice);
@@ -313,6 +314,66 @@ class Notification extends AbstractApi
 
         // Send sms to user
         Pi::api('sms', 'notification')->send($content, $order['mobile']);
+    }
+
+    public function processOrderCanPay($order)
+    {
+        // Check notification module
+        if (!Pi::service('module')->isActive('notification')) {
+            return false;
+        }
+
+        if ($order['can_pay'] == 1) {
+            // Get sitename
+            $sitename = Pi::config('sitename');
+
+            // Set mail text
+            $text = sprintf(
+                __('We active payment for order %s on %s website, and you can pay it now'),
+                $order['code'],
+                $sitename
+            );
+
+            // Set sms content
+            $content = sprintf(
+                __('Dear %s %s, We active payment for order %s on %s website, and you can pay it now'),
+                $order['first_name'],
+                $order['last_name'],
+                $order['code'],
+                $sitename
+            );
+
+            // Set link
+            $link = Pi::url(Pi::service('url')->assemble('order', array(
+                'module' => $this->getModule(),
+                'controller' => 'detail',
+                'action' => 'index',
+                'id' => $order['id'],
+            )));
+
+            // Set mail information
+            $information = array(
+                'first_name' => $order['first_name'],
+                'last_name' => $order['last_name'],
+                'order_link' => $link,
+                'text' => $text,
+            );
+
+            // Send mail to user
+            $toUser = array(
+                $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
+            );
+            Pi::api('mail', 'notification')->send(
+                $toUser,
+                'user_process_order',
+                $information,
+                Pi::service('module')->current(),
+                $order['uid']
+            );
+
+            // Send sms to user
+            Pi::api('sms', 'notification')->send($content, $order['mobile']);
+        }
     }
 
     public function payInvoice($order, $invoice)
