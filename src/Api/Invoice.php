@@ -145,7 +145,7 @@ class Invoice extends AbstractApi
                     // Get user 
                     $user = Pi::api('user', 'order')->getUserInformation();
                     // Set invoices price
-                    $invoices = Pi::api('installment', 'order')->setPriceForInvoice($order['total_price'], $order['plan'], $user);
+                    $invoices = Pi::api('installment', 'order')->setPriceForInvoice($order['product_price'], $order['plan'], $user);
                     $total = $invoices['total'];
                     unset($invoices['total']);
                     // Check allowed
@@ -172,11 +172,19 @@ class Invoice extends AbstractApi
                             $row->time_duedate = $invoice['duedate'];
                             $row->order = $order['id'];
                             $row->product_price = $invoice['price'];
-                            $row->discount_price = 0;
-                            $row->shipping_price = 0;
-                            $row->setup_price = 0;
-                            $row->packing_price = 0;
-                            $row->vat_price = 0;
+                            if ($key == 0) {
+                                $row->discount_price = $order['discount_price'];
+                                $row->shipping_price = $order['shipping_price'];
+                                $row->setup_price = $order['setup_price'];
+                                $row->packing_price = $order['packing_price'];
+                                $row->vat_price = $order['vat_price'];
+                            } else {
+                                $row->discount_price = 0;
+                                $row->shipping_price = 0;
+                                $row->setup_price = 0;
+                                $row->packing_price = 0;
+                                $row->vat_price = 0;
+                            }
                             $row->total_price = $invoice['price'];
                             $row->paid_price = 0;
                             $row->credit_price = $invoice['credit'];
