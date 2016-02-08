@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2016-02-01 21:08+0330\n"
+"POT-Creation-Date: 2016-02-08 22:33+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -401,6 +401,7 @@ msgid "Did not set any request"
 msgstr "هیچ درخواستی ذخیره نشده است"
 
 #: src/Controller/Front/PaymentController.php:298
+#: src/Gateway/Dargahpardakht/Gateway.php:161
 #: src/Gateway/Mellat/Gateway.php:160 src/Gateway/Paypal/Gateway.php:411
 msgid "Your payment were successfully."
 msgstr "پرداخت شما موفقیت آمیز بود."
@@ -823,13 +824,67 @@ msgstr "به روز رسانی"
 msgid "Note"
 msgstr "توضیح"
 
+#: src/Gateway/Dargahpardakht/Gateway.php:30
+msgid "DargahPardakht"
+msgstr "درگاه پرداخت"
+
+#: src/Gateway/Dargahpardakht/Gateway.php:48 src/Gateway/Mellat/Gateway.php:48
+#: src/Gateway/Paypal/Gateway.php:48
+msgid "path"
+msgstr "مسیر"
+
+#: src/Gateway/Dargahpardakht/Gateway.php:55
+#: template/admin/delivery-index.phtml:13 template/admin/invoice-index.phtml:23
+#: template/admin/location-index.phtml:13 template/admin/log-index.phtml:7
+#: template/admin/order-index.phtml:26 template/admin/order-view.phtml:165
+#: template/admin/order-view.phtml:289 template/front/list.phtml:80
+msgid "ID"
+msgstr "شناسه"
+
+#: src/Gateway/Dargahpardakht/Gateway.php:135
+msgid "Dargahpardakht verify error -1"
+msgstr "پارامترهای ارسالی صحیح نمی‌باشد"
+
+#: src/Gateway/Dargahpardakht/Gateway.php:154
+#: src/Gateway/Dargahpardakht/Gateway.php:196
+msgid "Dargahpardakht verify error 0"
+msgstr "پرداخت با موفقیت انجام نشده است"
+
+#: src/Gateway/Dargahpardakht/Gateway.php:215
+msgid "Dargahpardakht error empty"
+msgstr "خطا در درگاه پرداخت ، مقدار دریافتی از بانک خالی است"
+
+#: src/Gateway/Dargahpardakht/Gateway.php:220
+msgid "Dargahpardakht error -1"
+msgstr "کد پذیرنده صحیح نمی‌باشد"
+
+#: src/Gateway/Dargahpardakht/Gateway.php:224
+msgid "Dargahpardakht error -2"
+msgstr "مقدار مبلغ صحیح نمی‌باشد"
+
+#: src/Gateway/Dargahpardakht/Gateway.php:228
+msgid "Dargahpardakht error -3"
+msgstr "آدرس بازگشت صحیح نمی‌باشد"
+
+#: src/Gateway/Dargahpardakht/Gateway.php:232
+msgid "Dargahpardakht error -4"
+msgstr "درگاه پذیرنده فعال نمی‌باشد"
+
+#: src/Gateway/Dargahpardakht/Gateway.php:236
+msgid "Dargahpardakht error -5"
+msgstr "شماره‌فاکتور صحیح نمی‌باشد"
+
+#: src/Gateway/Dargahpardakht/Gateway.php:240
+msgid "Dargahpardakht error -6"
+msgstr "شماره‌فاکتور تکراری است"
+
+#: src/Gateway/Dargahpardakht/Gateway.php:244
+msgid "Dargahpardakht error -7"
+msgstr "خطا در شبکه‌ی بانکی وجود دارد"
+
 #: src/Gateway/Mellat/Gateway.php:30
 msgid "Bank Mellat (Iran)"
 msgstr "بانک ملت"
-
-#: src/Gateway/Mellat/Gateway.php:48 src/Gateway/Paypal/Gateway.php:48
-msgid "path"
-msgstr "مسیر"
 
 #: src/Gateway/Mellat/Gateway.php:55
 msgid "pin"
@@ -1097,13 +1152,6 @@ msgstr "درج روش تحویل"
 #: template/admin/delivery-index.phtml:9
 msgid "List of Delivery methods"
 msgstr "فهرست روش های تحویل"
-
-#: template/admin/delivery-index.phtml:13 template/admin/invoice-index.phtml:23
-#: template/admin/location-index.phtml:13 template/admin/log-index.phtml:7
-#: template/admin/order-index.phtml:26 template/admin/order-view.phtml:165
-#: template/admin/order-view.phtml:289 template/front/list.phtml:80
-msgid "ID"
-msgstr "شناسه"
 
 #: template/admin/delivery-index.phtml:15 template/admin/invoice-index.phtml:28
 #: template/admin/location-index.phtml:15 template/admin/order-view.phtml:294
