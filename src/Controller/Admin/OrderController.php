@@ -18,6 +18,8 @@ use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
 use Module\Order\Form\OrderSettingForm;
 use Module\Order\Form\OrderSettingFilter;
+use Module\Order\Form\OrderAddForm;
+use Module\Order\Form\OrderAddFilter;
 use Module\Order\Form\UpdateDeliveryForm;
 use Module\Order\Form\UpdateDeliveryFilter;
 use Module\Order\Form\UpdateOrderForm;
@@ -492,9 +494,27 @@ class OrderController extends ActionController
         $this->view()->assign('order', $order);
     }
 
-    public function editAction()
+    public function addAction()
     {
-        $this->view()->setTemplate('empty');
+        $post = array();
+
+
+        $form = new OrderAddForm('setting');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new OrderAddFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+
+                $post= $values;
+            }
+        }
+
+        // Set view
+        $this->view()->setTemplate('order-add');
+        $this->view()->assign('form', $form);
+        $this->view()->assign('post', $post);
     }
 
     public function printAction()

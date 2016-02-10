@@ -19,7 +19,18 @@ $this->backbone();
             </div>
         </div>
     </div>
-    <h3><?php _e('List of orders'); ?></h3>
+
+    <div class="clearfix row order-header">
+        <div class="col-xs-6">
+            <h3><?php _e('List of orders'); ?></h3>
+        </div>
+        <div class="col-xs-6 text-right">
+            <a class="btn btn-success" title="<?php _e('New order'); ?>" href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'add')); ?>">
+                <i class="fa fa-plus"></i> <?php _e('New order'); ?>
+            </a>
+        </div>
+    </div>
+
     <?php if (!empty($list)) { ?>
         <table class="table table-striped table-bordered table-condensed">
             <tr>
