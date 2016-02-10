@@ -109,20 +109,20 @@ class Gateway extends AbstractGateway
         // Get invoice
         $invoice = Pi::api('invoice', 'order')->getInvoice($request['resnum'], 'random_id');
         // Check status
-        if ($request['status'] == 1) {
+        if ($processing['random_id'] == $request['resnum'] && $request['status'] == 1) {
             // Set information
             $url = 'http://dargahpardakht.com/webservice/verify.php';
             $id = $this->gatewayOption['id'];
             $amount = $invoice['total_price'] / 10;
-            $result = $this->dargahpardakhtGet($url, $id, $request['resnum'], $request['refnum'], $amount);
-            switch ($result) {
+            $resultDargahpardakht = $this->dargahpardakhtGet($url, $id, $request['resnum'], $request['refnum'], $amount);
+            switch ($resultDargahpardakht) {
                 // error
                 case '-1' :
                     echo
                     // Set log value
                     $value = array();
                     $value['request'] = $request;
-                    $value['result'] = $result;
+                    $value['result'] = $resultDargahpardakht;
                     $value = Json::encode($value);
                     // Set log
                     $log = array();
@@ -141,7 +141,7 @@ class Gateway extends AbstractGateway
                     // Set log value
                     $value = array();
                     $value['request'] = $request;
-                    $value['result'] = $result;
+                    $value['result'] = $resultDargahpardakht;
                     $value = Json::encode($value);
                     // Set log
                     $log = array();
@@ -157,12 +157,10 @@ class Gateway extends AbstractGateway
 
                 // ok
                 case '1' :
-                    // Get invoice
-                    $message = __('Your payment were successfully.');
                     // Set log value
                     $value = array();
                     $value['request'] = $request;
-                    $value['result'] = $result;
+                    $value['result'] = $resultDargahpardakht;
                     $value = Json::encode($value);
                     // Set log
                     $log = array();
@@ -172,7 +170,7 @@ class Gateway extends AbstractGateway
                     $log['invoice'] = $invoice['id'];
                     $log['amount'] = $invoice['total_price'];
                     $log['status'] = 1;
-                    $log['message'] = $message;
+                    $log['message'] = __('Your payment were successfully.');
                     Pi::api('log', 'order')->setLog($log);
                     // Update invoice
                     $invoice = Pi::api('invoice', 'order')->updateInvoice($request['resnum']);
@@ -183,7 +181,6 @@ class Gateway extends AbstractGateway
             // Set log value
             $value = array();
             $value['request'] = $request;
-            $value['result'] = $result;
             $value = Json::encode($value);
             // Set log
             $log = array();
