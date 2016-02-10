@@ -186,7 +186,7 @@ class InvoiceController extends ActionController
         $this->view()->assign('config', $config);
     }
 
-    public function updateAction()
+    public function addAction()
     {
         // Get id
         $order = $this->params('order');
@@ -250,7 +250,7 @@ class InvoiceController extends ActionController
             }
         }
         // Set view
-        $this->view()->setTemplate('invoice-update');
+        $this->view()->setTemplate('invoice-add');
         $this->view()->assign('form', $form);
         $this->view()->assign('order', $order);
     }

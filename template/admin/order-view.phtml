@@ -344,7 +344,7 @@ $this->backbone();
             <h3><?php _e('Add extra invoice to this order'); ?></h3>
             <p><?php _e('If you want your user pay new price for this order, you can add new invoice for him by new price, use below button to add new invoice'); ?></p>
             <p><a class="btn btn-success"
-                  href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'update', 'order' => $order['id'])); ?>"
+                  href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'add', 'order' => $order['id'])); ?>"
                   title="<?php _e('New invoice'); ?>" target="_blank"><i
                         class="fa fa-plus"></i> <?php _e('New invoice'); ?></a></p>
         </div>
