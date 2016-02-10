@@ -26,7 +26,20 @@ $this->backbone();
                 <th><?php _e('ID'); ?></th>
                 <th><?php _e('Code'); ?></th>
                 <th><?php _e('Total price'); ?></th>
-                <th><?php _e('Information'); ?></th>
+                <th class="clearfix small">
+                    <div class="col-xs-4">
+                        <?php _e('Information'); ?>
+                    </div>
+                    <div class="col-xs-8">
+                        <ul class="list-inline">
+                            <li class="col-xs-3"><?php _e('Order status'); ?></li>
+                            <li class="col-xs-2"><?php _e('Can pay'); ?></li>
+                            <li class="col-xs-2"><?php _e('Payment status'); ?></li>
+                            <li class="col-xs-3"><?php _e('Delivery status'); ?></li>
+                            <li class="col-xs-2"><?php _e('Action'); ?></li>
+                        </ul>
+                    </div>
+                </th>
             </tr>
             <?php foreach ($list as $order) { ?>
                 <tr

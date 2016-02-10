@@ -175,7 +175,7 @@ msgstr "سفارش های تکمیل شده"
 
 #: src/Api/Order.php:128
 msgid "Can pay"
-msgstr "قابل پردات"
+msgstr "قابل پرداخت"
 
 #: src/Api/Order.php:134
 msgid "Can not pay"

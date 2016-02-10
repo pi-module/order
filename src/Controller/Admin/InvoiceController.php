@@ -232,6 +232,19 @@ class InvoiceController extends ActionController
                     array('code' => $code),
                     array('id' => $row->id)
                 );
+                // Update order
+                // Update order
+                $this->getModel('order')->update(
+                    array(
+                        'product_price' => $order['product_price'] + $row->product_price,
+                        'shipping_price' => $order['shipping_price'] + $row->shipping_price,
+                        'packing_price' => $order['packing_price'] + $row->packing_price,
+                        'setup_price' => $order['setup_price'] + $row->setup_price,
+                        'vat_price' => $order['vat_price'] + $row->vat_price,
+                        'total_price' => $order['total_price'] + $row->total_price,
+                    ),
+                    array('id' => $order['id'])
+                );
                 // Check it save or not
                 $message = __('New invoice data saved successfully.');
                 $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message);
@@ -240,6 +253,63 @@ class InvoiceController extends ActionController
         // Set view
         $this->view()->setTemplate('invoice-update');
         $this->view()->assign('form', $form);
+        $this->view()->assign('order', $order);
+    }
+
+    public function editAction()
+    {
+        // Get id
+        $id = $this->params('id');
+        // Get invoice and order
+        $invoice = Pi::api('invoice', 'order')->getInvoice($id);
+        $order = Pi::api('order', 'order')->getOrder($invoice['order']);
+        // Check invoice
+        if ($invoice['status'] != 2) {
+            $this->jump(
+                array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order']),
+                __('This invoice paid or canceled before, than you can not edit it'),
+                'error'
+            );
+        }
+        // Set form
+        $form = new InvoiceForm('invoice');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new InvoiceFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                $values['ip'] = Pi::user()->getIp();
+                $values['time_duedate'] = strtotime($values['time_duedate']);
+                $values['total_price'] = $values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['setup_price'] + $values['vat_price'];
+                // Save values
+                $row = $this->getModel('invoice')->find($id);
+                $row->assign($values);
+                $row->save();
+                // Update order
+                $this->getModel('order')->update(
+                    array(
+                        'product_price' => ($order['product_price'] - $invoice['product_price']) + $row->product_price,
+                        'shipping_price' => ($order['shipping_price'] - $invoice['shipping_price']) + $row->shipping_price,
+                        'packing_price' => ($order['packing_price'] - $invoice['packing_price']) + $row->packing_price,
+                        'setup_price' => ($order['setup_price'] - $invoice['setup_price']) + $row->setup_price,
+                        'vat_price' => ($order['vat_price'] - $invoice['vat_price']) + $row->vat_price,
+                        'total_price' => ($order['total_price'] - $invoice['total_price']) + $row->total_price,
+                    ),
+                    array('id' => $order['id'])
+                );
+                // Check it save or not
+                $message = __('Your invoice data saved successfully.');
+                $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message);
+            }
+        } else {
+            $invoice['time_duedate'] = date('Y-m-d', $invoice['time_duedate']);
+            $form->setData($invoice);
+        }
+        // Set view
+        $this->view()->setTemplate('invoice-edit');
+        $this->view()->assign('form', $form);
+        $this->view()->assign('invoice', $invoice);
         $this->view()->assign('order', $order);
     }
 }
