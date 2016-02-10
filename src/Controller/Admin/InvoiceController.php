@@ -233,7 +233,6 @@ class InvoiceController extends ActionController
                     array('id' => $row->id)
                 );
                 // Update order
-                // Update order
                 $this->getModel('order')->update(
                     array(
                         'product_price' => $order['product_price'] + $row->product_price,
