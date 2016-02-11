@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2016-02-11 10:30+0330\n"
+"POT-Creation-Date: 2016-02-11 12:36+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -62,7 +62,7 @@ msgstr ""
 #: template/admin/invoice-index.phtml:74 template/admin/invoice-print.phtml:65
 #: template/admin/invoice-view.phtml:10 template/admin/log-index.phtml:63
 #: template/admin/order-view.phtml:234 template/admin/order-view.phtml:338
-#: template/front/detail.phtml:15 template/front/detail.phtml:296
+#: template/front/detail.phtml:15 template/front/detail.phtml:295
 #: template/front/invoice-print.phtml:65 template/front/invoice.phtml:15
 #: template/front/invoice.phtml:92
 msgid "Paid"
@@ -305,31 +305,31 @@ msgstr ""
 msgid "New order added and data saved successfully."
 msgstr ""
 
-#: src/Controller/Front/CheckoutController.php:46
-#: src/Controller/Front/CheckoutController.php:55
-#: src/Controller/Front/CheckoutController.php:480
+#: src/Controller/Front/CheckoutController.php:50
+#: src/Controller/Front/CheckoutController.php:59
+#: src/Controller/Front/CheckoutController.php:485
 msgid "Your cart is empty."
 msgstr ""
 
-#: src/Controller/Front/CheckoutController.php:60
-#: src/Controller/Front/CheckoutController.php:485
+#: src/Controller/Front/CheckoutController.php:64
+#: src/Controller/Front/CheckoutController.php:490
 msgid "So sorry, At this moment order is inactive"
 msgstr ""
 
-#: src/Controller/Front/CheckoutController.php:91
+#: src/Controller/Front/CheckoutController.php:95
 msgid "User information was not completed and user account was not saved."
 msgstr ""
 
-#: src/Controller/Front/CheckoutController.php:113
+#: src/Controller/Front/CheckoutController.php:117
 msgid "User account was not saved."
 msgstr ""
 
-#: src/Controller/Front/CheckoutController.php:496
+#: src/Controller/Front/CheckoutController.php:501
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 
-#: src/Controller/Front/CheckoutController.php:627
+#: src/Controller/Front/CheckoutController.php:632
 #: src/Form/Element/Gateway.php:28
 msgid "Offline"
 msgstr ""
@@ -379,7 +379,7 @@ msgid "You pay this invoice before this time"
 msgstr ""
 
 #: src/Controller/Front/PaymentController.php:42
-#: template/front/detail.phtml:323 template/front/invoice.phtml:252
+#: template/front/detail.phtml:322 template/front/invoice.phtml:252
 msgid "You can pay this invoice after admin review"
 msgstr ""
 
@@ -431,7 +431,7 @@ msgstr ""
 #: template/admin/invoice-print.phtml:63 template/admin/invoice-view.phtml:8
 #: template/admin/invoice-view.phtml:128 template/admin/order-view.phtml:178
 #: template/admin/order-view.phtml:192 template/admin/order-view.phtml:210
-#: template/front/detail.phtml:294 template/front/invoice-print.phtml:63
+#: template/front/detail.phtml:293 template/front/invoice-print.phtml:63
 #: template/front/invoice.phtml:90 template/front/list.phtml:84
 msgid "Status"
 msgstr ""
@@ -468,7 +468,7 @@ msgstr ""
 #: src/Form/Element/Delivery.php:36 src/Form/LocationForm.php:106
 #: template/admin/invoice-print.phtml:134 template/admin/order-view.phtml:222
 #: template/admin/order-view.phtml:224 template/admin/order-view.phtml:247
-#: template/admin/order-view.phtml:290 template/front/checkout.phtml:219
+#: template/admin/order-view.phtml:290 template/front/checkout.phtml:233
 #: template/front/detail.phtml:189 template/front/invoice-print.phtml:134
 #: template/front/invoice.phtml:158 template/front/list.phtml:83
 msgid "Price"
@@ -480,7 +480,7 @@ msgstr ""
 msgid "Time"
 msgstr ""
 
-#: src/Form/Element/Delivery.php:40 template/front/checkout.phtml:82
+#: src/Form/Element/Delivery.php:40 template/front/checkout.phtml:94
 msgid "Days"
 msgstr ""
 
@@ -609,7 +609,7 @@ msgstr ""
 #: src/Form/OrderSimpleForm.php:101 template/admin/invoice-add.phtml:45
 #: template/admin/invoice-edit.phtml:89 template/admin/invoice-print.phtml:88
 #: template/admin/invoice-view.phtml:90 template/admin/order-print.phtml:56
-#: template/admin/order-view.phtml:61 template/front/checkout.phtml:157
+#: template/admin/order-view.phtml:61 template/front/checkout.phtml:174
 #: template/front/detail.phtml:135 template/front/invoice-print.phtml:88
 #: template/front/invoice.phtml:113 template/front/list.phtml:45
 msgid "Phone"
@@ -620,7 +620,7 @@ msgstr ""
 #: template/admin/invoice-add.phtml:49 template/admin/invoice-edit.phtml:93
 #: template/admin/invoice-print.phtml:92 template/admin/invoice-view.phtml:94
 #: template/admin/order-print.phtml:60 template/admin/order-view.phtml:65
-#: template/front/checkout.phtml:158 template/front/detail.phtml:139
+#: template/front/checkout.phtml:175 template/front/detail.phtml:139
 #: template/front/invoice-print.phtml:92 template/front/invoice.phtml:117
 #: template/front/list.phtml:49
 msgid "Mobile"
@@ -672,7 +672,7 @@ msgstr ""
 #: src/Form/OrderSimpleForm.php:199 template/admin/invoice-add.phtml:29
 #: template/admin/invoice-edit.phtml:73 template/admin/invoice-print.phtml:113
 #: template/admin/invoice-view.phtml:74 template/admin/order-print.phtml:71
-#: template/admin/order-view.phtml:45 template/front/checkout.phtml:149
+#: template/admin/order-view.phtml:45 template/front/checkout.phtml:164
 #: template/front/detail.phtml:115 template/front/invoice-print.phtml:113
 #: template/front/invoice.phtml:138 template/front/list.phtml:27
 msgid "State"
@@ -683,7 +683,7 @@ msgstr ""
 #: template/admin/invoice-add.phtml:25 template/admin/invoice-edit.phtml:69
 #: template/admin/invoice-print.phtml:109 template/admin/invoice-view.phtml:70
 #: template/admin/order-print.phtml:67 template/admin/order-view.phtml:41
-#: template/front/checkout.phtml:150 template/front/detail.phtml:111
+#: template/front/checkout.phtml:165 template/front/detail.phtml:111
 #: template/front/invoice-print.phtml:109 template/front/invoice.phtml:134
 #: template/front/list.phtml:23
 msgid "City"
@@ -694,7 +694,7 @@ msgstr ""
 #: template/admin/invoice-add.phtml:37 template/admin/invoice-edit.phtml:81
 #: template/admin/invoice-print.phtml:121 template/admin/invoice-view.phtml:82
 #: template/admin/order-print.phtml:79 template/admin/order-view.phtml:53
-#: template/front/checkout.phtml:154 template/front/detail.phtml:123
+#: template/front/checkout.phtml:170 template/front/detail.phtml:123
 #: template/front/invoice-print.phtml:121 template/front/invoice.phtml:146
 #: template/front/list.phtml:35
 msgid "Zip code"
@@ -751,13 +751,12 @@ msgid "Register and save order"
 msgstr ""
 
 #: src/Form/OrderForm.php:492 src/Form/OrderSimpleForm.php:409
-#: template/front/detail.phtml:311 template/front/detail.phtml:313
+#: template/front/detail.phtml:310 template/front/detail.phtml:312
 #: template/front/invoice.phtml:240 template/front/invoice.phtml:242
 msgid "Pay"
 msgstr ""
 
 #: src/Form/OrderForm.php:494 src/Form/OrderSimpleForm.php:411
-#: template/front/checkout.phtml:163
 msgid "Save order"
 msgstr ""
 
@@ -1362,14 +1361,14 @@ msgstr ""
 #: template/admin/invoice-edit.phtml:11 template/admin/invoice-index.phtml:75
 #: template/admin/invoice-print.phtml:69 template/admin/invoice-view.phtml:12
 #: template/admin/log-index.phtml:64 template/admin/order-view.phtml:339
-#: template/front/detail.phtml:299 template/front/invoice-print.phtml:69
+#: template/front/detail.phtml:298 template/front/invoice-print.phtml:69
 #: template/front/invoice.phtml:95
 msgid "Unpaid"
 msgstr ""
 
 #: template/admin/invoice-edit.phtml:13 template/admin/invoice-index.phtml:76
 #: template/admin/invoice-print.phtml:73 template/admin/invoice-view.phtml:14
-#: template/admin/order-view.phtml:340 template/front/detail.phtml:301
+#: template/admin/order-view.phtml:340 template/front/detail.phtml:300
 #: template/front/invoice-print.phtml:73 template/front/invoice.phtml:99
 msgid "Canceled"
 msgstr ""
@@ -1454,7 +1453,7 @@ msgid "View"
 msgstr ""
 
 #: template/admin/invoice-index.phtml:65 template/admin/invoice-index.phtml:67
-#: template/front/detail.phtml:285 template/front/detail.phtml:287
+#: template/front/detail.phtml:284 template/front/detail.phtml:286
 #: template/front/invoice.phtml:232 template/front/invoice.phtml:234
 msgid "Print invoice"
 msgstr ""
@@ -1475,19 +1474,19 @@ msgstr ""
 msgid "Order date"
 msgstr ""
 
-#: template/admin/invoice-print.phtml:56 template/front/detail.phtml:290
+#: template/admin/invoice-print.phtml:56 template/front/detail.phtml:289
 #: template/front/invoice-print.phtml:56 template/front/invoice.phtml:83
 msgid "Invoice date"
 msgstr ""
 
 #: template/admin/invoice-print.phtml:66 template/admin/invoice-print.phtml:74
-#: template/front/detail.phtml:297 template/front/detail.phtml:302
+#: template/front/detail.phtml:296 template/front/detail.phtml:301
 #: template/front/invoice-print.phtml:66 template/front/invoice-print.phtml:74
 #: template/front/invoice.phtml:93 template/front/invoice.phtml:100
 msgid "On"
 msgstr ""
 
-#: template/admin/invoice-print.phtml:101 template/front/checkout.phtml:153
+#: template/admin/invoice-print.phtml:101 template/front/checkout.phtml:169
 #: template/front/invoice-print.phtml:101 template/front/invoice.phtml:126
 msgid "Address"
 msgstr ""
@@ -1769,30 +1768,38 @@ msgstr ""
 msgid "New invoice"
 msgstr ""
 
-#: template/front/checkout.phtml:80
+#: template/front/checkout.phtml:92
 msgid "Price : "
 msgstr ""
 
-#: template/front/checkout.phtml:81
+#: template/front/checkout.phtml:93
 msgid "Time : "
 msgstr ""
 
-#: template/front/checkout.phtml:90
+#: template/front/checkout.phtml:97 template/front/checkout.phtml:197
+msgid "Cancel"
+msgstr ""
+
+#: template/front/checkout.phtml:98 template/front/checkout.phtml:151
+msgid "Use it"
+msgstr ""
+
+#: template/front/checkout.phtml:104
 msgid "Checkout"
 msgstr ""
 
-#: template/front/checkout.phtml:95
+#: template/front/checkout.phtml:109
 msgid "Terms of payment"
 msgstr ""
 
-#: template/front/checkout.phtml:96
+#: template/front/checkout.phtml:110
 #, php-format
 msgid ""
 "You buy products on %s installment by %s payment on each installment and %s "
 "per payment"
 msgstr ""
 
-#: template/front/checkout.phtml:103
+#: template/front/checkout.phtml:117
 msgid ""
 "One of your select products or services have variable stock, than your "
 "payment option is disable, we will review your order and if your selected "
@@ -1800,54 +1807,46 @@ msgid ""
 "notification for you"
 msgstr ""
 
-#: template/front/checkout.phtml:111
+#: template/front/checkout.phtml:125
 msgid ""
 "If you registered on website before this time and have user account, please "
 "login to system and continue ordering, and if you dont have user account "
 "here, please fill register new user account and make order form"
 msgstr ""
 
-#: template/front/checkout.phtml:114
+#: template/front/checkout.phtml:128
 msgid "Login"
 msgstr ""
 
-#: template/front/checkout.phtml:118
+#: template/front/checkout.phtml:132
 msgid "Register new user account and make order"
 msgstr ""
 
-#: template/front/checkout.phtml:125
-msgid "Use current address"
+#: template/front/checkout.phtml:193
+msgid "Make order by new customer information"
 msgstr ""
 
-#: template/front/checkout.phtml:128
-msgid "Add new address"
-msgstr ""
-
-#: template/front/checkout.phtml:172
-msgid "Close"
-msgstr ""
-
-#: template/front/checkout.phtml:198
+#: template/front/checkout.phtml:212
 msgid "Your products or services"
 msgstr ""
 
-#: template/front/checkout.phtml:227
+#: template/front/checkout.phtml:241
 msgid "Total Price"
 msgstr ""
 
-#: template/front/checkout.phtml:231
+#: template/front/checkout.phtml:245
 msgid "Total Discount"
 msgstr ""
 
-#: template/front/checkout.phtml:235
+#: template/front/checkout.phtml:249
 msgid "Total Shipping"
 msgstr ""
 
-#: template/front/checkout.phtml:239
+#: template/front/checkout.phtml:253
 msgid "Total Vat"
 msgstr ""
 
-#: template/front/checkout.phtml:243
+#: template/front/checkout.phtml:257
 msgid "Final Price"
 msgstr ""
 
@@ -1874,7 +1873,7 @@ msgid ""
 "<strong>%s</strong>"
 msgstr ""
 
-#: template/front/detail.phtml:316 template/front/invoice.phtml:245
+#: template/front/detail.phtml:315 template/front/invoice.phtml:245
 #, php-format
 msgid "You can pay this invoice after %s"
 msgstr ""
