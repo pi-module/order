@@ -32,6 +32,9 @@ class OrderAddFilter extends InputFilter
                     'name' => 'StringTrim',
                 ),
             ),
+            'validators' => array(
+                new \Module\Order\Validator\User,
+            ),
         ));
         // name
         if ($config['order_name']) {

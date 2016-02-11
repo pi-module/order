@@ -496,9 +496,9 @@ class OrderController extends ActionController
 
     public function addAction()
     {
-        $post = array();
-
-
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Set form
         $form = new OrderAddForm('setting');
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
@@ -506,15 +506,106 @@ class OrderController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-
-                $post= $values;
+                $values['ip'] = Pi::user()->getIp();
+                $values['type_payment'] = 'onetime';
+                $values['status_order'] = 1;
+                $values['status_payment'] = 1;
+                $values['status_delivery'] = 1;
+                $values['time_create'] = time();
+                $values['module_name'] = 'order';
+                $values['can_pay'] = 1;
+                // Get user
+                $user = Pi::api('user', 'order')->getUserInformation($values['uid']);
+                // Check user email
+                if (!isset($values['email']) || empty($values['email'])) {
+                    $values['email'] = $user['email'];
+                }
+                // Check user id_number
+                if (!isset($values['id_number']) || empty($values['id_number'])) {
+                    $values['id_number'] = $user['id_number'];
+                }
+                // Check user first_name
+                if (!isset($values['first_name']) || empty($values['first_name'])) {
+                    $values['first_name'] = $user['first_name'];
+                }
+                // Check user last_name
+                if (!isset($values['last_name']) || empty($values['last_name'])) {
+                    $values['last_name'] = $user['last_name'];
+                }
+                // Check user phone
+                if (!isset($values['phone']) || empty($values['phone'])) {
+                    $values['phone'] = $user['phone'];
+                }
+                // Check user mobile
+                if (!isset($values['mobile']) || empty($values['mobile'])) {
+                    $values['mobile'] = $user['mobile'];
+                }
+                // Check user address1
+                if (!isset($values['address1']) || empty($values['address1'])) {
+                    $values['address1'] = $user['address1'];
+                }
+                // Check user address2
+                if (!isset($values['address2']) || empty($values['address2'])) {
+                    $values['address2'] = $user['address2'];
+                }
+                // Check user country
+                if (!isset($values['country']) || empty($values['country'])) {
+                    $values['country'] = $user['country'];
+                }
+                // Check user state
+                if (!isset($values['state']) || empty($values['state'])) {
+                    $values['state'] = $user['state'];
+                }
+                // Check user city
+                if (!isset($values['city']) || empty($values['city'])) {
+                    $values['city'] = $user['city'];
+                }
+                // Check user zip_code
+                if (!isset($values['zip_code']) || empty($values['zip_code'])) {
+                    $values['zip_code'] = $user['zip_code'];
+                }
+                // Check user company
+                if (!isset($values['company']) || empty($values['company'])) {
+                    $values['company'] = $user['company'];
+                }
+                // Check user company_id
+                if (!isset($values['company_id']) || empty($values['company_id'])) {
+                    $values['company_id'] = $user['company_id'];
+                }
+                // Check user company_vat
+                if (!isset($values['company_vat']) || empty($values['company_vat'])) {
+                    $values['company_vat'] = $user['company_vat'];
+                }
+                // Set additional price
+                if ($values['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
+                    $values['shipping_price'] = $values['shipping_price'] + $config['order_additional_price_product'];
+                } elseif ($values['type_commodity'] == 'service' && $config['order_additional_price_service'] >0 ) {
+                    $values['setup_price'] = $values['setup_price'] + $config['order_additional_price_service'];
+                }
+                // Set total
+                $values['total_price'] = $values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['setup_price'] + $values['vat_price'];
+                // Save values to order
+                $order = $this->getModel('order')->createRow();
+                $order->assign($values);
+                $order->save();
+                // Set order ID
+                $code = Pi::api('order', 'order')->generatCode($order->id);
+                $this->getModel('order')->update(
+                    array('code' => $code),
+                    array('id' => $order->id)
+                );
+                // Set invoice
+                Pi::api('invoice', 'order')->createInvoice($order->id, $order->uid);
+                // Jump
+                $message = __('New order added and data saved successfully.');
+                $url = array('controller' => 'order', 'action' => 'view', 'id' => $order->id);
+                $this->jump($url, $message);
             }
         }
 
         // Set view
         $this->view()->setTemplate('order-add');
         $this->view()->assign('form', $form);
-        $this->view()->assign('post', $post);
     }
 
     public function printAction()
