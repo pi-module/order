@@ -17,8 +17,10 @@
                         <li class="progtrckr-todo"><?php _e('UnPaid'); ?></li>
                     <?php } ?>
                     <?php if ($order['status_order'] == '2') { ?>
-                        <li class="progtrckr-done"><?php _e('validated'); ?></li>
-                    <?php } else { ?>
+                        <li class="progtrckr-done"><?php _e('Validated'); ?></li>
+                    <?php } if ($order['status_order'] == '3') { ?>
+                        <li class="progtrckr-pending"><?php _e('Pending'); ?></li>
+                    <?php } elseif (in_array($order['status_order'], array(1, 3, 4, 5, 6))) { ?>
                         <li class="progtrckr-todo"><?php _e('Not validated'); ?></li>
                     <?php } ?>
                     <?php if ($order['status_delivery'] == '1') { ?>
@@ -41,6 +43,11 @@
                         <li class="progtrckr-done"><?php _e('Packed'); ?></li>
                         <li class="progtrckr-done"><?php _e('Posted'); ?></li>
                         <li class="progtrckr-error"><?php _e('Back eaten'); ?></li>
+                    <?php } ?>
+                    <?php if ($order['status_order'] == '7' && $order['status_delivery'] != '5') { ?>
+                        <li class="progtrckr-done"><?php _e('Finished'); ?></li>
+                    <?php } elseif ($order['status_order'] == '7' && $order['status_delivery'] == '5') { ?>
+                        <li class="progtrckr-error"><?php _e('Not finished'); ?></li>
                     <?php } ?>
                 </ul>
             </div>

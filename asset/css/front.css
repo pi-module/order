@@ -16,18 +16,23 @@ ul.progtrckr li {
 }
 
 ul.progtrckr li.progtrckr-done {
-    color: black;
-    border-bottom: 4px solid yellowgreen;
+    color: #000000;
+    border-bottom: 4px solid #9acd32;
 }
 
 ul.progtrckr li.progtrckr-todo {
-    color: silver;
-    border-bottom: 4px solid silver;
+    color: #c0c0c0;
+    border-bottom: 4px solid #c0c0c0;
 }
 
 ul.progtrckr li.progtrckr-error {
-    color: red;
-    border-bottom: 4px solid red;
+    color: #ff0000;
+    border-bottom: 4px solid #ff0000;
+}
+
+ul.progtrckr li.progtrckr-pending {
+    color: #F2BF48;
+    border-bottom: 4px solid #F2BF48;
 }
 
 ul.progtrckr li:after {
@@ -44,8 +49,8 @@ ul.progtrckr li:before {
 
 ul.progtrckr li.progtrckr-done:before {
     content: "\2713";
-    color: white;
-    background-color: yellowgreen;
+    color: #ffffff;
+    background-color: #9acd32;
     height: 1.2em;
     width: 1.2em;
     line-height: 1.2em;
@@ -55,8 +60,16 @@ ul.progtrckr li.progtrckr-done:before {
 
 ul.progtrckr li.progtrckr-todo:before {
     content: "\039F";
-    color: silver;
-    background-color: white;
+    color: #c0c0c0;
+    background-color: #ffffff;
+    font-size: 1.5em;
+    bottom: -1.6em;
+}
+
+ul.progtrckr li.progtrckr-pending:before {
+    content: "\039F";
+    color: #F2BF48;
+    background-color: #ffffff;
     font-size: 1.5em;
     bottom: -1.6em;
 }

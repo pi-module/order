@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2016-02-11 12:35+0330\n"
+"POT-Creation-Date: 2016-02-11 13:09+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -51,7 +51,8 @@ msgstr "تایید شد"
 msgid "has pending to confirmed"
 msgstr "در انتظار تایید"
 
-#: src/Api/Notification.php:168
+#: src/Api/Notification.php:168 src/Api/Order.php:115
+#: template/front/detail.phtml:48
 msgid "Finished"
 msgstr "تکمیل شد"
 
@@ -61,7 +62,7 @@ msgstr "تکمیل شد"
 #: template/admin/invoice-index.phtml:74 template/admin/invoice-print.phtml:65
 #: template/admin/invoice-view.phtml:10 template/admin/log-index.phtml:63
 #: template/admin/order-view.phtml:234 template/admin/order-view.phtml:338
-#: template/front/detail.phtml:15 template/front/detail.phtml:295
+#: template/front/detail.phtml:15 template/front/detail.phtml:302
 #: template/front/invoice-print.phtml:65 template/front/invoice.phtml:15
 #: template/front/invoice.phtml:92
 msgid "Paid"
@@ -69,9 +70,9 @@ msgstr "پرداخت شده"
 
 #: src/Api/Notification.php:187 src/Api/Order.php:172
 #: src/Form/OrderSettingForm.php:76 src/Form/UpdateDeliveryForm.php:44
-#: template/front/detail.phtml:25 template/front/detail.phtml:29
-#: template/front/detail.phtml:33 template/front/detail.phtml:37
-#: template/front/detail.phtml:41 template/front/invoice.phtml:25
+#: template/front/detail.phtml:27 template/front/detail.phtml:31
+#: template/front/detail.phtml:35 template/front/detail.phtml:39
+#: template/front/detail.phtml:43 template/front/invoice.phtml:25
 #: template/front/invoice.phtml:29 template/front/invoice.phtml:33
 #: template/front/invoice.phtml:37 template/front/invoice.phtml:41
 msgid "Packed"
@@ -79,9 +80,9 @@ msgstr "بسته بندی شده"
 
 #: src/Api/Notification.php:192 src/Api/Order.php:178
 #: src/Form/OrderSettingForm.php:77 src/Form/UpdateDeliveryForm.php:45
-#: template/front/detail.phtml:26 template/front/detail.phtml:30
-#: template/front/detail.phtml:34 template/front/detail.phtml:38
-#: template/front/detail.phtml:42 template/front/invoice.phtml:26
+#: template/front/detail.phtml:28 template/front/detail.phtml:32
+#: template/front/detail.phtml:36 template/front/detail.phtml:40
+#: template/front/detail.phtml:44 template/front/invoice.phtml:26
 #: template/front/invoice.phtml:30 template/front/invoice.phtml:34
 #: template/front/invoice.phtml:38 template/front/invoice.phtml:42
 msgid "Posted"
@@ -89,8 +90,8 @@ msgstr "ارسال شده"
 
 #: src/Api/Notification.php:197 src/Api/Order.php:184
 #: src/Form/OrderSettingForm.php:78 src/Form/UpdateDeliveryForm.php:46
-#: template/front/detail.phtml:27 template/front/detail.phtml:31
-#: template/front/detail.phtml:35 template/front/detail.phtml:39
+#: template/front/detail.phtml:29 template/front/detail.phtml:33
+#: template/front/detail.phtml:37 template/front/detail.phtml:41
 #: template/front/invoice.phtml:27 template/front/invoice.phtml:31
 #: template/front/invoice.phtml:35 template/front/invoice.phtml:39
 msgid "Delivered"
@@ -98,7 +99,7 @@ msgstr "تحویل شده"
 
 #: src/Api/Notification.php:202 src/Api/Order.php:190
 #: src/Form/OrderSettingForm.php:79 src/Form/UpdateDeliveryForm.php:47
-#: template/front/detail.phtml:43 template/front/invoice.phtml:43
+#: template/front/detail.phtml:45 template/front/invoice.phtml:43
 msgid "Back eaten"
 msgstr "برگشت خورده"
 
@@ -144,37 +145,29 @@ msgstr ""
 msgid "Not processed"
 msgstr "پردازش نشده"
 
-#: src/Api/Order.php:85 src/Form/OrderSettingForm.php:45
-#: src/Form/UpdateOrderForm.php:44
-msgid "Orders validated"
-msgstr "سفارش های تایید شده"
+#: src/Api/Order.php:85 template/front/detail.phtml:20
+msgid "Validated"
+msgstr "تایید شده"
 
-#: src/Api/Order.php:91 src/Form/OrderSettingForm.php:46
-#: src/Form/UpdateOrderForm.php:45
-msgid "Orders pending"
-msgstr "سفارش های در انتظار تایید"
+#: src/Api/Order.php:91 template/front/detail.phtml:22
+msgid "Pending"
+msgstr "در انتظار تایید"
 
 #: src/Api/Order.php:97 src/Form/OrderSettingForm.php:47
 #: src/Form/UpdateOrderForm.php:46
 msgid "Orders failed"
 msgstr "سفارش های خراب"
 
-#: src/Api/Order.php:103 src/Form/OrderSettingForm.php:48
-#: src/Form/UpdateOrderForm.php:47
-msgid "Orders cancelled"
-msgstr "سفارش های لغو شده"
+#: src/Api/Order.php:103
+msgid "Cancelled"
+msgstr "لغو شده"
 
 #: src/Api/Order.php:109 src/Form/OrderSettingForm.php:49
 #: src/Form/UpdateOrderForm.php:48
 msgid "Fraudulent orders"
 msgstr "سفارش های فریب آمیز"
 
-#: src/Api/Order.php:115 src/Form/OrderSettingForm.php:50
-#: src/Form/UpdateOrderForm.php:49
-msgid "Orders finished"
-msgstr "سفارش های تکمیل شده"
-
-#: src/Api/Order.php:128 template/admin/order-index.phtml:47
+#: src/Api/Order.php:128 template/admin/order-index.phtml:46
 msgid "Can pay"
 msgstr "قابل پرداخت"
 
@@ -214,7 +207,7 @@ msgstr "پایان نیافته"
 
 #: src/Api/Order.php:304 src/Form/OrderAddForm.php:291
 #: src/Form/OrderSettingForm.php:119 template/admin/invoice-print.phtml:132
-#: template/admin/order-view.phtml:245 template/front/detail.phtml:187
+#: template/admin/order-view.phtml:245 template/front/detail.phtml:194
 #: template/front/invoice-print.phtml:132 template/front/invoice.phtml:156
 msgid "Product"
 msgstr "محصول"
@@ -385,7 +378,7 @@ msgid "You pay this invoice before this time"
 msgstr "شما قبلا این فاکتور را پرداخت کرده اید"
 
 #: src/Controller/Front/PaymentController.php:42
-#: template/front/detail.phtml:322 template/front/invoice.phtml:252
+#: template/front/detail.phtml:329 template/front/invoice.phtml:252
 msgid "You can pay this invoice after admin review"
 msgstr "شما می توانید این فاکتور را بعد از بررسی مدیر پرداخت نمایید"
 
@@ -428,7 +421,7 @@ msgstr "حالت تست فعال نیست"
 #: src/Form/DeliveryForm.php:48 src/Form/LocationForm.php:50
 #: template/admin/delivery-index.phtml:14
 #: template/admin/invoice-print.phtml:178
-#: template/admin/location-index.phtml:14 template/front/detail.phtml:251
+#: template/admin/location-index.phtml:14 template/front/detail.phtml:258
 #: template/front/invoice-print.phtml:178 template/front/invoice.phtml:205
 msgid "Title"
 msgstr "عنوان"
@@ -438,7 +431,7 @@ msgstr "عنوان"
 #: template/admin/invoice-print.phtml:63 template/admin/invoice-view.phtml:8
 #: template/admin/invoice-view.phtml:128 template/admin/order-view.phtml:178
 #: template/admin/order-view.phtml:192 template/admin/order-view.phtml:210
-#: template/front/detail.phtml:293 template/front/invoice-print.phtml:63
+#: template/front/detail.phtml:300 template/front/invoice-print.phtml:63
 #: template/front/invoice.phtml:90 template/front/list.phtml:84
 msgid "Status"
 msgstr "وضعیت"
@@ -476,7 +469,7 @@ msgstr "ارسال"
 #: template/admin/invoice-print.phtml:134 template/admin/order-view.phtml:222
 #: template/admin/order-view.phtml:224 template/admin/order-view.phtml:247
 #: template/admin/order-view.phtml:290 template/front/checkout.phtml:233
-#: template/front/detail.phtml:189 template/front/invoice-print.phtml:134
+#: template/front/detail.phtml:196 template/front/invoice-print.phtml:134
 #: template/front/invoice.phtml:158 template/front/list.phtml:83
 msgid "Price"
 msgstr "قیمت"
@@ -539,10 +532,10 @@ msgid "User ID"
 msgstr "شناسه کاربر"
 
 #: src/Form/InvoiceSettingForm.php:63 template/admin/invoice-add.phtml:69
-#: template/admin/order-index.phtml:48 template/admin/order-view.phtml:85
-#: template/front/detail.phtml:69
+#: template/admin/order-index.phtml:47 template/admin/order-view.phtml:85
+#: template/front/detail.phtml:76
 msgid "Payment status"
-msgstr "وضعیت پرداخت"
+msgstr "پرداخت"
 
 #: src/Form/InvoiceSettingForm.php:65 src/Form/OrderSettingForm.php:43
 #: src/Form/OrderSettingForm.php:61 src/Form/OrderSettingForm.php:74
@@ -596,7 +589,7 @@ msgstr "نام خانوادگی"
 #: template/admin/invoice-add.phtml:13 template/admin/invoice-edit.phtml:57
 #: template/admin/invoice-print.phtml:84 template/admin/invoice-view.phtml:58
 #: template/admin/order-print.phtml:42 template/admin/order-view.phtml:29
-#: template/front/detail.phtml:127 template/front/invoice-print.phtml:84
+#: template/front/detail.phtml:134 template/front/invoice-print.phtml:84
 #: template/front/invoice.phtml:109 template/front/list.phtml:19
 msgid "ID number"
 msgstr "کد ملی"
@@ -606,7 +599,7 @@ msgstr "کد ملی"
 #: template/admin/invoice-add.phtml:41 template/admin/invoice-edit.phtml:85
 #: template/admin/invoice-print.phtml:96 template/admin/invoice-view.phtml:86
 #: template/admin/order-print.phtml:52 template/admin/order-view.phtml:57
-#: template/admin/order-view.phtml:167 template/front/detail.phtml:131
+#: template/admin/order-view.phtml:167 template/front/detail.phtml:138
 #: template/front/invoice-print.phtml:96 template/front/invoice.phtml:121
 #: template/front/list.phtml:41
 msgid "Email"
@@ -617,7 +610,7 @@ msgstr "ایمیل"
 #: template/admin/invoice-edit.phtml:89 template/admin/invoice-print.phtml:88
 #: template/admin/invoice-view.phtml:90 template/admin/order-print.phtml:56
 #: template/admin/order-view.phtml:61 template/front/checkout.phtml:174
-#: template/front/detail.phtml:135 template/front/invoice-print.phtml:88
+#: template/front/detail.phtml:142 template/front/invoice-print.phtml:88
 #: template/front/invoice.phtml:113 template/front/list.phtml:45
 msgid "Phone"
 msgstr "تلفن"
@@ -627,7 +620,7 @@ msgstr "تلفن"
 #: template/admin/invoice-add.phtml:49 template/admin/invoice-edit.phtml:93
 #: template/admin/invoice-print.phtml:92 template/admin/invoice-view.phtml:94
 #: template/admin/order-print.phtml:60 template/admin/order-view.phtml:65
-#: template/front/checkout.phtml:175 template/front/detail.phtml:139
+#: template/front/checkout.phtml:175 template/front/detail.phtml:146
 #: template/front/invoice-print.phtml:92 template/front/invoice.phtml:117
 #: template/front/list.phtml:49
 msgid "Mobile"
@@ -636,7 +629,7 @@ msgstr "موبایل"
 #: src/Form/OrderAddForm.php:139 src/Form/OrderForm.php:153
 #: src/Form/OrderSettingForm.php:227 src/Form/OrderSimpleForm.php:127
 #: template/admin/invoice-add.phtml:53 template/admin/order-print.phtml:46
-#: template/admin/order-view.phtml:69 template/front/detail.phtml:143
+#: template/admin/order-view.phtml:69 template/front/detail.phtml:150
 #: template/front/list.phtml:53
 msgid "Company"
 msgstr "شرکت"
@@ -660,7 +653,7 @@ msgstr "آدرس تحویل"
 #: src/Form/OrderSimpleForm.php:175 template/admin/invoice-add.phtml:21
 #: template/admin/invoice-edit.phtml:65 template/admin/invoice-view.phtml:66
 #: template/admin/order-print.phtml:87 template/admin/order-view.phtml:37
-#: template/front/detail.phtml:107 template/front/list.phtml:71
+#: template/front/detail.phtml:114 template/front/list.phtml:71
 msgid "Address 2"
 msgstr "آدرس ۲"
 
@@ -669,7 +662,7 @@ msgstr "آدرس ۲"
 #: src/Form/OrderSimpleForm.php:187 template/admin/invoice-add.phtml:33
 #: template/admin/invoice-edit.phtml:77 template/admin/invoice-print.phtml:117
 #: template/admin/invoice-view.phtml:78 template/admin/order-print.phtml:75
-#: template/admin/order-view.phtml:49 template/front/detail.phtml:119
+#: template/admin/order-view.phtml:49 template/front/detail.phtml:126
 #: template/front/invoice-print.phtml:117 template/front/invoice.phtml:142
 #: template/front/list.phtml:31
 msgid "Country"
@@ -680,7 +673,7 @@ msgstr "کشور"
 #: template/admin/invoice-edit.phtml:73 template/admin/invoice-print.phtml:113
 #: template/admin/invoice-view.phtml:74 template/admin/order-print.phtml:71
 #: template/admin/order-view.phtml:45 template/front/checkout.phtml:164
-#: template/front/detail.phtml:115 template/front/invoice-print.phtml:113
+#: template/front/detail.phtml:122 template/front/invoice-print.phtml:113
 #: template/front/invoice.phtml:138 template/front/list.phtml:27
 msgid "State"
 msgstr "استان"
@@ -690,7 +683,7 @@ msgstr "استان"
 #: template/admin/invoice-add.phtml:25 template/admin/invoice-edit.phtml:69
 #: template/admin/invoice-print.phtml:109 template/admin/invoice-view.phtml:70
 #: template/admin/order-print.phtml:67 template/admin/order-view.phtml:41
-#: template/front/checkout.phtml:165 template/front/detail.phtml:111
+#: template/front/checkout.phtml:165 template/front/detail.phtml:118
 #: template/front/invoice-print.phtml:109 template/front/invoice.phtml:134
 #: template/front/list.phtml:23
 msgid "City"
@@ -701,7 +694,7 @@ msgstr "شهر"
 #: template/admin/invoice-add.phtml:37 template/admin/invoice-edit.phtml:81
 #: template/admin/invoice-print.phtml:121 template/admin/invoice-view.phtml:82
 #: template/admin/order-print.phtml:79 template/admin/order-view.phtml:53
-#: template/front/checkout.phtml:170 template/front/detail.phtml:123
+#: template/front/checkout.phtml:170 template/front/detail.phtml:130
 #: template/front/invoice-print.phtml:121 template/front/invoice.phtml:146
 #: template/front/list.phtml:35
 msgid "Zip code"
@@ -710,7 +703,7 @@ msgstr "کد پستی"
 #: src/Form/OrderAddForm.php:277 src/Form/OrderForm.php:295
 #: src/Form/OrderSimpleForm.php:237 template/admin/order-view.phtml:218
 #: template/admin/order-view.phtml:230 template/admin/order-view.phtml:249
-#: template/front/detail.phtml:191
+#: template/front/detail.phtml:198
 msgid "Packing"
 msgstr "بسته بندی"
 
@@ -728,7 +721,7 @@ msgstr "روش تحویل"
 
 #: src/Form/OrderForm.php:427 src/Form/OrderSimpleForm.php:368
 #: template/admin/invoice-add.phtml:122 template/admin/order-view.phtml:140
-#: template/front/detail.phtml:170
+#: template/front/detail.phtml:177
 msgid "User note"
 msgstr "توضیح مشتری"
 
@@ -758,7 +751,7 @@ msgid "Register and save order"
 msgstr "ثبت نام و ثبت سفارش"
 
 #: src/Form/OrderForm.php:492 src/Form/OrderSimpleForm.php:409
-#: template/front/detail.phtml:310 template/front/detail.phtml:312
+#: template/front/detail.phtml:317 template/front/detail.phtml:319
 #: template/front/invoice.phtml:240 template/front/invoice.phtml:242
 msgid "Pay"
 msgstr "پرداخت"
@@ -773,6 +766,22 @@ msgstr "ثبت سفارش"
 #: template/front/invoice-print.phtml:60 template/front/invoice.phtml:87
 msgid "Order"
 msgstr "سفارش"
+
+#: src/Form/OrderSettingForm.php:45 src/Form/UpdateOrderForm.php:44
+msgid "Orders validated"
+msgstr "سفارش های تایید شده"
+
+#: src/Form/OrderSettingForm.php:46 src/Form/UpdateOrderForm.php:45
+msgid "Orders pending"
+msgstr "سفارش های در انتظار تایید"
+
+#: src/Form/OrderSettingForm.php:48 src/Form/UpdateOrderForm.php:47
+msgid "Orders cancelled"
+msgstr "سفارش های لغو شده"
+
+#: src/Form/OrderSettingForm.php:50 src/Form/UpdateOrderForm.php:49
+msgid "Orders finished"
+msgstr "سفارش های تکمیل شده"
 
 #: src/Form/OrderSettingForm.php:59 src/Form/UpdatePaymentForm.php:41
 #: template/admin/order-view.phtml:190
@@ -816,7 +825,7 @@ msgstr "دوره ای"
 msgid "Installment"
 msgstr "خرید قسطی"
 
-#: src/Form/OrderSettingForm.php:128 template/admin/order-index.phtml:38
+#: src/Form/OrderSettingForm.php:128 template/admin/order-index.phtml:37
 #: template/front/list.phtml:81
 msgid "Code"
 msgstr "کد"
@@ -871,8 +880,8 @@ msgstr "مسیر"
 #: src/Gateway/Dargahpardakht/Gateway.php:55
 #: template/admin/delivery-index.phtml:13 template/admin/invoice-index.phtml:23
 #: template/admin/location-index.phtml:13 template/admin/log-index.phtml:7
-#: template/admin/order-index.phtml:37 template/admin/order-view.phtml:165
-#: template/admin/order-view.phtml:289 template/front/list.phtml:80
+#: template/admin/order-view.phtml:165 template/admin/order-view.phtml:289
+#: template/front/list.phtml:80
 msgid "ID"
 msgstr "شناسه"
 
@@ -1193,7 +1202,7 @@ msgid "List of Delivery methods"
 msgstr "فهرست روش های تحویل"
 
 #: template/admin/delivery-index.phtml:15 template/admin/invoice-index.phtml:28
-#: template/admin/location-index.phtml:15 template/admin/order-index.phtml:50
+#: template/admin/location-index.phtml:15 template/admin/order-index.phtml:49
 #: template/admin/order-view.phtml:294 template/front/list.phtml:86
 msgid "Action"
 msgstr "عملکرد"
@@ -1213,25 +1222,25 @@ msgstr "هیچ روش تحویلی هنوز ایجاد نشده است"
 
 #: template/admin/delivery-index.phtml:41 template/admin/invoice-index.phtml:81
 #: template/admin/location-index.phtml:41 template/admin/log-index.phtml:70
-#: template/admin/order-index.phtml:104
+#: template/admin/order-index.phtml:102
 msgid "Todo list for fist time"
 msgstr "فهرست موارد لازم الجرا برای اولین استفاده"
 
 #: template/admin/delivery-index.phtml:43 template/admin/invoice-index.phtml:83
 #: template/admin/location-index.phtml:43 template/admin/log-index.phtml:72
-#: template/admin/order-index.phtml:106
+#: template/admin/order-index.phtml:104
 msgid "Setup payment gateway from gateway tap"
 msgstr "از تب دروازه پرداخت ، دروازه های پرداخت مورد نظر خود را نصب کنید"
 
 #: template/admin/delivery-index.phtml:44 template/admin/invoice-index.phtml:84
 #: template/admin/location-index.phtml:44 template/admin/log-index.phtml:73
-#: template/admin/order-index.phtml:107
+#: template/admin/order-index.phtml:105
 msgid "Setup delivery method from delivery tap"
 msgstr "از تب روش تحویل ، روش های تحویل مورد نظر خود را وارد کنید"
 
 #: template/admin/delivery-index.phtml:45 template/admin/invoice-index.phtml:85
 #: template/admin/location-index.phtml:45 template/admin/log-index.phtml:74
-#: template/admin/order-index.phtml:108
+#: template/admin/order-index.phtml:106
 msgid "Setup location from location tap"
 msgstr "از تب مکان ، مکان های مورد نظر خود را وارد کنید"
 
@@ -1287,7 +1296,7 @@ msgstr "اطلاعات سفارش"
 #: template/admin/invoice-add.phtml:8 template/admin/invoice-edit.phtml:52
 #: template/admin/invoice-print.phtml:79 template/admin/invoice-view.phtml:53
 #: template/admin/order-print.phtml:37 template/admin/order-view.phtml:24
-#: template/admin/order-view.phtml:171 template/front/detail.phtml:98
+#: template/admin/order-view.phtml:171 template/front/detail.phtml:105
 #: template/front/invoice-print.phtml:79 template/front/invoice.phtml:104
 #: template/front/list.phtml:14
 msgid "Name"
@@ -1295,28 +1304,28 @@ msgstr "نام"
 
 #: template/admin/invoice-add.phtml:17 template/admin/invoice-edit.phtml:61
 #: template/admin/invoice-view.phtml:62 template/admin/order-print.phtml:83
-#: template/admin/order-view.phtml:33 template/front/detail.phtml:103
+#: template/admin/order-view.phtml:33 template/front/detail.phtml:110
 #: template/front/list.phtml:67
 msgid "Address 1"
 msgstr "آدرس"
 
 #: template/admin/invoice-add.phtml:57 template/admin/order-view.phtml:73
-#: template/front/detail.phtml:147 template/front/list.phtml:57
+#: template/front/detail.phtml:154 template/front/list.phtml:57
 msgid "Company ID"
 msgstr "کد اقتصادی"
 
 #: template/admin/invoice-add.phtml:61 template/admin/order-view.phtml:77
-#: template/front/detail.phtml:151 template/front/list.phtml:61
+#: template/front/detail.phtml:158 template/front/list.phtml:61
 msgid "Company VAT"
 msgstr "کد مالیات"
 
-#: template/admin/invoice-add.phtml:66 template/admin/order-index.phtml:46
-#: template/admin/order-view.phtml:82 template/front/detail.phtml:66
+#: template/admin/invoice-add.phtml:66 template/admin/order-index.phtml:45
+#: template/admin/order-view.phtml:82 template/front/detail.phtml:73
 msgid "Order status"
 msgstr "وضعیت سفارش"
 
-#: template/admin/invoice-add.phtml:72 template/admin/order-index.phtml:49
-#: template/admin/order-view.phtml:88 template/front/detail.phtml:72
+#: template/admin/invoice-add.phtml:72 template/admin/order-index.phtml:48
+#: template/admin/order-view.phtml:88 template/front/detail.phtml:79
 msgid "Delivery status"
 msgstr "وضعیت ارسال"
 
@@ -1325,39 +1334,39 @@ msgid "Time create"
 msgstr "تاریخ ایجاد"
 
 #: template/admin/invoice-add.phtml:78 template/admin/order-view.phtml:94
-#: template/front/detail.phtml:78
+#: template/front/detail.phtml:85
 msgid "Time payment"
 msgstr "تاریخ پرداخت"
 
 #: template/admin/invoice-add.phtml:81 template/admin/order-view.phtml:97
-#: template/front/detail.phtml:81
+#: template/front/detail.phtml:88
 msgid "Time delivery"
 msgstr "تاریخ تحویل"
 
 #: template/admin/invoice-add.phtml:84 template/admin/order-view.phtml:100
-#: template/front/detail.phtml:84
+#: template/front/detail.phtml:91
 msgid "Time finish"
 msgstr "تاریخ تکمیل"
 
 #: template/admin/invoice-add.phtml:87 template/admin/order-view.phtml:103
-#: template/front/detail.phtml:87
+#: template/front/detail.phtml:94
 msgid "Time start"
 msgstr "تاریخ شروع"
 
 #: template/admin/invoice-add.phtml:90 template/admin/order-view.phtml:106
-#: template/front/detail.phtml:90
+#: template/front/detail.phtml:97
 msgid "Time end"
 msgstr "تاریخ پایان"
 
 #: template/admin/invoice-add.phtml:93 template/admin/invoice-edit.phtml:20
 #: template/admin/invoice-edit.phtml:116 template/admin/invoice-view.phtml:21
 #: template/admin/invoice-view.phtml:117 template/admin/order-view.phtml:109
-#: template/front/detail.phtml:93
+#: template/front/detail.phtml:100
 msgid "Gateway"
 msgstr "دروازه"
 
 #: template/admin/invoice-add.phtml:112 template/admin/invoice-edit.phtml:42
-#: template/admin/invoice-view.phtml:43 template/admin/order-index.phtml:39
+#: template/admin/invoice-view.phtml:43 template/admin/order-index.phtml:38
 #: template/admin/order-view.phtml:128
 msgid "Total price"
 msgstr "مجموع قیمت"
@@ -1375,14 +1384,14 @@ msgstr "به روز رسانی فاکتور %s"
 #: template/admin/invoice-edit.phtml:11 template/admin/invoice-index.phtml:75
 #: template/admin/invoice-print.phtml:69 template/admin/invoice-view.phtml:12
 #: template/admin/log-index.phtml:64 template/admin/order-view.phtml:339
-#: template/front/detail.phtml:298 template/front/invoice-print.phtml:69
+#: template/front/detail.phtml:305 template/front/invoice-print.phtml:69
 #: template/front/invoice.phtml:95
 msgid "Unpaid"
 msgstr "پرداخت نشده"
 
 #: template/admin/invoice-edit.phtml:13 template/admin/invoice-index.phtml:76
 #: template/admin/invoice-print.phtml:73 template/admin/invoice-view.phtml:14
-#: template/admin/order-view.phtml:340 template/front/detail.phtml:300
+#: template/admin/order-view.phtml:340 template/front/detail.phtml:307
 #: template/front/invoice-print.phtml:73 template/front/invoice.phtml:99
 msgid "Canceled"
 msgstr "لغو شده"
@@ -1425,7 +1434,7 @@ msgstr "کاربر"
 
 #: template/admin/invoice-edit.phtml:123 template/admin/invoice-index.phtml:24
 #: template/admin/invoice-print.phtml:179 template/admin/invoice-view.phtml:124
-#: template/admin/log-index.phtml:10 template/front/detail.phtml:252
+#: template/admin/log-index.phtml:10 template/front/detail.phtml:259
 #: template/front/invoice-print.phtml:179 template/front/invoice.phtml:206
 msgid "Amount"
 msgstr "مقدار"
@@ -1460,14 +1469,14 @@ msgid "Time pay"
 msgstr "زمان پرداخت"
 
 #: template/admin/invoice-index.phtml:59 template/admin/invoice-index.phtml:61
-#: template/admin/order-index.phtml:93 template/admin/order-view.phtml:324
+#: template/admin/order-index.phtml:91 template/admin/order-view.phtml:324
 #: template/admin/order-view.phtml:326 template/front/list.phtml:100
 #: template/front/list.phtml:102
 msgid "View"
 msgstr "مشاهده"
 
 #: template/admin/invoice-index.phtml:65 template/admin/invoice-index.phtml:67
-#: template/front/detail.phtml:284 template/front/detail.phtml:286
+#: template/front/detail.phtml:291 template/front/detail.phtml:293
 #: template/front/invoice.phtml:232 template/front/invoice.phtml:234
 msgid "Print invoice"
 msgstr "چاپ فاکتور"
@@ -1477,7 +1486,7 @@ msgid "No invoice is not created yet"
 msgstr "هنوز هیچ فاکتوری ایجاد نشده است"
 
 #: template/admin/invoice-print.phtml:32 template/admin/invoice-view.phtml:3
-#: template/front/detail.phtml:240 template/front/invoice-print.phtml:32
+#: template/front/detail.phtml:247 template/front/invoice-print.phtml:32
 #: template/front/invoice.phtml:8
 #, php-format
 msgid "Invoice %s"
@@ -1488,13 +1497,13 @@ msgstr "فاکتور %s"
 msgid "Order date"
 msgstr "تاریخ ثبت سفارش"
 
-#: template/admin/invoice-print.phtml:56 template/front/detail.phtml:289
+#: template/admin/invoice-print.phtml:56 template/front/detail.phtml:296
 #: template/front/invoice-print.phtml:56 template/front/invoice.phtml:83
 msgid "Invoice date"
 msgstr "تاریخ ساخت فاکتور"
 
 #: template/admin/invoice-print.phtml:66 template/admin/invoice-print.phtml:74
-#: template/front/detail.phtml:296 template/front/detail.phtml:301
+#: template/front/detail.phtml:303 template/front/detail.phtml:308
 #: template/front/invoice-print.phtml:66 template/front/invoice-print.phtml:74
 #: template/front/invoice.phtml:93 template/front/invoice.phtml:100
 msgid "On"
@@ -1506,7 +1515,7 @@ msgid "Address"
 msgstr "آدرس"
 
 #: template/admin/invoice-print.phtml:128 template/admin/order-view.phtml:242
-#: template/front/detail.phtml:184 template/front/invoice-print.phtml:128
+#: template/front/detail.phtml:191 template/front/invoice-print.phtml:128
 #: template/front/invoice.phtml:152
 msgid "This order products or services list"
 msgstr "فهرست محصولات و خدمات"
@@ -1521,15 +1530,15 @@ msgstr "ردیف"
 #: template/admin/invoice-print.phtml:133 template/admin/order-print.phtml:99
 #: template/admin/order-print.phtml:296 template/admin/order-print.phtml:424
 #: template/admin/order-print.phtml:552 template/admin/order-view.phtml:246
-#: template/front/detail.phtml:188 template/front/installment.phtml:101
+#: template/front/detail.phtml:195 template/front/installment.phtml:101
 #: template/front/invoice-print.phtml:133 template/front/invoice.phtml:157
 msgid "Number"
 msgstr "تعداد"
 
 #: template/admin/invoice-print.phtml:135
 #: template/admin/invoice-print.phtml:186 template/admin/order-view.phtml:228
-#: template/admin/order-view.phtml:248 template/front/detail.phtml:190
-#: template/front/detail.phtml:259 template/front/invoice-print.phtml:135
+#: template/admin/order-view.phtml:248 template/front/detail.phtml:197
+#: template/front/detail.phtml:266 template/front/invoice-print.phtml:135
 #: template/front/invoice-print.phtml:186 template/front/invoice.phtml:159
 #: template/front/invoice.phtml:213
 msgid "Shipping"
@@ -1537,7 +1546,7 @@ msgstr "هزینه ارسال"
 
 #: template/admin/invoice-print.phtml:136
 #: template/admin/invoice-print.phtml:190 template/admin/order-view.phtml:250
-#: template/front/detail.phtml:192 template/front/detail.phtml:263
+#: template/front/detail.phtml:199 template/front/detail.phtml:270
 #: template/front/invoice-print.phtml:136
 #: template/front/invoice-print.phtml:190 template/front/invoice.phtml:160
 #: template/front/invoice.phtml:217
@@ -1549,13 +1558,13 @@ msgstr "مالیات"
 #: template/admin/order-print.phtml:395 template/admin/order-print.phtml:440
 #: template/admin/order-print.phtml:523 template/admin/order-print.phtml:568
 #: template/admin/order-print.phtml:651 template/admin/order-view.phtml:232
-#: template/admin/order-view.phtml:251 template/front/detail.phtml:193
-#: template/front/detail.phtml:229 template/front/installment.phtml:116
+#: template/admin/order-view.phtml:251 template/front/detail.phtml:200
+#: template/front/detail.phtml:236 template/front/installment.phtml:116
 #: template/front/invoice-print.phtml:137 template/front/invoice.phtml:161
 msgid "Total"
 msgstr "مجموع"
 
-#: template/admin/invoice-print.phtml:171 template/front/detail.phtml:244
+#: template/admin/invoice-print.phtml:171 template/front/detail.phtml:251
 #: template/front/invoice-print.phtml:171 template/front/invoice.phtml:198
 msgid "Payment price"
 msgstr "مبلغ قابل پرداخت"
@@ -1565,12 +1574,12 @@ msgstr "مبلغ قابل پرداخت"
 msgid "Total invoice price"
 msgstr "مجموع مبلغ فاکتور"
 
-#: template/admin/invoice-print.phtml:182 template/front/detail.phtml:255
+#: template/admin/invoice-print.phtml:182 template/front/detail.phtml:262
 #: template/front/invoice-print.phtml:182 template/front/invoice.phtml:209
 msgid "Product price ex VAT"
 msgstr "قیمت محصول"
 
-#: template/admin/invoice-print.phtml:194 template/front/detail.phtml:267
+#: template/admin/invoice-print.phtml:194 template/front/detail.phtml:274
 #: template/front/invoice-print.phtml:194 template/front/invoice.phtml:221
 msgid "Total all taxes included"
 msgstr "مجموع قیمت"
@@ -1637,15 +1646,15 @@ msgstr "فیلتر کردن سفارش ها"
 msgid "List of orders"
 msgstr "فهرست سفارش ها"
 
-#: template/admin/order-index.phtml:42 template/admin/order-view.phtml:19
+#: template/admin/order-index.phtml:41 template/admin/order-view.phtml:19
 msgid "Information"
 msgstr "اطلاعات"
 
-#: template/admin/order-index.phtml:91
+#: template/admin/order-index.phtml:89
 msgid "Its service"
 msgstr "نوع : خدمات"
 
-#: template/admin/order-index.phtml:102
+#: template/admin/order-index.phtml:100
 msgid "No order is not created yet"
 msgstr "هیچ سفارشی هنوز ثبت نشده است"
 
@@ -1743,7 +1752,7 @@ msgstr "مهر شرکت / اثر انگشت"
 msgid "Order %s details"
 msgstr "جزئیات سفارش %s"
 
-#: template/admin/order-view.phtml:149 template/front/detail.phtml:178
+#: template/admin/order-view.phtml:149 template/front/detail.phtml:185
 msgid "Admin note"
 msgstr "توضیح مدیر"
 
@@ -1880,23 +1889,23 @@ msgstr "مجموع مالیات"
 msgid "Final Price"
 msgstr "قیمت نهایی"
 
-#: template/front/detail.phtml:20 template/front/invoice.phtml:20
-msgid "validated"
-msgstr "تایید شده"
-
-#: template/front/detail.phtml:22 template/front/invoice.phtml:22
+#: template/front/detail.phtml:24 template/front/invoice.phtml:22
 msgid "Not validated"
 msgstr "تایید نشده"
 
-#: template/front/detail.phtml:75
+#: template/front/detail.phtml:50
+msgid "Not finished"
+msgstr "تکمیل نشده"
+
+#: template/front/detail.phtml:82
 msgid "Time order"
 msgstr "زمان سفارش"
 
-#: template/front/detail.phtml:159
+#: template/front/detail.phtml:166
 msgid "Delivery method"
 msgstr "روش تحویل"
 
-#: template/front/detail.phtml:161
+#: template/front/detail.phtml:168
 #, php-format
 msgid ""
 "This order delivery time is <strong>%s</strong> in <strong>%s</strong> by "
@@ -1905,7 +1914,7 @@ msgstr ""
 "این سفارش ظرف مدت <strong>%s</strong> در <strong>%s</strong> و به وسیله "
 "<strong>%s</strong> تحویل داده می شود."
 
-#: template/front/detail.phtml:315 template/front/invoice.phtml:245
+#: template/front/detail.phtml:322 template/front/invoice.phtml:245
 #, php-format
 msgid "You can pay this invoice after %s"
 msgstr "شما این فاکتور را بعد از تاریخ %s می توانید پرداخت کنید."
@@ -1968,6 +1977,10 @@ msgstr "خرید نقدی"
 #, php-format
 msgid "%s months"
 msgstr "%s ماه"
+
+#: template/front/invoice.phtml:20
+msgid "validated"
+msgstr "تایید شده"
 
 #: template/front/invoice.phtml:230 template/front/invoice.phtml:231
 msgid "Back to order"

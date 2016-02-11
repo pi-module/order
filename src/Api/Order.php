@@ -82,13 +82,13 @@ class Order extends AbstractApi
             case '2':
                 $return['orderClass'] = 'btn-success';
                 $return['orderLabel'] = 'label-success';
-                $return['orderTitle'] = __('Orders validated');
+                $return['orderTitle'] = __('Validated');
                 break;
 
             case '3':
                 $return['orderClass'] = 'btn-danger';
                 $return['orderLabel'] = 'label-danger';
-                $return['orderTitle'] = __('Orders pending');
+                $return['orderTitle'] = __('Pending');
                 break;
 
             case '4':
@@ -100,7 +100,7 @@ class Order extends AbstractApi
             case '5':
                 $return['orderClass'] = 'btn-danger';
                 $return['orderLabel'] = 'label-danger';
-                $return['orderTitle'] = __('Orders cancelled');
+                $return['orderTitle'] = __('Cancelled');
                 break;
 
             case '6':
@@ -112,7 +112,7 @@ class Order extends AbstractApi
             case '7':
                 $return['orderClass'] = 'btn-primary';
                 $return['orderLabel'] = 'label-primary';
-                $return['orderTitle'] = __('Orders finished');
+                $return['orderTitle'] = __('Finished');
                 break;
         }
         return $return;
