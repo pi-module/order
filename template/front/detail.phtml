@@ -198,7 +198,7 @@
                 <tr>
                     <td>
                         <div class="productItem">
-                            <a title="<?php echo $this->escape($product['details']['title']); ?>"
+                            <a target="_blank" title="<?php echo $this->escape($product['details']['title']); ?>"
                                href="<?php echo $this->escape($product['details']['productUrl']); ?>">
                                 <?php if (isset($product['details']['thumbUrl']) && !empty($product['details']['thumbUrl'])) { ?>
                                     <img width="32" height="32"
@@ -277,7 +277,6 @@
                     </div>
                 </div>
             <?php } ?>
-
             <div class="clearfix row">
                 <div class="<?php if ($invoice['status'] == 1) { echo 'col-md-12';} else { echo 'col-md-8';} ?>">
                     <ul class="list-inline">

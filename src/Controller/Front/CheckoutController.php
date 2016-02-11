@@ -34,6 +34,10 @@ class CheckoutController extends IndexController
                 && isset($_SESSION['session_order'])
                 && !empty($_SESSION['session_order'])
             ) {
+                // Load language
+                Pi::service('i18n')->load(array('module/system', 'default'));
+                Pi::service('i18n')->load(array('module/user', 'default'));
+                // Set login form
                 $formLogin = new LoginForm('login');
                 $formLogin->setAttribute(
                     'action',
@@ -394,6 +398,7 @@ class CheckoutController extends IndexController
                 $forms['new'] = $form;
             }
         } else {
+            echo 'dddd';
             // Set new form
             $user = Pi::api('user', 'order')->getUserInformation();
             $user['customer_id'] = 0;

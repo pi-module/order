@@ -353,7 +353,7 @@ class OrderFilter extends InputFilter
             ));
         }
         // order_term
-        if ($config['order_term']) {
+        if ($config['order_term'] && !empty($config['order_termurl'])) {
             $this->add(array(
                 'name' => 'order_term',
                 'required' => true,

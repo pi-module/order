@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2016-02-10 12:10+0330\n"
+"POT-Creation-Date: 2016-02-11 10:30+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -171,7 +171,7 @@ msgstr ""
 msgid "Orders finished"
 msgstr ""
 
-#: src/Api/Order.php:128 template/admin/order-index.phtml:36
+#: src/Api/Order.php:128 template/admin/order-index.phtml:47
 msgid "Can pay"
 msgstr ""
 
@@ -189,15 +189,15 @@ msgstr ""
 msgid "Paid prepayment"
 msgstr ""
 
-#: src/Api/Order.php:207 src/Controller/Admin/OrderController.php:328
+#: src/Api/Order.php:207 src/Controller/Admin/OrderController.php:330
 msgid "Not Paid"
 msgstr ""
 
-#: src/Api/Order.php:209 src/Controller/Admin/OrderController.php:375
+#: src/Api/Order.php:209 src/Controller/Admin/OrderController.php:377
 msgid "Not Delivery"
 msgstr ""
 
-#: src/Api/Order.php:211 src/Controller/Admin/OrderController.php:260
+#: src/Api/Order.php:211 src/Controller/Admin/OrderController.php:262
 msgid "Not Finish"
 msgstr ""
 
@@ -209,14 +209,15 @@ msgstr ""
 msgid "Not End"
 msgstr ""
 
-#: src/Api/Order.php:304 src/Form/OrderSettingForm.php:119
-#: template/admin/invoice-print.phtml:132 template/admin/order-view.phtml:245
-#: template/front/detail.phtml:187 template/front/invoice-print.phtml:132
-#: template/front/invoice.phtml:156
+#: src/Api/Order.php:304 src/Form/OrderAddForm.php:291
+#: src/Form/OrderSettingForm.php:119 template/admin/invoice-print.phtml:132
+#: template/admin/order-view.phtml:245 template/front/detail.phtml:187
+#: template/front/invoice-print.phtml:132 template/front/invoice.phtml:156
 msgid "Product"
 msgstr ""
 
-#: src/Api/Order.php:306 src/Form/OrderSettingForm.php:120
+#: src/Api/Order.php:306 src/Form/OrderAddForm.php:292
+#: src/Form/OrderSettingForm.php:120
 msgid "Service"
 msgstr ""
 
@@ -241,17 +242,17 @@ msgid "Install gateway"
 msgstr ""
 
 #: src/Controller/Admin/InvoiceController.php:119
-#: src/Controller/Admin/OrderController.php:186
+#: src/Controller/Admin/OrderController.php:188
 msgid "Go to filter"
 msgstr ""
 
 #: src/Controller/Admin/InvoiceController.php:129
-#: src/Controller/Admin/OrderController.php:207
+#: src/Controller/Admin/OrderController.php:209
 msgid "Not valid"
 msgstr ""
 
 #: src/Controller/Admin/InvoiceController.php:135
-#: src/Controller/Admin/OrderController.php:213
+#: src/Controller/Admin/OrderController.php:215
 msgid "Not set"
 msgstr ""
 
@@ -282,22 +283,26 @@ msgstr ""
 msgid "Add a location"
 msgstr ""
 
-#: src/Controller/Admin/OrderController.php:274
+#: src/Controller/Admin/OrderController.php:276
 msgid "Update order"
 msgstr ""
 
-#: src/Controller/Admin/OrderController.php:341
+#: src/Controller/Admin/OrderController.php:343
 msgid "Update payment"
 msgstr ""
 
-#: src/Controller/Admin/OrderController.php:388
+#: src/Controller/Admin/OrderController.php:390
 msgid "Update delivery"
 msgstr ""
 
-#: src/Controller/Admin/OrderController.php:433
-#: src/Controller/Admin/OrderController.php:472
+#: src/Controller/Admin/OrderController.php:435
+#: src/Controller/Admin/OrderController.php:474
 #: template/admin/order-view.phtml:158
 msgid "Add / edit admin note"
+msgstr ""
+
+#: src/Controller/Admin/OrderController.php:600
+msgid "New order added and data saved successfully."
 msgstr ""
 
 #: src/Controller/Front/CheckoutController.php:46
@@ -447,11 +452,11 @@ msgstr ""
 msgid "Private"
 msgstr ""
 
-#: src/Form/DeliveryForm.php:75 src/Form/OrderForm.php:352
-#: src/Form/OrderForm.php:380 src/Form/OrderForm.php:410
-#: src/Form/OrderSimpleForm.php:293 src/Form/OrderSimpleForm.php:321
-#: src/Form/OrderSimpleForm.php:351 template/admin/log-index.phtml:9
-#: template/admin/order-view.phtml:202
+#: src/Form/DeliveryForm.php:75 src/Form/OrderAddForm.php:314
+#: src/Form/OrderForm.php:352 src/Form/OrderForm.php:380
+#: src/Form/OrderForm.php:410 src/Form/OrderSimpleForm.php:293
+#: src/Form/OrderSimpleForm.php:321 src/Form/OrderSimpleForm.php:351
+#: template/admin/log-index.phtml:9 template/admin/order-view.phtml:202
 msgid "Adapter"
 msgstr ""
 
@@ -479,31 +484,31 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: src/Form/InvoiceForm.php:40 template/admin/invoice-edit.phtml:26
-#: template/admin/invoice-update.phtml:96 template/admin/invoice-view.phtml:27
-#: template/admin/order-view.phtml:112
+#: src/Form/InvoiceForm.php:40 src/Form/OrderAddForm.php:328
+#: template/admin/invoice-add.phtml:96 template/admin/invoice-edit.phtml:26
+#: template/admin/invoice-view.phtml:27 template/admin/order-view.phtml:112
 msgid "Product price"
 msgstr ""
 
-#: src/Form/InvoiceForm.php:51 template/admin/invoice-edit.phtml:30
-#: template/admin/invoice-update.phtml:100 template/admin/invoice-view.phtml:31
-#: template/admin/order-view.phtml:116
+#: src/Form/InvoiceForm.php:51 src/Form/OrderAddForm.php:339
+#: template/admin/invoice-add.phtml:100 template/admin/invoice-edit.phtml:30
+#: template/admin/invoice-view.phtml:31 template/admin/order-view.phtml:116
 msgid "Shipping price"
 msgstr ""
 
-#: src/Form/InvoiceForm.php:62 template/admin/invoice-edit.phtml:34
-#: template/admin/invoice-update.phtml:104 template/admin/invoice-view.phtml:35
-#: template/admin/order-view.phtml:120
+#: src/Form/InvoiceForm.php:62 src/Form/OrderAddForm.php:350
+#: template/admin/invoice-add.phtml:104 template/admin/invoice-edit.phtml:34
+#: template/admin/invoice-view.phtml:35 template/admin/order-view.phtml:120
 msgid "Packing price"
 msgstr ""
 
-#: src/Form/InvoiceForm.php:73
+#: src/Form/InvoiceForm.php:73 src/Form/OrderAddForm.php:361
 msgid "Setup price"
 msgstr ""
 
-#: src/Form/InvoiceForm.php:84 template/admin/invoice-edit.phtml:38
-#: template/admin/invoice-update.phtml:108 template/admin/invoice-view.phtml:39
-#: template/admin/order-view.phtml:124
+#: src/Form/InvoiceForm.php:84 src/Form/OrderAddForm.php:372
+#: template/admin/invoice-add.phtml:108 template/admin/invoice-edit.phtml:38
+#: template/admin/invoice-view.phtml:39 template/admin/order-view.phtml:124
 msgid "Vat price"
 msgstr ""
 
@@ -513,7 +518,7 @@ msgstr ""
 msgid "Due date"
 msgstr ""
 
-#: src/Form/InvoiceForm.php:111
+#: src/Form/InvoiceForm.php:111 src/Form/OrderAddForm.php:384
 msgid "Save"
 msgstr ""
 
@@ -521,12 +526,13 @@ msgstr ""
 msgid "Order ID"
 msgstr ""
 
-#: src/Form/InvoiceSettingForm.php:51 src/Form/OrderSettingForm.php:172
+#: src/Form/InvoiceSettingForm.php:51 src/Form/OrderAddForm.php:42
+#: src/Form/OrderSettingForm.php:172
 msgid "User ID"
 msgstr ""
 
-#: src/Form/InvoiceSettingForm.php:63 template/admin/invoice-update.phtml:69
-#: template/admin/order-index.phtml:37 template/admin/order-view.phtml:85
+#: src/Form/InvoiceSettingForm.php:63 template/admin/invoice-add.phtml:69
+#: template/admin/order-index.phtml:48 template/admin/order-view.phtml:85
 #: template/front/detail.phtml:69
 msgid "Payment status"
 msgstr ""
@@ -568,107 +574,114 @@ msgstr ""
 msgid "Time ( days )"
 msgstr ""
 
-#: src/Form/OrderForm.php:67 src/Form/OrderSettingForm.php:194
-#: src/Form/OrderSimpleForm.php:51
+#: src/Form/OrderAddForm.php:56 src/Form/OrderForm.php:67
+#: src/Form/OrderSettingForm.php:194 src/Form/OrderSimpleForm.php:51
 msgid "First name"
 msgstr ""
 
-#: src/Form/OrderForm.php:81 src/Form/OrderSettingForm.php:205
-#: src/Form/OrderSimpleForm.php:62
+#: src/Form/OrderAddForm.php:68 src/Form/OrderForm.php:81
+#: src/Form/OrderSettingForm.php:205 src/Form/OrderSimpleForm.php:62
 msgid "Last name"
 msgstr ""
 
-#: src/Form/OrderForm.php:96 src/Form/OrderSettingForm.php:183
-#: src/Form/OrderSimpleForm.php:75 template/admin/invoice-edit.phtml:57
-#: template/admin/invoice-print.phtml:84 template/admin/invoice-update.phtml:13
-#: template/admin/invoice-view.phtml:58 template/admin/order-print.phtml:42
-#: template/admin/order-view.phtml:29 template/front/detail.phtml:127
-#: template/front/invoice-print.phtml:84 template/front/invoice.phtml:109
-#: template/front/list.phtml:19
+#: src/Form/OrderAddForm.php:82 src/Form/OrderForm.php:96
+#: src/Form/OrderSettingForm.php:183 src/Form/OrderSimpleForm.php:75
+#: template/admin/invoice-add.phtml:13 template/admin/invoice-edit.phtml:57
+#: template/admin/invoice-print.phtml:84 template/admin/invoice-view.phtml:58
+#: template/admin/order-print.phtml:42 template/admin/order-view.phtml:29
+#: template/front/detail.phtml:127 template/front/invoice-print.phtml:84
+#: template/front/invoice.phtml:109 template/front/list.phtml:19
 msgid "ID number"
 msgstr ""
 
-#: src/Form/OrderForm.php:110 src/Form/OrderSettingForm.php:150
-#: src/Form/OrderSimpleForm.php:88 template/admin/invoice-edit.phtml:85
-#: template/admin/invoice-print.phtml:96 template/admin/invoice-update.phtml:41
-#: template/admin/invoice-view.phtml:86 template/admin/order-print.phtml:52
-#: template/admin/order-view.phtml:57 template/admin/order-view.phtml:167
-#: template/front/detail.phtml:131 template/front/invoice-print.phtml:96
-#: template/front/invoice.phtml:121 template/front/list.phtml:41
+#: src/Form/OrderAddForm.php:96 src/Form/OrderForm.php:110
+#: src/Form/OrderSettingForm.php:150 src/Form/OrderSimpleForm.php:88
+#: template/admin/invoice-add.phtml:41 template/admin/invoice-edit.phtml:85
+#: template/admin/invoice-print.phtml:96 template/admin/invoice-view.phtml:86
+#: template/admin/order-print.phtml:52 template/admin/order-view.phtml:57
+#: template/admin/order-view.phtml:167 template/front/detail.phtml:131
+#: template/front/invoice-print.phtml:96 template/front/invoice.phtml:121
+#: template/front/list.phtml:41
 msgid "Email"
 msgstr ""
 
-#: src/Form/OrderForm.php:124 src/Form/OrderSimpleForm.php:101
+#: src/Form/OrderAddForm.php:110 src/Form/OrderForm.php:124
+#: src/Form/OrderSimpleForm.php:101 template/admin/invoice-add.phtml:45
 #: template/admin/invoice-edit.phtml:89 template/admin/invoice-print.phtml:88
-#: template/admin/invoice-update.phtml:45 template/admin/invoice-view.phtml:90
-#: template/admin/order-print.phtml:56 template/admin/order-view.phtml:61
-#: template/front/checkout.phtml:157 template/front/detail.phtml:135
-#: template/front/invoice-print.phtml:88 template/front/invoice.phtml:113
-#: template/front/list.phtml:45
+#: template/admin/invoice-view.phtml:90 template/admin/order-print.phtml:56
+#: template/admin/order-view.phtml:61 template/front/checkout.phtml:157
+#: template/front/detail.phtml:135 template/front/invoice-print.phtml:88
+#: template/front/invoice.phtml:113 template/front/list.phtml:45
 msgid "Phone"
 msgstr ""
 
-#: src/Form/OrderForm.php:138 src/Form/OrderSettingForm.php:139
-#: src/Form/OrderSimpleForm.php:113 template/admin/invoice-edit.phtml:93
-#: template/admin/invoice-print.phtml:92 template/admin/invoice-update.phtml:49
-#: template/admin/invoice-view.phtml:94 template/admin/order-print.phtml:60
-#: template/admin/order-view.phtml:65 template/front/checkout.phtml:158
-#: template/front/detail.phtml:139 template/front/invoice-print.phtml:92
-#: template/front/invoice.phtml:117 template/front/list.phtml:49
+#: src/Form/OrderAddForm.php:124 src/Form/OrderForm.php:138
+#: src/Form/OrderSettingForm.php:139 src/Form/OrderSimpleForm.php:113
+#: template/admin/invoice-add.phtml:49 template/admin/invoice-edit.phtml:93
+#: template/admin/invoice-print.phtml:92 template/admin/invoice-view.phtml:94
+#: template/admin/order-print.phtml:60 template/admin/order-view.phtml:65
+#: template/front/checkout.phtml:158 template/front/detail.phtml:139
+#: template/front/invoice-print.phtml:92 template/front/invoice.phtml:117
+#: template/front/list.phtml:49
 msgid "Mobile"
 msgstr ""
 
-#: src/Form/OrderForm.php:153 src/Form/OrderSettingForm.php:227
-#: src/Form/OrderSimpleForm.php:127 template/admin/invoice-update.phtml:53
-#: template/admin/order-print.phtml:46 template/admin/order-view.phtml:69
-#: template/front/detail.phtml:143 template/front/list.phtml:53
+#: src/Form/OrderAddForm.php:139 src/Form/OrderForm.php:153
+#: src/Form/OrderSettingForm.php:227 src/Form/OrderSimpleForm.php:127
+#: template/admin/invoice-add.phtml:53 template/admin/order-print.phtml:46
+#: template/admin/order-view.phtml:69 template/front/detail.phtml:143
+#: template/front/list.phtml:53
 msgid "Company"
 msgstr ""
 
-#: src/Form/OrderForm.php:168 src/Form/OrderSimpleForm.php:140
+#: src/Form/OrderAddForm.php:153 src/Form/OrderForm.php:168
+#: src/Form/OrderSimpleForm.php:140
 msgid "Company id"
 msgstr ""
 
-#: src/Form/OrderForm.php:181 src/Form/OrderSimpleForm.php:150
+#: src/Form/OrderAddForm.php:164 src/Form/OrderForm.php:181
+#: src/Form/OrderSimpleForm.php:150
 msgid "Company vat"
 msgstr ""
 
-#: src/Form/OrderForm.php:195 src/Form/OrderSimpleForm.php:162
+#: src/Form/OrderAddForm.php:177 src/Form/OrderForm.php:195
+#: src/Form/OrderSimpleForm.php:162
 msgid "Delivery address"
 msgstr ""
 
-#: src/Form/OrderForm.php:209 src/Form/OrderSimpleForm.php:175
-#: template/admin/invoice-edit.phtml:65 template/admin/invoice-update.phtml:21
-#: template/admin/invoice-view.phtml:66 template/admin/order-print.phtml:87
-#: template/admin/order-view.phtml:37 template/front/detail.phtml:107
-#: template/front/list.phtml:71
+#: src/Form/OrderAddForm.php:191 src/Form/OrderForm.php:209
+#: src/Form/OrderSimpleForm.php:175 template/admin/invoice-add.phtml:21
+#: template/admin/invoice-edit.phtml:65 template/admin/invoice-view.phtml:66
+#: template/admin/order-print.phtml:87 template/admin/order-view.phtml:37
+#: template/front/detail.phtml:107 template/front/list.phtml:71
 msgid "Address 2"
 msgstr ""
 
+#: src/Form/OrderAddForm.php:212 src/Form/OrderAddForm.php:220
 #: src/Form/OrderForm.php:230 src/Form/OrderForm.php:238
-#: src/Form/OrderSimpleForm.php:187 template/admin/invoice-edit.phtml:77
-#: template/admin/invoice-print.phtml:117
-#: template/admin/invoice-update.phtml:33 template/admin/invoice-view.phtml:78
-#: template/admin/order-print.phtml:75 template/admin/order-view.phtml:49
-#: template/front/detail.phtml:119 template/front/invoice-print.phtml:117
-#: template/front/invoice.phtml:142 template/front/list.phtml:31
+#: src/Form/OrderSimpleForm.php:187 template/admin/invoice-add.phtml:33
+#: template/admin/invoice-edit.phtml:77 template/admin/invoice-print.phtml:117
+#: template/admin/invoice-view.phtml:78 template/admin/order-print.phtml:75
+#: template/admin/order-view.phtml:49 template/front/detail.phtml:119
+#: template/front/invoice-print.phtml:117 template/front/invoice.phtml:142
+#: template/front/list.phtml:31
 msgid "Country"
 msgstr ""
 
-#: src/Form/OrderForm.php:252 src/Form/OrderSimpleForm.php:199
+#: src/Form/OrderAddForm.php:234 src/Form/OrderForm.php:252
+#: src/Form/OrderSimpleForm.php:199 template/admin/invoice-add.phtml:29
 #: template/admin/invoice-edit.phtml:73 template/admin/invoice-print.phtml:113
-#: template/admin/invoice-update.phtml:29 template/admin/invoice-view.phtml:74
-#: template/admin/order-print.phtml:71 template/admin/order-view.phtml:45
-#: template/front/checkout.phtml:149 template/front/detail.phtml:115
-#: template/front/invoice-print.phtml:113 template/front/invoice.phtml:138
-#: template/front/list.phtml:27
+#: template/admin/invoice-view.phtml:74 template/admin/order-print.phtml:71
+#: template/admin/order-view.phtml:45 template/front/checkout.phtml:149
+#: template/front/detail.phtml:115 template/front/invoice-print.phtml:113
+#: template/front/invoice.phtml:138 template/front/list.phtml:27
 msgid "State"
 msgstr ""
 
-#: src/Form/OrderForm.php:266 src/Form/OrderSettingForm.php:161
-#: src/Form/OrderSimpleForm.php:211 template/admin/invoice-edit.phtml:69
-#: template/admin/invoice-print.phtml:109
-#: template/admin/invoice-update.phtml:25 template/admin/invoice-view.phtml:70
+#: src/Form/OrderAddForm.php:248 src/Form/OrderForm.php:266
+#: src/Form/OrderSettingForm.php:161 src/Form/OrderSimpleForm.php:211
+#: template/admin/invoice-add.phtml:25 template/admin/invoice-edit.phtml:69
+#: template/admin/invoice-print.phtml:109 template/admin/invoice-view.phtml:70
 #: template/admin/order-print.phtml:67 template/admin/order-view.phtml:41
 #: template/front/checkout.phtml:150 template/front/detail.phtml:111
 #: template/front/invoice-print.phtml:109 template/front/invoice.phtml:134
@@ -676,10 +689,10 @@ msgstr ""
 msgid "City"
 msgstr ""
 
-#: src/Form/OrderForm.php:280 src/Form/OrderSettingForm.php:216
-#: src/Form/OrderSimpleForm.php:223 template/admin/invoice-edit.phtml:81
-#: template/admin/invoice-print.phtml:121
-#: template/admin/invoice-update.phtml:37 template/admin/invoice-view.phtml:82
+#: src/Form/OrderAddForm.php:262 src/Form/OrderForm.php:280
+#: src/Form/OrderSettingForm.php:216 src/Form/OrderSimpleForm.php:223
+#: template/admin/invoice-add.phtml:37 template/admin/invoice-edit.phtml:81
+#: template/admin/invoice-print.phtml:121 template/admin/invoice-view.phtml:82
 #: template/admin/order-print.phtml:79 template/admin/order-view.phtml:53
 #: template/front/checkout.phtml:154 template/front/detail.phtml:123
 #: template/front/invoice-print.phtml:121 template/front/invoice.phtml:146
@@ -687,10 +700,15 @@ msgstr ""
 msgid "Zip code"
 msgstr ""
 
-#: src/Form/OrderForm.php:295 src/Form/OrderSimpleForm.php:237
-#: template/admin/order-view.phtml:218 template/admin/order-view.phtml:230
-#: template/admin/order-view.phtml:249 template/front/detail.phtml:191
+#: src/Form/OrderAddForm.php:277 src/Form/OrderForm.php:295
+#: src/Form/OrderSimpleForm.php:237 template/admin/order-view.phtml:218
+#: template/admin/order-view.phtml:230 template/admin/order-view.phtml:249
+#: template/front/detail.phtml:191
 msgid "Packing"
+msgstr ""
+
+#: src/Form/OrderAddForm.php:289 src/Form/OrderSettingForm.php:116
+msgid "Type commodity"
 msgstr ""
 
 #: src/Form/OrderForm.php:312 src/Form/OrderSimpleForm.php:253
@@ -702,7 +720,7 @@ msgid "Delivery methods"
 msgstr ""
 
 #: src/Form/OrderForm.php:427 src/Form/OrderSimpleForm.php:368
-#: template/admin/invoice-update.phtml:122 template/admin/order-view.phtml:140
+#: template/admin/invoice-add.phtml:122 template/admin/order-view.phtml:140
 #: template/front/detail.phtml:170
 msgid "User note"
 msgstr ""
@@ -792,11 +810,7 @@ msgstr ""
 msgid "Installment"
 msgstr ""
 
-#: src/Form/OrderSettingForm.php:116
-msgid "Type commodity"
-msgstr ""
-
-#: src/Form/OrderSettingForm.php:128 template/admin/order-index.phtml:27
+#: src/Form/OrderSettingForm.php:128 template/admin/order-index.phtml:38
 #: template/front/list.phtml:81
 msgid "Code"
 msgstr ""
@@ -844,7 +858,7 @@ msgstr ""
 #: src/Gateway/Dargahpardakht/Gateway.php:55
 #: template/admin/delivery-index.phtml:13 template/admin/invoice-index.phtml:23
 #: template/admin/location-index.phtml:13 template/admin/log-index.phtml:7
-#: template/admin/order-index.phtml:26 template/admin/order-view.phtml:165
+#: template/admin/order-index.phtml:37 template/admin/order-view.phtml:165
 #: template/admin/order-view.phtml:289 template/front/list.phtml:80
 msgid "ID"
 msgstr ""
@@ -1153,6 +1167,10 @@ msgstr ""
 msgid "You need accept our Terms & Conditions for checkout"
 msgstr ""
 
+#: src/Validator/User.php:36
+msgid "Select user ID not exist on system"
+msgstr ""
+
 #: template/admin/delivery-index.phtml:4 template/admin/delivery-index.phtml:6
 msgid "Add delivery methods"
 msgstr ""
@@ -1162,7 +1180,7 @@ msgid "List of Delivery methods"
 msgstr ""
 
 #: template/admin/delivery-index.phtml:15 template/admin/invoice-index.phtml:28
-#: template/admin/location-index.phtml:15 template/admin/order-index.phtml:39
+#: template/admin/location-index.phtml:15 template/admin/order-index.phtml:50
 #: template/admin/order-view.phtml:294 template/front/list.phtml:86
 msgid "Action"
 msgstr ""
@@ -1182,25 +1200,25 @@ msgstr ""
 
 #: template/admin/delivery-index.phtml:41 template/admin/invoice-index.phtml:81
 #: template/admin/location-index.phtml:41 template/admin/log-index.phtml:70
-#: template/admin/order-index.phtml:93
+#: template/admin/order-index.phtml:104
 msgid "Todo list for fist time"
 msgstr ""
 
 #: template/admin/delivery-index.phtml:43 template/admin/invoice-index.phtml:83
 #: template/admin/location-index.phtml:43 template/admin/log-index.phtml:72
-#: template/admin/order-index.phtml:95
+#: template/admin/order-index.phtml:106
 msgid "Setup payment gateway from gateway tap"
 msgstr ""
 
 #: template/admin/delivery-index.phtml:44 template/admin/invoice-index.phtml:84
 #: template/admin/location-index.phtml:44 template/admin/log-index.phtml:73
-#: template/admin/order-index.phtml:96
+#: template/admin/order-index.phtml:107
 msgid "Setup delivery method from delivery tap"
 msgstr ""
 
 #: template/admin/delivery-index.phtml:45 template/admin/invoice-index.phtml:85
 #: template/admin/location-index.phtml:45 template/admin/log-index.phtml:74
-#: template/admin/order-index.phtml:97
+#: template/admin/order-index.phtml:108
 msgid "Setup location from location tap"
 msgstr ""
 
@@ -1245,6 +1263,97 @@ msgstr ""
 msgid "Install"
 msgstr ""
 
+#: template/admin/invoice-add.phtml:2
+msgid "Update invoice"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:4
+msgid "Order info"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:8 template/admin/invoice-edit.phtml:52
+#: template/admin/invoice-print.phtml:79 template/admin/invoice-view.phtml:53
+#: template/admin/order-print.phtml:37 template/admin/order-view.phtml:24
+#: template/admin/order-view.phtml:171 template/front/detail.phtml:98
+#: template/front/invoice-print.phtml:79 template/front/invoice.phtml:104
+#: template/front/list.phtml:14
+msgid "Name"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:17 template/admin/invoice-edit.phtml:61
+#: template/admin/invoice-view.phtml:62 template/admin/order-print.phtml:83
+#: template/admin/order-view.phtml:33 template/front/detail.phtml:103
+#: template/front/list.phtml:67
+msgid "Address 1"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:57 template/admin/order-view.phtml:73
+#: template/front/detail.phtml:147 template/front/list.phtml:57
+msgid "Company ID"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:61 template/admin/order-view.phtml:77
+#: template/front/detail.phtml:151 template/front/list.phtml:61
+msgid "Company VAT"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:66 template/admin/order-index.phtml:46
+#: template/admin/order-view.phtml:82 template/front/detail.phtml:66
+msgid "Order status"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:72 template/admin/order-index.phtml:49
+#: template/admin/order-view.phtml:88 template/front/detail.phtml:72
+msgid "Delivery status"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:75 template/admin/order-view.phtml:91
+msgid "Time create"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:78 template/admin/order-view.phtml:94
+#: template/front/detail.phtml:78
+msgid "Time payment"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:81 template/admin/order-view.phtml:97
+#: template/front/detail.phtml:81
+msgid "Time delivery"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:84 template/admin/order-view.phtml:100
+#: template/front/detail.phtml:84
+msgid "Time finish"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:87 template/admin/order-view.phtml:103
+#: template/front/detail.phtml:87
+msgid "Time start"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:90 template/admin/order-view.phtml:106
+#: template/front/detail.phtml:90
+msgid "Time end"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:93 template/admin/invoice-edit.phtml:20
+#: template/admin/invoice-edit.phtml:116 template/admin/invoice-view.phtml:21
+#: template/admin/invoice-view.phtml:117 template/admin/order-view.phtml:109
+#: template/front/detail.phtml:93
+msgid "Gateway"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:112 template/admin/invoice-edit.phtml:42
+#: template/admin/invoice-view.phtml:43 template/admin/order-index.phtml:39
+#: template/admin/order-view.phtml:128
+msgid "Total price"
+msgstr ""
+
+#: template/admin/invoice-add.phtml:116 template/admin/invoice-edit.phtml:46
+#: template/admin/invoice-view.phtml:47 template/admin/order-view.phtml:132
+msgid "Paid price"
+msgstr ""
+
 #: template/admin/invoice-edit.phtml:2
 #, php-format
 msgid "Update invoice %s"
@@ -1265,43 +1374,9 @@ msgstr ""
 msgid "Canceled"
 msgstr ""
 
-#: template/admin/invoice-edit.phtml:20 template/admin/invoice-edit.phtml:116
-#: template/admin/invoice-update.phtml:93 template/admin/invoice-view.phtml:21
-#: template/admin/invoice-view.phtml:117 template/admin/order-view.phtml:109
-#: template/front/detail.phtml:93
-msgid "Gateway"
-msgstr ""
-
 #: template/admin/invoice-edit.phtml:23 template/admin/invoice-edit.phtml:118
 #: template/admin/invoice-view.phtml:24 template/admin/invoice-view.phtml:119
 msgid "Create"
-msgstr ""
-
-#: template/admin/invoice-edit.phtml:42 template/admin/invoice-update.phtml:112
-#: template/admin/invoice-view.phtml:43 template/admin/order-index.phtml:28
-#: template/admin/order-view.phtml:128
-msgid "Total price"
-msgstr ""
-
-#: template/admin/invoice-edit.phtml:46 template/admin/invoice-update.phtml:116
-#: template/admin/invoice-view.phtml:47 template/admin/order-view.phtml:132
-msgid "Paid price"
-msgstr ""
-
-#: template/admin/invoice-edit.phtml:52 template/admin/invoice-print.phtml:79
-#: template/admin/invoice-update.phtml:8 template/admin/invoice-view.phtml:53
-#: template/admin/order-print.phtml:37 template/admin/order-view.phtml:24
-#: template/admin/order-view.phtml:171 template/front/detail.phtml:98
-#: template/front/invoice-print.phtml:79 template/front/invoice.phtml:104
-#: template/front/list.phtml:14
-msgid "Name"
-msgstr ""
-
-#: template/admin/invoice-edit.phtml:61 template/admin/invoice-update.phtml:17
-#: template/admin/invoice-view.phtml:62 template/admin/order-print.phtml:83
-#: template/admin/order-view.phtml:33 template/front/detail.phtml:103
-#: template/front/list.phtml:67
-msgid "Address 1"
 msgstr ""
 
 #: template/admin/invoice-edit.phtml:98 template/admin/invoice-edit.phtml:100
@@ -1372,7 +1447,7 @@ msgid "Time pay"
 msgstr ""
 
 #: template/admin/invoice-index.phtml:59 template/admin/invoice-index.phtml:61
-#: template/admin/order-index.phtml:82 template/admin/order-view.phtml:324
+#: template/admin/order-index.phtml:93 template/admin/order-view.phtml:324
 #: template/admin/order-view.phtml:326 template/front/list.phtml:100
 #: template/front/list.phtml:102
 msgid "View"
@@ -1495,63 +1570,6 @@ msgstr ""
 msgid "Buyer signature"
 msgstr ""
 
-#: template/admin/invoice-update.phtml:2
-msgid "Update invoice"
-msgstr ""
-
-#: template/admin/invoice-update.phtml:4
-msgid "Order info"
-msgstr ""
-
-#: template/admin/invoice-update.phtml:57 template/admin/order-view.phtml:73
-#: template/front/detail.phtml:147 template/front/list.phtml:57
-msgid "Company ID"
-msgstr ""
-
-#: template/admin/invoice-update.phtml:61 template/admin/order-view.phtml:77
-#: template/front/detail.phtml:151 template/front/list.phtml:61
-msgid "Company VAT"
-msgstr ""
-
-#: template/admin/invoice-update.phtml:66 template/admin/order-index.phtml:35
-#: template/admin/order-view.phtml:82 template/front/detail.phtml:66
-msgid "Order status"
-msgstr ""
-
-#: template/admin/invoice-update.phtml:72 template/admin/order-index.phtml:38
-#: template/admin/order-view.phtml:88 template/front/detail.phtml:72
-msgid "Delivery status"
-msgstr ""
-
-#: template/admin/invoice-update.phtml:75 template/admin/order-view.phtml:91
-msgid "Time create"
-msgstr ""
-
-#: template/admin/invoice-update.phtml:78 template/admin/order-view.phtml:94
-#: template/front/detail.phtml:78
-msgid "Time payment"
-msgstr ""
-
-#: template/admin/invoice-update.phtml:81 template/admin/order-view.phtml:97
-#: template/front/detail.phtml:81
-msgid "Time delivery"
-msgstr ""
-
-#: template/admin/invoice-update.phtml:84 template/admin/order-view.phtml:100
-#: template/front/detail.phtml:84
-msgid "Time finish"
-msgstr ""
-
-#: template/admin/invoice-update.phtml:87 template/admin/order-view.phtml:103
-#: template/front/detail.phtml:87
-msgid "Time start"
-msgstr ""
-
-#: template/admin/invoice-update.phtml:90 template/admin/order-view.phtml:106
-#: template/front/detail.phtml:90
-msgid "Time end"
-msgstr ""
-
 #: template/admin/location-index.phtml:4 template/admin/location-index.phtml:6
 msgid "Add Location"
 msgstr ""
@@ -1584,23 +1602,34 @@ msgstr ""
 msgid "No invoice is not set yet"
 msgstr ""
 
+#: template/admin/order-add.phtml:3 template/admin/order-index.phtml:28
+#: template/admin/order-index.phtml:29
+msgid "New order"
+msgstr ""
+
+#: template/admin/order-add.phtml:5
+msgid ""
+"You can add manual order for your customer, this order not join to any "
+"service or product. and useful for just make payment by customers"
+msgstr ""
+
 #: template/admin/order-index.phtml:11
 msgid "Filter orders"
 msgstr ""
 
-#: template/admin/order-index.phtml:22
+#: template/admin/order-index.phtml:25
 msgid "List of orders"
 msgstr ""
 
-#: template/admin/order-index.phtml:31 template/admin/order-view.phtml:19
+#: template/admin/order-index.phtml:42 template/admin/order-view.phtml:19
 msgid "Information"
 msgstr ""
 
-#: template/admin/order-index.phtml:80
+#: template/admin/order-index.phtml:91
 msgid "Its service"
 msgstr ""
 
-#: template/admin/order-index.phtml:91
+#: template/admin/order-index.phtml:102
 msgid "No order is not created yet"
 msgstr ""
 
