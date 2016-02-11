@@ -1,3 +1,7 @@
+/* progtrckr */
+/*
+ * From : http://blog.sathomas.me/post/tracking-progress-in-pure-css
+ */
 ul.progtrckr {
     margin: 0;
     padding: 0 0 25px 0;
@@ -57,30 +61,16 @@ ul.progtrckr li.progtrckr-todo:before {
     bottom: -1.6em;
 }
 
-/* #pi-order .order-checkout .description {
-    height: 100px;
-    overflow-y: scroll;
-    border: 1px solid #ccc;
-    padding: 10px;
-} */
-
-#pi-order .finishBox {
-    margin-top: 80px;
-}
-
-#pi-order .finishBox .finishLogo {
-    padding-bottom: 20px;
-}
-
+/* Checkout page */
 .cart-product .panel-body {
     padding: 5px;
 }
 
-.cart-product-list {
+.cart-product .cart-product-list {
     margin-bottom: 10px;
 }
 
-.cart-product-single {
+.cart-product .cart-product-single {
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
     margin-bottom: 10px;
