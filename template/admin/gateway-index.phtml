@@ -32,16 +32,14 @@
                         <a class="btn btn-primary" title="<?php _e('Edit'); ?>"
                            href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Edit'); ?></a>
                         <a class="btn btn-warning" title="<?php _e('Inactive'); ?>" href=""><?php _e('Inactive'); ?></a>
-                        <a class="btn btn-danger" title="<?php _e('UnInstall'); ?>"
-                           href=""><?php _e('UnInstall'); ?></a>
+                        <a class="btn btn-danger" title="<?php _e('UnInstall'); ?>" href=""><?php _e('UnInstall'); ?></a>
                     </p>
                 <?php } else { ?>
                     <p>
                         <a class="btn btn-primary" title="<?php _e('Edit'); ?>"
                            href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Edit'); ?></a>
                         <a class="btn btn-success" title="<?php _e('Active'); ?>" href=""><?php _e('Active'); ?></a>
-                        <a class="btn btn-danger" title="<?php _e('UnInstall'); ?>"
-                           href=""><?php _e('UnInstall'); ?></a>
+                        <a class="btn btn-danger" title="<?php _e('UnInstall'); ?>" href=""><?php _e('UnInstall'); ?></a>
                     </p>
                 <?php } ?>
             <?php } else { ?>
