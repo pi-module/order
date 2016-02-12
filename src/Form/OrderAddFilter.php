@@ -261,6 +261,26 @@ class OrderAddFilter extends InputFilter
                 ),
             ),
         ));
+        // module_name
+        $this->add(array(
+            'name' => 'module_name',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
+        // module_item
+        $this->add(array(
+            'name' => 'module_item',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
         // product_price
         $this->add(array(
             'name' => 'product_price',
@@ -304,26 +324,6 @@ class OrderAddFilter extends InputFilter
         // vat_price
         $this->add(array(
             'name' => 'vat_price',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // module_name
-        $this->add(array(
-            'name' => 'module_name',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // module_item
-        $this->add(array(
-            'name' => 'module_item',
             'required' => false,
             'filters' => array(
                 array(

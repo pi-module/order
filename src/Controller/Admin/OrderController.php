@@ -620,6 +620,20 @@ class OrderController extends ActionController
                     array('code' => $code),
                     array('id' => $order->id)
                 );
+
+                // Save basket
+                $basket = $this->getModel('basket')->createRow();
+                $basket->order = $order->id;
+                $basket->product = $order->module_item;
+                $basket->discount_price = $order->discount_price;
+                $basket->shipping_price = $order->shipping_price;
+                $basket->setup_price = $order->setup_price;
+                $basket->vat_price = $order->vat_price;
+                $basket->product_price = $order->product_price;
+                $basket->total_price = $order->total_price;
+                $basket->number = 1;
+                $basket->save();
+
                 // Set invoice
                 Pi::api('invoice', 'order')->createInvoice($order->id, $order->uid);
                 // Jump

@@ -321,6 +321,31 @@ class OrderAddForm extends BaseForm
                 )
             ));
         }
+        // module_name
+        $this->add(array(
+            'name' => 'module_name',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Join to module'),
+                'value_options' => array(
+                    'order' => __('Order module'),
+                    'shop' => __('Shop module'),
+                    'guide' => __('Guide module'),
+                    'plans' => __('Plans module'),
+                ),
+            ),
+        ));
+        // module_item
+        $this->add(array(
+            'name' => 'module_item',
+            'options' => array(
+                'label' => __('Module service / product id'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => __('Put service / product id and join order to module'),
+            )
+        ));
         // product_price
         $this->add(array(
             'name' => 'product_price',
@@ -374,31 +399,6 @@ class OrderAddForm extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-            )
-        ));
-        // module_name
-        $this->add(array(
-            'name' => 'module_name',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Join to module'),
-                'value_options' => array(
-                    'order' => __('Order module'),
-                    'shop' => __('Shop module'),
-                    'guide' => __('Guide module'),
-                    'plans' => __('Plans module'),
-                ),
-            ),
-        ));
-        // module_item
-        $this->add(array(
-            'name' => 'module_item',
-            'options' => array(
-                'label' => __('Module service / product id'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => __('Put service / product id and join order to module'),
             )
         ));
         // Save order
