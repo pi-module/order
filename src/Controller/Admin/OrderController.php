@@ -512,7 +512,6 @@ class OrderController extends ActionController
                 $values['status_payment'] = 1;
                 $values['status_delivery'] = 1;
                 $values['time_create'] = time();
-                $values['module_name'] = 'order';
                 $values['can_pay'] = 1;
                 // Get user
                 $user = Pi::api('user', 'order')->getUserInformation($values['uid']);
@@ -575,6 +574,33 @@ class OrderController extends ActionController
                 // Check user company_vat
                 if (!isset($values['company_vat']) || empty($values['company_vat'])) {
                     $values['company_vat'] = $user['company_vat'];
+                }
+                // Check user company_vat
+                switch ($values['module_name']) {
+                    case 'order';
+                        $values['module_table'] = 'manual';
+                        $values['module_item'] = 1;
+                        break;
+
+                    case 'shop';
+                        $values['module_table'] = 'product';
+                        $values['module_item'] = intval($values['module_item']);
+                        break;
+
+                    case 'guide';
+                        $values['module_table'] = 'package';
+                        $values['module_item'] = intval($values['module_item']);
+                        break;
+
+                    case 'plans';
+                        $values['module_table'] = 'plans';
+                        $values['module_item'] = intval($values['module_item']);
+                        break;
+
+                    case 'event';
+                        $values['module_table'] = 'event';
+                        $values['module_item'] = intval($values['module_item']);
+                        break;
                 }
                 // Set additional price
                 if ($values['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {

@@ -311,5 +311,25 @@ class OrderAddFilter extends InputFilter
                 ),
             ),
         ));
+        // module_name
+        $this->add(array(
+            'name' => 'module_name',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
+        // module_item
+        $this->add(array(
+            'name' => 'module_item',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
     }
 }
