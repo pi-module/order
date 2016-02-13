@@ -346,6 +346,21 @@ class OrderAddForm extends BaseForm
                 'description' => __('Put service / product id and join order to module'),
             )
         ));
+        // time_create
+        $this->add(array(
+            'name' => 'time_create',
+            'type' => 'datepicker',
+            'options' => array(
+                'label' => __('Order / invoice date'),
+                'datepicker' => array(
+                    'format' => 'yyyy-mm-dd',
+                ),
+            ),
+            'attributes' => array(
+                'id' => 'time-create',
+                'required' => true,
+            )
+        ));
         // product_price
         $this->add(array(
             'name' => 'product_price',

@@ -511,7 +511,6 @@ class OrderController extends ActionController
                 $values['status_order'] = 1;
                 $values['status_payment'] = 1;
                 $values['status_delivery'] = 1;
-                $values['time_create'] = time();
                 $values['can_pay'] = 1;
                 // Get user
                 $user = Pi::api('user', 'order')->getUserInformation($values['uid']);
@@ -574,6 +573,12 @@ class OrderController extends ActionController
                 // Check user company_vat
                 if (!isset($values['company_vat']) || empty($values['company_vat'])) {
                     $values['company_vat'] = $user['company_vat'];
+                }
+                // Check time create
+                if (isset($values['time_create']) && !empty($values['time_create'])) {
+                    $values['time_create'] = strtotime($values['time_create']);
+                } else {
+                    $values['time_create'] = time();
                 }
                 // Check user company_vat
                 switch ($values['module_name']) {

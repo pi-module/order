@@ -281,6 +281,11 @@ class OrderAddFilter extends InputFilter
                 ),
             ),
         ));
+        // time_create
+        $this->add(array(
+            'name' => 'time_create',
+            'required' => true,
+        ));
         // product_price
         $this->add(array(
             'name' => 'product_price',
