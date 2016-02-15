@@ -344,6 +344,20 @@ class Order extends AbstractApi
                 $list[$row->id]['extra'] = array();
             } else {
                 $list[$row->id]['extra'] = json::decode($row->extra, true);
+                // Set template and view
+                if (isset($list[$row->id]['extra']['view_type']) && $list[$row->id]['extra']['view_type'] == 'template') {
+                    $list[$row->id]['extra']['view_type'] = 'template';
+                    if (!isset($list[$row->id]['extra']['view_template']) || empty($list[$row->id]['extra']['view_template'])) {
+                        $list[$row->id]['extra']['view_template'] = 'order-detail';
+                    }
+                } else {
+                    $list[$row->id]['extra']['view_type'] = 'simple';
+                    $list[$row->id]['extra']['view_template'] = '';
+                }
+                // Get detail
+                if (isset($list[$row->id]['extra']['getDetail']) && $list[$row->id]['extra']['getDetail']) {
+                    $list[$row->id]['extra']['orderDetail'] = Pi::api('order', 'event')->getOrder($id, 'order');
+                }
             }
         }
         return $list;

@@ -215,7 +215,9 @@
                                 <?php echo $this->escape($product['details']['title']); ?>
                             </a>
                         </div>
-                        <?php if (isset($product['extra']['product']) && !empty($product['extra']['product'])) { ?>
+                        <?php if (isset($product['extra']['product'])
+                            && !empty($product['extra']['product'])
+                            && $product['extra']['view_type'] == 'simple') { ?>
                             <?php foreach ($product['extra']['product'] as $extraProduct) { ?>
                                 <div class="productItem">
                                     <span><?php echo $this->escape($extraProduct['title']); ?></span> :
@@ -242,6 +244,13 @@
                 <td><strong><?php echo $this->escape($order['total_price_view']); ?></strong></td>
             </tr> -->
         </table>
+        <?php foreach ($order['products'] as $product) { ?>
+            <?php if (isset($product['extra']['orderDetail'])
+                && !empty($product['extra']['orderDetail'])
+                && $product['extra']['view_type'] == 'template') { ?>
+                <?php include $this->template($product['extra']['view_template'], 'front', $order['module_name']); ?>
+            <?php } ?>
+        <?php } ?>
         <?php foreach ($order['invoices'] as $invoice) { ?>
             <hr />
             <h4><?php echo sprintf(__('Invoice %s'), $this->escape($invoice['code'])); ?></h4>

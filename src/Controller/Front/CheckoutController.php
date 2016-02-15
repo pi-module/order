@@ -345,6 +345,22 @@ class CheckoutController extends IndexController
                             } else {
                                 $extra = array();
                                 $extra['product'] = json::decode($product['extra'], true);
+
+                                if (isset($extra['product']['view_type'])) {
+                                    $extra['view_type'] = $extra['product']['view_type'];
+                                    unset($extra['product']['view_type']);
+                                }
+
+                                if (isset($extra['product']['view_template'])) {
+                                    $extra['view_template'] = $extra['product']['view_template'];
+                                    unset($extra['product']['view_template']);
+                                }
+
+                                if (isset($extra['product']['getDetail'])) {
+                                    $extra['getDetail'] = $extra['product']['getDetail'];
+                                    unset($extra['product']['getDetail']);
+                                }
+
                                 $basket->extra = json::encode($extra);
                             }
                             $basket->save();
