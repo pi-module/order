@@ -46,8 +46,7 @@ class CheckoutController extends IndexController
                 $formLogin->setData(array('redirect' => $this->url('', array('controller' => 'checkout', 'action' => 'index'))));
                 $this->view()->assign('formLogin', $formLogin);
             } else {
-                $url = array('home');
-                $this->jump($url, __('Your cart is empty.'), 'error');
+                $this->jump(Pi::url(), __('Your cart is empty.'), 'error');
             }
         }
         // Get config

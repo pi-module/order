@@ -1849,7 +1849,7 @@ msgid ""
 "login to system and continue ordering, and if you dont have user account "
 "here, please fill register new user account and make order form"
 msgstr ""
-"اگر شما قبلا در بو سایت ثبت نام کرده اید و حساب کاربری فعال دارید، لطفا با "
+"اگر شما قبلا در وب سایت ثبت نام کرده اید و حساب کاربری فعال دارید، لطفا با "
 "استفاده از فرم ورود زیر به وب سایت وارد شوید و مراحل سفارش را دنبال کنید ، "
 "در غیر این صورت لطفا فرم ثبت سفارش و ساخت حساب کاربری زیر را تکمیل فرمایید."
 
