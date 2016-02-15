@@ -398,7 +398,6 @@ class CheckoutController extends IndexController
                 $forms['new'] = $form;
             }
         } else {
-            echo 'dddd';
             // Set new form
             $user = Pi::api('user', 'order')->getUserInformation();
             $user['customer_id'] = 0;
@@ -417,6 +416,7 @@ class CheckoutController extends IndexController
                 }
             }
         }
+
         // Set price
         $price['product'] = 0;
         $price['discount'] = 0;
@@ -426,8 +426,9 @@ class CheckoutController extends IndexController
         $price['vat'] = 0;
         $price['total'] = 0;
         foreach ($cart['product'] as $product) {
-            // Set price
+            // Check setup price
             $product['setup_price'] = isset($product['setup_price']) ? $product['setup_price'] : 0;
+            // Set price
             $price['product'] = ($product['product_price'] * $product['number']) + $price['product'];
             $price['discount'] = ($product['discount_price'] * $product['number']) + $price['discount'];
             $price['shipping'] = ($product['shipping_price'] * $product['number']) + $price['shipping'];
@@ -435,34 +436,35 @@ class CheckoutController extends IndexController
             $price['packing'] = ($product['packing_price'] * $product['number']) + $price['packing'];
             $price['vat'] = $product['vat_price'] + $price['vat'];
         }
-        // Set total
-        $product['setup_price'] = isset($product['setup_price']) ? $product['setup_price'] : 0;
-        $price['total'] = (($product['product_price'] +
-                $product['shipping_price'] +
-                $product['packing_price'] +
-                $product['setup_price'] +
-                $product['vat_price']
-            ) - $product['discount_price']);
+
         // Set additional price
-        $additional = 0;
-        if ($cart['type_commodity'] == 'product') {
-            $additional = $config['order_additional_price_product'];
-            $price['shipping'] = $config['order_additional_price_product'];
-        } elseif ($cart['type_commodity'] == 'service') {
-            $additional = $config['order_additional_price_service'];
+        if ($cart['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
+            $price['shipping'] = $price['shipping'] + $config['order_additional_price_product'];
+        } elseif ($cart['type_commodity'] == 'service' && $config['order_additional_price_service'] >0 ) {
+            $price['setup'] = $price['setup'] + $config['order_additional_price_service'];
         }
-        $price['total'] = $price['total'] + $additional;
+
+        // Set total
+        $price['total'] = (($price['product'] +
+                $price['shipping'] +
+                $price['packing'] +
+                $price['setup'] +
+                $price['vat']
+            ) - $price['discount']);
+
         // Set plan
         if ($cart['type_payment'] == 'installment') {
             $user = Pi::api('user', 'order')->getUserInformation();
             $plan = Pi::api('installment', 'order')->setPriceForInvoice($price['total'], $cart['plan'], $user);
             $this->view()->assign('plan', $plan);
         }
+
         // Set products
         foreach ($cart['product'] as $product) {
             $cart['product'][$product['product']]['details'] = Pi::api('order', $cart['module_name'])->getProductDetails($product['product']);
             $cart['product'][$product['product']]['product_price_view'] = Pi::api('api', 'order')->viewPrice($product['product_price']);
         }
+
         // Set view
         $this->view()->setTemplate('checkout');
         $this->view()->assign('forms', $forms);
