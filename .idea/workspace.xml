@@ -4,11 +4,9 @@
     <bookmark url="file://$PROJECT_DIR$/src/Controller/Front/CheckoutController.php" description="                                $extra = array();" line="340" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb89c1a1-3ca6-4284-b00d-d0e1e5682c61" name="Default" comment="Fix bug">
+    <list default="true" id="eb89c1a1-3ca6-4284-b00d-d0e1e5682c61" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Api/Order.php" afterPath="$PROJECT_DIR$/src/Api/Order.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/Front/CheckoutController.php" afterPath="$PROJECT_DIR$/src/Controller/Front/CheckoutController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/front/detail.phtml" afterPath="$PROJECT_DIR$/template/front/detail.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/front/checkout.phtml" afterPath="$PROJECT_DIR$/template/front/checkout.phtml" />
     </list>
     <ignored path="order.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,73 +28,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="checkout.phtml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/front/checkout.phtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="6.7090907">
-              <caret line="142" column="60" selection-start-line="142" selection-start-column="36" selection-end-line="142" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CheckoutController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Front/CheckoutController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.654546">
-              <caret line="359" column="86" selection-start-line="359" selection-start-column="86" selection-end-line="359" selection-end-column="86" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="detail.phtml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/template/front/detail.phtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.75686276">
-              <caret line="253" column="0" selection-start-line="253" selection-start-column="0" selection-end-line="253" selection-end-column="0" />
-              <folding>
-                <marker date="1455532834134" expanded="true" signature="14218:14274" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="15632:15691" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="15657:15691" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="15975:16055" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="16000:16055" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="16196:16251" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="16446:16501" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="16684:16739" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="16912:16967" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="17350:17463" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="17404:17463" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="17661:17709" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="17820:17928" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="17849:17928" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="18059:18119" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="18212:18258" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="18447:18493" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="19465:19505" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="19801:19869" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="19997:20048" placeholder="..." />
-                <marker date="1455532834134" expanded="true" signature="20438:20476" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mysql.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sql/mysql.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.923077">
-              <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Order.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Api/Order.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.527273">
+            <state vertical-scroll-proportion="-18.381819">
               <caret line="358" column="109" selection-start-line="358" selection-start-column="109" selection-end-line="358" selection-end-column="109" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="checkout.phtml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/template/front/checkout.phtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6156863">
+              <caret line="195" column="111" selection-start-line="195" selection-start-column="111" selection-end-line="195" selection-end-column="111" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Front/IndexController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="6.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list.phtml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/front/list.phtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-24.666666">
+              <caret line="100" column="89" selection-start-line="100" selection-start-column="65" selection-end-line="100" selection-end-column="89" />
               <folding />
             </state>
           </provider>
@@ -131,7 +97,6 @@
         <option value="$PROJECT_DIR$/src/Form/OrderAddFilter.php" />
         <option value="$PROJECT_DIR$/template/admin/order-add.phtml" />
         <option value="$PROJECT_DIR$/src/Controller/Admin/OrderController.php" />
-        <option value="$PROJECT_DIR$/template/front/checkout.phtml" />
         <option value="$PROJECT_DIR$/src/Form/OrderForm.php" />
         <option value="$PROJECT_DIR$/src/Form/OrderFilter.php" />
         <option value="$PROJECT_DIR$/template/admin/order-index.phtml" />
@@ -144,6 +109,7 @@
         <option value="$PROJECT_DIR$/src/Controller/Front/CheckoutController.php" />
         <option value="$PROJECT_DIR$/src/Api/Order.php" />
         <option value="$PROJECT_DIR$/template/front/detail.phtml" />
+        <option value="$PROJECT_DIR$/template/front/checkout.phtml" />
       </list>
     </option>
   </component>
@@ -430,7 +396,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455525838092</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Improve order details view">
+      <created>1455532886356</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1455532886356</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -495,27 +467,14 @@
     <MESSAGE value="Update checkout template" />
     <MESSAGE value="Improve order template" />
     <MESSAGE value="Fix bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix bug" />
+    <MESSAGE value="Improve order details view" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improve order details view" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Api/Notification.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="342" column="25" selection-start-line="342" selection-start-column="25" selection-end-line="342" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Api/Api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sql/mysql.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -829,14 +788,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Api/Order.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.527273">
-          <caret line="358" column="109" selection-start-line="358" selection-start-column="109" selection-end-line="358" selection-end-column="109" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Front/CheckoutController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.654546">
@@ -853,17 +804,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/front/checkout.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="6.7090907">
-          <caret line="142" column="60" selection-start-line="142" selection-start-column="36" selection-end-line="142" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/template/front/detail.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75686276">
+        <state vertical-scroll-proportion="-10.527273">
           <caret line="253" column="0" selection-start-line="253" selection-start-column="0" selection-end-line="253" selection-end-column="0" />
           <folding>
             <marker date="1455532834134" expanded="true" signature="14218:14274" placeholder="..." />
@@ -888,6 +831,38 @@
             <marker date="1455532834134" expanded="true" signature="19997:20048" placeholder="..." />
             <marker date="1455532834134" expanded="true" signature="20438:20476" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Api/Order.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.381819">
+          <caret line="358" column="109" selection-start-line="358" selection-start-column="109" selection-end-line="358" selection-end-column="109" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Front/IndexController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="6.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/front/list.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.666666">
+          <caret line="100" column="89" selection-start-line="100" selection-start-column="65" selection-end-line="100" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/front/checkout.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6156863">
+          <caret line="195" column="111" selection-start-line="195" selection-start-column="111" selection-end-line="195" selection-end-column="111" />
+          <folding />
         </state>
       </provider>
     </entry>

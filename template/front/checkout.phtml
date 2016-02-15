@@ -193,12 +193,12 @@ $this->footScript()->appendScript($script);
                             <h3><?php _e("Make order by new customer information"); ?></h3>
                         </div>
                         <dic class="col-md-3 text-center">
-                            <button id="customerFromButtonNew" class="showCustomerFrom btn btn-danger btn-sm">
-                                <?php _e('Cancel'); ?>
+                            <button id="customerFromButtonNew" class="showCustomerFrom btn btn-success btn-sm">
+                                <?php _e('Use it'); ?>
                             </button>
                         </dic>
                     </div>
-                    <div id="customerFromNew" class="clearfix col-md-12">
+                    <div id="customerFromNew" class="clearfix col-md-12 hidden">
                         <?php echo $this->form($forms['new']); ?>
                     </div>
                 </div>
