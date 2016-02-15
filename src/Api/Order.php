@@ -356,7 +356,7 @@ class Order extends AbstractApi
                 }
                 // Get detail
                 if (isset($list[$row->id]['extra']['getDetail']) && $list[$row->id]['extra']['getDetail']) {
-                    $list[$row->id]['extra']['orderDetail'] = Pi::api('order', 'event')->getOrder($id, 'order');
+                    $list[$row->id]['extra']['orderDetail'] = Pi::api('order', $module)->getOrder($id, 'order');
                 }
             }
         }

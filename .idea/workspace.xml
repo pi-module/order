@@ -4,11 +4,9 @@
     <bookmark url="file://$PROJECT_DIR$/src/Controller/Front/CheckoutController.php" description="                                $extra = array();" line="339" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb89c1a1-3ca6-4284-b00d-d0e1e5682c61" name="Default" comment="">
+    <list default="true" id="eb89c1a1-3ca6-4284-b00d-d0e1e5682c61" name="Default" comment="Fix url">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/fa/default.mo" afterPath="$PROJECT_DIR$/locale/fa/default.mo" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/fa/default.po" afterPath="$PROJECT_DIR$/locale/fa/default.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/Front/CheckoutController.php" afterPath="$PROJECT_DIR$/src/Controller/Front/CheckoutController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Api/Order.php" afterPath="$PROJECT_DIR$/src/Api/Order.php" />
     </list>
     <ignored path="order.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,23 +27,15 @@
     <favorites_list name="order" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="CheckoutController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Front/CheckoutController.php">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="detail.phtml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/template/front/detail.phtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6862745">
-              <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Front/IndexController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.0">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="25" selection-end-column="54" />
-              <folding />
+            <state vertical-scroll-proportion="0.86415094">
+              <caret line="345" column="6" selection-start-line="345" selection-start-column="6" selection-end-line="345" selection-end-column="6" />
+              <folding>
+                <marker date="1455539555780" expanded="true" signature="14218:14274" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -53,8 +43,8 @@
       <file leaf-file-name="Order.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Api/Order.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.781818">
-              <caret line="358" column="109" selection-start-line="358" selection-start-column="109" selection-end-line="358" selection-end-column="109" />
+            <state vertical-scroll-proportion="-18.666666">
+              <caret line="358" column="86" selection-start-line="358" selection-start-column="86" selection-end-line="358" selection-end-column="86" />
               <folding />
             </state>
           </provider>
@@ -98,10 +88,10 @@
         <option value="$PROJECT_DIR$/template/admin/location-index.phtml" />
         <option value="$PROJECT_DIR$/template/admin/delivery-index.phtml" />
         <option value="$PROJECT_DIR$/src/Api/Invoice.php" />
-        <option value="$PROJECT_DIR$/src/Api/Order.php" />
-        <option value="$PROJECT_DIR$/template/front/detail.phtml" />
         <option value="$PROJECT_DIR$/template/front/checkout.phtml" />
         <option value="$PROJECT_DIR$/src/Controller/Front/CheckoutController.php" />
+        <option value="$PROJECT_DIR$/src/Api/Order.php" />
+        <option value="$PROJECT_DIR$/template/front/detail.phtml" />
       </list>
     </option>
   </component>
@@ -143,6 +133,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -159,6 +150,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="template" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="front" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -250,7 +259,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -368,14 +376,20 @@
       <option name="project" value="LOCAL" />
       <updated>1455533522771</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Fix url">
+      <created>1455538289167</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1455538289167</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="994" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22617124" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22940226" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -435,7 +449,8 @@
     <MESSAGE value="Fix bug" />
     <MESSAGE value="Improve order details view" />
     <MESSAGE value="Improve template" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improve template" />
+    <MESSAGE value="Fix url" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix url" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -757,36 +772,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/front/detail.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.527273">
-          <caret line="253" column="0" selection-start-line="253" selection-start-column="0" selection-end-line="253" selection-end-column="0" />
-          <folding>
-            <marker date="1455532834134" expanded="true" signature="14218:14274" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="15632:15691" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="15657:15691" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="15975:16055" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="16000:16055" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="16196:16251" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="16446:16501" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="16684:16739" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="16912:16967" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="17350:17463" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="17404:17463" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="17661:17709" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="17820:17928" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="17849:17928" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="18059:18119" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="18212:18258" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="18447:18493" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="19465:19505" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="19801:19869" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="19997:20048" placeholder="..." />
-            <marker date="1455532834134" expanded="true" signature="20438:20476" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/template/front/list.phtml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-24.666666">
@@ -803,25 +788,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Front/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="25" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Api/Order.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.781818">
-          <caret line="358" column="109" selection-start-line="358" selection-start-column="109" selection-end-line="358" selection-end-column="109" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Front/CheckoutController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6862745">
+        <state vertical-scroll-proportion="0.7044025">
           <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Api/Order.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.666666">
+          <caret line="358" column="86" selection-start-line="358" selection-start-column="86" selection-end-line="358" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/front/detail.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.86415094">
+          <caret line="345" column="6" selection-start-line="345" selection-start-column="6" selection-end-line="345" selection-end-column="6" />
+          <folding>
+            <marker date="1455539555780" expanded="true" signature="14218:14274" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
