@@ -131,11 +131,10 @@ class PaymentController extends IndexController
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Get request
-        $request = '';
         if ($this->request->isPost()) {
             $request = $this->request->getPost();
-        } elseif ($this->request->isGet()) {
-            $request = $this->request->getParams();
+        } else {
+            $request = _get()->toArray();
         }
         // Check request
         if (!empty($request)) {
