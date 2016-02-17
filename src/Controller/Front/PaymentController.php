@@ -134,6 +134,8 @@ class PaymentController extends IndexController
         $request = '';
         if ($this->request->isPost()) {
             $request = $this->request->getPost();
+        } elseif ($this->request->isGet()) {
+            $request = $this->request->getParams();
         }
         // Check request
         if (!empty($request)) {
