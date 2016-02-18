@@ -16,9 +16,9 @@ namespace Module\Order\Gateway\Pasargad;
 use Pi;
 use Module\Order\Gateway\AbstractGateway;
 
-use Module\Order\Gateway\Pasargad\RSAProcessor;
-use Module\Order\Gateway\Pasargad\Parser;
-use Module\Order\Gateway\Pasargad\Rsa;
+//use Module\Order\Gateway\Pasargad\RSAProcessor;
+//use Module\Order\Gateway\Pasargad\Parser;
+//use Module\Order\Gateway\Pasargad\Rsa;
 
 use Zend\Json\Json;
 
@@ -135,14 +135,17 @@ class Gateway extends AbstractGateway
         $redirectAddress = $this->gatewayBackUrl;
         $action = '1003';
         $timeStamp = date("Y/m/d H:i:s");
-        $certificate = Pi::pach('usr/module/order/src/Gateway/Pasargad/certificate.xml');
+
+        // Load files
+        require_once Pi::path('module') . '/order/src/Gateway/Pasargad/RSAProcessor.class.php';
+        $certificate = Pi::path('module') . '/order/src/Gateway/Pasargad/certificate.xml';
 
         // Set signature
         $processor = new RSAProcessor($certificate, RSAKeyType::XMLFile);
-        $data = "#" . $merchantCode . "#" . $terminalCode . "#" . $invoiceNumber . "#" . $invoiceDate . "#" . $amount . "#" . $redirectAddress . "#" . $action . "#" . $timeStamp . "#";
-        $data = sha1($data, true);
-        $data = $processor->sign($data);
-        $sign = base64_encode($data);
+        $data1 = "#" . $merchantCode . "#" . $terminalCode . "#" . $invoiceNumber . "#" . $invoiceDate . "#" . $amount . "#" . $redirectAddress . "#" . $action . "#" . $timeStamp . "#";
+        $data2 = sha1($data1, true);
+        $data3 = $processor->sign($data2);
+        $sign = base64_encode($data3);
 
         // Set form value
         $this->gatewayPayInformation['invoiceNumber'] = $invoiceNumber;
@@ -154,6 +157,17 @@ class Gateway extends AbstractGateway
         $this->gatewayPayInformation['timeStamp'] = $timeStamp;
         $this->gatewayPayInformation['action'] = $action;
         $this->gatewayPayInformation['sign'] = $sign;
+
+        // Set log
+        $log = array();
+        $log['gateway'] = $this->gatewayAdapter;
+        $log['authority'] = '';
+        $log['value'] = json_encode($this->gatewayPayInformation);
+        $log['invoice'] = '';
+        $log['amount'] = '';
+        $log['status'] = 0;
+        $log['message'] = '';
+        $logResult = Pi::api('log', 'order')->setLog($log);
 
         // Set post url
         $this->gatewayRedirectUrl = 'https://pep.shaparak.ir/gateway.aspx';
@@ -167,16 +181,21 @@ class Gateway extends AbstractGateway
         $fields = array(
             'invoiceUID' => $request['tref']
         );
+
+        // Load files
+        require_once Pi::path('module') . '/order/src/Gateway/Pasargad/RSAProcessor.class.php';
+        require_once Pi::path('module') . '/order/src/Gateway/Pasargad/parser.php';
+
         // Check Transaction Result
-        $checkTransactionResult = Parser::post2https($fields, 'https://pep.shaparak.ir/CheckTransactionResult.aspx');
-        $checkTransactionResult = Parser::makeXMLTree($checkTransactionResult);
+        $checkTransactionResult = post2https($fields, 'https://pep.shaparak.ir/CheckTransactionResult.aspx');
+        $checkTransactionResult = makeXMLTree($checkTransactionResult);
+
         // Get invoice
         $invoice = Pi::api('invoice', 'order')->getInvoice($request['iN'], 'random_id');
+
+        // Set
         $result['status'] = 0;
-
-
         $timeStamp = date("Y/m/d H:i:s");
-
         $fields = array(
             'MerchantCode' => $this->gatewayOption['merchantCode'],
             'TerminalCode' => $this->gatewayOption['terminalCode'],
@@ -187,29 +206,16 @@ class Gateway extends AbstractGateway
             'sign' => '',
         );
 
-
-
+        // Set signature
         $processor = new RSAProcessor("certificate.xml",RSAKeyType::XMLFile);
         $data = "#". $fields['MerchantCode'] ."#". $fields['TerminalCode'] ."#". $fields['InvoiceNumber'] ."#". $fields['InvoiceDate'] ."#". $fields['amount'] ."#". $fields['TimeStamp'] ."#";
         $data = sha1($data,true);
         $data =  $processor->sign($data);
         $fields['sign'] =  base64_encode($data);
 
-
-
-
         $sendingData =  "MerchantCode=". $this->gatewayOption['merchantCode'] ."&TerminalCode=". $this->gatewayOption['terminalCode'] ."&InvoiceNumber=". $invoice['random_id'] ."&InvoiceDate=". date("Y/m/d H:i:s", $invoice['time_create']) ."&amount=". intval($invoice['time_create']) ."&TimeStamp=". $timeStamp ."&sign=".$fields['sign'];
-        $verifyresult = Parser::post2https($fields,'https://pep.shaparak.ir/VerifyPayment.aspx');
-        $verifyresult = Parser::makeXMLTree($verifyresult);
-
-
-
-
-
-
-
-
-
+        $verifyresult = post2https($fields,'https://pep.shaparak.ir/VerifyPayment.aspx');
+        $verifyresult = makeXMLTree($verifyresult);
 
         // Check 
         /* if ($processing['random_id'] == $request['SaleOrderId'] && $request['ResCode'] == 0) {
