@@ -140,8 +140,10 @@ class Gateway extends AbstractGateway
         require_once Pi::path('module') . '/order/src/Gateway/Pasargad/RSAProcessor.class.php';
         $certificate = Pi::path('module') . '/order/src/Gateway/Pasargad/certificate.xml';
 
+        echo $certificate;
+
         // Set signature
-        $processor = new RSAProcessor($certificate, RSAKeyType::XMLFile);
+        $processor = new \RSAProcessor($certificate, \RSAKeyType::XMLFile);
         $data1 = "#" . $merchantCode . "#" . $terminalCode . "#" . $invoiceNumber . "#" . $invoiceDate . "#" . $amount . "#" . $redirectAddress . "#" . $action . "#" . $timeStamp . "#";
         $data2 = sha1($data1, true);
         $data3 = $processor->sign($data2);
@@ -151,7 +153,7 @@ class Gateway extends AbstractGateway
         $this->gatewayPayInformation['invoiceNumber'] = $invoiceNumber;
         $this->gatewayPayInformation['invoiceDate'] = $invoiceDate;
         $this->gatewayPayInformation['amount'] = $amount;
-        $this->gatewayPayInformation['terminalCode'] = $merchantCode;
+        $this->gatewayPayInformation['terminalCode'] = $terminalCode;
         $this->gatewayPayInformation['merchantCode'] = $merchantCode;
         $this->gatewayPayInformation['redirectAddress'] = $redirectAddress;
         $this->gatewayPayInformation['timeStamp'] = $timeStamp;
@@ -185,89 +187,71 @@ class Gateway extends AbstractGateway
         // Load files
         require_once Pi::path('module') . '/order/src/Gateway/Pasargad/RSAProcessor.class.php';
         require_once Pi::path('module') . '/order/src/Gateway/Pasargad/parser.php';
+        $certificate = Pi::path('module') . '/order/src/Gateway/Pasargad/certificate.xml';
 
         // Check Transaction Result
-        $checkTransactionResult = post2https($fields, 'https://pep.shaparak.ir/CheckTransactionResult.aspx');
-        $checkTransactionResult = makeXMLTree($checkTransactionResult);
+        $checkResult = post2https($fields, 'https://pep.shaparak.ir/CheckTransactionResult.aspx');
+        $checkResult = makeXMLTree($checkResult);
 
         // Get invoice
         $invoice = Pi::api('invoice', 'order')->getInvoice($request['iN'], 'random_id');
 
-        // Set
-        $result['status'] = 0;
-        $timeStamp = date("Y/m/d H:i:s");
-        $fields = array(
-            'MerchantCode' => $this->gatewayOption['merchantCode'],
-            'TerminalCode' => $this->gatewayOption['terminalCode'],
-            'InvoiceNumber' => $invoice['random_id'],
-            'InvoiceDate' => date("Y/m/d H:i:s", $invoice['time_create']),
-            'amount' => intval($invoice['time_create']),
-            'TimeStamp' => $timeStamp,
-            'sign' => '',
-        );
-
-        // Set signature
-        $processor = new RSAProcessor("certificate.xml",RSAKeyType::XMLFile);
-        $data = "#". $fields['MerchantCode'] ."#". $fields['TerminalCode'] ."#". $fields['InvoiceNumber'] ."#". $fields['InvoiceDate'] ."#". $fields['amount'] ."#". $fields['TimeStamp'] ."#";
-        $data = sha1($data,true);
-        $data =  $processor->sign($data);
-        $fields['sign'] =  base64_encode($data);
-
-        $sendingData =  "MerchantCode=". $this->gatewayOption['merchantCode'] ."&TerminalCode=". $this->gatewayOption['terminalCode'] ."&InvoiceNumber=". $invoice['random_id'] ."&InvoiceDate=". date("Y/m/d H:i:s", $invoice['time_create']) ."&amount=". intval($invoice['time_create']) ."&TimeStamp=". $timeStamp ."&sign=".$fields['sign'];
-        $verifyresult = post2https($fields,'https://pep.shaparak.ir/VerifyPayment.aspx');
-        $verifyresult = makeXMLTree($verifyresult);
-
-        // Check 
-        /* if ($processing['random_id'] == $request['SaleOrderId'] && $request['ResCode'] == 0) {
-            // Check bank
-            $call = $this->call('bpVerifyRequest', $parameters);
-            if (!is_null($call)) {
-                if (is_numeric($call) && $call == 0) {
-                    // Get invoice
-                    $message = __('Your payment were successfully.');
-                    // Set log value
-                    $value = array();
-                    $value['request'] = $request;
-                    $value['bpVerifyRequest'] = $call;
-                    $value = Json::encode($value);
-                    // Set log
-                    $log = array();
-                    $log['gateway'] = $this->gatewayAdapter;
-                    $log['authority'] = $request['authority'];
-                    $log['value'] = $value;
-                    $log['invoice'] = $invoice['id'];
-                    $log['amount'] = $invoice['total_price'];
-                    $log['status'] = 1;
-                    $log['message'] = $message;
-                    $logResult = Pi::api('log', 'order')->setLog($log);
-                    // Update invoice
-                    if ($logResult) {
-                        $invoice = Pi::api('invoice', 'order')->updateInvoice($request['SaleOrderId']);
-                        $result['status'] = 1;
-                    }
-                } else {
-                    $error = $this->setPaymentError($call);
-                    // Set log value
-                    $value = array();
-                    $value['request'] = $request;
-                    $value['bpVerifyRequest'] = $call;
-                    $value = Json::encode($value);
-                    // Set log
-                    $log = array();
-                    $log['gateway'] = $this->gatewayAdapter;
-                    $log['authority'] = $request['authority'];
-                    $log['value'] = $value;
-                    $log['invoice'] = $invoice['id'];
-                    $log['amount'] = $invoice['total_price'];
-                    $log['status'] = 0;
-                    $log['message'] = $error;
-                    Pi::api('log', 'order')->setLog($log);
+        // Check checkTransactionResult
+        if ($checkResult["resultObj"]['result'] && $checkResult["resultObj"]['transactionReferenceID'] == $request['tref']) {
+            // Set
+            $result['status'] = 0;
+            $timeStamp = date("Y/m/d H:i:s");
+            $fields = array(
+                'TransactionReferenceID ' => $checkResult["resultObj"]['transactionReferenceID'],
+                'MerchantCode' => $this->gatewayOption['merchantCode'],
+                'TerminalCode' => $this->gatewayOption['terminalCode'],
+                'InvoiceNumber' => $invoice['random_id'],
+                'InvoiceDate' => date("Y/m/d H:i:s", $invoice['time_create']),
+                'amount' => intval($invoice['total_price']),
+                'TimeStamp' => $timeStamp,
+                'sign' => '',
+            );
+            // Set signature
+            $processor = new \RSAProcessor($certificate, \RSAKeyType::XMLFile);
+            $data = "#" . $fields['MerchantCode'] . "#" . $fields['TerminalCode'] . "#" . $fields['InvoiceNumber'] . "#" . $fields['InvoiceDate'] . "#" . $fields['amount'] . "#" . $fields['TimeStamp'] . "#";
+            $data = sha1($data, true);
+            $data = $processor->sign($data);
+            $fields['sign'] = base64_encode($data);
+            // Set verify result
+            $sendingData = "MerchantCode=" . $this->gatewayOption['merchantCode'] . "&TerminalCode=" . $this->gatewayOption['terminalCode'] . "&InvoiceNumber=" . $invoice['random_id'] . "&InvoiceDate=" . date("Y/m/d H:i:s", $invoice['time_create']) . "&amount=" . intval($invoice['total_price']) . "&TimeStamp=" . $timeStamp . "&sign=" . $fields['sign'];
+            $verifyresult = post2https($fields, 'https://pep.shaparak.ir/VerifyPayment.aspx');
+            $verifyresult = makeXMLTree($verifyresult);
+            // Check verify result
+            if ($verifyresult['actionResult']['result']) {
+                // Set log value
+                $value = array();
+                $value['request'] = $request;
+                $value['fields'] = $fields;
+                $value['checkResult'] = $checkResult;
+                $value['verifyResult'] = $verifyresult;
+                $value = Json::encode($value);
+                // Set log
+                $log = array();
+                $log['gateway'] = $this->gatewayAdapter;
+                $log['authority'] = $request['authority'];
+                $log['value'] = $value;
+                $log['invoice'] = $invoice['id'];
+                $log['amount'] = $invoice['total_price'];
+                $log['status'] = 1;
+                $log['message'] = $verifyresult['verifyresult']['resultMessage'];
+                $logResult = Pi::api('log', 'order')->setLog($log);
+                // Update invoice
+                if ($logResult) {
+                    $invoice = Pi::api('invoice', 'order')->updateInvoice($request['iN']);
+                    $result['status'] = 1;
                 }
             } else {
                 // Set log value
                 $value = array();
                 $value['request'] = $request;
-                $value['bpVerifyRequest'] = $call;
+                $value['fields'] = $fields;
+                $value['checkResult'] = $checkResult;
+                $value['verifyResult'] = $verifyresult;
                 $value = Json::encode($value);
                 // Set log
                 $log = array();
@@ -277,11 +261,11 @@ class Gateway extends AbstractGateway
                 $log['invoice'] = $invoice['id'];
                 $log['amount'] = $invoice['total_price'];
                 $log['status'] = 0;
-                $log['message'] = __('bpVerifyRequest method is null');
+                $log['message'] = $verifyresult['verifyresult']['resultMessage'];
                 Pi::api('log', 'order')->setLog($log);
             }
-        } elseif ($request['ResCode'] > 0) {
-            $error = $this->setPaymentError($request['ResCode']);
+        } else {
+            $error = $this->setPaymentError('1');
             // Set log value
             $value = array();
             $value['request'] = $request;
@@ -296,7 +280,7 @@ class Gateway extends AbstractGateway
             $log['status'] = 0;
             $log['message'] = $error;
             Pi::api('log', 'order')->setLog($log);
-        } */
+        }
         // Set result
         $result['adapter'] = $this->gatewayAdapter;
         $result['invoice'] = $invoice['id'];
@@ -318,7 +302,11 @@ class Gateway extends AbstractGateway
 
         switch ($id) {
             case '':
-                $error = __('Bank Pasargad error 0');
+                $error = __('Bank Pasargad error');
+                break;
+
+            case '1':
+                $error = __('resultObj is not true');
                 break;
 
             default:
