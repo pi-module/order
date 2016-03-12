@@ -160,17 +160,6 @@ class Gateway extends AbstractGateway
         $this->gatewayPayInformation['action'] = $action;
         $this->gatewayPayInformation['sign'] = $sign;
 
-        // Set log
-        $log = array();
-        $log['gateway'] = $this->gatewayAdapter;
-        $log['authority'] = '';
-        $log['value'] = json_encode($this->gatewayPayInformation);
-        $log['invoice'] = '';
-        $log['amount'] = '';
-        $log['status'] = 0;
-        $log['message'] = '';
-        $logResult = Pi::api('log', 'order')->setLog($log);
-
         // Set post url
         $this->gatewayRedirectUrl = 'https://pep.shaparak.ir/gateway.aspx';
     }
@@ -290,7 +279,11 @@ class Gateway extends AbstractGateway
 
     public function setMessage($log)
     {
-        $message = '';
+        if (isset($log["checkResult"]["resultObj"]['transactionReferenceID']) && !empty($log["checkResult"]["resultObj"]['transactionReferenceID'])) {
+            $message = sprintf(__('Your track code is : %s'), $log["checkResult"]["resultObj"]['transactionReferenceID']);
+        } else {
+            $message = '';
+        }
         return $message;
     }
 
