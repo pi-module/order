@@ -52,8 +52,10 @@ class InvoiceController extends ActionController
                 $where['status'] = 2;
                 $where['time_duedate <= ?'] = time();
             } elseif (in_array($payment_status, array(1, 2))) {
-                $where['status'] = $payment_status;
+                $where['status'] = array(1, 2);
             }
+        } else {
+            $where['status'] = $payment_status;
         }
         if ($start) {
             $where['time_duedate >= ?'] = strtotime($start);

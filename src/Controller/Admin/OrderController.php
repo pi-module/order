@@ -13,23 +13,23 @@
 
 namespace Module\Order\Controller\Admin;
 
+use Module\Order\Form\OrderAddFilter;
+use Module\Order\Form\OrderAddForm;
+use Module\Order\Form\OrderSettingFilter;
+use Module\Order\Form\OrderSettingForm;
+use Module\Order\Form\UpdateCanPayFilter;
+use Module\Order\Form\UpdateCanPayForm;
+use Module\Order\Form\UpdateDeliveryFilter;
+use Module\Order\Form\UpdateDeliveryForm;
+use Module\Order\Form\UpdateNoteFilter;
+use Module\Order\Form\UpdateNoteForm;
+use Module\Order\Form\UpdateOrderFilter;
+use Module\Order\Form\UpdateOrderForm;
+use Module\Order\Form\UpdatePaymentFilter;
+use Module\Order\Form\UpdatePaymentForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Module\Order\Form\OrderSettingForm;
-use Module\Order\Form\OrderSettingFilter;
-use Module\Order\Form\OrderAddForm;
-use Module\Order\Form\OrderAddFilter;
-use Module\Order\Form\UpdateDeliveryForm;
-use Module\Order\Form\UpdateDeliveryFilter;
-use Module\Order\Form\UpdateOrderForm;
-use Module\Order\Form\UpdateOrderFilter;
-use Module\Order\Form\UpdatePaymentForm;
-use Module\Order\Form\UpdatePaymentFilter;
-use Module\Order\Form\UpdateCanPayForm;
-use Module\Order\Form\UpdateCanPayFilter;
-use Module\Order\Form\UpdateNoteForm;
-use Module\Order\Form\UpdateNoteFilter;
 
 class OrderController extends ActionController
 {
@@ -62,6 +62,8 @@ class OrderController extends ActionController
         // Set where
         if ($status_order) {
             $where['status_order'] = $status_order;
+        } else {
+            $where['status_order'] = array(1, 2, 3, 7);
         }
         if ($status_payment) {
             $where['status_payment'] = $status_payment;
@@ -610,7 +612,7 @@ class OrderController extends ActionController
                 // Set additional price
                 if ($values['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
                     $values['shipping_price'] = $values['shipping_price'] + $config['order_additional_price_product'];
-                } elseif ($values['type_commodity'] == 'service' && $config['order_additional_price_service'] >0 ) {
+                } elseif ($values['type_commodity'] == 'service' && $config['order_additional_price_service'] > 0) {
                     $values['setup_price'] = $values['setup_price'] + $config['order_additional_price_service'];
                 }
                 // Set total
