@@ -30,6 +30,7 @@ class InvoiceController extends ActionController
         $page = $this->params('page', 1);
         $module = $this->params('module');
         $orderid = $this->params('orderid');
+        $randomid = $this->params('randomid');
         $uid = $this->params('uid');
         $payment_status = $this->params('payment_status');
         $start = $this->params('start');
@@ -43,6 +44,9 @@ class InvoiceController extends ActionController
         // Set where
         if ($orderid) {
             $where['order'] = $orderid;
+        }
+        if ($randomid) {
+            $where['random_id'] = $randomid;
         }
         if ($uid) {
             $where['uid'] = $uid;
@@ -85,6 +89,7 @@ class InvoiceController extends ActionController
                 'controller' => 'invoice',
                 'action' => 'index',
                 'orderid' => $orderid,
+                'randomid' => $randomid,
                 'uid' => $uid,
                 'payment_status' => $payment_status,
                 'start' => $start,
@@ -94,6 +99,7 @@ class InvoiceController extends ActionController
         // Set form
         $values = array(
             'orderid' => $orderid,
+            'randomid' => $randomid,
             'uid' => $uid,
             'payment_status' => $payment_status,
             'start' => $start,
@@ -122,6 +128,7 @@ class InvoiceController extends ActionController
                 $url = array(
                     'action' => 'index',
                     'orderid' => $values['orderid'],
+                    'randomid' => $values['randomid'],
                     'uid' => $values['uid'],
                     'payment_status' => $values['payment_status'],
                     'start' => $values['start'],

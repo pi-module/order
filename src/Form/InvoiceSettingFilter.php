@@ -25,6 +25,11 @@ class InvoiceSettingFilter extends InputFilter
             'name' => 'orderid',
             'required' => false,
         ));
+        // randomid
+        $this->add(array(
+            'name' => 'randomid',
+            'required' => false,
+        ));
         // uid
         $this->add(array(
             'name' => 'uid',

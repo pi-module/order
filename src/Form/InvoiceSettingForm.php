@@ -44,6 +44,17 @@ class InvoiceSettingForm extends BaseForm
                 'description' => '',
             )
         ));
+        // randomid
+        $this->add(array(
+            'name' => 'randomid',
+            'options' => array(
+                'label' => __('Bank ID'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+            )
+        ));
         // uid
         $this->add(array(
             'name' => 'uid',
