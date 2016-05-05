@@ -95,7 +95,7 @@ msgstr "Livré"
 #: src/Form/OrderSettingForm.php:79 src/Form/UpdateDeliveryForm.php:47
 #: template/front/detail.phtml:43
 msgid "Back eaten"
-msgstr ""
+msgstr "Produit retourné"
 
 #: src/Api/Notification.php:212
 #, php-format
