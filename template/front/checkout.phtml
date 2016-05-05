@@ -236,7 +236,7 @@ $this->footScript()->appendScript($script);
                         <?php } ?>
                     </div>
                     <p>
-                        <strong><?php _e('Total Price'); ?></strong> :
+                        <strong><?php _e('Total Price ext VAT'); ?></strong> :
                         <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'])); ?>
                     </p>
                     <p>
@@ -252,7 +252,7 @@ $this->footScript()->appendScript($script);
                         <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?>
                     </p>
                     <p>
-                        <strong><?php _e('Final Price'); ?></strong> :
+                        <strong><?php _e('Final Price incl. VAT'); ?></strong> :
                         <span class="label label-success">
                             <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?>
                         </span>
