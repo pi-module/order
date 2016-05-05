@@ -229,35 +229,33 @@ $this->footScript()->appendScript($script);
                                         </div>
                                     <?php } ?>
                                     <div class="col-xs-7">
-                                        <div class="small">
-                                            <strong><?php _e('Price') ?></strong> : <?php echo $this->escape($product['product_price_view']); ?>
-                                        </div>
+                                        <strong><?php _e('Price') ?></strong> : <?php echo $this->escape($product['product_price_view']); ?>
                                     </div>
                                 </div>
                             </div>
                         <?php } ?>
                     </div>
-                    <p class="small">
+                    <p>
                         <strong><?php _e('Total Price'); ?></strong> :
                         <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'])); ?>
                     </p>
-                    <p class="small">
+                    <p>
                         <strong><?php _e('Total Discount'); ?></strong> :
                         <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['discount'])); ?>
                     </p>
-                    <p class="small">
+                    <p>
                         <strong><?php _e('Total Shipping'); ?></strong> :
                         <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['shipping'])); ?>
                     </p>
-                    <p class="small">
+                    <p>
                         <strong><?php _e('Total Vat'); ?></strong> :
                         <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?>
                     </p>
-                    <p class="small">
+                    <p>
                         <strong><?php _e('Final Price'); ?></strong> :
-                            <span class="label label-success">
-                                <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?>
-                            </span>
+                        <span class="label label-success">
+                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?>
+                        </span>
                     </p>
                 </div>
             </div>
