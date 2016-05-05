@@ -830,5 +830,14 @@ return array(
             'filter' => 'string',
             'value' => 10,
         ),
+        // head_meta
+        'text_description_checkup' => array(
+            'category' => 'head_meta',
+            'title' => _a('Description for checkup page'),
+            'description' => '',
+            'edit' => 'textarea',
+            'filter' => 'string',
+            'value' => ''
+        ),
     ),
 );

@@ -261,6 +261,11 @@ $this->footScript()->appendScript($script);
                     </p>
                 </div>
             </div>
+            <?php if (!empty($config['text_description_checkup'])) { ?>
+                <div class="checkout-description">
+                    <?php echo $config['text_description_checkup']; ?>
+                </div>
+            <?php } ?>
         </div>
     </div>
 </div>

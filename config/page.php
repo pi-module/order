@@ -44,4 +44,25 @@ return array(
             'permission' => 'location',
         ),
     ),
+    // Front section
+    'front' => array(
+        array(
+            'title' => _a('Index page'),
+            'controller' => 'index',
+            'permission' => 'public',
+            'block' => 1,
+        ),
+        array(
+            'title' => _a('Checkout'),
+            'controller' => 'checkout',
+            'permission' => 'public',
+            'block' => 1,
+        ),
+        array(
+            'title' => _a('Detail'),
+            'controller' => 'detail',
+            'permission' => 'public',
+            'block' => 1,
+        ),
+    ),
 );
