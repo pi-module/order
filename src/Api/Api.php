@@ -36,6 +36,14 @@ class Api extends AbstractApi
                     $viewPrice = $short ? _number($price) : sprintf('%s %s', _number($price), __('Toman'));
                     break;
 
+                case 'EUR':
+                    $viewPrice = _currency($price);
+                    $viewPriceArray = explode(",", $viewPrice);
+                    if ($viewPriceArray[1] == 00) {
+                        $viewPrice = $viewPriceArray[0] . " €";
+                    }
+                    break;
+
                 default:
                     $viewPrice = _currency($price);
                     break;
