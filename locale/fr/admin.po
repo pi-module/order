@@ -9,10 +9,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _a;_t\n"
-"X-Poedit-Basepath: ..\\..\\\n"
+"X-Poedit-Basepath: ../..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
@@ -22,15 +22,15 @@ msgstr "Détail des commandes"
 
 #: config/block.php:17
 msgid "Simple orders detail"
-msgstr ""
+msgstr "Détail des commandes unique"
 
 #: config/block.php:23 config/config.php:37
 msgid "Installment"
-msgstr ""
+msgstr "Installations"
 
 #: config/block.php:24
 msgid "Installment orders detail"
-msgstr ""
+msgstr "Détail des commandes Installations"
 
 #: config/config.php:17
 msgid "Admin"
@@ -112,43 +112,43 @@ msgstr ""
 
 #: config/config.php:112
 msgid "Show ID number"
-msgstr ""
+msgstr "Afficher le Numéro ID utilisateur"
 
 #: config/config.php:120
 msgid "Show name"
-msgstr ""
+msgstr "Afficher le Nom"
 
 #: config/config.php:128
 msgid "Show email"
-msgstr ""
+msgstr "Afficher l'Email"
 
 #: config/config.php:136
 msgid "Show phone"
-msgstr ""
+msgstr "Afficher le Numéro de téléphone"
 
 #: config/config.php:144
 msgid "Show mobile"
-msgstr ""
+msgstr "Afficher le Numéro de mobile"
 
 #: config/config.php:152
 msgid "Show company"
-msgstr ""
+msgstr "Afficher le Nom Entreprise"
 
 #: config/config.php:160
 msgid "Show company extra"
-msgstr ""
+msgstr "Afficher les infos Entreprise complémentaires"
 
 #: config/config.php:168
 msgid "Show address"
-msgstr ""
+msgstr "Afficher l'Adresse"
 
 #: config/config.php:176
 msgid "Show address 2"
-msgstr ""
+msgstr "Afficher l'Adresse 2"
 
 #: config/config.php:184
 msgid "Show country"
-msgstr ""
+msgstr "Afficher le pays"
 
 #: config/config.php:192
 msgid "Country list"
@@ -164,7 +164,7 @@ msgstr "Afficher l'Etat"
 
 #: config/config.php:206
 msgid "Show city"
-msgstr ""
+msgstr "Afficher la ville"
 
 #: config/config.php:214
 msgid "Show Zip code"
@@ -172,15 +172,15 @@ msgstr "Afficher le Code Postal"
 
 #: config/config.php:222
 msgid "Show packing"
-msgstr ""
+msgstr "Afficher l'emballage"
 
 #: config/config.php:230
 msgid "Show location and delivery"
-msgstr ""
+msgstr "Afficher les lieux et livraisons"
 
 #: config/config.php:238
 msgid "Show promo"
-msgstr ""
+msgstr "Afficher les promos"
 
 #: config/config.php:246
 msgid "Show user note"
@@ -188,7 +188,7 @@ msgstr "Afficher les Notes Utilisateurs"
 
 #: config/config.php:254
 msgid "Show order term"
-msgstr ""
+msgstr "Afficher les CGV"
 
 #: config/config.php:262
 msgid "Order term url"
@@ -196,7 +196,7 @@ msgstr "URL CGV Commande"
 
 #: config/config.php:268
 msgid "Product additional price"
-msgstr ""
+msgstr "Prix des produits additionnels"
 
 #: config/config.php:269
 msgid "Additional price as ready and delivery, just for products"
@@ -205,7 +205,7 @@ msgstr ""
 
 #: config/config.php:276
 msgid "Service additional price"
-msgstr ""
+msgstr "Prix des Services Additionnels"
 
 #: config/config.php:277
 msgid "Additional price as setup, just for servicies"
@@ -225,15 +225,15 @@ msgstr "Aller à la page de paiement"
 
 #: config/config.php:300
 msgid "Seller logo"
-msgstr ""
+msgstr "Logo du Vendeur"
 
 #: config/config.php:301
 msgid "Put logo full URL"
-msgstr ""
+msgstr "Insérer l'URL du logo"
 
 #: config/config.php:307
 msgid "Seller information"
-msgstr ""
+msgstr "Informations vendeur"
 
 #: config/config.php:308
 msgid "HTML tags supported, use on invoice page"
@@ -245,7 +245,7 @@ msgstr "Email de notification pour chaque module"
 
 #: config/config.php:315
 msgid "Setup format : shop,shop@mysite.com|guide,guide@mysite.com"
-msgstr ""
+msgstr "Format shop,shop@mysite.com|guide,guide@mysite.com"
 
 #: config/config.php:322
 msgid "Use custom price"
@@ -329,7 +329,7 @@ msgstr ""
 
 #: config/config.php:394
 msgid "Set X day before due date"
-msgstr ""
+msgstr "Définir X jours avant l'échéance"
 
 #: config/config.php:395
 msgid "Notification invoice due date, X day before invoice time by cron"
@@ -348,7 +348,7 @@ msgstr "Cher/Chère %s %s, vous avez des factures échues dans %s jours"
 
 #: config/config.php:410
 msgid "Set X day after expired"
-msgstr ""
+msgstr "Définir X jours après expiration"
 
 #: config/config.php:411
 msgid "Notification invoice expired, X day after invoice time by cron"
@@ -367,7 +367,7 @@ msgstr "Cher, Chère %s %s, vous avez des factures échues depuis %s jours"
 
 #: config/config.php:427
 msgid "Reduce from user credit"
-msgstr ""
+msgstr "Déduit du crédit utilisateur"
 
 #: config/config.php:435
 msgid "Show plan 1"
