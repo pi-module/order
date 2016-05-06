@@ -217,6 +217,61 @@ class OrderForm extends BaseForm
                 )
             ));
         }
+        // zip_code
+        if ($this->config['order_zip'] && !in_array('zip_code', $registerFieldsName)) {
+            $this->add(array(
+                'name' => 'zip_code',
+                'options' => array(
+                    'label' => __('Zip code'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    'required' => true,
+                )
+            ));
+        }
+        // city
+        if ($this->config['order_city'] && !in_array('city', $registerFieldsName)) {
+            $this->add(array(
+                'name' => 'city',
+                'options' => array(
+                    'label' => __('City'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+
+                )
+            ));
+        }
+        // packing
+        if ($this->config['order_packing']) {
+            $this->add(array(
+                'name' => 'packing',
+                'type' => 'checkbox',
+                'options' => array(
+                    'label' => __('Packing'),
+                ),
+                'attributes' => array(
+                    'description' => '',
+                )
+            ));
+        }
+        // state
+        if ($this->config['order_state'] && !in_array('state', $registerFieldsName)) {
+            $this->add(array(
+                'name' => 'state',
+                'options' => array(
+                    'label' => __('State'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+
+                )
+            ));
+        }
         // country
         if ($this->config['order_country'] && !in_array('country', $registerFieldsName)) {
             if (!empty($this->config['order_countrylist'])) {
@@ -246,61 +301,6 @@ class OrderForm extends BaseForm
                     )
                 ));
             }
-        }
-        // state
-        if ($this->config['order_state'] && !in_array('state', $registerFieldsName)) {
-            $this->add(array(
-                'name' => 'state',
-                'options' => array(
-                    'label' => __('State'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-
-                )
-            ));
-        }
-        // city
-        if ($this->config['order_city'] && !in_array('city', $registerFieldsName)) {
-            $this->add(array(
-                'name' => 'city',
-                'options' => array(
-                    'label' => __('City'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-
-                )
-            ));
-        }
-        // zip_code
-        if ($this->config['order_zip'] && !in_array('zip_code', $registerFieldsName)) {
-            $this->add(array(
-                'name' => 'zip_code',
-                'options' => array(
-                    'label' => __('Zip code'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                    'required' => true,
-                )
-            ));
-        }
-        // packing
-        if ($this->config['order_packing']) {
-            $this->add(array(
-                'name' => 'packing',
-                'type' => 'checkbox',
-                'options' => array(
-                    'label' => __('Packing'),
-                ),
-                'attributes' => array(
-                    'description' => '',
-                )
-            ));
         }
         // Check type_commodity
         $gatewayList = Pi::api('gateway', 'order')->getActiveGatewayName();
@@ -433,7 +433,7 @@ class OrderForm extends BaseForm
                     'type' => 'textarea',
                     'rows' => '5',
                     'cols' => '40',
-                    'description' => '',
+                    'description' => __('Give here more details you think we need to know about'),
                 )
             ));
         }
@@ -497,7 +497,6 @@ class OrderForm extends BaseForm
                 $title = __('Save order');
             }
         }
-
         $this->add(array(
             'name' => 'submit',
             'type' => 'submit',

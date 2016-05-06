@@ -40,7 +40,7 @@ class RemoveForm extends BaseForm
             ),
             'attributes' => array(
                 'type' => 'description',
-                'description' => __('You have another open payment process, if have have another page for online payment, please fish for courent payment and after that start new one. But is you cancel your old payment or it have any other problem and you want close all old proess and start new one, Please conferm this meaasage and select other payment'),
+                'description' => __('You have stopped the payment process. You will be redirected to the Order Checkout page so you can relaunch payment / checkout process.</br> Or maybe you try to launch several payment at the same time :  you cannot proceed to si;ultaneous payments, please proceed one by one. You will be also redirected to Order Checkout page'),
             )
         ));
         // Save
@@ -49,7 +49,7 @@ class RemoveForm extends BaseForm
             'type' => 'submit',
             'attributes' => array(
                 'class' => 'btn btn-danger',
-                'value' => __('Conferm'),
+                'value' => __('I understand'),
             )
         ));
     }

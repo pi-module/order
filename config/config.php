@@ -190,7 +190,7 @@ return array(
         'order_countrylist' => array(
             'category' => 'order',
             'title' => _a('Country list'),
-            'description' => _a('Use `|` as delimiter to separate countres'),
+            'description' => _a('Use `|` as delimiter to separate countries'),
             'edit' => 'textarea',
         ),
         'order_state' => array(

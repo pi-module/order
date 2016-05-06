@@ -160,16 +160,14 @@ $this->footScript()->appendScript($script);
                                 !empty($customer['phone']) ||
                                 !empty($customer['mobile'])) { ?>
                                 <tr>
-                                    <td class="col-md-3">
-                                        <p><strong><?php _e('State'); ?></strong> : <?php echo $this->escape($customer['state']); ?></p>
-                                        <p><strong><?php _e('City'); ?></strong> : <?php echo $this->escape($customer['city']); ?></p>
-                                    </td>
-
                                     <td class="col-md-6">
                                         <p><strong><?php _e('Address'); ?></strong> : <?php echo $this->escape($customer['address1']); ?></p>
                                         <p><strong><?php _e('Zip code'); ?></strong> : <?php echo $this->escape($customer['zip_code']); ?></p>
                                     </td>
-
+                                    <td class="col-md-3">
+                                        <p><strong><?php _e('State'); ?></strong> : <?php echo $this->escape($customer['state']); ?></p>
+                                        <p><strong><?php _e('City'); ?></strong> : <?php echo $this->escape($customer['city']); ?></p>
+                                    </td>
                                     <td class="col-md-3">
                                         <p><strong><?php _e('Phone'); ?></strong> : <?php echo $this->escape($customer['phone']); ?></p>
                                         <p><strong><?php _e('Mobile'); ?></strong> : <?php echo $this->escape($customer['mobile']); ?></p>

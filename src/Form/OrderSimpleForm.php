@@ -371,7 +371,7 @@ class OrderSimpleForm extends BaseForm
                     'type' => 'textarea',
                     'rows' => '5',
                     'cols' => '40',
-                    'description' => '',
+                    'description' => __('Give here more details you think we need to know about'),
                 )
             ));
         }
