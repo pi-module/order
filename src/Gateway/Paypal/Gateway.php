@@ -311,7 +311,7 @@ class Gateway extends AbstractGateway
         $this->gatewayPayInformation['country'] = $order['country'];
         $this->gatewayPayInformation['zip'] = $order['zip_code'];
         $this->gatewayPayInformation['email'] = $order['email'];
-        $this->gatewayPayInformation['night_phone_b'] = $order['phone'];
+        $this->gatewayPayInformation['night_phone_b'] = $order['mobile'];
         $this->gatewayPayInformation['cmd'] = '_cart';
         $this->gatewayPayInformation['upload'] = 1;
         $this->gatewayPayInformation['return'] = $this->gatewayFinishUrl;
