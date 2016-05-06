@@ -28,10 +28,6 @@ $locale = 'en';
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
-                <div class="text-center">
-                    <h4><?php echo sprintf(__('Invoice %s'), $this->escape($invoice['code'])); ?></h4>
-                    <hr/>
-                </div>
                 <div class="clearfix">
                     <table class="table table-striped table-bordered table-condensed small">
                         <tr>
@@ -51,15 +47,14 @@ $locale = 'en';
                                     </div>
                                 <?php } ?>
                                 <p><strong><?php _e('Order date'); ?></strong> :
-                                    <span><?php echo $this->escape($order['time_create_view']); ?></span></p>
+                                    <span><?php echo $this->escape($order['time_create_view']); ?></span>
+                                    ( <strong><?php _e('Order Nr'); ?></strong> :
+                                    <span><?php echo $this->escape($order['code']); ?></span> )
+                                </p>
 
                                 <p><strong><?php _e('Invoice date'); ?></strong> :
                                     <span><?php echo $this->escape($invoice['time_create_view']); ?></span></p>
-                            </td>
-                            <td class="col-md-7">
-                                <p><strong><?php _e('Order'); ?></strong> :
-                                    <span><?php echo $this->escape($order['code']); ?></span></p>
-
+                                <h3><?php echo sprintf(__('Invoice %s'), $this->escape($invoice['code'])); ?></h3>
                                 <p><strong><?php _e('Status'); ?></strong> :
                                     <?php if ($invoice['status'] == 1) { ?>
                                         <span class="label label-success"><?php _e('Paid'); ?></span>
@@ -75,6 +70,8 @@ $locale = 'en';
                                             : <?php echo $this->escape($invoice['time_cancel_view']) ?></span>
                                     <?php } ?>
                                 </p>
+                            </td>
+                            <td class="col-md-7">
                                 <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
                                     <p><strong><?php _e('Name'); ?></strong> :
                                         <span><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></span>
@@ -96,31 +93,37 @@ $locale = 'en';
                                     <p><strong><?php _e('Email'); ?></strong> :
                                         <span><?php echo $this->escape($order['email']); ?></span></p>
                                 <?php } ?>
+                                <?php if (!empty($order['company'])) { ?>
+                                    <p><strong><?php _e('Company'); ?></strong> :
+                                        <span><?php echo $this->escape($order['company']); ?></span></p>
+                                <?php } ?>
+                                <?php if (!empty($order['company_id'])) { ?>
+                                    <p><strong><?php _e('Company ID'); ?></strong> :
+                                        <span><?php echo $this->escape($order['company_id']); ?></span></p>
+                                <?php } ?>
+                                <?php if (!empty($order['company_vat'])) { ?>
+                                    <p><strong><?php _e('Company VAT'); ?></strong> :
+                                        <span><?php echo $this->escape($order['company_vat']); ?></span></p>
+                                <?php } ?>
                                 <?php if (!empty($order['address1'])) { ?>
-                                    <p>
-                                        <strong><?php _e('Address'); ?></strong> :
-                                        <span><?php echo $this->escape($order['address1']); ?></span>
-                                        <?php if (!empty($order['address2'])) { ?>
-                                            <span><?php echo $this->escape($order['address2']); ?></span>
-                                        <?php } ?>
-                                    </p>
+                                    <p><strong><?php echo $this->escape($order['address1']); ?></strong></p>
+                                <?php } ?>
+                                <?php if (!empty($order['address2'])) { ?>
+                                    <p><strong><?php echo $this->escape($order['address2']); ?></strong></p>
                                 <?php } ?>
                                 <?php if (!empty($order['city'])) { ?>
-                                    <p><strong><?php _e('City'); ?></strong> :
-                                        <span><?php echo $this->escape($order['city']); ?></span></p>
+                                    <p><strong><?php echo $this->escape($order['city']); ?></strong></p>
                                 <?php } ?>
                                 <?php if (!empty($order['state'])) { ?>
-                                    <p><strong><?php _e('State'); ?></strong> :
-                                        <span><?php echo $this->escape($order['state']); ?></span></p>
+                                    <p><strong><?php echo $this->escape($order['state']); ?></strong></p>
                                 <?php } ?>
                                 <?php if (!empty($order['country'])) { ?>
-                                    <p><strong><?php _e('Country'); ?></strong> :
-                                        <span><?php echo $this->escape($order['country']); ?></span></p>
+                                    <p><strong><?php echo $this->escape($order['country']); ?></strong></p>
                                 <?php } ?>
                                 <?php if (!empty($order['zip_code'])) { ?>
-                                    <p><strong><?php _e('Zip code'); ?></strong> :
-                                        <span><?php echo $this->escape($order['zip_code']); ?></span></p>
+                                    <p><strong><?php echo $this->escape($order['zip_code']); ?></strong></p>
                                 <?php } ?>
+
                             </td>
                         </tr>
                     </table>
@@ -131,10 +134,10 @@ $locale = 'en';
                         <th><?php _e('Row'); ?></th>
                         <th><?php _e('Product'); ?></th>
                         <th><?php _e('Number'); ?></th>
-                        <th><?php _e('Price'); ?></th>
+                        <th><?php _e('Price ex VAT'); ?></th>
                         <!-- <th><?php _e('Shipping'); ?></th>
                         <th><?php _e('Vat'); ?></th> -->
-                        <th><?php _e('Total'); ?></th>
+                        <th><?php _e('Total all taxes included'); ?></th>
                     </tr>
                     <?php $i = 1; ?>
                     <?php foreach ($order['products'] as $product) { ?>

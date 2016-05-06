@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="eb89c1a1-3ca6-4284-b00d-d0e1e5682c61" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/admin/invoice-print.phtml" afterPath="$PROJECT_DIR$/template/admin/invoice-print.phtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/front/detail.phtml" afterPath="$PROJECT_DIR$/template/front/detail.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/front/invoice-print.phtml" afterPath="$PROJECT_DIR$/template/front/invoice-print.phtml" />
     </list>
     <ignored path="order.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,11 +40,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detail.phtml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="detail.phtml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/template/front/detail.phtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="327" column="0" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
+            <state relative-caret-position="271">
+              <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="159" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="invoice-print.phtml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/front/invoice-print.phtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="379">
+              <caret line="117" column="65" selection-start-line="0" selection-start-column="0" selection-end-line="214" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="invoice-print.phtml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/template/admin/invoice-print.phtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="757">
+              <caret line="214" column="7" selection-start-line="214" selection-start-column="7" selection-end-line="214" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -113,6 +135,8 @@
         <option value="$PROJECT_DIR$/src/Form/RemoveForm.php" />
         <option value="$PROJECT_DIR$/src/Gateway/Paypal/Gateway.php" />
         <option value="$PROJECT_DIR$/template/front/detail.phtml" />
+        <option value="$PROJECT_DIR$/template/front/invoice-print.phtml" />
+        <option value="$PROJECT_DIR$/template/admin/invoice-print.phtml" />
       </list>
     </option>
   </component>
@@ -201,6 +225,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="template" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="template" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -340,7 +382,7 @@
       <workItem from="1462472424101" duration="1600000" />
       <workItem from="1462513721866" duration="4005000" />
       <workItem from="1462526852890" duration="53000" />
-      <workItem from="1462527097744" duration="805000" />
+      <workItem from="1462527097744" duration="2516000" />
     </task>
     <task id="LOCAL-00001" summary="Fix order module">
       <created>1454310931206</created>
@@ -482,17 +524,24 @@
       <option name="project" value="LOCAL" />
       <updated>1462529683697</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="update paypal">
+      <created>1462529747520</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1462529747520</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15023000" />
+    <option name="totallyTimeSpent" value="16734000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="994" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2819063" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.07996769" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293979" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -562,20 +611,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Form/OrderAddFilter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="36" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/OrderAddForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Validator/User.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -917,8 +952,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/template/front/detail.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="327" column="0" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
+        <state relative-caret-position="271">
+          <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="159" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/front/invoice-print.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="117" column="65" selection-start-line="0" selection-start-column="0" selection-end-line="214" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/admin/invoice-print.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="757">
+          <caret line="214" column="7" selection-start-line="214" selection-start-column="7" selection-end-line="214" selection-end-column="7" />
           <folding />
         </state>
       </provider>

@@ -277,6 +277,22 @@
                     </div>
                 </div>
             <?php } ?>
+            <?php if (!empty($order['user_note'])) { ?>
+                <div class="alert alert-success">
+                    <h4><?php _e('User note'); ?></h4>
+                    <div class="clearfix">
+                        <?php echo $order['user_note']; ?>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if (!empty($order['admin_note'])) { ?>
+                <div class="alert alert-danger">
+                    <h4><?php _e('Admin note'); ?></h4>
+                    <div class="clearfix">
+                        <?php echo $order['admin_note']; ?>
+                    </div>
+                </div>
+            <?php } ?>
             <div class="clearfix row">
                 <div class="<?php if ($invoice['status'] == 1) { echo 'col-md-12';} else { echo 'col-md-8';} ?>">
                     <ul class="list-inline">
@@ -324,23 +340,6 @@
                     <?php } ?>
                 </div>
                 <?php } ?>
-            </div>
-        <?php } ?>
-        <br />
-        <?php if (!empty($order['user_note'])) { ?>
-            <div class="alert alert-success">
-                <h4><?php _e('User note'); ?></h4>
-                <div class="clearfix">
-                    <?php echo $order['user_note']; ?>
-                </div>
-            </div>
-        <?php } ?>
-        <?php if (!empty($order['admin_note'])) { ?>
-            <div class="alert alert-danger">
-                <h4><?php _e('Admin note'); ?></h4>
-                <div class="clearfix">
-                    <?php echo $order['admin_note']; ?>
-                </div>
             </div>
         <?php } ?>
     </div>
