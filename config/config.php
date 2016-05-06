@@ -157,7 +157,7 @@ return array(
         ),
         'order_company_extra' => array(
             'category' => 'order',
-            'title' => _a('Show company extra'),
+            'title' => _a('Show company extra (ID , VAT)'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -165,7 +165,7 @@ return array(
         ),
         'order_address' => array(
             'category' => 'order',
-            'title' => _a('Show address'),
+            'title' => _a('Show delivery address'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -173,7 +173,7 @@ return array(
         ),
         'order_address2' => array(
             'category' => 'order',
-            'title' => _a('Show address 2'),
+            'title' => _a('Show invoicing address'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',

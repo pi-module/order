@@ -195,9 +195,10 @@ class OrderForm extends BaseForm
                     'label' => __('Delivery address'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
+                    'type' => 'textarea',
+                    'rows' => '3',
+                    'cols' => '40',
                     'description' => '',
-                    'required' => true,
                 )
             ));
         }
@@ -206,10 +207,12 @@ class OrderForm extends BaseForm
             $this->add(array(
                 'name' => 'address2',
                 'options' => array(
-                    'label' => __('Address 2'),
+                    'label' => __('Invoicing Address'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
+                    'type' => 'textarea',
+                    'rows' => '3',
+                    'cols' => '40',
                     'description' => '',
                 )
             ));
