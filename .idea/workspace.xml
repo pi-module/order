@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="eb89c1a1-3ca6-4284-b00d-d0e1e5682c61" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Gateway/Paypal/Gateway.php" afterPath="$PROJECT_DIR$/src/Gateway/Paypal/Gateway.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/front/detail.phtml" afterPath="$PROJECT_DIR$/template/front/detail.phtml" />
     </list>
     <ignored path="order.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,11 +28,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Gateway.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Gateway.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Gateway/Paypal/Gateway.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
+            <state relative-caret-position="-450">
               <caret line="313" column="70" selection-start-line="313" selection-start-column="70" selection-end-line="313" selection-end-column="70" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detail.phtml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/template/front/detail.phtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="347">
+              <caret line="327" column="0" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -97,12 +107,12 @@
         <option value="$PROJECT_DIR$/config/module.php" />
         <option value="$PROJECT_DIR$/config/permission.php" />
         <option value="$PROJECT_DIR$/config/config.php" />
-        <option value="$PROJECT_DIR$/template/front/detail.phtml" />
         <option value="$PROJECT_DIR$/src/Form/OrderForm.php" />
         <option value="$PROJECT_DIR$/src/Form/OrderSimpleForm.php" />
         <option value="$PROJECT_DIR$/template/front/checkout.phtml" />
         <option value="$PROJECT_DIR$/src/Form/RemoveForm.php" />
         <option value="$PROJECT_DIR$/src/Gateway/Paypal/Gateway.php" />
+        <option value="$PROJECT_DIR$/template/front/detail.phtml" />
       </list>
     </option>
   </component>
@@ -159,6 +169,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="template" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="front" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="template" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -298,7 +340,7 @@
       <workItem from="1462472424101" duration="1600000" />
       <workItem from="1462513721866" duration="4005000" />
       <workItem from="1462526852890" duration="53000" />
-      <workItem from="1462527097744" duration="731000" />
+      <workItem from="1462527097744" duration="805000" />
     </task>
     <task id="LOCAL-00001" summary="Fix order module">
       <created>1454310931206</created>
@@ -433,11 +475,18 @@
       <option name="project" value="LOCAL" />
       <updated>1462517709945</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="update paypal">
+      <created>1462529683697</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1462529683697</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14949000" />
+    <option name="totallyTimeSpent" value="15023000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="994" extended-state="6" />
@@ -445,6 +494,7 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2819063" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293979" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -452,7 +502,6 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -505,7 +554,8 @@
     <MESSAGE value="Improve template" />
     <MESSAGE value="Fix url" />
     <MESSAGE value="Improve view orders" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improve view orders" />
+    <MESSAGE value="update paypal" />
+    <option name="LAST_COMMIT_MESSAGE" value="update paypal" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -842,13 +892,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/front/detail.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1027">
-          <caret line="343" column="18" selection-start-line="343" selection-start-column="18" selection-end-line="343" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/config.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="523">
@@ -866,8 +909,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Gateway/Paypal/Gateway.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
+        <state relative-caret-position="-450">
           <caret line="313" column="70" selection-start-line="313" selection-start-column="70" selection-end-line="313" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/front/detail.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="327" column="0" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
           <folding />
         </state>
       </provider>
