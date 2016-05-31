@@ -1,0 +1,19 @@
+﻿[comment]Add order to user[/comment]
+
+[format]html[/format]
+
+[subject]%site_name% - Votre commande[/subject]
+
+[body]
+<div style="padding: 1px; direction: ltr;">
+	<h3 style="font-size: 1.1em;">Chère/Cher %first_name% %last_name%</h3>
+	<div style="padding: 3px 0; margin: 1px; 0">Votre nouvelle commande N°<strong>%order_id%</strong> ID a été crée sur le site %site_name%. Tu peux cliquer sur le lien ci-dessous pour en voir les détails.</div>
+	<div style="padding: 3px 0; margin: 1px; 0">
+        <a href="%order_link%" title="Détails commande">%order_link%</a>
+	</div>
+	<div style="padding: 3px 0; margin: 1px; 0">Merci de ne pas répondre à cet email</div>
+	<div style="margin-top: 10px">
+        <a href="%site_url%" title="%site_name%">%site_name%</a>
+    </div>
+</div>
+[/body]
