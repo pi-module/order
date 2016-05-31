@@ -2,12 +2,12 @@
 
 [format]html[/format]
 
-[subject]%site_name% - Votre commande[/subject]
+[subject]%site_name% - nouvelle commande créée[/subject]
 
 [body]
 <div style="padding: 1px; direction: ltr;">
 	<h3 style="font-size: 1.1em;">Chère/Cher %first_name% %last_name%</h3>
-	<div style="padding: 3px 0; margin: 1px; 0">Votre nouvelle commande N°<strong>%order_id%</strong> ID a été crée sur le site %site_name%. Tu peux cliquer sur le lien ci-dessous pour en voir les détails.</div>
+	<div style="padding: 3px 0; margin: 1px; 0">Votre nouvelle commande N°<strong>%order_id%</strong> a été créée sur le site %site_name%. Tu peux te connecter puis cliquer sur le lien ci-dessous pour en voir les détails.</div>
 	<div style="padding: 3px 0; margin: 1px; 0">
         <a href="%order_link%" title="Détails commande">%order_link%</a>
 	</div>

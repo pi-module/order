@@ -2,12 +2,12 @@
 
 [format]html[/format]
 
-[subject]%site_name% - Paiement effecuté[/subject]
+[subject]%site_name% - Paiement effectué[/subject]
 
 [body]
 <div style="padding: 1px; direction: ltr;">
 	<h3 style="font-size: 1.1em;">Chère/Cher %first_name% %last_name%</h3>
-	<div style="padding: 3px 0; margin: 1px; 0">La facture <strong>%invoice_id%</strong> a été réglée avec succès sur le site %site_name%. Tu peux voir le détail en cliquant sur le lien ci-dessous.</div>
+	<div style="padding: 3px 0; margin: 1px; 0">La facture <strong>%invoice_id%</strong> a été réglée avec succès sur le site %site_name%. Tu peux en voir les détails en connectant puis en cliquant sur le lien ci-dessous.</div>
 	<div style="padding: 3px 0; margin: 1px; 0">
         <a href="%order_link%" title="Détail Facture">%order_link%</a>
 	</div>

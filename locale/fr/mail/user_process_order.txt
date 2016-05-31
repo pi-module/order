@@ -7,7 +7,7 @@
 [body]
 <div style="padding: 1px; direction: ltr;">
 	<h3 style="font-size: 1.1em;">Chère/Cher %first_name% %last_name%</h3>
-	<div style="padding: 3px 0; margin: 1px; 0">%text%. Tu peux voir les détails en cliquant sur le lien ci-dessous</div>
+	<div style="padding: 3px 0; margin: 1px; 0">%text%. Tu peux voir les détails en te connectant puis en cliquant sur le lien ci-dessous</div>
 	<div style="padding: 3px 0; margin: 1px; 0">
         <a href="%order_link%" title="Détails de la commande">%order_link%</a>
 	</div>
