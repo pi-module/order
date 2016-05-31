@@ -1643,7 +1643,7 @@ msgstr "Transport"
 #: template/front/invoice-print.phtml:193 template/front/invoice.phtml:160
 #: template/front/invoice.phtml:217
 msgid "Vat"
-msgstr "TVA"
+msgstr "TVA 20%"
 
 #: template/admin/invoice-print.phtml:140
 #: template/admin/invoice-print.phtml:197 template/front/detail.phtml:267
