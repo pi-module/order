@@ -666,7 +666,7 @@ msgstr "Adresse de livraison"
 #: template/admin/order-view.phtml:37 template/front/detail.phtml:114
 #: template/front/list.phtml:71
 msgid "Address 2"
-msgstr "Adresse 2"
+msgstr "Adresse"
 
 #: src/Form/OrderAddForm.php:212 src/Form/OrderAddForm.php:220
 #: src/Form/OrderForm.php:288 src/Form/OrderForm.php:296
@@ -895,16 +895,16 @@ msgid ""
 "si;ultaneous payments, please proceed one by one. You will be also "
 "redirected to Order Checkout page"
 msgstr ""
-"Vous avez stoppé le process de règlement. Vous allez être redirigé à la page "
-"de validation de commande, où vous pourrez procéder au règlement.</br> Ou "
-"peut être avez vous essayé de lancer plusieurs règlements au même moment : "
-"vous ne pouvez pas procéder à des paiements simultanés, merci de procéder un "
-"par un. Vous allez être également redirigé à la page de Validation de "
-"commande."
+"Vous avez stoppé le processus de règlement. Vous allez être redirigés à la "
+"page de validation de commande, où vous pourrez procéder au règlement.</br> "
+"Ou peut être avez vous essayé de lancer plusieurs règlements au même "
+"moment : vous ne pouvez pas procéder à des paiements simultanés, merci de "
+"procéder un par un. Vous allez être également redirigés à la page de "
+"Validation de commande."
 
 #: src/Form/RemoveForm.php:52
 msgid "I understand"
-msgstr "Je comprend"
+msgstr "Je comprends"
 
 #: src/Form/UpdateCanPayForm.php:41
 msgid "Customer can make payment ?"
@@ -1247,7 +1247,7 @@ msgstr "Attribut personnel"
 
 #: src/Gateway/Paypal/Gateway.php:90
 msgid "Test mode by sandbox"
-msgstr "Mot Test pour la Sandbox"
+msgstr "Mode Test pour la Sandbox"
 
 #: src/Gateway/Paypal/Gateway.php:97
 msgid "Username for sandbox"

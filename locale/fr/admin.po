@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2016-05-31 10:39+0200\n"
+"POT-Creation-Date: 2016-05-31 12:53+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -42,7 +42,7 @@ msgstr "Commande"
 
 #: config/config.php:25
 msgid "Customize"
-msgstr "Personaliser"
+msgstr "Personnaliser"
 
 #: config/config.php:29
 msgid "Payment"
@@ -136,7 +136,7 @@ msgstr "Afficher le Nom Entreprise"
 
 #: config/config.php:160
 msgid "Show company extra (ID , VAT)"
-msgstr "Afficher les infos supplémentaires Societé (ID,VAT)"
+msgstr "Afficher les infos supplémentaires Société (ID,VAT)"
 
 #: config/config.php:168
 msgid "Show delivery address"
@@ -196,7 +196,7 @@ msgstr "URL CGV Commande"
 
 #: config/config.php:268
 msgid "Product additional price"
-msgstr "Prix des produits additionnels"
+msgstr "Coût additionnel Produits"
 
 #: config/config.php:269
 msgid "Additional price as ready and delivery, just for products"
@@ -205,7 +205,7 @@ msgstr ""
 
 #: config/config.php:276
 msgid "Service additional price"
-msgstr "Prix des Services Additionnels"
+msgstr "Coût additionnel Services"
 
 #: config/config.php:277
 msgid "Additional price as setup, just for servicies"
@@ -237,7 +237,7 @@ msgstr "Informations vendeur"
 
 #: config/config.php:308
 msgid "HTML tags supported, use on invoice page"
-msgstr "Tags HTML supporés, utilisé sur la page de facture"
+msgstr "Tags HTML supportés, utilisé sur la page de facture"
 
 #: config/config.php:314
 msgid "Notification email for each module"
@@ -249,7 +249,7 @@ msgstr "Format shop,shop@mysite.com|guide,guide@mysite.com"
 
 #: config/config.php:322
 msgid "Use custom price"
-msgstr "Utilisater les prix personalisés"
+msgstr "Utiliser les prix personnalisés"
 
 #: config/config.php:330
 msgid "Date format"
