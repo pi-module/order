@@ -1911,7 +1911,7 @@ msgstr "Utiliser celle-ci"
 
 #: template/front/checkout.phtml:104
 msgid "Checkout"
-msgstr "Régler"
+msgstr "Validation Commande"
 
 #: template/front/checkout.phtml:109
 msgid "Terms of payment"
