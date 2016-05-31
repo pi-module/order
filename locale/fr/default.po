@@ -353,8 +353,8 @@ msgstr "Cette commande n'est pas active"
 #: src/Controller/Front/IndexController.php:52
 msgid "Your old payment process remove, please try new payment ation"
 msgstr ""
-"Votre ancienne commande a été supprimée, merci de passer une nouvelle "
-"commande"
+"L'ancien processus de règlement a bien été supprimé, vous pouvez maintenant "
+"procéder à votre paiement en ligne !"
 
 #: src/Controller/Front/IndexController.php:54
 #: src/Controller/Front/IndexController.php:62
@@ -2033,16 +2033,16 @@ msgstr "Merci !"
 msgid ""
 "Your payment ends successfully, we need %s to obtain payment confirmation."
 msgstr ""
-"Votre paiement s'est finalisé avec succès, nous devons attendre %s secondes "
-"pour obtenir la confirmation du paiement"
+"Ton paiement a bien été effectué, merci d'attendre %s secondes le temps que "
+"l'on obtienne la confirmation du correct encaissement."
 
 #: template/front/finish.phtml:35
 msgid ""
 "Once received, youll be redirected automatically to your dashboard, and will "
 "be able to create your item !"
 msgstr ""
-"Une fois le règlement reçu, vous serez redirigez automatiquement vers votre "
-"tableau de bord, et pourrez alors créer votre élément !"
+"Une fois le règlement reçu, tu seras redirigé automatiquement vers ton "
+"Espace : tu pourras alors immédiatement commencer à promouvoir ton activité !"
 
 #: template/front/finish.phtml:37
 msgid "Please wait !"
