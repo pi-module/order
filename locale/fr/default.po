@@ -138,7 +138,7 @@ msgid ""
 "Dear %s %s, We active payment for order %s on %s website, and you can pay it "
 "now"
 msgstr ""
-"Chère/Cher %s %s, nous avons activé le paiement pour la commander %s sur le "
+"Chère/Cher %s %s, nous avons activé le paiement pour la commande %s sur le "
 "site web %s, tu peux maintenant procéder au règlement"
 
 #: src/Api/Order.php:79 src/Api/Order.php:166 src/Form/OrderSettingForm.php:44
@@ -404,7 +404,7 @@ msgstr "Votre process de paimeent n'est pas défini"
 
 #: src/Controller/Front/PaymentController.php:150
 msgid "Your IP address changed and processing not valid"
-msgstr "Votre adresse IP a a changé :le process de paiement n'est pas valide"
+msgstr "Votre adresse IP a a changé : le process de paiement n'est pas valide"
 
 #: src/Controller/Front/PaymentController.php:181
 msgid "Your payment wont successfully."
@@ -2033,7 +2033,7 @@ msgstr "Merci !"
 msgid ""
 "Your payment ends successfully, we need %s to obtain payment confirmation."
 msgstr ""
-"Ton paiement a bien été effectué, merci d'attendre %s secondes le temps que "
+"Ton paiement a bien été effectué, merci d'attendre %s secondes, le temps que "
 "l'on obtienne la confirmation du correct encaissement."
 
 #: template/front/finish.phtml:35
