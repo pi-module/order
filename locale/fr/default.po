@@ -1966,7 +1966,7 @@ msgstr "Créer la commande avec les informations utilisateurs"
 
 #: template/front/checkout.phtml:210
 msgid "Your products or services"
-msgstr "Vos produits ou services"
+msgstr "Produits ou services commandés"
 
 #: template/front/checkout.phtml:237
 msgid "Total Price ext VAT"
