@@ -789,7 +789,7 @@ msgstr "Conditions Générales de Vente"
 #: src/Form/OrderForm.php:469
 #, php-format
 msgid "I accept %s"
-msgstr "J'accepte %s"
+msgstr "J'accepte les %s"
 
 #: src/Form/OrderForm.php:489
 msgid "Register and pay"
