@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2015-10-24 18:02+0100\n"
+"POT-Creation-Date: 2016-05-31 12:53+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -42,7 +42,7 @@ msgstr "Commande"
 
 #: config/config.php:25
 msgid "Customize"
-msgstr "Personaliser"
+msgstr "Personnaliser"
 
 #: config/config.php:29
 msgid "Payment"
@@ -135,16 +135,16 @@ msgid "Show company"
 msgstr "Afficher le Nom Entreprise"
 
 #: config/config.php:160
-msgid "Show company extra"
-msgstr "Afficher les infos Entreprise complémentaires"
+msgid "Show company extra (ID , VAT)"
+msgstr "Afficher les infos supplémentaires Société (ID,VAT)"
 
 #: config/config.php:168
-msgid "Show address"
-msgstr "Afficher l'Adresse"
+msgid "Show delivery address"
+msgstr "Afficher l'adresse de livraison"
 
 #: config/config.php:176
-msgid "Show address 2"
-msgstr "Afficher l'Adresse 2"
+msgid "Show invoicing address"
+msgstr "Afficher l'adresse de facturation"
 
 #: config/config.php:184
 msgid "Show country"
@@ -155,7 +155,7 @@ msgid "Country list"
 msgstr "Liste de pays"
 
 #: config/config.php:193
-msgid "Use `|` as delimiter to separate countres"
+msgid "Use `|` as delimiter to separate countries"
 msgstr "Utiliser `|` comme délimiteur pour séparer les pays"
 
 #: config/config.php:198
@@ -196,7 +196,7 @@ msgstr "URL CGV Commande"
 
 #: config/config.php:268
 msgid "Product additional price"
-msgstr "Prix des produits additionnels"
+msgstr "Coût additionnel Produits"
 
 #: config/config.php:269
 msgid "Additional price as ready and delivery, just for products"
@@ -205,7 +205,7 @@ msgstr ""
 
 #: config/config.php:276
 msgid "Service additional price"
-msgstr "Prix des Services Additionnels"
+msgstr "Coût additionnel Services"
 
 #: config/config.php:277
 msgid "Additional price as setup, just for servicies"
@@ -237,7 +237,7 @@ msgstr "Informations vendeur"
 
 #: config/config.php:308
 msgid "HTML tags supported, use on invoice page"
-msgstr "Tags HTML supporés, utilisé sur la page de facture"
+msgstr "Tags HTML supportés, utilisé sur la page de facture"
 
 #: config/config.php:314
 msgid "Notification email for each module"
@@ -249,7 +249,7 @@ msgstr "Format shop,shop@mysite.com|guide,guide@mysite.com"
 
 #: config/config.php:322
 msgid "Use custom price"
-msgstr "Utilisater les prix personalisés"
+msgstr "Utiliser les prix personnalisés"
 
 #: config/config.php:330
 msgid "Date format"
@@ -371,11 +371,11 @@ msgstr "Déduit du crédit utilisateur"
 
 #: config/config.php:435
 msgid "Show plan 1"
-msgstr ""
+msgstr "Show plan 1"
 
 #: config/config.php:443
 msgid "Plan 1 : Title"
-msgstr ""
+msgstr "Plan 1 : Title"
 
 #: config/config.php:447
 msgid "1 month"
@@ -383,23 +383,23 @@ msgstr "1 mois"
 
 #: config/config.php:451
 msgid "Plan 1 : Prepayment"
-msgstr ""
+msgstr "Plan 1 : Prepayment"
 
 #: config/config.php:459
 msgid "Plan 1 : Profit"
-msgstr ""
+msgstr "Plan 1 : Profit"
 
 #: config/config.php:467
 msgid "Plan 1 : Total"
-msgstr ""
+msgstr "Plan 1 : Total"
 
 #: config/config.php:475
 msgid "Show plan 2"
-msgstr ""
+msgstr "Show plan 2"
 
 #: config/config.php:483
 msgid "Plan 2 : Title"
-msgstr ""
+msgstr "Plan 2 : Title"
 
 #: config/config.php:487
 msgid "2 months"
@@ -407,23 +407,23 @@ msgstr "2 mois"
 
 #: config/config.php:491
 msgid "Plan 2 : Prepayment"
-msgstr ""
+msgstr "Plan 2 : Prepayment"
 
 #: config/config.php:499
 msgid "Plan 2 : Profit"
-msgstr ""
+msgstr "Plan 2 : Profit"
 
 #: config/config.php:507
 msgid "Plan 2 : Total"
-msgstr ""
+msgstr "Plan 2 : Total"
 
 #: config/config.php:515
 msgid "Show plan 3"
-msgstr ""
+msgstr "Show plan 3"
 
 #: config/config.php:523
 msgid "Plan 3 : Title"
-msgstr ""
+msgstr "Plan 3 : Title"
 
 #: config/config.php:527
 msgid "3 months"
@@ -431,23 +431,23 @@ msgstr "3 mois"
 
 #: config/config.php:531
 msgid "Plan 3 : Prepayment"
-msgstr ""
+msgstr "Plan 3 : Prepayment"
 
 #: config/config.php:539
 msgid "Plan 3 : Profit"
-msgstr ""
+msgstr "Plan 3 : Profit"
 
 #: config/config.php:547
 msgid "Plan 3 : Total"
-msgstr ""
+msgstr "Plan 3 : Total"
 
 #: config/config.php:555
 msgid "Show plan 4"
-msgstr ""
+msgstr "Show plan 4"
 
 #: config/config.php:563
 msgid "Plan 4 : Title"
-msgstr ""
+msgstr "Plan 4 : Title"
 
 #: config/config.php:567
 msgid "4 months"
@@ -455,23 +455,23 @@ msgstr "4 mois"
 
 #: config/config.php:571
 msgid "Plan 4 : Prepayment"
-msgstr ""
+msgstr "Plan 4 : Prepayment"
 
 #: config/config.php:579
 msgid "Plan 4 : Profit"
-msgstr ""
+msgstr "Plan 4 : Profit"
 
 #: config/config.php:587
 msgid "Plan 4 : Total"
-msgstr ""
+msgstr "Plan 4 : Total"
 
 #: config/config.php:595
 msgid "Show plan 5"
-msgstr ""
+msgstr "Show plan 5"
 
 #: config/config.php:603
 msgid "Plan 5 : Title"
-msgstr ""
+msgstr "Plan 5 : Title"
 
 #: config/config.php:607
 msgid "5 months"
@@ -479,23 +479,23 @@ msgstr "5 mois"
 
 #: config/config.php:611
 msgid "Plan 5 : Prepayment"
-msgstr ""
+msgstr "Plan 5 : Prepayment"
 
 #: config/config.php:619
 msgid "Plan 5 : Profit"
-msgstr ""
+msgstr "Plan 5 : Profit"
 
 #: config/config.php:627
 msgid "Plan 5 : Total"
-msgstr ""
+msgstr "Plan 5 : Total"
 
 #: config/config.php:635
 msgid "Show plan 6"
-msgstr ""
+msgstr "Show plan 6"
 
 #: config/config.php:643
 msgid "Plan 6 : Title"
-msgstr ""
+msgstr "Plan 6 : Title"
 
 #: config/config.php:647
 msgid "6 months"
@@ -503,23 +503,23 @@ msgstr "6 mois"
 
 #: config/config.php:651
 msgid "Plan 6 : Prepayment"
-msgstr ""
+msgstr "Plan 6 : Prepayment"
 
 #: config/config.php:659
 msgid "Plan 6 : Profit"
-msgstr ""
+msgstr "Plan 6 : Profit"
 
 #: config/config.php:667
 msgid "Plan 6 : Total"
-msgstr ""
+msgstr "Plan 6 : Total"
 
 #: config/config.php:675
 msgid "Show plan 7"
-msgstr ""
+msgstr "Show plan 7"
 
 #: config/config.php:683
 msgid "Plan 7 : Title"
-msgstr ""
+msgstr "Plan 7 : Title"
 
 #: config/config.php:687
 msgid "7 months"
@@ -527,23 +527,23 @@ msgstr "7 mois"
 
 #: config/config.php:691
 msgid "Plan 7 : Prepayment"
-msgstr ""
+msgstr "Plan 7 : Prepayment"
 
 #: config/config.php:699
 msgid "Plan 7 : Profit"
-msgstr ""
+msgstr "Plan 7 : Profit"
 
 #: config/config.php:707
 msgid "Plan 7 : Total"
-msgstr ""
+msgstr "Plan 7 : Total"
 
 #: config/config.php:715
 msgid "Show plan 8"
-msgstr ""
+msgstr "Show plan 8"
 
 #: config/config.php:723
 msgid "Plan 8 : Title"
-msgstr ""
+msgstr "Plan 8 : Title"
 
 #: config/config.php:727
 msgid "8 months"
@@ -551,23 +551,23 @@ msgstr "8 mois"
 
 #: config/config.php:731
 msgid "Plan 8 : Prepayment"
-msgstr ""
+msgstr "Plan 8 : Prepayment"
 
 #: config/config.php:739
 msgid "Plan 8 : Profit"
-msgstr ""
+msgstr "Plan 8 : Profit"
 
 #: config/config.php:747
 msgid "Plan 8 : Total"
-msgstr ""
+msgstr "Plan 8 : Total"
 
 #: config/config.php:755
 msgid "Show plan 9"
-msgstr ""
+msgstr "Show plan 9"
 
 #: config/config.php:763
 msgid "Plan 9 : Title"
-msgstr ""
+msgstr "Plan 9 : Title"
 
 #: config/config.php:767
 msgid "9 months"
@@ -575,23 +575,23 @@ msgstr "9 mois"
 
 #: config/config.php:771
 msgid "Plan 9 : Prepayment"
-msgstr ""
+msgstr "Plan 9 : Prepayment"
 
 #: config/config.php:779
 msgid "Plan 9 : Profit"
-msgstr ""
+msgstr "Plan 9 : Profit"
 
 #: config/config.php:787
 msgid "Plan 9 : Total"
-msgstr ""
+msgstr "Plan 9 : Total"
 
 #: config/config.php:795
 msgid "Show plan 10"
-msgstr ""
+msgstr "Show plan 10"
 
 #: config/config.php:803
 msgid "Plan 10 : Title"
-msgstr ""
+msgstr "Plan 10 : Title"
 
 #: config/config.php:807
 msgid "10 months"
@@ -599,15 +599,19 @@ msgstr "10 mois"
 
 #: config/config.php:811
 msgid "Plan 10 : Prepayment"
-msgstr ""
+msgstr "Plan 10 : Prepayment"
 
 #: config/config.php:819
 msgid "Plan 10 : Profit"
-msgstr ""
+msgstr "Plan 10 : Profit"
 
 #: config/config.php:827
 msgid "Plan 10 : Total"
-msgstr ""
+msgstr "Plan 10 : Total"
+
+#: config/config.php:836
+msgid "Description for checkup page"
+msgstr "Description pour la page de Checkout"
 
 #: config/module.php:16 config/navigation.php:19 config/page.php:17
 #: config/permission.php:17
@@ -637,6 +641,34 @@ msgstr "Livraison"
 #: config/navigation.php:49 config/page.php:42 config/permission.php:42
 msgid "Location"
 msgstr "Lieu"
+
+#: config/page.php:50
+msgid "Index page"
+msgstr "Page Index"
+
+#: config/page.php:56
+msgid "Checkout"
+msgstr "Checkout"
+
+#: config/page.php:62
+msgid "Detail"
+msgstr "Détails"
+
+#: config/permission.php:50
+msgid "Global public resource"
+msgstr "Ressource publique globale"
+
+#~ msgid "Show company extra"
+#~ msgstr "Afficher les infos Entreprise complémentaires"
+
+#~ msgid "Show address"
+#~ msgstr "Afficher l'Adresse"
+
+#~ msgid "Show address 2"
+#~ msgstr "Afficher l'Adresse 2"
+
+#~ msgid "Use `|` as delimiter to separate countres"
+#~ msgstr "Utiliser `|` comme délimiteur pour séparer les pays"
 
 #~ msgid "Payment gateway"
 #~ msgstr "Passerelle de paiement"
