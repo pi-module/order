@@ -264,6 +264,10 @@
                         <td class="col-md-8"><?php echo $this->escape($invoice['vat_price_view']); ?></td>
                     </tr>
                     <tr>
+                        <td class="col-md-4"><?php _e('Discount'); ?></td>
+                        <td class="col-md-8"><?php echo $this->escape($invoice['discount_price_view']); ?></td>
+                    </tr>
+                    <tr>
                         <td class="col-md-4"><?php _e('Total all taxes included'); ?></td>
                         <td class="col-md-8"><strong><?php echo $this->escape($invoice['total_price_view']); ?></strong>
                         </td>

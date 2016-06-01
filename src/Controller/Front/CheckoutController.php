@@ -241,12 +241,12 @@ class CheckoutController extends IndexController
                 }
 
                 // Set price values
+                $values['discount_price'] = isset($cart['total_discount']) ? $cart['total_discount'] : 0;
+                $values['shipping_price'] = isset($cart['total_shipping']) ? $cart['total_shipping'] : 0;
+                $values['packing_price'] = isset($cart['total_packing']) ? $cart['total_packing'] : 0;
+                $values['setup_price'] = isset($cart['total_setup']) ? $cart['total_setup'] : 0;
+                $values['vat_price'] = isset($cart['total_vat']) ? $cart['total_vat'] : 0;
                 $values['product_price'] = 0;
-                $values['discount_price'] = 0;
-                $values['shipping_price'] = 0;
-                $values['packing_price'] = 0;
-                $values['setup_price'] = 0;
-                $values['vat_price'] = 0;
                 $values['total_price'] = 0;
 
                 // Check order values
@@ -433,12 +433,12 @@ class CheckoutController extends IndexController
         }
 
         // Set price
+        $price['discount'] = isset($cart['total_discount']) ? $cart['total_discount'] : 0;
+        $price['shipping'] = isset($cart['total_shipping']) ? $cart['total_shipping'] : 0;
+        $price['packing'] = isset($cart['total_packing']) ? $cart['total_packing'] : 0;
+        $price['setup'] = isset($cart['total_setup']) ? $cart['total_setup'] : 0;
+        $price['vat'] = isset($cart['total_vat']) ? $cart['total_vat'] : 0;
         $price['product'] = 0;
-        $price['discount'] = 0;
-        $price['shipping'] = 0;
-        $price['packing'] = 0;
-        $price['setup'] = 0;
-        $price['vat'] = 0;
         $price['total'] = 0;
         foreach ($cart['product'] as $product) {
             // Check setup price

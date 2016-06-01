@@ -412,6 +412,7 @@ class Invoice extends AbstractApi
         // Set price
         $invoice['product_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['product_price']);
         $invoice['shipping_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['shipping_price']);
+        $invoice['discount_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['discount_price']);
         $invoice['packing_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['packing_price']);
         $invoice['setup_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['setup_price']);
         $invoice['vat_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['vat_price']);
