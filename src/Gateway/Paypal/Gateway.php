@@ -303,7 +303,7 @@ class Gateway extends AbstractGateway
         $this->gatewayPayInformation['no_shipping'] = 1;
         $this->gatewayPayInformation['first_name'] = $order['first_name'];
         $this->gatewayPayInformation['last_name'] = $order['last_name'];
-        $this->gatewayPayInformation['address1'] = $order['address1'];
+        $this->gatewayPayInformation['address1'] = (!empty($order['address1'])) ? $order['address1'] : $order['address2'];
         $this->gatewayPayInformation['address2'] = $order['address2'];
         $this->gatewayPayInformation['address_override'] = 1;
         $this->gatewayPayInformation['city'] = $order['city'];
