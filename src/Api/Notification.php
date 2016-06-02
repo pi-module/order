@@ -66,7 +66,7 @@ class Notification extends AbstractApi
         $information = array(
             'first_name' => $order['first_name'],
             'last_name' => $order['last_name'],
-            'order_id' => $order['code'],
+            'order_id' => (!empty($order['code'])) ? $order['code'] : $order['id'],
             'order_link' => $link,
             'product_list' => $productList,
             'product_price' => $productPrice,
