@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2016-02-11 10:31+0330\n"
+"POT-Creation-Date: 2016-06-02 13:53+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _a;_t\n"
 "X-Poedit-Basepath: ../..\n"
@@ -133,16 +133,16 @@ msgid "Show company"
 msgstr "نمایش شرکت"
 
 #: config/config.php:160
-msgid "Show company extra"
+msgid "Show company extra (ID , VAT)"
 msgstr "نمایش اطلاعات اضافی شرکت"
 
 #: config/config.php:168
-msgid "Show address"
-msgstr "نمایش آدرس"
+msgid "Show delivery address"
+msgstr "نمایش آدرس تحویل"
 
 #: config/config.php:176
-msgid "Show address 2"
-msgstr "نمایش آدرس دوم"
+msgid "Show invoicing address"
+msgstr "نمایش آدرس فاکتور"
 
 #: config/config.php:184
 msgid "Show country"
@@ -153,7 +153,7 @@ msgid "Country list"
 msgstr "فهرست کشور ها"
 
 #: config/config.php:193
-msgid "Use `|` as delimiter to separate countres"
+msgid "Use `|` as delimiter to separate countries"
 msgstr "با استفاده از `|` کشور ها را از هم جدا کنید"
 
 #: config/config.php:198
@@ -600,6 +600,10 @@ msgstr "پلن ۱۰ : سود"
 msgid "Plan 10 : Total"
 msgstr "پلن ۱۰ : تعداد اقساط"
 
+#: config/config.php:836
+msgid "Description for checkup page"
+msgstr "توضیحات مربوط به صفحه ثبت سفارش"
+
 #: config/module.php:16 config/navigation.php:19 config/page.php:17
 #: config/permission.php:17
 msgid "Orders"
@@ -628,6 +632,34 @@ msgstr "روش ارسال"
 #: config/navigation.php:49 config/page.php:42 config/permission.php:42
 msgid "Location"
 msgstr "مکان تحویل"
+
+#: config/page.php:50
+msgid "Index page"
+msgstr "صفحه اصلی"
+
+#: config/page.php:56
+msgid "Checkout"
+msgstr "ثبت سفارش"
+
+#: config/page.php:62
+msgid "Detail"
+msgstr "اطلاعات سفارش"
+
+#: config/permission.php:50
+msgid "Global public resource"
+msgstr "دسترسی های عمومی"
+
+#~ msgid "Show company extra"
+#~ msgstr "نمایش اطلاعات اضافی شرکت"
+
+#~ msgid "Show address"
+#~ msgstr "نمایش آدرس"
+
+#~ msgid "Show address 2"
+#~ msgstr "نمایش آدرس دوم"
+
+#~ msgid "Use `|` as delimiter to separate countres"
+#~ msgstr "با استفاده از `|` کشور ها را از هم جدا کنید"
 
 #~ msgid "Order term text"
 #~ msgstr "متن شرایط سفارش"
