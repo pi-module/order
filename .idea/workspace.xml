@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="eb89c1a1-3ca6-4284-b00d-d0e1e5682c61" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Gateway/Paypal/Gateway.php" afterPath="$PROJECT_DIR$/src/Gateway/Paypal/Gateway.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/front/pay.phtml" afterPath="$PROJECT_DIR$/template/front/pay.phtml" />
     </list>
     <ignored path="order.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,11 +28,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Gateway.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Gateway.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Gateway/Paypal/Gateway.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
               <caret line="305" column="119" selection-start-line="305" selection-start-column="119" selection-end-line="305" selection-end-column="119" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pay.phtml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/template/front/pay.phtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -95,6 +105,7 @@
         <option value="$PROJECT_DIR$/src/Api/Invoice.php" />
         <option value="$PROJECT_DIR$/src/Api/Notification.php" />
         <option value="$PROJECT_DIR$/src/Gateway/Paypal/Gateway.php" />
+        <option value="$PROJECT_DIR$/template/front/pay.phtml" />
       </list>
     </option>
   </component>
@@ -151,6 +162,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="template" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="front" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="template" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -283,7 +326,7 @@
       <workItem from="1464778400506" duration="2602000" />
       <workItem from="1464781356900" duration="247000" />
       <workItem from="1464784631801" duration="70000" />
-      <workItem from="1464857868853" duration="583000" />
+      <workItem from="1464857868853" duration="859000" />
     </task>
     <task id="LOCAL-00001" summary="Fix order module">
       <created>1454310931206</created>
@@ -453,11 +496,18 @@
       <option name="project" value="LOCAL" />
       <updated>1464858256157</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Fix address">
+      <created>1464858460049</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1464858460049</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22093000" />
+    <option name="totallyTimeSpent" value="22369000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -537,20 +587,14 @@
     <MESSAGE value="update paypal" />
     <MESSAGE value="update template" />
     <MESSAGE value="Fix order id" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix order id" />
+    <MESSAGE value="Fix address" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix address" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/GatewayController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/template/admin/gateway-index.phtml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -903,6 +947,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="305" column="119" selection-start-line="305" selection-start-column="119" selection-end-line="305" selection-end-column="119" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/front/pay.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
           <folding />
         </state>
       </provider>
