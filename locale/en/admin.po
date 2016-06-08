@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi order module\n"
-"POT-Creation-Date: 2016-02-11 10:30+0330\n"
+"POT-Creation-Date: 2016-06-08 13:30+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _a;_t\n"
 "X-Poedit-Basepath: ../..\n"
@@ -131,15 +131,15 @@ msgid "Show company"
 msgstr ""
 
 #: config/config.php:160
-msgid "Show company extra"
+msgid "Show company extra (ID , VAT)"
 msgstr ""
 
 #: config/config.php:168
-msgid "Show address"
+msgid "Show delivery address"
 msgstr ""
 
 #: config/config.php:176
-msgid "Show address 2"
+msgid "Show invoicing address"
 msgstr ""
 
 #: config/config.php:184
@@ -151,7 +151,7 @@ msgid "Country list"
 msgstr ""
 
 #: config/config.php:193
-msgid "Use `|` as delimiter to separate countres"
+msgid "Use `|` as delimiter to separate countries"
 msgstr ""
 
 #: config/config.php:198
@@ -590,6 +590,10 @@ msgstr ""
 msgid "Plan 10 : Total"
 msgstr ""
 
+#: config/config.php:836
+msgid "Description for checkup page"
+msgstr ""
+
 #: config/module.php:16 config/navigation.php:19 config/page.php:17
 #: config/permission.php:17
 msgid "Orders"
@@ -617,4 +621,20 @@ msgstr ""
 
 #: config/navigation.php:49 config/page.php:42 config/permission.php:42
 msgid "Location"
+msgstr ""
+
+#: config/page.php:50
+msgid "Index page"
+msgstr ""
+
+#: config/page.php:56
+msgid "Checkout"
+msgstr ""
+
+#: config/page.php:62
+msgid "Detail"
+msgstr ""
+
+#: config/permission.php:50
+msgid "Global public resource"
 msgstr ""

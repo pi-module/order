@@ -30,11 +30,11 @@ $this->backbone();
                             <span><?php echo $this->escape($order['id_number']); ?></span></p>
                     <?php } ?>
                     <?php if (!empty($order['address1'])) { ?>
-                        <p><strong><?php _e('Address 1'); ?></strong> :
+                        <p><strong><?php _e('Delivery address'); ?></strong> :
                             <span><?php echo $this->escape($order['address1']); ?></span></p>
                     <?php } ?>
                     <?php if (!empty($order['address2'])) { ?>
-                        <p><strong><?php _e('Address 2'); ?></strong> :
+                        <p><strong><?php _e('Invoicing Address'); ?></strong> :
                             <span><?php echo $this->escape($order['address2']); ?></span></p>
                     <?php } ?>
                     <?php if (!empty($order['city'])) { ?>

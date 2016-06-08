@@ -6,85 +6,90 @@ $this->css(array(
 $this->jQuery();
 $this->backbone();
 $script = <<<'EOT'
-    (function($) {
-        var page = {
-            el: $('#js-order'),
-            $: function(selector) {
-                return this.el.find(selector);
-            },
-            init: function() {
-                _.bindAll(this);
-                this.$('#select-location').on("change",this.locationAction);
-                this.$('#select-delivery').on("change",this.deliveryAction);
-                this.$('#select-payment').on("change",this.paymentAction);
-                this.$('.showCustomerFrom').on("click",this.makeOrderAction);
-            },
-            locationAction: function(e) {
-                var url = "%s";
-                $.getJSON(url + $('#select-location').val()).done(function(result) {
-                    if (result.status == 1) {
-                        var htmlOptins = '';
-                        $.each(result.data, function( index, value ) {
-                            if (value.status==1) {
-                                htmlOptins = htmlOptins
-                                    + "<option value='" + value.delivery + "'>"
-                                    + value.title + " - "
-                                    + " %s " + value.price + " - "
-                                    + " %s " + value.delivery_time  + " %s "
-                                    + "</option>";
-                            } else {
-                                htmlOptins = htmlOptins
-                                    + "<option value='" + value.delivery + "'>" + value.title + "</option>";
-                            }
-                        });
-                        $('#select-delivery').html(htmlOptins);
-                    }
-                    $('#cart-location').html(result.location);
-                });
-            },
-            deliveryAction: function(e) {
-                var url = "%s";
-                $.getJSON(url + $('#select-delivery').val()).done(function(result) {
-                    if (result.status == 1) {
-                        $('#cart-total-shipping').html(result.data.shipping);
-                        $('#cart-total-total').html(result.data.total);
-                        var htmlOptins = '';
-                        $.each(result.data.payment, function( index, value ) {
-                            if (value.status==1) {
-                                htmlOptins = htmlOptins
-                                    + "<option value='" + value.path + "'>"  + value.title + "</option>";
-                            }
-                        });
-                        $('#select-payment').html(htmlOptins);
-                    }
-                    $('#cart-delivery').html(result.delivery);
-                    $('#cart-payment').html(result.payment);
-                });
-            },
-            paymentAction: function(e) {
-                var url = "%s";
-                $.getJSON(url + $('#select-payment').val()).done(function(result) {
-                    if (result.status == 1) {
-                        $('#cart-location').html(result.data.location);
-                        $('#cart-delivery').html(result.data.delivery);
-                        $('#cart-payment').html(result.data.payment);
-                    }
-                });
-            },
-            makeOrderAction: function (e) {
-                var p = $(e.target).parents('.customer-single'),
-                    self = this;
-                if ($('#' + p.attr('data-id')).hasClass('hidden')) {
-                    $('#' + p.attr('data-id')).removeClass('hidden');
-                    $('#' + p.attr('data-button')).removeClass('btn-success').addClass('btn-danger').html("%s");
+(function($) {
+    var page = {
+        el: $('#js-order'),
+        $: function(selector) {
+            return this.el.find(selector);
+        },
+        init: function() {
+            _.bindAll(this);
+            this.$('#select-location').on("change",this.locationAction);
+            this.$('#select-delivery').on("change",this.deliveryAction);
+            this.$('#select-payment').on("change",this.paymentAction);
+            this.$('.showCustomerFrom').on("click",this.makeOrderAction);
+        },
+        locationAction: function(e) {
+            var url = "%s";
+            $.getJSON(url + $('#select-location').val()).done(function(result) {
+                if (result.status == 1) {
+                    var htmlOptins = '';
+                    $.each(result.data, function( index, value ) {
+                        if (value.status==1) {
+                            htmlOptins = htmlOptins
+                                + "<option value='" + value.delivery + "'>"
+                                + value.title + " - "
+                                + " %s " + value.price + " - "
+                                + " %s " + value.delivery_time  + " %s "
+                                + "</option>";
+                        } else {
+                            htmlOptins = htmlOptins
+                                + "<option value='" + value.delivery + "'>" + value.title + "</option>";
+                        }
+                    });
+                    $('#select-delivery').html(htmlOptins);
+                }
+                $('#cart-location').html(result.location);
+            });
+        },
+        deliveryAction: function(e) {
+            var url = "%s";
+            $.getJSON(url + $('#select-delivery').val()).done(function(result) {
+                if (result.status == 1) {
+                    $('#cart-total-shipping').html(result.data.shipping);
+                    $('#cart-total-total').html(result.data.total);
+                    var htmlOptins = '';
+                    $.each(result.data.payment, function( index, value ) {
+                        if (value.status==1) {
+                            htmlOptins = htmlOptins
+                                + "<option value='" + value.path + "'>"  + value.title + "</option>";
+                        }
+                    });
+                    $('#select-payment').html(htmlOptins);
+                }
+                $('#cart-delivery').html(result.delivery);
+                $('#cart-payment').html(result.payment);
+            });
+        },
+        paymentAction: function(e) {
+            var url = "%s";
+            $.getJSON(url + $('#select-payment').val()).done(function(result) {
+                if (result.status == 1) {
+                    $('#cart-location').html(result.data.location);
+                    $('#cart-delivery').html(result.data.delivery);
+                    $('#cart-payment').html(result.data.payment);
+                }
+            });
+        },
+        makeOrderAction: function (e) {
+            var p = $(e.target).parents('.customer-single'),
+                self = this;
+            if ($('#' + p.attr('data-id')).hasClass('hidden')) {
+                $('#' + p.attr('data-id')).removeClass('hidden');
+                $('#' + p.attr('data-button')).removeClass('btn-success').addClass('btn-danger').html("%s");
+            } else {
+                if (p.attr('data-id') == 'customerFromNew') {
+                    $('#' + p.attr('data-id')).addClass('hidden');
+                    $('#' + p.attr('data-button')).removeClass('btn-danger').addClass('btn-success').html("%s");
                 } else {
                     $('#' + p.attr('data-id')).addClass('hidden');
                     $('#' + p.attr('data-button')).removeClass('btn-danger').addClass('btn-success').html("%s");
                 }
-            },
-        }
-        page.init();
-    })(jQuery)
+            }
+        },
+    }
+    page.init();
+})(jQuery)
 EOT;
 $script = sprintf(
     $script,
@@ -95,6 +100,7 @@ $script = sprintf(
     Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'level', 'process' => 'delivery', 'id' => ''))),
     Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'level', 'process' => 'payment', 'id' => ''))),
     __('Cancel'),
+    __('Create'),
     __('Use it')
 );
 $this->footScript()->appendScript($script);
@@ -144,6 +150,10 @@ $this->footScript()->appendScript($script);
                                         <li><?php echo $this->escape($customer['first_name']); ?></li>
                                         <li><?php echo $this->escape($customer['last_name']); ?></li>
                                         <li>( <?php echo $this->escape($customer['email']); ?> )</li>
+                                        <?php if (!empty($customer['company'])) { ?>
+                                            <li> - </li>
+                                            <li><?php echo $this->escape($customer['company']); ?></li>
+                                        <?php } ?>
                                     </ul>
                                 </th>
                                 <td colspan="1" class="col-md-3 text-center">
@@ -161,16 +171,17 @@ $this->footScript()->appendScript($script);
                                 !empty($customer['mobile'])) { ?>
                                 <tr>
                                     <td class="col-md-6">
-                                        <p><strong><?php _e('Address'); ?></strong> : <?php echo $this->escape($customer['address1']); ?></p>
-                                        <p><strong><?php _e('Zip code'); ?></strong> : <?php echo $this->escape($customer['zip_code']); ?></p>
+                                        <?php if (!empty($customer['address1'])) { ?><p><strong><?php _e('Delivery address'); ?></strong> : <?php echo $this->escape($customer['address1']); ?></p><?php } ?>
+                                        <?php if (!empty($customer['address2'])) { ?><p><strong><?php _e('Invoicing address'); ?></strong> : <?php echo $this->escape($customer['address2']); ?></p><?php } ?>
+                                        <?php if (!empty($customer['zip_code'])) { ?><p><strong><?php _e('Zip code'); ?></strong> : <?php echo $this->escape($customer['zip_code']); ?></p><?php } ?>
                                     </td>
                                     <td class="col-md-3">
-                                        <p><strong><?php _e('State'); ?></strong> : <?php echo $this->escape($customer['state']); ?></p>
-                                        <p><strong><?php _e('City'); ?></strong> : <?php echo $this->escape($customer['city']); ?></p>
+                                        <?php if (!empty($customer['state'])) { ?><p><strong><?php _e('State'); ?></strong> : <?php echo $this->escape($customer['state']); ?></p><?php } ?>
+                                        <?php if (!empty($customer['city'])) { ?><p><strong><?php _e('City'); ?></strong> : <?php echo $this->escape($customer['city']); ?></p><?php } ?>
                                     </td>
                                     <td class="col-md-3">
-                                        <p><strong><?php _e('Phone'); ?></strong> : <?php echo $this->escape($customer['phone']); ?></p>
-                                        <p><strong><?php _e('Mobile'); ?></strong> : <?php echo $this->escape($customer['mobile']); ?></p>
+                                        <?php if (!empty($customer['phone'])) { ?><p><strong><?php _e('Phone'); ?></strong> : <?php echo $this->escape($customer['phone']); ?></p><?php } ?>
+                                        <?php if (!empty($customer['mobile'])) { ?><p><strong><?php _e('Mobile'); ?></strong> : <?php echo $this->escape($customer['mobile']); ?></p><?php } ?>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -188,11 +199,11 @@ $this->footScript()->appendScript($script);
                 <div class="customer-single well well-sm clearfix" data-id="customerFromNew" data-button="customerFromButtonNew">
                     <div class="page-header row">
                         <div class="col-md-9">
-                            <h3><?php _e("Make order by new customer information"); ?></h3>
+                            <h3><?php _e("Create order with a new address"); ?></h3>
                         </div>
                         <dic class="col-md-3 text-center">
                             <button id="customerFromButtonNew" class="showCustomerFrom btn btn-success btn-sm">
-                                <?php _e('Use it'); ?>
+                                <?php _e('Create'); ?>
                             </button>
                         </dic>
                     </div>

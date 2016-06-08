@@ -172,7 +172,7 @@ class OrderSimpleForm extends BaseForm
             $this->add(array(
                 'name' => 'address2',
                 'options' => array(
-                    'label' => __('Address 2'),
+                    'label' => __('Invoicing Address'),
                 ),
                 'attributes' => array(
                     'type' => 'hidden',
