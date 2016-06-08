@@ -188,7 +188,7 @@ class OrderForm extends BaseForm
             }
         }
         // address
-        if ($this->config['order_address'] && !in_array('address1', $registerFieldsName)) {
+        if ($this->config['order_address1'] && !in_array('address1', $registerFieldsName)) {
             $this->add(array(
                 'name' => 'address1',
                 'options' => array(

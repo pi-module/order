@@ -171,8 +171,8 @@ class OrderFilter extends InputFilter
                 ));
             }
         }
-        // address
-        if ($config['order_address'] && !in_array('address1', $registerFiltersName)) {
+        // address1
+        if ($config['order_address1'] && !in_array('address1', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'address1',
                 'required' => true,

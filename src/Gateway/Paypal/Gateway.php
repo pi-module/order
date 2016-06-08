@@ -299,12 +299,25 @@ class Gateway extends AbstractGateway
             $this->gatewayPayInformation['tax_' . $i] = $product['vat_price'];
             $i++;
         }
+        // Set address
+        $address = '';
+        if ($config['order_address1'] && $config['order_address1']) {
+            if (!empty($order['address1'])) {
+                $address = $order['address1'];
+            } elseif (!empty($order['address2'])) {
+                $address = $order['address2'];
+            }
+        } elseif ($config['order_address1']) {
+            $address = $order['address1'];
+        } elseif ($config['order_address2']) {
+            $address = $order['address2'];
+        }
         // Set payment information
         $this->gatewayPayInformation['no_shipping'] = 1;
         $this->gatewayPayInformation['first_name'] = $order['first_name'];
         $this->gatewayPayInformation['last_name'] = $order['last_name'];
-        $this->gatewayPayInformation['address1'] = (!empty($order['address1'])) ? $order['address1'] : $order['address2'];
-        $this->gatewayPayInformation['address2'] = $order['address2'];
+        $this->gatewayPayInformation['address1'] = $address;
+        $this->gatewayPayInformation['address2'] = '';
         $this->gatewayPayInformation['address_override'] = 1;
         $this->gatewayPayInformation['city'] = $order['city'];
         $this->gatewayPayInformation['state'] = $order['state'];

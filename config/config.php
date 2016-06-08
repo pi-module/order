@@ -163,7 +163,7 @@ return array(
             'filter' => 'number_int',
             'value' => 1
         ),
-        'order_address' => array(
+        'order_address1' => array(
             'category' => 'order',
             'title' => _a('Show delivery address'),
             'description' => '',
