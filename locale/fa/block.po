@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2016-06-08 13:29+0430\n"
+"POT-Creation-Date: 2016-06-13 14:03+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -147,11 +147,11 @@ msgstr "کد مالیات"
 
 #: template/block/detail.phtml:148
 msgid "Delivery address"
-msgstr ""
+msgstr "آدرس تحویل"
 
 #: template/block/detail.phtml:152
 msgid "Invoicing Address"
-msgstr ""
+msgstr "آدرس فاکتور"
 
 #: template/block/detail.phtml:162 template/block/detail.phtml:163
 #: template/block/installment.phtml:280
