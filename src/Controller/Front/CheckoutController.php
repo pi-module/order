@@ -49,6 +49,8 @@ class CheckoutController extends IndexController
                 $this->jump(Pi::url(), __('Your cart is empty.'), 'error');
             }
         }
+        // Set check
+        $check = false;
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Set cart
@@ -397,6 +399,7 @@ class CheckoutController extends IndexController
                     $this->view()->assign('error', $error);
                 }
             } elseif (Pi::service('authentication')->hasIdentity()) {
+                $check = true;
                 $forms = array();
                 $forms['new'] = $form;
                 // Set customer forms
@@ -487,6 +490,7 @@ class CheckoutController extends IndexController
         $this->view()->assign('price', $price);
         $this->view()->assign('config', $config);
         $this->view()->assign('customers', $customers);
+        $this->view()->assign('check', $check);
     }
 
     public function installmentAction()

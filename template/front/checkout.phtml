@@ -100,7 +100,7 @@ $script = sprintf(
     Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'level', 'process' => 'delivery', 'id' => ''))),
     Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'level', 'process' => 'payment', 'id' => ''))),
     __('Cancel'),
-    __('Create'),
+    __('Create new address'),
     __('Use it')
 );
 $this->footScript()->appendScript($script);
@@ -203,11 +203,11 @@ $this->footScript()->appendScript($script);
                         </div>
                         <dic class="col-md-3 text-center">
                             <button id="customerFromButtonNew" class="showCustomerFrom btn btn-success btn-sm">
-                                <?php _e('Create'); ?>
+                                <?php _e('Create new address'); ?>
                             </button>
                         </dic>
                     </div>
-                    <div id="customerFromNew" class="clearfix col-md-12 hidden">
+                    <div id="customerFromNew" class="clearfix col-md-12 <?php if (!$check) { echo 'hidden';} ?>">
                         <?php echo $this->form($forms['new']); ?>
                     </div>
                 </div>
