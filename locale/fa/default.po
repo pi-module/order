@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2016-06-13 14:04+0430\n"
+"POT-Creation-Date: 2016-07-08 19:58+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -303,32 +303,32 @@ msgid "New order added and data saved successfully."
 msgstr "سفارش جدید ساخته شد و اطلاعات آن با موفقیت ذخیره شد"
 
 #: src/Controller/Front/CheckoutController.php:49
-#: src/Controller/Front/CheckoutController.php:58
-#: src/Controller/Front/CheckoutController.php:502
+#: src/Controller/Front/CheckoutController.php:60
+#: src/Controller/Front/CheckoutController.php:506
 msgid "Your cart is empty."
 msgstr "سبد خرید شما خالی است"
 
-#: src/Controller/Front/CheckoutController.php:63
-#: src/Controller/Front/CheckoutController.php:507
+#: src/Controller/Front/CheckoutController.php:65
+#: src/Controller/Front/CheckoutController.php:511
 msgid "So sorry, At this moment order is inactive"
 msgstr "متاسفانه در این لحظه امکان ثبت سفارش وجود ندارد"
 
-#: src/Controller/Front/CheckoutController.php:94
+#: src/Controller/Front/CheckoutController.php:96
 msgid "User information was not completed and user account was not saved."
 msgstr "اطلاعات کابری تکمیل نیست و حساب کاربری ساخته نشده است."
 
-#: src/Controller/Front/CheckoutController.php:116
+#: src/Controller/Front/CheckoutController.php:118
 msgid "User account was not saved."
 msgstr "حساب کاربری ذخیره نشده است."
 
-#: src/Controller/Front/CheckoutController.php:518
+#: src/Controller/Front/CheckoutController.php:522
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 "پلن قسطی سفارش شما با موفقت ذخیره شد، لطفا اطلاعات مورد نیاز را تکمیل "
 "فرمایید و بعد از آن پیش قسط مربوط به این سفارش را پرداخت نمایید."
 
-#: src/Controller/Front/CheckoutController.php:649
+#: src/Controller/Front/CheckoutController.php:653
 #: src/Form/Element/Gateway.php:28
 msgid "Offline"
 msgstr "آفلاین"
@@ -1467,7 +1467,6 @@ msgstr "لغو شده"
 
 #: template/admin/invoice-edit.phtml:23 template/admin/invoice-edit.phtml:118
 #: template/admin/invoice-view.phtml:26 template/admin/invoice-view.phtml:121
-#: template/front/checkout.phtml:103 template/front/checkout.phtml:206
 msgid "Create"
 msgstr "زمان ایجاد"
 
@@ -1890,9 +1889,13 @@ msgstr "زمان : "
 msgid "Cancel"
 msgstr "لغو"
 
+#: template/front/checkout.phtml:103 template/front/checkout.phtml:206
+msgid "Create new address"
+msgstr "ثبت سفارش با آدرس جدید"
+
 #: template/front/checkout.phtml:104 template/front/checkout.phtml:161
 msgid "Use it"
-msgstr "استفاده"
+msgstr "ثبت سفارش با استفاده از این اطلاعات"
 
 #: template/front/checkout.phtml:110
 msgid "Checkout"
@@ -1918,11 +1921,9 @@ msgid ""
 "products or services be in stock we active payment option and send "
 "notification for you"
 msgstr ""
-"یکی از محصولات یا خدمات انتخاب شما دارای موجودی متغیر است، در نتیجه گزینه "
-"پرداخت آنلاین بعد از ثبت این سفارش برای شما غیر فعال می باشد ، ما سفارش شما "
-"و موجودی کالا را بررسی خواهیم کرد و بعد از موجود کردن محصول مورد نظر شما "
-"امکان پرداخت را فعال می کنیم و شما را از طریق اس ام اس و ایمیل مطلع خواهیم "
-"کرد."
+"یکی از کالاهای انتخابی شما دارای موجودی متغیر است و یا سایز آن نیاز به "
+"هماهنگی دارد.لذا گزینه پرداخت آنلاین آن پس از تائید مدیر سایت فعال میگردد و "
+"از طریق ایمیل و پیامک به شما اطلاع رسانی میگردد."
 
 #: template/front/checkout.phtml:131
 msgid ""
