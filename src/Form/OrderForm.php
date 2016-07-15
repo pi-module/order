@@ -199,6 +199,7 @@ class OrderForm extends BaseForm
                     'rows' => '3',
                     'cols' => '40',
                     'description' => '',
+                    'required' => true,
                 )
             ));
         }
@@ -214,6 +215,7 @@ class OrderForm extends BaseForm
                     'rows' => '3',
                     'cols' => '40',
                     'description' => '',
+                    'required' => true,
                 )
             ));
         }
@@ -241,20 +243,8 @@ class OrderForm extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
+                    'required' => true,
 
-                )
-            ));
-        }
-        // packing
-        if ($this->config['order_packing']) {
-            $this->add(array(
-                'name' => 'packing',
-                'type' => 'checkbox',
-                'options' => array(
-                    'label' => __('Packing'),
-                ),
-                'attributes' => array(
-                    'description' => '',
                 )
             ));
         }
@@ -287,6 +277,7 @@ class OrderForm extends BaseForm
                     'options' => array(
                         'label' => __('Country'),
                         'value_options' => $countryList,
+                        'required' => true,
                     ),
                 ));
             } else {
@@ -298,9 +289,23 @@ class OrderForm extends BaseForm
                     'attributes' => array(
                         'type' => 'text',
                         'description' => '',
+                        'required' => true,
                     )
                 ));
             }
+        }
+        // packing
+        if ($this->config['order_packing']) {
+            $this->add(array(
+                'name' => 'packing',
+                'type' => 'checkbox',
+                'options' => array(
+                    'label' => __('Packing'),
+                ),
+                'attributes' => array(
+                    'description' => '',
+                )
+            ));
         }
         // Check type_commodity
         $gatewayList = Pi::api('gateway', 'order')->getActiveGatewayName();

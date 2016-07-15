@@ -187,7 +187,7 @@ class OrderFilter extends InputFilter
         if ($config['order_address2'] && !in_array('address2', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'address2',
-                'required' => false,
+                'required' => true,
                 'filters' => array(
                     array(
                         'name' => 'StringTrim',
@@ -199,7 +199,7 @@ class OrderFilter extends InputFilter
         if ($config['order_country'] && !in_array('country', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'country',
-                'required' => false,
+                'required' => true,
                 'filters' => array(
                     array(
                         'name' => 'StringTrim',
@@ -211,7 +211,7 @@ class OrderFilter extends InputFilter
         if ($config['order_state'] && !in_array('state', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'state',
-                'required' => false,
+                'required' => true,
                 'filters' => array(
                     array(
                         'name' => 'StringTrim',
@@ -223,7 +223,7 @@ class OrderFilter extends InputFilter
         if ($config['order_city'] && !in_array('city', $registerFiltersName)) {
             $this->add(array(
                 'name' => 'city',
-                'required' => false,
+                'required' => true,
                 'filters' => array(
                     array(
                         'name' => 'StringTrim',
