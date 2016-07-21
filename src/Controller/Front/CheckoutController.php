@@ -241,6 +241,14 @@ class CheckoutController extends IndexController
                 if (is_array($values['gateway'])) {
                     $values['gateway'] = $values['gateway'][0];
                 }
+                // Set promo_type values
+                if (isset($cart['promo_type']) && !empty($cart['promo_type'])) {
+                    $values['promo_type'] = $cart['promo_type'];
+                }
+                // Set promo_value values
+                if (isset($cart['promo_value']) && !empty($cart['promo_value'])) {
+                    $values['promo_value'] = $cart['promo_value'];
+                }
 
                 // Set price values
                 $values['discount_price'] = isset($cart['total_discount']) ? $cart['total_discount'] : 0;
