@@ -15,6 +15,7 @@ namespace Module\Order\Gateway\Zarinpal;
 
 use Pi;
 use Module\Order\Gateway\AbstractGateway;
+use Zend\Soap\Client as ZendSoapClient;
 use Zend\Json\Json;
 
 class Gateway extends AbstractGateway
@@ -72,11 +73,6 @@ class Gateway extends AbstractGateway
         return $this;
     }
 
-    public function getDialogUrl()
-    {
-        return 'https://www.zarinpal.com/pg/services/WebGate/wsdl';
-    }
-
     public function setRedirectUrl()
     {
         // Get order
@@ -90,21 +86,26 @@ class Gateway extends AbstractGateway
         $parameters['Mobile'] = $order['mobile'];
         $parameters['CallbackURL'] = $this->gatewayBackUrl;
         $parameters['payerId'] = 0;
-        // Check bank
-        $result = $this->call('PaymentRequest', $parameters);
-        if ($result['Status'] == 100) {
-            header('Location: https://www.zarinpal.com/pg/StartPay/'.$result['Authority']);
+        // Call
+        $client = new ZendSoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
+        $call = $client->PaymentRequest($parameters);
+        if ($call->Status == 100) {
+            $this->gatewayPayInformation = array(
+                'Status' => $call->Status,
+                'Authority' => $call->Authority,
+            );
+            $this->gatewayRedirectUrl = sprintf('https://www.zarinpal.com/pg/StartPay/%s', $call->Authority);
         } else {
-            $this->setPaymentError($result[0]);
+            $this->setPaymentError(0);
             // set log
             $log = array();
             $log['gateway'] = $this->gatewayAdapter;
-            $log['authority'] = $result[0];
-            $log['value'] = Json::encode($this->gatewayInvoice);
+            $log['authority'] = $call->Authority;
+            $log['value'] = Json::encode(array($this->gatewayInvoice, (array) $call));
             $log['invoice'] = $this->gatewayInvoice['id'];
             $log['amount'] = intval($this->gatewayInvoice['total_price']);
             $log['status'] = 0;
-            $log['message'] = 'ERR: '.$result['Status'];
+            $log['message'] = 'ERR: ' . $call->Status;
             Pi::api('log', 'order')->setLog($log);
         }
     }
@@ -124,16 +125,17 @@ class Gateway extends AbstractGateway
             $parameters['Authority'] = $request['Authority'];
             $parameters['Amount'] = intval($invoice['total_price']);
             // Call
-            $call = $this->call('PaymentVerification', $parameters);
+            $client = new ZendSoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
+            $call = $client->PaymentVerification($parameters);
             // Check
-            if ($call['Status'] == 100) {
+            if ($call->Status == 100) {
                 $result['status'] = 1;
                 // Get invoice
                 $message = __('Your payment were successfully.');
                 // Set log value
                 $value = array();
                 $value['request'] = $request;
-                $value['PaymentVerification'] = $call;
+                $value['PaymentVerification'] = (array) $call;
                 $value = Json::encode($value);
                 // Set log
                 $log = array();
@@ -201,14 +203,5 @@ class Gateway extends AbstractGateway
         // Set error
         $this->gatewayError = $error;
         return $error;
-    }
-
-    public function call($api, $parameters)
-    {
-        // Set nusoap client
-        require_once Pi::path('module') . '/order/src/Gateway/Zarinpal/nusoap.php';
-        // Set client
-        $client = new \nusoap_client($this->getDialogUrl());
-        return $client->call($api, $parameters, $this->getNamespaceUrl());
     }
 }
