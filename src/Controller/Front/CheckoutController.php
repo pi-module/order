@@ -381,6 +381,10 @@ class CheckoutController extends IndexController
                     }
                     // Set invoice
                     $result = Pi::api('invoice', 'order')->createInvoice($order->id, $uid);
+                    // Add user credit
+                    if (isset($cart['credit'])) {
+                        Pi::api('credit', 'order')->addHistory($cart['credit'], $order->id);
+                    }
                     // unset order
                     Pi::api('order', 'order')->unsetOrderInfo();
                     // Send notification

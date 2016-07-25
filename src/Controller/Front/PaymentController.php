@@ -160,6 +160,8 @@ class PaymentController extends IndexController
                 $url = Pi::api('order', 'order')->updateOrder($verify['order'], $verify['invoice']);
                 // Remove processing
                 Pi::api('processing', 'order')->removeProcessing();
+                // Update credit
+                Pi::api('credit', 'order')->acceptOrderCredit($verify['order'], $verify['invoice']);
                 // jump to module
                 $message = __('Your payment were successfully. Back to module');
                 $this->jump($url, $message);

@@ -237,3 +237,33 @@ CREATE TABLE `{log}` (
   KEY `uid` (`uid`),
   KEY `ip` (`ip`)
 );
+
+CREATE TABLE `{credit}` (
+  `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uid`         INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `time_update` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `amount`      DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uid` (`uid`)
+);
+
+CREATE TABLE `{history}` (
+  `id`                 INT(10) UNSIGNED              NOT NULL AUTO_INCREMENT,
+  `uid`                INT(10) UNSIGNED              NOT NULL DEFAULT '0',
+  `time_create`        INT(10) UNSIGNED              NOT NULL DEFAULT '0',
+  `order`              INT(10) UNSIGNED              NOT NULL DEFAULT '0',
+  `invoice`            INT(10) UNSIGNED              NOT NULL DEFAULT '0',
+  `amount`             DECIMAL(16, 2)                NOT NULL DEFAULT '0.00',
+  `amount_old`         DECIMAL(16, 2)                NOT NULL DEFAULT '0.00',
+  `status`             TINYINT(1) UNSIGNED           NOT NULL DEFAULT '0',
+  `status_fluctuation` ENUM ('increase', 'decrease') NOT NULL DEFAULT 'increase',
+  `status_action`      ENUM ('automatic', 'manual')  NOT NULL DEFAULT 'automatic',
+  `message_user`       TEXT,
+  `message_admin`      TEXT,
+  `ip`                 CHAR(15)                      NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`),
+  KEY `time_create` (`time_create`),
+  KEY `order` (`order`),
+  KEY `invoice` (`invoice`)
+);

@@ -169,7 +169,7 @@ class Update extends BasicUpdate
         }
 
         if (version_compare($moduleVersion, '1.6.2', '<')) {
-            // Add table : event
+            // Add table : customer
             $sql = <<<'EOD'
 CREATE TABLE `{customer}` (
     `id` int(10) unsigned NOT NULL auto_increment,
@@ -352,6 +352,70 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '1.7.8', '<')) {
+            // Add table : credit
+            $sql = <<<'EOD'
+CREATE TABLE `{credit}` (
+  `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uid`         INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `time_update` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `amount`      DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uid` (`uid`)
+);
+EOD;
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'SQL schema query for author table failed: '
+                        . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+
+            // Add table : history
+            $sql = <<<'EOD'
+CREATE TABLE `{history}` (
+  `id`                 INT(10) UNSIGNED              NOT NULL AUTO_INCREMENT,
+  `uid`                INT(10) UNSIGNED              NOT NULL DEFAULT '0',
+  `time_create`        INT(10) UNSIGNED              NOT NULL DEFAULT '0',
+  `order`              INT(10) UNSIGNED              NOT NULL DEFAULT '0',
+  `invoice`            INT(10) UNSIGNED              NOT NULL DEFAULT '0',
+  `amount`             DECIMAL(16, 2)                NOT NULL DEFAULT '0.00',
+  `amount_old`         DECIMAL(16, 2)                NOT NULL DEFAULT '0.00',
+  `status`             TINYINT(1) UNSIGNED           NOT NULL DEFAULT '0',
+  `status_fluctuation` ENUM ('increase', 'decrease') NOT NULL DEFAULT 'increase',
+  `status_action`      ENUM ('automatic', 'manual')  NOT NULL DEFAULT 'automatic',
+  `message_user`       TEXT,
+  `message_admin`      TEXT,
+  `ip`                 CHAR(15)                      NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`),
+  KEY `time_create` (`time_create`),
+  KEY `order` (`order`),
+  KEY `invoice` (`invoice`)
+);
+EOD;
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'SQL schema query for author table failed: '
+                        . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+        }
+
         return true;
     }
-}   
+}
