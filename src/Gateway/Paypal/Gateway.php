@@ -220,7 +220,7 @@ class Gateway extends AbstractGateway
             'type' => 'hidden',
         );
         // zip
-        $form['zip'] = array(
+        $form['zip_code'] = array(
             'name' => 'zip',
             'type' => 'hidden',
         );
@@ -322,7 +322,7 @@ class Gateway extends AbstractGateway
         $this->gatewayPayInformation['city'] = $order['city'];
         $this->gatewayPayInformation['state'] = $order['state'];
         $this->gatewayPayInformation['country'] = $order['country'];
-        $this->gatewayPayInformation['zip'] = $order['zip_code'];
+        $this->gatewayPayInformation['zip_code'] = $order['zip_code'];
         $this->gatewayPayInformation['email'] = $order['email'];
         $this->gatewayPayInformation['night_phone_b'] = $order['mobile'];
         $this->gatewayPayInformation['cmd'] = '_cart';

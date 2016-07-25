@@ -75,9 +75,9 @@ $locale = 'fa';
                             <strong><?php _e('Country'); ?></strong> :
                             <span><?php echo $this->escape($order['country']); ?></span>
                         <?php } ?>
-                        <?php if (!empty($order['zip'])) { ?>
+                        <?php if (!empty($order['zip_code'])) { ?>
                             <strong><?php _e('Zip code'); ?></strong> :
-                            <span><?php echo $this->escape($order['zip']); ?></span>
+                            <span><?php echo $this->escape($order['zip_code']); ?></span>
                         <?php } ?>
                         <?php if (!empty($order['address1'])) { ?>
                             <strong><?php _e('Delivery address'); ?></strong> :
