@@ -15,7 +15,7 @@ namespace Module\Order\Model;
 
 use Pi\Application\Model\Model;
 
-class Customer extends Model
+class Log extends Model
 {
     /**
      * {@inheritDoc}
@@ -23,28 +23,14 @@ class Customer extends Model
     protected $columns = array(
         'id',
         'uid',
-        'ip',
-        'id_number',
-        'first_name',
-        'last_name',
-        'email',
-        'phone',
-        'mobile',
-        'address1',
-        'address2',
-        'address_type',
-        'country',
-        'state',
-        'city',
-        'zip_code',
-        'company',
-        'company_id',
-        'company_vat',
-        'user_note',
+        'invoice',
+        'gateway',
         'time_create',
-        'time_update',
+        'amount',
+        'authority',
         'status',
-        'delivery',
-        'location',
+        'ip',
+        'value',
+        'message',
     );
 }

@@ -325,6 +325,33 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '1.7.7', '<')) {
+            // Alter table field CHANGE
+            $sql = sprintf("ALTER TABLE %s CHANGE `promo_type` `promotion_type` VARCHAR(64)  NOT NULL DEFAULT ''", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            // Alter table field CHANGE
+            $sql = sprintf("ALTER TABLE %s CHANGE `promo_value` `promotion_value` VARCHAR(64) NOT NULL DEFAULT ''", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }
 }   

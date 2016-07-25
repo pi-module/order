@@ -305,18 +305,6 @@ class OrderSimpleFilter extends InputFilter
                 ),
             ));
         }
-        // promo_value
-        if ($config['order_promo']) {
-            $this->add(array(
-                'name' => 'promo_value',
-                'required' => false,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
-        }
         // order_term
         if ($config['order_term']) {
             $this->add(array(

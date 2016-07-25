@@ -233,14 +233,6 @@ return array(
             'filter' => 'number_int',
             'value' => 1
         ),
-        'order_promo' => array(
-            'category' => 'order',
-            'title' => _a('Show promo'),
-            'description' => '',
-            'edit' => 'checkbox',
-            'filter' => 'number_int',
-            'value' => 1
-        ),
         'order_usernote' => array(
             'category' => 'order',
             'title' => _a('Show user note'),

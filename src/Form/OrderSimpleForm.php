@@ -375,19 +375,6 @@ class OrderSimpleForm extends BaseForm
                 )
             ));
         }
-        // promo_value
-        if ($this->config['order_promo']) {
-            $this->add(array(
-                'name' => 'promo_value',
-                'options' => array(
-                    'label' => __('Promo'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                )
-            ));
-        }
         // order_term
         if ($this->config['order_term'] && !empty($this->config['order_termurl'])) {
             $term = sprintf('<a href="%s" target="_blank">%s</a>', $this->config['order_termurl'], __('Terms & Conditions'));

@@ -15,7 +15,7 @@ namespace Module\Order\Model;
 
 use Pi\Application\Model\Model;
 
-class Customer extends Model
+class Processing extends Model
 {
     /**
      * {@inheritDoc}
@@ -24,27 +24,9 @@ class Customer extends Model
         'id',
         'uid',
         'ip',
-        'id_number',
-        'first_name',
-        'last_name',
-        'email',
-        'phone',
-        'mobile',
-        'address1',
-        'address2',
-        'address_type',
-        'country',
-        'state',
-        'city',
-        'zip_code',
-        'company',
-        'company_id',
-        'company_vat',
-        'user_note',
+        'invoice',
+        'random_id',
+        'gateway',
         'time_create',
-        'time_update',
-        'status',
-        'delivery',
-        'location',
     );
 }

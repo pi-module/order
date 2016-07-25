@@ -15,19 +15,15 @@ namespace Module\Order\Model;
 
 use Pi\Application\Model\Model;
 
-class Invoice extends Model
+class Basket extends Model
 {
     /**
      * {@inheritDoc}
      */
     protected $columns = array(
         'id',
-        'random_id',
         'order',
-        'uid',
-        'ip',
-        'code',
-        'can_pay',
+        'product',
         'product_price',
         'discount_price',
         'shipping_price',
@@ -35,15 +31,7 @@ class Invoice extends Model
         'setup_price',
         'vat_price',
         'total_price',
-        'paid_price',
-        'credit_price',
-        'gateway',
-        'status',
-        'time_create',
-        'time_duedate',
-        'time_payment',
-        'time_cancel',
-        'back_url',
+        'number',
         'extra',
     );
 }
