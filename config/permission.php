@@ -43,6 +43,11 @@ return array(
             'access' => array(//'admin',
             ),
         ),
+        'credit' => array(
+            'title' => _a('Credit'),
+            'access' => array(//'admin',
+            ),
+        ),
     ),
     // Front section
     'front' => array(

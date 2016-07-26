@@ -43,6 +43,11 @@ return array(
             'controller' => 'location',
             'permission' => 'location',
         ),
+        array(
+            'label' => _a('Credit'),
+            'controller' => 'credit',
+            'permission' => 'credit',
+        ),
     ),
     // Front section
     'front' => array(
@@ -61,6 +66,12 @@ return array(
         array(
             'title' => _a('Detail'),
             'controller' => 'detail',
+            'permission' => 'public',
+            'block' => 1,
+        ),
+        array(
+            'title' => _a('Credit'),
+            'controller' => 'credit',
             'permission' => 'public',
             'block' => 1,
         ),

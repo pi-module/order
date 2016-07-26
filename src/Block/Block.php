@@ -56,4 +56,13 @@ class Block
         $block['d'] = Pi::api('installment', 'order')->blockTable($user, $orderIds);
         return $block;
     }
+
+    public function credit($options = array(), $module = null)
+    {
+        // Set options
+        $block = array();
+        $block = array_merge($block, $options);
+
+        return $block;
+    }
 }

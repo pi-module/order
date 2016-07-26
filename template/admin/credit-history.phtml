@@ -1,0 +1,130 @@
+<?php $this->css($this->assetModule('css/admin.css')); ?>
+<div class="clearfix">
+    <h3><?php _e('List of historys'); ?></h3>
+    <?php if (!empty($list)) { ?>
+        <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <th><?php _e('ID'); ?></th>
+                <th><?php _e('Name'); ?></th>
+                <th><?php _e('Identity'); ?></th>
+                <th><?php _e('Email'); ?></th>
+                <th><?php _e('Amount old'); ?></th>
+                <th><?php _e('Amount new'); ?></th>
+                <th><?php _e('Time create'); ?></th>
+                <th><?php _e('Action'); ?></th>
+            </tr>
+            <?php foreach ($list as $history) { ?>
+                <?php
+                if ($history['status'] == 1) {
+                    $tableClass = 'success';
+                } elseif ($history['status'] == 2) {
+                    $tableClass = 'info';
+                } elseif ($history['status'] == 0) {
+                    $tableClass = 'danger';
+                }
+                ?>
+                <tr class="<?php echo $tableClass; ?>">
+                    <td><?php echo $this->escape($history['id']); ?></td>
+                    <td><?php echo $this->escape($history['user']['name']); ?></td>
+                    <td><?php echo $this->escape($history['user']['identity']); ?></td>
+                    <td><?php echo $this->escape($history['user']['email']); ?></td>
+                    <td><?php echo $this->escape($history['amount_old_view']); ?></td>
+                    <td><?php echo $this->escape($history['amount_view']); ?></td>
+                    <td><?php echo $this->escape($history['time_create_view']); ?></td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal"
+                                data-target="#history-modal-<?php echo $this->escape($history['id']); ?>">
+                            <?php _e('Show details'); ?>
+                        </button>
+                        <div class="modal fade" id="history-modal-<?php echo $this->escape($history['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title"><?php _e('history details'); ?></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tr>
+                                                <td><strong><?php _e('Name'); ?></strong></td>
+                                                <td><?php echo $this->escape($history['user']['name']); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong><?php _e('Identity'); ?></strong></td>
+                                                <td><?php echo $this->escape($history['user']['identity']); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong><?php _e('Email'); ?></strong></td>
+                                                <td><?php echo $this->escape($history['user']['email']); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong><?php _e('Amount old'); ?></strong></td>
+                                                <td><?php echo $this->escape($history['amount_old_view']); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong><?php _e('Amount new'); ?></strong></td>
+                                                <td><?php echo $this->escape($history['amount_view']); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong><?php _e('Time create'); ?></strong></td>
+                                                <td><?php echo $this->escape($history['time_create_view']); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong><?php _e('User message'); ?></strong></td>
+                                                <td><?php echo $this->escape($history['message_user']); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong><?php _e('Admin message'); ?></strong></td>
+                                                <td><?php echo $this->escape($history['message_admin']); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong><?php _e('Fluctuation status'); ?></strong></td>
+                                                <td><?php echo $this->escape($history['status_fluctuation_view']); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong><?php _e('Action status'); ?></strong></td>
+                                                <td><?php echo $this->escape($history['status_action_view']); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong><?php _e('Ip'); ?></strong></td>
+                                                <td><?php echo $this->escape($history['ip']); ?></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <?php if ($history['order']) { ?>
+                                            <a class="btn btn-primary" title="<?php _e('View order'); ?>" href="<?php echo $this->url('admin', array(
+                                                'controller' => 'order',
+                                                'action' => 'view',
+                                                'id' => $history['order'],
+                                            )); ?>" target="_blank"><?php _e('View order'); ?></a>
+                                        <?php } ?>
+                                        <?php if ($history['invoice']) { ?>
+                                            <a class="btn btn-primary" title="<?php _e('View invoice'); ?>" href="<?php echo $this->url('admin', array(
+                                                'controller' => 'invoice',
+                                                'action' => 'view',
+                                                'id' => $history['invoice'],
+                                            )); ?>" target="_blank"><?php _e('View invoice'); ?></a>
+                                        <?php } ?>
+                                        <a class="btn btn-success" title="<?php _e('User information'); ?>" href="<?php echo $this->url('admin', array(
+                                            'module' => 'user',
+                                            'controller' => 'edit',
+                                            'action' => 'index',
+                                            'uid' => $credit['uid'],
+                                        )); ?>" target="_blank"><?php _e('User information'); ?></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            <?php } ?>
+        </table>
+        <div class="paginator">
+            <?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?>
+        </div>
+    <?php } else { ?>
+        <div class="alert alert-warning" role="alert"><?php _e('No history save yet'); ?></div>
+    <?php } ?>
+</div>

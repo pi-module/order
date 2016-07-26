@@ -51,5 +51,31 @@ return array(
             'controller' => 'location',
             'action' => 'index',
         ),
+        'credit' => array(
+            'label' => _a('Credit'),
+            'route' => 'admin',
+            'controller' => 'credit',
+            'action' => 'index',
+            'pages'         => array(
+                'list'   => array(
+                    'label'         => _t('User list'),
+                    'route'         => 'admin',
+                    'controller'    => 'credit',
+                    'action'        => 'index',
+                ),
+                'history'   => array(
+                    'label'         => _t('History'),
+                    'route'         => 'admin',
+                    'controller'    => 'credit',
+                    'action'        => 'history',
+                ),
+                'add'   => array(
+                    'label'         => _t('Add'),
+                    'route'         => 'admin',
+                    'controller'    => 'credit',
+                    'action'        => 'update',
+                ),
+            ),
+        ),
     ),
 );

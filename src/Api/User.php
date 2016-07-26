@@ -18,13 +18,13 @@ use Pi\Application\Api\AbstractApi;
 use Zend\Json\Json;
 
 /*
- * Pi::api('user', 'order')->getUserInformation($uid);
+ * Pi::api('user', 'order')->getUserInformation($uid, $type);
  * Pi::api('user', 'order')->updateUserInformation($user, $uid);
  */
 
 class User extends AbstractApi
 {
-    public function getUserInformation($uid = '')
+    public function getUserInformation($uid = '', $type = 'normal')
     {
         // Get user id if not set
         if (empty($uid)) {
@@ -34,11 +34,23 @@ class User extends AbstractApi
         if (!$uid || $uid == 0) {
             return array();
         }
+        // Check type
+        switch ($type) {
+            case 'normal':
+                $fields = array(
+                    'id', 'identity', 'name', 'email', 'first_name', 'last_name', 'id_number', 'phone', 'mobile', 'credit',
+                    'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat',
+                );
+                break;
+
+            case 'light':
+                $fields = array(
+                    'id', 'identity', 'name', 'email'
+                );
+                break;
+        }
         // Get user info
-        $user = Pi::user()->get($uid, array(
-            'id', 'identity', 'name', 'email', 'first_name', 'last_name', 'id_number', 'phone', 'mobile', 'credit',
-            'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat',
-        ));
+        $user = Pi::user()->get($uid, $fields);
         // Check user first_name
         if (!isset($user['first_name'])) {
             $user['first_name'] = '';

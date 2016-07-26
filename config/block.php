@@ -25,4 +25,11 @@ return array(
         'render' => array('block', 'installment'),
         'template' => 'installment',
     ),
+    'credit' => array(
+        'name' => 'credit',
+        'title' => _a('Credit'),
+        'description' => _a('User credit information'),
+        'render' => array('block', 'credit'),
+        'template' => 'credit',
+    ),
 );
