@@ -3,12 +3,12 @@ body {
 }
 
 @page {
-    size: a4 portrait;
-    margin: 20mm 10mm;
-    padding: 0;
+    size: auto;   /* auto is the initial value */
+    margin: 0;  /* this affects the margin in the printer settings */
 }
 
 #print {
+    padding: 5mm;
 }
 
 .print-title {

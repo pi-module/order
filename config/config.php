@@ -22,6 +22,10 @@ return array(
             'name' => 'order'
         ),
         array(
+            'title' => _a('Print'),
+            'name' => 'print'
+        ),
+        array(
             'title' => _a('Customize'),
             'name' => 'customize'
         ),
@@ -307,6 +311,15 @@ return array(
             'description' => _a('Setup format : shop,shop@mysite.com|guide,guide@mysite.com'),
             'edit' => 'textarea',
             'filter' => 'string',
+        ),
+        // Print
+        'print_anonymous' => array(
+            'category' => 'print_signature',
+            'title' => _a('Signature zone on print'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
         ),
         // Customize
         'price_custom' => array(

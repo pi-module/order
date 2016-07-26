@@ -34,9 +34,9 @@ $locale = 'en';
                             <td class="col-md-5">
                                 <div class="clearfix">
                                     <?php if (!empty($config['order_sellerlogo'])) { ?>
-                                        <img src="<?php echo $config['order_sellerlogo']; ?>" alt="">
+                                        <img class="img-responsive" src="<?php echo $config['order_sellerlogo']; ?>" alt="">
                                     <?php } else { ?>
-                                        <img src="<?php echo $this->logo(); ?>" alt="">
+                                        <img class="img-responsive" src="<?php echo $this->logo(); ?>" alt="">
                                     <?php } ?>
                                     <br/>
                                 </div>
@@ -201,14 +201,16 @@ $locale = 'en';
                     </table>
                 <?php } ?>
             </div>
-            <div class="clearfix">
-                <div class="col-xs-6 text-center">
-                    <?php _e('Seller signature'); ?>
+            <?php if ($config['print_anonymous']) { ?>
+                <div class="clearfix">
+                    <div class="col-xs-6 text-center">
+                        <?php _e('Seller signature'); ?>
+                    </div>
+                    <div class="col-xs-6 text-center">
+                        <?php _e('Buyer signature'); ?>
+                    </div>
                 </div>
-                <div class="col-xs-6 text-center">
-                    <?php _e('Buyer signature'); ?>
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
 </body>

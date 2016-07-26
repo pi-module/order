@@ -81,7 +81,7 @@ class Gateway extends AbstractGateway
         $parameters = array();
         $parameters['MerchantID'] = $this->gatewayOption['MerchantID'];
         $parameters['Description'] = sprintf('order id : %s', $this->gatewayInvoice['random_id']);
-        $parameters['Amount'] = intval($this->gatewayInvoice['total_price']);
+        $parameters['Amount'] = intval($this->gatewayInvoice['total_price']) / 10;
         $parameters['Email'] = $order['email'];
         $parameters['Mobile'] = $order['mobile'];
         $parameters['CallbackURL'] = $this->gatewayBackUrl;
@@ -123,7 +123,7 @@ class Gateway extends AbstractGateway
             $parameters = array();
             $parameters['MerchantID'] = $this->gatewayOption['MerchantID'];
             $parameters['Authority'] = $request['Authority'];
-            $parameters['Amount'] = intval($invoice['total_price']);
+            $parameters['Amount'] = intval($invoice['total_price']) / 10;
             // Call
             $client = new ZendSoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
             $call = $client->PaymentVerification($parameters);

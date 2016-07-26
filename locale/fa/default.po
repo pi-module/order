@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2016-07-08 19:58+0430\n"
+"POT-Creation-Date: 2016-07-09 09:29+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -380,7 +380,7 @@ msgstr "شما قبلا این فاکتور را پرداخت کرده اید"
 #: src/Controller/Front/PaymentController.php:42
 #: template/front/detail.phtml:342 template/front/invoice.phtml:252
 msgid "You can pay this invoice after admin review"
-msgstr "شما می توانید این فاکتور را بعد از بررسی مدیر پرداخت نمایید"
+msgstr "شما میتوانید این فاکتور را پس از تائید مدیر سایت پرداخت نمایید. "
 
 #: src/Controller/Front/PaymentController.php:111
 #, php-format
