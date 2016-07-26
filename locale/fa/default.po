@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2016-07-09 09:29+0430\n"
+"POT-Creation-Date: 2016-07-26 11:07+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -304,12 +304,12 @@ msgstr "سفارش جدید ساخته شد و اطلاعات آن با موفق
 
 #: src/Controller/Front/CheckoutController.php:49
 #: src/Controller/Front/CheckoutController.php:60
-#: src/Controller/Front/CheckoutController.php:506
+#: src/Controller/Front/CheckoutController.php:518
 msgid "Your cart is empty."
 msgstr "سبد خرید شما خالی است"
 
 #: src/Controller/Front/CheckoutController.php:65
-#: src/Controller/Front/CheckoutController.php:511
+#: src/Controller/Front/CheckoutController.php:523
 msgid "So sorry, At this moment order is inactive"
 msgstr "متاسفانه در این لحظه امکان ثبت سفارش وجود ندارد"
 
@@ -321,14 +321,14 @@ msgstr "اطلاعات کابری تکمیل نیست و حساب کاربری �
 msgid "User account was not saved."
 msgstr "حساب کاربری ذخیره نشده است."
 
-#: src/Controller/Front/CheckoutController.php:522
+#: src/Controller/Front/CheckoutController.php:534
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 "پلن قسطی سفارش شما با موفقت ذخیره شد، لطفا اطلاعات مورد نیاز را تکمیل "
 "فرمایید و بعد از آن پیش قسط مربوط به این سفارش را پرداخت نمایید."
 
-#: src/Controller/Front/CheckoutController.php:653
+#: src/Controller/Front/CheckoutController.php:665
 #: src/Form/Element/Gateway.php:28
 msgid "Offline"
 msgstr "آفلاین"
@@ -368,8 +368,8 @@ msgstr "سفارش فعال نیست"
 
 #: src/Controller/Front/InvoiceController.php:125
 #: src/Controller/Front/PaymentController.php:88
-#: src/Controller/Front/PaymentController.php:164
-#: src/Controller/Front/PaymentController.php:349
+#: src/Controller/Front/PaymentController.php:166
+#: src/Controller/Front/PaymentController.php:351
 msgid "Your payment were successfully. Back to module"
 msgstr "پرداخت شما با موفقیت به انجام رسید. به صفحه اتمام خرید منتقل می شوید"
 
@@ -400,21 +400,22 @@ msgid "Your IP address changed and processing not valid"
 msgstr ""
 "آدرس آی پی شما در هنگام پرداخت تغییر کرده است و این روند خرید صحیح نیست"
 
-#: src/Controller/Front/PaymentController.php:181
+#: src/Controller/Front/PaymentController.php:183
 msgid "Your payment wont successfully."
 msgstr "پرداخت شما موفقیت آمیز نبود"
 
-#: src/Controller/Front/PaymentController.php:187
+#: src/Controller/Front/PaymentController.php:189
 msgid "Did not set any request"
 msgstr "هیچ درخواستی ذخیره نشده است"
 
-#: src/Controller/Front/PaymentController.php:299
+#: src/Controller/Front/PaymentController.php:301
 #: src/Gateway/Dargahpardakht/Gateway.php:173
 #: src/Gateway/Mellat/Gateway.php:160 src/Gateway/Paypal/Gateway.php:424
+#: src/Gateway/Zarinpal/Gateway.php:134
 msgid "Your payment were successfully."
 msgstr "پرداخت شما موفقیت آمیز بود."
 
-#: src/Controller/Front/PaymentController.php:337
+#: src/Controller/Front/PaymentController.php:339
 msgid "Test mode not active."
 msgstr "حالت تست فعال نیست"
 
@@ -453,8 +454,8 @@ msgid "Private"
 msgstr "خصوصی"
 
 #: src/Form/DeliveryForm.php:75 src/Form/OrderAddForm.php:314
-#: src/Form/OrderForm.php:355 src/Form/OrderForm.php:383
-#: src/Form/OrderForm.php:413 src/Form/OrderSimpleForm.php:293
+#: src/Form/OrderForm.php:360 src/Form/OrderForm.php:388
+#: src/Form/OrderForm.php:418 src/Form/OrderSimpleForm.php:293
 #: src/Form/OrderSimpleForm.php:321 src/Form/OrderSimpleForm.php:351
 #: template/admin/log-index.phtml:9 template/admin/order-view.phtml:202
 msgid "Adapter"
@@ -658,7 +659,7 @@ msgstr "کد مالیات"
 msgid "Delivery address"
 msgstr "آدرس تحویل"
 
-#: src/Form/OrderAddForm.php:191 src/Form/OrderForm.php:210
+#: src/Form/OrderAddForm.php:191 src/Form/OrderForm.php:211
 #: src/Form/OrderSimpleForm.php:175 template/admin/invoice-add.phtml:21
 #: template/admin/invoice-edit.phtml:65 template/admin/invoice-view.phtml:68
 #: template/admin/order-print.phtml:87 template/admin/order-view.phtml:37
@@ -667,7 +668,7 @@ msgid "Invoicing Address"
 msgstr "آدرس فاکتور"
 
 #: src/Form/OrderAddForm.php:212 src/Form/OrderAddForm.php:220
-#: src/Form/OrderForm.php:288 src/Form/OrderForm.php:296
+#: src/Form/OrderForm.php:278 src/Form/OrderForm.php:287
 #: src/Form/OrderSimpleForm.php:187 template/admin/invoice-add.phtml:33
 #: template/admin/invoice-edit.phtml:77 template/admin/invoice-view.phtml:80
 #: template/admin/order-print.phtml:75 template/admin/order-view.phtml:49
@@ -676,7 +677,7 @@ msgstr "آدرس فاکتور"
 msgid "Country"
 msgstr "کشور"
 
-#: src/Form/OrderAddForm.php:234 src/Form/OrderForm.php:266
+#: src/Form/OrderAddForm.php:234 src/Form/OrderForm.php:256
 #: src/Form/OrderSimpleForm.php:199 template/admin/invoice-add.phtml:29
 #: template/admin/invoice-edit.phtml:73 template/admin/invoice-view.phtml:76
 #: template/admin/order-print.phtml:71 template/admin/order-view.phtml:45
@@ -685,7 +686,7 @@ msgstr "کشور"
 msgid "State"
 msgstr "استان"
 
-#: src/Form/OrderAddForm.php:248 src/Form/OrderForm.php:239
+#: src/Form/OrderAddForm.php:248 src/Form/OrderForm.php:241
 #: src/Form/OrderSettingForm.php:161 src/Form/OrderSimpleForm.php:211
 #: template/admin/invoice-add.phtml:25 template/admin/invoice-edit.phtml:69
 #: template/admin/invoice-view.phtml:72 template/admin/order-print.phtml:67
@@ -695,7 +696,7 @@ msgstr "استان"
 msgid "City"
 msgstr "شهر"
 
-#: src/Form/OrderAddForm.php:262 src/Form/OrderForm.php:225
+#: src/Form/OrderAddForm.php:262 src/Form/OrderForm.php:227
 #: src/Form/OrderSettingForm.php:216 src/Form/OrderSimpleForm.php:223
 #: template/admin/invoice-add.phtml:37 template/admin/invoice-edit.phtml:81
 #: template/admin/invoice-view.phtml:84 template/admin/order-print.phtml:79
@@ -705,7 +706,7 @@ msgstr "شهر"
 msgid "Zip code"
 msgstr "کد پستی"
 
-#: src/Form/OrderAddForm.php:277 src/Form/OrderForm.php:254
+#: src/Form/OrderAddForm.php:277 src/Form/OrderForm.php:303
 #: src/Form/OrderSimpleForm.php:237 template/admin/order-view.phtml:218
 #: template/admin/order-view.phtml:230 template/admin/order-view.phtml:249
 #: template/front/detail.phtml:182
@@ -749,56 +750,52 @@ msgstr ""
 msgid "Order / invoice date"
 msgstr "تاریخ سفارش / فاکتور"
 
-#: src/Form/OrderForm.php:315 src/Form/OrderSimpleForm.php:253
+#: src/Form/OrderForm.php:320 src/Form/OrderSimpleForm.php:253
 msgid "Location"
 msgstr "مکان"
 
-#: src/Form/OrderForm.php:328 src/Form/OrderSimpleForm.php:265
+#: src/Form/OrderForm.php:333 src/Form/OrderSimpleForm.php:265
 msgid "Delivery methods"
 msgstr "روش تحویل"
 
-#: src/Form/OrderForm.php:430 src/Form/OrderSimpleForm.php:368
+#: src/Form/OrderForm.php:435 src/Form/OrderSimpleForm.php:368
 #: template/admin/invoice-add.phtml:122 template/admin/order-view.phtml:140
 #: template/front/detail.phtml:286
 msgid "User note"
 msgstr "توضیح مشتری"
 
-#: src/Form/OrderForm.php:436 src/Form/OrderSimpleForm.php:374
+#: src/Form/OrderForm.php:441 src/Form/OrderSimpleForm.php:374
 msgid "Give here more details you think we need to know about"
 msgstr "اطلاعات بیشتری را که نیاز است ما بدانیم در این بخش درج نمایید"
 
-#: src/Form/OrderForm.php:446
+#: src/Form/OrderForm.php:451
 msgid "Update your profile by this information?"
 msgstr "به روز رسانی اطلاعات حساب کاربری با این اطلاعات؟"
 
-#: src/Form/OrderForm.php:458 src/Form/OrderSimpleForm.php:383
-msgid "Promo"
-msgstr "کد تخفیف"
-
-#: src/Form/OrderForm.php:468 src/Form/OrderSimpleForm.php:393
+#: src/Form/OrderForm.php:460 src/Form/OrderSimpleForm.php:380
 msgid "Terms & Conditions"
 msgstr "شرایط و مقررات"
 
-#: src/Form/OrderForm.php:469
+#: src/Form/OrderForm.php:461
 #, php-format
 msgid "I accept %s"
 msgstr "من %s را می پذیرم"
 
-#: src/Form/OrderForm.php:489
+#: src/Form/OrderForm.php:481
 msgid "Register and pay"
 msgstr "ثبت نام و پرداخت"
 
-#: src/Form/OrderForm.php:491
+#: src/Form/OrderForm.php:483
 msgid "Register and save order"
 msgstr "ثبت نام و ثبت سفارش"
 
-#: src/Form/OrderForm.php:495 src/Form/OrderSimpleForm.php:409
+#: src/Form/OrderForm.php:487 src/Form/OrderSimpleForm.php:396
 #: template/front/detail.phtml:330 template/front/detail.phtml:332
 #: template/front/invoice.phtml:240 template/front/invoice.phtml:242
 msgid "Pay"
 msgstr "پرداخت"
 
-#: src/Form/OrderForm.php:497 src/Form/OrderSimpleForm.php:411
+#: src/Form/OrderForm.php:489 src/Form/OrderSimpleForm.php:398
 msgid "Save order"
 msgstr "ثبت سفارش"
 
@@ -871,7 +868,7 @@ msgstr "خرید قسطی"
 msgid "Code"
 msgstr "کد"
 
-#: src/Form/OrderSimpleForm.php:394
+#: src/Form/OrderSimpleForm.php:381
 #, php-format
 msgid "Accept %s"
 msgstr "تایید %s"
@@ -920,6 +917,7 @@ msgstr "درگاه پرداخت"
 
 #: src/Gateway/Dargahpardakht/Gateway.php:48 src/Gateway/Mellat/Gateway.php:48
 #: src/Gateway/Pasargad/Gateway.php:53 src/Gateway/Paypal/Gateway.php:48
+#: src/Gateway/Zarinpal/Gateway.php:49
 msgid "path"
 msgstr "مسیر"
 
@@ -1259,6 +1257,23 @@ msgstr "امضای sandbox"
 #: template/front/result.phtml:4
 msgid "Error"
 msgstr "خطا"
+
+#: src/Gateway/Zarinpal/Gateway.php:31
+msgid "Zarinpal"
+msgstr "زرین پال"
+
+#: src/Gateway/Zarinpal/Gateway.php:56
+msgid "MerchantID"
+msgstr "MerchantID"
+
+#: src/Gateway/Zarinpal/Gateway.php:168
+#, php-format
+msgid "Transation failed. Status: %s"
+msgstr "تراکنش نا موفق بود، وضعیت : %s"
+
+#: src/Gateway/Zarinpal/Gateway.php:184
+msgid "Transaction canceled by user"
+msgstr "تراکنش توسط کاربر لغو شد"
 
 #: src/Validator/Term.php:36
 msgid "You need accept our Terms & Conditions for checkout"
@@ -1652,13 +1667,13 @@ msgstr "مجموع مبلغ فاکتور"
 msgid "Product price ex VAT"
 msgstr "قیمت محصول"
 
-#: template/admin/invoice-print.phtml:206 template/admin/order-print.phtml:673
-#: template/front/invoice-print.phtml:206
+#: template/admin/invoice-print.phtml:207 template/admin/order-print.phtml:673
+#: template/front/invoice-print.phtml:207
 msgid "Seller signature"
 msgstr "امضای فروشنده"
 
-#: template/admin/invoice-print.phtml:209 template/admin/order-print.phtml:678
-#: template/front/invoice-print.phtml:209
+#: template/admin/invoice-print.phtml:210 template/admin/order-print.phtml:678
+#: template/front/invoice-print.phtml:210
 msgid "Buyer signature"
 msgstr "امضای خریدار"
 
@@ -2091,6 +2106,9 @@ msgstr "نوع"
 #: template/front/pay.phtml:12
 msgid "You'll be redirected in few seconds to gateway Checkout Page"
 msgstr "شما ظرف چند ثانیه به صفحه پرداخت بانک منتقل خواهید شد"
+
+#~ msgid "Promo"
+#~ msgstr "کد تخفیف"
 
 #~ msgid "Address 2"
 #~ msgstr "آدرس فاکتور"
