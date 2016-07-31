@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2016-07-26 11:06+0430\n"
+"POT-Creation-Date: 2016-07-31 11:31+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -30,6 +30,15 @@ msgstr "قسطی"
 #: config/block.php:24
 msgid "Installment orders detail"
 msgstr "جزییات سفارش های قسطی"
+
+#: config/block.php:30 config/navigation.php:55 config/page.php:47
+#: config/page.php:73 config/permission.php:47
+msgid "Credit"
+msgstr "اعتبار"
+
+#: config/block.php:31
+msgid "User credit information"
+msgstr "آطلاعات اعتبار کاربر"
 
 #: config/config.php:17
 msgid "Admin"
@@ -637,19 +646,31 @@ msgstr "روش ارسال"
 msgid "Location"
 msgstr "مکان تحویل"
 
-#: config/page.php:50
+#: config/navigation.php:61
+msgid "User list"
+msgstr "فهرست کاربران"
+
+#: config/navigation.php:67
+msgid "History"
+msgstr "تاریخچه تغییرات"
+
+#: config/navigation.php:73
+msgid "Add"
+msgstr "اعتبار جدید"
+
+#: config/page.php:55
 msgid "Index page"
 msgstr "صفحه اصلی"
 
-#: config/page.php:56
+#: config/page.php:61
 msgid "Checkout"
 msgstr "ثبت سفارش"
 
-#: config/page.php:62
+#: config/page.php:67
 msgid "Detail"
 msgstr "اطلاعات سفارش"
 
-#: config/permission.php:50
+#: config/permission.php:55
 msgid "Global public resource"
 msgstr "دسترسی های عمومی"
 

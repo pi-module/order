@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2016-07-26 11:06+0430\n"
+"POT-Creation-Date: 2016-07-31 11:31+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -18,6 +18,16 @@ msgstr ""
 
 #: src/Api/Api.php:36
 msgid "Toman"
+msgstr ""
+
+#: src/Api/Credit.php:103
+msgid "Your input amount is more than user credit"
+msgstr ""
+
+#: src/Api/Credit.php:118
+msgid ""
+"This user never use credit system, than you can not decrease amnout from "
+"him / her"
 msgstr ""
 
 #: src/Api/Installment.php:39
@@ -212,6 +222,26 @@ msgstr ""
 #: src/Api/Order.php:306 src/Form/OrderAddForm.php:292
 #: src/Form/OrderSettingForm.php:120
 msgid "Service"
+msgstr ""
+
+#: src/Controller/Admin/CreditController.php:104 src/Form/CreditForm.php:68
+msgid "Increase"
+msgstr ""
+
+#: src/Controller/Admin/CreditController.php:109 src/Form/CreditForm.php:69
+msgid "Decrease"
+msgstr ""
+
+#: src/Controller/Admin/CreditController.php:116
+msgid "Automatic"
+msgstr ""
+
+#: src/Controller/Admin/CreditController.php:120
+msgid "Manual"
+msgstr ""
+
+#: src/Controller/Admin/CreditController.php:170
+msgid "Input amount add as user credit successfully."
 msgstr ""
 
 #: src/Controller/Admin/DeliveryController.php:101
@@ -412,6 +442,37 @@ msgstr ""
 msgid "Test mode not active."
 msgstr ""
 
+#: src/Form/CreditForm.php:41 src/Form/InvoiceSettingForm.php:62
+#: src/Form/OrderAddForm.php:42 src/Form/OrderSettingForm.php:172
+msgid "User ID"
+msgstr ""
+
+#: src/Form/CreditForm.php:53 template/admin/credit-index.phtml:11
+#: template/admin/invoice-edit.phtml:123 template/admin/invoice-print.phtml:182
+#: template/admin/invoice-view.phtml:126 template/admin/log-index.phtml:10
+#: template/front/detail.phtml:252 template/front/invoice-print.phtml:182
+#: template/front/invoice.phtml:206
+msgid "Amount"
+msgstr ""
+
+#: src/Form/CreditForm.php:66 src/Form/OrderAddForm.php:289
+#: src/Form/OrderSettingForm.php:116
+msgid "Type commodity"
+msgstr ""
+
+#: src/Form/CreditForm.php:80 template/admin/credit-history.phtml:76
+msgid "User message"
+msgstr ""
+
+#: src/Form/CreditForm.php:93 template/admin/credit-history.phtml:80
+msgid "Admin message"
+msgstr ""
+
+#: src/Form/CreditForm.php:107 src/Form/InvoiceForm.php:111
+#: src/Form/OrderAddForm.php:424
+msgid "Save"
+msgstr ""
+
 #: src/Form/DeliveryForm.php:48 src/Form/LocationForm.php:50
 #: template/admin/delivery-index.phtml:14
 #: template/admin/invoice-print.phtml:181
@@ -511,10 +572,6 @@ msgstr ""
 msgid "Due date"
 msgstr ""
 
-#: src/Form/InvoiceForm.php:111 src/Form/OrderAddForm.php:424
-msgid "Save"
-msgstr ""
-
 #: src/Form/InvoiceSettingForm.php:40
 msgid "Order ID"
 msgstr ""
@@ -522,11 +579,6 @@ msgstr ""
 #: src/Form/InvoiceSettingForm.php:51 template/admin/invoice-index.phtml:24
 #: template/admin/invoice-view.phtml:18 template/admin/order-view.phtml:290
 msgid "Bank ID"
-msgstr ""
-
-#: src/Form/InvoiceSettingForm.php:62 src/Form/OrderAddForm.php:42
-#: src/Form/OrderSettingForm.php:172
-msgid "User ID"
 msgstr ""
 
 #: src/Form/InvoiceSettingForm.php:74 template/admin/invoice-add.phtml:69
@@ -594,6 +646,8 @@ msgstr ""
 
 #: src/Form/OrderAddForm.php:96 src/Form/OrderForm.php:110
 #: src/Form/OrderSettingForm.php:150 src/Form/OrderSimpleForm.php:88
+#: template/admin/credit-history.phtml:10
+#: template/admin/credit-history.phtml:60 template/admin/credit-index.phtml:10
 #: template/admin/invoice-add.phtml:41 template/admin/invoice-edit.phtml:85
 #: template/admin/invoice-print.phtml:93 template/admin/invoice-view.phtml:88
 #: template/admin/order-print.phtml:52 template/admin/order-view.phtml:57
@@ -704,10 +758,6 @@ msgstr ""
 #: template/admin/order-view.phtml:230 template/admin/order-view.phtml:249
 #: template/front/detail.phtml:182
 msgid "Packing"
-msgstr ""
-
-#: src/Form/OrderAddForm.php:289 src/Form/OrderSettingForm.php:116
-msgid "Type commodity"
 msgstr ""
 
 #: src/Form/OrderAddForm.php:329
@@ -907,6 +957,7 @@ msgid "path"
 msgstr ""
 
 #: src/Gateway/Dargahpardakht/Gateway.php:55
+#: template/admin/credit-history.phtml:7 template/admin/credit-index.phtml:7
 #: template/admin/delivery-index.phtml:13
 #: template/admin/location-index.phtml:13 template/admin/log-index.phtml:7
 #: template/admin/order-view.phtml:165 template/front/list.phtml:80
@@ -1268,18 +1319,151 @@ msgstr ""
 msgid "Select user ID not exist on system"
 msgstr ""
 
+#: template/admin/credit-history.phtml:3
+msgid "List of historys"
+msgstr ""
+
+#: template/admin/credit-history.phtml:8 template/admin/credit-history.phtml:52
+#: template/admin/credit-index.phtml:8 template/admin/invoice-add.phtml:8
+#: template/admin/invoice-edit.phtml:52 template/admin/invoice-print.phtml:76
+#: template/admin/invoice-view.phtml:55 template/admin/order-print.phtml:37
+#: template/admin/order-view.phtml:24 template/admin/order-view.phtml:171
+#: template/front/detail.phtml:105 template/front/invoice-print.phtml:76
+#: template/front/invoice.phtml:104 template/front/list.phtml:14
+msgid "Name"
+msgstr ""
+
+#: template/admin/credit-history.phtml:9 template/admin/credit-history.phtml:56
+#: template/admin/credit-index.phtml:9 template/admin/order-view.phtml:169
+msgid "Identity"
+msgstr ""
+
+#: template/admin/credit-history.phtml:11
+#: template/admin/credit-history.phtml:84
+msgid "Fluctuation status"
+msgstr ""
+
+#: template/admin/credit-history.phtml:12
+#: template/admin/credit-history.phtml:64
+msgid "Amount old"
+msgstr ""
+
+#: template/admin/credit-history.phtml:13
+#: template/admin/credit-history.phtml:68
+msgid "Amount new"
+msgstr ""
+
+#: template/admin/credit-history.phtml:14
+#: template/admin/credit-history.phtml:72 template/admin/invoice-add.phtml:75
+#: template/admin/order-view.phtml:91
+msgid "Time create"
+msgstr ""
+
+#: template/admin/credit-history.phtml:15 template/admin/credit-index.phtml:13
+#: template/admin/delivery-index.phtml:15 template/admin/invoice-index.phtml:29
+#: template/admin/location-index.phtml:15 template/admin/order-index.phtml:49
+#: template/admin/order-view.phtml:295 template/front/list.phtml:86
+msgid "Action"
+msgstr ""
+
+#: template/admin/credit-history.phtml:39 template/admin/log-index.phtml:36
+msgid "Show details"
+msgstr ""
+
+#: template/admin/credit-history.phtml:47
+msgid "history details"
+msgstr ""
+
+#: template/admin/credit-history.phtml:88
+msgid "Action status"
+msgstr ""
+
+#: template/admin/credit-history.phtml:92 template/admin/invoice-edit.phtml:129
+#: template/admin/invoice-view.phtml:132
+msgid "Ip"
+msgstr ""
+
+#: template/admin/credit-history.phtml:99
+#: template/admin/credit-history.phtml:103 template/admin/invoice-edit.phtml:98
+#: template/admin/invoice-edit.phtml:100 template/admin/invoice-index.phtml:62
+#: template/admin/invoice-index.phtml:64 template/admin/invoice-view.phtml:101
+#: template/admin/invoice-view.phtml:103
+msgid "View order"
+msgstr ""
+
+#: template/admin/credit-history.phtml:106
+#: template/admin/credit-history.phtml:110
+msgid "View invoice"
+msgstr ""
+
+#: template/admin/credit-history.phtml:112
+#: template/admin/credit-history.phtml:117 template/admin/credit-index.phtml:34
+#: template/admin/credit-index.phtml:39
+msgid "User information"
+msgstr ""
+
+#: template/admin/credit-history.phtml:130
+msgid "No history save yet"
+msgstr ""
+
+#: template/admin/credit-index.phtml:3 template/admin/log-index.phtml:3
+msgid "List of logs"
+msgstr ""
+
+#: template/admin/credit-index.phtml:12
+msgid "Time Update"
+msgstr ""
+
+#: template/admin/credit-index.phtml:24 template/admin/credit-index.phtml:28
+msgid "Update credit"
+msgstr ""
+
+#: template/admin/credit-index.phtml:29 template/admin/credit-index.phtml:33
+msgid "History"
+msgstr ""
+
+#: template/admin/credit-index.phtml:48
+msgid "No credit information used yet"
+msgstr ""
+
+#: template/admin/credit-update.phtml:3
+msgid "Update user credit"
+msgstr ""
+
+#: template/admin/credit-update.phtml:5
+msgid "Guide lines"
+msgstr ""
+
+#: template/admin/credit-update.phtml:7
+msgid "You can increase or decrease user credit amount here"
+msgstr ""
+
+#: template/admin/credit-update.phtml:8
+msgid "Select user ID and put user ID here"
+msgstr ""
+
+#: template/admin/credit-update.phtml:9
+msgid "Put amount to update increase or decrease than on user credit"
+msgstr ""
+
+#: template/admin/credit-update.phtml:10
+msgid "Select change type, set increase or decrease"
+msgstr ""
+
+#: template/admin/credit-update.phtml:11
+msgid "Set update credit reason as test, it show to user and admin"
+msgstr ""
+
+#: template/admin/credit-update.phtml:12
+msgid "Decrease just work if user credit is more than your input amount"
+msgstr ""
+
 #: template/admin/delivery-index.phtml:4 template/admin/delivery-index.phtml:6
 msgid "Add delivery methods"
 msgstr ""
 
 #: template/admin/delivery-index.phtml:9
 msgid "List of Delivery methods"
-msgstr ""
-
-#: template/admin/delivery-index.phtml:15 template/admin/invoice-index.phtml:29
-#: template/admin/location-index.phtml:15 template/admin/order-index.phtml:49
-#: template/admin/order-view.phtml:295 template/front/list.phtml:86
-msgid "Action"
 msgstr ""
 
 #: template/admin/delivery-index.phtml:31
@@ -1367,15 +1551,6 @@ msgstr ""
 msgid "Order info"
 msgstr ""
 
-#: template/admin/invoice-add.phtml:8 template/admin/invoice-edit.phtml:52
-#: template/admin/invoice-print.phtml:76 template/admin/invoice-view.phtml:55
-#: template/admin/order-print.phtml:37 template/admin/order-view.phtml:24
-#: template/admin/order-view.phtml:171 template/front/detail.phtml:105
-#: template/front/invoice-print.phtml:76 template/front/invoice.phtml:104
-#: template/front/list.phtml:14
-msgid "Name"
-msgstr ""
-
 #: template/admin/invoice-add.phtml:57 template/admin/invoice-print.phtml:101
 #: template/admin/order-view.phtml:73 template/front/detail.phtml:154
 #: template/front/invoice-print.phtml:101 template/front/list.phtml:57
@@ -1396,10 +1571,6 @@ msgstr ""
 #: template/admin/invoice-add.phtml:72 template/admin/order-index.phtml:48
 #: template/admin/order-view.phtml:88 template/front/detail.phtml:79
 msgid "Delivery status"
-msgstr ""
-
-#: template/admin/invoice-add.phtml:75 template/admin/order-view.phtml:91
-msgid "Time create"
 msgstr ""
 
 #: template/admin/invoice-add.phtml:78 template/admin/order-view.phtml:94
@@ -1470,12 +1641,6 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: template/admin/invoice-edit.phtml:98 template/admin/invoice-edit.phtml:100
-#: template/admin/invoice-index.phtml:62 template/admin/invoice-index.phtml:64
-#: template/admin/invoice-view.phtml:101 template/admin/invoice-view.phtml:103
-msgid "View order"
-msgstr ""
-
 #: template/admin/invoice-edit.phtml:101 template/admin/invoice-edit.phtml:103
 #: template/admin/invoice-view.phtml:104 template/admin/invoice-view.phtml:106
 #: template/admin/order-view.phtml:327 template/admin/order-view.phtml:329
@@ -1501,19 +1666,8 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: template/admin/invoice-edit.phtml:123 template/admin/invoice-print.phtml:182
-#: template/admin/invoice-view.phtml:126 template/admin/log-index.phtml:10
-#: template/front/detail.phtml:252 template/front/invoice-print.phtml:182
-#: template/front/invoice.phtml:206
-msgid "Amount"
-msgstr ""
-
 #: template/admin/invoice-edit.phtml:125 template/admin/invoice-view.phtml:128
 msgid "Authority"
-msgstr ""
-
-#: template/admin/invoice-edit.phtml:129 template/admin/invoice-view.phtml:132
-msgid "Ip"
 msgstr ""
 
 #: template/admin/invoice-edit.phtml:131 template/admin/invoice-view.phtml:134
@@ -1674,16 +1828,8 @@ msgstr ""
 msgid "No location is not created yet"
 msgstr ""
 
-#: template/admin/log-index.phtml:3
-msgid "List of logs"
-msgstr ""
-
 #: template/admin/log-index.phtml:13
 msgid "Details"
-msgstr ""
-
-#: template/admin/log-index.phtml:36
-msgid "Show details"
 msgstr ""
 
 #: template/admin/log-index.phtml:45
@@ -1831,10 +1977,6 @@ msgstr ""
 
 #: template/admin/order-view.phtml:149 template/front/detail.phtml:294
 msgid "Admin note"
-msgstr ""
-
-#: template/admin/order-view.phtml:169
-msgid "Identity"
 msgstr ""
 
 #: template/admin/order-view.phtml:184

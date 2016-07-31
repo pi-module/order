@@ -16,6 +16,8 @@ namespace Module\Order\Controller\Admin;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
+use Module\Order\Form\CreditForm;
+use Module\Order\Form\CreditFilter;
 
 class CreditController extends ActionController
 {
@@ -100,10 +102,12 @@ class CreditController extends ActionController
             switch ($row->status_fluctuation) {
                 case 'increase':
                     $list[$row->id]['status_fluctuation_view'] = __('Increase');
+                    $list[$row->id]['status_fluctuation_class'] = 'label label-success';
                     break;
 
                 case 'decrease':
                     $list[$row->id]['status_fluctuation_view'] = __('Decrease');
+                    $list[$row->id]['status_fluctuation_class'] = 'label label-danger';
                     break;
             }
 
@@ -142,7 +146,43 @@ class CreditController extends ActionController
 
     public function updateAction()
     {
+        // Set info
+        $uid = $this->params('uid');
+        $message = '';
+        // Set form
+        $form = new CreditForm('credit');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new CreditFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Add credit
+                $result = Pi::api('credit', 'order')->addCredit(
+                    $values['uid'],
+                    $values['amount'],
+                    $values['status_fluctuation'],
+                    $values['message_admin'],
+                    $values['message_user']
+                );
+                // Check result
+                if ($result['status'] == 1) {
+                    $message = __('Input amount add as user credit successfully.');
+                    $this->jump(array('action' => 'update'), $message);
+                } else {
+                    $message = $result['message'];
+                    $form->setData($values);
+                }
+            }
+        } elseif (intval($uid) > 0) {
+            $values = array(
+                'uid' => intval($uid),
+            );
+            $form->setData($values);
+        }
         // Set view
         $this->view()->setTemplate('credit-update');
+        $this->view()->assign('form', $form);
+        $this->view()->assign('message', $message);
     }
 }

@@ -19,6 +19,7 @@ use Pi\Application\Api\AbstractApi;
 /*
  * Pi::api('credit', 'order')->addHistory($history, $order, $invoice, $status);
  * Pi::api('credit', 'order')->acceptOrderCredit($order, $invoice = 0);
+ * Pi::api('credit', 'order')->addCredit($uid, $amount, $fluctuation, $messageAdmin, $messageUser);
  */
 
 class Credit extends AbstractApi
@@ -26,7 +27,7 @@ class Credit extends AbstractApi
     public function addHistory($history, $order = 0 , $invoice = 0, $status = 0)
     {
         $row = Pi::model('history', $this->getModule())->createRow();
-        $row->uid = $history['uid'];
+        $row->uid = isset($history['uid']) ? $history['uid'] : Pi::user()->getId();
         $row->time_create = time();
         $row->order = $order;
         $row->invoice = $invoice;
@@ -62,11 +63,13 @@ class Credit extends AbstractApi
                             $credit->amount = $credit->amount - $history->amount;
                             break;
                     }
+                    $credit->time_update = time();
                     $credit->save();
                 } else {
                     $credit = Pi::model('credit', $this->getModule())->createRow();
                     $credit->uid = $history->uid;
                     $credit->amount = $history->amount;
+                    $credit->time_update = time();
                     $credit->save();
                 }
                 $history->invoice = $invoice;
@@ -74,5 +77,60 @@ class Credit extends AbstractApi
                 $history->save();
             }
         }
+    }
+
+    public function addCredit($uid, $amount, $fluctuation = 'increase', $messageAdmin = '', $messageUser = '')
+    {
+        // Set result
+        $result = array(
+            'status' => 0,
+            'message' => '',
+        );
+        $amountOld = 0;
+        // Find and set credit
+        $credit = Pi::model('credit', $this->getModule())->find($uid, 'uid');
+        if ($credit) {
+            $amountOld = $credit->amount;
+            switch ($fluctuation) {
+                case 'increase':
+                    $credit->amount = $credit->amount + $amount;
+                    break;
+
+                case 'decrease':
+                    if ($credit->amount >= $amount) {
+                        $credit->amount = $credit->amount - $amount;
+                    } else {
+                        $result['message'] = __('Your input amount is more than user credit');
+                        return $result;
+                    }
+                    break;
+            }
+            $credit->time_update = time();
+            $credit->save();
+        } else {
+            if ($fluctuation == 'increase') {
+                $credit = Pi::model('credit', $this->getModule())->createRow();
+                $credit->uid = $uid;
+                $credit->amount = $amount;
+                $credit->time_update = time();
+                $credit->save();
+            } else {
+                $result['message'] = __('This user never use credit system, than you can not decrease amnout from him / her');
+                return $result;
+            }
+        }
+        // Add history
+        $history = array(
+            'amount' => $amount,
+            'amount_old' => $amountOld,
+            'status_fluctuation' => $fluctuation,
+            'status_action' => 'manual',
+            'message_user' => $messageAdmin,
+            'message_admin' => $messageUser,
+        );
+        $this->addHistory($history, 0, 0, 1);
+        // Return result
+        $result['status'] = 1;
+        return $result;
     }
 }

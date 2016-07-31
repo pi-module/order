@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi order module\n"
-"POT-Creation-Date: 2016-07-26 11:06+0430\n"
+"POT-Creation-Date: 2016-07-31 11:31+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -30,6 +30,15 @@ msgstr ""
 
 #: config/block.php:24
 msgid "Installment orders detail"
+msgstr ""
+
+#: config/block.php:30 config/navigation.php:55 config/page.php:47
+#: config/page.php:73 config/permission.php:47
+msgid "Credit"
+msgstr ""
+
+#: config/block.php:31
+msgid "User credit information"
 msgstr ""
 
 #: config/config.php:17
@@ -627,18 +636,30 @@ msgstr ""
 msgid "Location"
 msgstr ""
 
-#: config/page.php:50
+#: config/navigation.php:61
+msgid "User list"
+msgstr ""
+
+#: config/navigation.php:67
+msgid "History"
+msgstr ""
+
+#: config/navigation.php:73
+msgid "Add"
+msgstr ""
+
+#: config/page.php:55
 msgid "Index page"
 msgstr ""
 
-#: config/page.php:56
+#: config/page.php:61
 msgid "Checkout"
 msgstr ""
 
-#: config/page.php:62
+#: config/page.php:67
 msgid "Detail"
 msgstr ""
 
-#: config/permission.php:50
+#: config/permission.php:55
 msgid "Global public resource"
 msgstr ""
