@@ -5,25 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb89c1a1-3ca6-4284-b00d-d0e1e5682c61" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Form/CreditFilter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Form/CreditForm.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/en/admin.mo" afterPath="$PROJECT_DIR$/locale/en/admin.mo" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/en/admin.po" afterPath="$PROJECT_DIR$/locale/en/admin.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/en/block.mo" afterPath="$PROJECT_DIR$/locale/en/block.mo" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/en/block.po" afterPath="$PROJECT_DIR$/locale/en/block.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/en/default.mo" afterPath="$PROJECT_DIR$/locale/en/default.mo" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/en/default.po" afterPath="$PROJECT_DIR$/locale/en/default.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/fa/admin.mo" afterPath="$PROJECT_DIR$/locale/fa/admin.mo" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/fa/admin.po" afterPath="$PROJECT_DIR$/locale/fa/admin.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/fa/block.mo" afterPath="$PROJECT_DIR$/locale/fa/block.mo" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/fa/block.po" afterPath="$PROJECT_DIR$/locale/fa/block.po" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/fa/default.mo" afterPath="$PROJECT_DIR$/locale/fa/default.mo" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/fa/default.po" afterPath="$PROJECT_DIR$/locale/fa/default.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Api/Credit.php" afterPath="$PROJECT_DIR$/src/Api/Credit.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/Admin/CreditController.php" afterPath="$PROJECT_DIR$/src/Controller/Admin/CreditController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/admin/credit-history.phtml" afterPath="$PROJECT_DIR$/template/admin/credit-history.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/admin/credit-update.phtml" afterPath="$PROJECT_DIR$/template/admin/credit-update.phtml" />
     </list>
     <ignored path="order.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -428,7 +412,7 @@
       <workItem from="1467270716581" duration="222000" />
       <workItem from="1467980045880" duration="1600000" />
       <workItem from="1469513953218" duration="1259000" />
-      <workItem from="1469943085259" duration="4913000" />
+      <workItem from="1469943085259" duration="4984000" />
     </task>
     <task id="LOCAL-00001" summary="Fix order module">
       <created>1454310931206</created>
@@ -640,11 +624,18 @@
       <option name="project" value="LOCAL" />
       <updated>1469515080039</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Work on issues 511">
+      <created>1469949040352</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1469949040352</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35215000" />
+    <option name="totallyTimeSpent" value="35286000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -661,6 +652,7 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.226979" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293979" sideWeight="0.49674267" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293979" sideWeight="0.50325733" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32744783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -669,7 +661,6 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />

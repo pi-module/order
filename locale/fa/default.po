@@ -462,7 +462,7 @@ msgstr "شناسه کاربر"
 #: template/front/detail.phtml:252 template/front/invoice-print.phtml:182
 #: template/front/invoice.phtml:206
 msgid "Amount"
-msgstr "مقدار"
+msgstr "مبلغ"
 
 #: src/Form/CreditForm.php:66 src/Form/OrderAddForm.php:289
 #: src/Form/OrderSettingForm.php:116
