@@ -149,7 +149,7 @@ class OrderSimpleFilter extends InputFilter
             ));
         }
         // address
-        if ($config['order_address']) {
+        if ($config['order_address1']) {
             $this->add(array(
                 'name' => 'address1',
                 'required' => true,

@@ -155,7 +155,7 @@ class OrderSimpleForm extends BaseForm
             ));
         }
         // address
-        if ($this->config['order_address']) {
+        if ($this->config['order_address1']) {
             $this->add(array(
                 'name' => 'address1',
                 'options' => array(
