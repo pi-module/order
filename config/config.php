@@ -314,7 +314,7 @@ return array(
         ),
         // Print
         'print_anonymous' => array(
-            'category' => 'print_signature',
+            'category' => 'print',
             'title' => _a('Signature zone on print'),
             'description' => '',
             'edit' => 'checkbox',
