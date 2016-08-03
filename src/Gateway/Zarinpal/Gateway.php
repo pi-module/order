@@ -149,7 +149,7 @@ class Gateway extends AbstractGateway
                 $logResult = Pi::api('log', 'order')->setLog($log);
                 // Update invoice
                 if ($logResult) {
-                    $invoice = Pi::api('invoice', 'order')->updateInvoice($request['SaleOrderId']);
+                    $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
                     $result['status'] = 1;
                 }
             } else {
