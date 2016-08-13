@@ -291,6 +291,13 @@
                             <?php } ?>
                         </td>
                     </tr>
+                    <?php if ($invoice['status'] == 1 && !empty($invoice['log'])) { ?>
+                        <tr>
+                            <td colspan="4">
+                                <span class="text-success"><?php echo $this->escape($invoice['log']['message']); ?> <?php echo $this->escape($invoice['log']['gatewayMessage']); ?></span>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 <?php } ?>
             </table>
         <?php } else { ?>
