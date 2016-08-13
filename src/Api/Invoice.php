@@ -291,15 +291,15 @@ class Invoice extends AbstractApi
                 if ($invoices[$row->id]['extra']['type'] == 'installment') {
                     $time = time() + (60 * 60 * 24 * 14);
                     if ($invoices[$row->id]['time_duedate'] < $time) {
-                        $invoices[$row->id]['allowPayment'] = true;
+                        $invoices[$row->id]['allowPayment'] = 1;
                     } else {
-                        $invoices[$row->id]['allowPayment'] = false;
+                        $invoices[$row->id]['allowPayment'] = 0;
                     }
                 } else {
-                    $invoices[$row->id]['allowPayment'] = true;
+                    $invoices[$row->id]['allowPayment'] = 1;
                 }
             } else {
-                $invoices[$row->id]['allowPayment'] = true;
+                $invoices[$row->id]['allowPayment'] = 1;
             }
         }
         return $invoices;

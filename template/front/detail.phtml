@@ -235,17 +235,67 @@
                 <?php include $this->template($product['extra']['view_template'], 'front', $order['module_name']); ?>
             <?php } ?>
         <?php } ?>
-        <?php foreach ($order['invoices'] as $invoice) { ?>
-            <hr />
-            <h4><?php echo sprintf(__('Invoice %s'), $this->escape($invoice['code'])); ?></h4>
-            <?php if ($order['type_payment'] == 'installment') { ?>
-                <div class="alert alert-success" role="alert">
-                    <h4>
-                        <?php _e('Payment price'); ?> :
-                        <strong><?php echo $this->escape($invoice['total_price_view']); ?></strong>
-                    </h4>
+
+        <hr />
+        <?php if ($order['type_payment'] == 'installment') { ?>
+            <?php if (!empty($order['user_note'])) { ?>
+                <div class="alert alert-success">
+                    <h4><?php _e('User note'); ?></h4>
+                    <div class="clearfix">
+                        <?php echo $order['user_note']; ?>
+                    </div>
                 </div>
-            <?php } else { ?>
+            <?php } ?>
+            <?php if (!empty($order['admin_note'])) { ?>
+                <div class="alert alert-danger">
+                    <h4><?php _e('Admin note'); ?></h4>
+                    <div class="clearfix">
+                        <?php echo $order['admin_note']; ?>
+                    </div>
+                </div>
+            <?php } ?>
+            <table class="table table-striped table-bordered table-condensed">
+                <tr>
+                    <th><?php _e('Invoice'); ?></th>
+                    <th><?php _e('Amount'); ?></th>
+                    <th><?php _e('Due date'); ?></th>
+                    <th><?php _e('Action'); ?></th>
+                </tr>
+                <?php foreach ($order['invoices'] as $invoice) { ?>
+                    <tr>
+                        <td><?php echo sprintf(__('Invoice %s'), $this->escape($invoice['code'])); ?></td>
+                        <td><?php echo $this->escape($invoice['total_price_view']); ?></td>
+                        <td class="text-center">
+                            <?php if ($invoice['status'] == 1) { ?>
+                                <?php echo $this->escape($invoice['time_payment_view']) ?></span>
+                            <?php } elseif ($invoice['status'] == 2) { ?>
+                                <?php echo $this->escape($invoice['time_duedate_view']); ?>
+                            <?php } else { ?>
+                                <span class="label label-danger"><?php _e('Canceled'); ?></span>
+                                <?php echo $this->escape($invoice['time_cancel_view']) ?></span>
+                            <?php } ?>
+                        </td>
+                        <td class="text-center">
+                            <?php if ($invoice['status'] == 2) { ?>
+                                <?php if ($invoice['can_pay'] == 1) { ?>
+                                    <?php if ($invoice['allowPayment']) { ?>
+                                        <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay_url']); ?>"><i class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
+                                    <?php } else { ?>
+                                        <span class="label label-danger"><?php echo sprintf(__('You can pay this invoice after %s'),  _date($invoice['time_duedate'] - (60 * 60 * 24 * 14), array('pattern' => 'dd-MM-yyyy'))); ?></span>
+                                    <?php } ?>
+                                <?php } elseif ($invoice['can_pay'] != 1) { ?>
+                                    <span class="label label-danger"><?php _e('You can pay this invoice after admin review'); ?></span>
+                                <?php } ?>
+                            <?php } elseif ($invoice['status'] == 1) { ?>
+                                <span class="label label-success"><?php _e('Paid'); ?></span>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </table>
+        <?php } else { ?>
+            <?php foreach ($order['invoices'] as $invoice) { ?>
+                <h4><?php echo sprintf(__('Invoice %s'), $this->escape($invoice['code'])); ?></h4>
                 <table class="table table-striped table-bordered table-condensed">
                     <tr>
                         <th class="col-md-4"><?php _e('Title'); ?></th>
@@ -273,78 +323,78 @@
                         </td>
                     </tr>
                 </table>
-            <?php } ?>
-            <?php if ($invoice['status'] == 1 && !empty($invoice['log'])) { ?>
-                <div class="clearfix row">
+                <?php if ($invoice['status'] == 1 && !empty($invoice['log'])) { ?>
+                    <div class="clearfix row">
+                        <div class="alert alert-success">
+                            <?php echo $this->escape($invoice['log']['message']); ?> <?php echo $this->escape($invoice['log']['gatewayMessage']); ?>
+                        </div>
+                    </div>
+                <?php } ?>
+                <?php if (!empty($order['user_note'])) { ?>
                     <div class="alert alert-success">
-                        <?php echo $this->escape($invoice['log']['message']); ?> <?php echo $this->escape($invoice['log']['gatewayMessage']); ?>
+                        <h4><?php _e('User note'); ?></h4>
+                        <div class="clearfix">
+                            <?php echo $order['user_note']; ?>
+                        </div>
                     </div>
-                </div>
-            <?php } ?>
-            <?php if (!empty($order['user_note'])) { ?>
-                <div class="alert alert-success">
-                    <h4><?php _e('User note'); ?></h4>
-                    <div class="clearfix">
-                        <?php echo $order['user_note']; ?>
+                <?php } ?>
+                <?php if (!empty($order['admin_note'])) { ?>
+                    <div class="alert alert-danger">
+                        <h4><?php _e('Admin note'); ?></h4>
+                        <div class="clearfix">
+                            <?php echo $order['admin_note']; ?>
+                        </div>
                     </div>
-                </div>
-            <?php } ?>
-            <?php if (!empty($order['admin_note'])) { ?>
-                <div class="alert alert-danger">
-                    <h4><?php _e('Admin note'); ?></h4>
-                    <div class="clearfix">
-                        <?php echo $order['admin_note']; ?>
+                <?php } ?>
+                <div class="clearfix row">
+                    <div class="<?php if ($invoice['status'] == 1) { echo 'col-md-12';} else { echo 'col-md-8';} ?>">
+                        <ul class="list-inline">
+                            <li>
+                                <a class="btn btn-primary btn-sm" title="<?php _e('Print invoice'); ?>"
+                                   href="<?php echo $this->escape($invoice['print_url']); ?>" target="_blank"><i
+                                        class="fa fa-print"></i> <?php _e('Print invoice'); ?></a>
+                            </li>
+                            <li>
+                                <strong><?php _e('Invoice date'); ?></strong> :
+                                <span><?php echo $this->escape($invoice['time_create_view']); ?></span>
+                            </li>
+                            <li>
+                                <strong><?php _e('Status'); ?></strong> :
+                                <?php if ($invoice['status'] == 1) { ?>
+                                    <span class="label label-success"><?php _e('Paid'); ?></span>
+                                    <span><?php _e('On'); ?> : <?php echo $this->escape($invoice['time_payment_view']) ?></span>
+                                <?php } elseif ($invoice['status'] == 2) { ?>
+                                    <span class="label label-warning"><?php _e('Unpaid'); ?></span>
+                                <?php } else { ?>
+                                    <span class="label label-danger"><?php _e('Canceled'); ?></span>
+                                    <span><?php _e('On'); ?> : <?php echo $this->escape($invoice['time_cancel_view']) ?></span>
+                                <?php } ?>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-            <?php } ?>
-            <div class="clearfix row">
-                <div class="<?php if ($invoice['status'] == 1) { echo 'col-md-12';} else { echo 'col-md-8';} ?>">
-                    <ul class="list-inline">
-                        <li>
-                            <a class="btn btn-primary btn-sm" title="<?php _e('Print invoice'); ?>"
-                               href="<?php echo $this->escape($invoice['print_url']); ?>" target="_blank"><i
-                                    class="fa fa-print"></i> <?php _e('Print invoice'); ?></a>
-                        </li>
-                        <li>
-                            <strong><?php _e('Invoice date'); ?></strong> :
-                            <span><?php echo $this->escape($invoice['time_create_view']); ?></span>
-                        </li>
-                        <li>
-                            <strong><?php _e('Status'); ?></strong> :
-                            <?php if ($invoice['status'] == 1) { ?>
-                                <span class="label label-success"><?php _e('Paid'); ?></span>
-                                <span><?php _e('On'); ?> : <?php echo $this->escape($invoice['time_payment_view']) ?></span>
-                            <?php } elseif ($invoice['status'] == 2) { ?>
-                                <span class="label label-warning"><?php _e('Unpaid'); ?></span>
-                            <?php } else { ?>
-                                <span class="label label-danger"><?php _e('Canceled'); ?></span>
-                                <span><?php _e('On'); ?> : <?php echo $this->escape($invoice['time_cancel_view']) ?></span>
-                            <?php } ?>
-                        </li>
-                    </ul>
-                </div>
-                <?php if ($invoice['status'] == 2) { ?>
-                <div class="col-md-4 text-right">
-                    <?php if ($invoice['can_pay'] == 1 && $invoice['allowPayment']) { ?>
-                        <?php if ($invoice['allowPayment']) { ?>
-                            <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>"
-                               href="<?php echo $this->escape($invoice['pay_url']); ?>"><i
-                                    class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
-                        <?php } else { ?>
-                            <span class="label label-danger">
+                    <?php if ($invoice['status'] == 2) { ?>
+                        <div class="col-md-4 text-right">
+                            <?php if ($invoice['can_pay'] == 1 && $invoice['allowPayment']) { ?>
+                                <?php if ($invoice['allowPayment']) { ?>
+                                    <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>"
+                                       href="<?php echo $this->escape($invoice['pay_url']); ?>"><i
+                                            class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
+                                <?php } else { ?>
+                                    <span class="label label-danger">
                             <?php echo sprintf(__('You can pay this invoice after %s'),
                                 _date($invoice['time_duedate'] - (60 * 60 * 24 * 14),
                                     array('pattern' => 'dd-MM-yyyy'))); ?>
                         </span>
-                        <?php } ?>
-                    <?php } elseif ($invoice['can_pay'] != 1) { ?>
-                        <span class="label label-danger">
+                                <?php } ?>
+                            <?php } elseif ($invoice['can_pay'] != 1) { ?>
+                                <span class="label label-danger">
                             <?php _e('You can pay this invoice after admin review'); ?>
                         </span>
+                            <?php } ?>
+                        </div>
                     <?php } ?>
                 </div>
-                <?php } ?>
-            </div>
+            <?php } ?>
         <?php } ?>
     </div>
 </div>
