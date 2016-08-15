@@ -88,6 +88,12 @@ class Breadcrumbs extends AbstractBreadcrumbs
                             break;
                     }
                     break;
+
+                case 'credit':
+                    $result[] = array(
+                        'label' => __('Credit'),
+                    );
+                    break;
             }
         }
         return $result;

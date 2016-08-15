@@ -366,7 +366,7 @@ return array(
             'filter' => 'string',
         ),
         // Credit
-        'price_custom' => array(
+        'credit_active' => array(
             'category' => 'credit',
             'title' => _a('Active credit system'),
             'description' => _a('User can use credit to pay invoice and see history'),

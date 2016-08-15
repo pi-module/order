@@ -24,6 +24,8 @@ class IndexController extends ActionController
     {
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
         // Get user info
         $user = Pi::api('user', 'order')->getUserInformation();
         // Get order
@@ -35,9 +37,17 @@ class IndexController extends ActionController
         }
         // Get invoice
         //$user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id'], false, $orderIds);
+        // Get credit
+        if ($config['credit_active']) {
+            $credit = $this->getModel('credit')->find($user['id'], 'uid')->toArray();
+            $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
+            $credit['time_update_view'] = ($credit['time_update'] > 0) ? _date($credit['time_update']) : __('Never update');
+            $this->view()->assign('credit', $credit);
+        }
         // Set view
         $this->view()->setTemplate('list');
         $this->view()->assign('user', $user);
+        $this->view()->assign('config', $config);
     }
 
     public function removeAction()

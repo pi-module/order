@@ -96,7 +96,7 @@
                     <td class="text-center"><?php echo $this->escape($order['type_commodity_view']); ?></td>
                     <td class="text-center">
                         <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" target="_blank"
-                           href="<?php echo $this->url('', array('controller' => 'detail', 'id' => $order['id'])); ?>"><i
+                           href="<?php echo Pi::url($this->url('order', array('controller' => 'detail', 'id' => $order['id']))); ?>"><i
                                 class="fa fa-edit"></i> <?php _e('View'); ?></a>
                     </td>
                 </tr>
