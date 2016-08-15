@@ -258,7 +258,7 @@ class OrderForm extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-
+                    'required' => true,
                 )
             ));
         }

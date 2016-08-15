@@ -130,6 +130,5 @@ class InvoiceController extends IndexController
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('order', $order);
         $this->view()->assign('config', $config);
-
     }
 }

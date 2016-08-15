@@ -145,7 +145,7 @@ $this->footScript()->appendScript($script);
                          data-button="customerFromButton<?php echo $customer['id']; ?>">
                         <table class="table table-bordered table-condensed table-striped">
                             <tr>
-                                <th colspan="2" class="col-md-9">
+                                <th colspan="3">
                                     <ul class="list-inline">
                                         <li><?php echo $this->escape($customer['first_name']); ?></li>
                                         <li><?php echo $this->escape($customer['last_name']); ?></li>
@@ -156,36 +156,37 @@ $this->footScript()->appendScript($script);
                                         <?php } ?>
                                     </ul>
                                 </th>
-                                <td colspan="1" class="col-md-3 text-center">
-                                    <button id="customerFromButton<?php echo $customer['id']; ?>" class="showCustomerFrom btn btn-success btn-sm">
-                                        <?php _e('Use it'); ?>
-                                    </button>
-                                </td>
                             </tr>
-                            <?php if (
+                            <tr>
+                                <?php if (
                                 !empty($customer['state']) ||
                                 !empty($customer['city']) ||
                                 !empty($customer['address1']) ||
                                 !empty($customer['zip_code']) ||
                                 !empty($customer['phone']) ||
                                 !empty($customer['mobile'])) { ?>
-                                <tr>
-                                    <td class="col-md-6">
-                                        <?php if (!empty($customer['address1'])) { ?><p><strong><?php _e('Delivery address'); ?></strong> : <?php echo $this->escape($customer['address1']); ?></p><?php } ?>
-                                        <?php if (!empty($customer['address2'])) { ?><p><strong><?php _e('Invoicing address'); ?></strong> : <?php echo $this->escape($customer['address2']); ?></p><?php } ?>
-                                        <?php if (!empty($customer['zip_code'])) { ?><p><strong><?php _e('Zip code'); ?></strong> : <?php echo $this->escape($customer['zip_code']); ?></p><?php } ?>
-                                    </td>
-                                    <td class="col-md-3">
-                                        <?php if (!empty($customer['state'])) { ?><p><strong><?php _e('State'); ?></strong> : <?php echo $this->escape($customer['state']); ?></p><?php } ?>
-                                        <?php if (!empty($customer['city'])) { ?><p><strong><?php _e('City'); ?></strong> : <?php echo $this->escape($customer['city']); ?></p><?php } ?>
-                                    </td>
-                                    <td class="col-md-3">
-                                        <?php if (!empty($customer['phone'])) { ?><p><strong><?php _e('Phone'); ?></strong> : <?php echo $this->escape($customer['phone']); ?></p><?php } ?>
-                                        <?php if (!empty($customer['mobile'])) { ?><p><strong><?php _e('Mobile'); ?></strong> : <?php echo $this->escape($customer['mobile']); ?></p><?php } ?>
-                                    </td>
-                                </tr>
+                                <td class="col-md-6">
+                                    <?php if (!empty($customer['address1'])) { ?><p><strong><?php _e('Delivery address'); ?></strong> : <span class="small"><?php echo $this->escape($customer['address1']); ?></span></p><?php } ?>
+                                    <?php if (!empty($customer['address2'])) { ?><p><strong><?php _e('Invoicing address'); ?></strong> : <span class="small"><?php echo $this->escape($customer['address2']); ?></span></p><?php } ?>
+                                    <?php if (!empty($customer['zip_code'])) { ?><p><strong><?php _e('Zip code'); ?></strong> : <?php echo $this->escape($customer['zip_code']); ?></p><?php } ?>
+                                </td>
+                                <td class="col-md-3">
+                                    <?php if (!empty($customer['state'])) { ?><p><strong><?php _e('State'); ?></strong> : <?php echo $this->escape($customer['state']); ?></p><?php } ?>
+                                    <?php if (!empty($customer['city'])) { ?><p><strong><?php _e('City'); ?></strong> : <?php echo $this->escape($customer['city']); ?></p><?php } ?>
+                                </td>
+                                <td class="col-md-3">
+                                    <?php if (!empty($customer['phone'])) { ?><p><strong><?php _e('Phone'); ?></strong> : <?php echo $this->escape($customer['phone']); ?></p><?php } ?>
+                                    <?php if (!empty($customer['mobile'])) { ?><p><strong><?php _e('Mobile'); ?></strong> : <?php echo $this->escape($customer['mobile']); ?></p><?php } ?>
+                                </td>
+                            </tr>
                             <?php } ?>
-                            <tr>
+                            <td colspan="3" class="text-right">
+                                <button id="customerFromButton<?php echo $customer['id']; ?>" class="showCustomerFrom btn btn-success btn-sm">
+                                    <?php _e('Use it'); ?>
+                                </button>
+                            </td>
+                            </tr>
+                            <tr class="active">
                                 <td colspan="3" id="customerFrom<?php echo $customer['id']; ?>" class="hidden">
                                     <div class="clearfix col-md-12">
                                         <?php $key = sprintf('customer-%s', $customer['id']); ?>
@@ -196,18 +197,18 @@ $this->footScript()->appendScript($script);
                         </table>
                     </div>
                 <?php } ?>
-                <div class="customer-single well well-sm clearfix" data-id="customerFromNew" data-button="customerFromButtonNew">
-                    <div class="page-header row">
+                <div class="customer-single alert alert-success clearfix" data-id="customerFromNew" data-button="customerFromButtonNew">
+                    <div class="page-header">
                         <div class="col-md-9">
-                            <h3><?php _e("Create order with a new address"); ?></h3>
+                            <h4><?php _e("Create order with a new address"); ?></h4>
                         </div>
-                        <dic class="col-md-3 text-center">
+                        <div class="col-md-3 text-center">
                             <button id="customerFromButtonNew" class="showCustomerFrom btn btn-success btn-sm">
                                 <?php _e('Create new address'); ?>
                             </button>
-                        </dic>
+                        </div>
                     </div>
-                    <div id="customerFromNew" class="clearfix col-md-12 <?php if (!$check) { echo 'hidden';} ?>">
+                    <div id="customerFromNew" class="clearfix <?php if (!$check) { echo 'hidden';} ?>">
                         <?php echo $this->form($forms['new']); ?>
                     </div>
                 </div>
@@ -260,12 +261,23 @@ $this->footScript()->appendScript($script);
                         <strong><?php _e('Total Vat'); ?></strong> :
                         <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?>
                     </p>
-                    <p>
-                        <strong><?php _e('Final Price incl. VAT'); ?></strong> :
-                        <span class="label label-success">
-                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?>
-                        </span>
-                    </p>
+                </div>
+                <div class="panel-footer">
+                    <ul class="list-inline">
+                        <li>
+                            <strong>
+                                <?php _e('Final Price incl. VAT'); ?>
+                            </strong>
+                        </li>
+                        <li>
+                            <h3>
+                                <sma class="label label-success">
+                                    <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?>
+                                </sma>
+                            </h3>
+                        </li>
+
+                    </ul>
                 </div>
             </div>
             <?php if (!empty($config['text_description_checkup'])) { ?>

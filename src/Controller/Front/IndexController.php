@@ -44,30 +44,37 @@ class IndexController extends ActionController
     {
         // Get invoice id
         $id = $this->params('id');
-        // Get post
-        if ($this->request->isPost()) {
-            $data = $this->request->getPost()->toArray();
-            if (isset($data['id']) && !empty($data['id'])) {
-                Pi::api('processing', 'order')->removeProcessing();
-                $message = __('Your old payment process remove, please try new payment ation');
+        $invoice = Pi::api('invoice', 'order')->getInvoice($id);
+        // Check invoice
+        if ($invoice) {
+            // Get post
+            if ($this->request->isPost()) {
+                $data = $this->request->getPost()->toArray();
+                if (isset($data['id']) && !empty($data['id'])) {
+                    Pi::api('processing', 'order')->removeProcessing();
+                    $message = __('Your old payment process remove, please try new payment ation');
+                } else {
+                    $message = __('Payment is clean');
+                }
+                $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $invoice['order']), $message);
             } else {
-                $message = __('Payment is clean');
+                $processing = Pi::api('processing', 'order')->getProcessing();
+                if (isset($processing['id']) && !empty($processing['id'])) {
+                    $values['id'] = $processing['id'];
+                } else {
+                    $message = __('Payment is clean');
+                    $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $invoice['order']), $message);
+                }
+                // Set form
+                $form = new RemoveForm('Remove');
+                $form->setData($values);
+                // Set view
+                $this->view()->setTemplate('remove');
+                $this->view()->assign('form', $form);
             }
-            $this->jump(array('', 'controller' => 'invoice', 'action' => 'index', 'id' => $id), $message);
         } else {
-            $processing = Pi::api('processing', 'order')->getProcessing();
-            if (isset($processing['id']) && !empty($processing['id'])) {
-                $values['id'] = $processing['id'];
-            } else {
-                $message = __('Payment is clean');
-                $this->jump(array('', 'controller' => 'invoice', 'action' => 'index', 'id' => $id), $message);
-            }
-            // Set form
-            $form = new RemoveForm('Remove');
-            $form->setData($values);
-            // Set view
-            $this->view()->setTemplate('remove');
-            $this->view()->assign('form', $form);
+            $message = __('Please select invoice');
+            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), $message);
         }
     }
 
