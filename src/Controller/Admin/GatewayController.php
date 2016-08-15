@@ -88,4 +88,27 @@ class GatewayController extends ActionController
         $this->view()->assign('message', $message);
         $this->view()->setTemplate('gateway-update');
     }
+
+    public function statusAction()
+    {
+        $gateway = $this->params('path');
+        $gateway = $this->getModel('gateway')->find($gateway, 'path');
+        if ($gateway) {
+            if ($gateway->status == 1) {
+                $gateway->status = 0;
+            } elseif ($gateway->status == 0) {
+                $gateway->status = 1;
+            }
+            $gateway->save();
+            // Set jump
+            $message = __('Gateway data saved successfully.');
+            $url = array('controller' => 'gateway', 'action' => 'index');
+            $this->jump($url, $message);
+        } else {
+            // Set jump
+            $message = __('Please select installed gateway');
+            $url = array('controller' => 'gateway', 'action' => 'index');
+            $this->jump($url, $message);
+        }
+    }
 }

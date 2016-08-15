@@ -16,31 +16,31 @@
 return array(
     'admin' => array(
         'order' => array(
-            'label' => _a('Orders'),
+            'label' => _a('Orders and invoices'),
             'route' => 'admin',
             'controller' => 'order',
             'action' => 'index',
-            'pages'         => array(
-                'list'   => array(
-                    'label'         => _a('Order list'),
+            'pages' => array(
+                'list' => array(
+                    'label' => _a('Order list'),
                     'route' => 'admin',
                     'controller' => 'order',
                     'action' => 'index',
                 ),
-                'invoice'   => array(
+                'invoice' => array(
                     'label' => _a('Invoice list'),
                     'route' => 'admin',
                     'controller' => 'invoice',
                     'action' => 'index',
                 ),
-                'logs'   => array(
+                'logs' => array(
                     'label' => _a('Logs'),
                     'route' => 'admin',
                     'controller' => 'logs',
                     'action' => 'index',
                 ),
-                'add'   => array(
-                    'label'         => _a('New order'),
+                'add' => array(
+                    'label' => _a('New order'),
                     'route' => 'admin',
                     'controller' => 'order',
                     'action' => 'add',
@@ -58,7 +58,7 @@ return array(
             'route' => 'admin',
             'controller' => 'delivery',
             'action' => 'index',
-            'pages'         => array(
+            'pages' => array(
                 'delivery' => array(
                     'label' => _a('Delivery'),
                     'route' => 'admin',
@@ -72,7 +72,7 @@ return array(
                     'action' => 'index',
                 ),
                 'delivery-add' => array(
-                    'label' => _a('Mew delivery'),
+                    'label' => _a('New delivery'),
                     'route' => 'admin',
                     'controller' => 'delivery',
                     'action' => 'update',
@@ -90,24 +90,24 @@ return array(
             'route' => 'admin',
             'controller' => 'credit',
             'action' => 'index',
-            'pages'         => array(
-                'list'   => array(
-                    'label'         => _a('User list'),
-                    'route'         => 'admin',
-                    'controller'    => 'credit',
-                    'action'        => 'index',
+            'pages' => array(
+                'list' => array(
+                    'label' => _a('User list'),
+                    'route' => 'admin',
+                    'controller' => 'credit',
+                    'action' => 'index',
                 ),
-                'history'   => array(
-                    'label'         => _a('History'),
-                    'route'         => 'admin',
-                    'controller'    => 'credit',
-                    'action'        => 'history',
+                'history' => array(
+                    'label' => _a('History'),
+                    'route' => 'admin',
+                    'controller' => 'credit',
+                    'action' => 'history',
                 ),
-                'add'   => array(
-                    'label'         => _a('Add'),
-                    'route'         => 'admin',
-                    'controller'    => 'credit',
-                    'action'        => 'update',
+                'add' => array(
+                    'label' => _a('Add'),
+                    'route' => 'admin',
+                    'controller' => 'credit',
+                    'action' => 'update',
                 ),
             ),
         ),

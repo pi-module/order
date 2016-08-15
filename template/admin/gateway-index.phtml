@@ -1,53 +1,74 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="clearfix">
     <h3><?php _e('List of all available gateways'); ?></h3>
-    <?php foreach ($list as $item) { ?>
-        <div class="well">
-            <h4><?php echo $item['title']; ?></h4>
-
-            <div class="clearfix">
-                <div class="col-md-6">
-                    <ul class="list-unstyled">
-                        <li><strong><?php _e('Description'); ?></strong> : <?php echo $item['description']; ?></li>
-                        <li><strong><?php _e('Version'); ?></strong> : <?php echo $item['version']; ?></li>
-                        <li><strong><?php _e('Author'); ?></strong> : <?php echo $item['author']; ?></li>
-                        <li><strong><?php _e('Credits'); ?></strong> : <?php echo $item['credits']; ?></li>
-                        <li><strong><?php _e('Release Date'); ?></strong> : <?php echo _date($item['releaseDate']); ?>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <?php if (isset($item['option']) && !empty($item['option'])) { ?>
-                        <ul class="list-unstyled">
-                            <?php foreach ($item['option'] as $key => $value) { ?>
-                                <li><strong><?php _e($key); ?></strong> : <?php echo $value; ?></li>
-                            <?php } ?>
-                        </ul>
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th><?php _e('Title'); ?></th>
+            <th><?php _e('Status'); ?></th>
+            <th><?php _e('Gateway detail'); ?></th>
+            <th><?php _e('Action'); ?></th>
+        </tr>
+        <?php foreach ($list as $item) { ?>
+            <tr>
+                <td><?php echo $item['title']; ?></td>
+                <td>
+                    <?php if (isset($item['status']) && $item['status'] == 1) { ?>
+                        <span class="label label-success"><?php _e('Active'); ?></span>
+                    <?php } elseif (isset($item['status']) && $item['status'] == 0) { ?>
+                        <span class="label label-warning"><?php _e('Inactive'); ?></span>
+                    <?php } else { ?>
+                        <span class="label label-danger"><?php _e('Not installed'); ?></span>
                     <?php } ?>
-                </div>
-            </div>
-            <?php if ($item['status'] != -1) { ?>
-                <?php if ($item['status']) { ?>
-                    <p>
-                        <a class="btn btn-primary" title="<?php _e('Edit'); ?>"
-                           href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Edit'); ?></a>
-                        <a class="btn btn-warning" title="<?php _e('Inactive'); ?>" href=""><?php _e('Inactive'); ?></a>
-                        <a class="btn btn-danger" title="<?php _e('UnInstall'); ?>" href=""><?php _e('UnInstall'); ?></a>
-                    </p>
-                <?php } else { ?>
-                    <p>
-                        <a class="btn btn-primary" title="<?php _e('Edit'); ?>"
-                           href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Edit'); ?></a>
-                        <a class="btn btn-success" title="<?php _e('Active'); ?>" href=""><?php _e('Active'); ?></a>
-                        <a class="btn btn-danger" title="<?php _e('UnInstall'); ?>" href=""><?php _e('UnInstall'); ?></a>
-                    </p>
-                <?php } ?>
-            <?php } else { ?>
-                <p>
-                    <a class="btn btn-success" title="<?php _e('Install'); ?>"
-                       href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Install'); ?></a>
-                </p>
-            <?php } ?>
-        </div>
-    <?php } ?>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#<?php echo $item['path']; ?>Modal">
+                        <?php _e('Gateway detail'); ?>
+                    </button>
+                    <div class="modal fade" id="<?php echo $item['path']; ?>Modal" tabindex="-1" role="dialog" aria-labelledby="<?php echo $item['path']; ?>ModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="<?php _e('Close'); ?>"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="<?php echo $item['path']; ?>ModalLabel"><?php echo $item['title']; ?> (<?php echo $item['path']; ?>)</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="clearfix">
+                                        <div class="col-md-6">
+                                            <ul class="list-unstyled">
+                                                <li><strong><?php _e('Description'); ?></strong> : <?php echo $item['description']; ?></li>
+                                                <li><strong><?php _e('Version'); ?></strong> : <?php echo $item['version']; ?></li>
+                                                <li><strong><?php _e('Author'); ?></strong> : <?php echo $item['author']; ?></li>
+                                                <li><strong><?php _e('Credits'); ?></strong> : <?php echo $item['credits']; ?></li>
+                                                <li><strong><?php _e('Release Date'); ?></strong> : <?php echo _date($item['releaseDate']); ?></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <?php if (isset($item['option']) && !empty($item['option'])) { ?>
+                                                <ul class="list-unstyled">
+                                                    <?php foreach ($item['option'] as $key => $value) { ?>
+                                                        <li><strong><?php _e($key); ?></strong> : <?php echo $value; ?></li>
+                                                    <?php } ?>
+                                                </ul>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <?php if (isset($item['status']) && $item['status'] == 1) { ?>
+                        <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Edit'); ?></a>
+                        <a class="btn btn-warning btn-xs" title="<?php _e('Inactive'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'status', 'path' => $item['path'])); ?>"><?php _e('Inactive'); ?></a>
+                    <?php } elseif (isset($item['status']) && $item['status'] == 0) { ?>
+                        <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Edit'); ?></a>
+                        <a class="btn btn-success btn-xs" title="<?php _e('Active'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'status', 'path' => $item['path'])); ?>"><?php _e('Active'); ?></a>
+                    <?php } else { ?>
+                        <a class="btn btn-success btn-xs" title="<?php _e('Install'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Install'); ?></a>
+                    <?php } ?>
+                </td>
+            </tr>
+        <?php } ?>
+    </table>
 </div>

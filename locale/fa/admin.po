@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2016-07-31 11:31+0430\n"
+"POT-Creation-Date: 2016-08-15 10:06+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.8\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _a;_t\n"
 "X-Poedit-Basepath: ../..\n"
@@ -23,7 +23,7 @@ msgstr "جزئیات سفارش"
 msgid "Simple orders detail"
 msgstr "جزئیات ساده سفارش"
 
-#: config/block.php:23 config/config.php:41
+#: config/block.php:23 config/config.php:45
 msgid "Installment"
 msgstr "قسطی"
 
@@ -31,8 +31,8 @@ msgstr "قسطی"
 msgid "Installment orders detail"
 msgstr "جزییات سفارش های قسطی"
 
-#: config/block.php:30 config/navigation.php:55 config/page.php:47
-#: config/page.php:73 config/permission.php:47
+#: config/block.php:30 config/config.php:37 config/navigation.php:89
+#: config/page.php:47 config/page.php:73 config/permission.php:47
 msgid "Credit"
 msgstr "اعتبار"
 
@@ -60,39 +60,39 @@ msgstr "شخصی سازی"
 msgid "Payment"
 msgstr "پرداخت"
 
-#: config/config.php:37
+#: config/config.php:41
 msgid "Notification"
 msgstr "آگاهی رسانی"
 
-#: config/config.php:49
+#: config/config.php:53
 msgid "Perpage"
 msgstr "تعداد در هر صفحه"
 
-#: config/config.php:57
+#: config/config.php:61
 msgid "Order method"
 msgstr "روش ثبت سفارش"
 
-#: config/config.php:63
+#: config/config.php:67
 msgid "Both"
 msgstr "هر دو"
 
-#: config/config.php:64
+#: config/config.php:68
 msgid "Online"
 msgstr "آنلاین"
 
-#: config/config.php:65
+#: config/config.php:69
 msgid "Offline"
 msgstr "آفلاین"
 
-#: config/config.php:66
+#: config/config.php:70
 msgid "Inactive"
 msgstr "غیر فعال"
 
-#: config/config.php:76
+#: config/config.php:80
 msgid "Test mode"
 msgstr "حالت تست"
 
-#: config/config.php:77
+#: config/config.php:81
 msgid ""
 "By test mode , you can disable payment on bank and test order level. dont "
 "use it on active websites"
@@ -100,220 +100,230 @@ msgstr ""
 "با حالت تست ، شما میتوانید پرداخت آنلاین در بانک را غیر فعال کنید و مراحل "
 "کامل سفارش را تست نمایید. در سایت های در حال کار استفاده نشود."
 
-#: config/config.php:84
+#: config/config.php:88
 msgid "Anonymous users can pay"
 msgstr "کاربر مهمان بتواند پرداخت کند"
 
-#: config/config.php:92
+#: config/config.php:96
 msgid "Order code Prefix"
 msgstr "پیشوند کد سفارش"
 
-#: config/config.php:100
+#: config/config.php:104
 msgid "Invoice code Prefix"
 msgstr "پیشوند کد فاکتور"
 
-#: config/config.php:108
+#: config/config.php:112
 msgid "Update user profile"
 msgstr "به روز رسانی پروفایل کاربر"
 
-#: config/config.php:109
+#: config/config.php:113
 msgid "Update user profile by order informations by user confirmation"
 msgstr ""
 "به روز رسانی پروفایل کاربر بر اساس اطلاعات ثبت شده در سفارش با تایید کاربر"
 
-#: config/config.php:116
+#: config/config.php:120
 msgid "Show ID number"
 msgstr "نمایش کد ملی"
 
-#: config/config.php:124
+#: config/config.php:128
 msgid "Show name"
 msgstr "نمایش نام"
 
-#: config/config.php:132
+#: config/config.php:136
 msgid "Show email"
 msgstr "نمایش ایمیل"
 
-#: config/config.php:140
+#: config/config.php:144
 msgid "Show phone"
 msgstr "نمایش تلفن"
 
-#: config/config.php:148
+#: config/config.php:152
 msgid "Show mobile"
 msgstr "نمایش موبایل"
 
-#: config/config.php:156
+#: config/config.php:160
 msgid "Show company"
 msgstr "نمایش شرکت"
 
-#: config/config.php:164
+#: config/config.php:168
 msgid "Show company extra (ID , VAT)"
 msgstr "نمایش اطلاعات اضافی شرکت"
 
-#: config/config.php:172
+#: config/config.php:176
 msgid "Show delivery address"
 msgstr "نمایش آدرس تحویل"
 
-#: config/config.php:180
+#: config/config.php:184
 msgid "Show invoicing address"
 msgstr "نمایش آدرس فاکتور"
 
-#: config/config.php:188
+#: config/config.php:192
 msgid "Show country"
 msgstr "نمایش کشور"
 
-#: config/config.php:196
+#: config/config.php:200
 msgid "Country list"
 msgstr "فهرست کشور ها"
 
-#: config/config.php:197
+#: config/config.php:201
 msgid "Use `|` as delimiter to separate countries"
 msgstr "با استفاده از `|` کشور ها را از هم جدا کنید"
 
-#: config/config.php:202
+#: config/config.php:206
 msgid "Show state"
 msgstr "نمایش استان"
 
-#: config/config.php:210
+#: config/config.php:214
 msgid "Show city"
 msgstr "نمایش شهر"
 
-#: config/config.php:218
+#: config/config.php:222
 msgid "Show Zip code"
 msgstr "نمایش کد پستی"
 
-#: config/config.php:226
+#: config/config.php:230
 msgid "Show packing"
 msgstr "نمایش بسته بندی"
 
-#: config/config.php:234
+#: config/config.php:238
 msgid "Show location and delivery"
 msgstr "نمایش مکان و روش تحویل"
 
-#: config/config.php:242
+#: config/config.php:246
 msgid "Show user note"
 msgstr "نمایش توضیح کاربر"
 
-#: config/config.php:250
+#: config/config.php:254
 msgid "Show order term"
 msgstr "نمایش شرایط و مقررات"
 
-#: config/config.php:258
+#: config/config.php:262
 msgid "Order term url"
 msgstr "لینک شرایط سفارش"
 
-#: config/config.php:264
+#: config/config.php:268
 msgid "Product additional price"
 msgstr "قیمت اضافی برای محصولات"
 
-#: config/config.php:265
+#: config/config.php:269
 msgid "Additional price as ready and delivery, just for products"
 msgstr "قیمت اضافی برای آماده سازی و ارسال ، فقط مخصوص محصولات"
 
-#: config/config.php:272
+#: config/config.php:276
 msgid "Service additional price"
 msgstr "قیمت اضافی برای خدمات"
 
-#: config/config.php:273
+#: config/config.php:277
 msgid "Additional price as setup, just for servicies"
 msgstr "قیمت اضافی برای راه اندازی ، فقط مخصوص سرویس ها"
 
-#: config/config.php:279
+#: config/config.php:283
 msgid "After save order"
 msgstr "بعد از ثبت سفارش"
 
-#: config/config.php:285
+#: config/config.php:289
 msgid "Go to invoice page"
 msgstr "برو به صفحه فاکتور"
 
-#: config/config.php:286
+#: config/config.php:290
 msgid "Go to payment page"
 msgstr "برو به صفحه پرداخت"
 
-#: config/config.php:296
+#: config/config.php:300
 msgid "Seller logo"
 msgstr "لوگوی فروشنده"
 
-#: config/config.php:297
+#: config/config.php:301
 msgid "Put logo full URL"
 msgstr "آدرس کامل عکس را وارد کنید"
 
-#: config/config.php:303
+#: config/config.php:307
 msgid "Seller information"
 msgstr "اطلاعات فروشنده"
 
-#: config/config.php:304
+#: config/config.php:308
 msgid "HTML tags supported, use on invoice page"
 msgstr "از تگ های HTML پشتیبانی می شود ، در صفحه فاکتور نمایش داده می شود"
 
-#: config/config.php:310
+#: config/config.php:314
 msgid "Notification email for each module"
 msgstr "ایمیل اطلاع رسانی برای هر ماژول"
 
-#: config/config.php:311
+#: config/config.php:315
 msgid "Setup format : shop,shop@mysite.com|guide,guide@mysite.com"
 msgstr "فرمت ورد استفاده : shop,shop@mysite.com|guide,guide@mysite.com"
 
-#: config/config.php:318
+#: config/config.php:322
 msgid "Signature zone on print"
 msgstr "نمایش محل امضا در پرینت"
 
-#: config/config.php:327
+#: config/config.php:331
 msgid "Use custom price"
 msgstr "استفاده از قیمت سفارشی"
 
-#: config/config.php:335
+#: config/config.php:339
 msgid "Date format"
 msgstr "فرمت تاریخ"
 
-#: config/config.php:336
+#: config/config.php:340
 msgid "For example : yyyy-MM-dd"
 msgstr "برای مثال : yyyy-MM-dd"
 
-#: config/config.php:344
+#: config/config.php:348
 msgid "Payment gateway error url"
 msgstr "لینک برگشت در خطای دروازه پرداخت"
 
-#: config/config.php:345
+#: config/config.php:349
 msgid "Set back url when gateway have error, set empty for default url"
 msgstr ""
 "تنظیم لینک برگشت وقتی که خطایی در روند پرداخت روی داده باشد، برای استفاده از "
 "آدرس پیش فرض این گزینه را خالی رها کنید."
 
-#: config/config.php:351
+#: config/config.php:355
 msgid "Show not pay payments"
 msgstr "نمایش فاکتور های پرداخت نشده به کاربر"
 
-#: config/config.php:359
+#: config/config.php:363
 msgid "Website image URL"
 msgstr "آدرس لوگوی وب سایت"
 
-#: config/config.php:360
+#: config/config.php:364
 msgid "Use on some payment gateway like paypal."
 msgstr "در بعضی دروازه پرداخت ها مثل پی پال استفاده می شود"
 
-#: config/config.php:367
+#: config/config.php:371
+msgid "Active credit system"
+msgstr "فعال کردن سیستم اعتبار"
+
+#: config/config.php:372
+msgid "User can use credit to pay invoice and see history"
+msgstr ""
+"کاربر می تواند از اعتبار خود برای پرداخت فاکتور استفاده نماید و گزارش فعالیت "
+"خود را مشاهده کند"
+
+#: config/config.php:380
 msgid "New order notification to user"
 msgstr "اطلاع رسانی سفارش جدید به کاربر"
 
-#: config/config.php:368 config/config.php:371
+#: config/config.php:381 config/config.php:384
 #, php-format
 msgid "Dear %s %s, you order %s product by %s price, added on %s website"
 msgstr "%s %s عزیز، شما کالای %s را با قیمت %s در وب سایت %s سفارش داده اید."
 
-#: config/config.php:375
+#: config/config.php:388
 msgid "New order notification to admin"
 msgstr "اطلاع رسانی سفارش جدید به مدیر"
 
-#: config/config.php:376 config/config.php:379
+#: config/config.php:389 config/config.php:392
 #, php-format
 msgid "Dear %s admin, %s %s User ordered %s product by %s price"
 msgstr "مدیر وب سایت %s ، کاربر %s %s کالای %s را به قیمت %s سفارش داده است."
 
-#: config/config.php:383
+#: config/config.php:396
 msgid "Pay invoice notification to user"
 msgstr "اطلاع رسانی پرداخت فاکتور به کاربر"
 
-#: config/config.php:384 config/config.php:387
+#: config/config.php:397 config/config.php:400
 msgid ""
 "Dear %s %s, You paid invoice %s by %s price for %s order included % product "
 "on %s website successfully"
@@ -321,11 +331,11 @@ msgstr ""
 "%s %s عزیز ، شما فاکتور شماره %s به مبلغ %s برای سفارش %s شامل کالاهای %s در "
 "وب سایت %s پرداخت کرده اید"
 
-#: config/config.php:391
+#: config/config.php:404
 msgid "Pay invoice notification to admin"
 msgstr "اطلاع رسانی پرداخت فاکتور به مدیر"
 
-#: config/config.php:392 config/config.php:395
+#: config/config.php:405 config/config.php:408
 msgid ""
 "Dear %s admin, %s %s User paid invoice %s by %s price for %s order included "
 "% product successfully"
@@ -333,292 +343,291 @@ msgstr ""
 "مدیر وب سایت %s ، کاربر %s %s فاکتور شماره %s را به مبلغ %s برای سفارش %s و "
 "شامل کالاهای %s پرداخت کرد."
 
-#: config/config.php:399
+#: config/config.php:412
 msgid "Set X day before due date"
 msgstr "تنظیم X روز قبل از سر رسید"
 
-#: config/config.php:400
+#: config/config.php:413
 msgid "Notification invoice due date, X day before invoice time by cron"
 msgstr ""
 "آگاهی رسانی تاریخ سررسید فاکتور، X روز قبل از تاریخ سررسید به وسیله کرون جاب"
 
-#: config/config.php:407
+#: config/config.php:420
 msgid "Duedate invoice notification to user"
 msgstr "اطلاع رسانی تاریخ سررسید فاکتور به کاربر"
 
-#: config/config.php:408 config/config.php:411
+#: config/config.php:421 config/config.php:424
 #, php-format
 msgid "Dear %s %s, You have duedate invoice on next %s days"
 msgstr "%s %s عزیز، سر رسید یک فاکتور شما طی %s آینده فرا می رسد."
 
-#: config/config.php:415
+#: config/config.php:428
 msgid "Set X day after expired"
 msgstr "تنظیم X روز بعد از ابطال"
 
-#: config/config.php:416
+#: config/config.php:429
 msgid "Notification invoice expired, X day after invoice time by cron"
 msgstr ""
 "آگاهی رسانی تاریخ گذشتن فاکتور، X روز بعد از تاریخ سررسید به وسیله کرون جاب"
 
-#: config/config.php:423
+#: config/config.php:436
 msgid "Expired invoice notification to user"
 msgstr "اطلاع رسانی فاکتور منقضی شده به کاربر"
 
-#: config/config.php:424 config/config.php:427
+#: config/config.php:437 config/config.php:440
 #, php-format
 msgid "Dear %s %s, You have expired invoice on %s days ago"
 msgstr "%s %s عزیز، شما یک فاکتور پرداخت نشده برای %s روز قبل دارید"
 
-#: config/config.php:432
+#: config/config.php:445
 msgid "Reduce from user credit"
 msgstr "کسر از اعتبار کاربر"
 
-#: config/config.php:440
+#: config/config.php:453
 msgid "Show plan 1"
 msgstr "نمایش پلن ۱"
 
-#: config/config.php:448
+#: config/config.php:461
 msgid "Plan 1 : Title"
 msgstr "پلن ۱ : عنوان"
 
-#: config/config.php:452
+#: config/config.php:465
 msgid "1 month"
 msgstr "۱ ماه"
 
-#: config/config.php:456
+#: config/config.php:469
 msgid "Plan 1 : Prepayment"
 msgstr "پلن ۱ : پیش قسط"
 
-#: config/config.php:464
+#: config/config.php:477
 msgid "Plan 1 : Profit"
 msgstr "پلن ۱ : سود"
 
-#: config/config.php:472
+#: config/config.php:485
 msgid "Plan 1 : Total"
 msgstr "پلن ۱ : تعداد اقساط"
 
-#: config/config.php:480
+#: config/config.php:493
 msgid "Show plan 2"
 msgstr "نمایش پلن ۲"
 
-#: config/config.php:488
+#: config/config.php:501
 msgid "Plan 2 : Title"
 msgstr "پلن ۲ : عنوان"
 
-#: config/config.php:492
+#: config/config.php:505
 msgid "2 months"
 msgstr "۲ ماه"
 
-#: config/config.php:496
+#: config/config.php:509
 msgid "Plan 2 : Prepayment"
 msgstr "پلن ۲ : پیش قسط"
 
-#: config/config.php:504
+#: config/config.php:517
 msgid "Plan 2 : Profit"
 msgstr "پلن ۲ : سود"
 
-#: config/config.php:512
+#: config/config.php:525
 msgid "Plan 2 : Total"
 msgstr "پلن ۲ : تعداد اقساط"
 
-#: config/config.php:520
+#: config/config.php:533
 msgid "Show plan 3"
 msgstr "نمایش پلن ۳"
 
-#: config/config.php:528
+#: config/config.php:541
 msgid "Plan 3 : Title"
 msgstr "پلن ۳ : عنوان"
 
-#: config/config.php:532
+#: config/config.php:545
 msgid "3 months"
 msgstr "۳ ماه"
 
-#: config/config.php:536
+#: config/config.php:549
 msgid "Plan 3 : Prepayment"
 msgstr "پلن ۳ : پیش قسط"
 
-#: config/config.php:544
+#: config/config.php:557
 msgid "Plan 3 : Profit"
 msgstr "پلن ۳ : سود"
 
-#: config/config.php:552
+#: config/config.php:565
 msgid "Plan 3 : Total"
 msgstr "پلن ۳ : تعداد اقساط"
 
-#: config/config.php:560
+#: config/config.php:573
 msgid "Show plan 4"
 msgstr "نمایش پلن ۴"
 
-#: config/config.php:568
+#: config/config.php:581
 msgid "Plan 4 : Title"
 msgstr "پلن ۴ : عنوان"
 
-#: config/config.php:572
+#: config/config.php:585
 msgid "4 months"
 msgstr "۴ ماه"
 
-#: config/config.php:576
+#: config/config.php:589
 msgid "Plan 4 : Prepayment"
 msgstr "پلن ۴ : پیش قسط"
 
-#: config/config.php:584
+#: config/config.php:597
 msgid "Plan 4 : Profit"
 msgstr "پلن ۴ : سود"
 
-#: config/config.php:592
+#: config/config.php:605
 msgid "Plan 4 : Total"
 msgstr "پلن ۴ : تعداد اقساط"
 
-#: config/config.php:600
+#: config/config.php:613
 msgid "Show plan 5"
 msgstr "نمایش پلن ۵"
 
-#: config/config.php:608
+#: config/config.php:621
 msgid "Plan 5 : Title"
 msgstr "پلن ۵ : عنوان"
 
-#: config/config.php:612
+#: config/config.php:625
 msgid "5 months"
 msgstr "۵ ماه"
 
-#: config/config.php:616
+#: config/config.php:629
 msgid "Plan 5 : Prepayment"
 msgstr "پلن ۵ : پیش قسط"
 
-#: config/config.php:624
+#: config/config.php:637
 msgid "Plan 5 : Profit"
 msgstr "پلن ۵ : سود"
 
-#: config/config.php:632
+#: config/config.php:645
 msgid "Plan 5 : Total"
 msgstr "پلن ۵ : تعداد اقساط"
 
-#: config/config.php:640
+#: config/config.php:653
 msgid "Show plan 6"
 msgstr "نمایش پلن ۶"
 
-#: config/config.php:648
+#: config/config.php:661
 msgid "Plan 6 : Title"
 msgstr "پلن ۶ : عنوان"
 
-#: config/config.php:652
+#: config/config.php:665
 msgid "6 months"
 msgstr "۶ ماه"
 
-#: config/config.php:656
+#: config/config.php:669
 msgid "Plan 6 : Prepayment"
 msgstr "پلن ۶ : پیش قسط"
 
-#: config/config.php:664
+#: config/config.php:677
 msgid "Plan 6 : Profit"
 msgstr "پلن ۶ : سود"
 
-#: config/config.php:672
+#: config/config.php:685
 msgid "Plan 6 : Total"
 msgstr "پلن ۶ : تعداد اقساط"
 
-#: config/config.php:680
+#: config/config.php:693
 msgid "Show plan 7"
 msgstr "نمایش پلن ۷"
 
-#: config/config.php:688
+#: config/config.php:701
 msgid "Plan 7 : Title"
 msgstr "پلن ۷ : عنوان"
 
-#: config/config.php:692
+#: config/config.php:705
 msgid "7 months"
 msgstr "۷ ماه"
 
-#: config/config.php:696
+#: config/config.php:709
 msgid "Plan 7 : Prepayment"
 msgstr "پلن ۷ : پیش قسط"
 
-#: config/config.php:704
+#: config/config.php:717
 msgid "Plan 7 : Profit"
 msgstr "پلن ۷ : سود"
 
-#: config/config.php:712
+#: config/config.php:725
 msgid "Plan 7 : Total"
 msgstr "پلن ۷ : تعداد اقساط"
 
-#: config/config.php:720
+#: config/config.php:733
 msgid "Show plan 8"
 msgstr "نمایش پلن ۸"
 
-#: config/config.php:728
+#: config/config.php:741
 msgid "Plan 8 : Title"
 msgstr "پلن ۸ : عنوان"
 
-#: config/config.php:732
+#: config/config.php:745
 msgid "8 months"
 msgstr "۸ ماه"
 
-#: config/config.php:736
+#: config/config.php:749
 msgid "Plan 8 : Prepayment"
 msgstr "پلن ۸ : پیش قسط"
 
-#: config/config.php:744
+#: config/config.php:757
 msgid "Plan 8 : Profit"
 msgstr "پلن ۸ : سود"
 
-#: config/config.php:752
+#: config/config.php:765
 msgid "Plan 8 : Total"
 msgstr "پلن ۸ : تعداد اقساط"
 
-#: config/config.php:760
+#: config/config.php:773
 msgid "Show plan 9"
 msgstr "نمایش پلن ۹"
 
-#: config/config.php:768
+#: config/config.php:781
 msgid "Plan 9 : Title"
 msgstr "پلن ۹ : عنوان"
 
-#: config/config.php:772
+#: config/config.php:785
 msgid "9 months"
 msgstr "۹ ماه"
 
-#: config/config.php:776
+#: config/config.php:789
 msgid "Plan 9 : Prepayment"
 msgstr "پلن ۹ : پیش قسط"
 
-#: config/config.php:784
+#: config/config.php:797
 msgid "Plan 9 : Profit"
 msgstr "پلن ۹ : سود"
 
-#: config/config.php:792
+#: config/config.php:805
 msgid "Plan 9 : Total"
 msgstr "پلن ۹ : تعداد اقساط"
 
-#: config/config.php:800
+#: config/config.php:813
 msgid "Show plan 10"
 msgstr "نمایش پلن ۱۰"
 
-#: config/config.php:808
+#: config/config.php:821
 msgid "Plan 10 : Title"
 msgstr "پلن ۱۰ : عنوان"
 
-#: config/config.php:812
+#: config/config.php:825
 msgid "10 months"
 msgstr "۱۰ ماه"
 
-#: config/config.php:816
+#: config/config.php:829
 msgid "Plan 10 : Prepayment"
 msgstr "پلن ۱۰ : پیش قسط"
 
-#: config/config.php:824
+#: config/config.php:837
 msgid "Plan 10 : Profit"
 msgstr "پلن ۱۰ : سود"
 
-#: config/config.php:832
+#: config/config.php:845
 msgid "Plan 10 : Total"
 msgstr "پلن ۱۰ : تعداد اقساط"
 
-#: config/config.php:841
+#: config/config.php:854
 msgid "Description for checkup page"
 msgstr "توضیحات مربوط به صفحه ثبت سفارش"
 
-#: config/module.php:16 config/navigation.php:19 config/page.php:17
-#: config/permission.php:17
+#: config/module.php:16 config/page.php:17 config/permission.php:17
 msgid "Orders"
 msgstr "سفارش ها"
 
@@ -626,37 +635,65 @@ msgstr "سفارش ها"
 msgid "Manage order process and payment"
 msgstr "مدیریت مراحل سفارش و پرداخت"
 
-#: config/navigation.php:25 config/page.php:22 config/permission.php:22
-msgid "Invoice"
-msgstr "فاکتور"
+#: config/navigation.php:19
+msgid "Orders and invoices"
+msgstr "سفارش ها و فاکتور ها"
 
-#: config/navigation.php:31 config/page.php:27 config/permission.php:27
+#: config/navigation.php:25
+msgid "Order list"
+msgstr "فهرست سفارش ها"
+
+#: config/navigation.php:31
+msgid "Invoice list"
+msgstr "فهرست فاکتور ها"
+
+#: config/navigation.php:37 config/page.php:27 config/permission.php:27
 msgid "Logs"
 msgstr "گزارش ها"
 
-#: config/navigation.php:37 config/page.php:32 config/permission.php:32
+#: config/navigation.php:43
+msgid "New order"
+msgstr "سفارش جدید"
+
+#: config/navigation.php:51 config/page.php:32 config/permission.php:32
 msgid "Gateway"
 msgstr "دروازه پرداخت"
 
-#: config/navigation.php:43 config/page.php:37 config/permission.php:37
+#: config/navigation.php:57
+msgid "Delivery and location"
+msgstr "روش ارسال و مکان تحویل"
+
+#: config/navigation.php:63 config/page.php:37 config/permission.php:37
 msgid "Delivery"
 msgstr "روش ارسال"
 
-#: config/navigation.php:49 config/page.php:42 config/permission.php:42
+#: config/navigation.php:69 config/page.php:42 config/permission.php:42
 msgid "Location"
 msgstr "مکان تحویل"
 
-#: config/navigation.php:61
+#: config/navigation.php:75
+msgid "New delivery"
+msgstr "روش ارسال جدید"
+
+#: config/navigation.php:81
+msgid "New location"
+msgstr "مکان تحویل جدید"
+
+#: config/navigation.php:95
 msgid "User list"
 msgstr "فهرست کاربران"
 
-#: config/navigation.php:67
+#: config/navigation.php:101
 msgid "History"
 msgstr "تاریخچه تغییرات"
 
-#: config/navigation.php:73
+#: config/navigation.php:107
 msgid "Add"
 msgstr "اعتبار جدید"
+
+#: config/page.php:22 config/permission.php:22
+msgid "Invoice"
+msgstr "فاکتور"
 
 #: config/page.php:55
 msgid "Index page"
