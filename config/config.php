@@ -34,6 +34,10 @@ return array(
             'name' => 'payment'
         ),
         array(
+            'title' => _a('Credit'),
+            'name' => 'credit'
+        ),
+        array(
             'title' => _a('Notification'),
             'name' => 'notification'
         ),
@@ -360,6 +364,15 @@ return array(
             'description' => _a('Use on some payment gateway like paypal.'),
             'edit' => 'text',
             'filter' => 'string',
+        ),
+        // Credit
+        'price_custom' => array(
+            'category' => 'credit',
+            'title' => _a('Active credit system'),
+            'description' => _a('User can use credit to pay invoice and see history'),
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1,
         ),
         // Notification
         'sms_order_user' => array(

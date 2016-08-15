@@ -68,7 +68,8 @@ class LocationController extends ActionController
         }
         // Go to update page if empty
         if (empty($option['delivery'])) {
-            return $this->redirect()->toRoute('', array('controller' => 'delivery', 'action' => 'update'));
+            $message = __('Please add delivery method first');
+            $this->jump(array('controller' => 'delivery', 'action' => 'update'), $message, 'error');
         }
         // Set form
         $form = new LocationForm('location', $option);
