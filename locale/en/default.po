@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2016-07-31 11:31+0430\n"
+"POT-Creation-Date: 2016-08-15 11:43+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.8\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ../..\n"
@@ -18,6 +18,31 @@ msgstr ""
 
 #: src/Api/Api.php:36
 msgid "Toman"
+msgstr ""
+
+#: src/Api/Breadcrumbs.php:51
+msgid "Remove cache"
+msgstr ""
+
+#: src/Api/Breadcrumbs.php:57 src/Gateway/Paypal/Gateway.php:429
+#: template/admin/log-index.phtml:65 template/front/result.phtml:4
+msgid "Error"
+msgstr ""
+
+#: src/Api/Breadcrumbs.php:67
+msgid "Order detail"
+msgstr ""
+
+#: src/Api/Breadcrumbs.php:78 template/front/checkout.phtml:110
+msgid "Checkout"
+msgstr ""
+
+#: src/Api/Breadcrumbs.php:86 template/front/installment.phtml:88
+msgid "Installment plans"
+msgstr ""
+
+#: src/Api/Breadcrumbs.php:94
+msgid "Credit"
 msgstr ""
 
 #: src/Api/Credit.php:103
@@ -73,9 +98,9 @@ msgstr ""
 #: template/admin/invoice-index.phtml:74 template/admin/invoice-print.phtml:60
 #: template/admin/invoice-view.phtml:10 template/admin/log-index.phtml:63
 #: template/admin/order-view.phtml:234 template/admin/order-view.phtml:338
-#: template/front/detail.phtml:15 template/front/detail.phtml:315
-#: template/front/invoice-print.phtml:60 template/front/invoice.phtml:15
-#: template/front/invoice.phtml:92
+#: template/front/detail.phtml:15 template/front/detail.phtml:290
+#: template/front/detail.phtml:371 template/front/invoice-print.phtml:60
+#: template/front/invoice.phtml:15 template/front/invoice.phtml:92
 msgid "Paid"
 msgstr ""
 
@@ -224,19 +249,23 @@ msgstr ""
 msgid "Service"
 msgstr ""
 
-#: src/Controller/Admin/CreditController.php:104 src/Form/CreditForm.php:68
+#: src/Controller/Admin/CreditController.php:104
+#: src/Controller/Front/CreditController.php:63 src/Form/CreditForm.php:68
 msgid "Increase"
 msgstr ""
 
-#: src/Controller/Admin/CreditController.php:109 src/Form/CreditForm.php:69
+#: src/Controller/Admin/CreditController.php:109
+#: src/Controller/Front/CreditController.php:68 src/Form/CreditForm.php:69
 msgid "Decrease"
 msgstr ""
 
 #: src/Controller/Admin/CreditController.php:116
+#: src/Controller/Front/CreditController.php:75
 msgid "Automatic"
 msgstr ""
 
 #: src/Controller/Admin/CreditController.php:120
+#: src/Controller/Front/CreditController.php:79
 msgid "Manual"
 msgstr ""
 
@@ -253,6 +282,7 @@ msgid "Add a delivery"
 msgstr ""
 
 #: src/Controller/Admin/GatewayController.php:71
+#: src/Controller/Admin/GatewayController.php:104
 msgid "Gateway data saved successfully."
 msgstr ""
 
@@ -264,45 +294,53 @@ msgstr ""
 msgid "Install gateway"
 msgstr ""
 
-#: src/Controller/Admin/InvoiceController.php:127
+#: src/Controller/Admin/GatewayController.php:109
+msgid "Please select installed gateway"
+msgstr ""
+
+#: src/Controller/Admin/InvoiceController.php:125
 #: src/Controller/Admin/OrderController.php:190
 msgid "Go to filter"
 msgstr ""
 
-#: src/Controller/Admin/InvoiceController.php:138
+#: src/Controller/Admin/InvoiceController.php:136
 #: src/Controller/Admin/OrderController.php:211
 msgid "Not valid"
 msgstr ""
 
-#: src/Controller/Admin/InvoiceController.php:144
+#: src/Controller/Admin/InvoiceController.php:142
 #: src/Controller/Admin/OrderController.php:217
 msgid "Not set"
 msgstr ""
 
-#: src/Controller/Admin/InvoiceController.php:165
-#: src/Controller/Admin/InvoiceController.php:189
+#: src/Controller/Admin/InvoiceController.php:163
+#: src/Controller/Admin/InvoiceController.php:187
 #: src/Controller/Front/InvoiceController.php:98
 #: src/Controller/Front/PaymentController.php:34
 msgid "The invoice not found."
 msgstr ""
 
-#: src/Controller/Admin/InvoiceController.php:257
+#: src/Controller/Admin/InvoiceController.php:255
 msgid "New invoice data saved successfully."
 msgstr ""
 
-#: src/Controller/Admin/InvoiceController.php:278
+#: src/Controller/Admin/InvoiceController.php:276
 msgid "This invoice paid or canceled before, than you can not edit it"
 msgstr ""
 
-#: src/Controller/Admin/InvoiceController.php:310
+#: src/Controller/Admin/InvoiceController.php:308
 msgid "Your invoice data saved successfully."
 msgstr ""
 
-#: src/Controller/Admin/LocationController.php:121
+#: src/Controller/Admin/LocationController.php:71
+msgid "Please add delivery method first"
+msgstr ""
+
+#: src/Controller/Admin/LocationController.php:122
 msgid "Location data saved successfully."
 msgstr ""
 
-#: src/Controller/Admin/LocationController.php:143
+#: src/Controller/Admin/LocationController.php:144
 msgid "Add a location"
 msgstr ""
 
@@ -330,12 +368,12 @@ msgstr ""
 
 #: src/Controller/Front/CheckoutController.php:49
 #: src/Controller/Front/CheckoutController.php:60
-#: src/Controller/Front/CheckoutController.php:518
+#: src/Controller/Front/CheckoutController.php:526
 msgid "Your cart is empty."
 msgstr ""
 
 #: src/Controller/Front/CheckoutController.php:65
-#: src/Controller/Front/CheckoutController.php:523
+#: src/Controller/Front/CheckoutController.php:531
 msgid "So sorry, At this moment order is inactive"
 msgstr ""
 
@@ -347,14 +385,25 @@ msgstr ""
 msgid "User account was not saved."
 msgstr ""
 
-#: src/Controller/Front/CheckoutController.php:534
+#: src/Controller/Front/CheckoutController.php:502
+#: src/Controller/Front/CreditController.php:41
+#: src/Controller/Front/DetailController.php:55
+#: src/Controller/Front/IndexController.php:44
+msgid "Never update"
+msgstr ""
+
+#: src/Controller/Front/CheckoutController.php:542
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 
-#: src/Controller/Front/CheckoutController.php:665
+#: src/Controller/Front/CheckoutController.php:673
 #: src/Form/Element/Gateway.php:28
 msgid "Offline"
+msgstr ""
+
+#: src/Controller/Front/CreditController.php:30
+msgid "So sorry, At this moment credit is inactive"
 msgstr ""
 
 #: src/Controller/Front/DetailController.php:32
@@ -369,13 +418,17 @@ msgstr ""
 msgid "This order not active."
 msgstr ""
 
-#: src/Controller/Front/IndexController.php:52
+#: src/Controller/Front/IndexController.php:65
 msgid "Your old payment process remove, please try new payment ation"
 msgstr ""
 
-#: src/Controller/Front/IndexController.php:54
-#: src/Controller/Front/IndexController.php:62
+#: src/Controller/Front/IndexController.php:67
+#: src/Controller/Front/IndexController.php:75
 msgid "Payment is clean"
+msgstr ""
+
+#: src/Controller/Front/IndexController.php:86
+msgid "Please select invoice"
 msgstr ""
 
 #: src/Controller/Front/InvoiceController.php:103
@@ -402,7 +455,8 @@ msgid "You pay this invoice before this time"
 msgstr ""
 
 #: src/Controller/Front/PaymentController.php:42
-#: template/front/detail.phtml:342 template/front/invoice.phtml:252
+#: template/front/detail.phtml:287 template/front/detail.phtml:398
+#: template/front/invoice.phtml:252
 msgid "You can pay this invoice after admin review"
 msgstr ""
 
@@ -450,8 +504,8 @@ msgstr ""
 #: src/Form/CreditForm.php:53 template/admin/credit-index.phtml:11
 #: template/admin/invoice-edit.phtml:123 template/admin/invoice-print.phtml:182
 #: template/admin/invoice-view.phtml:126 template/admin/log-index.phtml:10
-#: template/front/detail.phtml:252 template/front/invoice-print.phtml:182
-#: template/front/invoice.phtml:206
+#: template/front/detail.phtml:260 template/front/detail.phtml:309
+#: template/front/invoice-print.phtml:182 template/front/invoice.phtml:206
 msgid "Amount"
 msgstr ""
 
@@ -461,6 +515,7 @@ msgid "Type commodity"
 msgstr ""
 
 #: src/Form/CreditForm.php:80 template/admin/credit-history.phtml:76
+#: template/front/credit-index.phtml:102
 msgid "User message"
 msgstr ""
 
@@ -474,20 +529,21 @@ msgid "Save"
 msgstr ""
 
 #: src/Form/DeliveryForm.php:48 src/Form/LocationForm.php:50
-#: template/admin/delivery-index.phtml:14
+#: template/admin/delivery-index.phtml:13 template/admin/gateway-index.phtml:6
 #: template/admin/invoice-print.phtml:181
-#: template/admin/location-index.phtml:14 template/front/detail.phtml:251
+#: template/admin/location-index.phtml:13 template/front/detail.phtml:308
 #: template/front/invoice-print.phtml:181 template/front/invoice.phtml:205
 msgid "Title"
 msgstr ""
 
 #: src/Form/DeliveryForm.php:61 src/Form/LocationForm.php:72
-#: template/admin/invoice-edit.phtml:7 template/admin/invoice-edit.phtml:127
-#: template/admin/invoice-print.phtml:58 template/admin/invoice-view.phtml:8
-#: template/admin/invoice-view.phtml:130 template/admin/order-view.phtml:178
-#: template/admin/order-view.phtml:192 template/admin/order-view.phtml:210
-#: template/front/detail.phtml:313 template/front/invoice-print.phtml:58
-#: template/front/invoice.phtml:90 template/front/list.phtml:84
+#: template/admin/gateway-index.phtml:7 template/admin/invoice-edit.phtml:7
+#: template/admin/invoice-edit.phtml:127 template/admin/invoice-print.phtml:58
+#: template/admin/invoice-view.phtml:8 template/admin/invoice-view.phtml:130
+#: template/admin/order-view.phtml:178 template/admin/order-view.phtml:192
+#: template/admin/order-view.phtml:210 template/front/detail.phtml:369
+#: template/front/invoice-print.phtml:58 template/front/invoice.phtml:90
+#: template/front/list.phtml:84
 msgid "Status"
 msgstr ""
 
@@ -523,7 +579,7 @@ msgstr ""
 #: src/Form/Element/Delivery.php:36 src/Form/LocationForm.php:106
 #: template/admin/order-view.phtml:222 template/admin/order-view.phtml:224
 #: template/admin/order-view.phtml:247 template/admin/order-view.phtml:291
-#: template/front/checkout.phtml:241 template/front/detail.phtml:180
+#: template/front/checkout.phtml:242 template/front/detail.phtml:180
 #: template/front/invoice.phtml:158 template/front/list.phtml:83
 msgid "Price"
 msgstr ""
@@ -568,7 +624,8 @@ msgstr ""
 
 #: src/Form/InvoiceForm.php:96 template/admin/invoice-index.phtml:27
 #: template/admin/invoice-print.phtml:65 template/admin/order-view.phtml:293
-#: template/front/invoice-print.phtml:65 template/front/invoice.phtml:96
+#: template/front/detail.phtml:261 template/front/invoice-print.phtml:65
+#: template/front/invoice.phtml:96
 msgid "Due date"
 msgstr ""
 
@@ -640,7 +697,7 @@ msgstr ""
 #: template/admin/invoice-print.phtml:81 template/admin/invoice-view.phtml:60
 #: template/admin/order-print.phtml:42 template/admin/order-view.phtml:29
 #: template/front/detail.phtml:134 template/front/invoice-print.phtml:81
-#: template/front/invoice.phtml:109 template/front/list.phtml:19
+#: template/front/invoice.phtml:109
 msgid "ID number"
 msgstr ""
 
@@ -651,9 +708,10 @@ msgstr ""
 #: template/admin/invoice-add.phtml:41 template/admin/invoice-edit.phtml:85
 #: template/admin/invoice-print.phtml:93 template/admin/invoice-view.phtml:88
 #: template/admin/order-print.phtml:52 template/admin/order-view.phtml:57
-#: template/admin/order-view.phtml:167 template/front/detail.phtml:138
-#: template/front/invoice-print.phtml:93 template/front/invoice.phtml:121
-#: template/front/list.phtml:41
+#: template/admin/order-view.phtml:167 template/front/credit-index.phtml:21
+#: template/front/credit-index.phtml:36 template/front/credit-index.phtml:86
+#: template/front/detail.phtml:138 template/front/invoice-print.phtml:93
+#: template/front/invoice.phtml:121
 msgid "Email"
 msgstr ""
 
@@ -661,9 +719,9 @@ msgstr ""
 #: src/Form/OrderSimpleForm.php:101 template/admin/invoice-add.phtml:45
 #: template/admin/invoice-edit.phtml:89 template/admin/invoice-print.phtml:85
 #: template/admin/invoice-view.phtml:92 template/admin/order-print.phtml:56
-#: template/admin/order-view.phtml:61 template/front/checkout.phtml:183
+#: template/admin/order-view.phtml:61 template/front/checkout.phtml:178
 #: template/front/detail.phtml:142 template/front/invoice-print.phtml:85
-#: template/front/invoice.phtml:113 template/front/list.phtml:45
+#: template/front/invoice.phtml:113
 msgid "Phone"
 msgstr ""
 
@@ -672,9 +730,8 @@ msgstr ""
 #: template/admin/invoice-add.phtml:49 template/admin/invoice-edit.phtml:93
 #: template/admin/invoice-print.phtml:89 template/admin/invoice-view.phtml:96
 #: template/admin/order-print.phtml:60 template/admin/order-view.phtml:65
-#: template/front/checkout.phtml:184 template/front/detail.phtml:146
+#: template/front/checkout.phtml:179 template/front/detail.phtml:146
 #: template/front/invoice-print.phtml:89 template/front/invoice.phtml:117
-#: template/front/list.phtml:49
 msgid "Mobile"
 msgstr ""
 
@@ -683,7 +740,6 @@ msgstr ""
 #: template/admin/invoice-add.phtml:53 template/admin/invoice-print.phtml:97
 #: template/admin/order-print.phtml:46 template/admin/order-view.phtml:69
 #: template/front/detail.phtml:150 template/front/invoice-print.phtml:97
-#: template/front/list.phtml:53
 msgid "Company"
 msgstr ""
 
@@ -701,8 +757,7 @@ msgstr ""
 #: src/Form/OrderSimpleForm.php:162 template/admin/invoice-add.phtml:17
 #: template/admin/invoice-edit.phtml:61 template/admin/invoice-view.phtml:64
 #: template/admin/order-print.phtml:83 template/admin/order-view.phtml:33
-#: template/front/checkout.phtml:174 template/front/detail.phtml:110
-#: template/front/list.phtml:67
+#: template/front/checkout.phtml:169 template/front/detail.phtml:110
 msgid "Delivery address"
 msgstr ""
 
@@ -710,7 +765,7 @@ msgstr ""
 #: src/Form/OrderSimpleForm.php:175 template/admin/invoice-add.phtml:21
 #: template/admin/invoice-edit.phtml:65 template/admin/invoice-view.phtml:68
 #: template/admin/order-print.phtml:87 template/admin/order-view.phtml:37
-#: template/front/detail.phtml:114 template/front/list.phtml:71
+#: template/front/detail.phtml:114
 msgid "Invoicing Address"
 msgstr ""
 
@@ -720,7 +775,6 @@ msgstr ""
 #: template/admin/invoice-edit.phtml:77 template/admin/invoice-view.phtml:80
 #: template/admin/order-print.phtml:75 template/admin/order-view.phtml:49
 #: template/front/detail.phtml:126 template/front/invoice.phtml:142
-#: template/front/list.phtml:31
 msgid "Country"
 msgstr ""
 
@@ -728,8 +782,8 @@ msgstr ""
 #: src/Form/OrderSimpleForm.php:199 template/admin/invoice-add.phtml:29
 #: template/admin/invoice-edit.phtml:73 template/admin/invoice-view.phtml:76
 #: template/admin/order-print.phtml:71 template/admin/order-view.phtml:45
-#: template/front/checkout.phtml:179 template/front/detail.phtml:122
-#: template/front/invoice.phtml:138 template/front/list.phtml:27
+#: template/front/checkout.phtml:174 template/front/detail.phtml:122
+#: template/front/invoice.phtml:138
 msgid "State"
 msgstr ""
 
@@ -737,9 +791,8 @@ msgstr ""
 #: src/Form/OrderSettingForm.php:161 src/Form/OrderSimpleForm.php:211
 #: template/admin/invoice-add.phtml:25 template/admin/invoice-edit.phtml:69
 #: template/admin/invoice-view.phtml:72 template/admin/order-print.phtml:67
-#: template/admin/order-view.phtml:41 template/front/checkout.phtml:180
+#: template/admin/order-view.phtml:41 template/front/checkout.phtml:175
 #: template/front/detail.phtml:118 template/front/invoice.phtml:134
-#: template/front/list.phtml:23
 msgid "City"
 msgstr ""
 
@@ -747,9 +800,8 @@ msgstr ""
 #: src/Form/OrderSettingForm.php:216 src/Form/OrderSimpleForm.php:223
 #: template/admin/invoice-add.phtml:37 template/admin/invoice-edit.phtml:81
 #: template/admin/invoice-view.phtml:84 template/admin/order-print.phtml:79
-#: template/admin/order-view.phtml:53 template/front/checkout.phtml:176
+#: template/admin/order-view.phtml:53 template/front/checkout.phtml:171
 #: template/front/detail.phtml:130 template/front/invoice.phtml:146
-#: template/front/list.phtml:35
 msgid "Zip code"
 msgstr ""
 
@@ -802,7 +854,7 @@ msgstr ""
 
 #: src/Form/OrderForm.php:435 src/Form/OrderSimpleForm.php:368
 #: template/admin/invoice-add.phtml:122 template/admin/order-view.phtml:140
-#: template/front/detail.phtml:286
+#: template/front/detail.phtml:243 template/front/detail.phtml:342
 msgid "User note"
 msgstr ""
 
@@ -832,8 +884,9 @@ msgid "Register and save order"
 msgstr ""
 
 #: src/Form/OrderForm.php:487 src/Form/OrderSimpleForm.php:396
-#: template/front/detail.phtml:330 template/front/detail.phtml:332
-#: template/front/invoice.phtml:240 template/front/invoice.phtml:242
+#: template/front/detail.phtml:282 template/front/detail.phtml:386
+#: template/front/detail.phtml:388 template/front/invoice.phtml:240
+#: template/front/invoice.phtml:242
 msgid "Pay"
 msgstr ""
 
@@ -958,9 +1011,10 @@ msgstr ""
 
 #: src/Gateway/Dargahpardakht/Gateway.php:55
 #: template/admin/credit-history.phtml:7 template/admin/credit-index.phtml:7
-#: template/admin/delivery-index.phtml:13
-#: template/admin/location-index.phtml:13 template/admin/log-index.phtml:7
-#: template/admin/order-view.phtml:165 template/front/list.phtml:80
+#: template/admin/delivery-index.phtml:12
+#: template/admin/location-index.phtml:12 template/admin/log-index.phtml:7
+#: template/admin/order-view.phtml:165 template/front/credit-index.phtml:33
+#: template/front/list.phtml:80
 msgid "ID"
 msgstr ""
 
@@ -1289,11 +1343,6 @@ msgstr ""
 msgid "Signature for sandbox"
 msgstr ""
 
-#: src/Gateway/Paypal/Gateway.php:429 template/admin/log-index.phtml:65
-#: template/front/result.phtml:4
-msgid "Error"
-msgstr ""
-
 #: src/Gateway/Zarinpal/Gateway.php:31
 msgid "Zarinpal"
 msgstr ""
@@ -1319,7 +1368,7 @@ msgstr ""
 msgid "Select user ID not exist on system"
 msgstr ""
 
-#: template/admin/credit-history.phtml:3
+#: template/admin/credit-history.phtml:3 template/front/credit-index.phtml:29
 msgid "List of historys"
 msgstr ""
 
@@ -1328,58 +1377,67 @@ msgstr ""
 #: template/admin/invoice-edit.phtml:52 template/admin/invoice-print.phtml:76
 #: template/admin/invoice-view.phtml:55 template/admin/order-print.phtml:37
 #: template/admin/order-view.phtml:24 template/admin/order-view.phtml:171
-#: template/front/detail.phtml:105 template/front/invoice-print.phtml:76
-#: template/front/invoice.phtml:104 template/front/list.phtml:14
+#: template/front/credit-index.phtml:14 template/front/credit-index.phtml:34
+#: template/front/credit-index.phtml:78 template/front/detail.phtml:105
+#: template/front/invoice-print.phtml:76 template/front/invoice.phtml:104
 msgid "Name"
 msgstr ""
 
 #: template/admin/credit-history.phtml:9 template/admin/credit-history.phtml:56
 #: template/admin/credit-index.phtml:9 template/admin/order-view.phtml:169
+#: template/front/credit-index.phtml:35 template/front/credit-index.phtml:82
 msgid "Identity"
 msgstr ""
 
 #: template/admin/credit-history.phtml:11
-#: template/admin/credit-history.phtml:84
+#: template/admin/credit-history.phtml:84 template/front/credit-index.phtml:37
+#: template/front/credit-index.phtml:106
 msgid "Fluctuation status"
 msgstr ""
 
 #: template/admin/credit-history.phtml:12
-#: template/admin/credit-history.phtml:64
+#: template/admin/credit-history.phtml:64 template/front/credit-index.phtml:38
+#: template/front/credit-index.phtml:90
 msgid "Amount old"
 msgstr ""
 
 #: template/admin/credit-history.phtml:13
-#: template/admin/credit-history.phtml:68
+#: template/admin/credit-history.phtml:68 template/front/credit-index.phtml:39
+#: template/front/credit-index.phtml:94
 msgid "Amount new"
 msgstr ""
 
 #: template/admin/credit-history.phtml:14
 #: template/admin/credit-history.phtml:72 template/admin/invoice-add.phtml:75
-#: template/admin/order-view.phtml:91
+#: template/admin/order-view.phtml:91 template/front/credit-index.phtml:40
+#: template/front/credit-index.phtml:98
 msgid "Time create"
 msgstr ""
 
 #: template/admin/credit-history.phtml:15 template/admin/credit-index.phtml:13
-#: template/admin/delivery-index.phtml:15 template/admin/invoice-index.phtml:29
-#: template/admin/location-index.phtml:15 template/admin/order-index.phtml:49
-#: template/admin/order-view.phtml:295 template/front/list.phtml:86
+#: template/admin/delivery-index.phtml:14 template/admin/gateway-index.phtml:9
+#: template/admin/invoice-index.phtml:29 template/admin/location-index.phtml:14
+#: template/admin/order-index.phtml:49 template/admin/order-view.phtml:295
+#: template/front/credit-index.phtml:41 template/front/detail.phtml:262
+#: template/front/list.phtml:86
 msgid "Action"
 msgstr ""
 
 #: template/admin/credit-history.phtml:39 template/admin/log-index.phtml:36
+#: template/front/credit-index.phtml:65
 msgid "Show details"
 msgstr ""
 
-#: template/admin/credit-history.phtml:47
+#: template/admin/credit-history.phtml:47 template/front/credit-index.phtml:73
 msgid "history details"
 msgstr ""
 
-#: template/admin/credit-history.phtml:88
+#: template/admin/credit-history.phtml:88 template/front/credit-index.phtml:110
 msgid "Action status"
 msgstr ""
 
 #: template/admin/credit-history.phtml:92 template/admin/invoice-edit.phtml:129
-#: template/admin/invoice-view.phtml:132
+#: template/admin/invoice-view.phtml:132 template/front/credit-index.phtml:114
 msgid "Ip"
 msgstr ""
 
@@ -1387,7 +1445,7 @@ msgstr ""
 #: template/admin/credit-history.phtml:103 template/admin/invoice-edit.phtml:98
 #: template/admin/invoice-edit.phtml:100 template/admin/invoice-index.phtml:62
 #: template/admin/invoice-index.phtml:64 template/admin/invoice-view.phtml:101
-#: template/admin/invoice-view.phtml:103
+#: template/admin/invoice-view.phtml:103 template/front/credit-index.phtml:121
 msgid "View order"
 msgstr ""
 
@@ -1403,6 +1461,7 @@ msgid "User information"
 msgstr ""
 
 #: template/admin/credit-history.phtml:130
+#: template/front/credit-index.phtml:135
 msgid "No history save yet"
 msgstr ""
 
@@ -1451,54 +1510,49 @@ msgid "Select change type, set increase or decrease"
 msgstr ""
 
 #: template/admin/credit-update.phtml:11
-msgid "Set update credit reason as test, it show to user and admin"
+msgid "Set update credit reason as text, it show to user and admin"
 msgstr ""
 
 #: template/admin/credit-update.phtml:12
 msgid "Decrease just work if user credit is more than your input amount"
 msgstr ""
 
-#: template/admin/delivery-index.phtml:4 template/admin/delivery-index.phtml:6
-msgid "Add delivery methods"
-msgstr ""
-
-#: template/admin/delivery-index.phtml:9
+#: template/admin/delivery-index.phtml:8
 msgid "List of Delivery methods"
 msgstr ""
 
-#: template/admin/delivery-index.phtml:31
-#: template/admin/delivery-index.phtml:33 template/admin/gateway-index.phtml:32
-#: template/admin/gateway-index.phtml:33 template/admin/gateway-index.phtml:39
-#: template/admin/gateway-index.phtml:40 template/admin/location-index.phtml:31
-#: template/admin/location-index.phtml:33 template/admin/order-view.phtml:330
+#: template/admin/delivery-index.phtml:30
+#: template/admin/delivery-index.phtml:32 template/admin/gateway-index.phtml:62
+#: template/admin/gateway-index.phtml:65 template/admin/location-index.phtml:30
+#: template/admin/location-index.phtml:32 template/admin/order-view.phtml:330
 #: template/admin/order-view.phtml:332
 msgid "Edit"
 msgstr ""
 
-#: template/admin/delivery-index.phtml:39
+#: template/admin/delivery-index.phtml:38
 msgid "No delivery methods is not created yet"
 msgstr ""
 
-#: template/admin/delivery-index.phtml:41 template/admin/invoice-index.phtml:81
-#: template/admin/location-index.phtml:41 template/admin/log-index.phtml:70
+#: template/admin/delivery-index.phtml:40 template/admin/invoice-index.phtml:81
+#: template/admin/location-index.phtml:40 template/admin/log-index.phtml:70
 #: template/admin/order-index.phtml:102
 msgid "Todo list for fist time"
 msgstr ""
 
-#: template/admin/delivery-index.phtml:43 template/admin/invoice-index.phtml:83
-#: template/admin/location-index.phtml:43 template/admin/log-index.phtml:72
+#: template/admin/delivery-index.phtml:42 template/admin/invoice-index.phtml:83
+#: template/admin/location-index.phtml:42 template/admin/log-index.phtml:72
 #: template/admin/order-index.phtml:104
 msgid "Setup payment gateway from gateway tap"
 msgstr ""
 
-#: template/admin/delivery-index.phtml:44 template/admin/invoice-index.phtml:84
-#: template/admin/location-index.phtml:44 template/admin/log-index.phtml:73
+#: template/admin/delivery-index.phtml:43 template/admin/invoice-index.phtml:84
+#: template/admin/location-index.phtml:43 template/admin/log-index.phtml:73
 #: template/admin/order-index.phtml:105
 msgid "Setup delivery method from delivery tap"
 msgstr ""
 
-#: template/admin/delivery-index.phtml:45 template/admin/invoice-index.phtml:85
-#: template/admin/location-index.phtml:45 template/admin/log-index.phtml:74
+#: template/admin/delivery-index.phtml:44 template/admin/invoice-index.phtml:85
+#: template/admin/location-index.phtml:44 template/admin/log-index.phtml:74
 #: template/admin/order-index.phtml:106
 msgid "Setup location from location tap"
 msgstr ""
@@ -1507,39 +1561,47 @@ msgstr ""
 msgid "List of all available gateways"
 msgstr ""
 
-#: template/admin/gateway-index.phtml:11
-msgid "Description"
+#: template/admin/gateway-index.phtml:8 template/admin/gateway-index.phtml:25
+msgid "Gateway detail"
 msgstr ""
 
-#: template/admin/gateway-index.phtml:12
-msgid "Version"
-msgstr ""
-
-#: template/admin/gateway-index.phtml:13
-msgid "Author"
-msgstr ""
-
-#: template/admin/gateway-index.phtml:14
-msgid "Credits"
-msgstr ""
-
-#: template/admin/gateway-index.phtml:15
-msgid "Release Date"
-msgstr ""
-
-#: template/admin/gateway-index.phtml:34
-msgid "Inactive"
-msgstr ""
-
-#: template/admin/gateway-index.phtml:35 template/admin/gateway-index.phtml:42
-msgid "UnInstall"
-msgstr ""
-
-#: template/admin/gateway-index.phtml:41
+#: template/admin/gateway-index.phtml:16 template/admin/gateway-index.phtml:66
 msgid "Active"
 msgstr ""
 
-#: template/admin/gateway-index.phtml:47 template/admin/gateway-index.phtml:48
+#: template/admin/gateway-index.phtml:18 template/admin/gateway-index.phtml:63
+msgid "Inactive"
+msgstr ""
+
+#: template/admin/gateway-index.phtml:20
+msgid "Not installed"
+msgstr ""
+
+#: template/admin/gateway-index.phtml:31
+msgid "Close"
+msgstr ""
+
+#: template/admin/gateway-index.phtml:38
+msgid "Description"
+msgstr ""
+
+#: template/admin/gateway-index.phtml:39
+msgid "Version"
+msgstr ""
+
+#: template/admin/gateway-index.phtml:40
+msgid "Author"
+msgstr ""
+
+#: template/admin/gateway-index.phtml:41
+msgid "Credits"
+msgstr ""
+
+#: template/admin/gateway-index.phtml:42
+msgid "Release Date"
+msgstr ""
+
+#: template/admin/gateway-index.phtml:68
 msgid "Install"
 msgstr ""
 
@@ -1553,13 +1615,13 @@ msgstr ""
 
 #: template/admin/invoice-add.phtml:57 template/admin/invoice-print.phtml:101
 #: template/admin/order-view.phtml:73 template/front/detail.phtml:154
-#: template/front/invoice-print.phtml:101 template/front/list.phtml:57
+#: template/front/invoice-print.phtml:101
 msgid "Company ID"
 msgstr ""
 
 #: template/admin/invoice-add.phtml:61 template/admin/invoice-print.phtml:105
 #: template/admin/order-view.phtml:77 template/front/detail.phtml:158
-#: template/front/invoice-print.phtml:105 template/front/list.phtml:61
+#: template/front/invoice-print.phtml:105
 msgid "Company VAT"
 msgstr ""
 
@@ -1624,15 +1686,16 @@ msgstr ""
 #: template/admin/invoice-edit.phtml:11 template/admin/invoice-index.phtml:75
 #: template/admin/invoice-print.phtml:64 template/admin/invoice-view.phtml:12
 #: template/admin/log-index.phtml:64 template/admin/order-view.phtml:339
-#: template/front/detail.phtml:318 template/front/invoice-print.phtml:64
+#: template/front/detail.phtml:374 template/front/invoice-print.phtml:64
 #: template/front/invoice.phtml:95
 msgid "Unpaid"
 msgstr ""
 
 #: template/admin/invoice-edit.phtml:13 template/admin/invoice-index.phtml:76
 #: template/admin/invoice-print.phtml:68 template/admin/invoice-view.phtml:14
-#: template/admin/order-view.phtml:340 template/front/detail.phtml:320
-#: template/front/invoice-print.phtml:68 template/front/invoice.phtml:99
+#: template/admin/order-view.phtml:340 template/front/detail.phtml:274
+#: template/front/detail.phtml:376 template/front/invoice-print.phtml:68
+#: template/front/invoice.phtml:99
 msgid "Canceled"
 msgstr ""
 
@@ -1657,7 +1720,7 @@ msgid "Id"
 msgstr ""
 
 #: template/admin/invoice-edit.phtml:114 template/admin/invoice-view.phtml:117
-#: template/admin/log-index.phtml:8
+#: template/admin/log-index.phtml:8 template/front/detail.phtml:259
 msgid "Invoice"
 msgstr ""
 
@@ -1697,13 +1760,13 @@ msgstr ""
 
 #: template/admin/invoice-index.phtml:59 template/admin/invoice-index.phtml:61
 #: template/admin/order-index.phtml:91 template/admin/order-view.phtml:324
-#: template/admin/order-view.phtml:326 template/front/list.phtml:100
-#: template/front/list.phtml:102
+#: template/admin/order-view.phtml:326 template/front/list.phtml:98
+#: template/front/list.phtml:100
 msgid "View"
 msgstr ""
 
 #: template/admin/invoice-index.phtml:65 template/admin/invoice-index.phtml:67
-#: template/front/detail.phtml:304 template/front/detail.phtml:306
+#: template/front/detail.phtml:360 template/front/detail.phtml:362
 #: template/front/invoice.phtml:232 template/front/invoice.phtml:234
 msgid "Print invoice"
 msgstr ""
@@ -1721,20 +1784,20 @@ msgstr ""
 msgid "Order Nr"
 msgstr ""
 
-#: template/admin/invoice-print.phtml:55 template/front/detail.phtml:309
+#: template/admin/invoice-print.phtml:55 template/front/detail.phtml:365
 #: template/front/invoice-print.phtml:55 template/front/invoice.phtml:83
 msgid "Invoice date"
 msgstr ""
 
 #: template/admin/invoice-print.phtml:57 template/admin/invoice-view.phtml:3
-#: template/front/detail.phtml:240 template/front/invoice-print.phtml:57
-#: template/front/invoice.phtml:8
+#: template/front/detail.phtml:266 template/front/detail.phtml:305
+#: template/front/invoice-print.phtml:57 template/front/invoice.phtml:8
 #, php-format
 msgid "Invoice %s"
 msgstr ""
 
 #: template/admin/invoice-print.phtml:61 template/admin/invoice-print.phtml:69
-#: template/front/detail.phtml:316 template/front/detail.phtml:321
+#: template/front/detail.phtml:372 template/front/detail.phtml:377
 #: template/front/invoice-print.phtml:61 template/front/invoice-print.phtml:69
 #: template/front/invoice.phtml:93 template/front/invoice.phtml:100
 msgid "On"
@@ -1769,7 +1832,7 @@ msgstr ""
 #: template/admin/invoice-print.phtml:138
 #: template/admin/invoice-print.phtml:189 template/admin/order-view.phtml:228
 #: template/admin/order-view.phtml:248 template/front/detail.phtml:181
-#: template/front/detail.phtml:259 template/front/invoice-print.phtml:138
+#: template/front/detail.phtml:316 template/front/invoice-print.phtml:138
 #: template/front/invoice-print.phtml:189 template/front/invoice.phtml:159
 #: template/front/invoice.phtml:213
 msgid "Shipping"
@@ -1777,7 +1840,7 @@ msgstr ""
 
 #: template/admin/invoice-print.phtml:139
 #: template/admin/invoice-print.phtml:193 template/admin/order-view.phtml:250
-#: template/front/detail.phtml:183 template/front/detail.phtml:263
+#: template/front/detail.phtml:183 template/front/detail.phtml:320
 #: template/front/invoice-print.phtml:139
 #: template/front/invoice-print.phtml:193 template/front/invoice.phtml:160
 #: template/front/invoice.phtml:217
@@ -1785,13 +1848,13 @@ msgid "Vat"
 msgstr ""
 
 #: template/admin/invoice-print.phtml:140
-#: template/admin/invoice-print.phtml:197 template/front/detail.phtml:271
+#: template/admin/invoice-print.phtml:197 template/front/detail.phtml:328
 #: template/front/invoice-print.phtml:140
 #: template/front/invoice-print.phtml:197 template/front/invoice.phtml:221
 msgid "Total all taxes included"
 msgstr ""
 
-#: template/admin/invoice-print.phtml:174 template/front/detail.phtml:244
+#: template/admin/invoice-print.phtml:174
 #: template/front/invoice-print.phtml:174 template/front/invoice.phtml:198
 msgid "Payment price"
 msgstr ""
@@ -1801,7 +1864,7 @@ msgstr ""
 msgid "Total invoice price"
 msgstr ""
 
-#: template/admin/invoice-print.phtml:185 template/front/detail.phtml:255
+#: template/admin/invoice-print.phtml:185 template/front/detail.phtml:312
 #: template/front/invoice-print.phtml:185 template/front/invoice.phtml:209
 msgid "Product price ex VAT"
 msgstr ""
@@ -1816,15 +1879,11 @@ msgstr ""
 msgid "Buyer signature"
 msgstr ""
 
-#: template/admin/location-index.phtml:4 template/admin/location-index.phtml:6
-msgid "Add Location"
-msgstr ""
-
-#: template/admin/location-index.phtml:9
+#: template/admin/location-index.phtml:8
 msgid "List of Location"
 msgstr ""
 
-#: template/admin/location-index.phtml:39
+#: template/admin/location-index.phtml:38
 msgid "No location is not created yet"
 msgstr ""
 
@@ -1975,7 +2034,8 @@ msgstr ""
 msgid "Order %s details"
 msgstr ""
 
-#: template/admin/order-view.phtml:149 template/front/detail.phtml:294
+#: template/admin/order-view.phtml:149 template/front/detail.phtml:251
+#: template/front/detail.phtml:350
 msgid "Admin note"
 msgstr ""
 
@@ -1987,7 +2047,7 @@ msgstr ""
 msgid "Method"
 msgstr ""
 
-#: template/admin/order-view.phtml:226 template/front/detail.phtml:267
+#: template/admin/order-view.phtml:226 template/front/detail.phtml:324
 msgid "Discount"
 msgstr ""
 
@@ -2025,16 +2085,12 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: template/front/checkout.phtml:103 template/front/checkout.phtml:206
+#: template/front/checkout.phtml:103 template/front/checkout.phtml:207
 msgid "Create new address"
 msgstr ""
 
-#: template/front/checkout.phtml:104 template/front/checkout.phtml:161
+#: template/front/checkout.phtml:104 template/front/checkout.phtml:185
 msgid "Use it"
-msgstr ""
-
-#: template/front/checkout.phtml:110
-msgid "Checkout"
 msgstr ""
 
 #: template/front/checkout.phtml:115
@@ -2071,36 +2127,48 @@ msgstr ""
 msgid "Register new user account and make order"
 msgstr ""
 
-#: template/front/checkout.phtml:175
+#: template/front/checkout.phtml:170
 msgid "Invoicing address"
 msgstr ""
 
-#: template/front/checkout.phtml:202
+#: template/front/checkout.phtml:203
 msgid "Create order with a new address"
 msgstr ""
 
-#: template/front/checkout.phtml:221
+#: template/front/checkout.phtml:222
 msgid "Your products or services"
 msgstr ""
 
-#: template/front/checkout.phtml:248
+#: template/front/checkout.phtml:249
 msgid "Total Price ext VAT"
 msgstr ""
 
-#: template/front/checkout.phtml:252
+#: template/front/checkout.phtml:253
 msgid "Total Discount"
 msgstr ""
 
-#: template/front/checkout.phtml:256
+#: template/front/checkout.phtml:257
 msgid "Total Shipping"
 msgstr ""
 
-#: template/front/checkout.phtml:260
+#: template/front/checkout.phtml:261
 msgid "Total Vat"
 msgstr ""
 
-#: template/front/checkout.phtml:264
+#: template/front/checkout.phtml:269
 msgid "Final Price incl. VAT"
+msgstr ""
+
+#: template/front/credit-index.phtml:8
+msgid "Credit information and history"
+msgstr ""
+
+#: template/front/credit-index.phtml:24
+msgid "Credit amount"
+msgstr ""
+
+#: template/front/credit-index.phtml:25
+msgid "Last update time"
 msgstr ""
 
 #: template/front/detail.phtml:24 template/front/invoice.phtml:22
@@ -2126,7 +2194,8 @@ msgid ""
 "<strong>%s</strong>"
 msgstr ""
 
-#: template/front/detail.phtml:335 template/front/invoice.phtml:245
+#: template/front/detail.phtml:284 template/front/detail.phtml:391
+#: template/front/invoice.phtml:245
 #, php-format
 msgid "You can pay this invoice after %s"
 msgstr ""
@@ -2153,10 +2222,6 @@ msgstr ""
 
 #: template/front/finish.phtml:37
 msgid "Please wait !"
-msgstr ""
-
-#: template/front/installment.phtml:88
-msgid "Installment plans"
 msgstr ""
 
 #: template/front/installment.phtml:93
@@ -2198,10 +2263,6 @@ msgstr ""
 
 #: template/front/list.phtml:8
 msgid "All your orders and invoices"
-msgstr ""
-
-#: template/front/list.phtml:77
-msgid "List of your order"
 msgstr ""
 
 #: template/front/list.phtml:85
