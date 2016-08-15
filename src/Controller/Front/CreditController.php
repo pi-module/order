@@ -36,9 +36,7 @@ class CreditController extends IndexController
         // Get user info
         $user = Pi::api('user', 'order')->getUserInformation();
         // Get credit
-        $credit = $this->getModel('credit')->find($user['id'], 'uid')->toArray();
-        $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
-        $credit['time_update_view'] = ($credit['time_update'] > 0) ? _date($credit['time_update']) : __('Never update');
+        $credit = Pi::api('credit', 'order')->getCredit($user['id']);
         // Get info
         $perPage = 50;
         $list = array();
@@ -112,7 +110,7 @@ class CreditController extends IndexController
             )),
         ));
         // Set view
-        $this->view()->setTemplate('credit-index');
+        $this->view()->setTemplate('credit');
         $this->view()->assign('user', $user);
         $this->view()->assign('credit', $credit);
         $this->view()->assign('list', $list);

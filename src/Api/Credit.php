@@ -17,6 +17,7 @@ use Pi;
 use Pi\Application\Api\AbstractApi;
 
 /*
+ * Pi::api('credit', 'order')->getCredit($uid);
  * Pi::api('credit', 'order')->addHistory($history, $order, $invoice, $status);
  * Pi::api('credit', 'order')->acceptOrderCredit($order, $invoice = 0);
  * Pi::api('credit', 'order')->addCredit($uid, $amount, $fluctuation, $messageAdmin, $messageUser);
@@ -24,6 +25,24 @@ use Pi\Application\Api\AbstractApi;
 
 class Credit extends AbstractApi
 {
+    public function getCredit($uid)
+    {
+        // Get user id if not set
+        if (empty($uid)) {
+            $uid = Pi::user()->getId();
+        }
+        // Check user id
+        if (!$uid || $uid == 0) {
+            return array();
+        }
+        // Get credit
+        $credit = Pi::model('credit', $this->getModule())->find($uid, 'uid')->toArray();
+        $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
+        $credit['time_update_view'] = ($credit['time_update'] > 0) ? _date($credit['time_update']) : __('Never update');
+
+        return $credit;
+    }
+
     public function addHistory($history, $order = 0 , $invoice = 0, $status = 0)
     {
         $row = Pi::model('history', $this->getModule())->createRow();
