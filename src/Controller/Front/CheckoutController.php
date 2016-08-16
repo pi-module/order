@@ -496,12 +496,12 @@ class CheckoutController extends IndexController
         }
 
         // Get credit
-        if ($config['credit_active'] && Pi::user()->getId() > 0) {
+        /* if ($config['credit_active'] && Pi::user()->getId() > 0) {
             $credit = $this->getModel('credit')->find(Pi::user()->getId(), 'uid')->toArray();
             $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
             $credit['time_update_view'] = ($credit['time_update'] > 0) ? _date($credit['time_update']) : __('Never update');
             $this->view()->assign('credit', $credit);
-        }
+        } */
 
         // Set view
         $this->view()->setTemplate('checkout');

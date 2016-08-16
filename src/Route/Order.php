@@ -48,6 +48,8 @@ class Order extends Standard
         $matches = array_merge($this->defaults, $matches);
         if (isset($parts[0]) && in_array($parts[0], $this->controllerList)) {
             $matches['controller'] = $this->decode($parts[0]);
+        } elseif (in_array($parts[0], array('remove', 'error'))) {
+            $matches['controller'] = 'index';
         } else {
             return false;
         }
@@ -108,6 +110,9 @@ class Order extends Standard
                     } elseif (is_numeric($parts[1])) {
                         $matches['action'] = 'index';
                         $matches['id'] = intval($parts[1]);
+                        if (isset($parts[2]) && $parts[2] == 'credit') {
+                            $matches['credit'] = intval($parts[3]);
+                        }
                     }
                     break;
 
@@ -169,6 +174,11 @@ class Order extends Standard
         // Set id
         if (isset($mergedParams['id'])) {
             $url['id'] = $mergedParams['id'];
+        }
+
+        // Set credit
+        if (isset($mergedParams['credit'])) {
+            $url['credit'] = 'credit' . $this->paramDelimiter . $mergedParams['credit'];
         }
 
         // Make url

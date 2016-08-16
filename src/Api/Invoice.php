@@ -50,6 +50,7 @@ class Invoice extends AbstractApi
         if ($config['order_anonymous'] == 0 && $uid == 0) {
             $result['status'] = 0;
             $result['pay_url'] = '';
+            $result['pay_credit_url'] = '';
             $result['message'] = __('Please login for create invoice');
         } else {
             // Check type_payment
@@ -134,6 +135,13 @@ class Invoice extends AbstractApi
                         'action' => 'index',
                         'id' => $row->id,
                     )));
+                    $result['pay_credit_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+                        'module' => $this->getModule(),
+                        'controller' => 'payment',
+                        'action' => 'index',
+                        'id' => $row->id,
+                        'credit' => 1,
+                    )));
                     // Set invoice information on session
                     if ($config['order_anonymous'] == 1 && $uid == 0) {
                         $_SESSION['payment']['process'] = 1;
@@ -144,7 +152,7 @@ class Invoice extends AbstractApi
                     break;
 
                 case 'installment':
-                    // Get user 
+                    // Get user
                     $user = Pi::api('user', 'order')->getUserInformation();
                     // Set invoices price
                     $invoices = Pi::api('installment', 'order')->setPriceForInvoice($order['product_price'], $order['plan'], $user);
@@ -240,12 +248,20 @@ class Invoice extends AbstractApi
                             'action' => 'index',
                             'id' => $information['invoice'],
                         )));
+                        $result['pay_credit_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+                            'module' => $this->getModule(),
+                            'controller' => 'payment',
+                            'action' => 'index',
+                            'id' => $information['invoice'],
+                            'credit' => 1,
+                        )));
                     } else {
                         $result['status'] = 0;
                         $result['message'] = __('Not allowed to create invoice by this user credit');
                         $result['order_url'] = '';
                         $result['invoice_url'] = '';
                         $result['pay_url'] = '';
+                        $result['pay_credit_url'] = '';
                     }
                     break;
             }
@@ -437,6 +453,13 @@ class Invoice extends AbstractApi
             'action' => 'index',
             'id' => $invoice['id'],
         )));
+        $invoice['pay_credit_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+            'module' => $this->getModule(),
+            'controller' => 'payment',
+            'action' => 'index',
+            'id' => $invoice['id'],
+            'credit' => 1,
+        )));
         $invoice['print_url'] = Pi::url(Pi::service('url')->assemble('order', array(
             'module' => $this->getModule(),
             'controller' => 'invoice',
@@ -462,4 +485,4 @@ class Invoice extends AbstractApi
         $log['value'] = Json::encode(array(12, $invoice->toArray()));
         Pi::api('log', 'order')->setLog($log);
     }
-}	
+}

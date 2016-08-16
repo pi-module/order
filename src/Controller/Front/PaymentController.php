@@ -26,8 +26,10 @@ class PaymentController extends IndexController
         $this->checkUser();
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
-        // Get invoice
+        // Get from url
         $id = $this->params('id');
+        $credit = $this->params('credit');
+        // Get invoice
         $invoice = Pi::api('invoice', 'order')->getInvoiceForPayment($id);
         // Check invoice
         if (empty($invoice)) {
@@ -58,6 +60,58 @@ class PaymentController extends IndexController
         // Check order is for this user
         if (!in_array($order['status_order'], array(1, 2, 3))) {
             $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This order not avtice.'));
+        }
+        // process credit
+        if ($credit == 1 && $config['credit_active'] && Pi::service('authentication')->hasIdentity()) {
+            $creditInformation = Pi::api('credit', 'order')->getCredit();
+            if ($creditInformation['amount'] > 0) {
+                // Use credit
+                if ($invoice['total_price'] > $creditInformation['amount']) {
+                    // Set credit
+                    $history = array(
+                        'uid' => $invoice['uid'],
+                        'amount' => $creditInformation['amount'],
+                        'amount_old' => $creditInformation['amount'],
+                        'status_fluctuation' => 'decrease',
+                        'status_action' => 'automatic',
+                        'message_user' => '',
+                        'message_admin' => '',
+                    );
+                    Pi::api('credit', 'order')->addHistory($history, $order['id'], $invoice['id']);
+                    // Set new price for payment
+                    $invoice['total_price'] = $invoice['total_price'] - $creditInformation['amount'];
+                } elseif ($invoice['total_price'] < $creditInformation['amount']) {
+                    // Set credit
+                    $messageAdmin = sprintf(__('use credit to pay invoice %s from order %s'), $invoice['code'], $order['code']);
+                    $messageUser = sprintf(__('use credit to pay invoice %s from order %s'), $invoice['code'], $order['code']);
+                    $amount = $creditInformation['amount'] - $invoice['total_price'];
+                    Pi::api('credit', 'order')->addCredit($invoice['uid'], $amount, 'decrease', 'automatic', $messageAdmin , $messageUser);
+                    // Update invoice
+                    $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
+                    // Update module order / invoice and get back url
+                    $url = Pi::api('order', 'order')->updateOrder($order['id'], $invoice['id']);
+                    // Remove processing
+                    Pi::api('processing', 'order')->removeProcessing();
+                    // jump to module
+                    $message = __('Your payment were successfully. Back to module');
+                    $this->jump($url, $message);
+                } elseif ($invoice['total_price'] == $creditInformation['amount']) {
+                    // Set credit
+                    $messageAdmin = sprintf(__('use credit to pay invoice %s from order %s'), $invoice['code'], $order['code']);
+                    $messageUser = sprintf(__('use credit to pay invoice %s from order %s'), $invoice['code'], $order['code']);
+                    $amount = 0;
+                    Pi::api('credit', 'order')->addCredit($invoice['uid'], $amount, 'decrease', 'automatic', $messageAdmin , $messageUser);
+                    // Update invoice
+                    $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
+                    // Update module order / invoice and get back url
+                    $url = Pi::api('order', 'order')->updateOrder($order['id'], $invoice['id']);
+                    // Remove processing
+                    Pi::api('processing', 'order')->removeProcessing();
+                    // jump to module
+                    $message = __('Your payment were successfully. Back to module');
+                    $this->jump($url, $message);
+                }
+            }
         }
         // Check running pay processing
         $processing = Pi::api('processing', 'order')->checkProcessing();
@@ -243,6 +297,8 @@ class PaymentController extends IndexController
                     if ($verify['status'] == 1) {
                         $url = Pi::api('order', 'order')->updateOrder($verify['order'], $verify['invoice']);
                         Pi::api('invoice', 'order')->setBackUrl($verify['invoice'], $url);
+                        // Update credit
+                        Pi::api('credit', 'order')->acceptOrderCredit($verify['order'], $verify['invoice']);
 
                         $log = array();
                         $log['gateway'] = 'paypal';
@@ -347,6 +403,8 @@ class PaymentController extends IndexController
         $url = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
         // Remove processing
         Pi::api('processing', 'order')->removeProcessing();
+        // Update credit
+        Pi::api('credit', 'order')->acceptOrderCredit($invoice['order'], $invoice['id']);
         // jump to module
         $message = __('Your payment were successfully. Back to module');
         $this->jump($url, $message);

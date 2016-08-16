@@ -20,12 +20,12 @@ use Pi\Application\Api\AbstractApi;
  * Pi::api('credit', 'order')->getCredit($uid);
  * Pi::api('credit', 'order')->addHistory($history, $order, $invoice, $status);
  * Pi::api('credit', 'order')->acceptOrderCredit($order, $invoice = 0);
- * Pi::api('credit', 'order')->addCredit($uid, $amount, $fluctuation, $messageAdmin, $messageUser);
+ * Pi::api('credit', 'order')->addCredit($uid, $amount, $fluctuation, $action, $messageAdmin, $messageUser);
  */
 
 class Credit extends AbstractApi
 {
-    public function getCredit($uid)
+    public function getCredit($uid = '')
     {
         // Get user id if not set
         if (empty($uid)) {
@@ -65,7 +65,7 @@ class Credit extends AbstractApi
     {
         // Update history
         $where = array('order' => $order);
-        $select = Pi::model('history', $this->getModule())->select()->where($where);
+        $select = Pi::model('history', $this->getModule())->select()->where($where)->limit(1);
         $history = Pi::model('history', $this->getModule())->selectWith($select)->current();
         if (!empty($history)) {
             // Check
@@ -98,7 +98,7 @@ class Credit extends AbstractApi
         }
     }
 
-    public function addCredit($uid, $amount, $fluctuation = 'increase', $messageAdmin = '', $messageUser = '')
+    public function addCredit($uid, $amount, $fluctuation = 'increase', $action = 'manual', $messageAdmin = '', $messageUser = '')
     {
         // Set result
         $result = array(
@@ -143,7 +143,7 @@ class Credit extends AbstractApi
             'amount' => $amount,
             'amount_old' => $amountOld,
             'status_fluctuation' => $fluctuation,
-            'status_action' => 'manual',
+            'status_action' => $action,
             'message_user' => $messageAdmin,
             'message_admin' => $messageUser,
         );

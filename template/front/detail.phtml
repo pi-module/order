@@ -236,7 +236,6 @@
                 <?php include $this->template($product['extra']['view_template'], 'front', $order['module_name']); ?>
             <?php } ?>
         <?php } ?>
-
         <hr />
         <?php if ($order['type_payment'] == 'installment') { ?>
             <?php if (!empty($order['user_note'])) { ?>
@@ -384,20 +383,25 @@
                         <div class="col-md-4 text-right">
                             <?php if ($invoice['can_pay'] == 1 && $invoice['allowPayment']) { ?>
                                 <?php if ($invoice['allowPayment']) { ?>
-                                    <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>"
-                                       href="<?php echo $this->escape($invoice['pay_url']); ?>"><i
-                                            class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
+                                    <?php if ($config['credit_active'] && isset($credit) && $credit['amount'] > 0) { ?>
+                                        <div class="dropup">
+                                            <button class="btn btn-success btn-lg dropdown-toggle" type="button" id="dropdownPay" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <?php _e('Pay'); ?>
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownPay">
+                                                <li><a href="<?php echo $this->escape($invoice['pay_url']); ?>"><?php _e('Pay without using credit'); ?></a></li>
+                                                <li><a href="<?php echo $this->escape($invoice['pay_credit_url']); ?>"><?php _e('Pay by using credit'); ?></a></li>
+                                              </ul>
+                                        </div>
+                                    <?php } else { ?>
+                                        <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay_url']); ?>"><i class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
+                                    <?php } ?>
                                 <?php } else { ?>
-                                    <span class="label label-danger">
-                            <?php echo sprintf(__('You can pay this invoice after %s'),
-                                _date($invoice['time_duedate'] - (60 * 60 * 24 * 14),
-                                    array('pattern' => 'dd-MM-yyyy'))); ?>
-                        </span>
+                                    <span class="label label-danger"><?php echo sprintf(__('You can pay this invoice after %s'), _date($invoice['time_duedate'] - (60 * 60 * 24 * 14), array('pattern' => 'dd-MM-yyyy'))); ?></span>
                                 <?php } ?>
                             <?php } elseif ($invoice['can_pay'] != 1) { ?>
-                                <span class="label label-danger">
-                            <?php _e('You can pay this invoice after admin review'); ?>
-                        </span>
+                                <span class="label label-danger"><?php _e('You can pay this invoice after admin review'); ?></span>
                             <?php } ?>
                         </div>
                     <?php } ?>

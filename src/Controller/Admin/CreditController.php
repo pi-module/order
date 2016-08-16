@@ -162,6 +162,7 @@ class CreditController extends ActionController
                     $values['uid'],
                     $values['amount'],
                     $values['status_fluctuation'],
+                    'manual',
                     $values['message_admin'],
                     $values['message_user']
                 );

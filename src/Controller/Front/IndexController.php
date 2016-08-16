@@ -38,12 +38,12 @@ class IndexController extends ActionController
         // Get invoice
         //$user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id'], false, $orderIds);
         // Get credit
-        if ($config['credit_active']) {
+        /* if ($config['credit_active']) {
             $credit = $this->getModel('credit')->find($user['id'], 'uid')->toArray();
             $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
             $credit['time_update_view'] = ($credit['time_update'] > 0) ? _date($credit['time_update']) : __('Never update');
             $this->view()->assign('credit', $credit);
-        }
+        } */
         // Set view
         $this->view()->setTemplate('list');
         $this->view()->assign('user', $user);
