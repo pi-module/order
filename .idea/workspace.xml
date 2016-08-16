@@ -6,14 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="eb89c1a1-3ca6-4284-b00d-d0e1e5682c61" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Api/Credit.php" afterPath="$PROJECT_DIR$/src/Api/Credit.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Api/Invoice.php" afterPath="$PROJECT_DIR$/src/Api/Invoice.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/Admin/CreditController.php" afterPath="$PROJECT_DIR$/src/Controller/Admin/CreditController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/Front/CheckoutController.php" afterPath="$PROJECT_DIR$/src/Controller/Front/CheckoutController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/Front/IndexController.php" afterPath="$PROJECT_DIR$/src/Controller/Front/IndexController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/Front/PaymentController.php" afterPath="$PROJECT_DIR$/src/Controller/Front/PaymentController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Route/Order.php" afterPath="$PROJECT_DIR$/src/Route/Order.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/front/detail.phtml" afterPath="$PROJECT_DIR$/template/front/detail.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/en/admin.mo" afterPath="$PROJECT_DIR$/locale/en/admin.mo" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/en/admin.po" afterPath="$PROJECT_DIR$/locale/en/admin.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/en/block.mo" afterPath="$PROJECT_DIR$/locale/en/block.mo" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/en/block.po" afterPath="$PROJECT_DIR$/locale/en/block.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/en/default.mo" afterPath="$PROJECT_DIR$/locale/en/default.mo" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/en/default.po" afterPath="$PROJECT_DIR$/locale/en/default.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/fa/admin.mo" afterPath="$PROJECT_DIR$/locale/fa/admin.mo" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/fa/admin.po" afterPath="$PROJECT_DIR$/locale/fa/admin.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/fa/block.mo" afterPath="$PROJECT_DIR$/locale/fa/block.mo" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/fa/block.po" afterPath="$PROJECT_DIR$/locale/fa/block.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/fa/default.mo" afterPath="$PROJECT_DIR$/locale/fa/default.mo" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locale/fa/default.po" afterPath="$PROJECT_DIR$/locale/fa/default.po" />
     </list>
     <ignored path="order.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -418,7 +422,7 @@
       <workItem from="1471262417439" duration="762000" />
       <workItem from="1471274235696" duration="1632000" />
       <workItem from="1471276338174" duration="112000" />
-      <workItem from="1471322516031" duration="7525000" />
+      <workItem from="1471322516031" duration="7648000" />
     </task>
     <task id="LOCAL-00001" summary="Fix order module">
       <created>1454310931206</created>
@@ -700,11 +704,18 @@
       <option name="project" value="LOCAL" />
       <updated>1471275264080</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Work on front layout">
+      <created>1471330397887</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1471330397887</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59804000" />
+    <option name="totallyTimeSpent" value="59927000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
