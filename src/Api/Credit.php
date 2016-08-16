@@ -36,10 +36,17 @@ class Credit extends AbstractApi
             return array();
         }
         // Get credit
-        $credit = Pi::model('credit', $this->getModule())->find($uid, 'uid')->toArray();
-        $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
-        $credit['time_update_view'] = ($credit['time_update'] > 0) ? _date($credit['time_update']) : __('Never update');
-
+        $credit = Pi::model('credit', $this->getModule())->find($uid, 'uid');
+        if ($credit) {
+            $credit = $credit->toArray();
+            $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
+            $credit['time_update_view'] = ($credit['time_update'] > 0) ? _date($credit['time_update']) : __('Never update');
+        } else {
+            $credit = array();
+            $credit['amount'] = 0;
+            $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
+            $credit['time_update_view'] = __('Never update');
+        }
         return $credit;
     }
 
