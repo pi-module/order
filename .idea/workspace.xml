@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="eb89c1a1-3ca6-4284-b00d-d0e1e5682c61" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/admin/invoice-print.phtml" afterPath="$PROJECT_DIR$/template/admin/invoice-print.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/front/invoice-print.phtml" afterPath="$PROJECT_DIR$/template/front/invoice-print.phtml" />
     </list>
     <ignored path="order.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,31 +27,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="order-print.phtml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/admin/order-print.phtml">
+      <file leaf-file-name="invoice-print.phtml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/admin/invoice-print.phtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4536">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="211">
+              <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="177" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="invoice-print.phtml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/template/admin/invoice-print.phtml">
+        <entry file="file://$PROJECT_DIR$/template/front/invoice-print.phtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="170" column="0" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="order-view.phtml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/admin/order-view.phtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="147" column="0" selection-start-line="147" selection-start-column="0" selection-end-line="160" selection-end-column="14" />
+            <state relative-caret-position="535">
+              <caret line="177" column="42" selection-start-line="177" selection-start-column="42" selection-end-line="177" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -75,7 +65,6 @@
         <option value="$PROJECT_DIR$/src/Form/OrderFilter.php" />
         <option value="$PROJECT_DIR$/template/front/finish.phtml" />
         <option value="$PROJECT_DIR$/asset/css/print.css" />
-        <option value="$PROJECT_DIR$/template/front/invoice-print.phtml" />
         <option value="$PROJECT_DIR$/src/Form/CreditForm.php" />
         <option value="$PROJECT_DIR$/src/Form/CreditFilter.php" />
         <option value="$PROJECT_DIR$/template/admin/credit-update.phtml" />
@@ -116,6 +105,7 @@
         <option value="$PROJECT_DIR$/src/Controller/Front/PaymentController.php" />
         <option value="$PROJECT_DIR$/src/Api/Credit.php" />
         <option value="$PROJECT_DIR$/template/admin/invoice-print.phtml" />
+        <option value="$PROJECT_DIR$/template/front/invoice-print.phtml" />
       </list>
     </option>
   </component>
@@ -340,7 +330,7 @@
       <workItem from="1471336991027" duration="1003000" />
       <workItem from="1471498174380" duration="616000" />
       <workItem from="1471843517432" duration="559000" />
-      <workItem from="1471850630948" duration="242000" />
+      <workItem from="1471850630948" duration="284000" />
     </task>
     <task id="LOCAL-00001" summary="Fix order module">
       <created>1454310931206</created>
@@ -643,11 +633,18 @@
       <option name="project" value="LOCAL" />
       <updated>1471337384197</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Add admin note on print">
+      <created>1471850884299</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1471850884299</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62488000" />
+    <option name="totallyTimeSpent" value="62530000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -662,7 +659,7 @@
     <frame x="0" y="0" width="1280" height="994" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.03634895" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22132471" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293979" sideWeight="0.49674267" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293979" sideWeight="0.50325733" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -732,20 +729,14 @@
     <MESSAGE value="Work on issues 511" />
     <MESSAGE value="Work on admin menu" />
     <MESSAGE value="Work on front layout" />
-    <option name="LAST_COMMIT_MESSAGE" value="Work on front layout" />
+    <MESSAGE value="Add admin note on print" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add admin note on print" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Form/OrderSimpleForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="157" column="26" selection-start-line="157" selection-start-column="26" selection-end-line="157" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Gateway/Zarinpal/Gateway.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -1095,8 +1086,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/template/admin/invoice-print.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="170" column="0" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
+        <state relative-caret-position="211">
+          <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="177" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/front/invoice-print.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="535">
+          <caret line="177" column="42" selection-start-line="177" selection-start-column="42" selection-end-line="177" selection-end-column="42" />
           <folding />
         </state>
       </provider>

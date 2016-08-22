@@ -160,6 +160,22 @@ $locale = 'en';
                                         </div>
                                     <?php } ?>
                                 <?php } ?>
+                                <?php if (!empty($order['user_note'])) { ?>
+                                    <div class="clearfix">
+                                        <h3><?php _e('User note'); ?></h3>
+                                        <div class="clearfix">
+                                            <?php echo $order['user_note']; ?>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                                <?php if (!empty($order['admin_note'])) { ?>
+                                    <div class="clearfix">
+                                        <h3><?php _e('Admin note'); ?></h3>
+                                        <div class="clearfix">
+                                            <?php echo $order['admin_note']; ?>
+                                        </div>
+                                    </div>
+                                <?php } ?>
                             </td>
                             <td><?php echo _number($this->escape($product['number'])); ?></td>
                             <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?></td>
