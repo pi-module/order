@@ -168,23 +168,27 @@ $locale = 'en';
                             <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['total_price'])); ?></td>
                         </tr>
                     <?php } ?>
+                    <?php if (!empty($order['user_note'])) { ?>
+                        <tr>
+                            <td colspan="5">
+                                <h5><?php _e('User note'); ?></h5>
+                                <div class="clearfix">
+                                    <?php echo $order['user_note']; ?>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    <?php if (!empty($order['admin_note'])) { ?>
+                        <tr>
+                            <td colspan="5">
+                                <h5><?php _e('Admin note'); ?></h5>
+                                <div class="clearfix">
+                                    <?php echo $order['admin_note']; ?>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </table>
-                <?php if (!empty($order['user_note'])) { ?>
-                    <div class="clearfix">
-                        <h5><?php _e('User note'); ?></h5>
-                        <div class="clearfix">
-                            <?php echo $order['user_note']; ?>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if (!empty($order['admin_note'])) { ?>
-                    <div class="clearfix">
-                        <h5><?php _e('Admin note'); ?></h5>
-                        <div class="clearfix">
-                            <?php echo $order['admin_note']; ?>
-                        </div>
-                    </div>
-                <?php } ?>
                 <?php if ($order['type_payment'] == 'installment') { ?>
                     <div class="alert alert-success" role="alert">
                         <h2><?php _e('Payment price'); ?> :

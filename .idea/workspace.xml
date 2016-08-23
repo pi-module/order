@@ -28,21 +28,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="invoice-print.phtml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="invoice-print.phtml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/template/admin/invoice-print.phtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="178" column="26" selection-start-line="178" selection-start-column="26" selection-end-line="178" selection-end-column="26" />
+            <state relative-caret-position="139">
+              <caret line="170" column="0" selection-start-line="170" selection-start-column="0" selection-end-line="189" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="invoice-print.phtml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="invoice-print.phtml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/template/front/invoice-print.phtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="661">
-              <caret line="181" column="27" selection-start-line="181" selection-start-column="27" selection-end-line="181" selection-end-column="27" />
+            <state relative-caret-position="751">
+              <caret line="189" column="30" selection-start-line="189" selection-start-column="30" selection-end-line="189" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -105,8 +105,8 @@
         <option value="$PROJECT_DIR$/src/Controller/Admin/CreditController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Front/PaymentController.php" />
         <option value="$PROJECT_DIR$/src/Api/Credit.php" />
-        <option value="$PROJECT_DIR$/template/front/invoice-print.phtml" />
         <option value="$PROJECT_DIR$/template/admin/invoice-print.phtml" />
+        <option value="$PROJECT_DIR$/template/front/invoice-print.phtml" />
       </list>
     </option>
   </component>
@@ -333,7 +333,7 @@
       <workItem from="1471843517432" duration="559000" />
       <workItem from="1471850630948" duration="457000" />
       <workItem from="1471867196293" duration="4000" />
-      <workItem from="1471929870497" duration="112000" />
+      <workItem from="1471929870497" duration="502000" />
     </task>
     <task id="LOCAL-00001" summary="Fix order module">
       <created>1454310931206</created>
@@ -650,11 +650,18 @@
       <option name="project" value="LOCAL" />
       <updated>1471850918184</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Add admin note on print">
+      <created>1471929988421</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1471929988421</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62819000" />
+    <option name="totallyTimeSpent" value="63209000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1091,18 +1098,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/front/invoice-print.phtml">
+    <entry file="file://$PROJECT_DIR$/template/admin/invoice-print.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="661">
-          <caret line="181" column="27" selection-start-line="181" selection-start-column="27" selection-end-line="181" selection-end-column="27" />
+        <state relative-caret-position="139">
+          <caret line="170" column="0" selection-start-line="170" selection-start-column="0" selection-end-line="189" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/admin/invoice-print.phtml">
+    <entry file="file://$PROJECT_DIR$/template/front/invoice-print.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="178" column="26" selection-start-line="178" selection-start-column="26" selection-end-line="178" selection-end-column="26" />
+        <state relative-caret-position="751">
+          <caret line="189" column="30" selection-start-line="189" selection-start-column="30" selection-end-line="189" selection-end-column="30" />
           <folding />
         </state>
       </provider>
