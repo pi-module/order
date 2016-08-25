@@ -204,7 +204,7 @@
                         </tr>
                         <?php foreach ($block['d']['additional']['invoice'] as $invoiceItem) { ?>
                             <tr class="text-muted">
-                                <td colspan="3" class="text-center"><a title="<?php echo $invoiceItem['id']; ?>" href="<?php echo $invoiceItem['invoice_url']; ?>"><?php echo $block['resources']['orders'][$invoiceItem['order']]['code']; ?> - <?php echo $invoiceItem['id']; ?></a></td>
+                                <td colspan="3" class="text-center"><a title="<?php echo $invoiceItem['id']; ?>" href="<?php echo $invoiceItem['order_url']; ?>"><?php echo $block['resources']['orders'][$invoiceItem['order']]['code']; ?> - <?php echo $invoiceItem['id']; ?></a></td>
                                 <td colspan="12" class="text-center"><?php echo $invoiceItem['time_duedate_view']; ?></td>
                                 <td colspan="1" class="text-center"><?php if (isset($invoiceItem['total_price_view'])) { echo $invoiceItem['total_price_view'];} ?></td>
                             </tr>

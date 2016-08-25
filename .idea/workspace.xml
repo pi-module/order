@@ -4,13 +4,9 @@
     <bookmark url="file://$PROJECT_DIR$/src/Controller/Front/CheckoutController.php" description="                                $extra = array();" line="341" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb89c1a1-3ca6-4284-b00d-d0e1e5682c61" name="Default" comment="Add admin note on print">
+    <list default="true" id="eb89c1a1-3ca6-4284-b00d-d0e1e5682c61" name="Default" comment="Work on installment system">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/Front/CheckoutController.php" afterPath="$PROJECT_DIR$/src/Controller/Front/CheckoutController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/Front/DetailController.php" afterPath="$PROJECT_DIR$/src/Controller/Front/DetailController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/admin/order-view.phtml" afterPath="$PROJECT_DIR$/template/admin/order-view.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/front/checkout.phtml" afterPath="$PROJECT_DIR$/template/front/checkout.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/front/detail.phtml" afterPath="$PROJECT_DIR$/template/front/detail.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/block/installment.phtml" afterPath="$PROJECT_DIR$/template/block/installment.phtml" />
     </list>
     <ignored path="order.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,51 +27,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CheckoutController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Front/CheckoutController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="354" column="40" selection-start-line="354" selection-start-column="40" selection-end-line="354" selection-end-column="61" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="checkout.phtml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/front/checkout.phtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="53">
-              <caret line="252" column="0" selection-start-line="252" selection-start-column="0" selection-end-line="253" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="order-view.phtml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/template/admin/order-view.phtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="277" column="72" selection-start-line="277" selection-start-column="61" selection-end-line="277" selection-end-column="72" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="detail.phtml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/front/detail.phtml">
+        <entry file="file://$PROJECT_DIR$/template/block/detail.phtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1224">
-              <caret line="269" column="68" selection-start-line="269" selection-start-column="68" selection-end-line="269" selection-end-column="68" />
+            <state relative-caret-position="-1409">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DetailController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Front/DetailController.php">
+      <file leaf-file-name="installment.phtml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/template/block/installment.phtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="51" column="57" selection-start-line="51" selection-start-column="57" selection-end-line="51" selection-end-column="57" />
+            <state relative-caret-position="243">
+              <caret line="206" column="155" selection-start-line="206" selection-start-column="155" selection-end-line="206" selection-end-column="155" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Invoice.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Api/Invoice.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="119" column="38" selection-start-line="119" selection-start-column="29" selection-end-line="119" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -89,7 +65,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/config/page.php" />
         <option value="$PROJECT_DIR$/config/permission.php" />
         <option value="$PROJECT_DIR$/src/Form/RemoveForm.php" />
         <option value="$PROJECT_DIR$/src/Api/Notification.php" />
@@ -140,6 +115,7 @@
         <option value="$PROJECT_DIR$/template/admin/order-view.phtml" />
         <option value="$PROJECT_DIR$/src/Controller/Front/DetailController.php" />
         <option value="$PROJECT_DIR$/template/front/detail.phtml" />
+        <option value="$PROJECT_DIR$/template/block/installment.phtml" />
       </list>
     </option>
   </component>
@@ -215,24 +191,6 @@
               <option name="myItemId" value="template" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="front" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="order" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="order" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="template" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -248,7 +206,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
+              <option name="myItemId" value="block" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -263,46 +221,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="order" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="order" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Front" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="order" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="order" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -440,7 +358,7 @@
       <workItem from="1471867196293" duration="4000" />
       <workItem from="1471929870497" duration="1121000" />
       <workItem from="1472109153829" duration="1122000" />
-      <workItem from="1472116047975" duration="2062000" />
+      <workItem from="1472116047975" duration="3354000" />
     </task>
     <task id="LOCAL-00001" summary="Fix order module">
       <created>1454310931206</created>
@@ -771,11 +689,18 @@
       <option name="project" value="LOCAL" />
       <updated>1471930376182</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Work on installment system">
+      <created>1472118431946</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1472118431946</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67012000" />
+    <option name="totallyTimeSpent" value="68304000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -790,7 +715,7 @@
     <frame x="0" y="0" width="1280" height="994" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.06946688" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12035541" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293979" sideWeight="0.49674267" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293979" sideWeight="0.50325733" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -861,34 +786,14 @@
     <MESSAGE value="Work on admin menu" />
     <MESSAGE value="Work on front layout" />
     <MESSAGE value="Add admin note on print" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add admin note on print" />
+    <MESSAGE value="Work on installment system" />
+    <option name="LAST_COMMIT_MESSAGE" value="Work on installment system" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Gateway/Zarinpal/Gateway.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="151" column="45" selection-start-line="0" selection-start-column="0" selection-end-line="206" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gateway/Dargahpardakht/Gateway.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="78" column="59" selection-start-line="78" selection-start-column="48" selection-end-line="78" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/route.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/permission.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1173,30 +1078,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Api/Invoice.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1026">
-          <caret line="21" column="45" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/template/front/checkout.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="252" column="0" selection-start-line="252" selection-start-column="0" selection-end-line="253" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Front/CheckoutController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="354" column="40" selection-start-line="354" selection-start-column="40" selection-end-line="354" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/template/admin/order-index.phtml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -1233,6 +1114,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="379">
           <caret line="277" column="72" selection-start-line="277" selection-start-column="61" selection-end-line="277" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/front/checkout.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="252" column="0" selection-start-line="252" selection-start-column="0" selection-end-line="253" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Block/Block.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-433">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Front/CheckoutController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="354" column="40" selection-start-line="354" selection-start-column="40" selection-end-line="354" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Api/Invoice.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="119" column="38" selection-start-line="119" selection-start-column="29" selection-end-line="119" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/block/detail.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1409">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/block/installment.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="206" column="155" selection-start-line="206" selection-start-column="155" selection-end-line="206" selection-end-column="155" />
           <folding />
         </state>
       </provider>
