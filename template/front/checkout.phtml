@@ -262,6 +262,7 @@ $this->footScript()->appendScript($script);
                         <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?>
                     </p>
                 </div>
+                <?php if ($cart['type_payment'] != 'installment') { ?>
                 <div class="panel-footer">
                     <ul class="list-inline">
                         <li>
@@ -276,9 +277,9 @@ $this->footScript()->appendScript($script);
                                 </sma>
                             </h3>
                         </li>
-
                     </ul>
                 </div>
+                <?php } ?>
             </div>
             <?php if (!empty($config['text_description_checkup'])) { ?>
                 <div class="checkout-description">

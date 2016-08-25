@@ -49,10 +49,8 @@ class DetailController extends IndexController
             $order['deliveryInformation'] = Pi::api('delivery', 'order')->getDeliveryInformation($order['location'], $order['delivery']);
         }
         // Get credit
-        if ($config['credit_active']) {
-            $credit = $this->getModel('credit')->find($order['uid'], 'uid')->toArray();
-            $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
-            $credit['time_update_view'] = ($credit['time_update'] > 0) ? _date($credit['time_update']) : __('Never update');
+        if ($config['credit_active'] && $order['uid'] > 0) {
+            $credit = Pi::api('credit', 'order')->getCredit($order['uid']);
             $this->view()->assign('credit', $credit);
         }
         // set view

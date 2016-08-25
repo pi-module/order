@@ -350,6 +350,10 @@ class CheckoutController extends IndexController
                                 $extra = array();
                                 $extra['product'] = json::decode($product['extra'], true);
                                 $extra['installment'] = Pi::api('installment', 'order')->setPriceForProduct($total, $order->plan);
+                                $extra['installment_main_price'] = $price;
+                                $extra['installment_main_total'] = $total;
+                                $extra['installment_new_price'] = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
+                                $extra['installment_new_total'] = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
                                 $basket->extra = json::encode($extra);
                             } else {
                                 $extra = array();
