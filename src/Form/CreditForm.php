@@ -73,6 +73,23 @@ class CreditForm extends BaseForm
                 'required' => true,
             )
         ));
+        // Set module
+        if ($this->option['type'] == 'module') {
+            $this->add(array(
+                'name' => 'module',
+                'type' => 'select',
+                'options' => array(
+                    'label' => __('Select module for use this credit'),
+                    'value_options' => array(
+                        'shop' => __('Shop'),
+                        'event' => __('Event'),
+                    ),
+                ),
+                'attributes' => array(
+                    'required' => true,
+                )
+            ));
+        }
         // message_user
         $this->add(array(
             'name' => 'message_user',

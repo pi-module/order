@@ -34,5 +34,6 @@ class History extends Model
         'message_user',
         'message_admin',
         'ip',
+        'module',
     );
 }

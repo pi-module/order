@@ -15,6 +15,7 @@ namespace Module\Order\Api;
 
 use Pi;
 use Pi\Application\Api\AbstractApi;
+use Zend\Json\Json;
 
 /*
  * Pi::api('credit', 'order')->getCredit($uid);
@@ -41,11 +42,15 @@ class Credit extends AbstractApi
             $credit = $credit->toArray();
             $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
             $credit['time_update_view'] = ($credit['time_update'] > 0) ? _date($credit['time_update']) : __('Never update');
+            if (!empty($credit['amount_detail'])) {
+                $credit['amount_detail'] = json::decode($credit['amount_detail']);
+            }
         } else {
             $credit = array();
             $credit['amount'] = 0;
             $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
             $credit['time_update_view'] = __('Never update');
+            $credit['amount_detail'] = array();
         }
         return $credit;
     }
@@ -65,11 +70,14 @@ class Credit extends AbstractApi
         $row->message_user = $history['message_user'];
         $row->message_admin = $history['message_admin'];
         $row->ip = Pi::user()->getIp();
+        $row->module = $history['module'];
         $row->save();
     }
 
     public function acceptOrderCredit($order, $invoice = 0)
     {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
         // Update history
         $where = array('order' => $order);
         $select = Pi::model('history', $this->getModule())->select()->where($where)->limit(1);
@@ -89,13 +97,24 @@ class Credit extends AbstractApi
                             $credit->amount = $credit->amount - $history->amount;
                             break;
                     }
+                    // Set amount detail
+                    $detail = json::decode($credit->amount_detail);
+                    $detail[$history->module] = $credit->amount;
+                    $credit->amount_detail = Json::encode($detail);
+                    // Save
                     $credit->time_update = time();
                     $credit->save();
                 } else {
+                    // Set detail
+                    $detail = array(
+                        $history->module => $history->amount,
+                    );
+                    // Save credit
                     $credit = Pi::model('credit', $this->getModule())->createRow();
                     $credit->uid = $history->uid;
-                    $credit->amount = $history->amount;
                     $credit->time_update = time();
+                    $credit->amount = $history->amount;
+                    $credit->amount_detail = Json::encode($detail);
                     $credit->save();
                 }
                 $history->invoice = $invoice;
@@ -105,7 +124,7 @@ class Credit extends AbstractApi
         }
     }
 
-    public function addCredit($uid, $amount, $fluctuation = 'increase', $action = 'manual', $messageAdmin = '', $messageUser = '')
+    public function addCredit($uid, $amount, $fluctuation = 'increase', $action = 'manual', $messageAdmin = '', $messageUser = '', $module = 'shop')
     {
         // Set result
         $result = array(
@@ -117,28 +136,38 @@ class Credit extends AbstractApi
         $credit = Pi::model('credit', $this->getModule())->find($uid, 'uid');
         if ($credit) {
             $amountOld = $credit->amount;
+            $detail = json::decode($credit->amount_detail);
             switch ($fluctuation) {
                 case 'increase':
                     $credit->amount = $credit->amount + $amount;
+                    $detail[$module] = $credit->amount;
                     break;
 
                 case 'decrease':
                     if ($credit->amount >= $amount) {
                         $credit->amount = $credit->amount - $amount;
+                        $detail[$module] = $credit->amount;
                     } else {
                         $result['message'] = __('Your input amount is more than user credit');
                         return $result;
                     }
                     break;
             }
+            $credit->amount_detail = Json::encode($detail);
             $credit->time_update = time();
             $credit->save();
         } else {
             if ($fluctuation == 'increase') {
+                // Set detail
+                $detail = array(
+                    $module => $amount,
+                );
+                // Save credit
                 $credit = Pi::model('credit', $this->getModule())->createRow();
                 $credit->uid = $uid;
-                $credit->amount = $amount;
                 $credit->time_update = time();
+                $credit->amount = $amount;
+                $credit->amount_detail = Json::encode($detail);
                 $credit->save();
             } else {
                 $result['message'] = __('This user never use credit system, than you can not decrease amnout from him / her');
@@ -153,6 +182,7 @@ class Credit extends AbstractApi
             'status_action' => $action,
             'message_user' => $messageAdmin,
             'message_admin' => $messageUser,
+            'module' => $module,
         );
         $this->addHistory($history, 0, 0, 1);
         // Return result

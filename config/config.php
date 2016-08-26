@@ -374,6 +374,22 @@ return array(
             'filter' => 'number_int',
             'value' => 1,
         ),
+        'credit_type' => array(
+            'title' => _a('Credit system type'),
+            'description' => '',
+            'edit' => array(
+                'type' => 'select',
+                'options' => array(
+                    'options' => array(
+                        'general' => _a('One credit amount for use on all modules'),
+                        'module' => _a('Each module have special credit amount'),
+                    ),
+                ),
+            ),
+            'filter' => 'text',
+            'value' => 'general',
+            'category' => 'credit',
+        ),
         // Notification
         'sms_order_user' => array(
             'category' => 'notification',

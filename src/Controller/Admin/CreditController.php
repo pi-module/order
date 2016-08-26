@@ -147,13 +147,20 @@ class CreditController extends ActionController
     public function updateAction()
     {
         // Set info
+        $module = $this->params('module');
         $uid = $this->params('uid');
         $message = '';
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+        // Set form option
+        $option = array(
+            'type' => $config['credit_type']
+        );
         // Set form
-        $form = new CreditForm('credit');
+        $form = new CreditForm('credit', $option);
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            $form->setInputFilter(new CreditFilter);
+            $form->setInputFilter(new CreditFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
@@ -164,7 +171,8 @@ class CreditController extends ActionController
                     $values['status_fluctuation'],
                     'manual',
                     $values['message_admin'],
-                    $values['message_user']
+                    $values['message_user'],
+                    $values['module']
                 );
                 // Check result
                 if ($result['status'] == 1) {
@@ -185,5 +193,6 @@ class CreditController extends ActionController
         $this->view()->setTemplate('credit-update');
         $this->view()->assign('form', $form);
         $this->view()->assign('message', $message);
+        $this->view()->assign('config', $config);
     }
 }

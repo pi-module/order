@@ -64,28 +64,35 @@ class PaymentController extends IndexController
         // process credit
         if ($credit == 1 && $config['credit_active'] && Pi::service('authentication')->hasIdentity()) {
             $creditInformation = Pi::api('credit', 'order')->getCredit();
-            if ($creditInformation['amount'] > 0) {
+
+            if ($config['credit_type'] == 'general') {
+                $creditAmount = $creditInformation['amount'];
+            } elseif ($config['credit_type'] == 'module') {
+                $creditAmount = $credit['amount_detail'][$order['module_name']];
+            }
+            if ($creditAmount > 0) {
                 // Use credit
-                if ($invoice['total_price'] > $creditInformation['amount']) {
+                if ($invoice['total_price'] > $creditAmount) {
                     // Set credit
                     $history = array(
                         'uid' => $invoice['uid'],
-                        'amount' => $creditInformation['amount'],
-                        'amount_old' => $creditInformation['amount'],
+                        'amount' => $creditAmount,
+                        'amount_old' => $creditAmount,
                         'status_fluctuation' => 'decrease',
                         'status_action' => 'automatic',
                         'message_user' => '',
                         'message_admin' => '',
+                        'module' => $order['module_name'],
                     );
                     Pi::api('credit', 'order')->addHistory($history, $order['id'], $invoice['id']);
                     // Set new price for payment
-                    $invoice['total_price'] = $invoice['total_price'] - $creditInformation['amount'];
-                } elseif ($invoice['total_price'] < $creditInformation['amount']) {
+                    $invoice['total_price'] = $invoice['total_price'] - $creditAmount;
+                } elseif ($invoice['total_price'] < $creditAmount) {
                     // Set credit
                     $messageAdmin = sprintf(__('use credit to pay invoice %s from order %s'), $invoice['code'], $order['code']);
                     $messageUser = sprintf(__('use credit to pay invoice %s from order %s'), $invoice['code'], $order['code']);
-                    $amount = $creditInformation['amount'] - $invoice['total_price'];
-                    Pi::api('credit', 'order')->addCredit($invoice['uid'], $amount, 'decrease', 'automatic', $messageAdmin , $messageUser);
+                    $amount = $creditAmount - $invoice['total_price'];
+                    Pi::api('credit', 'order')->addCredit($invoice['uid'], $amount, 'decrease', 'automatic', $messageAdmin , $messageUser, $order['module_name']);
                     // Update invoice
                     $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
                     // Update module order / invoice and get back url
@@ -95,12 +102,12 @@ class PaymentController extends IndexController
                     // jump to module
                     $message = __('Your payment were successfully. Back to module');
                     $this->jump($url, $message);
-                } elseif ($invoice['total_price'] == $creditInformation['amount']) {
+                } elseif ($invoice['total_price'] == $creditAmount) {
                     // Set credit
                     $messageAdmin = sprintf(__('use credit to pay invoice %s from order %s'), $invoice['code'], $order['code']);
                     $messageUser = sprintf(__('use credit to pay invoice %s from order %s'), $invoice['code'], $order['code']);
                     $amount = 0;
-                    Pi::api('credit', 'order')->addCredit($invoice['uid'], $amount, 'decrease', 'automatic', $messageAdmin , $messageUser);
+                    Pi::api('credit', 'order')->addCredit($invoice['uid'], $amount, 'decrease', 'automatic', $messageAdmin , $messageUser, $order['module_name']);
                     // Update invoice
                     $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
                     // Update module order / invoice and get back url

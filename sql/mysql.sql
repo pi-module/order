@@ -239,10 +239,11 @@ CREATE TABLE `{log}` (
 );
 
 CREATE TABLE `{credit}` (
-  `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `uid`         INT(10) UNSIGNED NOT NULL DEFAULT '0',
-  `time_update` INT(10) UNSIGNED NOT NULL DEFAULT '0',
-  `amount`      DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+  `id`            INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uid`           INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `time_update`   INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `amount`        DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+  `amount_detail` VARCHAR(255)     NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uid` (`uid`)
 );
@@ -261,6 +262,7 @@ CREATE TABLE `{history}` (
   `message_user`       TEXT,
   `message_admin`      TEXT,
   `ip`                 CHAR(15)                      NOT NULL DEFAULT '',
+  `module`             VARCHAR(64)                   NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`),
   KEY `time_create` (`time_create`),

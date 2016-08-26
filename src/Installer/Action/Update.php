@@ -58,6 +58,16 @@ class Update extends BasicUpdate
         $customerTable = $customerModel->getTable();
         $customerAdapter = $customerModel->getAdapter();
 
+        // Set credit model
+        $creditModel = Pi::model('credit', $this->module);
+        $creditTable = $creditModel->getTable();
+        $creditAdapter = $creditModel->getAdapter();
+
+        // Set history model
+        $historyModel = Pi::model('history', $this->module);
+        $historyTable = $historyModel->getTable();
+        $historyAdapter = $historyModel->getAdapter();
+
         if (version_compare($moduleVersion, '1.3.6', '<')) {
             // Alter table field add id_number
             $sql = sprintf("ALTER TABLE %s ADD `id_number` varchar(255) NOT NULL default ''", $orderTable);
@@ -412,6 +422,36 @@ EOD;
                         . $exception->getMessage(),
                 ));
 
+                return false;
+            }
+        }
+
+        if (version_compare($moduleVersion, '1.8.5', '<')) {
+            // Alter table field add id_number
+            $sql = sprintf("ALTER TABLE %s ADD `amount_detail` VARCHAR(255) NOT NULL DEFAULT ''", $creditTable);
+            try {
+                $creditAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
+        if (version_compare($moduleVersion, '1.8.6', '<')) {
+            // Alter table field add id_number
+            $sql = sprintf("ALTER TABLE %s ADD `module` VARCHAR(64) NOT NULL DEFAULT ''", $historyTable);
+            try {
+                $historyAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
                 return false;
             }
         }

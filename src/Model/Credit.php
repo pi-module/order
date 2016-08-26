@@ -25,5 +25,6 @@ class Credit extends Model
         'uid',
         'time_update',
         'amount',
+        'amount_detail',
     );
 }
