@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2016-08-16 11:23+0430\n"
+"POT-Creation-Date: 2016-08-29 10:45+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -301,29 +301,41 @@ msgstr ""
 "کاربر می تواند از اعتبار خود برای پرداخت فاکتور استفاده نماید و گزارش فعالیت "
 "خود را مشاهده کند"
 
-#: config/config.php:380
+#: config/config.php:378
+msgid "Credit system type"
+msgstr "نوع سیستم اعتبار"
+
+#: config/config.php:384
+msgid "One credit amount for use on all modules"
+msgstr "اعتبار یکپارچه برای استفاده در کل ماژول ها"
+
+#: config/config.php:385
+msgid "Each module have special credit amount"
+msgstr "اعتبار جداگانه برای هر ماژول"
+
+#: config/config.php:396
 msgid "New order notification to user"
 msgstr "اطلاع رسانی سفارش جدید به کاربر"
 
-#: config/config.php:381 config/config.php:384
+#: config/config.php:397 config/config.php:400
 #, php-format
 msgid "Dear %s %s, you order %s product by %s price, added on %s website"
 msgstr "%s %s عزیز، شما کالای %s را با قیمت %s در وب سایت %s سفارش داده اید."
 
-#: config/config.php:388
+#: config/config.php:404
 msgid "New order notification to admin"
 msgstr "اطلاع رسانی سفارش جدید به مدیر"
 
-#: config/config.php:389 config/config.php:392
+#: config/config.php:405 config/config.php:408
 #, php-format
 msgid "Dear %s admin, %s %s User ordered %s product by %s price"
 msgstr "مدیر وب سایت %s ، کاربر %s %s کالای %s را به قیمت %s سفارش داده است."
 
-#: config/config.php:396
+#: config/config.php:412
 msgid "Pay invoice notification to user"
 msgstr "اطلاع رسانی پرداخت فاکتور به کاربر"
 
-#: config/config.php:397 config/config.php:400
+#: config/config.php:413 config/config.php:416
 msgid ""
 "Dear %s %s, You paid invoice %s by %s price for %s order included % product "
 "on %s website successfully"
@@ -331,11 +343,11 @@ msgstr ""
 "%s %s عزیز ، شما فاکتور شماره %s به مبلغ %s برای سفارش %s شامل کالاهای %s در "
 "وب سایت %s پرداخت کرده اید"
 
-#: config/config.php:404
+#: config/config.php:420
 msgid "Pay invoice notification to admin"
 msgstr "اطلاع رسانی پرداخت فاکتور به مدیر"
 
-#: config/config.php:405 config/config.php:408
+#: config/config.php:421 config/config.php:424
 msgid ""
 "Dear %s admin, %s %s User paid invoice %s by %s price for %s order included "
 "% product successfully"
@@ -343,287 +355,287 @@ msgstr ""
 "مدیر وب سایت %s ، کاربر %s %s فاکتور شماره %s را به مبلغ %s برای سفارش %s و "
 "شامل کالاهای %s پرداخت کرد."
 
-#: config/config.php:412
+#: config/config.php:428
 msgid "Set X day before due date"
 msgstr "تنظیم X روز قبل از سر رسید"
 
-#: config/config.php:413
+#: config/config.php:429
 msgid "Notification invoice due date, X day before invoice time by cron"
 msgstr ""
 "آگاهی رسانی تاریخ سررسید فاکتور، X روز قبل از تاریخ سررسید به وسیله کرون جاب"
 
-#: config/config.php:420
+#: config/config.php:436
 msgid "Duedate invoice notification to user"
 msgstr "اطلاع رسانی تاریخ سررسید فاکتور به کاربر"
 
-#: config/config.php:421 config/config.php:424
+#: config/config.php:437 config/config.php:440
 #, php-format
 msgid "Dear %s %s, You have duedate invoice on next %s days"
 msgstr "%s %s عزیز، سر رسید یک فاکتور شما طی %s آینده فرا می رسد."
 
-#: config/config.php:428
+#: config/config.php:444
 msgid "Set X day after expired"
 msgstr "تنظیم X روز بعد از ابطال"
 
-#: config/config.php:429
+#: config/config.php:445
 msgid "Notification invoice expired, X day after invoice time by cron"
 msgstr ""
 "آگاهی رسانی تاریخ گذشتن فاکتور، X روز بعد از تاریخ سررسید به وسیله کرون جاب"
 
-#: config/config.php:436
+#: config/config.php:452
 msgid "Expired invoice notification to user"
 msgstr "اطلاع رسانی فاکتور منقضی شده به کاربر"
 
-#: config/config.php:437 config/config.php:440
+#: config/config.php:453 config/config.php:456
 #, php-format
 msgid "Dear %s %s, You have expired invoice on %s days ago"
 msgstr "%s %s عزیز، شما یک فاکتور پرداخت نشده برای %s روز قبل دارید"
 
-#: config/config.php:445
+#: config/config.php:461
 msgid "Reduce from user credit"
 msgstr "کسر از اعتبار کاربر"
 
-#: config/config.php:453
+#: config/config.php:469
 msgid "Show plan 1"
 msgstr "نمایش پلن ۱"
 
-#: config/config.php:461
+#: config/config.php:477
 msgid "Plan 1 : Title"
 msgstr "پلن ۱ : عنوان"
 
-#: config/config.php:465
+#: config/config.php:481
 msgid "1 month"
 msgstr "۱ ماه"
 
-#: config/config.php:469
+#: config/config.php:485
 msgid "Plan 1 : Prepayment"
 msgstr "پلن ۱ : پیش قسط"
 
-#: config/config.php:477
+#: config/config.php:493
 msgid "Plan 1 : Profit"
 msgstr "پلن ۱ : سود"
 
-#: config/config.php:485
+#: config/config.php:501
 msgid "Plan 1 : Total"
 msgstr "پلن ۱ : تعداد اقساط"
 
-#: config/config.php:493
+#: config/config.php:509
 msgid "Show plan 2"
 msgstr "نمایش پلن ۲"
 
-#: config/config.php:501
+#: config/config.php:517
 msgid "Plan 2 : Title"
 msgstr "پلن ۲ : عنوان"
 
-#: config/config.php:505
+#: config/config.php:521
 msgid "2 months"
 msgstr "۲ ماه"
 
-#: config/config.php:509
+#: config/config.php:525
 msgid "Plan 2 : Prepayment"
 msgstr "پلن ۲ : پیش قسط"
 
-#: config/config.php:517
+#: config/config.php:533
 msgid "Plan 2 : Profit"
 msgstr "پلن ۲ : سود"
 
-#: config/config.php:525
+#: config/config.php:541
 msgid "Plan 2 : Total"
 msgstr "پلن ۲ : تعداد اقساط"
 
-#: config/config.php:533
+#: config/config.php:549
 msgid "Show plan 3"
 msgstr "نمایش پلن ۳"
 
-#: config/config.php:541
+#: config/config.php:557
 msgid "Plan 3 : Title"
 msgstr "پلن ۳ : عنوان"
 
-#: config/config.php:545
+#: config/config.php:561
 msgid "3 months"
 msgstr "۳ ماه"
 
-#: config/config.php:549
+#: config/config.php:565
 msgid "Plan 3 : Prepayment"
 msgstr "پلن ۳ : پیش قسط"
 
-#: config/config.php:557
+#: config/config.php:573
 msgid "Plan 3 : Profit"
 msgstr "پلن ۳ : سود"
 
-#: config/config.php:565
+#: config/config.php:581
 msgid "Plan 3 : Total"
 msgstr "پلن ۳ : تعداد اقساط"
 
-#: config/config.php:573
+#: config/config.php:589
 msgid "Show plan 4"
 msgstr "نمایش پلن ۴"
 
-#: config/config.php:581
+#: config/config.php:597
 msgid "Plan 4 : Title"
 msgstr "پلن ۴ : عنوان"
 
-#: config/config.php:585
+#: config/config.php:601
 msgid "4 months"
 msgstr "۴ ماه"
 
-#: config/config.php:589
+#: config/config.php:605
 msgid "Plan 4 : Prepayment"
 msgstr "پلن ۴ : پیش قسط"
 
-#: config/config.php:597
+#: config/config.php:613
 msgid "Plan 4 : Profit"
 msgstr "پلن ۴ : سود"
 
-#: config/config.php:605
+#: config/config.php:621
 msgid "Plan 4 : Total"
 msgstr "پلن ۴ : تعداد اقساط"
 
-#: config/config.php:613
+#: config/config.php:629
 msgid "Show plan 5"
 msgstr "نمایش پلن ۵"
 
-#: config/config.php:621
+#: config/config.php:637
 msgid "Plan 5 : Title"
 msgstr "پلن ۵ : عنوان"
 
-#: config/config.php:625
+#: config/config.php:641
 msgid "5 months"
 msgstr "۵ ماه"
 
-#: config/config.php:629
+#: config/config.php:645
 msgid "Plan 5 : Prepayment"
 msgstr "پلن ۵ : پیش قسط"
 
-#: config/config.php:637
+#: config/config.php:653
 msgid "Plan 5 : Profit"
 msgstr "پلن ۵ : سود"
 
-#: config/config.php:645
+#: config/config.php:661
 msgid "Plan 5 : Total"
 msgstr "پلن ۵ : تعداد اقساط"
 
-#: config/config.php:653
+#: config/config.php:669
 msgid "Show plan 6"
 msgstr "نمایش پلن ۶"
 
-#: config/config.php:661
+#: config/config.php:677
 msgid "Plan 6 : Title"
 msgstr "پلن ۶ : عنوان"
 
-#: config/config.php:665
+#: config/config.php:681
 msgid "6 months"
 msgstr "۶ ماه"
 
-#: config/config.php:669
+#: config/config.php:685
 msgid "Plan 6 : Prepayment"
 msgstr "پلن ۶ : پیش قسط"
 
-#: config/config.php:677
+#: config/config.php:693
 msgid "Plan 6 : Profit"
 msgstr "پلن ۶ : سود"
 
-#: config/config.php:685
+#: config/config.php:701
 msgid "Plan 6 : Total"
 msgstr "پلن ۶ : تعداد اقساط"
 
-#: config/config.php:693
+#: config/config.php:709
 msgid "Show plan 7"
 msgstr "نمایش پلن ۷"
 
-#: config/config.php:701
+#: config/config.php:717
 msgid "Plan 7 : Title"
 msgstr "پلن ۷ : عنوان"
 
-#: config/config.php:705
+#: config/config.php:721
 msgid "7 months"
 msgstr "۷ ماه"
 
-#: config/config.php:709
+#: config/config.php:725
 msgid "Plan 7 : Prepayment"
 msgstr "پلن ۷ : پیش قسط"
 
-#: config/config.php:717
+#: config/config.php:733
 msgid "Plan 7 : Profit"
 msgstr "پلن ۷ : سود"
 
-#: config/config.php:725
+#: config/config.php:741
 msgid "Plan 7 : Total"
 msgstr "پلن ۷ : تعداد اقساط"
 
-#: config/config.php:733
+#: config/config.php:749
 msgid "Show plan 8"
 msgstr "نمایش پلن ۸"
 
-#: config/config.php:741
+#: config/config.php:757
 msgid "Plan 8 : Title"
 msgstr "پلن ۸ : عنوان"
 
-#: config/config.php:745
+#: config/config.php:761
 msgid "8 months"
 msgstr "۸ ماه"
 
-#: config/config.php:749
+#: config/config.php:765
 msgid "Plan 8 : Prepayment"
 msgstr "پلن ۸ : پیش قسط"
 
-#: config/config.php:757
+#: config/config.php:773
 msgid "Plan 8 : Profit"
 msgstr "پلن ۸ : سود"
 
-#: config/config.php:765
+#: config/config.php:781
 msgid "Plan 8 : Total"
 msgstr "پلن ۸ : تعداد اقساط"
 
-#: config/config.php:773
+#: config/config.php:789
 msgid "Show plan 9"
 msgstr "نمایش پلن ۹"
 
-#: config/config.php:781
+#: config/config.php:797
 msgid "Plan 9 : Title"
 msgstr "پلن ۹ : عنوان"
 
-#: config/config.php:785
+#: config/config.php:801
 msgid "9 months"
 msgstr "۹ ماه"
 
-#: config/config.php:789
+#: config/config.php:805
 msgid "Plan 9 : Prepayment"
 msgstr "پلن ۹ : پیش قسط"
 
-#: config/config.php:797
+#: config/config.php:813
 msgid "Plan 9 : Profit"
 msgstr "پلن ۹ : سود"
 
-#: config/config.php:805
+#: config/config.php:821
 msgid "Plan 9 : Total"
 msgstr "پلن ۹ : تعداد اقساط"
 
-#: config/config.php:813
+#: config/config.php:829
 msgid "Show plan 10"
 msgstr "نمایش پلن ۱۰"
 
-#: config/config.php:821
+#: config/config.php:837
 msgid "Plan 10 : Title"
 msgstr "پلن ۱۰ : عنوان"
 
-#: config/config.php:825
+#: config/config.php:841
 msgid "10 months"
 msgstr "۱۰ ماه"
 
-#: config/config.php:829
+#: config/config.php:845
 msgid "Plan 10 : Prepayment"
 msgstr "پلن ۱۰ : پیش قسط"
 
-#: config/config.php:837
+#: config/config.php:853
 msgid "Plan 10 : Profit"
 msgstr "پلن ۱۰ : سود"
 
-#: config/config.php:845
+#: config/config.php:861
 msgid "Plan 10 : Total"
 msgstr "پلن ۱۰ : تعداد اقساط"
 
-#: config/config.php:854
+#: config/config.php:870
 msgid "Description for checkup page"
 msgstr "توضیحات مربوط به صفحه ثبت سفارش"
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi order module\n"
-"POT-Creation-Date: 2016-08-16 11:23+0430\n"
+"POT-Creation-Date: 2016-08-29 10:45+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -295,323 +295,335 @@ msgstr ""
 msgid "User can use credit to pay invoice and see history"
 msgstr ""
 
-#: config/config.php:380
+#: config/config.php:378
+msgid "Credit system type"
+msgstr ""
+
+#: config/config.php:384
+msgid "One credit amount for use on all modules"
+msgstr ""
+
+#: config/config.php:385
+msgid "Each module have special credit amount"
+msgstr ""
+
+#: config/config.php:396
 msgid "New order notification to user"
 msgstr ""
 
-#: config/config.php:381 config/config.php:384
+#: config/config.php:397 config/config.php:400
 #, php-format
 msgid "Dear %s %s, you order %s product by %s price, added on %s website"
 msgstr ""
 
-#: config/config.php:388
+#: config/config.php:404
 msgid "New order notification to admin"
 msgstr ""
 
-#: config/config.php:389 config/config.php:392
+#: config/config.php:405 config/config.php:408
 #, php-format
 msgid "Dear %s admin, %s %s User ordered %s product by %s price"
 msgstr ""
 
-#: config/config.php:396
+#: config/config.php:412
 msgid "Pay invoice notification to user"
 msgstr ""
 
-#: config/config.php:397 config/config.php:400
+#: config/config.php:413 config/config.php:416
 msgid ""
 "Dear %s %s, You paid invoice %s by %s price for %s order included % product "
 "on %s website successfully"
 msgstr ""
 
-#: config/config.php:404
+#: config/config.php:420
 msgid "Pay invoice notification to admin"
 msgstr ""
 
-#: config/config.php:405 config/config.php:408
+#: config/config.php:421 config/config.php:424
 msgid ""
 "Dear %s admin, %s %s User paid invoice %s by %s price for %s order included "
 "% product successfully"
 msgstr ""
 
-#: config/config.php:412
+#: config/config.php:428
 msgid "Set X day before due date"
 msgstr ""
 
-#: config/config.php:413
+#: config/config.php:429
 msgid "Notification invoice due date, X day before invoice time by cron"
 msgstr ""
 
-#: config/config.php:420
-msgid "Duedate invoice notification to user"
-msgstr ""
-
-#: config/config.php:421 config/config.php:424
-#, php-format
-msgid "Dear %s %s, You have duedate invoice on next %s days"
-msgstr ""
-
-#: config/config.php:428
-msgid "Set X day after expired"
-msgstr ""
-
-#: config/config.php:429
-msgid "Notification invoice expired, X day after invoice time by cron"
-msgstr ""
-
 #: config/config.php:436
-msgid "Expired invoice notification to user"
+msgid "Duedate invoice notification to user"
 msgstr ""
 
 #: config/config.php:437 config/config.php:440
 #, php-format
-msgid "Dear %s %s, You have expired invoice on %s days ago"
+msgid "Dear %s %s, You have duedate invoice on next %s days"
+msgstr ""
+
+#: config/config.php:444
+msgid "Set X day after expired"
 msgstr ""
 
 #: config/config.php:445
-msgid "Reduce from user credit"
+msgid "Notification invoice expired, X day after invoice time by cron"
 msgstr ""
 
-#: config/config.php:453
-msgid "Show plan 1"
+#: config/config.php:452
+msgid "Expired invoice notification to user"
+msgstr ""
+
+#: config/config.php:453 config/config.php:456
+#, php-format
+msgid "Dear %s %s, You have expired invoice on %s days ago"
 msgstr ""
 
 #: config/config.php:461
-msgid "Plan 1 : Title"
-msgstr ""
-
-#: config/config.php:465
-msgid "1 month"
+msgid "Reduce from user credit"
 msgstr ""
 
 #: config/config.php:469
-msgid "Plan 1 : Prepayment"
+msgid "Show plan 1"
 msgstr ""
 
 #: config/config.php:477
-msgid "Plan 1 : Profit"
+msgid "Plan 1 : Title"
+msgstr ""
+
+#: config/config.php:481
+msgid "1 month"
 msgstr ""
 
 #: config/config.php:485
-msgid "Plan 1 : Total"
+msgid "Plan 1 : Prepayment"
 msgstr ""
 
 #: config/config.php:493
-msgid "Show plan 2"
+msgid "Plan 1 : Profit"
 msgstr ""
 
 #: config/config.php:501
-msgid "Plan 2 : Title"
-msgstr ""
-
-#: config/config.php:505
-msgid "2 months"
+msgid "Plan 1 : Total"
 msgstr ""
 
 #: config/config.php:509
-msgid "Plan 2 : Prepayment"
+msgid "Show plan 2"
 msgstr ""
 
 #: config/config.php:517
-msgid "Plan 2 : Profit"
+msgid "Plan 2 : Title"
+msgstr ""
+
+#: config/config.php:521
+msgid "2 months"
 msgstr ""
 
 #: config/config.php:525
-msgid "Plan 2 : Total"
+msgid "Plan 2 : Prepayment"
 msgstr ""
 
 #: config/config.php:533
-msgid "Show plan 3"
+msgid "Plan 2 : Profit"
 msgstr ""
 
 #: config/config.php:541
-msgid "Plan 3 : Title"
-msgstr ""
-
-#: config/config.php:545
-msgid "3 months"
+msgid "Plan 2 : Total"
 msgstr ""
 
 #: config/config.php:549
-msgid "Plan 3 : Prepayment"
+msgid "Show plan 3"
 msgstr ""
 
 #: config/config.php:557
-msgid "Plan 3 : Profit"
+msgid "Plan 3 : Title"
+msgstr ""
+
+#: config/config.php:561
+msgid "3 months"
 msgstr ""
 
 #: config/config.php:565
-msgid "Plan 3 : Total"
+msgid "Plan 3 : Prepayment"
 msgstr ""
 
 #: config/config.php:573
-msgid "Show plan 4"
+msgid "Plan 3 : Profit"
 msgstr ""
 
 #: config/config.php:581
-msgid "Plan 4 : Title"
-msgstr ""
-
-#: config/config.php:585
-msgid "4 months"
+msgid "Plan 3 : Total"
 msgstr ""
 
 #: config/config.php:589
-msgid "Plan 4 : Prepayment"
+msgid "Show plan 4"
 msgstr ""
 
 #: config/config.php:597
-msgid "Plan 4 : Profit"
+msgid "Plan 4 : Title"
+msgstr ""
+
+#: config/config.php:601
+msgid "4 months"
 msgstr ""
 
 #: config/config.php:605
-msgid "Plan 4 : Total"
+msgid "Plan 4 : Prepayment"
 msgstr ""
 
 #: config/config.php:613
-msgid "Show plan 5"
+msgid "Plan 4 : Profit"
 msgstr ""
 
 #: config/config.php:621
-msgid "Plan 5 : Title"
-msgstr ""
-
-#: config/config.php:625
-msgid "5 months"
+msgid "Plan 4 : Total"
 msgstr ""
 
 #: config/config.php:629
-msgid "Plan 5 : Prepayment"
+msgid "Show plan 5"
 msgstr ""
 
 #: config/config.php:637
-msgid "Plan 5 : Profit"
+msgid "Plan 5 : Title"
+msgstr ""
+
+#: config/config.php:641
+msgid "5 months"
 msgstr ""
 
 #: config/config.php:645
-msgid "Plan 5 : Total"
+msgid "Plan 5 : Prepayment"
 msgstr ""
 
 #: config/config.php:653
-msgid "Show plan 6"
+msgid "Plan 5 : Profit"
 msgstr ""
 
 #: config/config.php:661
-msgid "Plan 6 : Title"
-msgstr ""
-
-#: config/config.php:665
-msgid "6 months"
+msgid "Plan 5 : Total"
 msgstr ""
 
 #: config/config.php:669
-msgid "Plan 6 : Prepayment"
+msgid "Show plan 6"
 msgstr ""
 
 #: config/config.php:677
-msgid "Plan 6 : Profit"
+msgid "Plan 6 : Title"
+msgstr ""
+
+#: config/config.php:681
+msgid "6 months"
 msgstr ""
 
 #: config/config.php:685
-msgid "Plan 6 : Total"
+msgid "Plan 6 : Prepayment"
 msgstr ""
 
 #: config/config.php:693
-msgid "Show plan 7"
+msgid "Plan 6 : Profit"
 msgstr ""
 
 #: config/config.php:701
-msgid "Plan 7 : Title"
-msgstr ""
-
-#: config/config.php:705
-msgid "7 months"
+msgid "Plan 6 : Total"
 msgstr ""
 
 #: config/config.php:709
-msgid "Plan 7 : Prepayment"
+msgid "Show plan 7"
 msgstr ""
 
 #: config/config.php:717
-msgid "Plan 7 : Profit"
+msgid "Plan 7 : Title"
+msgstr ""
+
+#: config/config.php:721
+msgid "7 months"
 msgstr ""
 
 #: config/config.php:725
-msgid "Plan 7 : Total"
+msgid "Plan 7 : Prepayment"
 msgstr ""
 
 #: config/config.php:733
-msgid "Show plan 8"
+msgid "Plan 7 : Profit"
 msgstr ""
 
 #: config/config.php:741
-msgid "Plan 8 : Title"
-msgstr ""
-
-#: config/config.php:745
-msgid "8 months"
+msgid "Plan 7 : Total"
 msgstr ""
 
 #: config/config.php:749
-msgid "Plan 8 : Prepayment"
+msgid "Show plan 8"
 msgstr ""
 
 #: config/config.php:757
-msgid "Plan 8 : Profit"
+msgid "Plan 8 : Title"
+msgstr ""
+
+#: config/config.php:761
+msgid "8 months"
 msgstr ""
 
 #: config/config.php:765
-msgid "Plan 8 : Total"
+msgid "Plan 8 : Prepayment"
 msgstr ""
 
 #: config/config.php:773
-msgid "Show plan 9"
+msgid "Plan 8 : Profit"
 msgstr ""
 
 #: config/config.php:781
-msgid "Plan 9 : Title"
-msgstr ""
-
-#: config/config.php:785
-msgid "9 months"
+msgid "Plan 8 : Total"
 msgstr ""
 
 #: config/config.php:789
-msgid "Plan 9 : Prepayment"
+msgid "Show plan 9"
 msgstr ""
 
 #: config/config.php:797
-msgid "Plan 9 : Profit"
+msgid "Plan 9 : Title"
+msgstr ""
+
+#: config/config.php:801
+msgid "9 months"
 msgstr ""
 
 #: config/config.php:805
-msgid "Plan 9 : Total"
+msgid "Plan 9 : Prepayment"
 msgstr ""
 
 #: config/config.php:813
-msgid "Show plan 10"
+msgid "Plan 9 : Profit"
 msgstr ""
 
 #: config/config.php:821
-msgid "Plan 10 : Title"
-msgstr ""
-
-#: config/config.php:825
-msgid "10 months"
+msgid "Plan 9 : Total"
 msgstr ""
 
 #: config/config.php:829
-msgid "Plan 10 : Prepayment"
+msgid "Show plan 10"
 msgstr ""
 
 #: config/config.php:837
-msgid "Plan 10 : Profit"
+msgid "Plan 10 : Title"
+msgstr ""
+
+#: config/config.php:841
+msgid "10 months"
 msgstr ""
 
 #: config/config.php:845
+msgid "Plan 10 : Prepayment"
+msgstr ""
+
+#: config/config.php:853
+msgid "Plan 10 : Profit"
+msgstr ""
+
+#: config/config.php:861
 msgid "Plan 10 : Total"
 msgstr ""
 
-#: config/config.php:854
+#: config/config.php:870
 msgid "Description for checkup page"
 msgstr ""
 

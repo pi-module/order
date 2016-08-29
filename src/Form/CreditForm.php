@@ -75,15 +75,26 @@ class CreditForm extends BaseForm
         ));
         // Set module
         if ($this->option['type'] == 'module') {
+            $moduleList = Pi::registry('modulelist')->read();
+            $valueOptions = array();
+            if (isset($moduleList['shop'])) {
+                $valueOptions['shop'] = $moduleList['shop']['title'];
+            }
+            if (isset($moduleList['event'])) {
+                $valueOptions['event'] = $moduleList['event']['title'];
+            }
+            if (isset($moduleList['guide'])) {
+                $valueOptions['guide'] = $moduleList['guide']['title'];
+            }
+            if (isset($moduleList['plans'])) {
+                $valueOptions['plans'] = $moduleList['plans']['title'];
+            }
             $this->add(array(
                 'name' => 'module',
                 'type' => 'select',
                 'options' => array(
                     'label' => __('Select module for use this credit'),
-                    'value_options' => array(
-                        'shop' => __('Shop'),
-                        'event' => __('Event'),
-                    ),
+                    'value_options' => $valueOptions,
                 ),
                 'attributes' => array(
                     'required' => true,

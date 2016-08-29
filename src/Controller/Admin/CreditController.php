@@ -18,6 +18,7 @@ use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
 use Module\Order\Form\CreditForm;
 use Module\Order\Form\CreditFilter;
+use Zend\Json\Json;
 
 class CreditController extends ActionController
 {
@@ -25,6 +26,8 @@ class CreditController extends ActionController
     {
         // Get page
         $page = $this->params('page', 1);
+        // Get module list
+        $moduleList = Pi::registry('modulelist')->read();
         // Get info
         $list = array();
         $order = array('time_update DESC', 'id DESC');
@@ -38,6 +41,16 @@ class CreditController extends ActionController
             $list[$row->id]['amount_view'] = Pi::api('api', 'order')->viewPrice($row->amount);
             $list[$row->id]['time_update_view'] = _date($row->time_update);
             $list[$row->id]['user'] = Pi::api('user', 'order')->getUserInformation($row->uid, 'light');
+            $amountDetail = json::decode($row->amount_detail, true);
+            $list[$row->id]['amount_detail_view'] = array();
+            foreach ($amountDetail as $module => $amount) {
+                $list[$row->id]['amount_detail_view'][$module] = array(
+                    'module_name' => $module,
+                    'module_title' => $moduleList[$module]['title'],
+                    'amount' => $amount,
+                    'amount_view' => Pi::api('api', 'order')->viewPrice($amount),
+                );
+            }
         }
         // Set paginator
         $count = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));

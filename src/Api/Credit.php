@@ -43,7 +43,17 @@ class Credit extends AbstractApi
             $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
             $credit['time_update_view'] = ($credit['time_update'] > 0) ? _date($credit['time_update']) : __('Never update');
             if (!empty($credit['amount_detail'])) {
-                $credit['amount_detail'] = json::decode($credit['amount_detail']);
+                $moduleList = Pi::registry('modulelist')->read();
+                $amountDetail = json::decode($credit['amount_detail'], true);
+                $credit['amount_detail_view'] = array();
+                foreach ($amountDetail as $module => $amount) {
+                    $credit['amount_detail_view'][$module] = array(
+                        'module_name' => $module,
+                        'module_title' => $moduleList[$module]['title'],
+                        'amount' => $amount,
+                        'amount_view' => Pi::api('api', 'order')->viewPrice($amount),
+                    );
+                }
             }
         } else {
             $credit = array();
@@ -51,6 +61,7 @@ class Credit extends AbstractApi
             $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
             $credit['time_update_view'] = __('Never update');
             $credit['amount_detail'] = array();
+            $credit['amount_detail_view'] = array();
         }
         return $credit;
     }
@@ -98,7 +109,7 @@ class Credit extends AbstractApi
                             break;
                     }
                     // Set amount detail
-                    $detail = json::decode($credit->amount_detail);
+                    $detail = json::decode($credit->amount_detail, true);
                     $detail[$history->module] = $credit->amount;
                     $credit->amount_detail = Json::encode($detail);
                     // Save
@@ -136,17 +147,17 @@ class Credit extends AbstractApi
         $credit = Pi::model('credit', $this->getModule())->find($uid, 'uid');
         if ($credit) {
             $amountOld = $credit->amount;
-            $detail = json::decode($credit->amount_detail);
+            $detail = json::decode($credit->amount_detail, true);
             switch ($fluctuation) {
                 case 'increase':
                     $credit->amount = $credit->amount + $amount;
-                    $detail[$module] = $credit->amount;
+                    $detail[$module] = $amount;
                     break;
 
                 case 'decrease':
                     if ($credit->amount >= $amount) {
                         $credit->amount = $credit->amount - $amount;
-                        $detail[$module] = $credit->amount;
+                        $detail[$module] = $amount;
                     } else {
                         $result['message'] = __('Your input amount is more than user credit');
                         return $result;
