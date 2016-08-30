@@ -64,11 +64,10 @@ class PaymentController extends IndexController
         // process credit
         if ($credit == 1 && $config['credit_active'] && Pi::service('authentication')->hasIdentity()) {
             $creditInformation = Pi::api('credit', 'order')->getCredit();
-
             if ($config['credit_type'] == 'general') {
                 $creditAmount = $creditInformation['amount'];
             } elseif ($config['credit_type'] == 'module') {
-                $creditAmount = $credit['amount_detail'][$order['module_name']];
+                $creditAmount = $creditInformation['amount_detail_view'][$order['module_name']]['amount'];
             }
             if ($creditAmount > 0) {
                 // Use credit
