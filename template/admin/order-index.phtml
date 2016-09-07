@@ -68,10 +68,11 @@ $this->backbone();
                                     <?php echo $this->escape($order['first_name']); ?>
                                     <?php echo $this->escape($order['last_name']); ?>
                                 </li>
-                                <li class="label label-info">
-                                    <?php echo $this->escape($order['user']['identity']); ?>
-                                    ( <?php echo $this->escape($order['user']['name']); ?> )
-                                </li>
+                                <?php if ($order['type_payment'] == 'installment') { ?>
+                                    <li class="label label-info">
+                                        <?php _e('Installment'); ?>
+                                    </li>
+                                <?php } ?>
                             </ul>
                         </div>
                         <div class="col-xs-8">
@@ -82,7 +83,11 @@ $this->backbone();
                                     <li class="col-xs-3 text-center"><span class="label label-danger"><?php echo $this->escape($order['orderTitle']); ?></span></li>
                                 <?php } ?>
                                 <li class="col-xs-2 text-center"><span id="update-canPay-<?php echo $this->escape($order['id']); ?>" class="update-canPay btn btn-xs <?php echo $this->escape($order['canPayClass']); ?>"><?php echo $this->escape($order['canPayTitle']); ?></span></li>
-                                <li class="col-xs-2 text-center"><span id="update-payment-<?php echo $this->escape($order['id']); ?>" class="update-payment btn btn-xs <?php echo $this->escape($order['paymentClass']); ?>"><?php echo $this->escape($order['paymentTitle']); ?></span></li>
+                                <?php if ($order['type_payment'] == 'installment') { ?>
+                                <li class="col-xs-2 text-center"><span class="btn btn-xs <?php echo $this->escape($order['paymentClass']); ?>"><?php echo $this->escape($order['paymentTitle']); ?></span></li>
+                                <?php } else { ?>
+                                    <li class="col-xs-2 text-center"><span id="update-payment-<?php echo $this->escape($order['id']); ?>" class="update-payment btn btn-xs <?php echo $this->escape($order['paymentClass']); ?>"><?php echo $this->escape($order['paymentTitle']); ?></span></li>
+                                <?php } ?>
                                 <?php if ($order['type_commodity'] == 'product') { ?>
                                     <li class="col-xs-3 text-center"><span id="update-delivery-<?php echo $this->escape($order['id']); ?>" class="update-delivery btn btn-xs <?php echo $this->escape($order['deliveryClass']); ?>"><?php echo $this->escape($order['deliveryTitle']); ?></span></li>
                                 <?php } else { ?>
