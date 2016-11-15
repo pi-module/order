@@ -18,7 +18,7 @@ use Pi\Application\Api\AbstractApi;
 
 /*
  * Pi::api('access', 'order')->checkAccess($key);
- * Pi::api('access', 'order')->setAccess();
+ * Pi::api('access', 'order')->setAccess($access);
  */
 
 class Access extends AbstractApi
@@ -42,7 +42,7 @@ class Access extends AbstractApi
         }
     }
 
-    public function setAccess()
+    public function setAccess($access)
     {
         return true;
     }

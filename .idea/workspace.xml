@@ -4,13 +4,9 @@
     <bookmark url="file://$PROJECT_DIR$/src/Controller/Front/CheckoutController.php" description="                                $extra = array();" line="341" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb89c1a1-3ca6-4284-b00d-d0e1e5682c61" name="Default" comment="Work on invoice">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Api/Access.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Model/Access.php" />
+    <list default="true" id="eb89c1a1-3ca6-4284-b00d-d0e1e5682c61" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/module.php" afterPath="$PROJECT_DIR$/config/module.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sql/mysql.sql" afterPath="$PROJECT_DIR$/sql/mysql.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Installer/Action/Update.php" afterPath="$PROJECT_DIR$/src/Installer/Action/Update.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Api/Access.php" afterPath="$PROJECT_DIR$/src/Api/Access.php" />
     </list>
     <ignored path="order.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,84 +28,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="InvoiceController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Admin/InvoiceController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="41" column="24" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mysql.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sql/mysql.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="278" column="3" selection-start-line="278" selection-start-column="3" selection-end-line="278" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Access.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Api/Access.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="422">
-              <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
+              <caret line="44" column="37" selection-start-line="44" selection-start-column="37" selection-end-line="44" selection-end-column="37" />
               <folding>
                 <element signature="e#355#362#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="module.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/module.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="17" column="27" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Update.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Installer/Action/Update.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="476" column="2" selection-start-line="476" selection-start-column="2" selection-end-line="476" selection-end-column="2" />
-              <folding>
-                <marker date="1479201809147" expanded="true" signature="2238:2301" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="2850:2921" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="3477:3596" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="4070:4158" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="4707:4738" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="5289:5320" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="5865:5922" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="8545:8635" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="9177:9248" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="9713:9784" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="10251:10322" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="10862:10929" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="11399:11466" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="12008:12077" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="12541:12610" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="13153:13237" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="13704:13789" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="16878:16945" placeholder="ALTER TABLE " />
-                <marker date="1479201809147" expanded="true" signature="17493:17552" placeholder="ALTER TABLE " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Access.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Model/Access.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -358,7 +284,7 @@
       <workItem from="1471076105445" duration="642000" />
       <workItem from="1478930210631" duration="599000" />
       <workItem from="1478933247311" duration="7657000" />
-      <workItem from="1479197015133" duration="2768000" />
+      <workItem from="1479197015133" duration="4491000" />
     </task>
     <task id="LOCAL-00001" summary="Fix order module">
       <created>1454310931206</created>
@@ -612,11 +538,18 @@
       <option name="project" value="LOCAL" />
       <updated>1471069751343</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Work on access system">
+      <created>1479207864829</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1479207864829</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55267000" />
+    <option name="totallyTimeSpent" value="56990000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -633,6 +566,7 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22374798" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293979" sideWeight="0.49674267" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293979" sideWeight="0.50325733" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293979" sideWeight="0.49674267" order="7" side_tool="false" content_ui="tabs" />
@@ -640,7 +574,6 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -700,7 +633,8 @@
     <MESSAGE value="Work on issues 561" />
     <MESSAGE value="Work on issues 511" />
     <MESSAGE value="Work on invoice" />
-    <option name="LAST_COMMIT_MESSAGE" value="Work on invoice" />
+    <MESSAGE value="Work on access system" />
+    <option name="LAST_COMMIT_MESSAGE" value="Work on access system" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1036,14 +970,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/Access.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/module.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -1088,10 +1014,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/Access.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Api/Access.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="422">
-          <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
+          <caret line="44" column="37" selection-start-line="44" selection-start-column="37" selection-end-line="44" selection-end-column="37" />
           <folding>
             <element signature="e#355#362#0#PHP" expanded="true" />
           </folding>
