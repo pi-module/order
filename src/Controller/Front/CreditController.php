@@ -16,6 +16,7 @@ namespace Module\Order\Controller\Front;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
+use Zend\Db\Sql\Predicate\Expression;
 
 class CreditController extends IndexController
 {
@@ -94,7 +95,7 @@ class CreditController extends IndexController
             }
         }
         // Set paginator
-        $count = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $count = array('count' => new Expression('count(*)'));
         $select = $this->getModel('history')->select()->columns($count);
         $count = $this->getModel('history')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));

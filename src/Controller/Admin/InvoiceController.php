@@ -21,6 +21,7 @@ use Module\Order\Form\InvoiceSettingFilter;
 use Module\Order\Form\InvoiceForm;
 use Module\Order\Form\InvoiceFilter;
 use Zend\Json\Json;
+use Zend\Db\Sql\Predicate\Expression;
 
 class InvoiceController extends ActionController
 {
@@ -73,7 +74,7 @@ class InvoiceController extends ActionController
             $list[$row->id] = Pi::api('invoice', 'order')->canonizeInvoice($row);
         }
         // Set paginator
-        $count = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $count = array('count' => new Expression('count(*)'));
         $select = $this->getModel('invoice')->select()->where($where)->columns($count);
         $count = $this->getModel('invoice')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));

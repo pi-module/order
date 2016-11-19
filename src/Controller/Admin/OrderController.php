@@ -30,6 +30,7 @@ use Module\Order\Form\UpdatePaymentForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
+use Zend\Db\Sql\Predicate\Expression;
 
 class OrderController extends ActionController
 {
@@ -118,7 +119,7 @@ class OrderController extends ActionController
             $list[$row->id] = Pi::api('order', 'order')->canonizeOrder($row);
         }
         // Set paginator
-        $count = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $count = array('count' => new Expression('count(*)'));
         $select = $this->getModel('order')->select()->columns($count)->where($where);
         $count = $this->getModel('order')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));

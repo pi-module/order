@@ -19,6 +19,7 @@ use Pi\Paginator\Paginator;
 use Module\Order\Form\CreditForm;
 use Module\Order\Form\CreditFilter;
 use Zend\Json\Json;
+use Zend\Db\Sql\Predicate\Expression;
 
 class CreditController extends ActionController
 {
@@ -53,7 +54,7 @@ class CreditController extends ActionController
             }
         }
         // Set paginator
-        $count = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $count = array('count' => new Expression('count(*)'));
         $select = $this->getModel('credit')->select()->columns($count);
         $count = $this->getModel('credit')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));
@@ -135,7 +136,7 @@ class CreditController extends ActionController
             }
         }
         // Set paginator
-        $count = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $count = array('count' => new Expression('count(*)'));
         $select = $this->getModel('history')->select()->columns($count);
         $count = $this->getModel('history')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));

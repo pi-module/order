@@ -17,6 +17,7 @@ use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
 use Zend\Json\Json;
+use Zend\Db\Sql\Predicate\Expression;
 
 class LogsController extends ActionController
 {
@@ -40,7 +41,7 @@ class LogsController extends ActionController
             $list[$row->id]['time_create_view'] = _date($list[$row->id]['time_create']);
         }
         // Set paginator
-        $count = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $count = array('count' => new Expression('count(*)'));
         $select = $this->getModel('log')->select()->columns($count);
         $count = $this->getModel('log')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));
