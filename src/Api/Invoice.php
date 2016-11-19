@@ -305,7 +305,7 @@ class Invoice extends AbstractApi
             // Check allow payment
             if ($order['type_payment'] == 'installment') {
                 if ($invoices[$row->id]['extra']['type'] == 'installment') {
-                    $time = time() + (60 * 60 * 24 * 14);
+                    $time = time() + (60 * 60 * 24 * 28);
                     if ($invoices[$row->id]['time_duedate'] < $time) {
                         $invoices[$row->id]['allowPayment'] = 1;
                     } else {
@@ -443,9 +443,9 @@ class Invoice extends AbstractApi
         )));
         $invoice['invoice_url'] = Pi::url(Pi::service('url')->assemble('order', array(
             'module' => $this->getModule(),
-            'controller' => 'invoice',
+            'controller' => 'detail',
             'action' => 'index',
-            'id' => $invoice['id'],
+            'id' => $invoice['order'],
         )));
         $invoice['pay_url'] = Pi::url(Pi::service('url')->assemble('order', array(
             'module' => $this->getModule(),
