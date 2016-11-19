@@ -22,7 +22,7 @@ use Zend\Math\Rand;
  * Pi::api('invoice', 'order')->createInvoice($id);
  * Pi::api('invoice', 'order')->generatCode($id);
  * Pi::api('invoice', 'order')->getInvoice($id);
- * Pi::api('invoice', 'order')->getInvoiceFromOrder($order);
+ * Pi::api('invoice', 'order')->getInvoiceFromOrder($order, $getLog);
  * Pi::api('invoice', 'order')->getInvoiceFromUser($uid, $compressed, $orderIds);
  * Pi::api('invoice', 'order')->getInvoiceForPayment($id);
  * Pi::api('invoice', 'order')->cancelInvoiceFromOrder($order);
@@ -292,7 +292,7 @@ class Invoice extends AbstractApi
         return $invoice;
     }
 
-    public function getInvoiceFromOrder($order)
+    public function getInvoiceFromOrder($order, $getLog = true)
     {
         $invoices = array();
         $where = array('order' => $order['id']);
@@ -301,7 +301,9 @@ class Invoice extends AbstractApi
         foreach ($rowset as $row) {
             $invoices[$row->id] = $this->canonizeInvoice($row);
             // Get log
-            $invoices[$row->id]['log'] = Pi::api('log', 'order')->getTrueLog($row->id);
+            if ($getLog) {
+                $invoices[$row->id]['log'] = Pi::api('log', 'order')->getTrueLog($row->id);
+            }
             // Check allow payment
             if ($order['type_payment'] == 'installment') {
                 if ($invoices[$row->id]['extra']['type'] == 'installment') {

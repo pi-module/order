@@ -13,6 +13,9 @@
 
 namespace Module\Order\Controller\Admin;
 
+use Pi;
+use Pi\Mvc\Controller\ActionController;
+use Pi\Paginator\Paginator;
 use Module\Order\Form\OrderAddFilter;
 use Module\Order\Form\OrderAddForm;
 use Module\Order\Form\OrderSettingFilter;
@@ -27,9 +30,6 @@ use Module\Order\Form\UpdateOrderFilter;
 use Module\Order\Form\UpdateOrderForm;
 use Module\Order\Form\UpdatePaymentFilter;
 use Module\Order\Form\UpdatePaymentForm;
-use Pi;
-use Pi\Mvc\Controller\ActionController;
-use Pi\Paginator\Paginator;
 use Zend\Db\Sql\Predicate\Expression;
 
 class OrderController extends ActionController
@@ -117,6 +117,19 @@ class OrderController extends ActionController
         // Make list
         foreach ($rowset as $row) {
             $list[$row->id] = Pi::api('order', 'order')->canonizeOrder($row);
+            $list[$row->id]['invoiceList'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($list[$row->id], false);
+            $list[$row->id]['totalInvoice'] = 0;
+            $list[$row->id]['paidInvoice'] = 0;
+            $list[$row->id]['unPaidInvoice'] = 0;
+            foreach ($list[$row->id]['invoiceList'] as $invoice) {
+                $list[$row->id]['totalInvoice']++;
+                if ($invoice['status'] == 2) {
+                    $list[$row->id]['paidInvoice']++;
+                } elseif ($invoice['status'] == 1) {
+                    $list[$row->id]['unPaidInvoice']++;
+                }
+            }
+            $list[$row->id]['statusInvoice'] = sprintf(__('Total : %s / paid : %s / unPaid : %s'), _number($list[$row->id]['totalInvoice']), _number($list[$row->id]['paidInvoice']), _number($list[$row->id]['unPaidInvoice']));
         }
         // Set paginator
         $count = array('count' => new Expression('count(*)'));
