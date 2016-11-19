@@ -319,11 +319,7 @@ class Installment extends AbstractApi
                 } elseif (in_array(pdate('d'), array('11', '12', '13', '14', '15', '16', '17', '18', '19', '20'))) {
                     $day = 20;
                 } elseif (in_array(pdate('d'), array('21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'))) {
-                    if (pdate('m') == 12) {
-                        $day = 28;
-                    } else {
-                        $day = 30;
-                    }
+                    $day = 30;
                 }
                 // make time
                 $month = pdate('m') + $i;
@@ -331,6 +327,9 @@ class Installment extends AbstractApi
                 if ($month > 12) {
                     $month = $month - 12;
                     $year = $year + 1;
+                }
+                if ($month == 12 && $day == 30) {
+                    $day = 28;
                 }
                 $time = pmktime(0, 0, 0, $month, $day, $year);
                 break;
