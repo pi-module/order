@@ -1,0 +1,299 @@
+<style>
+    @media (min-width: 992px) {
+        .modal-lg {
+            width: 1200px;
+        }
+    }
+</style>
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="order-block-installment">
+                <div class="order-block-detail-tab" role="tabpanel">
+                    <ul class="nav nav-tabs">
+                        <?php if ($orderInstallmentCount > 0) { ?>
+                            <li role="presentation" class="active">
+                                <a href="#summery" aria-controls="summery" role="tab" data-toggle="tab"><?php _e('Summery'); ?></a>
+                            </li>
+                        <?php } ?>
+                        <li role="presentation"<?php if ($orderInstallmentCount == 0) { ?> class="active"<?php } ?>>
+                            <a href="#invoice" aria-controls="invoice" role="tab" data-toggle="tab">
+                                <?php _e('Payable invoices'); ?>
+                                <?php if (count($user['invoices']) > 0) { ?>
+                                    <span class="label label-danger"><?php echo _number(count($user['invoices'])); ?></span>
+                                <?php } else { ?>
+                                    <span class="label label-success"><?php echo _number(count($user['invoices'])); ?></span>
+                                <?php } ?>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#order" aria-controls="order" role="tab" data-toggle="tab"><?php _e('Orders'); ?></a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <?php if ($orderInstallmentCount > 0) { ?>
+                        <div role="tabpanel" class="tab-pane active" id="summery">
+                            <h3 class="text-center"><?php _e('List of installment'); ?></h3>
+                            <table class="table table-striped table-bordered table-condensed small">
+                                <tr>
+                                    <th class="text-center col-md-table-16"><?php _e('10 th'); ?></th>
+                                    <th class="text-center col-md-table-16"><?php _e('Debt'); ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[0]['10-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[1]['10-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[2]['10-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[3]['10-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[4]['10-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[5]['10-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[6]['10-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[7]['10-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[8]['10-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[9]['10-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[10]['10-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[11]['10-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[12]['10-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php _e('Total'); ?></td>
+                                </tr>
+                                <?php foreach ($tableView['all']['10-order'] as $orderItem) { ?>
+                                    <tr class="text-muted">
+                                        <td class="text-center"><a title="<?php echo $user['orders'][$orderItem]['code']; ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $user['orders'][$orderItem]['id'])); ?>"><?php echo $user['orders'][$orderItem]['code']; ?></a></td>
+                                        <td class="text-center"><?php if ($tableView['m']['10-invoice'][$orderItem]['total_price_view']) {echo $tableView['m']['10-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if ($tableView[0]['10-invoice'][$orderItem]['total_price_view']) {echo $tableView[0]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if ($tableView[1]['10-invoice'][$orderItem]['total_price_view']) {echo $tableView[1]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if ($tableView[2]['10-invoice'][$orderItem]['total_price_view']) {echo $tableView[2]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if ($tableView[3]['10-invoice'][$orderItem]['total_price_view']) {echo $tableView[3]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if ($tableView[4]['10-invoice'][$orderItem]['total_price_view']) {echo $tableView[4]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if ($tableView[5]['10-invoice'][$orderItem]['total_price_view']) {echo $tableView[5]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if ($tableView[6]['10-invoice'][$orderItem]['total_price_view']) {echo $tableView[6]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if ($tableView[7]['10-invoice'][$orderItem]['total_price_view']) {echo $tableView[7]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if ($tableView[8]['10-invoice'][$orderItem]['total_price_view']) {echo $tableView[8]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if ($tableView[9]['10-invoice'][$orderItem]['total_price_view']) {echo $tableView[9]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if ($tableView[10]['10-invoice'][$orderItem]['total_price_view']) {echo $tableView[10]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if ($tableView[11]['10-invoice'][$orderItem]['total_price_view']) {echo $tableView[11]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if ($tableView[12]['10-invoice'][$orderItem]['total_price_view']) {echo $tableView[12]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"></td>
+                                    </tr>
+                                <?php } ?>
+                                <tr>
+                                    <td class="text-center"><?php _e('Amount'); ?></td>
+                                    <td class="text-center"><?php echo $tableView['m']['10-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[0]['10-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[1]['10-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[2]['10-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[3]['10-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[4]['10-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[5]['10-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[6]['10-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[7]['10-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[8]['10-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[9]['10-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[10]['10-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[11]['10-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[12]['10-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView['all']['10-sun-view']; ?></td>
+                                </tr>
+                            </table>
+                            <table class="table table-striped table-bordered table-condensed small">
+                                <tr>
+                                    <th class="text-center col-md-table-16"><?php _e('20 th'); ?></th>
+                                    <th class="text-center col-md-table-16"><?php _e('Debt'); ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[0]['20-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[1]['20-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[2]['20-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[3]['20-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[4]['20-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[5]['20-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[6]['20-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[7]['20-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[8]['20-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[9]['20-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[10]['20-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[11]['20-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[12]['20-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php _e('Total'); ?></td>
+                                </tr>
+                                <?php foreach ($tableView['all']['20-order'] as $orderItem) { ?>
+                                    <tr class="text-muted">
+                                        <td class="text-center"><a title="<?php echo $user['orders'][$orderItem]['code']; ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $user['orders'][$orderItem]['id'])); ?>"><?php echo $user['orders'][$orderItem]['code']; ?></a></td>
+                                        <td class="text-center"><?php if (isset($tableView['m']['20-invoice'][$orderItem]['total_price_view'])) {echo $tableView['m']['20-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[0]['20-invoice'][$orderItem]['total_price_view'])) {echo $tableView[0]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[1]['20-invoice'][$orderItem]['total_price_view'])) {echo $tableView[1]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[2]['20-invoice'][$orderItem]['total_price_view'])) {echo $tableView[2]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[3]['20-invoice'][$orderItem]['total_price_view'])) {echo $tableView[3]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[4]['20-invoice'][$orderItem]['total_price_view'])) {echo $tableView[4]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[5]['20-invoice'][$orderItem]['total_price_view'])) {echo $tableView[5]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[6]['20-invoice'][$orderItem]['total_price_view'])) {echo $tableView[6]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[7]['20-invoice'][$orderItem]['total_price_view'])) {echo $tableView[7]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[8]['20-invoice'][$orderItem]['total_price_view'])) {echo $tableView[8]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[9]['20-invoice'][$orderItem]['total_price_view'])) {echo $tableView[9]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[10]['20-invoice'][$orderItem]['total_price_view'])) {echo $tableView[10]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[11]['20-invoice'][$orderItem]['total_price_view'])) {echo $tableView[11]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[12]['20-invoice'][$orderItem]['total_price_view'])) {echo $tableView[12]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"></td>
+                                    </tr>
+                                <?php } ?>
+                                <tr>
+                                    <td class="text-center"><?php _e('Amount'); ?></td>
+                                    <td class="text-center"><?php echo $tableView['m']['20-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[0]['20-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[1]['20-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[2]['20-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[3]['20-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[4]['20-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[5]['20-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[6]['20-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[7]['20-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[8]['20-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[9]['20-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[10]['20-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[11]['20-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[12]['20-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView['all']['20-sun-view']; ?></td>
+                                </tr>
+                            </table>
+                            <table class="table table-striped table-bordered table-condensed small">
+                                <tr>
+                                    <th class="text-center col-md-table-16"><?php _e('30 th'); ?></th>
+                                    <th class="text-center col-md-table-16"><?php _e('Debt'); ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[0]['30-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[1]['30-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[2]['30-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[3]['30-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[4]['30-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[5]['30-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[6]['30-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[7]['30-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[8]['30-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[9]['30-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[10]['30-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[11]['30-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php echo $tableView[12]['30-view']; ?></th>
+                                    <th class="text-center col-md-table-16"><?php _e('Total'); ?></td>
+                                </tr>
+                                <?php foreach ($tableView['all']['30-order'] as $orderItem) { ?>
+                                    <tr class="text-muted">
+                                        <td class="text-center"><a title="<?php echo $user['orders'][$orderItem]['code']; ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $user['orders'][$orderItem]['id'])); ?>"><?php echo $user['orders'][$orderItem]['code']; ?></a></td>
+                                        <td class="text-center"><?php if (isset($tableView['m']['30-invoice'][$orderItem]['total_price_view'])) { echo $tableView['m']['30-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[0]['30-invoice'][$orderItem]['total_price_view'])) { echo $tableView[0]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[1]['30-invoice'][$orderItem]['total_price_view'])) { echo $tableView[1]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[2]['30-invoice'][$orderItem]['total_price_view'])) { echo $tableView[2]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[3]['30-invoice'][$orderItem]['total_price_view'])) { echo $tableView[3]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[4]['30-invoice'][$orderItem]['total_price_view'])) { echo $tableView[4]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[5]['30-invoice'][$orderItem]['total_price_view'])) { echo $tableView[5]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[6]['30-invoice'][$orderItem]['total_price_view'])) { echo $tableView[6]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[7]['30-invoice'][$orderItem]['total_price_view'])) { echo $tableView[7]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[8]['30-invoice'][$orderItem]['total_price_view'])) { echo $tableView[8]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[9]['30-invoice'][$orderItem]['total_price_view'])) { echo $tableView[9]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[10]['30-invoice'][$orderItem]['total_price_view'])) {echo $tableView[10]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[11]['30-invoice'][$orderItem]['total_price_view'])) {echo $tableView[11]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"><?php if (isset($tableView[12]['30-invoice'][$orderItem]['total_price_view'])) {echo $tableView[12]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
+                                        <td class="text-center"></td>
+                                    </tr>
+                                <?php } ?>
+                                <tr>
+                                    <td class="text-center"><?php _e('Amount'); ?></td>
+                                    <td class="text-center"><?php echo $tableView['m']['30-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[0]['30-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[1]['30-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[2]['30-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[3]['30-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[4]['30-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[5]['30-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[6]['30-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[7]['30-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[8]['30-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[9]['30-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[10]['30-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[11]['30-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView[12]['30-sun']; ?></td>
+                                    <td class="text-center"><?php echo $tableView['all']['30-sun-view']; ?></td>
+                                </tr>
+                            </table>
+                            <?php if (isset($tableView['additional']['invoice']) && !empty($tableView['additional']['invoice'])) { ?>
+                                <table class="table table-striped table-bordered table-condensed small">
+                                    <tr>
+                                        <th colspan="3" class="text-center col-md-3"><?php _e('Additional invoices'); ?></th>
+                                        <th colspan="12" class="text-center col-md-8"><?php _e('Due date'); ?></th>
+                                        <th colspan="1" class="text-center col-md-1"><?php _e('Total'); ?></td>
+                                    </tr>
+                                    <?php foreach ($tableView['additional']['invoice'] as $invoiceItem) { ?>
+                                        <tr class="text-muted">
+                                            <td colspan="3" class="text-center"><a title="<?php echo $invoiceItem['id']; ?>" href="<?php echo $invoiceItem['order_url']; ?>"><?php echo $user['orders'][$invoiceItem['order']]['code']; ?> - <?php echo $invoiceItem['id']; ?></a></td>
+                                            <td colspan="12" class="text-center"><?php echo $invoiceItem['time_duedate_view']; ?></td>
+                                            <td colspan="1" class="text-center"><?php if (isset($invoiceItem['total_price_view'])) { echo $invoiceItem['total_price_view'];} ?></td>
+                                        </tr>
+                                    <?php } ?>
+                                    <tr>
+                                        <td colspan="15"><?php _e('Amount'); ?></td>
+                                        <td colspan="1" class="text-center"><?php echo $tableView['additional']['sun']; ?></td>
+                                    </tr>
+                                </table>
+                            <?php } ?>
+                            <table class="table table-striped table-bordered table-condensed small">
+                                <tr>
+                                    <th class="text-center col-md-11">جمع کل</th>
+                                    <th class="text-center col-md-1"><?php echo $tableView['total-view']; ?></th>
+                                </tr>
+                            </table>
+                        </div>
+                        <?php } ?>
+                        <div role="tabpanel" class="tab-pane<?php if ($orderInstallmentCount == 0) { ?> active<?php } ?>" id="invoice">
+                            <h3 class="text-center"><?php _e('Invoices list'); ?></h3>
+                            <?php if ($user['invoices']) { ?>
+                                <table class="table table-striped table-bordered table-condensed small">
+                                    <tr>
+                                        <th class="text-center"><?php _e('Amount'); ?></th>
+                                        <th class="text-center"><?php _e('Time Create'); ?></th>
+                                        <th class="text-center"><?php _e('Due date'); ?></th>
+                                        <th class="text-center"><?php _e('Action'); ?></th>
+                                    </tr>
+                                    <?php foreach($user['invoices'] as $invoice) { ?>
+                                        <tr>
+                                            <td class="text-center"><?php echo $this->escape($invoice['total_price_view']); ?></td>
+                                            <td class="text-center"><?php echo $this->escape($invoice['time_create_view']); ?></td>
+                                            <td class="text-center"><?php echo $this->escape($invoice['time_duedate_view']); ?></td>
+                                            <td class="text-center">
+                                                <a class="btn btn-primary btn-xs" target="_blank" title="<?php _e('View'); ?>" href="<?php echo $this->url('admin', array('module' => 'order', 'controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>"><i class="fa fa-edit"></i> <?php _e('View'); ?></a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </table>
+                            <?php } else { ?>
+                                <div class="alert alert-warning" role="alert"><?php _e('You dont have any invoice yet'); ?></div>
+                            <?php } ?>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="order">
+                            <h3 class="text-center"><?php _e('Orders list'); ?></h3>
+                            <?php if ($user['orders']) { ?>
+                                <table class="table table-striped table-bordered table-condensed small">
+                                    <tr>
+                                        <th class="text-center"><?php _e('ID'); ?></th>
+                                        <th class="text-center"><?php _e('Time create'); ?></th>
+                                        <th class="text-center"><?php _e('Amount'); ?></th>
+                                        <th class="text-center"><?php _e('Gateway'); ?></th>
+                                        <th class="text-center"><?php _e('Action'); ?></th>
+                                    </tr>
+                                    <?php foreach($user['orders'] as $order) { ?>
+                                        <tr>
+                                            <td class="text-center"><?php echo $this->escape($order['code']); ?></td>
+                                            <td class="text-center"><?php echo $this->escape($order['time_create_view']); ?></td>
+                                            <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
+                                            <td class="text-center"><?php echo $this->escape($order['gateway']); ?></td>
+                                            <td class="text-center">
+                                                <a class="btn btn-primary btn-xs" target="_blank" title="<?php _e('View'); ?>" href="<?php echo $this->url('admin', array('module' => 'order', 'controller' => 'order', 'action' => 'view', 'id' => $order['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('View'); ?></a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </table>
+                            <?php } else { ?>
+                                <div class="alert alert-warning" role="alert"><?php _e('You dont have any order yet'); ?></div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><?php _e('Close'); ?></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -58,6 +58,7 @@ $this->backbone();
                     data-canPay="<?php echo $this->escape($order['url_update_canPay']); ?>"
                     data-payment="<?php echo $this->escape($order['url_update_payment']); ?>"
                     data-delivery="<?php echo $this->escape($order['url_update_delivery']); ?>"
+                    data-listUser="<?php echo $this->escape($order['url_list_user']); ?>"
                 >
                     <td class="text-center small"><?php echo $this->escape($order['code']); ?></td>
                     <td class="text-center small"><?php echo $this->escape($order['total_price_view']); ?></td>
@@ -73,6 +74,7 @@ $this->backbone();
                                         <?php _e('Installment'); ?>
                                     </li>
                                 <?php } ?>
+                                <li><button type="button" class="btn btn-link btn-xs show-list-user"><i class="fa fa-info-circle" aria-hidden="true"></i></button></li>
                             </ul>
                         </div>
                         <div class="col-xs-8">
@@ -127,6 +129,7 @@ $this->backbone();
                 this.$('.update-payment').click(this.paymentAction);
                 this.$('.update-delivery').click(this.deliveryAction);
                 this.$('.update-canPay').click(this.canPayAction);
+                this.$('.show-list-user').click(this.listUserAction);
             },
             orderAction: function (e) {
                 var p = $(e.target).parents('tr'),
@@ -174,6 +177,13 @@ $this->backbone();
                         self.modal.html(res).modal('hide');
                         $('#update-canPay-' + p.attr('data-id')).attr('class', 'update-canPay btn btn-xs ' + d.canPayClass).html(d.canPayTitle);
                     };
+                });
+            },
+            listUserAction: function (e) {
+                var p = $(e.target).parents('tr'),
+                    self = this;
+                $.get(p.attr('data-listUser')).done(function (res) {
+                    self.modal.html(res).modal('show');
                 });
             },
         }

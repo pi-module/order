@@ -279,6 +279,12 @@ class Order extends AbstractApi
             'action' => 'view',
             'id' => $order['id'],
         )));
+        // Set url_view
+        $order['url_list_user'] = Pi::url(Pi::service('url')->assemble('admin', array(
+            'controller' => 'order',
+            'action' => 'listUser',
+            'uid' => $order['uid'],
+        )));
         // Status order
         $status_order = $this->orderStatus($order['status_order']);
         $order['orderClass'] = $status_order['orderClass'];

@@ -675,4 +675,35 @@ class OrderController extends ActionController
         $this->view()->setTemplate('order-print')->setLayout('layout-content');
         $this->view()->assign('order', $order);
     }
+    
+    public function listUserAction()
+    {
+        // Get id
+        $uid = $this->params('uid');
+        // Get user info
+        $user = Pi::api('user', 'order')->getUserInformation($uid);
+        // Get order
+        $user['orders'] = Pi::api('order', 'order')->getOrderFromUser($user['id'], true);
+        // Set order ids
+        $orderIds = array();
+        $orderInstallmentCount = 1;
+        foreach ($user['orders'] as $order) {
+            $orderIds[] = $order['id'];
+            if ($order['type_payment'] == 'installment') {
+                $orderInstallmentCount++;
+            }
+        }
+        // Get invoice
+        $user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id'], true, $orderIds);
+        // Table view
+        $tableView = array();
+        if ($orderInstallmentCount > 0) {
+            $tableView = Pi::api('installment', 'order')->blockTable($user, $orderIds);
+        }
+        // Set view
+        $this->view()->setTemplate('order-list-user');
+        $this->view()->assign('user', $user);
+        $this->view()->assign('tableView', $tableView);
+        $this->view()->assign('orderInstallmentCount', $orderInstallmentCount);
+    }
 }
