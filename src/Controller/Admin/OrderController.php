@@ -123,9 +123,9 @@ class OrderController extends ActionController
             $list[$row->id]['unPaidInvoice'] = 0;
             foreach ($list[$row->id]['invoiceList'] as $invoice) {
                 $list[$row->id]['totalInvoice']++;
-                if ($invoice['status'] == 2) {
+                if ($invoice['status'] == 1) {
                     $list[$row->id]['paidInvoice']++;
-                } elseif ($invoice['status'] == 1) {
+                } elseif ($invoice['status'] == 2) {
                     $list[$row->id]['unPaidInvoice']++;
                 }
             }
