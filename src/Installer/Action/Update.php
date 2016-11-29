@@ -456,17 +456,19 @@ EOD;
             }
         }
 
-        if (version_compare($moduleVersion, '1.8.7', '<')) {
+        if (version_compare($moduleVersion, '1.8.8', '<')) {
             // Add table : access
             $sql = <<<'EOD'
 CREATE TABLE `{access}` (
-  `id`         INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
-  `uid`        INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `item_key`   VARCHAR(128)        NOT NULL DEFAULT '',
-  `order`      INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `time_start` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `time_end`   INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `status`     TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+  `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
+  `uid`         INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `item_key`    VARCHAR(128)        NOT NULL DEFAULT '',
+  `order`       INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `time_create` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `time_start`  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `time_end`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ip`          CHAR(15)            NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `item_key` (`item_key`),
   KEY `uid` (`uid`),
