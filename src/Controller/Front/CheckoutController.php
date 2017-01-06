@@ -357,7 +357,9 @@ class CheckoutController extends IndexController
                                 $basket->extra = json::encode($extra);
                             } else {
                                 $extra = array();
-                                $extra['product'] = json::decode($product['extra'], true);
+                                if($product['extra']){
+                                    $extra['product'] = json::decode($product['extra'], true);
+                                }
 
                                 if (isset($extra['product']['view_type'])) {
                                     $extra['view_type'] = $extra['product']['view_type'];
