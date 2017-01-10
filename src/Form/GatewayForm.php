@@ -27,7 +27,7 @@ class GatewayForm extends BaseForm
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new GatewayFilter;
+            $this->filter = new GatewayFilter(null);
         }
         return $this->filter;
     }

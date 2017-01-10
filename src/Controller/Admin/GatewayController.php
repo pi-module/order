@@ -36,6 +36,8 @@ class GatewayController extends ActionController
     {
         $gateway = $this->params('path');
         $gateway = Pi::api('gateway', 'order')->getGateway($gateway);
+        $message = null;
+
         // Set form
         $form = new GatewayForm('gateway', $gateway->gatewaySettingForm);
         if ($this->request->isPost()) {
