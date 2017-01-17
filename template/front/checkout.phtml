@@ -117,7 +117,7 @@ $this->footScript()->appendScript($script);
             </div>
         </div>
     <?php } ?>
-    <?php if ($cart['can_pay'] == 2) { ?>
+    <?php if (isset($cart['can_pay']) && $cart['can_pay'] == 2) { ?>
         <div class="col-md-12">
             <div class="alert alert-danger"  role="alert">
                 <p><?php echo __('One of your select products or services have variable stock, than your payment option is disable, we will review your order and if your selected products or services be in stock we active payment option and send notification for you'); ?></p>
