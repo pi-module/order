@@ -176,7 +176,7 @@ $this->footScript()->appendScript($script);
                 <td class="text-center">
 				<span class="hidden check<?php echo $key; ?>">
                     <?php if ($installment['invoices']['total']['allowed']) { ?>
-                        <form action="" method="POST" name="product" class="form-inline">
+                        <form action="#" method="POST" name="product" class="form-inline">
                             <input name="plan" type="hidden" value="<?php echo $this->escape($installment['id']); ?>">
                             <button type="submit" class="btn btn-success btn-xs"><?php _e('Buy'); ?></button>
                         </form>
