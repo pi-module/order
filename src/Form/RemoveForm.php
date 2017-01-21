@@ -40,7 +40,7 @@ class RemoveForm extends BaseForm
             ),
             'attributes' => array(
                 'type' => 'description',
-                'description' => __('You have stopped the payment process. You will be redirected to the Order Checkout page so you can relaunch payment / checkout process.</br> Or maybe you try to launch several payment at the same time :  you cannot proceed to si;ultaneous payments, please proceed one by one. You will be also redirected to Order Checkout page'),
+                'description' => __('You have stopped the payment process. You will be redirected to the Order Checkout page so you can relaunch payment / checkout process.<br> Or maybe you try to launch several payment at the same time :  you cannot proceed to si;ultaneous payments, please proceed one by one. You will be also redirected to Order Checkout page'),
             )
         ));
         // Save
