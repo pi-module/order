@@ -94,9 +94,7 @@ ul.progtrckr li.progtrckr-pending:before {
     margin: 0;
 }
 
-@media (min-width: 1200px) {
-    #pi-order.userSection .container {
-        max-width: none;
-        width: auto;
-    }
+#pi-order.userSection .container {
+    max-width: none;
+    width: auto;
 }
