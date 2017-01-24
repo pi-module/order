@@ -93,3 +93,10 @@ ul.progtrckr li.progtrckr-pending:before {
     padding: 0;
     margin: 0;
 }
+
+@media (min-width: 1200px) {
+    #pi-order.userSection .container {
+        max-width: 1600px;
+        width: auto;
+    }
+}
