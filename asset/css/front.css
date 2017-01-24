@@ -96,7 +96,7 @@ ul.progtrckr li.progtrckr-pending:before {
 
 @media (min-width: 1200px) {
     #pi-order.userSection .container {
-        max-width: 1600px;
+        max-width: none;
         width: auto;
     }
 }
