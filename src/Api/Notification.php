@@ -542,8 +542,8 @@ class Notification extends AbstractApi
         $config = Pi::service('registry')->config->read($this->getModule());
 
         // Set log
-        $log = array();
-        $log['time'] = sprintf('cron start on server time is : %s', date("Y-m-d H:i:s"));
+        $audit = sprintf('Start order cron on server time is : %s', date("Y-m-d H:i:s"));
+        Pi::service('audit')->log('cron', $audit);
 
         // due date invoices
         $duedate1 = time();
@@ -556,7 +556,8 @@ class Notification extends AbstractApi
             $order = Pi::api('order', 'order')->getOrder($row->order);
             $this->duedateInvoice($order, $invoice);
             // Set log
-            $log['content'][] = json_encode(array('due date invoice', $order, $invoice));
+            $audit = json_encode(array('due date invoice', $order, $invoice));
+            Pi::service('audit')->log('cron', $audit);
         }
 
         // expired invoices
@@ -569,9 +570,11 @@ class Notification extends AbstractApi
             $order = Pi::api('order', 'order')->getOrder($row->order);
             $this->expiredInvoice($order, $invoice);
             // Set log
-            $log['content'][] = json_encode(array('expired invoice', $order, $invoice));
+            $audit = json_encode(array('expired invoice', $order, $invoice));
+            Pi::service('audit')->log('cron', $audit);
         }
 
-        return $log;
+        $audit = sprintf('End order cron on server time is : %s', date("Y-m-d H:i:s"));
+        Pi::service('audit')->log('cron', $audit);
     }
 }
