@@ -556,7 +556,7 @@ class Notification extends AbstractApi
             $order = Pi::api('order', 'order')->getOrder($row->order);
             $this->duedateInvoice($order, $invoice);
             // Set log
-            $audit = 'order - due date invoice ' . json_encode(array($order, $invoice));
+            $audit = array('order - due date invoic' , json_encode($order), json_encode($invoice));
             Pi::service('audit')->log('cron', $audit);
         }
 
@@ -570,7 +570,7 @@ class Notification extends AbstractApi
             $order = Pi::api('order', 'order')->getOrder($row->order);
             $this->expiredInvoice($order, $invoice);
             // Set log
-            $audit = 'order - expired invoice ' . json_encode(array($order, $invoice));
+            $audit = array('order - expired invoice' , json_encode($order), json_encode($invoice));
             Pi::service('audit')->log('cron', $audit);
         }
 
