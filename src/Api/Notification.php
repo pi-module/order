@@ -542,8 +542,7 @@ class Notification extends AbstractApi
         $config = Pi::service('registry')->config->read($this->getModule());
 
         // Set log
-        $audit = sprintf('order - Start cron on server time is : %s', date("Y-m-d H:i:s"));
-        Pi::service('audit')->log('cron', $audit);
+        Pi::service('audit')->log('cron', 'order - Start cron on server');
 
         // due date invoices
         $duedate1 = time();
@@ -574,7 +573,7 @@ class Notification extends AbstractApi
             Pi::service('audit')->log('cron', $audit);
         }
 
-        $audit = sprintf('order - End cron on server time is : %s', date("Y-m-d H:i:s"));
-        Pi::service('audit')->log('cron', $audit);
+        // Set log
+        Pi::service('audit')->log('cron', 'order - End cron on server');
     }
 }
