@@ -520,45 +520,4 @@ class Notification extends AbstractApi
         $content = sprintf($config['sms_invoice_expired'], $order['first_name'], $order['last_name'], $config['notification_cron_expired']);
         Pi::service('notification')->smsToUser($content, $order['mobile']);
     }
-
-    public function doCron()
-    {
-        // Get config
-        $config = Pi::service('registry')->config->read($this->getModule());
-
-        // Set log
-        Pi::service('audit')->log('cron', 'order - Start cron on server');
-
-        // due date invoices
-        $duedate1 = time();
-        $duedate2 = time() + (86400 * intval($config['notification_cron_invoice']));
-        $where = array('status' => 2, 'time_duedate > ?' => $duedate1, 'time_duedate < ?' => $duedate2);
-        $select = Pi::model('invoice', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
-            $invoice = Pi::api('invoice', 'order')->canonizeInvoice($row);
-            $order = Pi::api('order', 'order')->getOrder($row->order);
-            $this->duedateInvoice($order, $invoice);
-            // Set log
-            $audit = array('order - due date invoic' , json_encode($order), json_encode($invoice));
-            Pi::service('audit')->log('cron', $audit);
-        }
-
-        // expired invoices
-        $time = time() - 86400;
-        $where = array('status' => 2, 'time_duedate < ?' => $time);
-        $select = Pi::model('invoice', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
-            $invoice = Pi::api('invoice', 'order')->canonizeInvoice($row);
-            $order = Pi::api('order', 'order')->getOrder($row->order);
-            $this->expiredInvoice($order, $invoice);
-            // Set log
-            $audit = array('order - expired invoice' , json_encode($order), json_encode($invoice));
-            Pi::service('audit')->log('cron', $audit);
-        }
-
-        // Set log
-        Pi::service('audit')->log('cron', 'order - End cron on server');
-    }
 }
