@@ -27,39 +27,47 @@ class Cron extends AbstractApi
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
-        // Set log
-        Pi::service('audit')->log('cron', 'order - Start cron on server');
+        // Check cron active for this module
+        if ($config['module_cron']) {
 
-        // due date invoices
-        $duedate1 = time();
-        $duedate2 = time() + (86400 * intval($config['notification_cron_invoice']));
-        $where = array('status' => 2, 'time_duedate > ?' => $duedate1, 'time_duedate < ?' => $duedate2);
-        $select = Pi::model('invoice', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
-            $invoice = Pi::api('invoice', 'order')->canonizeInvoice($row);
-            $order = Pi::api('order', 'order')->getOrder($row->order);
-            Pi::api('notification', 'order')->duedateInvoice($order, $invoice);
             // Set log
-            $audit = array('order - due date invoic' , json_encode($order), json_encode($invoice));
-            Pi::service('audit')->log('cron', $audit);
-        }
+            Pi::service('audit')->log('cron', 'order - Start cron on server');
 
-        // expired invoices
-        $time = time() - 86400;
-        $where = array('status' => 2, 'time_duedate < ?' => $time);
-        $select = Pi::model('invoice', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
-            $invoice = Pi::api('invoice', 'order')->canonizeInvoice($row);
-            $order = Pi::api('order', 'order')->getOrder($row->order);
-            Pi::api('notification', 'order')->expiredInvoice($order, $invoice);
+            // due date invoices
+            $duedate1 = time();
+            $duedate2 = time() + (86400 * intval($config['notification_cron_invoice']));
+            $where = array('status' => 2, 'time_duedate > ?' => $duedate1, 'time_duedate < ?' => $duedate2);
+            $select = Pi::model('invoice', $this->getModule())->select()->where($where);
+            $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
+            foreach ($rowset as $row) {
+                $invoice = Pi::api('invoice', 'order')->canonizeInvoice($row);
+                $order = Pi::api('order', 'order')->getOrder($row->order);
+                Pi::api('notification', 'order')->duedateInvoice($order, $invoice);
+                // Set log
+                $audit = array('order - due date invoic' , json_encode($order), json_encode($invoice));
+                Pi::service('audit')->log('cron', $audit);
+            }
+
+            // expired invoices
+            $time = time() - 86400;
+            $where = array('status' => 2, 'time_duedate < ?' => $time);
+            $select = Pi::model('invoice', $this->getModule())->select()->where($where);
+            $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
+            foreach ($rowset as $row) {
+                $invoice = Pi::api('invoice', 'order')->canonizeInvoice($row);
+                $order = Pi::api('order', 'order')->getOrder($row->order);
+                Pi::api('notification', 'order')->expiredInvoice($order, $invoice);
+                // Set log
+                $audit = array('order - expired invoice' , json_encode($order), json_encode($invoice));
+                Pi::service('audit')->log('cron', $audit);
+            }
+
             // Set log
-            $audit = array('order - expired invoice' , json_encode($order), json_encode($invoice));
-            Pi::service('audit')->log('cron', $audit);
-        }
+            Pi::service('audit')->log('cron', 'order - End cron on server');
 
-        // Set log
-        Pi::service('audit')->log('cron', 'order - End cron on server');
+        } else {
+            // Set log
+            Pi::service('audit')->log('cron', 'order - cron system not active for this module');
+        }
     }
 }

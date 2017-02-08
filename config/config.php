@@ -42,6 +42,10 @@ return array(
             'name' => 'notification'
         ),
         array(
+            'title' => _a('Cron'),
+            'name' => 'cron'
+        ),
+        array(
             'title' => _a('Installment'),
             'name' => 'installment'
         ),
@@ -454,6 +458,15 @@ return array(
             'edit' => 'text',
             'filter' => 'string',
             'value' => _a('Dear %s %s, You have expired invoice on %s days ago'),
+        ),
+        // Cron
+        'module_cron' => array(
+            'category' => 'cron',
+            'title' => _a('Active this module cron system'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
         ),
         // Installment
         'installment_credit' => array(

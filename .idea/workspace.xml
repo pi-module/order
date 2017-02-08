@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb89c1a1-3ca6-4284-b00d-d0e1e5682c61" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Api/Cron.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Api/Notification.php" afterPath="$PROJECT_DIR$/src/Api/Notification.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/config.php" afterPath="$PROJECT_DIR$/config/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/module.php" afterPath="$PROJECT_DIR$/config/module.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Api/Cron.php" afterPath="$PROJECT_DIR$/src/Api/Cron.php" />
     </list>
     <ignored path="order.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,24 +29,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Notification.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Api/Notification.php">
+      <file leaf-file-name="Cron.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Api/Cron.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="19" column="37" lean-forward="true" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="37" />
+            <state relative-caret-position="417">
+              <caret line="69" column="52" lean-forward="false" selection-start-line="69" selection-start-column="52" selection-end-line="69" selection-end-column="52" />
+              <folding>
+                <element signature="e#355#362#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="module.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/module.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Cron.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Api/Cron.php">
+      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/config.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="735">
-              <caret line="55" column="46" lean-forward="false" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
-              <folding>
-                <element signature="e#355#362#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="327">
+              <caret line="462" column="20" lean-forward="false" selection-start-line="462" selection-start-column="9" selection-end-line="462" selection-end-column="20" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -83,7 +94,6 @@
         <option value="$PROJECT_DIR$/src/Api/Credit.php" />
         <option value="$PROJECT_DIR$/template/admin/credit-history.phtml" />
         <option value="$PROJECT_DIR$/template/admin/credit-update.phtml" />
-        <option value="$PROJECT_DIR$/config/config.php" />
         <option value="$PROJECT_DIR$/template/front/empty.phtml" />
         <option value="$PROJECT_DIR$/src/Form/OrderSimpleForm.php" />
         <option value="$PROJECT_DIR$/src/Form/OrderAddFilter.php" />
@@ -109,11 +119,12 @@
         <option value="$PROJECT_DIR$/asset/css/admin.css" />
         <option value="$PROJECT_DIR$/src/Controller/Admin/OrderController.php" />
         <option value="$PROJECT_DIR$/sql/mysql.sql" />
-        <option value="$PROJECT_DIR$/config/module.php" />
         <option value="$PROJECT_DIR$/src/Installer/Action/Update.php" />
         <option value="$PROJECT_DIR$/src/Api/Access.php" />
         <option value="$PROJECT_DIR$/src/Api/Cron.phtml" />
         <option value="$PROJECT_DIR$/src/Api/Notification.php" />
+        <option value="$PROJECT_DIR$/config/module.php" />
+        <option value="$PROJECT_DIR$/config/config.php" />
         <option value="$PROJECT_DIR$/src/Api/Cron.php" />
       </list>
     </option>
@@ -147,6 +158,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -191,10 +204,22 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -329,14 +354,8 @@
       <workItem from="1486319440047" duration="228000" />
       <workItem from="1486320584327" duration="606000" />
       <workItem from="1486383852806" duration="1000" />
-      <workItem from="1486542865871" duration="1189000" />
-    </task>
-    <task id="LOCAL-00001" summary="Fix order module">
-      <created>1454310931206</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1454310931206</updated>
+      <workItem from="1486542865871" duration="1215000" />
+      <workItem from="1486545800636" duration="267000" />
     </task>
     <task id="LOCAL-00002" summary="Add support can payment option">
       <created>1454328479427</created>
@@ -674,11 +693,18 @@
       <option name="project" value="LOCAL" />
       <updated>1486543192979</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Update cron system">
+      <created>1486544084343</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1486544084348</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75056000" />
+    <option name="totallyTimeSpent" value="75349000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -693,7 +719,7 @@
     <frame x="0" y="0" width="1280" height="770" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3457189" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3513732" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293979" sideWeight="0.49674267" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32905295" sideWeight="0.50325733" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -749,7 +775,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
-    <MESSAGE value="Add support can payment option" />
     <MESSAGE value="Add order by admin" />
     <MESSAGE value="Update checkout template" />
     <MESSAGE value="Improve order template" />
@@ -774,7 +799,8 @@
     <MESSAGE value="Update cron service" />
     <MESSAGE value="Improve save log" />
     <MESSAGE value="Update send sms method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update send sms method" />
+    <MESSAGE value="Update cron system" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update cron system" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -929,13 +955,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-840">
-          <caret line="352" column="38" lean-forward="false" selection-start-line="352" selection-start-column="38" selection-end-line="352" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/template/front/detail.phtml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -1081,13 +1100,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/module.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Api/Log.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -1123,26 +1135,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Api/Cron.phtml">
+    <entry file="file://$PROJECT_DIR$/src/Api/Cron.phtml" />
+    <entry file="file://$PROJECT_DIR$/src/Api/Notification.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="180">
+          <caret line="19" column="37" lean-forward="false" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Api/Notification.php">
+    <entry file="file://$PROJECT_DIR$/config/config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="19" column="37" lean-forward="true" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="37" />
+        <state relative-caret-position="327">
+          <caret line="462" column="20" lean-forward="false" selection-start-line="462" selection-start-column="9" selection-end-line="462" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/module.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Api/Cron.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="55" column="46" lean-forward="false" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
+        <state relative-caret-position="417">
+          <caret line="69" column="52" lean-forward="false" selection-start-line="69" selection-start-column="52" selection-end-line="69" selection-end-column="52" />
           <folding>
             <element signature="e#355#362#0#PHP" expanded="true" />
           </folding>
