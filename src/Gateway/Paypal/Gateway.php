@@ -82,7 +82,7 @@ class Gateway extends AbstractGateway
             'name' => 'custom',
             'label' => __('Custom attribute'),
             'type' => 'text',
-            'required' => true,
+            'required' => false,
         );
         // test_mode
         $form['test_mode'] = array(
@@ -322,7 +322,7 @@ class Gateway extends AbstractGateway
         $this->gatewayPayInformation['city'] = $order['city'];
         $this->gatewayPayInformation['state'] = $order['state'];
         $this->gatewayPayInformation['country'] = $order['country'];
-        $this->gatewayPayInformation['zip_code'] = $order['zip_code'];
+        $this->gatewayPayInformation['zip'] = $order['zip_code'];
         $this->gatewayPayInformation['email'] = $order['email'];
         $this->gatewayPayInformation['night_phone_b'] = $order['mobile'];
         $this->gatewayPayInformation['cmd'] = '_cart';
