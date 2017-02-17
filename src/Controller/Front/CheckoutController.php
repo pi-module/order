@@ -319,6 +319,7 @@ class CheckoutController extends IndexController
                             'uid' => $uid,
                             'module' => 'order',
                             'message' => __("User has read and accept current terms and conditions on checkout. Version : " . $condition->version),
+                            'data' => $condition->version,
                             'timeline' => 'accept_conditions',
                         );
 
