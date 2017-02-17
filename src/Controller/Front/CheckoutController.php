@@ -309,6 +309,24 @@ class CheckoutController extends IndexController
                 $order->assign($values);
                 $order->save();
 
+
+                // Log term and condition acceptation
+                if (Pi::service('module')->isActive('user')){
+                    $condition = Pi::api('condition', 'user')->getLastEligibleCondition();
+
+                    if($condition && isset($values['order_term']) && $values['order_term'] == 1){
+                        $log = array(
+                            'uid' => $uid,
+                            'module' => 'order',
+                            'message' => __("User has read and accept current terms and conditions on checkout. Version : " . $condition->version),
+                            'data' => $condition->version,
+                            'timeline' => 'accept_conditions',
+                        );
+
+                        Pi::api('log', 'user')->add(null, null, $log);
+                    }
+                }
+
                 // Check order save
                 if (isset($order->id) && intval($order->id) > 0) {
                     // Set order ID
