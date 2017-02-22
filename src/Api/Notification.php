@@ -31,11 +31,6 @@ class Notification extends AbstractApi
 {
     public function addOrder($order)
     {
-        // Check notification module
-        if (!Pi::service('module')->isActive('notification')) {
-            return false;
-        }
-
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
@@ -76,7 +71,7 @@ class Notification extends AbstractApi
         $toAdmin = array(
             $adminmail => $adminname,
         );
-        Pi::api('mail', 'notification')->send(
+        Pi::service('notification')->send(
             $toAdmin,
             'admin_add_order',
             $information,
@@ -93,7 +88,7 @@ class Notification extends AbstractApi
                     $toAdmin = array(
                         $list[1] => $adminname,
                     );
-                    Pi::api('mail', 'notification')->send(
+                    Pi::service('notification')->send(
                         $toAdmin,
                         'admin_add_order',
                         $information,
@@ -107,7 +102,7 @@ class Notification extends AbstractApi
         $toUser = array(
             $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
         );
-        Pi::api('mail', 'notification')->send(
+        Pi::service('notification')->send(
             $toUser,
             'user_add_order',
             $information,
@@ -124,7 +119,7 @@ class Notification extends AbstractApi
             $productList,
             $productPrice
         );
-        Pi::api('sms', 'notification')->sendToAdmin($content);
+        Pi::service('notification')->smsToAdmin($content);
 
         // Send sms to user
         $content = sprintf(
@@ -135,16 +130,11 @@ class Notification extends AbstractApi
             $productPrice,
             $sitename
         );
-        Pi::api('sms', 'notification')->send($content, $order['mobile']);
+        Pi::service('notification')->smsToUser($content, $order['mobile']);
     }
 
     public function processOrder($order, $type)
     {
-        // Check notification module
-        if (!Pi::service('module')->isActive('notification')) {
-            return false;
-        }
-
         // Get sitename
         $sitename = Pi::config('sitename');
 
@@ -247,7 +237,7 @@ class Notification extends AbstractApi
         $toUser = array(
             $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
         );
-        Pi::api('mail', 'notification')->send(
+        Pi::service('notification')->send(
             $toUser,
             'user_process_order',
             $information,
@@ -256,16 +246,11 @@ class Notification extends AbstractApi
         );
 
         // Send sms to user
-        Pi::api('sms', 'notification')->send($content, $order['mobile']);
+        Pi::service('notification')->smsToUser($content, $order['mobile']);
     }
 
     public function processOrderNote($order)
     {
-        // Check notification module
-        if (!Pi::service('module')->isActive('notification')) {
-            return false;
-        }
-
         // Get sitename
         $sitename = Pi::config('sitename');
 
@@ -304,7 +289,7 @@ class Notification extends AbstractApi
         $toUser = array(
             $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
         );
-        Pi::api('mail', 'notification')->send(
+        Pi::service('notification')->send(
             $toUser,
             'user_process_order',
             $information,
@@ -313,16 +298,11 @@ class Notification extends AbstractApi
         );
 
         // Send sms to user
-        Pi::api('sms', 'notification')->send($content, $order['mobile']);
+        Pi::service('notification')->smsToUser($content, $order['mobile']);
     }
 
     public function processOrderCanPay($order)
     {
-        // Check notification module
-        if (!Pi::service('module')->isActive('notification')) {
-            return false;
-        }
-
         if ($order['can_pay'] == 1) {
             // Get sitename
             $sitename = Pi::config('sitename');
@@ -363,7 +343,7 @@ class Notification extends AbstractApi
             $toUser = array(
                 $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
             );
-            Pi::api('mail', 'notification')->send(
+            Pi::service('notification')->send(
                 $toUser,
                 'user_process_order',
                 $information,
@@ -372,17 +352,13 @@ class Notification extends AbstractApi
             );
 
             // Send sms to user
-            Pi::api('sms', 'notification')->send($content, $order['mobile']);
+            Pi::service('notification')->smsToUser($content, $order['mobile']);
+
         }
     }
 
     public function payInvoice($order, $invoice)
     {
-        // Check notification module
-        if (!Pi::service('module')->isActive('notification')) {
-            return false;
-        }
-
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
@@ -421,7 +397,7 @@ class Notification extends AbstractApi
         $toAdmin = array(
             $adminmail => $adminname,
         );
-        Pi::api('mail', 'notification')->send(
+        Pi::service('notification')->send(
             $toAdmin,
             'admin_pay_invoice',
             $information,
@@ -432,7 +408,7 @@ class Notification extends AbstractApi
         $toUser = array(
             $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
         );
-        Pi::api('mail', 'notification')->send(
+        Pi::service('notification')->send(
             $toUser,
             'user_pay_invoice',
             $information,
@@ -451,7 +427,7 @@ class Notification extends AbstractApi
             $order['code'],
             $productList
         );
-        Pi::api('sms', 'notification')->sendToAdmin($content);
+        Pi::service('notification')->smsToAdmin($content);
 
         // Send sms to user
         $content = sprintf(
@@ -464,16 +440,11 @@ class Notification extends AbstractApi
             $productList,
             $sitename
         );
-        Pi::api('sms', 'notification')->send($content, $order['mobile']);
+        Pi::service('notification')->smsToUser($content, $order['mobile']);
     }
 
     public function duedateInvoice($order, $invoice)
     {
-        // Check notification module
-        if (!Pi::service('module')->isActive('notification')) {
-            return false;
-        }
-
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
@@ -498,7 +469,7 @@ class Notification extends AbstractApi
         $toUser = array(
             $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
         );
-        Pi::api('mail', 'notification')->send(
+        Pi::service('notification')->send(
             $toUser,
             'user_duedate_invoice',
             $information,
@@ -508,16 +479,11 @@ class Notification extends AbstractApi
 
         // Send sms to user
         $content = sprintf($config['sms_invoice_duedate'], $order['first_name'], $order['last_name'], $config['notification_cron_invoice']);
-        Pi::api('sms', 'notification')->send($content, $order['mobile']);
+        Pi::service('notification')->smsToUser($content, $order['mobile']);
     }
 
     public function expiredInvoice($order, $invoice)
     {
-        // Check notification module
-        if (!Pi::service('module')->isActive('notification')) {
-            return false;
-        }
-
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
@@ -542,7 +508,7 @@ class Notification extends AbstractApi
         $toUser = array(
             $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
         );
-        Pi::api('mail', 'notification')->send(
+        Pi::service('notification')->send(
             $toUser,
             'user_expired_invoice',
             $information,
@@ -552,64 +518,6 @@ class Notification extends AbstractApi
 
         // Send sms to user
         $content = sprintf($config['sms_invoice_expired'], $order['first_name'], $order['last_name'], $config['notification_cron_expired']);
-        Pi::api('sms', 'notification')->send($content, $order['mobile']);
-    }
-
-    public function doCron()
-    {
-        // Check notification module
-        if (!Pi::service('module')->isActive('notification')) {
-            return false;
-        }
-
-        // Get config
-        $config = Pi::service('registry')->config->read($this->getModule());
-
-        // Set log
-        $file = Pi::path('upload/order/log.txt');
-        if (!Pi::service('file')->exists($file)) {
-            Pi::service('file')->mkdir(Pi::path('upload/order'));
-            $fp = fopen($file, "a+");
-            fclose($fp);
-        }
-        $buffer = json_encode(array('cron start on server time', date("Y-m-d H:i:s")));
-        if (file_exists($file)) {
-            $buffer = file_get_contents($file) . "\n" . $buffer;
-        }
-        file_put_contents($file, $buffer);
-
-        // due date invoices
-        // $duedate1 = time() + (86400 * intval($config['notification_cron_invoice']));
-        // $duedate2 = time() + (86400 * (intval($config['notification_cron_invoice']) + 1));
-        $duedate1 = time();
-        $duedate2 = time() + (86400 * intval($config['notification_cron_invoice']));
-        $where = array('status' => 2, 'time_duedate > ?' => $duedate1, 'time_duedate < ?' => $duedate2);
-        $select = Pi::model('invoice', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
-            $invoice = Pi::api('invoice', 'order')->canonizeInvoice($row);
-            $order = Pi::api('order', 'order')->getOrder($row->order);
-            $this->duedateInvoice($order, $invoice);
-            // Set log
-            $buffer = file_get_contents($file) . "\n" . json_encode(array('due date invoice', $order, $invoice));
-            file_put_contents($file, $buffer);
-        }
-
-        // expired invoices
-        //$duedate1 = time() - (86400 * intval($config['notification_cron_invoice']));
-        //$duedate2 = time() - (86400 * (intval($config['notification_cron_invoice']) + 1));
-        //$where = array('status' => 2, 'time_duedate < ?' => $duedate1, 'time_duedate > ?' => $duedate2);
-        $time = time() - 86400;
-        $where = array('status' => 2, 'time_duedate < ?' => $time);
-        $select = Pi::model('invoice', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
-            $invoice = Pi::api('invoice', 'order')->canonizeInvoice($row);
-            $order = Pi::api('order', 'order')->getOrder($row->order);
-            $this->expiredInvoice($order, $invoice);
-            // Set log
-            $buffer = file_get_contents($file) . "\n" . json_encode(array('expired invoice', $order, $invoice));
-            file_put_contents($file, $buffer);
-        }
+        Pi::service('notification')->smsToUser($content, $order['mobile']);
     }
 }
