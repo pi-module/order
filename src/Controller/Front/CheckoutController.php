@@ -16,6 +16,8 @@ namespace Module\Order\Controller\Front;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 //use Pi\Authentication\Result;
+use Module\Order\Form\AddressForm;
+use Module\Order\Form\AddressFilter;
 use Module\Order\Form\OrderForm;
 use Module\Order\Form\OrderFilter;
 use Module\Order\Form\OrderSimpleForm;
@@ -26,8 +28,250 @@ use Zend\Json\Json;
 
 class CheckoutController extends IndexController
 {
+   private function order($values, $customer, $cart, $config, $uid)
+   {
+       
+        $values['uid'] = $uid;
+        $values['ip'] = Pi::user()->getIp();
+        $values['status_order'] = 1;
+        $values['status_payment'] = 1;
+        $values['status_delivery'] = 1;
+        $values['time_create'] = time();
+        
+        unset($customer['id']);
+        unset($customer['uid']);
+        unset($customer['ip']);
+        unset($customer['id_number']);
+        unset($customer['user_note']);
+        unset($customer['time_create']);
+        unset($customer['time_update']);
+        unset($customer['status']);
+        unset($customer['time_create_view']);
+        unset($customer['time_update_view']);
+        $values = $values + $customer;
+        
+        // Set type_payment values
+        if (isset($cart['type_commodity']) && in_array($cart['type_commodity'], array('product', 'service'))) {
+            $values['type_commodity'] = $cart['type_commodity'];
+        }
+        // Set plan values
+        if (isset($cart['plan']) && !empty($cart['plan'])) {
+            $values['plan'] = $cart['plan'];
+        }
+        // Set module_name values
+        if (isset($cart['module_name']) && !empty($cart['module_name'])) {
+            $values['module_name'] = $cart['module_name'];
+        }
+        // Set module_table values
+        if (isset($cart['module_table']) && !empty($cart['module_table'])) {
+            $values['module_table'] = $cart['module_table'];
+        }
+        // Set module_item values
+        if (isset($cart['module_item']) && !empty($cart['module_item'])) {
+            $values['module_item'] = $cart['module_item'];
+        }
+        // Set can_pay values
+        if (isset($cart['can_pay']) && !empty($cart['can_pay'])) {
+            $values['can_pay'] = $cart['can_pay'];
+        }
+        // Check gateway
+        if (is_array($values['gateway'])) {
+            $values['gateway'] = $values['gateway'][0];
+        }
+        // Set promotion_type values
+        if (isset($cart['promotion_type']) && !empty($cart['promotion_type'])) {
+            $values['promotion_type'] = $cart['promotion_type'];
+        }
+        // Set promotion_value values
+        if (isset($cart['promotion_value']) && !empty($cart['promotion_value'])) {
+            $values['promotion_value'] = $cart['promotion_value'];
+        }
+
+        // Set price values
+        $values['discount_price'] = isset($cart['total_discount']) ? $cart['total_discount'] : 0;
+        $values['shipping_price'] = isset($cart['total_shipping']) ? $cart['total_shipping'] : 0;
+        $values['packing_price'] = isset($cart['total_packing']) ? $cart['total_packing'] : 0;
+        $values['setup_price'] = isset($cart['total_setup']) ? $cart['total_setup'] : 0;
+        $values['vat_price'] = isset($cart['total_vat']) ? $cart['total_vat'] : 0;
+        $values['product_price'] = 0;
+        $values['total_price'] = 0;
+
+        // Check order values
+        if (!empty($cart['product'])) {
+            foreach ($cart['product'] as $product) {
+                // Set other price
+                $values['product_price'] = ($product['product_price'] * $product['number']) + $values['product_price'];
+                $values['discount_price'] = ($product['discount_price'] * $product['number']) + $values['discount_price'];
+                $values['shipping_price'] = ($product['shipping_price'] * $product['number']) + $values['shipping_price'];
+                $values['packing_price'] = ($product['packing_price'] * $product['number']) + $values['packing_price'];
+                $values['setup_price'] = ($product['setup_price'] * $product['number']) + $values['setup_price'];
+                $values['vat_price'] = ($product['vat_price'] * $product['number']) + $values['vat_price'];
+            }
+        }
+
+        // Check delivery and location for get price
+        if (isset($values['location'])
+            && intval($values['location']) > 0
+            && isset($values['delivery'])
+            && intval($values['delivery']) > 0
+        ) {
+            $shippingPrice = Pi::api('delivery', 'order')->getPrice($values['location'], $values['delivery']);
+            $values['shipping_price'] = $values['shipping_price'] + $shippingPrice;
+        }
+
+        // Set additional price
+        if ($values['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
+            $values['shipping_price'] = $values['shipping_price'] + $config['order_additional_price_product'];
+        } elseif ($values['type_commodity'] == 'service' && $config['order_additional_price_service'] >0 ) {
+            $values['setup_price'] = $values['setup_price'] + $config['order_additional_price_service'];
+        }
+
+        // Set total
+        $values['total_price'] = (($values['product_price'] +
+                $values['shipping_price'] +
+                $values['packing_price'] +
+                $values['setup_price'] +
+                $values['vat_price']
+            ) - $values['discount_price']);
+
+        
+
+        // Save values to order
+        $order = $this->getModel('order')->createRow();
+        $order->assign($values);
+        $order->save();
+
+        // Check order save
+        if (isset($order->id) && intval($order->id) > 0) {
+            // Set order ID
+            $code = Pi::api('order', 'order')->generatCode($order->id);
+            $this->getModel('order')->update(
+                array('code' => $code),
+                array('id' => $order->id)
+            );
+            // Save order basket
+            if (!empty($cart['product'])) {
+                foreach ($cart['product'] as $product) {
+                    $price = $product['product_price'];
+                    $total = (($product['product_price'] +
+                                $product['shipping_price'] +
+                                $product['packing_price'] +
+                                $product['setup_price'] +
+                                $product['vat_price']
+                            ) - $product['discount_price']) * $product['number'];
+                    
+                    // Save basket
+                    $basket = $this->getModel('basket')->createRow();
+                    $basket->order = $order->id;
+                    $basket->product = $product['product'];
+                    $basket->discount_price = isset($product['discount_price']) ? $product['discount_price'] : 0;
+                    $basket->shipping_price = isset($product['shipping_price']) ? $product['shipping_price'] : 0;
+                    $basket->setup_price = isset($product['setup_price']) ? $product['setup_price'] : 0;
+                    $basket->packing_price = isset($product['packing_price']) ? $product['packing_price'] : 0;
+                    $basket->vat_price = isset($product['vat_price']) ? $product['vat_price'] : 0;
+                    // Set price
+                    if ($order->type_payment == 'installment') {
+                        $basket->product_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
+                        $basket->total_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
+                    } else {
+                        $basket->product_price = $price;
+                        $basket->total_price = $total;
+                    }
+                    $basket->number = $product['number'];
+                    // Set installment to extra
+                    if ($order->type_payment == 'installment') {
+                        $extra = array();
+                        $extra['product'] = json::decode($product['extra'], true);
+                        $extra['installment'] = Pi::api('installment', 'order')->setPriceForProduct($total, $order->plan);
+                        $extra['installment_main_price'] = $price;
+                        $extra['installment_main_total'] = $total;
+                        $extra['installment_new_price'] = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
+                        $extra['installment_new_total'] = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
+                        $basket->extra = json::encode($extra);
+                    } else {
+                        $extra = array();
+                        if($product['extra']){
+                            $extra['product'] = json::decode($product['extra'], true);
+                        }
+
+                        if (isset($extra['product']['view_type'])) {
+                            $extra['view_type'] = $extra['product']['view_type'];
+                            unset($extra['product']['view_type']);
+                        }
+
+                        if (isset($extra['product']['view_template'])) {
+                            $extra['view_template'] = $extra['product']['view_template'];
+                            unset($extra['product']['view_template']);
+                        }
+
+                        if (isset($extra['product']['getDetail'])) {
+                            $extra['getDetail'] = $extra['product']['getDetail'];
+                            unset($extra['product']['getDetail']);
+                        }
+
+                        $basket->extra = json::encode($extra);
+                    }
+                    $basket->save();
+                }
+            }
+            // Update user information
+            if ($config['order_update_user'] && isset($values['update_user']) && $values['update_user']) {
+                Pi::api('user', 'order')->updateUserInformation($values);
+            }
+            // Set invoice
+            $result = Pi::api('invoice', 'order')->createInvoice($order->id, $uid);
+            // Add user credit
+            if (isset($cart['credit'])) {
+                $cart['credit']['module'] = $order->module_name;
+                Pi::api('credit', 'order')->addHistory($cart['credit'], $order->id);
+            }
+            // unset order
+            Pi::api('order', 'order')->unsetOrderInfo();
+            // Send notification
+            Pi::api('notification', 'order')->addOrder($order->toArray());
+            // Go to payment
+            if ($result['status'] == 0) {
+                $url = array('', 'controller' => 'index', 'action' => 'index');
+                $this->jump($url, $result['message'], 'error');
+            } else {
+                if ($config['order_payment'] == 'payment') {
+                    $url = $result['pay_url'];
+                } else {
+                    $url = $result['order_url'];
+                }
+                $this->jump($url, $result['message'], 'success');
+            }
+        } else {
+            $error = array(
+                'values' => $values,
+                'cart' => $cart,
+                'customers' => $customers,
+                'user' => $user,
+            );
+            $this->view()->assign('error', $error);
+        }
+        
+   }
     public function indexAction()
     {
+
+        // Set check
+        $check = false;
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Set cart
+        $cart = Pi::api('order', 'order')->getOrderInfo();
+        if (empty($cart)) {
+            $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
+            $this->jump($url, __('Your cart is empty.'), 'error');
+        }
+        
+        // Check order is active or inactive
+        if ($config['order_method'] == 'inactive') {
+            $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
+            $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
+        }
+        
         // Check user
         if (!Pi::service('authentication')->hasIdentity()) {
             if (Pi::service('module')->isActive('user')
@@ -49,21 +293,7 @@ class CheckoutController extends IndexController
                 $this->jump(Pi::url(), __('Your cart is empty.'), 'error');
             }
         }
-        // Set check
-        $check = false;
-        // Get config
-        $config = Pi::service('registry')->config->read($this->getModule());
-        // Set cart
-        $cart = Pi::api('order', 'order')->getOrderInfo();
-        if (empty($cart)) {
-            $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
-            $this->jump($url, __('Your cart is empty.'), 'error');
-        }
-        // Check order is active or inactive
-        if ($config['order_method'] == 'inactive') {
-            $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
-            $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
-        }
+            
         // Get customer
         $customers = Pi::api('customer', 'order')->findCustomer();
         // Sety form option
@@ -71,387 +301,155 @@ class CheckoutController extends IndexController
             'type_commodity' => $cart['type_commodity'],
             'customers' => $customers,
         );
+        
+        $formAddress = new AddressForm();
+        $formAddress->setInputFilter(new AddressFilter($option));
+        
+        $formOrderSimple = new OrderSimpleForm('order', $option);
+        $formOrderSimple->setInputFilter(new OrderSimpleFilter($option));
+            
+        $formOrder = new OrderForm('order', $option);
+        $formOrder->setInputFilter(new OrderFilter($option));
+      
         // Check post
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            $form = new OrderForm('order', $option);
-            $form->setInputFilter(new OrderFilter($option));
-            $form->setData($data);
-            if ($form->isValid()) {
-                $values = $form->getData();
-
-                /*
-                 * Register user codes from user module register controller
-                 */
-                if (Pi::service('module')->isActive('user')
-                    && !Pi::service('authentication')->hasIdentity()
-                    && isset($_SESSION['session_order'])
-                    && !empty($_SESSION['session_order'])
-                ) {
-                    /*
-                     * Register part
-                     */
-                    // Check email force set on register form
-                    if (!isset($values['email']) || empty($values['email'])) {
-                        $result['message'] = __('User information was not completed and user account was not saved.');
-                        return $result;
-                    }
-                    // Set email as identity if not set on register form
-                    if (!isset($values['identity']) || empty($values['identity'])) {
-                        $values['identity'] = $values['email'];
-                    }
-                    // Set name if not set on register form
-                    if (!isset($values['name']) || empty($values['name'])) {
-                        if (isset($values['first_name']) || isset($values['last_name'])) {
-                            $values['name'] = $values['first_name'] . ' ' . $values['last_name'];
-                        } else {
-                            $values['name'] = $values['identity'];
-                        }
-                    }
-                    // Set values
-                    $values['last_modified'] = time();
-                    $values['ip_register']   = Pi::user()->getIp();
-                    // Add user
-                    $uid = Pi::api('user', 'user')->addUser($values);
-                    if (!$uid || !is_int($uid)) {
-                        $url = Pi::url(Pi::service('user')->getUrl('register', array()));
-                        $this->jump($url, __('User account was not saved.'), 'error');
-                    }
-                    // Set user role
-                    Pi::api('user', 'user')->setRole($uid, 'member');
-
-                    /*
-                     * Active user
-                     */
-                    $status = Pi::api('user', 'user')->activateUser($uid);
-                    if ($status) {
-                        // Target activate user event
-                        Pi::service('event')->trigger('user_activate', $uid);
-                    }
-
-                    /*
-                     * Get user information
-                     */
+            
+            if (isset($data['submit_address'])) {
+                $formAddress->setData($data);
+                if ($formAddress->isValid()) {
+                   
                     // Check user informations
-                    $user = Pi::api('user', 'order')->getUserInformation($uid);
-                } else {
-                    // Get user id
                     $uid = Pi::user()->getId();
-                    // Check user informations
                     $user = Pi::api('user', 'order')->getUserInformation();
-                }
-
-                // Set values
-                $values['uid'] = $uid;
-                $values['ip'] = Pi::user()->getIp();
-                $values['status_order'] = 1;
-                $values['status_payment'] = 1;
-                $values['status_delivery'] = 1;
-                $values['time_create'] = time();
-
-                // Check user email
-                if (!isset($values['email']) || empty($values['email'])) {
-                    $values['email'] = $user['email'];
-                }
-                // Check user id_number
-                if (!isset($values['id_number']) || empty($values['id_number'])) {
-                    $values['id_number'] = $user['id_number'];
-                }
-                // Check user first_name
-                if (!isset($values['first_name']) || empty($values['first_name'])) {
-                    $values['first_name'] = $user['first_name'];
-                }
-                // Check user last_name
-                if (!isset($values['last_name']) || empty($values['last_name'])) {
-                    $values['last_name'] = $user['last_name'];
-                }
-                // Check user phone
-                if (!isset($values['phone']) || empty($values['phone'])) {
-                    $values['phone'] = $user['phone'];
-                }
-                // Check user mobile
-                if (!isset($values['mobile']) || empty($values['mobile'])) {
-                    $values['mobile'] = $user['mobile'];
-                }
-                // Check user address1
-                if (!isset($values['address1']) || empty($values['address1'])) {
-                    $values['address1'] = $user['address1'];
-                }
-                // Check user address2
-                if (!isset($values['address2']) || empty($values['address2'])) {
-                    $values['address2'] = $user['address2'];
-                }
-                // Check user country
-                if (!isset($values['country']) || empty($values['country'])) {
-                    $values['country'] = $user['country'];
-                }
-                // Check user state
-                if (!isset($values['state']) || empty($values['state'])) {
-                    $values['state'] = $user['state'];
-                }
-                // Check user city
-                if (!isset($values['city']) || empty($values['city'])) {
-                    $values['city'] = $user['city'];
-                }
-                // Check user zip_code
-                if (!isset($values['zip_code']) || empty($values['zip_code'])) {
-                    $values['zip_code'] = $user['zip_code'];
-                }
-                // Check user company
-                if (!isset($values['company']) || empty($values['company'])) {
-                    $values['company'] = $user['company'];
-                }
-                // Check user company_id
-                if (!isset($values['company_id']) || empty($values['company_id'])) {
-                    $values['company_id'] = $user['company_id'];
-                }
-                // Check user company_vat
-                if (!isset($values['company_vat']) || empty($values['company_vat'])) {
-                    $values['company_vat'] = $user['company_vat'];
-                }
-                // Set type_payment values
-                if (isset($cart['type_payment']) && in_array($cart['type_payment'], array('free', 'onetime', 'recurring', 'installment'))) {
-                    $values['type_payment'] = $cart['type_payment'];
-                }
-                // Set type_payment values
-                if (isset($cart['type_commodity']) && in_array($cart['type_commodity'], array('product', 'service'))) {
-                    $values['type_commodity'] = $cart['type_commodity'];
-                }
-                // Set plan values
-                if (isset($cart['plan']) && !empty($cart['plan'])) {
-                    $values['plan'] = $cart['plan'];
-                }
-                // Set module_name values
-                if (isset($cart['module_name']) && !empty($cart['module_name'])) {
-                    $values['module_name'] = $cart['module_name'];
-                }
-                // Set module_table values
-                if (isset($cart['module_table']) && !empty($cart['module_table'])) {
-                    $values['module_table'] = $cart['module_table'];
-                }
-                // Set module_item values
-                if (isset($cart['module_item']) && !empty($cart['module_item'])) {
-                    $values['module_item'] = $cart['module_item'];
-                }
-                // Set can_pay values
-                if (isset($cart['can_pay']) && !empty($cart['can_pay'])) {
-                    $values['can_pay'] = $cart['can_pay'];
-                }
-                // Check gateway
-                if (is_array($values['gateway'])) {
-                    $values['gateway'] = $values['gateway'][0];
-                }
-                // Set promotion_type values
-                if (isset($cart['promotion_type']) && !empty($cart['promotion_type'])) {
-                    $values['promotion_type'] = $cart['promotion_type'];
-                }
-                // Set promotion_value values
-                if (isset($cart['promotion_value']) && !empty($cart['promotion_value'])) {
-                    $values['promotion_value'] = $cart['promotion_value'];
-                }
-
-                // Set price values
-                $values['discount_price'] = isset($cart['total_discount']) ? $cart['total_discount'] : 0;
-                $values['shipping_price'] = isset($cart['total_shipping']) ? $cart['total_shipping'] : 0;
-                $values['packing_price'] = isset($cart['total_packing']) ? $cart['total_packing'] : 0;
-                $values['setup_price'] = isset($cart['total_setup']) ? $cart['total_setup'] : 0;
-                $values['vat_price'] = isset($cart['total_vat']) ? $cart['total_vat'] : 0;
-                $values['product_price'] = 0;
-                $values['total_price'] = 0;
-
-                // Check order values
-                if (!empty($cart['product'])) {
-                    foreach ($cart['product'] as $product) {
-                        // Set other price
-                        $values['product_price'] = ($product['product_price'] * $product['number']) + $values['product_price'];
-                        $values['discount_price'] = ($product['discount_price'] * $product['number']) + $values['discount_price'];
-                        $values['shipping_price'] = ($product['shipping_price'] * $product['number']) + $values['shipping_price'];
-                        $values['packing_price'] = ($product['packing_price'] * $product['number']) + $values['packing_price'];
-                        $values['setup_price'] = ($product['setup_price'] * $product['number']) + $values['setup_price'];
-                        $values['vat_price'] = ($product['vat_price'] * $product['number']) + $values['vat_price'];
-                    }
-                }
-
-                // Check delivery and location for get price
-                if (isset($values['location'])
-                    && intval($values['location']) > 0
-                    && isset($values['delivery'])
-                    && intval($values['delivery']) > 0
-                ) {
-                    $shippingPrice = Pi::api('delivery', 'order')->getPrice($values['location'], $values['delivery']);
-                    $values['shipping_price'] = $values['shipping_price'] + $shippingPrice;
-                }
-
-                // Set additional price
-                if ($values['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
-                    $values['shipping_price'] = $values['shipping_price'] + $config['order_additional_price_product'];
-                } elseif ($values['type_commodity'] == 'service' && $config['order_additional_price_service'] >0 ) {
-                    $values['setup_price'] = $values['setup_price'] + $config['order_additional_price_service'];
-                }
-
-                // Set total
-                $values['total_price'] = (($values['product_price'] +
-                        $values['shipping_price'] +
-                        $values['packing_price'] +
-                        $values['setup_price'] +
-                        $values['vat_price']
-                    ) - $values['discount_price']);
-
-                // Set customer
-                if ($values['customer_id'] == 0) {
-                    Pi::api('customer', 'order')->addCustomer($values);
-                } else {
-                    Pi::api('customer', 'order')->updateCustomer($values);
-                }
-
-                // Save values to order
-                $order = $this->getModel('order')->createRow();
-                $order->assign($values);
-                $order->save();
-
-                // Check order save
-                if (isset($order->id) && intval($order->id) > 0) {
-                    // Set order ID
-                    $code = Pi::api('order', 'order')->generatCode($order->id);
-                    $this->getModel('order')->update(
-                        array('code' => $code),
-                        array('id' => $order->id)
-                    );
-                    // Save order basket
-                    if (!empty($cart['product'])) {
-                        foreach ($cart['product'] as $product) {
-                            $price = $product['product_price'];
-                            $total = (($product['product_price'] +
-                                        $product['shipping_price'] +
-                                        $product['packing_price'] +
-                                        $product['setup_price'] +
-                                        $product['vat_price']
-                                    ) - $product['discount_price']) * $product['number'];
-                            // Save basket
-                            $basket = $this->getModel('basket')->createRow();
-                            $basket->order = $order->id;
-                            $basket->product = $product['product'];
-                            $basket->discount_price = isset($product['discount_price']) ? $product['discount_price'] : 0;
-                            $basket->shipping_price = isset($product['shipping_price']) ? $product['shipping_price'] : 0;
-                            $basket->setup_price = isset($product['setup_price']) ? $product['setup_price'] : 0;
-                            $basket->packing_price = isset($product['packing_price']) ? $product['packing_price'] : 0;
-                            $basket->vat_price = isset($product['vat_price']) ? $product['vat_price'] : 0;
-                            // Set price
-                            if ($order->type_payment == 'installment') {
-                                $basket->product_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
-                                $basket->total_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
-                            } else {
-                                $basket->product_price = $price;
-                                $basket->total_price = $total;
-                            }
-                            $basket->number = $product['number'];
-                            // Set installment to extra
-                            if ($order->type_payment == 'installment') {
-                                $extra = array();
-                                $extra['product'] = json::decode($product['extra'], true);
-                                $extra['installment'] = Pi::api('installment', 'order')->setPriceForProduct($total, $order->plan);
-                                $extra['installment_main_price'] = $price;
-                                $extra['installment_main_total'] = $total;
-                                $extra['installment_new_price'] = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
-                                $extra['installment_new_total'] = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
-                                $basket->extra = json::encode($extra);
-                            } else {
-                                $extra = array();
-                                if($product['extra']){
-                                    $extra['product'] = json::decode($product['extra'], true);
-                                }
-
-                                if (isset($extra['product']['view_type'])) {
-                                    $extra['view_type'] = $extra['product']['view_type'];
-                                    unset($extra['product']['view_type']);
-                                }
-
-                                if (isset($extra['product']['view_template'])) {
-                                    $extra['view_template'] = $extra['product']['view_template'];
-                                    unset($extra['product']['view_template']);
-                                }
-
-                                if (isset($extra['product']['getDetail'])) {
-                                    $extra['getDetail'] = $extra['product']['getDetail'];
-                                    unset($extra['product']['getDetail']);
-                                }
-
-                                $basket->extra = json::encode($extra);
-                            }
-                            $basket->save();
-                        }
-                    }
-                    // Update user information
-                    if ($config['order_update_user'] && isset($values['update_user']) && $values['update_user']) {
-                        Pi::api('user', 'order')->updateUserInformation($values);
-                    }
-                    // Set invoice
-                    $result = Pi::api('invoice', 'order')->createInvoice($order->id, $uid);
-                    // Add user credit
-                    if (isset($cart['credit'])) {
-                        $cart['credit']['module'] = $order->module_name;
-                        Pi::api('credit', 'order')->addHistory($cart['credit'], $order->id);
-                    }
-                    // unset order
-                    Pi::api('order', 'order')->unsetOrderInfo();
-                    // Send notification
-                    Pi::api('notification', 'order')->addOrder($order->toArray());
-                    // Go to payment
-                    if ($result['status'] == 0) {
-                        $url = array('', 'controller' => 'index', 'action' => 'index');
-                        $this->jump($url, $result['message'], 'error');
+                    
+                    $values = $formAddress->getData();
+                    $values['time_create'] = time();
+                    
+                    $values['uid'] = $uid;
+                    if ($values['customer_id'] == 0) {
+                        Pi::api('customer', 'order')->addCustomer($values);
                     } else {
-                        if ($config['order_payment'] == 'payment') {
-                            $url = $result['pay_url'];
-                        } else {
-                            $url = $result['order_url'];
-                        }
-                        $this->jump($url, $result['message'], 'success');
+                        Pi::api('customer', 'order')->updateCustomer($values);
                     }
-                } else {
-                    $error = array(
-                        'values' => $values,
-                        'cart' => $cart,
-                        'customers' => $customers,
-                        'user' => $user,
-                    );
-                    $this->view()->assign('error', $error);
-                }
-            } elseif (Pi::service('authentication')->hasIdentity()) {
-                $check = true;
-                $forms = array();
-                $forms['new'] = $form;
-                // Set customer forms
-                if (!empty($customers)) {
-                    foreach ($customers as $customer) {
-                        $key = sprintf('customer-%s', $customer['id']);
-                        $option['location'] = $customer['location'];
-                        $forms[$key] = new OrderSimpleForm('order', $option);
-                        $forms[$key]->setData($data);
-                    }
-                }
+                    $url = $this->url('', array('controller' => 'checkout', 'action' => 'index'));
+                    $this->jump($url);
+                    
+                }  
+            } else if (isset($data['submit_order_simple'])) {
+                $formOrderSimple->setData($data);
+                if ($formOrderSimple->isValid()) {
+                    
+                    $uid = Pi::user()->getId();
+                    $user = Pi::api('user', 'order')->getUserInformation();
+                             
+                     // Set values
+                    $values = $formOrderSimple->getData();
+                    
+                    $customers = Pi::api('customer', 'order')->findCustomer($uid);
+                    $customer = $customers[$values['customer_id']];
+                   
+                    
+                    $this->order($values, $customer, $cart, $config, $uid);                  
+                } 
             } else {
-                $forms = array();
-                $forms['new'] = $form;
-            }
-        } else {
-            // Set new form
-            $user = Pi::api('user', 'order')->getUserInformation();
-            $user['customer_id'] = 0;
-            $forms = array();
-            $forms['new'] = new OrderForm('order', $option);
-            $forms['new']->setData($user);
-            // Set customer forms
-            if (!empty($customers)) {
-                foreach ($customers as $customer) {
-                    $key = sprintf('customer-%s', $customer['id']);
-                    $option['location'] = $customer['location'];
-                    unset($customer['delivery']);
-                    unset($customer['user_note']);
-                    $forms[$key] = new OrderSimpleForm('order', $option);
-                    $forms[$key]->setData($customer);
+                $formOrder->setData($data);
+                if ($formOrder->isValid()) {
+                    $values = $formOrder->getData();
+                    $values['time_create'] = time();
+                     /*
+                     * Register user codes from user module register controller
+                     */
+                    if (Pi::service('module')->isActive('user')
+                        && !Pi::service('authentication')->hasIdentity()
+                        && isset($_SESSION['session_order'])
+                        && !empty($_SESSION['session_order'])
+                    ) {
+                        
+                        /*
+                         * Register part
+                         */
+                        // Check email force set on register form
+                        if (!isset($values['email']) || empty($values['email'])) {
+                            $result['message'] = __('User information was not completed and user account was not saved.');
+                            return $result;
+                        }
+                        // Set email as identity if not set on register form
+                        if (!isset($values['identity']) || empty($values['identity'])) {
+                            $values['identity'] = $values['email'];
+                        }
+                        // Set name if not set on register form
+                        if (!isset($values['name']) || empty($values['name'])) {
+                            if (isset($values['first_name']) || isset($values['last_name'])) {
+                                $values['name'] = $values['first_name'] . ' ' . $values['last_name'];
+                            } else {
+                                $values['name'] = $values['identity'];
+                            }
+                        }
+                        // Set values
+                        $values['last_modified'] = time();
+                        $values['ip_register']   = Pi::user()->getIp();
+                        
+                        // Add user
+                        $uid = Pi::api('user', 'user')->addUser($values);
+                        if (!$uid || !is_int($uid)) {
+                            $url = Pi::url(Pi::service('user')->getUrl('register', array()));
+                            $this->jump($url, __('User account was not saved.'), 'error');
+                        }
+                        // Set user role
+                        Pi::api('user', 'user')->setRole($uid, 'member');
+    
+                        /*
+                         * Active user
+                         */
+                        $status = Pi::api('user', 'user')->activateUser($uid);
+                        if ($status) {
+                            // Target activate user event
+                            Pi::service('event')->trigger('user_activate', $uid);
+                        }
+    
+                        /*
+                         * Get user information
+                         */
+                        // Check user informations
+                        $user = Pi::api('user', 'order')->getUserInformation($uid);
+                        $values['uid'] = $uid;
+                        if ($values['customer_id'] == 0) {
+                            Pi::api('customer', 'order')->addCustomer($values);
+                        } else {
+                            Pi::api('customer', 'order')->updateCustomer($values);
+                        }
+                        $customers = Pi::api('customer', 'order')->findCustomer($uid);
+                        $customer = current($customers);
+                        
+                        
+                        $this->order($values, $customer, $cart, $config, $uid);    
+                    
+                    } 
                 }
             }
+        } 
+
+        // Set new form
+        $user = Pi::api('user', 'order')->getUserInformation();
+        $user['customer_id'] = 0;
+        $forms = array();
+        
+        // Set customer forms
+        if (!empty($customers)) {
+            foreach ($customers as $customer) {
+                $key = sprintf('customer-%s', $customer['id']);
+                $option['location'] = $customer['location'];
+                unset($customer['delivery']);
+                unset($customer['user_note']);
+               
+            }
+        }
+        if (Pi::service('authentication')->hasIdentity()) {
+            $forms['order'] = $formOrderSimple;
+            $forms['new'] = $formAddress;
+        } else {
+            $forms['new'] = $formOrder;
         }
 
         // Set price

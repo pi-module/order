@@ -71,7 +71,7 @@ class Customer extends AbstractApi
         // Select
         $customers = array();
         $where = array('uid' => $uid);
-        $select = Pi::model('customer', $this->getModule())->select()->where($where);
+        $select = Pi::model('customer', $this->getModule())->select()->where($where)->order('id DESC');
         $rowset = Pi::model('customer', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $customers[$row->id] = $this->canonizeCustomer($row);

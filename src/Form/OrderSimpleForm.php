@@ -42,185 +42,12 @@ class OrderSimpleForm extends BaseForm
                 'type' => 'hidden',
             ),
         ));
-        // name
-        if ($this->config['order_name']) {
-            // first_name
-            $this->add(array(
-                'name' => 'first_name',
-                'options' => array(
-                    'label' => __('First name'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                    'required' => true,
-                )
-            ));
-            // last_name
-            $this->add(array(
-                'name' => 'last_name',
-                'options' => array(
-                    'label' => __('Last name'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                    'required' => true,
-                )
-            ));
-        }
         // id_number
         if ($this->config['order_idnumber']) {
             $this->add(array(
                 'name' => 'id_number',
                 'options' => array(
                     'label' => __('ID number'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                    'required' => true,
-                )
-            ));
-        }
-        // email
-        if ($this->config['order_email']) {
-            $this->add(array(
-                'name' => 'email',
-                'options' => array(
-                    'label' => __('Email'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                    'required' => true,
-                )
-            ));
-        }
-        // phone
-        if ($this->config['order_phone']) {
-            $this->add(array(
-                'name' => 'phone',
-                'options' => array(
-                    'label' => __('Phone'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                )
-            ));
-        }
-        // mobile
-        if ($this->config['order_mobile']) {
-            $this->add(array(
-                'name' => 'mobile',
-                'options' => array(
-                    'label' => __('Mobile'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                    'required' => true,
-                )
-            ));
-        }
-        // company
-        if ($this->config['order_company']) {
-            // company
-            $this->add(array(
-                'name' => 'company',
-                'options' => array(
-                    'label' => __('Company'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                )
-            ));
-        }
-        // company extra
-        if ($this->config['order_company_extra']) {
-            // company_id
-            $this->add(array(
-                'name' => 'company_id',
-                'options' => array(
-                    'label' => __('Company id'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                )
-            ));
-            // company_vat
-            $this->add(array(
-                'name' => 'company_vat',
-                'options' => array(
-                    'label' => __('Company vat'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                )
-            ));
-        }
-        // address
-        if ($this->config['order_address1']) {
-            $this->add(array(
-                'name' => 'address1',
-                'options' => array(
-                    'label' => __('Delivery address'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                    'required' => true,
-                )
-            ));
-        }
-        // address 2
-        if ($this->config['order_address2']) {
-            $this->add(array(
-                'name' => 'address2',
-                'options' => array(
-                    'label' => __('Invoicing Address'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                )
-            ));
-        }
-        // country
-        if ($this->config['order_country']) {
-            $this->add(array(
-                'name' => 'country',
-                'options' => array(
-                    'label' => __('Country'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                )
-            ));
-        }
-        // state
-        if ($this->config['order_state']) {
-            $this->add(array(
-                'name' => 'state',
-                'options' => array(
-                    'label' => __('State'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                )
-            ));
-        }
-        // city
-        if ($this->config['order_city']) {
-            $this->add(array(
-                'name' => 'city',
-                'options' => array(
-                    'label' => __('City'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                )
-            ));
-        }
-        // zip_code
-        if ($this->config['order_zip']) {
-            $this->add(array(
-                'name' => 'zip_code',
-                'options' => array(
-                    'label' => __('Zip code'),
                 ),
                 'attributes' => array(
                     'type' => 'hidden',
@@ -398,11 +225,11 @@ class OrderSimpleForm extends BaseForm
             $title = __('Save order');
         }
         $this->add(array(
-            'name' => 'submit',
+            'name' => 'submit_order_simple',
             'type' => 'submit',
             'attributes' => array(
                 'value' => $title,
-                'class' => 'btn btn-success',
+                'class' => 'btn btn-success hidden',
             )
         ));
     }

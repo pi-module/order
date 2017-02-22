@@ -98,3 +98,11 @@ ul.progtrckr li.progtrckr-pending:before {
     max-width: none;
     width: auto;
 }
+
+.customer-single > div {
+    margin:0px 0px 10px 0px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    padding:10px
+    
+}
