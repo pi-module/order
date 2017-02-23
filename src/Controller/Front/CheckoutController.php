@@ -148,10 +148,8 @@ class CheckoutController extends IndexController
             if($condition && isset($values['order_term']) && $values['order_term'] == 1){
                 $log = array(
                     'uid' => $uid,
-                    'module' => 'order',
-                    'message' => __("User has read and accept current terms and conditions on checkout. Version : " . $condition->version),
                     'data' => $condition->version,
-                    'timeline' => 'accept_conditions',
+                    'action' => 'accept_conditions_checkout',
                 );
 
                 Pi::api('log', 'user')->add(null, null, $log);
