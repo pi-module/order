@@ -191,8 +191,7 @@ $this->footScript()->appendScript($script);
                     <h3 class="panel-title"><?php _e('Your order'); ?></h3>
                 </div>
                 <div class="panel-body">
-                   
-                        <table class="cart-product-list">
+                    <table class="cart-product-list">
                             <tr>
                                 <th>Nom du produit</th>
                                 <th class="col-xs-7">Total</th>
@@ -245,7 +244,7 @@ $this->footScript()->appendScript($script);
                                     <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?>
                                 </sma>
                             </td>
-                            >
+                        </tr>
                     <?php } ?>
                     </table>
                 </div>
