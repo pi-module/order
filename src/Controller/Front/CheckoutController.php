@@ -327,6 +327,7 @@ class CheckoutController extends IndexController
         $formOrder->setInputFilter(new OrderFilter($option));
 
         // Check post
+        $check = count($customers) == 0 ? true : false;
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
             
@@ -350,7 +351,9 @@ class CheckoutController extends IndexController
                     $url = $this->url('', array('controller' => 'checkout', 'action' => 'index'));
                     $this->jump($url);
                     
-                }  
+                } else {
+                    $check = true;
+                }
             } else if (isset($data['submit_order_simple'])) {
                 $formOrderSimple->setData($data);
                 if ($formOrderSimple->isValid()) {

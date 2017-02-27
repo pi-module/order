@@ -229,7 +229,7 @@ class OrderSimpleForm extends BaseForm
             'type' => 'submit',
             'attributes' => array(
                 'value' => $title,
-                'class' => 'btn btn-success hidden',
+                'class' => 'btn btn-success hidden submit_order_simple',
             )
         ));
     }

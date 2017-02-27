@@ -19,6 +19,10 @@ $script = <<<'EOT'
             this.$('#select-payment').on("change",this.paymentAction);
             this.$('.showCustomerFrom').on("click",this.makeOrderAction);
             this.$('.showNewCustomerFrom').on("click",this.newAddressAction);
+            this.$('#customerFromButtonNew').on("click",this.showNewAddress);
+        },
+        showNewAddress: function(e) {
+            $('#customerFromNew').removeClass('hidden');
         },
         locationAction: function(e) {
             var url = "%s";
@@ -147,11 +151,11 @@ $this->footScript()->appendScript($script);
                                 <?php } ?>
                                 <?php if (!empty($customer['address1'])) { ?><p><strong><?php _e('Delivery address'); ?></strong> : <span class="small"><?php echo $this->escape($customer['address1']); ?></span></p><?php } ?>
                             <?php if (!empty($customer['address2'])) { ?><p><strong><?php _e('Invoicing address'); ?></strong> : <span class="small"><?php echo $this->escape($customer['address2']); ?></span></p><?php } ?>
-                            <?php if (!empty($customer['zip_code'])) { ?><p><strong><?php _e('Zip code'); ?></strong> : <?php echo $this->escape($customer['zip_code']); ?></p><?php } ?>
-                                <?php if (!empty($customer['state'])) { ?><p><strong><?php _e('State'); ?></strong> : <?php echo $this->escape($customer['state']); ?></p><?php } ?>
-                            <?php if (!empty($customer['city'])) { ?><p><strong><?php _e('City'); ?></strong> : <?php echo $this->escape($customer['city']); ?></p><?php } ?>
-                                <?php if (!empty($customer['phone'])) { ?><p><strong><?php _e('Phone'); ?></strong> : <?php echo $this->escape($customer['phone']); ?></p><?php } ?>
-                            <?php if (!empty($customer['mobile'])) { ?><p><strong><?php _e('Mobile'); ?></strong> : <?php echo $this->escape($customer['mobile']); ?></p><?php } ?>
+                            <?php if (!empty($customer['zip_code'])) { ?><p><?php echo $this->escape($customer['zip_code']); ?></p><?php } ?>
+                                <?php if (!empty($customer['state'])) { ?><p><?php echo $this->escape($customer['state']); ?></p><?php } ?>
+                            <?php if (!empty($customer['city'])) { ?><p><?php echo $this->escape($customer['city']); ?></p><?php } ?>
+                                <?php if (!empty($customer['phone'])) { ?><p><?php echo $this->escape($customer['phone']); ?></p><?php } ?>
+                            <?php if (!empty($customer['mobile'])) { ?><p><?php echo $this->escape($customer['mobile']); ?></p><?php } ?>
                             </ul>
                     
                             <button id="customerFromButton<?php echo $customer['id']; ?>" class="showCustomerFrom btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
@@ -162,13 +166,19 @@ $this->footScript()->appendScript($script);
                 <?php } ?>
                 <div class="clearfix"></div>
                 <div class=" alert  clearfix" data-id="customerFromNew" data-button="customerFromButtonNew">
-                    <div class="page-header">
-                        <div class="col-md-12">
-                            <h2><?php _e("Create order with a new address"); ?></h2>
+                    <hr />
+                    <div>
+                        <div class="col-md-9">
+                            <h4><?php _e("Create order with a new address"); ?></h4>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <button id="customerFromButtonNew" class="showCustomerFrom btn btn-success btn-sm">
+                                <?php _e('Create new address'); ?>
+                            </button>
                         </div>
                     </div>
-                    <div id="customerFromNew" class="clearfix">
-                        <?php echo $this->form($forms['new']); ?>
+                    <div id="customerFromNew" class="clearfix <?php if (!$check) { echo 'hidden';} ?>">
+                            <?php echo $this->form($forms['new']); ?>
                     </div>
                 </div>
             <?php } else { ?>
@@ -178,18 +188,21 @@ $this->footScript()->appendScript($script);
         <div class="col-md-4 cart-product">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?php _e('Your products or services'); ?></h3>
+                    <h3 class="panel-title"><?php _e('Your order'); ?></h3>
                 </div>
                 <div class="panel-body">
-                    <div class="cart-product-list">
-                        <?php foreach ($cart['product'] as $product) { ?>
-                            <div class="clearfix cart-product-single">
-                                <div class="row">
-                                    <h5 class="col-xs-12">
-                                        <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
-                                            <?php echo $this->escape($product['details']['title']); ?>
-                                        </a>
-                                    </h5>
+                   
+                        <table class="cart-product-list">
+                            <tr>
+                                <th>Nom du produit</th>
+                                <th class="col-xs-7">Total</th>
+                            </tr>
+                            <?php foreach ($cart['product'] as $product) { ?>
+                            <tr>
+                                <td>
+                                   <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
+                                        <?php echo $this->escape($product['details']['title']); ?>
+                                    </a>
                                     <?php if (!empty($product['details']['thumbUrl'])) { ?>
                                         <div class="col-xs-5">
                                             <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
@@ -197,52 +210,49 @@ $this->footScript()->appendScript($script);
                                             </a>
                                         </div>
                                     <?php } ?>
-                                    <div class="col-xs-7">
-                                        <strong><?php _e('Price') ?></strong> : <?php echo $this->escape($product['product_price_view']); ?>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } ?>
-                    </div>
-                    <p>
-                        <strong><?php _e('Total Price ext VAT'); ?></strong> :
-                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'])); ?>
-                    </p>
-                    <p>
-                        <strong><?php _e('Total Discount'); ?></strong> :
-                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['discount'])); ?>
-                    </p>
-                    <p>
-                        <strong><?php _e('Total Shipping'); ?></strong> :
-                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['shipping'])); ?>
-                    </p>
-                    <p>
-                        <strong><?php _e('Total Vat'); ?></strong> :
-                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?>
-                    </p>
-                </div>
-                <?php if ($cart['type_payment'] != 'installment') { ?>
-                <div class="panel-footer">
-                    <ul class="list-inline">
-                        <li>
-                            <strong>
-                                <?php _e('Final Price incl. VAT'); ?>
-                            </strong>
-                        </li>
-                        <li>
-                            <h3>
+                                </td>
+                                <td>
+                                    <?php echo $this->escape($product['product_price_view']); ?>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                        
+                    <tr>
+                        <td><?php _e('Total Price ext VAT'); ?></td>
+                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'])); ?></td>
+                    </tr>
+                    <tr>
+                        <td><?php _e('Total Discount'); ?></td>
+                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['discount'])); ?></td>
+                    </tr>
+                    <tr>
+                        <td><?php _e('Total Shipping'); ?></td>
+                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['shipping'])); ?></td>
+                    </tr>
+                    <tr>
+                        <td><?php _e('Total Vat'); ?></td>
+                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?></td>
+                    </tr>
+                    <?php if ($cart['type_payment'] != 'installment') { ?>
+                        <tr class="panel-footer">
+                            <td class="list-inline">
+                                <strong>
+                                    <?php _e('Final Price incl. VAT'); ?>
+                                </strong>
+                            </td>
+                            <td>
                                 <sma class="label label-success">
                                     <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?>
                                 </sma>
-                            </h3>
-                        </li>
-                    </ul>
+                            </td>
+                            >
+                    <?php } ?>
+                    </table>
                 </div>
-                <?php } ?>
             </div>
             <div>
                 <?php if(isset($forms['order'])) { ?>
-                    <?php echo $this->form($forms['order']); ?>
+                    <?php echo $this->form($forms['order'], 'vertical'); ?>
                 <?php } ?>
             </div>
             <?php if (!empty($config['text_description_checkup'])) { ?>
