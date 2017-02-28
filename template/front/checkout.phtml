@@ -83,11 +83,12 @@ $script = <<<'EOT'
             $('form#order [name=customer_id]').val(idCustomer);
             $('form#order [name=submit_order_simple]').removeClass('hidden');
             
-            $('.fa-check').addClass('hidden');
+            $('.selected-address').addClass('hidden');
+            $('.showCustomerFrom').addClass('inverse');
             $('.showCustomerFrom').removeClass('hidden');
             
             $(e.target).addClass('hidden');
-            $(e.target).parent().find('.fa').removeClass('hidden');
+            $(e.target).parent().find('.selected-address').removeClass('hidden');
         },
         newAddressAction: function (e) {
             $('#customerFromNew').removeClass('hidden');
@@ -142,6 +143,9 @@ $this->footScript()->appendScript($script);
                     <h3><?php _e('Register new user account and make order'); ?></h3>
                 </div>
             <?php } ?>
+            <p>
+                <h3><?php _e('Select the needed address for your order. You can also add a new address') ?></h3>
+            </p>
             <?php if (!empty($customers)) { ?>
                 <?php foreach ($customers as $customer) { ?>
                     <div class="col-md-3 customer-single"
@@ -168,18 +172,18 @@ $this->footScript()->appendScript($script);
                             <button id="customerFromButton<?php echo $customer['id']; ?>" class="showCustomerFrom btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
                                 <?php _e('Use it'); ?>
                             </button>
-                            <span class="hidden fa fa-check"> <?php _e('Selected address') ?> </span>
+                            <sma class="label label-success hidden selected-address">
+                                <span class="fa fa-check"> <?php _e('Selected address') ?> </span>
+                            </sma>
                           </div>
                     </div>
                 <?php } ?>
                 <div class="clearfix"></div>
                 <div class=" alert  clearfix" data-id="customerFromNew" data-button="customerFromButtonNew">
-                    <hr />
                     <div>
                         <div class="col-md-12">
-                            <h4><?php _e("Create order with a new address"); ?></h4>
                             <button id="customerFromButtonNew" class=" btn btn-simple btn-sm">
-                                <?php _e('Create new address'); ?>
+                                <?php _e('Add new address'); ?>
                             </button>
                         </div>
                     </div>

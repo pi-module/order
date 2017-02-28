@@ -136,4 +136,6 @@ ul.progtrckr li.progtrckr-pending:before {
     border:1px solid #000;
 }
 
-.customer-single .fa-check {color:#5cb85c}
+.customer-single .fa-check {color:#fff}
+.customer-single .list-inline li {padding:0}
+.showCustomerFrom.inverse {color:#EC407A; border: 1px solid #EC407A; background:#fff}
