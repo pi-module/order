@@ -369,6 +369,12 @@ return array(
             'edit' => 'text',
             'filter' => 'string',
         ),
+        'payment_methods' => array(
+            'category' => 'payment',
+            'title' => _a('Payment methods'),
+            'edit' => 'textarea',
+            'filter' => 'string',
+        ),
         // Credit
         'credit_active' => array(
             'category' => 'credit',
