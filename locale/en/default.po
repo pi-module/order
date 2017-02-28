@@ -2361,3 +2361,7 @@ msgstr ""
 #: template/front/checkout.phtml:191
 msgid "Your order"
 msgstr ""
+
+#: template/front/checkout.phtml:171
+msgid "Selected address"
+msgstr ""

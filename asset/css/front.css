@@ -76,7 +76,7 @@ ul.progtrckr li.progtrckr-pending:before {
 
 /* Checkout page */
 .cart-product .panel-body {
-    padding: 5px;
+    padding: 5px 20px 20px 20px;
 }
 
 .cart-product .cart-product-list {
@@ -124,3 +124,16 @@ ul.progtrckr li.progtrckr-pending:before {
     font-weight:600;
     width:200px
 }
+
+.btn-simple {
+    color:#333;
+    background:#fff;
+    border:1px solid #333;
+}
+
+.btn-simple:hover {
+    color:#000;
+    border:1px solid #000;
+}
+
+.customer-single .fa-check {color:#5cb85c}
