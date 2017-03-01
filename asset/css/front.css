@@ -83,16 +83,21 @@ ul.progtrckr li.progtrckr-pending:before {
     margin-bottom: 10px;
     width:100%
 }
-.cart-product .cart-product-list th {
-    padding:0
-    
-}
+
 .cart-product .cart-product-list td:first-child{
     width:75%
 }
 .cart-product .cart-product-list tr {
     border-bottom:1px solid #ccc;
     height:35px
+}
+
+.cart-product .cart-product-list .label-success {
+    font-size:14px
+}
+.cart-product .cart-product-list th,
+.cart-product .cart-product-list td {
+    padding-left:5px
 }
 
 .cart-product .cart-product-single {
@@ -139,3 +144,4 @@ ul.progtrckr li.progtrckr-pending:before {
 .customer-single .fa-check {color:#fff}
 .customer-single .list-inline li {padding:0}
 .showCustomerFrom.inverse {color:#EC407A; border: 1px solid #EC407A; background:#fff}
+.selected-address{padding: 8px 4px 7px 4px}
