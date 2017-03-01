@@ -2193,7 +2193,7 @@ msgid "Cancel"
 msgstr "لغو"
 
 #: template/front/checkout.phtml:103 template/front/checkout.phtml:207
-msgid "Create new address"
+msgid "Add new address"
 msgstr "ثبت سفارش با آدرس جدید"
 
 #: template/front/checkout.phtml:104 template/front/checkout.phtml:185

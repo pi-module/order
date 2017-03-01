@@ -2163,7 +2163,7 @@ msgid "Cancel"
 msgstr ""
 
 #: template/front/checkout.phtml:103 template/front/checkout.phtml:207
-msgid "Create new address"
+msgid "Add new address"
 msgstr ""
 
 #: template/front/checkout.phtml:104 template/front/checkout.phtml:185
@@ -2361,3 +2361,12 @@ msgstr ""
 #: template/front/checkout.phtml:191
 msgid "Your order"
 msgstr ""
+
+#: template/front/checkout.phtml:171
+msgid "Selected address"
+msgstr ""
+
+#: template/front/checkout.phtml:148
+msgid "Select the needed address for your order. You can also add a new address"
+msgstr ""
+
