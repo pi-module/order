@@ -141,7 +141,13 @@ ul.progtrckr li.progtrckr-pending:before {
     border:1px solid #000;
 }
 
-.customer-single .fa-check {color:#fff}
+.customer-single .fa-check {
+    color:#fff;
+    font-size:12px
+}
 .customer-single .list-inline li {padding:0}
 .showCustomerFrom.inverse {color:#EC407A; border: 1px solid #EC407A; background:#fff}
-.selected-address{padding: 8px 4px 7px 4px}
+.selected-address{
+    display:inline-block;
+    padding: 8px 4px 8px 4px;
+}
