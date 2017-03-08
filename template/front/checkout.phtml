@@ -225,23 +225,25 @@ $this->footScript()->appendScript($script);
                                 </td>
                             </tr>
                             <?php } ?>
-                        
-                    <tr>
-                        <td><?php _e('Total Price ext VAT'); ?></td>
-                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'])); ?></td>
-                    </tr>
+                    
                     <tr>
                         <td><?php _e('Total Discount'); ?></td>
                         <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['discount'])); ?></td>
-                    </tr>
+                    </tr>    
                     <tr>
-                        <td><?php _e('Total Shipping'); ?></td>
-                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['shipping'])); ?></td>
+                        <td><?php _e('Total Price ext VAT'); ?></td>
+                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $price['discount'])); ?></td>
                     </tr>
                     <tr>
                         <td><?php _e('Total Vat'); ?></td>
                         <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?></td>
                     </tr>
+                    <?php if ($price['shipping'] > 0) { ?>
+                    <tr>
+                        <td><?php _e('Total Shipping'); ?></td>
+                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['shipping'])); ?></td>
+                    </tr>
+                    <?php } ?> 
                     <?php if ($cart['type_payment'] != 'installment') { ?>
                         <tr class="panel-footer">
                             <td class="list-inline">
