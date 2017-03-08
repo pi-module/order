@@ -206,6 +206,7 @@ $this->footScript()->appendScript($script);
                                 <th>Nom du produit</th>
                                 <th class="col-xs-7">Total</th>
                             </tr>
+                            <?php $totalDiscount = 0 ?>
                             <?php foreach ($cart['product'] as $product) { ?>
                             <tr>
                                 <td>
@@ -224,15 +225,20 @@ $this->footScript()->appendScript($script);
                                     <?php echo $this->escape($product['product_price_view']); ?>
                                 </td>
                             </tr>
-                            <?php } ?>
-                    
-                    <tr>
-                        <td><?php _e('Total Discount'); ?></td>
-                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['discount'])); ?></td>
-                    </tr>    
+                           <tr>
+                                <td>
+                                    <?php _e('Total Discount'); ?> 
+                                    <?php if (isset($product['discount'])) { ?>  
+                                        (<?php echo $product['discount'] ?>%)
+                                    <?php } ?> 
+                                </td>
+                                <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?></td>
+                            </tr> 
+                            <?php $totalDiscount += $product['discount_price']; ?> 
+                     <?php } ?>   
                     <tr>
                         <td><?php _e('Total Price ext VAT'); ?></td>
-                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $price['discount'])); ?></td>
+                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $totalDiscount)); ?></td>
                     </tr>
                     <tr>
                         <td><?php _e('Total Vat'); ?></td>
