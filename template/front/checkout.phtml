@@ -241,7 +241,12 @@ $this->footScript()->appendScript($script);
                         <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $totalDiscount)); ?></td>
                     </tr>
                     <tr>
-                        <td><?php _e('Total Vat'); ?></td>
+                        <td>
+                            <?php _e('Total Vat'); ?>
+                            <?php if (isset($product['vat'])) { ?>  
+                                (<?php echo $product['vat'] ?>%)
+                            <?php } ?> 
+                        </td>
                         <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?></td>
                     </tr>
                     <?php if ($price['shipping'] > 0) { ?>
