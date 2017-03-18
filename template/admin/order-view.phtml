@@ -151,15 +151,19 @@ $this->backbone();
                 <tr>
                     <td>
                         <div class="productItem">
-                            <a title="<?php echo $this->escape($product['details']['title']); ?>"
-                               href="<?php echo $this->escape($product['details']['productUrl']); ?>">
-                                <?php if (isset($product['details']['thumbUrl']) && !empty($product['details']['thumbUrl'])) { ?>
-                                    <img width="32" height="32"
-                                         src="<?php echo $this->escape($product['details']['thumbUrl']); ?>"
-                                         alt="<?php echo $this->escape($product['details']['title']); ?>">
-                                <?php } ?>
+                            <?php if (isset($product['details']['productUrl']) && !empty($product['details']['productUrl'])) { ?>
+                                <a title="<?php echo $this->escape($product['details']['title']); ?>"
+                                   href="<?php echo $this->escape($product['details']['productUrl']); ?>">
+                                    <?php if (isset($product['details']['thumbUrl']) && !empty($product['details']['thumbUrl'])) { ?>
+                                        <img width="32" height="32"
+                                             src="<?php echo $this->escape($product['details']['thumbUrl']); ?>"
+                                             alt="<?php echo $this->escape($product['details']['title']); ?>">
+                                    <?php } ?>
+                                    <?php echo $this->escape($product['details']['title']); ?>
+                                </a>
+                            <?php } else { ?>
                                 <?php echo $this->escape($product['details']['title']); ?>
-                            </a>
+                            <?php } ?>
                         </div>
                         <?php if (isset($product['extra']['product']) && !empty($product['extra']['product'])) { ?>
                             <?php foreach ($product['extra']['product'] as $extraProduct) { ?>
