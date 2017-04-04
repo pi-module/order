@@ -20,10 +20,10 @@ class UpdateNoteFilter extends InputFilter
 {
     public function __construct()
     {
-        // status_delivery
+        // admin_note
         $this->add(array(
             'name' => 'admin_note',
             'required' => true,
         ));
     }
-}    	
+}

@@ -135,110 +135,7 @@ $this->backbone();
                 </div>
             </div>
         </div>
-        <?php if (!empty($order['user_note'])) { ?>
-            <div class="well clearfix">
-                <h3><?php _e('User note'); ?></h3>
-                <div class="col-md-12">
-                    <div class="clearfix">
-                        <?php echo $order['user_note']; ?>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
-        <div class="well clearfix">
-            <h3><?php _e('Admin note'); ?></h3>
-            <div class="col-md-12">
-                <div id="update-note-<?php echo $this->escape($order['id']); ?>" class="clearfix">
-                    <?php echo $order['admin_note']; ?>
-                </div>
-                <hr />
-            </div>
-            <div class="col-md-12">
-                <a class="update-note btn btn-primary">
-                    <?php _e('Add / edit admin note'); ?>
-                </a>
-            </div>
-        </div>
-        <div class="well">
-            <h3><?php _e('User'); ?></h3>
-            <ul class="clearfix list-unstyled">
-                <li class="col-md-3"><strong><?php _e('ID'); ?></strong>
-                    : <?php echo $this->escape($order['user']['id']); ?></li>
-                <li class="col-md-3"><strong><?php _e('Email'); ?></strong>
-                    : <?php echo $this->escape($order['user']['email']); ?></li>
-                <li class="col-md-3"><strong><?php _e('Identity'); ?></strong>
-                    : <?php echo $this->escape($order['user']['identity']); ?></li>
-                <li class="col-md-3"><strong><?php _e('Name'); ?></strong>
-                    : <?php echo $this->escape($order['user']['name']); ?></li>
-            </ul>
-        </div>
-        <div class="well">
-            <h3><?php _e('Order'); ?></h3>
-            <ul class="clearfix list-unstyled">
-                <li class="col-md-4"><strong><?php _e('Status'); ?></strong> : <span
-                        id="update-order-<?php echo $this->escape($order['id']); ?>"
-                        class="update-order btn <?php echo $this->escape($order['orderClass']); ?> "><?php echo $this->escape($order['orderTitle']); ?></span>
-                </li>
-                <li class="col-md-4"><strong><?php _e('Time'); ?></strong>
-                    : <?php echo $this->escape($order['time_create_view']); ?></li>
-                <li class="col-md-4"><strong><?php _e('Finish'); ?></strong> : <span
-                        id="update-order-<?php echo $this->escape($order['id']); ?>-time"><?php echo $this->escape($order['time_finish_view']); ?></span>
-                </li>
-            </ul>
-        </div>
-        <div class="well">
-            <h3><?php _e('Payment'); ?></h3>
-            <ul class="clearfix list-unstyled">
-                <li class="col-md-3"><strong><?php _e('Status'); ?></strong> : <span
-                        id="update-payment-<?php echo $this->escape($order['id']); ?>"
-                        class="update-payment btn <?php echo $this->escape($order['paymentClass']); ?> "><?php echo $this->escape($order['paymentTitle']); ?></span>
-                </li>
-                <li class="col-md-3"><strong><?php _e('Can pay?'); ?></strong> : <span
-                        id="update-canPay-<?php echo $this->escape($order['id']); ?>"
-                        class="update-canPay btn <?php echo $this->escape($order['canPayClass']); ?> "><?php echo $this->escape($order['canPayTitle']); ?></span>
-                </li>
-                <li class="col-md-3"><strong><?php _e('Time'); ?></strong>
-                    : <?php echo $this->escape($order['time_payment_view']); ?></li>
-                <li class="col-md-3"><strong><?php _e('Adapter'); ?></strong> : <span
-                        id="update-payment-<?php echo $this->escape($order['id']); ?>-adapter"><?php echo $this->escape($order['gateway']); ?></span>
-                </li>
-            </ul>
-        </div>
-        <div class="well">
-            <h3><?php _e('Delivery'); ?></h3>
-            <ul class="clearfix list-unstyled">
-                <li class="col-md-3"><strong><?php _e('Status'); ?></strong> : <span
-                        id="update-delivery-<?php echo $this->escape($order['id']); ?>"
-                        class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> "><?php echo $this->escape($order['deliveryTitle']); ?></span>
-                </li>
-                <li class="col-md-3"><strong><?php _e('Time'); ?></strong> : <span
-                        id="update-delivery-<?php echo $this->escape($order['id']); ?>-time"><?php echo $this->escape($order['time_delivery_view']); ?></span>
-                </li>
-                <li class="col-md-3"><strong><?php _e('Method'); ?></strong> :</li>
-                <li class="col-md-3"><strong><?php _e('Packing'); ?></strong> :</li>
-            </ul>
-        </div>
-        <div class="well">
-            <h3><?php _e('Price'); ?></h3>
-            <ul class="clearfix list-unstyled">
-                <li class="col-md-4"><strong><?php _e('Price'); ?></strong>
-                    : <?php echo $this->escape($order['product_price_view']); ?></li>
-                <li class="col-md-4"><strong><?php _e('Discount'); ?></strong>
-                    : <?php echo $this->escape($order['discount_price_view']); ?></li>
-                <li class="col-md-4"><strong><?php _e('Shipping'); ?></strong>
-                    : <?php echo $this->escape($order['shipping_price_view']); ?></li>
-                <li class="col-md-4"><strong><?php _e('Packing'); ?></strong>
-                    : <?php echo $this->escape($order['packing_price_view']); ?></li>
-                <li class="col-md-4"><strong><?php _e('Total'); ?></strong>
-                    : <?php echo $this->escape($order['total_price_view']); ?></li>
-                <li class="col-md-4"><strong><?php _e('Paid'); ?></strong>
-                    : <?php echo $this->escape($order['paid_price_view']); ?></li>
-                <?php if ($order['type_payment'] == 'installment') { ?>
-                    <li class="col-md-4"><strong><?php _e('Installment numbers'); ?></strong>
-                        : <?php echo _number(count($order['invoices']) - 1); ?></li>
-                <?php } ?>
-            </ul>
-        </div>
+
         <h3><?php _e('This order products or services list'); ?></h3>
         <table class="table table-striped table-bordered table-condensed">
             <tr>
@@ -254,15 +151,19 @@ $this->backbone();
                 <tr>
                     <td>
                         <div class="productItem">
-                            <a title="<?php echo $this->escape($product['details']['title']); ?>"
-                               href="<?php echo $this->escape($product['details']['productUrl']); ?>">
-                                <?php if (isset($product['details']['thumbUrl']) && !empty($product['details']['thumbUrl'])) { ?>
-                                    <img width="32" height="32"
-                                         src="<?php echo $this->escape($product['details']['thumbUrl']); ?>"
-                                         alt="<?php echo $this->escape($product['details']['title']); ?>">
-                                <?php } ?>
+                            <?php if (isset($product['details']['productUrl']) && !empty($product['details']['productUrl'])) { ?>
+                                <a title="<?php echo $this->escape($product['details']['title']); ?>"
+                                   href="<?php echo $this->escape($product['details']['productUrl']); ?>">
+                                    <?php if (isset($product['details']['thumbUrl']) && !empty($product['details']['thumbUrl'])) { ?>
+                                        <img width="32" height="32"
+                                             src="<?php echo $this->escape($product['details']['thumbUrl']); ?>"
+                                             alt="<?php echo $this->escape($product['details']['title']); ?>">
+                                    <?php } ?>
+                                    <?php echo $this->escape($product['details']['title']); ?>
+                                </a>
+                            <?php } else { ?>
                                 <?php echo $this->escape($product['details']['title']); ?>
-                            </a>
+                            <?php } ?>
                         </div>
                         <?php if (isset($product['extra']['product']) && !empty($product['extra']['product'])) { ?>
                             <?php foreach ($product['extra']['product'] as $extraProduct) { ?>
@@ -296,6 +197,7 @@ $this->backbone();
                 </tr>
             <?php } ?>
         </table>
+
         <?php if (!empty($order['invoices'])) { ?>
             <h3><?php _e('This order invoices list'); ?></h3>
             <table class="table table-striped table-bordered table-condensed">
@@ -360,8 +262,116 @@ $this->backbone();
             <p><a class="btn btn-success"
                   href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'add', 'order' => $order['id'])); ?>"
                   title="<?php _e('New invoice'); ?>" target="_blank"><i
-                        class="fa fa-plus"></i> <?php _e('New invoice'); ?></a></p>
+                            class="fa fa-plus"></i> <?php _e('New invoice'); ?></a></p>
         </div>
+
+        <?php if (!empty($order['user_note'])) { ?>
+            <div class="well clearfix">
+                <h3><?php _e('User note'); ?></h3>
+                <div class="col-md-12">
+                    <div class="clearfix">
+                        <?php echo $order['user_note']; ?>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+        <div class="well clearfix">
+            <h3><?php _e('Admin note'); ?></h3>
+            <div class="col-md-12">
+                <div id="update-note-<?php echo $this->escape($order['id']); ?>" class="clearfix">
+                    <?php echo $order['admin_note']; ?>
+                </div>
+                <hr />
+            </div>
+            <div class="col-md-12">
+                <a class="update-note btn btn-primary">
+                    <?php _e('Add / edit admin note'); ?>
+                </a>
+            </div>
+        </div>
+        <div class="well">
+            <h3><?php _e('User'); ?></h3>
+            <ul class="clearfix list-unstyled">
+                <li class="col-md-3"><strong><?php _e('ID'); ?></strong>
+                    : <?php echo $this->escape($order['user']['id']); ?></li>
+                <li class="col-md-3"><strong><?php _e('Email'); ?></strong>
+                    : <?php echo $this->escape($order['user']['email']); ?></li>
+                <li class="col-md-3"><strong><?php _e('Identity'); ?></strong>
+                    : <?php echo $this->escape($order['user']['identity']); ?></li>
+                <li class="col-md-3"><strong><?php _e('Name'); ?></strong>
+                    : <?php echo $this->escape($order['user']['name']); ?></li>
+            </ul>
+        </div>
+        <div class="well">
+            <h3><?php _e('Price'); ?></h3>
+            <ul class="clearfix list-unstyled">
+                <li class="col-md-4"><strong><?php _e('Price'); ?></strong>
+                    : <?php echo $this->escape($order['product_price_view']); ?></li>
+                <li class="col-md-4"><strong><?php _e('Discount'); ?></strong>
+                    : <?php echo $this->escape($order['discount_price_view']); ?></li>
+                <li class="col-md-4"><strong><?php _e('Shipping'); ?></strong>
+                    : <?php echo $this->escape($order['shipping_price_view']); ?></li>
+                <li class="col-md-4"><strong><?php _e('Packing'); ?></strong>
+                    : <?php echo $this->escape($order['packing_price_view']); ?></li>
+                <li class="col-md-4"><strong><?php _e('Total'); ?></strong>
+                    : <?php echo $this->escape($order['total_price_view']); ?></li>
+                <li class="col-md-4"><strong><?php _e('Paid'); ?></strong>
+                    : <?php echo $this->escape($order['paid_price_view']); ?></li>
+                <?php if ($order['type_payment'] == 'installment') { ?>
+                    <li class="col-md-4"><strong><?php _e('Installment numbers'); ?></strong>
+                        : <?php echo _number(count($order['invoices']) - 1); ?></li>
+                <?php } ?>
+            </ul>
+        </div>
+        <div class="well">
+            <h3><?php _e('Order'); ?></h3>
+            <ul class="clearfix list-unstyled">
+                <li class="col-md-4"><strong><?php _e('Status'); ?></strong> : <span
+                        id="update-order-<?php echo $this->escape($order['id']); ?>"
+                        class="update-order btn <?php echo $this->escape($order['orderClass']); ?> "><?php echo $this->escape($order['orderTitle']); ?></span>
+                </li>
+                <li class="col-md-4"><strong><?php _e('Time'); ?></strong>
+                    : <?php echo $this->escape($order['time_create_view']); ?></li>
+                <li class="col-md-4"><strong><?php _e('Finish'); ?></strong> : <span
+                        id="update-order-<?php echo $this->escape($order['id']); ?>-time"><?php echo $this->escape($order['time_finish_view']); ?></span>
+                </li>
+            </ul>
+        </div>
+        <div class="well">
+            <h3><?php _e('Payment'); ?></h3>
+            <ul class="clearfix list-unstyled">
+                <li class="col-md-3"><strong><?php _e('Status'); ?></strong> : <span
+                        id="update-payment-<?php echo $this->escape($order['id']); ?>"
+                        class="update-payment btn <?php echo $this->escape($order['paymentClass']); ?> "><?php echo $this->escape($order['paymentTitle']); ?></span>
+                </li>
+                <li class="col-md-3"><strong><?php _e('Can pay?'); ?></strong> : <span
+                        id="update-canPay-<?php echo $this->escape($order['id']); ?>"
+                        class="update-canPay btn <?php echo $this->escape($order['canPayClass']); ?> "><?php echo $this->escape($order['canPayTitle']); ?></span>
+                </li>
+                <li class="col-md-3"><strong><?php _e('Time'); ?></strong>
+                    : <?php echo $this->escape($order['time_payment_view']); ?></li>
+                <li class="col-md-3"><strong><?php _e('Adapter'); ?></strong> : <span
+                        id="update-payment-<?php echo $this->escape($order['id']); ?>-adapter"><?php echo $this->escape($order['gateway']); ?></span>
+                </li>
+            </ul>
+        </div>
+        <div class="well">
+            <h3><?php _e('Delivery'); ?></h3>
+            <ul class="clearfix list-unstyled">
+                <li class="col-md-3"><strong><?php _e('Status'); ?></strong> : <span
+                        id="update-delivery-<?php echo $this->escape($order['id']); ?>"
+                        class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> "><?php echo $this->escape($order['deliveryTitle']); ?></span>
+                </li>
+                <li class="col-md-3"><strong><?php _e('Time'); ?></strong> : <span
+                        id="update-delivery-<?php echo $this->escape($order['id']); ?>-time"><?php echo $this->escape($order['time_delivery_view']); ?></span>
+                </li>
+                <li class="col-md-3"><strong><?php _e('Method'); ?></strong> :</li>
+                <li class="col-md-3"><strong><?php _e('Packing'); ?></strong> :</li>
+            </ul>
+        </div>
+
+
+
     </div>
     <?php if ($order['type_payment'] == 'installment') { ?>
         <div class="clearfix">

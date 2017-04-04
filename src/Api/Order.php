@@ -76,42 +76,56 @@ class Order extends AbstractApi
             case '1':
                 $return['orderClass'] = 'btn-warning';
                 $return['orderLabel'] = 'label-warning';
+                $return['orderTableBg'] = 'warning';
+                $return['orderBg'] = 'bg-warning';
                 $return['orderTitle'] = __('Not processed');
                 break;
 
             case '2':
                 $return['orderClass'] = 'btn-success';
                 $return['orderLabel'] = 'label-success';
+                $return['orderTableBg'] = 'success';
+                $return['orderBg'] = 'bg-success';
                 $return['orderTitle'] = __('Validated');
                 break;
 
             case '3':
                 $return['orderClass'] = 'btn-danger';
                 $return['orderLabel'] = 'label-danger';
+                $return['orderTableBg'] = 'danger';
+                $return['orderBg'] = 'bg-danger';
                 $return['orderTitle'] = __('Pending');
                 break;
 
             case '4':
                 $return['orderClass'] = 'btn-danger';
                 $return['orderLabel'] = 'label-danger';
+                $return['orderTableBg'] = 'danger';
+                $return['orderBg'] = 'bg-danger';
                 $return['orderTitle'] = __('Orders failed');
                 break;
 
             case '5':
                 $return['orderClass'] = 'btn-danger';
                 $return['orderLabel'] = 'label-danger';
+                $return['orderTableBg'] = 'danger';
+                $return['orderBg'] = 'bg-danger';
                 $return['orderTitle'] = __('Cancelled');
                 break;
 
             case '6':
                 $return['orderClass'] = 'btn-danger';
                 $return['orderLabel'] = 'label-danger';
+                $return['orderTableBg'] = 'danger';
+                $return['orderBg'] = 'bg-danger';
                 $return['orderTitle'] = __('Fraudulent orders');
                 break;
 
             case '7':
                 $return['orderClass'] = 'btn-primary';
                 $return['orderLabel'] = 'label-primary';
+                $return['orderTableBg'] = 'info';
+                $return['orderBg'] = 'bg-primary';
                 $return['orderTitle'] = __('Finished');
                 break;
         }
@@ -290,6 +304,8 @@ class Order extends AbstractApi
         $order['orderClass'] = $status_order['orderClass'];
         $order['orderLabel'] = $status_order['orderLabel'];
         $order['orderTitle'] = $status_order['orderTitle'];
+        $order['orderTableBg'] = $status_order['orderTableBg'];
+        $order['orderBg'] = $status_order['orderBg'];
         // Status payment
         $status_payment = $this->paymentStatus($order['status_payment'], $order['type_payment']);
         $order['paymentClass'] = $status_payment['paymentClass'];
