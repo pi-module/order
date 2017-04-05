@@ -361,7 +361,7 @@ class Order extends AbstractApi
         $rowset = Pi::model('basket', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
-            $list[$row->id]['details'] = Pi::api('order', $module)->getProductDetails($row->product);
+            $list[$row->id]['details'] = Pi::api('order', $module)->getProductDetails($row->product, $row->extra);
             if (empty($row->extra)) {
                 $list[$row->id]['extra'] = array();
             } else {
@@ -392,7 +392,7 @@ class Order extends AbstractApi
         $rowset = Pi::model('basket', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
-            $list[$row->id]['details'] = Pi::api('order', $module)->getProductDetails($row->product);
+            $list[$row->id]['details'] = Pi::api('order', $module)->getProductDetails($row->product, $row->extra);
             if (empty($row->extra)) {
                 $list[$row->id]['extra'] = array();
             } else {

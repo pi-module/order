@@ -203,8 +203,8 @@ $this->footScript()->appendScript($script);
                 <div class="panel-body">
                     <table class="cart-product-list">
                             <tr>
-                                <th>Nom du produit</th>
-                                <th class="col-xs-7">Total</th>
+                                <th><?php _e('Product name') ?></th>
+                                <th class="col-xs-7"><?php _e('Total') ?></th>
                             </tr>
                             <?php $totalDiscount = 0 ?>
                             <?php foreach ($cart['product'] as $product) { ?>
