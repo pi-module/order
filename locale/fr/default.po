@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2017-04-05 09:44+0200\n"
+"POT-Creation-Date: 2017-04-09 20:56+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -315,7 +315,7 @@ msgstr "Cette facture a été payée ou annulée, vous ne pouvez donc pas l'édi
 
 #: src/Controller/Admin/InvoiceController.php:309
 msgid "Your invoice data saved successfully."
-msgstr "Vos informations Facture ont été enregistrées avec succès"
+msgstr "Vos informations Facture ont été enregistrées avec succès."
 
 #: src/Controller/Admin/LocationController.php:71
 msgid "Please add delivery method first"
@@ -361,7 +361,7 @@ msgstr ""
 #: src/Controller/Front/CheckoutController.php:308
 #: src/Controller/Front/CheckoutController.php:549
 msgid "Your cart is empty."
-msgstr "Votre caddy est vide"
+msgstr "Votre caddy est vide."
 
 #: src/Controller/Front/CheckoutController.php:287
 #: src/Controller/Front/CheckoutController.php:554
@@ -383,7 +383,7 @@ msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 "Votre package d'installation sélectionné a été sauvegardé, merci de "
-"compléter vos informations de facturation et de paiement"
+"compléter vos informations de facturation et de paiement."
 
 #: src/Controller/Front/CheckoutController.php:696
 #: src/Form/Element/Gateway.php:28
@@ -404,7 +404,7 @@ msgstr "Ceci n'est pas votre commande."
 
 #: src/Controller/Front/DetailController.php:40
 msgid "This order not active."
-msgstr "Cette commande n'est pas active"
+msgstr "Cette commande n'est pas active."
 
 #: src/Controller/Front/IndexController.php:65
 msgid "Your old payment process remove, please try new payment ation"
@@ -478,7 +478,7 @@ msgstr "Votre adresse IP a a changé : le process de paiement n'est pas valide"
 
 #: src/Controller/Front/PaymentController.php:243
 msgid "Your payment wont successfully."
-msgstr "Votre paiement a échoué"
+msgstr "Votre paiement a échoué."
 
 #: src/Controller/Front/PaymentController.php:249
 msgid "Did not set any request"
