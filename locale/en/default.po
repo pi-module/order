@@ -2377,3 +2377,7 @@ msgstr ""
 #: template/front/checkout.phtml:150
 msgid "You don\'t have an address. Please create your adress we will use for your order. You will be able then to manage several adresses"
 msgstr ""
+
+#: src/Form/AddressForm.php:116
+msgid "Like +33xxxxxxxxx"
+msgstr ""
