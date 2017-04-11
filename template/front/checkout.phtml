@@ -270,6 +270,9 @@ $this->footScript()->appendScript($script);
                         </tr>
                     <?php } ?>
                     </table>
+                    <?php if ($totalDiscount) { ?>
+                        <div class="text-loyalty">You can benefit from a discount loyalty price for this package. The system did apply it on the final price for you.</div>
+                    <?php } ?> 
                 </div>
             </div>
             <div>
