@@ -2166,6 +2166,10 @@ msgstr ""
 msgid "Add new address"
 msgstr ""
 
+#: template/front/checkout.phtml:103 template/front/checkout.phtml:207
+msgid "Edit new address"
+msgstr ""
+
 #: template/front/checkout.phtml:104 template/front/checkout.phtml:185
 msgid "Use it"
 msgstr ""
@@ -2370,3 +2374,6 @@ msgstr ""
 msgid "Select the needed address for your order. You can also add a new address"
 msgstr ""
 
+#: template/front/checkout.phtml:150
+msgid "You don\'t have an address. Please create your adress we will use for your order. You will be able then to manage several adresses"
+msgstr ""

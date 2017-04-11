@@ -64,7 +64,9 @@ class Order extends Standard
                         $matches['id'] = $this->decode($parts[3]);
                     } elseif (isset($parts[1]) && $parts[1] == 'installment') {
                         $matches['action'] = 'installment';
-                    }
+                    } elseif (isset($parts[1])) {
+                        $matches['customer'] = $parts[1];
+                    }  
                     break;
 
                 case 'detail':
@@ -174,6 +176,10 @@ class Order extends Standard
         // Set id
         if (isset($mergedParams['id'])) {
             $url['id'] = $mergedParams['id'];
+        }
+        
+        if (isset($mergedParams['customer'])) {
+            $url['customer'] = $mergedParams['customer'];
         }
 
         // Set credit

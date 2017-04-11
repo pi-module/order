@@ -18,10 +18,12 @@ use Pi\Form\Form as BaseForm;
 
 class AddressForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    protected $_id;
+    public function __construct($id = null, $option = array())
     {
         $this->option = $option;
         $this->config = Pi::service('registry')->config->read('order', 'order');
+        $this->_id = $id;
         parent::__construct($name);
     }
 
@@ -269,7 +271,7 @@ class AddressForm extends BaseForm
             'name' => 'submit_address',
             'type' => 'submit',
             'attributes' => array(
-                'value' => __('Add'),
+                'value' => $this->_id ? __('Edit') :  __('Add'),
                 'class' => 'btn btn-success',
             )
         ));
