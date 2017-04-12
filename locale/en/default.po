@@ -2379,5 +2379,5 @@ msgid "You don\'t have an address. Please create your adress we will use for you
 msgstr ""
 
 #: src/Form/AddressForm.php:116
-msgid "Like +33xxxxxxxxx"
+msgid "example : +33123456789"
 msgstr ""
