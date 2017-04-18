@@ -114,176 +114,178 @@ $this->footScript()->appendScript($script);
     <div class="page-header">
         <h1><?php _e('Checkout'); ?></h1>
     </div>
-    <?php if ($cart['type_payment'] == 'installment') { ?>
-        <div class="col-md-12">
-            <div class="alert alert-info" role="alert">
-                <h2><?php _e('Terms of payment'); ?></h2>
-                <p><?php echo sprintf(__('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2), Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])), Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))); ?></p>
-            </div>
-        </div>
-    <?php } ?>
-    <?php if (isset($cart['can_pay']) && $cart['can_pay'] == 2) { ?>
-        <div class="col-md-12">
-            <div class="alert alert-danger"  role="alert">
-                <p><?php echo __('One of your select products or services have variable stock, than your payment option is disable, we will review your order and if your selected products or services be in stock we active payment option and send notification for you'); ?></p>
-            </div>
-        </div>
-    <?php } ?>
-    <div class="clearfix">
-        <div class="col-md-8">
-            <?php if (isset($formLogin) && !empty($formLogin)) { ?>
+    <div class="row clearfix">
+        <?php if ($cart['type_payment'] == 'installment') { ?>
+            <div class="col-md-12">
                 <div class="alert alert-info" role="alert">
-                    <?php _e('If you registered on website before this time and have user account, please login to system and continue ordering, and if you dont have user account here, please fill register new user account and make order form'); ?>
+                    <h2><?php _e('Terms of payment'); ?></h2>
+                    <p><?php echo sprintf(__('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2), Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])), Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))); ?></p>
                 </div>
-                <div class="page-header">
-                    <h3><?php _e('Login'); ?></h3>
+            </div>
+        <?php } ?>
+        <?php if (isset($cart['can_pay']) && $cart['can_pay'] == 2) { ?>
+            <div class="col-md-12">
+                <div class="alert alert-danger"  role="alert">
+                    <p><?php echo __('One of your select products or services have variable stock, than your payment option is disable, we will review your order and if your selected products or services be in stock we active payment option and send notification for you'); ?></p>
                 </div>
-                <?php echo $this->form($formLogin); ?>
-                <div class="page-header">
-                    <h3><?php _e('Register new user account and make order'); ?></h3>
-                </div>
-            <?php } ?>
-            <p>
-            <h4><?php _e('Select the needed address for your order. You can also add a new address') ?></h4>
-            </p>
-            <?php if (!empty($customers)) { ?>
-                <?php foreach ($customers as $customer) { ?>
-                    <div class="col-md-6 customer-single"
-                         data-id="customerFrom<?php echo $customer['id']; ?>"
-                         data-button="customerFromButton<?php echo $customer['id']; ?>">
-                        <div>
-                            <ul class="list-inline">
-                                <li><?php echo $this->escape($customer['first_name']); ?></li>
-                                <li><?php echo $this->escape($customer['last_name']); ?></li>
-                                <li>( <?php echo $this->escape($customer['email']); ?> )</li>
-                                <?php if (!empty($customer['company'])) { ?>
-                                    <li> - </li>
-                                    <li><?php echo $this->escape($customer['company']); ?></li>
-                                <?php } ?>
-                                <?php if (!empty($customer['address1'])) { ?><p><strong><?php _e('Delivery address'); ?></strong> : <span class="small"><?php echo $this->escape($customer['address1']); ?></span></p><?php } ?>
-                                <?php if (!empty($customer['address2'])) { ?><p><strong><?php _e('Invoicing address'); ?></strong> : <span class="small"><?php echo $this->escape($customer['address2']); ?></span></p><?php } ?>
-                                <?php if (!empty($customer['zip_code'])) { ?><p><?php echo $this->escape($customer['zip_code']); ?></p><?php } ?>
-                                <?php if (!empty($customer['state'])) { ?><p><?php echo $this->escape($customer['state']); ?></p><?php } ?>
-                                <?php if (!empty($customer['city'])) { ?><p><?php echo $this->escape($customer['city']); ?></p><?php } ?>
-                                <?php if (!empty($customer['phone'])) { ?><p><?php echo $this->escape($customer['phone']); ?></p><?php } ?>
-                                <?php if (!empty($customer['mobile'])) { ?><p><?php echo $this->escape($customer['mobile']); ?></p><?php } ?>
-                            </ul>
+            </div>
+        <?php } ?>
+        <div class="clearfix">
+            <div class="col-md-8">
+                <?php if (isset($formLogin) && !empty($formLogin)) { ?>
+                    <div class="alert alert-info" role="alert">
+                        <?php _e('If you registered on website before this time and have user account, please login to system and continue ordering, and if you dont have user account here, please fill register new user account and make order form'); ?>
+                    </div>
+                    <div class="page-header">
+                        <h3><?php _e('Login'); ?></h3>
+                    </div>
+                    <?php echo $this->form($formLogin); ?>
+                    <div class="page-header">
+                        <h3><?php _e('Register new user account and make order'); ?></h3>
+                    </div>
+                <?php } ?>
+                <p>
+                <h4><?php _e('Select the needed address for your order. You can also add a new address') ?></h4>
+                </p>
+                <?php if (!empty($customers)) { ?>
+                    <?php foreach ($customers as $customer) { ?>
+                        <div class="col-md-6 customer-single"
+                             data-id="customerFrom<?php echo $customer['id']; ?>"
+                             data-button="customerFromButton<?php echo $customer['id']; ?>">
+                            <div>
+                                <ul class="list-inline">
+                                    <li><?php echo $this->escape($customer['first_name']); ?></li>
+                                    <li><?php echo $this->escape($customer['last_name']); ?></li>
+                                    <li>( <?php echo $this->escape($customer['email']); ?> )</li>
+                                    <?php if (!empty($customer['company'])) { ?>
+                                        <li> - </li>
+                                        <li><?php echo $this->escape($customer['company']); ?></li>
+                                    <?php } ?>
+                                    <?php if (!empty($customer['address1'])) { ?><p><strong><?php _e('Delivery address'); ?></strong> : <span class="small"><?php echo $this->escape($customer['address1']); ?></span></p><?php } ?>
+                                    <?php if (!empty($customer['address2'])) { ?><p><strong><?php _e('Invoicing address'); ?></strong> : <span class="small"><?php echo $this->escape($customer['address2']); ?></span></p><?php } ?>
+                                    <?php if (!empty($customer['zip_code'])) { ?><p><?php echo $this->escape($customer['zip_code']); ?></p><?php } ?>
+                                    <?php if (!empty($customer['state'])) { ?><p><?php echo $this->escape($customer['state']); ?></p><?php } ?>
+                                    <?php if (!empty($customer['city'])) { ?><p><?php echo $this->escape($customer['city']); ?></p><?php } ?>
+                                    <?php if (!empty($customer['phone'])) { ?><p><?php echo $this->escape($customer['phone']); ?></p><?php } ?>
+                                    <?php if (!empty($customer['mobile'])) { ?><p><?php echo $this->escape($customer['mobile']); ?></p><?php } ?>
+                                </ul>
 
-                            <div class="text-center user-it-button">
-                                <button id="customerFromButton<?php echo $customer['id']; ?>" class="showCustomerFrom btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
-                                    <?php _e('Use it'); ?>
-                                </button>
-                                <sma class="label label-success hidden selected-address">
-                                    <span class="fa fa-check"> <?php _e('Selected address') ?> </span>
-                                </sma>
+                                <div class="text-center user-it-button">
+                                    <button id="customerFromButton<?php echo $customer['id']; ?>" class="showCustomerFrom btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
+                                        <?php _e('Use it'); ?>
+                                    </button>
+                                    <sma class="label label-success hidden selected-address">
+                                        <span class="fa fa-check"> <?php _e('Selected address') ?> </span>
+                                    </sma>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <?php } ?>
-                <div class="clearfix"></div>
-                <div class=" alert  clearfix" data-id="customerFromNew" data-button="customerFromButtonNew">
-                    <div>
-                        <div class="col-md-12">
-                            <button id="customerFromButtonNew" class=" btn btn-simple btn-sm">
-                                <?php _e('Add new address'); ?>
-                            </button>
+                    <?php } ?>
+                    <div class="clearfix"></div>
+                    <div class=" alert  clearfix" data-id="customerFromNew" data-button="customerFromButtonNew">
+                        <div>
+                            <div class="col-md-12">
+                                <button id="customerFromButtonNew" class=" btn btn-simple btn-sm">
+                                    <?php _e('Add new address'); ?>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="customerFromNew" class="clearfix <?php if (!$check) { echo 'hidden';} ?>">
+                            <?php echo $this->form($forms['new'], 'vertical'); ?>
                         </div>
                     </div>
-                    <div id="customerFromNew" class="clearfix <?php if (!$check) { echo 'hidden';} ?>">
-                        <?php echo $this->form($forms['new'], 'vertical'); ?>
-                    </div>
-                </div>
-            <?php } else { ?>
-                <?php echo $this->form($forms['new'], 'vertical'); ?>
-            <?php } ?>
-        </div>
-        <div class="col-md-4 cart-product">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><?php _e('Your order'); ?></h3>
-                </div>
-                <div class="panel-body">
-                    <table class="cart-product-list">
-                        <tr>
-                            <th><?php _e('Product name') ?></th>
-                            <th class="col-xs-7"><?php _e('Total') ?></th>
-                        </tr>
-                        <?php $totalDiscount = 0 ?>
-                        <?php foreach ($cart['product'] as $product) { ?>
-                            <tr>
-                                <td>
-                                    <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
-                                        <?php echo $this->escape($product['details']['title']); ?>
-                                    </a>
-                                    <?php if (!empty($product['details']['thumbUrl'])) { ?>
-                                        <div class="col-xs-5">
-                                            <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
-                                                <img class="img-responsive" src="<?php echo $this->escape($product['details']['thumbUrl']); ?>">
-                                            </a>
-                                        </div>
-                                    <?php } ?>
-                                </td>
-                                <td>
-                                    <?php echo $this->escape($product['product_price_view']); ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <?php _e('Total Discount'); ?>
-                                    <?php if (isset($product['discount'])) { ?>
-                                        (<?php echo $product['discount'] ?>%)
-                                    <?php } ?>
-                                </td>
-                                <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?></td>
-                            </tr>
-                            <?php $totalDiscount += $product['discount_price']; ?>
-                        <?php } ?>
-                        <tr>
-                            <td><?php _e('Total Price ext VAT'); ?></td>
-                            <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $totalDiscount)); ?></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <?php _e('Total Vat'); ?>
-                                <?php if (isset($product['vat'])) { ?>
-                                    (<?php echo $product['vat'] ?>%)
-                                <?php } ?>
-                            </td>
-                            <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?></td>
-                        </tr>
-                        <?php if ($price['shipping'] > 0) { ?>
-                            <tr>
-                                <td><?php _e('Total Shipping'); ?></td>
-                                <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['shipping'])); ?></td>
-                            </tr>
-                        <?php } ?>
-                        <?php if ($cart['type_payment'] != 'installment') { ?>
-                            <tr class="panel-footer">
-                                <td class="list-inline">
-                                    <strong>
-                                        <?php _e('Final Price incl. VAT'); ?>
-                                    </strong>
-                                </td>
-                                <td>
-                                    <sma class="label label-success">
-                                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?>
-                                    </sma>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                    </table>
-                </div>
-            </div>
-            <div>
-                <?php if(isset($forms['order'])) { ?>
-                    <?php echo $this->form($forms['order'], 'vertical'); ?>
+                <?php } else { ?>
+                    <?php echo $this->form($forms['new'], 'vertical'); ?>
                 <?php } ?>
             </div>
-            <?php if (!empty($config['text_description_checkup'])) { ?>
-                <div class="checkout-description">
-                    <?php echo $config['text_description_checkup']; ?>
+            <div class="col-md-4 cart-product">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><?php _e('Your order'); ?></h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="cart-product-list">
+                            <tr>
+                                <th><?php _e('Product name') ?></th>
+                                <th class="col-xs-7"><?php _e('Total') ?></th>
+                            </tr>
+                            <?php $totalDiscount = 0 ?>
+                            <?php foreach ($cart['product'] as $product) { ?>
+                                <tr>
+                                    <td>
+                                        <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
+                                            <?php echo $this->escape($product['details']['title']); ?>
+                                        </a>
+                                        <?php if (!empty($product['details']['thumbUrl'])) { ?>
+                                            <div class="col-xs-5">
+                                                <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
+                                                    <img class="img-responsive" src="<?php echo $this->escape($product['details']['thumbUrl']); ?>">
+                                                </a>
+                                            </div>
+                                        <?php } ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $this->escape($product['product_price_view']); ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <?php _e('Total Discount'); ?>
+                                        <?php if (isset($product['discount'])) { ?>
+                                            (<?php echo $product['discount'] ?>%)
+                                        <?php } ?>
+                                    </td>
+                                    <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?></td>
+                                </tr>
+                                <?php $totalDiscount += $product['discount_price']; ?>
+                            <?php } ?>
+                            <tr>
+                                <td><?php _e('Total Price ext VAT'); ?></td>
+                                <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $totalDiscount)); ?></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <?php _e('Total Vat'); ?>
+                                    <?php if (isset($product['vat'])) { ?>
+                                        (<?php echo $product['vat'] ?>%)
+                                    <?php } ?>
+                                </td>
+                                <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?></td>
+                            </tr>
+                            <?php if ($price['shipping'] > 0) { ?>
+                                <tr>
+                                    <td><?php _e('Total Shipping'); ?></td>
+                                    <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['shipping'])); ?></td>
+                                </tr>
+                            <?php } ?>
+                            <?php if ($cart['type_payment'] != 'installment') { ?>
+                                <tr class="panel-footer">
+                                    <td class="list-inline">
+                                        <strong>
+                                            <?php _e('Final Price incl. VAT'); ?>
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <sma class="label label-success">
+                                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?>
+                                        </sma>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </table>
+                    </div>
                 </div>
-            <?php } ?>
+                <div>
+                    <?php if(isset($forms['order'])) { ?>
+                        <?php echo $this->form($forms['order'], 'vertical'); ?>
+                    <?php } ?>
+                </div>
+                <?php if (!empty($config['text_description_checkup'])) { ?>
+                    <div class="checkout-description">
+                        <?php echo $config['text_description_checkup']; ?>
+                    </div>
+                <?php } ?>
+            </div>
         </div>
     </div>
 </div>
