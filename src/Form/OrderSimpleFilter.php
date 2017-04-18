@@ -28,7 +28,7 @@ class OrderSimpleFilter extends InputFilter
             'required' => false,
         ));
         // id_number
-        if ($config['order_idnumber']) {
+        /* if ($config['order_idnumber']) {
             $this->add(array(
                 'name' => 'id_number',
                 'required' => true,
@@ -38,7 +38,7 @@ class OrderSimpleFilter extends InputFilter
                     ),
                 ),
             ));
-        }
+        } */
         // packing
         if ($config['order_packing']) {
             $this->add(array(
