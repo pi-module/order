@@ -2239,7 +2239,7 @@ msgstr "ساخت حساب کاربری در وب سایت و ثبت سفارش"
 msgid ""
 "Select the needed address for your order. You can also add a new address"
 msgstr ""
-"مضخصات و آدرس مورد نظر خود را برای ثبت این سفارش انتخاب کنید ، همچنین شما می "
+"مشخصات و آدرس مورد نظر خود را برای ثبت این سفارش انتخاب کنید ، همچنین شما می "
 "توانید آدرس و مشخصات جدیدی ثبت نمایید"
 
 #: template/front/checkout.phtml:164
