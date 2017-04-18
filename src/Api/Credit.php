@@ -47,12 +47,11 @@ class Credit extends AbstractApi
                 $amountDetail = json::decode($credit['amount_detail'], true);
                 $credit['amount_detail_view'] = array();
                 foreach ($amountDetail as $module => $amount) {
-                    $credit['amount_detail_view'][$module] = array(
-                        'module_name' => $module,
-                        'module_title' => $moduleList[$module]['title'],
-                        'amount' => $amount,
-                        'amount_view' => Pi::api('api', 'order')->viewPrice($amount),
-                    );
+                    $credit['amount_detail_view'][$module] = array();
+                    $credit['amount_detail_view'][$module]['module_name'] = $module;
+                    $credit['amount_detail_view'][$module]['module_title'] = $moduleList[$module]['title'];
+                    $credit['amount_detail_view'][$module]['amount'] = $amount;
+                    $credit['amount_detail_view'][$module]['amount_view'] = Pi::api('api', 'order')->viewPrice($amount);
                 }
             }
         } else {
@@ -66,7 +65,7 @@ class Credit extends AbstractApi
         return $credit;
     }
 
-    public function addHistory($history, $order = 0 , $invoice = 0, $status = 0)
+    public function addHistory($history, $order = 0, $invoice = 0, $status = 0)
     {
         $row = Pi::model('history', $this->getModule())->createRow();
         $row->uid = isset($history['uid']) ? $history['uid'] : Pi::user()->getId();

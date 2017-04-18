@@ -54,17 +54,15 @@ class CreditFilter extends InputFilter
             ),
         ));
         // Set module
-        if ($option['type'] == 'module') {
-            $this->add(array(
-                'name' => 'module',
-                'required' => true,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
+        $this->add(array(
+            'name' => 'module',
+            'required' => true,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
                 ),
-            ));
-        }
+            ),
+        ));
         // message_user
         $this->add(array(
             'name' => 'message_user',

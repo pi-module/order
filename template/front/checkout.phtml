@@ -130,7 +130,7 @@ $this->footScript()->appendScript($script);
         </div>
     <?php } ?>
     <div class="clearfix">
-        <div class="col-md-7">
+        <div class="col-md-8">
             <?php if (isset($formLogin) && !empty($formLogin)) { ?>
                 <div class="alert alert-info" role="alert">
                     <?php _e('If you registered on website before this time and have user account, please login to system and continue ordering, and if you dont have user account here, please fill register new user account and make order form'); ?>
@@ -148,7 +148,7 @@ $this->footScript()->appendScript($script);
             </p>
             <?php if (!empty($customers)) { ?>
                 <?php foreach ($customers as $customer) { ?>
-                    <div class="col-md-3 customer-single"
+                    <div class="col-md-6 customer-single"
                          data-id="customerFrom<?php echo $customer['id']; ?>"
                          data-button="customerFromButton<?php echo $customer['id']; ?>">
                          <div>
@@ -169,12 +169,14 @@ $this->footScript()->appendScript($script);
                             <?php if (!empty($customer['mobile'])) { ?><p><?php echo $this->escape($customer['mobile']); ?></p><?php } ?>
                             </ul>
                     
-                            <button id="customerFromButton<?php echo $customer['id']; ?>" class="showCustomerFrom btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
-                                <?php _e('Use it'); ?>
-                            </button>
-                            <sma class="label label-success hidden selected-address">
-                                <span class="fa fa-check"> <?php _e('Selected address') ?> </span>
-                            </sma>
+                            <div class="text-center user-it-button">
+                                <button id="customerFromButton<?php echo $customer['id']; ?>" class="showCustomerFrom btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
+                                    <?php _e('Use it'); ?>
+                                </button>
+                                <sma class="label label-success hidden selected-address">
+                                    <span class="fa fa-check"> <?php _e('Selected address') ?> </span>
+                                </sma>
+                            </div>
                           </div>
                     </div>
                 <?php } ?>
@@ -188,11 +190,11 @@ $this->footScript()->appendScript($script);
                         </div>
                     </div>
                     <div id="customerFromNew" class="clearfix <?php if (!$check) { echo 'hidden';} ?>">
-                            <?php echo $this->form($forms['new']); ?>
+                            <?php echo $this->form($forms['new'], 'vertical'); ?>
                     </div>
                 </div>
             <?php } else { ?>
-                <?php echo $this->form($forms['new']); ?>
+                <?php echo $this->form($forms['new'], 'vertical'); ?>
             <?php } ?>
         </div>
         <div class="col-md-4 cart-product">
