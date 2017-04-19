@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2017-04-05 09:38+0200\n"
+"POT-Creation-Date: 2017-04-11 12:03+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -9,37 +9,12 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0\n"
+"X-Generator: Poedit 2.0.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _a;_t\n"
 "X-Poedit-Basepath: ../..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SearchPath-0: .\n"
-
-#: config/block.php:16
-msgid "Orders detail"
-msgstr "Détail des commandes"
-
-#: config/block.php:17
-msgid "Simple orders detail"
-msgstr "Détail des commandes unique"
-
-#: config/block.php:23 config/config.php:49
-msgid "Installment"
-msgstr "Installations"
-
-#: config/block.php:24
-msgid "Installment orders detail"
-msgstr "Détail des commandes Installations"
-
-#: config/block.php:30 config/config.php:37 config/navigation.php:89
-#: config/page.php:47 config/page.php:73 config/permission.php:47
-msgid "Credit"
-msgstr "Compte Client"
-
-#: config/block.php:31
-msgid "User credit information"
-msgstr "Information Compte Utilisateur"
 
 #: config/config.php:17
 msgid "Admin"
@@ -61,13 +36,22 @@ msgstr "Personnaliser"
 msgid "Payment"
 msgstr "Paiement"
 
+#: config/config.php:37 config/block.php:30 config/navigation.php:89
+#: config/permission.php:47 config/page.php:47 config/page.php:73
+msgid "Credit"
+msgstr "Compte Client"
+
 #: config/config.php:41
 msgid "Notification"
 msgstr "Notifications"
 
 #: config/config.php:45
 msgid "Cron"
-msgstr "Cron"
+msgstr ""
+
+#: config/config.php:49 config/block.php:23
+msgid "Installment"
+msgstr "Installations"
 
 #: config/config.php:57
 msgid "Perpage"
@@ -296,33 +280,32 @@ msgstr "URL de l'image du website"
 
 #: config/config.php:368
 msgid "Use on some payment gateway like paypal."
-msgstr "Utilisé par plusieurs passerelles de paiement comme Paypal."
+msgstr "Utilisé par plusieurs passerelles de paiement comme Paypal"
 
 #: config/config.php:374
+#, fuzzy
 msgid "Payment methods"
-msgstr "Méthodes de paiment"
+msgstr "Paiement"
 
 #: config/config.php:381
 msgid "Active credit system"
-msgstr "Activer le Crédit en Compte"
+msgstr ""
 
 #: config/config.php:382
 msgid "User can use credit to pay invoice and see history"
 msgstr ""
-"L'utilisateur peut utiliser son crédit en compte pour payer sa facture et "
-"voir l'historique"
 
 #: config/config.php:388
 msgid "Credit system type"
-msgstr "Type de Credit en Compte"
+msgstr ""
 
 #: config/config.php:394
 msgid "One credit amount for use on all modules"
-msgstr "Un seul montant de Crédit en compte pour tous les modules"
+msgstr ""
 
 #: config/config.php:395
 msgid "Each module have special credit amount"
-msgstr "Chaque module a un montant dédié de Crédit en Compte"
+msgstr ""
 
 #: config/config.php:406
 msgid "New order notification to user"
@@ -410,7 +393,7 @@ msgstr "Cher, Chère %s %s, vous avez des factures échues depuis %s jours"
 
 #: config/config.php:471
 msgid "Active this module cron system"
-msgstr "Activer le système de cron du module"
+msgstr ""
 
 #: config/config.php:480
 msgid "Reduce from user credit"
@@ -660,57 +643,70 @@ msgstr "Plan 10 : Total"
 msgid "Description for checkup page"
 msgstr "Description pour la page de Checkout"
 
-#: config/module.php:16 config/page.php:17 config/permission.php:17
-msgid "Orders"
-msgstr "Commandes"
+#: config/block.php:16
+msgid "Orders detail"
+msgstr "Détail des commandes"
 
-#: config/module.php:17
-msgid "Manage order process and payment"
-msgstr "Gérer le process de commande et de paiement"
+#: config/block.php:17
+msgid "Simple orders detail"
+msgstr "Détail des commandes unique"
+
+#: config/block.php:24
+msgid "Installment orders detail"
+msgstr "Détail des commandes Installations"
+
+#: config/block.php:31
+msgid "User credit information"
+msgstr "Information Compte Utilisateur"
 
 #: config/navigation.php:19
 msgid "Orders and invoices"
-msgstr "Commandes et Factures"
+msgstr ""
 
 #: config/navigation.php:25
+#, fuzzy
 msgid "Order list"
-msgstr "Liste des Commandes"
+msgstr "Commandes"
 
 #: config/navigation.php:31
+#, fuzzy
 msgid "Invoice list"
-msgstr "Liste de factures"
+msgstr "Facture"
 
-#: config/navigation.php:37 config/page.php:27 config/permission.php:27
+#: config/navigation.php:37 config/permission.php:27 config/page.php:27
 msgid "Logs"
 msgstr "Logs"
 
 #: config/navigation.php:43
 msgid "New order"
-msgstr "Nouvelle commande"
+msgstr ""
 
-#: config/navigation.php:51 config/page.php:32 config/permission.php:32
+#: config/navigation.php:51 config/permission.php:32 config/page.php:32
 msgid "Gateway"
 msgstr "Passerelle"
 
 #: config/navigation.php:57
+#, fuzzy
 msgid "Delivery and location"
-msgstr "Livraison et lieu"
+msgstr "Informations vendeur"
 
-#: config/navigation.php:63 config/page.php:37 config/permission.php:37
+#: config/navigation.php:63 config/permission.php:37 config/page.php:37
 msgid "Delivery"
 msgstr "Livraison"
 
-#: config/navigation.php:69 config/page.php:42 config/permission.php:42
+#: config/navigation.php:69 config/permission.php:42 config/page.php:42
 msgid "Location"
 msgstr "Lieu"
 
 #: config/navigation.php:75
+#, fuzzy
 msgid "New delivery"
-msgstr "Nouvelle livraison"
+msgstr "Livraison"
 
 #: config/navigation.php:81
+#, fuzzy
 msgid "New location"
-msgstr "Nouveau lieu de livraison"
+msgstr "Lieu"
 
 #: config/navigation.php:95
 msgid "User list"
@@ -724,9 +720,17 @@ msgstr "Historique"
 msgid "Add"
 msgstr "Ajouter"
 
-#: config/page.php:22 config/permission.php:22
+#: config/permission.php:17 config/page.php:17 config/module.php:16
+msgid "Orders"
+msgstr "Commandes"
+
+#: config/permission.php:22 config/page.php:22
 msgid "Invoice"
 msgstr "Facture"
+
+#: config/permission.php:55
+msgid "Global public resource"
+msgstr "Ressource publique globale"
 
 #: config/page.php:55
 msgid "Index page"
@@ -740,9 +744,9 @@ msgstr "Checkout"
 msgid "Detail"
 msgstr "Détails"
 
-#: config/permission.php:55
-msgid "Global public resource"
-msgstr "Ressource publique globale"
+#: config/module.php:17
+msgid "Manage order process and payment"
+msgstr "Gérer le process de commande et de paiement"
 
 #~ msgid "Show promo"
 #~ msgstr "Afficher les promos"

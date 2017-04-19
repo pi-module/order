@@ -23,7 +23,11 @@ class AddressFilter extends InputFilter
     {
         // Get config
         $config = Pi::service('registry')->config->read('order', 'order');
-
+        $this->add(array(
+                'name' => 'customer_id',
+                'required' => false,
+        ));
+        
         // name
         if ($config['order_name']) {
             // first_name

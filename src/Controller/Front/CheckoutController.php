@@ -272,6 +272,7 @@ class CheckoutController extends IndexController
 
         // Set check
         $check = false;
+        $editAddress = false;
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Set cart
@@ -446,7 +447,18 @@ class CheckoutController extends IndexController
                     } 
                 }
             }
-        } 
+        } else {
+            $customer = $this->params('customer');
+            if ($customer) {
+                $formAddress = new AddressForm($customer);
+                $formAddress->setInputFilter(new AddressFilter($option));
+                $values = $customers[$customer];
+                $values['customer_id'] = $customer;
+                $formAddress->setData($values);
+                $check = true;
+                $editAddress = true;
+            }
+        }
 
         // Set new form
         $user = Pi::api('user', 'order')->getUserInformation();
@@ -534,6 +546,7 @@ class CheckoutController extends IndexController
         $this->view()->assign('config', $config);
         $this->view()->assign('customers', $customers);
         $this->view()->assign('check', $check);
+        $this->view()->assign('editAddress', $editAddress);
     }
 
     public function installmentAction()

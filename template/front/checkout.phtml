@@ -128,6 +128,57 @@ $this->footScript()->appendScript($script);
                 <div class="alert alert-danger"  role="alert">
                     <p><?php echo __('One of your select products or services have variable stock, than your payment option is disable, we will review your order and if your selected products or services be in stock we active payment option and send notification for you'); ?></p>
                 </div>
+            <?php } ?>
+            <p>
+                <?php if (!empty($customers)) { ?> 
+                <h3><?php _e('Select the needed address for your order. You can also add a new address') ?></h3>
+                <?php } else { ?>
+                    <h3><?php _e('You don\'t have an address. Please create your adress we will use for your order. You will be able then to manage several adresses') ?></h3>
+                <?php } ?>
+            </p>
+            <?php if (!empty($customers)) { ?>
+                <?php foreach ($customers as $customer) { ?>
+                    <div class="col-md-3 customer-single"
+                         data-id="customerFrom<?php echo $customer['id']; ?>"
+                         data-button="customerFromButton<?php echo $customer['id']; ?>">
+                         <div>
+                            <ul class="list-inline">
+                                <li><?php echo $this->escape($customer['first_name']); ?></li>
+                                <li><?php echo $this->escape($customer['last_name']); ?></li>
+                                <li>( <?php echo $this->escape($customer['email']); ?> )</li>
+                                <?php if (!empty($customer['company'])) { ?>
+                                    <li> - </li>
+                                    <li><?php echo $this->escape($customer['company']); ?></li>
+                                <?php } ?>
+                                <?php if (!empty($customer['address1'])) { ?><p><strong><?php _e('Delivery address'); ?></strong> : <span class="small"><?php echo $this->escape($customer['address1']); ?></span></p><?php } ?>
+                            <?php if (!empty($customer['address2'])) { ?><p><strong><?php _e('Invoicing address'); ?></strong> : <span class="small"><?php echo $this->escape($customer['address2']); ?></span></p><?php } ?>
+                            <?php if (!empty($customer['zip_code'])) { ?><p><?php echo $this->escape($customer['zip_code']); ?></p><?php } ?>
+                                <?php if (!empty($customer['state'])) { ?><p><?php echo $this->escape($customer['state']); ?></p><?php } ?>
+                            <?php if (!empty($customer['city'])) { ?><p><?php echo $this->escape($customer['city']); ?></p><?php } ?>
+                                <?php if (!empty($customer['phone'])) { ?><p><?php echo $this->escape($customer['phone']); ?></p><?php } ?>
+                            <?php if (!empty($customer['mobile'])) { ?><p><?php echo $this->escape($customer['mobile']); ?></p><?php } ?>
+                            </ul>
+                    
+                            <button id="customerFromButton<?php echo $customer['id']; ?>" class="showCustomerFrom btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
+                                <?php _e('Use it'); ?>
+                            </button>
+                             <sma class="label label-success hidden selected-address">
+                                <span class="fa fa-check"> <?php _e('Selected address') ?> </span>
+                            </sma>
+                             <a href="<?php echo     Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'index', 'customer' => $customer['id']))) ?>" class=" btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
+                                <?php _e('Edit'); ?>
+                            </a>
+                           
+                          </div>
+                    </div>
+                <?php } ?>
+                <div class="clearfix"></div>
+                <div class=" alert  clearfix" data-id="customerFromNew" data-button="customerFromButtonNew">
+                    <div>
+                        <div class="col-md-12">
+                            <button id="customerFromButtonNew" class=" btn btn-simple btn-sm">
+                                <?php echo $editAddress ? __('Edit new address') : __('Add new address'); ?>
+                            </button>
             </div>
         <?php } ?>
         <div class="clearfix">
@@ -279,6 +330,10 @@ $this->footScript()->appendScript($script);
                     <?php if(isset($forms['order'])) { ?>
                         <?php echo $this->form($forms['order'], 'vertical'); ?>
                     <?php } ?>
+                    </table>
+                    <?php if ($totalDiscount) { ?>
+                        <div class="text-loyalty">You can benefit from a discount loyalty price for this package. The system did apply it on the final price for you.</div>
+                    <?php } ?> 
                 </div>
                 <?php if (!empty($config['text_description_checkup'])) { ?>
                     <div class="checkout-description">

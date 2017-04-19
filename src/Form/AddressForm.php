@@ -18,10 +18,12 @@ use Pi\Form\Form as BaseForm;
 
 class AddressForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    protected $_id;
+    public function __construct($id = null, $option = array())
     {
         $this->option = $option;
         $this->config = Pi::service('registry')->config->read('order', 'order');
+        $this->_id = $id;
         parent::__construct($name);
     }
 
@@ -110,7 +112,8 @@ class AddressForm extends BaseForm
                     'label' => __('Phone'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
+                    'type' => 'tel',
+                    'pattern'=> "^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$",
                     'description' => '',
 
                 )
@@ -124,7 +127,9 @@ class AddressForm extends BaseForm
                     'label' => __('Mobile'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
+                   'type' => 'tel',
+                   'title'=> __("example : +33123456789"),
+                    'pattern'=> "^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$",
                     'description' => '',
                     'required' => true,
                 )
@@ -282,7 +287,7 @@ class AddressForm extends BaseForm
             'name' => 'submit_address',
             'type' => 'submit',
             'attributes' => array(
-                'value' => __('Add'),
+                'value' => $this->_id ? __('Edit') :  __('Add'),
                 'class' => 'btn btn-success',
             )
         ));

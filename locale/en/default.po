@@ -2173,12 +2173,21 @@ msgstr ""
 msgid "Method"
 msgstr ""
 
+<<<<<<< HEAD
+#: template/front/checkout.phtml:103 template/front/checkout.phtml:207
+msgid "Edit new address"
+msgstr ""
+
+#: template/front/checkout.phtml:104 template/front/checkout.phtml:185
+msgid "Use it"
+=======
 #: template/front/checkout.phtml:104
 msgid "Price : "
 msgstr ""
 
 #: template/front/checkout.phtml:105
 msgid "Time : "
+>>>>>>> upstream/master
 msgstr ""
 
 #: template/front/checkout.phtml:121
@@ -2380,4 +2389,24 @@ msgstr ""
 
 #: template/front/pay.phtml:12
 msgid "You'll be redirected in few seconds to gateway Checkout Page"
+msgstr ""
+
+#: template/front/checkout.phtml:191
+msgid "Your order"
+msgstr ""
+
+#: template/front/checkout.phtml:171
+msgid "Selected address"
+msgstr ""
+
+#: template/front/checkout.phtml:148
+msgid "Select the needed address for your order. You can also add a new address"
+msgstr ""
+
+#: template/front/checkout.phtml:150
+msgid "You don\'t have an address. Please create your adress we will use for your order. You will be able then to manage several adresses"
+msgstr ""
+
+#: src/Form/AddressForm.php:116
+msgid "example : +33123456789"
 msgstr ""
