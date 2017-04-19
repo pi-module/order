@@ -86,8 +86,6 @@ class Credit extends AbstractApi
 
     public function acceptOrderCredit($order, $invoice = 0)
     {
-        // Get config
-        $config = Pi::service('registry')->config->read($this->getModule());
         // Update history
         $where = array('order' => $order);
         $select = Pi::model('history', $this->getModule())->select()->where($where)->limit(1);
@@ -134,7 +132,7 @@ class Credit extends AbstractApi
         }
     }
 
-    public function addCredit($uid, $amount, $fluctuation = 'increase', $action = 'manual', $messageAdmin = '', $messageUser = '', $module = 'shop')
+    public function addCredit($uid, $amount, $fluctuation = 'increase', $action = 'manual', $messageAdmin = '', $messageUser = '', $module = 'order')
     {
         // Set result
         $result = array(
