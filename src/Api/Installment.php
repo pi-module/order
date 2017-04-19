@@ -199,7 +199,7 @@ class Installment extends AbstractApi
         // Check allow
         $allowed = 1;
         if ($config['installment_credit']) {
-            if ($installmentCredit > $credit) {
+            if ($installmentCredit > $credit['amount']) {
                 $allowed = 0;
             }
         }
