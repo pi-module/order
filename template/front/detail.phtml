@@ -383,7 +383,7 @@
                         <div class="col-md-5 text-right">
                             <?php if ($invoice['can_pay'] == 1 && $invoice['allowPayment']) { ?>
                                 <?php if ($invoice['allowPayment']) { ?>
-                                    <?php if ($config['credit_active'] && isset($credit)) { ?>
+                                    <?php if ($config['credit_active'] && isset($credit) && $order['type_payment'] != 'installment') { ?>
                                         <?php if ($config['credit_type'] == 'general') {
                                             $creditAmount = $credit['amount'];
                                         } elseif ($config['credit_type'] == 'module') {

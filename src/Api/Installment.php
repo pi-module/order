@@ -149,8 +149,8 @@ class Installment extends AbstractApi
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Get user
-        if (empty($user) && $config['installment_credit']) {
-            $user = Pi::api('user', 'order')->getUserInformation();
+        if ($config['installment_credit']) {
+            $credit = Pi::api('credit', 'order')->getCredit();
         }
         // Get plan
         $planList = $this->planList();
@@ -199,7 +199,7 @@ class Installment extends AbstractApi
         // Check allow
         $allowed = 1;
         if ($config['installment_credit']) {
-            if ($installmentCredit > $user['credit']) {
+            if ($installmentCredit > $credit) {
                 $allowed = 0;
             }
         }

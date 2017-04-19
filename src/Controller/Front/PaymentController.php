@@ -62,7 +62,7 @@ class PaymentController extends IndexController
             $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This order not avtice.'));
         }
         // process credit
-        if ($credit == 1 && $config['credit_active'] && Pi::service('authentication')->hasIdentity()) {
+        if ($credit == 1 && $config['credit_active'] && Pi::service('authentication')->hasIdentity() && $order['type_payment'] != 'installment') {
             $creditInformation = Pi::api('credit', 'order')->getCredit();
             if ($config['credit_type'] == 'general') {
                 $creditAmount = $creditInformation['amount'];
@@ -220,8 +220,6 @@ class PaymentController extends IndexController
                 $url = Pi::api('order', 'order')->updateOrder($verify['order'], $verify['invoice']);
                 // Remove processing
                 Pi::api('processing', 'order')->removeProcessing();
-                // Update credit
-                Pi::api('credit', 'order')->acceptOrderCredit($verify['order'], $verify['invoice']);
                 // jump to module
                 $message = __('Your payment were successfully. Back to module');
                 $this->jump($url, $message);
@@ -303,9 +301,7 @@ class PaymentController extends IndexController
                     if ($verify['status'] == 1) {
                         $url = Pi::api('order', 'order')->updateOrder($verify['order'], $verify['invoice']);
                         Pi::api('invoice', 'order')->setBackUrl($verify['invoice'], $url);
-                        // Update credit
-                        Pi::api('credit', 'order')->acceptOrderCredit($verify['order'], $verify['invoice']);
-
+                        // Add log
                         $log = array();
                         $log['gateway'] = 'paypal';
                         $log['value'] = Json::encode(array(10, $verify, $url));
@@ -409,8 +405,6 @@ class PaymentController extends IndexController
         $url = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
         // Remove processing
         Pi::api('processing', 'order')->removeProcessing();
-        // Update credit
-        Pi::api('credit', 'order')->acceptOrderCredit($invoice['order'], $invoice['id']);
         // jump to module
         $message = __('Your payment were successfully. Back to module');
         $this->jump($url, $message);
