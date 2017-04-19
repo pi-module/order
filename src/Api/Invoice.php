@@ -218,8 +218,8 @@ class Invoice extends AbstractApi
                         }
                         // Update user credit
                         if ($config['installment_credit']) {
-                            $credit = $user['credit'] - $total['installment'];
-                            Pi::model('profile', 'user')->update(array('credit' => $credit), array('uid' => $uid));
+                            $message = __('Decrease credit for installment system');
+                            Pi::api('credit', 'order')->addCredit($uid, $total['installment'], 'decrease', 'automatic', $message, $message);
                         }
                         // Update order
                         $totalPrice = ($total['price'] + $order['shipping_price'] + $order['packing_price'] + $order['setup_price'] + $order['vat_price']) - $order['discount_price'];
@@ -373,12 +373,8 @@ class Invoice extends AbstractApi
             $invoice->save();
             // Update user credit
             if ($config['installment_credit'] && $order['type_payment'] == 'installment') {
-                // Get user
-                $user = Pi::api('user', 'order')->getUserInformation();
-                $uid = Pi::user()->getId();
-                // Update
-                $credit = $user['credit'] + $invoice->credit_price;
-                Pi::model('profile', 'user')->update(array('credit' => $credit), array('uid' => $uid));
+                $message = __('Increase credit for cancel invoice');
+                Pi::api('credit', 'order')->addCredit(Pi::user()->getId(), $invoice->credit_price, 'increase', 'automatic', $message, $message);
             }
         }
     }
@@ -396,12 +392,8 @@ class Invoice extends AbstractApi
         $invoice->save();
         // Update user credit
         if ($config['installment_credit'] && $order['type_payment'] == 'installment') {
-            // Get user
-            $user = Pi::api('user', 'order')->getUserInformation();
-            $uid = Pi::user()->getId();
-            // Update
-            $credit = $user['credit'] + $invoice->credit_price;
-            Pi::model('profile', 'user')->update(array('credit' => $credit), array('uid' => $uid));
+            $message = __('Increase credit for pay invoice');
+            Pi::api('credit', 'order')->addCredit(Pi::user()->getId(), $invoice->credit_price, 'increase', 'automatic', $message, $message);
         }
         // Canonize invoice
         $invoice = $this->canonizeInvoice($invoice);

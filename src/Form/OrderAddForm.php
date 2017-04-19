@@ -281,6 +281,19 @@ class OrderAddForm extends BaseForm
                 )
             ));
         }
+        // type_payment
+        $this->add(array(
+            'name' => 'type_payment',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Type payment'),
+                'value_options' => array(
+                    'onetime' => __('Onetime'),
+                    'installment' => __('Installment'),
+                    'free' => __('Free'),
+                ),
+            ),
+        ));
         // type_commodity
         $this->add(array(
             'name' => 'type_commodity',

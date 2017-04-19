@@ -354,7 +354,7 @@
                     </div>
                 <?php } ?>
                 <div class="clearfix row">
-                    <div class="<?php if ($invoice['status'] == 1) { echo 'col-md-12';} else { echo 'col-md-8';} ?>">
+                    <div class="<?php if ($invoice['status'] == 1) { echo 'col-md-12';} else { echo 'col-md-7';} ?>">
                         <ul class="list-inline">
                             <li>
                                 <a class="btn btn-primary btn-sm" title="<?php _e('Print invoice'); ?>"
@@ -380,10 +380,10 @@
                         </ul>
                     </div>
                     <?php if ($invoice['status'] == 2) { ?>
-                        <div class="col-md-4 text-right">
+                        <div class="col-md-5 text-right">
                             <?php if ($invoice['can_pay'] == 1 && $invoice['allowPayment']) { ?>
                                 <?php if ($invoice['allowPayment']) { ?>
-                                    <?php if ($config['credit_active'] && isset($credit)) { ?>
+                                    <?php if ($config['credit_active'] && isset($credit) && $order['type_payment'] != 'installment') { ?>
                                         <?php if ($config['credit_type'] == 'general') {
                                             $creditAmount = $credit['amount'];
                                         } elseif ($config['credit_type'] == 'module') {

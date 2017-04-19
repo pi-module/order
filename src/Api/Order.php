@@ -402,13 +402,13 @@ class Order extends AbstractApi
         return $list;
     }
 
-    public function updateOrder($id, $invoice)
+    public function updateOrder($orderId, $invoiceId)
     {
         // Get order
-        $order = Pi::model('order', $this->getModule())->find($id);
+        $order = Pi::model('order', $this->getModule())->find($orderId);
         // Checl for installment
         if ($order->type_payment == 'installment') {
-            $invoice = Pi::api('invoice', 'order')->getInvoice($invoice);
+            $invoice = Pi::api('invoice', 'order')->getInvoice($invoiceId);
             if ($invoice['extra']['type'] == 'prepayment') {
                 // Update order
                 $order->time_payment = time();
@@ -418,7 +418,7 @@ class Order extends AbstractApi
                 $order = $this->canonizeOrder($order);
                 // Get order basket
                 $basket = array();
-                $where = array('order' => $id);
+                $where = array('order' => $orderId);
                 $select = Pi::model('basket', $this->getModule())->select()->where($where);
                 $rowset = Pi::model('basket', $this->getModule())->selectWith($select);
                 foreach ($rowset as $row) {
@@ -444,7 +444,7 @@ class Order extends AbstractApi
             $order = $this->canonizeOrder($order);
             // Get order basket
             $basket = array();
-            $where = array('order' => $id);
+            $where = array('order' => $orderId);
             $select = Pi::model('basket', $this->getModule())->select()->where($where);
             $rowset = Pi::model('basket', $this->getModule())->selectWith($select);
             foreach ($rowset as $row) {
@@ -457,6 +457,8 @@ class Order extends AbstractApi
             }
             // Update module and get back url
             $backUrl = Pi::api('order', $order['module_name'])->postPaymentUpdate($order, $basket);
+            // Accept Order Credit
+            Pi::api('credit', 'order')->acceptOrderCredit($orderId, $invoiceId);
         }
         return $backUrl;
     }

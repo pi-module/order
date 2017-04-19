@@ -241,6 +241,16 @@ class OrderAddFilter extends InputFilter
                 ),
             ));
         }
+        // type_payment
+        $this->add(array(
+            'name' => 'type_payment',
+            'required' => true,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
         // type_commodity
         $this->add(array(
             'name' => 'type_commodity',

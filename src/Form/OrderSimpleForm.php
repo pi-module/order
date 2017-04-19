@@ -43,7 +43,7 @@ class OrderSimpleForm extends BaseForm
             ),
         ));
         // id_number
-        if ($this->config['order_idnumber']) {
+        /* if ($this->config['order_idnumber']) {
             $this->add(array(
                 'name' => 'id_number',
                 'options' => array(
@@ -54,7 +54,7 @@ class OrderSimpleForm extends BaseForm
                     'required' => true,
                 )
             ));
-        }
+        } */
         // packing
         if ($this->config['order_packing']) {
             $this->add(array(

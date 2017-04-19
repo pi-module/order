@@ -74,9 +74,9 @@ class CreditForm extends BaseForm
             )
         ));
         // Set module
+        $valueOptions = array();
+        $moduleList = Pi::registry('modulelist')->read();
         if ($this->option['type'] == 'module') {
-            $moduleList = Pi::registry('modulelist')->read();
-            $valueOptions = array();
             if (isset($moduleList['shop'])) {
                 $valueOptions['shop'] = $moduleList['shop']['title'];
             }
@@ -89,18 +89,21 @@ class CreditForm extends BaseForm
             if (isset($moduleList['plans'])) {
                 $valueOptions['plans'] = $moduleList['plans']['title'];
             }
-            $this->add(array(
-                'name' => 'module',
-                'type' => 'select',
-                'options' => array(
-                    'label' => __('Select module for use this credit'),
-                    'value_options' => $valueOptions,
-                ),
-                'attributes' => array(
-                    'required' => true,
-                )
-            ));
+
+        } else {
+            $valueOptions['system'] = $moduleList['system']['title'];
         }
+        $this->add(array(
+            'name' => 'module',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Select module for use this credit'),
+                'value_options' => $valueOptions,
+            ),
+            'attributes' => array(
+                'required' => true,
+            )
+        ));
         // message_user
         $this->add(array(
             'name' => 'message_user',

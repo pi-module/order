@@ -523,7 +523,6 @@ class OrderController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 $values['ip'] = Pi::user()->getIp();
-                $values['type_payment'] = 'onetime';
                 $values['status_order'] = 1;
                 $values['status_payment'] = 1;
                 $values['status_delivery'] = 1;
