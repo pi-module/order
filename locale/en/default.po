@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2017-04-18 13:59+0430\n"
+"POT-Creation-Date: 2017-04-19 10:06+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -71,15 +71,27 @@ msgstr ""
 msgid "Your invoice create successfully"
 msgstr ""
 
+#: src/Api/Invoice.php:221
+msgid "Decrease credit for installment system"
+msgstr ""
+
 #: src/Api/Invoice.php:260
 msgid "Not allowed to create invoice by this user credit"
 msgstr ""
 
-#: src/Api/Invoice.php:428
+#: src/Api/Invoice.php:376
+msgid "Increase credit for cancel invoice"
+msgstr ""
+
+#: src/Api/Invoice.php:395
+msgid "Increase credit for pay invoice"
+msgstr ""
+
+#: src/Api/Invoice.php:420
 msgid "Not pay"
 msgstr ""
 
-#: src/Api/Invoice.php:429
+#: src/Api/Invoice.php:421
 msgid "Not canceled"
 msgstr ""
 
@@ -242,14 +254,14 @@ msgstr ""
 msgid "Not End"
 msgstr ""
 
-#: src/Api/Order.php:326 src/Form/OrderAddForm.php:291
+#: src/Api/Order.php:326 src/Form/OrderAddForm.php:304
 #: src/Form/OrderSettingForm.php:119 template/admin/invoice-print.phtml:135
 #: template/admin/order-view.phtml:142 template/front/detail.phtml:179
 #: template/front/invoice-print.phtml:135 template/front/invoice.phtml:157
 msgid "Product"
 msgstr ""
 
-#: src/Api/Order.php:328 src/Form/OrderAddForm.php:292
+#: src/Api/Order.php:328 src/Form/OrderAddForm.php:305
 #: src/Form/OrderSettingForm.php:120
 msgid "Service"
 msgstr ""
@@ -372,7 +384,7 @@ msgstr ""
 msgid "Add / edit admin note"
 msgstr ""
 
-#: src/Controller/Admin/OrderController.php:661
+#: src/Controller/Admin/OrderController.php:660
 msgid "New order added and data saved successfully."
 msgstr ""
 
@@ -450,8 +462,8 @@ msgstr ""
 #: src/Controller/Front/PaymentController.php:102
 #: src/Controller/Front/PaymentController.php:117
 #: src/Controller/Front/PaymentController.php:148
-#: src/Controller/Front/PaymentController.php:226
-#: src/Controller/Front/PaymentController.php:415
+#: src/Controller/Front/PaymentController.php:224
+#: src/Controller/Front/PaymentController.php:409
 msgid "Your payment were successfully. Back to module"
 msgstr ""
 
@@ -490,22 +502,22 @@ msgstr ""
 msgid "Your IP address changed and processing not valid"
 msgstr ""
 
-#: src/Controller/Front/PaymentController.php:243
+#: src/Controller/Front/PaymentController.php:241
 msgid "Your payment wont successfully."
 msgstr ""
 
-#: src/Controller/Front/PaymentController.php:249
+#: src/Controller/Front/PaymentController.php:247
 msgid "Did not set any request"
 msgstr ""
 
-#: src/Controller/Front/PaymentController.php:363
+#: src/Controller/Front/PaymentController.php:359
 #: src/Gateway/Dargahpardakht/Gateway.php:173
 #: src/Gateway/Mellat/Gateway.php:160 src/Gateway/Paypal/Gateway.php:424
 #: src/Gateway/Zarinpal/Gateway.php:134
 msgid "Your payment were successfully."
 msgstr ""
 
-#: src/Controller/Front/PaymentController.php:401
+#: src/Controller/Front/PaymentController.php:397
 msgid "Test mode not active."
 msgstr ""
 
@@ -584,7 +596,7 @@ msgstr ""
 #: src/Form/OrderForm.php:195 template/admin/invoice-add.phtml:17
 #: template/admin/invoice-edit.phtml:61 template/admin/invoice-view.phtml:64
 #: template/admin/order-print.phtml:83 template/admin/order-view.phtml:33
-#: template/front/checkout.phtml:163 template/front/detail.phtml:111
+#: template/front/checkout.phtml:164 template/front/detail.phtml:111
 msgid "Delivery address"
 msgstr ""
 
@@ -655,7 +667,7 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: src/Form/CreditForm.php:66 src/Form/OrderAddForm.php:289
+#: src/Form/CreditForm.php:66 src/Form/OrderAddForm.php:302
 #: src/Form/OrderSettingForm.php:116
 msgid "Type commodity"
 msgstr ""
@@ -674,7 +686,7 @@ msgid "Admin message"
 msgstr ""
 
 #: src/Form/CreditForm.php:138 src/Form/InvoiceForm.php:111
-#: src/Form/OrderAddForm.php:424
+#: src/Form/OrderAddForm.php:437
 msgid "Save"
 msgstr ""
 
@@ -713,7 +725,7 @@ msgstr ""
 msgid "Private"
 msgstr ""
 
-#: src/Form/DeliveryForm.php:75 src/Form/OrderAddForm.php:314
+#: src/Form/DeliveryForm.php:75 src/Form/OrderAddForm.php:327
 #: src/Form/OrderForm.php:360 src/Form/OrderForm.php:388
 #: src/Form/OrderForm.php:418 src/Form/OrderSimpleForm.php:120
 #: src/Form/OrderSimpleForm.php:148 src/Form/OrderSimpleForm.php:178
@@ -744,29 +756,29 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: src/Form/InvoiceForm.php:40 src/Form/OrderAddForm.php:368
+#: src/Form/InvoiceForm.php:40 src/Form/OrderAddForm.php:381
 #: template/admin/invoice-add.phtml:96 template/admin/invoice-edit.phtml:26
 #: template/admin/invoice-view.phtml:29 template/admin/order-view.phtml:112
 msgid "Product price"
 msgstr ""
 
-#: src/Form/InvoiceForm.php:51 src/Form/OrderAddForm.php:379
+#: src/Form/InvoiceForm.php:51 src/Form/OrderAddForm.php:392
 #: template/admin/invoice-add.phtml:100 template/admin/invoice-edit.phtml:30
 #: template/admin/invoice-view.phtml:33 template/admin/order-view.phtml:116
 msgid "Shipping price"
 msgstr ""
 
-#: src/Form/InvoiceForm.php:62 src/Form/OrderAddForm.php:390
+#: src/Form/InvoiceForm.php:62 src/Form/OrderAddForm.php:403
 #: template/admin/invoice-add.phtml:104 template/admin/invoice-edit.phtml:34
 #: template/admin/invoice-view.phtml:37 template/admin/order-view.phtml:120
 msgid "Packing price"
 msgstr ""
 
-#: src/Form/InvoiceForm.php:73 src/Form/OrderAddForm.php:401
+#: src/Form/InvoiceForm.php:73 src/Form/OrderAddForm.php:414
 msgid "Setup price"
 msgstr ""
 
-#: src/Form/InvoiceForm.php:84 src/Form/OrderAddForm.php:412
+#: src/Form/InvoiceForm.php:84 src/Form/OrderAddForm.php:425
 #: template/admin/invoice-add.phtml:108 template/admin/invoice-edit.phtml:38
 #: template/admin/invoice-view.phtml:41 template/admin/order-view.phtml:124
 msgid "Vat price"
@@ -840,35 +852,52 @@ msgstr ""
 msgid "Packing"
 msgstr ""
 
-#: src/Form/OrderAddForm.php:329
-msgid "Join to module"
+#: src/Form/OrderAddForm.php:289 src/Form/OrderSettingForm.php:101
+msgid "Type payment"
 msgstr ""
 
-#: src/Form/OrderAddForm.php:331
-msgid "Order module"
+#: src/Form/OrderAddForm.php:291 src/Form/OrderSettingForm.php:105
+msgid "Onetime"
 msgstr ""
 
-#: src/Form/OrderAddForm.php:332
-msgid "Shop module"
+#: src/Form/OrderAddForm.php:292 src/Form/OrderSettingForm.php:107
+#: template/admin/order-index.phtml:82
+msgid "Installment"
 msgstr ""
 
-#: src/Form/OrderAddForm.php:333
-msgid "Guide module"
-msgstr ""
-
-#: src/Form/OrderAddForm.php:334
-msgid "Plans module"
+#: src/Form/OrderAddForm.php:293 src/Form/OrderSettingForm.php:104
+msgid "Free"
 msgstr ""
 
 #: src/Form/OrderAddForm.php:342
-msgid "Module service / product id"
+msgid "Join to module"
+msgstr ""
+
+#: src/Form/OrderAddForm.php:344
+msgid "Order module"
+msgstr ""
+
+#: src/Form/OrderAddForm.php:345
+msgid "Shop module"
 msgstr ""
 
 #: src/Form/OrderAddForm.php:346
+msgid "Guide module"
+msgstr ""
+
+#: src/Form/OrderAddForm.php:347
+msgid "Plans module"
+msgstr ""
+
+#: src/Form/OrderAddForm.php:355
+msgid "Module service / product id"
+msgstr ""
+
+#: src/Form/OrderAddForm.php:359
 msgid "Put service / product id and join order to module"
 msgstr ""
 
-#: src/Form/OrderAddForm.php:354
+#: src/Form/OrderAddForm.php:367
 msgid "Order / invoice date"
 msgstr ""
 
@@ -967,24 +996,8 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: src/Form/OrderSettingForm.php:101
-msgid "Type payment"
-msgstr ""
-
-#: src/Form/OrderSettingForm.php:104
-msgid "Free"
-msgstr ""
-
-#: src/Form/OrderSettingForm.php:105
-msgid "Onetime"
-msgstr ""
-
 #: src/Form/OrderSettingForm.php:106
 msgid "Recurring"
-msgstr ""
-
-#: src/Form/OrderSettingForm.php:107 template/admin/order-index.phtml:82
-msgid "Installment"
 msgstr ""
 
 #: src/Form/OrderSettingForm.php:128 template/admin/order-index.phtml:37
@@ -2008,7 +2021,7 @@ msgstr ""
 #: template/admin/order-print.phtml:440 template/admin/order-print.phtml:523
 #: template/admin/order-print.phtml:568 template/admin/order-print.phtml:651
 #: template/admin/order-view.phtml:148 template/admin/order-view.phtml:316
-#: template/front/checkout.phtml:209 template/front/detail.phtml:185
+#: template/front/checkout.phtml:210 template/front/detail.phtml:185
 #: template/front/detail.phtml:223 template/front/installment.phtml:116
 #: template/front/invoice.phtml:162
 msgid "Total"
@@ -2049,7 +2062,7 @@ msgstr ""
 
 #: template/admin/order-print.phtml:98 template/admin/order-print.phtml:295
 #: template/admin/order-print.phtml:423 template/admin/order-print.phtml:551
-#: template/front/checkout.phtml:208
+#: template/front/checkout.phtml:209
 msgid "Product name"
 msgstr ""
 
@@ -2168,18 +2181,18 @@ msgstr ""
 msgid "Time : "
 msgstr ""
 
-#: template/front/checkout.phtml:120
+#: template/front/checkout.phtml:121
 msgid "Terms of payment"
 msgstr ""
 
-#: template/front/checkout.phtml:121
+#: template/front/checkout.phtml:122
 #, php-format
 msgid ""
 "You buy products on %s installment by %s payment on each installment and %s "
 "per payment"
 msgstr ""
 
-#: template/front/checkout.phtml:128
+#: template/front/checkout.phtml:129
 msgid ""
 "One of your select products or services have variable stock, than your "
 "payment option is disable, we will review your order and if your selected "
@@ -2187,63 +2200,63 @@ msgid ""
 "notification for you"
 msgstr ""
 
-#: template/front/checkout.phtml:136
+#: template/front/checkout.phtml:137
 msgid ""
 "If you registered on website before this time and have user account, please "
 "login to system and continue ordering, and if you dont have user account "
 "here, please fill register new user account and make order form"
 msgstr ""
 
-#: template/front/checkout.phtml:139
+#: template/front/checkout.phtml:140
 msgid "Login"
 msgstr ""
 
-#: template/front/checkout.phtml:143
+#: template/front/checkout.phtml:144
 msgid "Register new user account and make order"
 msgstr ""
 
-#: template/front/checkout.phtml:147
+#: template/front/checkout.phtml:148
 msgid ""
 "Select the needed address for your order. You can also add a new address"
 msgstr ""
 
-#: template/front/checkout.phtml:164
+#: template/front/checkout.phtml:165
 msgid "Invoicing address"
 msgstr ""
 
-#: template/front/checkout.phtml:174
+#: template/front/checkout.phtml:175
 msgid "Use it"
 msgstr ""
 
-#: template/front/checkout.phtml:177
+#: template/front/checkout.phtml:178
 msgid "Selected address"
 msgstr ""
 
-#: template/front/checkout.phtml:188
+#: template/front/checkout.phtml:189
 msgid "Add new address"
 msgstr ""
 
-#: template/front/checkout.phtml:203
+#: template/front/checkout.phtml:204
 msgid "Your order"
 msgstr ""
 
-#: template/front/checkout.phtml:232
+#: template/front/checkout.phtml:233
 msgid "Total Discount"
 msgstr ""
 
-#: template/front/checkout.phtml:242
+#: template/front/checkout.phtml:243
 msgid "Total Price ext VAT"
 msgstr ""
 
-#: template/front/checkout.phtml:247
+#: template/front/checkout.phtml:248
 msgid "Total Vat"
 msgstr ""
 
-#: template/front/checkout.phtml:256
+#: template/front/checkout.phtml:257
 msgid "Total Shipping"
 msgstr ""
 
-#: template/front/checkout.phtml:264
+#: template/front/checkout.phtml:265
 msgid "Final Price incl. VAT"
 msgstr ""
 
