@@ -526,7 +526,7 @@ class CheckoutController extends IndexController
 
         // Set products
         foreach ($cart['product'] as $product) {
-            $cart['product'][$product['product']]['details'] = Pi::api('order', $cart['module_name'])->getProductDetails($product['product']);
+            $cart['product'][$product['product']]['details'] = Pi::api('order', $cart['module_name'])->getProductDetails($product['product'], $product['extra']);
             $cart['product'][$product['product']]['product_price_view'] = Pi::api('api', 'order')->viewPrice($product['product_price']);
         }
 
