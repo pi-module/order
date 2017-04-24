@@ -194,17 +194,21 @@ $this->footScript()->appendScript($script);
                     <div class=" alert  clearfix" data-id="customerFromNew" data-button="customerFromButtonNew">
                         <div>
                             <div class="col-md-12">
-                                <button id="customerFromButtonNew" class=" btn btn-simple btn-sm">
-                                    <?php _e('Add new address'); ?>
-                                </button>
+                                <p>
+                                    <button id="customerFromButtonNew" class=" btn btn-simple btn-sm">
+                                        <?php _e('Add new address'); ?>
+                                    </button>
+                                </p>
                             </div>
                         </div>
-                        <div id="customerFromNew" class="clearfix <?php if (!$check) { echo 'hidden';} ?>">
+                        <div id="customerFromNew" class="col-md-6 clearfix <?php if (!$check) { echo 'hidden';} ?>">
                             <?php echo $this->form($forms['new'], 'vertical'); ?>
                         </div>
                     </div>
                 <?php } else { ?>
+                    <div class="col-md-6 clearfix>
                     <?php echo $this->form($forms['new'], 'vertical'); ?>
+                    </div>
                 <?php } ?>
             </div>
             <div class="col-md-4 cart-product">
