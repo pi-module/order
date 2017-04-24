@@ -731,9 +731,16 @@ class CheckoutController extends IndexController
         return $return;
     }
 
-
-    /* protected function verifyResult(Result $result)
+    public function deleteAction()
     {
-        return $result;
-    } */
+        $customerId = $this->params('customer');
+        $customer = Pi::model('customer', 'order')->find($customerId);
+        $uid = Pi::user()->getId();
+        if ($customer->uid == $uid) {
+            $customer->delete();
+        }
+        $url = array('', 'controller' => 'checkout', 'action' => 'index');
+        $this->jump($url, __('Address deleted'));       
+    }
+    
 }

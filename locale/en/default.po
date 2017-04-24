@@ -2410,3 +2410,7 @@ msgstr ""
 #: src/Form/AddressForm.php:116
 msgid "example : +33123456789"
 msgstr ""
+
+#: src/Controller/Front/CheckoutController.php:743
+msgid "Address deleted"
+msgstr ""

@@ -181,10 +181,12 @@ $this->footScript()->appendScript($script);
                              <sma class="label label-success hidden selected-address">
                                 <span class="fa fa-check"> <?php _e('Selected address') ?> </span>
                             </sma>
-                             <a href="<?php echo     Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'index', 'customer' => $customer['id']))) ?>" class=" btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
+                            <a href="<?php echo     Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'index', 'customer' => $customer['id']))) ?>" class=" btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
                                 <?php _e('Edit'); ?>
                             </a>
-                           
+                            <a href="<?php echo     Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'delete', 'customer' => $customer['id']))) ?>" class=" btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
+                                <?php _e('Delete'); ?>
+                            </a>
                           </div>
                     </div>
                 <?php } ?>
