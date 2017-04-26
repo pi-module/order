@@ -24,7 +24,7 @@ class AddressForm extends BaseForm
         $this->option = $option;
         $this->config = Pi::service('registry')->config->read('order', 'order');
         $this->_id = $id;
-        parent::__construct($name);
+        parent::__construct();
     }
 
     public function getInputFilter()
