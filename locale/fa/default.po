@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2017-04-27 11:58+0430\n"
+"POT-Creation-Date: 2017-04-27 13:45+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -611,7 +611,7 @@ msgstr "کد مالیات"
 #: src/Form/OrderForm.php:197 template/admin/invoice-add.phtml:17
 #: template/admin/invoice-edit.phtml:61 template/admin/invoice-view.phtml:64
 #: template/admin/order-print.phtml:83 template/admin/order-view.phtml:33
-#: template/front/checkout.phtml:169 template/front/detail.phtml:111
+#: template/front/checkout.phtml:170 template/front/detail.phtml:111
 msgid "Delivery address"
 msgstr "آدرس تحویل"
 
@@ -663,7 +663,7 @@ msgstr "کشور"
 #: template/admin/delivery-index.phtml:32 template/admin/gateway-index.phtml:62
 #: template/admin/gateway-index.phtml:65 template/admin/location-index.phtml:30
 #: template/admin/location-index.phtml:32 template/admin/order-view.phtml:246
-#: template/admin/order-view.phtml:248 template/front/checkout.phtml:185
+#: template/admin/order-view.phtml:248 template/front/checkout.phtml:186
 msgid "Edit"
 msgstr "ویرایش"
 
@@ -2056,7 +2056,7 @@ msgstr "معوقه"
 #: template/admin/order-print.phtml:440 template/admin/order-print.phtml:523
 #: template/admin/order-print.phtml:568 template/admin/order-print.phtml:651
 #: template/admin/order-view.phtml:148 template/admin/order-view.phtml:316
-#: template/front/checkout.phtml:223 template/front/detail.phtml:185
+#: template/front/checkout.phtml:224 template/front/detail.phtml:185
 #: template/front/detail.phtml:223 template/front/installment.phtml:116
 #: template/front/invoice.phtml:162
 msgid "Total"
@@ -2097,7 +2097,7 @@ msgstr "فاکتور فروش"
 
 #: template/admin/order-print.phtml:98 template/admin/order-print.phtml:295
 #: template/admin/order-print.phtml:423 template/admin/order-print.phtml:551
-#: template/front/checkout.phtml:222
+#: template/front/checkout.phtml:223
 msgid "Product name"
 msgstr "شرح کالا"
 
@@ -2276,47 +2276,51 @@ msgstr ""
 "شما هنوز هیچ آدرسی در سیستم ثبت نکرده اید، لطفا یک آدرس برای استفاده در "
 "هنگام سفارش محصول درج نمایید، شما میتوانید چندین آدرس مختلف داشته باشید"
 
-#: template/front/checkout.phtml:170
+#: template/front/checkout.phtml:171
 msgid "Invoicing address"
 msgstr "آدرس فاکتور"
 
-#: template/front/checkout.phtml:179
+#: template/front/checkout.phtml:180
 msgid "Use it"
-msgstr "ثبت سفارش با استفاده از این اطلاعات"
+msgstr "استفاده از این آدرس"
 
-#: template/front/checkout.phtml:182
+#: template/front/checkout.phtml:183
 msgid "Selected address"
 msgstr "آدرس انتخابی"
 
 #: template/front/checkout.phtml:188
+msgid "Are you sure you want delete this address?"
+msgstr "آیا اطمینان دارید که میخواهید این آدرس را حذف کنید؟"
+
+#: template/front/checkout.phtml:189
 msgid "Delete"
 msgstr "حذف"
 
-#: template/front/checkout.phtml:199
+#: template/front/checkout.phtml:200
 msgid "Add new address"
 msgstr "ثبت سفارش با آدرس جدید"
 
-#: template/front/checkout.phtml:217
+#: template/front/checkout.phtml:218
 msgid "Your order"
 msgstr "سفارش شما"
 
-#: template/front/checkout.phtml:246
+#: template/front/checkout.phtml:247
 msgid "Total Discount"
 msgstr "مجموع تخفیف"
 
-#: template/front/checkout.phtml:256
+#: template/front/checkout.phtml:257
 msgid "Total Price ext VAT"
 msgstr "مجموع قیمت با مالیات"
 
-#: template/front/checkout.phtml:261
+#: template/front/checkout.phtml:262
 msgid "Total Vat"
 msgstr "مجموع مالیات"
 
-#: template/front/checkout.phtml:270
+#: template/front/checkout.phtml:271
 msgid "Total Shipping"
 msgstr "مجموع هزینه ارسال"
 
-#: template/front/checkout.phtml:278
+#: template/front/checkout.phtml:279
 msgid "Final Price incl. VAT"
 msgstr "قیمت نهایی"
 
