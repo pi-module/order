@@ -192,6 +192,7 @@ class Credit extends AbstractApi
         }
         // Add history
         $history = array(
+            'uid' => $uid,
             'amount' => $amount,
             'amount_old' => $amountOld,
             'amount_new' => $amountNew,

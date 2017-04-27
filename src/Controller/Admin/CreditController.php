@@ -41,7 +41,7 @@ class CreditController extends ActionController
             $list[$row->id] = $row->toArray();
             $list[$row->id]['amount_view'] = Pi::api('api', 'order')->viewPrice($row->amount);
             $list[$row->id]['time_update_view'] = _date($row->time_update);
-            $list[$row->id]['user'] = Pi::api('user', 'order')->getUserInformation($row->uid, 'light');
+            $list[$row->id]['user'] = Pi::api('user', 'order')->getUserInformation($row->uid);
             $amountDetail = json::decode($row->amount_detail, true);
             $list[$row->id]['amount_detail_view'] = array();
             foreach ($amountDetail as $module => $amount) {
@@ -90,7 +90,7 @@ class CreditController extends ActionController
         if ($uid > 0) {
             $credit = $this->getModel('credit')->find($uid, 'uid');
             $where['uid'] = $credit['uid'];
-            $user = Pi::api('user', 'order')->getUserInformation($credit['uid'], 'light');
+            $user = Pi::api('user', 'order')->getUserInformation($credit['uid']);
             // Set view
             $this->view()->assign('credit', $credit);
         }
@@ -112,7 +112,7 @@ class CreditController extends ActionController
             if (isset($user)) {
                 $list[$row->id]['user'] = $user;
             } else {
-                $list[$row->id]['user'] = Pi::api('user', 'order')->getUserInformation($row->uid, 'light');
+                $list[$row->id]['user'] = Pi::api('user', 'order')->getUserInformation($row->uid);
             }
 
             switch ($row->status_fluctuation) {

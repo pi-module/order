@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2017-04-19 10:05+0430\n"
+"POT-Creation-Date: 2017-04-27 11:58+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -52,7 +52,7 @@ msgstr "هرگز به روز نشده است"
 msgid "Your input amount is more than user credit"
 msgstr "رقم وارد شده توسط شما از مقدار اعتبار کاربر بیشتر است."
 
-#: src/Api/Credit.php:183
+#: src/Api/Credit.php:189
 msgid ""
 "This user never use credit system, than you can not decrease amnout from "
 "him / her"
@@ -271,27 +271,27 @@ msgstr "محصول"
 msgid "Service"
 msgstr "خدمت"
 
-#: src/Controller/Admin/CreditController.php:118
-#: src/Controller/Front/CreditController.php:62 src/Form/CreditForm.php:68
+#: src/Controller/Admin/CreditController.php:120
+#: src/Controller/Front/CreditController.php:64 src/Form/CreditForm.php:68
 msgid "Increase"
 msgstr "افزایشی"
 
-#: src/Controller/Admin/CreditController.php:123
-#: src/Controller/Front/CreditController.php:67 src/Form/CreditForm.php:69
+#: src/Controller/Admin/CreditController.php:125
+#: src/Controller/Front/CreditController.php:69 src/Form/CreditForm.php:69
 msgid "Decrease"
 msgstr "کاهشی"
 
-#: src/Controller/Admin/CreditController.php:130
-#: src/Controller/Front/CreditController.php:74
+#: src/Controller/Admin/CreditController.php:132
+#: src/Controller/Front/CreditController.php:76
 msgid "Automatic"
 msgstr "خودکار"
 
-#: src/Controller/Admin/CreditController.php:134
-#: src/Controller/Front/CreditController.php:78
+#: src/Controller/Admin/CreditController.php:136
+#: src/Controller/Front/CreditController.php:80
 msgid "Manual"
 msgstr "دستی"
 
-#: src/Controller/Admin/CreditController.php:193
+#: src/Controller/Admin/CreditController.php:195
 msgid "Input amount add as user credit successfully."
 msgstr "مبلغ وارده شده به موفقیت به اعتبار کاربر اضافه / کم شد"
 
@@ -394,36 +394,40 @@ msgstr "درج / ویرایش توضیح مدیر"
 msgid "New order added and data saved successfully."
 msgstr "سفارش جدید ساخته شد و اطلاعات آن با موفقیت ذخیره شد"
 
-#: src/Controller/Front/CheckoutController.php:281
-#: src/Controller/Front/CheckoutController.php:308
-#: src/Controller/Front/CheckoutController.php:549
+#: src/Controller/Front/CheckoutController.php:282
+#: src/Controller/Front/CheckoutController.php:309
+#: src/Controller/Front/CheckoutController.php:562
 msgid "Your cart is empty."
 msgstr "سبد خرید شما خالی است"
 
-#: src/Controller/Front/CheckoutController.php:287
-#: src/Controller/Front/CheckoutController.php:554
+#: src/Controller/Front/CheckoutController.php:288
+#: src/Controller/Front/CheckoutController.php:567
 msgid "So sorry, At this moment order is inactive"
 msgstr "متاسفانه در این لحظه امکان ثبت سفارش وجود ندارد"
 
-#: src/Controller/Front/CheckoutController.php:392
+#: src/Controller/Front/CheckoutController.php:393
 msgid "User information was not completed and user account was not saved."
 msgstr "اطلاعات کابری تکمیل نیست و حساب کاربری ساخته نشده است."
 
-#: src/Controller/Front/CheckoutController.php:415
+#: src/Controller/Front/CheckoutController.php:416
 msgid "User account was not saved."
 msgstr "حساب کاربری ذخیره نشده است."
 
-#: src/Controller/Front/CheckoutController.php:565
+#: src/Controller/Front/CheckoutController.php:578
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 "پلن قسطی سفارش شما با موفقت ذخیره شد، لطفا اطلاعات مورد نیاز را تکمیل "
 "فرمایید و بعد از آن پیش قسط مربوط به این سفارش را پرداخت نمایید."
 
-#: src/Controller/Front/CheckoutController.php:696
+#: src/Controller/Front/CheckoutController.php:709
 #: src/Form/Element/Gateway.php:28
 msgid "Offline"
 msgstr "آفلاین"
+
+#: src/Controller/Front/CheckoutController.php:743
+msgid "Address deleted"
+msgstr "حذف آدرس"
 
 #: src/Controller/Front/CreditController.php:31
 msgid "So sorry, At this moment credit is inactive"
@@ -467,11 +471,11 @@ msgid "This order not avtice."
 msgstr "سفارش فعال نیست"
 
 #: src/Controller/Front/InvoiceController.php:125
-#: src/Controller/Front/PaymentController.php:102
-#: src/Controller/Front/PaymentController.php:117
-#: src/Controller/Front/PaymentController.php:148
-#: src/Controller/Front/PaymentController.php:224
-#: src/Controller/Front/PaymentController.php:409
+#: src/Controller/Front/PaymentController.php:103
+#: src/Controller/Front/PaymentController.php:118
+#: src/Controller/Front/PaymentController.php:149
+#: src/Controller/Front/PaymentController.php:225
+#: src/Controller/Front/PaymentController.php:410
 msgid "Your payment were successfully. Back to module"
 msgstr "پرداخت شما با موفقیت به انجام رسید. به صفحه اتمام خرید منتقل می شوید"
 
@@ -485,62 +489,62 @@ msgstr "شما قبلا این فاکتور را پرداخت کرده اید"
 msgid "You can pay this invoice after admin review"
 msgstr "شما میتوانید این فاکتور را پس از تائید مدیر سایت پرداخت نمایید. "
 
-#: src/Controller/Front/PaymentController.php:91
 #: src/Controller/Front/PaymentController.php:92
-#: src/Controller/Front/PaymentController.php:106
+#: src/Controller/Front/PaymentController.php:93
 #: src/Controller/Front/PaymentController.php:107
+#: src/Controller/Front/PaymentController.php:108
 #, php-format
 msgid "use credit to pay invoice %s from order %s"
 msgstr "استفاده از اعتبار برای پرداخت فاکتور %s مربوط به سفارش %s"
 
-#: src/Controller/Front/PaymentController.php:171
+#: src/Controller/Front/PaymentController.php:172
 #, php-format
 msgid "Error to get %s."
 msgstr "خطا در گرفتن %s"
 
-#: src/Controller/Front/PaymentController.php:178
+#: src/Controller/Front/PaymentController.php:179
 msgid "Error to get information."
 msgstr "خطا در گرفتن اطلاعات"
 
-#: src/Controller/Front/PaymentController.php:205
+#: src/Controller/Front/PaymentController.php:206
 msgid "Your running pay processing not set"
 msgstr "پروسه پرداخت در حال اجرای شما تنظیم نشده است"
 
-#: src/Controller/Front/PaymentController.php:210
+#: src/Controller/Front/PaymentController.php:211
 msgid "Your IP address changed and processing not valid"
 msgstr ""
 "آدرس آی پی شما در هنگام پرداخت تغییر کرده است و این روند خرید صحیح نیست"
 
-#: src/Controller/Front/PaymentController.php:241
+#: src/Controller/Front/PaymentController.php:242
 msgid "Your payment wont successfully."
 msgstr "پرداخت شما موفقیت آمیز نبود"
 
-#: src/Controller/Front/PaymentController.php:247
+#: src/Controller/Front/PaymentController.php:248
 msgid "Did not set any request"
 msgstr "هیچ درخواستی ذخیره نشده است"
 
-#: src/Controller/Front/PaymentController.php:359
+#: src/Controller/Front/PaymentController.php:360
 #: src/Gateway/Dargahpardakht/Gateway.php:173
 #: src/Gateway/Mellat/Gateway.php:160 src/Gateway/Paypal/Gateway.php:424
 #: src/Gateway/Zarinpal/Gateway.php:134
 msgid "Your payment were successfully."
 msgstr "پرداخت شما موفقیت آمیز بود."
 
-#: src/Controller/Front/PaymentController.php:397
+#: src/Controller/Front/PaymentController.php:398
 msgid "Test mode not active."
 msgstr "حالت تست فعال نیست"
 
-#: src/Form/AddressForm.php:52 src/Form/OrderAddForm.php:56
+#: src/Form/AddressForm.php:54 src/Form/OrderAddForm.php:56
 #: src/Form/OrderForm.php:67 src/Form/OrderSettingForm.php:194
 msgid "First name"
 msgstr "نام"
 
-#: src/Form/AddressForm.php:65 src/Form/OrderAddForm.php:68
+#: src/Form/AddressForm.php:67 src/Form/OrderAddForm.php:68
 #: src/Form/OrderForm.php:81 src/Form/OrderSettingForm.php:205
 msgid "Last name"
 msgstr "نام خانوادگی"
 
-#: src/Form/AddressForm.php:81 src/Form/OrderAddForm.php:82
+#: src/Form/AddressForm.php:83 src/Form/OrderAddForm.php:82
 #: src/Form/OrderForm.php:96 src/Form/OrderSettingForm.php:183
 #: template/admin/invoice-add.phtml:13 template/admin/invoice-edit.phtml:57
 #: template/admin/invoice-print.phtml:81 template/admin/invoice-view.phtml:60
@@ -550,21 +554,19 @@ msgstr "نام خانوادگی"
 msgid "ID number"
 msgstr "کد ملی"
 
-#: src/Form/AddressForm.php:96 src/Form/OrderAddForm.php:96
+#: src/Form/AddressForm.php:98 src/Form/OrderAddForm.php:96
 #: src/Form/OrderForm.php:110 src/Form/OrderSettingForm.php:150
-#: template/admin/credit-history.phtml:10
-#: template/admin/credit-history.phtml:60 template/admin/credit-index.phtml:10
-#: template/admin/invoice-add.phtml:41 template/admin/invoice-edit.phtml:85
-#: template/admin/invoice-print.phtml:93 template/admin/invoice-view.phtml:88
-#: template/admin/order-print.phtml:52 template/admin/order-view.phtml:57
-#: template/admin/order-view.phtml:297 template/front/credit.phtml:23
-#: template/front/credit.phtml:40 template/front/credit.phtml:90
+#: template/admin/credit-history.phtml:72 template/admin/invoice-add.phtml:41
+#: template/admin/invoice-edit.phtml:85 template/admin/invoice-print.phtml:93
+#: template/admin/invoice-view.phtml:88 template/admin/order-print.phtml:52
+#: template/admin/order-view.phtml:57 template/admin/order-view.phtml:297
+#: template/front/credit.phtml:23 template/front/credit.phtml:94
 #: template/front/detail.phtml:139 template/front/invoice-print.phtml:93
 #: template/front/invoice.phtml:122
 msgid "Email"
 msgstr "ایمیل"
 
-#: src/Form/AddressForm.php:110 src/Form/OrderAddForm.php:110
+#: src/Form/AddressForm.php:112 src/Form/OrderAddForm.php:110
 #: src/Form/OrderForm.php:124 template/admin/invoice-add.phtml:45
 #: template/admin/invoice-edit.phtml:89 template/admin/invoice-print.phtml:85
 #: template/admin/invoice-view.phtml:92 template/admin/order-print.phtml:56
@@ -573,8 +575,8 @@ msgstr "ایمیل"
 msgid "Phone"
 msgstr "تلفن"
 
-#: src/Form/AddressForm.php:124 src/Form/OrderAddForm.php:124
-#: src/Form/OrderForm.php:138 src/Form/OrderSettingForm.php:139
+#: src/Form/AddressForm.php:127 src/Form/OrderAddForm.php:124
+#: src/Form/OrderForm.php:139 src/Form/OrderSettingForm.php:139
 #: template/admin/invoice-add.phtml:49 template/admin/invoice-edit.phtml:93
 #: template/admin/invoice-print.phtml:89 template/admin/invoice-view.phtml:96
 #: template/admin/order-print.phtml:60 template/admin/order-view.phtml:65
@@ -583,42 +585,46 @@ msgstr "تلفن"
 msgid "Mobile"
 msgstr "موبایل"
 
-#: src/Form/AddressForm.php:139 src/Form/OrderAddForm.php:139
-#: src/Form/OrderForm.php:153 src/Form/OrderSettingForm.php:227
+#: src/Form/AddressForm.php:131
+msgid "example : +33123456789"
+msgstr "مثال : 09121112233"
+
+#: src/Form/AddressForm.php:144 src/Form/OrderAddForm.php:139
+#: src/Form/OrderForm.php:155 src/Form/OrderSettingForm.php:227
 #: template/admin/invoice-add.phtml:53 template/admin/invoice-print.phtml:97
 #: template/admin/order-print.phtml:46 template/admin/order-view.phtml:69
 #: template/front/detail.phtml:151 template/front/invoice-print.phtml:97
 msgid "Company"
 msgstr "شرکت"
 
-#: src/Form/AddressForm.php:153 src/Form/OrderAddForm.php:153
-#: src/Form/OrderForm.php:168
+#: src/Form/AddressForm.php:158 src/Form/OrderAddForm.php:153
+#: src/Form/OrderForm.php:170
 msgid "Company id"
 msgstr "کد اقتصادی"
 
-#: src/Form/AddressForm.php:165 src/Form/OrderAddForm.php:164
-#: src/Form/OrderForm.php:181
+#: src/Form/AddressForm.php:170 src/Form/OrderAddForm.php:164
+#: src/Form/OrderForm.php:183
 msgid "Company vat"
 msgstr "کد مالیات"
 
-#: src/Form/AddressForm.php:178 src/Form/OrderAddForm.php:177
-#: src/Form/OrderForm.php:195 template/admin/invoice-add.phtml:17
+#: src/Form/AddressForm.php:183 src/Form/OrderAddForm.php:177
+#: src/Form/OrderForm.php:197 template/admin/invoice-add.phtml:17
 #: template/admin/invoice-edit.phtml:61 template/admin/invoice-view.phtml:64
 #: template/admin/order-print.phtml:83 template/admin/order-view.phtml:33
-#: template/front/checkout.phtml:164 template/front/detail.phtml:111
+#: template/front/checkout.phtml:169 template/front/detail.phtml:111
 msgid "Delivery address"
 msgstr "آدرس تحویل"
 
-#: src/Form/AddressForm.php:194 src/Form/OrderAddForm.php:191
-#: src/Form/OrderForm.php:211 template/admin/invoice-add.phtml:21
+#: src/Form/AddressForm.php:199 src/Form/OrderAddForm.php:191
+#: src/Form/OrderForm.php:213 template/admin/invoice-add.phtml:21
 #: template/admin/invoice-edit.phtml:65 template/admin/invoice-view.phtml:68
 #: template/admin/order-print.phtml:87 template/admin/order-view.phtml:37
 #: template/front/detail.phtml:115
 msgid "Invoicing Address"
 msgstr "آدرس فاکتور"
 
-#: src/Form/AddressForm.php:210 src/Form/OrderAddForm.php:262
-#: src/Form/OrderForm.php:227 src/Form/OrderSettingForm.php:216
+#: src/Form/AddressForm.php:215 src/Form/OrderAddForm.php:262
+#: src/Form/OrderForm.php:229 src/Form/OrderSettingForm.php:216
 #: template/admin/invoice-add.phtml:37 template/admin/invoice-edit.phtml:81
 #: template/admin/invoice-view.phtml:84 template/admin/order-print.phtml:79
 #: template/admin/order-view.phtml:53 template/front/detail.phtml:131
@@ -626,8 +632,8 @@ msgstr "آدرس فاکتور"
 msgid "Zip code"
 msgstr "کد پستی"
 
-#: src/Form/AddressForm.php:224 src/Form/OrderAddForm.php:248
-#: src/Form/OrderForm.php:241 src/Form/OrderSettingForm.php:161
+#: src/Form/AddressForm.php:229 src/Form/OrderAddForm.php:248
+#: src/Form/OrderForm.php:243 src/Form/OrderSettingForm.php:161
 #: template/admin/invoice-add.phtml:25 template/admin/invoice-edit.phtml:69
 #: template/admin/invoice-view.phtml:72 template/admin/order-print.phtml:67
 #: template/admin/order-view.phtml:41 template/front/detail.phtml:119
@@ -635,17 +641,17 @@ msgstr "کد پستی"
 msgid "City"
 msgstr "شهر"
 
-#: src/Form/AddressForm.php:239 src/Form/OrderAddForm.php:234
-#: src/Form/OrderForm.php:256 template/admin/invoice-add.phtml:29
+#: src/Form/AddressForm.php:244 src/Form/OrderAddForm.php:234
+#: src/Form/OrderForm.php:258 template/admin/invoice-add.phtml:29
 #: template/admin/invoice-edit.phtml:73 template/admin/invoice-view.phtml:76
 #: template/admin/order-print.phtml:71 template/admin/order-view.phtml:45
 #: template/front/detail.phtml:123 template/front/invoice.phtml:139
 msgid "State"
 msgstr "استان"
 
-#: src/Form/AddressForm.php:261 src/Form/AddressForm.php:270
+#: src/Form/AddressForm.php:266 src/Form/AddressForm.php:275
 #: src/Form/OrderAddForm.php:212 src/Form/OrderAddForm.php:220
-#: src/Form/OrderForm.php:278 src/Form/OrderForm.php:287
+#: src/Form/OrderForm.php:280 src/Form/OrderForm.php:289
 #: template/admin/invoice-add.phtml:33 template/admin/invoice-edit.phtml:77
 #: template/admin/invoice-view.phtml:80 template/admin/order-print.phtml:75
 #: template/admin/order-view.phtml:49 template/front/detail.phtml:127
@@ -653,7 +659,15 @@ msgstr "استان"
 msgid "Country"
 msgstr "کشور"
 
-#: src/Form/AddressForm.php:285
+#: src/Form/AddressForm.php:290 template/admin/delivery-index.phtml:30
+#: template/admin/delivery-index.phtml:32 template/admin/gateway-index.phtml:62
+#: template/admin/gateway-index.phtml:65 template/admin/location-index.phtml:30
+#: template/admin/location-index.phtml:32 template/admin/order-view.phtml:246
+#: template/admin/order-view.phtml:248 template/front/checkout.phtml:185
+msgid "Edit"
+msgstr "ویرایش"
+
+#: src/Form/AddressForm.php:290
 msgid "Add"
 msgstr "اضافه کردن"
 
@@ -662,7 +676,7 @@ msgstr "اضافه کردن"
 msgid "User ID"
 msgstr "شناسه کاربر"
 
-#: src/Form/CreditForm.php:53 template/admin/credit-index.phtml:11
+#: src/Form/CreditForm.php:53 template/admin/credit-index.phtml:8
 #: template/admin/invoice-edit.phtml:123 template/admin/invoice-print.phtml:202
 #: template/admin/invoice-view.phtml:126 template/admin/log-index.phtml:10
 #: template/admin/order-list-user.phtml:77
@@ -685,12 +699,12 @@ msgstr "نوع کالا"
 msgid "Select module for use this credit"
 msgstr "انتخاب ماژول برای درج این اعتبار"
 
-#: src/Form/CreditForm.php:111 template/admin/credit-history.phtml:76
-#: template/front/credit.phtml:106
+#: src/Form/CreditForm.php:111 template/admin/credit-history.phtml:88
+#: template/front/credit.phtml:118
 msgid "User message"
 msgstr "پیام کاربر"
 
-#: src/Form/CreditForm.php:124 template/admin/credit-history.phtml:80
+#: src/Form/CreditForm.php:124 template/admin/credit-history.phtml:92
 msgid "Admin message"
 msgstr "پیام مدیر"
 
@@ -735,8 +749,8 @@ msgid "Private"
 msgstr "خصوصی"
 
 #: src/Form/DeliveryForm.php:75 src/Form/OrderAddForm.php:327
-#: src/Form/OrderForm.php:360 src/Form/OrderForm.php:388
-#: src/Form/OrderForm.php:418 src/Form/OrderSimpleForm.php:120
+#: src/Form/OrderForm.php:362 src/Form/OrderForm.php:390
+#: src/Form/OrderForm.php:420 src/Form/OrderSimpleForm.php:120
 #: src/Form/OrderSimpleForm.php:148 src/Form/OrderSimpleForm.php:178
 #: template/admin/log-index.phtml:9 template/admin/order-view.phtml:353
 msgid "Adapter"
@@ -854,7 +868,7 @@ msgstr "آیا %s فعال باشد؟"
 msgid "Time ( days )"
 msgstr "زمان ( روز )"
 
-#: src/Form/OrderAddForm.php:277 src/Form/OrderForm.php:303
+#: src/Form/OrderAddForm.php:277 src/Form/OrderForm.php:305
 #: src/Form/OrderSimpleForm.php:64 template/admin/order-view.phtml:146
 #: template/admin/order-view.phtml:314 template/admin/order-view.phtml:369
 #: template/front/detail.phtml:183
@@ -911,54 +925,54 @@ msgstr ""
 msgid "Order / invoice date"
 msgstr "تاریخ سفارش / فاکتور"
 
-#: src/Form/OrderForm.php:320 src/Form/OrderSimpleForm.php:80
+#: src/Form/OrderForm.php:322 src/Form/OrderSimpleForm.php:80
 msgid "Location"
 msgstr "مکان"
 
-#: src/Form/OrderForm.php:333 src/Form/OrderSimpleForm.php:92
+#: src/Form/OrderForm.php:335 src/Form/OrderSimpleForm.php:92
 msgid "Delivery methods"
 msgstr "روش تحویل"
 
-#: src/Form/OrderForm.php:435 src/Form/OrderSimpleForm.php:195
+#: src/Form/OrderForm.php:437 src/Form/OrderSimpleForm.php:195
 #: template/admin/invoice-add.phtml:122 template/admin/invoice-print.phtml:174
 #: template/admin/order-view.phtml:270 template/front/detail.phtml:243
 #: template/front/detail.phtml:342 template/front/invoice-print.phtml:174
 msgid "User note"
 msgstr "توضیح مشتری"
 
-#: src/Form/OrderForm.php:441 src/Form/OrderSimpleForm.php:201
+#: src/Form/OrderForm.php:443 src/Form/OrderSimpleForm.php:201
 msgid "Give here more details you think we need to know about"
 msgstr "اطلاعات بیشتری را که نیاز است ما بدانیم در این بخش درج نمایید"
 
-#: src/Form/OrderForm.php:451
+#: src/Form/OrderForm.php:453
 msgid "Update your profile by this information?"
 msgstr "به روز رسانی اطلاعات حساب کاربری با این اطلاعات؟"
 
-#: src/Form/OrderForm.php:460 src/Form/OrderSimpleForm.php:207
+#: src/Form/OrderForm.php:462 src/Form/OrderSimpleForm.php:207
 msgid "Terms & Conditions"
 msgstr "شرایط و مقررات"
 
-#: src/Form/OrderForm.php:461
+#: src/Form/OrderForm.php:463
 #, php-format
 msgid "I accept %s"
 msgstr "من %s را می پذیرم"
 
-#: src/Form/OrderForm.php:481
+#: src/Form/OrderForm.php:483
 msgid "Register and pay"
 msgstr "ثبت نام و پرداخت"
 
-#: src/Form/OrderForm.php:483
+#: src/Form/OrderForm.php:485
 msgid "Register and save order"
 msgstr "ثبت نام و ثبت سفارش"
 
-#: src/Form/OrderForm.php:487 src/Form/OrderSimpleForm.php:223
+#: src/Form/OrderForm.php:489 src/Form/OrderSimpleForm.php:223
 #: template/front/detail.phtml:282 template/front/detail.phtml:395
 #: template/front/detail.phtml:404 template/front/detail.phtml:407
 #: template/front/invoice.phtml:241 template/front/invoice.phtml:243
 msgid "Pay"
 msgstr "پرداخت"
 
-#: src/Form/OrderForm.php:489 src/Form/OrderSimpleForm.php:225
+#: src/Form/OrderForm.php:491 src/Form/OrderSimpleForm.php:225
 msgid "Save order"
 msgstr "ثبت سفارش"
 
@@ -1069,11 +1083,11 @@ msgid "path"
 msgstr "مسیر"
 
 #: src/Gateway/Dargahpardakht/Gateway.php:55
-#: template/admin/credit-history.phtml:7 template/admin/credit-index.phtml:7
+#: template/admin/credit-history.phtml:7 template/admin/credit-index.phtml:20
 #: template/admin/delivery-index.phtml:12
 #: template/admin/location-index.phtml:12 template/admin/log-index.phtml:7
 #: template/admin/order-list-user.phtml:269 template/admin/order-view.phtml:295
-#: template/front/credit.phtml:37 template/front/list.phtml:81
+#: template/front/list.phtml:81
 msgid "ID"
 msgstr "شناسه"
 
@@ -1427,100 +1441,111 @@ msgstr "به منظور ثبت سفارش ، باید شرایط و مقررات
 msgid "Select user ID not exist on system"
 msgstr "شناسه کاربر انتخابی در سیستم موجود نیست"
 
-#: template/admin/credit-history.phtml:3 template/front/credit.phtml:33
+#: template/admin/credit-history.phtml:3 template/front/credit.phtml:35
 msgid "List of historys"
 msgstr "فهرست تاریخچه تغییرات"
 
-#: template/admin/credit-history.phtml:8 template/admin/credit-history.phtml:52
-#: template/admin/credit-index.phtml:8 template/admin/invoice-add.phtml:8
+#: template/admin/credit-history.phtml:8 template/admin/credit-history.phtml:58
+#: template/admin/credit-index.phtml:7 template/admin/invoice-add.phtml:8
 #: template/admin/invoice-edit.phtml:52 template/admin/invoice-print.phtml:76
 #: template/admin/invoice-view.phtml:55 template/admin/order-print.phtml:37
 #: template/admin/order-view.phtml:24 template/admin/order-view.phtml:301
-#: template/front/credit.phtml:16 template/front/credit.phtml:38
-#: template/front/credit.phtml:82 template/front/detail.phtml:106
-#: template/front/invoice-print.phtml:76 template/front/invoice.phtml:105
+#: template/front/credit.phtml:16 template/front/credit.phtml:80
+#: template/front/detail.phtml:106 template/front/invoice-print.phtml:76
+#: template/front/invoice.phtml:105
 msgid "Name"
 msgstr "نام"
 
-#: template/admin/credit-history.phtml:9 template/admin/credit-history.phtml:56
-#: template/admin/credit-index.phtml:9 template/admin/order-view.phtml:299
-#: template/front/credit.phtml:39 template/front/credit.phtml:86
-msgid "Identity"
-msgstr "هویت"
-
-#: template/admin/credit-history.phtml:11
-#: template/admin/credit-history.phtml:84 template/front/credit.phtml:41
-#: template/front/credit.phtml:110
-msgid "Fluctuation status"
-msgstr "وضعیت تغییر"
-
-#: template/admin/credit-history.phtml:12
-#: template/admin/credit-history.phtml:64 template/front/credit.phtml:42
-#: template/front/credit.phtml:94
-msgid "Amount old"
-msgstr "مبلغ قبلی"
-
-#: template/admin/credit-history.phtml:13
-#: template/admin/credit-history.phtml:68 template/front/credit.phtml:43
-#: template/front/credit.phtml:98
-msgid "Amount new"
-msgstr "مبلغ جدید"
-
-#: template/admin/credit-history.phtml:14
-#: template/admin/credit-history.phtml:72 template/admin/invoice-add.phtml:75
-#: template/admin/order-list-user.phtml:270 template/admin/order-view.phtml:91
-#: template/front/credit.phtml:44 template/front/credit.phtml:102
+#: template/admin/credit-history.phtml:9 template/admin/credit-history.phtml:84
+#: template/admin/invoice-add.phtml:75 template/admin/order-list-user.phtml:270
+#: template/admin/order-view.phtml:91 template/front/credit.phtml:39
+#: template/front/credit.phtml:114
 msgid "Time create"
 msgstr "تاریخ ایجاد"
 
-#: template/admin/credit-history.phtml:15 template/admin/credit-index.phtml:13
+#: template/admin/credit-history.phtml:10 template/admin/gateway-index.phtml:38
+#: template/front/credit.phtml:40
+msgid "Description"
+msgstr "توضیحات"
+
+#: template/admin/credit-history.phtml:11 template/front/credit.phtml:41
+msgid "Old amount"
+msgstr "مبلغ قبلی"
+
+#: template/admin/credit-history.phtml:12 template/front/credit.phtml:42
+msgid "Debtor / Creditor"
+msgstr "بدهکار / بستانکار"
+
+#: template/admin/credit-history.phtml:13 template/front/credit.phtml:43
+msgid "Remained"
+msgstr "مانده"
+
+#: template/admin/credit-history.phtml:14 template/admin/credit-index.phtml:10
 #: template/admin/delivery-index.phtml:14 template/admin/gateway-index.phtml:9
 #: template/admin/invoice-index.phtml:29 template/admin/location-index.phtml:14
 #: template/admin/order-index.phtml:49 template/admin/order-list-user.phtml:247
 #: template/admin/order-list-user.phtml:273 template/admin/order-view.phtml:211
-#: template/front/credit.phtml:45 template/front/detail.phtml:262
+#: template/front/credit.phtml:44 template/front/detail.phtml:262
 #: template/front/list.phtml:87
 msgid "Action"
 msgstr "عملکرد"
 
-#: template/admin/credit-history.phtml:39 template/admin/log-index.phtml:36
-#: template/front/credit.phtml:69
+#: template/admin/credit-history.phtml:45 template/admin/log-index.phtml:36
+#: template/front/credit.phtml:67
 msgid "Show details"
-msgstr "نمایش جزئیات"
+msgstr "جزئیات"
 
-#: template/admin/credit-history.phtml:47 template/front/credit.phtml:77
+#: template/admin/credit-history.phtml:53 template/front/credit.phtml:75
 msgid "history details"
 msgstr "جززیات"
 
-#: template/admin/credit-history.phtml:88 template/front/credit.phtml:114
+#: template/admin/credit-history.phtml:68 template/admin/order-view.phtml:299
+#: template/front/credit.phtml:90
+msgid "Identity"
+msgstr "هویت"
+
+#: template/admin/credit-history.phtml:76
+msgid "Amount old"
+msgstr "مبلغ قبلی"
+
+#: template/admin/credit-history.phtml:80
+msgid "Amount new"
+msgstr "مبلغ جدید"
+
+#: template/admin/credit-history.phtml:96 template/front/credit.phtml:106
+msgid "Fluctuation status"
+msgstr "وضعیت تغییر"
+
+#: template/admin/credit-history.phtml:100 template/front/credit.phtml:122
 msgid "Action status"
 msgstr "وضعیت عملکرد"
 
-#: template/admin/credit-history.phtml:92 template/admin/invoice-edit.phtml:129
-#: template/admin/invoice-view.phtml:132 template/front/credit.phtml:118
+#: template/admin/credit-history.phtml:104
+#: template/admin/invoice-edit.phtml:129 template/admin/invoice-view.phtml:132
+#: template/front/credit.phtml:126
 msgid "Ip"
 msgstr "آی پی"
 
-#: template/admin/credit-history.phtml:99
-#: template/admin/credit-history.phtml:103 template/admin/invoice-edit.phtml:98
+#: template/admin/credit-history.phtml:111
+#: template/admin/credit-history.phtml:115 template/admin/invoice-edit.phtml:98
 #: template/admin/invoice-edit.phtml:100 template/admin/invoice-index.phtml:62
 #: template/admin/invoice-index.phtml:64 template/admin/invoice-view.phtml:101
-#: template/admin/invoice-view.phtml:103 template/front/credit.phtml:125
+#: template/admin/invoice-view.phtml:103 template/front/credit.phtml:133
 msgid "View order"
 msgstr "نمایش سفارش"
 
-#: template/admin/credit-history.phtml:106
-#: template/admin/credit-history.phtml:110
+#: template/admin/credit-history.phtml:118
+#: template/admin/credit-history.phtml:122
 msgid "View invoice"
 msgstr "نمایش فاکتور"
 
-#: template/admin/credit-history.phtml:112
-#: template/admin/credit-history.phtml:117 template/admin/credit-index.phtml:55
+#: template/admin/credit-history.phtml:124
+#: template/admin/credit-history.phtml:129 template/admin/credit-index.phtml:55
 #: template/admin/credit-index.phtml:60
 msgid "User information"
 msgstr "اطلاعات کاربر"
 
-#: template/admin/credit-history.phtml:130 template/front/credit.phtml:139
+#: template/admin/credit-history.phtml:142 template/front/credit.phtml:147
 msgid "No history save yet"
 msgstr "هنوز هیچ گزارشی ذخیره نشده است"
 
@@ -1528,7 +1553,7 @@ msgstr "هنوز هیچ گزارشی ذخیره نشده است"
 msgid "List of logs"
 msgstr "فهرست گزارش ها"
 
-#: template/admin/credit-index.phtml:12
+#: template/admin/credit-index.phtml:9
 msgid "Time Update"
 msgstr "به روز رسانی"
 
@@ -1591,14 +1616,6 @@ msgstr ""
 msgid "List of Delivery methods"
 msgstr "فهرست روش های تحویل"
 
-#: template/admin/delivery-index.phtml:30
-#: template/admin/delivery-index.phtml:32 template/admin/gateway-index.phtml:62
-#: template/admin/gateway-index.phtml:65 template/admin/location-index.phtml:30
-#: template/admin/location-index.phtml:32 template/admin/order-view.phtml:246
-#: template/admin/order-view.phtml:248
-msgid "Edit"
-msgstr "ویرایش"
-
 #: template/admin/delivery-index.phtml:38
 msgid "No delivery methods is not created yet"
 msgstr "هیچ روش تحویلی هنوز ایجاد نشده است"
@@ -1646,10 +1663,6 @@ msgstr "غیر فعال"
 #: template/admin/gateway-index.phtml:20
 msgid "Not installed"
 msgstr "نصب نشده"
-
-#: template/admin/gateway-index.phtml:38
-msgid "Description"
-msgstr "توضیحات"
 
 #: template/admin/gateway-index.phtml:39
 msgid "Version"
@@ -2043,7 +2056,7 @@ msgstr "معوقه"
 #: template/admin/order-print.phtml:440 template/admin/order-print.phtml:523
 #: template/admin/order-print.phtml:568 template/admin/order-print.phtml:651
 #: template/admin/order-view.phtml:148 template/admin/order-view.phtml:316
-#: template/front/checkout.phtml:210 template/front/detail.phtml:185
+#: template/front/checkout.phtml:223 template/front/detail.phtml:185
 #: template/front/detail.phtml:223 template/front/installment.phtml:116
 #: template/front/invoice.phtml:162
 msgid "Total"
@@ -2084,7 +2097,7 @@ msgstr "فاکتور فروش"
 
 #: template/admin/order-print.phtml:98 template/admin/order-print.phtml:295
 #: template/admin/order-print.phtml:423 template/admin/order-print.phtml:551
-#: template/front/checkout.phtml:209
+#: template/front/checkout.phtml:222
 msgid "Product name"
 msgstr "شرح کالا"
 
@@ -2230,7 +2243,7 @@ msgstr ""
 "هماهنگی دارد.لذا گزینه پرداخت آنلاین آن پس از تائید مدیر سایت فعال میگردد و "
 "از طریق ایمیل و پیامک به شما اطلاع رسانی میگردد."
 
-#: template/front/checkout.phtml:137
+#: template/front/checkout.phtml:138
 msgid ""
 "If you registered on website before this time and have user account, please "
 "login to system and continue ordering, and if you dont have user account "
@@ -2240,58 +2253,70 @@ msgstr ""
 "استفاده از فرم ورود زیر به وب سایت وارد شوید و مراحل سفارش را دنبال کنید ، "
 "در غیر این صورت لطفا فرم ثبت سفارش و ساخت حساب کاربری زیر را تکمیل فرمایید."
 
-#: template/front/checkout.phtml:140
+#: template/front/checkout.phtml:141
 msgid "Login"
 msgstr "ورود"
 
-#: template/front/checkout.phtml:144
+#: template/front/checkout.phtml:145
 msgid "Register new user account and make order"
 msgstr "ساخت حساب کاربری در وب سایت و ثبت سفارش"
 
-#: template/front/checkout.phtml:148
+#: template/front/checkout.phtml:150
 msgid ""
 "Select the needed address for your order. You can also add a new address"
 msgstr ""
 "مشخصات و آدرس مورد نظر خود را برای ثبت این سفارش انتخاب کنید ، همچنین شما می "
 "توانید آدرس و مشخصات جدیدی ثبت نمایید"
 
-#: template/front/checkout.phtml:165
+#: template/front/checkout.phtml:152
+msgid ""
+"You don't have set an address yet. Please create your adress we will use for "
+"your order. You will be able then to manage several adresses"
+msgstr ""
+"شما هنوز هیچ آدرسی در سیستم ثبت نکرده اید، لطفا یک آدرس برای استفاده در "
+"هنگام سفارش محصول درج نمایید، شما میتوانید چندین آدرس مختلف داشته باشید"
+
+#: template/front/checkout.phtml:170
 msgid "Invoicing address"
 msgstr "آدرس فاکتور"
 
-#: template/front/checkout.phtml:175
+#: template/front/checkout.phtml:179
 msgid "Use it"
 msgstr "ثبت سفارش با استفاده از این اطلاعات"
 
-#: template/front/checkout.phtml:178
+#: template/front/checkout.phtml:182
 msgid "Selected address"
 msgstr "آدرس انتخابی"
 
-#: template/front/checkout.phtml:189
+#: template/front/checkout.phtml:188
+msgid "Delete"
+msgstr "حذف"
+
+#: template/front/checkout.phtml:199
 msgid "Add new address"
 msgstr "ثبت سفارش با آدرس جدید"
 
-#: template/front/checkout.phtml:204
+#: template/front/checkout.phtml:217
 msgid "Your order"
 msgstr "سفارش شما"
 
-#: template/front/checkout.phtml:233
+#: template/front/checkout.phtml:246
 msgid "Total Discount"
 msgstr "مجموع تخفیف"
 
-#: template/front/checkout.phtml:243
+#: template/front/checkout.phtml:256
 msgid "Total Price ext VAT"
 msgstr "مجموع قیمت با مالیات"
 
-#: template/front/checkout.phtml:248
+#: template/front/checkout.phtml:261
 msgid "Total Vat"
 msgstr "مجموع مالیات"
 
-#: template/front/checkout.phtml:257
+#: template/front/checkout.phtml:270
 msgid "Total Shipping"
 msgstr "مجموع هزینه ارسال"
 
-#: template/front/checkout.phtml:265
+#: template/front/checkout.phtml:278
 msgid "Final Price incl. VAT"
 msgstr "قیمت نهایی"
 
@@ -2306,6 +2331,18 @@ msgstr "زمان آخرین به روزرسانی"
 #: template/front/credit.phtml:26
 msgid "Total credit amount"
 msgstr "مجموع کل اعتبار"
+
+#: template/front/credit.phtml:98
+msgid "Amount old credit"
+msgstr "مبلغ اعتبار قبلی"
+
+#: template/front/credit.phtml:102
+msgid "Amount change credit"
+msgstr "مبلغ تغییر اعتبار"
+
+#: template/front/credit.phtml:110
+msgid "Amount new credit"
+msgstr "مبلغ اعتبار جدید"
 
 #: template/front/detail.phtml:25 template/front/invoice.phtml:23
 msgid "Not validated"
@@ -2424,6 +2461,12 @@ msgstr "نوع"
 #: template/front/pay.phtml:12
 msgid "You'll be redirected in few seconds to gateway Checkout Page"
 msgstr "شما ظرف چند ثانیه به صفحه پرداخت بانک منتقل خواهید شد"
+
+#~ msgid "Debtor"
+#~ msgstr "بدهکار"
+
+#~ msgid "Creditor"
+#~ msgstr "بستانکار"
 
 #~ msgid ""
 #~ "You have stopped the payment process. You will be redirected to the Order "
