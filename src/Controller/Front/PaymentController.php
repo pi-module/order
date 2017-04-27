@@ -77,6 +77,7 @@ class PaymentController extends IndexController
                         'uid' => $invoice['uid'],
                         'amount' => $creditAmount,
                         'amount_old' => $creditAmount,
+                        'amount_new' => 0,
                         'status_fluctuation' => 'decrease',
                         'status_action' => 'automatic',
                         'message_user' => '',

@@ -74,6 +74,7 @@ class Credit extends AbstractApi
         $row->invoice = $invoice;
         $row->amount = $history['amount'];
         $row->amount_old = isset($history['amount_old']) ? $history['amount_old'] : '';
+        $row->amount_new = isset($history['amount_new']) ? $history['amount_new'] : '';
         $row->status = $status;
         $row->status_fluctuation = $history['status_fluctuation'];
         $row->status_action = $history['status_action'];
@@ -139,11 +140,12 @@ class Credit extends AbstractApi
             'status' => 0,
             'message' => '',
         );
-        $amountOld = 0;
         // Find and set credit
         $credit = Pi::model('credit', $this->getModule())->find($uid, 'uid');
         if ($credit) {
+            // Set old credit amount
             $amountOld = $credit->amount;
+            // Do action
             $detail = json::decode($credit->amount_detail, true);
             switch ($fluctuation) {
                 case 'increase':
@@ -164,6 +166,8 @@ class Credit extends AbstractApi
             $credit->amount_detail = Json::encode($detail);
             $credit->time_update = time();
             $credit->save();
+            // Set new credit amount
+            $amountNew = $credit->amount;
         } else {
             if ($fluctuation == 'increase') {
                 // Set detail
@@ -177,6 +181,10 @@ class Credit extends AbstractApi
                 $credit->amount = $amount;
                 $credit->amount_detail = Json::encode($detail);
                 $credit->save();
+                // Set old credit amount
+                $amountOld = 0;
+                // Set new credit amount
+                $amountNew = $credit->amount;
             } else {
                 $result['message'] = __('This user never use credit system, than you can not decrease amnout from him / her');
                 return $result;
@@ -186,6 +194,7 @@ class Credit extends AbstractApi
         $history = array(
             'amount' => $amount,
             'amount_old' => $amountOld,
+            'amount_new' => $amountNew,
             'status_fluctuation' => $fluctuation,
             'status_action' => $action,
             'message_user' => $messageAdmin,

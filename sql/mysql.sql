@@ -256,6 +256,7 @@ CREATE TABLE `{history}` (
   `invoice`            INT(10) UNSIGNED              NOT NULL DEFAULT '0',
   `amount`             DECIMAL(16, 2)                NOT NULL DEFAULT '0.00',
   `amount_old`         DECIMAL(16, 2)                NOT NULL DEFAULT '0.00',
+  `amount_new`         DECIMAL(16, 2)                NOT NULL DEFAULT '0.00',
   `status`             TINYINT(1) UNSIGNED           NOT NULL DEFAULT '0',
   `status_fluctuation` ENUM ('increase', 'decrease') NOT NULL DEFAULT 'increase',
   `status_action`      ENUM ('automatic', 'manual')  NOT NULL DEFAULT 'automatic',

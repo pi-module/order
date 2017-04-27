@@ -34,35 +34,41 @@
         <?php if (!empty($list)) { ?>
             <table class="table table-striped table-bordered table-condensed">
                 <tr>
-                    <th><?php _e('ID'); ?></th>
-                    <th><?php _e('Name'); ?></th>
-                    <th><?php _e('Identity'); ?></th>
-                    <th><?php _e('Email'); ?></th>
-                    <th><?php _e('Fluctuation status'); ?></th>
-                    <th><?php _e('Amount old'); ?></th>
-                    <th><?php _e('Amount new'); ?></th>
-                    <th><?php _e('Time create'); ?></th>
+                    <th><?php _e('Description'); ?></th>
+                    <th><?php _e('Debtor'); ?></th>
+                    <th><?php _e('Creditor'); ?></th>
+                    <th><?php _e('Remained'); ?></th>
                     <th><?php _e('Action'); ?></th>
                 </tr>
                 <?php foreach ($list as $history) { ?>
-                    <?php
-                    if ($history['status'] == 1) {
-                        $tableClass = 'success';
+                    <?php if ($history['status'] == 1) {
+                        if ($history['status_fluctuation'] == 'increase') {
+                            $tableClass = 'success';
+                        } elseif ($history['status_fluctuation'] == 'decrease') {
+                            $tableClass = 'danger';
+                        }
                     } elseif ($history['status'] == 2) {
                         $tableClass = 'info';
                     } elseif ($history['status'] == 0) {
-                        $tableClass = 'danger';
-                    }
-                    ?>
+                        $tableClass = 'warning';
+                    } ?>
                     <tr class="<?php echo $tableClass; ?>">
-                        <td><?php echo $this->escape($history['id']); ?></td>
-                        <td><?php echo $this->escape($user['name']); ?></td>
-                        <td><?php echo $this->escape($user['identity']); ?></td>
-                        <td><?php echo $this->escape($user['email']); ?></td>
-                        <td><span class="<?php echo $history['status_fluctuation_class']; ?>"><?php echo $this->escape($history['status_fluctuation_view']); ?></span></td>
-                        <td><?php echo $this->escape($history['amount_old_view']); ?></td>
-                        <td><?php echo $this->escape($history['amount_view']); ?></td>
-                        <td><?php echo $this->escape($history['time_create_view']); ?></td>
+                        <td><?php echo $this->escape($history['message_user']); ?></td>
+                        <td>
+                            <?php if ($history['status_fluctuation'] == 'decrease') { ?>
+                                <?php echo $this->escape($history['amount_view']); ?>
+                            <?php } else { ?>
+                                -
+                            <?php } ?>
+                        </td>
+                        <td>
+                            <?php if ($history['status_fluctuation'] == 'increase') { ?>
+                                <?php echo $this->escape($history['amount_view']); ?>
+                            <?php } else { ?>
+                                -
+                            <?php } ?>
+                        </td>
+                        <td><?php echo $this->escape($history['amount_new_view']); ?></td>
                         <td>
                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal"
                                     data-target="#history-modal-<?php echo $this->escape($history['id']); ?>">
@@ -80,7 +86,13 @@
                                             <table class="table table-striped table-bordered table-condensed">
                                                 <tr>
                                                     <td><strong><?php _e('Name'); ?></strong></td>
-                                                    <td><?php echo $this->escape($user['name']); ?></td>
+                                                    <td>
+                                                        <?php if (!empty($user['first_name']) && !empty($user['last_name'])) { ?>
+                                                            <span><?php echo $this->escape($user['first_name']); ?> <?php echo $this->escape($user['last_name']); ?></span>
+                                                        <?php } else { ?>
+                                                            <span><?php echo $this->escape($user['name']); ?></span>
+                                                        <?php } ?>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong><?php _e('Identity'); ?></strong></td>
