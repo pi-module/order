@@ -413,7 +413,7 @@ return array(
             'value' => 0,
         ),
         'score_division' => array(
-            'category' => 'payment',
+            'category' => 'score',
             'title' => _a('Division score'),
             'edit' => 'text',
             'filter' => 'string',
