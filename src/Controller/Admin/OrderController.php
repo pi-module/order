@@ -496,6 +496,8 @@ class OrderController extends ActionController
         // Get id
         $id = $this->params('id');
         $module = $this->params('module');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
         // Get order
         $order = $this->getModel('order')->find($id);
         $order = Pi::api('order', 'order')->canonizeOrder($order);
@@ -508,6 +510,7 @@ class OrderController extends ActionController
         // Set view
         $this->view()->setTemplate('order-view');
         $this->view()->assign('order', $order);
+        $this->view()->assign('config', $config);
     }
 
     public function addAction()

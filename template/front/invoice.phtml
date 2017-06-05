@@ -241,13 +241,13 @@
                         <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>"
                            href="<?php echo $this->escape($invoice['pay_url']); ?>"><i
                                 class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
-                    <?php } else { ?>
+                    <?php } /* else { ?>
                         <span class="label label-danger">
                             <?php echo sprintf(__('You can pay this invoice after %s'),
                                 _date($invoice['time_duedate'] - (60 * 60 * 24 * 14),
                                     array('pattern' => 'dd-MM-yyyy'))); ?>
                         </span>
-                    <?php } ?>
+                    <?php } */ ?>
                 <?php } elseif ($invoice['status'] == 2 && $invoice['can_pay'] != 1) { ?>
                     <span class="label label-danger">
                             <?php _e('You can pay this invoice after admin review'); ?>

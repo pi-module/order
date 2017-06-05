@@ -15,6 +15,13 @@ $this->backbone();
          data-note="<?php echo $this->escape($order['url_update_note']); ?>">
         <h3><?php echo sprintf(__('Order %s details'), $order['code']); ?></h3>
 
+        <?php if ($config['score_active']) { ?>
+            <div class="alert alert-info">
+                <?php $score = Pi::api('invoice', 'order')->getInvoiceScore($order['uid']); ?>
+                <?php echo sprintf('Type : %s - Amount : %s', $score['type'], $score['amount']); ?>
+            </div>
+        <?php } ?>
+
         <div class="well">
             <h3><?php _e('Information'); ?></h3>
 

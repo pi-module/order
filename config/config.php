@@ -38,6 +38,10 @@ return array(
             'name' => 'credit'
         ),
         array(
+            'title' => _a('Score'),
+            'name' => 'score'
+        ),
+        array(
             'title' => _a('Notification'),
             'name' => 'notification'
         ),
@@ -399,6 +403,21 @@ return array(
             'filter' => 'text',
             'value' => 'general',
             'category' => 'credit',
+        ),
+        // Score
+        'score_active' => array(
+            'category' => 'score',
+            'title' => _a('Active score system'),
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 0,
+        ),
+        'score_division' => array(
+            'category' => 'payment',
+            'title' => _a('Division score'),
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => '0.001'
         ),
         // Notification
         'sms_order_user' => array(

@@ -18,6 +18,8 @@ use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
 use Module\Order\Form\CreditForm;
 use Module\Order\Form\CreditFilter;
+use Module\Order\Form\CreditSettingForm;
+use Module\Order\Form\CreditSettingFilter;
 use Zend\Json\Json;
 use Zend\Db\Sql\Predicate\Expression;
 
@@ -27,6 +29,11 @@ class CreditController extends ActionController
     {
         // Get page
         $page = $this->params('page', 1);
+        $uid = $this->params('uid');
+        $first_name = $this->params('first_name');
+        $last_name = $this->params('last_name');
+        $email = $this->params('email');
+        $company = $this->params('company');
         // Get module list
         $moduleList = Pi::registry('modulelist')->read();
         // Get info
@@ -34,7 +41,55 @@ class CreditController extends ActionController
         $order = array('time_update DESC', 'id DESC');
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit = intval($this->config('admin_perpage'));
-        $select = $this->getModel('credit')->select()->order($order)->offset($offset)->limit($limit);
+        // Find user
+        $where = array();
+        $userIds = array();
+        if (!empty($email)) {
+            $whereUserAccount = array();
+            $whereUserAccount['email LIKE ?'] = '%' . $email . '%';
+            $modelAccount = Pi::model('user_account');
+            $select = $modelAccount->select();
+            $select->columns(array('id'));
+            $select->where($whereUserAccount);
+            $rowset = $modelAccount->selectWith($select);
+            foreach ($rowset as $row) {
+                $userIds[] = (int) $row['id'];
+            }
+        }
+        if (!empty($first_name) || !empty($last_name) || !empty($company)) {
+            $whereUserAccount = array();
+            if (!empty($first_name)) {
+                $whereUserAccount['first_name LIKE ?'] = '%' . $first_name . '%';
+            }
+            if (!empty($last_name)) {
+                $whereUserAccount['last_name LIKE ?'] = '%' . $last_name . '%';
+            }
+            if (!empty($company)) {
+                $whereUserAccount['company LIKE ?'] = '%' . $company . '%';
+            }
+            $modelAccount = Pi::model('profile', 'user');
+            $select = $modelAccount->select();
+            $select->columns(array('id'));
+            $select->where($whereUserAccount);
+            $rowset = $modelAccount->selectWith($select);
+            foreach ($rowset as $row) {
+                $userIds[] = (int) $row['id'];
+            }
+        }
+
+        if (!empty($userIds)) {
+            if (intval($uid) > 0) {
+                $userIds[] = intval($uid);
+            }
+            $userIds = array_unique($userIds);
+            $where['uid'] = $userIds;
+        } else {
+            if (intval($uid) > 0) {
+                $where['uid'] = intval($uid);
+            }
+        }
+
+        $select = $this->getModel('credit')->select()->where($where)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('credit')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
@@ -67,12 +122,62 @@ class CreditController extends ActionController
                 'module' => $this->getModule(),
                 'controller' => 'credit',
                 'action' => 'index',
+                'uid' => $uid,
+                'first_name' => $first_name,
+                'last_name' => $last_name,
+                'email' => $email,
+                'company' => $company,
             )),
         ));
+        // Set form
+        $values = array(
+            'uid' => $uid,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'email' => $email,
+            'company' => $company,
+        );
+        $form = new CreditSettingForm('setting');
+        $form->setAttribute('action', $this->url('', array('action' => 'process')));
+        $form->setData($values);
         // Set view
         $this->view()->setTemplate('credit-index');
         $this->view()->assign('list', $list);
         $this->view()->assign('paginator', $paginator);
+        $this->view()->assign('form', $form);
+    }
+
+    public function processAction()
+    {
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form = new CreditSettingForm('setting');
+            $form->setInputFilter(new CreditSettingFilter());
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                $message = __('Go to filter');
+                $url = array(
+                    'action' => 'index',
+                    'uid' => $values['uid'],
+                    'first_name' => $values['first_name'],
+                    'last_name' => $values['last_name'],
+                    'email' => $values['email'],
+                    'company' => $values['company'],
+                );
+            } else {
+                $message = __('Not valid');
+                $url = array(
+                    'action' => 'index',
+                );
+            }
+        } else {
+            $message = __('Not set');
+            $url = array(
+                'action' => 'index',
+            );
+        }
+        return $this->jump($url, $message);
     }
 
     public function historyAction()

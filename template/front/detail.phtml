@@ -280,21 +280,21 @@
                                 <?php if ($invoice['can_pay'] == 1) { ?>
                                     <?php if ($invoice['allowPayment']) { ?>
                                         <a class="btn btn-success btn-xs" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay_url']); ?>"><i class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
-                                    <?php } else { ?>
+                                    <?php } /* else { ?>
                                         <span class="label label-danger"><?php echo sprintf(__('You can pay this invoice after %s'),  _date($invoice['time_duedate'] - (60 * 60 * 24 * 14), array('pattern' => 'dd-MM-yyyy'))); ?></span>
-                                    <?php } ?>
+                                    <?php } */ ?>
                                 <?php } elseif ($invoice['can_pay'] != 1) { ?>
                                     <span class="label label-danger"><?php _e('You can pay this invoice after admin review'); ?></span>
                                 <?php } ?>
                             <?php } elseif ($invoice['status'] == 1) { ?>
-                                <span class="label label-success"><?php _e('Paid'); ?></span>
+                                <span class="label label-info"><?php _e('Paid'); ?></span>
                             <?php } ?>
                         </td>
                     </tr>
                     <?php if ($invoice['status'] == 1 && !empty($invoice['log'])) { ?>
                         <tr>
                             <td colspan="4">
-                                <span class="text-success"><?php echo $this->escape($invoice['log']['message']); ?> <?php echo $this->escape($invoice['log']['gatewayMessage']); ?></span>
+                                <span class="text-info"><?php echo $this->escape($invoice['log']['message']); ?> <?php echo $this->escape($invoice['log']['gatewayMessage']); ?></span>
                             </td>
                         </tr>
                     <?php } ?>
@@ -406,9 +406,9 @@
                                     <?php } else { ?>
                                         <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay_url']); ?>"><i class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
                                     <?php } ?>
-                                <?php } else { ?>
+                                <?php } /* else { ?>
                                     <span class="label label-danger"><?php echo sprintf(__('You can pay this invoice after %s'), _date($invoice['time_duedate'] - (60 * 60 * 24 * 14), array('pattern' => 'dd-MM-yyyy'))); ?></span>
-                                <?php } ?>
+                                <?php } */ ?>
                             <?php } elseif ($invoice['can_pay'] != 1) { ?>
                                 <span class="label label-danger"><?php _e('You can pay this invoice after admin review'); ?></span>
                             <?php } ?>
