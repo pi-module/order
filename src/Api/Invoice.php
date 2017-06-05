@@ -500,22 +500,54 @@ class Invoice extends AbstractApi
         $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             if ($row->time_payment > ($row->time_duedate + 86400)) {
+
                 // Negative
-                $pointNegative = $pointNegative + (($row->time_payment - ($row->time_duedate + 86400)) * $row->total_price);
+                $days = number_format(($row->time_payment / 86400) - (($row->time_duedate + 86400) / 86400));
+                $point = ($days * $row->total_price);
+                $amount = $point * $pointDivision;
+                $pointNegative = $pointNegative + $amount;
+
+                echo '<pre>';
+                print_r(array(
+                    'type' => 'Negative',
+                    'price' => $row->total_price,
+                    'day' => $days,
+                    'point' => $point,
+                    'division' => $pointDivision,
+                    'amount' => $amount,
+                ));
+                echo '</pre>';
+
             } elseif ($row->time_duedate > ($row->time_payment + 86400)) {
+
                 // Positive
-                $pointPositive = $pointPositive + (($row->time_duedate - ($row->time_payment + 86400)) * $row->total_price);
+                $days = number_format(($row->time_duedate  / 86400) - (($row->time_payment + 86400) / 86400));
+                $point = ($days * $row->total_price);
+                $amount = $point * $pointDivision;
+                $pointPositive = $pointPositive + $amount;
+
+                echo '<pre>';
+                print_r(array(
+                    'type' => 'Positive',
+                    'price' => $row->total_price,
+                    'day' => $days,
+                    'point' => $point,
+                    'division' => $pointDivision,
+                    'amount' => $amount,
+                ));
+                echo '</pre>';
+
             }
         }
 
         if ($pointNegative > $pointPositive) {
             // Negative
             $pointScore['type'] = 'negative';
-            $pointScore['amount']= ($pointNegative - $pointPositive) / $pointDivision;
+            $pointScore['amount']= ($pointNegative - $pointPositive);
         } elseif ($pointPositive > $pointNegative) {
             // Positive
             $pointScore['type'] = 'positive';
-            $pointScore['amount'] = ($pointPositive - $pointNegative) / $pointDivision;
+            $pointScore['amount'] = ($pointPositive - $pointNegative);
         } else {
             // Normal
             $pointScore['type'] = 'normal';
