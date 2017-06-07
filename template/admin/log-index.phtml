@@ -5,10 +5,10 @@
         <table class="table table-striped table-bordered table-condensed">
             <tr>
                 <th><?php _e('ID'); ?></th>
+                <th><?php _e('User'); ?></th>
                 <th><?php _e('Invoice'); ?></th>
                 <th><?php _e('Adapter'); ?></th>
                 <th><?php _e('Amount'); ?></th>
-                <th><?php _e('User'); ?></th>
                 <th><?php _e('Time Create'); ?></th>
                 <th><?php _e('Details'); ?></th>
             </tr>
@@ -23,15 +23,31 @@
                 }
                 ?>
                 <tr>
-                    <td><span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($log['id']); ?></span>
+                    <td>
+                        <span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($log['id']); ?></span>
                     </td>
-                    <td><?php echo $this->escape($log['invoice']); ?></td>
-                    <td><?php echo $this->escape($log['gateway']); ?></td>
+                    <td>
+                        <a target="_blank" href="<?php echo $this->escape($log['user_url']); ?>">
+                            <?php echo $this->escape($log['user']['name']); ?> (<?php echo $this->escape($log['user']['id']); ?>)
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank" href="<?php echo $this->escape($log['invoice_url']); ?>">
+                            <?php echo $this->escape($log['invoice']); ?> (<?php _e('View'); ?>)
+                        </a>
+                    </td>
+                    <td>
+                        <?php echo $this->escape($log['gateway']); ?>
+                        <?php if ($log['gateway'] == 'Mellat') { ?>
+                            <?php if (isset($log['value']['request']['SaleReferenceId'])) { ?>
+                                ( <?php echo $log['value']['request']['SaleReferenceId']; ?> )
+                            <?php } ?>
+                        <?php } ?>
+                    </td>
                     <td><?php echo $this->escape($log['amount']); ?></td>
-                    <td><?php echo $this->escape($log['user']['identity']); ?></td>
                     <td><?php echo $this->escape($log['time_create_view']); ?></td>
                     <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal"
                                 data-target="#log-modal-<?php echo $this->escape($log['id']); ?>">
                             <?php _e('Show details'); ?>
                         </button>
