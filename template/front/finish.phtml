@@ -35,5 +35,9 @@ $this->footScript()->appendScript($script2);
         <p><?php _e('Once received, youll be redirected automatically to your dashboard, and will be able to create your item !'); ?></p>
 
         <p><?php _e('Please wait !'); ?></p>
+        
+        <?php if ($paypal) { ?> 
+            <p><?php _e('Nous vous remercions de votre paiement. Votre transaction est terminée et vous allez recevoir par email un avis accusant réception de votre achat. Vous pouvez vous connecter à votre compte sur www.paypal.com pour consulter les détails de cette transaction.'); ?></p>    
+        <?php } ?> 
     </div>
 </div>
