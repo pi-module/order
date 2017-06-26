@@ -361,7 +361,17 @@ class Order extends AbstractApi
         $rowset = Pi::model('basket', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
-            $list[$row->id]['details'] = Pi::api('order', $module)->getProductDetails($row->product, $row->extra);
+
+            if ($module != 'order' && Pi::service('module')->isActive($module)) {
+                $list[$row->id]['details'] = Pi::api('order', $module)->getProductDetails($row->product, $row->extra);
+            } else {
+                $list[$row->id]['details'] = array(
+                    'title' => __('Manually order'),
+                    'productUrl' => '',
+                    'thumbUrl' => '',
+                );
+            }
+
             if (empty($row->extra)) {
                 $list[$row->id]['extra'] = array();
             } else {
