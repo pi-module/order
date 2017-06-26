@@ -34,6 +34,8 @@ class PayForm extends BaseForm
 
     public function init()
     {
+        $this->setAttribute('enctype','multipart/form-data');
+
         // Set extra field
         if (!empty($this->field)) {
             foreach ($this->field as $field) {

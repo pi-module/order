@@ -331,14 +331,15 @@ class PaymentController extends IndexController
 
     public function finishAction()
     {
-        $url = Pi::url($this->url('', array(
-            'module' => $this->getModule(),
-            'controller' => 'payment',
-            'action' => 'process',
-        )));
+        $id = $this->params('id');
+        $paypal = false;
+        if ($id == 'paypal') {
+            $paypal = true;
+        }
         // Set view
         $this->view()->setTemplate('finish')->setLayout('layout-style');
         $this->view()->assign('url', $url);
+        $this->view()->assign('paypal', $paypal);
     }
 
     public function processAction()
