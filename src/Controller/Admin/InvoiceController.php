@@ -305,6 +305,12 @@ class InvoiceController extends ActionController
                     ),
                     array('id' => $order['id'])
                 );
+                // Get new invoice
+                $newInvoice = Pi::api('invoice', 'order')->getInvoice($id);
+                // Save log
+                Pi::service('audit')->log('invoice', $invoice);
+                Pi::service('audit')->log('invoice', $newInvoice);
+                Pi::service('audit')->log('invoice', '-----------------------------------------');
                 // Check it save or not
                 $message = __('Your invoice data saved successfully.');
                 $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message);

@@ -493,6 +493,21 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '1.9.1', '<')) {
+            // Alter table field add amount_new
+            $sql = sprintf("ALTER TABLE %s ADD `amount_new` DECIMAL(16, 2) NOT NULL DEFAULT '0.00'", $historyTable);
+            try {
+                $historyAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }
 }

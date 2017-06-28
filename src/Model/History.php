@@ -28,6 +28,7 @@ class History extends Model
         'invoice',
         'amount',
         'amount_old',
+        'amount_new',
         'status',
         'status_fluctuation',
         'status_action',

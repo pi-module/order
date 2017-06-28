@@ -29,6 +29,7 @@ use Zend\Math\Rand;
  * Pi::api('invoice', 'order')->updateInvoice($randomId);
  * Pi::api('invoice', 'order')->canonizeInvoice($invoice);
  * Pi::api('invoice', 'order')->setBackUrl($id, $url);
+ * Pi::api('invoice', 'order')->getInvoiceScore($uid);
  */
 
 class Invoice extends AbstractApi
@@ -305,7 +306,7 @@ class Invoice extends AbstractApi
                 $invoices[$row->id]['log'] = Pi::api('log', 'order')->getTrueLog($row->id);
             }
             // Check allow payment
-            if ($order['type_payment'] == 'installment') {
+            /* if ($order['type_payment'] == 'installment') {
                 if ($invoices[$row->id]['extra']['type'] == 'installment') {
                     $time = time() + (60 * 60 * 24 * 28);
                     if ($invoices[$row->id]['time_duedate'] < $time) {
@@ -318,7 +319,8 @@ class Invoice extends AbstractApi
                 }
             } else {
                 $invoices[$row->id]['allowPayment'] = 1;
-            }
+            } */
+            $invoices[$row->id]['allowPayment'] = 1;
         }
         return $invoices;
     }
@@ -460,6 +462,16 @@ class Invoice extends AbstractApi
             'action' => 'print',
             'id' => $invoice['id'],
         )));
+        // Set anonymous pay
+        $invoice['anonymous_pay_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+            'module' => $this->getModule(),
+            'controller' => 'payment',
+            'action' => 'index',
+            'id' => $invoice['id'],
+            'anonymous' => 1,
+            'token' => 'TOKEN_KEY',
+        )));
+
         // Set extra
         if (!empty($invoice['extra'])) {
             $invoice['extra'] = json::decode($invoice['extra'], true);
@@ -478,5 +490,79 @@ class Invoice extends AbstractApi
         $log['gateway'] = 'paypal';
         $log['value'] = Json::encode(array(12, $invoice->toArray()));
         Pi::api('log', 'order')->setLog($log);
+    }
+
+    public function getInvoiceScore($uid)
+    {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Set point
+        $pointDivision = $config['score_division'];
+        $pointNegative = 0;
+        $pointPositive = 0;
+        $pointScore = array(
+            'type',
+            'amount',
+        );
+        // Select
+        $where = array('uid' => $uid, 'status' => 1);
+        $select = Pi::model('invoice', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            if ($row->time_payment > ($row->time_duedate + 86400)) {
+
+                // Negative
+                $days = number_format(($row->time_payment / 86400) - (($row->time_duedate + 86400) / 86400));
+                $point = ($days * $row->total_price);
+                $amount = $point * $pointDivision;
+                $pointNegative = $pointNegative + $amount;
+
+                /* echo '<pre>';
+                print_r(array(
+                    'type' => 'Negative',
+                    'price' => $row->total_price,
+                    'day' => $days,
+                    'point' => $point,
+                    'division' => $pointDivision,
+                    'amount' => $amount,
+                ));
+                echo '</pre>'; */
+
+            } elseif ($row->time_duedate > ($row->time_payment + 86400)) {
+
+                // Positive
+                $days = number_format(($row->time_duedate  / 86400) - (($row->time_payment + 86400) / 86400));
+                $point = ($days * $row->total_price);
+                $amount = $point * $pointDivision;
+                $pointPositive = $pointPositive + $amount;
+
+                /* echo '<pre>';
+                print_r(array(
+                    'type' => 'Positive',
+                    'price' => $row->total_price,
+                    'day' => $days,
+                    'point' => $point,
+                    'division' => $pointDivision,
+                    'amount' => $amount,
+                ));
+                echo '</pre>'; */
+            }
+        }
+
+        if ($pointNegative > $pointPositive) {
+            // Negative
+            $pointScore['type'] = 'negative';
+            $pointScore['amount']= ($pointNegative - $pointPositive);
+        } elseif ($pointPositive > $pointNegative) {
+            // Positive
+            $pointScore['type'] = 'positive';
+            $pointScore['amount'] = ($pointPositive - $pointNegative);
+        } else {
+            // Normal
+            $pointScore['type'] = 'normal';
+            $pointScore['amount'] = 0;
+        }
+
+        return $pointScore;
     }
 }

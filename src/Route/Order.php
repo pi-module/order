@@ -122,6 +122,9 @@ class Order extends Standard
                         $matches['id'] = intval($parts[1]);
                         if (isset($parts[2]) && $parts[2] == 'credit') {
                             $matches['credit'] = intval($parts[3]);
+                        } elseif (isset($parts[2]) && $parts[2] == 'anonymous') {
+                            $matches['anonymous'] = intval($parts[3]);
+                            $matches['token'] = $this->decode($parts[5]);
                         }
                     }
                     break;
@@ -193,6 +196,16 @@ class Order extends Standard
         // Set credit
         if (isset($mergedParams['credit'])) {
             $url['credit'] = 'credit' . $this->paramDelimiter . $mergedParams['credit'];
+        }
+
+        // Set anonymous
+        if (isset($mergedParams['anonymous'])) {
+            $url['anonymous'] = 'anonymous' . $this->paramDelimiter . $mergedParams['anonymous'];
+        }
+
+        // Set token
+        if (isset($mergedParams['token'])) {
+            $url['token'] = 'token' . $this->paramDelimiter . $mergedParams['token'];
         }
 
         // Make url
