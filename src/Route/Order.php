@@ -115,7 +115,10 @@ class Order extends Standard
                     } else if ($parts[1] == 'finish') {
                         $matches['action'] = $this->decode($parts[1]);
                         if (isset($parts[2])) {
-                            $matches['id'] = $parts[2];
+                            $matches['type'] = $parts[2];
+                        }
+                        if (isset($parts[3]) && is_numeric($parts[3])) {
+                            $matches['id'] = intval($parts[3]);
                         }
                     } elseif (is_numeric($parts[1])) {
                         $matches['action'] = 'index';

@@ -114,7 +114,7 @@ class AddressForm extends BaseForm
                 'attributes' => array(
                     'type' => 'tel',
                     'pattern'=> Pi::api('api', 'order')->patternPhone(),
-                    'description' => '',
+                    'description' => Pi::service('i18n')->getLocale() == 'fa' ? '' : __('International number expected (+33123456789)'),
 
                 )
             ));
@@ -145,7 +145,7 @@ class AddressForm extends BaseForm
                 ),
                 'attributes' => array(
                     'type' => 'text',
-                    'description' => Pi::service('i18n')->getLocale() == 'fa' ? '' : __('International number expected (+33123456789)'),
+                    'description' => '',
                 )
             ));
         }
