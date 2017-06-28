@@ -28,16 +28,17 @@ $this->footScript()->appendScript($script2);
         <img class="img-responsive" src="<?php echo $this->logo(); ?>" alt="">
     </div>
     <div class="alert alert-success" role="alert">
-        <h1><?php _e('Thanks !'); ?></h1>
+        <h1><?php _e('Thanks you for your payment !'); ?></h1>
 
-        <p><?php echo sprintf(__('Your payment ends successfully, we need %s to obtain payment confirmation.'), '<strong><span id="timer"></span></strong>'); ?></p>
+        <p><?php echo sprintf(__('Your payment ends successfully, we just need %s to obtain payment confirmation.'), '<strong><span id="timer"></span></strong>'); ?></p>
 
         <p><?php _e('Once received, youll be redirected automatically to your dashboard, and will be able to create your item !'); ?></p>
 
+		<?php if ($paypal) { ?> 
+        <p><?php _e('You will additionally receive a confirmation mail from Paypal, telling that your transaction has been completed, and giving you a receipt for your purchase. You may log into your account at www.paypal.com to view details of this transaction.'); ?></p>    
+        <?php } ?> 
+
         <p><?php _e('Please wait !'); ?></p>
         
-        <?php if ($paypal) { ?> 
-            <p><?php _e('Nous vous remercions de votre paiement. Votre transaction est terminée et vous allez recevoir par email un avis accusant réception de votre achat. Vous pouvez vous connecter à votre compte sur www.paypal.com pour consulter les détails de cette transaction.'); ?></p>    
-        <?php } ?> 
     </div>
 </div>
