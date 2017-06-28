@@ -29,6 +29,8 @@ class PaymentController extends IndexController
         // Get from url
         $id = $this->params('id');
         $credit = $this->params('credit');
+        $anonymous = $this->params('anonymous');
+        $token = $this->params('token');
         // Get invoice
         $invoice = Pi::api('invoice', 'order')->getInvoiceForPayment($id);
         // Check invoice
@@ -49,7 +51,12 @@ class PaymentController extends IndexController
                 $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('This is not your invoice.'));
             }
         } else {
-            if (!isset($_SESSION['payment']['invoice_id']) || $_SESSION['payment']['invoice_id'] != $invoice['id']) {
+            if ($anonymous == 1 && !empty($token)) {
+                $check = Pi::api('token', 'tools')->check($token, 'order');
+                if ($check['status'] != 1) {
+                    $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('Token not true'));
+                }
+            } elseif (!isset($_SESSION['payment']['invoice_id']) || $_SESSION['payment']['invoice_id'] != $invoice['id']) {
                 $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('This is not your invoice.'));
             }
             // Set session

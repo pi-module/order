@@ -80,10 +80,10 @@
             <tr>
                 <th class="text-center"><?php _e('ID'); ?></th>
                 <th class="text-center"><?php _e('Code'); ?></th>
+                <td class="text-center"><?php _e('Product / service'); ?></td>
                 <th class="text-center"><?php _e('Time'); ?></th>
                 <th class="text-center"><?php _e('Price'); ?></th>
                 <th class="text-center"><?php _e('Status'); ?></th>
-                <th class="text-center"><?php _e('Type'); ?></th>
                 <th class="text-center"><?php _e('Action'); ?></th>
             </tr>
             <?php $i = 1; ?>
@@ -91,10 +91,16 @@
                 <tr>
                     <td class="text-center"><?php echo _number($i); ?></td>
                     <td class="text-center"><?php echo $this->escape($order['code']); ?></td>
+                    <td class="text-center">
+                        <?php $productsList = array();
+                        foreach ($order['products'] as $product) {
+                            $productsList[] = $product['details']['title'];
+                        }
+                        echo implode(' , ',$productsList); ?>
+                    </td>
                     <td class="text-center"><?php echo $this->escape($order['time_create_view']); ?></td>
                     <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
                     <td class="text-center"><span class="label <?php echo $this->escape($order['shortLabel']); ?>"><?php echo $this->escape($order['shortStatus']); ?></span></td>
-                    <td class="text-center"><?php echo $this->escape($order['type_commodity_view']); ?></td>
                     <td class="text-center">
                         <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" target="_blank"
                            href="<?php echo Pi::url($this->url('order', array('controller' => 'detail', 'id' => $order['id']))); ?>"><i

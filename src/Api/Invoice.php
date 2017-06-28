@@ -462,6 +462,16 @@ class Invoice extends AbstractApi
             'action' => 'print',
             'id' => $invoice['id'],
         )));
+        // Set anonymous pay
+        $invoice['anonymous_pay_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+            'module' => $this->getModule(),
+            'controller' => 'payment',
+            'action' => 'index',
+            'id' => $invoice['id'],
+            'anonymous' => 1,
+            'token' => 'TOKEN_KEY',
+        )));
+
         // Set extra
         if (!empty($invoice['extra'])) {
             $invoice['extra'] = json::decode($invoice['extra'], true);
@@ -507,7 +517,7 @@ class Invoice extends AbstractApi
                 $amount = $point * $pointDivision;
                 $pointNegative = $pointNegative + $amount;
 
-                echo '<pre>';
+                /* echo '<pre>';
                 print_r(array(
                     'type' => 'Negative',
                     'price' => $row->total_price,
@@ -516,7 +526,7 @@ class Invoice extends AbstractApi
                     'division' => $pointDivision,
                     'amount' => $amount,
                 ));
-                echo '</pre>';
+                echo '</pre>'; */
 
             } elseif ($row->time_duedate > ($row->time_payment + 86400)) {
 
@@ -526,7 +536,7 @@ class Invoice extends AbstractApi
                 $amount = $point * $pointDivision;
                 $pointPositive = $pointPositive + $amount;
 
-                echo '<pre>';
+                /* echo '<pre>';
                 print_r(array(
                     'type' => 'Positive',
                     'price' => $row->total_price,
@@ -535,8 +545,7 @@ class Invoice extends AbstractApi
                     'division' => $pointDivision,
                     'amount' => $amount,
                 ));
-                echo '</pre>';
-
+                echo '</pre>'; */
             }
         }
 
