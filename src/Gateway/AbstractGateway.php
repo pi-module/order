@@ -224,6 +224,7 @@ abstract class AbstractGateway
             'module' => 'order',
             'controller' => 'payment',
             'action' => 'finish',
+            'id' => (new Pi\Filter\Slug())->filter($this->gatewayAdapter)
         )));
     }
 

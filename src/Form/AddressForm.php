@@ -113,8 +113,8 @@ class AddressForm extends BaseForm
                 ),
                 'attributes' => array(
                     'type' => 'tel',
-                    'pattern'=> "^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$",
-                    'description' => '',
+                    'pattern'=> Pi::api('api', 'order')->patternPhone(),
+                    'description' => Pi::service('i18n')->getLocale() == 'fa' ? '' : __('International number expected (+33123456789)'),
 
                 )
             ));
@@ -129,8 +129,8 @@ class AddressForm extends BaseForm
                 'attributes' => array(
                    'type' => 'tel',
                    'title'=> __("example : +33123456789"),
-                    'pattern'=> "^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$",
-                    'description' => '',
+                    'pattern'=> Pi::api('api', 'order')->patternPhone(),
+                    'description' => Pi::service('i18n')->getLocale() == 'fa' ? '' : __('International number expected (+33123456789)'),
                     'required' => true,
                 )
             ));

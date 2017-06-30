@@ -69,4 +69,21 @@ class Api extends AbstractApi
         }
         return $price;
     }
+    
+    public function patternPhone()
+    {
+        $locale = Pi::service('i18n')->getLocale();
+
+        switch ($locale) {
+            case 'fa':
+                $pattern = '[^-,]+';
+                break;
+
+            default:
+                $pattern = "^\\+(?:[0-9]?){6,14}[0-9]$";
+                break;
+        }
+        return $pattern;
+    }
+    
 }

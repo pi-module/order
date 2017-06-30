@@ -339,14 +339,22 @@ class PaymentController extends IndexController
 
     public function finishAction()
     {
+        $type = $this->params('type');
+        $paypal = false;
+        if ($type == 'paypal') {
+            $paypal = true;
+        }
+        
         $url = Pi::url($this->url('', array(
             'module' => $this->getModule(),
             'controller' => 'payment',
             'action' => 'process',
         )));
+
         // Set view
         $this->view()->setTemplate('finish')->setLayout('layout-style');
         $this->view()->assign('url', $url);
+        $this->view()->assign('paypal', $paypal);
     }
 
     public function processAction()
