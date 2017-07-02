@@ -165,9 +165,7 @@ class PaymentController extends IndexController
             Pi::api('processing', 'order')->removeProcessing();
             $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), $gateway->gatewayError);
         }
-        // Set form
-        $form = new PayForm('pay', $gateway->gatewayPayForm);
-        $form->setAttribute('action', $gateway->gatewayRedirectUrl);
+
         // Set form values
         if (!empty($gateway->gatewayPayInformation)) {
             foreach ($gateway->gatewayPayInformation as $key => $value) {
@@ -179,17 +177,25 @@ class PaymentController extends IndexController
                     $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), sprintf(__('Error to get %s.'), $key));
                 }
             }
+            // Set form
+            $form = new PayForm('pay', $gateway->gatewayPayForm);
+            $form->setAttribute('action', $gateway->gatewayRedirectUrl);
             $form->setData($values);
         } else {
-            // Get gateway object
-            $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
-            $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), __('Error to get information.'));
+            if (isset($gateway->gatewayRedirectUrl) && !empty($gateway->gatewayRedirectUrl)) {
+                return $this->redirect()->toUrl($gateway->gatewayRedirectUrl);
+            } else {
+                // Get gateway object
+                $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
+                $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), __('Error to get information.'));
+            }
         }
         // Set view
         $this->view()->setLayout('layout-style');
         $this->view()->setTemplate('pay');
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('form', $form);
+        $this->view()->assign('gateway', $gateway);
     }
 
     public function resultAction()
@@ -265,32 +271,37 @@ class PaymentController extends IndexController
         $this->view()->setTemplate(false)->setLayout('layout-content');
         // Get module 
         $module = $this->params('module');
+        // Get module
+        $gatewayName = $this->params('gatewayName', 'paypal');
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Get request
         $request = '';
+        // Get request
         if ($this->request->isPost()) {
             $request = $this->request->getPost();
+        } elseif (isset($_GET['invoice'])) {
+            $request = _get()->toArray();
         }
         // Check request
         if (!empty($request)) {
             // Set log
             $log = array();
-            $log['gateway'] = 'paypal';
+            $log['gateway'] = $gatewayName;
             $log['value'] = Json::encode(array(1, $request));
             Pi::api('log', 'order')->setLog($log);
             // Get processing
             $processing = Pi::api('processing', 'order')->getProcessing($request['invoice']);
             // Set log
             $log = array();
-            $log['gateway'] = 'paypal';
+            $log['gateway'] = $gatewayName;
             $log['value'] = Json::encode(array(3, $request, $processing));
             Pi::api('log', 'order')->setLog($log);
             // Check processing
             if ($processing) {
                 // Set log
                 $log = array();
-                $log['gateway'] = 'paypal';
+                $log['gateway'] = $gatewayName;
                 $log['value'] = Json::encode(array(4, $request));
                 Pi::api('log', 'order')->setLog($log);
                 // Get gateway
@@ -298,7 +309,7 @@ class PaymentController extends IndexController
                 $verify = $gateway->verifyPayment($request, $processing);
                 // Set log
                 $log = array();
-                $log['gateway'] = 'paypal';
+                $log['gateway'] = $gatewayName;
                 $log['value'] = Json::encode(array(5, $verify));
                 Pi::api('log', 'order')->setLog($log);
                 // Check error
@@ -311,12 +322,12 @@ class PaymentController extends IndexController
                         Pi::api('invoice', 'order')->setBackUrl($verify['invoice'], $url);
                         // Add log
                         $log = array();
-                        $log['gateway'] = 'paypal';
+                        $log['gateway'] = $gatewayName;
                         $log['value'] = Json::encode(array(10, $verify, $url));
                         Pi::api('log', 'order')->setLog($log);
                     } else {
                         $log = array();
-                        $log['gateway'] = 'paypal';
+                        $log['gateway'] = $gatewayName;
                         $log['value'] = Json::encode(array(11, $verify));
                         Pi::api('log', 'order')->setLog($log);
                     }
@@ -324,14 +335,14 @@ class PaymentController extends IndexController
             } else {
                 // Set log
                 $log = array();
-                $log['gateway'] = 'paypal';
+                $log['gateway'] = $gatewayName;
                 $log['value'] = Json::encode(array(9, $request));
                 Pi::api('log', 'order')->setLog($log);
             }
         } else {
             // Set log
             $log = array();
-            $log['gateway'] = 'paypal';
+            $log['gateway'] = $gatewayName;
             $log['value'] = Json::encode(array(2, $request));
             Pi::api('log', 'order')->setLog($log);
         }
