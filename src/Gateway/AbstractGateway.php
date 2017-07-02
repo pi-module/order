@@ -40,6 +40,8 @@ abstract class AbstractGateway
 
     public $gatewayBackUrl = '';
 
+    public $gatewayNotifyUrl = '';
+
     public $gatewayError = '';
 
     /**
