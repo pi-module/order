@@ -262,7 +262,16 @@
                     <th><?php _e('Action'); ?></th>
                 </tr>
                 <?php foreach ($order['invoices'] as $invoice) { ?>
-                    <tr>
+                    <?php if ($invoice['status'] == 2) {
+                        if (time() > $invoice['time_duedate']) {
+                            $classBtn = 'btn-danger';
+                            $classBg = 'danger';
+                        } else {
+                            $classBtn = 'btn-success';
+                            $classBg = '';
+                        }
+                    } ?>
+                    <tr class="<?php echo $classBg; ?>">
                         <td><?php echo sprintf(__('Invoice %s'), $this->escape($invoice['code'])); ?></td>
                         <td><?php echo $this->escape($invoice['total_price_view']); ?></td>
                         <td class="text-center">
@@ -279,7 +288,7 @@
                             <?php if ($invoice['status'] == 2) { ?>
                                 <?php if ($invoice['can_pay'] == 1) { ?>
                                     <?php if ($invoice['allowPayment']) { ?>
-                                        <a class="btn btn-success btn-xs" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay_url']); ?>"><i class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
+                                         <a class="btn <?php echo $classBtn; ?> btn-xs" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay_url']); ?>"><i class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
                                     <?php } /* else { ?>
                                         <span class="label label-danger"><?php echo sprintf(__('You can pay this invoice after %s'),  _date($invoice['time_duedate'] - (60 * 60 * 24 * 14), array('pattern' => 'dd-MM-yyyy'))); ?></span>
                                     <?php } */ ?>
