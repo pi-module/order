@@ -17,23 +17,10 @@ use Pi;
 use Zend\InputFilter\InputFilter;
 use Module\System\Validator\UserEmail as UserEmailValidator;
 
-class OrderAddFilter extends InputFilter
+class OrderEditFilter extends InputFilter
 {
     public function __construct($option = array())
     {
-        // uid
-        $this->add(array(
-            'name' => 'uid',
-            'required' => true,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-            'validators' => array(
-                new \Module\Order\Validator\User,
-            ),
-        ));
         // name
         if ($option['config']['order_name']) {
             // first_name
@@ -263,81 +250,6 @@ class OrderAddFilter extends InputFilter
         $this->add(array(
             'name' => 'gateway',
             'required' => true,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // module_name
-        $this->add(array(
-            'name' => 'module_name',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // module_item
-        $this->add(array(
-            'name' => 'module_item',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // time_create
-        $this->add(array(
-            'name' => 'time_create',
-            'required' => true,
-        ));
-        // product_price
-        $this->add(array(
-            'name' => 'product_price',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // shipping_price
-        $this->add(array(
-            'name' => 'shipping_price',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // packing_price
-        $this->add(array(
-            'name' => 'packing_price',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // setup_price
-        $this->add(array(
-            'name' => 'setup_price',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // vat_price
-        $this->add(array(
-            'name' => 'vat_price',
-            'required' => false,
             'filters' => array(
                 array(
                     'name' => 'StringTrim',

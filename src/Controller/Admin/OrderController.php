@@ -18,6 +18,8 @@ use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
 use Module\Order\Form\OrderAddFilter;
 use Module\Order\Form\OrderAddForm;
+use Module\Order\Form\OrderEditFilter;
+use Module\Order\Form\OrderEditForm;
 use Module\Order\Form\OrderSettingFilter;
 use Module\Order\Form\OrderSettingForm;
 use Module\Order\Form\UpdateCanPayFilter;
@@ -542,11 +544,15 @@ class OrderController extends ActionController
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+        // Set option
+        $option = array(
+            'config' => $config,
+        );
         // Set form
-        $form = new OrderAddForm('setting');
+        $form = new OrderAddForm('addOrder', $option);
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            $form->setInputFilter(new OrderAddFilter);
+            $form->setInputFilter(new OrderAddFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
@@ -693,6 +699,42 @@ class OrderController extends ActionController
 
         // Set view
         $this->view()->setTemplate('order-add');
+        $this->view()->assign('form', $form);
+    }
+
+    public function editAction()
+    {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Get id
+        $id = $this->params('id');
+        // Set option
+        $option = array(
+            'config' => $config,
+        );
+        // Set form
+        $form = new OrderEditForm('addOrder', $option);
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new OrderEditFilter($option));
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Save order
+                $order = $this->getModel('order')->find($id);
+                $order->assign($values);
+                $order->save();
+                // Check it save or not
+                $message = __('Order information saved successfully.');
+                $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order->id), $message);
+            }
+        } else {
+            // Get order
+            $order = Pi::api('order', 'order')->getOrder($id);
+            $form->setData($order);
+        }
+        // Set view
+        $this->view()->setTemplate('order-edit');
         $this->view()->assign('form', $form);
     }
 

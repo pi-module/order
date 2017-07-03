@@ -21,10 +21,42 @@ $this->backbone();
                 </li>
                 <li class="pull-right">
                     <a class="btn btn-success"
-                       href="#"
-                       title="<?php _e('Edit'); ?>" target="_blank"><i
-                                class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
+                       href="<?php echo $this->url('', array(
+                           'controller' => 'order',
+                           'action' => 'edit',
+                           'id' => $order['id']
+                       )); ?>"
+                       title="<?php _e('Edit'); ?>" target="_blank">
+                        <i class="fa fa-edit"></i> <?php _e('Edit'); ?>
+                    </a>
                 </li>
+            </ul>
+        </div>
+
+        <div class="alert alert-info">
+            <ul class="list-inline">
+                <li class="order-main-icon"><i class="fa fa-user" aria-hidden="true"></i></li>
+                <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
+                    <li><strong><?php _e('Name'); ?></strong> :
+                        <span><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></span>
+                    </li>
+                <?php } ?>
+                <?php if (!empty($order['email'])) { ?>
+                    <li><strong><?php _e('Email'); ?></strong> :
+                        <span><?php echo $this->escape($order['email']); ?></span></li>
+                <?php } ?>
+                <?php if (!empty($order['phone'])) { ?>
+                    <li><strong><?php _e('Phone'); ?></strong> :
+                        <span><?php echo $this->escape($order['phone']); ?></span></li>
+                <?php } ?>
+                <?php if (!empty($order['mobile'])) { ?>
+                    <li><strong><?php _e('Mobile'); ?></strong> :
+                        <span><?php echo $this->escape($order['mobile']); ?></span></li>
+                <?php } ?>
+                <?php if ($order['total_price'] > 0) { ?>
+                    <li><strong><?php _e('Total price'); ?></strong> :
+                        <span><?php echo $this->escape($order['total_price_view']); ?></span></li>
+                <?php } ?>
             </ul>
         </div>
 
