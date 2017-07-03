@@ -162,6 +162,7 @@ class Gateway extends AbstractGateway
             $this->gatewayOption['apiId']
         );
 
+        $scMerchantClient->setPrivateMerchantKey($this->gatewayOption['signature']);
 
         $callback = $scMerchantClient->parseCreateOrderCallback($request);
         if ($callback != null && $scMerchantClient->validateCreateOrderCallback($callback)){

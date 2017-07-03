@@ -552,15 +552,21 @@ class Invoice extends AbstractApi
         if ($pointNegative > $pointPositive) {
             // Negative
             $pointScore['type'] = 'negative';
+            $pointScore['type_view'] = __('Negative score');
             $pointScore['amount']= ($pointNegative - $pointPositive);
+            $pointScore['amount_view'] = Pi::api('api', 'order')->viewPrice(($pointNegative - $pointPositive));
         } elseif ($pointPositive > $pointNegative) {
             // Positive
             $pointScore['type'] = 'positive';
-            $pointScore['amount'] = ($pointPositive - $pointNegative);
+            $pointScore['type_view'] = __('Positive score');
+            $pointScore['amount'] = Pi::api('api', 'order')->viewPrice(($pointPositive - $pointNegative));
+            $pointScore['amount_view'] = ($pointPositive - $pointNegative);
         } else {
             // Normal
             $pointScore['type'] = 'normal';
+            $pointScore['type_view'] = __('Normal score');
             $pointScore['amount'] = 0;
+            $pointScore['amount_view'] = Pi::api('api', 'order')->viewPrice(0);
         }
 
         return $pointScore;

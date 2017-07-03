@@ -117,7 +117,8 @@ class OrderController extends ActionController
         // Make list
         foreach ($rowset as $row) {
             $list[$row->id] = Pi::api('order', 'order')->canonizeOrder($row);
-            $list[$row->id]['invoiceList'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($list[$row->id], false);
+            $list[$row->id]['products'] = Pi::api('order', 'order')->listProduct($row->id, $row->module_name);
+            $list[$row->id]['invoiceList'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($row->id, false);
             $list[$row->id]['totalInvoice'] = 0;
             $list[$row->id]['paidInvoice'] = 0;
             $list[$row->id]['unPaidInvoice'] = 0;
@@ -129,7 +130,12 @@ class OrderController extends ActionController
                     $list[$row->id]['unPaidInvoice']++;
                 }
             }
-            $list[$row->id]['statusInvoice'] = sprintf(__('Total : %s / paid : %s / unPaid : %s'), _number($list[$row->id]['totalInvoice']), _number($list[$row->id]['paidInvoice']), _number($list[$row->id]['unPaidInvoice']));
+            $list[$row->id]['statusInvoice'] = sprintf(
+                __('Total : %s / paid : %s / unPaid : %s'),
+                _number($list[$row->id]['totalInvoice']),
+                _number($list[$row->id]['paidInvoice']),
+                _number($list[$row->id]['unPaidInvoice'])
+            );
         }
         // Set paginator
         $count = array('count' => new Expression('count(*)'));
@@ -505,6 +511,25 @@ class OrderController extends ActionController
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
         // set Products
         $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order);
+        // Set status Invoice
+        foreach ($order['invoices'] as $invoice) {
+            $order['totalInvoice']++;
+            if ($invoice['status'] == 1) {
+                $order['paidInvoice']++;
+            } elseif ($invoice['status'] == 2) {
+                $order['unPaidInvoice']++;
+            }
+        }
+        $order['statusInvoice'] = sprintf(
+            __('Total : %s / paid : %s / unPaid : %s'),
+            _number($order['totalInvoice']),
+            _number($order['paidInvoice']),
+            _number($order['unPaidInvoice'])
+        );
+        // credit
+        if ($config['credit_active']) {
+            $order['credit'] = Pi::api('credit', 'order')->getCredit($order['uid']);
+        }
         // Add log
         //Pi::api('log', 'shop')->addLog('order', $order['id'], 'view');
         // Set view

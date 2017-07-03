@@ -36,19 +36,16 @@ $this->backbone();
             <tr>
                 <th class="text-center small"><?php _e('Code'); ?></th>
                 <th class="text-center small"><?php _e('Total price'); ?></th>
+                <th class="text-center small"><?php _e('Information'); ?></th>
+                <th class="text-center small"><?php _e('Products'); ?></th>
                 <th class="clearfix small">
-                    <div class="col-xs-4">
-                        <?php _e('Information'); ?>
-                    </div>
-                    <div class="col-xs-8">
-                        <ul class="list-inline">
-                            <li class="col-xs-3 text-center"><?php _e('Order status'); ?></li>
-                            <li class="col-xs-2 text-center"><?php _e('Can pay'); ?></li>
-                            <li class="col-xs-2 text-center"><?php _e('Payment status'); ?></li>
-                            <li class="col-xs-3 text-center"><?php _e('Delivery status'); ?></li>
-                            <li class="col-xs-2 text-center"><?php _e('Action'); ?></li>
-                        </ul>
-                    </div>
+                    <ul class="list-inline">
+                        <li class="col-xs-3 text-center"><?php _e('Order status'); ?></li>
+                        <li class="col-xs-2 text-center"><?php _e('Can pay'); ?></li>
+                        <li class="col-xs-2 text-center"><?php _e('Payment status'); ?></li>
+                        <li class="col-xs-3 text-center"><?php _e('Delivery status'); ?></li>
+                        <li class="col-xs-2 text-center"><?php _e('Action'); ?></li>
+                    </ul>
                 </th>
             </tr>
             <?php foreach ($list as $order) { ?>
@@ -70,49 +67,65 @@ $this->backbone();
                 >
                     <td class="text-center small"><?php echo $this->escape($order['code']); ?></td>
                     <td class="text-center small"><?php echo $this->escape($order['total_price_view']); ?></td>
-                    <td class="clearfix">
-                        <div class="col-xs-4">
-                            <ul class="list-inline small">
-                                <li>
-                                    <?php echo $this->escape($order['first_name']); ?>
-                                    <?php echo $this->escape($order['last_name']); ?>
+
+                    <td class="text-center small">
+                        <ul class="list-inline">
+                            <li>
+                                <?php echo $this->escape($order['first_name']); ?>
+                                <?php echo $this->escape($order['last_name']); ?>
+                            </li>
+                            <?php if ($order['type_payment'] == 'installment') { ?>
+                                <li class="label label-info">
+                                    <?php _e('Installment'); ?>
+                                    <button type="button" class="btn btn-link btn-xs show-list-user">
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    </button>
                                 </li>
-                                <?php if ($order['type_payment'] == 'installment') { ?>
-                                    <li class="label label-info">
-                                        <?php _e('Installment'); ?>
-                                    </li>
-                                <?php } ?>
-                                <li><button type="button" class="btn btn-link btn-xs show-list-user"><i class="fa fa-info-circle" aria-hidden="true"></i></button></li>
-                            </ul>
-                        </div>
-                        <div class="col-xs-8">
-                            <ul class="list-inline">
+                            <?php } ?>
+                        </ul>
+                    </td>
+                    <td class="text-center small">
+                        <?php $productsList = array();
+                        foreach ($order['products'] as $product) {
+                            $productsList[] = $product['details']['title'];
+                        }
+                        echo implode(' , ',$productsList); ?>
+                    </td>
+                    <td class="clearfix">
+                        <ul class="list-inline">
+                            <li class="col-xs-3 text-center">
                                 <?php if (in_array($order['status_order'], array(1, 2, 3, 7))) { ?>
-                                    <li class="col-xs-3 text-center"><span id="update-order-<?php echo $this->escape($order['id']); ?>" class="update-order btn btn-xs <?php echo $this->escape($order['orderClass']); ?>"><?php echo $this->escape($order['orderTitle']); ?></span></li>
+                                    <span id="update-order-<?php echo $this->escape($order['id']); ?>" class="update-order btn btn-xs <?php echo $this->escape($order['orderClass']); ?>"><?php echo $this->escape($order['orderTitle']); ?></span>
                                 <?php } else { ?>
-                                    <li class="col-xs-3 text-center"><span class="label label-danger"><?php echo $this->escape($order['orderTitle']); ?></span></li>
+                                    <span class="label label-danger"><?php echo $this->escape($order['orderTitle']); ?></span>
                                 <?php } ?>
-                                <li class="col-xs-2 text-center"><span id="update-canPay-<?php echo $this->escape($order['id']); ?>" class="update-canPay btn btn-xs <?php echo $this->escape($order['canPayClass']); ?>"><?php echo $this->escape($order['canPayTitle']); ?></span></li>
-                                <?php /* if ($order['type_payment'] == 'installment') { ?>
+                            </li>
+                            <li class="col-xs-2 text-center">
+                                <span id="update-canPay-<?php echo $this->escape($order['id']); ?>" class="update-canPay btn btn-xs <?php echo $this->escape($order['canPayClass']); ?>"><?php echo $this->escape($order['canPayTitle']); ?></span>
+                            </li>
+                            <?php /* if ($order['type_payment'] == 'installment') { ?>
                                     <li class="col-xs-2 text-center"><span class="btn btn-xs <?php echo $this->escape($order['paymentClass']); ?>"><?php echo $this->escape($order['paymentTitle']); ?></span></li>
                                 <?php } else { ?>
                                     <li class="col-xs-2 text-center"><span id="update-payment-<?php echo $this->escape($order['id']); ?>" class="update-payment btn btn-xs <?php echo $this->escape($order['paymentClass']); ?>"><?php echo $this->escape($order['paymentTitle']); ?></span></li>
                                 <?php } */ ?>
-                                <li class="col-xs-2 text-center">
-                                    <?php if ($order['unPaidInvoice'] == 0) { ?>
-                                        <span class="label label-success" data-toggle="tooltip" data-placement="top" title="<?php echo $this->escape($order['statusInvoice']); ?>"><?php _e('Paid'); ?></span>
-                                    <?php } else { ?>
-                                        <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="<?php echo $this->escape($order['statusInvoice']); ?>"><?php _e('Unpaid'); ?></span>
-                                    <?php } ?>
-                                </li>
-                                <?php if ($order['type_commodity'] == 'product') { ?>
-                                    <li class="col-xs-3 text-center"><span id="update-delivery-<?php echo $this->escape($order['id']); ?>" class="update-delivery btn btn-xs <?php echo $this->escape($order['deliveryClass']); ?>"><?php echo $this->escape($order['deliveryTitle']); ?></span></li>
+                            <li class="col-xs-2 text-center">
+                                <?php if ($order['unPaidInvoice'] == 0) { ?>
+                                    <span class="label label-success" data-toggle="tooltip" data-placement="top" title="<?php echo $this->escape($order['statusInvoice']); ?>"><?php _e('Paid'); ?></span>
                                 <?php } else { ?>
-                                    <li class="col-xs-3 text-center"><span class="label label-default"><?php _e('Its service'); ?></span></li>
+                                    <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="<?php echo $this->escape($order['statusInvoice']); ?>"><?php _e('Unpaid'); ?></span>
                                 <?php } ?>
-                                <li class="col-xs-2 text-center"><a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i class="fa fa-eye"></i> <?php _e('View'); ?></a></li>
-                            </ul>
-                        </div>
+                            </li>
+                            <li class="col-xs-3 text-center">
+                                <?php if ($order['type_commodity'] == 'product') { ?>
+                                    <span id="update-delivery-<?php echo $this->escape($order['id']); ?>" class="update-delivery btn btn-xs <?php echo $this->escape($order['deliveryClass']); ?>"><?php echo $this->escape($order['deliveryTitle']); ?></span>
+                                <?php } else { ?>
+                                    <span class="label label-default"><?php _e('Its service'); ?></span>
+                                <?php } ?>
+                            </li>
+                            <li class="col-xs-2 text-center">
+                                <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
+                            </li>
+                        </ul>
                     </td>
                 </tr>
             <?php } ?>
