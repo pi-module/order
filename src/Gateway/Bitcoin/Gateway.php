@@ -70,6 +70,13 @@ class Gateway extends AbstractGateway
             'type' => 'text',
             'required' => true,
         );
+        // form signature
+        $form['signature'] = array(
+            'name' => 'signature',
+            'label' => __('Signature (private key)'),
+            'type' => 'textarea',
+            'required' => true,
+        );
         $this->gatewaySettingForm = $form;
         return $this;
     }
@@ -86,12 +93,15 @@ class Gateway extends AbstractGateway
         // Call SCMerchantClient
         include_once Pi::path('module') . '/order/src/Gateway/Bitcoin/SCMerchantClient/SCMerchantClient.php';
 
-        $orderId = $this->gatewayInvoice['random_id']; // "Order005";
-        $payCurrency = 'BTC'; // Customer pay amount calculation currency
-        $payAmount = 0.0005; // Customer pay amount in calculation currency
-        $receiveCurrency = 'GBP'; // Merchant receive amount calculation currency
-        $receiveAmount = null; //1; // Merchant receive amount in calculation currency
-        $description = Pi::url();
+        $url = sprintf('https://blockchain.info/tobtc?currency=USD&value=%s', $this->gatewayInvoice['total_price']);
+        $amount = Pi::service('remote')->get($url);
+
+        $orderId = $this->gatewayInvoice['random_id'];
+        $payCurrency = 'BTC';
+        $payAmount = $amount;
+        $receiveCurrency = 'USD';
+        $receiveAmount = $this->gatewayInvoice['total_price'];
+        $description = 'Far War Art payment';
         $culture = "en";
 
         $scMerchantClient = new \SCMerchantClient(
@@ -100,21 +110,9 @@ class Gateway extends AbstractGateway
             $this->gatewayOption['apiId']
         );
 
+        $scMerchantClient->setPrivateMerchantKey($this->gatewayOption['signature']);
+
         $backUrl = $this->gatewayNotifyUrl . '?invoice=' . $this->gatewayInvoice['random_id'];
-
-
-        /* $r['merchantId'],
-        $r['apiId'],
-        $r['orderId'],
-        $r['payCurrency'],
-        $r['payAmount'],
-        $r['receiveCurrency'],
-        $r['receiveAmount'],
-        $r['receivedAmount'],
-        $r['description'],
-        $r['orderRequestId'],
-        $r['status'],
-        $r['sign'] */
 
         $createOrderRequest = new \CreateOrderRequest(
             $orderId,

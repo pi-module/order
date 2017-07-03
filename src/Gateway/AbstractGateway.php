@@ -251,4 +251,4 @@ abstract class AbstractGateway
         }
         return $this;
     }
-}	
+}
