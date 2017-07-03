@@ -20,6 +20,8 @@ use Module\Order\Form\OrderAddFilter;
 use Module\Order\Form\OrderAddForm;
 use Module\Order\Form\OrderEditFilter;
 use Module\Order\Form\OrderEditForm;
+use Module\Order\Form\OrderProductFilter;
+use Module\Order\Form\OrderProductForm;
 use Module\Order\Form\OrderSettingFilter;
 use Module\Order\Form\OrderSettingForm;
 use Module\Order\Form\UpdateCanPayFilter;
@@ -713,7 +715,7 @@ class OrderController extends ActionController
             'config' => $config,
         );
         // Set form
-        $form = new OrderEditForm('addOrder', $option);
+        $form = new OrderEditForm('editOrder', $option);
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
             $form->setInputFilter(new OrderEditFilter($option));
@@ -742,7 +744,6 @@ class OrderController extends ActionController
     {
         // Get id
         $id = $this->params('id');
-        $module = $this->params('module');
         // Get order
         $order = $this->getModel('order')->find($id);
         $order = Pi::api('order', 'order')->canonizeOrder($order);
@@ -757,6 +758,133 @@ class OrderController extends ActionController
         // Set view
         $this->view()->setTemplate('order-print')->setLayout('layout-content');
         $this->view()->assign('order', $order);
+    }
+
+    public function productAction()
+    {
+        // Set option
+        $option = array();
+        // Get id
+        $order = $this->params('order');
+        $order = Pi::api('order', 'order')->getOrder($order);
+        // Check module
+        if (in_array($order['module_name'], array('shop'/* ,'order', 'guide', 'plans'*/))) {
+            switch ($order['module_name']) {
+                case 'order':
+                    $order['moduleTitle'] = __('Order module');
+                    break;
+
+                case 'shop':
+                    $order['moduleTitle'] = __('Shop module');
+                    break;
+
+                case 'guide':
+                    $order['moduleTitle'] = __('Guide module');
+                    break;
+
+                case 'plans':
+                    $order['moduleTitle'] = __('Plans module');
+                    break;
+            }
+        } else {
+            $message = __('This order not supported add manual product');
+            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message, 'error');
+        }
+        // Get
+        $invoices = Pi::api('invoice', 'order')->getInvoiceFromOrder($order);
+        foreach ($invoices as $invoice) {
+            if ($invoice['status'] == 2) {
+                $option['invoice'][$invoice['id']] = sprintf(__('Invoice %s by %s price and %s due date'),
+                    $invoice['code'],
+                    $invoice['total_price_view'],
+                    $invoice['time_duedate_view']
+                );
+            }
+        }
+        $option['invoice'][0] = __('Generate new invoice');
+        // Set form
+        $form = new OrderProductForm('product', $option);
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new OrderProductFilter($option));
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Get product
+                switch ($order['module_name']) {
+                    case 'shop':
+                        // Get product
+                        $product = Pi::api('product', 'shop')->getProductLight($values['id']);
+                        if (!$product || $product['status'] != 1) {
+                            $message = __('Your selected product not active / exist');
+                            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message, 'error');
+                        }
+                        // Add to basket
+                        $basket = $this->getModel('basket')->createRow();
+                        $basket->order = $order['id'];
+                        $basket->product = $product['id'];
+                        $basket->product_price = $product['price'];
+                        $basket->total_price = $product['price'];
+                        $basket->number = 1;
+                        $basket->save();
+                        // Add to invoice
+                        if ($values['invoice'] == 0) {
+                            $invoice = array();
+                            $invoice['product_price'] = $product['price'];
+                            $invoice['total_price'] = $product['price'];
+                            $invoice['time_duedate'] = time();
+                            $invoice['random_id'] = time() + rand(100, 999);
+                            $invoice['uid'] = $order['uid'];
+                            $invoice['ip'] = Pi::user()->getIp();
+                            $invoice['status'] = 2;
+                            $invoice['time_create'] = time();
+                            $invoice['order'] = $order['id'];
+                            $invoice['gateway'] = $order['gateway'];
+                            // Set extra
+                            if ($order['type_payment'] == 'installment') {
+                                $extra = array();
+                                $extra['order']['type_payment'] = $order['type_payment'];
+                                $extra['order']['type_commodity'] = $order['type_commodity'];
+                                $extra['number'] = '';
+                                $extra['type'] = 'additional';
+                                $invoice['extra'] = json::encode($extra);
+                            }
+                            // Save invoice
+                            $row = $this->getModel('invoice')->createRow();
+                            $row->assign($invoice);
+                            $row->save();
+                        } else {
+                            $row = $this->getModel('invoice')->find($values['invoice']);
+                            $row->product_price = $row->product_price + $product['price'];
+                            $row->total_price = $row->total_price + $product['price'];
+                            $row->save();
+                        }
+                        // Update order price
+                        $this->getModel('order')->update(
+                            array(
+                                'product_price' => $order['product_price'] + $product['price'],
+                                'total_price' => $order['total_price'] + $product['price'],
+                            ),
+                            array('id' => $order['id'])
+                        );
+                        break;
+
+                    default:
+                        $message = __('This order not supported add manual product');
+                        $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message, 'error');
+                        break;
+                }
+                // Check it save or not
+                $message = __('New product / service added to your order');
+                $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message);
+            }
+        }
+
+        // Set view
+        $this->view()->setTemplate('order-product');
+        $this->view()->assign('order', $order);
+        $this->view()->assign('invoices', $invoices);
+        $this->view()->assign('form', $form);
     }
     
     public function listUserAction()

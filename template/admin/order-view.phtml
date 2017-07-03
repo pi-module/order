@@ -20,14 +20,12 @@ $this->backbone();
                     <h1><?php echo sprintf(__('Order %s details'), $order['code']); ?></h1>
                 </li>
                 <li class="pull-right">
-                    <a class="btn btn-success"
+                    <a class="btn btn-success" title="<?php _e('Edit'); ?>"
                        href="<?php echo $this->url('', array(
                            'controller' => 'order',
                            'action' => 'edit',
                            'id' => $order['id']
-                       )); ?>"
-                       title="<?php _e('Edit'); ?>" target="_blank">
-                        <i class="fa fa-edit"></i> <?php _e('Edit'); ?>
+                       )); ?>"><i class="fa fa-edit"></i> <?php _e('Edit'); ?>
                     </a>
                 </li>
             </ul>
@@ -313,6 +311,19 @@ $this->backbone();
                                 </tr>
                             <?php } ?>
                         </table>
+                        <hr />
+                        <ul class="list-inline clearfix">
+                            <li class="pull-left"><?php _e('You can add new product / service to this order'); ?></li>
+                            <li class="pull-right">
+                                <a class="btn btn-success" title="<?php _e('Add product / service'); ?>" href="<?php echo $this->url('', array(
+                                    'controller' => 'order',
+                                    'action' => 'product',
+                                    'order' => $order['id']
+                                )); ?>">
+                                    <i class="fa fa-plus"></i> <?php _e('Add product / service'); ?>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -367,14 +378,14 @@ $this->backbone();
                                         <td><?php echo $this->escape($invoice['time_payment_view']); ?></td>
                                         <td>
                                             <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>"
-                                               href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'view', 'id' => $invoice['id'])); ?>"
-                                               target="_blank"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
+                                               href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'view', 'id' => $invoice['id'])); ?>">
+                                                <i class="fa fa-eye"></i> <?php _e('View'); ?></a>
                                             <a class="btn btn-primary btn-xs" title="<?php _e('Print'); ?>"
-                                               href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'print', 'id' => $invoice['id'])); ?>"
-                                               target="_blank"><i class="fa fa-print"></i> <?php _e('Print'); ?></a>
+                                               href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'print', 'id' => $invoice['id'])); ?>">
+                                                <i class="fa fa-print"></i> <?php _e('Print'); ?></a>
                                             <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
-                                               href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'edit', 'id' => $invoice['id'])); ?>"
-                                               target="_blank"><i class="fa fa-pencil"></i> <?php _e('Edit'); ?></a>
+                                               href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'edit', 'id' => $invoice['id'])); ?>">
+                                                <i class="fa fa-pencil"></i> <?php _e('Edit'); ?></a>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -390,7 +401,7 @@ $this->backbone();
                                 <li class="pull-right">
                                     <a class="btn btn-success"
                                        href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'add', 'order' => $order['id'])); ?>"
-                                       title="<?php _e('New invoice'); ?>" target="_blank"><i
+                                       title="<?php _e('New invoice'); ?>"><i
                                                 class="fa fa-plus"></i> <?php _e('New invoice'); ?></a>
                                 </li>
                             </ul>
@@ -400,8 +411,7 @@ $this->backbone();
                                 <p><?php _e('If you want your user pay new price for this order, you can add new invoice for him by new price, use below button to add new invoice'); ?></p>
                                 <p><a class="btn btn-success"
                                       href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'add', 'order' => $order['id'])); ?>"
-                                      title="<?php _e('New invoice'); ?>" target="_blank"><i
-                                                class="fa fa-plus"></i> <?php _e('New invoice'); ?></a></p>
+                                      title="<?php _e('New invoice'); ?>"><i class="fa fa-plus"></i> <?php _e('New invoice'); ?></a></p>
                             </div>
                         <?php } ?>
 
@@ -481,7 +491,6 @@ $this->backbone();
                                 )); ?>" target="_blank"><i class="fa fa-user"></i> <?php _e('User information'); ?></a>
                             </li>
                         </ul>
-
                     </div>
                 </div>
             </div>
