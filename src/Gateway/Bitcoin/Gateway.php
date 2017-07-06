@@ -112,7 +112,10 @@ class Gateway extends AbstractGateway
 
         $scMerchantClient->setPrivateMerchantKey($this->gatewayOption['signature']);
 
-        $backUrl = $this->gatewayNotifyUrl . '?invoice=' . $this->gatewayInvoice['random_id'];
+        $backUrl = sprintf('%s?gatewayName=Bitcoin&invoice=%s',
+            $this->gatewayNotifyUrl,
+            $this->gatewayInvoice['random_id']
+        );
 
         $createOrderRequest = new \CreateOrderRequest(
             $orderId,
