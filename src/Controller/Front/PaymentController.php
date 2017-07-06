@@ -273,12 +273,8 @@ class PaymentController extends IndexController
     {
         // Set view
         $this->view()->setTemplate(false)->setLayout('layout-content');
-        // Get module 
-        $module = $this->params('module');
         // Get module
-        $gatewayName = $this->params('gatewayName', 'paypal');
-        // Get config
-        $config = Pi::service('registry')->config->read($module);
+        $gatewayName = $this->params('gatewayName', 'Paypal');
         // Get request
         $request = '';
         // Get request
@@ -288,14 +284,28 @@ class PaymentController extends IndexController
             $request = _get()->toArray();
         }
         // Check request
-        if (!empty($request)) {
+        if (!empty($request) && in_array($gatewayName, array(
+            'Paypal', 'paypal', 'Bitcoin', 'bitcoin'
+            ))) {
+            // Get random_id
+            switch ($gatewayName) {
+                case 'Paypal':
+                case 'paypal':
+                    $randomID = $request['invoice'];
+                    break;
+
+                case 'Bitcoin':
+                case 'bitcoin':
+                    $randomID = $request['orderId'];
+                    break;
+            }
             // Set log
             $log = array();
             $log['gateway'] = $gatewayName;
             $log['value'] = Json::encode(array(1, $request));
             Pi::api('log', 'order')->setLog($log);
             // Get processing
-            $processing = Pi::api('processing', 'order')->getProcessing($request['invoice']);
+            $processing = Pi::api('processing', 'order')->getProcessing($randomID);
             // Set log
             $log = array();
             $log['gateway'] = $gatewayName;
@@ -319,7 +329,7 @@ class PaymentController extends IndexController
                 // Check error
                 if ($gateway->gatewayError) {
                     // Remove processing
-                    Pi::api('processing', 'order')->removeProcessing($request['invoice']);
+                    Pi::api('processing', 'order')->removeProcessing($randomID);
                 } else {
                     if ($verify['status'] == 1) {
                         $url = Pi::api('order', 'order')->updateOrder($verify['order'], $verify['invoice']);
