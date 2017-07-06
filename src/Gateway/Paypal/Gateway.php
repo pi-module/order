@@ -295,7 +295,7 @@ class Gateway extends AbstractGateway
             $this->gatewayPayInformation['item_name_' . $i] = $product['details']['title'];
             $this->gatewayPayInformation['item_number_' . $i] = $product['number'];
             $this->gatewayPayInformation['quantity_' . $i] = 1;
-            $this->gatewayPayInformation['amount_' . $i] = $product['product_price'];
+            $this->gatewayPayInformation['amount_' . $i] = $product['product_price'] - $product['discount_price'];
             $this->gatewayPayInformation['tax_' . $i] = $product['vat_price'];
             $i++;
         }
