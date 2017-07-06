@@ -65,23 +65,13 @@ return array(
             'value' => 50
         ),
         // Order
-        'order_method' => array(
+        'order_active' => array(
+            'category' => 'order',
             'title' => _a('Order method'),
             'description' => '',
-            'edit' => array(
-                'type' => 'select',
-                'options' => array(
-                    'options' => array(
-                        'both' => _a('Both'),
-                        'online' => _a('Online'),
-                        'offline' => _a('Offline'),
-                        'inactive' => _a('Inactive'),
-                    ),
-                ),
-            ),
-            'filter' => 'text',
-            'value' => 'both',
-            'category' => 'order',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
         ),
         'order_testmode' => array(
             'category' => 'order',
@@ -345,10 +335,10 @@ return array(
         'date_format' => array(
             'category' => 'customize',
             'title' => _a('Date format'),
-            'description' => _a('For example : yyyy-MM-dd'),
+            'description' => _a('For example : yyyy/MM/dd'),
             'edit' => 'text',
             'filter' => 'string',
-            'value' => 'yyyy-MM-dd'
+            'value' => 'yyyy/MM/dd'
         ),
         // Payment
         'payment_gateway_error_url' => array(
@@ -358,14 +348,14 @@ return array(
             'edit' => 'text',
             'filter' => 'string',
         ),
-        'payment_shownotpay' => array(
+        /* 'payment_shownotpay' => array(
             'category' => 'payment',
             'title' => _a('Show not pay payments'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
             'value' => 1
-        ),
+        ), */
         'payment_image' => array(
             'category' => 'payment',
             'title' => _a('Website image URL'),
@@ -373,11 +363,35 @@ return array(
             'edit' => 'text',
             'filter' => 'string',
         ),
-        'payment_methods' => array(
+        /* 'payment_methods' => array(
             'category' => 'payment',
             'title' => _a('Payment methods'),
             'edit' => 'textarea',
             'filter' => 'string',
+        ), */
+        'payment_offline' => array(
+            'category' => 'payment',
+            'title' => _a('Offline payment'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 0
+        ),
+        'payment_offline_title' => array(
+            'category' => 'payment',
+            'title' => _a('Title for offline payment'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => _a('Offline payment'),
+        ),
+        'payment_offline_description' => array(
+            'category' => 'payment',
+            'title' => _a('Description for offline payment'),
+            'description' => '',
+            'edit' => 'textarea',
+            'filter' => 'string',
+            'value' => _a('Admin make contact about payment whit you after review your order'),
         ),
         // Credit
         'credit_active' => array(

@@ -170,3 +170,8 @@ ul.progtrckr li.progtrckr-pending:before {
 .text-loyalty {
     color: #5ebc5f
 }
+
+.radio label {
+    font-size: 1.1em;
+    padding-bottom: 15px;
+}

@@ -45,6 +45,10 @@ class PaymentController extends IndexController
         if ($invoice['can_pay'] != 1) {
             $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $invoice['order']), __('You can pay this invoice after admin review'));
         }
+        // Check offline
+        if ($invoice['gateway'] == 'Offline') {
+            $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $invoice['order']), $config['payment_offline_description']);
+        }
         // Check invoice is for this user
         if (Pi::service('authentication')->hasIdentity()) {
             if ($invoice['uid'] != Pi::user()->getId()) {

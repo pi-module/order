@@ -260,8 +260,8 @@ class CheckoutController extends IndexController
             $error = array(
                 'values' => $values,
                 'cart' => $cart,
-                'customers' => $customers,
-                'user' => $user,
+                //'customers' => $customers,
+                //'user' => $user,
             );
             $this->view()->assign('error', $error);
         }
@@ -283,7 +283,7 @@ class CheckoutController extends IndexController
         }
         
         // Check order is active or inactive
-        if ($config['order_method'] == 'inactive') {
+        if (!$config['order_active']) {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
             $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
         }
@@ -562,7 +562,7 @@ class CheckoutController extends IndexController
             $this->jump($url, __('Your cart is empty.'), 'error');
         }
         // Check order is active or inactive
-        if ($config['order_method'] == 'inactive') {
+        if (!$config['order_active']) {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
             $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
         }
@@ -701,12 +701,12 @@ class CheckoutController extends IndexController
                         }
                     }
                     // Set return
-                    $return['status'] = 1;
-                    $return['data'] = $data;
-                    $return['data']['shipping'] = $invoice['total']['shipping'];
-                    $return['data']['total'] = $invoice['total']['total_price'];
-                    $return['delivery'] = $delivery['title'];
-                    $return['payment'] = ($config['order_method'] == 'offline') ? __('Offline') : '';
+                    //$return['status'] = 1;
+                    //$return['data'] = $data;
+                    //$return['data']['shipping'] = $invoice['total']['shipping'];
+                    //$return['data']['total'] = $invoice['total']['total_price'];
+                    //$return['delivery'] = $delivery['title'];
+                    //$return['payment'] = ($config['order_method'] == 'offline') ? __('Offline') : '';
                 }
                 break;
 
