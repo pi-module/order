@@ -37,14 +37,14 @@ $this->backbone();
                 <th class="text-center small"><?php _e('Code'); ?></th>
                 <th class="text-center small"><?php _e('Total price'); ?></th>
                 <th class="text-center small"><?php _e('Information'); ?></th>
-                <th class="text-center small"><?php _e('Products'); ?></th>
-                <th class="clearfix small">
+                <th class="text-center small col-xs-3"><?php _e('Products'); ?></th>
+                <th class="clearfix col-xs-5">
                     <ul class="list-inline">
-                        <li class="col-xs-3 text-center"><?php _e('Order status'); ?></li>
-                        <li class="col-xs-2 text-center"><?php _e('Can pay'); ?></li>
-                        <li class="col-xs-2 text-center"><?php _e('Payment status'); ?></li>
-                        <li class="col-xs-3 text-center"><?php _e('Delivery status'); ?></li>
-                        <li class="col-xs-2 text-center"><?php _e('Action'); ?></li>
+                        <li class="text-center small col-xs-3"><?php _e('Order status'); ?></li>
+                        <li class="text-center small col-xs-2"><?php _e('Can pay'); ?></li>
+                        <li class="text-center small col-xs-2"><?php _e('Payment'); ?></li>
+                        <li class="text-center small col-xs-3"><?php _e('Delivery'); ?></li>
+                        <li class="text-center small col-xs-2"><?php _e('Action'); ?></li>
                     </ul>
                 </th>
             </tr>
@@ -67,7 +67,6 @@ $this->backbone();
                 >
                     <td class="text-center small"><?php echo $this->escape($order['code']); ?></td>
                     <td class="text-center small"><?php echo $this->escape($order['total_price_view']); ?></td>
-
                     <td class="text-center small">
                         <ul class="list-inline">
                             <li>
@@ -130,7 +129,9 @@ $this->backbone();
                 </tr>
             <?php } ?>
         </table>
-        <div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
+        <div class="paginator">
+            <?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?>
+        </div>
     <?php } else { ?>
         <div class="alert alert-warning" role="alert"><?php _e('No order is not created yet'); ?></div>
         <div class="alert alert-info" role="alert">
