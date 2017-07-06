@@ -361,7 +361,17 @@ class Order extends AbstractApi
         $rowset = Pi::model('basket', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
-            $list[$row->id]['details'] = Pi::api('order', $module)->getProductDetails($row->product, $row->extra);
+
+            if ($module != 'order' && Pi::service('module')->isActive($module)) {
+                $list[$row->id]['details'] = Pi::api('order', $module)->getProductDetails($row->product, $row->extra);
+            } else {
+                $list[$row->id]['details'] = array(
+                    'title' => __('Manually order'),
+                    'productUrl' => '',
+                    'thumbUrl' => '',
+                );
+            }
+
             if (empty($row->extra)) {
                 $list[$row->id]['extra'] = array();
             } else {
@@ -406,9 +416,10 @@ class Order extends AbstractApi
     {
         // Get order
         $order = Pi::model('order', $this->getModule())->find($orderId);
+        // Get invoice
+        $invoice = Pi::api('invoice', 'order')->getInvoice($invoiceId);
         // Checl for installment
         if ($order->type_payment == 'installment') {
-            $invoice = Pi::api('invoice', 'order')->getInvoice($invoiceId);
             if ($invoice['extra']['type'] == 'prepayment') {
                 // Update order
                 $order->time_payment = time();
@@ -431,9 +442,6 @@ class Order extends AbstractApi
                 }
                 // Update module and get back url
                 $backUrl = Pi::api('order', $order['module_name'])->postPaymentUpdate($order, $basket);
-            } else {
-                // Get back url
-                $backUrl = $invoice['order_url'];
             }
         } else {
             // Update order
@@ -460,6 +468,11 @@ class Order extends AbstractApi
             // Accept Order Credit
             Pi::api('credit', 'order')->acceptOrderCredit($orderId, $invoiceId);
         }
+        // Get back url
+        if (!isset($backUrl) || empty($backUrl)) {
+            $backUrl = $invoice['order_url'];
+        }
+
         return $backUrl;
     }
 

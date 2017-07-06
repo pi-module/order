@@ -37,8 +37,20 @@ class LogsController extends ActionController
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
             $list[$row->id]['value'] = Json::decode($list[$row->id]['value'], true);
-            $list[$row->id]['user'] = Pi::user()->get($list[$row->id]['uid'], array('id', 'identity', 'name', 'email'));
+            $list[$row->id]['user'] = Pi::user()->get($row->uid, array('id', 'identity', 'name', 'email'));
             $list[$row->id]['time_create_view'] = _date($list[$row->id]['time_create']);
+            $list[$row->id]['user_url'] = Pi::url($this->url('', array(
+                'module' => 'user',
+                'controller' => 'edit',
+                'action' => 'index',
+                'uid' => $row->uid,
+            )));
+            $list[$row->id]['invoice_url'] = Pi::url($this->url('', array(
+                'module' => 'order',
+                'controller' => 'invoice',
+                'action' => 'view',
+                'id' => $row->invoice,
+            )));
         }
         // Set paginator
         $count = array('count' => new Expression('count(*)'));

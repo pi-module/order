@@ -63,7 +63,7 @@ class CreditForm extends BaseForm
             'name' => 'status_fluctuation',
             'type' => 'select',
             'options' => array(
-                'label' => __('Type commodity'),
+                'label' => __('Type fluctuation'),
                 'value_options' => array(
                     'increase' => __('Increase'),
                     'decrease' => __('Decrease'),

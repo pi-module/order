@@ -53,6 +53,8 @@ class CreditController extends IndexController
             $list[$row->id] = $row->toArray();
             $list[$row->id]['amount_view'] = Pi::api('api', 'order')->viewPrice($row->amount);
             $list[$row->id]['amount_old_view'] = Pi::api('api', 'order')->viewPrice($row->amount_old);
+            $list[$row->id]['amount_new_view'] = Pi::api('api', 'order')->viewPrice($row->amount_new);
+
             $list[$row->id]['time_create_view'] = _date($row->time_create);
 
             $list[$row->id]['message_user'] = Pi::service('markup')->render($row->message_user, 'html', 'html');
