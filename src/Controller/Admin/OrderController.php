@@ -120,13 +120,20 @@ class OrderController extends ActionController
         $rowset = $this->getModel('order')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
+            $invoiceList = Pi::api('invoice', 'order')->getInvoiceFromOrder($row->id, false);
+            $productList = Pi::api('order', 'order')->listProduct($row->id, $row->module_name);
             $list[$row->id] = Pi::api('order', 'order')->canonizeOrder($row);
-            $list[$row->id]['products'] = Pi::api('order', 'order')->listProduct($row->id, $row->module_name);
-            $list[$row->id]['invoiceList'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($row->id, false);
+            $list[$row->id]['products'] = $productList;
+            $list[$row->id]['invoiceList'] = $invoiceList;
             $list[$row->id]['totalInvoice'] = 0;
             $list[$row->id]['paidInvoice'] = 0;
             $list[$row->id]['unPaidInvoice'] = 0;
-            foreach ($list[$row->id]['invoiceList'] as $invoice) {
+            foreach ($invoiceList as $invoice) {
+
+                echo '<pre>';
+                print_r($invoice);
+                echo '</pre>';
+
                 $list[$row->id]['totalInvoice']++;
                 if ($invoice['status'] == 1) {
                     $list[$row->id]['paidInvoice']++;
@@ -514,7 +521,7 @@ class OrderController extends ActionController
         // set Products
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
         // set Products
-        $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order);
+        $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
         // Set status Invoice
         foreach ($order['invoices'] as $invoice) {
             $order['totalInvoice']++;
@@ -750,7 +757,7 @@ class OrderController extends ActionController
         // Set Products
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
         // Set Products
-        $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order);
+        $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
         // Set installment
         $order['installment'] = Pi::api('installment', 'order')->blockTable($order['user']);
         // Get all products
@@ -791,7 +798,7 @@ class OrderController extends ActionController
             $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message, 'error');
         }
         // Get
-        $invoices = Pi::api('invoice', 'order')->getInvoiceFromOrder($order);
+        $invoices = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
         foreach ($invoices as $invoice) {
             if ($invoice['status'] == 2) {
                 $option['invoice'][$invoice['id']] = sprintf(__('Invoice %s by %s price and %s due date'),

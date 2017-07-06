@@ -293,10 +293,10 @@ class Invoice extends AbstractApi
         return $invoice;
     }
 
-    public function getInvoiceFromOrder($order, $getLog = true)
+    public function getInvoiceFromOrder($orderId, $getLog = true)
     {
         $invoices = array();
-        $where = array('order' => $order['id']);
+        $where = array('order' => $orderId);
         $select = Pi::model('invoice', $this->getModule())->select()->where($where);
         $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
