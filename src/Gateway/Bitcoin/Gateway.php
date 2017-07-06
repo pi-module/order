@@ -157,6 +157,7 @@ class Gateway extends AbstractGateway
         $log['invoice'] = $invoice['id'];
         $log['amount'] = $invoice['total_price'];
         $log['status'] = $result['status'];
+        $log['uid'] = $processing['uid'];
 
         //
         $scMerchantClient = new \SCMerchantClient(

@@ -309,6 +309,7 @@ class PaymentController extends IndexController
             // Set log
             $log = array();
             $log['gateway'] = $gatewayName;
+            $log['uid'] = $processing['uid'];
             $log['value'] = Json::encode(array(3, $request, $processing));
             Pi::api('log', 'order')->setLog($log);
             // Check processing
@@ -316,7 +317,8 @@ class PaymentController extends IndexController
                 // Set log
                 $log = array();
                 $log['gateway'] = $gatewayName;
-                $log['value'] = Json::encode(array(4, $request));
+                $log['uid'] = $processing['uid'];
+                $log['value'] = Json::encode(array(4, $request, $processing, $randomID));
                 Pi::api('log', 'order')->setLog($log);
                 // Get gateway
                 $gateway = Pi::api('gateway', 'order')->getGateway($processing['gateway']);
@@ -324,6 +326,7 @@ class PaymentController extends IndexController
                 // Set log
                 $log = array();
                 $log['gateway'] = $gatewayName;
+                $log['uid'] = $processing['uid'];
                 $log['value'] = Json::encode(array(5, $verify));
                 Pi::api('log', 'order')->setLog($log);
                 // Check error
@@ -337,11 +340,13 @@ class PaymentController extends IndexController
                         // Add log
                         $log = array();
                         $log['gateway'] = $gatewayName;
+                        $log['uid'] = $processing['uid'];
                         $log['value'] = Json::encode(array(10, $verify, $url));
                         Pi::api('log', 'order')->setLog($log);
                     } else {
                         $log = array();
                         $log['gateway'] = $gatewayName;
+                        $log['uid'] = $processing['uid'];
                         $log['value'] = Json::encode(array(11, $verify));
                         Pi::api('log', 'order')->setLog($log);
                     }

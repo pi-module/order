@@ -42,7 +42,7 @@ class Log extends AbstractApi
         $row->message = isset($log['message']) ? $log['message'] : '';
         $row->value = isset($log['value']) ? $log['value'] : '';
         $row->time_create = time();
-        $row->uid = Pi::user()->getId();
+        $row->uid = isset($log['uid']) ? $log['uid'] : Pi::user()->getId();
         $row->ip = Pi::user()->getIp();
         $row->save();
         if ($row->id) {
