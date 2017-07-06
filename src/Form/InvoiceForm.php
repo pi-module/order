@@ -103,6 +103,18 @@ class InvoiceForm extends BaseForm
                 'required' => true,
             )
         ));
+        // status_payment
+        $this->add(array(
+            'name' => 'status_payment',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Payment'),
+                'value_options' => array(
+                    1 => __('UnPaid'),
+                    2 => __('Paid'),
+                ),
+            ),
+        ));
         // Save
         $this->add(array(
             'name' => 'submit',
