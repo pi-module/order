@@ -142,6 +142,9 @@ class Gateway extends AbstractGateway
 
     public function verifyPayment($request, $processing)
     {
+        // Call SCMerchantClient
+        include_once Pi::path('module') . '/order/src/Gateway/Bitcoin/SCMerchantClient/SCMerchantClient.php';
+
         // Set result
         $result = array();
         $result['status'] = 0;
@@ -158,6 +161,8 @@ class Gateway extends AbstractGateway
         $log['amount'] = $invoice['total_price'];
         $log['status'] = $result['status'];
         $log['uid'] = $processing['uid'];
+        $log['message'] = 'test1';
+        Pi::api('log', 'order')->setLog($log);
 
         //
         $scMerchantClient = new \SCMerchantClient(
@@ -166,36 +171,50 @@ class Gateway extends AbstractGateway
             $this->gatewayOption['apiId']
         );
 
+        $log['message'] = 'test2';
+        Pi::api('log', 'order')->setLog($log);
+
         $scMerchantClient->setPrivateMerchantKey($this->gatewayOption['signature']);
 
+        $log['message'] = 'test3';
+        Pi::api('log', 'order')->setLog($log);
+
         $callback = $scMerchantClient->parseCreateOrderCallback($request);
+
+        $log['message'] = 'test4';
+        Pi::api('log', 'order')->setLog($log);
+
         if ($callback != null && $scMerchantClient->validateCreateOrderCallback($callback)){
+
+            $log['message'] = 'Status' . $callback->getStatus();
+            Pi::api('log', 'order')->setLog($log);
+
             switch ($callback->getStatus()) {
-                case \OrderStatusEnum::$Test:
-                    $log['message'] = __('Noting paid ! Test');
+                case 1:
+                    $log['message'] = __('Start state when order is registered in SpectroCoin system');
                     break;
 
-                case \OrderStatusEnum::$New:
-                    $log['message'] = __('Noting paid ! New');
+                case 2:
+                    $log['message'] = __('Payment (or part of it) was received but still not confirmed');
                     break;
 
-                case \OrderStatusEnum::$Pending:
-                    $log['message'] = __('Noting paid ! Pending');
-                    break;
-
-                case \OrderStatusEnum::$Expired:
-                    $log['message'] = __('Noting paid ! Expired');
-                    break;
-
-                case \OrderStatusEnum::$Failed:
-                    $log['message'] = __('Noting paid ! Failed');
-                    break;
-
-                case \OrderStatusEnum::$Paid:
+                case 3:
+                    $log['message'] = __('Order is complete');
                     $invoice = Pi::api('invoice', 'order')->updateInvoice($request['invoice']);
                     $result['status'] = 1;
                     $log['status'] = 1;
-                    $log['message'] = __('Your payment were successfully.');
+                    break;
+
+                case 4:
+                    $log['message'] = __('Some error occurred');
+                    break;
+
+                case 5:
+                    $log['message'] = __('Payment was not received in time');
+                    break;
+
+                case 6:
+                    $log['message'] = __('Test order');
                     break;
 
                 default:
