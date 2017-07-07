@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2017-04-26 11:42+0200\n"
+"POT-Creation-Date: 2017-07-07 09:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _a;_t\n"
 "X-Poedit-Basepath: ../..\n"
@@ -24,7 +24,7 @@ msgstr "Détail des commandes"
 msgid "Simple orders detail"
 msgstr "Détail des commandes simples"
 
-#: config/block.php:23 config/config.php:49
+#: config/block.php:23 config/config.php:53
 msgid "Installment"
 msgstr "Installations"
 
@@ -62,42 +62,46 @@ msgid "Payment"
 msgstr "Paiement"
 
 #: config/config.php:41
+msgid "Score"
+msgstr "Score"
+
+#: config/config.php:45
 msgid "Notification"
 msgstr "Notifications"
 
-#: config/config.php:45
+#: config/config.php:49
 msgid "Cron"
 msgstr "Cron"
 
-#: config/config.php:57
+#: config/config.php:61
 msgid "Perpage"
 msgstr "Par page"
 
-#: config/config.php:65
+#: config/config.php:69
 msgid "Order method"
 msgstr "Méthode de commande"
 
-#: config/config.php:71
+#: config/config.php:75
 msgid "Both"
 msgstr "Les deux"
 
-#: config/config.php:72
+#: config/config.php:76
 msgid "Online"
 msgstr "En ligne"
 
-#: config/config.php:73
+#: config/config.php:77
 msgid "Offline"
 msgstr "Hors Ligne"
 
-#: config/config.php:74
+#: config/config.php:78
 msgid "Inactive"
 msgstr "Inactif"
 
-#: config/config.php:84
+#: config/config.php:88
 msgid "Test mode"
 msgstr "Mode Test"
 
-#: config/config.php:85
+#: config/config.php:89
 msgid ""
 "By test mode , you can disable payment on bank and test order level. dont "
 "use it on active websites"
@@ -105,251 +109,259 @@ msgstr ""
 "Par le mode Test, vous pouvez désactiver le paiement bancaire et tester le "
 "process de commande, ne pas utiliser sur les sites en production"
 
-#: config/config.php:92
+#: config/config.php:96
 msgid "Anonymous users can pay"
 msgstr "Les utilisateurs Anonymes peuvent payer"
 
-#: config/config.php:100
+#: config/config.php:104
 msgid "Order code Prefix"
 msgstr "Code Préfixe pour les commandes"
 
-#: config/config.php:108
+#: config/config.php:112
 msgid "Invoice code Prefix"
 msgstr "Prefixe du numéro de facture"
 
-#: config/config.php:116
+#: config/config.php:120
 msgid "Update user profile"
 msgstr "Mettre à jour le profil utilisateur"
 
-#: config/config.php:117
+#: config/config.php:121
 msgid "Update user profile by order informations by user confirmation"
 msgstr ""
 "Mettre à jour le profil utilisateur avec les informations de commande, après "
 "confirmation utilisateur"
 
-#: config/config.php:124
+#: config/config.php:128
 msgid "Show ID number"
 msgstr "Afficher le Numéro ID utilisateur"
 
-#: config/config.php:132
+#: config/config.php:136
 msgid "Show name"
 msgstr "Afficher le Nom"
 
-#: config/config.php:140
+#: config/config.php:144
 msgid "Show email"
 msgstr "Afficher l'Email"
 
-#: config/config.php:148
+#: config/config.php:152
 msgid "Show phone"
 msgstr "Afficher le Numéro de téléphone"
 
-#: config/config.php:156
+#: config/config.php:160
 msgid "Show mobile"
 msgstr "Afficher le Numéro de mobile"
 
-#: config/config.php:164
+#: config/config.php:168
 msgid "Show company"
 msgstr "Afficher le Nom Entreprise"
 
-#: config/config.php:172
+#: config/config.php:176
 msgid "Show company extra (ID , VAT)"
 msgstr "Afficher les infos supplémentaires Société (ID,VAT)"
 
-#: config/config.php:180
+#: config/config.php:184
 msgid "Show delivery address"
 msgstr "Afficher l'adresse de livraison"
 
-#: config/config.php:188
+#: config/config.php:192
 msgid "Show invoicing address"
 msgstr "Afficher l'adresse de facturation"
 
-#: config/config.php:196
+#: config/config.php:200
 msgid "Show country"
 msgstr "Afficher le pays"
 
-#: config/config.php:204
+#: config/config.php:208
 msgid "Country list"
 msgstr "Liste de pays"
 
-#: config/config.php:205
+#: config/config.php:209
 msgid "Use `|` as delimiter to separate countries"
 msgstr "Utiliser `|` comme délimiteur pour séparer les pays"
 
-#: config/config.php:210
+#: config/config.php:214
 msgid "Show state"
 msgstr "Afficher l'Etat"
 
-#: config/config.php:218
+#: config/config.php:222
 msgid "Show city"
 msgstr "Afficher la ville"
 
-#: config/config.php:226
+#: config/config.php:230
 msgid "Show Zip code"
 msgstr "Afficher le Code Postal"
 
-#: config/config.php:234
+#: config/config.php:238
 msgid "Show packing"
 msgstr "Afficher l'emballage"
 
-#: config/config.php:242
+#: config/config.php:246
 msgid "Show location and delivery"
 msgstr "Afficher les lieux et livraisons"
 
-#: config/config.php:250
+#: config/config.php:254
 msgid "Show user note"
 msgstr "Afficher les Notes Utilisateurs"
 
-#: config/config.php:258
+#: config/config.php:262
 msgid "Show order term"
 msgstr "Afficher les CGV"
 
-#: config/config.php:266
+#: config/config.php:270
 msgid "Order term url"
 msgstr "URL CGV Commande"
 
-#: config/config.php:272
+#: config/config.php:276
 msgid "Product additional price"
 msgstr "Coût additionnel Produits"
 
-#: config/config.php:273
+#: config/config.php:277
 msgid "Additional price as ready and delivery, just for products"
 msgstr ""
 "Coût additionnel de livraison/installation, uniquement pour les produits"
 
-#: config/config.php:280
+#: config/config.php:284
 msgid "Service additional price"
 msgstr "Coût additionnel Services"
 
-#: config/config.php:281
+#: config/config.php:285
 msgid "Additional price as setup, just for servicies"
 msgstr "Coût additionnel d'activation, uniquement pour les services"
 
-#: config/config.php:287
+#: config/config.php:291
 msgid "After save order"
 msgstr "Après avoir enregistré la commande"
 
-#: config/config.php:293
+#: config/config.php:297
 msgid "Go to invoice page"
 msgstr "Aller à la page de facturation"
 
-#: config/config.php:294
+#: config/config.php:298
 msgid "Go to payment page"
 msgstr "Aller à la page de paiement"
 
-#: config/config.php:304
+#: config/config.php:308
 msgid "Seller logo"
 msgstr "Logo du Vendeur"
 
-#: config/config.php:305
+#: config/config.php:309
 msgid "Put logo full URL"
 msgstr "Insérer l'URL du logo"
 
-#: config/config.php:311
+#: config/config.php:315
 msgid "Seller information"
 msgstr "Informations vendeur"
 
-#: config/config.php:312
+#: config/config.php:316
 msgid "HTML tags supported, use on invoice page"
 msgstr "Tags HTML supportés, utilisé sur la page de facture"
 
-#: config/config.php:318
+#: config/config.php:322
 msgid "Notification email for each module"
 msgstr "Email de notification pour chaque module"
 
-#: config/config.php:319
+#: config/config.php:323
 msgid "Setup format : shop,shop@mysite.com|guide,guide@mysite.com"
 msgstr "Format shop,shop@mysite.com|guide,guide@mysite.com"
 
-#: config/config.php:326
+#: config/config.php:330
 msgid "Signature zone on print"
 msgstr "Zone signature sur impression"
 
-#: config/config.php:335
+#: config/config.php:339
 msgid "Use custom price"
 msgstr "Utiliser les prix personnalisés"
 
-#: config/config.php:343
+#: config/config.php:347
 msgid "Date format"
 msgstr "Format de date"
 
-#: config/config.php:344
+#: config/config.php:348
 msgid "For example : yyyy-MM-dd"
 msgstr "Par exemple : yyyy-MM-dd"
 
-#: config/config.php:352
+#: config/config.php:356
 msgid "Payment gateway error url"
 msgstr "Url pour l'erreur de passerelle de paiement"
 
-#: config/config.php:353
+#: config/config.php:357
 msgid "Set back url when gateway have error, set empty for default url"
 msgstr ""
 "Définir l'url de retour lorsqu'une la passerelle rencontre une erreur, "
 "laisser vide pour l'url par défaut"
 
-#: config/config.php:359
+#: config/config.php:363
 msgid "Show not pay payments"
 msgstr "Montrer les commandes non payées"
 
-#: config/config.php:367
+#: config/config.php:371
 msgid "Website image URL"
 msgstr "URL de l'image du website"
 
-#: config/config.php:368
+#: config/config.php:372
 msgid "Use on some payment gateway like paypal."
 msgstr "Utilisé par plusieurs passerelles de paiement comme Paypal"
 
-#: config/config.php:374
+#: config/config.php:378
 msgid "Payment methods"
 msgstr "Méthode de paiement"
 
-#: config/config.php:381
+#: config/config.php:385
 msgid "Active credit system"
 msgstr "Activer le système de Crédit en compte"
 
-#: config/config.php:382
+#: config/config.php:386
 msgid "User can use credit to pay invoice and see history"
 msgstr ""
 "L'utilisateur peut utiliser son crédit pour payer les factures et en "
 "visualiser l'historique d'utilisation"
 
-#: config/config.php:388
+#: config/config.php:392
 msgid "Credit system type"
 msgstr "Type de Crédit en Compte"
 
-#: config/config.php:394
+#: config/config.php:398
 msgid "One credit amount for use on all modules"
 msgstr "Un montant unique utilisable pour tous les modules"
 
-#: config/config.php:395
+#: config/config.php:399
 msgid "Each module have special credit amount"
 msgstr "Chaque module a un montant spécifique de crédit en compte"
 
-#: config/config.php:406
+#: config/config.php:410
+msgid "Active score system"
+msgstr "Activer le système de scoring"
+
+#: config/config.php:417
+msgid "Division score"
+msgstr "Division score"
+
+#: config/config.php:425
 msgid "New order notification to user"
 msgstr "Notifier les nouvelles commandes à l'Utilisateur"
 
-#: config/config.php:407 config/config.php:410
+#: config/config.php:426 config/config.php:429
 #, php-format
 msgid "Dear %s %s, you order %s product by %s price, added on %s website"
 msgstr ""
 "Cher/Chère %s %s, votre avez commandé le produit %s au prix de %s , depuis "
 "le  site %s"
 
-#: config/config.php:414
+#: config/config.php:433
 msgid "New order notification to admin"
 msgstr "Notifier les nouvelles commandes à l'Admin"
 
-#: config/config.php:415 config/config.php:418
+#: config/config.php:434 config/config.php:437
 #, php-format
 msgid "Dear %s admin, %s %s User ordered %s product by %s price"
 msgstr ""
 "Cher Admin %s, l'utilisateur %s %s a commandé le produit %s au prix de %s"
 
-#: config/config.php:422
+#: config/config.php:441
 msgid "Pay invoice notification to user"
 msgstr "Notifier les factures réglées à l'Utilisateur"
 
-#: config/config.php:423 config/config.php:426
+#: config/config.php:442 config/config.php:445
 msgid ""
 "Dear %s %s, You paid invoice %s by %s price for %s order included % product "
 "on %s website successfully"
@@ -358,11 +370,11 @@ msgstr ""
 "la commande %s comprenant le produit % , depuis le site %s, a été finalisé "
 "avec succès."
 
-#: config/config.php:430
+#: config/config.php:449
 msgid "Pay invoice notification to admin"
 msgstr "Notifier les factures réglées à l'Admin"
 
-#: config/config.php:431 config/config.php:434
+#: config/config.php:450 config/config.php:453
 msgid ""
 "Dear %s admin, %s %s User paid invoice %s by %s price for %s order included "
 "% product successfully"
@@ -370,293 +382,293 @@ msgstr ""
 "Cher Admin %s, l'utilisateur %s %s a réglé avec succès la facture %s au prix "
 "de  %s price pour la commande %s order incluant le produit %"
 
-#: config/config.php:438
+#: config/config.php:457
 msgid "Set X day before due date"
 msgstr "Définir X jours avant l'échéance"
 
-#: config/config.php:439
+#: config/config.php:458
 msgid "Notification invoice due date, X day before invoice time by cron"
 msgstr ""
 "Notifier la date d'échéance de la facture, X jours avant l'échéance de la "
 "facture, par Cron"
 
-#: config/config.php:446
+#: config/config.php:465
 msgid "Duedate invoice notification to user"
 msgstr "Notifier la date d'échéance à l'utilisateur"
 
-#: config/config.php:447 config/config.php:450
+#: config/config.php:466 config/config.php:469
 #, php-format
 msgid "Dear %s %s, You have duedate invoice on next %s days"
 msgstr "Cher/Chère %s %s, vous avez des factures échues dans %s jours"
 
-#: config/config.php:454
+#: config/config.php:473
 msgid "Set X day after expired"
 msgstr "Définir X jours après expiration"
 
-#: config/config.php:455
+#: config/config.php:474
 msgid "Notification invoice expired, X day after invoice time by cron"
 msgstr ""
 "Notifier que la facture est échue, X jours après la date d'échéance de la "
 "facture, par Cron"
 
-#: config/config.php:462
+#: config/config.php:481
 msgid "Expired invoice notification to user"
 msgstr "Notifier les factures arrivées à échéance à l'utilisateur"
 
-#: config/config.php:463 config/config.php:466
+#: config/config.php:482 config/config.php:485
 #, php-format
 msgid "Dear %s %s, You have expired invoice on %s days ago"
 msgstr "Cher, Chère %s %s, vous avez des factures échues depuis %s jours"
 
-#: config/config.php:471
+#: config/config.php:490
 msgid "Active this module cron system"
 msgstr "Activer le système de cron pour ce module"
 
-#: config/config.php:480
+#: config/config.php:499
 msgid "Reduce from user credit"
 msgstr "Déduit du crédit utilisateur"
 
-#: config/config.php:488
+#: config/config.php:507
 msgid "Show plan 1"
 msgstr "Show plan 1"
 
-#: config/config.php:496
+#: config/config.php:515
 msgid "Plan 1 : Title"
 msgstr "Plan 1 : Title"
 
-#: config/config.php:500
+#: config/config.php:519
 msgid "1 month"
 msgstr "1 mois"
 
-#: config/config.php:504
+#: config/config.php:523
 msgid "Plan 1 : Prepayment"
 msgstr "Plan 1 : Prepayment"
 
-#: config/config.php:512
+#: config/config.php:531
 msgid "Plan 1 : Profit"
 msgstr "Plan 1 : Profit"
 
-#: config/config.php:520
+#: config/config.php:539
 msgid "Plan 1 : Total"
 msgstr "Plan 1 : Total"
 
-#: config/config.php:528
+#: config/config.php:547
 msgid "Show plan 2"
 msgstr "Show plan 2"
 
-#: config/config.php:536
+#: config/config.php:555
 msgid "Plan 2 : Title"
 msgstr "Plan 2 : Title"
 
-#: config/config.php:540
+#: config/config.php:559
 msgid "2 months"
 msgstr "2 mois"
 
-#: config/config.php:544
+#: config/config.php:563
 msgid "Plan 2 : Prepayment"
 msgstr "Plan 2 : Prepayment"
 
-#: config/config.php:552
+#: config/config.php:571
 msgid "Plan 2 : Profit"
 msgstr "Plan 2 : Profit"
 
-#: config/config.php:560
+#: config/config.php:579
 msgid "Plan 2 : Total"
 msgstr "Plan 2 : Total"
 
-#: config/config.php:568
+#: config/config.php:587
 msgid "Show plan 3"
 msgstr "Show plan 3"
 
-#: config/config.php:576
+#: config/config.php:595
 msgid "Plan 3 : Title"
 msgstr "Plan 3 : Title"
 
-#: config/config.php:580
+#: config/config.php:599
 msgid "3 months"
 msgstr "3 mois"
 
-#: config/config.php:584
+#: config/config.php:603
 msgid "Plan 3 : Prepayment"
 msgstr "Plan 3 : Prepayment"
 
-#: config/config.php:592
+#: config/config.php:611
 msgid "Plan 3 : Profit"
 msgstr "Plan 3 : Profit"
 
-#: config/config.php:600
+#: config/config.php:619
 msgid "Plan 3 : Total"
 msgstr "Plan 3 : Total"
 
-#: config/config.php:608
+#: config/config.php:627
 msgid "Show plan 4"
 msgstr "Show plan 4"
 
-#: config/config.php:616
+#: config/config.php:635
 msgid "Plan 4 : Title"
 msgstr "Plan 4 : Title"
 
-#: config/config.php:620
+#: config/config.php:639
 msgid "4 months"
 msgstr "4 mois"
 
-#: config/config.php:624
+#: config/config.php:643
 msgid "Plan 4 : Prepayment"
 msgstr "Plan 4 : Prepayment"
 
-#: config/config.php:632
+#: config/config.php:651
 msgid "Plan 4 : Profit"
 msgstr "Plan 4 : Profit"
 
-#: config/config.php:640
+#: config/config.php:659
 msgid "Plan 4 : Total"
 msgstr "Plan 4 : Total"
 
-#: config/config.php:648
+#: config/config.php:667
 msgid "Show plan 5"
 msgstr "Show plan 5"
 
-#: config/config.php:656
+#: config/config.php:675
 msgid "Plan 5 : Title"
 msgstr "Plan 5 : Title"
 
-#: config/config.php:660
+#: config/config.php:679
 msgid "5 months"
 msgstr "5 mois"
 
-#: config/config.php:664
+#: config/config.php:683
 msgid "Plan 5 : Prepayment"
 msgstr "Plan 5 : Prepayment"
 
-#: config/config.php:672
+#: config/config.php:691
 msgid "Plan 5 : Profit"
 msgstr "Plan 5 : Profit"
 
-#: config/config.php:680
+#: config/config.php:699
 msgid "Plan 5 : Total"
 msgstr "Plan 5 : Total"
 
-#: config/config.php:688
+#: config/config.php:707
 msgid "Show plan 6"
 msgstr "Show plan 6"
 
-#: config/config.php:696
+#: config/config.php:715
 msgid "Plan 6 : Title"
 msgstr "Plan 6 : Title"
 
-#: config/config.php:700
+#: config/config.php:719
 msgid "6 months"
 msgstr "6 mois"
 
-#: config/config.php:704
+#: config/config.php:723
 msgid "Plan 6 : Prepayment"
 msgstr "Plan 6 : Prepayment"
 
-#: config/config.php:712
+#: config/config.php:731
 msgid "Plan 6 : Profit"
 msgstr "Plan 6 : Profit"
 
-#: config/config.php:720
+#: config/config.php:739
 msgid "Plan 6 : Total"
 msgstr "Plan 6 : Total"
 
-#: config/config.php:728
+#: config/config.php:747
 msgid "Show plan 7"
 msgstr "Show plan 7"
 
-#: config/config.php:736
+#: config/config.php:755
 msgid "Plan 7 : Title"
 msgstr "Plan 7 : Title"
 
-#: config/config.php:740
+#: config/config.php:759
 msgid "7 months"
 msgstr "7 mois"
 
-#: config/config.php:744
+#: config/config.php:763
 msgid "Plan 7 : Prepayment"
 msgstr "Plan 7 : Prepayment"
 
-#: config/config.php:752
+#: config/config.php:771
 msgid "Plan 7 : Profit"
 msgstr "Plan 7 : Profit"
 
-#: config/config.php:760
+#: config/config.php:779
 msgid "Plan 7 : Total"
 msgstr "Plan 7 : Total"
 
-#: config/config.php:768
+#: config/config.php:787
 msgid "Show plan 8"
 msgstr "Show plan 8"
 
-#: config/config.php:776
+#: config/config.php:795
 msgid "Plan 8 : Title"
 msgstr "Plan 8 : Title"
 
-#: config/config.php:780
+#: config/config.php:799
 msgid "8 months"
 msgstr "8 mois"
 
-#: config/config.php:784
+#: config/config.php:803
 msgid "Plan 8 : Prepayment"
 msgstr "Plan 8 : Prepayment"
 
-#: config/config.php:792
+#: config/config.php:811
 msgid "Plan 8 : Profit"
 msgstr "Plan 8 : Profit"
 
-#: config/config.php:800
+#: config/config.php:819
 msgid "Plan 8 : Total"
 msgstr "Plan 8 : Total"
 
-#: config/config.php:808
+#: config/config.php:827
 msgid "Show plan 9"
 msgstr "Show plan 9"
 
-#: config/config.php:816
+#: config/config.php:835
 msgid "Plan 9 : Title"
 msgstr "Plan 9 : Title"
 
-#: config/config.php:820
+#: config/config.php:839
 msgid "9 months"
 msgstr "9 mois"
 
-#: config/config.php:824
+#: config/config.php:843
 msgid "Plan 9 : Prepayment"
 msgstr "Plan 9 : Prepayment"
 
-#: config/config.php:832
+#: config/config.php:851
 msgid "Plan 9 : Profit"
 msgstr "Plan 9 : Profit"
 
-#: config/config.php:840
+#: config/config.php:859
 msgid "Plan 9 : Total"
 msgstr "Plan 9 : Total"
 
-#: config/config.php:848
+#: config/config.php:867
 msgid "Show plan 10"
 msgstr "Show plan 10"
 
-#: config/config.php:856
+#: config/config.php:875
 msgid "Plan 10 : Title"
 msgstr "Plan 10 : Title"
 
-#: config/config.php:860
+#: config/config.php:879
 msgid "10 months"
 msgstr "10 mois"
 
-#: config/config.php:864
+#: config/config.php:883
 msgid "Plan 10 : Prepayment"
 msgstr "Plan 10 : Prepayment"
 
-#: config/config.php:872
+#: config/config.php:891
 msgid "Plan 10 : Profit"
 msgstr "Plan 10 : Profit"
 
-#: config/config.php:880
+#: config/config.php:899
 msgid "Plan 10 : Total"
 msgstr "Plan 10 : Total"
 
-#: config/config.php:889
+#: config/config.php:908
 msgid "Description for checkup page"
 msgstr "Description pour la page de Checkout"
 
