@@ -237,23 +237,24 @@
             <?php } ?>
         <?php } ?>
         <hr />
+        <?php if (!empty($order['user_note'])) { ?>
+            <div class="alert alert-success">
+                <h4><?php _e('User note'); ?></h4>
+                <div class="clearfix">
+                    <?php echo $order['user_note']; ?>
+                </div>
+            </div>
+        <?php } ?>
+        <?php if (!empty($order['admin_note'])) { ?>
+            <div class="alert alert-danger">
+                <h4><?php _e('Admin note'); ?></h4>
+                <div class="clearfix">
+                    <?php echo $order['admin_note']; ?>
+                </div>
+            </div>
+        <?php } ?>
+
         <?php if ($order['type_payment'] == 'installment') { ?>
-            <?php if (!empty($order['user_note'])) { ?>
-                <div class="alert alert-success">
-                    <h4><?php _e('User note'); ?></h4>
-                    <div class="clearfix">
-                        <?php echo $order['user_note']; ?>
-                    </div>
-                </div>
-            <?php } ?>
-            <?php if (!empty($order['admin_note'])) { ?>
-                <div class="alert alert-danger">
-                    <h4><?php _e('Admin note'); ?></h4>
-                    <div class="clearfix">
-                        <?php echo $order['admin_note']; ?>
-                    </div>
-                </div>
-            <?php } ?>
             <table class="table table-striped table-bordered table-condensed">
                 <tr>
                     <th><?php _e('Invoice'); ?></th>
@@ -262,7 +263,16 @@
                     <th><?php _e('Action'); ?></th>
                 </tr>
                 <?php foreach ($order['invoices'] as $invoice) { ?>
-                    <tr>
+                    <?php if ($invoice['status'] == 2) {
+                        if (time() > $invoice['time_duedate']) {
+                            $classBtn = 'btn-danger';
+                            $classBg = 'danger';
+                        } else {
+                            $classBtn = 'btn-success';
+                            $classBg = '';
+                        }
+                    } ?>
+                    <tr class="<?php echo $classBg; ?>">
                         <td><?php echo sprintf(__('Invoice %s'), $this->escape($invoice['code'])); ?></td>
                         <td><?php echo $this->escape($invoice['total_price_view']); ?></td>
                         <td class="text-center">
@@ -279,7 +289,7 @@
                             <?php if ($invoice['status'] == 2) { ?>
                                 <?php if ($invoice['can_pay'] == 1) { ?>
                                     <?php if ($invoice['allowPayment']) { ?>
-                                        <a class="btn btn-success btn-xs" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay_url']); ?>"><i class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
+                                         <a class="btn <?php echo $classBtn; ?> btn-xs" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay_url']); ?>"><i class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
                                     <?php } /* else { ?>
                                         <span class="label label-danger"><?php echo sprintf(__('You can pay this invoice after %s'),  _date($invoice['time_duedate'] - (60 * 60 * 24 * 14), array('pattern' => 'dd-MM-yyyy'))); ?></span>
                                     <?php } */ ?>
@@ -337,29 +347,13 @@
                         </div>
                     </div>
                 <?php } ?>
-                <?php if (!empty($order['user_note'])) { ?>
-                    <div class="alert alert-success">
-                        <h4><?php _e('User note'); ?></h4>
-                        <div class="clearfix">
-                            <?php echo $order['user_note']; ?>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if (!empty($order['admin_note'])) { ?>
-                    <div class="alert alert-danger">
-                        <h4><?php _e('Admin note'); ?></h4>
-                        <div class="clearfix">
-                            <?php echo $order['admin_note']; ?>
-                        </div>
-                    </div>
-                <?php } ?>
                 <div class="clearfix row">
                     <div class="<?php if ($invoice['status'] == 1) { echo 'col-md-12';} else { echo 'col-md-7';} ?>">
                         <ul class="list-inline">
                             <li>
                                 <a class="btn btn-primary btn-sm" title="<?php _e('Print invoice'); ?>"
                                    href="<?php echo $this->escape($invoice['print_url']); ?>" target="_blank"><i
-                                        class="fa fa-print"></i> <?php _e('Print invoice'); ?></a>
+                                            class="fa fa-print"></i> <?php _e('Print invoice'); ?></a>
                             </li>
                             <li>
                                 <strong><?php _e('Invoice date'); ?></strong> :
@@ -379,40 +373,44 @@
                             </li>
                         </ul>
                     </div>
-                    <?php if ($invoice['status'] == 2) { ?>
-                        <div class="col-md-5 text-right">
-                            <?php if ($invoice['can_pay'] == 1 && $invoice['allowPayment']) { ?>
-                                <?php if ($invoice['allowPayment']) { ?>
-                                    <?php if ($config['credit_active'] && isset($credit) && $order['type_payment'] != 'installment') { ?>
-                                        <?php if ($config['credit_type'] == 'general') {
-                                            $creditAmount = $credit['amount'];
-                                        } elseif ($config['credit_type'] == 'module') {
-                                            $creditAmount = $credit['amount_detail_view'][$order['module_name']]['amount'];
-                                        } ?>
-                                        <?php if ($creditAmount > 0) { ?>
-                                            <div class="dropup">
-                                                <button class="btn btn-success btn-lg dropdown-toggle" type="button" id="dropdownPay" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                    <?php _e('Pay'); ?>
-                                                    <span class="caret"></span>
-                                                </button>
-                                                <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownPay">
-                                                    <li><a href="<?php echo $this->escape($invoice['pay_url']); ?>"><?php _e('Pay without using credit'); ?></a></li>
-                                                    <li><a href="<?php echo $this->escape($invoice['pay_credit_url']); ?>"><?php _e('Pay by using credit'); ?></a></li>
-                                                </ul>
-                                            </div>
+                    <?php if ($invoice['gateway'] != 'Offline') { ?>
+                        <?php if ($invoice['status'] == 2) { ?>
+                            <div class="col-md-5 text-right">
+                                <?php if ($invoice['can_pay'] == 1 && $invoice['allowPayment']) { ?>
+                                    <?php if ($invoice['allowPayment']) { ?>
+                                        <?php if ($config['credit_active'] && isset($credit) && $order['type_payment'] != 'installment') { ?>
+                                            <?php if ($config['credit_type'] == 'general') {
+                                                $creditAmount = $credit['amount'];
+                                            } elseif ($config['credit_type'] == 'module') {
+                                                $creditAmount = $credit['amount_detail_view'][$order['module_name']]['amount'];
+                                            } ?>
+                                            <?php if ($creditAmount > 0) { ?>
+                                                <div class="dropup">
+                                                    <button class="btn btn-success btn-lg dropdown-toggle" type="button" id="dropdownPay" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        <?php _e('Pay'); ?>
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownPay">
+                                                        <li><a href="<?php echo $this->escape($invoice['pay_url']); ?>"><?php _e('Pay without using credit'); ?></a></li>
+                                                        <li><a href="<?php echo $this->escape($invoice['pay_credit_url']); ?>"><?php _e('Pay by using credit'); ?></a></li>
+                                                    </ul>
+                                                </div>
+                                            <?php } else { ?>
+                                                <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay_url']); ?>"><i class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
+                                            <?php } ?>
                                         <?php } else { ?>
                                             <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay_url']); ?>"><i class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
                                         <?php } ?>
-                                    <?php } else { ?>
-                                        <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>" href="<?php echo $this->escape($invoice['pay_url']); ?>"><i class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
-                                    <?php } ?>
-                                <?php } /* else { ?>
+                                    <?php } /* else { ?>
                                     <span class="label label-danger"><?php echo sprintf(__('You can pay this invoice after %s'), _date($invoice['time_duedate'] - (60 * 60 * 24 * 14), array('pattern' => 'dd-MM-yyyy'))); ?></span>
                                 <?php } */ ?>
-                            <?php } elseif ($invoice['can_pay'] != 1) { ?>
-                                <span class="label label-danger"><?php _e('You can pay this invoice after admin review'); ?></span>
-                            <?php } ?>
-                        </div>
+                                <?php } elseif ($invoice['can_pay'] != 1) { ?>
+                                    <span class="label label-danger"><?php _e('You can pay this invoice after admin review'); ?></span>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
+                    <?php } else { ?>
+                        <span class="label label-danger"><?php echo $this->escape($config['payment_offline_description']); ?></span>
                     <?php } ?>
                 </div>
             <?php } ?>

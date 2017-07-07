@@ -16,7 +16,7 @@ namespace Module\Order\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class OrderAddForm extends BaseForm
+class OrderEditForm extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {
@@ -27,25 +27,13 @@ class OrderAddForm extends BaseForm
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new OrderAddFilter($this->option);
+            $this->filter = new OrderEditFilter($this->option);
         }
         return $this->filter;
     }
 
     public function init()
     {
-        // uid
-        $this->add(array(
-            'name' => 'uid',
-            'options' => array(
-                'label' => __('User ID'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                'required' => true,
-            )
-        ));
         // name
         if ($this->option['config']['order_name']) {
             // first_name
@@ -333,101 +321,6 @@ class OrderAddForm extends BaseForm
                 )
             ));
         }
-        // module_name
-        $this->add(array(
-            'name' => 'module_name',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Join to module'),
-                'value_options' => array(
-                    'order' => __('Order module'),
-                    'shop' => __('Shop module'),
-                    'guide' => __('Guide module'),
-                    'plans' => __('Plans module'),
-                ),
-            ),
-        ));
-        // module_item
-        $this->add(array(
-            'name' => 'module_item',
-            'options' => array(
-                'label' => __('Module service / product id'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => __('Put service / product id and join order to module'),
-            )
-        ));
-        // time_create
-        $this->add(array(
-            'name' => 'time_create',
-            'type' => 'datepicker',
-            'options' => array(
-                'label' => __('Order / invoice date'),
-                'datepicker' => array(
-                    'format' => 'yyyy-mm-dd',
-                ),
-            ),
-            'attributes' => array(
-                'id' => 'time-create',
-                'required' => true,
-            )
-        ));
-        // product_price
-        $this->add(array(
-            'name' => 'product_price',
-            'options' => array(
-                'label' => __('Product price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
-        // shipping_price
-        $this->add(array(
-            'name' => 'shipping_price',
-            'options' => array(
-                'label' => __('Shipping price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
-        // packing_price
-        $this->add(array(
-            'name' => 'packing_price',
-            'options' => array(
-                'label' => __('Packing price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
-        // setup_price
-        $this->add(array(
-            'name' => 'setup_price',
-            'options' => array(
-                'label' => __('Setup price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
-        // vat_price
-        $this->add(array(
-            'name' => 'vat_price',
-            'options' => array(
-                'label' => __('Vat price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
         // Save order
         $this->add(array(
             'name' => 'submit',
