@@ -2636,8 +2636,9 @@ msgid ""
 "Once received, youll be redirected automatically to your dashboard, and will "
 "be able to create your item !"
 msgstr ""
-"Une fois le règlement reçu, tu seras redirigé automatiquement vers ton "
-"Espace : tu pourras alors immédiatement commencer à promouvoir ton activité !"
+"Une fois le règlement reçu, vous serez redirigé automatiquement vers votre "
+"Espace : vous pourrez alors immédiatement commencer à promouvoir votre "
+"activité !"
 
 #: template/front/finish.phtml:38
 msgid ""
