@@ -58,7 +58,7 @@ class PayForm extends BaseForm
             }
         }
         // Pay
-        if ($this->option['config']['payment_page']) {
+        if ($this->option['config']['payment_page'] == 'manual') {
             $this->add(array(
                 'name' => 'submit',
                 'type' => 'submit',

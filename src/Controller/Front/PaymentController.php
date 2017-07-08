@@ -188,7 +188,7 @@ class PaymentController extends IndexController
             );
             // Set form
             $form = new PayForm('pay', $option);
-            $this->setAttribute('enctype','multipart/form-data');
+            $form->setAttribute('enctype','multipart/form-data');
             $form->setAttribute('action', $gateway->gatewayRedirectUrl);
             $form->setData($values);
 
