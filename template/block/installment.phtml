@@ -244,7 +244,9 @@
                                 </td>
                                 <td class="text-center"><?php echo $this->escape($invoice['time_duedate_view']); ?></td>
                                 <td class="text-center">
-                                    <a class="btn btn-primary btn-xs" title="<?php echo _b('View / Pay'); ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $invoice['order'])); ?>"><i class="fa fa-edit"></i> <?php echo _b('View / Pay'); ?></a>
+                                    <a class="btn btn-primary btn-xs" title="<?php echo _b('View / Pay'); ?>"
+                                       href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $invoice['order'])); ?>"><i
+                                                class="fa fa-edit"></i> <?php echo _b('View / Pay'); ?></a>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -282,7 +284,7 @@
                                 <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
                                 <td class="text-center">
                                     <a class="btn btn-primary btn-xs" title="<?php echo _b('View'); ?>" target="_blank"
-                                       href="<?php echo Pi::url($this->url('order', array('controller' => 'detail', 'id' => $order['id']))); ?>"><i
+                                       href="<?php echo Pi::url($this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $order['id']))); ?>"><i
                                                 class="fa fa-edit"></i> <?php echo _b('View'); ?></a>
                                 </td>
                             </tr>
