@@ -185,6 +185,8 @@ class PaymentController extends IndexController
             $form = new PayForm('pay', $gateway->gatewayPayForm);
             $form->setAttribute('action', $gateway->gatewayRedirectUrl);
             $form->setData($values);
+
+            Pi::service('audit')->log('order', array_merge(array('order-id-' . $invoice['random_id'], 'form-values'), $values));
         } else {
             if (isset($gateway->gatewayRedirectUrl) && !empty($gateway->gatewayRedirectUrl)) {
                 return $this->redirect()->toUrl($gateway->gatewayRedirectUrl);
