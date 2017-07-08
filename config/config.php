@@ -341,6 +341,22 @@ return array(
             'value' => 'yyyy/MM/dd'
         ),
         // Payment
+        'payment_page' => array(
+            'title' => _a('Payment page redirect type'),
+            'description' => '',
+            'edit' => array(
+                'type' => 'select',
+                'options' => array(
+                    'options' => array(
+                        'auto' => _a('Auto redirect to gateway'),
+                        'manual' => _a('Manual redirect by user'),
+                    ),
+                ),
+            ),
+            'filter' => 'text',
+            'value' => 'auto',
+            'category' => 'payment',
+        ),
         'payment_gateway_error_url' => array(
             'category' => 'payment',
             'title' => _a('Payment gateway error url'),
@@ -348,14 +364,6 @@ return array(
             'edit' => 'text',
             'filter' => 'string',
         ),
-        /* 'payment_shownotpay' => array(
-            'category' => 'payment',
-            'title' => _a('Show not pay payments'),
-            'description' => '',
-            'edit' => 'checkbox',
-            'filter' => 'number_int',
-            'value' => 1
-        ), */
         'payment_image' => array(
             'category' => 'payment',
             'title' => _a('Website image URL'),
@@ -363,12 +371,6 @@ return array(
             'edit' => 'text',
             'filter' => 'string',
         ),
-        /* 'payment_methods' => array(
-            'category' => 'payment',
-            'title' => _a('Payment methods'),
-            'edit' => 'textarea',
-            'filter' => 'string',
-        ), */
         'payment_offline' => array(
             'category' => 'payment',
             'title' => _a('Offline payment'),
@@ -393,6 +395,21 @@ return array(
             'filter' => 'string',
             'value' => _a('Admin make contact about payment whit you after review your order'),
         ),
+        /* 'payment_methods' => array(
+            'category' => 'payment',
+            'title' => _a('Payment methods'),
+            'edit' => 'textarea',
+            'filter' => 'string',
+        ), */
+        /* 'payment_shownotpay' => array(
+            'category' => 'payment',
+            'title' => _a('Show not pay payments'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ), */
+
         // Credit
         'credit_active' => array(
             'category' => 'credit',

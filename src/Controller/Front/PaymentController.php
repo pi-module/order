@@ -181,8 +181,14 @@ class PaymentController extends IndexController
                     $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), sprintf(__('Error to get %s.'), $key));
                 }
             }
+            // Set form option
+            $option = array(
+                'field' => $gateway->gatewayPayForm,
+                'config' => $config,
+            );
             // Set form
-            $form = new PayForm('pay', $gateway->gatewayPayForm);
+            $form = new PayForm('pay', $option);
+            $this->setAttribute('enctype','multipart/form-data');
             $form->setAttribute('action', $gateway->gatewayRedirectUrl);
             $form->setData($values);
 
@@ -202,6 +208,7 @@ class PaymentController extends IndexController
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('form', $form);
         $this->view()->assign('gateway', $gateway);
+        $this->view()->assign('config', $config);
     }
 
     public function resultAction()

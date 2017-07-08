@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2017-07-06 19:11+0430\n"
+"POT-Creation-Date: 2017-07-08 15:38+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -533,8 +533,8 @@ msgstr "سفارش فعال نیست"
 #: src/Controller/Front/PaymentController.php:114
 #: src/Controller/Front/PaymentController.php:129
 #: src/Controller/Front/PaymentController.php:160
-#: src/Controller/Front/PaymentController.php:242
-#: src/Controller/Front/PaymentController.php:455
+#: src/Controller/Front/PaymentController.php:251
+#: src/Controller/Front/PaymentController.php:464
 msgid "Your payment were successfully. Back to module"
 msgstr "پرداخت شما با موفقیت به انجام رسید. به صفحه اتمام خرید منتقل می شوید"
 
@@ -565,35 +565,35 @@ msgstr "استفاده از اعتبار برای پرداخت فاکتور %s �
 msgid "Error to get %s."
 msgstr "خطا در گرفتن %s"
 
-#: src/Controller/Front/PaymentController.php:194
+#: src/Controller/Front/PaymentController.php:202
 msgid "Error to get information."
 msgstr "خطا در گرفتن اطلاعات"
 
-#: src/Controller/Front/PaymentController.php:223
+#: src/Controller/Front/PaymentController.php:232
 msgid "Your running pay processing not set"
 msgstr "پروسه پرداخت در حال اجرای شما تنظیم نشده است"
 
-#: src/Controller/Front/PaymentController.php:228
+#: src/Controller/Front/PaymentController.php:237
 msgid "Your IP address changed and processing not valid"
 msgstr ""
 "آدرس آی پی شما در هنگام پرداخت تغییر کرده است و این روند خرید صحیح نیست"
 
-#: src/Controller/Front/PaymentController.php:259
+#: src/Controller/Front/PaymentController.php:268
 msgid "Your payment wont successfully."
 msgstr "پرداخت شما موفقیت آمیز نبود"
 
-#: src/Controller/Front/PaymentController.php:265
+#: src/Controller/Front/PaymentController.php:274
 msgid "Did not set any request"
 msgstr "هیچ درخواستی ذخیره نشده است"
 
-#: src/Controller/Front/PaymentController.php:405
+#: src/Controller/Front/PaymentController.php:414
 #: src/Gateway/Dargahpardakht/Gateway.php:173
 #: src/Gateway/Mellat/Gateway.php:160 src/Gateway/Paypal/Gateway.php:424
 #: src/Gateway/Zarinpal/Gateway.php:134
 msgid "Your payment were successfully."
 msgstr "پرداخت شما موفقیت آمیز بود."
 
-#: src/Controller/Front/PaymentController.php:443
+#: src/Controller/Front/PaymentController.php:452
 msgid "Test mode not active."
 msgstr "حالت تست فعال نیست"
 
@@ -1050,9 +1050,10 @@ msgid "Register and save order"
 msgstr "ثبت نام و ثبت سفارش"
 
 #: src/Form/OrderForm.php:489 src/Form/OrderSimpleForm.php:220
-#: template/front/detail.phtml:292 template/front/detail.phtml:390
-#: template/front/detail.phtml:399 template/front/detail.phtml:402
-#: template/front/invoice.phtml:241 template/front/invoice.phtml:243
+#: src/Form/PayForm.php:66 template/front/detail.phtml:292
+#: template/front/detail.phtml:390 template/front/detail.phtml:399
+#: template/front/detail.phtml:402 template/front/invoice.phtml:241
+#: template/front/invoice.phtml:243
 msgid "Pay"
 msgstr "پرداخت"
 
@@ -2678,9 +2679,18 @@ msgstr "فهرست تمام سفارش ها و فاکتور های شما"
 msgid "Product / service"
 msgstr "محصول / خدمت"
 
-#: template/front/pay.phtml:12
+#: template/front/pay.phtml:13
 msgid "You'll be redirected in few seconds to gateway Checkout Page"
 msgstr "شما ظرف چند ثانیه به صفحه پرداخت بانک منتقل خواهید شد"
+
+#: template/front/pay.phtml:25
+msgid "Please press pay button to redirect to gateway"
+msgstr ""
+"برای شروع عملیات، لطفا دکمه پرداخت را فشار دهید تا به صفحه پرداخت منتقل شود."
+
+#: template/front/pay.phtml:40
+msgid "Error on payment form, please make contact to admin !"
+msgstr "خطا در فرم پرداخت، لطفا با مدیر سایت تماس بگیرید !"
 
 #~ msgid "Noting paid ! Test"
 #~ msgstr "Noting paid ! Test"
