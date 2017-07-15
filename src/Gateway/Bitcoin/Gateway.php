@@ -185,11 +185,12 @@ class Gateway extends AbstractGateway
         Pi::api('log', 'order')->setLog($log);
 
         if ($callback != null && $scMerchantClient->validateCreateOrderCallback($callback)){
+            $status = intval($callback->getStatus());
 
-            $log['message'] = 'Status' . $callback->getStatus();
+            $log['message'] = 'Status : ' . $status;
             Pi::api('log', 'order')->setLog($log);
 
-            switch ($callback->getStatus()) {
+            switch ($status) {
                 case 1:
                     $log['message'] = __('Start state when order is registered in SpectroCoin system');
                     break;
@@ -200,7 +201,7 @@ class Gateway extends AbstractGateway
 
                 case 3:
                     $log['message'] = __('Order is complete');
-                    $invoice = Pi::api('invoice', 'order')->updateInvoice($request['invoice']);
+                    $invoice = Pi::api('invoice', 'order')->updateInvoice($request['orderId']);
                     $result['status'] = 1;
                     $log['status'] = 1;
                     break;
@@ -218,7 +219,7 @@ class Gateway extends AbstractGateway
                     break;
 
                 default:
-                    $log['message'] = 'Unknown order status: '.$callback->getStatus();
+                    $log['message'] = 'Unknown order status: ' . $status;
                     break;
             }
 

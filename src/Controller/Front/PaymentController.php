@@ -188,7 +188,9 @@ class PaymentController extends IndexController
             );
             // Set form
             $form = new PayForm('pay', $option);
-            $form->setAttribute('enctype','multipart/form-data');
+            if ($invoice['gateway'] == 'Paypal') {
+                $form->setAttribute('enctype','multipart/form-data');
+            }
             $form->setAttribute('action', $gateway->gatewayRedirectUrl);
             $form->setData($values);
 
