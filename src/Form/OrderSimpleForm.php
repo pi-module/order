@@ -115,14 +115,13 @@ class OrderSimpleForm extends BaseForm
                         // gateway
                         $this->add(array(
                             'name' => 'gateway',
-                            'type' => 'select',
+                            'type' => 'radio',
                             'options' => array(
                                 'label' => __('Adapter'),
                                 'value_options' => array(),
                             ),
                             'attributes' => array(
                                 'id' => 'customer-select-payment',
-                                'size' => 3,
                                 'required' => true,
                             )
                         ));
@@ -143,14 +142,13 @@ class OrderSimpleForm extends BaseForm
                         // gateway
                         $this->add(array(
                             'name' => 'gateway',
-                            'type' => 'select',
+                            'type' => 'radio',
                             'options' => array(
                                 'label' => __('Adapter'),
                                 'value_options' => $gatewayList,
                             ),
                             'attributes' => array(
                                 'id' => 'customer-select-payment',
-                                'size' => 1,
                                 'required' => true,
                             )
                         ));
@@ -173,14 +171,13 @@ class OrderSimpleForm extends BaseForm
                     // gateway
                     $this->add(array(
                         'name' => 'gateway',
-                        'type' => 'select',
+                        'type' => 'radio',
                         'options' => array(
                             'label' => __('Adapter'),
                             'value_options' => $gatewayList,
                         ),
                         'attributes' => array(
                             'id' => 'customer-select-payment',
-                            'size' => 1,
                             'required' => true,
                         )
                     ));

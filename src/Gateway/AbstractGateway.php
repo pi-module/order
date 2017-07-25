@@ -40,6 +40,8 @@ abstract class AbstractGateway
 
     public $gatewayBackUrl = '';
 
+    public $gatewayNotifyUrl = '';
+
     public $gatewayError = '';
 
     /**
@@ -121,6 +123,12 @@ abstract class AbstractGateway
         foreach ($rowset as $row) {
             $list[$row->path] = $row->title;
         }
+
+        $config = Pi::service('registry')->config->read('order');
+        if ($config['payment_offline']) {
+            $list['Offline'] = $config['payment_offline_title'];
+        }
+
         return $list;
     }
 
@@ -249,4 +257,4 @@ abstract class AbstractGateway
         }
         return $this;
     }
-}	
+}

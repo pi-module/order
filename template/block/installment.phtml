@@ -228,14 +228,20 @@
                     <table class="table table-striped table-bordered table-condensed small">
                         <tr>
                             <th class="text-center"><?php echo _b('Amount'); ?></th>
-                            <th class="text-center"><?php echo _b('Time Create'); ?></th>
+                            <td class="text-center"><?php echo _b('Product / service'); ?></td>
                             <th class="text-center"><?php echo _b('Due date'); ?></th>
                             <th class="text-center"><?php echo _b('Action'); ?></th>
                         </tr>
                         <?php foreach($block['resources']['invoices'] as $invoice) { ?>
                             <tr>
                                 <td class="text-center"><?php echo $this->escape($invoice['total_price_view']); ?></td>
-                                <td class="text-center"><?php echo $this->escape($invoice['time_create_view']); ?></td>
+                                <td class="text-center">
+                                    <?php $productsList = array();
+                                    foreach ($block['resources']['orders'][$invoice['order']]['products'] as $product) {
+                                        $productsList[] = $product['details']['title'];
+                                    }
+                                    echo implode(' , ',$productsList); ?>
+                                </td>
                                 <td class="text-center"><?php echo $this->escape($invoice['time_duedate_view']); ?></td>
                                 <td class="text-center">
                                     <a class="btn btn-primary btn-xs" title="<?php echo _b('View / Pay'); ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $invoice['order'])); ?>"><i class="fa fa-edit"></i> <?php echo _b('View / Pay'); ?></a>
@@ -250,24 +256,37 @@
             <div role="tabpanel" class="tab-pane" id="order">
                 <h3 class="text-center"><?php echo _b('Orders list'); ?></h3>
                 <?php if ($block['resources']['orders']) { ?>
-                    <table class="table table-striped table-bordered table-condensed small">
+
+                    <table class="table table-striped table-bordered table-condensed">
                         <tr>
                             <th class="text-center"><?php echo _b('ID'); ?></th>
-                            <th class="text-center"><?php echo _b('Time create'); ?></th>
-                            <th class="text-center"><?php echo _b('Amount'); ?></th>
-                            <th class="text-center"><?php echo _b('Gateway'); ?></th>
+                            <th class="text-center"><?php echo _b('Code'); ?></th>
+                            <td class="text-center"><?php echo _b('Product / service'); ?></td>
+                            <th class="text-center"><?php echo _b('Time'); ?></th>
+                            <th class="text-center"><?php echo _b('Price'); ?></th>
                             <th class="text-center"><?php echo _b('Action'); ?></th>
                         </tr>
-                        <?php foreach($block['resources']['orders'] as $order) { ?>
+                        <?php $i = 1; ?>
+                        <?php foreach ($block['resources']['orders'] as $order) { ?>
                             <tr>
+                                <td class="text-center"><?php echo _number($i); ?></td>
                                 <td class="text-center"><?php echo $this->escape($order['code']); ?></td>
+                                <td class="text-center">
+                                    <?php $productsList = array();
+                                    foreach ($order['products'] as $product) {
+                                        $productsList[] = $product['details']['title'];
+                                    }
+                                    echo implode(' , ',$productsList); ?>
+                                </td>
                                 <td class="text-center"><?php echo $this->escape($order['time_create_view']); ?></td>
                                 <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
-                                <td class="text-center"><?php echo $this->escape($order['gateway']); ?></td>
                                 <td class="text-center">
-                                    <a class="btn btn-primary btn-xs" title="<?php echo _b('View'); ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $order['id'])); ?>"><i class="fa fa-edit"></i> <?php echo _b('View'); ?></a>
+                                    <a class="btn btn-primary btn-xs" title="<?php echo _b('View'); ?>" target="_blank"
+                                       href="<?php echo Pi::url($this->url('order', array('controller' => 'detail', 'id' => $order['id']))); ?>"><i
+                                                class="fa fa-edit"></i> <?php echo _b('View'); ?></a>
                                 </td>
                             </tr>
+                            <?php $i++; ?>
                         <?php } ?>
                     </table>
                 <?php } else { ?>

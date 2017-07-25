@@ -45,6 +45,10 @@ class PaymentController extends IndexController
         if ($invoice['can_pay'] != 1) {
             $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $invoice['order']), __('You can pay this invoice after admin review'));
         }
+        // Check offline
+        if ($invoice['gateway'] == 'Offline') {
+            $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $invoice['order']), $config['payment_offline_description']);
+        }
         // Check invoice is for this user
         if (Pi::service('authentication')->hasIdentity()) {
             if ($invoice['uid'] != Pi::user()->getId()) {
@@ -165,9 +169,7 @@ class PaymentController extends IndexController
             Pi::api('processing', 'order')->removeProcessing();
             $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), $gateway->gatewayError);
         }
-        // Set form
-        $form = new PayForm('pay', $gateway->gatewayPayForm);
-        $form->setAttribute('action', $gateway->gatewayRedirectUrl);
+
         // Set form values
         if (!empty($gateway->gatewayPayInformation)) {
             foreach ($gateway->gatewayPayInformation as $key => $value) {
@@ -179,17 +181,25 @@ class PaymentController extends IndexController
                     $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), sprintf(__('Error to get %s.'), $key));
                 }
             }
+            // Set form
+            $form = new PayForm('pay', $gateway->gatewayPayForm);
+            $form->setAttribute('action', $gateway->gatewayRedirectUrl);
             $form->setData($values);
         } else {
-            // Get gateway object
-            $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
-            $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), __('Error to get information.'));
+            if (isset($gateway->gatewayRedirectUrl) && !empty($gateway->gatewayRedirectUrl)) {
+                return $this->redirect()->toUrl($gateway->gatewayRedirectUrl);
+            } else {
+                // Get gateway object
+                $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
+                $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), __('Error to get information.'));
+            }
         }
         // Set view
         $this->view()->setLayout('layout-style');
         $this->view()->setTemplate('pay');
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('form', $form);
+        $this->view()->assign('gateway', $gateway);
     }
 
     public function resultAction()
@@ -263,60 +273,80 @@ class PaymentController extends IndexController
     {
         // Set view
         $this->view()->setTemplate(false)->setLayout('layout-content');
-        // Get module 
-        $module = $this->params('module');
-        // Get config
-        $config = Pi::service('registry')->config->read($module);
+        // Get module
+        $gatewayName = $this->params('gatewayName', 'Paypal');
         // Get request
         $request = '';
+        // Get request
         if ($this->request->isPost()) {
             $request = $this->request->getPost();
+        } elseif (isset($_GET['invoice'])) {
+            $request = _get()->toArray();
         }
         // Check request
-        if (!empty($request)) {
+        if (!empty($request) && in_array($gatewayName, array(
+            'Paypal', 'paypal', 'Bitcoin', 'bitcoin'
+            ))) {
+            // Get random_id
+            switch ($gatewayName) {
+                case 'Paypal':
+                case 'paypal':
+                    $randomID = $request['invoice'];
+                    break;
+
+                case 'Bitcoin':
+                case 'bitcoin':
+                    $randomID = $request['orderId'];
+                    break;
+            }
             // Set log
             $log = array();
-            $log['gateway'] = 'paypal';
+            $log['gateway'] = $gatewayName;
             $log['value'] = Json::encode(array(1, $request));
             Pi::api('log', 'order')->setLog($log);
             // Get processing
-            $processing = Pi::api('processing', 'order')->getProcessing($request['invoice']);
+            $processing = Pi::api('processing', 'order')->getProcessing($randomID);
             // Set log
             $log = array();
-            $log['gateway'] = 'paypal';
+            $log['gateway'] = $gatewayName;
+            $log['uid'] = $processing['uid'];
             $log['value'] = Json::encode(array(3, $request, $processing));
             Pi::api('log', 'order')->setLog($log);
             // Check processing
             if ($processing) {
                 // Set log
                 $log = array();
-                $log['gateway'] = 'paypal';
-                $log['value'] = Json::encode(array(4, $request));
+                $log['gateway'] = $gatewayName;
+                $log['uid'] = $processing['uid'];
+                $log['value'] = Json::encode(array(4, $request, $processing, $randomID));
                 Pi::api('log', 'order')->setLog($log);
                 // Get gateway
                 $gateway = Pi::api('gateway', 'order')->getGateway($processing['gateway']);
                 $verify = $gateway->verifyPayment($request, $processing);
                 // Set log
                 $log = array();
-                $log['gateway'] = 'paypal';
+                $log['gateway'] = $gatewayName;
+                $log['uid'] = $processing['uid'];
                 $log['value'] = Json::encode(array(5, $verify));
                 Pi::api('log', 'order')->setLog($log);
                 // Check error
                 if ($gateway->gatewayError) {
                     // Remove processing
-                    Pi::api('processing', 'order')->removeProcessing($request['invoice']);
+                    Pi::api('processing', 'order')->removeProcessing($randomID);
                 } else {
                     if ($verify['status'] == 1) {
                         $url = Pi::api('order', 'order')->updateOrder($verify['order'], $verify['invoice']);
                         Pi::api('invoice', 'order')->setBackUrl($verify['invoice'], $url);
                         // Add log
                         $log = array();
-                        $log['gateway'] = 'paypal';
+                        $log['gateway'] = $gatewayName;
+                        $log['uid'] = $processing['uid'];
                         $log['value'] = Json::encode(array(10, $verify, $url));
                         Pi::api('log', 'order')->setLog($log);
                     } else {
                         $log = array();
-                        $log['gateway'] = 'paypal';
+                        $log['gateway'] = $gatewayName;
+                        $log['uid'] = $processing['uid'];
                         $log['value'] = Json::encode(array(11, $verify));
                         Pi::api('log', 'order')->setLog($log);
                     }
@@ -324,14 +354,14 @@ class PaymentController extends IndexController
             } else {
                 // Set log
                 $log = array();
-                $log['gateway'] = 'paypal';
+                $log['gateway'] = $gatewayName;
                 $log['value'] = Json::encode(array(9, $request));
                 Pi::api('log', 'order')->setLog($log);
             }
         } else {
             // Set log
             $log = array();
-            $log['gateway'] = 'paypal';
+            $log['gateway'] = $gatewayName;
             $log['value'] = Json::encode(array(2, $request));
             Pi::api('log', 'order')->setLog($log);
         }

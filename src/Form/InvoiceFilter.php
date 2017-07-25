@@ -75,5 +75,10 @@ class InvoiceFilter extends InputFilter
             'name' => 'time_duedate',
             'required' => true,
         ));
+        // status_payment
+        $this->add(array(
+            'name' => 'status_payment',
+            'required' => true,
+        ));
     }
-}    	
+}
