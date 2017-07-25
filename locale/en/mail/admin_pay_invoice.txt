@@ -7,7 +7,7 @@
 [body]
 <div style="padding: 1px; direction: ltr;">
 	<h3 style="font-size: 1.1em;">Dear %site_name% admin</h3>
-	<div style="padding: 3px 0; margin: 1px 0;">An invoice was paid on %site_name% website, please visit website admin to see details</div>
+	<div style="padding: 3px 0; margin: 1px 0;">An invoice (%type_product%) was paid on %site_name% website, please visit website admin to see details</div>
 	<div style="padding: 3px 0; margin: 1px 0;">Dont reply to this email</div>
 	<div style="margin-top: 10px">
         <a href="%site_url%" title="%site_name%">%site_name%</a>

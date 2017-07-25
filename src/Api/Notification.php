@@ -57,6 +57,16 @@ class Notification extends AbstractApi
             'id' => $order['id'],
         )));
 
+        // type product
+        $typeProduct = "undefined";
+        if ($order['module_name'] == 'guide') {
+            $typeProduct = __('package');
+        } else if ($order['module_name'] == 'shop') {
+            $typeProduct = __('product');
+        } else {
+            $typeProduct = __($order['module_name']);
+        }   
+        
         // Set mail information
         $information = array(
             'first_name' => $order['first_name'],
@@ -65,6 +75,8 @@ class Notification extends AbstractApi
             'order_link' => $link,
             'product_list' => $productList,
             'product_price' => $productPrice,
+            'type_product' => $typeProduct,
+            
         );
 
         // Send mail to admin
@@ -382,6 +394,16 @@ class Notification extends AbstractApi
             'id' => $order['id'],
         )));
 
+        // type product
+        $typeProduct = "undefined";
+        if ($order['module_name'] == 'guide') {
+            $typeProduct = __('package');
+        } else if ($order['module_name'] == 'shop') {
+            $typeProduct = __('product');
+        } else {
+            $typeProduct = __($order['module_name']);
+        }
+        
         // Set mail information
         $information = array(
             'first_name' => $order['first_name'],
@@ -391,6 +413,7 @@ class Notification extends AbstractApi
             'order_link' => $link,
             'invoice_price' => Pi::api('api', 'order')->viewPrice($invoice['total_price']),
             'product_list' => $productList,
+            'type_product' => $typeProduct,
         );
 
         // Send mail to admin
