@@ -77,6 +77,13 @@ class Gateway extends AbstractGateway
             'type' => 'textarea',
             'required' => true,
         );
+        // form discount
+        $form['discount'] = array(
+            'name' => 'discount',
+            'label' => __('Discount'),
+            'type' => 'text',
+            'required' => false,
+        );
         $this->gatewaySettingForm = $form;
         return $this;
     }
@@ -103,6 +110,13 @@ class Gateway extends AbstractGateway
         $receiveAmount = $this->gatewayInvoice['total_price'];
         $description = 'Far War Art payment';
         $culture = "en";
+
+        if (isset($this->gatewayOption['discount'])
+            && !empty($this->gatewayOption['discount'])
+            && intval($this->gatewayOption['discount']) > 0
+            && intval($this->gatewayOption['discount']) < 100) {
+            $payAmount = ($payAmount - ($payAmount * (intval($this->gatewayOption['discount']) / 100)));
+        }
 
         $scMerchantClient = new \SCMerchantClient(
             'https://spectrocoin.com/api/merchant/1',
@@ -152,6 +166,16 @@ class Gateway extends AbstractGateway
         // Get invoice
         $invoice = Pi::api('invoice', 'order')->getInvoice($processing['random_id'], 'random_id');
 
+        if (isset($this->gatewayOption['discount'])
+            && !empty($this->gatewayOption['discount'])
+            && intval($this->gatewayOption['discount']) > 0
+            && intval($this->gatewayOption['discount']) < 100) {
+            $mainPrice = $invoice['total_price'];
+            $invoice['total_price'] = ($invoice['total_price'] - ($invoice['total_price'] * (intval($this->gatewayOption['discount']) / 100)));
+
+            $discountPrice =  ($mainPrice - $invoice['total_price']);
+        }
+
         // Set log
         $log = array();
         $log['gateway'] = $this->gatewayAdapter;
@@ -161,8 +185,8 @@ class Gateway extends AbstractGateway
         $log['amount'] = $invoice['total_price'];
         $log['status'] = $result['status'];
         $log['uid'] = $processing['uid'];
-        $log['message'] = 'test1';
-        Pi::api('log', 'order')->setLog($log);
+        //$log['message'] = 'test1';
+        //Pi::api('log', 'order')->setLog($log);
 
         //
         $scMerchantClient = new \SCMerchantClient(
@@ -171,24 +195,24 @@ class Gateway extends AbstractGateway
             $this->gatewayOption['apiId']
         );
 
-        $log['message'] = 'test2';
-        Pi::api('log', 'order')->setLog($log);
+        //$log['message'] = 'test2';
+        //Pi::api('log', 'order')->setLog($log);
 
         $scMerchantClient->setPrivateMerchantKey($this->gatewayOption['signature']);
 
-        $log['message'] = 'test3';
-        Pi::api('log', 'order')->setLog($log);
+        //$log['message'] = 'test3';
+        //Pi::api('log', 'order')->setLog($log);
 
         $callback = $scMerchantClient->parseCreateOrderCallback($request);
 
-        $log['message'] = 'test4';
-        Pi::api('log', 'order')->setLog($log);
+        //$log['message'] = 'test4';
+        //Pi::api('log', 'order')->setLog($log);
 
         if ($callback != null && $scMerchantClient->validateCreateOrderCallback($callback)){
             $status = intval($callback->getStatus());
 
-            $log['message'] = 'Status : ' . $status;
-            Pi::api('log', 'order')->setLog($log);
+            //$log['message'] = 'Status : ' . $status;
+            //Pi::api('log', 'order')->setLog($log);
 
             switch ($status) {
                 case 1:
@@ -204,6 +228,31 @@ class Gateway extends AbstractGateway
                     $invoice = Pi::api('invoice', 'order')->updateInvoice($request['orderId']);
                     $result['status'] = 1;
                     $log['status'] = 1;
+
+                    if (isset($this->gatewayOption['discount'])
+                        && !empty($this->gatewayOption['discount'])
+                        && intval($this->gatewayOption['discount']) > 0
+                        && intval($this->gatewayOption['discount']) < 100) {
+
+                        $order = Pi::api('order', 'order')->getOrder($invoice['order']);
+
+                        $this->getModel('invoice')->update(
+                            array(
+                                'discount_price' => $discountPrice,
+                                'total_price' => $invoice['total_price'],
+                            ),
+                            array('id' => $invoice['id'])
+                        );
+
+                        $this->getModel('order')->update(
+                            array(
+                                'discount_price' => $discountPrice,
+                                'total_price' => ($order['total_price'] - $discountPrice),
+                            ),
+                            array('id' => $order['id'])
+                        );
+                    }
+
                     break;
 
                 case 4:
