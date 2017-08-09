@@ -24,6 +24,7 @@ class Basket extends Model
         'id',
         'order',
         'product',
+        'status',
         'product_price',
         'discount_price',
         'shipping_price',

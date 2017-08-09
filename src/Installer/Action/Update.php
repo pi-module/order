@@ -508,6 +508,21 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '1.9.5', '<')) {
+            // Alter table field add credit_price
+            $sql = sprintf("ALTER TABLE %s ADD `status` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1'", $basketTable);
+            try {
+                $basketAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }
 }

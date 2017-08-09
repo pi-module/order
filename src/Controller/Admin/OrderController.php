@@ -20,8 +20,12 @@ use Module\Order\Form\OrderAddFilter;
 use Module\Order\Form\OrderAddForm;
 use Module\Order\Form\OrderEditFilter;
 use Module\Order\Form\OrderEditForm;
-use Module\Order\Form\OrderProductFilter;
-use Module\Order\Form\OrderProductForm;
+use Module\Order\Form\OrderProductAddFilter;
+use Module\Order\Form\OrderProductAddForm;
+use Module\Order\Form\OrderProductEditFilter;
+use Module\Order\Form\OrderProductEditForm;
+use Module\Order\Form\OrderProductDeleteFilter;
+use Module\Order\Form\OrderProductDeleteForm;
 use Module\Order\Form\OrderSettingFilter;
 use Module\Order\Form\OrderSettingForm;
 use Module\Order\Form\UpdateCanPayFilter;
@@ -767,7 +771,7 @@ class OrderController extends ActionController
         $this->view()->assign('order', $order);
     }
 
-    public function productAction()
+    public function productAddAction()
     {
         // Set option
         $option = array();
@@ -810,10 +814,10 @@ class OrderController extends ActionController
         }
         $option['invoice'][0] = __('Generate new invoice');
         // Set form
-        $form = new OrderProductForm('product', $option);
+        $form = new OrderProductAddForm('product', $option);
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            $form->setInputFilter(new OrderProductFilter($option));
+            $form->setInputFilter(new OrderProductAddFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
@@ -888,8 +892,261 @@ class OrderController extends ActionController
         }
 
         // Set view
-        $this->view()->setTemplate('order-product');
+        $this->view()->setTemplate('order-product-add');
         $this->view()->assign('order', $order);
+        $this->view()->assign('invoices', $invoices);
+        $this->view()->assign('form', $form);
+    }
+
+    public function productEditAction()
+    {
+        // Set option
+        $option = array();
+        // Get id
+        $order = $this->params('order');
+        $product = $this->params('product');
+        // Get order
+        $order = Pi::api('order', 'order')->getOrder($order);
+        // set Products
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        // Check module
+        if (in_array($order['module_name'], array('shop'/* ,'order', 'guide', 'plans'*/))) {
+            switch ($order['module_name']) {
+                case 'order':
+                    $order['moduleTitle'] = __('Order module');
+                    break;
+
+                case 'shop':
+                    $order['moduleTitle'] = __('Shop module');
+                    break;
+
+                case 'guide':
+                    $order['moduleTitle'] = __('Guide module');
+                    break;
+
+                case 'plans':
+                    $order['moduleTitle'] = __('Plans module');
+                    break;
+            }
+        } else {
+            $message = __('This order not supported delete manual product');
+            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message, 'error');
+        }
+        // Check product
+        if (!isset($order['products'][$product])) {
+            $message = __('Selected product not available on this order');
+            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message, 'error');
+        }
+        // Set delete product
+        $editProduct = $order['products'][$product];
+        // Get invoices
+        $invoices = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
+        foreach ($invoices as $invoice) {
+            if ($invoice['status'] == 2 && $invoice['total_price'] >= $editProduct['total_price']) {
+                $option['invoice'][$invoice['id']] = sprintf(__('Invoice %s by %s price and %s due date'),
+                    $invoice['code'],
+                    $invoice['total_price_view'],
+                    $invoice['time_duedate_view']
+                );
+            }
+        }
+        // Set form
+        $form = new OrderProductEditForm('product', $option);
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new OrderProductEditFilter($option));
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Set update basket
+                $updateBasket = array(
+                    'number'          => $values['number'],
+                    'product_price'   => $values['product_price'],
+                    'shipping_price'  => $values['shipping_price'],
+                    'packing_price'   => $values['packing_price'],
+                    'setup_price'     => $values['setup_price'],
+                    'vat_price'       => $values['vat_price'],
+                    'total_price'     => $values['number'] * (($values['product_price'] + $values['shipping_price'] 
+                                                             + $values['packing_price'] + $values['setup_price']) 
+                                                             - $values['vat_price']),
+                );
+                // Set update invoice
+                $updateInvoice = array(
+                    'product_price'   => ($invoices[$values['invoice']]['product_price'] - $editProduct['product_price']) + ($updateBasket['product_price'] * $values['number']),
+                    'shipping_price'  => ($invoices[$values['invoice']]['shipping_price'] - $editProduct['shipping_price']) + ($updateBasket['shipping_price'] * $values['number']),
+                    'packing_price'   => ($invoices[$values['invoice']]['packing_price'] - $editProduct['packing_price']) + ($updateBasket['packing_price'] * $values['number']),
+                    'setup_price'     => ($invoices[$values['invoice']]['setup_price'] - $editProduct['setup_price']) + ($updateBasket['setup_price'] * $values['number']),
+                    'vat_price'       => ($invoices[$values['invoice']]['vat_price'] - $editProduct['vat_price']) + ($updateBasket['vat_price'] * $values['number']),
+                    'total_price'     => ($invoices[$values['invoice']]['total_price'] - $editProduct['total_price']) + $updateBasket['total_price'],
+                );
+                // Set update order
+                $updateOrder = array(
+                    'product_price'   => ($order['product_price'] - $invoices[$values['invoice']]['product_price']) + $updateInvoice['product_price'],
+                    'shipping_price'  => ($order['shipping_price'] - $invoices[$values['invoice']]['shipping_price']) + $updateInvoice['shipping_price'],
+                    'packing_price'   => ($order['packing_price'] - $invoices[$values['invoice']]['packing_price']) + $updateInvoice['packing_price'],
+                    'setup_price'     => ($order['setup_price'] - $invoices[$values['invoice']]['setup_price']) + $updateInvoice['setup_price'],
+                    'vat_price'       => ($order['vat_price'] - $invoices[$values['invoice']]['vat_price']) + $updateInvoice['vat_price'],
+                    'total_price'     => ($order['total_price'] - $invoices[$values['invoice']]['total_price']) + $updateInvoice['total_price'],
+                );
+
+
+                // Update basket table
+                $this->getModel('basket')->update(
+                    $updateBasket,
+                    array('id' => $values['id'])
+                );
+                // Update invoice table
+                $this->getModel('invoice')->update(
+                    $updateInvoice,
+                    array('id' => $values['invoice'])
+                );
+                // Update order table
+                $this->getModel('order')->update(
+                    $updateOrder,
+                    array('id' => $values['order'])
+                );
+                // Jump
+                $message = __('Selected product and order information updated');
+                $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message);
+
+            }
+        } else {
+            $form->setData($editProduct);
+        }
+        // Set view
+        $this->view()->setTemplate('order-product-edit');
+        $this->view()->assign('order', $order);
+        $this->view()->assign('editProduct', $editProduct);
+        $this->view()->assign('invoices', $invoices);
+        $this->view()->assign('form', $form);
+    }
+
+    public function productDeleteAction()
+    {
+        // Set option
+        $option = array();
+        // Get id
+        $order = $this->params('order');
+        $product = $this->params('product');
+        // Get order
+        $order = Pi::api('order', 'order')->getOrder($order);
+        // set Products
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        // Check module
+        if (in_array($order['module_name'], array('shop'/* ,'order', 'guide', 'plans'*/))) {
+            switch ($order['module_name']) {
+                case 'order':
+                    $order['moduleTitle'] = __('Order module');
+                    break;
+
+                case 'shop':
+                    $order['moduleTitle'] = __('Shop module');
+                    break;
+
+                case 'guide':
+                    $order['moduleTitle'] = __('Guide module');
+                    break;
+
+                case 'plans':
+                    $order['moduleTitle'] = __('Plans module');
+                    break;
+            }
+        } else {
+            $message = __('This order not supported delete manual product');
+            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message, 'error');
+        }
+        // Check product
+        if (!isset($order['products'][$product])) {
+            $message = __('Selected product not available on this order');
+            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message, 'error');
+        }
+        // Set delete product
+        $deleteProduct = $order['products'][$product];
+        // Get invoices
+        $invoices = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
+        foreach ($invoices as $invoice) {
+            if ($invoice['status'] == 2 && $invoice['total_price'] >= $deleteProduct['total_price']) {
+                $option['invoice'][$invoice['id']] = sprintf(__('Invoice %s by %s price and %s due date'),
+                    $invoice['code'],
+                    $invoice['total_price_view'],
+                    $invoice['time_duedate_view']
+                );
+            }
+        }
+        // Set form
+        $form = new OrderProductDeleteForm('product', $option);
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new OrderProductDeleteFilter($option));
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Set update basket
+                $updateBasket = array(
+                    'status'          => 5
+                );
+                // Set update invoice
+                $updateInvoice = array(
+                    'product_price'   => $invoices[$values['invoice']]['product_price'] - $deleteProduct['product_price'],
+                    'discount_price'  => $invoices[$values['invoice']]['discount_price'] - $deleteProduct['discount_price'],
+                    'shipping_price'  => $invoices[$values['invoice']]['shipping_price'] - $deleteProduct['shipping_price'],
+                    'packing_price'   => $invoices[$values['invoice']]['packing_price'] - $deleteProduct['packing_price'],
+                    'setup_price'     => $invoices[$values['invoice']]['setup_price'] - $deleteProduct['setup_price'],
+                    'vat_price'       => $invoices[$values['invoice']]['vat_price'] - $deleteProduct['vat_price'],
+                    'total_price'     => $invoices[$values['invoice']]['total_price'] - $deleteProduct['total_price'],
+                );
+                if ($invoices[$values['invoice']]['total_price'] <= $deleteProduct['total_price']) {
+                    $updateInvoice['status'] = 0;
+                }
+                // Set update order
+                $updateOrder = array(
+                    'product_price'   => $order['product_price'] - $deleteProduct['product_price'],
+                    'discount_price'  => $order['discount_price'] - $deleteProduct['discount_price'],
+                    'shipping_price'  => $order['shipping_price'] - $deleteProduct['shipping_price'],
+                    'packing_price'   => $order['packing_price'] - $deleteProduct['packing_price'],
+                    'setup_price'     => $order['setup_price'] - $deleteProduct['setup_price'],
+                    'vat_price'       => $order['vat_price'] - $deleteProduct['vat_price'],
+                    'total_price'     => $order['total_price'] - $deleteProduct['total_price'],
+                );
+                // Check count of product
+                if ($values['count'] == 1) {
+                    $updateInvoice['status'] = 0;
+                    $updateOrder['status_order'] = 5;
+                    $message = __('Selected product delete from order and order status set canceled');
+                } else {
+                    $message = __('Selected product delete from order');
+                }
+                // Update basket table
+                $this->getModel('basket')->update(
+                    $updateBasket,
+                    array('id' => $values['id'])
+                );
+                // Update invoice table
+                $this->getModel('invoice')->update(
+                    $updateInvoice,
+                    array('id' => $values['invoice'])
+                );
+                // Update order table
+                $this->getModel('order')->update(
+                    $updateOrder,
+                    array('id' => $values['order'])
+                );
+                // Jump
+                $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message);
+            }
+        } else {
+            $data = array(
+                'count' => count($order['products']),
+                'confirm' => 1,
+                'order' => $deleteProduct['order'],
+                'id' => $deleteProduct['id'],
+            );
+            $form->setData($data);
+        }
+        // Set view
+        $this->view()->setTemplate('order-product-delete');
+        $this->view()->assign('order', $order);
+        $this->view()->assign('deleteProduct', $deleteProduct);
         $this->view()->assign('invoices', $invoices);
         $this->view()->assign('form', $form);
     }

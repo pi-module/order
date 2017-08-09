@@ -70,13 +70,20 @@ $this->backbone();
                     <td class="text-center small">
                         <ul class="list-inline">
                             <li>
-                                <?php echo $this->escape($order['first_name']); ?>
-                                <?php echo $this->escape($order['last_name']); ?>
+                                <a title="<?php _e('User information'); ?>" href="<?php echo $this->url('admin', array(
+                                    'module' => 'user',
+                                    'controller' => 'edit',
+                                    'action' => 'index',
+                                    'uid' => $order['uid'],
+                                )); ?>" target="_blank">
+                                    <?php echo $this->escape($order['first_name']); ?>
+                                    <?php echo $this->escape($order['last_name']); ?>
+                                </a>
                             </li>
                             <?php if ($order['type_payment'] == 'installment') { ?>
-                                <li class="label label-info">
+                                <!-- <li class="label label-info">
                                     <?php _e('Installment'); ?>
-                                </li>
+                                </li> -->
                                 <button type="button" class="btn btn-link btn-xs show-list-user">
                                     <i class="fa fa-info-circle" aria-hidden="true"></i>
                                 </button>

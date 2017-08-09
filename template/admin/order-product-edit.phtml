@@ -1,0 +1,27 @@
+<?php $this->css($this->assetModule('css/admin.css')); ?>
+<div class="clearfix">
+    <div class="page-header">
+        <h3><?php _e('Edit product / service from order'); ?></h3>
+    </div>
+    <div class="alert alert-info">
+        <?php echo __('You can edit this product price and number and selected invoice and order information will be update by your changes'); ?>
+    </div>
+    <div class="well well-sm">
+        <div class="media">
+            <div class="media-left col-md-1">
+                <a href="<?php echo $this->escape($editProduct['details']['productUrl']); ?>">
+                    <img class="media-object img-responsive" src="<?php echo $this->escape($editProduct['details']['thumbUrl']); ?>" alt="<?php echo $this->escape($editProduct['title']['details']['title']); ?>">
+                </a>
+            </div>
+            <div class="media-body clearfix">
+                <h4 class="media-heading"><?php echo $this->escape($editProduct['details']['title']); ?></h4>
+                <div class="clearfix">
+                    <a target="_blank" href="<?php echo $this->escape($editProduct['details']['productUrl']); ?>"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <?php echo $this->form($form); ?>
+    </div>
+</div>
+<pre><?php print_r($values); ?></pre>

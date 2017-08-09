@@ -16,7 +16,7 @@ namespace Module\Order\Form;
 use Pi;
 use Zend\InputFilter\InputFilter;
 
-class OrderProductFilter extends InputFilter
+class OrderProductAddFilter extends InputFilter
 {
     public function __construct($option = array())
     {

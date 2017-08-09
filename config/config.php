@@ -395,6 +395,14 @@ return array(
             'filter' => 'string',
             'value' => _a('Admin make contact about payment whit you after review your order'),
         ),
+        'payment_check_ip' => array(
+            'category' => 'payment',
+            'title' => _a('Check ip on payment'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
         /* 'payment_methods' => array(
             'category' => 'payment',
             'title' => _a('Payment methods'),

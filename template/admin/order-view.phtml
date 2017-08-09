@@ -269,70 +269,87 @@ $this->backbone();
                                 <th><?php _e('Packing'); ?></th>
                                 <th><?php _e('Vat'); ?></th>
                                 <th><?php _e('Total'); ?></th>
+                                <?php if (in_array($order['module_name'], array('shop'))) { ?>
+                                    <th><?php _e('Action'); ?></th>
+                                <?php } ?>
                             </tr>
                             <?php foreach ($order['products'] as $product) { ?>
-                                <tr>
-                                    <td>
-                                        <div class="productItem">
-                                            <?php if (isset($product['details']['productUrl']) && !empty($product['details']['productUrl'])) { ?>
-                                                <a title="<?php echo $this->escape($product['details']['title']); ?>"
-                                                   href="<?php echo $this->escape($product['details']['productUrl']); ?>">
-                                                    <?php if (isset($product['details']['thumbUrl']) && !empty($product['details']['thumbUrl'])) { ?>
-                                                        <img width="32" height="32"
-                                                             src="<?php echo $this->escape($product['details']['thumbUrl']); ?>"
-                                                             alt="<?php echo $this->escape($product['details']['title']); ?>">
-                                                    <?php } ?>
+                                <?php if ($product['status'] == 1) { ?>
+                                    <tr>
+                                        <td>
+                                            <div class="productItem">
+                                                <?php if (isset($product['details']['productUrl']) && !empty($product['details']['productUrl'])) { ?>
+                                                    <a title="<?php echo $this->escape($product['details']['title']); ?>"
+                                                       href="<?php echo $this->escape($product['details']['productUrl']); ?>">
+                                                        <?php if (isset($product['details']['thumbUrl']) && !empty($product['details']['thumbUrl'])) { ?>
+                                                            <img width="32" height="32"
+                                                                 src="<?php echo $this->escape($product['details']['thumbUrl']); ?>"
+                                                                 alt="<?php echo $this->escape($product['details']['title']); ?>">
+                                                        <?php } ?>
+                                                        <?php echo $this->escape($product['details']['title']); ?>
+                                                    </a>
+                                                <?php } else { ?>
                                                     <?php echo $this->escape($product['details']['title']); ?>
-                                                </a>
+                                                <?php } ?>
+                                            </div>
+                                            <?php if (isset($product['extra']['product']) && !empty($product['extra']['product'])) { ?>
+                                                <?php foreach ($product['extra']['product'] as $extraProduct) { ?>
+                                                    <div class="productItem">
+                                                        <span><?php echo $this->escape($extraProduct['title']); ?></span> :
+                                                        <strong><?php echo $this->escape($extraProduct['value']); ?></strong>
+                                                    </div>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </td>
+                                        <td><?php echo _number($this->escape($product['number'])); ?></td>
+                                        <td>
+                                            <?php if ($order['type_payment'] == 'installment') { ?>
+                                                <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['extra']['installment_new_price'])); ?>
+                                                ( <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['extra']['installment_main_price'])); ?> )
                                             <?php } else { ?>
-                                                <?php echo $this->escape($product['details']['title']); ?>
+                                                <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
                                             <?php } ?>
-                                        </div>
-                                        <?php if (isset($product['extra']['product']) && !empty($product['extra']['product'])) { ?>
-                                            <?php foreach ($product['extra']['product'] as $extraProduct) { ?>
-                                                <div class="productItem">
-                                                    <span><?php echo $this->escape($extraProduct['title']); ?></span> :
-                                                    <strong><?php echo $this->escape($extraProduct['value']); ?></strong>
-                                                </div>
+                                        </td>
+                                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['shipping_price'])); ?></td>
+                                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['packing_price'])); ?></td>
+                                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['vat_price'])); ?></td>
+                                        <td>
+                                            <?php if ($order['type_payment'] == 'installment') { ?>
+                                                <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['extra']['installment_new_total'])); ?>
+                                                ( <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['extra']['installment_main_total'])); ?> )
+                                            <?php } else { ?>
+                                                <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['total_price'])); ?>
                                             <?php } ?>
+                                        </td>
+                                        <?php if (in_array($order['module_name'], array('shop'))) { ?>
+                                            <td>
+                                                <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
+                                                   href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'productEdit', 'order' => $order['id'], 'product' => $product['id'])); ?>">
+                                                    <i class="fa fa-pencil"></i> <?php _e('Edit'); ?></a>
+                                                <a class="btn btn-danger btn-xs" title="<?php _e('Delete'); ?>"
+                                                   href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'productDelete', 'order' => $order['id'], 'product' => $product['id'])); ?>">
+                                                    <i class="fa fa-trash-o"></i> <?php _e('Delete'); ?></a>
+                                            </td>
                                         <?php } ?>
-                                    </td>
-                                    <td><?php echo _number($this->escape($product['number'])); ?></td>
-                                    <td>
-                                        <?php if ($order['type_payment'] == 'installment') { ?>
-                                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['extra']['installment_new_price'])); ?>
-                                            ( <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['extra']['installment_main_price'])); ?> )
-                                        <?php } else { ?>
-                                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
-                                        <?php } ?>
-                                    </td>
-                                    <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['shipping_price'])); ?></td>
-                                    <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['packing_price'])); ?></td>
-                                    <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['vat_price'])); ?></td>
-                                    <td>
-                                        <?php if ($order['type_payment'] == 'installment') { ?>
-                                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['extra']['installment_new_total'])); ?>
-                                            ( <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['extra']['installment_main_total'])); ?> )
-                                        <?php } else { ?>
-                                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['total_price'])); ?>
-                                        <?php } ?>
-                                    </td>
-                                </tr>
+                                    </tr>
+                                <?php } ?>
                             <?php } ?>
                         </table>
-                        <hr />
-                        <ul class="list-inline clearfix">
-                            <li class="pull-left"><?php _e('You can add new product / service to this order'); ?></li>
-                            <li class="pull-right">
-                                <a class="btn btn-success" title="<?php _e('Add product / service'); ?>" href="<?php echo $this->url('', array(
-                                    'controller' => 'order',
-                                    'action' => 'product',
-                                    'order' => $order['id']
-                                )); ?>">
-                                    <i class="fa fa-plus"></i> <?php _e('Add product / service'); ?>
-                                </a>
-                            </li>
-                        </ul>
+                        <?php if (in_array($order['module_name'], array('shop'))) { ?>
+                            <hr />
+                            <ul class="list-inline clearfix">
+                                <li class="pull-left"><?php _e('You can add new product / service to this order'); ?></li>
+                                <li class="pull-right">
+                                    <a class="btn btn-success" title="<?php _e('Add product / service'); ?>" href="<?php echo $this->url('', array(
+                                        'controller' => 'order',
+                                        'action' => 'productAdd',
+                                        'order' => $order['id']
+                                    )); ?>">
+                                        <i class="fa fa-plus"></i> <?php _e('Add product / service'); ?>
+                                    </a>
+                                </li>
+                            </ul>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -366,7 +383,7 @@ $this->backbone();
                                         $labelIdClass = 'label-success';
                                     } elseif ($invoice['status'] == 2) {
                                         $labelIdClass = 'label-warning';
-                                    } elseif ($invoice['status'] == 3) {
+                                    } elseif ($invoice['status'] == 0) {
                                         $labelIdClass = 'label-danger';
                                     }
                                     // Set row class

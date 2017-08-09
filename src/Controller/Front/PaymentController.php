@@ -235,9 +235,11 @@ class PaymentController extends IndexController
                 $this->jump(array('', 'controller' => 'index', 'action' => 'error'), $message);
             }
             // Check ip
-            if ($processing['ip'] != Pi::user()->getIp()) {
-                $message = __('Your IP address changed and processing not valid');
-                $this->jump(array('', 'controller' => 'index', 'action' => 'error'), $message);
+            if ($config['payment_check_ip']) {
+                if ($processing['ip'] != Pi::user()->getIp()) {
+                    $message = __('Your IP address changed and processing not valid');
+                    $this->jump(array('', 'controller' => 'index', 'action' => 'error'), $message);
+                }
             }
             // Get gateway
             $gateway = Pi::api('gateway', 'order')->getGateway($processing['gateway']);

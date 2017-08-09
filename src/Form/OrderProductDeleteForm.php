@@ -16,7 +16,7 @@ namespace Module\Order\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class OrderProductForm extends BaseForm
+class OrderProductDeleteForm extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {
@@ -27,7 +27,7 @@ class OrderProductForm extends BaseForm
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new OrderProductFilter($this->option);
+            $this->filter = new OrderProductDeleteFilter($this->option);
         }
         return $this->filter;
     }
@@ -37,19 +37,16 @@ class OrderProductForm extends BaseForm
         // id
         $this->add(array(
             'name' => 'id',
-            'options' => array(
-                'label' => __('Product / service ID'),
-            ),
             'attributes' => array(
-                'type' => 'text',
+                'type' => 'hidden',
                 'required' => true,
-            )
+            ),
         ));
         // invoice
         $this->add(array(
             'name' => 'invoice',
             'options' => array(
-                'label' => __('Select invoice to add fee'),
+                'label' => __('Select invoice to delete fee'),
                 'value_options' => $this->option['invoice'],
             ),
             'type' => 'radio',
@@ -57,15 +54,37 @@ class OrderProductForm extends BaseForm
                 'required' => true,
             ),
         ));
-
-
+        // order
+        $this->add(array(
+            'name' => 'order',
+            'attributes' => array(
+                'type' => 'hidden',
+                'required' => true,
+            ),
+        ));
+        // count
+        $this->add(array(
+            'name' => 'count',
+            'attributes' => array(
+                'type' => 'hidden',
+                'required' => true,
+            ),
+        ));
+        // confirm
+        $this->add(array(
+            'name' => 'confirm',
+            'attributes' => array(
+                'type' => 'hidden',
+                'required' => true,
+            ),
+        ));
         // Save order
         $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
-                'value' => __('Save'),
-                'class' => 'btn btn-success',
+                'value' => __('Delete'),
+                'class' => 'btn btn-danger',
             )
         ));
     }
