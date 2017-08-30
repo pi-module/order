@@ -100,23 +100,22 @@ class Gateway extends AbstractGateway
         // Call SCMerchantClient
         include_once Pi::path('module') . '/order/src/Gateway/Bitcoin/SCMerchantClient/SCMerchantClient.php';
 
-        $url = sprintf('https://blockchain.info/tobtc?currency=USD&value=%s', $this->gatewayInvoice['total_price']);
-        $amount = Pi::service('remote')->get($url);
+        $totalPrice = $this->gatewayInvoice['total_price'];
+
+        if ($this->gatewayOption['discount'] > 0) {
+            $totalPrice = ($totalPrice - ($totalPrice * ($this->gatewayOption['discount'] / 100)));
+        }
+
+        $url = sprintf('https://blockchain.info/tobtc?currency=USD&value=%s', $totalPrice);
+        $payAmount = Pi::service('remote')->get($url);
 
         $orderId = $this->gatewayInvoice['random_id'];
         $payCurrency = 'BTC';
-        $payAmount = $amount;
+
         $receiveCurrency = 'USD';
-        $receiveAmount = $this->gatewayInvoice['total_price'];
+        $receiveAmount = $totalPrice;
         $description = 'Far War Art payment';
         $culture = "en";
-
-        if (isset($this->gatewayOption['discount'])
-            && !empty($this->gatewayOption['discount'])
-            && intval($this->gatewayOption['discount']) > 0
-            && intval($this->gatewayOption['discount']) < 100) {
-            $payAmount = ($payAmount - ($payAmount * (intval($this->gatewayOption['discount']) / 100)));
-        }
 
         $scMerchantClient = new \SCMerchantClient(
             'https://spectrocoin.com/api/merchant/1',
@@ -166,13 +165,10 @@ class Gateway extends AbstractGateway
         // Get invoice
         $invoice = Pi::api('invoice', 'order')->getInvoice($processing['random_id'], 'random_id');
 
-        if (isset($this->gatewayOption['discount'])
-            && !empty($this->gatewayOption['discount'])
-            && intval($this->gatewayOption['discount']) > 0
-            && intval($this->gatewayOption['discount']) < 100) {
-            $mainPrice = $invoice['total_price'];
-            $invoice['total_price'] = ($invoice['total_price'] - ($invoice['total_price'] * (intval($this->gatewayOption['discount']) / 100)));
+        if ($this->gatewayOption['discount'] > 0) {
 
+            $mainPrice = $invoice['total_price'];
+            $invoice['total_price'] = ($invoice['total_price'] - ($invoice['total_price'] * ($this->gatewayOption['discount'] / 100)));
             $discountPrice =  ($mainPrice - $invoice['total_price']);
         }
 
@@ -229,10 +225,7 @@ class Gateway extends AbstractGateway
                     $result['status'] = 1;
                     $log['status'] = 1;
 
-                    if (isset($this->gatewayOption['discount'])
-                        && !empty($this->gatewayOption['discount'])
-                        && intval($this->gatewayOption['discount']) > 0
-                        && intval($this->gatewayOption['discount']) < 100) {
+                    if ($this->gatewayOption['discount'] > 0) {
 
                         $order = Pi::api('order', 'order')->getOrder($invoice['order']);
 
