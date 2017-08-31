@@ -350,10 +350,6 @@ class Installment extends AbstractApi
         // Get list of user invoices
         $invoices = Pi::api('invoice', 'order')->getInvoiceFromUser($user['uid'], false, $orderIds);
 
-        // Get this month and yesr
-        $month = pdate('m', strtotime('now'));
-        $year = pdate('Y', strtotime('now'));
-
         // Set general array
         $d = array();
 
@@ -368,12 +364,31 @@ class Installment extends AbstractApi
         $d['all']['additional-order'] = array();
 
 
-
         /*
          * Set Delayed payments
          * Set ['m'] sub array for Delayed payments
          * Update ['all'] sub array
          */
+
+        $d['delay'] = array(
+            'total' => 0,
+            'total-view' => '',
+            //'invoice' => '',
+        );
+        foreach ($invoices as $invoice) {
+            if ($invoice['time_duedate'] < time()
+                && $invoice['status'] == 2
+                && $invoice['extra']['type'] == 'installment'
+            ) {
+                $d['delay']['total'] = $d['delay']['total'] + $invoice['total_price'];
+                //$d['delay']['invoice'][$invoice['id']] = $invoice;
+            }
+        }
+        $d['delay']['total-view'] = Pi::api('api', 'order')->viewPrice($d['delay']['total'], true);
+
+        /* // Get this month and yesr
+        $month = pdate('m', strtotime('now'));
+        $year = pdate('Y', strtotime('now'));
 
         // line 1
         // Set ['m'] sub array
@@ -462,7 +477,7 @@ class Installment extends AbstractApi
             $d['m']['30-sun'] = Pi::api('api', 'order')->viewPrice($d['m']['30-sun'], true);
         } else {
             $d['m']['30-sun'] = '';
-        }
+        } */
 
 
 
@@ -635,7 +650,7 @@ class Installment extends AbstractApi
         $d['all']['30-order'] = array_unique($d['all']['30-order']);
         $d['all']['additional-order'] = array_unique($d['all']['additional-order']);
 
-        $d['total'] = $d['all']['10-sun'] + $d['all']['20-sun'] + $d['all']['30-sun'] + $d['all']['additional-sun'];
+        $d['total'] = $d['all']['10-sun'] + $d['all']['20-sun'] + $d['all']['30-sun'] + $d['all']['additional-sun'] + $d['delay']['total'];
         if ($d['total']) {
             $d['total-view'] = Pi::api('api', 'order')->viewPrice($d['total'], true);
         } else {
