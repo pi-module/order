@@ -475,7 +475,25 @@ class Invoice extends AbstractApi
         // Set extra
         if (!empty($invoice['extra'])) {
             $invoice['extra'] = json::decode($invoice['extra'], true);
+            if (isset($invoice['extra']['number'])) {
+                $invoice['extra_number'] = $invoice['extra']['number'];
+                $invoice['extra_number_view'] = _number($invoice['extra']['number']);
+            }
+            if (isset($invoice['extra']['type'])) {
+                switch ($invoice['extra']['type']) {
+                    case 'prepayment':
+                        $invoice['extra_type'] = $invoice['extra']['type'];
+                        $invoice['extra_type_view'] = __('Per Payment');
+                        break;
+
+                    case 'installment':
+                        $invoice['extra_type'] = $invoice['extra']['type'];
+                        $invoice['extra_type_view'] = __('Installment');
+                        break;
+                }
+            }
         }
+
         // return order
         return $invoice;
     }
