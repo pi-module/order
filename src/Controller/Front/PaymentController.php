@@ -56,8 +56,7 @@ class PaymentController extends IndexController
             }
         } else {
             if ($anonymous == 1 && !empty($token)) {
-                $check = Pi::api('token', 'tools')->check($token, 'order');
-                if ($check['status'] != 1) {
+                if ($token != md5($invoice['time_create'])) {
                     $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('Token not true'));
                 }
             } elseif (!isset($_SESSION['payment']['invoice_id']) || $_SESSION['payment']['invoice_id'] != $invoice['id']) {

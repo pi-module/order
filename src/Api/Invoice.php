@@ -469,7 +469,7 @@ class Invoice extends AbstractApi
             'action' => 'index',
             'id' => $invoice['id'],
             'anonymous' => 1,
-            'token' => 'TOKEN_KEY',
+            'token' => md5($invoice['time_create']),
         )));
 
         // Set extra
