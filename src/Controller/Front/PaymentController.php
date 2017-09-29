@@ -58,6 +58,11 @@ class PaymentController extends IndexController
             if ($anonymous == 1 && !empty($token)) {
                 if ($token != md5($invoice['time_create'])) {
                     $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('Token not true'));
+                } else {
+                    $_SESSION['payment']['process'] = 1;
+                    $_SESSION['payment']['process_start'] = time();
+                    $_SESSION['payment']['invoice_id'] = $invoice['id'];
+                    $_SESSION['payment']['gateway'] = $invoice['gateway'];
                 }
             } elseif (!isset($_SESSION['payment']['invoice_id']) || $_SESSION['payment']['invoice_id'] != $invoice['id']) {
                 $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('This is not your invoice.'));

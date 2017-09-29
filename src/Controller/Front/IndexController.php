@@ -110,7 +110,8 @@ class IndexController extends ActionController
         // Check
         if (!Pi::service('authentication')->hasIdentity()) {
             if (!isset($_SESSION['payment']['process']) || $_SESSION['payment']['process'] != 1) {
-                $this->jump(array('', 'controller' => 'index', 'action' => 'error'));
+                $_SESSION['payment']['process'] = 1;
+                $_SESSION['payment']['process_start'] = time();
             }
             // Set session
             $_SESSION['payment']['process_update'] = time();
