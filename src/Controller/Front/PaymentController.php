@@ -160,10 +160,6 @@ class PaymentController extends IndexController
             $url = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
             // Remove processing
             Pi::api('processing', 'order')->removeProcessing();
-            // Check not login user
-            if (!Pi::service('authentication')->hasIdentity()) {
-                $url = array('', 'controller' => 'index', 'action' => 'message', 'type' => 'successPayment');
-            }
             // jump to module
             $message = __('Your payment were successfully. Back to module');
             $this->jump($url, $message);
@@ -260,8 +256,14 @@ class PaymentController extends IndexController
                 // Remove processing
                 Pi::api('processing', 'order')->removeProcessing();
                 // jump to module
-                $message = __('Your payment were successfully. Back to module');
-                $this->jump($url, $message);
+                if (!Pi::service('authentication')->hasIdentity()) {
+                    $url = array('', 'controller' => 'index', 'action' => 'message', 'type' => 'successPayment');
+                    $message = '';
+                    $this->jump($url, $message);
+                } else {
+                    $message = __('Your payment were successfully. Back to module');
+                    $this->jump($url, $message);
+                }
             } else {
                 // Check error
                 if ($gateway->gatewayError) {
