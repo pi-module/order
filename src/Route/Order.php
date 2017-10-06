@@ -83,8 +83,9 @@ class Order extends Standard
                                 $matches['action'] = 'index';
                                 break;
 
-                            case 'error':
-                                $matches['action'] = 'error';
+                            case 'message':
+                                $matches['action'] = 'message';
+                                $matches['type'] = $this->decode($parts[1]);
                                 break;
 
                             case 'remove':
@@ -209,6 +210,11 @@ class Order extends Standard
         // Set token
         if (isset($mergedParams['token'])) {
             $url['token'] = 'token' . $this->paramDelimiter . $mergedParams['token'];
+        }
+
+        // Set type
+        if (isset($mergedParams['type'])) {
+            $url['type'] = $mergedParams['type'];
         }
 
         // Make url

@@ -92,10 +92,29 @@ class IndexController extends ActionController
         }
     }
 
-    public function errorAction()
+    public function messageAction()
     {
+        // Get invoice id
+        $type = $this->params('type');
+
+        // Set information
+        switch ($type) {
+            case 'successPayment':
+                $message = __('Your payment were successfully. thank you for your payment.');
+                $alertClass = 'alert-success';
+                break;
+
+            default:
+            case 'error':
+                $message = __('Error on order processing, please contact to website admin');
+                $alertClass = 'alert-danger';
+                break;
+        }
+
         // Set view
-        $this->view()->setTemplate('error');
+        $this->view()->setTemplate('message');
+        $this->view()->assign('message', $message);
+        $this->view()->assign('alertClass', $alertClass);
     }
 
     public function checkUser()

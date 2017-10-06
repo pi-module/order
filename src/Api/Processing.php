@@ -51,7 +51,7 @@ class Processing extends AbstractApi
             if ($uid) {
                 $row = Pi::model('processing', $this->getModule())->find($uid, 'uid');
             } elseif ($config['order_anonymous']) {
-                $invoice = $_SESSION['order']['invoice_id'];
+                $invoice = $_SESSION['payment']['invoice_id'];
                 $row = Pi::model('processing', $this->getModule())->find($invoice, 'invoice');
             }
         }
@@ -74,7 +74,7 @@ class Processing extends AbstractApi
         if ($uid) {
             $row = Pi::model('processing', $this->getModule())->find($uid, 'uid');
         } elseif ($config['order_anonymous']) {
-            $invoice = $_SESSION['order']['invoice_id'];
+            $invoice = $_SESSION['payment']['invoice_id'];
             $row = Pi::model('processing', $this->getModule())->find($invoice, 'invoice');
         } else {
             return false;
@@ -105,7 +105,7 @@ class Processing extends AbstractApi
             if ($uid) {
                 $row = Pi::model('processing', $this->getModule())->find($uid, 'uid');
             } elseif ($config['order_anonymous']) {
-                $invoice = $_SESSION['order']['invoice_id'];
+                $invoice = $_SESSION['payment']['invoice_id'];
                 $row = Pi::model('processing', $this->getModule())->find($invoice, 'invoice');
             }
         }

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2017-08-09 13:36+0430\n"
+"POT-Creation-Date: 2017-10-06 17:44+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.0.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ../..\n"
@@ -96,15 +96,26 @@ msgstr "پرداخت نشده"
 msgid "Not canceled"
 msgstr "لغو نشده"
 
-#: src/Api/Invoice.php:555
+#: src/Api/Invoice.php:486 template/admin/order-print.phtml:100
+#: template/front/installment.phtml:103
+msgid "Per Payment"
+msgstr "پیش قسط"
+
+#: src/Api/Invoice.php:491 src/Form/OrderAddForm.php:291
+#: src/Form/OrderEditForm.php:279 src/Form/OrderSettingForm.php:107
+#: template/admin/order-index.phtml:85
+msgid "Installment"
+msgstr "خرید قسطی"
+
+#: src/Api/Invoice.php:573
 msgid "Negative score"
 msgstr "منفی"
 
-#: src/Api/Invoice.php:561
+#: src/Api/Invoice.php:579
 msgid "Positive score"
 msgstr "مثبت"
 
-#: src/Api/Invoice.php:567
+#: src/Api/Invoice.php:585
 msgid "Normal score"
 msgstr "خنثی"
 
@@ -553,24 +564,32 @@ msgstr "دروازه پرداخت پاک است"
 msgid "Please select invoice"
 msgstr "لطفا یک فاکتور انتخاب نمایید"
 
+#: src/Controller/Front/IndexController.php:103
+msgid "Your payment were successfully. thank you for your payment."
+msgstr "پرداخت شما موفقیت آمیز بود. با تشکر از پرداخت شما."
+
+#: src/Controller/Front/IndexController.php:109
+msgid "Error on order processing, please contact to website admin"
+msgstr "خطا در پردازش مراحل سفارش، لطفا با مدیر وب سایت تماس بگیرید."
+
 #: src/Controller/Front/InvoiceController.php:103
 #: src/Controller/Front/InvoiceController.php:107
 #: src/Controller/Front/PaymentController.php:55
-#: src/Controller/Front/PaymentController.php:64
+#: src/Controller/Front/PaymentController.php:68
 msgid "This is not your invoice."
 msgstr "این فاکتور متعلق به شما نیست"
 
 #: src/Controller/Front/InvoiceController.php:116
-#: src/Controller/Front/PaymentController.php:73
+#: src/Controller/Front/PaymentController.php:77
 msgid "This order not avtice."
 msgstr "سفارش فعال نیست"
 
 #: src/Controller/Front/InvoiceController.php:125
-#: src/Controller/Front/PaymentController.php:114
-#: src/Controller/Front/PaymentController.php:129
-#: src/Controller/Front/PaymentController.php:160
-#: src/Controller/Front/PaymentController.php:255
-#: src/Controller/Front/PaymentController.php:468
+#: src/Controller/Front/PaymentController.php:118
+#: src/Controller/Front/PaymentController.php:133
+#: src/Controller/Front/PaymentController.php:168
+#: src/Controller/Front/PaymentController.php:263
+#: src/Controller/Front/PaymentController.php:476
 msgid "Your payment were successfully. Back to module"
 msgstr "پرداخت شما با موفقیت به انجام رسید. به صفحه اتمام خرید منتقل می شوید"
 
@@ -584,52 +603,52 @@ msgstr "شما قبلا این فاکتور را پرداخت کرده اید"
 msgid "You can pay this invoice after admin review"
 msgstr "شما میتوانید این فاکتور را پس از تائید مدیر سایت پرداخت نمایید. "
 
-#: src/Controller/Front/PaymentController.php:61
+#: src/Controller/Front/PaymentController.php:60
 msgid "Token not true"
 msgstr "توکن صحیح نیست"
 
-#: src/Controller/Front/PaymentController.php:103
-#: src/Controller/Front/PaymentController.php:104
-#: src/Controller/Front/PaymentController.php:118
-#: src/Controller/Front/PaymentController.php:119
+#: src/Controller/Front/PaymentController.php:107
+#: src/Controller/Front/PaymentController.php:108
+#: src/Controller/Front/PaymentController.php:122
+#: src/Controller/Front/PaymentController.php:123
 #, php-format
 msgid "use credit to pay invoice %s from order %s"
 msgstr "استفاده از اعتبار برای پرداخت فاکتور %s مربوط به سفارش %s"
 
-#: src/Controller/Front/PaymentController.php:181
+#: src/Controller/Front/PaymentController.php:189
 #, php-format
 msgid "Error to get %s."
 msgstr "خطا در گرفتن %s"
 
-#: src/Controller/Front/PaymentController.php:204
+#: src/Controller/Front/PaymentController.php:212
 msgid "Error to get information."
 msgstr "خطا در گرفتن اطلاعات"
 
-#: src/Controller/Front/PaymentController.php:234
+#: src/Controller/Front/PaymentController.php:242
 msgid "Your running pay processing not set"
 msgstr "پروسه پرداخت در حال اجرای شما تنظیم نشده است"
 
-#: src/Controller/Front/PaymentController.php:240
+#: src/Controller/Front/PaymentController.php:248
 msgid "Your IP address changed and processing not valid"
 msgstr ""
 "آدرس آی پی شما در هنگام پرداخت تغییر کرده است و این روند خرید صحیح نیست"
 
-#: src/Controller/Front/PaymentController.php:272
+#: src/Controller/Front/PaymentController.php:280
 msgid "Your payment wont successfully."
 msgstr "پرداخت شما موفقیت آمیز نبود"
 
-#: src/Controller/Front/PaymentController.php:278
+#: src/Controller/Front/PaymentController.php:286
 msgid "Did not set any request"
 msgstr "هیچ درخواستی ذخیره نشده است"
 
-#: src/Controller/Front/PaymentController.php:418
+#: src/Controller/Front/PaymentController.php:406
 #: src/Gateway/Dargahpardakht/Gateway.php:173
 #: src/Gateway/Mellat/Gateway.php:160 src/Gateway/Paypal/Gateway.php:424
 #: src/Gateway/Zarinpal/Gateway.php:134
 msgid "Your payment were successfully."
 msgstr "پرداخت شما موفقیت آمیز بود."
 
-#: src/Controller/Front/PaymentController.php:456
+#: src/Controller/Front/PaymentController.php:464
 msgid "Test mode not active."
 msgstr "حالت تست فعال نیست"
 
@@ -1020,11 +1039,6 @@ msgstr "نوع پرداخت"
 msgid "Onetime"
 msgstr "یک باره"
 
-#: src/Form/OrderAddForm.php:291 src/Form/OrderEditForm.php:279
-#: src/Form/OrderSettingForm.php:107 template/admin/order-index.phtml:85
-msgid "Installment"
-msgstr "خرید قسطی"
-
 #: src/Form/OrderAddForm.php:292 src/Form/OrderEditForm.php:280
 #: src/Form/OrderSettingForm.php:104
 msgid "Free"
@@ -1248,27 +1262,27 @@ msgstr "Signature (private key)"
 msgid "Discount"
 msgstr "تخفیف"
 
-#: src/Gateway/Bitcoin/Gateway.php:219
+#: src/Gateway/Bitcoin/Gateway.php:215
 msgid "Start state when order is registered in SpectroCoin system"
 msgstr "Start state when order is registered in SpectroCoin system"
 
-#: src/Gateway/Bitcoin/Gateway.php:223
+#: src/Gateway/Bitcoin/Gateway.php:219
 msgid "Payment (or part of it) was received but still not confirmed"
 msgstr "Payment (or part of it) was received but still not confirmed"
 
-#: src/Gateway/Bitcoin/Gateway.php:227
+#: src/Gateway/Bitcoin/Gateway.php:223
 msgid "Order is complete"
 msgstr "Order is complete"
 
-#: src/Gateway/Bitcoin/Gateway.php:259
+#: src/Gateway/Bitcoin/Gateway.php:252
 msgid "Some error occurred"
 msgstr "Some error occurred"
 
-#: src/Gateway/Bitcoin/Gateway.php:263
+#: src/Gateway/Bitcoin/Gateway.php:256
 msgid "Payment was not received in time"
 msgstr "Payment was not received in time"
 
-#: src/Gateway/Bitcoin/Gateway.php:267
+#: src/Gateway/Bitcoin/Gateway.php:260
 msgid "Test order"
 msgstr "Test order"
 
@@ -1342,201 +1356,201 @@ msgstr "نام کاربری"
 msgid "password"
 msgstr "واژه رمز"
 
-#: src/Gateway/Mellat/Gateway.php:213
+#: src/Gateway/Mellat/Gateway.php:214
 msgid "bpVerifyRequest method is null"
 msgstr "روش تایید bpVerifyRequest خالی است"
 
-#: src/Gateway/Mellat/Gateway.php:243 src/Gateway/Mellat/Gateway.php:245
+#: src/Gateway/Mellat/Gateway.php:244 src/Gateway/Mellat/Gateway.php:246
 #: src/Gateway/Pasargad/Gateway.php:283
 #, php-format
 msgid "Your track code is : %s"
 msgstr "کد پیگیری تراکنش شما %s می باشد."
 
-#: src/Gateway/Mellat/Gateway.php:264
+#: src/Gateway/Mellat/Gateway.php:265
 msgid "Bank Mellat error empty"
 msgstr "خطا در بانک ملت ، مقدار دریافتی از بانک خالی است"
 
-#: src/Gateway/Mellat/Gateway.php:269
+#: src/Gateway/Mellat/Gateway.php:270
 msgid "Bank Mellat error 0"
 msgstr "سرور بانک دچار مشکل می باشد."
 
-#: src/Gateway/Mellat/Gateway.php:273
+#: src/Gateway/Mellat/Gateway.php:274
 msgid "Bank Mellat error 41"
 msgstr "شماره درخواست تکراری است."
 
-#: src/Gateway/Mellat/Gateway.php:277
+#: src/Gateway/Mellat/Gateway.php:278
 msgid "Bank Mellat error 43"
 msgstr "عملیات قبلا انجام شده است."
 
-#: src/Gateway/Mellat/Gateway.php:281
+#: src/Gateway/Mellat/Gateway.php:282
 msgid "Bank Mellat error 17"
 msgstr "لغو عملیات پرداخت توسط کاربر صورت گرفته است."
 
-#: src/Gateway/Mellat/Gateway.php:285
+#: src/Gateway/Mellat/Gateway.php:286
 msgid "Bank Mellat error 415"
 msgstr "زمان شما برای انجام عملیات پرداخت به پایان رسیده است."
 
-#: src/Gateway/Mellat/Gateway.php:289
+#: src/Gateway/Mellat/Gateway.php:290
 msgid "Bank Mellat error 417"
 msgstr "شناسه پرداخت کننده نامعتبر است."
 
-#: src/Gateway/Mellat/Gateway.php:293
+#: src/Gateway/Mellat/Gateway.php:294
 msgid "Bank Mellat error 11"
 msgstr "شماره كارت نامعتبر است."
 
-#: src/Gateway/Mellat/Gateway.php:297
+#: src/Gateway/Mellat/Gateway.php:298
 msgid "Bank Mellat error 12"
 msgstr "موجودي كافي نيست."
 
-#: src/Gateway/Mellat/Gateway.php:301
+#: src/Gateway/Mellat/Gateway.php:302
 msgid "Bank Mellat error 13"
 msgstr "رمز نادرست است."
 
-#: src/Gateway/Mellat/Gateway.php:305
+#: src/Gateway/Mellat/Gateway.php:306
 msgid "Bank Mellat error 14"
 msgstr "تعداد دفعات وارد كردن رمز بيش از حد مجاز است."
 
-#: src/Gateway/Mellat/Gateway.php:309
+#: src/Gateway/Mellat/Gateway.php:310
 msgid "Bank Mellat error 15"
 msgstr "كارت نامعتبر است."
 
-#: src/Gateway/Mellat/Gateway.php:313
+#: src/Gateway/Mellat/Gateway.php:314
 msgid "Bank Mellat error 16"
 msgstr "دفعات برداشت وجه بيش از حد مجاز است."
 
-#: src/Gateway/Mellat/Gateway.php:317
+#: src/Gateway/Mellat/Gateway.php:318
 msgid "Bank Mellat error 18"
 msgstr "تاريخ انقضاي كارت گذشته است."
 
-#: src/Gateway/Mellat/Gateway.php:321
+#: src/Gateway/Mellat/Gateway.php:322
 msgid "Bank Mellat error 19"
 msgstr "مبلغ برداشت وجه بيش از حد مجاز است."
 
-#: src/Gateway/Mellat/Gateway.php:325
+#: src/Gateway/Mellat/Gateway.php:326
 msgid "Bank Mellat error 111"
 msgstr "صادر كننده كارت نامعتبر است."
 
-#: src/Gateway/Mellat/Gateway.php:329
+#: src/Gateway/Mellat/Gateway.php:330
 msgid "Bank Mellat error 112"
 msgstr "خطاي سوييچ صادر كننده كارت."
 
-#: src/Gateway/Mellat/Gateway.php:333
+#: src/Gateway/Mellat/Gateway.php:334
 msgid "Bank Mellat error 113"
 msgstr "پاسخي از صادر كننده كارت دريافت نشد."
 
-#: src/Gateway/Mellat/Gateway.php:337
+#: src/Gateway/Mellat/Gateway.php:338
 msgid "Bank Mellat error 114"
 msgstr "دارنده كارت مجاز به انجام اين تراكنش نيست."
 
-#: src/Gateway/Mellat/Gateway.php:341
+#: src/Gateway/Mellat/Gateway.php:342
 msgid "Bank Mellat error 21"
 msgstr "پذيرنده نامعتبر است."
 
-#: src/Gateway/Mellat/Gateway.php:345
+#: src/Gateway/Mellat/Gateway.php:346
 msgid "Bank Mellat error 23"
 msgstr "خطاي امنيتي رخ داده است."
 
-#: src/Gateway/Mellat/Gateway.php:349
+#: src/Gateway/Mellat/Gateway.php:350
 msgid "Bank Mellat error 24"
 msgstr "اطلاعات كاربري پذيرنده نامعتبر است."
 
-#: src/Gateway/Mellat/Gateway.php:353
+#: src/Gateway/Mellat/Gateway.php:354
 msgid "Bank Mellat error 25"
 msgstr "مبلغ نامعتبر است."
 
-#: src/Gateway/Mellat/Gateway.php:357
+#: src/Gateway/Mellat/Gateway.php:358
 msgid "Bank Mellat error 31"
 msgstr "پاسخ نامعتبر است."
 
-#: src/Gateway/Mellat/Gateway.php:361
+#: src/Gateway/Mellat/Gateway.php:362
 msgid "Bank Mellat error 32"
 msgstr "فرمت اطلاعات وارد شده صحيح نمي باشد."
 
-#: src/Gateway/Mellat/Gateway.php:365
+#: src/Gateway/Mellat/Gateway.php:366
 msgid "Bank Mellat error 33"
 msgstr "حساب نامعتبر است."
 
-#: src/Gateway/Mellat/Gateway.php:369
+#: src/Gateway/Mellat/Gateway.php:370
 msgid "Bank Mellat error 34"
 msgstr "خطاي سيستمي."
 
-#: src/Gateway/Mellat/Gateway.php:373
+#: src/Gateway/Mellat/Gateway.php:374
 msgid "Bank Mellat error 35"
 msgstr "تاريخ نامعتبر است."
 
-#: src/Gateway/Mellat/Gateway.php:377
+#: src/Gateway/Mellat/Gateway.php:378
 msgid "Bank Mellat error 42"
 msgstr "خریدی با این شماره درخواست یافت نشد."
 
-#: src/Gateway/Mellat/Gateway.php:381
+#: src/Gateway/Mellat/Gateway.php:382
 msgid "Bank Mellat error 44"
 msgstr "کسر پول از حساب مشتری صورت نگرفته است."
 
-#: src/Gateway/Mellat/Gateway.php:385
+#: src/Gateway/Mellat/Gateway.php:386
 msgid "Bank Mellat error 45"
 msgstr "واریز پول قبلا انجام شده است."
 
-#: src/Gateway/Mellat/Gateway.php:389
+#: src/Gateway/Mellat/Gateway.php:390
 msgid "Bank Mellat error 46"
 msgstr "واریز پول به حساب پذیرنده انجام نشده است."
 
-#: src/Gateway/Mellat/Gateway.php:393
+#: src/Gateway/Mellat/Gateway.php:394
 msgid "Bank Mellat error 47"
 msgstr "واریز پول به حساب پذیرنده انجام نشده است."
 
-#: src/Gateway/Mellat/Gateway.php:397
+#: src/Gateway/Mellat/Gateway.php:398
 msgid "Bank Mellat error 48"
 msgstr "پول مشتری به حساب او بازگشت داده شده است."
 
-#: src/Gateway/Mellat/Gateway.php:401
+#: src/Gateway/Mellat/Gateway.php:402
 msgid "Bank Mellat error 49"
 msgstr "تراکنش استرداد وجه دلخواه یافت نشد."
 
-#: src/Gateway/Mellat/Gateway.php:405
+#: src/Gateway/Mellat/Gateway.php:406
 msgid "Bank Mellat error 412"
 msgstr "شناسه قبض نادرست است."
 
-#: src/Gateway/Mellat/Gateway.php:409
+#: src/Gateway/Mellat/Gateway.php:410
 msgid "Bank Mellat error 413"
 msgstr "شناسه پرداخت نادرست است."
 
-#: src/Gateway/Mellat/Gateway.php:413
+#: src/Gateway/Mellat/Gateway.php:414
 msgid "Bank Mellat error 414"
 msgstr "سازمان صادر كننده قبض نامعتبر است."
 
-#: src/Gateway/Mellat/Gateway.php:417
+#: src/Gateway/Mellat/Gateway.php:418
 msgid "Bank Mellat error 416"
 msgstr "در ثبت اطلاعات پرداخت شما در بانک ملت خطایی رخ داده است."
 
-#: src/Gateway/Mellat/Gateway.php:421
+#: src/Gateway/Mellat/Gateway.php:422
 msgid "Bank Mellat error 418"
 msgstr "در تعریف اطلاعات شما نزد بانک ملت خطایی پدید آمده است."
 
-#: src/Gateway/Mellat/Gateway.php:425
+#: src/Gateway/Mellat/Gateway.php:426
 msgid "Bank Mellat error 419"
 msgstr "تعداد دفعات ورود اطلاعات از حد مجاز گذشته است."
 
-#: src/Gateway/Mellat/Gateway.php:429
+#: src/Gateway/Mellat/Gateway.php:430
 msgid "Bank Mellat error 421"
 msgstr "IP نامعتبر است."
 
-#: src/Gateway/Mellat/Gateway.php:433
+#: src/Gateway/Mellat/Gateway.php:434
 msgid "Bank Mellat error 51"
 msgstr "تراکنش تکراری است."
 
-#: src/Gateway/Mellat/Gateway.php:437
+#: src/Gateway/Mellat/Gateway.php:438
 msgid "Bank Mellat error 54"
 msgstr "تراکنش مرجع موجود نیست."
 
-#: src/Gateway/Mellat/Gateway.php:441
+#: src/Gateway/Mellat/Gateway.php:442
 msgid "Bank Mellat error 55"
 msgstr "تراکنش نامعتبر است."
 
-#: src/Gateway/Mellat/Gateway.php:445
+#: src/Gateway/Mellat/Gateway.php:446
 msgid "Bank Mellat error 61"
 msgstr "خطا در واریز وجه."
 
-#: src/Gateway/Mellat/Gateway.php:449
+#: src/Gateway/Mellat/Gateway.php:450
 #, php-format
 msgid "Bank Mellat error %s"
 msgstr "شماره خطای اعلام شده توسط بانک: %s"
@@ -2313,10 +2327,6 @@ msgstr "فاکتور فروش"
 msgid "Product name"
 msgstr "شرح کالا"
 
-#: template/admin/order-print.phtml:100 template/front/installment.phtml:103
-msgid "Per Payment"
-msgstr "پیش قسط"
-
 #: template/admin/order-print.phtml:101 template/front/installment.phtml:104
 msgid "1 months"
 msgstr "۱ ماه"
@@ -2674,10 +2684,6 @@ msgstr "پرداخت بدون استفاده از اعتبار"
 #: template/front/detail.phtml:395
 msgid "Pay by using credit"
 msgstr "پرداخت با استفاده از اعتبار"
-
-#: template/front/error.phtml:4
-msgid "Error on order processing, please contact to website admin"
-msgstr "خطا در پردازش مراحل سفارش، لطفا با مدیر وب سایت تماس بگیرید."
 
 #: template/front/finish.phtml:31
 msgid "Thanks you for your payment !"

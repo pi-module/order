@@ -35,7 +35,7 @@ class PaymentController extends IndexController
         $invoice = Pi::api('invoice', 'order')->getInvoiceForPayment($id);
         // Check invoice
         if (empty($invoice)) {
-            $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('The invoice not found.'));
+            $this->jump(array('', 'controller' => 'index', 'action' => 'message', 'type' => 'error'), __('The invoice not found.'));
         }
         // Check invoice not paid
         if ($invoice['status'] != 2) {
@@ -52,12 +52,12 @@ class PaymentController extends IndexController
         // Check invoice is for this user
         if (Pi::service('authentication')->hasIdentity()) {
             if ($invoice['uid'] != Pi::user()->getId()) {
-                $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('This is not your invoice.'));
+                $this->jump(array('', 'controller' => 'index', 'action' => 'message', 'type' => 'error'), __('This is not your invoice.'));
             }
         } else {
             if ($anonymous == 1 && !empty($token)) {
                 if ($token != md5($invoice['time_create'])) {
-                    $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('Token not true'));
+                    $this->jump(array('', 'controller' => 'index', 'action' => 'message', 'type' => 'error'), __('Token not true'));
                 } else {
                     $_SESSION['payment']['process'] = 1;
                     $_SESSION['payment']['process_start'] = time();
@@ -65,7 +65,7 @@ class PaymentController extends IndexController
                     $_SESSION['payment']['gateway'] = $invoice['gateway'];
                 }
             } elseif (!isset($_SESSION['payment']['invoice_id']) || $_SESSION['payment']['invoice_id'] != $invoice['id']) {
-                $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('This is not your invoice.'));
+                $this->jump(array('', 'controller' => 'index', 'action' => 'message', 'type' => 'error'), __('This is not your invoice.'));
             }
             // Set session
             $_SESSION['payment']['process_update'] = time();
@@ -160,6 +160,10 @@ class PaymentController extends IndexController
             $url = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
             // Remove processing
             Pi::api('processing', 'order')->removeProcessing();
+            // Check not login user
+            if (!Pi::service('authentication')->hasIdentity()) {
+                $url = array('', 'controller' => 'index', 'action' => 'message', 'type' => 'successPayment');
+            }
             // jump to module
             $message = __('Your payment were successfully. Back to module');
             $this->jump($url, $message);
@@ -236,13 +240,13 @@ class PaymentController extends IndexController
             // Check processing
             if (!$processing) {
                 $message = __('Your running pay processing not set');
-                $this->jump(array('', 'controller' => 'index', 'action' => 'error'), $message);
+                $this->jump(array('', 'controller' => 'index', 'action' => 'message', 'type' => 'error'), $message);
             }
             // Check ip
             if ($config['payment_check_ip']) {
                 if ($processing['ip'] != Pi::user()->getIp()) {
                     $message = __('Your IP address changed and processing not valid');
-                    $this->jump(array('', 'controller' => 'index', 'action' => 'error'), $message);
+                    $this->jump(array('', 'controller' => 'index', 'action' => 'message', 'type' => 'error'), $message);
                 }
             }
             // Get gateway
@@ -384,26 +388,6 @@ class PaymentController extends IndexController
         }
     }
 
-    public function finishAction()
-    {
-        $type = $this->params('type');
-        $paypal = false;
-        if ($type == 'paypal') {
-            $paypal = true;
-        }
-        
-        $url = Pi::url($this->url('', array(
-            'module' => $this->getModule(),
-            'controller' => 'payment',
-            'action' => 'process',
-        )));
-
-        // Set view
-        $this->view()->setTemplate('finish')->setLayout('layout-style');
-        $this->view()->assign('url', $url);
-        $this->view()->assign('paypal', $paypal);
-    }
-
     public function processAction()
     {
         $processing = Pi::api('processing', 'order')->getProcessing();
@@ -432,6 +416,26 @@ class PaymentController extends IndexController
             $this->view()->setTemplate(false)->setLayout('layout-content');
             return Json::encode($return);
         }
+    }
+
+    public function finishAction()
+    {
+        $type = $this->params('type');
+        $paypal = false;
+        if ($type == 'paypal') {
+            $paypal = true;
+        }
+
+        $url = Pi::url($this->url('', array(
+            'module' => $this->getModule(),
+            'controller' => 'payment',
+            'action' => 'process',
+        )));
+
+        // Set view
+        $this->view()->setTemplate('finish')->setLayout('layout-style');
+        $this->view()->assign('url', $url);
+        $this->view()->assign('paypal', $paypal);
     }
 
     public function cancelAction()

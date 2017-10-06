@@ -172,6 +172,7 @@ class Gateway extends AbstractGateway
                     $log['amount'] = $invoice['total_price'];
                     $log['status'] = 1;
                     $log['message'] = $message;
+                    $log['uid'] = (Pi::user()->getId() > 0) ? Pi::user()->getId() : $invoice['uid'];
                     $logResult = Pi::api('log', 'order')->setLog($log);
                     // Update invoice
                     if ($logResult) {
