@@ -22,9 +22,9 @@ class Order extends Standard
      * @var array
      */
     protected $defaults = array(
-        'module' => 'order',
+        'module'     => 'order',
         'controller' => 'index',
-        'action' => 'index'
+        'action'     => 'index'
     );
 
     protected $controllerList = array(
