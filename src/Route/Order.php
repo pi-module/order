@@ -48,7 +48,7 @@ class Order extends Standard
         $matches = array_merge($this->defaults, $matches);
         if (isset($parts[0]) && in_array($parts[0], $this->controllerList)) {
             $matches['controller'] = $this->decode($parts[0]);
-        } elseif (isset($parts[0]) && in_array($parts[0], array('remove', 'error'))) {
+        } elseif (isset($parts[0]) && in_array($parts[0], array('remove', 'message'))) {
             $matches['controller'] = 'index';
         } else {
             return false;
