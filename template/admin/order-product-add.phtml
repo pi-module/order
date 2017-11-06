@@ -1,0 +1,10 @@
+<?php $this->css($this->assetModule('css/admin.css')); ?>
+<div class="clearfix">
+    <div class="page-header">
+        <h3><?php _e('Manage order product / service'); ?></h3>
+    </div>
+    <div class="alert alert-info">
+        <?php echo sprintf(__('Please add product / service id from %s module, your selected product / service should be active. if user still didnt pay invoice, this product price add to current invoice and if pay, new invoice generated !'), $order['moduleTitle']); ?>
+    </div>
+    <?php echo $this->form($form); ?>
+</div>

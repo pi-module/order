@@ -1,0 +1,26 @@
+<?php $this->css($this->assetModule('css/admin.css')); ?>
+<div class="clearfix">
+    <div class="page-header">
+        <h3><?php _e('Delete product / service from order'); ?></h3>
+    </div>
+    <div class="alert alert-info">
+        <?php echo __('You can delete this product from your order, after delete product, your order price change and if your order just have one product, system make your order canceled !'); ?>
+    </div>
+    <div class="well well-sm">
+        <div class="media">
+            <div class="media-left col-md-1">
+                <a href="<?php echo $this->escape($deleteProduct['details']['productUrl']); ?>">
+                    <img class="media-object img-responsive" src="<?php echo $this->escape($deleteProduct['details']['thumbUrl']); ?>" alt="<?php echo $this->escape($deleteProduct['title']['details']['title']); ?>">
+                </a>
+            </div>
+            <div class="media-body clearfix">
+                <h4 class="media-heading"><?php echo $this->escape($deleteProduct['details']['title']); ?></h4>
+                <div class="clearfix">
+                    <a target="_blank" href="<?php echo $this->escape($deleteProduct['details']['productUrl']); ?>"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <?php echo $this->form($form); ?>
+    </div>
+</div>
