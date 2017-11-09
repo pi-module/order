@@ -18,6 +18,12 @@ use Zend\Json\Json;
 
 abstract class AbstractGateway
 {
+    const TYPE_FORM = 0;
+    const TYPE_REST = 1;
+    
+    protected $_type = AbstractGateway::TYPE_FORM;
+    protected $_needToken = false;
+     
     public $gatewayAdapter = '';
 
     public $gatewayRow = '';
@@ -54,7 +60,9 @@ abstract class AbstractGateway
         $this->setRow();
         $this->setOption();
         $this->setSettingForm();
-        $this->setPayForm();
+        if ($this->_type == TYPE_FORM) {
+            $this->setPayForm();
+        }
         $this->setIsActive();
     }
 
@@ -257,4 +265,15 @@ abstract class AbstractGateway
         }
         return $this;
     }
+    
+    protected function setLog($value)
+    {
+        $log = array();
+        $log['gateway'] = $this->gatewayAdapter;
+        $log['value'] = $value;
+        $log['invoice'] = $this->gatewayPayInformation['invoice'];
+        Pi::api('log', 'order')->setLog($log);
+        
+    }
+    
 }

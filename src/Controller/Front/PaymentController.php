@@ -16,6 +16,7 @@ namespace Module\Order\Controller\Front;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Module\Order\Form\PayForm;
+use Module\Order\Gateway\AbstractGateway;
 use Zend\Json\Json;
 
 class PaymentController extends IndexController
@@ -149,7 +150,7 @@ class PaymentController extends IndexController
                 'action' => 'test',
                 'id' => $invoice['id'],
             ));
-        }
+        } 
         // Check invoice prive
         if (in_array($order['status_order'], array(1, 2, 3)) && $invoice['status'] == 2 && $invoice['total_price'] == 0) {
             $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
@@ -168,6 +169,14 @@ class PaymentController extends IndexController
             // Remove processing
             Pi::api('processing', 'order')->removeProcessing();
             $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), $gateway->gatewayError);
+        }
+
+        if ($gateway->getType() == AbstractGateway::TYPE_REST) {
+            $approvalUrl = $gateway->getApproval($invoice);
+            if (!$approvalUrl) {
+                $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), __('Error to get information.'));
+            }
+            return $this->redirect()->toUrl($approvalUrl);
         }
 
         // Set form values
@@ -231,6 +240,8 @@ class PaymentController extends IndexController
             // Get gateway
             $gateway = Pi::api('gateway', 'order')->getGateway($processing['gateway']);
             // verify order
+            $invoice = Pi::api('invoice', 'order')->getInvoice($processing['invoice']);
+            $gateway->setInvoice($invoice);
             $verify = $gateway->verifyPayment($request, $processing);
             // Check status
             if ($verify['status'] == 1) {
@@ -380,7 +391,38 @@ class PaymentController extends IndexController
             'controller' => 'payment',
             'action' => 'process',
         )));
-
+        
+        $processing = Pi::api('processing', 'order')->getProcessing();
+        if (!empty($processing['invoice'])) {
+            // Get invoice
+            $invoice = Pi::api('invoice', 'order')->getInvoice($processing['invoice']);
+            $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
+            if ($gateway->getType() == AbstractGateway::TYPE_REST) {
+                $paymentId = $this->params('paymentId');
+                $payerId = $this->params('PayerID');
+                $gateway->setInvoice($invoice);
+                $result = $gateway->execute($payerId, $paymentId);
+                if ($result->state == 'approved') {
+                    $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
+                    $backurl = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
+                    Pi::api('invoice', 'order')->setBackUrl($invoice['id'], $backurl);
+                    $messenger = $this->plugin('flashMessenger');
+                } else {
+                    $url = Pi::url($this->url('', array(
+                        'module' => $this->getModule(),
+                        'controller' => 'payment',
+                        'action' => 'result',
+                    )));
+                    $url .= '?invoice=' .  $invoice['id'];
+                }
+                
+                return $this->redirect($url);
+            }
+        } else {
+            $url = array('', 'controller' => 'index', 'action' => 'index');
+            $message = __('Order canceled');
+            return $this->jump($url, $message);
+        }
         // Set view
         $this->view()->setTemplate('finish')->setLayout('layout-style');
         $this->view()->assign('url', $url);
@@ -419,6 +461,26 @@ class PaymentController extends IndexController
 
     public function cancelAction()
     {
+        $processing = Pi::api('processing', 'order')->getProcessing();
+        if (!empty($processing['invoice'])) {
+            // Get invoice
+            $invoice = Pi::api('invoice', 'order')->getInvoice($processing['invoice']);
+            $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
+            if ($gateway->getType() == AbstractGateway::TYPE_REST) {
+                Pi::api('processing', 'order')->removeProcessing();
+                
+                $log = array();
+                $log['gateway'] = $gateway->gatewayAdapter;
+                $log['value'] = 'cancel';
+                $log['invoice'] = $invoice['random_id'];
+                Pi::api('log', 'order')->setLog($log);
+        
+                $url = array('', 'controller' => 'index', 'action' => 'index');
+                $message = __('Order canceled');
+                return $this->jump($url, $message);
+            }
+        }
+        
         // Set return
         $return = array(
             'website' => Pi::url(),

@@ -19,6 +19,225 @@ use Zend\Json\Json;
 
 class Gateway extends AbstractGateway
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_type = AbstractGateway::TYPE_REST;
+        $this->_needToken = true;
+    }
+    
+    public function getType()
+    {
+        return $this->_type; 
+    }
+    
+    public function needToken()
+    {
+        return $this->_needToken;
+    }
+    
+    public function getUrl()
+    {
+        if ($this->gatewayOption['test_mode']) {
+            return 'https://api.sandbox.paypal.com/v1';
+        } else {
+            return 'https://api.paypal.com/v1';
+        }
+    }
+    
+    protected function getToken()
+    {
+        $key = $this->gatewayOption['username'];
+        $secret = $this->gatewayOption['password'];
+        $url = $this->getUrl() . '/oauth2/token';
+        
+        $this->setLog('token start');
+                
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+        curl_setopt($ch, CURLOPT_USERPWD, $key.":".$secret);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        $this->setLog('token_stop : ' . $result);
+        
+        if(empty($result)) {
+           return null;
+        }
+    
+        $json = json_decode($result);
+        return $json->access_token ;
+        
+    }
+
+    public function getApproval($invoice)
+    {
+        $token = $this->getToken();
+        $url = $this->getUrl() . '/payments/payment';
+        $header =  array(
+            "Content-Type: application/json",
+            "Authorization: Bearer " . $token
+        );
+        
+        // see here : https://developer.paypal.com/docs/integration/direct/payments/paypal-payments/#create-paypal-payment
+        $data ='{
+            "intent":"sale",
+            "redirect_urls":{
+                "return_url":"' . $this->gatewayFinishUrl . '",
+                "cancel_url":"' . $this->gatewayCancelUrl . '"
+            },
+            "payer":{
+                "payment_method":"paypal"
+            },
+            "transactions":[
+                {
+                    "amount": {
+                        "total": "' . ($this->gatewayPayInformation['amount_1'] + $this->gatewayPayInformation['tax_1']) . '",
+                        "currency": "' . $this->gatewayPayInformation['currency_code'] . '",
+                        "details": {
+                            "subtotal": "' . $this->gatewayPayInformation['amount_1'] . '",
+                            "tax": "' . $this->gatewayPayInformation['tax_1'] . '"
+                        }
+                    },
+                    "description": "",
+                    "item_list": {
+                        "items": [
+                            {
+                                "name": "' . $this->gatewayPayInformation['item_name_1'] . '",
+                                "price": "' . $this->gatewayPayInformation['amount_1'] . '",
+                                "currency": "' . $this->gatewayPayInformation['currency_code'] . '",
+                                "quantity": "' . $this->gatewayPayInformation['quantity_1'] . '",
+                                "description": "' . $this->gatewayPayInformation['item_name_1'] . '",
+                                "tax": "' . $this->gatewayPayInformation['tax_1'] . '"
+                            }
+                        ],
+                        "shipping_address": {
+                            "recipient_name": "' . $this->gatewayPayInformation['first_name'] . ' ' . $this->gatewayPayInformation['last_name'] . '",
+                            "line1": "' . $this->gatewayPayInformation['address1'] . '",
+                            "line2": "' . $this->gatewayPayInformation['address2'] . '",
+                            "city": "' . $this->gatewayPayInformation['city'] . '",
+                            "state": "' . $this->gatewayPayInformation['state'] . '",
+                            "phone": "' . $this->gatewayPayInformation['night_phone_b'] . '",
+                            "postal_code": "' . $this->gatewayPayInformation['zip'] . '",
+                            "country_code": "' . $this->gatewayOption['location'] . '"
+                        }
+                    }
+                }
+            ]
+        }';
+        
+        $this->setLog('approval_start : ' . $data);
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data); 
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        
+        $result = curl_exec($ch);
+        curl_close($ch);
+        
+        $this->setLog('approval_stop : ' . $result);
+        
+        if(empty($result)) {
+            return null;
+        } else {
+            $result = json_decode($result);
+        }
+        
+        $extra = json_decode($invoice['extra']);
+        $extra['paypal_payment_id'] = $result->id;
+        Pi::model('invoice', 'order')->update(
+            array('extra' => json_encode($extra)),
+            array('id' => $invoice['id'])
+        );
+
+        foreach ($result->links as $link) {
+            if ($link->rel == 'approval_url') {
+               return $link->href;
+            }
+        }
+        
+        return null;
+        
+    }
+    
+    public function getPayment($paymentId)
+    {
+        $token = $this->getToken();
+        $url = $this->getUrl() . '/payments/payment/' . $paymentId;
+        $header =  array(
+            "Content-Type: application/json",
+            "Authorization: Bearer " . $token
+        );
+        
+        $this->setLog('payment_detail_start : ' . $paymentId);
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        
+        $result = curl_exec($ch);
+        curl_close($ch);
+        
+        $this->setLog('payment_detail_stop : ' . $result);
+        
+        if(empty($result)) {
+            return null;
+        } else {
+            $result = json_decode($result);
+        }
+        
+        return $result;
+        
+    }
+    public function execute($payerId, $paymentId)
+    {
+        $token = $this->getToken();
+        $url = $this->getUrl() . '/payments/payment/' . $paymentId . '/execute';
+        $data = '{"payer_id":"' . $payerId . '"}';
+        $header =  array(
+            "Content-Type: application/json",
+            "Authorization: Bearer " . $token
+        );
+        if ($this->gatewayOption['error_mode']) {
+            $header[] = 'PayPal-Mock-Response: {"mock_application_codes":"INSTRUMENT_DECLINED"';    
+        }
+
+        $this->setLog('execute_start : ' . $data);
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data); 
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        $result = curl_exec($ch);
+        curl_close($ch);
+    
+        $this->setLog('execute_stop : ' . $result);
+        
+        if(empty($result)) {
+            return null;
+        } else {
+            $result = json_decode($result);
+        }
+        
+        return $result;
+    }
+    
     public function setAdapter()
     {
         $this->gatewayAdapter = 'Paypal';
@@ -30,11 +249,11 @@ class Gateway extends AbstractGateway
         $gateway['title'] = __('Paypal');
         $gateway['path'] = 'Paypal';
         $gateway['type'] = 'online';
-        $gateway['version'] = '1.0';
+        $gateway['version'] = '2.0';
         $gateway['description'] = '';
-        $gateway['author'] = 'Hossein Azizabadi <azizabadi@faragostaresh.com>';
-        $gateway['credits'] = '@voltan';
-        $gateway['releaseDate'] = 1380802565;
+        $gateway['author'] = 'Mickael STAMM <contact@sta2m.com>';
+        $gateway['credits'] = '@sta2m';
+        $gateway['releaseDate'] = 1510244649;
         $this->gatewayInformation = $gateway;
         return $gateway;
     }
@@ -77,13 +296,6 @@ class Gateway extends AbstractGateway
             'type' => 'text',
             'required' => true,
         );
-        // custom
-        $form['custom'] = array(
-            'name' => 'custom',
-            'label' => __('Custom attribute'),
-            'type' => 'text',
-            'required' => false,
-        );
         // test_mode
         $form['test_mode'] = array(
             'name' => 'test_mode',
@@ -94,191 +306,26 @@ class Gateway extends AbstractGateway
         // Username
         $form['username'] = array(
             'name' => 'username',
-            'label' => __('Username for sandbox'),
+            'label' => __('Client ID'),
             'type' => 'text',
             'required' => false,
         );
         // password
         $form['password'] = array(
             'name' => 'password',
-            'label' => __('Password for sandbox'),
+            'label' => __('Secret'),
             'type' => 'text',
             'required' => false,
         );
-        // signature
-        $form['signature'] = array(
-            'name' => 'signature',
-            'label' => __('Signature for sandbox'),
-            'type' => 'text',
+        // test_mode
+        $form['error_mode'] = array(
+            'name' => 'error_mode',
+            'label' => __('Force error for sandbox'),
+            'type' => 'checkbox',
             'required' => false,
         );
         $this->gatewaySettingForm = $form;
         return $this;
-    }
-
-    public function setPayForm()
-    {
-        $form = array();
-        // form cmd
-        $form['cmd'] = array(
-            'name' => 'cmd',
-            'type' => 'hidden',
-        );
-        // form upload
-        $form['upload'] = array(
-            'name' => 'upload',
-            'type' => 'hidden',
-        );
-        // form return
-        $form['return'] = array(
-            'name' => 'return',
-            'type' => 'hidden',
-        );
-        // form cancel_return
-        $form['cancel_return'] = array(
-            'name' => 'cancel_return',
-            'type' => 'hidden',
-        );
-        // form notify_url
-        $form['notify_url'] = array(
-            'name' => 'notify_url',
-            'type' => 'hidden',
-        );
-        // form business
-        $form['business'] = array(
-            'name' => 'business',
-            'type' => 'hidden',
-        );
-        // form currency_code
-        $form['currency_code'] = array(
-            'name' => 'currency_code',
-            'type' => 'hidden',
-        );
-        // form invoice
-        $form['invoice'] = array(
-            'name' => 'invoice',
-            'type' => 'hidden',
-        );
-        // form item_name_1
-        $form['item_name_1'] = array(
-            'name' => 'item_name_1',
-            'type' => 'hidden',
-        );
-        // form item_number_1
-        $form['item_number_1'] = array(
-            'name' => 'item_number_1',
-            'type' => 'hidden',
-        );
-        // form quantity_1
-        $form['quantity_1'] = array(
-            'name' => 'quantity_1',
-            'type' => 'hidden',
-        );
-        // form amount_1
-        $form['amount_1'] = array(
-            'name' => 'amount_1',
-            'type' => 'hidden',
-        );
-        // form amount_1
-        $form['tax_1'] = array(
-            'name' => 'tax_1',
-            'type' => 'hidden',
-        );
-        // first_name
-        $form['first_name'] = array(
-            'name' => 'first_name',
-            'type' => 'hidden',
-        );
-        // last_name
-        $form['last_name'] = array(
-            'name' => 'last_name',
-            'type' => 'hidden',
-        );
-        // address1
-        $form['address1'] = array(
-            'name' => 'address1',
-            'type' => 'hidden',
-        );
-        // address2
-        $form['address2'] = array(
-            'name' => 'address2',
-            'type' => 'hidden',
-        );
-        // city
-        $form['city'] = array(
-            'name' => 'city',
-            'type' => 'hidden',
-        );
-        // state
-        $form['state'] = array(
-            'name' => 'state',
-            'type' => 'hidden',
-        );
-        // country
-        $form['country'] = array(
-            'name' => 'country',
-            'type' => 'hidden',
-        );
-        // zip
-        $form['zip_code'] = array(
-            'name' => 'zip',
-            'type' => 'hidden',
-        );
-        // email
-        $form['email'] = array(
-            'name' => 'email',
-            'type' => 'hidden',
-        );
-        // night_phone_b
-        $form['night_phone_b'] = array(
-            'name' => 'night_phone_b',
-            'type' => 'hidden',
-        );
-        // image_url
-        $form['image_url'] = array(
-            'name' => 'image_url',
-            'type' => 'hidden',
-        );
-        // no_shipping
-        $form['no_shipping'] = array(
-            'name' => 'no_shipping',
-            'type' => 'hidden',
-        );
-        // address_override
-        $form['address_override'] = array(
-            'name' => 'address_override',
-            'type' => 'hidden',
-        );
-        // Set for test mode
-        if (isset($this->gatewayOption['test_mode']) && $this->gatewayOption['test_mode']) {
-            // username
-            $form['username'] = array(
-                'name' => 'username',
-                'type' => 'hidden',
-            );
-            // password
-            $form['password'] = array(
-                'name' => 'password',
-                'type' => 'hidden',
-            );
-            // signature
-            $form['signature'] = array(
-                'name' => 'signature',
-                'type' => 'hidden',
-            );
-        }
-        // Set form
-        $this->gatewayPayForm = $form;
-        return $this;
-    }
-
-    public function getDialogUrl()
-    {
-        if ($this->gatewayOption['test_mode']) {
-            return 'https://www.sandbox.paypal.com';
-        } else {
-            return 'https://www.paypal.com';
-        }
     }
 
     public function getAuthority()
@@ -345,100 +392,25 @@ class Gateway extends AbstractGateway
     public function setRedirectUrl()
     {
         $this->getAuthority();
-        if ($this->gatewayOption['test_mode']) {
-            $this->gatewayRedirectUrl = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
-        } else {
-            $this->gatewayRedirectUrl = 'https://www.paypal.com/cgi-bin/webscr';
-        }
     }
 
-    /**
-     * Verify Payment
-     *
-     * Some good example for verify
-     * https://developer.paypal.com/docs/classic/ipn/ht_ipn/
-     * https://stackoverflow.com/questions/4848227/validate-that-ipn-call-is-from-paypal
-     * http://www.emanueleferonato.com/2011/09/28/using-php-with-paypals-ipn-instant-paypal-notification-to-automate-your-digital-delivery/
-     * https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNIntro/
-     *
-     * Paypal verify method
-     * Source : https://developer.paypal.com/docs/classic/ipn/ht_ipn/
-     */
     public function verifyPayment($request, $processing)
     {
-        // STEP 1: read POST data
-        $req = 'cmd=_notify-validate';
-        foreach ($request as $key => $value) {
-            $req .= sprintf('&%s=%s', urldecode($key), urldecode($value));
-        }
-
-        // Set log
-        $log = array();
-        $log['gateway'] = 'paypal';
-        $log['value'] = Json::encode(array(6, $req));
-        Pi::api('log', 'order')->setLog($log);
-
-        // Step 2: POST IPN data back to PayPal to validate
-        if ($this->gatewayOption['test_mode']) {
-            $url_parsed = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
-        } else {
-            $url_parsed = 'https://www.paypal.com/cgi-bin/webscr';
-        }
-
-        // Check by curl
-        $ch = curl_init($url_parsed);
-        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
-
-        if (!($res = curl_exec($ch))) {
-            curl_close($ch);
-            return false;
-            exit;
-        }
-        curl_close($ch);
-
-        // Set log
-        $log = array();
-        $log['gateway'] = 'paypal';
-        $log['value'] = Json::encode(array(7, $req));
-        Pi::api('log', 'order')->setLog($log);
-
-        // STEP 3: Inspect IPN validation result and act accordingly
-        if (strcmp($res, "VERIFIED") == 0) {
-            $invoice = Pi::api('invoice', 'order')->updateInvoice($request['invoice']);
+        $invoice = Pi::api('invoice', 'order')->getInvoice($processing['invoice']);
+        $extra = $invoice['extra'];
+        $paymentId = $extra['paypal_payment_id'];
+        $payment = $this->getPayment($paymentId);
+        
+        if ($payment->state == 'approved') {
             $result['status'] = 1;
-            // Set log
-            $log = array();
-            $log['gateway'] = $this->gatewayAdapter;
-            $log['authority'] = '';
-            $log['value'] = Json::encode($request);
-            $log['invoice'] = $invoice['id'];
-            $log['amount'] = $invoice['total_price'];
-            $log['status'] = $result['status'];
-            $log['message'] = __('Your payment were successfully.');
-            Pi::api('log', 'order')->setLog($log);
-        } elseif (strcmp($res, "INVALID") == 0) {
+            $result['adapter'] = $this->gatewayAdapter;
+            $result['invoice'] = $invoice['id'];
+            $result['order'] = $invoice['order'];
+        } else {
             $invoice = Pi::api('invoice', 'order')->getInvoice($request['invoice'], 'random_id');
             $result['status'] = 0;
-            $message = __('Error');
         }
-
-        // Set log
-        $log = array();
-        $log['gateway'] = 'paypal';
-        $log['value'] = Json::encode(array(8, $req));
-        Pi::api('log', 'order')->setLog($log);
-
-        // Set result
-        $result['adapter'] = $this->gatewayAdapter;
-        $result['invoice'] = $invoice['id'];
-        $result['order'] = $invoice['order'];
+        
         return $result;
     }
 
@@ -452,5 +424,10 @@ class Gateway extends AbstractGateway
     {
         // Set error
         $this->gatewayError = '';
+    }
+    
+    function setPayForm()
+    {
+        return;
     }
 }
