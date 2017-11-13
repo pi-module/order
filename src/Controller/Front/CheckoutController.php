@@ -76,8 +76,11 @@ class CheckoutController extends IndexController
         }
         // Check gateway
         if (is_array($values['gateway'])) {
-            $values['gateway'] = $values['gateway'][0];
+            $values['gateway'] = $values['gateway'][0]; 
         }
+        $gateway = Pi::api('gateway', 'order')->getGatewayInfo($values['gateway']);
+        $gatewayOptions = json_decode($gateway['option'], true);
+            
         // Set promotion_type values
         if (isset($cart['promotion_type']) && !empty($cart['promotion_type'])) {
             $values['promotion_type'] = $cart['promotion_type'];
@@ -243,7 +246,9 @@ class CheckoutController extends IndexController
             // unset order
             Pi::api('order', 'order')->unsetOrderInfo();
             // Send notification
-            Pi::api('notification', 'order')->addOrder($order->toArray());
+            if (!$gatewayOptions['onemail']) {
+                Pi::api('notification', 'order')->addOrder($order->toArray());
+            }
             // Go to payment
             if ($result['status'] == 0) {
                 $url = array('', 'controller' => 'index', 'action' => 'index');

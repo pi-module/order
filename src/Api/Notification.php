@@ -381,11 +381,12 @@ class Notification extends AbstractApi
 
         // Get product list
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
-        $productList = '';
+        $productList = array();
         foreach ($order['products'] as $product) {
-            $productList .= $product['details']['title'] . ' , ';
+            $productList[] = $product['details']['title'];
         }
-
+        $productList = join(', ', $productList);
+        
         // Set link
         $link = Pi::url(Pi::service('url')->assemble('order', array(
             'module' => $this->getModule(),

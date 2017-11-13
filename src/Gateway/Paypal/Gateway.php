@@ -284,6 +284,14 @@ class Gateway extends AbstractGateway
             'type' => 'hidden',
             'required' => true,
         );
+        
+        $form['onemail'] = array(
+            'name' => 'onemail',
+            'label' => __('Send only 1 mail after payment'),
+            'type' => 'checkbox',
+            'required' => false,
+        );
+        
         // business
         $form['business'] = array(
             'name' => 'business',
