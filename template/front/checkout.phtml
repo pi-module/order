@@ -222,12 +222,12 @@ $this->footScript()->appendScript($script);
                                         </spam>
                                     </li>
                                     <li>
-                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'index', 'customer' => $customer['id']))) ?>" class=" btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
+                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'index', 'customer' => $customer['id']))) ?>" class=" btn btn-primary btn-sm" rel="<?php echo $customer['id']; ?>">
                                             <i class="fa fa-edit"></i> <?php _e('Edit'); ?>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'delete', 'customer' => $customer['id']))) ?>" class=" btn btn-danger btn-sm" rel="<?php echo $customer['id']; ?>" onclick="return confirm('<?php _e('Are you sure you want delete this address?'); ?>');">
+                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'delete', 'customer' => $customer['id']))) ?>" class=" btn btn-delete btn-sm" rel="<?php echo $customer['id']; ?>" onclick="return confirm('<?php _e('Are you sure you want delete this address?'); ?>');">
                                             <i class="fa fa-trash"></i> <?php _e('Delete'); ?>
                                         </a>
                                     </li>

@@ -60,7 +60,7 @@ abstract class AbstractGateway
         $this->setRow();
         $this->setOption();
         $this->setSettingForm();
-        if ($this->_type == TYPE_FORM) {
+        if ($this->_type == AbstractGateway::TYPE_FORM) {
             $this->setPayForm();
         }
         $this->setIsActive();
@@ -275,5 +275,8 @@ abstract class AbstractGateway
         Pi::api('log', 'order')->setLog($log);
         
     }
+    
+    public function getDescription() { return null; }
+    
     
 }

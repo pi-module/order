@@ -175,3 +175,8 @@ ul.progtrckr li.progtrckr-pending:before {
     font-size: 1.1em;
     padding-bottom: 15px;
 }
+
+.btn-delete {
+    background:#ccc;
+    color:#000;
+}

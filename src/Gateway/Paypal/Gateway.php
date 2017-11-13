@@ -85,6 +85,17 @@ class Gateway extends AbstractGateway
         );
         
         // see here : https://developer.paypal.com/docs/integration/direct/payments/paypal-payments/#create-paypal-payment
+        $discount = null;
+        if ($this->gatewayPayInformation['discount_price_1']) {
+            $discount = ',{
+                "name": "' . __('Discount') . '",
+                "price": "-' . $this->gatewayPayInformation['discount_price_1'] . '",
+                "currency": "' . $this->gatewayPayInformation['currency_code'] . '",
+                "quantity": "1",
+                "tax": "0"
+            }';
+        }
+        
         $data ='{
             "intent":"sale",
             "redirect_urls":{
@@ -92,15 +103,20 @@ class Gateway extends AbstractGateway
                 "cancel_url":"' . $this->gatewayCancelUrl . '"
             },
             "payer":{
-                "payment_method":"paypal"
+                "payment_method":"paypal",
+                "payer_info":{
+                    "first_name":"' . $this->gatewayPayInformation['first_name'] . '",
+                    "last_name":"' . $this->gatewayPayInformation['last_name'] . '",
+                    "email":"' . $this->gatewayPayInformation['email'] . '"
+                }
             },
             "transactions":[
                 {
                     "amount": {
-                        "total": "' . ($this->gatewayPayInformation['amount_1'] + $this->gatewayPayInformation['tax_1']) . '",
+                        "total": "' . ($this->gatewayPayInformation['amount_1'] + $this->gatewayPayInformation['tax_1'] - $this->gatewayPayInformation['discount_price_1']) . '",
                         "currency": "' . $this->gatewayPayInformation['currency_code'] . '",
                         "details": {
-                            "subtotal": "' . $this->gatewayPayInformation['amount_1'] . '",
+                            "subtotal": "' . ($this->gatewayPayInformation['amount_1'] - $this->gatewayPayInformation['discount_price_1']) . '",
                             "tax": "' . $this->gatewayPayInformation['tax_1'] . '"
                         }
                     },
@@ -114,7 +130,7 @@ class Gateway extends AbstractGateway
                                 "quantity": "' . $this->gatewayPayInformation['quantity_1'] . '",
                                 "description": "' . $this->gatewayPayInformation['item_name_1'] . '",
                                 "tax": "' . $this->gatewayPayInformation['tax_1'] . '"
-                            }
+                            }' . $discount . ' 
                         ],
                         "shipping_address": {
                             "recipient_name": "' . $this->gatewayPayInformation['first_name'] . ' ' . $this->gatewayPayInformation['last_name'] . '",
@@ -342,8 +358,9 @@ class Gateway extends AbstractGateway
             $this->gatewayPayInformation['item_name_' . $i] = $product['details']['title'];
             $this->gatewayPayInformation['item_number_' . $i] = $product['number'];
             $this->gatewayPayInformation['quantity_' . $i] = 1;
-            $this->gatewayPayInformation['amount_' . $i] = $product['product_price'] - $product['discount_price'];
+            $this->gatewayPayInformation['amount_' . $i] = $product['product_price'];
             $this->gatewayPayInformation['tax_' . $i] = $product['vat_price'];
+            $this->gatewayPayInformation['discount_price_' . $i] = $product['discount_price'];
             $i++;
         }
         // Set address
@@ -429,5 +446,14 @@ class Gateway extends AbstractGateway
     function setPayForm()
     {
         return;
+    }
+    
+    public function getDescription()
+    {
+            return __('To install the Paypal Driver (Rest API) : <br/>
+Declare your REST API App on https://developer.paypal.com/developer/applications/ : you will get the API Credentials (Client ID and Secret Key)<br/>
+You can use the sandbox mode for your test and also check the error mode (no payment), to fine tune your code<br/>
+You can get testing accounts from https://developer.paypal.com/developer/accounts/ : xxx-facilitator@xxx.com (seller) and xxx-buyer@xxx.com (buyer). You can use the pass of your normal account<br/>
+        ');
     }
 }
