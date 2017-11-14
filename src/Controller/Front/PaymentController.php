@@ -393,12 +393,11 @@ class PaymentController extends IndexController
         )));
         
         $processing = Pi::api('processing', 'order')->getProcessing();
-        Pi::api('order', 'order')->unsetOrderInfo();
-        
         if (!empty($processing['invoice'])) {
             // Get invoice
             $invoice = Pi::api('invoice', 'order')->getInvoice($processing['invoice']);
             $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
+            Pi::api('order', 'order')->unsetOrderInfo();
             if ($gateway->getType() == AbstractGateway::TYPE_REST) {
                 $paymentId = $this->params('paymentId');
                 $payerId = $this->params('PayerID');
@@ -421,6 +420,7 @@ class PaymentController extends IndexController
                 return $this->redirect($url);
             }
         } else {
+            Pi::api('order', 'order')->unsetOrderInfo();
             $url = array('', 'controller' => 'index', 'action' => 'index');
             $message = __('Order canceled');
             return $this->jump($url, $message);
