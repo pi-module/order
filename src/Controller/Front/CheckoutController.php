@@ -136,14 +136,18 @@ class CheckoutController extends IndexController
                 $values['setup_price'] +
                 $values['vat_price']
             ) - $values['discount_price']);
-
         
-
         // Save values to order
-        $order = $this->getModel('order')->createRow();
+        if (isset($_SESSION['order']['id'])) {
+            $order = $this->getModel('order')->find($_SESSION['order']['id']); // ORDERHERE
+        } 
+        if (empty($order)) {
+            $order = $this->getModel('order')->createRow(); // ORDERHERE
+        }
         $order->assign($values);
         $order->save();
-
+        $_SESSION['order']['id'] = $order['id'];
+    
         // Log term and condition acceptation
         if (Pi::service('module')->isActive('user')){
             $condition = Pi::api('condition', 'user')->getLastEligibleCondition();
@@ -179,7 +183,8 @@ class CheckoutController extends IndexController
                             ) - $product['discount_price']) * $product['number'];
                     
                     // Save basket
-                    $basket = $this->getModel('basket')->createRow();
+                    $this->getModel('basket')->delete(array('order' => $_SESSION['order']['id']));
+                    $basket = $this->getModel('basket')->createRow(); // ORDERHERE
                     $basket->order = $order->id;
                     $basket->product = $product['product'];
                     $basket->discount_price = isset($product['discount_price']) ? $product['discount_price'] : 0;
@@ -237,14 +242,24 @@ class CheckoutController extends IndexController
                 Pi::api('user', 'order')->updateUserInformation($values);
             }
             // Set invoice
-            $result = Pi::api('invoice', 'order')->createInvoice($order->id, $uid);
+            $result = array();
+            if (isset($_SESSION['order']['id'])) {
+                $result = Pi::api('invoice', 'order')->getInvoiceFromOrder($_SESSION['order']['id']); // ORDERHERE
+                if (count($result)) {
+                    $result = current($result);
+                }
+            } 
+            if (!count($result)) {
+                $result = Pi::api('invoice', 'order')->createInvoice($order->id, $uid); // ORDERHERE
+            }
+            
             // Add user credit
             if (isset($cart['credit'])) {
                 $cart['credit']['module'] = $order->module_name;
                 Pi::api('credit', 'order')->addHistory($cart['credit'], $order->id);
             }
             // unset order
-            Pi::api('order', 'order')->unsetOrderInfo();
+            // Pi::api('order', 'order')->unsetOrderInfo();  // ORDERHERE
             // Send notification
             if (!$gatewayOptions['onemail']) {
                 Pi::api('notification', 'order')->addOrder($order->toArray());

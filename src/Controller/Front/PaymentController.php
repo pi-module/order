@@ -393,6 +393,8 @@ class PaymentController extends IndexController
         )));
         
         $processing = Pi::api('processing', 'order')->getProcessing();
+        Pi::api('order', 'order')->unsetOrderInfo();
+        
         if (!empty($processing['invoice'])) {
             // Get invoice
             $invoice = Pi::api('invoice', 'order')->getInvoice($processing['invoice']);
