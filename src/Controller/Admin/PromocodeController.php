@@ -69,6 +69,7 @@ class PromocodeController extends ActionController
                 $values = $form->getData();
                 $values['time_start'] = strtotime($values['time_start']);
                 $values['time_end'] = strtotime($values['time_end']);
+                $values['module'] = json_encode($values['module']);
                 
                 if (!empty($values['id'])) {
                     $row = $this->getModel('promocode')->find($values['id']);
@@ -90,6 +91,7 @@ class PromocodeController extends ActionController
                 $data = $row->toArray();
                 $data['time_start'] = date('Y-m-d', $data['time_start']);
                 $data['time_end'] = date('Y-m-d', $data['time_end']);
+                $data['module'] = json_decode($data['module'], true);
                 
                 $form->setData($data);    
             }

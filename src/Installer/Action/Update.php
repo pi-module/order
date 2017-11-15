@@ -517,7 +517,7 @@ CREATE TABLE `{promocode}` (
   `promo`         TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
   `time_start`      INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   `time_end`        INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
-  `module`          VARCHAR(16) NOT NULL,
+  `module`          VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`)
 );
 EOD;

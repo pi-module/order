@@ -99,6 +99,10 @@ class PromocodeForm extends BaseForm
                 'label' => __('Module'),
                 'value_options' => $this->_modules,
             ),
+            'attributes' => array(
+                'size' => 5,
+                'multiple' => 1
+            )
         ));
         
         $this->add(array(

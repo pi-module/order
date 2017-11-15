@@ -36,7 +36,7 @@ class PromocodeFilter extends InputFilter
                         'adapter' => Pi::model('promocode', 'order')->getAdapter(),
                         'exclude' => array(
                             'field' => 'id',
-                            'value' => $option['id']
+                            'value' => isset($option['id']) ? $option['id'] : null
                         )                            
                     )
                 )

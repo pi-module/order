@@ -32,4 +32,16 @@ class Promocode extends AbstractApi
         $row = Pi::model('promocode', 'order')->selectWith($select)->current();
         return $row;        
     }
+    
+    public function hasActiveCode()
+    {
+        $where = array(
+            'time_start <= ' . strtotime(date('Y-m-d')),
+            'time_end >= ' . strtotime(date('Y-m-d')),
+        );
+        
+        $select = Pi::model('promocode', 'order')->select()->where($where);
+        $count = Pi::model('promocode', 'order')->selectWith($select)->count();
+        return $count;        
+    }
 }
