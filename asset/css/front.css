@@ -164,7 +164,9 @@ ul.progtrckr li.progtrckr-pending:before {
 
 .selected-address {
     display: inline-block;
-    padding: 8px 4px 8px 4px;
+    padding: 9px 5px 9px 5px;
+    border-radius: 0px;
+    margin-right:-3px;
 }
 
 .text-loyalty {
@@ -179,4 +181,7 @@ ul.progtrckr li.progtrckr-pending:before {
 .btn-delete {
     background:#ccc;
     color:#000;
+    border-radius:0px;
 }
+
+.btn-success {padding:5px!important}

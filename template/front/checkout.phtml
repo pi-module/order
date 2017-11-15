@@ -88,7 +88,7 @@ $script = <<<'EOT'
             $('.showCustomerFrom').removeClass('hidden');
             
             $(e.target).addClass('hidden');
-            $(e.target).parent().find('.selected-address').removeClass('hidden');
+            $(e.target).parent().parent().find('.selected-address').removeClass('hidden');
         },
         newAddressAction: function (e) {
             $('#customerFromNew').removeClass('hidden');
@@ -155,7 +155,7 @@ $this->footScript()->appendScript($script);
             <?php if (!empty($customers)) { ?>
                 <div class="clearfix row">
                     <?php foreach ($customers as $customer) { ?>
-                        <div class="col-md-12 customer-single"
+                        <div class="col-md-4 customer-single"
                              data-id="customerFrom<?php echo $customer['id']; ?>"
                              data-button="customerFromButton<?php echo $customer['id']; ?>">
                             <div class="clearfix">
@@ -212,17 +212,17 @@ $this->footScript()->appendScript($script);
                                 <br />
                                 <ul class="list-inline">
                                     <li>
-                                        <button id="customerFromButton<?php echo $customer['id']; ?>" class="showCustomerFrom btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
-                                            <?php _e('Use it'); ?>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <spam class="label label-success hidden selected-address">
+                                        <div class="label label-success hidden selected-address">
                                             <i class="fa fa-check"></i> <?php _e('Selected address') ?>
-                                        </spam>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'index', 'customer' => $customer['id']))) ?>" class=" btn btn-primary btn-sm" rel="<?php echo $customer['id']; ?>">
+                                        <a href="#" id="customerFromButton<?php echo $customer['id']; ?>" class="showCustomerFrom btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
+                                           <?php _e('Use it'); ?>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'index', 'customer' => $customer['id']))) ?>" class=" btn btn-primary  btn-sm" rel="<?php echo $customer['id']; ?>">
                                             <i class="fa fa-edit"></i> <?php _e('Edit'); ?>
                                         </a>
                                     </li>

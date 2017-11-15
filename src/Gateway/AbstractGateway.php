@@ -266,11 +266,12 @@ abstract class AbstractGateway
         return $this;
     }
     
-    protected function setLog($value)
+    protected function setLog($value, $message)
     {
         $log = array();
         $log['gateway'] = $this->gatewayAdapter;
         $log['value'] = $value;
+        $log['message'] = $message;
         $log['invoice'] = $this->gatewayPayInformation['invoice'];
         Pi::api('log', 'order')->setLog($log);
         
