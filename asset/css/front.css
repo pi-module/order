@@ -185,3 +185,12 @@ ul.progtrckr li.progtrckr-pending:before {
 }
 
 .btn-success {padding:5px!important}
+
+
+.btn-refresh {
+    color: #EC407A;
+    border: 1px solid #EC407A;
+    background: #fff;
+    margin-left:-1px;
+    padding:5px!important;
+}

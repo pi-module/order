@@ -37,6 +37,7 @@ class PromoCheckoutForm extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
+                'class' => 'form-control'
             )
         ));
         
@@ -44,8 +45,8 @@ class PromoCheckoutForm extends BaseForm
             'name' => 'submit_promo',
             'type' => 'submit',
             'attributes' => array(
-                'value' => __('Ok'),
-                'class' => 'btn btn-success',
+                'value' => __('Refresh'),
+                'class' => 'btn btn-refresh form-control',
             )
         ));
     }

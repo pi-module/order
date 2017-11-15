@@ -347,7 +347,31 @@ $this->footScript()->appendScript($script);
                 </div>
                 <div class="clearfix">
                     <?php if (isset($forms['promoCheckout'])) { ?>
-                        <?php echo $this->form($forms['promoCheckout'], 'vertical'); ?>
+                        <?php echo $this->form()->openTag($forms['promoCheckout']); ?>
+                            <div class="col-md-10 nopadding">
+                                <div class="form-group has-feedback" data-name="code">
+                                    <label class=" control-label">
+                                        Promo code
+                                    </label>
+                                    <div class=" js-form-element">
+                                        <?php echo $this->formElement($forms['promoCheckout']->get('code')); ?>
+                                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                        <span style="display:block;" class="text-muted"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 nopadding">
+                                <label class=" control-label">
+                                    &nbsp;
+                                 </label>
+                                <div class="form-group has-feedback" data-name="code">
+                                    <div class=" js-form-element">
+                                        <?php echo $this->formElement($forms['promoCheckout']->get('submit_promo')); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        <?php echo $this->form()->closeTag($forms['promoCheckout']); ?>
                     <?php } ?>
                     <?php if (isset($forms['order'])) { ?>
                         <?php echo $this->form($forms['order'], 'vertical'); ?>
