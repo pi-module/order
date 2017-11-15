@@ -508,6 +508,35 @@ EOD;
             }
         }
 
+
+         if (version_compare($moduleVersion, '1.10.0', '<')) {
+            $sql = <<<'EOD'
+CREATE TABLE `{promocode}` (
+  `id`            INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `code`          VARCHAR(16) NOT NULL,
+  `promo`         TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
+  `time_start`      INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
+  `time_end`        INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
+  `module`          VARCHAR(16) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+EOD;
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'SQL schema query for author table failed: '
+                        . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+        }
+
+
         return true;
     }
 }

@@ -51,7 +51,7 @@ class Gateway extends AbstractGateway
         $secret = $this->gatewayOption['password'];
         $url = $this->getUrl() . '/oauth2/token';
         
-        $this->setLog('token start');
+        $this->setLog('{}', 'token start');
                 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -64,7 +64,7 @@ class Gateway extends AbstractGateway
         $result = curl_exec($ch);
         curl_close($ch);
 
-        $this->setLog('token_stop : ' . $result);
+        $this->setLog($result, 'token_stop');
         
         if(empty($result)) {
            return null;
@@ -147,7 +147,7 @@ class Gateway extends AbstractGateway
             ]
         }';
         
-        $this->setLog('approval_start : ' . $data);
+        $this->setLog($data, 'approval_start');
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -161,7 +161,7 @@ class Gateway extends AbstractGateway
         $result = curl_exec($ch);
         curl_close($ch);
         
-        $this->setLog('approval_stop : ' . $result);
+        $this->setLog($result, 'approval_stop');
         
         if(empty($result)) {
             return null;
@@ -195,7 +195,7 @@ class Gateway extends AbstractGateway
             "Authorization: Bearer " . $token
         );
         
-        $this->setLog('payment_detail_start : ' . $paymentId);
+        $this->setLog($paymentId, 'payment_detail_start');
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -206,7 +206,7 @@ class Gateway extends AbstractGateway
         $result = curl_exec($ch);
         curl_close($ch);
         
-        $this->setLog('payment_detail_stop : ' . $result);
+        $this->setLog($result, 'payment_detail_stop');
         
         if(empty($result)) {
             return null;
@@ -230,7 +230,7 @@ class Gateway extends AbstractGateway
             $header[] = 'PayPal-Mock-Response: {"mock_application_codes":"INSTRUMENT_DECLINED"';    
         }
 
-        $this->setLog('execute_start : ' . $data);
+        $this->setLog($data, 'execute_start');
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -243,7 +243,7 @@ class Gateway extends AbstractGateway
         $result = curl_exec($ch);
         curl_close($ch);
     
-        $this->setLog('execute_stop : ' . $result);
+        $this->setLog($result, 'execute_stop');
         
         if(empty($result)) {
             return null;
@@ -262,7 +262,7 @@ class Gateway extends AbstractGateway
     public function setInformation()
     {
         $gateway = array();
-        $gateway['title'] = __('Paypal');
+        $gateway['title'] = __('Paypal (REST API)');
         $gateway['path'] = 'Paypal';
         $gateway['type'] = 'online';
         $gateway['version'] = '2.0';

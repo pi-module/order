@@ -20,6 +20,8 @@ use Module\Order\Form\AddressForm;
 use Module\Order\Form\AddressFilter;
 use Module\Order\Form\OrderForm;
 use Module\Order\Form\OrderFilter;
+use Module\Order\Form\PromoCheckoutForm;
+use Module\Order\Form\PromoCheckoutFilter;
 use Module\Order\Form\OrderSimpleForm;
 use Module\Order\Form\OrderSimpleFilter;
 use Module\System\Form\LoginForm;
@@ -139,10 +141,10 @@ class CheckoutController extends IndexController
         
         // Save values to order
         if (isset($_SESSION['order']['id'])) {
-            $order = $this->getModel('order')->find($_SESSION['order']['id']); // ORDERHERE
+            $order = $this->getModel('order')->find($_SESSION['order']['id']); 
         } 
         if (empty($order)) {
-            $order = $this->getModel('order')->createRow(); // ORDERHERE
+            $order = $this->getModel('order')->createRow();
         }
         $order->assign($values);
         $order->save();
@@ -184,7 +186,7 @@ class CheckoutController extends IndexController
                     
                     // Save basket
                     $this->getModel('basket')->delete(array('order' => $_SESSION['order']['id']));
-                    $basket = $this->getModel('basket')->createRow(); // ORDERHERE
+                    $basket = $this->getModel('basket')->createRow();
                     $basket->order = $order->id;
                     $basket->product = $product['product'];
                     $basket->discount_price = isset($product['discount_price']) ? $product['discount_price'] : 0;
@@ -244,13 +246,13 @@ class CheckoutController extends IndexController
             // Set invoice
             $result = array();
             if (isset($_SESSION['order']['id'])) {
-                $result = Pi::api('invoice', 'order')->getInvoiceFromOrder($_SESSION['order']['id']); // ORDERHERE
+                $result = Pi::api('invoice', 'order')->getInvoiceFromOrder($_SESSION['order']['id']); 
                 if (count($result)) {
                     $result = current($result);
                 }
             } 
             if (!count($result)) {
-                $result = Pi::api('invoice', 'order')->createInvoice($order->id, $uid); // ORDERHERE
+                $result = Pi::api('invoice', 'order')->createInvoice($order->id, $uid);
             }
             
             // Add user credit
@@ -258,8 +260,6 @@ class CheckoutController extends IndexController
                 $cart['credit']['module'] = $order->module_name;
                 Pi::api('credit', 'order')->addHistory($cart['credit'], $order->id);
             }
-            // unset order
-            // Pi::api('order', 'order')->unsetOrderInfo();  // ORDERHERE
             // Send notification
             if (!$gatewayOptions['onemail']) {
                 Pi::api('notification', 'order')->addOrder($order->toArray());
@@ -346,7 +346,11 @@ class CheckoutController extends IndexController
             
         $formOrder = new OrderForm('order', $option);
         $formOrder->setInputFilter(new OrderFilter($option));
-
+        
+        $formPromoCheckout = new PromoCheckoutForm('promoCheckout', $option);
+        $formPromoCheckout->setInputFilter(new PromoCheckoutFilter($option));
+        
+                
         // Check post
         $check = count($customers) == 0 ? true : false;
         if ($this->request->isPost()) {
@@ -390,6 +394,47 @@ class CheckoutController extends IndexController
                    
                     
                     $this->order($values, $customer, $cart, $config, $uid);                  
+                } 
+            } else if (isset($data['submit_promo'])) {
+                
+                $formPromoCheckout->setData($data);
+                if ($formPromoCheckout->isValid()) {
+                    // promo existantes
+                    foreach ($cart['product'] as $product) {
+                        if ($product['discount'] > 0) {
+                            $url = array('', 'module' => 'order', 'controller' => 'checkout', 'action' => 'index');
+                            $this->jump($url, __("You cannot combine two discounts."), 'error');
+                        }
+                    }       
+                    
+                    $values = $formPromoCheckout->getData();
+                    $promocode = Pi::api('promocode', 'order')->get($values['code']);
+                    if ($promocode) {
+                        if (time() < $promocode->time_start || time() > $promocode->time_end) {
+                            // Code dépassé
+                            $url = array('', 'module' => 'order', 'controller' => 'checkout', 'action' => 'index');
+                            $this->jump($url, __('This code has expired.'), 'error');
+                                
+                        } else if ($promocode->module != $cart['module_name']) {
+                            // mauvais module
+                            $url = array('', 'module' => 'order', 'controller' => 'checkout', 'action' => 'index');
+                            $this->jump($url, __('This code cannot be applied on this product.'), 'error');
+                        } else {
+                            // MAJ $cart
+                            foreach ($cart['product'] as &$product) {
+                                $product['discount'] = $promocode->promo;
+                                $product['discount_price'] = $product['product_price'] * $promocode->promo / 100;
+                                $product['vat_price'] = ($product['product_price'] - $product['discount_price']) * $product['vat'] / 100;    
+                            }
+                            Pi::api('order', 'order')->setOrderInfo($cart);
+                            $url = array('', 'module' => 'order', 'controller' => 'checkout', 'action' => 'index');
+                            $this->jump($url, __("Promo code accepted"), 'info');
+                        }
+                    } else {
+                        // Code inexistant
+                        $url = array('', 'module' => 'order', 'controller' => 'checkout', 'action' => 'index');
+                        $this->jump($url, __("This code doesn't exist"), 'error');
+                    }           
                 } 
             } else {
                 $formOrder->setData($data);
@@ -484,6 +529,7 @@ class CheckoutController extends IndexController
         $user = Pi::api('user', 'order')->getUserInformation();
         $user['customer_id'] = 0;
         $forms = array();
+        $forms['promoCheckout'] = $formPromoCheckout;
         
         // Set customer forms
         if (!empty($customers)) {
