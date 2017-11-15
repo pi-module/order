@@ -1,0 +1,18 @@
+<?php 
+$this->css(array(
+    $this->assetModule('css/admin.css'), 
+    $this->assetModule('script/system-ui.css', 'system'),
+));
+   
+$this->jQuery(array(
+    'ui/jquery-ui.custom.min.js',
+));
+$this->js($this->assetModule('script/system-msg.js', 'system'));
+$this->Backbone();
+    
+?>
+<div class="clearfix">
+    
+    <?php echo $this->form($form); ?>
+   
+</div>

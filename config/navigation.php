@@ -111,5 +111,14 @@ return array(
                 ),
             ),
         ),
+        'promocode' => array(
+            'label' => _a('Promotional codes'),
+            'route' => 'admin',
+            'controller' => 'promocode',
+            'action' => 'index',
+            'pages' => array(
+                
+            ),
+        ),
     ),
 );

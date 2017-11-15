@@ -347,6 +347,7 @@ $this->footScript()->appendScript($script);
                 </div>
                 <div class="clearfix">
                     <?php if (isset($forms['order'])) { ?>
+                        <?php echo $this->form($forms['promoCheckout'], 'vertical'); ?>
                         <?php echo $this->form($forms['order'], 'vertical'); ?>
                     <?php } ?>
                     </table>

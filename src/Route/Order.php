@@ -28,7 +28,7 @@ class Order extends Standard
     );
 
     protected $controllerList = array(
-        'checkout', 'credit', 'detail', 'index', 'invoice', 'payment'
+        'checkout', 'credit', 'detail', 'index', 'invoice', 'payment', 'promocode'
     );
 
     /**
