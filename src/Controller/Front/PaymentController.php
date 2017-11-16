@@ -478,7 +478,7 @@ class PaymentController extends IndexController
                 Pi::api('log', 'order')->setLog($log);
         
                 $url = array('', 'controller' => 'index', 'action' => 'index');
-                $message = __('Order canceled');
+                $message = __('Payment canceled');
                 return $this->jump($url, $message);
             }
         }

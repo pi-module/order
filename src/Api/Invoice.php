@@ -117,7 +117,6 @@ class Invoice extends AbstractApi
                     );
                     // return array
                     $result['status'] = $row->status;
-                    $result['message'] = __('Your invoice create successfully');
                     $result['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
                         'module' => $this->getModule(),
                         'controller' => 'detail',
@@ -230,7 +229,6 @@ class Invoice extends AbstractApi
                         );
                         // return array
                         $result['status'] = $information['status'];
-                        $result['message'] = __('Your invoice create successfully');
                         $result['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
                             'module' => $this->getModule(),
                             'controller' => 'detail',
