@@ -2,12 +2,12 @@
 
 [format]html[/format]
 
-[subject]%site_name% - Création d'une nouvelle commande[/subject]
+[subject]%site_name% - Nouvelle commande[/subject]
 
 [body]
 <div style="padding: 1px; direction: ltr;">
-	<h3 style="font-size: 1.1em;">Chère/cher Admin du site %site_name%</h3>
-	<div style="padding: 3px 0; margin: 1px 0;">Une nouvelle commande (%type_product%) a été créée sur le site %site_name%, merci de vous connecter pour en voir les détails</div>
+	<h3 style="font-size: 1.1em;">Chère/cher Admin,</h3>
+	<div style="padding: 3px 0; margin: 1px 0;">Une nouvelle commande (%type_product%) a été créée sur votre site, merci de vous connecter pour en voir les détails</div>
 	<div style="padding: 3px 0; margin: 1px 0;">Merci de ne pas répondre à ce mail</div>
 	<div style="margin-top: 10px">
         <a href="%site_url%" title="%site_name%">%site_name%</a>
