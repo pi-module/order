@@ -372,6 +372,11 @@ $this->footScript()->appendScript($script);
                             </div>
                             <div class="clearfix"></div>
                         <?php echo $this->form()->closeTag($forms['promoCheckout']); ?>
+                        <?php if ($msgPromoCode) { ?>
+                            <div class="clearfix alert alert-<?php echo $msgPromoCode['type'] ?>" role="alert">
+                                    <span><?php echo $msgPromoCode['message'] ?></span>
+                            </div>
+                        <?php } ?>
                     <?php } ?>
                     <?php if (isset($forms['order'])) { ?>
                         <?php echo $this->form($forms['order'], 'vertical'); ?>

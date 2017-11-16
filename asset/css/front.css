@@ -188,9 +188,15 @@ ul.progtrckr li.progtrckr-pending:before {
 
 
 .btn-refresh {
-    color: #EC407A;
-    border: 1px solid #EC407A;
+    color: #03A9F4;
+    border: 1px solid #03A9F4;
     background: #fff;
+    margin-left:-1px;
+    padding:5px!important;
+}
+.btn-refresh:hover {
+    color: #fff;
+    background: #03A9F4;
     margin-left:-1px;
     padding:5px!important;
 }

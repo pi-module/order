@@ -346,7 +346,8 @@ class CheckoutController extends IndexController
             
         $formOrder = new OrderForm('order', $option);
         $formOrder->setInputFilter(new OrderFilter($option));
-        
+
+        $msgPromoCode = null;        
         $hasActiveCode = Pi::api('promocode', 'order')->hasActiveCode();
         if ($hasActiveCode) {
             $formPromoCheckout = new PromoCheckoutForm('promoCheckout', $option);
@@ -409,42 +410,59 @@ class CheckoutController extends IndexController
                         $authorizedModules = json_decode($promocode['module']);
                         if (strtotime(date('Y-m-d')) < $promocode->time_start || strtotime(date('Y-m-d')) > $promocode->time_end) {
                             // Code dépassé
-                            $url = array('', 'module' => 'order', 'controller' => 'checkout', 'action' => 'index');
-                            $this->jump($url, __('This code has expired.'), 'error');
+                            $msgPromoCode = array(
+                                'type' => 'info',
+                                'message' => __('This code has expired.')
+                            );
                                 
                         } else if (!in_array($cart['module_name'], $authorizedModules)) {
                             // mauvais module
-                            $url = array('', 'module' => 'order', 'controller' => 'checkout', 'action' => 'index');
-                            $this->jump($url, __('This code cannot be applied on this product.'), 'error');
+                            $msgPromoCode = array(
+                                'type' => 'info',
+                                'message' => __('This code cannot be applied on this product.')
+                            );
+                                
                         } else {
                             // promo existantes
+                            $canUpdate = true;
                             foreach ($cart['product'] as &$product) {
                                 if ($product['discount'] > 0) {
+                                    $canUpdate = false;     
                                     if ($product['discount'] < $promocode->promo) {
                                         $product['discount_price'] = $product['product_price'] - ($product['product_price'] * $promocode->promo / 100);
                                         $product['discount'] = $promocode->promo;
-                                        $product['vat_price'] = $product['discount_price'] * $product['vat'] / 100;     
+                                        $product['vat_price'] = $product['discount_price'] * $product['vat'] / 100;
+                                        Pi::api('order', 'order')->setOrderInfo($cart);
                                     }
-                                    Pi::api('order', 'order')->setOrderInfo($cart);
-                                    $url = array('', 'module' => 'order', 'controller' => 'checkout', 'action' => 'index');
-                                    $this->jump($url, __("You are trying to use a promo code on a product that already has a discount. We have automatically applied the most advantageous discount for you (it is not possible to cumulate the discounts)"), 'error');
+                                    
+                                    $msgPromoCode = array(
+                                        'type' => 'success',
+                                        'message' => __("You are trying to use a promo code on a product that already has a discount. We have automatically applied the most advantageous discount for you (it is not possible to cumulate the discounts)")
+                                    );
                                 }
                             }
                             
                             // MAJ $cart
-                            foreach ($cart['product'] as &$product) {
-                                $product['discount'] = $promocode->promo;
-                                $product['discount_price'] = $product['product_price'] * $promocode->promo / 100;
-                                $product['vat_price'] = ($product['product_price'] - $product['discount_price']) * $product['vat'] / 100;    
+                            if ($canUpdate) {
+                                foreach ($cart['product'] as &$product) {
+                                    $product['discount'] = $promocode->promo;
+                                    $product['discount_price'] = $product['product_price'] * $promocode->promo / 100;
+                                    $product['vat_price'] = ($product['product_price'] - $product['discount_price']) * $product['vat'] / 100;    
+                                }
+                                Pi::api('order', 'order')->setOrderInfo($cart);
+                            
+                                $msgPromoCode = array(
+                                    'type' => 'success',
+                                    'message' => __("Promo code accepted")
+                                );
                             }
-                            Pi::api('order', 'order')->setOrderInfo($cart);
-                            $url = array('', 'module' => 'order', 'controller' => 'checkout', 'action' => 'index');
-                            $this->jump($url, __("Promo code accepted"), 'info');
                         }
                     } else {
                         // Code inexistant
-                        $url = array('', 'module' => 'order', 'controller' => 'checkout', 'action' => 'index');
-                        $this->jump($url, __("This code doesn't exist"), 'error');
+                        $msgPromoCode = array(
+                            'type' => 'info',
+                            'message' => __("This code doesn't exist")
+                        );
                     }           
                 } 
             } else {
@@ -624,6 +642,8 @@ class CheckoutController extends IndexController
         $this->view()->assign('customers', $customers);
         $this->view()->assign('check', $check);
         $this->view()->assign('editAddress', $editAddress);
+        $this->view()->assign('msgPromoCode', $msgPromoCode);
+        
     }
 
     public function installmentAction()
