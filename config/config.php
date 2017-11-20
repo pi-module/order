@@ -171,7 +171,7 @@ return array(
         ),
         'order_address1' => array(
             'category' => 'order',
-            'title' => _a('Show delivery address'),
+            'title' => _a('Show address'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -179,7 +179,7 @@ return array(
         ),
         'order_address2' => array(
             'category' => 'order',
-            'title' => _a('Show invoicing address'),
+            'title' => _a('Show address addition'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
