@@ -438,7 +438,7 @@ class CheckoutController extends IndexController
                                 if ($product['discount'] > 0) {
                                     $canUpdate = false;     
                                     if ($product['discount'] < $promocode->promo) {
-                                        $product['discount_price'] = $product['product_price'] - ($product['product_price'] * $promocode->promo / 100);
+                                        $product['discount_price'] = $product['product_price'] * $promocode->promo / 100;
                                         $product['discount'] = $promocode->promo;
                                         $product['vat_price'] = $product['discount_price'] * $product['vat'] / 100;
                                         Pi::api('order', 'order')->setOrderInfo($cart);
