@@ -299,7 +299,7 @@ class CheckoutController extends IndexController
         $cart = Pi::api('order', 'order')->getOrderInfo();
         
         if (empty($cart) && !$config['order_anonymous']) {
-            $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
+            $url = array('route' => 'home');
             $this->jump($url);
         }
         
