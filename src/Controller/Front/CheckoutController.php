@@ -297,6 +297,12 @@ class CheckoutController extends IndexController
         $config = Pi::service('registry')->config->read($this->getModule());
         // Set cart
         $cart = Pi::api('order', 'order')->getOrderInfo();
+        
+        if (empty($cart) && !$config['order_anonymous']) {
+            $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
+            $this->jump($url);
+        }
+        
         if (empty($cart)) {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
             $this->jump($url, __('Your cart is empty.'), 'error');
