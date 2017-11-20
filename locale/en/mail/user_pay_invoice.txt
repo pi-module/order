@@ -2,12 +2,14 @@
 
 [format]html[/format]
 
-[subject]%site_name% - Pay invoice[/subject]
+[subject]%site_name% - Your invoice was paid[/subject]
 
 [body]
 <div style="padding: 1px; direction: ltr;">
 	<h3 style="font-size: 1.1em;">Dear %first_name% %last_name%</h3>
+	<div style="padding: 3px 0; margin: 1px 0;">Thanks for your purchase !</div>
 	<div style="padding: 3px 0; margin: 1px 0;">Your <strong>%invoice_id%</strong> invoice paid successfully on %site_name% website. please click on this link to see details</div>
+	<div style="padding: 3px 0; margin: 1px 0;">Here is the list of the bought items : %product_list%</div>
 	<div style="padding: 3px 0; margin: 1px 0;">
         <a href="%order_link%" title="Invoice details">%order_link%</a>
 	</div>
