@@ -180,7 +180,7 @@ class AddressForm extends BaseForm
             $this->add(array(
                 'name' => 'address1',
                 'options' => array(
-                    'label' => __('Delivery address'),
+                    'label' => __('Address'),
                 ),
                 'attributes' => array(
                     'type' => 'textarea',
@@ -196,14 +196,14 @@ class AddressForm extends BaseForm
             $this->add(array(
                 'name' => 'address2',
                 'options' => array(
-                    'label' => __('Invoicing Address'),
+                    'label' => __('Address addition'),
                 ),
                 'attributes' => array(
                     'type' => 'textarea',
                     'rows' => '3',
                     'cols' => '40',
                     'description' => '',
-                    'required' => true,
+                    'required' => false,
                 )
             ));
         }

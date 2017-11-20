@@ -129,6 +129,9 @@ ul.progtrckr li.progtrckr-pending:before {
     padding: 20px;
     /* min-height: 180px; */
 }
+.customer-single .info {
+    min-height:172px;
+}
 
 .submit_order_simple {
     font-size: 1.2em;

@@ -158,58 +158,52 @@ $this->footScript()->appendScript($script);
                         <div class="col-md-4 customer-single"
                              data-id="customerFrom<?php echo $customer['id']; ?>"
                              data-button="customerFromButton<?php echo $customer['id']; ?>">
-                            <div class="clearfix">
-                                <ul class="list-inline">
-                                    <li><?php echo $this->escape($customer['first_name']); ?></li>
-                                    <li><?php echo $this->escape($customer['last_name']); ?></li>
-                                    <li>( <?php echo $this->escape($customer['email']); ?> )</li>
-                                </ul>
-                                <?php if (!empty($customer['company'])) { ?>
-                                    <p><?php echo $this->escape($customer['company']); ?></p>
-                                <?php } ?>
-                                <?php if (!empty($customer['address1'])) { ?>
+                             <div class="clearfix">
+                                <div class="info">
                                     <p>
-                                        <strong><?php _e('Delivery address'); ?></strong> : <span class="small"><?php echo $this->escape($customer['address1']); ?></span>
+                                        <strong><?php _e('Invoicing address'); ?></strong>
                                     </p>
-                                <?php } ?>
-                                <?php if (!empty($customer['address2'])) { ?>
-                                    <p>
-                                        <strong><?php _e('Invoicing address'); ?></strong> : <span class="small"><?php echo $this->escape($customer['address2']); ?></span>
-                                    </p>
-                                <?php } ?>
-                                <div class="clearfix row">
-                                    <?php if (!empty($customer['zip_code'])) { ?>
-                                        <div class="col-md-6">
-                                            <strong><?php _e('Zip code'); ?></strong> :
-                                            <?php echo $this->escape($customer['zip_code']); ?>
-                                        </div>
+                                    <div>
+                                        <?php echo $this->escape($customer['first_name']); ?>  <?php echo $this->escape($customer['last_name']); ?>
+                                        ( <?php echo $this->escape($customer['email']); ?> )
+                                    </div>
+                                    <?php if (!empty($customer['company'])) { ?>
+                                        <div><?php echo $this->escape($customer['company']); ?></div>
                                     <?php } ?>
-                                    <?php if (!empty($customer['state'])) { ?>
-                                        <div class="col-md-6">
-                                            <strong><?php _e('State'); ?></strong> :
-                                            <?php echo $this->escape($customer['state']); ?>
-                                        </div>
+                                    <?php if (!empty($customer['address1'])) { ?>
+                                        <div><?php echo $this->escape($customer['address1']); ?></div>
                                     <?php } ?>
-                                    <?php if (!empty($customer['city'])) { ?>
-                                        <div class="col-md-6">
-                                            <strong><?php _e('City'); ?></strong> :
-                                            <?php echo $this->escape($customer['city']); ?>
-                                        </div>
+                                    <?php if (!empty($customer['address2'])) { ?>
+                                        <div><?php echo $this->escape($customer['address2']); ?></div>
                                     <?php } ?>
+                                    <div>
+                                        <?php if (!empty($customer['zip_code'])) { ?>
+                                            <?php echo $this->escape($customer['zip_code']); ?>&nbsp;
+                                        <?php } ?>
+                                        <?php if (!empty($customer['state'])) { ?>
+                                            <?php echo $this->escape($customer['state']); ?>&nbsp;
+                                        <?php } ?>
+                                        <?php if (!empty($customer['city'])) { ?>
+                                            <?php echo $this->escape($customer['city']); ?>&nbsp;
+                                        <?php } ?>
+                                    </div>
+                                    
                                     <?php if (!empty($customer['phone'])) { ?>
-                                        <div class="col-md-6">
-                                            <strong><?php _e('Phone'); ?></strong> :
+                                        <div>
+                                            <?php _e('Phone'); ?> :
                                             <?php echo $this->escape($customer['phone']); ?>
                                         </div>
                                     <?php } ?>
                                     <?php if (!empty($customer['mobile'])) { ?>
-                                        <div class="col-md-6">
-                                            <strong><?php _e('Mobile'); ?></strong> :
+                                        <div>
+                                            <?php _e('Mobile'); ?> :
                                             <?php echo $this->escape($customer['mobile']); ?>
                                         </div>
                                     <?php } ?>
+                                    
+                                    <br />
                                 </div>
-                                <br />
+                            
                                 <ul class="list-inline">
                                     <li>
                                         <div class="label label-success hidden selected-address">

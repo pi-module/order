@@ -344,7 +344,7 @@ class CheckoutController extends IndexController
             'customers' => $customers,
         );
         
-        $formAddress = new AddressForm();
+        $formAddress = new AddressForm($user);
         $formAddress->setInputFilter(new AddressFilter($option));
         
         $formOrderSimple = new OrderSimpleForm('order', $option);
@@ -378,6 +378,9 @@ class CheckoutController extends IndexController
                     $values['time_create'] = time();
                     
                     $values['uid'] = $uid;
+                    $values['last_name'] = strtoupper($values['last_name']);
+                    $values['city'] = strtoupper($values['city']);
+                    
                     if ($values['customer_id'] == 0) {
                         Pi::api('customer', 'order')->addCustomer($values);
                     } else {
@@ -557,6 +560,18 @@ class CheckoutController extends IndexController
                 $formAddress->setData($values);
                 $check = true;
                 $editAddress = true;
+            } else {
+                // Get user base info
+                $user = array();
+                if (Pi::user()->getId()) {
+                    $user = Pi::api('user', 'user')->get(
+                        Pi::user()->getId(),
+                        array('email', 'first_name', 'last_name', 'address1', 'address2', 'city', 'zip_code', 'country', 'state', 'mobile', 'phone'),
+                        true,
+                        true
+                    );
+                }
+                $formAddress->setData($user);
             }
         }
 

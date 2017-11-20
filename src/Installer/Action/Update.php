@@ -536,7 +536,20 @@ EOD;
             }
         }
 
-
+        if (version_compare($moduleVersion, '1.10.1', '<')) {
+            // Alter table field add amount_new
+            $sql = sprintf("UPDATE %s SET `city` = UPPER(city), last_name = UPPER(last_name)", $customerTable);
+            try {
+                $customerAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
         return true;
     }
 }
