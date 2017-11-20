@@ -45,7 +45,7 @@ class PromoCheckoutForm extends BaseForm
             'name' => 'submit_promo',
             'type' => 'submit',
             'attributes' => array(
-                'value' => __('Refresh'),
+                'value' => __('Apply'),
                 'class' => 'btn btn-refresh form-control',
             )
         ));
