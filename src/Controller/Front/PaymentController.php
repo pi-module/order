@@ -465,10 +465,9 @@ class PaymentController extends IndexController
     public function cancelAction()
     {
         $processing = Pi::api('processing', 'order')->getProcessing();
-        if (!empty($processing['invoice'])) {
+        if (!empty($processing['order'])) {
             // Get invoice
-            $invoice = Pi::api('invoice', 'order')->getInvoice($processing['invoice']);
-            $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
+            $gateway = Pi::api('gateway', 'order')->getGateway($processing['gateway']);
             if ($gateway->getType() == AbstractGateway::TYPE_REST) {
                 Pi::api('processing', 'order')->removeProcessing();
                 
