@@ -68,6 +68,14 @@ class Update extends BasicUpdate
         $historyTable = $historyModel->getTable();
         $historyAdapter = $historyModel->getAdapter();
 
+        $processModel = Pi::model('processing', $this->module);
+        $processTable = $processModel->getTable();
+        $processAdapter = $processModel->getAdapter();
+        
+        $logModel = Pi::model('log', $this->module);
+        $logTable = $logModel->getTable();
+        $logAdapter = $logModel->getAdapter();
+
         if (version_compare($moduleVersion, '1.3.6', '<')) {
             // Alter table field add id_number
             $sql = sprintf("ALTER TABLE %s ADD `id_number` varchar(255) NOT NULL default ''", $orderTable);
@@ -550,6 +558,48 @@ EOD;
                 return false;
             }
         }
+        
+        if (version_compare($moduleVersion, '1.11.0', '<')) {
+            // Alter table field add amount_new
+            $sql = sprintf("ALTER TABLE %s CHANGE `invoice` `order` INT(10) NOT NULL ", $processTable);
+            try {
+                $processAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+           $sql = sprintf("ALTER TABLE %s ADD `extra` TEXT NULL", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+            $sql = sprintf("ALTER TABLE %s CHANGE `invoice` `order` INT(10) NOT NULL ", $logTable);
+            try {
+                $logAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+        }
+        
+        
         return true;
     }
 }

@@ -265,7 +265,8 @@ class Invoice extends AbstractApi
                     break;
             }
         }
-        // return
+
+        $result['random_id'] = $row->random_id;
         return $result;
     }
 
@@ -299,10 +300,6 @@ class Invoice extends AbstractApi
         $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $invoices[$row->id] = $this->canonizeInvoice($row);
-            // Get log
-            if ($getLog) {
-                $invoices[$row->id]['log'] = Pi::api('log', 'order')->getTrueLog($row->id);
-            }
             // Check allow payment
             /* if ($order['type_payment'] == 'installment') {
                 if ($invoices[$row->id]['extra']['type'] == 'installment') {

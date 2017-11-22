@@ -242,19 +242,8 @@ class CheckoutController extends IndexController
             // Update user information
             if ($config['order_update_user'] && isset($values['update_user']) && $values['update_user']) {
                 Pi::api('user', 'order')->updateUserInformation($values);
-            }
-            // Set invoice
-            $result = array();
-            if (isset($_SESSION['order']['id'])) {
-                $result = Pi::api('invoice', 'order')->getInvoiceFromOrder($_SESSION['order']['id']); 
-                if (count($result)) {
-                    $result = current($result);
-                }
-            } 
-            if (!count($result)) {
-                $result = Pi::api('invoice', 'order')->createInvoice($order->id, $uid);
-            }
-            
+            }    
+
             // Add user credit
             if (isset($cart['credit'])) {
                 $cart['credit']['module'] = $order->module_name;
@@ -265,17 +254,22 @@ class CheckoutController extends IndexController
                 Pi::api('notification', 'order')->addOrder($order->toArray());
             }
             // Go to payment
-            if ($result['status'] == 0) {
-                $url = array('', 'controller' => 'index', 'action' => 'index');
-                $this->jump($url, $result['message'], 'error');
+            if ($config['order_payment'] == 'payment') {
+                $url = Pi::url(Pi::service('url')->assemble('order', array(
+                    'module' => $this->getModule(),
+                    'controller' => 'payment',
+                    'action' => 'index',
+                    'id' => $order->id,
+                )));
             } else {
-                if ($config['order_payment'] == 'payment') {
-                    $url = $result['pay_url'];
-                } else {
-                    $url = $result['order_url'];
-                }
-                $this->jump($url, $result['message'], 'success');
+                $url = Pi::url(Pi::service('url')->assemble('order', array(
+                    'module' => $this->getModule(),
+                    'controller' => 'detail',
+                    'action' => 'index',
+                    'id' => $order->order,
+                )));
             }
+            $this->jump($url, $result['message'], 'success');
         } else {
             $error = array(
                 'values' => $values,

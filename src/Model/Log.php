@@ -23,7 +23,7 @@ class Log extends Model
     protected $columns = array(
         'id',
         'uid',
-        'invoice',
+        'order',
         'gateway',
         'time_create',
         'amount',

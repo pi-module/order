@@ -1,0 +1,235 @@
+<?php $invoice = current($order['invoices']); ?>
+<style>
+    .odd {background:#f5f5f5}
+    table {border:1px solid #e3e3e3; width:100%}
+    th, td {padding:10px 5px}
+    .header {position:relative; height:50mm; width:200mm;background:#f5f5f5; border:1px solid #e3e3e3}
+    .header div {position:absolute; bottom:5mm;left:5mm; }
+    .align-right {text-align:right; right:5mm}
+    div.small{position:relative; float:left; right:0mm; top:10mm; width:75mm;}
+    .small .col1{width:66%}
+    .small .col2{width:34%}
+    div.big {position:relative; margin:10mm auto 0 auto;width:200mm;}
+    .big .col1{width:75%}
+    .big .col2{width:12%}
+    .big .col3{width:13%}
+</style>
+<div class="container">
+    <div class="header">
+        <div>
+            <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
+                <?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?>
+                <br/>        
+            <?php } ?>
+            <?php if (!empty($order['address1'])) { ?>
+                <?php echo $this->escape($order['address1']); ?>
+                <br/>
+            <?php } ?>
+            <?php if (!empty($order['address2'])) { ?>
+                <?php echo $this->escape($order['address2']); ?>
+                <br/>
+            <?php } ?>
+            <?php if (!empty($order['city'])) { ?>
+                <?php echo $this->escape($order['city']); ?>
+                <br/>
+            <?php } ?>
+            <?php if (!empty($order['state'])) { ?>
+                <?php echo $this->escape($order['state']); ?>
+                <br/>
+            <?php } ?>
+            <?php if (!empty($order['zip_code'])) { ?>
+                <?php echo $this->escape($order['zip_code']); ?>
+                <br/>
+            <?php } ?>
+            <?php if (!empty($order['country'])) { ?>
+                <?php echo $this->escape($order['country']); ?>
+                <br/>
+            <?php } ?>
+            <?php if (!empty($order['id_number'])) { ?>
+                <?php echo $this->escape($order['id_number']); ?>
+                <br/>
+            <?php } ?>
+            <?php if (!empty($order['email'])) { ?>
+                <?php echo $this->escape($order['email']); ?>
+                <br/>
+            <?php } ?>
+            <?php if (!empty($order['phone'])) { ?>
+                <?php echo $this->escape($order['phone']); ?>
+                <br/>
+            <?php } ?>
+            <?php if (!empty($order['mobile'])) { ?>
+                <?php echo $this->escape($order['mobile']); ?>
+                <br/>
+            <?php } ?>
+            <?php if (!empty($order['company'])) { ?>
+                <?php echo $this->escape($order['company']); ?>
+                <br/>
+            <?php } ?>
+            <?php if (!empty($order['company_id'])) { ?>
+                <?php echo $this->escape($order['company_id']); ?>
+                <br/>
+            <?php } ?>
+            <?php if (!empty($order['company_vat'])) { ?>
+                <?php echo $this->escape($order['company_vat']); ?>
+                <br/>
+            <?php } ?>
+        </div>    
+        <div class="align-right">
+            <?php echo $config['order_sellerinfo']; ?>
+        </div>
+    </div>    
+    
+    <div class="small">
+            <table cellspacing="0">
+                <thead>
+                    <tr class="odd">
+                        <th colspan=2>
+                            <?php _e('Invoice'); ?>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col1">
+                            <?php _e('Order number'); ?>
+                        </td>
+                        <td class="align-right col2">
+                            <?php echo $order['code'] ?>
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <td>
+                            <?php _e('Invoice number'); ?>
+                        </td>
+                        <td class="align-right">
+                            <?php echo $invoice['code'] ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <?php _e('Time order'); ?>
+                        </td>
+                        <td class="align-right">
+                            <?php echo $this->escape($order['time_create_view']); ?>
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <td>
+                            <?php _e('Time payment'); ?>
+                        </td>
+                        <td class="align-right">
+                            <?php echo $this->escape($order['time_payment_view']); ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                           <?php _e('To pay'); ?>
+                        </td>
+                        <td class="align-right">
+                            <?php echo $this->escape($invoice['total_price_view']); ?>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        <div style="clear:both"></div>
+
+    </div>
+    <div class="big">
+            <table cellspacing="0" style="width:100%">
+                <thead>
+                    <tr class="odd">
+                        <th class="col1">
+                            <?php _e('Product'); ?>
+                        </th>
+                        <th class="col2">
+                            <?php _e('Number'); ?>
+                        </th>
+                        <th class="align-right col3">
+                            <?php _e('Price'); ?>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $odd = true; ?>
+                    <?php foreach ($order['products'] as $product) { ?>
+                        <?php $odd = !$odd ?>
+                        <tr class="<?php echo $odd ? 'odd' : '' ?>">
+                            <td>
+                                <?php echo $this->escape($product['details']['title']); ?>
+                            </td>
+                            <td style="text-align:center">
+                                <?php echo _number($this->escape($product['number'])); ?>
+                            </td>
+                            <td class="align-right">
+                                <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
+                            </td>
+                        </tr>
+                        <?php if ($product['discount_price']) { ?>
+                            <?php $odd = !$odd ?>
+                            <tr class="<?php echo $odd ? 'odd' : '' ?>">
+                                <td colspan=2>
+                                    <?php _e('Discount'); ?>
+                                </td>
+                                <td class="align-right">
+                                    <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    <?php } ?>
+                </tbody>
+            </table>
+        <div style="clear:both"></div>
+
+    </div>
+    <div class="small">
+            <table cellspacing="0">
+                <tbody>
+                    <tr class="odd">
+                        <td class="col1">
+                            <strong><?php _e('Product price ex VAT'); ?></strong>
+                        </td>
+                        <td class="align-right col2">
+                            <?php echo $this->escape($invoice['product_price_view']); ?>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <?php _e('Shipping'); ?>
+                        </td>
+                        <td class="align-right">
+                            <?php echo $this->escape($invoice['shipping_price_view']); ?>
+                        </td>
+                    </tr>
+                    <?php if ($product['discount_price']) { ?>
+                        <tr class="odd">
+                            <td>
+                                <?php _e('Discount'); ?>
+                            </td>
+                            <td class="align-right">
+                                <?php echo $this->escape($invoice['discount_price_view']); ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    <tr class="<?php echo $product['discount_price'] ? '' : 'odd'?>>
+                        <td>
+                            <?php _e('Vat'); ?>
+                        </td>
+                        <td class="align-right">
+                            <?php echo $this->escape($invoice['vat_price_view']); ?>
+                        </td>
+                    </tr>
+                    
+                    <tr class="<?php echo $product['discount_price'] ? 'odd' : ''?>">
+                        <td>
+                            <?php _e('Total all taxes included'); ?>
+                        </td>
+                        <td class="align-right">
+                            <?php echo $this->escape($invoice['total_price_view']); ?>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        <div style="clear:both"></div>
+    </div>
+</div>

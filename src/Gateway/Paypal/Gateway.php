@@ -169,11 +169,12 @@ class Gateway extends AbstractGateway
             $result = json_decode($result);
         }
         
-        $extra = json_decode($invoice['extra']);
+        
+        $extra = json_decode($order['extra']);
         $extra['paypal_payment_id'] = $result->id;
-        Pi::model('invoice', 'order')->update(
+        Pi::model('order', 'order')->update(
             array('extra' => json_encode($extra)),
-            array('id' => $invoice['id'])
+            array('id' => $order['id'])
         );
 
         foreach ($result->links as $link) {
@@ -357,7 +358,7 @@ class Gateway extends AbstractGateway
         // Get config
         $config = Pi::service('registry')->config->read('order');
         // Get order
-        $order = Pi::api('order', 'order')->getOrder($this->gatewayInvoice['order']);
+        $order = Pi::api('order', 'order')->getOrder($this->gatewayOrder['id']);
         // Get product list
         $products = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
         // Set products to payment
@@ -421,18 +422,16 @@ class Gateway extends AbstractGateway
 
     public function verifyPayment($request, $processing)
     {
-        $invoice = Pi::api('invoice', 'order')->getInvoice($processing['invoice']);
-        $extra = $invoice['extra'];
+        $order = Pi::api('order', 'order')->getOrder($processing['order']);
+        $extra = $order['extra'];
         $paymentId = $extra['paypal_payment_id'];
         $payment = $this->getPayment($paymentId);
         
         if ($payment->state == 'approved') {
             $result['status'] = 1;
             $result['adapter'] = $this->gatewayAdapter;
-            $result['invoice'] = $invoice['id'];
-            $result['order'] = $invoice['order'];
+            $result['order'] = $order['id'];
         } else {
-            $invoice = Pi::api('invoice', 'order')->getInvoice($request['invoice'], 'random_id');
             $result['status'] = 0;
         }
         

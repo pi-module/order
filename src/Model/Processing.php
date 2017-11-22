@@ -24,7 +24,7 @@ class Processing extends Model
         'id',
         'uid',
         'ip',
-        'invoice',
+        'order',
         'random_id',
         'gateway',
         'time_create',

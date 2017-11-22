@@ -41,6 +41,8 @@ abstract class AbstractGateway
     public $gatewayInformation = array();
 
     public $gatewayInvoice = array();
+    
+    public $gatewayOrder = array();
 
     public $gatewayRedirectUrl = '';
 
@@ -253,10 +255,10 @@ abstract class AbstractGateway
         )));
     }
 
-    public function setInvoice($invoice = array())
+    public function setOrder($order = array())
     {
-        if (is_array($invoice) && !empty($invoice)) {
-            $this->gatewayInvoice = $invoice;
+        if (is_array($order) && !empty($order)) {
+            $this->gatewayOrder = $order;
             $this->setBackUrl();
             $this->setCancelUrl();
             $this->setFinishUrl();
@@ -272,7 +274,7 @@ abstract class AbstractGateway
         $log['gateway'] = $this->gatewayAdapter;
         $log['value'] = $value;
         $log['message'] = $message;
-        $log['invoice'] = $this->gatewayPayInformation['invoice'];
+        $log['order'] = $this->gatewayOrder['id'];
         Pi::api('log', 'order')->setLog($log);
         
     }

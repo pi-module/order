@@ -470,7 +470,12 @@ class Order extends AbstractApi
         }
         // Get back url
         if (!isset($backUrl) || empty($backUrl)) {
-            $backUrl = $invoice['order_url'];
+            $backUrl =  Pi::url(Pi::service('url')->assemble('order', array(
+                'module' => $this->getModule(),
+                'controller' => 'detail',
+                'action' => 'index',
+                'id' => $order->id,
+            )));
         }
 
         return $backUrl;
@@ -521,5 +526,15 @@ class Order extends AbstractApi
         if (isset($_SESSION['order']) && !empty($_SESSION['order'])) {
             unset($_SESSION['order']);
         }
+    }
+    
+    public function cancelOrder($id)
+    {
+        $order = Pi::model('order', $this->getModule())->find($id);
+        if ($order->uid != Pi::user()->getId()) {
+            return false;
+        }
+        $order->status_order = \Module\Order\Model\Order::STATUS_ORDER_CANCELLED;
+        $order->save();
     }
 }

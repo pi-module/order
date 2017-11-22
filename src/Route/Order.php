@@ -28,7 +28,7 @@ class Order extends Standard
     );
 
     protected $controllerList = array(
-        'checkout', 'credit', 'detail', 'index', 'invoice', 'payment', 'promocode'
+        'checkout', 'credit', 'index', 'invoice', 'payment', 'promocode'
     );
 
     /**
@@ -48,7 +48,7 @@ class Order extends Standard
         $matches = array_merge($this->defaults, $matches);
         if (isset($parts[0]) && in_array($parts[0], $this->controllerList)) {
             $matches['controller'] = $this->decode($parts[0]);
-        } elseif (isset($parts[0]) && in_array($parts[0], array('remove', 'error'))) {
+        } elseif (isset($parts[0]) && in_array($parts[0], array('print', 'cancel', 'error'))) {
             $matches['controller'] = 'index';
         } else {
             return false;
@@ -86,10 +86,10 @@ class Order extends Standard
                             case 'error':
                                 $matches['action'] = 'error';
                                 break;
-
-                            case 'remove':
-                                $matches['action'] = 'remove';
-                                $matches['id'] = intval($this->decode($parts[1]));
+                            case 'print':
+                            case 'cancel':
+                                $matches['action'] = $parts[0];
+                                $matches['id'] = intval($parts[1]);
                                 break;
                         }
                     }

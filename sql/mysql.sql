@@ -59,6 +59,7 @@ CREATE TABLE `{order}` (
   # promotion as gift
   `promotion_type`  VARCHAR(64)                                          NOT NULL DEFAULT '',
   `promotion_value` VARCHAR(64)                                          NOT NULL DEFAULT '',
+  `extra`          TEXT,
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`)
 );
@@ -123,7 +124,7 @@ CREATE TABLE `{processing}` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `uid`         INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `ip`          CHAR(15)         NOT NULL DEFAULT '',
-  `invoice`     INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `order`     	INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `random_id`   INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `gateway`     VARCHAR(64)      NOT NULL DEFAULT '',
   `time_create` INT(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -224,7 +225,7 @@ CREATE TABLE `{location_delivery}` (
 CREATE TABLE `{log}` (
   `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
   `uid`         INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `invoice`     INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `order`    	INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `gateway`     VARCHAR(64)         NOT NULL DEFAULT '',
   `time_create` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `amount`      DOUBLE(16, 2)       NOT NULL DEFAULT '0.00',

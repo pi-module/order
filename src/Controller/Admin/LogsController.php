@@ -45,11 +45,11 @@ class LogsController extends ActionController
                 'action' => 'index',
                 'uid' => $row->uid,
             )));
-            $list[$row->id]['invoice_url'] = Pi::url($this->url('', array(
+            $list[$row->id]['order_url'] = Pi::url($this->url('', array(
                 'module' => 'order',
-                'controller' => 'invoice',
+                'controller' => 'order',
                 'action' => 'view',
-                'id' => $row->invoice,
+                'id' => $row->order,
             )));
         }
         // Set paginator

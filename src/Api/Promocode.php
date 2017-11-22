@@ -8,7 +8,7 @@
  */
 
 /**
- * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
+ * @author Mickaël STAMM <contact@sta2m.com>
  */
 
 namespace Module\Order\Api;
@@ -16,13 +16,6 @@ namespace Module\Order\Api;
 use Pi;
 use Pi\Application\Api\AbstractApi;
 use Zend\Json\Json;
-
-/*
- * Pi::api('processing', 'order')->setProcessing($invoice);
- * Pi::api('processing', 'order')->getProcessing($random_id);
- * Pi::api('processing', 'order')->checkProcessing();
- * Pi::api('processing', 'order')->removeProcessing($invoice);
- */
 
 class Promocode extends AbstractApi
 {

@@ -33,27 +33,25 @@ class PaymentController extends IndexController
         $anonymous = $this->params('anonymous');
         $token = $this->params('token');
         // Get invoice
-        $invoice = Pi::api('invoice', 'order')->getInvoiceForPayment($id);
+        //$invoice = Pi::api('invoice', 'order')->getInvoiceForPayment($id);
+        $order  = Pi::api('order', 'order')->getOrder($id);
         // Check invoice
-        if (empty($invoice)) {
-            $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('The invoice not found.'));
+        if (empty($order)) {
+            $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('The order not found.'));
         }
-        // Check invoice not paid
-        if ($invoice['status'] != 2) {
-            $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $invoice['order']), __('You pay this invoice before this time'));
+       // Check order is for this user
+        if (!in_array($order['status_order'], array(1, 2, 3))) {
+            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This order not actice.'));
         }
-        // Check invoice can pay
-        if ($invoice['can_pay'] != 1) {
-            $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $invoice['order']), __('You can pay this invoice after admin review'));
-        }
+        
         // Check offline
-        if ($invoice['gateway'] == 'Offline') {
-            $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $invoice['order']), $config['payment_offline_description']);
+        if ($order['gateway'] == 'Offline') {
+            $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $id), $config['payment_offline_description']);
         }
         // Check invoice is for this user
         if (Pi::service('authentication')->hasIdentity()) {
-            if ($invoice['uid'] != Pi::user()->getId()) {
-                $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('This is not your invoice.'));
+            if ($order['uid'] != Pi::user()->getId()) {
+                $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('This is not your order.'));
             }
         } else {
             if ($anonymous == 1 && !empty($token)) {
@@ -67,12 +65,7 @@ class PaymentController extends IndexController
             // Set session
             $_SESSION['payment']['process_update'] = time();
         }
-        // set Products
-        $order = Pi::api('order', 'order')->getOrder($invoice['order']);
-        // Check order is for this user
-        if (!in_array($order['status_order'], array(1, 2, 3))) {
-            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This order not avtice.'));
-        }
+
         // process credit
         if ($credit == 1 && $config['credit_active'] && Pi::service('authentication')->hasIdentity() && $order['type_payment'] != 'installment') {
             $creditInformation = Pi::api('credit', 'order')->getCredit();
@@ -83,10 +76,10 @@ class PaymentController extends IndexController
             }
             if ($creditAmount > 0) {
                 // Use credit
-                if ($invoice['total_price'] > $creditAmount) {
+                if ($order['total_price'] > $creditAmount) {
                     // Set credit
                     $history = array(
-                        'uid' => $invoice['uid'],
+                        'uid' => $order['uid'],
                         'amount' => $creditAmount,
                         'amount_old' => $creditAmount,
                         'amount_new' => 0,
@@ -98,14 +91,13 @@ class PaymentController extends IndexController
                     );
                     Pi::api('credit', 'order')->addHistory($history, $order['id'], $invoice['id']);
                     // Set new price for payment
-                    $invoice['total_price'] = $invoice['total_price'] - $creditAmount;
-                } elseif ($invoice['total_price'] < $creditAmount) {
+                    $order['total_price'] = $order['total_price'] - $creditAmount;
+                } elseif ($order['total_price'] < $creditAmount) {
                     // Set credit
-                    $messageAdmin = sprintf(__('use credit to pay invoice %s from order %s'), $invoice['code'], $order['code']);
-                    $messageUser = sprintf(__('use credit to pay invoice %s from order %s'), $invoice['code'], $order['code']);
-                    $amount = $creditAmount - $invoice['total_price'];
-                    Pi::api('credit', 'order')->addCredit($invoice['uid'], $amount, 'decrease', 'automatic', $messageAdmin , $messageUser, $order['module_name']);
-                    // Update invoice
+                    $messageAdmin = sprintf(__('use credit to pay order %s'),  $order['code']);
+                    $messageUser = sprintf(__('use credit to pay order %s'), $order['code']);
+                    $amount = $creditAmount - $order['total_price'];
+                    Pi::api('credit', 'order')->addCredit($order['uid'], $amount, 'decrease', 'automatic', $messageAdmin , $messageUser, $order['module_name']);
                     $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
                     // Update module order / invoice and get back url
                     $url = Pi::api('order', 'order')->updateOrder($order['id'], $invoice['id']);
@@ -114,12 +106,12 @@ class PaymentController extends IndexController
                     // jump to module
                     $message = __('Your payment were successfully. Back to module');
                     $this->jump($url, $message);
-                } elseif ($invoice['total_price'] == $creditAmount) {
+                } elseif ($order['total_price'] == $creditAmount) {
                     // Set credit
-                    $messageAdmin = sprintf(__('use credit to pay invoice %s from order %s'), $invoice['code'], $order['code']);
-                    $messageUser = sprintf(__('use credit to pay invoice %s from order %s'), $invoice['code'], $order['code']);
+                    $messageAdmin = sprintf(__('use credit to pay order %s'), $order['code']);
+                    $messageUser = sprintf(__('use credit to pay order %s'), $order['code']);
                     $amount = 0;
-                    Pi::api('credit', 'order')->addCredit($invoice['uid'], $amount, 'decrease', 'automatic', $messageAdmin , $messageUser, $order['module_name']);
+                    Pi::api('credit', 'order')->addCredit($order['uid'], $amount, 'decrease', 'automatic', $messageAdmin , $messageUser, $order['module_name']);
                     // Update invoice
                     $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
                     // Update module order / invoice and get back url
@@ -135,24 +127,21 @@ class PaymentController extends IndexController
         // Check running pay processing
         $processing = Pi::api('processing', 'order')->checkProcessing();
         if (!$processing) {
-            return $this->redirect()->toRoute('', array(
-                'controller' => 'index',
-                'action' => 'remove',
-                'id' => $invoice['id'],
-            ));
+            Pi::api('processing', 'order')->removeProcessing();
         }
+
         // Set pay processing
-        Pi::api('processing', 'order')->setProcessing($invoice);
-        // Check test mode
+        Pi::api('processing', 'order')->setProcessing($order);
+        
         if ($config['order_testmode']) {
             return $this->redirect()->toRoute('', array(
                 'controller' => 'payment',
                 'action' => 'test',
-                'id' => $invoice['id'],
+                'id' => $order['id'],
             ));
         } 
-        // Check invoice prive
-        if (in_array($order['status_order'], array(1, 2, 3)) && $invoice['status'] == 2 && $invoice['total_price'] == 0) {
+        // Check invoice price
+        if (in_array($order['status_order'], array(1, 2, 3)) && $order['status_payment'] == 2 && $order['total_price'] == 0) {
             $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
             $url = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
             // Remove processing
@@ -162,23 +151,23 @@ class PaymentController extends IndexController
             $this->jump($url, $message);
         }
         // Get gateway object
-        $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
-        $gateway->setInvoice($invoice);
+        $gateway = Pi::api('gateway', 'order')->getGateway($order['gateway']);
+        $gateway->setOrder($order);
         // Check error
         if ($gateway->gatewayError) {
             // Remove processing
             Pi::api('processing', 'order')->removeProcessing();
             $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), $gateway->gatewayError);
         }
-
+        
         if ($gateway->getType() == AbstractGateway::TYPE_REST) {
-            $approvalUrl = $gateway->getApproval($invoice);
+            $approvalUrl = $gateway->getApproval($order);
             if (!$approvalUrl) {
                 $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), __('Error to get information.'));
             }
             return $this->redirect()->toUrl($approvalUrl);
         }
-
+        
         // Set form values
         if (!empty($gateway->gatewayPayInformation)) {
             foreach ($gateway->gatewayPayInformation as $key => $value) {
@@ -186,7 +175,7 @@ class PaymentController extends IndexController
                     $values[$key] = $value;
                 } else {
                     // Get gateway object
-                    $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
+                    $gateway = Pi::api('gateway', 'order')->getGateway($order['gateway']);
                     $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), sprintf(__('Error to get %s.'), $key));
                 }
             }
@@ -199,14 +188,13 @@ class PaymentController extends IndexController
                 return $this->redirect()->toUrl($gateway->gatewayRedirectUrl);
             } else {
                 // Get gateway object
-                $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
+                $gateway = Pi::api('gateway', 'order')->getGateway($order['gateway']);
                 $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), __('Error to get information.'));
             }
         }
         // Set view
         $this->view()->setLayout('layout-style');
         $this->view()->setTemplate('pay');
-        $this->view()->assign('invoice', $invoice);
         $this->view()->assign('form', $form);
         $this->view()->assign('gateway', $gateway);
     }
@@ -240,13 +228,21 @@ class PaymentController extends IndexController
             // Get gateway
             $gateway = Pi::api('gateway', 'order')->getGateway($processing['gateway']);
             // verify order
-            $invoice = Pi::api('invoice', 'order')->getInvoice($processing['invoice']);
-            $gateway->setInvoice($invoice);
+            $order  = Pi::api('order', 'order')->getOrder($processing['order']);
+            $gateway->setOrder($order);
             $verify = $gateway->verifyPayment($request, $processing);
             // Check status
             if ($verify['status'] == 1) {
                 // Update module order / invoice and get back url
-                $url = Pi::api('order', 'order')->updateOrder($verify['order'], $verify['invoice']);
+                $invoice = Pi::api('invoice', 'order')->getInvoiceFromOrder($processing['order']);
+                $randomId = $invoice['random_id'];
+                if (empty($invoice)) {
+                    $result = Pi::api('invoice', 'order')->createInvoice($processing['order'], Pi::user()->getId());
+                    $randomId = $result['random_id'];
+                } 
+                $invoice = Pi::api('invoice', 'order')->updateInvoice($result['random_id']);
+                $url = Pi::api('order', 'order')->updateOrder($verify['order'], $invoice['id']);
+                
                 // Remove processing
                 Pi::api('processing', 'order')->removeProcessing();
                 // jump to module
@@ -393,18 +389,19 @@ class PaymentController extends IndexController
         )));
         
         $processing = Pi::api('processing', 'order')->getProcessing();
-        if (!empty($processing['invoice'])) {
+        if (!empty($processing['order'])) {
             // Get invoice
-            $invoice = Pi::api('invoice', 'order')->getInvoice($processing['invoice']);
-            $gateway = Pi::api('gateway', 'order')->getGateway($invoice['gateway']);
+            $gateway = Pi::api('gateway', 'order')->getGateway($processing['gateway']);
             Pi::api('order', 'order')->unsetOrderInfo();
             if ($gateway->getType() == AbstractGateway::TYPE_REST) {
                 $paymentId = $this->params('paymentId');
                 $payerId = $this->params('PayerID');
-                $gateway->setInvoice($invoice);
+                $order  = Pi::api('order', 'order')->getOrder($processing['order']);
+                $gateway->setOrder($order);
                 $result = $gateway->execute($payerId, $paymentId);
                 if ($result->state == 'approved') {
-                    $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
+                    $result = Pi::api('invoice', 'order')->createInvoice($processing['order'], Pi::user()->getId());
+                    $invoice = Pi::api('invoice', 'order')->updateInvoice($result['random_id']);
                     $backurl = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
                     Pi::api('invoice', 'order')->setBackUrl($invoice['id'], $backurl);
                     $messenger = $this->plugin('flashMessenger');
@@ -414,12 +411,16 @@ class PaymentController extends IndexController
                         'controller' => 'payment',
                         'action' => 'result',
                     )));
-                    $url .= '?invoice=' .  $invoice['id'];
+                    $url .= '?order=' .  $order['id']; 
                 }
                 
                 return $this->redirect($url);
             }
         } else {
+            
+            $result = Pi::api('invoice', 'order')->createInvoice($processing['order'], Pi::user()->getId());
+            $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
+                    
             Pi::api('order', 'order')->unsetOrderInfo();
             $url = array('', 'controller' => 'index', 'action' => 'index');
             $message = __('Order canceled');
@@ -434,9 +435,9 @@ class PaymentController extends IndexController
     public function processAction()
     {
         $processing = Pi::api('processing', 'order')->getProcessing();
-        if (!empty($processing['invoice'])) {
+        if (!empty($processing['order'])) {
             // Get invoice
-            $invoice = Pi::api('invoice', 'order')->getInvoice($processing['invoice']);
+            $invoice = Pi::api('invoice', 'order')->getInvoiceFromOrder($processing['order']);
             // Remove
             Pi::api('processing', 'order')->removeProcessing();
             // Set back url
@@ -473,7 +474,7 @@ class PaymentController extends IndexController
                 
                 $log = array();
                 $log['gateway'] = $gateway->gatewayAdapter;
-                $log['value'] = 'cancel';
+                $log['message'] = 'cancel';
                 $log['invoice'] = $invoice['random_id'];
                 Pi::api('log', 'order')->setLog($log);
         
@@ -509,7 +510,7 @@ class PaymentController extends IndexController
         }
         // Get invoice
         $id = $this->params('id');
-        $invoice = Pi::api('invoice', 'order')->getInvoice($id);
+        $invoice = Pi::api('invoice', 'order')->getInvoiceFromOrder($processing['order']);
         $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
         // Update module order / invoice and get back url
         $url = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
