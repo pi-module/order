@@ -27,7 +27,7 @@ class PromoCheckoutFilter extends InputFilter
         
         $this->add(array(
             'name' => 'submit_promo',
-            'required' => true,
+            'required' => false,
         ));
         
     }

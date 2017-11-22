@@ -402,72 +402,6 @@ class CheckoutController extends IndexController
                     
                     $this->order($values, $customer, $cart, $config, $uid);                  
                 } 
-            } else if (isset($data['submit_promo'])) {
-                
-                $formPromoCheckout->setData($data);
-                if ($formPromoCheckout->isValid()) {    
-                    
-                    $values = $formPromoCheckout->getData();
-                    $promocode = Pi::api('promocode', 'order')->get($values['code']);
-                    if ($promocode) {
-                        $authorizedModules = json_decode($promocode['module']);
-                        if (strtotime(date('Y-m-d')) < $promocode->time_start || strtotime(date('Y-m-d')) > $promocode->time_end) {
-                            // Code dépassé
-                            $msgPromoCode = array(
-                                'type' => 'info',
-                                'message' => __('This code has expired.')
-                            );
-                                
-                        } else if (!in_array($cart['module_name'], $authorizedModules)) {
-                            // mauvais module
-                            $msgPromoCode = array(
-                                'type' => 'info',
-                                'message' => __('This code cannot be applied on this product.')
-                            );
-                                
-                        } else {
-                            // promo existantes
-                            $canUpdate = true;
-                            foreach ($cart['product'] as &$product) {
-                                if ($product['discount'] > 0) {
-                                    $canUpdate = false;     
-                                    if ($product['discount'] < $promocode->promo) {
-                                        $product['discount_price'] = $product['product_price'] * $promocode->promo / 100;
-                                        $product['discount'] = $promocode->promo;
-                                        $product['vat_price'] = $product['discount_price'] * $product['vat'] / 100;
-                                        Pi::api('order', 'order')->setOrderInfo($cart);
-                                    }
-                                    
-                                    $msgPromoCode = array(
-                                        'type' => 'success',
-                                        'message' => __("You are trying to use a promo code on a product that already has a discount. We have automatically applied the most advantageous discount for you (it is not possible to cumulate the discounts)")
-                                    );
-                                }
-                            }
-                            
-                            // MAJ $cart
-                            if ($canUpdate) {
-                                foreach ($cart['product'] as &$product) {
-                                    $product['discount'] = $promocode->promo;
-                                    $product['discount_price'] = $product['product_price'] * $promocode->promo / 100;
-                                    $product['vat_price'] = ($product['product_price'] - $product['discount_price']) * $product['vat'] / 100;    
-                                }
-                                Pi::api('order', 'order')->setOrderInfo($cart);
-                            
-                                $msgPromoCode = array(
-                                    'type' => 'success',
-                                    'message' => __("Promo code accepted")
-                                );
-                            }
-                        }
-                    } else {
-                        // Code inexistant
-                        $msgPromoCode = array(
-                            'type' => 'info',
-                            'message' => __("This code doesn't exist")
-                        );
-                    }           
-                } 
             } else {
                 $formOrder->setData($data);
                 if ($formOrder->isValid()) {
@@ -593,40 +527,8 @@ class CheckoutController extends IndexController
         }
 
         // Set price
-        $price['discount'] = isset($cart['total_discount']) ? $cart['total_discount'] : 0;
-        $price['shipping'] = isset($cart['total_shipping']) ? $cart['total_shipping'] : 0;
-        $price['packing'] = isset($cart['total_packing']) ? $cart['total_packing'] : 0;
-        $price['setup'] = isset($cart['total_setup']) ? $cart['total_setup'] : 0;
-        $price['vat'] = isset($cart['total_vat']) ? $cart['total_vat'] : 0;
-        $price['product'] = 0;
-        $price['total'] = 0;
-        foreach ($cart['product'] as $product) {
-            // Check setup price
-            $product['setup_price'] = isset($product['setup_price']) ? $product['setup_price'] : 0;
-            // Set price
-            $price['product'] = ($product['product_price'] * $product['number']) + $price['product'];
-            $price['discount'] = ($product['discount_price'] * $product['number']) + $price['discount'];
-            $price['shipping'] = ($product['shipping_price'] * $product['number']) + $price['shipping'];
-            $price['setup'] = ($product['setup_price'] * $product['number']) + $price['setup'];
-            $price['packing'] = ($product['packing_price'] * $product['number']) + $price['packing'];
-            $price['vat'] = $product['vat_price'] + $price['vat'];
-        }
-
-        // Set additional price
-        if ($cart['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
-            $price['shipping'] = $price['shipping'] + $config['order_additional_price_product'];
-        } elseif ($cart['type_commodity'] == 'service' && $config['order_additional_price_service'] >0 ) {
-            $price['setup'] = $price['setup'] + $config['order_additional_price_service'];
-        }
-
-        // Set total
-        $price['total'] = (($price['product'] +
-                $price['shipping'] +
-                $price['packing'] +
-                $price['setup'] +
-                $price['vat']
-            ) - $price['discount']);
-
+        $price = $this->updatePrice($cart);
+        
         // Set plan
         if ($cart['type_payment'] == 'installment') {
             $user = Pi::api('user', 'order')->getUserInformation();
@@ -854,5 +756,130 @@ class CheckoutController extends IndexController
         $url = array('', 'controller' => 'checkout', 'action' => 'index');
         $this->jump($url, __('Address deleted'));       
     }
-    
+    private function updatePrice($cart)
+    {
+        $price = array();
+        $price['discount'] = isset($cart['total_discount']) ? $cart['total_discount'] : 0;
+        $price['shipping'] = isset($cart['total_shipping']) ? $cart['total_shipping'] : 0;
+        $price['packing'] = isset($cart['total_packing']) ? $cart['total_packing'] : 0;
+        $price['setup'] = isset($cart['total_setup']) ? $cart['total_setup'] : 0;
+        $price['vat'] = isset($cart['total_vat']) ? $cart['total_vat'] : 0;
+        $price['product'] = 0;
+        $price['total'] = 0;
+        foreach ($cart['product'] as $product) {
+            // Check setup price
+            $product['setup_price'] = isset($product['setup_price']) ? $product['setup_price'] : 0;
+            // Set price
+            $price['product'] = ($product['product_price'] * $product['number']) + $price['product'];
+            $price['discount'] = ($product['discount_price'] * $product['number']) + $price['discount'];
+            $price['shipping'] = ($product['shipping_price'] * $product['number']) + $price['shipping'];
+            $price['setup'] = ($product['setup_price'] * $product['number']) + $price['setup'];
+            $price['packing'] = ($product['packing_price'] * $product['number']) + $price['packing'];
+            $price['vat'] = $product['vat_price'] + $price['vat'];
+            
+        }
+
+        // Set additional price
+        if ($cart['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
+            $price['shipping'] = $price['shipping'] + $config['order_additional_price_product'];
+        } elseif ($cart['type_commodity'] == 'service' && $config['order_additional_price_service'] >0 ) {
+            $price['setup'] = $price['setup'] + $config['order_additional_price_service'];
+        }
+
+        // Set total
+        $price['total'] = (($price['product'] +
+                $price['shipping'] +
+                $price['packing'] +
+                $price['setup'] +
+                $price['vat']
+            ) - $price['discount']);
+        
+        return $price;
+    }
+    public function promocodeAction()
+    {
+        if ($this->request->isPost()) {
+            $cart = Pi::api('order', 'order')->getOrderInfo();
+            $formPromoCheckout = new PromoCheckoutForm('promoCheckout', $option);
+            $formPromoCheckout->setInputFilter(new PromoCheckoutFilter($option));
+            $data = $this->request->getPost();
+            $formPromoCheckout->setData($data);
+            if ($formPromoCheckout->isValid()) {    
+                $values = $formPromoCheckout->getData();
+                $promocode = Pi::api('promocode', 'order')->get($values['code']);
+                if ($promocode) {
+                    $authorizedModules = json_decode($promocode['module']);
+                    if (strtotime(date('Y-m-d')) < $promocode->time_start || strtotime(date('Y-m-d')) > $promocode->time_end) {
+                        // Code dépassé
+                        $msgPromoCode = array(
+                            'type' => 'info',
+                            'message' => __('This code has expired.')
+                        );
+                            
+                    } else if (!in_array($cart['module_name'], $authorizedModules)) {
+                        // mauvais module
+                        $msgPromoCode = array(
+                            'type' => 'info',
+                            'message' => __('This code cannot be applied on this product.')
+                        ); 
+                    } else {
+                        // promo existantes
+                        $canUpdate = true;
+                        foreach ($cart['product'] as &$product) {
+                            if ($product['discount'] > 0) {
+                                $canUpdate = false;     
+                                if ($product['discount'] < $promocode->promo) {
+                                    $product['discount_price'] = $product['product_price'] * $promocode->promo / 100;
+                                    $product['discount'] = $promocode->promo;
+                                    $product['vat_price'] =  ($product['product_price'] - $product['discount_price']) * $product['vat'] / 100;
+                                    Pi::api('order', 'order')->setOrderInfo($cart);
+                                }
+                                
+                                $msgPromoCode = array(
+                                    'type' => 'success',
+                                    'message' => __("You are trying to use a promo code on a product that already has a discount. We have automatically applied the most advantageous discount for you (it is not possible to cumulate the discounts)")
+                                );
+                            }
+                        }
+                        
+                        // MAJ $cart
+                        if ($canUpdate) {
+                            foreach ($cart['product'] as &$product) {
+                                $product['discount'] = $promocode->promo;
+                                $product['discount_price'] = $product['product_price'] * $promocode->promo / 100;
+                                $product['vat_price'] = ($product['product_price'] - $product['discount_price']) * $product['vat'] / 100;    
+                            }
+                            Pi::api('order', 'order')->setOrderInfo($cart);
+                        
+                            $msgPromoCode = array(
+                                'type' => 'success',
+                                'message' => __("Promo code accepted")
+                            );
+                        }
+                    }
+                } else {
+                    // Code inexistant
+                    $msgPromoCode = array(
+                        'type' => 'info',
+                        'message' => __("This code doesn't exist")
+                    );
+                }           
+            } 
+        }
+
+        $price = $this->updatePrice($cart);
+        
+        
+        $totalDiscount = 0;
+        foreach ($cart['product'] as &$product) {
+            $product['discount_price_view'] = Pi::api('api', 'order')->viewPrice($product['discount_price']);
+            $totalDiscount += Pi::api('api', 'order')->viewPrice($product['discount_price']);
+        } 
+                      
+        $price['total_price_view'] = Pi::api('api', 'order')->viewPrice($price['product'] - $totalDiscount);
+        $price['vat_view'] = Pi::api('api', 'order')->viewPrice($price['vat']);
+        $price['total_price_ttc_view'] = Pi::api('api', 'order')->viewPrice($price['product'] - $totalDiscount + $price['vat']);          
+        
+        return array('msgPromoCode' => $msgPromoCode, 'cart' => $cart, 'price' => $price);
+    }
 }

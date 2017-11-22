@@ -64,6 +64,8 @@ class Order extends Standard
                         $matches['id'] = $this->decode($parts[3]);
                     } elseif (isset($parts[1]) && $parts[1] == 'installment') {
                         $matches['action'] = 'installment';
+                    } elseif (isset($parts[1]) && $parts[1] == 'promocode') {
+                        $matches['action'] = 'promocode';
                     } elseif (isset($parts[1]) && $parts[1] == 'delete') {
                         $matches['action'] = 'delete';
                         $matches['customer'] = $this->decode($parts[2]);

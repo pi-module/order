@@ -1,4 +1,4 @@
-<?php
+data-total-price<?php
 $this->css(array(
     $this->assetModule('css/front.css'),
     $this->assetModule('script/system-ui.css', 'system'),
@@ -288,10 +288,10 @@ $this->footScript()->appendScript($script);
                                     <td>
                                         <?php _e('Total Discount'); ?>
                                         <?php if (isset($product['discount'])) { ?>
-                                            (<?php echo $product['discount'] ?>%)
+                                            (<span data-discount-for="<?php echo $product['product'] ?>"><?php echo $product['discount'] ?></span>%)
                                         <?php } ?>
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-right" data-discount-price-for="<?php echo $product['product'] ?>">
                                         <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
                                     </td>
                                 </tr>
@@ -299,7 +299,7 @@ $this->footScript()->appendScript($script);
                             <?php } ?>
                             <tr>
                                 <td><?php _e('Total Price ext VAT'); ?></td>
-                                <td class="text-right">
+                                <td class="text-right data-total-price"">
                                     <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $totalDiscount)); ?>
                                 </td>
                             </tr>
@@ -310,7 +310,7 @@ $this->footScript()->appendScript($script);
                                         (<?php echo $product['vat'] ?>%)
                                     <?php } ?>
                                 </td>
-                                <td class="text-right">
+                                <td class="text-right test data-total-vat">
                                     <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?>
                                 </td>
                             </tr>
@@ -330,7 +330,7 @@ $this->footScript()->appendScript($script);
                                         </strong>
                                     </td>
                                     <td class="text-right">
-                                        <spam class="label label-success">
+                                        <spam class="label label-success data-total-price-ttc">
                                             <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?>
                                         </spam>
                                     </td>
@@ -345,7 +345,7 @@ $this->footScript()->appendScript($script);
                             <div class="col-md-4 nopadding">
                                 <div class="form-group has-feedback" data-name="code">
                                     <label class=" control-label">
-                                        Promo code
+                                        <?php _e('Promo code') ?>
                                     </label>
                                     <div class=" js-form-element">
                                         <?php echo $this->formElement($forms['promoCheckout']->get('code')); ?>
@@ -371,6 +371,11 @@ $this->footScript()->appendScript($script);
                                     <span><?php echo $msgPromoCode['message'] ?></span>
                             </div>
                         <?php } ?>
+                        
+                        <div class="clearfix alert hidden" role="alert">
+                            <span></span>
+                        </div>
+                            
                     <?php } ?>
                     <?php if (isset($forms['order'])) { ?>
                         <?php echo $this->form($forms['order'], 'vertical'); ?>
@@ -391,3 +396,44 @@ $this->footScript()->appendScript($script);
         </div>
     </div>
 </div>
+<script>
+    $( document ).ready(function() {
+        $('#promoCheckout').on('submit', function() {
+            var code = $('#promoCheckout input[name=code]').val();
+            if (code == null) {
+                return false;
+            }
+            $('#promoCheckout input[name=code]').val('');
+        
+            $.ajax({
+              type: "POST",
+              url: 'http://www.queyras.lian/order/checkout/promocode',
+              data: {code: code},
+              success: function(data) {
+                  $('#promoCheckout').parent().find('.alert')
+                  .removeClass('hidden')
+                  .removeClass('alert-info')
+                  .removeClass('alert-success')
+                  .addClass('alert-' + data.msgPromoCode.type);
+                  
+                  $('#promoCheckout').parent().find('.alert span').html(data.msgPromoCode.message);
+                  
+                  var totalDiscount = 0;
+                  $.each(data.cart.product, 
+                      function(i, product)
+                      {
+                          $('.cart-product span[data-discount-for=' + product.product + ']').html(product.discount);
+                          $('.cart-product td[data-discount-price-for=' + product.product + ']').html(product.discount_price_view);
+                      }
+                  );
+                  $('.cart-product .data-total-price').html(data.price.total_price_view);
+                  $('.cart-product .data-total-vat').html(data.price.vat_view);
+                  $('.cart-product .data-total-price-ttc').html(data.price.total_price_ttc_view);       
+                  //$('[data-total-vat-for=445]').val()
+              },
+              dataType: 'json'
+            });
+            return false; 
+        });
+    });
+</script>
