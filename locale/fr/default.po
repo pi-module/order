@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2017-11-23 15:37+0100\n"
+"POT-Creation-Date: 2017-11-23 15:45+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -1165,7 +1165,7 @@ msgstr "Code"
 msgid "Accept the %s"
 msgstr "Accepter les %s"
 
-#: src/Form/PromoCheckoutForm.php:35
+#: src/Form/PromoCheckoutForm.php:35 template/front/checkout.phtml:351
 msgid "Your promo code"
 msgstr "Votre code avantage"
 
@@ -2625,10 +2625,6 @@ msgstr "Total Transport"
 msgid "Final Price incl. VAT"
 msgstr "Prix Total TTC"
 
-#: template/front/checkout.phtml:351
-msgid "Promo code"
-msgstr "Code Avantage"
-
 #: template/front/checkout.phtml:389
 msgid ""
 "You can benefit from a discount loyalty price for this package. The system "
@@ -2786,6 +2782,9 @@ msgstr "Date commande"
 #: template/front/print.phtml:126
 msgid "To pay"
 msgstr "A régler"
+
+#~ msgid "Promo code"
+#~ msgstr "Code Avantage"
 
 #~ msgid "No order"
 #~ msgstr "Vous n'avez pas encore passé de commande"
