@@ -481,7 +481,7 @@ msgid ""
 "We have automatically applied the most advantageous discount for you (it is "
 "not possible to cumulate the discounts)"
 msgstr ""
-"Vous tentez d'utiliser un  code avantage sur un produit qui bénéficie déjç "
+"Vous tentez d'utiliser un code avantage sur un produit qui bénéficie déjà "
 "d'une remise. Nous avons automatiquement appliqué la remise la plus "
 "avantageuse pour vous (il n'est pas possible de cumuler les remises)."
 
