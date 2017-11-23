@@ -53,6 +53,10 @@ return array(
             'title' => _a('Installment'),
             'name' => 'installment'
         ),
+        array(
+            'title' => _a('Invoice'),
+            'name' => 'invoice'
+        ),
     ),
     'item' => array(
         // Admin
@@ -924,6 +928,35 @@ return array(
             'edit' => 'textarea',
             'filter' => 'string',
             'value' => ''
+        ),
+        // Invoice
+        'invoice_text_description' => array(
+            'category' => 'invoice',
+            'title' => _a('Description for invoice'),
+            'description' => '',
+            'edit' => 'textarea',
+            'filter' => 'string',
+            'value' => ''
+        ),
+        'invoice_text_footer' => array(
+            'category' => 'invoice',
+            'title' => _a('Text for footer'),
+            'description' => '',
+            'edit' => 'textarea',
+            'filter' => 'string',
+            'value' => ''
+        ),
+        'invoice_header_image' => array(
+            'category' => 'invoice',
+            'title' => _a('Invoice header image path'),
+            'description' => '',
+            'edit' => 'text',
+        ),
+        'invoice_header_logo' => array(
+            'category' => 'invoice',
+            'title' => _a('Invoice header logo path'),
+            'description' => 'Square',
+            'edit' => 'text',
         ),
     ),
 );
