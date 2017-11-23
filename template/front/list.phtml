@@ -19,39 +19,53 @@
                 <th class="text-center"><?php _e('Action'); ?></th>
             </tr>
             <?php $i = 1; ?>
-            <?php foreach ($user['orders'] as $order) { ?>
+            <?php if (count ($user['orders'])) { ?>
+                <?php foreach ($user['orders'] as $order) { ?>
+                    <tr>
+                        <td class="text-center"><?php echo _number($i); ?></td>
+                        <td class="text-center"><?php echo $this->escape($order['code']); ?></td>
+                        <td class="text-center">
+                            <?php $productsList = array();
+                            foreach ($order['products'] as $product) {
+                                $productsList[] = $product['details']['title'];
+                            }
+                            echo implode(' , ',$productsList); ?>
+                        </td>
+                        <td class="text-center"><?php echo $this->escape($order['time_create_view']); ?></td>
+                        <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
+                        <td class="text-center"><span class="label <?php echo $this->escape($order['shortLabel']); ?>"><?php echo $this->escape($order['shortStatus']); ?></span></td>
+                        <td class="text-center">
+                            <?php if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_NOT_PROCESSED ||
+                                $order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED ||
+                                $order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_PENDING ||
+                                $order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_FINISHED
+                            ) { ?>        
+                                <?php if ($order['status_payment'] == \Module\Order\Model\Order::STATUS_ORDER_NOT_PROCESSED) { ?>        
+                                <a class="btn btn-danger btn-xs" title="<?php _e('Cancel'); ?>" target="_blank"
+                                   href="<?php echo Pi::url($this->url('order', array('controller'=> 'index', 'action' => 'cancel', 'id' => $order['id']))); ?>"><i
+                                        class="fa fa-remove"></i> <?php _e('Cancel'); ?></a>
+                                
+                                <a class="btn btn-primary btn-xs" title="<?php _e('Cancel'); ?>" target="_blank"
+                                   href="<?php echo Pi::url($this->url('order', array('controller'=> 'payment', 'action' => 'index', 'id' => $order['id']))); ?>"><i
+                                        class="fa fa-credit-card"></i> <?php _e('Pay'); ?></a>
+                              
+                                <?php } ?>
+                                <?php if ($order['status_payment'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) { ?>        
+                                    <a class="btn btn-primary btn-xs" title="<?php _e('Print'); ?>" target="_blank"
+                                       href="<?php echo Pi::url($this->url('order', array('controller'=> 'index', 'action' => 'print', 'id' => $order['id']))); ?>"><i
+                                            class="fa fa-file-pdf-o"></i> <?php _e('Print'); ?></a>
+                                <?php } ?>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                    <?php $i++; ?>
+                <?php } ?>
+            <?php } else { ?>
                 <tr>
-                    <td class="text-center"><?php echo _number($i); ?></td>
-                    <td class="text-center"><?php echo $this->escape($order['code']); ?></td>
-                    <td class="text-center">
-                        <?php $productsList = array();
-                        foreach ($order['products'] as $product) {
-                            $productsList[] = $product['details']['title'];
-                        }
-                        echo implode(' , ',$productsList); ?>
-                    </td>
-                    <td class="text-center"><?php echo $this->escape($order['time_create_view']); ?></td>
-                    <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
-                    <td class="text-center"><span class="label <?php echo $this->escape($order['shortLabel']); ?>"><?php echo $this->escape($order['shortStatus']); ?></span></td>
-                    <td class="text-center">
-                        <?php if ($order['status_payment'] == \Module\Order\Model\Order::STATUS_ORDER_NOT_PROCESSED) { ?>        
-                        <a class="btn btn-danger btn-xs" title="<?php _e('Cancel'); ?>" target="_blank"
-                           href="<?php echo Pi::url($this->url('order', array('controller'=> 'index', 'action' => 'cancel', 'id' => $order['id']))); ?>"><i
-                                class="fa fa-remove"></i> <?php _e('Cancel'); ?></a>
-                        
-                        <a class="btn btn-primary btn-xs" title="<?php _e('Cancel'); ?>" target="_blank"
-                           href="<?php echo Pi::url($this->url('order', array('controller'=> 'payment', 'action' => 'index', 'id' => $order['id']))); ?>"><i
-                                class="fa fa-credit-card"></i> <?php _e('Pay'); ?></a>
-                      
-                        <?php } ?>
-                        <?php if ($order['status_payment'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) { ?>        
-                            <a class="btn btn-primary btn-xs" title="<?php _e('Print'); ?>" target="_blank"
-                               href="<?php echo Pi::url($this->url('order', array('controller'=> 'index', 'action' => 'print', 'id' => $order['id']))); ?>"><i
-                                    class="fa fa-edit"></i> <?php _e('Print'); ?></a>
-                        <?php } ?>
+                    <td colspan="7" class="text-center">
+                        <?php _e('No order'); ?>   
                     </td>
                 </tr>
-                <?php $i++; ?>
             <?php } ?>
         </table>
     </div>

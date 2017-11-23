@@ -338,7 +338,7 @@ class CheckoutController extends IndexController
             'customers' => $customers,
         );
         
-        $formAddress = new AddressForm($user);
+        $formAddress = new AddressForm();
         $formAddress->setInputFilter(new AddressFilter($option));
         
         $formOrderSimple = new OrderSimpleForm('order', $option);

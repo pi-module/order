@@ -31,7 +31,7 @@ class IndexController extends ActionController
         // Get user info
         $user = Pi::api('user', 'order')->getUserInformation();
         // Get order
-        $orders = Pi::api('order', 'order')->getOrderFromUser($user['id'], true);
+        $orders = Pi::api('order', 'order')->getOrderFromUser($user['id'], false);
         foreach ($orders as $order) {
             $user['orders'][$order['id']] = $order;
             $user['orders'][$order['id']]['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
