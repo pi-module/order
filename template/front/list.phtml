@@ -10,7 +10,6 @@
         </div>
         <table class="table table-striped table-bordered table-condensed">
             <tr>
-                <th class="text-center"><?php _e('ID'); ?></th>
                 <th class="text-center"><?php _e('Code'); ?></th>
                 <td class="text-center"><?php _e('Product / service'); ?></td>
                 <th class="text-center"><?php _e('Time'); ?></th>
@@ -18,11 +17,9 @@
                 <th class="text-center"><?php _e('Status'); ?></th>
                 <th class="text-center"><?php _e('Action'); ?></th>
             </tr>
-            <?php $i = 1; ?>
             <?php if (count ($user['orders'])) { ?>
                 <?php foreach ($user['orders'] as $order) { ?>
                     <tr>
-                        <td class="text-center"><?php echo _number($i); ?></td>
                         <td class="text-center"><?php echo $this->escape($order['code']); ?></td>
                         <td class="text-center">
                             <?php $productsList = array();
@@ -51,14 +48,13 @@
                               
                                 <?php } ?>
                                 <?php if ($order['status_payment'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) { ?>        
-                                    <a class="btn btn-primary btn-xs" title="<?php _e('Print'); ?>" target="_blank"
+                                    <a class="btn btn-standard btn-xs" title="<?php _e('Print'); ?>" target="_blank"
                                        href="<?php echo Pi::url($this->url('order', array('controller'=> 'index', 'action' => 'print', 'id' => $order['id']))); ?>"><i
-                                            class="fa fa-file-pdf-o"></i> <?php _e('Print'); ?></a>
+                                            class="fa fa-download"></i> <?php _e('Download'); ?></a>
                                 <?php } ?>
                             <?php } ?>
                         </td>
                     </tr>
-                    <?php $i++; ?>
                 <?php } ?>
             <?php } else { ?>
                 <tr>
