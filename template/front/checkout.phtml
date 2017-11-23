@@ -407,7 +407,7 @@ $this->footScript()->appendScript($script);
         
             $.ajax({
               type: "POST",
-              url: 'http://www.queyras.lian/order/checkout/promocode',
+              url: "<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'promocode'))) ?>",
               data: {code: code},
               success: function(data) {
                   $('#promoCheckout').parent().find('.alert')
@@ -426,7 +426,7 @@ $this->footScript()->appendScript($script);
                           $('.cart-product td[data-discount-price-for=' + product.product + ']').html(product.discount_price_view);
                       }
                   );
-                  $('.cart-product .data-total-price').html(data.price.total_price_view);
+                  $('.c61art-product .data-total-price').html(data.price.total_price_view);
                   $('.cart-product .data-total-vat').html(data.price.vat_view);
                   $('.cart-product .data-total-price-ttc').html(data.price.total_price_ttc_view);       
                   //$('[data-total-vat-for=445]').val()
