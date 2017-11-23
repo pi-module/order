@@ -374,7 +374,7 @@ class Gateway extends AbstractGateway
         }
         // Set address
         $address = '';
-        if ($config['order_address1'] && $config['order_address1']) {
+        if ($config['order_address1'] && $config['order_address2']) {
             if (!empty($order['address1'])) {
                 $address = $order['address1'];
             } elseif (!empty($order['address2'])) {
@@ -390,7 +390,7 @@ class Gateway extends AbstractGateway
         $this->gatewayPayInformation['first_name'] = $order['first_name'];
         $this->gatewayPayInformation['last_name'] = $order['last_name'];
         $this->gatewayPayInformation['address1'] = $address;
-        $this->gatewayPayInformation['address2'] = '';
+        $this->gatewayPayInformation['address2'] = $order['address2'];
         $this->gatewayPayInformation['address_override'] = 1;
         $this->gatewayPayInformation['city'] = $order['city'];
         $this->gatewayPayInformation['state'] = $order['state'];

@@ -183,9 +183,7 @@ class AddressForm extends BaseForm
                     'label' => __('Address'),
                 ),
                 'attributes' => array(
-                    'type' => 'textarea',
-                    'rows' => '3',
-                    'cols' => '40',
+                    'type' => 'text',
                     'description' => '',
                     'required' => true,
                 )
@@ -199,9 +197,7 @@ class AddressForm extends BaseForm
                     'label' => __('Address addition'),
                 ),
                 'attributes' => array(
-                    'type' => 'textarea',
-                    'rows' => '3',
-                    'cols' => '40',
+                    'type' => 'text',
                     'description' => '',
                     'required' => false,
                 )
