@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2017-11-22 19:08+0100\n"
+"POT-Creation-Date: 2017-11-23 15:37+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -33,7 +33,7 @@ msgstr "Erreur"
 msgid "Order detail"
 msgstr "Détail commande"
 
-#: src/Api/Breadcrumbs.php:78 template/front/checkout.phtml:115
+#: src/Api/Breadcrumbs.php:78 template/front/checkout.phtml:118
 msgid "Checkout"
 msgstr "Validation Commande"
 
@@ -458,24 +458,45 @@ msgstr "Un nouveau produit/service a été ajouté à votre commande"
 
 #: src/Controller/Front/CheckoutController.php:302
 #: src/Controller/Front/CheckoutController.php:329
-#: src/Controller/Front/CheckoutController.php:674
+#: src/Controller/Front/CheckoutController.php:576
 msgid "Your cart is empty."
 msgstr "Votre caddy est vide."
 
 #: src/Controller/Front/CheckoutController.php:308
-#: src/Controller/Front/CheckoutController.php:679
+#: src/Controller/Front/CheckoutController.php:581
 msgid "So sorry, At this moment order is inactive"
 msgstr "Désolé. Les commandes ne sont actuellement pas ouvertes."
 
-#: src/Controller/Front/CheckoutController.php:418
+#: src/Controller/Front/CheckoutController.php:424
+msgid "User information was not completed and user account was not saved."
+msgstr ""
+"Les informations utilisateurs n'ont pas été toutes fournies, le compte n'a "
+"pas été enregistré."
+
+#: src/Controller/Front/CheckoutController.php:447
+msgid "User account was not saved."
+msgstr "Le compte utilisateur n'a pas été sauvegardé."
+
+#: src/Controller/Front/CheckoutController.php:592
+msgid ""
+"Your installment plan save, please complete your information and payment."
+msgstr ""
+"Votre package d'installation sélectionné a été sauvegardé, merci de "
+"compléter vos informations de facturation et de paiement."
+
+#: src/Controller/Front/CheckoutController.php:757
+msgid "Address deleted"
+msgstr "Adresse supprimée"
+
+#: src/Controller/Front/CheckoutController.php:816
 msgid "This code has expired."
 msgstr "Ce code a expiré."
 
-#: src/Controller/Front/CheckoutController.php:425
+#: src/Controller/Front/CheckoutController.php:823
 msgid "This code cannot be applied on this product."
 msgstr "Ce code ne peut être appliqué sur ce produit"
 
-#: src/Controller/Front/CheckoutController.php:443
+#: src/Controller/Front/CheckoutController.php:840
 msgid ""
 "You are trying to use a promo code on a product that already has a discount. "
 "We have automatically applied the most advantageous discount for you (it is "
@@ -485,34 +506,13 @@ msgstr ""
 "d'une remise. Nous avons automatiquement appliqué la remise la plus "
 "avantageuse pour vous (il n'est pas possible de cumuler les remises)."
 
-#: src/Controller/Front/CheckoutController.php:459
+#: src/Controller/Front/CheckoutController.php:856
 msgid "Promo code accepted"
 msgstr "Le code avantage est valide"
 
-#: src/Controller/Front/CheckoutController.php:467
+#: src/Controller/Front/CheckoutController.php:864
 msgid "This code doesn't exist"
 msgstr "Ce code n'existe pas"
-
-#: src/Controller/Front/CheckoutController.php:490
-msgid "User information was not completed and user account was not saved."
-msgstr ""
-"Les informations utilisateurs n'ont pas été toutes fournies, le compte n'a "
-"pas été enregistré."
-
-#: src/Controller/Front/CheckoutController.php:513
-msgid "User account was not saved."
-msgstr "Le compte utilisateur n'a pas été sauvegardé."
-
-#: src/Controller/Front/CheckoutController.php:690
-msgid ""
-"Your installment plan save, please complete your information and payment."
-msgstr ""
-"Votre package d'installation sélectionné a été sauvegardé, merci de "
-"compléter vos informations de facturation et de paiement."
-
-#: src/Controller/Front/CheckoutController.php:855
-msgid "Address deleted"
-msgstr "Adresse supprimée"
 
 #: src/Controller/Front/CreditController.php:31
 msgid "So sorry, At this moment credit is inactive"
@@ -552,7 +552,7 @@ msgstr "Cette commande n'est pas active."
 #: src/Controller/Front/PaymentController.php:122
 #: src/Controller/Front/PaymentController.php:150
 #: src/Controller/Front/PaymentController.php:249
-#: src/Controller/Front/PaymentController.php:520
+#: src/Controller/Front/PaymentController.php:519
 msgid "Your payment were successfully. Back to module"
 msgstr "Votre paiement a été un succès. Retour au module."
 
@@ -604,11 +604,11 @@ msgstr "Aucune demande effectuée."
 msgid "Your payment were successfully."
 msgstr "Votre paiement a réussi."
 
-#: src/Controller/Front/PaymentController.php:482
+#: src/Controller/Front/PaymentController.php:481
 msgid "Payment canceled"
 msgstr "Paiement annulé"
 
-#: src/Controller/Front/PaymentController.php:508
+#: src/Controller/Front/PaymentController.php:507
 msgid "Test mode not active."
 msgstr "Mode Test non actif."
 
@@ -652,7 +652,7 @@ msgstr "Email"
 #: template/admin/invoice-add.phtml:45 template/admin/invoice-edit.phtml:89
 #: template/admin/invoice-print.phtml:85 template/admin/invoice-view.phtml:92
 #: template/admin/order-print.phtml:56 template/admin/order-view.phtml:56
-#: template/admin/order-view.phtml:172 template/front/checkout.phtml:193
+#: template/admin/order-view.phtml:172 template/front/checkout.phtml:196
 #: template/front/invoice-print.phtml:85 template/front/invoice.phtml:114
 msgid "Phone"
 msgstr "Téléphone"
@@ -667,7 +667,7 @@ msgstr "Format Numérotation Internationale attendue (+33123456789)"
 #: template/admin/invoice-edit.phtml:93 template/admin/invoice-print.phtml:89
 #: template/admin/invoice-view.phtml:96 template/admin/order-print.phtml:60
 #: template/admin/order-view.phtml:60 template/admin/order-view.phtml:176
-#: template/front/checkout.phtml:199 template/front/invoice-print.phtml:89
+#: template/front/checkout.phtml:202 template/front/invoice-print.phtml:89
 #: template/front/invoice.phtml:118
 msgid "Mobile"
 msgstr "Mobile"
@@ -699,11 +699,11 @@ msgstr "N° TVA Entreprise"
 msgid "Address"
 msgstr "Adresse"
 
-#: src/Form/AddressForm.php:199
+#: src/Form/AddressForm.php:197
 msgid "Address addition"
 msgstr "Ajouter une adresse"
 
-#: src/Form/AddressForm.php:215 src/Form/OrderAddForm.php:261
+#: src/Form/AddressForm.php:211 src/Form/OrderAddForm.php:261
 #: src/Form/OrderEditForm.php:249 src/Form/OrderForm.php:229
 #: src/Form/OrderSettingForm.php:216 template/admin/invoice-add.phtml:37
 #: template/admin/invoice-edit.phtml:81 template/admin/invoice-view.phtml:84
@@ -712,7 +712,7 @@ msgstr "Ajouter une adresse"
 msgid "Zip code"
 msgstr "Code Postal"
 
-#: src/Form/AddressForm.php:229 src/Form/OrderAddForm.php:247
+#: src/Form/AddressForm.php:225 src/Form/OrderAddForm.php:247
 #: src/Form/OrderEditForm.php:235 src/Form/OrderForm.php:243
 #: src/Form/OrderSettingForm.php:161 template/admin/invoice-add.phtml:25
 #: template/admin/invoice-edit.phtml:69 template/admin/invoice-view.phtml:72
@@ -721,7 +721,7 @@ msgstr "Code Postal"
 msgid "City"
 msgstr "Ville"
 
-#: src/Form/AddressForm.php:244 src/Form/OrderAddForm.php:233
+#: src/Form/AddressForm.php:240 src/Form/OrderAddForm.php:233
 #: src/Form/OrderEditForm.php:221 src/Form/OrderForm.php:258
 #: template/admin/invoice-add.phtml:29 template/admin/invoice-edit.phtml:73
 #: template/admin/invoice-view.phtml:76 template/admin/order-print.phtml:71
@@ -729,7 +729,7 @@ msgstr "Ville"
 msgid "State"
 msgstr "Département-Province"
 
-#: src/Form/AddressForm.php:266 src/Form/AddressForm.php:275
+#: src/Form/AddressForm.php:262 src/Form/AddressForm.php:271
 #: src/Form/OrderAddForm.php:211 src/Form/OrderAddForm.php:219
 #: src/Form/OrderEditForm.php:199 src/Form/OrderEditForm.php:207
 #: src/Form/OrderForm.php:280 src/Form/OrderForm.php:289
@@ -739,18 +739,18 @@ msgstr "Département-Province"
 msgid "Country"
 msgstr "Pays"
 
-#: src/Form/AddressForm.php:290 src/Form/OrderProductEditForm.php:150
+#: src/Form/AddressForm.php:286 src/Form/OrderProductEditForm.php:150
 #: src/Form/PromocodeForm.php:112 template/admin/delivery-index.phtml:30
 #: template/admin/delivery-index.phtml:32 template/admin/gateway-index.phtml:62
 #: template/admin/gateway-index.phtml:65 template/admin/location-index.phtml:30
 #: template/admin/location-index.phtml:32 template/admin/order-view.phtml:23
 #: template/admin/order-view.phtml:28 template/admin/order-view.phtml:397
 #: template/admin/order-view.phtml:399 template/admin/promocode-index.phtml:40
-#: template/front/checkout.phtml:220
+#: template/front/checkout.phtml:223
 msgid "Edit"
 msgstr "Editer"
 
-#: src/Form/AddressForm.php:290 src/Form/PromocodeForm.php:112
+#: src/Form/AddressForm.php:286 src/Form/PromocodeForm.php:112
 #: template/admin/promocode-index.phtml:13
 msgid "Add"
 msgstr "Ajouter"
@@ -816,7 +816,7 @@ msgstr "Titre"
 #: template/admin/invoice-view.phtml:8 template/admin/invoice-view.phtml:130
 #: template/admin/order-view.phtml:554 template/admin/order-view.phtml:580
 #: template/admin/order-view.phtml:611 template/front/invoice-print.phtml:58
-#: template/front/invoice.phtml:91 template/front/list.phtml:18
+#: template/front/invoice.phtml:91 template/front/list.phtml:17
 msgid "Status"
 msgstr "Statut"
 
@@ -853,18 +853,18 @@ msgstr "Soumettre"
 #: src/Form/Element/Delivery.php:36 src/Form/LocationForm.php:106
 #: template/admin/order-view.phtml:267 template/admin/order-view.phtml:356
 #: template/admin/order-view.phtml:514 template/admin/order-view.phtml:521
-#: template/front/invoice.phtml:159 template/front/list.phtml:17
+#: template/front/invoice.phtml:159 template/front/list.phtml:16
 #: template/front/print.phtml:148
 msgid "Price"
 msgstr "Prix"
 
 #: src/Form/Element/Delivery.php:38 template/admin/order-view.phtml:558
 #: template/admin/order-view.phtml:588 template/admin/order-view.phtml:615
-#: template/front/list.phtml:16
+#: template/front/list.phtml:15
 msgid "Time"
 msgstr "Date"
 
-#: src/Form/Element/Delivery.php:40 template/front/checkout.phtml:106
+#: src/Form/Element/Delivery.php:40 template/front/checkout.phtml:109
 msgid "Days"
 msgstr "Jours"
 
@@ -1071,7 +1071,7 @@ msgstr "S'inscrire et créer la commande"
 
 #: src/Form/OrderForm.php:489 src/Form/OrderSimpleForm.php:220
 #: template/front/invoice.phtml:241 template/front/invoice.phtml:243
-#: template/front/list.phtml:44
+#: template/front/list.phtml:47
 msgid "Pay"
 msgstr "Payer"
 
@@ -1093,7 +1093,7 @@ msgstr "Sélectionnez la facture sur laquelle vous voulez supprimer des lignes"
 
 #: src/Form/OrderProductDeleteForm.php:86
 #: template/admin/promocode-index.phtml:43
-#: template/admin/promocode-index.phtml:44 template/front/checkout.phtml:225
+#: template/admin/promocode-index.phtml:44 template/front/checkout.phtml:228
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -1156,7 +1156,7 @@ msgstr "Recurrent"
 
 #: src/Form/OrderSettingForm.php:128 src/Form/PromocodeForm.php:53
 #: template/admin/order-index.phtml:37 template/admin/promocode-index.phtml:23
-#: template/front/list.phtml:14
+#: template/front/list.phtml:13
 msgid "Code"
 msgstr "Code"
 
@@ -1166,8 +1166,8 @@ msgid "Accept the %s"
 msgstr "Accepter les %s"
 
 #: src/Form/PromoCheckoutForm.php:35
-msgid "Promo code"
-msgstr "Code Avantage"
+msgid "Your promo code"
+msgstr "Votre code avantage"
 
 #: src/Form/PromoCheckoutForm.php:48
 msgid "Apply"
@@ -1254,7 +1254,6 @@ msgstr "DargahPardakht"
 #: template/admin/delivery-index.phtml:12
 #: template/admin/location-index.phtml:12 template/admin/log-index.phtml:7
 #: template/admin/order-list-user.phtml:269 template/admin/order-view.phtml:484
-#: template/front/list.phtml:13
 msgid "ID"
 msgstr "ID"
 
@@ -1683,7 +1682,7 @@ msgstr "Reste"
 #: template/admin/invoice-index.phtml:29 template/admin/location-index.phtml:14
 #: template/admin/order-index.phtml:47 template/admin/order-list-user.phtml:247
 #: template/admin/order-list-user.phtml:273 template/admin/order-view.phtml:361
-#: template/front/credit.phtml:44 template/front/list.phtml:19
+#: template/front/credit.phtml:44 template/front/list.phtml:18
 msgid "Action"
 msgstr "Action"
 
@@ -1993,7 +1992,7 @@ msgstr "Créer"
 #: template/admin/invoice-view.phtml:104 template/admin/invoice-view.phtml:106
 #: template/admin/order-view.phtml:394 template/admin/order-view.phtml:396
 #: template/admin/order-view.phtml:630 template/admin/order-view.phtml:632
-#: template/front/list.phtml:48 template/front/list.phtml:50
+#: template/front/list.phtml:51
 msgid "Print"
 msgstr "Imprimer"
 
@@ -2267,7 +2266,7 @@ msgstr "Dette"
 #: template/admin/order-print.phtml:440 template/admin/order-print.phtml:523
 #: template/admin/order-print.phtml:568 template/admin/order-print.phtml:651
 #: template/admin/order-view.phtml:271 template/admin/order-view.phtml:529
-#: template/front/checkout.phtml:263 template/front/installment.phtml:116
+#: template/front/checkout.phtml:266 template/front/installment.phtml:116
 #: template/front/invoice.phtml:162
 msgid "Total"
 msgstr "Total"
@@ -2307,7 +2306,7 @@ msgstr "Commande Facture"
 
 #: template/admin/order-print.phtml:98 template/admin/order-print.phtml:295
 #: template/admin/order-print.phtml:423 template/admin/order-print.phtml:551
-#: template/front/checkout.phtml:262
+#: template/front/checkout.phtml:265
 msgid "Product name"
 msgstr "Nom du Produit"
 
@@ -2515,19 +2514,19 @@ msgstr "Gérer"
 msgid "No promo code"
 msgstr "Aucun code avantage"
 
-#: template/front/checkout.phtml:104
+#: template/front/checkout.phtml:107
 msgid "Price : "
 msgstr "Prix : "
 
-#: template/front/checkout.phtml:105
+#: template/front/checkout.phtml:108
 msgid "Time : "
 msgstr "Date :"
 
-#: template/front/checkout.phtml:121
+#: template/front/checkout.phtml:124
 msgid "Terms of payment"
 msgstr "Termes de Paiement"
 
-#: template/front/checkout.phtml:122
+#: template/front/checkout.phtml:125
 #, php-format
 msgid ""
 "You buy products on %s installment by %s payment on each installment and %s "
@@ -2536,7 +2535,7 @@ msgstr ""
 "Tu as acheté un produit en %s installations avec %s paiements à chaque "
 "installation et %s par paiement"
 
-#: template/front/checkout.phtml:129
+#: template/front/checkout.phtml:132
 msgid ""
 "One of your select products or services have variable stock, than your "
 "payment option is disable, we will review your order and if your selected "
@@ -2548,7 +2547,7 @@ msgstr ""
 "si les produits ou services sont en stock, vous recevrez alors une "
 "notification"
 
-#: template/front/checkout.phtml:138
+#: template/front/checkout.phtml:141
 msgid ""
 "If you registered on website before this time and have user account, please "
 "login to system and continue ordering, and if you dont have user account "
@@ -2558,22 +2557,22 @@ msgstr ""
 "continuer votre commande. Si vous n'avez de compte utilisateur, merci de "
 "créer votre nouveau compte, vous pourrez ensuite faire une nouvelle commande."
 
-#: template/front/checkout.phtml:141
+#: template/front/checkout.phtml:144
 msgid "Login"
 msgstr "Se connecter"
 
-#: template/front/checkout.phtml:145
+#: template/front/checkout.phtml:148
 msgid "Register new user account and make order"
 msgstr "Créer un nouveau compte et commander"
 
-#: template/front/checkout.phtml:150
+#: template/front/checkout.phtml:153
 msgid ""
 "Select the needed address for your order. You can also add a new address"
 msgstr ""
 "Sélectionnez l'adresse nécessaire pour votre commande. Vous pouvez aussi "
 "ajouter une nouvelle adresse."
 
-#: template/front/checkout.phtml:152
+#: template/front/checkout.phtml:155
 msgid ""
 "You don't have set an address yet. Please create your adress we will use for "
 "your order. You will be able then to manage several adresses"
@@ -2582,51 +2581,55 @@ msgstr ""
 "sera utilisée pour votre commande. Vous pourrez ensuite gérer plusieurs "
 "adresses."
 
-#: template/front/checkout.phtml:164
+#: template/front/checkout.phtml:167
 msgid "Invoicing address"
 msgstr "Adresse Facturation"
 
-#: template/front/checkout.phtml:210
+#: template/front/checkout.phtml:213
 msgid "Selected address"
 msgstr "Adresse sélectionnée"
 
-#: template/front/checkout.phtml:215
+#: template/front/checkout.phtml:218
 msgid "Use it"
 msgstr "Utiliser celle-ci"
 
-#: template/front/checkout.phtml:224
+#: template/front/checkout.phtml:227
 msgid "Are you sure you want delete this address?"
 msgstr "Etes-vous sûrs de vouloir supprimer cette adresse?"
 
-#: template/front/checkout.phtml:238
+#: template/front/checkout.phtml:241
 msgid "Add new address"
 msgstr "Ajouter une nouvelle adresse"
 
-#: template/front/checkout.phtml:257
+#: template/front/checkout.phtml:260
 msgid "Your order"
 msgstr "Votre commande"
 
-#: template/front/checkout.phtml:289
+#: template/front/checkout.phtml:292
 msgid "Total Discount"
 msgstr "Total Remise"
 
-#: template/front/checkout.phtml:301
+#: template/front/checkout.phtml:304
 msgid "Total Price ext VAT"
 msgstr "Prix total HT"
 
-#: template/front/checkout.phtml:308
+#: template/front/checkout.phtml:311
 msgid "Total Vat"
 msgstr "Total TVA"
 
-#: template/front/checkout.phtml:319
+#: template/front/checkout.phtml:322
 msgid "Total Shipping"
 msgstr "Total Transport"
 
-#: template/front/checkout.phtml:329
+#: template/front/checkout.phtml:332
 msgid "Final Price incl. VAT"
 msgstr "Prix Total TTC"
 
-#: template/front/checkout.phtml:381
+#: template/front/checkout.phtml:351
+msgid "Promo code"
+msgstr "Code Avantage"
+
+#: template/front/checkout.phtml:389
 msgid ""
 "You can benefit from a discount loyalty price for this package. The system "
 "did apply it on the final price for you."
@@ -2747,14 +2750,22 @@ msgstr "Vous pouvez régler cette facture après validation de l'administrateur"
 msgid "All your orders and invoices"
 msgstr "Toutes vos commandes et factures"
 
-#: template/front/list.phtml:15
+#: template/front/list.phtml:14
 msgid "Product / service"
 msgstr "Produit/ Service"
 
-#: template/front/list.phtml:38 template/front/list.phtml:40
-#: template/front/list.phtml:42
+#: template/front/list.phtml:41 template/front/list.phtml:43
+#: template/front/list.phtml:45
 msgid "Cancel"
 msgstr "Annuler"
+
+#: template/front/list.phtml:53
+msgid "Download"
+msgstr "Télécharger"
+
+#: template/front/list.phtml:62
+msgid "You did not yet place an order yet"
+msgstr "Vous n'avez pas encore passé de commande"
 
 #: template/front/pay.phtml:12
 msgid "You'll be redirected in few seconds to gateway Checkout Page"
@@ -2775,6 +2786,9 @@ msgstr "Date commande"
 #: template/front/print.phtml:126
 msgid "To pay"
 msgstr "A régler"
+
+#~ msgid "No order"
+#~ msgstr "Vous n'avez pas encore passé de commande"
 
 #~ msgid "Your invoice create successfully"
 #~ msgstr "Votre facture a été correctement créée"

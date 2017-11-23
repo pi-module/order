@@ -32,7 +32,7 @@ class PromoCheckoutForm extends BaseForm
          $this->add(array(
             'name' => 'code',
             'options' => array(
-                'label' => __('Promo code'),
+                'label' => __('Your promo code'),
             ),
             'attributes' => array(
                 'type' => 'text',
