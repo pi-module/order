@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2017-07-07 14:56+0200\n"
+"POT-Creation-Date: 2017-11-22 19:08+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 2.0.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _a;_t\n"
 "X-Poedit-Basepath: ../..\n"
@@ -144,12 +144,12 @@ msgid "Show company extra (ID , VAT)"
 msgstr "Afficher les infos supplémentaires Société (ID,VAT)"
 
 #: config/config.php:174
-msgid "Show delivery address"
-msgstr "Afficher l'adresse de livraison"
+msgid "Show address"
+msgstr "Afficher l'Adresse"
 
 #: config/config.php:182
-msgid "Show invoicing address"
-msgstr "Afficher l'adresse de facturation"
+msgid "Show address addition"
+msgstr "Afficher le complément d'adresse"
 
 #: config/config.php:190
 msgid "Show country"
@@ -728,6 +728,10 @@ msgstr "Historique"
 msgid "Add"
 msgstr "Ajouter"
 
+#: config/navigation.php:115
+msgid "Promotional codes"
+msgstr "Codes Avantages"
+
 #: config/page.php:22 config/permission.php:22
 msgid "Invoice"
 msgstr "Facture"
@@ -747,6 +751,12 @@ msgstr "Détails"
 #: config/permission.php:55
 msgid "Global public resource"
 msgstr "Ressource publique globale"
+
+#~ msgid "Show delivery address"
+#~ msgstr "Afficher l'adresse de livraison"
+
+#~ msgid "Show invoicing address"
+#~ msgstr "Afficher l'adresse de facturation"
 
 #~ msgid "Both"
 #~ msgstr "Les deux"
@@ -768,12 +778,6 @@ msgstr "Ressource publique globale"
 
 #~ msgid "Show company extra"
 #~ msgstr "Afficher les infos Entreprise complémentaires"
-
-#~ msgid "Show address"
-#~ msgstr "Afficher l'Adresse"
-
-#~ msgid "Show address 2"
-#~ msgstr "Afficher l'Adresse 2"
 
 #~ msgid "Use `|` as delimiter to separate countres"
 #~ msgstr "Utiliser `|` comme délimiteur pour séparer les pays"
