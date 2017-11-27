@@ -76,6 +76,7 @@ class Notification extends AbstractApi
             'product_list' => $productList,
             'product_price' => $productPrice,
             'type_product' => $typeProduct,
+            'sellerinfo' => $config['order_sellerinfo']
             
         );
 
@@ -265,6 +266,7 @@ class Notification extends AbstractApi
     {
         // Get sitename
         $sitename = Pi::config('sitename');
+        $config = Pi::service('registry')->config->read($this->getModule());
 
         // Set mail text
         $text = sprintf(
@@ -295,6 +297,8 @@ class Notification extends AbstractApi
             'last_name' => $order['last_name'],
             'order_link' => $link,
             'text' => $text,
+            'sellerinfo' => $config['order_sellerinfo']
+            
         );
 
         // Send mail to user
@@ -315,6 +319,8 @@ class Notification extends AbstractApi
 
     public function processOrderCanPay($order)
     {
+        $config = Pi::service('registry')->config->read($this->getModule());
+        
         if ($order['can_pay'] == 1) {
             // Get sitename
             $sitename = Pi::config('sitename');
@@ -349,6 +355,8 @@ class Notification extends AbstractApi
                 'last_name' => $order['last_name'],
                 'order_link' => $link,
                 'text' => $text,
+                'sellerinfo' => $config['order_sellerinfo']
+                
             );
 
             // Send mail to user
@@ -415,6 +423,8 @@ class Notification extends AbstractApi
             'invoice_price' => Pi::api('api', 'order')->viewPrice($invoice['total_price']),
             'product_list' => $productList,
             'type_product' => $typeProduct,
+            'sellerinfo' => $config['order_sellerinfo']
+            
         );
 
         // Send mail to admin
@@ -487,6 +497,8 @@ class Notification extends AbstractApi
             'invoice_id' => $invoice['id'],
             'order_link' => $link,
             'day' => $config['notification_cron_invoice'],
+            'sellerinfo' => $config['order_sellerinfo']
+            
         );
 
         // Send mail to user
@@ -526,6 +538,8 @@ class Notification extends AbstractApi
             'invoice_id' => $invoice['id'],
             'order_link' => $link,
             'day' => $config['notification_cron_expired'],
+            'sellerinfo' => $config['order_sellerinfo']
+            
         );
 
         // Send mail to user
