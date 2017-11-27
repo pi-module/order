@@ -173,6 +173,12 @@ $this->footScript()->appendScript($script);
                                     <?php if (!empty($customer['company'])) { ?>
                                         <div><?php echo $this->escape($customer['company']); ?></div>
                                     <?php } ?>
+                                    <?php if (!empty($customer['company_id'])) { ?>
+                                        <div><?php echo $this->escape($customer['company_id']); ?></div>
+                                    <?php } ?>
+                                    <?php if (!empty($customer['company_vat'])) { ?>
+                                        <div><?php echo $this->escape($customer['company_vat']); ?></div>
+                                    <?php } ?>
                                     <?php if (!empty($customer['address1'])) { ?>
                                         <div><?php echo $this->escape($customer['address1']); ?></div>
                                     <?php } ?>
@@ -188,6 +194,9 @@ $this->footScript()->appendScript($script);
                                         <?php } ?>
                                         <?php if (!empty($customer['city'])) { ?>
                                             <?php echo $this->escape($customer['city']); ?>&nbsp;
+                                        <?php } ?>
+                                        <?php if (!empty($customer['country'])) { ?>
+                                            <?php echo $this->escape($customer['country']); ?>&nbsp;
                                         <?php } ?>
                                     </div>
                                     
