@@ -141,7 +141,14 @@ class PaymentController extends IndexController
             ));
         } 
         // Check invoice price
-        if (in_array($order['status_order'], array(1, 2, 3)) && $order['status_payment'] == 2 && $order['total_price'] == 0) {
+        if (in_array($order['status_order'], array(1, 2, 3)) && $order['total_price'] == 0) {
+            
+            if ($order['status_payment'] == 1) {
+                $invoice = Pi::api('invoice', 'order')->createInvoice($order['id'], Pi::user()->getId());
+                
+            } else {
+                $invoice = current(Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']));
+            }
             $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
             $url = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
             // Remove processing
