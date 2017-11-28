@@ -69,6 +69,20 @@ class PromocodeForm extends BaseForm
             )
         ));
         
+        $this->add(array(
+            'name' => 'module',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Module'),
+                'value_options' => $this->_modules,
+            ),
+            'attributes' => array(
+                'size' => 5,
+                'multiple' => 1
+            )
+        ));
+        
+        
          $this->add(array(
             'name' => 'time_start',
             'type' => 'datepicker',
@@ -92,18 +106,6 @@ class PromocodeForm extends BaseForm
             )
         ));
 
-        $this->add(array(
-            'name' => 'module',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Module'),
-                'value_options' => $this->_modules,
-            ),
-            'attributes' => array(
-                'size' => 5,
-                'multiple' => 1
-            )
-        ));
         
         $this->add(array(
             'name' => 'submit',
