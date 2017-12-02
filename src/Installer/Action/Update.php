@@ -68,6 +68,14 @@ class Update extends BasicUpdate
         $historyTable = $historyModel->getTable();
         $historyAdapter = $historyModel->getAdapter();
 
+        $processModel = Pi::model('processing', $this->module);
+        $processTable = $processModel->getTable();
+        $processAdapter = $processModel->getAdapter();
+        
+        $logModel = Pi::model('log', $this->module);
+        $logTable = $logModel->getTable();
+        $logAdapter = $logModel->getAdapter();
+
         if (version_compare($moduleVersion, '1.3.6', '<')) {
             // Alter table field add id_number
             $sql = sprintf("ALTER TABLE %s ADD `id_number` varchar(255) NOT NULL default ''", $orderTable);
@@ -508,11 +516,39 @@ EOD;
             }
         }
 
-        if (version_compare($moduleVersion, '1.9.5', '<')) {
-            // Alter table field add credit_price
-            $sql = sprintf("ALTER TABLE %s ADD `status` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1'", $basketTable);
+
+         if (version_compare($moduleVersion, '1.10.0', '<')) {
+            $sql = <<<'EOD'
+CREATE TABLE `{promocode}` (
+  `id`            INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `code`          VARCHAR(16) NOT NULL,
+  `promo`         TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
+  `time_start`      INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
+  `time_end`        INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
+  `module`          VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+EOD;
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
             try {
-                $basketAdapter->query($sql, 'execute');
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'SQL schema query for author table failed: '
+                        . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+        }
+
+        if (version_compare($moduleVersion, '1.10.1', '<')) {
+            // Alter table field add amount_new
+            $sql = sprintf("UPDATE %s SET `city` = UPPER(city), last_name = UPPER(last_name)", $customerTable);
+            try {
+                $customerAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
                     'status' => false,
@@ -522,7 +558,48 @@ EOD;
                 return false;
             }
         }
-
+        
+        if (version_compare($moduleVersion, '1.11.0', '<')) {
+            // Alter table field add amount_new
+            $sql = sprintf("ALTER TABLE %s CHANGE `invoice` `order` INT(10) NOT NULL ", $processTable);
+            try {
+                $processAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+           $sql = sprintf("ALTER TABLE %s ADD `extra` TEXT NULL", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+            $sql = sprintf("ALTER TABLE %s CHANGE `invoice` `order` INT(10) NOT NULL ", $logTable);
+            try {
+                $logAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+        }
+        
+        
         return true;
     }
 }

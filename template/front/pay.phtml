@@ -8,35 +8,16 @@
             text-align: center;
         }
     </style>
-    <?php if ($config['payment_page'] == 'manual') { ?>
-        <div class="order-message">
-            <?php _e("Please press pay button to redirect to gateway"); ?>
-        </div>
-        <?php echo $this->form($form, 'inline'); ?>
-    <?php } else { ?>
-        <div class="order-message">
-            <?php _e("You'll be redirected in few seconds to gateway Checkout Page"); ?>
-        </div>
-        <?php echo $this->form($form); ?>
-        <script type="text/javascript">
-            function formAutoSubmit () {
-                var frm = document.getElementById("pay");
-                frm.submit();
-            }
-            window.onload = formAutoSubmit;
-        </script>
-    <?php } ?>
-<?php } else { ?>
-    <style>
-        .order-message {
-            background: #F2DEDE;
-            border: 1px solid #f2a8a7;
-            margin: 50px auto;
-            padding: 15px;
-            text-align: center;
-        }
-    </style>
     <div class="order-message">
-        <?php _e("Error on payment form, please make contact to admin !"); ?>
+        <?php _e("You'll be redirected in few seconds to gateway Checkout Page"); ?>
     </div>
+    <?php echo $this->form($form); ?>
+    <script type="text/javascript">
+        function formAutoSubmit () {
+            var frm = document.getElementById("pay");
+            frm.submit();
+        }
+        window.onload = window.setTimeout(formAutoSubmit, 100);
+
+    </script>
 <?php } ?>

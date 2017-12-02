@@ -77,13 +77,6 @@ class Gateway extends AbstractGateway
             'type' => 'textarea',
             'required' => true,
         );
-        // form discount
-        $form['discount'] = array(
-            'name' => 'discount',
-            'label' => __('Discount'),
-            'type' => 'text',
-            'required' => false,
-        );
         $this->gatewaySettingForm = $form;
         return $this;
     }
@@ -100,20 +93,14 @@ class Gateway extends AbstractGateway
         // Call SCMerchantClient
         include_once Pi::path('module') . '/order/src/Gateway/Bitcoin/SCMerchantClient/SCMerchantClient.php';
 
-        $totalPrice = $this->gatewayInvoice['total_price'];
-
-        if ($this->gatewayOption['discount'] > 0) {
-            $totalPrice = ($totalPrice - ($totalPrice * ($this->gatewayOption['discount'] / 100)));
-        }
-
-        $url = sprintf('https://blockchain.info/tobtc?currency=USD&value=%s', $totalPrice);
-        $payAmount = Pi::service('remote')->get($url);
+        $url = sprintf('https://blockchain.info/tobtc?currency=USD&value=%s', $this->gatewayInvoice['total_price']);
+        $amount = Pi::service('remote')->get($url);
 
         $orderId = $this->gatewayInvoice['random_id'];
         $payCurrency = 'BTC';
-
+        $payAmount = $amount;
         $receiveCurrency = 'USD';
-        $receiveAmount = $totalPrice;
+        $receiveAmount = $this->gatewayInvoice['total_price'];
         $description = 'Far War Art payment';
         $culture = "en";
 
@@ -165,13 +152,6 @@ class Gateway extends AbstractGateway
         // Get invoice
         $invoice = Pi::api('invoice', 'order')->getInvoice($processing['random_id'], 'random_id');
 
-        if ($this->gatewayOption['discount'] > 0) {
-
-            $mainPrice = $invoice['total_price'];
-            $invoice['total_price'] = ($invoice['total_price'] - ($invoice['total_price'] * ($this->gatewayOption['discount'] / 100)));
-            $discountPrice =  ($mainPrice - $invoice['total_price']);
-        }
-
         // Set log
         $log = array();
         $log['gateway'] = $this->gatewayAdapter;
@@ -181,8 +161,8 @@ class Gateway extends AbstractGateway
         $log['amount'] = $invoice['total_price'];
         $log['status'] = $result['status'];
         $log['uid'] = $processing['uid'];
-        //$log['message'] = 'test1';
-        //Pi::api('log', 'order')->setLog($log);
+        $log['message'] = 'test1';
+        Pi::api('log', 'order')->setLog($log);
 
         //
         $scMerchantClient = new \SCMerchantClient(
@@ -191,26 +171,25 @@ class Gateway extends AbstractGateway
             $this->gatewayOption['apiId']
         );
 
-        //$log['message'] = 'test2';
-        //Pi::api('log', 'order')->setLog($log);
+        $log['message'] = 'test2';
+        Pi::api('log', 'order')->setLog($log);
 
         $scMerchantClient->setPrivateMerchantKey($this->gatewayOption['signature']);
 
-        //$log['message'] = 'test3';
-        //Pi::api('log', 'order')->setLog($log);
+        $log['message'] = 'test3';
+        Pi::api('log', 'order')->setLog($log);
 
         $callback = $scMerchantClient->parseCreateOrderCallback($request);
 
-        //$log['message'] = 'test4';
-        //Pi::api('log', 'order')->setLog($log);
+        $log['message'] = 'test4';
+        Pi::api('log', 'order')->setLog($log);
 
         if ($callback != null && $scMerchantClient->validateCreateOrderCallback($callback)){
-            $status = intval($callback->getStatus());
 
-            //$log['message'] = 'Status : ' . $status;
-            //Pi::api('log', 'order')->setLog($log);
+            $log['message'] = 'Status' . $callback->getStatus();
+            Pi::api('log', 'order')->setLog($log);
 
-            switch ($status) {
+            switch ($callback->getStatus()) {
                 case 1:
                     $log['message'] = __('Start state when order is registered in SpectroCoin system');
                     break;
@@ -221,31 +200,9 @@ class Gateway extends AbstractGateway
 
                 case 3:
                     $log['message'] = __('Order is complete');
-                    $invoice = Pi::api('invoice', 'order')->updateInvoice($request['orderId']);
+                    $invoice = Pi::api('invoice', 'order')->updateInvoice($request['invoice']);
                     $result['status'] = 1;
                     $log['status'] = 1;
-
-                    if ($this->gatewayOption['discount'] > 0) {
-
-                        $order = Pi::api('order', 'order')->getOrder($invoice['order']);
-
-                        $this->getModel('invoice')->update(
-                            array(
-                                'discount_price' => $discountPrice,
-                                'total_price' => $invoice['total_price'],
-                            ),
-                            array('id' => $invoice['id'])
-                        );
-
-                        $this->getModel('order')->update(
-                            array(
-                                'discount_price' => $discountPrice,
-                                'total_price' => ($order['total_price'] - $discountPrice),
-                            ),
-                            array('id' => $order['id'])
-                        );
-                    }
-
                     break;
 
                 case 4:
@@ -261,7 +218,7 @@ class Gateway extends AbstractGateway
                     break;
 
                 default:
-                    $log['message'] = 'Unknown order status: ' . $status;
+                    $log['message'] = 'Unknown order status: '.$callback->getStatus();
                     break;
             }
 

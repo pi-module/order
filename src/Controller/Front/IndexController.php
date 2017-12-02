@@ -18,6 +18,8 @@ use Pi\Mvc\Controller\ActionController;
 use Module\Order\Form\RemoveForm;
 use Zend\Json\Json;
 
+use Spipu\Html2Pdf\Html2Pdf;
+
 class IndexController extends ActionController
 {
     public function indexAction()
@@ -29,7 +31,7 @@ class IndexController extends ActionController
         // Get user info
         $user = Pi::api('user', 'order')->getUserInformation();
         // Get order
-        $orders = Pi::api('order', 'order')->getOrderFromUser($user['id'], true);
+        $orders = Pi::api('order', 'order')->getOrderFromUser($user['id'], false);
         foreach ($orders as $order) {
             $user['orders'][$order['id']] = $order;
             $user['orders'][$order['id']]['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
@@ -54,67 +56,10 @@ class IndexController extends ActionController
         $this->view()->assign('config', $config);
     }
 
-    public function removeAction()
+    public function errorAction()
     {
-        // Get invoice id
-        $id = $this->params('id');
-        $invoice = Pi::api('invoice', 'order')->getInvoice($id);
-        // Check invoice
-        if ($invoice) {
-            // Get post
-            if ($this->request->isPost()) {
-                $data = $this->request->getPost()->toArray();
-                if (isset($data['id']) && !empty($data['id'])) {
-                    Pi::api('processing', 'order')->removeProcessing();
-                    $message = __('Your old payment process remove, please try new payment ation');
-                } else {
-                    $message = __('Payment is clean');
-                }
-                $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $invoice['order']), $message);
-            } else {
-                $processing = Pi::api('processing', 'order')->getProcessing();
-                if (isset($processing['id']) && !empty($processing['id'])) {
-                    $values['id'] = $processing['id'];
-                } else {
-                    $message = __('Payment is clean');
-                    $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $invoice['order']), $message);
-                }
-                // Set form
-                $form = new RemoveForm('Remove');
-                $form->setData($values);
-                // Set view
-                $this->view()->setTemplate('remove');
-                $this->view()->assign('form', $form);
-            }
-        } else {
-            $message = __('Please select invoice');
-            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), $message);
-        }
-    }
-
-    public function messageAction()
-    {
-        // Get invoice id
-        $type = $this->params('type');
-
-        // Set information
-        switch ($type) {
-            case 'successPayment':
-                $message = __('Your payment were successfully. thank you for your payment.');
-                $alertClass = 'alert-success';
-                break;
-
-            default:
-            case 'error':
-                $message = __('Error on order processing, please contact to website admin');
-                $alertClass = 'alert-danger';
-                break;
-        }
-
         // Set view
-        $this->view()->setTemplate('message');
-        $this->view()->assign('message', $message);
-        $this->view()->assign('alertClass', $alertClass);
+        $this->view()->setTemplate('error');
     }
 
     public function checkUser()
@@ -129,8 +74,7 @@ class IndexController extends ActionController
         // Check
         if (!Pi::service('authentication')->hasIdentity()) {
             if (!isset($_SESSION['payment']['process']) || $_SESSION['payment']['process'] != 1) {
-                $_SESSION['payment']['process'] = 1;
-                $_SESSION['payment']['process_start'] = time();
+                $this->jump(array('', 'controller' => 'index', 'action' => 'error'));
             }
             // Set session
             $_SESSION['payment']['process_update'] = time();
@@ -138,4 +82,55 @@ class IndexController extends ActionController
         //
         return true;
     }
+    
+    public function cancelAction()
+    {
+        $id = $this->params('id');
+        Pi::api('order', 'order')->cancelOrder($id);
+        $this->jump(array('', 'action' => 'index'), __('Order canceled'));
+        
+    }
+    
+    public function printAction()
+    {
+        
+         // Check user
+        $this->checkUser();
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Get order
+        $id = $this->params('id');
+        $order = Pi::api('order', 'order')->getOrder($id);
+        
+        // Check order
+        if (empty($order)) {
+            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('The order not found.'));
+        }
+        // Check order is for this user
+        if ($order['uid'] != Pi::user()->getId()) {
+            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This is not your order.'));
+        }
+        // Check order is for this user
+        if (!in_array($order['status_order'], array(1, 2, 3, 7))) {
+            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This order not active.'));
+        }
+
+        // set Products
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        // set Products
+        $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
+        // set delivery information
+        $order['deliveryInformation'] = '';
+        if ($order['delivery'] > 0 && $order['location'] > 0) {
+            $order['deliveryInformation'] = Pi::api('delivery', 'order')->getDeliveryInformation($order['location'], $order['delivery']);
+        }
+        
+        $order['total_product_price'] = Pi::api('api', 'order')->viewPrice($order['product_price'] - $order['discount_price']);
+        
+        $template = 'order:front/print';
+        $data = array('order' => $order, 'config' => $config);
+        
+        Pi::service('html2pdf')->pdf($template, $data);
+    }
+    
 }

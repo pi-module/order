@@ -22,13 +22,13 @@ class Order extends Standard
      * @var array
      */
     protected $defaults = array(
-        'module'     => 'order',
+        'module' => 'order',
         'controller' => 'index',
-        'action'     => 'index'
+        'action' => 'index'
     );
 
     protected $controllerList = array(
-        'checkout', 'credit', 'detail', 'index', 'invoice', 'payment'
+        'checkout', 'credit', 'index', 'invoice', 'payment', 'promocode'
     );
 
     /**
@@ -48,7 +48,7 @@ class Order extends Standard
         $matches = array_merge($this->defaults, $matches);
         if (isset($parts[0]) && in_array($parts[0], $this->controllerList)) {
             $matches['controller'] = $this->decode($parts[0]);
-        } elseif (isset($parts[0]) && in_array($parts[0], array('remove', 'message'))) {
+        } elseif (isset($parts[0]) && in_array($parts[0], array('print', 'cancel', 'error'))) {
             $matches['controller'] = 'index';
         } else {
             return false;
@@ -64,6 +64,8 @@ class Order extends Standard
                         $matches['id'] = $this->decode($parts[3]);
                     } elseif (isset($parts[1]) && $parts[1] == 'installment') {
                         $matches['action'] = 'installment';
+                    } elseif (isset($parts[1]) && $parts[1] == 'promocode') {
+                        $matches['action'] = 'promocode';
                     } elseif (isset($parts[1]) && $parts[1] == 'delete') {
                         $matches['action'] = 'delete';
                         $matches['customer'] = $this->decode($parts[2]);
@@ -83,14 +85,13 @@ class Order extends Standard
                                 $matches['action'] = 'index';
                                 break;
 
-                            case 'message':
-                                $matches['action'] = 'message';
-                                $matches['type'] = $this->decode($parts[1]);
+                            case 'error':
+                                $matches['action'] = 'error';
                                 break;
-
-                            case 'remove':
-                                $matches['action'] = 'remove';
-                                $matches['id'] = intval($this->decode($parts[1]));
+                            case 'print':
+                            case 'cancel':
+                                $matches['action'] = $parts[0];
+                                $matches['id'] = intval($parts[1]);
                                 break;
                         }
                     }
@@ -114,6 +115,14 @@ class Order extends Standard
                             $matches['id'] = intval($parts[2]);
                         }
                     } else if ($parts[1] == 'finish') {
+                        $matches['action'] = $this->decode($parts[1]);
+                        if (isset($parts[2])) {
+                            $matches['type'] = $parts[2];
+                        }
+                        if (isset($parts[3]) && is_numeric($parts[3])) {
+                            $matches['id'] = intval($parts[3]);
+                        }
+                    }  else if ($parts[1] == 'execute') {
                         $matches['action'] = $this->decode($parts[1]);
                         if (isset($parts[2])) {
                             $matches['type'] = $parts[2];
@@ -210,11 +219,6 @@ class Order extends Standard
         // Set token
         if (isset($mergedParams['token'])) {
             $url['token'] = 'token' . $this->paramDelimiter . $mergedParams['token'];
-        }
-
-        // Set type
-        if (isset($mergedParams['type'])) {
-            $url['type'] = $mergedParams['type'];
         }
 
         // Make url

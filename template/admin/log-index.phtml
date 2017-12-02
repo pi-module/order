@@ -6,7 +6,7 @@
             <tr>
                 <th><?php _e('ID'); ?></th>
                 <th><?php _e('User'); ?></th>
-                <th><?php _e('Invoice'); ?></th>
+                <th><?php _e('Order'); ?></th>
                 <th><?php _e('Adapter'); ?></th>
                 <th><?php _e('Amount'); ?></th>
                 <th><?php _e('Time Create'); ?></th>
@@ -32,8 +32,8 @@
                         </a>
                     </td>
                     <td>
-                        <a target="_blank" href="<?php echo $this->escape($log['invoice_url']); ?>">
-                            <?php echo $this->escape($log['invoice']); ?> (<?php _e('View'); ?>)
+                        <a target="_blank" href="<?php echo $this->escape($log['order_url']); ?>">
+                            <?php echo $this->escape($log['order']); ?> (<?php _e('View'); ?>)
                         </a>
                     </td>
                     <td>

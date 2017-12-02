@@ -18,25 +18,27 @@ use Pi\Form\Form as BaseForm;
 
 class PayForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $field)
     {
-        $this->option = $option;
+        $this->field = $field;
         parent::__construct($name);
     }
 
     /* public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new PayFilter($this->option);
+            $this->filter = new PayFilter($this->field);
         }
         return $this->filter;
     } */
 
     public function init()
     {
+        $this->setAttribute('enctype','multipart/form-data');
+
         // Set extra field
-        if (!empty($this->option['field'])) {
-            foreach ($this->option['field'] as $field) {
+        if (!empty($this->field)) {
+            foreach ($this->field as $field) {
                 if ($field['type'] != 'hidden') {
                     $this->add(array(
                         'name' => $field['name'],
@@ -57,16 +59,13 @@ class PayForm extends BaseForm
                 }
             }
         }
-        // Pay
-        if ($this->option['config']['payment_page'] == 'manual') {
-            $this->add(array(
-                'name' => 'submit',
-                'type' => 'submit',
-                'attributes' => array(
-                    'value' => __('Pay'),
-                    'class' => 'btn btn-success btn-lg',
-                )
-            ));
-        }
+        // Save
+        /* $this->add(array(
+            'name' => 'submit',
+            'type' => 'submit',
+            'attributes' => array(
+                'value' => __('Pay'),
+            )
+        )); */
     }
 }

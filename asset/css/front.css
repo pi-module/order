@@ -129,6 +129,9 @@ ul.progtrckr li.progtrckr-pending:before {
     padding: 20px;
     /* min-height: 180px; */
 }
+.customer-single .info {
+    min-height:172px;
+}
 
 .submit_order_simple {
     font-size: 1.2em;
@@ -164,7 +167,9 @@ ul.progtrckr li.progtrckr-pending:before {
 
 .selected-address {
     display: inline-block;
-    padding: 8px 4px 8px 4px;
+    padding: 9px 5px 9px 5px;
+    border-radius: 0px;
+    margin-right:-3px;
 }
 
 .text-loyalty {
@@ -174,4 +179,35 @@ ul.progtrckr li.progtrckr-pending:before {
 .radio label {
     font-size: 1.1em;
     padding-bottom: 15px;
+}
+
+.btn-delete {
+    background:#ccc;
+    color:#000;
+    border-radius:0px;
+}
+
+.btn-standard {
+    background:#f9f9f9;
+    color:#000;
+    border-radius:0px;
+    border:1px solid #ddd
+}
+
+
+.btn-success {padding:5px!important}
+
+
+.btn-refresh {
+    color: #03A9F4;
+    border: 1px solid #03A9F4;
+    background: #fff;
+    margin-left:-1px;
+    padding:5px!important;
+}
+.btn-refresh:hover {
+    color: #fff;
+    background: #03A9F4;
+    margin-left:-1px;
+    padding:5px!important;
 }

@@ -1,5 +1,12 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="clearfix">
     <h3><?php echo $this->escape($title); ?></h3>
+    
+    <?php if ($description) { ?> 
+        <hr/>
+        <p><?php echo $description ?></p>
+        <hr/>
+    <?php } ?>
+    
     <?php echo $this->form($form); ?>
 </div>

@@ -169,7 +169,7 @@ class AddressFilter extends InputFilter
         if ($config['order_address2']) {
             $this->add(array(
                 'name' => 'address2',
-                'required' => true,
+                'required' => false,
                 'filters' => array(
                     array(
                         'name' => 'StringTrim',

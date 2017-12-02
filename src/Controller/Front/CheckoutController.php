@@ -20,6 +20,8 @@ use Module\Order\Form\AddressForm;
 use Module\Order\Form\AddressFilter;
 use Module\Order\Form\OrderForm;
 use Module\Order\Form\OrderFilter;
+use Module\Order\Form\PromoCheckoutForm;
+use Module\Order\Form\PromoCheckoutFilter;
 use Module\Order\Form\OrderSimpleForm;
 use Module\Order\Form\OrderSimpleFilter;
 use Module\System\Form\LoginForm;
@@ -76,8 +78,11 @@ class CheckoutController extends IndexController
         }
         // Check gateway
         if (is_array($values['gateway'])) {
-            $values['gateway'] = $values['gateway'][0];
+            $values['gateway'] = $values['gateway'][0]; 
         }
+        $gateway = Pi::api('gateway', 'order')->getGatewayInfo($values['gateway']);
+        $gatewayOptions = json_decode($gateway['option'], true);
+            
         // Set promotion_type values
         if (isset($cart['promotion_type']) && !empty($cart['promotion_type'])) {
             $values['promotion_type'] = $cart['promotion_type'];
@@ -133,14 +138,18 @@ class CheckoutController extends IndexController
                 $values['setup_price'] +
                 $values['vat_price']
             ) - $values['discount_price']);
-
         
-
         // Save values to order
-        $order = $this->getModel('order')->createRow();
+        if (isset($_SESSION['order']['id'])) {
+            $order = $this->getModel('order')->find($_SESSION['order']['id']); 
+        } 
+        if (empty($order)) {
+            $order = $this->getModel('order')->createRow();
+        }
         $order->assign($values);
         $order->save();
-
+        $_SESSION['order']['id'] = $order['id'];
+    
         // Log term and condition acceptation
         if (Pi::service('module')->isActive('user')){
             $condition = Pi::api('condition', 'user')->getLastEligibleCondition();
@@ -176,6 +185,7 @@ class CheckoutController extends IndexController
                             ) - $product['discount_price']) * $product['number'];
                     
                     // Save basket
+                    $this->getModel('basket')->delete(array('order' => $_SESSION['order']['id']));
                     $basket = $this->getModel('basket')->createRow();
                     $basket->order = $order->id;
                     $basket->product = $product['product'];
@@ -232,30 +242,34 @@ class CheckoutController extends IndexController
             // Update user information
             if ($config['order_update_user'] && isset($values['update_user']) && $values['update_user']) {
                 Pi::api('user', 'order')->updateUserInformation($values);
-            }
-            // Set invoice
-            $result = Pi::api('invoice', 'order')->createInvoice($order->id, $uid);
+            }    
+
             // Add user credit
             if (isset($cart['credit'])) {
                 $cart['credit']['module'] = $order->module_name;
                 Pi::api('credit', 'order')->addHistory($cart['credit'], $order->id);
             }
-            // unset order
-            Pi::api('order', 'order')->unsetOrderInfo();
             // Send notification
-            Pi::api('notification', 'order')->addOrder($order->toArray());
-            // Go to payment
-            if ($result['status'] == 0) {
-                $url = array('', 'controller' => 'index', 'action' => 'index');
-                $this->jump($url, $result['message'], 'error');
-            } else {
-                if ($config['order_payment'] == 'payment') {
-                    $url = $result['pay_url'];
-                } else {
-                    $url = $result['order_url'];
-                }
-                $this->jump($url, $result['message'], 'success');
+            if (!$gatewayOptions['onemail']) {
+                Pi::api('notification', 'order')->addOrder($order->toArray());
             }
+            // Go to payment
+            if ($config['order_payment'] == 'payment') {
+                $url = Pi::url(Pi::service('url')->assemble('order', array(
+                    'module' => $this->getModule(),
+                    'controller' => 'payment',
+                    'action' => 'index',
+                    'id' => $order->id,
+                )));
+            } else {
+                $url = Pi::url(Pi::service('url')->assemble('order', array(
+                    'module' => $this->getModule(),
+                    'controller' => 'detail',
+                    'action' => 'index',
+                    'id' => $order->order,
+                )));
+            }
+            $this->jump($url, $result['message'], 'success');
         } else {
             $error = array(
                 'values' => $values,
@@ -277,6 +291,12 @@ class CheckoutController extends IndexController
         $config = Pi::service('registry')->config->read($this->getModule());
         // Set cart
         $cart = Pi::api('order', 'order')->getOrderInfo();
+        
+        if (empty($cart) && !$config['order_anonymous']) {
+            $url = array('route' => 'home');
+            $this->jump($url);
+        }
+        
         if (empty($cart)) {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
             $this->jump($url, __('Your cart is empty.'), 'error');
@@ -327,6 +347,14 @@ class CheckoutController extends IndexController
         $formOrder = new OrderForm('order', $option);
         $formOrder->setInputFilter(new OrderFilter($option));
 
+        $msgPromoCode = null;        
+        $hasActiveCode = Pi::api('promocode', 'order')->hasActiveCode();
+        if ($hasActiveCode) {
+            $formPromoCheckout = new PromoCheckoutForm('promoCheckout', $option);
+            $formPromoCheckout->setInputFilter(new PromoCheckoutFilter($option));
+        }
+        
+                
         // Check post
         $check = count($customers) == 0 ? true : false;
         if ($this->request->isPost()) {
@@ -344,6 +372,9 @@ class CheckoutController extends IndexController
                     $values['time_create'] = time();
                     
                     $values['uid'] = $uid;
+                    $values['last_name'] = strtoupper($values['last_name']);
+                    $values['city'] = strtoupper($values['city']);
+                    
                     if ($values['customer_id'] == 0) {
                         Pi::api('customer', 'order')->addCustomer($values);
                     } else {
@@ -457,6 +488,18 @@ class CheckoutController extends IndexController
                 $formAddress->setData($values);
                 $check = true;
                 $editAddress = true;
+            } else {
+                // Get user base info
+                $user = array();
+                if (Pi::user()->getId()) {
+                    $user = Pi::api('user', 'user')->get(
+                        Pi::user()->getId(),
+                        array('email', 'first_name', 'last_name', 'address1', 'address2', 'city', 'zip_code', 'country', 'state', 'mobile', 'phone'),
+                        true,
+                        true
+                    );
+                }
+                $formAddress->setData($user);
             }
         }
 
@@ -464,6 +507,7 @@ class CheckoutController extends IndexController
         $user = Pi::api('user', 'order')->getUserInformation();
         $user['customer_id'] = 0;
         $forms = array();
+        $forms['promoCheckout'] = $formPromoCheckout;
         
         // Set customer forms
         if (!empty($customers)) {
@@ -483,40 +527,8 @@ class CheckoutController extends IndexController
         }
 
         // Set price
-        $price['discount'] = isset($cart['total_discount']) ? $cart['total_discount'] : 0;
-        $price['shipping'] = isset($cart['total_shipping']) ? $cart['total_shipping'] : 0;
-        $price['packing'] = isset($cart['total_packing']) ? $cart['total_packing'] : 0;
-        $price['setup'] = isset($cart['total_setup']) ? $cart['total_setup'] : 0;
-        $price['vat'] = isset($cart['total_vat']) ? $cart['total_vat'] : 0;
-        $price['product'] = 0;
-        $price['total'] = 0;
-        foreach ($cart['product'] as $product) {
-            // Check setup price
-            $product['setup_price'] = isset($product['setup_price']) ? $product['setup_price'] : 0;
-            // Set price
-            $price['product'] = ($product['product_price'] * $product['number']) + $price['product'];
-            $price['discount'] = ($product['discount_price'] * $product['number']) + $price['discount'];
-            $price['shipping'] = ($product['shipping_price'] * $product['number']) + $price['shipping'];
-            $price['setup'] = ($product['setup_price'] * $product['number']) + $price['setup'];
-            $price['packing'] = ($product['packing_price'] * $product['number']) + $price['packing'];
-            $price['vat'] = $product['vat_price'] + $price['vat'];
-        }
-
-        // Set additional price
-        if ($cart['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
-            $price['shipping'] = $price['shipping'] + $config['order_additional_price_product'];
-        } elseif ($cart['type_commodity'] == 'service' && $config['order_additional_price_service'] >0 ) {
-            $price['setup'] = $price['setup'] + $config['order_additional_price_service'];
-        }
-
-        // Set total
-        $price['total'] = (($price['product'] +
-                $price['shipping'] +
-                $price['packing'] +
-                $price['setup'] +
-                $price['vat']
-            ) - $price['discount']);
-
+        $price = $this->updatePrice($cart);
+        
         // Set plan
         if ($cart['type_payment'] == 'installment') {
             $user = Pi::api('user', 'order')->getUserInformation();
@@ -547,6 +559,8 @@ class CheckoutController extends IndexController
         $this->view()->assign('customers', $customers);
         $this->view()->assign('check', $check);
         $this->view()->assign('editAddress', $editAddress);
+        $this->view()->assign('msgPromoCode', $msgPromoCode);
+        
     }
 
     public function installmentAction()
@@ -742,5 +756,130 @@ class CheckoutController extends IndexController
         $url = array('', 'controller' => 'checkout', 'action' => 'index');
         $this->jump($url, __('Address deleted'));       
     }
-    
+    private function updatePrice($cart)
+    {
+        $price = array();
+        $price['discount'] = isset($cart['total_discount']) ? $cart['total_discount'] : 0;
+        $price['shipping'] = isset($cart['total_shipping']) ? $cart['total_shipping'] : 0;
+        $price['packing'] = isset($cart['total_packing']) ? $cart['total_packing'] : 0;
+        $price['setup'] = isset($cart['total_setup']) ? $cart['total_setup'] : 0;
+        $price['vat'] = isset($cart['total_vat']) ? $cart['total_vat'] : 0;
+        $price['product'] = 0;
+        $price['total'] = 0;
+        foreach ($cart['product'] as $product) {
+            // Check setup price
+            $product['setup_price'] = isset($product['setup_price']) ? $product['setup_price'] : 0;
+            // Set price
+            $price['product'] = ($product['product_price'] * $product['number']) + $price['product'];
+            $price['discount'] = ($product['discount_price'] * $product['number']) + $price['discount'];
+            $price['shipping'] = ($product['shipping_price'] * $product['number']) + $price['shipping'];
+            $price['setup'] = ($product['setup_price'] * $product['number']) + $price['setup'];
+            $price['packing'] = ($product['packing_price'] * $product['number']) + $price['packing'];
+            $price['vat'] = $product['vat_price'] + $price['vat'];
+            
+        }
+
+        // Set additional price
+        if ($cart['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
+            $price['shipping'] = $price['shipping'] + $config['order_additional_price_product'];
+        } elseif ($cart['type_commodity'] == 'service' && $config['order_additional_price_service'] >0 ) {
+            $price['setup'] = $price['setup'] + $config['order_additional_price_service'];
+        }
+
+        // Set total
+        $price['total'] = (($price['product'] +
+                $price['shipping'] +
+                $price['packing'] +
+                $price['setup'] +
+                $price['vat']
+            ) - $price['discount']);
+        
+        return $price;
+    }
+    public function promocodeAction()
+    {
+        if ($this->request->isPost()) {
+            $cart = Pi::api('order', 'order')->getOrderInfo();
+            $formPromoCheckout = new PromoCheckoutForm('promoCheckout', $option);
+            $formPromoCheckout->setInputFilter(new PromoCheckoutFilter($option));
+            $data = $this->request->getPost();
+            $formPromoCheckout->setData($data);
+            if ($formPromoCheckout->isValid()) {    
+                $values = $formPromoCheckout->getData();
+                $promocode = Pi::api('promocode', 'order')->get($values['code']);
+                if ($promocode) {
+                    $authorizedModules = json_decode($promocode['module']);
+                    if (strtotime(date('Y-m-d')) < $promocode->time_start || strtotime(date('Y-m-d')) > $promocode->time_end) {
+                        // Code dépassé
+                        $msgPromoCode = array(
+                            'type' => 'info',
+                            'message' => __('This code has expired.')
+                        );
+                            
+                    } else if (!in_array($cart['module_name'], $authorizedModules)) {
+                        // mauvais module
+                        $msgPromoCode = array(
+                            'type' => 'info',
+                            'message' => __('This code cannot be applied on this product.')
+                        ); 
+                    } else {
+                        // promo existantes
+                        $canUpdate = true;
+                        foreach ($cart['product'] as &$product) {
+                            if ($product['discount'] > 0) {
+                                $canUpdate = false;     
+                                if ($product['discount'] < $promocode->promo) {
+                                    $product['discount_price'] = $product['product_price'] * $promocode->promo / 100;
+                                    $product['discount'] = $promocode->promo;
+                                    $product['vat_price'] =  ($product['product_price'] - $product['discount_price']) * $product['vat'] / 100;
+                                    Pi::api('order', 'order')->setOrderInfo($cart);
+                                }
+                                
+                                $msgPromoCode = array(
+                                    'type' => 'success',
+                                    'message' => __("You are trying to use a promo code on a product that already has a discount. We have automatically applied the most advantageous discount for you (it is not possible to cumulate the discounts)")
+                                );
+                            }
+                        }
+                        
+                        // MAJ $cart
+                        if ($canUpdate) {
+                            foreach ($cart['product'] as &$product) {
+                                $product['discount'] = $promocode->promo;
+                                $product['discount_price'] = $product['product_price'] * $promocode->promo / 100;
+                                $product['vat_price'] = ($product['product_price'] - $product['discount_price']) * $product['vat'] / 100;    
+                            }
+                            Pi::api('order', 'order')->setOrderInfo($cart);
+                        
+                            $msgPromoCode = array(
+                                'type' => 'success',
+                                'message' => __("Promo code accepted")
+                            );
+                        }
+                    }
+                } else {
+                    // Code inexistant
+                    $msgPromoCode = array(
+                        'type' => 'info',
+                        'message' => __("This code doesn't exist")
+                    );
+                }           
+            } 
+        }
+
+        $price = $this->updatePrice($cart);
+        
+        
+        $totalDiscount = 0;
+        foreach ($cart['product'] as &$product) {
+            $product['discount_price_view'] = Pi::api('api', 'order')->viewPrice($product['discount_price']);
+            $totalDiscount += Pi::api('api', 'order')->viewPrice($product['discount_price']);
+        } 
+                      
+        $price['total_price_view'] = Pi::api('api', 'order')->viewPrice($price['product'] - $totalDiscount);
+        $price['vat_view'] = Pi::api('api', 'order')->viewPrice($price['vat']);
+        $price['total_price_ttc_view'] = Pi::api('api', 'order')->viewPrice($price['product'] - $totalDiscount + $price['vat']);          
+        
+        return array('msgPromoCode' => $msgPromoCode, 'cart' => $cart, 'price' => $price);
+    }
 }

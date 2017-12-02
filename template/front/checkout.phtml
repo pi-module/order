@@ -77,6 +77,9 @@ $script = <<<'EOT'
             });
         },
         makeOrderAction: function (e) {
+            
+            e.preventDefault();
+            
             $('#customerFromNew').addClass('hidden');
             
             var idCustomer = $(e.target).attr('rel');
@@ -88,7 +91,7 @@ $script = <<<'EOT'
             $('.showCustomerFrom').removeClass('hidden');
             
             $(e.target).addClass('hidden');
-            $(e.target).parent().find('.selected-address').removeClass('hidden');
+            $(e.target).parent().parent().find('.selected-address').removeClass('hidden');
         },
         newAddressAction: function (e) {
             $('#customerFromNew').removeClass('hidden');
@@ -155,79 +158,82 @@ $this->footScript()->appendScript($script);
             <?php if (!empty($customers)) { ?>
                 <div class="clearfix row">
                     <?php foreach ($customers as $customer) { ?>
-                        <div class="col-md-12 customer-single"
+                        <div class="col-md-4 customer-single"
                              data-id="customerFrom<?php echo $customer['id']; ?>"
                              data-button="customerFromButton<?php echo $customer['id']; ?>">
-                            <div class="clearfix">
-                                <ul class="list-inline">
-                                    <li><?php echo $this->escape($customer['first_name']); ?></li>
-                                    <li><?php echo $this->escape($customer['last_name']); ?></li>
-                                    <li>( <?php echo $this->escape($customer['email']); ?> )</li>
-                                </ul>
-                                <?php if (!empty($customer['company'])) { ?>
-                                    <p><?php echo $this->escape($customer['company']); ?></p>
-                                <?php } ?>
-                                <?php if (!empty($customer['address1'])) { ?>
+                             <div class="clearfix">
+                                <div class="info">
                                     <p>
-                                        <strong><?php _e('Delivery address'); ?></strong> : <span class="small"><?php echo $this->escape($customer['address1']); ?></span>
+                                        <strong><?php _e('Invoicing address'); ?></strong>
                                     </p>
-                                <?php } ?>
-                                <?php if (!empty($customer['address2'])) { ?>
-                                    <p>
-                                        <strong><?php _e('Invoicing address'); ?></strong> : <span class="small"><?php echo $this->escape($customer['address2']); ?></span>
-                                    </p>
-                                <?php } ?>
-                                <div class="clearfix row">
-                                    <?php if (!empty($customer['zip_code'])) { ?>
-                                        <div class="col-md-6">
-                                            <strong><?php _e('Zip code'); ?></strong> :
-                                            <?php echo $this->escape($customer['zip_code']); ?>
-                                        </div>
+                                    <div>
+                                        <?php echo $this->escape($customer['first_name']); ?>  <?php echo $this->escape($customer['last_name']); ?>
+                                        ( <?php echo $this->escape($customer['email']); ?> )
+                                    </div>
+                                    <?php if (!empty($customer['company'])) { ?>
+                                        <div><?php echo $this->escape($customer['company']); ?></div>
                                     <?php } ?>
-                                    <?php if (!empty($customer['state'])) { ?>
-                                        <div class="col-md-6">
-                                            <strong><?php _e('State'); ?></strong> :
-                                            <?php echo $this->escape($customer['state']); ?>
-                                        </div>
+                                    <?php if (!empty($customer['company_id'])) { ?>
+                                        <div><?php echo $this->escape($customer['company_id']); ?></div>
                                     <?php } ?>
-                                    <?php if (!empty($customer['city'])) { ?>
-                                        <div class="col-md-6">
-                                            <strong><?php _e('City'); ?></strong> :
-                                            <?php echo $this->escape($customer['city']); ?>
-                                        </div>
+                                    <?php if (!empty($customer['company_vat'])) { ?>
+                                        <div><?php echo $this->escape($customer['company_vat']); ?></div>
                                     <?php } ?>
+                                    <?php if (!empty($customer['address1'])) { ?>
+                                        <div><?php echo $this->escape($customer['address1']); ?></div>
+                                    <?php } ?>
+                                    <?php if (!empty($customer['address2'])) { ?>
+                                        <div><?php echo $this->escape($customer['address2']); ?></div>
+                                    <?php } ?>
+                                    <div>
+                                        <?php if (!empty($customer['zip_code'])) { ?>
+                                            <?php echo $this->escape($customer['zip_code']); ?>&nbsp;
+                                        <?php } ?>
+                                        <?php if (!empty($customer['state'])) { ?>
+                                            <?php echo $this->escape($customer['state']); ?>&nbsp;
+                                        <?php } ?>
+                                        <?php if (!empty($customer['city'])) { ?>
+                                            <?php echo $this->escape($customer['city']); ?>&nbsp;
+                                        <?php } ?>
+                                        <?php if (!empty($customer['country'])) { ?>
+                                            <?php echo $this->escape($customer['country']); ?>&nbsp;
+                                        <?php } ?>
+                                    </div>
+                                    
                                     <?php if (!empty($customer['phone'])) { ?>
-                                        <div class="col-md-6">
-                                            <strong><?php _e('Phone'); ?></strong> :
+                                        <div>
+                                            <?php _e('Phone'); ?> :
                                             <?php echo $this->escape($customer['phone']); ?>
                                         </div>
                                     <?php } ?>
                                     <?php if (!empty($customer['mobile'])) { ?>
-                                        <div class="col-md-6">
-                                            <strong><?php _e('Mobile'); ?></strong> :
+                                        <div>
+                                            <?php _e('Mobile'); ?> :
                                             <?php echo $this->escape($customer['mobile']); ?>
                                         </div>
                                     <?php } ?>
+                                    
+                                    <br />
                                 </div>
-                                <br />
+                            
                                 <ul class="list-inline">
                                     <li>
-                                        <button id="customerFromButton<?php echo $customer['id']; ?>" class="showCustomerFrom btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
-                                            <?php _e('Use it'); ?>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <spam class="label label-success hidden selected-address">
+                                        <div class="label label-success hidden selected-address">
                                             <i class="fa fa-check"></i> <?php _e('Selected address') ?>
-                                        </spam>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'index', 'customer' => $customer['id']))) ?>" class=" btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
+                                        <a href="#" id="customerFromButton<?php echo $customer['id']; ?>" class="showCustomerFrom btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
+                                           <?php _e('Use it'); ?>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'index', 'customer' => $customer['id']))) ?>" class=" btn btn-primary  btn-sm" rel="<?php echo $customer['id']; ?>">
                                             <i class="fa fa-edit"></i> <?php _e('Edit'); ?>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'delete', 'customer' => $customer['id']))) ?>" class=" btn btn-danger btn-sm" rel="<?php echo $customer['id']; ?>" onclick="return confirm('<?php _e('Are you sure you want delete this address?'); ?>');">
+                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'delete', 'customer' => $customer['id']))) ?>" class=" btn btn-delete btn-sm" rel="<?php echo $customer['id']; ?>" onclick="return confirm('<?php _e('Are you sure you want delete this address?'); ?>');">
                                             <i class="fa fa-trash"></i> <?php _e('Delete'); ?>
                                         </a>
                                     </li>
@@ -294,10 +300,10 @@ $this->footScript()->appendScript($script);
                                     <td>
                                         <?php _e('Total Discount'); ?>
                                         <?php if (isset($product['discount'])) { ?>
-                                            (<?php echo $product['discount'] ?>%)
+                                            (<span data-discount-for="<?php echo $product['product'] ?>"><?php echo $product['discount'] ?></span>%)
                                         <?php } ?>
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-right" data-discount-price-for="<?php echo $product['product'] ?>">
                                         <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
                                     </td>
                                 </tr>
@@ -305,7 +311,7 @@ $this->footScript()->appendScript($script);
                             <?php } ?>
                             <tr>
                                 <td><?php _e('Total Price ext VAT'); ?></td>
-                                <td class="text-right">
+                                <td class="text-right data-total-price"">
                                     <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $totalDiscount)); ?>
                                 </td>
                             </tr>
@@ -316,7 +322,7 @@ $this->footScript()->appendScript($script);
                                         (<?php echo $product['vat'] ?>%)
                                     <?php } ?>
                                 </td>
-                                <td class="text-right">
+                                <td class="text-right test data-total-vat">
                                     <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?>
                                 </td>
                             </tr>
@@ -336,7 +342,7 @@ $this->footScript()->appendScript($script);
                                         </strong>
                                     </td>
                                     <td class="text-right">
-                                        <spam class="label label-success">
+                                        <spam class="label label-success data-total-price-ttc">
                                             <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?>
                                         </spam>
                                     </td>
@@ -346,6 +352,43 @@ $this->footScript()->appendScript($script);
                     </div>
                 </div>
                 <div class="clearfix">
+                    <?php if (isset($forms['promoCheckout'])) { ?>
+                        <?php echo $this->form()->openTag($forms['promoCheckout']); ?>
+                            <div class="col-md-4 nopadding">
+                                <div class="form-group has-feedback" data-name="code">
+                                    <label class=" control-label">
+                                        <?php _e('Your promo code') ?>
+                                    </label>
+                                    <div class=" js-form-element">
+                                        <?php echo $this->formElement($forms['promoCheckout']->get('code')); ?>
+                                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                        <span style="display:block;" class="text-muted"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 nopadding">
+                                <label class=" control-label">
+                                    &nbsp;
+                                 </label>
+                                <div class="form-group has-feedback" data-name="code">
+                                    <div class=" js-form-element">
+                                        <?php echo $this->formElement($forms['promoCheckout']->get('submit_promo')); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        <?php echo $this->form()->closeTag($forms['promoCheckout']); ?>
+                        <?php if ($msgPromoCode) { ?>
+                            <div class="clearfix alert alert-<?php echo $msgPromoCode['type'] ?>" role="alert">
+                                    <span><?php echo $msgPromoCode['message'] ?></span>
+                            </div>
+                        <?php } ?>
+                        
+                        <div class="clearfix alert hidden" role="alert">
+                            <span></span>
+                        </div>
+                            
+                    <?php } ?>
                     <?php if (isset($forms['order'])) { ?>
                         <?php echo $this->form($forms['order'], 'vertical'); ?>
                     <?php } ?>
@@ -365,3 +408,44 @@ $this->footScript()->appendScript($script);
         </div>
     </div>
 </div>
+<script>
+    $( document ).ready(function() {
+        $('#promoCheckout').on('submit', function() {
+            var code = $('#promoCheckout input[name=code]').val();
+            if (code == null) {
+                return false;
+            }
+            $('#promoCheckout input[name=code]').val('');
+        
+            $.ajax({
+              type: "POST",
+              url: "<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'promocode'))) ?>",
+              data: {code: code},
+              success: function(data) {
+                  $('#promoCheckout').parent().find('.alert')
+                  .removeClass('hidden')
+                  .removeClass('alert-info')
+                  .removeClass('alert-success')
+                  .addClass('alert-' + data.msgPromoCode.type);
+                  
+                  $('#promoCheckout').parent().find('.alert span').html(data.msgPromoCode.message);
+                  
+                  var totalDiscount = 0;
+                  $.each(data.cart.product, 
+                      function(i, product)
+                      {
+                          $('.cart-product span[data-discount-for=' + product.product + ']').html(product.discount);
+                          $('.cart-product td[data-discount-price-for=' + product.product + ']').html(product.discount_price_view);
+                      }
+                  );
+                  $('.cart-product .data-total-price').html(data.price.total_price_view);
+                  $('.cart-product .data-total-vat').html(data.price.vat_view);
+                  $('.cart-product .data-total-price-ttc').html(data.price.total_price_ttc_view);       
+                  //$('[data-total-vat-for=445]').val()
+              },
+              dataType: 'json'
+            });
+            return false; 
+        });
+    });
+</script>

@@ -1,0 +1,60 @@
+<?php $this->css($this->assetModule('css/admin.css')); 
+$urlMessage = $this->url('', array(
+    'controller' => 'booking',
+    'action' => 'message',
+));
+?>
+<div class="clearfix">
+    <div class="admin-header clearfix well well-sm">
+        <div class="col-md-4">
+            <div class="nav">
+                <div class="btn-group">
+                    <a href="<?php echo $this->url('', array('action' => 'manage')); ?>" type="button" class="btn btn-success ">
+                        <?php _e('Add'); ?>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <h3><?php _e('List promotional codes'); ?></h3>
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th><?php _e('Code'); ?></th>
+            <th><?php _e('Promo'); ?></th>
+            <th><?php _e('Time start'); ?></th>
+            <th><?php _e('Time end'); ?></th>
+            <th><?php _e('Module'); ?></th>
+            <th></th>
+        </tr>
+        <?php if (count($paginator)) { ?> 
+            <?php foreach ($paginator as $promocode) { ?>
+               
+                <tr>
+                    <td><?php echo $this->escape($promocode['code']); ?></td>
+                    <td><?php echo $this->escape($promocode['promo']); ?>%</td>
+                    <td><?php echo $this->escape(_date($promocode['time_start'])); ?></td>
+                    <td><?php echo $this->escape(_date($promocode['time_end'])); ?></td>
+                    <td><?php echo join(', ', json_decode($promocode['module'])); ?></td>
+                    <td>
+                         <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'manage', 'id' => $promocode['id'])); ?>">
+                             <i class="fa fa-edit"></i> <?php _e('Manage'); ?>
+                         </a>
+                         <a class="btn btn-primary btn-xs" title="<?php _e('Delete'); ?>" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $promocode['id'])); ?>">
+                             <i class="fa fa-cross"></i> <?php _e('Delete'); ?>
+                         </a>
+                    </td>
+                </tr>
+            <?php } ?>
+        <?php } else { ?>
+            <tr>
+                <td colspan="6" class="text-center">
+                    <?php _e('No promo code') ?>
+                </td>
+            </tr> 
+        <?php } ?>
+    </table>
+    <div class="paginator">
+        <?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?>
+    </div>
+</div>

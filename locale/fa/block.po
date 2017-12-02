@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2017-08-09 13:36+0430\n"
+"POT-Creation-Date: 2017-07-06 19:06+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -29,16 +29,16 @@ msgid "User informations"
 msgstr "اطلاعات کاربری"
 
 #: template/block/detail.phtml:16 template/block/detail.phtml:63
-#: template/block/installment.phtml:264
+#: template/block/installment.phtml:256
 msgid "ID"
 msgstr "شناسه"
 
 #: template/block/detail.phtml:17 template/block/detail.phtml:66
-#: template/block/installment.phtml:268
+#: template/block/installment.phtml:260
 msgid "Price"
 msgstr "قیمت"
 
-#: template/block/detail.phtml:18
+#: template/block/detail.phtml:18 template/block/installment.phtml:231
 msgid "Time Create"
 msgstr "تاریخ ایجاد"
 
@@ -52,12 +52,12 @@ msgid "Time pay"
 msgstr "تاریخ پرداخت"
 
 #: template/block/detail.phtml:21 template/block/detail.phtml:68
-#: template/block/installment.phtml:233 template/block/installment.phtml:269
+#: template/block/installment.phtml:233 template/block/installment.phtml:261
 msgid "Action"
 msgstr "عملکرد"
 
 #: template/block/detail.phtml:42 template/block/detail.phtml:44
-#: template/block/installment.phtml:247 template/block/installment.phtml:249
+#: template/block/installment.phtml:241
 msgid "View / Pay"
 msgstr "مشاهده / پرداخت"
 
@@ -73,7 +73,7 @@ msgstr "پرداخت نشده"
 msgid "Canceled"
 msgstr "لغو شده"
 
-#: template/block/detail.phtml:56 template/block/installment.phtml:255
+#: template/block/detail.phtml:56 template/block/installment.phtml:247
 msgid "You dont have any invoice yet"
 msgstr "شما هیچ فاکتوری ندارید"
 
@@ -90,11 +90,11 @@ msgid "Gateway"
 msgstr "دروازه پرداخت"
 
 #: template/block/detail.phtml:78 template/block/detail.phtml:80
-#: template/block/installment.phtml:286 template/block/installment.phtml:288
+#: template/block/installment.phtml:278 template/block/installment.phtml:280
 msgid "View"
 msgstr "نمایش"
 
-#: template/block/detail.phtml:86 template/block/installment.phtml:295
+#: template/block/detail.phtml:86 template/block/installment.phtml:287
 msgid "You dont have any order yet"
 msgstr "شما هنوز هیچ سفارشی ثبت نکرده اید"
 
@@ -155,7 +155,7 @@ msgid "Invoicing Address"
 msgstr "آدرس فاکتور"
 
 #: template/block/detail.phtml:162 template/block/detail.phtml:163
-#: template/block/installment.phtml:301
+#: template/block/installment.phtml:293
 msgid "More informations"
 msgstr "اطلاعات بیشتر"
 
@@ -207,19 +207,19 @@ msgstr "فاکتور های اضافی"
 msgid "Invoices list"
 msgstr "فهرست سررسید فاکتور ها"
 
-#: template/block/installment.phtml:231 template/block/installment.phtml:266
+#: template/block/installment.phtml:251
+msgid "Orders list"
+msgstr "فهرست سفارش ها"
+
+#: template/block/installment.phtml:257
+msgid "Code"
+msgstr "کد"
+
+#: template/block/installment.phtml:258
 msgid "Product / service"
 msgstr "محصول / خدمت"
 
 #: template/block/installment.phtml:259
-msgid "Orders list"
-msgstr "فهرست سفارش ها"
-
-#: template/block/installment.phtml:265
-msgid "Code"
-msgstr "کد"
-
-#: template/block/installment.phtml:267
 msgid "Time"
 msgstr "زمان"
 

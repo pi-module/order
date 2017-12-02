@@ -34,7 +34,7 @@ class Log extends AbstractApi
     {
         // create log
         $row = Pi::model('log', $this->getModule())->createRow();
-        $row->invoice = isset($log['invoice']) ? $log['invoice'] : '';
+        $row->order = isset($log['order']) ? $log['order'] : '';
         $row->gateway = isset($log['gateway']) ? $log['gateway'] : '';
         $row->amount = isset($log['amount']) ? $log['amount'] : 0;
         $row->authority = isset($log['authority']) ? $log['authority'] : 0;
@@ -52,11 +52,11 @@ class Log extends AbstractApi
         }
     }
 
-    public function getLog($invoice)
+    public function getLog($order)
     {
         // set info
         $list = array();
-        $where = array('invoice' => $invoice);
+        $where = array('order' => $order);
         // Get all logs
         $select = Pi::model('log', $this->getModule())->select()->where($where);
         $rowset = Pi::model('log', $this->getModule())->selectWith($select);
@@ -71,11 +71,11 @@ class Log extends AbstractApi
         return $list;
     }
 
-    public function getTrueLog($invoice)
+    public function getTrueLog($order)
     {
         // set info
         $log = array();
-        $where = array('invoice' => $invoice, 'status' => 1);
+        $where = array('order' => $order, 'status' => 1);
         // Get all logs
         $select = Pi::model('log', $this->getModule())->select()->where($where)->limit(1);
         $rowset = Pi::model('log', $this->getModule())->selectWith($select)->current();

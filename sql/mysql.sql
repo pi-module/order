@@ -59,23 +59,23 @@ CREATE TABLE `{order}` (
   # promotion as gift
   `promotion_type`  VARCHAR(64)                                          NOT NULL DEFAULT '',
   `promotion_value` VARCHAR(64)                                          NOT NULL DEFAULT '',
+  `extra`          TEXT,
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`)
 );
 
 CREATE TABLE `{basket}` (
-  `id`             INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
-  `order`          INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `product`        INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `status`         TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
-  `product_price`  DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `discount_price` DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `shipping_price` DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `packing_price`  DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `setup_price`    DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `vat_price`      DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `total_price`    DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `number`         INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `id`             INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `order`          INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `product`        INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `product_price`  DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+  `discount_price` DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+  `shipping_price` DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+  `packing_price`  DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+  `setup_price`    DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+  `vat_price`      DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+  `total_price`    DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+  `number`         INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `extra`          TEXT,
   PRIMARY KEY (`id`),
   KEY `order` (`order`),
@@ -124,7 +124,7 @@ CREATE TABLE `{processing}` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `uid`         INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `ip`          CHAR(15)         NOT NULL DEFAULT '',
-  `invoice`     INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `order`     	INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `random_id`   INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `gateway`     VARCHAR(64)      NOT NULL DEFAULT '',
   `time_create` INT(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -225,7 +225,7 @@ CREATE TABLE `{location_delivery}` (
 CREATE TABLE `{log}` (
   `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
   `uid`         INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `invoice`     INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `order`    	INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `gateway`     VARCHAR(64)         NOT NULL DEFAULT '',
   `time_create` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `amount`      DOUBLE(16, 2)       NOT NULL DEFAULT '0.00',
@@ -290,4 +290,14 @@ CREATE TABLE `{access}` (
   KEY `status` (`status`),
   KEY `time_start` (`time_start`),
   KEY `time_end` (`time_end`)
+);
+
+CREATE TABLE `{promocode}` (
+  `id`            INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `code`          VARCHAR(16) NOT NULL,
+  `promo`   	  TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
+  `time_start`      INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
+  `time_end`        INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
+  `module`          VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`)
 );

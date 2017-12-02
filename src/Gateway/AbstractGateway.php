@@ -18,6 +18,12 @@ use Zend\Json\Json;
 
 abstract class AbstractGateway
 {
+    const TYPE_FORM = 0;
+    const TYPE_REST = 1;
+    
+    protected $_type = AbstractGateway::TYPE_FORM;
+    protected $_needToken = false;
+     
     public $gatewayAdapter = '';
 
     public $gatewayRow = '';
@@ -35,6 +41,8 @@ abstract class AbstractGateway
     public $gatewayInformation = array();
 
     public $gatewayInvoice = array();
+    
+    public $gatewayOrder = array();
 
     public $gatewayRedirectUrl = '';
 
@@ -54,7 +62,9 @@ abstract class AbstractGateway
         $this->setRow();
         $this->setOption();
         $this->setSettingForm();
-        $this->setPayForm();
+        if ($this->_type == AbstractGateway::TYPE_FORM) {
+            $this->setPayForm();
+        }
         $this->setIsActive();
     }
 
@@ -245,10 +255,10 @@ abstract class AbstractGateway
         )));
     }
 
-    public function setInvoice($invoice = array())
+    public function setOrder($order = array())
     {
-        if (is_array($invoice) && !empty($invoice)) {
-            $this->gatewayInvoice = $invoice;
+        if (is_array($order) && !empty($order)) {
+            $this->gatewayOrder = $order;
             $this->setBackUrl();
             $this->setCancelUrl();
             $this->setFinishUrl();
@@ -257,4 +267,19 @@ abstract class AbstractGateway
         }
         return $this;
     }
+    
+    protected function setLog($value, $message)
+    {
+        $log = array();
+        $log['gateway'] = $this->gatewayAdapter;
+        $log['value'] = $value;
+        $log['message'] = $message;
+        $log['order'] = $this->gatewayOrder['id'];
+        Pi::api('log', 'order')->setLog($log);
+        
+    }
+    
+    public function getDescription() { return null; }
+    
+    
 }

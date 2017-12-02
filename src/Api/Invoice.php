@@ -117,7 +117,6 @@ class Invoice extends AbstractApi
                     );
                     // return array
                     $result['status'] = $row->status;
-                    $result['message'] = __('Your invoice create successfully');
                     $result['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
                         'module' => $this->getModule(),
                         'controller' => 'detail',
@@ -230,7 +229,6 @@ class Invoice extends AbstractApi
                         );
                         // return array
                         $result['status'] = $information['status'];
-                        $result['message'] = __('Your invoice create successfully');
                         $result['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
                             'module' => $this->getModule(),
                             'controller' => 'detail',
@@ -267,7 +265,8 @@ class Invoice extends AbstractApi
                     break;
             }
         }
-        // return
+
+        $result['random_id'] = $row->random_id;
         return $result;
     }
 
@@ -301,10 +300,6 @@ class Invoice extends AbstractApi
         $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $invoices[$row->id] = $this->canonizeInvoice($row);
-            // Get log
-            if ($getLog) {
-                $invoices[$row->id]['log'] = Pi::api('log', 'order')->getTrueLog($row->id);
-            }
             // Check allow payment
             /* if ($order['type_payment'] == 'installment') {
                 if ($invoices[$row->id]['extra']['type'] == 'installment') {
@@ -469,31 +464,13 @@ class Invoice extends AbstractApi
             'action' => 'index',
             'id' => $invoice['id'],
             'anonymous' => 1,
-            'token' => strtolower(md5($invoice['time_create'])),
+            'token' => 'TOKEN_KEY',
         )));
 
         // Set extra
         if (!empty($invoice['extra'])) {
             $invoice['extra'] = json::decode($invoice['extra'], true);
-            if (isset($invoice['extra']['number'])) {
-                $invoice['extra_number'] = $invoice['extra']['number'];
-                $invoice['extra_number_view'] = _number($invoice['extra']['number']);
-            }
-            if (isset($invoice['extra']['type'])) {
-                switch ($invoice['extra']['type']) {
-                    case 'prepayment':
-                        $invoice['extra_type'] = $invoice['extra']['type'];
-                        $invoice['extra_type_view'] = __('Per Payment');
-                        break;
-
-                    case 'installment':
-                        $invoice['extra_type'] = $invoice['extra']['type'];
-                        $invoice['extra_type_view'] = __('Installment');
-                        break;
-                }
-            }
         }
-
         // return order
         return $invoice;
     }
