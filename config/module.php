@@ -15,7 +15,7 @@ return array(
     'meta' => array(
         'title' => _a('Orders'),
         'description' => _a('Manage order process and payment'),
-        'version' => '1.11.1',
+        'version' => '2.0.0',
         'license' => 'New BSD',
         'logo' => 'image/logo.png',
         'readme' => 'docs/readme.txt',
@@ -24,9 +24,10 @@ return array(
     ),
     // Author information
     'author' => array(
-        'Name' => 'Hossein Azizabadi',
-        'email' => 'azizabadi@faragostaresh.com',
-        'website' => 'http://pialog.org',
+		'Dev'      => 'Hossein Azizabadi; Marc Desrousseaux; Frederic Tissot; Mickael Stamm',
+        'Fonctionnal Design'     => '@marc-pi, @voltan',
+        'QA'        => '@marc-pi',
+        'website' => 'http://pialog',
         'credits' => 'Pi Engine Team'
     ),
     // Resource
