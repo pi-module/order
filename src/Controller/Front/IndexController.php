@@ -18,8 +18,6 @@ use Pi\Mvc\Controller\ActionController;
 use Module\Order\Form\RemoveForm;
 use Zend\Json\Json;
 
-use Spipu\Html2Pdf\Html2Pdf;
-
 class IndexController extends ActionController
 {
     public function indexAction()
@@ -130,7 +128,8 @@ class IndexController extends ActionController
         $template = 'order:front/print';
         $data = array('order' => $order, 'config' => $config);
         
-        Pi::service('html2pdf')->pdf($template, $data);
+        $name = sprintf("%s-%s-%s.pdf", $config['order_filename_prefix'], $config['invoice_code_prefix'], current($order['invoices'])['id']);
+        Pi::service('html2pdf')->pdf($template, $data, $name);
     }
     
 }

@@ -93,6 +93,14 @@ return array(
             'filter' => 'number_int',
             'value' => 0
         ),
+        'order_filename_prefix' => array(
+            'category' => 'order',
+            'title' => _a('Order filename Prefix'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => 'Pi'
+        ),
         'order_code_prefix' => array(
             'category' => 'order',
             'title' => _a('Order code Prefix'),
