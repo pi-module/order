@@ -19,9 +19,11 @@ use Zend\Json\Json;
 
 /*
  * Pi::api('credit', 'order')->getCredit($uid);
+ * Pi::api('credit', 'order')->getCreditList($uidList);
  * Pi::api('credit', 'order')->addHistory($history, $order, $invoice, $status);
  * Pi::api('credit', 'order')->acceptOrderCredit($order, $invoice = 0);
  * Pi::api('credit', 'order')->addCredit($uid, $amount, $fluctuation, $action, $messageAdmin, $messageUser);
+ * Pi::api('credit', 'order')->canonizeCredit($credit);
  */
 
 class Credit extends AbstractApi
@@ -38,31 +40,27 @@ class Credit extends AbstractApi
         }
         // Get credit
         $credit = Pi::model('credit', $this->getModule())->find($uid, 'uid');
-        if ($credit) {
-            $credit = $credit->toArray();
-            $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
-            $credit['time_update_view'] = ($credit['time_update'] > 0) ? _date($credit['time_update']) : __('Never update');
-            if (!empty($credit['amount_detail'])) {
-                $moduleList = Pi::registry('modulelist')->read();
-                $amountDetail = json::decode($credit['amount_detail'], true);
-                $credit['amount_detail_view'] = array();
-                foreach ($amountDetail as $module => $amount) {
-                    $credit['amount_detail_view'][$module] = array();
-                    $credit['amount_detail_view'][$module]['module_name'] = $module;
-                    $credit['amount_detail_view'][$module]['module_title'] = $moduleList[$module]['title'];
-                    $credit['amount_detail_view'][$module]['amount'] = $amount;
-                    $credit['amount_detail_view'][$module]['amount_view'] = Pi::api('api', 'order')->viewPrice($amount);
-                }
-            }
-        } else {
-            $credit = array();
-            $credit['amount'] = 0;
-            $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
-            $credit['time_update_view'] = __('Never update');
-            $credit['amount_detail'] = array();
-            $credit['amount_detail_view'] = array();
+        return $this->canonizeCredit($credit);
+    }
+
+    public function getCreditList($uidList)
+    {
+        $creditList = [];
+        $where = ['uid' => $uidList];
+
+        $select = Pi::model('credit', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('credit', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $creditList[$row->uid] = $this->canonizeCredit($row);
         }
-        return $credit;
+
+        foreach ($uidList as $uid) {
+            if (!isset($creditList[$uid])) {
+                $creditList[$uid]  = $this->canonizeCredit([]);
+            }
+        }
+
+        return $creditList;
     }
 
     public function addHistory($history, $order = 0, $invoice = 0, $status = 0)
@@ -206,5 +204,35 @@ class Credit extends AbstractApi
         // Return result
         $result['status'] = 1;
         return $result;
+    }
+
+    public function canonizeCredit($credit)
+    {
+        if ($credit) {
+            $credit = $credit->toArray();
+            $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
+            $credit['time_update_view'] = ($credit['time_update'] > 0) ? _date($credit['time_update']) : __('Never update');
+            if (!empty($credit['amount_detail'])) {
+                $moduleList = Pi::registry('modulelist')->read();
+                $amountDetail = json::decode($credit['amount_detail'], true);
+                $credit['amount_detail_view'] = array();
+                foreach ($amountDetail as $module => $amount) {
+                    $credit['amount_detail_view'][$module] = array();
+                    $credit['amount_detail_view'][$module]['module_name'] = $module;
+                    $credit['amount_detail_view'][$module]['module_title'] = $moduleList[$module]['title'];
+                    $credit['amount_detail_view'][$module]['amount'] = $amount;
+                    $credit['amount_detail_view'][$module]['amount_view'] = Pi::api('api', 'order')->viewPrice($amount);
+                }
+            }
+        } else {
+            $credit = array();
+            $credit['amount'] = 0;
+            $credit['amount_view'] = Pi::api('api', 'order')->viewPrice($credit['amount']);
+            $credit['time_update_view'] = __('Never update');
+            $credit['amount_detail'] = array();
+            $credit['amount_detail_view'] = array();
+        }
+
+        return $credit;
     }
 }
