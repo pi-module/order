@@ -194,6 +194,17 @@
                                     </td>
                                 </tr>
                             <?php } ?>
+                            <?php $unconsumedPrice = $product['extra']['product']['unconsumedPrice'];?> 
+                            <?php if ($unconsumedPrice) { ?>
+                                <tr>
+                                    <td colspan=2>
+                                        <?php _e('Old package recovery'); ?>
+                                    </td>
+                                    <td class="align-right">
+                                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice)); ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         <?php } ?>
                     </tbody>
                 </table>

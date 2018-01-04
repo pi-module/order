@@ -95,7 +95,15 @@ class Gateway extends AbstractGateway
                 "tax": "0"
             }';
         }
-        
+        if ($this->gatewayPayInformation['unconsumed_1']) {
+            $unconsumed = ',{
+                "name": "' . __('Old package recovery') . '",
+                "price": "-' . $this->gatewayPayInformation['unconsumed_1'] . '",
+                "currency": "' . $this->gatewayPayInformation['currency_code'] . '",
+                "quantity": "1",
+                "tax": "0"
+            }';
+        }
         $data ='{
             "intent":"sale",
             "redirect_urls":{
@@ -113,10 +121,10 @@ class Gateway extends AbstractGateway
             "transactions":[
                 {
                     "amount": {
-                        "total": "' . ($this->gatewayPayInformation['amount_1'] + $this->gatewayPayInformation['tax_1'] - $this->gatewayPayInformation['discount_price_1']) . '",
+                        "total": "' . ($this->gatewayPayInformation['amount_1'] + $this->gatewayPayInformation['tax_1'] - $this->gatewayPayInformation['discount_price_1']  - $this->gatewayPayInformation['unconsumed_1']) . '",
                         "currency": "' . $this->gatewayPayInformation['currency_code'] . '",
                         "details": {
-                            "subtotal": "' . ($this->gatewayPayInformation['amount_1'] - $this->gatewayPayInformation['discount_price_1']) . '",
+                            "subtotal": "' . ($this->gatewayPayInformation['amount_1'] - $this->gatewayPayInformation['discount_price_1'] - $this->gatewayPayInformation['unconsumed_1']) . '",
                             "tax": "' . $this->gatewayPayInformation['tax_1'] . '"
                         }
                     },
@@ -130,7 +138,7 @@ class Gateway extends AbstractGateway
                                 "quantity": "' . $this->gatewayPayInformation['quantity_1'] . '",
                                 "description": "' . $this->gatewayPayInformation['item_name_1'] . '",
                                 "tax": "' . $this->gatewayPayInformation['tax_1'] . '"
-                            }' . $discount . ' 
+                            }' . $discount . $unconsumed . ' 
                         ],
                         "shipping_address": {
                             "recipient_name": "' . $this->gatewayPayInformation['first_name'] . ' ' . $this->gatewayPayInformation['last_name'] . '",
@@ -370,6 +378,7 @@ class Gateway extends AbstractGateway
             $this->gatewayPayInformation['amount_' . $i] = $product['product_price'];
             $this->gatewayPayInformation['tax_' . $i] = $product['vat_price'];
             $this->gatewayPayInformation['discount_price_' . $i] = $product['discount_price'];
+            $this->gatewayPayInformation['unconsumed_' . $i] = $product['extra']['product']['unconsumedPrice'];
             $i++;
         }
         // Set address
@@ -425,9 +434,11 @@ class Gateway extends AbstractGateway
         $order = Pi::api('order', 'order')->getOrder($processing['order']);
         $extra = $order['extra'];
         $paymentId = $extra['paypal_payment_id'];
-        $payment = $this->getPayment($paymentId);
+        if (!empty($paymentId)) {
+            $payment = $this->getPayment($paymentId);
+        }
         
-        if ($payment->state == 'approved') {
+        if (!empty($paymentId) && $payment->state == 'approved') {
             $result['status'] = 1;
             $result['adapter'] = $this->gatewayAdapter;
             $result['order'] = $order['id'];

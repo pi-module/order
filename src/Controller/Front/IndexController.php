@@ -123,7 +123,8 @@ class IndexController extends ActionController
             $order['deliveryInformation'] = Pi::api('delivery', 'order')->getDeliveryInformation($order['location'], $order['delivery']);
         }
         
-        $order['total_product_price'] = Pi::api('api', 'order')->viewPrice($order['product_price'] - $order['discount_price']);
+        $unconsumedPrice = json_decode($order['extra'], true)['unconsumedPrice'];
+        $order['total_product_price'] = Pi::api('api', 'order')->viewPrice($order['product_price'] - $order['discount_price'] - $unconsumedPrice);
         
         $template = 'order:front/print';
         $data = array('order' => $order, 'config' => $config);

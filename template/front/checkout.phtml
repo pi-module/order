@@ -276,6 +276,8 @@ $this->footScript()->appendScript($script);
                             </tr>
                             <?php $totalDiscount = 0 ?>
                             <?php foreach ($cart['product'] as $product) { ?>
+                                <?php $unconsumedPrice = json_decode($product['extra'], true)['unconsumedPrice']; ?>
+
                                 <tr>
                                     <td>
                                         <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
@@ -307,7 +309,18 @@ $this->footScript()->appendScript($script);
                                         <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
                                     </td>
                                 </tr>
+                                <?php if ($unconsumedPrice) { ?>
+                                    <tr>
+                                        <td>
+                                            <?php _e('Old package recovery'); ?>
+                                        </td>
+                                        <td class="text-right" data-discount-price-for="<?php echo $product['product'] ?>">
+                                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice)); ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?> 
                                 <?php $totalDiscount += $product['discount_price']; ?>
+                                <?php $totalDiscount += $unconsumedPrice; ?>
                             <?php } ?>
                             <tr>
                                 <td><?php _e('Total Price ext VAT'); ?></td>

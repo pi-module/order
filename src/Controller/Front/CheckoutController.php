@@ -100,10 +100,14 @@ class CheckoutController extends IndexController
         $values['vat_price'] = isset($cart['total_vat']) ? $cart['total_vat'] : 0;
         $values['product_price'] = 0;
         $values['total_price'] = 0;
+        $values['unconsumed'] = 0;
+    
 
         // Check order values
         if (!empty($cart['product'])) {
             foreach ($cart['product'] as $product) {
+                $unconsumedPrice = json_decode($product['extra'], true)['unconsumedPrice'];
+                
                 // Set other price
                 $values['product_price'] = ($product['product_price'] * $product['number']) + $values['product_price'];
                 $values['discount_price'] = ($product['discount_price'] * $product['number']) + $values['discount_price'];
@@ -111,6 +115,7 @@ class CheckoutController extends IndexController
                 $values['packing_price'] = ($product['packing_price'] * $product['number']) + $values['packing_price'];
                 $values['setup_price'] = ($product['setup_price'] * $product['number']) + $values['setup_price'];
                 $values['vat_price'] = ($product['vat_price'] * $product['number']) + $values['vat_price'];
+                $values['unconsumedPrice'] = $unconsumedPrice + $values['unconsumedPrice'];
             }
         }
 
@@ -137,7 +142,7 @@ class CheckoutController extends IndexController
                 $values['packing_price'] +
                 $values['setup_price'] +
                 $values['vat_price']
-            ) - $values['discount_price']);
+            ) - $values['discount_price'] - $values['unconsumedPrice']);
         
         // Save values to order
         if (isset($_SESSION['order']['id'])) {
@@ -177,12 +182,14 @@ class CheckoutController extends IndexController
             if (!empty($cart['product'])) {
                 foreach ($cart['product'] as $product) {
                     $price = $product['product_price'];
+                    $unconsumedPrice = json_decode($product['extra'], true)['unconsumedPrice'];
+                    
                     $total = (($product['product_price'] +
                                 $product['shipping_price'] +
                                 $product['packing_price'] +
                                 $product['setup_price'] +
                                 $product['vat_price']
-                            ) - $product['discount_price']) * $product['number'];
+                            ) - $product['discount_price'] - $unconsumedPrice) * $product['number'];
                     
                     // Save basket
                     $this->getModel('basket')->delete(array('order' => $_SESSION['order']['id']));
@@ -606,6 +613,8 @@ class CheckoutController extends IndexController
             // Check order price
             if (!empty($cart['product'])) {
                 foreach ($cart['product'] as $product) {
+                    $unconsumedPrice = json_decode($product['extra'], true)['unconsumedPrice'];
+                    
                     // Set price
                     $price['product_price'] = $product['product_price'] + $price['product_price'];
                     $price['discount_price'] = $product['discount_price'] + $price['discount_price'];
@@ -619,7 +628,7 @@ class CheckoutController extends IndexController
                                 $product['packing_price'] +
                                 $product['setup_price'] +
                                 $product['vat_price']
-                            ) - $product['discount_price']) * $product['number'];
+                            ) - $product['discount_price'] - $unconsumedPrice) * $product['number'];
                     $price['total_price'] = $total + $price['total_price'];
                 }
             }
@@ -768,6 +777,8 @@ class CheckoutController extends IndexController
         $price['total'] = 0;
         foreach ($cart['product'] as $product) {
             // Check setup price
+            $unconsumedPrice = json_decode($product['extra'], true)['unconsumedPrice'];
+            
             $product['setup_price'] = isset($product['setup_price']) ? $product['setup_price'] : 0;
             // Set price
             $price['product'] = ($product['product_price'] * $product['number']) + $price['product'];
@@ -776,6 +787,7 @@ class CheckoutController extends IndexController
             $price['setup'] = ($product['setup_price'] * $product['number']) + $price['setup'];
             $price['packing'] = ($product['packing_price'] * $product['number']) + $price['packing'];
             $price['vat'] = $product['vat_price'] + $price['vat'];
+            $price['unconsumed'] = $unconsumedPrice;
             
         }
 
@@ -792,7 +804,7 @@ class CheckoutController extends IndexController
                 $price['packing'] +
                 $price['setup'] +
                 $price['vat']
-            ) - $price['discount']);
+            ) - $price['discount'] - $unconsumedPrice);
         
         return $price;
     }
