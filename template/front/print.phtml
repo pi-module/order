@@ -46,8 +46,15 @@
     <div class="container">
         <div class="header">
             <div class="align-right">
-                <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
-                    <b><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></b>
+                <?php if (!empty($order['company'])) { ?>
+                    <b><?php echo $this->escape($order['company']); ?></b>
+                    <br/>
+                     <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
+                        <?php echo __('To the attention of') . ' ' . $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?>
+                        <br/>        
+                    <?php } ?>
+                <?php } else if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
+                    <b><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?>
                     <br/>        
                 <?php } ?>
                 <?php if (!empty($order['address1'])) { ?>
@@ -80,10 +87,6 @@
                 <?php } ?>
                 <?php if (!empty($order['id_number'])) { ?>
                     <?php echo $this->escape($order['id_number']); ?>
-                    <br/>
-                <?php } ?>
-                <?php if (!empty($order['company'])) { ?>
-                    <?php echo $this->escape($order['company']); ?>
                     <br/>
                 <?php } ?>
                 <?php if (!empty($order['company_id'])) { ?>
