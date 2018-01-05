@@ -924,4 +924,12 @@ class OrderController extends ActionController
         $this->view()->assign('tableView', $tableView);
         $this->view()->assign('orderInstallmentCount', $orderInstallmentCount);
     }
+
+    public function printPdfAction()
+    {
+        $id = $this->params('id');
+        Pi::api('order', 'order')->pdf($id);
+        
+    }
+
 }

@@ -91,46 +91,11 @@ class IndexController extends ActionController
     
     public function printAction()
     {
-        
-         // Check user
+        // Check user
         $this->checkUser();
-        // Get config
-        $config = Pi::service('registry')->config->read($this->getModule());
-        // Get order
+        
         $id = $this->params('id');
-        $order = Pi::api('order', 'order')->getOrder($id);
-        
-        // Check order
-        if (empty($order)) {
-            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('The order not found.'));
-        }
-        // Check order is for this user
-        if ($order['uid'] != Pi::user()->getId()) {
-            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This is not your order.'));
-        }
-        // Check order is for this user
-        if (!in_array($order['status_order'], array(1, 2, 3, 7))) {
-            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This order not active.'));
-        }
-
-        // set Products
-        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
-        // set Products
-        $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
-        // set delivery information
-        $order['deliveryInformation'] = '';
-        if ($order['delivery'] > 0 && $order['location'] > 0) {
-            $order['deliveryInformation'] = Pi::api('delivery', 'order')->getDeliveryInformation($order['location'], $order['delivery']);
-        }
-        
-        $unconsumedPrice = json_decode($order['extra'], true)['unconsumedPrice'];
-        $order['total_product_price'] = Pi::api('api', 'order')->viewPrice($order['product_price'] - $order['discount_price'] - $unconsumedPrice);
-        
-        $template = 'order:front/print';
-        $data = array('order' => $order, 'config' => $config);
-        
-        $name = sprintf("%s-%s-%s.pdf", $config['order_filename_prefix'], $config['invoice_code_prefix'], current($order['invoices'])['id']);
-        Pi::service('html2pdf')->pdf($template, $data, $name);
+        Pi::api('order', 'order')->pdf($id);
     }
     
 }
