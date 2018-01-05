@@ -538,7 +538,7 @@ class Order extends AbstractApi
         $order->save();
     }
     
-    public function pdf($id)
+    public function pdf($id, $controls = true)
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
@@ -548,15 +548,26 @@ class Order extends AbstractApi
         
         // Check order
         if (empty($order)) {
-            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('The order not found.'));
+            return array(
+                'status' => 0,
+                'message' => __('The order not found.')
+            );
         }
         // Check order is for this user
-        if ($order['uid'] != Pi::user()->getId()) {
-            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This is not your order.'));
-        }
-        // Check order is for this user
-        if (!in_array($order['status_order'], array(1, 2, 3, 7))) {
-            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This order not active.'));
+        if ($controls) {
+            if ($order['uid'] != Pi::user()->getId()) {
+                return array(
+                    'status' => 0,
+                    'message' => __('This is not your order.')
+                );
+            }
+            // Check order is for this user
+            if (!in_array($order['status_order'], array(1, 2, 3, 7))) {
+                return array(
+                    'status' => 0,
+                    'message' => __('This order not active.')
+                );
+            }
         }
 
         // set Products

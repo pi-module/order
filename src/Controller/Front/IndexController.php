@@ -95,7 +95,10 @@ class IndexController extends ActionController
         $this->checkUser();
         
         $id = $this->params('id');
-        Pi::api('order', 'order')->pdf($id);
+        $ret = Pi::api('order', 'order')->pdf($id);
+        if (!$ret['status']) {
+            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), $ret['message']);
+        }
     }
     
 }

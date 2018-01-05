@@ -928,7 +928,10 @@ class OrderController extends ActionController
     public function printPdfAction()
     {
         $id = $this->params('id');
-        Pi::api('order', 'order')->pdf($id);
+        $ret = Pi::api('order', 'order')->pdf($id, false);
+        if (!$ret['status']) {
+            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), $ret['message']);
+        }
         
     }
 
