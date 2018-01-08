@@ -306,7 +306,9 @@ $this->footScript()->appendScript($script);
                                         <?php } ?>
                                     </td>
                                     <td class="text-right" data-discount-price-for="<?php echo $product['product'] ?>">
-                                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
+                                        <?php
+                                            echo $product['discount_price'] > 0 ? '-' : ''; 
+                                            echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
                                     </td>
                                 </tr>
                                 <?php if ($unconsumedPrice) { ?>
@@ -315,7 +317,10 @@ $this->footScript()->appendScript($script);
                                             <?php _e('Old package recovery'); ?>
                                         </td>
                                         <td class="text-right" data-discount-price-for="<?php echo $product['product'] ?>">
-                                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice)); ?>
+                                            <?php
+                                                echo $unconsumedPrice > 0 ? '-' : ''; 
+                                                echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice)); 
+                                            ?>
                                         </td>
                                     </tr>
                                 <?php } ?> 
