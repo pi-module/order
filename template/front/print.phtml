@@ -48,22 +48,22 @@
             <div class="align-right">
                 <?php if (!empty($order['company'])) { ?>
                     <b><?php echo $this->escape($order['company']); ?></b>
-                    <br/>
+                    <br>
                      <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
                         <?php echo __('To the attention of') . ' ' . $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?>
-                        <br/>        
+                        <br>
                     <?php } ?>
                 <?php } else if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
                     <b><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?>
-                    <br/>        
+                    <br>
                 <?php } ?>
                 <?php if (!empty($order['address1'])) { ?>
                     <?php echo $this->escape($order['address1']); ?>
-                    <br/>
+                    <br>
                 <?php } ?>
                 <?php if (!empty($order['address2'])) { ?>
                     <?php echo $this->escape($order['address2']); ?>
-                    <br/>
+                    <br>
                 <?php } ?>
                 <?php 
                     $address = array();
@@ -75,27 +75,27 @@
                     }
                     echo $this->escape(join(', ', $address));
                 ?>
-                <br/>
+                <br>
                 <?php if (!empty($order['state'])) { ?>
                     <?php echo $this->escape($order['state']); ?>
-                    <br/>
+                    <br>
                 <?php } ?>
                 
                 <?php if (!empty($order['country'])) { ?>
                     <?php echo $this->escape($order['country']); ?>
-                    <br/>
+                    <br>
                 <?php } ?>
                 <?php if (!empty($order['id_number'])) { ?>
                     <?php echo $this->escape($order['id_number']); ?>
-                    <br/>
+                    <br>
                 <?php } ?>
                 <?php if (!empty($order['company_id'])) { ?>
                     <?php echo $this->escape($order['company_id']); ?>
-                    <br/>
+                    <br>
                 <?php } ?>
                 <?php if (!empty($order['company_vat'])) { ?>
                     N° TVA UE <?php echo $this->escape($order['company_vat']); ?>
-                    <br/>
+                    <br>
                 <?php } ?>
             </div>    
             
@@ -258,7 +258,7 @@
             </table>
             <div class="clearfix"></div>
         </div>
-        <br/>
+        <br>
         <p class="align-justify text-footer">
             <?php echo nl2br($config['invoice_text_footer']); ?>
         </p>
