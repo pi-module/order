@@ -180,6 +180,7 @@ class CheckoutController extends IndexController
             );
             // Save order basket
             if (!empty($cart['product'])) {
+                $this->getModel('basket')->delete(array('order' => $_SESSION['order']['id']));
                 foreach ($cart['product'] as $product) {
                     $price = $product['product_price'];
                     $unconsumedPrice = json_decode($product['extra'], true)['unconsumedPrice'];
@@ -192,7 +193,6 @@ class CheckoutController extends IndexController
                             ) - $product['discount_price'] - $unconsumedPrice) * $product['number'];
                     
                     // Save basket
-                    $this->getModel('basket')->delete(array('order' => $_SESSION['order']['id']));
                     $basket = $this->getModel('basket')->createRow();
                     $basket->order = $order->id;
                     $basket->product = $product['product'];
@@ -356,6 +356,7 @@ class CheckoutController extends IndexController
 
         $msgPromoCode = null;        
         $hasActiveCode = Pi::api('promocode', 'order')->hasActiveCode();
+        $formPromoCheckout = null;
         if ($hasActiveCode) {
             $formPromoCheckout = new PromoCheckoutForm('promoCheckout', $option);
             $formPromoCheckout->setInputFilter(new PromoCheckoutFilter($option));
@@ -544,9 +545,9 @@ class CheckoutController extends IndexController
         }
 
         // Set products
-        foreach ($cart['product'] as $product) {
-            $cart['product'][$product['product']]['details'] = Pi::api('order', $cart['module_name'])->getProductDetails($product['product'], $product['extra']);
-            $cart['product'][$product['product']]['product_price_view'] = Pi::api('api', 'order')->viewPrice($product['product_price']);
+        foreach ($cart['product'] as $key => $product) {
+            $cart['product'][$key]['details'] = Pi::api('order', $cart['module_name'])->getProductDetails($product['product'], $product['extra']);
+            $cart['product'][$key]['product_price_view'] = Pi::api('api', 'order')->viewPrice($product['product_price']);
         }
 
         // Get credit

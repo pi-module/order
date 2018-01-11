@@ -96,6 +96,10 @@ ul.progtrckr li.progtrckr-pending:before {
     height: 35px;
 }
 
+.cart-product-list tr.footer {
+    border-top: 3px solid #ccc;
+}
+
 .cart-product .cart-product-list .label-success {
     font-size: 14px;
 }
@@ -194,9 +198,7 @@ ul.progtrckr li.progtrckr-pending:before {
     border:1px solid #ddd
 }
 
-
 .btn-success {padding:5px!important}
-
 
 .btn-refresh {
     color: #03A9F4;

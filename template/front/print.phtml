@@ -52,9 +52,9 @@
                      <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
                         <?php echo __('To the attention of') . ' ' . $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?>
                         <br/>        
-                    <?php } ?>
+                     <?php } ?>
                 <?php } else if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
-                    <b><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?>
+                    <b><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></b>
                     <br/>        
                 <?php } ?>
                 <?php if (!empty($order['address1'])) { ?>
@@ -157,7 +157,6 @@
                     </tbody>
                 </table>
             <div class="clearfix"></div>
-    
         </div>
         <div class="big">
                 <table cellspacing="0" class="withborder">
@@ -175,36 +174,47 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $count = 0; ?>
                         <?php foreach ($order['products'] as $product) { ?>
+                            <?php $count++ ?>
                             <tr>
                                 <td>
-                                    <?php echo $this->escape($product['details']['title']); ?>
+                                    <strong>#<?php echo $count . ' ' . $this->escape($product['details']['title']); ?></strong>
                                 </td>
                                 <td class="align-center">
-                                    <?php echo _number($this->escape($product['number'])); ?>
+                                    <strong><?php echo _number($this->escape($product['number'])); ?></strong>
                                 </td>
                                 <td class="align-right">
+                                    <strong><?php echo Pi::api('api', 'order')->viewPrice($product['product_price'] - $product['discount_price'] - $unconsumedPrice); ?></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan=2>
+                                    <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Price ext VAT'); ?>
+                                </td>
+                                <td>
                                     <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
                                 </td>
                             </tr>
-                            <?php if ($product['discount_price']) { ?>
+                            
+                            <?php if ($product['discount_price'] > 0) { ?>
                                 <tr>
                                     <td colspan=2>
-                                        <?php _e('Discount'); ?>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Discount'); ?>
                                     </td>
-                                    <td class="align-right">
-                                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
+                                    <td>
+                                        -<?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
                                     </td>
                                 </tr>
                             <?php } ?>
                             <?php $unconsumedPrice = $product['extra']['product']['unconsumedPrice'];?> 
-                            <?php if ($unconsumedPrice) { ?>
+                            <?php if ($unconsumedPrice > 0) { ?>
                                 <tr>
                                     <td colspan=2>
-                                        <?php _e('Old package recovery'); ?>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Old package recovery'); ?>
                                     </td>
-                                    <td class="align-right">
-                                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice)); ?>
+                                    <td>
+                                        -<?php echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice)); ?>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -225,25 +235,25 @@
                             <strong><?php _e('Product price ex VAT'); ?></strong>
                         </td>
                         <td class="align-right col2 borderbottom">
-                            <?php echo $this->escape($order['total_product_price']); ?>
+                            <strong><?php echo $this->escape($order['total_product_price']); ?></strong>
                         </td>
                     </tr>
                     <?php if ($order['shipping_price'] > 0) { ?>
                     <tr>
                         <td>
-                            <?php _e('Shipping'); ?>
+                            <strong><?php _e('Shipping'); ?></strong>
                         </td>
                         <td class="align-right">
-                            <?php echo $this->escape($order['shipping_price_view']); ?>
+                            <strong><?php echo $this->escape($order['shipping_price_view']); ?></strong>
                         </td>
                     </tr>
                     <?php } ?> 
                     <tr>
                         <td>
-                            <?php _e('Vat'); ?>
+                            <strong><?php _e('Vat'); ?></strong>
                         </td>
                         <td class="align-right">
-                            <?php echo $this->escape($order['vat_price_view']); ?>
+                            <strong><?php echo $this->escape($order['vat_price_view']); ?></strong>
                         </td>
                     </tr>
                     <tr>
