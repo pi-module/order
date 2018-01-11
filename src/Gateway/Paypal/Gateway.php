@@ -481,10 +481,10 @@ class Gateway extends AbstractGateway
     
     public function getDescription()
     {
-            return __('To install the Paypal Driver (Rest API) : <br/>
-Declare your REST API App on https://developer.paypal.com/developer/applications/ : you will get the API Credentials (Client ID and Secret Key)<br/>
-You can use the sandbox mode for your test and also check the error mode (no payment), to fine tune your code<br/>
-You can get testing accounts from https://developer.paypal.com/developer/accounts/ : xxx-facilitator@xxx.com (seller) and xxx-buyer@xxx.com (buyer). You can use the pass of your normal account<br/>
+            return __('To install the Paypal Driver (Rest API) : <br>
+Declare your REST API App on https://developer.paypal.com/developer/applications/ : you will get the API Credentials (Client ID and Secret Key)<br>
+You can use the sandbox mode for your test and also check the error mode (no payment), to fine tune your code<br>
+You can get testing accounts from https://developer.paypal.com/developer/accounts/ : xxx-facilitator@xxx.com (seller) and xxx-buyer@xxx.com (buyer). You can use the pass of your normal account<br>
         ');
     }
 }
