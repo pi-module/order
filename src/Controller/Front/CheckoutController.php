@@ -240,7 +240,12 @@ class CheckoutController extends IndexController
                             $extra['getDetail'] = $extra['product']['getDetail'];
                             unset($extra['product']['getDetail']);
                         }
-
+                        
+                        if (array_key_exists('unconsumedPrice', $extra['product'])) {
+                            unset($extra['product']['unconsumedPrice']);
+                        }
+                        
+                        
                         $basket->extra = json::encode($extra);
                     }
                     $basket->save();
