@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2018-01-10 15:37+0100\n"
+"POT-Creation-Date: 2018-01-13 18:59+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -273,7 +273,7 @@ msgstr "Non terminé"
 #: src/Form/OrderEditForm.php:291 src/Form/OrderSettingForm.php:119
 #: template/admin/invoice-print.phtml:135 template/admin/order-view.phtml:265
 #: template/front/invoice-print.phtml:135 template/front/invoice.phtml:157
-#: template/front/print.phtml:167
+#: template/front/print.phtml:166
 msgid "Product"
 msgstr "Produit"
 
@@ -468,47 +468,47 @@ msgstr "Le produit sélectionné n'est pas active ou n'existe plus"
 msgid "New product / service added to your order"
 msgstr "Un nouveau produit/service a été ajouté à votre commande"
 
-#: src/Controller/Front/CheckoutController.php:309
-#: src/Controller/Front/CheckoutController.php:336
-#: src/Controller/Front/CheckoutController.php:583
+#: src/Controller/Front/CheckoutController.php:314
+#: src/Controller/Front/CheckoutController.php:341
+#: src/Controller/Front/CheckoutController.php:589
 msgid "Your cart is empty."
 msgstr "Votre caddy est vide."
 
-#: src/Controller/Front/CheckoutController.php:315
-#: src/Controller/Front/CheckoutController.php:588
+#: src/Controller/Front/CheckoutController.php:320
+#: src/Controller/Front/CheckoutController.php:594
 msgid "So sorry, At this moment order is inactive"
 msgstr "Désolé. Les commandes ne sont actuellement pas ouvertes."
 
-#: src/Controller/Front/CheckoutController.php:431
+#: src/Controller/Front/CheckoutController.php:437
 msgid "User information was not completed and user account was not saved."
 msgstr ""
 "Les informations utilisateurs n'ont pas été toutes fournies, le compte n'a "
 "pas été enregistré."
 
-#: src/Controller/Front/CheckoutController.php:454
+#: src/Controller/Front/CheckoutController.php:460
 msgid "User account was not saved."
 msgstr "Le compte utilisateur n'a pas été sauvegardé."
 
-#: src/Controller/Front/CheckoutController.php:599
+#: src/Controller/Front/CheckoutController.php:605
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 "Votre package d'installation sélectionné a été sauvegardé, merci de "
 "compléter vos informations de facturation et de paiement."
 
-#: src/Controller/Front/CheckoutController.php:766
+#: src/Controller/Front/CheckoutController.php:772
 msgid "Address deleted"
 msgstr "Adresse supprimée"
 
-#: src/Controller/Front/CheckoutController.php:828
+#: src/Controller/Front/CheckoutController.php:834
 msgid "This code has expired."
 msgstr "Ce code a expiré."
 
-#: src/Controller/Front/CheckoutController.php:835
+#: src/Controller/Front/CheckoutController.php:841
 msgid "This code cannot be applied on this product."
 msgstr "Ce code ne peut être appliqué sur ce produit"
 
-#: src/Controller/Front/CheckoutController.php:852
+#: src/Controller/Front/CheckoutController.php:858
 msgid ""
 "You are trying to use a promo code on a product that already has a discount. "
 "We have automatically applied the most advantageous discount for you (it is "
@@ -518,11 +518,11 @@ msgstr ""
 "d'une remise. Nous avons automatiquement appliqué la remise la plus "
 "avantageuse pour vous (il n'est pas possible de cumuler les remises)."
 
-#: src/Controller/Front/CheckoutController.php:868
+#: src/Controller/Front/CheckoutController.php:874
 msgid "Promo code accepted"
 msgstr "Le code avantage est valide"
 
-#: src/Controller/Front/CheckoutController.php:876
+#: src/Controller/Front/CheckoutController.php:882
 msgid "This code doesn't exist"
 msgstr "Ce code n'existe pas"
 
@@ -852,7 +852,7 @@ msgstr "Soumettre"
 #: template/admin/order-view.phtml:267 template/admin/order-view.phtml:356
 #: template/admin/order-view.phtml:514 template/admin/order-view.phtml:521
 #: template/front/invoice.phtml:159 template/front/list.phtml:16
-#: template/front/print.phtml:173
+#: template/front/print.phtml:172
 msgid "Price"
 msgstr "Prix"
 
@@ -1100,7 +1100,7 @@ msgstr "Supprimer"
 #: template/admin/order-print.phtml:424 template/admin/order-print.phtml:552
 #: template/admin/order-view.phtml:266 template/front/installment.phtml:101
 #: template/front/invoice-print.phtml:136 template/front/invoice.phtml:158
-#: template/front/print.phtml:170
+#: template/front/print.phtml:169
 msgid "Number"
 msgstr "Quantité"
 
@@ -1163,7 +1163,7 @@ msgstr "Code"
 msgid "Accept the %s"
 msgstr "Accepter les %s"
 
-#: src/Form/PromoCheckoutForm.php:35 template/front/checkout.phtml:378
+#: src/Form/PromoCheckoutForm.php:35 template/front/checkout.phtml:393
 msgid "Your promo code"
 msgstr "Votre code avantage"
 
@@ -1199,7 +1199,7 @@ msgstr "Bitcoin (blockchain)"
 
 #: src/Gateway/Bitcoin/Gateway.php:55 src/Gateway/Dargahpardakht/Gateway.php:48
 #: src/Gateway/Mellat/Gateway.php:48 src/Gateway/Pasargad/Gateway.php:53
-#: src/Gateway/Paypal/Gateway.php:292 src/Gateway/Zarinpal/Gateway.php:49
+#: src/Gateway/Paypal/Gateway.php:304 src/Gateway/Zarinpal/Gateway.php:49
 msgid "path"
 msgstr "chemin"
 
@@ -1540,57 +1540,57 @@ msgstr "resultObj is not true"
 msgid "Bank Pasargad error %s"
 msgstr "Bank Pasargad error %s"
 
-#: src/Gateway/Paypal/Gateway.php:91 template/admin/order-view.phtml:523
-#: template/front/print.phtml:193
+#: src/Gateway/Paypal/Gateway.php:107 template/admin/order-view.phtml:523
+#: template/front/print.phtml:203
 msgid "Discount"
 msgstr "Remise"
 
-#: src/Gateway/Paypal/Gateway.php:100 template/front/checkout.phtml:317
-#: template/front/print.phtml:204
+#: src/Gateway/Paypal/Gateway.php:118 template/front/checkout.phtml:325
+#: template/front/print.phtml:214
 msgid "Old package recovery"
 msgstr "Reprise ancien abonnement"
 
-#: src/Gateway/Paypal/Gateway.php:274
+#: src/Gateway/Paypal/Gateway.php:286
 msgid "Paypal (REST API)"
 msgstr "Paypal (REST API)"
 
-#: src/Gateway/Paypal/Gateway.php:299
+#: src/Gateway/Paypal/Gateway.php:311
 msgid "Send only 1 mail after payment"
 msgstr "Envoyer seulement 1 mail après paiement"
 
-#: src/Gateway/Paypal/Gateway.php:307
+#: src/Gateway/Paypal/Gateway.php:319
 msgid "Paypal email address"
 msgstr "Adresse email Paypal"
 
-#: src/Gateway/Paypal/Gateway.php:314
+#: src/Gateway/Paypal/Gateway.php:326
 msgid "Paypal currency"
 msgstr "Devise Paypal"
 
-#: src/Gateway/Paypal/Gateway.php:321
+#: src/Gateway/Paypal/Gateway.php:333
 msgid "Paypal currency symbol"
 msgstr "Symbole devise Paypal"
 
-#: src/Gateway/Paypal/Gateway.php:328
+#: src/Gateway/Paypal/Gateway.php:340
 msgid "Location code (ex GB)"
 msgstr "Code pays (ex GB)"
 
-#: src/Gateway/Paypal/Gateway.php:335
+#: src/Gateway/Paypal/Gateway.php:347
 msgid "Test mode by sandbox"
 msgstr "Mode Test pour la Sandbox"
 
-#: src/Gateway/Paypal/Gateway.php:342
+#: src/Gateway/Paypal/Gateway.php:354
 msgid "Client ID"
 msgstr "ID Client"
 
-#: src/Gateway/Paypal/Gateway.php:349
+#: src/Gateway/Paypal/Gateway.php:361
 msgid "Secret"
 msgstr "Secret"
 
-#: src/Gateway/Paypal/Gateway.php:356
+#: src/Gateway/Paypal/Gateway.php:368
 msgid "Force error for sandbox"
 msgstr "Forcer les erreurs pour la sandbox"
 
-#: src/Gateway/Paypal/Gateway.php:471
+#: src/Gateway/Paypal/Gateway.php:484
 msgid ""
 "To install the Paypal Driver (Rest API) : <br>\n"
 "Declare your REST API App on https://developer.paypal.com/developer/"
@@ -2112,7 +2112,7 @@ msgstr "Prix HT"
 #: template/admin/invoice-print.phtml:209 template/admin/order-view.phtml:268
 #: template/admin/order-view.phtml:525 template/front/invoice-print.phtml:138
 #: template/front/invoice-print.phtml:209 template/front/invoice.phtml:160
-#: template/front/invoice.phtml:214 template/front/print.phtml:234
+#: template/front/invoice.phtml:214 template/front/print.phtml:244
 msgid "Shipping"
 msgstr "Transport"
 
@@ -2120,7 +2120,7 @@ msgstr "Transport"
 #: template/admin/invoice-print.phtml:213 template/admin/order-view.phtml:270
 #: template/front/invoice-print.phtml:139
 #: template/front/invoice-print.phtml:213 template/front/invoice.phtml:161
-#: template/front/invoice.phtml:218 template/front/print.phtml:243
+#: template/front/invoice.phtml:218 template/front/print.phtml:253
 msgid "Vat"
 msgstr "TVA 20%"
 
@@ -2128,7 +2128,7 @@ msgstr "TVA 20%"
 #: template/admin/invoice-print.phtml:217
 #: template/front/invoice-print.phtml:140
 #: template/front/invoice-print.phtml:217 template/front/invoice.phtml:222
-#: template/front/print.phtml:151 template/front/print.phtml:251
+#: template/front/print.phtml:151 template/front/print.phtml:261
 msgid "Total all taxes included"
 msgstr "Total TTC"
 
@@ -2149,7 +2149,7 @@ msgstr "Prix total facture"
 
 #: template/admin/invoice-print.phtml:205
 #: template/front/invoice-print.phtml:205 template/front/invoice.phtml:210
-#: template/front/print.phtml:225
+#: template/front/print.phtml:235
 msgid "Product price ex VAT"
 msgstr "Prix HT"
 
@@ -2612,27 +2612,31 @@ msgstr "Ajouter une nouvelle adresse"
 msgid "Your order"
 msgstr "Votre commande"
 
-#: template/front/checkout.phtml:303
+#: template/front/checkout.phtml:302 template/front/print.phtml:193
+msgid "Price ext VAT"
+msgstr "Prix HT"
+
+#: template/front/checkout.phtml:310
 msgid "Total Discount"
 msgstr "Total Remise"
 
-#: template/front/checkout.phtml:331
+#: template/front/checkout.phtml:342
 msgid "Total Price ext VAT"
 msgstr "Prix total HT"
 
-#: template/front/checkout.phtml:338
+#: template/front/checkout.phtml:352
 msgid "Total Vat"
 msgstr "Total TVA"
 
-#: template/front/checkout.phtml:349
+#: template/front/checkout.phtml:364
 msgid "Total Shipping"
 msgstr "Total Transport"
 
-#: template/front/checkout.phtml:359
+#: template/front/checkout.phtml:374
 msgid "Final Price incl. VAT"
 msgstr "Prix Total TTC"
 
-#: template/front/checkout.phtml:416
+#: template/front/checkout.phtml:431
 msgid ""
 "You can benefit from a discount loyalty price for this package. The system "
 "did apply it on the final price for you."
@@ -2786,7 +2790,7 @@ msgstr "N° facture"
 msgid "Time order"
 msgstr "Date commande"
 
-#: template/front/print.phtml:219
+#: template/front/print.phtml:229
 #, php-format
 msgid "Paid invoice (credit card / %s)"
 msgstr "Facture acquittée (carte bancaire  / %s)"
