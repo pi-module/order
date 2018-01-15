@@ -176,6 +176,7 @@
                     <tbody>
                         <?php $count = 0; ?>
                         <?php foreach ($order['products'] as $product) { ?>
+                            <?php $unconsumedPrice = $product['extra']['product']['unconsumedPrice'];?> 
                             <?php $count++ ?>
                             <tr>
                                 <td>
@@ -207,7 +208,6 @@
                                     </td>
                                 </tr>
                             <?php } ?>
-                            <?php $unconsumedPrice = $product['extra']['product']['unconsumedPrice'];?> 
                             <?php if ($unconsumedPrice > 0) { ?>
                                 <tr>
                                     <td colspan=2>
