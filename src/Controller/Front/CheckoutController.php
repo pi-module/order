@@ -27,6 +27,8 @@ use Module\Order\Form\OrderSimpleFilter;
 use Module\System\Form\LoginForm;
 use Module\System\Form\LoginFilter;
 use Zend\Json\Json;
+use Module\Order\Gateway\AbstractGateway;
+
 
 class CheckoutController extends IndexController
 {
@@ -80,6 +82,11 @@ class CheckoutController extends IndexController
         if (is_array($values['gateway'])) {
             $values['gateway'] = $values['gateway'][0]; 
         }
+        $gateway = Pi::api('gateway', 'order')->getGateway($values['gateway']);
+        if ($gateway->getType() == AbstractGateway::TYPE_REST) {
+            $_SESSION['order']['redirect'] = $cart['redirect']; 
+        }
+        
         $gateway = Pi::api('gateway', 'order')->getGatewayInfo($values['gateway']);
         $gatewayOptions = json_decode($gateway['option'], true);
             

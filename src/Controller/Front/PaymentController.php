@@ -399,6 +399,9 @@ class PaymentController extends IndexController
         if (!empty($processing['order'])) {
             // Get invoice
             $gateway = Pi::api('gateway', 'order')->getGateway($processing['gateway']);
+            if ($gateway->getType() == AbstractGateway::TYPE_REST) {
+                $backurl = $_SESSION['order']['redirect']; 
+            }
             Pi::api('order', 'order')->unsetOrderInfo();
             if ($gateway->getType() == AbstractGateway::TYPE_REST) {
                 $paymentId = $this->params('paymentId');
@@ -409,7 +412,7 @@ class PaymentController extends IndexController
                 if ($result->state == 'approved') {
                     $result = Pi::api('invoice', 'order')->createInvoice($processing['order'], Pi::user()->getId());
                     $invoice = Pi::api('invoice', 'order')->updateInvoice($result['random_id']);
-                    $backurl = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
+                    Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
                     Pi::api('invoice', 'order')->setBackUrl($invoice['id'], $backurl);
                     $messenger = $this->plugin('flashMessenger');
                 } else {
