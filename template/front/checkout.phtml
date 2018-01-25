@@ -271,16 +271,18 @@ $this->footScript()->appendScript($script);
                     <div class="clearfix">
                         <table class="cart-product-list">
                             <tr>
-                                <th><?php _e('Product name') ?></th>
-                                <th class="col-xs-7 text-right"><?php _e('Total') ?></th>
+                                <th class="col-md-10"><?php _e('Product name') ?></th>
+                                <th class="col-md-2 text-right"><?php _e('Total') ?></th>
                             </tr>
                             <?php $totalDiscount = 0 ?>
-                            <?php foreach ($cart['product'] as $product) { ?>
+                            <?php foreach ($cart['product'] as $key => $product) { ?>
+                                <?php $unconsumedPrice = json_decode($product['extra'], true)['unconsumedPrice']; ?>
+
                                 <tr>
                                     <td>
                                         <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
                                            target="_blank">
-                                            <?php echo $this->escape($product['details']['title']); ?>
+                                            <b>#<?php echo ($key + 1) . ' ' . $this->escape($product['details']['title']); ?></b>
                                         </a>
                                         <?php if (!empty($product['details']['thumbUrl'])) { ?>
                                             <div class="col-xs-5">
@@ -293,37 +295,68 @@ $this->footScript()->appendScript($script);
                                         <?php } ?>
                                     </td>
                                     <td class="text-right">
-                                        <?php echo $this->escape($product['product_price_view']); ?>
+                                        <strong><?php echo  Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'] - $product['discount_price'] - $unconsumedPrice)); ?></strong>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <?php _e('Total Discount'); ?>
-                                        <?php if (isset($product['discount'])) { ?>
-                                            (<span data-discount-for="<?php echo $product['product'] ?>"><?php echo $product['discount'] ?></span>%)
-                                        <?php } ?>
-                                    </td>
-                                    <td class="text-right" data-discount-price-for="<?php echo $product['product'] ?>">
-                                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
+                                    <td><?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Price ext VAT'); ?></td>
+                                    <td class="data-total-price"">
+                                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
                                     </td>
                                 </tr>
+                                <?php if (isset($product['discount']) && $product['discount'] > 0) { ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Total Discount'); ?>
+                                            <?php if (isset($product['discount'])) { ?>
+                                                (<span data-discount-for="<?php echo $product['product'] ?>"><?php echo $product['discount'] ?></span>%)
+                                            <?php } ?>
+                                        </td>
+                                        <td data-discount-price-for="<?php echo $product['product'] ?>">
+                                            <?php
+                                                echo $product['discount_price'] > 0 ? '-' : ''; 
+                                                echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                                <?php if ($unconsumedPrice) { ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Old package recovery'); ?>
+                                        </td>
+                                        <td data-discount-price-for="<?php echo $product['product'] ?>">
+                                            <?php
+                                                echo $unconsumedPrice > 0 ? '-' : ''; 
+                                                echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice)); 
+                                            ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?> 
                                 <?php $totalDiscount += $product['discount_price']; ?>
+                                <?php $totalDiscount += $unconsumedPrice; ?>
                             <?php } ?>
-                            <tr>
-                                <td><?php _e('Total Price ext VAT'); ?></td>
+                            <tr class="footer">
+
+                                <td>
+                                    <strong>
+                                        <?php _e('Total Price ext VAT'); ?>
+                                    </strong>
+                                </td>
                                 <td class="text-right data-total-price"">
-                                    <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $totalDiscount)); ?>
+                                    <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $totalDiscount)); ?></strong>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <?php _e('Total Vat'); ?>
-                                    <?php if (isset($product['vat'])) { ?>
-                                        (<?php echo $product['vat'] ?>%)
-                                    <?php } ?>
+                                    <strong>
+                                        <?php _e('Total Vat'); ?>
+                                        <?php if (isset($product['vat'])) { ?>
+                                            (<?php echo $product['vat'] ?>%)
+                                        <?php } ?>
+                                    </strong>
                                 </td>
                                 <td class="text-right test data-total-vat">
-                                    <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?>
+                                    <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?></strong>
                                 </td>
                             </tr>
                             <?php if ($price['shipping'] > 0) { ?>
@@ -335,7 +368,7 @@ $this->footScript()->appendScript($script);
                                 </tr>
                             <?php } ?>
                             <?php if ($cart['type_payment'] != 'installment') { ?>
-                                <tr class="panel-footer">
+                                <tr class="panel-footer footer">
                                     <td>
                                         <strong>
                                             <?php _e('Final Price incl. VAT'); ?>

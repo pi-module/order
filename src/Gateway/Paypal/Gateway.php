@@ -86,16 +86,46 @@ class Gateway extends AbstractGateway
         
         // see here : https://developer.paypal.com/docs/integration/direct/payments/paypal-payments/#create-paypal-payment
         $discount = null;
-        if ($this->gatewayPayInformation['discount_price_1']) {
-            $discount = ',{
-                "name": "' . __('Discount') . '",
-                "price": "-' . $this->gatewayPayInformation['discount_price_1'] . '",
-                "currency": "' . $this->gatewayPayInformation['currency_code'] . '",
-                "quantity": "1",
-                "tax": "0"
-            }';
-        }
         
+        
+        
+        $items = array();
+        $subtotal = 0;
+        $tax = 0;
+        for ($i = 1; $i < $this->gatewayPayInformation['nb_product']; ++$i) {
+            $item = array();
+            $item["name"] = $this->gatewayPayInformation['item_name_' . $i];
+            $item["price"] = $this->gatewayPayInformation['amount_' . $i];
+            $item["currency"] = $this->gatewayPayInformation['currency_code'];
+            $item["quantity"] = $this->gatewayPayInformation['quantity_' . $i];
+            $item["description"] = $this->gatewayPayInformation['item_name_' . $i];
+            $item["tax"] = $this->gatewayPayInformation['tax_' . $i];
+            $items[] = $item;
+            
+            if ($this->gatewayPayInformation['discount_price_' . $i] > 0) {
+                $item = array();
+                $item["name"] = __('Discount');
+                $item["price"] = -$this->gatewayPayInformation['discount_price_' . $i];
+                $item["currency"] = $this->gatewayPayInformation['currency_code'];
+                $item["quantity"] = 1;
+                $item["tax"] = 0;
+                $items[] = $item;
+            }
+            
+            if ($this->gatewayPayInformation['unconsumed_'  . $i] > 0) {
+                
+                $item = array();
+                $item["name"] = __('Old package recovery');
+                $item["price"] = -$this->gatewayPayInformation['unconsumed_' . $i];
+                $item["currency"] = $this->gatewayPayInformation['currency_code'];
+                $item["quantity"] = 1;
+                $item["tax"] = 0;
+                $items[] = $item;
+            }
+            
+            $subtotal += $this->gatewayPayInformation['amount_' . $i] - $this->gatewayPayInformation['discount_price_' . $i] - $this->gatewayPayInformation['unconsumed_' .$i];
+            $tax +=  $this->gatewayPayInformation['tax_' . $i];
+        }
         $data ='{
             "intent":"sale",
             "redirect_urls":{
@@ -113,25 +143,16 @@ class Gateway extends AbstractGateway
             "transactions":[
                 {
                     "amount": {
-                        "total": "' . ($this->gatewayPayInformation['amount_1'] + $this->gatewayPayInformation['tax_1'] - $this->gatewayPayInformation['discount_price_1']) . '",
+                        "total": "' . ($subtotal + $tax) . '",
                         "currency": "' . $this->gatewayPayInformation['currency_code'] . '",
                         "details": {
-                            "subtotal": "' . ($this->gatewayPayInformation['amount_1'] - $this->gatewayPayInformation['discount_price_1']) . '",
-                            "tax": "' . $this->gatewayPayInformation['tax_1'] . '"
+                            "subtotal": "' . $subtotal . '",
+                            "tax": "' . $tax . '"
                         }
                     },
                     "description": "",
                     "item_list": {
-                        "items": [
-                            {
-                                "name": "' . $this->gatewayPayInformation['item_name_1'] . '",
-                                "price": "' . $this->gatewayPayInformation['amount_1'] . '",
-                                "currency": "' . $this->gatewayPayInformation['currency_code'] . '",
-                                "quantity": "' . $this->gatewayPayInformation['quantity_1'] . '",
-                                "description": "' . $this->gatewayPayInformation['item_name_1'] . '",
-                                "tax": "' . $this->gatewayPayInformation['tax_1'] . '"
-                            }' . $discount . ' 
-                        ],
+                        "items": ' . json_encode($items) . ',
                         "shipping_address": {
                             "recipient_name": "' . $this->gatewayPayInformation['first_name'] . ' ' . $this->gatewayPayInformation['last_name'] . '",
                             "line1": "' . $this->gatewayPayInformation['address1'] . '",
@@ -146,7 +167,6 @@ class Gateway extends AbstractGateway
                 }
             ]
         }';
-        
         $this->setLog($data, 'approval_start');
         
         $ch = curl_init();
@@ -370,6 +390,7 @@ class Gateway extends AbstractGateway
             $this->gatewayPayInformation['amount_' . $i] = $product['product_price'];
             $this->gatewayPayInformation['tax_' . $i] = $product['vat_price'];
             $this->gatewayPayInformation['discount_price_' . $i] = $product['discount_price'];
+            $this->gatewayPayInformation['unconsumed_' . $i] = $product['extra']['product']['unconsumedPrice'];
             $i++;
         }
         // Set address
@@ -386,7 +407,8 @@ class Gateway extends AbstractGateway
             $address = $order['address2'];
         }
         // Set payment information
-        $this->gatewayPayInformation['no_shipping'] = 1;
+        $this->gatewayPayInformation['nb_product'] = $i;
+        $this->gatewayPayInformation['no_shipping'] = count($products);
         $this->gatewayPayInformation['first_name'] = $order['first_name'];
         $this->gatewayPayInformation['last_name'] = $order['last_name'];
         $this->gatewayPayInformation['address1'] = $address;
@@ -425,9 +447,11 @@ class Gateway extends AbstractGateway
         $order = Pi::api('order', 'order')->getOrder($processing['order']);
         $extra = $order['extra'];
         $paymentId = $extra['paypal_payment_id'];
-        $payment = $this->getPayment($paymentId);
+        if (!empty($paymentId)) {
+            $payment = $this->getPayment($paymentId);
+        }
         
-        if ($payment->state == 'approved') {
+        if (!empty($paymentId) && $payment->state == 'approved') {
             $result['status'] = 1;
             $result['adapter'] = $this->gatewayAdapter;
             $result['order'] = $order['id'];
@@ -457,10 +481,10 @@ class Gateway extends AbstractGateway
     
     public function getDescription()
     {
-            return __('To install the Paypal Driver (Rest API) : <br/>
-Declare your REST API App on https://developer.paypal.com/developer/applications/ : you will get the API Credentials (Client ID and Secret Key)<br/>
-You can use the sandbox mode for your test and also check the error mode (no payment), to fine tune your code<br/>
-You can get testing accounts from https://developer.paypal.com/developer/accounts/ : xxx-facilitator@xxx.com (seller) and xxx-buyer@xxx.com (buyer). You can use the pass of your normal account<br/>
+            return __('To install the Paypal Driver (Rest API) : <br>
+Declare your REST API App on https://developer.paypal.com/developer/applications/ : you will get the API Credentials (Client ID and Secret Key)<br>
+You can use the sandbox mode for your test and also check the error mode (no payment), to fine tune your code<br>
+You can get testing accounts from https://developer.paypal.com/developer/accounts/ : xxx-facilitator@xxx.com (seller) and xxx-buyer@xxx.com (buyer). You can use the pass of your normal account<br>
         ');
     }
 }

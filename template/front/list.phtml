@@ -11,9 +11,9 @@
         <table class="table table-striped table-bordered table-condensed">
             <tr>
                 <th class="text-center"><?php _e('Code'); ?></th>
-                <td class="text-center"><?php _e('Product / service'); ?></td>
+                <th class="text-center"><?php _e('Product / service'); ?></th>
                 <th class="text-center"><?php _e('Time'); ?></th>
-                <th class="text-center"><?php _e('Price'); ?></th>
+                <th class="text-center"><?php _e('Price incl. VAT'); ?></th>
                 <th class="text-center"><?php _e('Status'); ?></th>
                 <th class="text-center"><?php _e('Action'); ?></th>
             </tr>
@@ -58,7 +58,7 @@
                 <?php } ?>
             <?php } else { ?>
                 <tr>
-                    <td colspan="7" class="text-center">
+                    <td colspan="6" class="text-center">
                         <?php _e('You did not yet place an order yet'); ?>   
                     </td>
                 </tr>
