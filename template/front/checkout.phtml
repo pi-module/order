@@ -276,7 +276,10 @@ $this->footScript()->appendScript($script);
                             </tr>
                             <?php $totalDiscount = 0 ?>
                             <?php foreach ($cart['product'] as $key => $product) { ?>
-                                <?php $unconsumedPrice = json_decode($product['extra'], true)['unconsumedPrice']; ?>
+                                <?php 
+                                    $extra = json_decode($product['extra'], true);
+                                    $unconsumedPrice = $extra['unconsumedPrice']; 
+                                ?>
 
                                 <tr>
                                     <td>
@@ -284,6 +287,11 @@ $this->footScript()->appendScript($script);
                                            target="_blank">
                                             <b>#<?php echo ($key + 1) . ' ' . $this->escape($product['details']['title']); ?></b>
                                         </a>
+                                        <?php if (!empty($extra['time_start'])) { ?>
+                                            <p>
+                                                <?php echo __('From') . ' ' . _date($extra['time_start']) . ' ' . __('to') . ' ' . _date($extra['time_end']) ?>
+                                            </p>
+                                        <?php } ?>
                                         <?php if (!empty($product['details']['thumbUrl'])) { ?>
                                             <div class="col-xs-5">
                                                 <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
