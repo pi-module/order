@@ -675,14 +675,10 @@ class OrderController extends ActionController
                 $values['total_price'] = $values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['setup_price'] + $values['vat_price'];
                 // Save values to order
                 $order = $this->getModel('order')->createRow();
+                $values['code'] = Pi::api('order', 'order')->generatCode();
                 $order->assign($values);
                 $order->save();
                 // Set order ID
-                $code = Pi::api('order', 'order')->generatCode($order->id);
-                $this->getModel('order')->update(
-                    array('code' => $code),
-                    array('id' => $order->id)
-                );
 
                 // Save basket
                 $basket = $this->getModel('basket')->createRow();

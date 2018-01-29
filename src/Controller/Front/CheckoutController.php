@@ -157,6 +157,7 @@ class CheckoutController extends IndexController
         } 
         if (empty($order)) {
             $order = $this->getModel('order')->createRow();
+            $values['code'] = Pi::api('order', 'order')->generatCode();
         }
         $order->assign($values);
         $order->save();
@@ -179,12 +180,6 @@ class CheckoutController extends IndexController
         
         // Check order save
         if (isset($order->id) && intval($order->id) > 0) {
-            // Set order ID
-            $code = Pi::api('order', 'order')->generatCode($order->id);
-            $this->getModel('order')->update(
-                array('code' => $code),
-                array('id' => $order->id)
-            );
             // Save order basket
             if (!empty($cart['product'])) {
                 $this->getModel('basket')->delete(array('order' => $_SESSION['order']['id']));

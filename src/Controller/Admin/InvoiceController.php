@@ -232,14 +232,10 @@ class InvoiceController extends ActionController
                 }
                 // Save values
                 $row = $this->getModel('invoice')->createRow();
+                $values['code'] = Pi::api('invoice', 'order')->generatCode();
                 $row->assign($values);
                 $row->save();
-                // Set order ID
-                $code = Pi::api('invoice', 'order')->generatCode($row->id);
-                $this->getModel('invoice')->update(
-                    array('code' => $code),
-                    array('id' => $row->id)
-                );
+                                
                 // Update order
                 $this->getModel('order')->update(
                     array(

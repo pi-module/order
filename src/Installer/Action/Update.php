@@ -599,7 +599,58 @@ EOD;
             
         }
         
-        
+        if (version_compare($moduleVersion, '2.0.2', '<')) {
+            try {
+                $select = $orderModel->select();
+                $rowset = $orderModel->selectWith($select);
+                $config = Pi::service('registry')->config->read('order');
+                
+                foreach ($rowset as $row) {
+                    // Set value
+                    $year = date('Y', $row->time_create);
+                    $count = Pi::model('order', 'order')->count(
+                        array(
+                            'time_create >= ' . strtotime('01-01-' . $year),
+                            'id < ' . $row->id 
+                        )
+                    );
+                    $num = $year .  sprintf('%03d', ($count+1));  
+                    $code = sprintf('%s-%s', $config['order_code_prefix'], $num);
+            
+                    $row->code = $code;
+                    $row->save();
+                }
+                
+                $select = $invoiceModel->select();
+                $rowset = $invoiceModel->selectWith($select);
+                $config = Pi::service('registry')->config->read('order');
+                
+                foreach ($rowset as $row) {
+                    // Set value
+                    $year = date('Y', $row->time_create);
+                    $count = Pi::model('invoice', 'order')->count(
+                        array(
+                            'time_create >= ' . strtotime('01-01-' . $year),
+                            'id < ' . $row->id 
+                        )
+                    );
+                    $num = $year .  sprintf('%03d', ($count+1));  
+                    $code = sprintf('%s-%s', $config['invoice_code_prefix'], $num);
+            
+                    $row->code = $code;
+                    $row->save();
+                }
+                
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table update query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;   
+            }
+        }
+         
         return true;
     }
 }

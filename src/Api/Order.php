@@ -63,10 +63,15 @@ class Order extends AbstractApi
         return $orders;
     }
 
-    public function generatCode($id)
+    public function generatCode()
     {
         $config = Pi::service('registry')->config->read($this->getModule());
-        return sprintf('%s-%s', $config['order_code_prefix'], $id);
+                    
+        $year = date('Y');
+        $count = Pi::model('order', 'order')->count(array('time_create >= ' . strtotime('01-01-' . $year)));
+        $num = $year .  sprintf('%03d', ($count+1));  
+        
+        return sprintf('%s-%s', $config['order_code_prefix'], $num);
     }
 
     public function orderStatus($status)
@@ -586,7 +591,7 @@ class Order extends AbstractApi
         $template = 'order:front/print';
         $data = array('order' => $order, 'config' => $config);
         
-        $name = sprintf("%s-%s-%s.pdf", $config['order_filename_prefix'], $config['invoice_code_prefix'], current($order['invoices'])['id']);
+        $name = sprintf("%s-%s.pdf", $config['order_filename_prefix'], current($order['invoices'])['code']);
         Pi::service('html2pdf')->pdf($template, $data, $name);
     }
 }
