@@ -33,6 +33,7 @@ use Zend\Math\Rand;
  * Pi::api('order', 'order')->getOrderInfo();
  * Pi::api('order', 'order')->updateOrderInfo($order);
  * Pi::api('order', 'order')->unsetOrderInfo();
+ * Pi::api('order', 'order')->getBasket($where);
  */
 
 class Order extends AbstractApi
@@ -593,5 +594,13 @@ class Order extends AbstractApi
         
         $name = sprintf("%s-%s.pdf", $config['order_filename_prefix'], current($order['invoices'])['code']);
         Pi::service('html2pdf')->pdf($template, $data, $name);
+    }
+
+    public function getBasket($where) 
+    {
+        $select = Pi::model('basket', 'order')->select()->where($where)->order('id DESC');
+        $row = Pi::model('basket', 'order')->selectWith($select)->current();
+        
+        return $row ? $row->toArray() : null;
     }
 }
