@@ -29,8 +29,8 @@ class Promocode extends AbstractApi
     public function hasActiveCode()
     {
         $where = array(
-            'time_start <= ' . strtotime(date('Y-m-d')),
-            'time_end >= ' . strtotime(date('Y-m-d')),
+            'time_start <= ' . time(),
+            'time_end >= ' . time(),
         );
         
         $select = Pi::model('promocode', 'order')->select()->where($where);
@@ -43,8 +43,8 @@ class Promocode extends AbstractApi
         $select = $model->select();
 
         $select->where(array(
-            'time_start <= ' . strtotime(date('Y-m-d')),
-            'time_end >= ' . strtotime(date('Y-m-d')),
+            'time_start <= ' . time(),
+            'time_end >= ' . time(),
         ));
 
         $select->order('id DESC');

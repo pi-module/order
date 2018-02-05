@@ -33,8 +33,8 @@ $urlMessage = $this->url('', array(
                 <tr>
                     <td><?php echo $this->escape($promocode['code']); ?></td>
                     <td><?php echo $this->escape($promocode['promo']); ?>%</td>
-                    <td><?php echo $this->escape(_date($promocode['time_start'])); ?></td>
-                    <td><?php echo $this->escape(_date($promocode['time_end'])); ?></td>
+                    <td><?php echo _date($promocode['time_start']) . ' ' . date('H:i', $promocode['time_start']); ?></td>
+                    <td><?php echo _date($promocode['time_end']) . ' ' . date('H:i', $promocode['time_end']); ?></td>
                     <td><?php echo join(', ', json_decode($promocode['module'])); ?></td>
                     <td>
                          <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'manage', 'id' => $promocode['id'])); ?>">

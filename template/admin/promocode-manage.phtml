@@ -1,5 +1,6 @@
 <?php 
 $this->css(array(
+    $this->assetModule('css/bootstrap-datetimepicker.min.css'),
     $this->assetModule('css/admin.css'), 
     $this->assetModule('script/system-ui.css', 'system'),
 ));
@@ -7,12 +8,55 @@ $this->css(array(
 $this->jQuery(array(
     'ui/jquery-ui.custom.min.js',
 ));
-$this->js($this->assetModule('script/system-msg.js', 'system'));
+
+
+$this->js(array(
+        $this->assetModule('js/moment.js'),
+        $this->assetModule('js/bootstrap-datetimepicker.min.js'),
+        $this->assetModule('script/system-msg.js', 'system')
+    )
+);
 $this->Backbone();
-    
+   
 ?>
 <div class="clearfix">
     
     <?php echo $this->form($form); ?>
    
 </div>
+
+
+<script>
+$(
+    function() 
+    {
+        var datetime_start = $('input[name=time_start]').val();
+        var dp = $('input[name=datetimepicker_start]').datetimepicker(
+            {
+                defaultDate : datetime_start == 0 ? false : moment(new Date(1000 * datetime_start)), 
+                locale: 'fr',
+            }
+        );
+         
+        dp.on('dp.change', function() {
+            $('input[name=time_start]').val($('input[name=datetimepicker_start]').datetimepicker('date').unix());
+        });
+        
+        var datetime_end = $('input[name=time_end]').val();
+        var dp = $('input[name=datetimepicker_end]').datetimepicker(
+            {
+                defaultDate : datetime_end == 0 ? false : moment(new Date(1000 * datetime_end)), 
+                locale: 'fr',
+            }
+        );
+         
+        dp.on('dp.change', function() {
+            $('input[name=time_end]').val($('input[name=datetimepicker_end]').datetimepicker('date').unix());
+        });
+        
+        
+        $('[data-toggle="tooltip"]').tooltip({html:true}); 
+    } 
+);
+    
+</script>

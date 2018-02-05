@@ -829,7 +829,7 @@ class CheckoutController extends IndexController
                 $promocode = Pi::api('promocode', 'order')->get($values['code']);
                 if ($promocode) {
                     $authorizedModules = json_decode($promocode['module']);
-                    if (strtotime(date('Y-m-d')) < $promocode->time_start || strtotime(date('Y-m-d')) > $promocode->time_end) {
+                    if (time() < $promocode->time_start || time() > $promocode->time_end) {
                         // Code dépassé
                         $msgPromoCode = array(
                             'type' => 'info',

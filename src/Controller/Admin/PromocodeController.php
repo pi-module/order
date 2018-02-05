@@ -67,8 +67,6 @@ class PromocodeController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                $values['time_start'] = strtotime($values['time_start']);
-                $values['time_end'] = strtotime($values['time_end']);
                 $values['module'] = json_encode($values['module']);
                 
                 if (!empty($values['id'])) {
@@ -89,8 +87,6 @@ class PromocodeController extends ActionController
                 $select = Pi::model("promocode", 'order')->select()->where($where);
                 $row = Pi::model("promocode", 'order')->selectWith($select)->current();
                 $data = $row->toArray();
-                $data['time_start'] = date('Y-m-d', $data['time_start']);
-                $data['time_end'] = date('Y-m-d', $data['time_end']);
                 $data['module'] = json_decode($data['module'], true);
                 
                 $form->setData($data);    
