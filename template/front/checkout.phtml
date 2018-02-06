@@ -84,7 +84,8 @@ $script = <<<'EOT'
             
             var idCustomer = $(e.target).attr('rel');
             $('form#order [name=customer_id]').val(idCustomer);
-            $('form#order [name=submit_order_simple]').removeClass('hidden');
+            $('form#order [name=submit_order_simple]').removeClass('disabled');
+            $('form#order [name=submit_order_simple]').removeAttr('title');
             
             $('.selected-address').addClass('hidden');
             $('.showCustomerFrom').addClass('inverse');
@@ -488,5 +489,16 @@ $this->footScript()->appendScript($script);
             });
             return false; 
         });
+        
+        if ($('.showCustomerFrom').length) {
+            $($('.showCustomerFrom')[0]).trigger('click');
+        } else {
+            $('.fortooltip').tooltip({container: 'body', html: true});
+            $('.fortooltip').click(
+                function(e) {
+                    e.preventDefault();
+                }
+            )
+        }
     });
 </script>

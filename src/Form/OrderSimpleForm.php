@@ -226,7 +226,8 @@ class OrderSimpleForm extends BaseForm
             'type' => 'submit',
             'attributes' => array(
                 'value' => $title,
-                'class' => 'btn btn-success hidden submit_order_simple',
+                'class' => 'btn btn-success submit_order_simple fortooltip disabled',
+                'title' => __('You need to create an address before pay')
             )
         ));
     }
