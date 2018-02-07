@@ -82,7 +82,7 @@ $script = <<<'EOT'
             
             $('#customerFromNew').addClass('hidden');
             
-            var idCustomer = $(e.target).attr('rel');
+            var idCustomer = $(e.target).data('address');
             $('form#order [name=customer_id]').val(idCustomer);
             $('form#order [name=submit_order_simple]').removeClass('disabled');
             $('form#order [name=submit_order_simple]').removeAttr('title');
@@ -224,17 +224,17 @@ $this->footScript()->appendScript($script);
                                         </div>
                                     </li>
                                     <li>
-                                        <a href="#" id="customerFromButton<?php echo $customer['id']; ?>" class="showCustomerFrom btn btn-success btn-sm" rel="<?php echo $customer['id']; ?>">
+                                        <a href="#" id="customerFromButton<?php echo $customer['id']; ?>" class="showCustomerFrom btn btn-success btn-sm" data-address="<?php echo $customer['id']; ?>">
                                            <?php _e('Use it'); ?>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'index', 'customer' => $customer['id']))) ?>" class=" btn btn-primary  btn-sm" rel="<?php echo $customer['id']; ?>">
+                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'index', 'customer' => $customer['id']))) ?>" class=" btn btn-primary  btn-sm" data-address="<?php echo $customer['id']; ?>">
                                             <i class="fa fa-edit"></i> <?php _e('Edit'); ?>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'delete', 'customer' => $customer['id']))) ?>" class=" btn btn-delete btn-sm" rel="<?php echo $customer['id']; ?>" onclick="return confirm('<?php _e('Are you sure you want delete this address?'); ?>');">
+                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'delete', 'customer' => $customer['id']))) ?>" class=" btn btn-delete btn-sm" data-address="<?php echo $customer['id']; ?>" onclick="return confirm('<?php _e('Are you sure you want delete this address?'); ?>');">
                                             <i class="fa fa-trash"></i> <?php _e('Delete'); ?>
                                         </a>
                                     </li>
@@ -290,7 +290,11 @@ $this->footScript()->appendScript($script);
                                         </a>
                                         <?php if (!empty($extra['time_start'])) { ?>
                                             <p>
-                                                <?php echo __('From') . ' ' . _date($extra['time_start']) . ' ' . __('to') . ' ' . _date($extra['time_end']) ?>
+                                                <?php if ($extra['time_end'] == strtotime("2030-01-01")) { ?>
+                                                   <?php echo __('Unlimited from') . ' ' . _date($extra['time_start'])?>
+                                                <?php } else { ?> 
+                                                    <?php echo __('From') . ' ' . _date($extra['time_start']) . ' ' . __('to') . ' ' . _date($extra['time_end']) ?>
+                                                <?php } ?>
                                             </p>
                                         <?php } ?>
                                         <?php if (!empty($product['details']['thumbUrl'])) { ?>
@@ -309,7 +313,7 @@ $this->footScript()->appendScript($script);
                                 </tr>
                                 <tr>
                                     <td><?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Price ext VAT'); ?></td>
-                                    <td class="data-total-price"">
+                                    <td class="data-total-price">
                                         <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
                                     </td>
                                 </tr>
@@ -351,7 +355,7 @@ $this->footScript()->appendScript($script);
                                         <?php _e('Total Price ext VAT'); ?>
                                     </strong>
                                 </td>
-                                <td class="text-right data-total-price"">
+                                <td class="text-right data-total-price">
                                     <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $totalDiscount)); ?></strong>
                                 </td>
                             </tr>
@@ -384,9 +388,9 @@ $this->footScript()->appendScript($script);
                                         </strong>
                                     </td>
                                     <td class="text-right">
-                                        <spam class="label label-success data-total-price-ttc">
+                                        <span class="label label-success data-total-price-ttc">
                                             <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?>
-                                        </spam>
+                                        </span>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -434,7 +438,6 @@ $this->footScript()->appendScript($script);
                     <?php if (isset($forms['order'])) { ?>
                         <?php echo $this->form($forms['order'], 'vertical'); ?>
                     <?php } ?>
-                    </table>
                     <?php if ($totalDiscount) { ?>
                         <div class="text-loyalty">
                             <?php _e('You can benefit from a discount loyalty price for this package. The system did apply it on the final price for you.'); ?>
@@ -492,6 +495,10 @@ $this->footScript()->appendScript($script);
         
         if ($('.showCustomerFrom').length) {
             $($('.showCustomerFrom')[0]).trigger('click');
+            if (<?php echo $editAddress ? 1 : 0 ?>) {
+                $('#customerFromNew').removeClass('hidden');
+
+            }
         } else {
             $('.fortooltip').tooltip({container: 'body', html: true});
             $('.fortooltip').click(
