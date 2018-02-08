@@ -19,17 +19,14 @@
     .header img.logo {width:30mm; height:30mm; position:absolute; top:5mm; left:10mm}
     
     .header .align-right {line-height:5mm}
-    .small1, 
-    .small2 {position:relative; right:0mm; top:10mm; width:75mm;border:2px solid #fff}
-    .small1 {top:2mm} 
-    .small2 {top:5mm}
-    .small1 .col1,
-    .small2 .col1 {width:66%}
-    .small1 .col2,
+    .small1 .col1 {width:117mm; padding:4mm 0mm 4mm 5mm;vertical-align:bottom}
+    .small1 .col2{width:75mm}
+    
+    .small2 {width:75mm;border:2px solid #fff}
+    .small2 .col1 {width:66%; padding:3mm 3mm 3mm 1mm}
     .small2 .col2{width:34%}
     
-     div.big {position:relative; float:left; right:0mm;top:5mm;;width:200mm;}
-     
+    .big {margin-left:5mm;;width:200mm;}
     .big .col1{width:75%}
     .big .col2{width:12%}
     .big .col3{width:13%}
@@ -42,8 +39,14 @@
     .text-footer {margin-left:5mm; width:200mm}
     
 </style>
-<page backleft="-20px" backtop="-20px">
-    <div class="container">
+<page backleft="-20px" backtop="81mm" backbottom="100px">
+    <page_footer>
+        <div class="align-center">
+            <hr/>
+            <?php echo $config['order_sellerinfo']; ?>
+        </div>
+    </page_footer>
+    <page_header>
         <div class="header">
             <div class="align-right">
                 <?php if (!empty($order['company'])) { ?>
@@ -100,12 +103,14 @@
             </div>    
             
         </div>    
-        
-        <div class="small1">
-                <div style="position:absolute;left:-125mm;top:46.5mm">
-                    <?php echo nl2br($config['invoice_text_description']); ?>
-                </div>
-                <table cellspacing="0">
+    </page_header>
+        <table class="first small1">
+        <tr>
+            <td class="col1">
+                <?php echo nl2br($config['invoice_text_description']); ?>
+            </td>
+            <td class="col2">
+               <table cellspacing="0" class="small2">
                     <thead>
                         <tr class="borderbottom">
                             <th colspan=2 class="borderbottom">
@@ -123,32 +128,143 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td class="col1">
                                 <?php _e('Invoice number'); ?>
                             </td>
-                            <td class="align-right">
+                            <td class="align-right col2">
                                 <?php echo $invoice['code'] ?>
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td class="col1">
                                 <?php _e('Time order'); ?>
                             </td>
-                            <td class="align-right">
+                            <td class="align-right col2">
                                 <?php echo $this->escape($order['time_create_view']); ?>
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td class="col1">
                                 <?php _e('Time payment'); ?>
                             </td>
-                            <td class="align-right">
+                            <td class="align-right col2">
                                 <?php echo $this->escape($order['time_payment_view']); ?>
                             </td>
                         </tr>
                         <tr>
-                            <td class="color1">
+                            <td class="color1 col1">
                                 <?php _e('Total all taxes included'); ?>
+                            </td>
+                            <td class="align-right color2 col2">
+                                <?php echo $this->escape($order['total_price_view']); ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table cellspacing="0" class="withborder big">
+        <thead>
+            <tr>
+                <th class="col1 color1">
+                    <?php _e('Product'); ?>
+                </th>
+                <th class="col2 color1">
+                    <?php _e('Number'); ?>
+                </th>
+                <th class="align-right col3 color2">
+                    <?php _e('Price'); ?>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $count = 0; ?>
+            <?php foreach ($order['products'] as $product) { ?>
+                <?php $unconsumedPrice = $product['extra']['product']['unconsumedPrice'];?> 
+                <?php $count++ ?>
+                <tr>
+                    <td>
+                        <strong>#<?php echo $count . ' ' . $this->escape($product['details']['title']); ?></strong>
+                    </td>
+                    <td class="align-center">
+                        <strong><?php echo _number($this->escape($product['number'])); ?></strong>
+                    </td>
+                    <td class="align-right">
+                        <strong><?php echo Pi::api('api', 'order')->viewPrice($product['product_price'] - $product['discount_price'] - $unconsumedPrice); ?></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan=2>
+                        <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Price ext VAT'); ?>
+                    </td>
+                    <td>
+                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
+                    </td>
+                </tr>
+                
+                <?php if ($product['discount_price'] > 0) { ?>
+                    <tr>
+                        <td colspan=2>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Discount'); ?>
+                        </td>
+                        <td>
+                            -<?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
+                        </td>
+                    </tr>
+                <?php } ?>
+                <?php if ($unconsumedPrice > 0) { ?>
+                    <tr>
+                        <td colspan=2>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Old package recovery'); ?>
+                        </td>
+                        <td>
+                            -<?php echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice)); ?>
+                        </td>
+                    </tr>
+                <?php } ?>
+            <?php } ?>
+        </tbody>
+    </table>
+    <table class="small1">
+        <tr>
+            <td class="col1">
+                <div class="paid-status">
+                    <strong>Facture réglée (<?php echo sprintf(__('credit card / %s'), $order['gateway']) ?>)</strong>
+                </div>
+            </td>
+            <td class="col2">
+                <table cellspacing="0" class="small2">
+                   <tbody>
+                        <tr>
+                            <td class="col1 borderbottom">
+                                <strong><?php _e('Product price ex VAT'); ?></strong>
+                            </td>
+                            <td class="align-right col2 borderbottom">
+                                <strong><?php echo $this->escape($order['total_product_price']); ?></strong>
+                            </td>
+                       </tr>
+                        <?php if ($order['shipping_price'] > 0) { ?>
+                        <tr>
+                            <td>
+                                <strong><?php _e('Shipping'); ?></strong>
+                            </td>
+                            <td class="align-right">
+                                <strong><?php echo $this->escape($order['shipping_price_view']); ?></strong>
+                            </td>
+                        </tr>
+                        <?php } ?> 
+                        <tr>
+                            <td>
+                                <strong><?php _e('Vat'); ?></strong>
+                            </td>
+                            <td class="align-right">
+                                <strong><?php echo $this->escape($order['vat_price_view']); ?></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="color1">
+                                <strong><?php _e('Total all taxes included'); ?></strong>
                             </td>
                             <td class="align-right color2">
                                 <?php echo $this->escape($order['total_price_view']); ?>
@@ -156,127 +272,11 @@
                         </tr>
                     </tbody>
                 </table>
-            <div class="clearfix"></div>
-        </div>
-        <div class="big">
-                <table cellspacing="0" class="withborder">
-                    <thead>
-                        <tr class="">
-                            <th class="col1 color1">
-                                <?php _e('Product'); ?>
-                            </th>
-                            <th class="col2 color1">
-                                <?php _e('Number'); ?>
-                            </th>
-                            <th class="align-right col3 color2">
-                                <?php _e('Price'); ?>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $count = 0; ?>
-                        <?php foreach ($order['products'] as $product) { ?>
-                            <?php $unconsumedPrice = $product['extra']['product']['unconsumedPrice'];?> 
-                            <?php $count++ ?>
-                            <tr>
-                                <td>
-                                    <strong>#<?php echo $count . ' ' . $this->escape($product['details']['title']); ?></strong>
-                                </td>
-                                <td class="align-center">
-                                    <strong><?php echo _number($this->escape($product['number'])); ?></strong>
-                                </td>
-                                <td class="align-right">
-                                    <strong><?php echo Pi::api('api', 'order')->viewPrice($product['product_price'] - $product['discount_price'] - $unconsumedPrice); ?></strong>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan=2>
-                                    <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Price ext VAT'); ?>
-                                </td>
-                                <td>
-                                    <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
-                                </td>
-                            </tr>
-                            
-                            <?php if ($product['discount_price'] > 0) { ?>
-                                <tr>
-                                    <td colspan=2>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Discount'); ?>
-                                    </td>
-                                    <td>
-                                        -<?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                            <?php if ($unconsumedPrice > 0) { ?>
-                                <tr>
-                                    <td colspan=2>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Old package recovery'); ?>
-                                    </td>
-                                    <td>
-                                        -<?php echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice)); ?>
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                        <?php } ?>
-                    </tbody>
-                </table>
-            <div class="clearfix"></div>
-    
-        </div>
-        <div class="small2">
-            <div class="paid-status">
-                <strong><?php echo sprintf(__('Paid invoice (credit card / %s)'), $order['gateway']) ?></strong>
-            </div>
-            <table cellspacing="0">
-                <tbody>
-                    <tr>
-                        <td class="col1 borderbottom">
-                            <strong><?php _e('Product price ex VAT'); ?></strong>
-                        </td>
-                        <td class="align-right col2 borderbottom">
-                            <strong><?php echo $this->escape($order['total_product_price']); ?></strong>
-                        </td>
-                    </tr>
-                    <?php if ($order['shipping_price'] > 0) { ?>
-                    <tr>
-                        <td>
-                            <strong><?php _e('Shipping'); ?></strong>
-                        </td>
-                        <td class="align-right">
-                            <strong><?php echo $this->escape($order['shipping_price_view']); ?></strong>
-                        </td>
-                    </tr>
-                    <?php } ?> 
-                    <tr>
-                        <td>
-                            <strong><?php _e('Vat'); ?></strong>
-                        </td>
-                        <td class="align-right">
-                            <strong><?php echo $this->escape($order['vat_price_view']); ?></strong>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="color1">
-                            <?php _e('Total all taxes included'); ?>
-                        </td>
-                        <td class="align-right color2">
-                            <?php echo $this->escape($order['total_price_view']); ?>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="clearfix"></div>
-        </div>
-        <br/>
-        <p class="align-justify text-footer">
-            <?php echo nl2br($config['invoice_text_footer']); ?>
-        </p>
-    </div>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <p class="align-justify text-footer">
+        <?php echo nl2br($config['invoice_text_footer']); ?>
+    </p>
  </page>
-<page_footer>
-    <div class="align-center">
-        <hr/>
-        <?php echo $config['order_sellerinfo']; ?>
-    </div>
-</page_footer>
