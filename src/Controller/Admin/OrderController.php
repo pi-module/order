@@ -141,12 +141,22 @@ class OrderController extends ActionController
                     $list[$row->id]['unPaidInvoice']++;
                 }
             }
-            $list[$row->id]['statusInvoice'] = sprintf(
-                __('Total : %s / paid : %s / unPaid : %s'),
-                _number($list[$row->id]['totalInvoice']),
-                _number($list[$row->id]['paidInvoice']),
-                _number($list[$row->id]['unPaidInvoice'])
-            );
+            if (!count($invoice)) {
+                $list[$row->id]['unPaidInvoice']++;
+                $list[$row->id]['statusInvoice'] = sprintf(
+                    __('Total : %s / paid : %s / unPaid : %s'),
+                    _number($list[$row->id]['totalInvoice']),
+                    _number($list[$row->id]['paidInvoice']),
+                    _number(0)
+                );
+            } else {
+                $list[$row->id]['statusInvoice'] = sprintf(
+                    __('Total : %s / paid : %s / unPaid : %s'),
+                    _number($list[$row->id]['totalInvoice']),
+                    _number($list[$row->id]['paidInvoice']),
+                    _number($list[$row->id]['unPaidInvoice'])
+                );
+            }
         }
         // Set paginator
         $count = array('count' => new Expression('count(*)'));
