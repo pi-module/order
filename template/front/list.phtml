@@ -47,10 +47,17 @@
                                         class="fa fa-credit-card"></i> <?php _e('Pay'); ?></a>
                               
                                 <?php } ?>
-                                <?php if ($order['status_payment'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) { ?>        
+                                
+                                <?php if ($order['status_payment'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) { ?>
+                                    <?php if (count($order['invoices']) == 1 ) { ?>        
                                     <a class="btn btn-standard btn-xs" title="<?php _e('Print'); ?>" target="_blank"
                                        href="<?php echo Pi::url($this->url('order', array('controller'=> 'index', 'action' => 'print', 'id' => $order['id']))); ?>"><i
                                             class="fa fa-download"></i> <?php _e('Download'); ?></a>
+                                    <?php } else { ?>
+                                        <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" target="_blank"
+                                            href="<?php echo Pi::url($this->url('order', array('controller' => 'detail', 'id' => $order['id']))); ?>"><i
+                                        class="fa fa-edit"></i> <?php _e('View'); ?></a> 
+                                    <?php } ?>
                                 <?php } ?>
                             <?php } ?>
                         </td>

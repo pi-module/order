@@ -33,6 +33,7 @@ class IndexController extends ActionController
         foreach ($orders as $order) {
             $user['orders'][$order['id']] = $order;
             $user['orders'][$order['id']]['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+            $user['orders'][$order['id']]['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
         }
         // Set order ids
         /* $orderIds = array();

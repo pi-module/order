@@ -28,8 +28,8 @@ class Order extends Standard
     );
 
     protected $controllerList = array(
-        'checkout', 'credit', 'index', 'invoice', 'payment', 'promocode'
-    );
+        'checkout', 'credit', 'detail', 'index', 'invoice', 'payment', 'promocode'  
+      );
 
     /**
      * {@inheritDoc}
@@ -150,7 +150,7 @@ class Order extends Standard
 
         //print_r($parts);
         //print_r($matches);
-
+       
         return $matches;
     }
 
