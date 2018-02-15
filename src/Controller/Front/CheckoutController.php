@@ -264,9 +264,8 @@ class CheckoutController extends IndexController
                 Pi::api('credit', 'order')->addHistory($cart['credit'], $order->id);
             }
             // Send notification
-            if (!$gatewayOptions['onemail']) {
-                Pi::api('notification', 'order')->addOrder($order->toArray());
-            }
+            Pi::api('notification', 'order')->addOrder($order->toArray(), $gatewayOptions['onemail']);
+            
             // Go to payment
             if ($config['order_payment'] == 'payment') {
                 $url = Pi::url(Pi::service('url')->assemble('order', array(

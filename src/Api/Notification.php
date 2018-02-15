@@ -29,7 +29,7 @@ use Pi\Application\Api\AbstractApi;
 
 class Notification extends AbstractApi
 {
-    public function addOrder($order)
+    public function addOrder($order, $oneMail = false)
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
@@ -67,6 +67,18 @@ class Notification extends AbstractApi
             $typeProduct = __($order['module_name']);
         }   
         
+        $userNote = '';
+        if ($order['user_note']) {
+            $userNote = Pi::service('mail')->template(
+                array(
+                    'file'      => 'admin_user_note',
+                    'module'    => 'order',
+                ),
+                array(
+                    'user_note' => $order['user_note'],                    
+                )
+            );
+        }
         // Set mail information
         $information = array(
             'first_name' => $order['first_name'],
@@ -76,7 +88,8 @@ class Notification extends AbstractApi
             'product_list' => $productList,
             'product_price' => $productPrice,
             'type_product' => $typeProduct,
-            'sellerinfo' => $config['order_sellerinfo']
+            'sellerinfo' => $config['order_sellerinfo'],
+            'user_note' => $userNote['body']
             
         );
 
@@ -111,17 +124,19 @@ class Notification extends AbstractApi
             }
         }
 
-        // Send mail to user
-        $toUser = array(
-            $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
-        );
-        Pi::service('notification')->send(
-            $toUser,
-            'user_add_order',
-            $information,
-            Pi::service('module')->current(),
-            $order['uid']
-        );
+        if (!$oneMail) {   
+            // Send mail to user
+            $toUser = array(
+                $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
+            );
+            Pi::service('notification')->send(
+                $toUser,
+                'user_add_order',
+                $information,
+                Pi::service('module')->current(),
+                $order['uid']
+            );
+        }
 
         // Send sms to admin
         $content = sprintf(
@@ -134,16 +149,18 @@ class Notification extends AbstractApi
         );
         Pi::service('notification')->smsToAdmin($content);
 
-        // Send sms to user
-        $content = sprintf(
-            $config['sms_order_user'],
-            $order['first_name'],
-            $order['last_name'],
-            $productList,
-            $productPrice,
-            $sitename
-        );
-        Pi::service('notification')->smsToUser($content, $order['mobile']);
+        if (!$oneMail) {
+            // Send sms to user
+            $content = sprintf(
+                $config['sms_order_user'],
+                $order['first_name'],
+                $order['last_name'],
+                $productList,
+                $productPrice,
+                $sitename
+            );
+            Pi::service('notification')->smsToUser($content, $order['mobile']);
+        }
     }
 
     public function processOrder($order, $type)

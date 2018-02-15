@@ -43,8 +43,9 @@ $this->backbone();
                     <ul class="list-inline">
                         <li class="text-center small col-xs-2"><?php _e('Order status'); ?></li>
                         <li class="text-center small col-xs-2"><?php _e('Can pay'); ?></li>
-                        <li class="text-center small col-xs-2"><?php _e('Payment'); ?></li>
+                        <li class="text-center small col-xs-1"><?php _e('Payment'); ?></li>
                         <li class="text-center small col-xs-2"><?php _e('Delivery'); ?></li>
+                        <li class="text-center small col-xs-1"><?php _e('Note'); ?></li>
                         <li class="text-center small col-xs-4"><?php _e('Action'); ?></li>
                         
                         
@@ -111,7 +112,7 @@ $this->backbone();
                                 <?php } else { ?>
                                     <li class="col-xs-2 text-center"><span id="update-payment-<?php echo $this->escape($order['id']); ?>" class="update-payment btn btn-xs <?php echo $this->escape($order['paymentClass']); ?>"><?php echo $this->escape($order['paymentTitle']); ?></span></li>
                                 <?php } */ ?>
-                            <li class="col-xs-2 text-center">
+                            <li class="col-xs-1 text-center">
                                 <?php if ($order['unPaidInvoice'] == 0) { ?>
                                     <span class="label label-success" data-toggle="tooltip" data-placement="top" title="<?php echo $this->escape($order['statusInvoice']); ?>"><?php _e('Paid'); ?></span>
                                 <?php } else { ?>
@@ -125,8 +126,15 @@ $this->backbone();
                                     <span class="label label-default"><?php _e('Its service'); ?></span>
                                 <?php } ?>
                             </li>
+                            <li class="col-xs-1 text-center">
+                                <?php if($order['user_note']) { ?>
+                                        <span class="fa fa-comments"></span> 
+                                    <?php } ?> 
+                            </li> 
                             <li class="col-xs-2 text-center">
-                                <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
+                                <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i class="fa fa-eye"></i> 
+                                    <?php _e('View'); ?>
+                                </a>
                             </li> 
                             <?php if ($order['status_payment'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) { ?>
                             <li class="col-xs-2 text-center">        

@@ -308,7 +308,7 @@ class Gateway extends AbstractGateway
         
         $form['onemail'] = array(
             'name' => 'onemail',
-            'label' => __('Send only 1 mail after payment'),
+            'label' => __('Send only 1 mail after payment (only for end user, not for admin)'),
             'type' => 'checkbox',
             'required' => false,
         );
