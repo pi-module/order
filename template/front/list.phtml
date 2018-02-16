@@ -49,7 +49,7 @@
                                 <?php } ?>
                                 
                                 <?php if ($order['status_payment'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) { ?>
-                                    <?php if (count($order['invoices']) == 1 ) { ?>        
+                                    <?php if ($config['invoice_pdf_or_detail']) { ?>        
                                     <a class="btn btn-standard btn-xs" title="<?php _e('Print'); ?>" target="_blank"
                                        href="<?php echo Pi::url($this->url('order', array('controller'=> 'index', 'action' => 'print', 'id' => $order['id']))); ?>"><i
                                             class="fa fa-download"></i> <?php _e('Download'); ?></a>

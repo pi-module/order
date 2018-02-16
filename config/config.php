@@ -966,5 +966,12 @@ return array(
             'description' => 'Square',
             'edit' => 'text',
         ),
+        'invoice_pdf_or_detail' => array(
+            'category' => 'invoice',
+            'title' => _a('Invoice : PDF or page details ? (check for PDF)'),
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
     ),
 );
