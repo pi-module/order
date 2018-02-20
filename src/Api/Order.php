@@ -220,7 +220,9 @@ class Order extends AbstractApi
         // Set date_format
         $pattern = !empty($config['date_format']) ? $config['date_format'] : 'yyyy-MM-dd';
         // boject to array
-        $order = $order->toArray();
+        if (!is_array($order)) {
+            $order = $order->toArray();
+        }
         // Set time_create_view
         $order['time_create_view'] = _date($order['time_create'], array('pattern' => $pattern));
         // Set time_payment_view
@@ -588,9 +590,9 @@ class Order extends AbstractApi
         
         $unconsumedPrice = json_decode($order['extra'], true)['unconsumedPrice'];
         $order['total_product_price'] = Pi::api('api', 'order')->viewPrice($order['product_price'] - $order['discount_price'] - $unconsumedPrice);
-        
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
         $template = 'order:front/print';
-        $data = array('order' => $order, 'config' => $config);
+        $data = array('order' => $order, 'address' => $address, 'config' => $config);
         
         $name = sprintf("%s-%s.pdf", $config['order_filename_prefix'], current($order['invoices'])['code']);
         Pi::service('html2pdf')->pdf($template, $data, $name);

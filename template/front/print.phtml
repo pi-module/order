@@ -51,57 +51,56 @@
             <div class="align-right">
                 <?php if (!empty($order['company'])) { ?>
                     <b><?php echo $this->escape($order['company']); ?></b>
-                    <br/>
-                     <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
-                        <?php echo __('To the attention of') . ' ' . $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?>
-                        <br/>        
+                    <br>
+                     <?php if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
+                        <?php echo __('To the attention of') . ' ' . $this->escape($address['first_name']); ?> <?php echo $this->escape($address['last_name']); ?>
+                        <br>        
                      <?php } ?>
-                <?php } else if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
-                    <b><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></b>
-                    <br/>        
+                <?php } else if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
+                    <b><?php echo $this->escape($address['first_name']); ?> <?php echo $this->escape($address['last_name']); ?></b>
+                    <br>        
                 <?php } ?>
-                <?php if (!empty($order['address1'])) { ?>
-                    <?php echo $this->escape($order['address1']); ?>
-                    <br/>
+                <?php if (!empty($address['address1'])) { ?>
+                    <?php echo $this->escape($address['address1']); ?>
+                    <br>
                 <?php } ?>
-                <?php if (!empty($order['address2'])) { ?>
-                    <?php echo $this->escape($order['address2']); ?>
-                    <br/>
+                <?php if (!empty($address['address2'])) { ?>
+                    <?php echo $this->escape($address['address2']); ?>
+                    <br>
                 <?php } ?>
                 <?php 
-                    $address = array();
-                    if (!empty($order['zip_code'])) {
-                        $address[] = $this->escape($order['zip_code']);
+                    $addressCompose = array();
+                    if (!empty($address['zip_code'])) {
+                        $addressCompose[] = $this->escape($address['zip_code']);
                     }
-                    if (!empty($order['city'])) {
-                        $address[] = $this->escape($order['city']);
+                    if (!empty($address['city'])) {
+                        $addressCompose[] = $this->escape($address['city']);
                     }
-                    echo $this->escape(join(', ', $address));
+                    echo $this->escape(join(', ', $addressCompose));
                 ?>
-                <br/>
-                <?php if (!empty($order['state'])) { ?>
-                    <?php echo $this->escape($order['state']); ?>
-                    <br/>
+                <br>
+                <?php if (!empty($address['state'])) { ?>
+                    <?php echo $this->escape($address['state']); ?>
+                    <br>
                 <?php } ?>
                 
-                <?php if (!empty($order['country'])) { ?>
-                    <?php echo $this->escape($order['country']); ?>
-                    <br/>
+                <?php if (!empty($address['country'])) { ?>
+                    <?php echo $this->escape($address['country']); ?>
+                    <br>
                 <?php } ?>
                 <?php if (!empty($order['id_number'])) { ?>
                     <?php echo $this->escape($order['id_number']); ?>
-                    <br/>
+                    <br>
                 <?php } ?>
-                <?php if (!empty($order['company_id'])) { ?>
-                    <?php echo $this->escape($order['company_id']); ?>
-                    <br/>
+                <?php if (!empty($address['company_id'])) { ?>
+                    <?php echo $this->escape($address['company_id']); ?>
+                    <br>
                 <?php } ?>
-                <?php if (!empty($order['company_vat'])) { ?>
-                    N° TVA UE <?php echo $this->escape($order['company_vat']); ?>
-                    <br/>
+                <?php if (!empty($address['company_vat'])) { ?>
+                    N° TVA UE <?php echo $this->escape($address['company_vat']); ?>
+                    <br>
                 <?php } ?>
-            </div>    
-            
+            </div>   
         </div>    
     </page_header>
         <table class="first small1">

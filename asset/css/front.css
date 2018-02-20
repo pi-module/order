@@ -126,14 +126,14 @@ ul.progtrckr li.progtrckr-pending:before {
     width: auto;
 }
 
-.customer-single > div {
+.address-single > div {
     margin: 0px 0px 10px 0px;
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 20px;
     /* min-height: 180px; */
 }
-.customer-single .info {
+.address-single .info {
     min-height:172px;
 }
 
@@ -154,19 +154,13 @@ ul.progtrckr li.progtrckr-pending:before {
     border: 1px solid #000;
 }
 
-.customer-single .fa-check {
+.address-single .fa-check {
     color: #fff;
     font-size: 12px
 }
 
-.customer-single .list-inline li {
+.address-single .list-inline li {
     padding: 0
-}
-
-.showCustomerFrom.inverse {
-    color: #EC407A;
-    border: 1px solid #EC407A;
-    background: #fff
 }
 
 .selected-address {

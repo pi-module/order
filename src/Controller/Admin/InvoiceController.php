@@ -157,6 +157,8 @@ class InvoiceController extends ActionController
         // Get info
         $invoice = Pi::api('invoice', 'order')->getInvoice($id);
         $order = Pi::api('order', 'order')->getOrder($invoice['order']);
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        
         // Get product list
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
         // Check invoice
@@ -170,6 +172,8 @@ class InvoiceController extends ActionController
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('order', $order);
         $this->view()->assign('config', $config);
+        $this->view()->assign('address', $address);
+        
     }
 
     public function printAction()
@@ -181,6 +185,8 @@ class InvoiceController extends ActionController
         // Get info
         $invoice = Pi::api('invoice', 'order')->getInvoice($id);
         $order = Pi::api('order', 'order')->getOrder($invoice['order']);
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        
         // Get product list
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
         // Check invoice
@@ -192,6 +198,8 @@ class InvoiceController extends ActionController
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('order', $order);
         $this->view()->assign('config', $config);
+        $this->view()->assign('address', $address);
+        
     }
 
     public function addAction()
@@ -201,6 +209,7 @@ class InvoiceController extends ActionController
         // Get order
         $order = $this->getModel('order')->find($order);
         $order = Pi::api('order', 'order')->canonizeOrder($order);
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
         // Set form
         $form = new InvoiceForm('setting');
         if ($this->request->isPost()) {
@@ -257,6 +266,7 @@ class InvoiceController extends ActionController
         $this->view()->setTemplate('invoice-add');
         $this->view()->assign('form', $form);
         $this->view()->assign('order', $order);
+        $this->view()->assign('address', $address);
     }
 
     public function editAction()
@@ -266,6 +276,8 @@ class InvoiceController extends ActionController
         // Get invoice and order
         $invoice = Pi::api('invoice', 'order')->getInvoice($id);
         $order = Pi::api('order', 'order')->getOrder($invoice['order']);
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        
         // Check invoice
         if ($invoice['status'] != 2) {
             $this->jump(
@@ -320,5 +332,6 @@ class InvoiceController extends ActionController
         $this->view()->assign('form', $form);
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('order', $order);
+        $this->view()->assign('address', $address);
     }
 }

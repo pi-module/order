@@ -32,27 +32,14 @@ use Module\Order\Gateway\AbstractGateway;
 
 class CheckoutController extends IndexController
 {
-   private function order($values, $customer, $cart, $config, $uid)
+   private function order($values, $addressDelivery, $addressInvoicing, $cart, $config, $uid)
    {
-       
         $values['uid'] = $uid;
         $values['ip'] = Pi::user()->getIp();
         $values['status_order'] = 1;
         $values['status_payment'] = 1;
         $values['status_delivery'] = 1;
         $values['time_create'] = time();
-        
-        unset($customer['id']);
-        unset($customer['uid']);
-        unset($customer['ip']);
-        unset($customer['id_number']);
-        unset($customer['user_note']);
-        unset($customer['time_create']);
-        unset($customer['time_update']);
-        unset($customer['status']);
-        unset($customer['time_create_view']);
-        unset($customer['time_update_view']);
-        $values = $values + $customer;
         
         // Set type_payment values
         if (isset($cart['type_commodity']) && in_array($cart['type_commodity'], array('product', 'service'))) {
@@ -162,7 +149,48 @@ class CheckoutController extends IndexController
         $order->assign($values);
         $order->save();
         $_SESSION['order']['id'] = $order['id'];
-    
+        
+        $orderAddress = $this->getModel('order_address')->createRow();
+        unset($addressDelivery['id']);
+        unset($addressDelivery['uid']);
+        unset($addressDelivery['ip']);
+        unset($addressDelivery['id_number']);
+        unset($addressDelivery['user_note']);
+        unset($addressDelivery['time_create']);
+        unset($addressDelivery['time_update']);
+        unset($addressDelivery['time_status']);
+        unset($addressDelivery['invoicing_favourite']);
+        unset($addressDelivery['delivery_favourite']);
+        unset($addressDelivery['address_id']);
+        unset($addressDelivery['status']);
+        unset($addressDelivery['time_create_view']);
+        unset($addressDelivery['time_update_view']);
+        $addressDelivery['type'] = 'DELIVERY';
+        $addressDelivery['order'] = $order['id']; 
+        $orderAddress->assign($addressDelivery);
+        $orderAddress->save();
+        
+        $orderAddress = $this->getModel('order_address')->createRow();
+        unset($addressInvoicing['id']);
+        unset($addressInvoicing['uid']);
+        unset($addressInvoicing['ip']);
+        unset($addressInvoicing['id_number']);
+        unset($addressInvoicing['user_note']);
+        unset($addressInvoicing['time_create']);
+        unset($addressInvoicing['time_update']);
+        unset($addressInvoicing['time_status']);
+        unset($addressInvoicing['invoicing_favourite']);
+        unset($addressInvoicing['delivery_favourite']);
+        unset($addressInvoicing['address_id']);
+        unset($addressInvoicing['status']);
+        unset($addressInvoicing['time_create_view']);
+        unset($addressInvoicing['time_update_view']);
+        $addressInvoicing['type'] = 'INVOICING';
+        $addressInvoicing['order'] = $order['id']; 
+        $orderAddress->assign($addressInvoicing);
+        $orderAddress->save();
+        
+        
         // Log term and condition acceptation
         if (Pi::service('module')->isActive('user')){
             $condition = Pi::api('condition', 'user')->getLastEligibleCondition();
@@ -264,7 +292,7 @@ class CheckoutController extends IndexController
                 Pi::api('credit', 'order')->addHistory($cart['credit'], $order->id);
             }
             // Send notification
-            Pi::api('notification', 'order')->addOrder($order->toArray(), $gatewayOptions['onemail']);
+            Pi::api('notification', 'order')->addOrder($order->toArray(), $addressInvoicing, $gatewayOptions['onemail']);
             
             // Go to payment
             if ($config['order_payment'] == 'payment') {
@@ -287,13 +315,13 @@ class CheckoutController extends IndexController
             $error = array(
                 'values' => $values,
                 'cart' => $cart,
-                //'customers' => $customers,
+                //'addresses' => $addresses,
                 //'user' => $user,
             );
             $this->view()->assign('error', $error);
         }
         
-   }
+    }
     public function indexAction()
     {
 
@@ -302,6 +330,30 @@ class CheckoutController extends IndexController
         $editAddress = false;
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+        
+        // Favourites addresses
+        $addresses = Pi::api('address', 'order')->findAddresses();
+        if (count($addresses)) {
+            if (!isset($_SESSION['order']['delivery_address']) || !$addresses[$_SESSION['order']['delivery_address']]) {
+                $favouriteDelivery = Pi::api('address', 'order')->getFavouriteDelivery();
+                if ($favouriteDelivery == null) {
+                  $favouriteDelivery = current($addresses);  
+                }
+                $_SESSION['order']['delivery_address'] = $favouriteDelivery['id'];
+            }
+            if (!isset($_SESSION['order']['invoicing_address']) || !$addresses[$_SESSION['order']['invoicing_address']]) {
+                $favouriteInvoicing = Pi::api('address', 'order')->getFavouriteInvoicing();
+                if ($favouriteInvoicing == null) {
+                  $favouriteInvoicing = current($addresses);  
+                }
+                $_SESSION['order']['invoicing_address'] = $favouriteInvoicing['id']; 
+            }
+        } else {
+            $_SESSION['order']['delivery_address'] = 0;
+            $_SESSION['order']['invoicing_address'] = 0; 
+        }
+        
+        
         // Set cart
         $cart = Pi::api('order', 'order')->getOrderInfo();
         
@@ -343,23 +395,23 @@ class CheckoutController extends IndexController
             }
         }
             
-        // Get customer
-        $customers = Pi::api('customer', 'order')->findCustomer();
+        // Get address
+        $addressDelivery = Pi::api('address', 'order')->getAddress($cart['delivery_address']);
+        $addressInvoicing = Pi::api('address', 'order')->getAddress($cart['invoicing_address']);
+
         // Sety form option
         $option = array(
             'type_commodity' => $cart['type_commodity'],
-            'customers' => $customers,
+            'addresses' => $addresses,
+            'delivery_address' => $_SESSION['order']['delivery_address'],
+            'invoicing_address' => $_SESSION['order']['invoicing_address'],
         );
-        
-        $formAddress = new AddressForm();
-        $formAddress->setInputFilter(new AddressFilter($option));
-        
         $formOrderSimple = new OrderSimpleForm('order', $option);
         $formOrderSimple->setInputFilter(new OrderSimpleFilter($option));
             
         $formOrder = new OrderForm('order', $option);
         $formOrder->setInputFilter(new OrderFilter($option));
-
+       
         $msgPromoCode = null;        
         $hasActiveCode = Pi::api('promocode', 'order')->hasActiveCode();
         $formPromoCheckout = null;
@@ -367,10 +419,25 @@ class CheckoutController extends IndexController
             $formPromoCheckout = new PromoCheckoutForm('promoCheckout', $option);
             $formPromoCheckout->setInputFilter(new PromoCheckoutFilter($option));
         }
-        
                 
+        $formAddress = null;
+        if (!count($addresses)) {
+            $formAddress = new AddressForm('address');
+            $formAddress->setInputFilter(new AddressFilter($option));
+            $user = array();
+            if (Pi::user()->getId()) {
+                $user = Pi::api('user', 'user')->get(
+                    Pi::user()->getId(),
+                    array('email', 'first_name', 'last_name', 'address1', 'address2', 'city', 'zip_code', 'country', 'state', 'mobile', 'phone'),
+                    true,
+                    true
+                );
+            }
+            $formAddress->setData($user);
+        }
+        
         // Check post
-        $check = count($customers) == 0 ? true : false;
+        $check = count($addresses) == 0 ? true : false;
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
             
@@ -389,10 +456,10 @@ class CheckoutController extends IndexController
                     $values['last_name'] = strtoupper($values['last_name']);
                     $values['city'] = strtoupper($values['city']);
                     
-                    if ($values['customer_id'] == 0) {
-                        Pi::api('customer', 'order')->addCustomer($values);
+                    if ($values['address_id'] == 0) {
+                        Pi::api('address', 'order')->addAddress($values);
                     } else {
-                        Pi::api('customer', 'order')->updateCustomer($values);
+                        Pi::api('address', 'order')->updateAddress($values);
                     }
                     $url = $this->url('', array('controller' => 'checkout', 'action' => 'index'));
                     $this->jump($url);
@@ -409,12 +476,13 @@ class CheckoutController extends IndexController
                              
                      // Set values
                     $values = $formOrderSimple->getData();
-                    
-                    $customers = Pi::api('customer', 'order')->findCustomer($uid);
-                    $customer = $customers[$values['customer_id']];
+                    $addressDelivery = $addresses[$values['address_delivery_id']];
+                    $addressInvoicing = $addresses[$values['address_invoicing_id']];
                    
-                    
-                    $this->order($values, $customer, $cart, $config, $uid);                  
+                    $this->order($values, $addressDelivery, $addressInvoicing, $cart, $config, $uid); 
+                    Pi::api('address', 'order')->updateFavouriteDelivery($_SESSION['order']['delivery_address']);
+                    Pi::api('address', 'order')->updateFavouriteInvoicing($_SESSION['order']['invoicing_address']);
+                                     
                 } 
             } else {
                 $formOrder->setData($data);
@@ -478,59 +546,35 @@ class CheckoutController extends IndexController
                         // Check user informations
                         $user = Pi::api('user', 'order')->getUserInformation($uid);
                         $values['uid'] = $uid;
-                        if ($values['customer_id'] == 0) {
-                            Pi::api('customer', 'order')->addCustomer($values);
+                        if ($values['address_id'] == 0) {
+                            Pi::api('address', 'order')->addAddress($values);
                         } else {
-                            Pi::api('customer', 'order')->updateCustomer($values);
+                            Pi::api('address', 'order')->updateAddress($values);
                         }
-                        $customers = Pi::api('customer', 'order')->findCustomer($uid);
-                        $customer = current($customers);
+                        $addresses = Pi::api('address', 'order')->findAddresses($uid);
+                        $address = current($addresses);
                         
                         
-                        $this->order($values, $customer, $cart, $config, $uid);    
+                        $this->order($values, $address, $address, $cart, $config, $uid);    
                     
                     } 
                 }
             }
-        } else {
-            $customer = $this->params('customer');
-            if ($customer) {
-                $formAddress = new AddressForm($customer);
-                $formAddress->setInputFilter(new AddressFilter($option));
-                $values = $customers[$customer];
-                $values['customer_id'] = $customer;
-                $formAddress->setData($values);
-                $check = true;
-                $editAddress = true;
-            } else {
-                // Get user base info
-                $user = array();
-                if (Pi::user()->getId()) {
-                    $user = Pi::api('user', 'user')->get(
-                        Pi::user()->getId(),
-                        array('email', 'first_name', 'last_name', 'address1', 'address2', 'city', 'zip_code', 'country', 'state', 'mobile', 'phone'),
-                        true,
-                        true
-                    );
-                }
-                $formAddress->setData($user);
-            }
-        }
-
+        } 
         // Set new form
-        $user = Pi::api('user', 'order')->getUserInformation();
-        $user['customer_id'] = 0;
         $forms = array();
+        $user = Pi::api('user', 'order')->getUserInformation();
+        $user['address_id'] = 0;
         $forms['promoCheckout'] = $formPromoCheckout;
+        $forms['new'] = $formAddress;
         
-        // Set customer forms
-        if (!empty($customers)) {
-            foreach ($customers as $customer) {
-                $key = sprintf('customer-%s', $customer['id']);
-                $option['location'] = $customer['location'];
-                unset($customer['delivery']);
-                unset($customer['user_note']);
-               
+        // Set address forms
+        if (!empty($addresses)) {
+            foreach ($addresses as $address) {
+                $key = sprintf('address-%s', $address['id']);
+                $option['location'] = $address['location'];
+                unset($address['delivery']);
+                unset($address['user_note']);               
             }
         }
         if (Pi::service('authentication')->hasIdentity()) {
@@ -570,11 +614,100 @@ class CheckoutController extends IndexController
         $this->view()->assign('cart', $cart);
         $this->view()->assign('price', $price);
         $this->view()->assign('config', $config);
-        $this->view()->assign('customers', $customers);
+        $this->view()->assign('addresses', $addresses);
         $this->view()->assign('check', $check);
         $this->view()->assign('editAddress', $editAddress);
         $this->view()->assign('msgPromoCode', $msgPromoCode);
+        $this->view()->assign('addressDelivery', $addressDelivery);
+        $this->view()->assign('addressInvoicing', $addressInvoicing);
         
+    }
+
+    public function changeAddressAction()
+    {
+        $type = $this->params('type');
+        $id = $this->params('id');
+        // Get address
+        if ($type == 'delivery') {
+            $_SESSION['order']['delivery_address'] = $id;
+        }
+        if ($type == 'invoicing') {
+            $_SESSION['order']['invoicing_address'] = $id;
+        }
+
+        $this->jump(array('', 'module' => 'order', 'controller' => 'checkout', 'action' => 'index'));
+    }
+    
+    public function addressListAction()
+    {
+        $type = $this->params('type');
+        
+        // Get address
+        $addresses = Pi::api('address', 'order')->findAddresses();
+        $this->view()->setTemplate('checkout-listaddress');
+        $this->view()->assign('addresses', $addresses);
+        $this->view()->assign('type', $type);
+        
+    }
+    
+    public function addressAction()
+    {
+        $form = new AddressForm('address');
+        $form->setAttribute('action', Pi::url(Pi::service('url')->assemble('order', array('module'=> 'order', 'controller' => 'checkout', 'action' => 'address'))));
+        $form->setInputFilter(new AddressFilter($option));
+        
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setData($data);
+            if ($form->isValid()) {
+               
+                // Check user informations
+                $uid = Pi::user()->getId();
+                $user = Pi::api('user', 'order')->getUserInformation();
+                
+                $values = $form->getData();
+                $values['time_create'] = time();
+                
+                $values['uid'] = $uid;
+                $values['last_name'] = strtoupper($values['last_name']);
+                $values['city'] = strtoupper($values['city']);
+                
+                if ($values['address_id'] == 0) {
+                    Pi::api('address', 'order')->addAddress($values);
+                } else {
+                    Pi::api('address', 'order')->updateAddress($values);
+                }
+                $this->flashMessenger()->addMessage(__('Address saved successfully.'));
+                
+                header('Content-Type: application/json');
+                return array('status' => 1);
+                
+            } 
+        } else {
+            $id = $this->params('id');
+            if ($id) {
+                $form = new AddressForm('address', $id);
+                $form->setInputFilter(new AddressFilter($option));
+                $values = Pi::api('address', 'order')->getAddress($id);
+                $values['address_id'] = $id;
+                $form->setData($values);                
+            } else {
+                // Get user base info
+                $user = array();
+                if (Pi::user()->getId()) {
+                    $user = Pi::api('user', 'user')->get(
+                        Pi::user()->getId(),
+                        array('email', 'first_name', 'last_name', 'address1', 'address2', 'city', 'zip_code', 'country', 'state', 'mobile', 'phone'),
+                        true,
+                        true
+                    );
+                }
+                $form->setData($user);
+            }
+        }
+                
+        $this->view()->setTemplate('checkout-address');
+        $this->view()->assign('form', $form);
     }
 
     public function installmentAction()
@@ -763,11 +896,11 @@ class CheckoutController extends IndexController
 
     public function deleteAction()
     {
-        $customerId = $this->params('customer');
-        $customer = Pi::model('customer', 'order')->find($customerId);
+        $addressId = $this->params('address');
+        $address = Pi::model('address', 'order')->find($addressId);
         $uid = Pi::user()->getId();
-        if ($customer->uid == $uid) {
-            $customer->delete();
+        if ($address->uid == $uid) {
+            $address->delete();
         }
         $url = array('', 'controller' => 'checkout', 'action' => 'index');
         $this->jump($url, __('Address deleted'));       

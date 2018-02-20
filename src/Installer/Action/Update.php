@@ -76,6 +76,14 @@ class Update extends BasicUpdate
         $logTable = $logModel->getTable();
         $logAdapter = $logModel->getAdapter();
 
+        $orderAddressModel = Pi::model('order_address', $this->module);
+        $orderAddressTable = $orderAddressModel->getTable();
+        $orderAddressAdapter = $orderAddressModel->getAdapter();
+
+        $addressModel = Pi::model('address', $this->module);
+        $addressTable = $addressModel->getTable();
+        $addressAdapter = $addressModel->getAdapter();
+        
         if (version_compare($moduleVersion, '1.3.6', '<')) {
             // Alter table field add id_number
             $sql = sprintf("ALTER TABLE %s ADD `id_number` varchar(255) NOT NULL default ''", $orderTable);
@@ -651,6 +659,136 @@ EOD;
             }
         }
          
+        if (version_compare($moduleVersion, '2.0.4', '=')) {
+            $sql = sprintf("RENAME TABLE %s TO %s;", $customerTable, $addressTable);
+            
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'SQL schema query for rename customer table failed: '
+                        . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+            
+            $sql = <<<'EOD'
+CREATE TABLE `{order_address}` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `order` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `type` ENUM('DELIVERY', 'INVOICING'),
+  `first_name` varchar(255) NOT NULL DEFAULT '',
+  `last_name` varchar(255) NOT NULL DEFAULT '',
+  `email` varchar(64) NOT NULL DEFAULT '',
+  `phone` varchar(16) NOT NULL DEFAULT '',
+  `mobile` varchar(16) NOT NULL DEFAULT '',
+  `address1` text,
+  `address2` text,
+  `country` varchar(64) NOT NULL DEFAULT '',
+  `state` varchar(64) NOT NULL DEFAULT '',
+  `city` varchar(64) NOT NULL DEFAULT '',
+  `zip_code` varchar(16) NOT NULL DEFAULT '',
+  `company` varchar(255) NOT NULL DEFAULT '',
+  `company_id` varchar(255) NOT NULL DEFAULT '',
+  `company_vat` varchar(255) NOT NULL DEFAULT '',
+  `delivery` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `location` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `order` (`order`)
+);
+EOD;
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'SQL schema query for order_address table failed: '
+                        . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+            
+            $columns = array(
+                'id',
+                'first_name',
+                'last_name',
+                'email',
+                'phone',
+                'mobile',
+                'address1',
+                'address2',
+                'country',
+                'state',
+                'city',
+                'zip_code',
+                'company',
+                'company_id',
+                'company_vat',
+                'delivery',
+                'location',
+            );
+            
+            try {
+                $select = $orderModel->select()->columns($columns);
+                $rowset = $orderModel->selectWith($select);
+                foreach ($rowset as $row) {
+                    $values = $row->toArray();
+                    $values['order'] = $values['id'];
+                    unset($values['id']);
+                    
+                    $orderAddress = $orderAddressModel->createRow();
+                    $values['type'] = 'INVOICING';
+                    $orderAddress->assign($values);
+                    $orderAddress->save(false);
+                    
+                    $orderAddress = $orderAddressModel->createRow();
+                    $values['type'] = 'DELIVERY';
+                    $orderAddress->assign($values);
+                    $orderAddress->save(false);
+                    
+                }
+            } catch (\Exception $exception) {
+             
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'data transfer failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;   
+            }
+            
+            $sql = sprintf("ALTER TABLE %s  DROP `first_name`,   DROP `last_name`,  DROP `email`,  DROP `phone`,  DROP `mobile`,  DROP `address1`,  DROP `address2`,  DROP `country`,  DROP `state`,  DROP `city`,  DROP `zip_code`,  DROP `company`,  DROP `company_id`,  DROP `company_vat`,  DROP `delivery`,  DROP `location`;", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+            $sql = sprintf("ALTER TABLE %s ADD `delivery_favourite` TINYINT(1) UNSIGNED, ADD `invoicing_favourite` TINYINT(1) UNSIGNED, DROP `address_type`", $customerTable);
+            try {
+                $customerAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for customer failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+        
         return true;
     }
 }

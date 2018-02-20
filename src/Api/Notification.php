@@ -29,7 +29,7 @@ use Pi\Application\Api\AbstractApi;
 
 class Notification extends AbstractApi
 {
-    public function addOrder($order, $oneMail = false)
+    public function addOrder($order, $addressInvoicing, $oneMail = false)
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
@@ -81,8 +81,8 @@ class Notification extends AbstractApi
         }
         // Set mail information
         $information = array(
-            'first_name' => $order['first_name'],
-            'last_name' => $order['last_name'],
+            'first_name' => $addressInvoicing['first_name'],
+            'last_name' => $addressInvoicing['last_name'],
             'order_id' => (!empty($order['code'])) ? $order['code'] : $order['id'],
             'order_link' => $link,
             'product_list' => $productList,
@@ -127,7 +127,7 @@ class Notification extends AbstractApi
         if (!$oneMail) {   
             // Send mail to user
             $toUser = array(
-                $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
+                $addressInvoicing['email'] => sprintf('%s %s', $addressInvoicing['first_name'], $addressInvoicing['last_name']),
             );
             Pi::service('notification')->send(
                 $toUser,
@@ -142,8 +142,8 @@ class Notification extends AbstractApi
         $content = sprintf(
             $config['sms_order_admin'],
             $sitename,
-            $order['first_name'],
-            $order['last_name'],
+            $addressInvoicing['first_name'],
+            $addressInvoicing['last_name'],
             $productList,
             $productPrice
         );
@@ -153,18 +153,20 @@ class Notification extends AbstractApi
             // Send sms to user
             $content = sprintf(
                 $config['sms_order_user'],
-                $order['first_name'],
-                $order['last_name'],
+                $addressInvoicing['first_name'],
+                $addressInvoicing['last_name'],
                 $productList,
                 $productPrice,
                 $sitename
             );
-            Pi::service('notification')->smsToUser($content, $order['mobile']);
+            Pi::service('notification')->smsToUser($content, $addressInvoicing['mobile']);
         }
     }
 
     public function processOrder($order, $type)
     {
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        
         // Get sitename
         $sitename = Pi::config('sitename');
 
@@ -241,8 +243,8 @@ class Notification extends AbstractApi
         // Set sms content
         $content = sprintf(
             __('Dear %s %s, Your order by %s ID %s'),
-            $order['first_name'],
-            $order['last_name'],
+            $address['first_name'],
+            $address['last_name'],
             $order['code'],
             $status
         );
@@ -257,15 +259,15 @@ class Notification extends AbstractApi
 
         // Set mail information
         $information = array(
-            'first_name' => $order['first_name'],
-            'last_name' => $order['last_name'],
+            'first_name' => $address['first_name'],
+            'last_name' => $address['last_name'],
             'order_link' => $link,
             'text' => $text,
         );
 
         // Send mail to user
         $toUser = array(
-            $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
+            $address['email'] => sprintf('%s %s', $address['first_name'], $address['last_name']),
         );
         Pi::service('notification')->send(
             $toUser,
@@ -276,11 +278,13 @@ class Notification extends AbstractApi
         );
 
         // Send sms to user
-        Pi::service('notification')->smsToUser($content, $order['mobile']);
+        Pi::service('notification')->smsToUser($content, $address['mobile']);
     }
 
     public function processOrderNote($order)
     {
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        
         // Get sitename
         $sitename = Pi::config('sitename');
         $config = Pi::service('registry')->config->read($this->getModule());
@@ -295,8 +299,8 @@ class Notification extends AbstractApi
         // Set sms content
         $content = sprintf(
             __('Dear %s %s, Admin note updated for order %s'),
-            $order['first_name'],
-            $order['last_name'],
+            $address['first_name'],
+            $address['last_name'],
             $order['code']
         );
 
@@ -310,8 +314,8 @@ class Notification extends AbstractApi
 
         // Set mail information
         $information = array(
-            'first_name' => $order['first_name'],
-            'last_name' => $order['last_name'],
+            'first_name' => $address['first_name'],
+            'last_name' => $address['last_name'],
             'order_link' => $link,
             'text' => $text,
             'sellerinfo' => $config['order_sellerinfo']
@@ -320,7 +324,7 @@ class Notification extends AbstractApi
 
         // Send mail to user
         $toUser = array(
-            $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
+            $address['email'] => sprintf('%s %s', $address['first_name'], $address['last_name']),
         );
         Pi::service('notification')->send(
             $toUser,
@@ -331,11 +335,13 @@ class Notification extends AbstractApi
         );
 
         // Send sms to user
-        Pi::service('notification')->smsToUser($content, $order['mobile']);
+        Pi::service('notification')->smsToUser($content, $address['mobile']);
     }
 
     public function processOrderCanPay($order)
     {
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        
         $config = Pi::service('registry')->config->read($this->getModule());
         
         if ($order['can_pay'] == 1) {
@@ -352,8 +358,8 @@ class Notification extends AbstractApi
             // Set sms content
             $content = sprintf(
                 __('Dear %s %s, We active payment for order %s on %s website, and you can pay it now'),
-                $order['first_name'],
-                $order['last_name'],
+                $address['first_name'],
+                $address['last_name'],
                 $order['code'],
                 $sitename
             );
@@ -368,8 +374,8 @@ class Notification extends AbstractApi
 
             // Set mail information
             $information = array(
-                'first_name' => $order['first_name'],
-                'last_name' => $order['last_name'],
+                'first_name' => $address['first_name'],
+                'last_name' => $address['last_name'],
                 'order_link' => $link,
                 'text' => $text,
                 'sellerinfo' => $config['order_sellerinfo']
@@ -378,7 +384,7 @@ class Notification extends AbstractApi
 
             // Send mail to user
             $toUser = array(
-                $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
+                $address['email'] => sprintf('%s %s', $address['first_name'], $address['last_name']),
             );
             Pi::service('notification')->send(
                 $toUser,
@@ -389,13 +395,15 @@ class Notification extends AbstractApi
             );
 
             // Send sms to user
-            Pi::service('notification')->smsToUser($content, $order['mobile']);
+            Pi::service('notification')->smsToUser($content, $address['mobile']);
 
         }
     }
 
     public function payInvoice($order, $invoice)
     {
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
@@ -432,8 +440,8 @@ class Notification extends AbstractApi
         
         // Set mail information
         $information = array(
-            'first_name' => $order['first_name'],
-            'last_name' => $order['last_name'],
+            'first_name' => $address['first_name'],
+            'last_name' => $address['last_name'],
             'order_id' => $order['code'],
             'invoice_id' => $invoice['code'],
             'order_link' => $link,
@@ -457,7 +465,7 @@ class Notification extends AbstractApi
 
         // Send mail to user
         $toUser = array(
-            $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
+            $address['email'] => sprintf('%s %s', $address['first_name'], $address['last_name']),
         );
         Pi::service('notification')->send(
             $toUser,
@@ -471,8 +479,8 @@ class Notification extends AbstractApi
         $content = sprintf(
             $config['sms_invoice_admin'],
             $sitename,
-            $order['first_name'],
-            $order['last_name'],
+            $address['first_name'],
+            $address['last_name'],
             $invoice['code'],
             Pi::api('api', 'order')->viewPrice($invoice['total_price']),
             $order['code'],
@@ -483,19 +491,21 @@ class Notification extends AbstractApi
         // Send sms to user
         $content = sprintf(
             $config['sms_invoice_user'],
-            $order['first_name'],
-            $order['last_name'],
+            $address['first_name'],
+            $address['last_name'],
             $invoice['code'],
             Pi::api('api', 'order')->viewPrice($invoice['total_price']),
             $order['code'],
             $productList,
             $sitename
         );
-        Pi::service('notification')->smsToUser($content, $order['mobile']);
+        Pi::service('notification')->smsToUser($content, $address['mobile']);
     }
 
     public function duedateInvoice($order, $invoice)
     {
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
@@ -509,8 +519,8 @@ class Notification extends AbstractApi
 
         // Set mail information
         $information = array(
-            'first_name' => $order['first_name'],
-            'last_name' => $order['last_name'],
+            'first_name' => $address['first_name'],
+            'last_name' => $address['last_name'],
             'invoice_id' => $invoice['id'],
             'order_link' => $link,
             'day' => $config['notification_cron_invoice'],
@@ -520,7 +530,7 @@ class Notification extends AbstractApi
 
         // Send mail to user
         $toUser = array(
-            $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
+            $address['email'] => sprintf('%s %s', $address['first_name'], $address['last_name']),
         );
         Pi::service('notification')->send(
             $toUser,
@@ -531,12 +541,14 @@ class Notification extends AbstractApi
         );
 
         // Send sms to user
-        $content = sprintf($config['sms_invoice_duedate'], $order['first_name'], $order['last_name'], $config['notification_cron_invoice']);
-        Pi::service('notification')->smsToUser($content, $order['mobile']);
+        $content = sprintf($config['sms_invoice_duedate'], $address['first_name'], $address['last_name'], $config['notification_cron_invoice']);
+        Pi::service('notification')->smsToUser($content, $address['mobile']);
     }
 
     public function expiredInvoice($order, $invoice)
     {
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
@@ -550,8 +562,8 @@ class Notification extends AbstractApi
 
         // Set mail information
         $information = array(
-            'first_name' => $order['first_name'],
-            'last_name' => $order['last_name'],
+            'first_name' => $address['first_name'],
+            'last_name' => $address['last_name'],
             'invoice_id' => $invoice['id'],
             'order_link' => $link,
             'day' => $config['notification_cron_expired'],
@@ -561,7 +573,7 @@ class Notification extends AbstractApi
 
         // Send mail to user
         $toUser = array(
-            $order['email'] => sprintf('%s %s', $order['first_name'], $order['last_name']),
+            $address['email'] => sprintf('%s %s', $address['first_name'], $address['last_name']),
         );
         Pi::service('notification')->send(
             $toUser,
@@ -572,7 +584,7 @@ class Notification extends AbstractApi
         );
 
         // Send sms to user
-        $content = sprintf($config['sms_invoice_expired'], $order['first_name'], $order['last_name'], $config['notification_cron_expired']);
-        Pi::service('notification')->smsToUser($content, $order['mobile']);
+        $content = sprintf($config['sms_invoice_expired'], $address['first_name'], $address['last_name'], $config['notification_cron_expired']);
+        Pi::service('notification')->smsToUser($content, $address['mobile']);
     }
 }

@@ -38,7 +38,6 @@ class PromocodeForm extends BaseForm
     public function init()
     {
        
-        // customer_id
         $this->add(array(
             'name' => 'id',
             'attributes' => array(

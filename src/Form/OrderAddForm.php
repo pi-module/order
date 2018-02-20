@@ -173,7 +173,7 @@ class OrderAddForm extends BaseForm
             $this->add(array(
                 'name' => 'address1',
                 'options' => array(
-                    'label' => __('Delivery address'),
+                    'label' => __('Address'),
                 ),
                 'attributes' => array(
                     'type' => 'text',
@@ -187,7 +187,7 @@ class OrderAddForm extends BaseForm
             $this->add(array(
                 'name' => 'address2',
                 'options' => array(
-                    'label' => __('Invoicing Address'),
+                    'label' => __('Address addition'),
                 ),
                 'attributes' => array(
                     'type' => 'text',

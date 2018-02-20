@@ -53,9 +53,13 @@ class DetailController extends IndexController
             $credit = Pi::api('credit', 'order')->getCredit($order['uid']);
             $this->view()->assign('credit', $credit);
         }
+        
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        
         // set view
         $this->view()->setTemplate('detail');
         $this->view()->assign('order', $order);
+        $this->view()->assign('address', $address);
         $this->view()->assign('config', $config);
     }
 }

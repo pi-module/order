@@ -14,20 +14,6 @@ CREATE TABLE `{order}` (
   # Customer information
   `ip`              CHAR(15)                                             NOT NULL DEFAULT '',
   `id_number`       VARCHAR(255)                                         NOT NULL DEFAULT '',
-  `first_name`      VARCHAR(255)                                         NOT NULL DEFAULT '',
-  `last_name`       VARCHAR(255)                                         NOT NULL DEFAULT '',
-  `email`           VARCHAR(64)                                          NOT NULL DEFAULT '',
-  `phone`           VARCHAR(16)                                          NOT NULL DEFAULT '',
-  `mobile`          VARCHAR(16)                                          NOT NULL DEFAULT '',
-  `address1`        TEXT,
-  `address2`        TEXT,
-  `country`         VARCHAR(64)                                          NOT NULL DEFAULT '',
-  `state`           VARCHAR(64)                                          NOT NULL DEFAULT '',
-  `city`            VARCHAR(64)                                          NOT NULL DEFAULT '',
-  `zip_code`        VARCHAR(16)                                          NOT NULL DEFAULT '',
-  `company`         VARCHAR(255)                                         NOT NULL DEFAULT '',
-  `company_id`      VARCHAR(255)                                         NOT NULL DEFAULT '',
-  `company_vat`     VARCHAR(255)                                         NOT NULL DEFAULT '',
   # Notes
   `user_note`       TEXT,
   `admin_note`      TEXT,
@@ -53,8 +39,6 @@ CREATE TABLE `{order}` (
   `paid_price`      DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
   # Checkout
   `gateway`         VARCHAR(64)                                          NOT NULL DEFAULT 'offline',
-  `delivery`        INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
-  `location`        INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   `packing`         TINYINT(1) UNSIGNED                                  NOT NULL DEFAULT '0',
   # promotion as gift
   `promotion_type`  VARCHAR(64)                                          NOT NULL DEFAULT '',
@@ -135,7 +119,7 @@ CREATE TABLE `{processing}` (
   KEY `ip` (`ip`)
 );
 
-CREATE TABLE `{customer}` (
+CREATE TABLE `{address}` (
   `id`           INT(10) UNSIGNED               NOT NULL AUTO_INCREMENT,
   `uid`          INT(10) UNSIGNED               NOT NULL DEFAULT '0',
   `ip`           CHAR(15)                       NOT NULL DEFAULT '',
@@ -147,7 +131,6 @@ CREATE TABLE `{customer}` (
   `mobile`       VARCHAR(16)                    NOT NULL DEFAULT '',
   `address1`     TEXT,
   `address2`     TEXT,
-  `address_type` ENUM ('delivery', 'invoicing') NOT NULL DEFAULT 'delivery',
   `country`      VARCHAR(64)                    NOT NULL DEFAULT '',
   `state`        VARCHAR(64)                    NOT NULL DEFAULT '',
   `city`         VARCHAR(64)                    NOT NULL DEFAULT '',
@@ -161,6 +144,8 @@ CREATE TABLE `{customer}` (
   `status`       TINYINT(1) UNSIGNED            NOT NULL DEFAULT '0',
   `delivery`     INT(10) UNSIGNED               NOT NULL DEFAULT '0',
   `location`     INT(10) UNSIGNED               NOT NULL DEFAULT '0',
+  `delivery_favourite`       TINYINT(1) UNSIGNED,
+  `invoicing_favourite`      TINYINT(1) UNSIGNED,
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`),
   KEY `status` (`status`),
@@ -300,4 +285,28 @@ CREATE TABLE `{promocode}` (
   `time_end`        INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   `module`          VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `{order_address}` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `order` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `type` ENUM('DELIVERY', 'INVOICING'),
+  `first_name` varchar(255) NOT NULL DEFAULT '',
+  `last_name` varchar(255) NOT NULL DEFAULT '',
+  `email` varchar(64) NOT NULL DEFAULT '',
+  `phone` varchar(16) NOT NULL DEFAULT '',
+  `mobile` varchar(16) NOT NULL DEFAULT '',
+  `address1` text,
+  `address2` text,
+  `country` varchar(64) NOT NULL DEFAULT '',
+  `state` varchar(64) NOT NULL DEFAULT '',
+  `city` varchar(64) NOT NULL DEFAULT '',
+  `zip_code` varchar(16) NOT NULL DEFAULT '',
+  `company` varchar(255) NOT NULL DEFAULT '',
+  `company_id` varchar(255) NOT NULL DEFAULT '',
+  `company_vat` varchar(255) NOT NULL DEFAULT '',
+  `delivery` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `location` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `order` (`order`)
 );

@@ -394,32 +394,33 @@ class Gateway extends AbstractGateway
             $i++;
         }
         // Set address
-        $address = '';
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        $addressCompose = '';
         if ($config['order_address1'] && $config['order_address2']) {
-            if (!empty($order['address1'])) {
-                $address = $order['address1'];
-            } elseif (!empty($order['address2'])) {
-                $address = $order['address2'];
+            if (!empty($address['address1'])) {
+                $addressCompose = $address['address1'];
+            } elseif (!empty($address['address2'])) {
+                $addressCompose = $address['address2'];
             }
         } elseif ($config['order_address1']) {
-            $address = $order['address1'];
+            $addressCompose = $address['address1'];
         } elseif ($config['order_address2']) {
-            $address = $order['address2'];
+            $addressCompose = $address['address2'];
         }
         // Set payment information
         $this->gatewayPayInformation['nb_product'] = $i;
         $this->gatewayPayInformation['no_shipping'] = count($products);
-        $this->gatewayPayInformation['first_name'] = $order['first_name'];
-        $this->gatewayPayInformation['last_name'] = $order['last_name'];
-        $this->gatewayPayInformation['address1'] = $address;
-        $this->gatewayPayInformation['address2'] = $order['address2'];
+        $this->gatewayPayInformation['first_name'] = $address['first_name'];
+        $this->gatewayPayInformation['last_name'] = $address['last_name'];
+        $this->gatewayPayInformation['address1'] = $addressCompose;
+        $this->gatewayPayInformation['address2'] = $address['address2'];
         $this->gatewayPayInformation['address_override'] = 1;
-        $this->gatewayPayInformation['city'] = $order['city'];
-        $this->gatewayPayInformation['state'] = $order['state'];
-        $this->gatewayPayInformation['country'] = $order['country'];
-        $this->gatewayPayInformation['zip'] = $order['zip_code'];
-        $this->gatewayPayInformation['email'] = $order['email'];
-        $this->gatewayPayInformation['night_phone_b'] = $order['mobile'];
+        $this->gatewayPayInformation['city'] = $address['city'];
+        $this->gatewayPayInformation['state'] = $address['state'];
+        $this->gatewayPayInformation['country'] = $address['country'];
+        $this->gatewayPayInformation['zip'] = $address['zip_code'];
+        $this->gatewayPayInformation['email'] = $address['email'];
+        $this->gatewayPayInformation['night_phone_b'] = $address['mobile'];
         $this->gatewayPayInformation['cmd'] = '_cart';
         $this->gatewayPayInformation['upload'] = 1;
         $this->gatewayPayInformation['return'] = $this->gatewayFinishUrl;

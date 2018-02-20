@@ -1,0 +1,96 @@
+<?php if (!empty($addresses)) { ?>
+    <div class="clearfix row">
+        <?php foreach ($addresses as $address) { ?>
+            <div class="col-md-6 address-single"
+                 data-id="addressFrom<?php echo $address['id']; ?>"
+                 data-button="addressFromButton<?php echo $address['id']; ?>">
+                 <div class="clearfix">
+                    <div class="info">
+                        <div>
+                            <?php echo $this->escape($address['first_name']); ?>  <?php echo $this->escape($address['last_name']); ?>
+                            ( <?php echo $this->escape($address['email']); ?> )
+                        </div>
+                        <?php if (!empty($address['company'])) { ?>
+                            <div><?php echo $this->escape($address['company']); ?></div>
+                        <?php } ?>
+                        <?php if (!empty($address['company_id'])) { ?>
+                            <div><?php echo $this->escape($address['company_id']); ?></div>
+                        <?php } ?>
+                        <?php if (!empty($address['company_vat'])) { ?>
+                            <div><?php echo $this->escape($address['company_vat']); ?></div>
+                        <?php } ?>
+                        <?php if (!empty($address['address1'])) { ?>
+                            <div><?php echo $this->escape($address['address1']); ?></div>
+                        <?php } ?>
+                        <?php if (!empty($address['address2'])) { ?>
+                            <div><?php echo $this->escape($address['address2']); ?></div>
+                        <?php } ?>
+                        <div>
+                            <?php if (!empty($address['zip_code'])) { ?>
+                                <?php echo $this->escape($address['zip_code']); ?>&nbsp;
+                            <?php } ?>
+                            <?php if (!empty($address['state'])) { ?>
+                                <?php echo $this->escape($address['state']); ?>&nbsp;
+                            <?php } ?>
+                            <?php if (!empty($address['city'])) { ?>
+                                <?php echo $this->escape($address['city']); ?>&nbsp;
+                            <?php } ?>
+                            <?php if (!empty($address['country'])) { ?>
+                                <?php echo $this->escape($address['country']); ?>&nbsp;
+                            <?php } ?>
+                        </div>
+                        
+                        <?php if (!empty($address['phone'])) { ?>
+                            <div>
+                                <?php _e('Phone'); ?> :
+                                <?php echo $this->escape($address['phone']); ?>
+                            </div>
+                        <?php } ?>
+                        <?php if (!empty($address['mobile'])) { ?>
+                            <div>
+                                <?php _e('Mobile'); ?> :
+                                <?php echo $this->escape($address['mobile']); ?>
+                            </div>
+                        <?php } ?>
+                        
+                        <br />
+                    </div>
+                
+                    <ul class="list-inline">
+                        <li>
+                            <div class="label label-success hidden selected-address">
+                                <i class="fa fa-check"></i> <?php _e('Selected address') ?>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'change-address', 'id' => $address['id'], 'type' => $type))) ?>" class=" btn btn-success  btn-sm" data-address="<?php echo $address['id']; ?>">
+                               <?php _e('Use it'); ?>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => $address['id']))) ?>" class=" btn btn-primary  btn-sm" data-address="<?php echo $address['id']; ?>" data-remote="false" data-toggle="modal" data-target="#addressModal" data-dismiss="modal">
+                                <i class="fa fa-edit"></i> <?php _e('Edit'); ?>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'delete', 'address' => $address['id']))) ?>" class=" btn btn-delete btn-sm" data-address="<?php echo $address['id']; ?>" onclick="return confirm('<?php _e('Are you sure you want delete this address?'); ?>');">
+                                <i class="fa fa-trash"></i> <?php _e('Delete'); ?>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+    <div class="clearfix">
+        <div>
+            <div class="col-md-12">
+                <p>
+                    <a class="btn btn-simple btn-sm" href="/order/checkout/address" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add new address'); ?></a>
+                </p>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+            
+

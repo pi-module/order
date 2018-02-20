@@ -43,22 +43,22 @@ $this->backbone();
         <div class="alert alert-info">
             <ul class="list-inline">
                 <li class="order-main-icon"><i class="fa fa-user" aria-hidden="true"></i></li>
-                <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
+                <?php if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
                     <li><strong><?php _e('Name'); ?></strong> :
-                        <span><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></span>
+                        <span><?php echo $this->escape($address['first_name']); ?> <?php echo $this->escape($address['last_name']); ?></span>
                     </li>
                 <?php } ?>
-                <?php if (!empty($order['email'])) { ?>
+                <?php if (!empty($address['email'])) { ?>
                     <li><strong><?php _e('Email'); ?></strong> :
-                        <span><?php echo $this->escape($order['email']); ?></span></li>
+                        <span><?php echo $this->escape($address['email']); ?></span></li>
                 <?php } ?>
-                <?php if (!empty($order['phone'])) { ?>
+                <?php if (!empty($address['phone'])) { ?>
                     <li><strong><?php _e('Phone'); ?></strong> :
-                        <span><?php echo $this->escape($order['phone']); ?></span></li>
+                        <span><?php echo $this->escape($address['phone']); ?></span></li>
                 <?php } ?>
-                <?php if (!empty($order['mobile'])) { ?>
+                <?php if (!empty($address['mobile'])) { ?>
                     <li><strong><?php _e('Mobile'); ?></strong> :
-                        <span><?php echo $this->escape($order['mobile']); ?></span></li>
+                        <span><?php echo $this->escape($address['mobile']); ?></span></li>
                 <?php } ?>
                 <?php if ($order['total_price'] > 0) { ?>
                     <li><strong><?php _e('Total price'); ?></strong> :

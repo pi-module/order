@@ -37,9 +37,8 @@ class OrderFilter extends InputFilter
                 $this->add($filter);
             }
         }
-        // customer_id
         $this->add(array(
-            'name' => 'customer_id',
+            'name' => 'address_id',
             'required' => false,
         ));
         // name

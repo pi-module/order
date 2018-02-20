@@ -22,9 +22,13 @@ class OrderSimpleFilter extends InputFilter
     public function __construct($option = array())
     {
         $config = Pi::service('registry')->config->read('order', 'order');
-        // customer_id
+
         $this->add(array(
-            'name' => 'customer_id',
+            'name' => 'address_delivery_id',
+            'required' => false,
+        ));
+        $this->add(array(
+            'name' => 'address_invoicing_id',
             'required' => false,
         ));
         // id_number

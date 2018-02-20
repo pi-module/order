@@ -15,7 +15,7 @@ namespace Module\Order\Model;
 
 use Pi\Application\Model\Model;
 
-class Customer extends Model
+class Address extends Model
 {
     /**
      * {@inheritDoc}
@@ -32,7 +32,6 @@ class Customer extends Model
         'mobile',
         'address1',
         'address2',
-        'address_type',
         'country',
         'state',
         'city',
@@ -46,5 +45,7 @@ class Customer extends Model
         'status',
         'delivery',
         'location',
+        'invoicing_favourite',
+        'delivery_favourite'
     );
 }

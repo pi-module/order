@@ -102,62 +102,62 @@
                         <span><?php echo $this->escape($order['gateway']); ?> </span></p>
                 </div>
                 <div class="col-md-6">
-                    <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
+                    <?php if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
                         <p><strong><?php _e('Name'); ?></strong> :
-                            <span><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></span>
+                            <span><?php echo $this->escape($address['first_name']); ?> <?php echo $this->escape($address['last_name']); ?></span>
                         </p>
                     <?php } ?>
-                    <?php if (!empty($order['address1'])) { ?>
+                    <?php if (!empty($address['address1'])) { ?>
                         <p><strong><?php _e('Delivery address'); ?></strong> :
-                            <span><?php echo $this->escape($order['address1']); ?></span></p>
+                            <span><?php echo $this->escape($address['address1']); ?></span></p>
                     <?php } ?>
-                    <?php if (!empty($order['address2'])) { ?>
+                    <?php if (!empty($address['address2'])) { ?>
                         <p><strong><?php _e('Invoicing Address'); ?></strong> :
-                            <span><?php echo $this->escape($order['address2']); ?></span></p>
+                            <span><?php echo $this->escape($address['address2']); ?></span></p>
                     <?php } ?>
-                    <?php if (!empty($order['city'])) { ?>
+                    <?php if (!empty($address['city'])) { ?>
                         <p><strong><?php _e('City'); ?></strong> :
-                            <span><?php echo $this->escape($order['city']); ?></span></p>
+                            <span><?php echo $this->escape($address['city']); ?></span></p>
                     <?php } ?>
-                    <?php if (!empty($order['state'])) { ?>
+                    <?php if (!empty($address['state'])) { ?>
                         <p><strong><?php _e('State'); ?></strong> :
-                            <span><?php echo $this->escape($order['state']); ?></span></p>
+                            <span><?php echo $this->escape($address['state']); ?></span></p>
                     <?php } ?>
-                    <?php if (!empty($order['country'])) { ?>
+                    <?php if (!empty($address['country'])) { ?>
                         <p><strong><?php _e('Country'); ?></strong> :
-                            <span><?php echo $this->escape($order['country']); ?></span></p>
+                            <span><?php echo $this->escape($address['country']); ?></span></p>
                     <?php } ?>
-                    <?php if (!empty($order['zip_code'])) { ?>
+                    <?php if (!empty($address['zip_code'])) { ?>
                         <p><strong><?php _e('Zip code'); ?></strong> :
-                            <span><?php echo $this->escape($order['zip_code']); ?></span></p>
+                            <span><?php echo $this->escape($address['zip_code']); ?></span></p>
                     <?php } ?>
                     <?php if (!empty($order['id_number'])) { ?>
                         <p><strong><?php _e('ID number'); ?></strong> :
                             <span><?php echo $this->escape($order['id_number']); ?></span></p>
                     <?php } ?>
-                    <?php if (!empty($order['email'])) { ?>
+                    <?php if (!empty($address['email'])) { ?>
                         <p><strong><?php _e('Email'); ?></strong> :
-                            <span><?php echo $this->escape($order['email']); ?></span></p>
+                            <span><?php echo $this->escape($address['email']); ?></span></p>
                     <?php } ?>
-                    <?php if (!empty($order['phone'])) { ?>
+                    <?php if (!empty($address['phone'])) { ?>
                         <p><strong><?php _e('Phone'); ?></strong> :
-                            <span><?php echo $this->escape($order['phone']); ?></span></p>
+                            <span><?php echo $this->escape($address['phone']); ?></span></p>
                     <?php } ?>
-                    <?php if (!empty($order['mobile'])) { ?>
+                    <?php if (!empty($address['mobile'])) { ?>
                         <p><strong><?php _e('Mobile'); ?></strong> :
-                            <span><?php echo $this->escape($order['mobile']); ?></span></p>
+                            <span><?php echo $this->escape($address['mobile']); ?></span></p>
                     <?php } ?>
-                    <?php if (!empty($order['company'])) { ?>
+                    <?php if (!empty($address['company'])) { ?>
                         <p><strong><?php _e('Company'); ?></strong> :
-                            <span><?php echo $this->escape($order['company']); ?></span></p>
+                            <span><?php echo $this->escape($address['company']); ?></span></p>
                     <?php } ?>
-                    <?php if (!empty($order['company_id'])) { ?>
+                    <?php if (!empty($address['company_id'])) { ?>
                         <p><strong><?php _e('Company ID'); ?></strong> :
-                            <span><?php echo $this->escape($order['company_id']); ?></span></p>
+                            <span><?php echo $this->escape($address['company_id']); ?></span></p>
                     <?php } ?>
-                    <?php if (!empty($order['company_vat'])) { ?>
+                    <?php if (!empty($address['company_vat'])) { ?>
                         <p><strong><?php _e('Company VAT'); ?></strong> :
-                            <span><?php echo $this->escape($order['company_vat']); ?></span></p>
+                            <span><?php echo $this->escape($address['company_vat']); ?></span></p>
                     <?php } ?>
                 </div>
             </div>

@@ -125,10 +125,14 @@ class InvoiceController extends IndexController
             $message = __('Your payment were successfully. Back to module');
             $this->jump($url, $message);
         }
+        
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        
         // set view
         $this->view()->setTemplate('invoice-print')->setLayout('layout-content');
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('order', $order);
+        $this->view()->assign('address', $address);
         $this->view()->assign('config', $config);
     }
 }

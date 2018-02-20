@@ -60,7 +60,7 @@ class OrderController extends ActionController
         $company = $this->params('company');
         // Get info
         $list = array();
-        $order = array('id DESC', 'time_create DESC');
+        $order = array('order.id DESC', 'time_create DESC');
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit = intval($this->config('admin_perpage'));
         $where = array();
@@ -116,52 +116,68 @@ class OrderController extends ActionController
             $where['company LIKE ?'] = '%' . $company . '%';
         }
         // Select
-        $select = $this->getModel('order')->select()->where($where)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('order')->selectWith($select);
+        $orderTable = Pi::model('order', 'order')->getTable();
+        $orderAddressTable = Pi::model("order_address", 'order')->getTable();
+     
+        $select = Pi::db()->select();
+        $select
+        ->from(array('order' => $orderTable))
+        ->join(array('order_address' => $orderAddressTable), 'order_address.order = order.id', array('first_name','last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 'delivery', 'location'))
+        ->where ($where)
+        ->order ($order);
+        
+        $rowset = Pi::db()->query($select);
+        
         // Make list
         foreach ($rowset as $row) {
-            $invoiceList = Pi::api('invoice', 'order')->getInvoiceFromOrder($row->id, false);
-            $productList = Pi::api('order', 'order')->listProduct($row->id, $row->module_name);
-            $list[$row->id] = Pi::api('order', 'order')->canonizeOrder($row);
-            $list[$row->id]['products'] = $productList;
-            $list[$row->id]['invoiceList'] = $invoiceList;
-            $list[$row->id]['totalInvoice'] = 0;
-            $list[$row->id]['paidInvoice'] = 0;
-            $list[$row->id]['unPaidInvoice'] = 0;
+            $invoiceList = Pi::api('invoice', 'order')->getInvoiceFromOrder($row['id'], false);
+            $productList = Pi::api('order', 'order')->listProduct($row['id'], $row['module_name']);
+            $list[$row['id']] = Pi::api('order', 'order')->canonizeOrder($row);
+            $list[$row['id']]['products'] = $productList;
+            $list[$row['id']]['invoiceList'] = $invoiceList;
+            $list[$row['id']]['totalInvoice'] = 0;
+            $list[$row['id']]['paidInvoice'] = 0;
+            $list[$row['id']]['unPaidInvoice'] = 0;
             foreach ($invoiceList as $invoice) {
 
                 echo '<pre>';
                 print_r($invoice);
                 echo '</pre>';
 
-                $list[$row->id]['totalInvoice']++;
+                $list[$row['id']]['totalInvoice']++;
                 if ($invoice['status'] == 1) {
-                    $list[$row->id]['paidInvoice']++;
+                    $list[$row['id']]['paidInvoice']++;
                 } elseif ($invoice['status'] == 2) {
-                    $list[$row->id]['unPaidInvoice']++;
+                    $list[$row['id']]['unPaidInvoice']++;
                 }
             }
             if (!count($invoice)) {
-                $list[$row->id]['unPaidInvoice']++;
-                $list[$row->id]['statusInvoice'] = sprintf(
+                $list[$row['id']]['unPaidInvoice']++;
+                $list[$row['id']]['statusInvoice'] = sprintf(
                     __('Total : %s / paid : %s / unPaid : %s'),
-                    _number($list[$row->id]['totalInvoice']),
-                    _number($list[$row->id]['paidInvoice']),
+                    _number($list[$row['id']]['totalInvoice']),
+                    _number($list[$row['id']]['paidInvoice']),
                     _number(0)
                 );
             } else {
-                $list[$row->id]['statusInvoice'] = sprintf(
+                $list[$row['id']]['statusInvoice'] = sprintf(
                     __('Total : %s / paid : %s / unPaid : %s'),
-                    _number($list[$row->id]['totalInvoice']),
-                    _number($list[$row->id]['paidInvoice']),
-                    _number($list[$row->id]['unPaidInvoice'])
+                    _number($list[$row['id']]['totalInvoice']),
+                    _number($list[$row['id']]['paidInvoice']),
+                    _number($list[$row['id']]['unPaidInvoice'])
                 );
             }
         }
         // Set paginator
         $count = array('count' => new Expression('count(*)'));
-        $select = $this->getModel('order')->select()->columns($count)->where($where);
-        $count = $this->getModel('order')->selectWith($select)->current()->count;
+        $select = Pi::db()->select();
+        $select
+        ->from(array('order' => $orderTable))->columns($count)
+        ->join(array('order_address' => $orderAddressTable), 'order_address.order = order.id', array())
+        ->where ($where)
+        ->order ($order);
+        $count = Pi::db()->query($select)->current()->count;
+        
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
@@ -528,6 +544,8 @@ class OrderController extends ActionController
         // Get order
         $order = $this->getModel('order')->find($id);
         $order = Pi::api('order', 'order')->canonizeOrder($order);
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        
         // set Products
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
         // set Products
@@ -556,6 +574,7 @@ class OrderController extends ActionController
         // Set view
         $this->view()->setTemplate('order-view');
         $this->view()->assign('order', $order);
+        $this->view()->assign('address', $address);
         $this->view()->assign('config', $config);
     }
 
@@ -688,7 +707,19 @@ class OrderController extends ActionController
                 $values['code'] = Pi::api('order', 'order')->generatCode();
                 $order->assign($values);
                 $order->save();
-                // Set order ID
+                
+                // Save address
+                $orderAddress = $this->getModel('order_address')->createRow();
+                $columns = array('first_name', 'last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 'delivery', 'location');
+                foreach ($values as $key => $value) {
+                    if (!in_array($key, $columns)) {
+                        unset($values[$key]);
+                    }
+                }
+                $values['order'] = $order->id;
+                $values['type'] = 'INVOICING';
+                $orderAddress->assign($values);
+                $orderAddress->save();
 
                 // Save basket
                 $basket = $this->getModel('basket')->createRow();
@@ -760,6 +791,8 @@ class OrderController extends ActionController
         // Get order
         $order = $this->getModel('order')->find($id);
         $order = Pi::api('order', 'order')->canonizeOrder($order);
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        
         // Set Products
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
         // Set Products
@@ -771,6 +804,7 @@ class OrderController extends ActionController
         // Set view
         $this->view()->setTemplate('order-print')->setLayout('layout-content');
         $this->view()->assign('order', $order);
+        $this->view()->assign('address', $address);
     }
 
     public function productAction()
