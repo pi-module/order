@@ -8,21 +8,23 @@
  */
 
 /**
- * @author Mickaël STAMM <contact@sta2m.com>
+ * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 
-namespace Module\Order\Model;
+namespace Module\Order\Model\Customer;
 
 use Pi\Application\Model\Model;
 
-class OrderAddress extends Model
+class Address extends Model
 {
     /**
      * {@inheritDoc}
      */
     protected $columns = array(
         'id',
-        'order',
+        'uid',
+        'ip',
+        'id_number',
         'first_name',
         'last_name',
         'email',
@@ -37,7 +39,13 @@ class OrderAddress extends Model
         'company',
         'company_id',
         'company_vat',
+        'user_note',
+        'time_create',
+        'time_update',
+        'status',
         'delivery',
         'location',
+        'invoicing_favourite',
+        'delivery_favourite'
     );
 }

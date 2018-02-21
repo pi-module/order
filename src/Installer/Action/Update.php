@@ -80,9 +80,9 @@ class Update extends BasicUpdate
         $orderAddressTable = $orderAddressModel->getTable();
         $orderAddressAdapter = $orderAddressModel->getAdapter();
 
-        $addressModel = Pi::model('address', $this->module);
-        $addressTable = $addressModel->getTable();
-        $addressAdapter = $addressModel->getAdapter();
+        $customerAddressModel = Pi::model('customer_address', $this->module);
+        $customerAddressTable = $customerAddressModel->getTable();
+        $customerAddressAdapter = $customerAddressModel->getAdapter();
         
         if (version_compare($moduleVersion, '1.3.6', '<')) {
             // Alter table field add id_number
@@ -660,7 +660,7 @@ EOD;
         }
          
         if (version_compare($moduleVersion, '2.0.4', '=')) {
-            $sql = sprintf("RENAME TABLE %s TO %s;", $customerTable, $addressTable);
+            $sql = sprintf("RENAME TABLE %s TO %s;", $customerTable, $customerAddressTable);
             
             SqlSchema::setType($this->module);
             $sqlHandler = new SqlSchema;
@@ -680,6 +680,7 @@ EOD;
 CREATE TABLE `{order_address}` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `order` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `id_number`  VARCHAR(255) NOT NULL DEFAULT '',
   `type` ENUM('DELIVERY', 'INVOICING'),
   `first_name` varchar(255) NOT NULL DEFAULT '',
   `last_name` varchar(255) NOT NULL DEFAULT '',
@@ -717,6 +718,7 @@ EOD;
             
             $columns = array(
                 'id',
+                'id_number',
                 'first_name',
                 'last_name',
                 'email',
@@ -764,7 +766,7 @@ EOD;
                 return false;   
             }
             
-            $sql = sprintf("ALTER TABLE %s  DROP `first_name`,   DROP `last_name`,  DROP `email`,  DROP `phone`,  DROP `mobile`,  DROP `address1`,  DROP `address2`,  DROP `country`,  DROP `state`,  DROP `city`,  DROP `zip_code`,  DROP `company`,  DROP `company_id`,  DROP `company_vat`,  DROP `delivery`,  DROP `location`;", $orderTable);
+            $sql = sprintf("ALTER TABLE %s  DROP `id_number`, DROP `first_name`,   DROP `last_name`,  DROP `email`,  DROP `phone`,  DROP `mobile`,  DROP `address1`,  DROP `address2`,  DROP `country`,  DROP `state`,  DROP `city`,  DROP `zip_code`,  DROP `company`,  DROP `company_id`,  DROP `company_vat`,  DROP `delivery`,  DROP `location`;", $orderTable);
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
@@ -776,7 +778,7 @@ EOD;
                 return false;
             }
             
-            $sql = sprintf("ALTER TABLE %s ADD `delivery_favourite` TINYINT(1) UNSIGNED, ADD `invoicing_favourite` TINYINT(1) UNSIGNED, DROP `address_type`", $customerTable);
+            $sql = sprintf("ALTER TABLE %s ADD `delivery_favourite` TINYINT(1) UNSIGNED, ADD `invoicing_favourite` TINYINT(1) UNSIGNED, DROP `address_type`", $customerAddressTable);
             try {
                 $customerAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {

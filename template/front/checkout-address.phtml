@@ -30,7 +30,7 @@ $( document ).ready(function() {
                 "<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address')); ?>", 
                 $('form#address').serialize(),
                 function(data)
-                {
+                {   alert(data.status);
                     if (data.status == 1) {
                         window.location.reload();
                     } else {

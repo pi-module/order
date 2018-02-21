@@ -13,7 +13,6 @@ CREATE TABLE `{order}` (
   `module_item`     INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   # Customer information
   `ip`              CHAR(15)                                             NOT NULL DEFAULT '',
-  `id_number`       VARCHAR(255)                                         NOT NULL DEFAULT '',
   # Notes
   `user_note`       TEXT,
   `admin_note`      TEXT,
@@ -290,6 +289,7 @@ CREATE TABLE `{promocode}` (
 CREATE TABLE `{order_address}` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `order` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `id_number`  VARCHAR(255) NOT NULL DEFAULT '',
   `type` ENUM('DELIVERY', 'INVOICING'),
   `first_name` varchar(255) NOT NULL DEFAULT '',
   `last_name` varchar(255) NOT NULL DEFAULT '',

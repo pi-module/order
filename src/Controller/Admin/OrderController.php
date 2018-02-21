@@ -122,7 +122,7 @@ class OrderController extends ActionController
         $select = Pi::db()->select();
         $select
         ->from(array('order' => $orderTable))
-        ->join(array('order_address' => $orderAddressTable), 'order_address.order = order.id', array('first_name','last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 'delivery', 'location'))
+        ->join(array('order_address' => $orderAddressTable), 'order_address.order = order.id', array('id_number', 'first_name','last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 'delivery', 'location'))
         ->where ($where)
         ->order ($order);
         

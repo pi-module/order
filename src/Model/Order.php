@@ -41,7 +41,6 @@ class Order extends Model
         'module_table',
         'module_item',
         'ip',
-        'id_number',
         'user_note',
         'admin_note',
         'time_create',

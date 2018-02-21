@@ -136,9 +136,9 @@ $this->backbone();
                                         <span><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></span>
                                     </p>
                                 <?php } ?>
-                                <?php if (!empty($order['id_number'])) { ?>
+                                <?php if (!empty($address['id_number'])) { ?>
                                     <p><strong><?php _e('ID number'); ?></strong> :
-                                        <span><?php echo $this->escape($order['id_number']); ?></span></p>
+                                        <span><?php echo $this->escape($address['id_number']); ?></span></p>
                                 <?php } ?>
                                 <?php if (!empty($order['address1'])) { ?>
                                     <p><strong><?php _e('Delivery address'); ?></strong> :

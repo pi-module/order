@@ -49,19 +49,7 @@ class OrderSimpleForm extends BaseForm
                 'value' => $this->option['invoicing_address']
             ),
         ));
-        // id_number
-        /* if ($this->config['order_idnumber']) {
-            $this->add(array(
-                'name' => 'id_number',
-                'options' => array(
-                    'label' => __('ID number'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                    'required' => true,
-                )
-            ));
-        } */
+        
         // packing
         if ($this->config['order_packing']) {
             $this->add(array(

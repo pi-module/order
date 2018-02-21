@@ -31,18 +31,7 @@ class OrderSimpleFilter extends InputFilter
             'name' => 'address_invoicing_id',
             'required' => false,
         ));
-        // id_number
-        /* if ($config['order_idnumber']) {
-            $this->add(array(
-                'name' => 'id_number',
-                'required' => true,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
-        } */
+        
         // packing
         if ($config['order_packing']) {
             $this->add(array(
