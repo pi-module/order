@@ -659,7 +659,7 @@ EOD;
             }
         }
          
-        if (version_compare($moduleVersion, '2.0.4', '=')) {
+        if (version_compare($moduleVersion, '2.0.4', '<')) {
             $sql = sprintf("RENAME TABLE %s TO %s;", $customerTable, $customerAddressTable);
             
             SqlSchema::setType($this->module);
