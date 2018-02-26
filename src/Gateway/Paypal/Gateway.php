@@ -380,7 +380,7 @@ class Gateway extends AbstractGateway
         // Get order
         $order = Pi::api('order', 'order')->getOrder($this->gatewayOrder['id']);
         // Get product list
-        $products = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        $products = Pi::api('order', 'order')->listProduct($order['id']);
         // Set products to payment
         $i = 1;
         foreach ($products as $product) {

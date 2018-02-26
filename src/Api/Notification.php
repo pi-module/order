@@ -40,13 +40,23 @@ class Notification extends AbstractApi
         $adminname = Pi::config('adminname');
 
         // Get product list
-        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
         $productList = '';
         $productPrice = '';
+        $typeProduct = array();
         foreach ($order['products'] as $product) {
             $productPrice = $productPrice + $product['total_price'];
             $productList .= $product['details']['title'] . ' , ';
+            
+            if ($product['module'] == 'guide') {
+                $typeProduct[] = __('package');
+            } else if ($product['module'] == 'shop') {
+                $typeProduct[] = __('product');
+            } else {
+                $typeProduct[] = __($product['module']);
+            }
         }
+        $typeProduct = array_unique($typeProduct);
         $productPrice = Pi::api('api', 'order')->viewPrice($productPrice);
 
         // Set link
@@ -57,15 +67,7 @@ class Notification extends AbstractApi
             'id' => $order['id'],
         )));
 
-        // type product
-        $typeProduct = "undefined";
-        if ($order['module_name'] == 'guide') {
-            $typeProduct = __('package');
-        } else if ($order['module_name'] == 'shop') {
-            $typeProduct = __('product');
-        } else {
-            $typeProduct = __($order['module_name']);
-        }   
+        
         
         $userNote = '';
         if ($order['user_note']) {
@@ -87,7 +89,7 @@ class Notification extends AbstractApi
             'order_link' => $link,
             'product_list' => $productList,
             'product_price' => $productPrice,
-            'type_product' => $typeProduct,
+            'type_product' => join(', ', $typeProduct),
             'sellerinfo' => $config['order_sellerinfo'],
             'user_note' => $userNote['body']
             
@@ -109,7 +111,7 @@ class Notification extends AbstractApi
             $lists = explode("|", $config['order_notification_email']);
             foreach ($lists as $items) {
                 $list = explode(",", $items);
-                if ($list[0] == $order['module_name']) {
+                if (in_array($list[0], $typeProduct)) {
                     // Send mail to admin
                     $toAdmin = array(
                         $list[1] => $adminname,
@@ -413,10 +415,18 @@ class Notification extends AbstractApi
         $adminname = Pi::config('adminname');
 
         // Get product list
-        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
         $productList = array();
+        $typeProduct = array();
         foreach ($order['products'] as $product) {
             $productList[] = $product['details']['title'];
+            if ($product['module'] == 'guide') {
+                $typeProduct[] = __('package');
+            } else if ($product['module'] == 'shop') {
+                $typeProduct[] = __('product');
+            } else {
+                $typeProduct[] = __($product['module']);
+            }
         }
         $productList = join(', ', $productList);
         
@@ -428,15 +438,6 @@ class Notification extends AbstractApi
             'id' => $order['id'],
         )));
 
-        // type product
-        $typeProduct = "undefined";
-        if ($order['module_name'] == 'guide') {
-            $typeProduct = __('package');
-        } else if ($order['module_name'] == 'shop') {
-            $typeProduct = __('product');
-        } else {
-            $typeProduct = __($order['module_name']);
-        }
         
         // Set mail information
         $information = array(
@@ -447,7 +448,7 @@ class Notification extends AbstractApi
             'order_link' => $link,
             'invoice_price' => Pi::api('api', 'order')->viewPrice($invoice['total_price']),
             'product_list' => $productList,
-            'type_product' => $typeProduct,
+            'type_product' => join(', ', $typeProduct),
             'sellerinfo' => $config['order_sellerinfo']
             
         );

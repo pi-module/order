@@ -84,6 +84,24 @@ class Update extends BasicUpdate
         $customerAddressTable = $customerAddressModel->getTable();
         $customerAddressAdapter = $customerAddressModel->getAdapter();
         
+        $detailModel = Pi::model('detail', $this->module);
+        $detailTable = $detailModel->getTable();
+        $detailAdapter = $detailModel->getAdapter();
+        
+        $accessModel = Pi::model('access', $this->module);
+        $accessTable = $accessModel->getTable();
+        $accessAdapter = $accessModel->getAdapter();
+        
+        $creditHistoryModel = Pi::model('credit_history', $this->module);
+        $creditHistoryTable = $creditHistoryModel->getTable();
+        $creditHistoryAdapter = $creditHistoryModel->getAdapter();
+        
+        $orderInstallmentModel = Pi::model('order_installment', $this->module);
+        $orderInstallmentTable = $orderInstallmentModel->getTable();
+        $orderInstallmentAdapter = $orderInstallmentModel->getAdapter();
+        
+        
+        
         if (version_compare($moduleVersion, '1.3.6', '<')) {
             // Alter table field add id_number
             $sql = sprintf("ALTER TABLE %s ADD `id_number` varchar(255) NOT NULL default ''", $orderTable);
@@ -785,6 +803,251 @@ EOD;
                 $this->setResult('db', array(
                     'status' => false,
                     'message' => 'Table alter query for customer failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
+        if (version_compare($moduleVersion, '2.1.0', '=')) {
+           
+            $sql = sprintf("ALTER TABLE %s ADD `module` VARCHAR(64) NOT NULL DEFAULT '', ADD `product_type` VARCHAR(64) NOT NULL DEFAULT '', ADD `time_start` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD `time_end` INT(10) UNSIGNED NOT NULL DEFAULT '0'", $basketTable);
+            try {
+                $basketAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for basket failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+            
+            $sql = sprintf("UPDATE %s basket INNER JOIN %s `order` on basket.`order` = `order`.id SET basket.module = `order`.module_name, basket.product_type = `order`.module_table", $basketTable, $orderTable);
+             try {
+                $basketAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for basket failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+            $sql = sprintf("ALTER TABLE %s  DROP `module_name`, DROP `module_table`,   DROP `module_item`, DROP `time_start`, DROP `time_end`, DROP `time_finish`", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+            $sql = sprintf("ALTER TABLE %s  DROP `uid`, DROP `ip`", $invoiceTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+            $sql = sprintf("RENAME TABLE %s TO %s;", $basketTable, $detailTable);
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'SQL schema query for rename basket table failed: '
+                        . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+            
+            $sql = sprintf("ALTER TABLE %s ADD `create_by` ENUM ('ADMIN', 'USER') NOT NULL DEFAULT 'USER'", $invoiceTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for invoice failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            $sql = sprintf("ALTER TABLE %s ADD `create_by` ENUM ('ADMIN', 'USER') NOT NULL DEFAULT 'USER'", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+            $sql = sprintf("DROP TABLE %s;", $accessTable);
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'SQL schema query for drop access table failed: '
+                        . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+            
+            $sql = sprintf("RENAME TABLE %s TO %s;", $historyTable, $creditHistoryTable);
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'SQL schema query for rename history table failed: '
+                        . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+
+    $sql = <<<'EOD'
+CREATE TABLE `{installment}` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `number` smallint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `commission`  DECIMAL(16, 2)  NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `{installment_product}` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `installment` int(10) UNSIGNED NOT NULL,
+  `module`         VARCHAR(64)  NOT NULL DEFAULT '',
+  `product_type`   VARCHAR(64)  NOT NULL DEFAULT '',
+  `product`  int(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `module` (`module`),
+  KEY `product_type` (`product_type`),
+  KEY `product` (`product`)
+);
+
+CREATE TABLE `{order_installment}` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `order` int(10) UNSIGNED NOT NULL,
+  `count`  smallint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `gateway`         VARCHAR(64)                                          NOT NULL DEFAULT 'offline',
+  `status_payment`  TINYINT(1) UNSIGNED                                  NOT NULL DEFAULT '0',
+  `time_payment`    INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
+  `paid_price`      DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`id`),
+  KEY `order` (`order`)
+);          
+EOD;
+
+
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'SQL schema query for installment tables failed: '
+                        . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+           
+            try {
+                $select = $orderModel->select();
+                $rowsetOrder = $orderModel->selectWith($select);
+                foreach ($rowsetOrder as $rowOrder) {
+                    $select = $invoiceModel->select()->where(array('order' => $rowOrder->id));
+                    $rowsetInvoice = $invoiceModel->selectWith($select);
+                    if ($rowsetInvoice->count()) {
+                        foreach ($rowsetInvoice as $rowInvoice) {        
+                            $values = array(
+                                'order' => $rowOrder->id,
+                                'count' => 1,
+                                'gateway' => $rowInvoice->gateway,
+                                'status_payment' => $rowOrder->status_payment,
+                                'time_payment' => $rowOrder->time_payment,
+                                'paid_price' => $rowOrder->paid_price,
+                            );
+                            $orderInstallment = $orderInstallmentModel->createRow();
+                            $orderInstallment->assign($values);
+                            $orderInstallment->save(false);
+                        }
+                    } else {
+                        $values = array(
+                            'order' => $rowOrder->id,
+                            'count' => 1,
+                            'gateway' => '',
+                            'status_payment' => $rowOrder->status_payment,
+                            'time_payment' => $rowOrder->time_payment,
+                            'paid_price' => $rowOrder->paid_price,
+                        );
+                        $orderInstallment = $orderInstallmentModel->createRow();
+                        $orderInstallment->assign($values);
+                        $orderInstallment->save(false);    
+                    }
+                }
+            } catch (\Exception $exception) {
+             
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'data transfer failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;   
+            }
+            $sql = sprintf("ALTER TABLE %s DROP `status_payment`, DROP `time_payment`, DROP `product_price`, DROP `discount_price`, DROP `shipping_price`, DROP `packing_price`, DROP `setup_price`, DROP `vat_price`, DROP `total_price`, DROP `paid_price`", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            $sql = sprintf("ALTER TABLE %s DROP `product_price`, DROP `discount_price`, DROP `shipping_price`, DROP `packing_price`, DROP `setup_price`, DROP `vat_price`, DROP `total_price`, DROP `paid_price`", $invoiceTable);
+            try {
+                $invoiceAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for invoice failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            $sql = sprintf("ALTER TABLE %s DROP `total_price`", $detailTable);
+            try {
+                $detailAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for detail failed: '
                         . $exception->getMessage(),
                 ));
                 return false;

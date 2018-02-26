@@ -200,8 +200,8 @@ class CreditController extends ActionController
             $this->view()->assign('credit', $credit);
         }
         // Select
-        $select = $this->getModel('history')->select()->where($where)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('history')->selectWith($select);
+        $select = $this->getModel('credit_history')->select()->where($where)->order($order)->offset($offset)->limit($limit);
+        $rowset = $this->getModel('credit_history')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
@@ -244,8 +244,8 @@ class CreditController extends ActionController
         }
         // Set paginator
         $count = array('count' => new Expression('count(*)'));
-        $select = $this->getModel('history')->select()->columns($count);
-        $count = $this->getModel('history')->selectWith($select)->current()->count;
+        $select = $this->getModel('credit_history')->select()->columns($count);
+        $count = $this->getModel('credit_history')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);

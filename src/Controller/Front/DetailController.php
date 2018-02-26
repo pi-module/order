@@ -40,7 +40,7 @@ class DetailController extends IndexController
             $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This order not active.'));
         }
         // set Products
-        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
         // set Products
         $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
         // set delivery information

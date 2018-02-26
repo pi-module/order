@@ -65,7 +65,7 @@ class Credit extends AbstractApi
 
     public function addHistory($history, $order = 0, $invoice = 0, $status = 0)
     {
-        $row = Pi::model('history', $this->getModule())->createRow();
+        $row = Pi::model('credit_history', $this->getModule())->createRow();
         $row->uid = isset($history['uid']) ? $history['uid'] : Pi::user()->getId();
         $row->time_create = time();
         $row->order = $order;
@@ -87,13 +87,13 @@ class Credit extends AbstractApi
     {
         // Update history
         $where = array('order' => $order);
-        $select = Pi::model('history', $this->getModule())->select()->where($where)->limit(1);
-        $history = Pi::model('history', $this->getModule())->selectWith($select)->current();
+        $select = Pi::model('credit_history', $this->getModule())->select()->where($where)->limit(1);
+        $history = Pi::model('credit_history', $this->getModule())->selectWith($select)->current();
         if (!empty($history)) {
             // Check
             if ($history->status == 0) {
                 // Find credit
-                $credit = Pi::model('credit', $this->getModule())->find($history->uid, 'uid');
+                $credit = Pi::model('credit_history', $this->getModule())->find($history->uid, 'uid');
                 if ($credit) {
                     switch ($history->status_fluctuation) {
                         case 'increase':
@@ -117,7 +117,7 @@ class Credit extends AbstractApi
                         $history->module => $history->amount,
                     );
                     // Save credit
-                    $credit = Pi::model('credit', $this->getModule())->createRow();
+                    $credit = Pi::model('credit_history', $this->getModule())->createRow();
                     $credit->uid = $history->uid;
                     $credit->time_update = time();
                     $credit->amount = $history->amount;

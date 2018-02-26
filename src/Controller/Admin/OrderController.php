@@ -131,7 +131,7 @@ class OrderController extends ActionController
         // Make list
         foreach ($rowset as $row) {
             $invoiceList = Pi::api('invoice', 'order')->getInvoiceFromOrder($row['id'], false);
-            $productList = Pi::api('order', 'order')->listProduct($row['id'], $row['module_name']);
+            $productList = Pi::api('order', 'order')->listProduct($row['id']);
             $list[$row['id']] = Pi::api('order', 'order')->canonizeOrder($row);
             $list[$row['id']]['products'] = $productList;
             $list[$row['id']]['invoiceList'] = $invoiceList;
@@ -547,7 +547,7 @@ class OrderController extends ActionController
         $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
         
         // set Products
-        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
         // set Products
         $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
         // Set status Invoice
@@ -668,29 +668,29 @@ class OrderController extends ActionController
                     $values['time_create'] = time();
                 }
                 // Check user company_vat
-                switch ($values['module_name']) {
+                switch ($values['module']) {
                     case 'order';
-                        $values['module_table'] = 'manual';
+                        $values['product_type'] = 'manual';
                         $values['module_item'] = 1;
                         break;
 
                     case 'shop';
-                        $values['module_table'] = 'product';
+                        $values['product_type'] = 'product';
                         $values['module_item'] = intval($values['module_item']);
                         break;
 
                     case 'guide';
-                        $values['module_table'] = 'package';
+                        $values['product_type'] = 'package';
                         $values['module_item'] = intval($values['module_item']);
                         break;
 
                     case 'plans';
-                        $values['module_table'] = 'plans';
+                        $values['product_type'] = 'plans';
                         $values['module_item'] = intval($values['module_item']);
                         break;
 
                     case 'event';
-                        $values['module_table'] = 'event';
+                        $values['product_type'] = 'event';
                         $values['module_item'] = intval($values['module_item']);
                         break;
                 }
@@ -705,6 +705,7 @@ class OrderController extends ActionController
                 // Save values to order
                 $order = $this->getModel('order')->createRow();
                 $values['code'] = Pi::api('order', 'order')->generatCode();
+                $values['create_by'] = 'ADMIN';
                 $order->assign($values);
                 $order->save();
                 
@@ -721,21 +722,23 @@ class OrderController extends ActionController
                 $orderAddress->assign($values);
                 $orderAddress->save();
 
-                // Save basket
-                $basket = $this->getModel('basket')->createRow();
-                $basket->order = $order->id;
-                $basket->product = $order->module_item;
-                $basket->discount_price = $order->discount_price;
-                $basket->shipping_price = $order->shipping_price;
-                $basket->setup_price = $order->setup_price;
-                $basket->vat_price = $order->vat_price;
-                $basket->product_price = $order->product_price;
-                $basket->total_price = $order->total_price;
-                $basket->number = 1;
-                $basket->save();
+                // Save detail
+                $detail = $this->getModel('detail')->createRow();
+                $detail->order = $order->id;
+                $detail->module = $values['module'];
+                $detail->product_type = $values['product_type'];
+                $detail->product = $order->module_item;
+                $detail->discount_price = $order->discount_price;
+                $detail->shipping_price = $order->shipping_price;
+                $detail->setup_price = $order->setup_price;
+                $detail->vat_price = $order->vat_price;
+                $detail->product_price = $order->product_price;
+                $detail->total_price = $order->total_price;
+                $detail->number = 1;
+                $detail->save();
 
                 // Set invoice
-                Pi::api('invoice', 'order')->createInvoice($order->id, $order->uid);
+                Pi::api('invoice', 'order')->createInvoice($order->id, $order->uid, true);
                 // Jump
                 $message = __('New order added and data saved successfully.');
                 $url = array('controller' => 'order', 'action' => 'view', 'id' => $order->id);
@@ -794,7 +797,7 @@ class OrderController extends ActionController
         $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
         
         // Set Products
-        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
         // Set Products
         $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
         // Set installment
@@ -858,7 +861,7 @@ class OrderController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 // Get product
-                switch ($order['module_name']) {
+                switch ($values['module']) {
                     case 'shop':
                         // Get product
                         $product = Pi::api('product', 'shop')->getProductLight($values['id']);
@@ -866,14 +869,15 @@ class OrderController extends ActionController
                             $message = __('Your selected product not active / exist');
                             $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message, 'error');
                         }
-                        // Add to basket
-                        $basket = $this->getModel('basket')->createRow();
-                        $basket->order = $order['id'];
-                        $basket->product = $product['id'];
-                        $basket->product_price = $product['price'];
-                        $basket->total_price = $product['price'];
-                        $basket->number = 1;
-                        $basket->save();
+                        // Add to detail
+                        $detail = $this->getModel('detail')->createRow();
+                        $detail->order = $order['id'];
+                        $detail->module = $values['module'];
+                        $detail->product = $product['id'];
+                        $detail->product_price = $product['price'];
+                        $detail->total_price = $product['price'];
+                        $detail->number = 1;
+                        $detail->save();
                         // Add to invoice
                         if ($values['invoice'] == 0) {
                             $invoice = array();
@@ -881,8 +885,6 @@ class OrderController extends ActionController
                             $invoice['total_price'] = $product['price'];
                             $invoice['time_duedate'] = time();
                             $invoice['random_id'] = time() + rand(100, 999);
-                            $invoice['uid'] = $order['uid'];
-                            $invoice['ip'] = Pi::user()->getIp();
                             $invoice['status'] = 2;
                             $invoice['time_create'] = time();
                             $invoice['order'] = $order['id'];
@@ -898,6 +900,7 @@ class OrderController extends ActionController
                             }
                             // Save invoice
                             $row = $this->getModel('invoice')->createRow();
+                            $invoice['create_by'] = 'ADMIN';
                             $row->assign($invoice);
                             $row->save();
                         } else {

@@ -8,14 +8,14 @@
  */
 
 /**
- * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
+ * @author Mickaël STAMM <contact@sta2m.com>
  */
 
-namespace Module\Order\Model;
+namespace Module\Order\Model\Order;
 
 use Pi\Application\Model\Model;
 
-class Basket extends Model
+class Installment extends Model
 {
     /**
      * {@inheritDoc}
@@ -23,15 +23,10 @@ class Basket extends Model
     protected $columns = array(
         'id',
         'order',
-        'product',
-        'product_price',
-        'discount_price',
-        'shipping_price',
-        'packing_price',
-        'setup_price',
-        'vat_price',
-        'total_price',
-        'number',
-        'extra',
+        'count',
+        'gateway',
+        'status_payment',
+        'time_payment',
+        'paid_price',
     );
 }

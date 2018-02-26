@@ -67,16 +67,30 @@ class InvoiceController extends ActionController
             $where['time_duedate <= ?'] = strtotime($end);
         }
         // Select
-        $select = $this->getModel('invoice')->select()->where($where)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('invoice')->selectWith($select);
+        $invoiceTable = Pi::model('invoice', 'order')->getTable();
+        $orderTable = Pi::model("order", 'order')->getTable();
+     
+        $select = Pi::db()->select();
+        $select
+        ->from(array('invoice' => $invoiceTable))
+        ->join(array('order' => $orderTable), 'invoice.order = order.id', array())
+        ->where ($where)->order($order)->offset($offset)->limit($limit);
+        
+        $rowset = Pi::db()->query($select);
+        
         // Make list
         foreach ($rowset as $row) {
-            $list[$row->id] = Pi::api('invoice', 'order')->canonizeInvoice($row);
+            $list[$row['id']] = Pi::api('invoice', 'order')->canonizeInvoice($row);
         }
         // Set paginator
         $count = array('count' => new Expression('count(*)'));
-        $select = $this->getModel('invoice')->select()->where($where)->columns($count);
-        $count = $this->getModel('invoice')->selectWith($select)->current()->count;
+        $select = Pi::db()->select();
+        $select
+        ->from(array('invoice' => $invoiceTable))->columns($count)
+        ->join(array('order' => $orderTable), 'invoice.order = order.id', array())
+        ->where ($where);
+        
+        $count = Pi::db()->query($select)->current()->count;
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
@@ -160,7 +174,7 @@ class InvoiceController extends ActionController
         $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
         
         // Get product list
-        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
         // Check invoice
         if (empty($invoice) || empty($order)) {
             $this->jump(array('', 'action' => 'index'), __('The invoice not found.'));
@@ -188,7 +202,7 @@ class InvoiceController extends ActionController
         $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
         
         // Get product list
-        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
         // Check invoice
         if (empty($invoice) || empty($order)) {
             $this->jump(array('', 'action' => 'index'), __('The invoice not found.'));
@@ -222,7 +236,6 @@ class InvoiceController extends ActionController
                 $values['total_price'] = $values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['setup_price'] + $values['vat_price'];
                 $values['random_id'] = time() + rand(100, 999);
                 $values['uid'] = $order['uid'];
-                $values['ip'] = Pi::user()->getIp();
                 $values['status'] = 2;
                 $values['time_create'] = time();
                 $values['order'] = $order['id'];
@@ -242,6 +255,7 @@ class InvoiceController extends ActionController
                 // Save values
                 $row = $this->getModel('invoice')->createRow();
                 $values['code'] = Pi::api('invoice', 'order')->generatCode();
+                $values['create_by'] = 'ADMIN';
                 $row->assign($values);
                 $row->save();
                                 
@@ -294,7 +308,6 @@ class InvoiceController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                $values['ip'] = Pi::user()->getIp();
                 $values['time_duedate'] = strtotime($values['time_duedate']);
                 $values['total_price'] = $values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['setup_price'] + $values['vat_price'];
                 // Save values

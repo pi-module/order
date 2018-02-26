@@ -39,7 +39,7 @@ class Invoice extends AbstractApi
      *
      * @return array
      */
-    public function createInvoice($id, $uid = null)
+    public function createInvoice($id, $uid = null, $admin = false)
     {
         // Get order
         $order = Pi::api('order', 'order')->getOrder($id);
@@ -61,8 +61,6 @@ class Invoice extends AbstractApi
                     $row = Pi::model('invoice', $this->getModule())->createRow();
                     $row->code = Pi::api('invoice', 'order')->generatCode();
                     $row->random_id = time() + rand(100, 999);
-                    $row->uid = $uid;
-                    $row->ip = Pi::user()->getIp();
                     $row->status = 1;
                     $row->can_pay = $order['can_pay'];
                     $row->time_create = $order['time_create'];
@@ -78,6 +76,9 @@ class Invoice extends AbstractApi
                     $row->paid_price = 0;
                     $row->credit_price = 0;
                     $row->gateway = $order['gateway'];
+                    if ($admin) {
+                        $row->create_by = 'ADMIN';
+                    }
                     $row->save();
                     break;
 
@@ -87,8 +88,6 @@ class Invoice extends AbstractApi
                     $row = Pi::model('invoice', $this->getModule())->createRow();
                     $row->code = Pi::api('invoice', 'order')->generatCode();
                     $row->random_id = time() + rand(100, 999);
-                    $row->uid = $uid;
-                    $row->ip = Pi::user()->getIp();
                     $row->status = 2;
                     $row->can_pay = $order['can_pay'];
                     $row->time_create = $order['time_create'];
@@ -104,6 +103,9 @@ class Invoice extends AbstractApi
                     $row->paid_price = 0;
                     $row->credit_price = 0;
                     $row->gateway = $order['gateway'];
+                    if ($admin) {
+                        $row->create_by = 'ADMIN';
+                    }
                     $row->save();
                    
                     // return array
@@ -167,8 +169,6 @@ class Invoice extends AbstractApi
                             $row = Pi::model('invoice', $this->getModule())->createRow();
                             $row->code = Pi::api('invoice', 'order')->generatCode();
                             $row->random_id = time() + rand(100, 999);
-                            $row->uid = $uid;
-                            $row->ip = Pi::user()->getIp();
                             $row->status = 2;
                             $row->can_pay = $order['can_pay'];
                             $row->time_create = $order['time_create'];
@@ -193,6 +193,9 @@ class Invoice extends AbstractApi
                             $row->credit_price = $invoice['credit'];
                             $row->gateway = $order['gateway'];
                             $row->extra = json::encode($extra);
+                            if ($admin) {
+                                $row->create_by = 'ADMIN';
+                            }
                             $row->save();
                             
                             // Set return
@@ -309,19 +312,27 @@ class Invoice extends AbstractApi
         $invoices = array();
         // Check compressed
         if ($compressed) {
-            $where = array('uid' => $uid, 'status' => 2, 'time_duedate < ?' => strtotime('+1 month'));
+            $where = array('order.uid' => $uid, 'invoice.status' => 2, 'invoice.time_duedate < ?' => strtotime('+1 month'));
         } else {
-            $where = array('uid' => $uid, 'status' => array(1, 2));
+            $where = array('order.uid' => $uid, 'invoice.status' => array(1, 2));
         }
         // Check order ids
         if (!empty($orderIds)) {
-            $where['order'] = $orderIds;
+            $where['invoice.order'] = $orderIds;
         }
-        // Select
-        $select = Pi::model('invoice', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
+        
+        $invoiceTable = Pi::model('invoice', 'order')->getTable();
+        $orderTable = Pi::model("order", 'order')->getTable();
+     
+        $select = Pi::db()->select();
+        $select
+        ->from(array('invoice' => $invoiceTable))
+        ->join(array('order' => $orderTable), 'invoice.order = order.id', array())
+        ->where ($where);
+        
+        $rowset = Pi::db()->query($select);
         foreach ($rowset as $row) {
-            $invoices[$row->id] = $this->canonizeInvoice($row);
+            $invoices[$row['id']] = $this->canonizeInvoice($row);
         }
         return $invoices;
     }
@@ -394,7 +405,9 @@ class Invoice extends AbstractApi
         // Set date_format
         $pattern = !empty($config['date_format']) ? $config['date_format'] : 'yyyy-MM-dd';
         // boject to array
-        $invoice = $invoice->toArray();
+        if (!is_array($invoice)) {
+            $invoice = $invoice->toArray();
+        }
         // Set time
         $invoice['time_create_view'] = _date($invoice['time_create'], array('pattern' => $pattern));
         $invoice['time_duedate_view'] = _date($invoice['time_duedate'], array('pattern' => $pattern));
@@ -484,47 +497,34 @@ class Invoice extends AbstractApi
             'amount',
         );
         // Select
-        $where = array('uid' => $uid, 'status' => 1);
-        $select = Pi::model('invoice', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('invoice', $this->getModule())->selectWith($select);
+        $where = array('order.uid' => $uid, 'invoice.status' => 1);
+        
+        $invoiceTable = Pi::model('invoice', 'order')->getTable();
+        $orderTable = Pi::model("order", 'order')->getTable();
+     
+        $select = Pi::db()->select();
+        $select
+        ->from(array('invoice' => $invoiceTable))
+        ->join(array('order' => $orderTable), 'invoice.order = order.id', array())
+        ->where ($where);
+        
+        $rowset = Pi::db()->query($select);
         foreach ($rowset as $row) {
-            if ($row->time_payment > ($row->time_duedate + 86400)) {
+            if ($row['time_payment'] > ($row['time_duedate'] + 86400)) {
 
                 // Negative
-                $days = number_format(($row->time_payment / 86400) - (($row->time_duedate + 86400) / 86400));
-                $point = ($days * $row->total_price);
+                $days = number_format(($row['time_payment'] / 86400) - (($row['time_duedate'] + 86400) / 86400));
+                $point = ($days * $row['total_price']);
                 $amount = $point * $pointDivision;
                 $pointNegative = $pointNegative + $amount;
 
-                /* echo '<pre>';
-                print_r(array(
-                    'type' => 'Negative',
-                    'price' => $row->total_price,
-                    'day' => $days,
-                    'point' => $point,
-                    'division' => $pointDivision,
-                    'amount' => $amount,
-                ));
-                echo '</pre>'; */
-
-            } elseif ($row->time_duedate > ($row->time_payment + 86400)) {
+            } elseif ($row['time_duedate'] > ($row['time_payment'] + 86400)) {
 
                 // Positive
-                $days = number_format(($row->time_duedate  / 86400) - (($row->time_payment + 86400) / 86400));
-                $point = ($days * $row->total_price);
+                $days = number_format(($row['time_duedate']  / 86400) - (($row['time_payment'] + 86400) / 86400));
+                $point = ($days * $row['total_price']);
                 $amount = $point * $pointDivision;
                 $pointPositive = $pointPositive + $amount;
-
-                /* echo '<pre>';
-                print_r(array(
-                    'type' => 'Positive',
-                    'price' => $row->total_price,
-                    'day' => $days,
-                    'point' => $point,
-                    'division' => $pointDivision,
-                    'amount' => $amount,
-                ));
-                echo '</pre>'; */
             }
         }
 

@@ -20,6 +20,16 @@ class OrderProductFilter extends InputFilter
 {
     public function __construct($option = array())
     {
+        $this->add(array(
+            'name' => 'module',
+            'required' => true,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
+        
         // id
         $this->add(array(
             'name' => 'id',

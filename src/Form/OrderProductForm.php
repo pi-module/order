@@ -34,6 +34,17 @@ class OrderProductForm extends BaseForm
 
     public function init()
     {
+         $this->add(array(
+            'name' => 'module',
+            'options' => array(
+                'label' => __('Module name'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'required' => true,
+            )
+        ));
+        
         // id
         $this->add(array(
             'name' => 'id',

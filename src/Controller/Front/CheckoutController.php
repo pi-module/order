@@ -51,11 +51,11 @@ class CheckoutController extends IndexController
         }
         // Set module_name values
         if (isset($cart['module_name']) && !empty($cart['module_name'])) {
-            $values['module_name'] = $cart['module_name'];
+            $values['module'] = $cart['module_name'];
         }
         // Set module_table values
         if (isset($cart['module_table']) && !empty($cart['module_table'])) {
-            $values['module_table'] = $cart['module_table'];
+            $values['product_type'] = $cart['module_table'];
         }
         // Set module_item values
         if (isset($cart['module_item']) && !empty($cart['module_item'])) {
@@ -182,9 +182,9 @@ class CheckoutController extends IndexController
         
         // Check order save
         if (isset($order->id) && intval($order->id) > 0) {
-            // Save order basket
+            // Save order detail
             if (!empty($cart['product'])) {
-                $this->getModel('basket')->delete(array('order' => $_SESSION['order']['id']));
+                $this->getModel('detail')->delete(array('order' => $_SESSION['order']['id']));
                 foreach ($cart['product'] as $product) {
                     $price = $product['product_price'];
                     $unconsumedPrice = json_decode($product['extra'], true)['unconsumedPrice'];
@@ -196,24 +196,26 @@ class CheckoutController extends IndexController
                                 $product['vat_price']
                             ) - $product['discount_price'] - $unconsumedPrice) * $product['number'];
                     
-                    // Save basket
-                    $basket = $this->getModel('basket')->createRow();
-                    $basket->order = $order->id;
-                    $basket->product = $product['product'];
-                    $basket->discount_price = isset($product['discount_price']) ? $product['discount_price'] : 0;
-                    $basket->shipping_price = isset($product['shipping_price']) ? $product['shipping_price'] : 0;
-                    $basket->setup_price = isset($product['setup_price']) ? $product['setup_price'] : 0;
-                    $basket->packing_price = isset($product['packing_price']) ? $product['packing_price'] : 0;
-                    $basket->vat_price = isset($product['vat_price']) ? $product['vat_price'] : 0;
+                    // Save detail
+                    $detail = $this->getModel('detail')->createRow();
+                    $detail->order = $order->id;
+                    $detail->module = $values['module'];
+                    $detail->product_type = $values['product_type'];
+                    $detail->product = $product['product'];
+                    $detail->discount_price = isset($product['discount_price']) ? $product['discount_price'] : 0;
+                    $detail->shipping_price = isset($product['shipping_price']) ? $product['shipping_price'] : 0;
+                    $detail->setup_price = isset($product['setup_price']) ? $product['setup_price'] : 0;
+                    $detail->packing_price = isset($product['packing_price']) ? $product['packing_price'] : 0;
+                    $detail->vat_price = isset($product['vat_price']) ? $product['vat_price'] : 0;
                     // Set price
                     if ($order->type_payment == 'installment') {
-                        $basket->product_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
-                        $basket->total_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
+                        $detail->product_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
+                        $detail->total_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
                     } else {
-                        $basket->product_price = $price;
-                        $basket->total_price = $total;
+                        $detail->product_price = $price;
+                        $detail->total_price = $total;
                     }
-                    $basket->number = $product['number'];
+                    $detail->number = $product['number'];
                     // Set installment to extra
                     if ($order->type_payment == 'installment') {
                         $extra = array();
@@ -223,7 +225,7 @@ class CheckoutController extends IndexController
                         $extra['installment_main_total'] = $total;
                         $extra['installment_new_price'] = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
                         $extra['installment_new_total'] = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
-                        $basket->extra = json::encode($extra);
+                        $detail->extra = json::encode($extra);
                     } else {
                         $extra = array();
                         if($product['extra']){
@@ -250,9 +252,9 @@ class CheckoutController extends IndexController
                         }
                         
                         
-                        $basket->extra = json::encode($extra);
+                        $detail->extra = json::encode($extra);
                     }
-                    $basket->save();
+                    $detail->save();
                 }
             }
             // Update user information
@@ -262,7 +264,7 @@ class CheckoutController extends IndexController
 
             // Add user credit
             if (isset($cart['credit'])) {
-                $cart['credit']['module'] = $order->module_name;
+                $cart['credit']['module'] = $values['module'];
                 Pi::api('credit', 'order')->addHistory($cart['credit'], $order->id);
             }
             // Send notification

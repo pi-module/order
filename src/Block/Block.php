@@ -45,7 +45,7 @@ class Block
         $orderIds = array();
         foreach ($user['orders'] as $order) {
             $orderIds[] = $order['id'];
-            $user['orders'][$order['id']]['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+            $user['orders'][$order['id']]['products'] = Pi::api('order', 'order')->listProduct($order['id']);
         }
         // Get invoice
         $user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id'], true, $orderIds);

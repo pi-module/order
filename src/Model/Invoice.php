@@ -24,8 +24,6 @@ class Invoice extends Model
         'id',
         'random_id',
         'order',
-        'uid',
-        'ip',
         'code',
         'can_pay',
         'product_price',

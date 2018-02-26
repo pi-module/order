@@ -68,11 +68,18 @@ class PaymentController extends IndexController
 
         // process credit
         if ($credit == 1 && $config['credit_active'] && Pi::service('authentication')->hasIdentity() && $order['type_payment'] != 'installment') {
+            
+            // determine module
+            $products = Pi::api('order', 'order')->listProduct($order['id']);
+            foreach ($products as $product) {
+                $module = $product['module'];
+            }
+            
             $creditInformation = Pi::api('credit', 'order')->getCredit();
             if ($config['credit_type'] == 'general') {
                 $creditAmount = $creditInformation['amount'];
             } elseif ($config['credit_type'] == 'module') {
-                $creditAmount = $creditInformation['amount_detail_view'][$order['module_name']]['amount'];
+                $creditAmount = $creditInformation['amount_detail_view'][$module]['amount'];
             }
             if ($creditAmount > 0) {
                 // Use credit
@@ -87,7 +94,7 @@ class PaymentController extends IndexController
                         'status_action' => 'automatic',
                         'message_user' => '',
                         'message_admin' => '',
-                        'module' => $order['module_name'],
+                        'module' => $module,
                     );
                     Pi::api('credit', 'order')->addHistory($history, $order['id'], $invoice['id']);
                     // Set new price for payment
@@ -97,7 +104,7 @@ class PaymentController extends IndexController
                     $messageAdmin = sprintf(__('use credit to pay order %s'),  $order['code']);
                     $messageUser = sprintf(__('use credit to pay order %s'), $order['code']);
                     $amount = $creditAmount - $order['total_price'];
-                    Pi::api('credit', 'order')->addCredit($order['uid'], $amount, 'decrease', 'automatic', $messageAdmin , $messageUser, $order['module_name']);
+                    Pi::api('credit', 'order')->addCredit($order['uid'], $amount, 'decrease', 'automatic', $messageAdmin , $messageUser, $module);
                     $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
                     // Update module order / invoice and get back url
                     $url = Pi::api('order', 'order')->updateOrder($order['id'], $invoice['id']);
@@ -111,7 +118,7 @@ class PaymentController extends IndexController
                     $messageAdmin = sprintf(__('use credit to pay order %s'), $order['code']);
                     $messageUser = sprintf(__('use credit to pay order %s'), $order['code']);
                     $amount = 0;
-                    Pi::api('credit', 'order')->addCredit($order['uid'], $amount, 'decrease', 'automatic', $messageAdmin , $messageUser, $order['module_name']);
+                    Pi::api('credit', 'order')->addCredit($order['uid'], $amount, 'decrease', 'automatic', $messageAdmin , $messageUser, $module);
                     // Update invoice
                     $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
                     // Update module order / invoice and get back url

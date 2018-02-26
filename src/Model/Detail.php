@@ -15,18 +15,27 @@ namespace Module\Order\Model;
 
 use Pi\Application\Model\Model;
 
-class Access extends Model
+class Detail extends Model
 {
     /**
      * {@inheritDoc}
      */
     protected $columns = array(
         'id',
-        'uid',
-        'item_key',
         'order',
+        'module',
+        'product_type',
+        'product',
         'time_start',
         'time_end',
-        'status',
+        'product_price',
+        'discount_price',
+        'shipping_price',
+        'packing_price',
+        'setup_price',
+        'vat_price',
+        'total_price',
+        'number',
+        'extra',
     );
 }
