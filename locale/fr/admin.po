@@ -26,11 +26,11 @@ msgstr "Détail des commandes simples"
 
 #: config/block.php:23 config/config.php:53
 msgid "Installment"
-msgstr "Installations"
+msgstr "Paiement fractionné"
 
 #: config/block.php:24
 msgid "Installment orders detail"
-msgstr "Détail des commandes Installations"
+msgstr "Détail des commandes avec paiements fractionnés"
 
 #: config/block.php:30 config/config.php:37 config/navigation.php:89
 #: config/page.php:47 config/page.php:73 config/permission.php:47

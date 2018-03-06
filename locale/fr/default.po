@@ -39,7 +39,7 @@ msgstr "Validation Commande"
 
 #: src/Api/Breadcrumbs.php:86 template/front/installment.phtml:88
 msgid "Installment plans"
-msgstr "Packages d'installation"
+msgstr "Echéancier paiements fractionnés"
 
 #: src/Api/Breadcrumbs.php:94 template/admin/order-view.phtml:102
 msgid "Credit"
@@ -71,7 +71,7 @@ msgstr "Merci de vous connecter pour créer la facture"
 
 #: src/Api/Invoice.php:208
 msgid "Decrease credit for installment system"
-msgstr "Diminuer le Crédit en compte pour le système d'Installation"
+msgstr "Diminuer le Crédit en compte pour le système de paiement fractionné"
 
 #: src/Api/Invoice.php:246
 msgid "Not allowed to create invoice by this user credit"
@@ -505,7 +505,7 @@ msgstr "Le compte utilisateur n'a pas été sauvegardé."
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
-"Votre package d'installation sélectionné a été sauvegardé, merci de "
+"Votre échéancier de paiements fractionnés a été sauvegardé, merci de "
 "compléter vos informations de facturation et de paiement."
 
 #: src/Controller/Front/CheckoutController.php:773
@@ -911,7 +911,7 @@ msgstr "Prix d'emballage"
 #: src/Form/InvoiceForm.php:73 src/Form/OrderAddForm.php:413
 #: src/Form/OrderProductEditForm.php:90
 msgid "Setup price"
-msgstr "Définir le prix"
+msgstr "Coût installation"
 
 #: src/Form/InvoiceForm.php:84 src/Form/OrderAddForm.php:424
 #: src/Form/OrderProductEditForm.php:101 template/admin/invoice-add.phtml:108
@@ -1018,7 +1018,7 @@ msgstr "OneShot"
 #: src/Form/OrderAddForm.php:291 src/Form/OrderEditForm.php:279
 #: src/Form/OrderSettingForm.php:107 template/admin/order-index.phtml:83
 msgid "Installment"
-msgstr "Instllations"
+msgstr "Paiement fractionné"
 
 #: src/Form/OrderAddForm.php:292 src/Form/OrderEditForm.php:280
 #: src/Form/OrderSettingForm.php:104
@@ -2301,7 +2301,7 @@ msgstr "Commandes"
 
 #: template/admin/order-list-user.phtml:36
 msgid "List of installment"
-msgstr "Listes des Installations"
+msgstr "Listes des paiements fractionnés"
 
 #: template/admin/order-list-user.phtml:39 template/admin/order-print.phtml:291
 msgid "10 th"
@@ -2545,7 +2545,7 @@ msgstr "Vous pouvez voir/éditer toutes les informations utilisateur"
 
 #: template/admin/order-view.phtml:534
 msgid "Installment numbers"
-msgstr "Nombre d'installations"
+msgstr "Nombre de paiements fractionnés"
 
 #: template/admin/order-view.phtml:560
 msgid "Finish"
@@ -2589,8 +2589,8 @@ msgid ""
 "You buy products on %s installment by %s payment on each installment and %s "
 "per payment"
 msgstr ""
-"Tu as acheté un produit en %s installations avec %s paiements à chaque "
-"installation et %s par paiement"
+"Tu as acheté un produit en %s paiements fractionnés avec %s paiements à "
+"chaque échéance et %s par paiement"
 
 #: template/front/checkout.phtml:133
 msgid ""
