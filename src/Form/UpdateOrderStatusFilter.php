@@ -16,24 +16,14 @@ namespace Module\Order\Form;
 use Pi;
 use Zend\InputFilter\InputFilter;
 
-class OrderProductAddFilter extends InputFilter
+class UpdateOrderStatusFilter extends InputFilter
 {
-    public function __construct($option = array())
+    public function __construct()
     {
-        // id
+        // status_order
         $this->add(array(
-            'name' => 'id',
-            'required' => true,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // invoice
-        $this->add(array(
-            'name' => 'invoice',
+            'name' => 'status_order',
             'required' => true,
         ));
     }
-}
+}    	

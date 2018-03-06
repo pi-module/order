@@ -17,6 +17,10 @@ use Pi\Application\Model\Model;
 
 class Invoice extends Model
 {
+    const STATUS_INVOICE_DRAFT                = 0;
+    const STATUS_INVOICE_VALIDATED            = 1;
+    const STATUS_INVOICE_CANCELLED            = 2;
+    
     /**
      * {@inheritDoc}
      */
@@ -25,23 +29,32 @@ class Invoice extends Model
         'random_id',
         'order',
         'code',
-        'can_pay',
-        'product_price',
-        'discount_price',
-        'shipping_price',
-        'packing_price',
-        'setup_price',
-        'vat_price',
-        'total_price',
-        'paid_price',
-        'credit_price',
-        'gateway',
         'status',
         'time_create',
-        'time_duedate',
-        'time_payment',
         'time_cancel',
         'back_url',
-        'extra',
+        'create_by',
+        'type'
     );
+    
+    public static function getStatusList($status = 0) 
+    {
+        $statusList = array(
+            Invoice::STATUS_INVOICE_DRAFT => __('Draft'),
+            Invoice::STATUS_INVOICE_VALIDATED  => __('Validated'),
+            Invoice::STATUS_INVOICE_CANCELLED => __('Cancelled')
+        );
+        
+        if ($status == Invoice::STATUS_INVOICE_VALIDATED) {
+            unset($statusList[Invoice::STATUS_INVOICE_DRAFT]);
+        }
+        
+        if ($status == Invoice::STATUS_INVOICE_CANCELLED) {
+            unset($statusList[Invoice::STATUS_INVOICE_DRAFT]);
+            unset($statusList[Invoice::STATUS_INVOICE_VALIDATED]);
+        }
+       
+        return $statusList;
+
+    }
 }

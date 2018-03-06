@@ -7,10 +7,6 @@ CREATE TABLE `{order}` (
   `type_commodity`  ENUM ('product', 'service')                          NOT NULL DEFAULT 'product',
   `can_pay`         TINYINT(1) UNSIGNED                                  NOT NULL DEFAULT '1',
   `plan`            INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
-  # Module
-  `module_name`     VARCHAR(64)                                          NOT NULL DEFAULT '',
-  `module_table`    VARCHAR(64)                                          NOT NULL DEFAULT '',
-  `module_item`     INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   # Customer information
   `ip`              CHAR(15)                                             NOT NULL DEFAULT '',
   # Notes
@@ -18,14 +14,9 @@ CREATE TABLE `{order}` (
   `admin_note`      TEXT,
   # Needed times
   `time_create`     INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
-  `time_payment`    INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   `time_delivery`   INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
-  `time_finish`     INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
-  `time_start`      INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
-  `time_end`        INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   # Needed status
   `status_order`    TINYINT(1) UNSIGNED                                  NOT NULL DEFAULT '0',
-  `status_payment`  TINYINT(1) UNSIGNED                                  NOT NULL DEFAULT '0',
   `status_delivery` TINYINT(1) UNSIGNED                                  NOT NULL DEFAULT '0',
   # Needed prices
   `product_price`   DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
@@ -37,27 +28,30 @@ CREATE TABLE `{order}` (
   `total_price`     DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
   `paid_price`      DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
   # Checkout
-  `gateway`         VARCHAR(64)                                          NOT NULL DEFAULT 'offline',
   `packing`         TINYINT(1) UNSIGNED                                  NOT NULL DEFAULT '0',
   # promotion as gift
   `promotion_type`  VARCHAR(64)                                          NOT NULL DEFAULT '',
   `promotion_value` VARCHAR(64)                                          NOT NULL DEFAULT '',
-  `extra`          TEXT,
+  `create_by`        ENUM ('ADMIN', 'USER') NOT NULL DEFAULT 'USER',
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`)
 );
 
-CREATE TABLE `{basket}` (
+CREATE TABLE `{detail}` (
   `id`             INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `order`          INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `module`     	   VARCHAR(64)                                          NOT NULL DEFAULT '',
+  `product_type`   VARCHAR(64)                                          NOT NULL DEFAULT '',
   `product`        INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `time_create`      INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
+  `time_start`      INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
+  `time_end`        INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   `product_price`  DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
   `discount_price` DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
   `shipping_price` DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
   `packing_price`  DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
   `setup_price`    DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
   `vat_price`      DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
-  `total_price`    DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
   `number`         INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `extra`          TEXT,
   PRIMARY KEY (`id`),
@@ -69,38 +63,21 @@ CREATE TABLE `{invoice}` (
   `id`             INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
   `random_id`      INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `order`          INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `uid`            INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `ip`             CHAR(15)            NOT NULL DEFAULT '',
   `code`           VARCHAR(16)         NOT NULL DEFAULT '',
-  `can_pay`        TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
-  `product_price`  DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `discount_price` DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `shipping_price` DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `packing_price`  DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `setup_price`    DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `vat_price`      DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `total_price`    DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `paid_price`     DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `credit_price`   DECIMAL(16, 8)      NOT NULL DEFAULT '0.00',
-  `gateway`        VARCHAR(64)         NOT NULL DEFAULT 'offline',
+  `type`        ENUM ('NORMAL', 'CREDIT') NOT NULL DEFAULT 'NORMAL',
   `status`         TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
   `time_create`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `time_duedate`   INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `time_payment`   INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `time_cancel`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `back_url`       VARCHAR(255)        NOT NULL DEFAULT '',
-  `extra`          TEXT,
+  `create_by`        ENUM ('ADMIN', 'USER') NOT NULL DEFAULT 'USER',
   PRIMARY KEY (`id`),
   UNIQUE KEY `random_id` (`random_id`),
   KEY `order` (`order`),
-  KEY `gateway` (`gateway`),
   KEY `uid` (`uid`),
   KEY `status` (`status`),
   KEY `uid_status` (`uid`, `status`),
   KEY `time_create` (`time_create`),
-  KEY `time_duedate` (`time_duedate`),
-  KEY `id_time_create` (`id`, `time_create`),
-  KEY `id_time_duedate` (`id`, `time_duedate`)
+  KEY `id_time_create` (`id`, `time_create`)
 );
 
 CREATE TABLE `{processing}` (
@@ -118,7 +95,7 @@ CREATE TABLE `{processing}` (
   KEY `ip` (`ip`)
 );
 
-CREATE TABLE `{address}` (
+CREATE TABLE `{customer_address}` (
   `id`           INT(10) UNSIGNED               NOT NULL AUTO_INCREMENT,
   `uid`          INT(10) UNSIGNED               NOT NULL DEFAULT '0',
   `ip`           CHAR(15)                       NOT NULL DEFAULT '',
@@ -233,7 +210,7 @@ CREATE TABLE `{credit}` (
   UNIQUE KEY `uid` (`uid`)
 );
 
-CREATE TABLE `{history}` (
+CREATE TABLE `{credit_history}` (
   `id`                 INT(10) UNSIGNED              NOT NULL AUTO_INCREMENT,
   `uid`                INT(10) UNSIGNED              NOT NULL DEFAULT '0',
   `time_create`        INT(10) UNSIGNED              NOT NULL DEFAULT '0',
@@ -254,26 +231,6 @@ CREATE TABLE `{history}` (
   KEY `time_create` (`time_create`),
   KEY `order` (`order`),
   KEY `invoice` (`invoice`)
-);
-
-# item_key role : module-itemType-itemId-userId OR module-itemId-userId OR module-userId
-CREATE TABLE `{access}` (
-  `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
-  `uid`         INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `item_key`    VARCHAR(128)        NOT NULL DEFAULT '',
-  `order`       INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `time_create` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `time_start`  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `time_end`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
-  `ip`          CHAR(15)            NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `item_key` (`item_key`),
-  KEY `uid` (`uid`),
-  KEY `order` (`order`),
-  KEY `status` (`status`),
-  KEY `time_start` (`time_start`),
-  KEY `time_end` (`time_end`)
 );
 
 CREATE TABLE `{promocode}` (
@@ -310,3 +267,38 @@ CREATE TABLE `{order_address}` (
   PRIMARY KEY (`id`),
   KEY `order` (`order`)
 );
+
+
+CREATE TABLE `{installment}` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `number` smallint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `commission`  DECIMAL(16, 2)  NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `{installment_product}` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `installment` int(10) UNSIGNED NOT NULL,
+  `module`     	   VARCHAR(64)  NOT NULL DEFAULT '',
+  `product_type`   VARCHAR(64)  NOT NULL DEFAULT '',
+  `product`  int(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `module` (`module`),
+  KEY `product_type` (`product_type`),
+  KEY `product` (`product`)
+);
+
+CREATE TABLE `{invoice_installment}` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `order` int(10) UNSIGNED NOT NULL,
+  `count`  smallint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `gateway`         VARCHAR(64)                                          NOT NULL DEFAULT '',
+  `status_payment`  TINYINT(1) UNSIGNED                                  NOT NULL DEFAULT '0',
+  `time_payment`    INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
+  `time_duedate`   INT(10) UNSIGNED    					 NOT NULL DEFAULT '0',
+  `due_price`      DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
+  `credit_price`   DECIMAL(16, 8)      NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`id`),
+  KEY `order` (`order`)
+);
+

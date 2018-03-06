@@ -178,18 +178,13 @@ class Notification extends AbstractApi
             case 'order':
                 switch ($order['status_order']) {
                     // Orders validated
-                    case 2:
+                    case \Module\Order\Model\Order::STATUS_ORDER_VALIDATED:
                         $status = __('Confirmed');
                         break;
 
                     // Orders pending
-                    case 3:
-                        $status = __('has pending to confirmed');
-                        break;
-
-                    // Orders finished
-                    case 7:
-                        $status = __('Finished');
+                    case \Module\Order\Model\Order::STATUS_ORDER_CANCELLED:
+                        $status = __('Candeled');
                         break;
 
                 }

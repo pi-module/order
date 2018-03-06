@@ -96,7 +96,7 @@ class Update extends BasicUpdate
         $creditHistoryTable = $creditHistoryModel->getTable();
         $creditHistoryAdapter = $creditHistoryModel->getAdapter();
         
-        $orderInstallmentModel = Pi::model('order_installment', $this->module);
+        $orderInstallmentModel = Pi::model('invoice_installment', $this->module);
         $orderInstallmentTable = $orderInstallmentModel->getTable();
         $orderInstallmentAdapter = $orderInstallmentModel->getAdapter();
         
@@ -809,15 +809,27 @@ EOD;
             }
         }
 
-        if (version_compare($moduleVersion, '2.1.0', '=')) {
+        if (version_compare($moduleVersion, '2.1.0', '<')) {
            
-            $sql = sprintf("ALTER TABLE %s ADD `module` VARCHAR(64) NOT NULL DEFAULT '', ADD `product_type` VARCHAR(64) NOT NULL DEFAULT '', ADD `time_start` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD `time_end` INT(10) UNSIGNED NOT NULL DEFAULT '0'", $basketTable);
+            $sql = sprintf("ALTER TABLE %s ADD `module` VARCHAR(64) NOT NULL DEFAULT '', ADD `product_type` VARCHAR(64) NOT NULL DEFAULT '', ADD `time_start` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD `time_end` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD `time_create` INT(10) UNSIGNED NOT NULL DEFAULT '0',", $basketTable);
             try {
                 $basketAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
                     'status' => false,
                     'message' => 'Table alter query for basket failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+            $sql = sprintf("UPDATE %s SET time_create = UNIX_TIMESTAMP()", $basketTable);
+             try {
+                $basketAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table update query for basket failed: '
                         . $exception->getMessage(),
                 ));
                 return false;
@@ -875,7 +887,7 @@ EOD;
                 return false;
             }
             
-            $sql = sprintf("ALTER TABLE %s ADD `create_by` ENUM ('ADMIN', 'USER') NOT NULL DEFAULT 'USER'", $invoiceTable);
+            $sql = sprintf("ALTER TABLE %s ADD `create_by` ENUM ('ADMIN', 'USER') NOT NULL DEFAULT 'USER', ADD `type` ENUM ('NORMAL', 'CREDIT') NOT NULL DEFAULT 'NORMAL'", $invoiceTable);
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
@@ -948,14 +960,16 @@ CREATE TABLE `{installment_product}` (
   KEY `product` (`product`)
 );
 
-CREATE TABLE `{order_installment}` (
+CREATE TABLE `{invoice_installment}` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `order` int(10) UNSIGNED NOT NULL,
+  `invoice` int(10) UNSIGNED NOT NULL DEFAULT '0' ,
   `count`  smallint(3) UNSIGNED NOT NULL DEFAULT '1',
   `gateway`         VARCHAR(64)                                          NOT NULL DEFAULT 'offline',
   `status_payment`  TINYINT(1) UNSIGNED                                  NOT NULL DEFAULT '0',
   `time_payment`    INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
-  `paid_price`      DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
+  `time_duedate`   INT(10) UNSIGNED                                      NOT NULL DEFAULT '0',
+  `due_price`      DECIMAL(16, 2)                                        NOT NULL DEFAULT '0.00',
+  `credit_price`   DECIMAL(16, 8)                                        NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`id`),
   KEY `order` (`order`)
 );          
@@ -977,20 +991,30 @@ EOD;
             }
            
             try {
-                $select = $orderModel->select();
+                $select = $orderModel->select()->columns(array('id', 'status_payment', 'time_payment', 'paid_price', 'status_order'));
                 $rowsetOrder = $orderModel->selectWith($select);
                 foreach ($rowsetOrder as $rowOrder) {
-                    $select = $invoiceModel->select()->where(array('order' => $rowOrder->id));
+                    if (in_array($rowOrder->status_order, array(1,3,4,6,7))) {
+                        $rowOrder->status_order = \Module\Order\Model\Order::STATUS_ORDER_VALIDATED;
+                        $rowOrder->save();
+                    }
+                    if (in_array($rowOrder->status_order, array(5))) {
+                        $rowOrder->status_order = \Module\Order\Model\Order::STATUS_ORDER_CANCELLED;
+                        $rowOrder->save();
+                    }
+                    $select = $invoiceModel->select()->columns(array('id', 'time_duedate', 'credit_price', 'gateway'))->where(array('order' => $rowOrder->id));
                     $rowsetInvoice = $invoiceModel->selectWith($select);
                     if ($rowsetInvoice->count()) {
-                        foreach ($rowsetInvoice as $rowInvoice) {        
+                        foreach ($rowsetInvoice as $rowInvoice) {
                             $values = array(
-                                'order' => $rowOrder->id,
+                                'invoice' => $rowInvoice->id,
                                 'count' => 1,
                                 'gateway' => $rowInvoice->gateway,
-                                'status_payment' => $rowOrder->status_payment,
+                                'status_payment' => $rowOrder->status_payment == 2 ? \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID : \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID,
                                 'time_payment' => $rowOrder->time_payment,
-                                'paid_price' => $rowOrder->paid_price,
+                                'time_duedate' => $rowInvoice->time_duedate,
+                                'due_price' => $rowOrder->paid_price,
+                                'credit_price' => $rowInvoice->credit_price,
                             );
                             $orderInstallment = $orderInstallmentModel->createRow();
                             $orderInstallment->assign($values);
@@ -998,12 +1022,14 @@ EOD;
                         }
                     } else {
                         $values = array(
-                            'order' => $rowOrder->id,
+                            'invoice' => 0,
                             'count' => 1,
                             'gateway' => '',
-                            'status_payment' => $rowOrder->status_payment,
+                            'status_payment' => $rowOrder->status_payment == 2 ? \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID : \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID,
+                            'time_duedate' => $rowInvoice->time_duedate,
                             'time_payment' => $rowOrder->time_payment,
-                            'paid_price' => $rowOrder->paid_price,
+                            'due_price' => $rowOrder->paid_price,
+                            'credit_price' => 0,
                         );
                         $orderInstallment = $orderInstallmentModel->createRow();
                         $orderInstallment->assign($values);
@@ -1019,7 +1045,7 @@ EOD;
                 ));
                 return false;   
             }
-            $sql = sprintf("ALTER TABLE %s DROP `status_payment`, DROP `time_payment`, DROP `product_price`, DROP `discount_price`, DROP `shipping_price`, DROP `packing_price`, DROP `setup_price`, DROP `vat_price`, DROP `total_price`, DROP `paid_price`", $orderTable);
+            $sql = sprintf("ALTER TABLE %s DROP `status_payment`, DROP `time_payment`, DROP `product_price`, DROP `discount_price`, DROP `shipping_price`, DROP `packing_price`, DROP `setup_price`, DROP `vat_price`, DROP `total_price`, DROP `paid_price`, DROP `gateway`, DROP `extra`", $orderTable);
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
@@ -1030,7 +1056,7 @@ EOD;
                 ));
                 return false;
             }
-            $sql = sprintf("ALTER TABLE %s DROP `product_price`, DROP `discount_price`, DROP `shipping_price`, DROP `packing_price`, DROP `setup_price`, DROP `vat_price`, DROP `total_price`, DROP `paid_price`", $invoiceTable);
+            $sql = sprintf("ALTER TABLE %s  DROP `time_payment`, DROP `product_price`, DROP `discount_price`, DROP `shipping_price`, DROP `packing_price`, DROP `setup_price`, DROP `vat_price`, DROP `total_price`, DROP `paid_price`, DROP `gateway`, DROP `time_duedate`, DROP `can_pay`, DROP `extra`, DROP `credit_price`", $invoiceTable);
             try {
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {

@@ -5,13 +5,16 @@
         <div class="clearfix">
             <div class="col-md-6">
                 <p><strong><?php _e('Status'); ?></strong> :
-                    <?php if ($invoice['status'] == 1) { ?>
-                        <span class="label label-success"><?php _e('Paid'); ?></span>
-                    <?php } elseif ($invoice['status'] == 2) { ?>
-                        <span class="label label-warning"><?php _e('Unpaid'); ?></span>
-                    <?php } else { ?>
-                        <span class="label label-danger"><?php _e('Canceled'); ?></span>
-                    <?php } ?>
+                    <?php 
+                        if ($invoice['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT) {
+                            $class = "warning";
+                        } elseif ($invoice['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) {
+                            $class = "success";
+                        } else {
+                            $class = "danger";
+                        }
+                    ?>                    
+                    <span class="label label-<?php echo $class ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']] ?></span>
                 </p>
 
                 <p><strong><?php _e('Order'); ?></strong> : <span><?php echo $this->escape($order['code']); ?></span>

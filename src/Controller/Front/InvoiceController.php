@@ -48,13 +48,17 @@ class InvoiceController extends IndexController
         }
         // set Products
         // Check order is for this user
-        if (!in_array($order['status_order'], array(1, 2, 3, 7))) {
+        if ($order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) {
             $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This order not avtice.'));
         }
         // Get product list
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
+        $totalPrice = 0;
+        foreach ($order['products'] as $product) {
+            $totalPrice = $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'];
+        }
         // Check invoice prive
-        if (in_array($order['status_order'], array(1, 2, 3)) && $invoice['status'] == 2 && $invoice['total_price'] == 0) {
+        if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED && $invoice['status'] == 2 && $totalPrice == 0) {
             $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
             $url = Pi::api('order', 'order')->updateOrder($invoice['order']);
             // jump to module

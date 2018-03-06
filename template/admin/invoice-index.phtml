@@ -63,7 +63,7 @@
                            href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>"
                            target="_blank"><i class="fa fa-eye"></i> <?php _e('View order'); ?></a>
                         <a class="btn btn-primary btn-xs" title="<?php _e('Print invoice'); ?>"
-                           href="<?php echo $this->url('', array('action' => 'print', 'id' => $invoice['id'])); ?>"
+                           href="<?php echo $this->url('', array('action' => 'print-pdf', 'id' => $invoice['id'])); ?>"
                            target="_blank"><i class="fa fa-print"></i> <?php _e('Print invoice'); ?></a>
                     </td>
                 </tr>

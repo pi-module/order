@@ -11,22 +11,36 @@
  * @author Mickaël STAMM <contact@sta2m.com>
  */
 
-namespace Module\Order\Model\Order;
+namespace Module\Order\Model\Invoice;
 
 use Pi\Application\Model\Model;
 
 class Installment extends Model
 {
+    const STATUS_PAYMENT_UNPAID = 1;
+    const STATUS_PAYMENT_PAID = 2;
+    
+    
     /**
      * {@inheritDoc}
      */
     protected $columns = array(
         'id',
-        'order',
+        'invoice',
         'count',
         'gateway',
         'status_payment',
         'time_payment',
-        'paid_price',
+        'time_duedate',
+        'due_price',
+        'credit_price',
     );
+    
+    public static function getStatusList()
+    {
+        return array(
+            self::STATUS_PAYMENT_UNPAID => __('Unpaid'),
+            self::STATUS_PAYMENT_PAID => __('Paid'),
+        );        
+    }
 }

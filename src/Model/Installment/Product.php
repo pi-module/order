@@ -11,35 +11,21 @@
  * @author Mickaël STAMM <contact@sta2m.com>
  */
 
-namespace Module\Order\Model\Order;
+namespace Module\Order\Model\Installment;
 
 use Pi\Application\Model\Model;
 
-class Address extends Model
+class Product extends Model
 {
     /**
      * {@inheritDoc}
      */
     protected $columns = array(
         'id',
-        'order',
-        'id_number',
-        'type',
-        'first_name',
-        'last_name',
-        'email',
-        'phone',
-        'mobile',
-        'address1',
-        'address2',
-        'country',
-        'state',
-        'city',
-        'zip_code',
-        'company',
-        'company_id',
-        'company_vat',
-        'delivery',
-        'location',
+        'installment',
+        'module',
+        'product',
+        'product_type',
     );
+    
 }

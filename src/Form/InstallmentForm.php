@@ -16,56 +16,57 @@ namespace Module\Order\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class OrderProductAddForm extends BaseForm
+class InstallmentForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    protected $_options;
+    public function __construct($name = null, $options = array())
     {
-        $this->option = $option;
+        $this->_options = $options;
         parent::__construct($name);
     }
 
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new OrderProductAddFilter($this->option);
+            $this->filter = new InstallmentFilter;
         }
         return $this->filter;
     }
 
     public function init()
-    {
-        // id
+    {  
         $this->add(array(
-            'name' => 'id',
+            'name' => 'gateway',
+            'type' => 'select',
             'options' => array(
-                'label' => __('Product / service ID'),
+                'label' => __('Gateway'),
+                'value_options' => Pi::api('gateway', 'order')->getAdminGatewayList(),
+                'required' => true,
             ),
             'attributes' => array(
-                'type' => 'text',
-                'required' => true,
+                'disabled' => $this->_options['readonly']
             )
         ));
-        // invoice
         $this->add(array(
-            'name' => 'invoice',
+            'name' => 'status_payment',
+            'type' => 'select',
             'options' => array(
-                'label' => __('Select invoice to add fee'),
-                'value_options' => $this->option['invoice'],
-            ),
-            'type' => 'radio',
-            'attributes' => array(
+                'label' => __('Status'),
+                'value_options' => \Module\Order\Model\Invoice\Installment::getStatusList(),
                 'required' => true,
             ),
+            'attributes' => array(
+                'disabled' => $this->_options['readonly']
+            )
         ));
-
-
-        // Save order
+        
+        // Save
         $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
                 'value' => __('Save'),
-                'class' => 'btn btn-success',
+                'class' => 'btn btn-primary',
             )
         ));
     }

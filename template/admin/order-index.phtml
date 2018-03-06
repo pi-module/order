@@ -53,11 +53,11 @@ $this->backbone();
                 </th>
             </tr>
             <?php foreach ($list as $order) { ?>
-                <?php if ($order['unPaidInvoice'] == 0) {
+                <?php 
+                $class = '';
+                if ($order['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
                     $class = 'success';
-                } elseif ($order['paidInvoice'] > 0) {
-                    $class = 'warning';
-                } else {
+                } else if ($order['status_payment'] != null && $order['status_payment'] != ''  && $order['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
                     $class = 'danger';
                 } ?>
                 <tr
@@ -98,7 +98,7 @@ $this->backbone();
                     <td class="clearfix">
                         <ul class="list-inline">
                             <li class="col-xs-2 text-center">
-                                <?php if (in_array($order['status_order'], array(1, 2, 3, 7))) { ?>
+                                <?php if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) { ?>
                                     <span id="update-order-<?php echo $this->escape($order['id']); ?>" class="update-order btn btn-xs <?php echo $this->escape($order['orderClass']); ?>"><?php echo $this->escape($order['orderTitle']); ?></span>
                                 <?php } else { ?>
                                     <span class="label label-danger"><?php echo $this->escape($order['orderTitle']); ?></span>
@@ -113,7 +113,9 @@ $this->backbone();
                                     <li class="col-xs-2 text-center"><span id="update-payment-<?php echo $this->escape($order['id']); ?>" class="update-payment btn btn-xs <?php echo $this->escape($order['paymentClass']); ?>"><?php echo $this->escape($order['paymentTitle']); ?></span></li>
                                 <?php } */ ?>
                             <li class="col-xs-1 text-center">
-                                <?php if ($order['unPaidInvoice'] == 0) { ?>
+                                <?php if ($class == '') { ?>
+                                    <span class="label label-warning" data-toggle="tooltip" data-placement="top" title="<?php echo $this->escape($order['statusInvoice']); ?>"><?php _e('Pending'); ?></span>
+                                <?php } elseif ($class == 'success') { ?>
                                     <span class="label label-success" data-toggle="tooltip" data-placement="top" title="<?php echo $this->escape($order['statusInvoice']); ?>"><?php _e('Paid'); ?></span>
                                 <?php } else { ?>
                                     <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="<?php echo $this->escape($order['statusInvoice']); ?>"><?php _e('Unpaid'); ?></span>
@@ -131,19 +133,11 @@ $this->backbone();
                                         <span class="fa fa-comments-o"></span> 
                                     <?php } ?> 
                             </li> 
-                            <li class="col-xs-2 text-center">
+                            <li class="col-xs-4 text-center">
                                 <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i class="fa fa-eye"></i> 
                                     <?php _e('View'); ?>
                                 </a>
                             </li> 
-                            <?php if ($order['status_payment'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) { ?>
-                            <li class="col-xs-2 text-center">        
-                                    <a class="btn btn-standard btn-xs" title="<?php _e('Print'); ?>" target="_blank"
-                                       href="<?php echo Pi::url($this->url('', array('action' => 'print-pdf', 'id' => $order['id']))); ?>"><i
-                                            class="fa fa-download"></i> <?php _e('Download'); ?></a>
-                               </li>  
-                            <?php } ?>
-                               
                         </ul>
                     </td>
                 </tr>

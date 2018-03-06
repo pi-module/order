@@ -16,17 +16,20 @@ namespace Module\Order\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class UpdatePaymentForm extends BaseForm
+class UpdateInvoiceForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    protected $_options = array();
+    
+    public function __construct($name = null, $options = array())
     {
+        $this->_options = $options;
         parent::__construct($name);
     }
 
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new UpdatePaymentFilter;
+            $this->filter = new UpdateInvoiceFilter;
         }
         return $this->filter;
     }
@@ -35,14 +38,11 @@ class UpdatePaymentForm extends BaseForm
     {
         // status_payment
         $this->add(array(
-            'name' => 'status_payment',
+            'name' => 'status',
             'type' => 'select',
             'options' => array(
                 'label' => __('Payment'),
-                'value_options' => array(
-                    1 => __('UnPaid'),
-                    2 => __('Paid'),
-                ),
+                    'value_options' => \Module\Order\Model\Invoice::getStatusList($this->_options['status']),
             ),
         ));
         // gateway

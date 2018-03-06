@@ -11,19 +11,18 @@
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 
-namespace Module\Order\Form;
+namespace Module\Order\Model;
 
-use Pi;
-use Zend\InputFilter\InputFilter;
+use Pi\Application\Model\Model;
 
-class UpdateOrderFilter extends InputFilter
+class Installment extends Model
 {
-    public function __construct()
-    {
-        // status_order
-        $this->add(array(
-            'name' => 'status_order',
-            'required' => true,
-        ));
-    }
-}    	
+    /**
+     * {@inheritDoc}
+     */
+    protected $columns = array(
+        'id',
+        'number',
+        'commission',
+    );
+}

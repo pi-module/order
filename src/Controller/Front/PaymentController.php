@@ -40,7 +40,7 @@ class PaymentController extends IndexController
             $this->jump(array('', 'controller' => 'index', 'action' => 'error'), __('The order not found.'));
         }
        // Check order is for this user
-        if (!in_array($order['status_order'], array(1, 2, 3))) {
+        if ($order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) {
             $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This order not actice.'));
         }
         
@@ -66,11 +66,12 @@ class PaymentController extends IndexController
             $_SESSION['payment']['process_update'] = time();
         }
 
+        $products = Pi::api('order', 'order')->listProduct($order['id']);
+        
         // process credit
         if ($credit == 1 && $config['credit_active'] && Pi::service('authentication')->hasIdentity() && $order['type_payment'] != 'installment') {
             
             // determine module
-            $products = Pi::api('order', 'order')->listProduct($order['id']);
             foreach ($products as $product) {
                 $module = $product['module'];
             }
@@ -148,7 +149,11 @@ class PaymentController extends IndexController
             ));
         } 
         // Check invoice price
-        if (in_array($order['status_order'], array(1, 2, 3)) && $order['total_price'] == 0) {
+        $totalPrice = 0;
+        foreach ($products as $product) {
+            $totalPrice = $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'];
+        }
+        if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED  && $totalPrice == 0) {
             
             if ($order['status_payment'] == 1) {
                 $invoice = Pi::api('invoice', 'order')->createInvoice($order['id'], Pi::user()->getId());

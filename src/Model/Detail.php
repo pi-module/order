@@ -26,6 +26,7 @@ class Detail extends Model
         'module',
         'product_type',
         'product',
+        'time_create',
         'time_start',
         'time_end',
         'product_price',
@@ -34,7 +35,6 @@ class Detail extends Model
         'packing_price',
         'setup_price',
         'vat_price',
-        'total_price',
         'number',
         'extra',
     );

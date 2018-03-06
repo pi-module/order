@@ -12,33 +12,33 @@
             <?php /* From : http://blog.sathomas.me/post/tracking-progress-in-pure-css */ ?>
             <div class="clearfix">
                 <ul class="progtrckr" data-progtrckr-steps="5">
-                    <?php if ($order['status_payment'] == '2') { ?>
+                    <?php if ($order['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) { ?>
                         <li class="progtrckr-done"><?php _e('Paid'); ?></li>
                     <?php } else { ?>
                         <li class="progtrckr-todo"><?php _e('UnPaid'); ?></li>
                     <?php } ?>
-                    <?php if ($order['status_order'] == '2') { ?>
+                    <?php if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) { ?>
                         <li class="progtrckr-done"><?php _e('validated'); ?></li>
                     <?php } else { ?>
                         <li class="progtrckr-todo"><?php _e('Not validated'); ?></li>
                     <?php } ?>
-                    <?php if ($order['status_delivery'] == '1') { ?>
+                    <?php if ($order['status_delivery'] == Module\Order\Model\Order::STATUS_DELIVERY_PENDING) { ?>
                         <li class="progtrckr-todo"><?php _e('Packed'); ?></li>
                         <li class="progtrckr-todo"><?php _e('Posted'); ?></li>
                         <li class="progtrckr-todo"><?php _e('Delivered'); ?></li>
-                    <?php } elseif ($order['status_delivery'] == '2') { ?>
+                    <?php } elseif ($order['status_delivery'] == Module\Order\Model\Order::STATUS_DELIVERY_PACKED) { ?>
                         <li class="progtrckr-done"><?php _e('Packed'); ?></li>
                         <li class="progtrckr-todo"><?php _e('Posted'); ?></li>
                         <li class="progtrckr-todo"><?php _e('Delivered'); ?></li>
-                    <?php } elseif ($order['status_delivery'] == '3') { ?>
+                    <?php } elseif ($order['status_delivery'] == Module\Order\Model\Order::STATUS_DELIVERY_POSTED) { ?>
                         <li class="progtrckr-done"><?php _e('Packed'); ?></li>
                         <li class="progtrckr-done"><?php _e('Posted'); ?></li>
                         <li class="progtrckr-todo"><?php _e('Delivered'); ?></li>
-                    <?php } elseif ($order['status_delivery'] == '4') { ?>
+                    <?php } elseif ($order['status_delivery'] == Module\Order\Model\Order::STATUS_DELIVERY_DELIVERED) { ?>
                         <li class="progtrckr-done"><?php _e('Packed'); ?></li>
                         <li class="progtrckr-done"><?php _e('Posted'); ?></li>
                         <li class="progtrckr-done"><?php _e('Delivered'); ?></li>
-                    <?php } elseif ($order['status_delivery'] == '5') { ?>
+                    <?php } elseif ($order['status_delivery'] == Module\Order\Model\Order::STATUS_DELIVERY_BACK) { ?>
                         <li class="progtrckr-done"><?php _e('Packed'); ?></li>
                         <li class="progtrckr-done"><?php _e('Posted'); ?></li>
                         <li class="progtrckr-error"><?php _e('Back eaten'); ?></li>
@@ -236,19 +236,11 @@
                 </div>
             </div>
             <div class="col-md-6 text-right">
-                <?php if ($invoice['status'] == 2 && $invoice['can_pay'] == 1 && $allowPayment) { ?>
-                    <?php if ($allowPayment) { ?>
+                <?php if ($invoice['status'] == 2 && $order['can_pay'] == 1) { ?>
                         <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>"
                            href="<?php echo $this->escape($invoice['pay_url']); ?>"><i
                                 class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
-                    <?php } /* else { ?>
-                        <span class="label label-danger">
-                            <?php echo sprintf(__('You can pay this invoice after %s'),
-                                _date($invoice['time_duedate'] - (60 * 60 * 24 * 14),
-                                    array('pattern' => 'dd-MM-yyyy'))); ?>
-                        </span>
-                    <?php } */ ?>
-                <?php } elseif ($invoice['status'] == 2 && $invoice['can_pay'] != 1) { ?>
+                <?php } elseif ($invoice['status'] == 2 && $order['can_pay'] != 1) { ?>
                     <span class="label label-danger">
                             <?php _e('You can pay this invoice after admin review'); ?>
                         </span>

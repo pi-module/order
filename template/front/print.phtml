@@ -1,4 +1,3 @@
-<?php $invoice = current($order['invoices']); ?>
 <style>
     * {color:#525251}
     
@@ -35,7 +34,7 @@
     .color2{background-color:#058cca; color:#fff; font-weight:bold}
     .borderbottom{border-bottom:1px solid #d6dce1}
     
-    .paid-status {position:absolute; top:2mm;left:-125mm; padding:5px ;border:2px solid #525251}
+    .paid-status {padding:5px; text-align:center;width:70mm;border:2px solid #525251}
     .text-footer {margin-left:5mm; width:200mm}
     
 </style>
@@ -131,7 +130,7 @@
                                 <?php _e('Invoice number'); ?>
                             </td>
                             <td class="align-right col2">
-                                <?php echo $invoice['code'] ?>
+                                <?php echo $order['invoice']['code'] ?>
                             </td>
                         </tr>
                         <tr>
@@ -229,7 +228,11 @@
         <tr>
             <td class="col1">
                 <div class="paid-status">
-                    <strong>Facture réglée (<?php echo sprintf(__('credit card / %s'), $order['gateway']) ?>)</strong>
+                    <?php if ($order['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) { ?>
+                    <strong><?php _e('Unpaid invoice') ?></strong>
+                    <?php } else { ?>
+                    <strong><?php _e('Paid invoice') ?> (<?php echo sprintf(__('credit card / %s'), $order['gateway']) ?>)</strong>
+                    <?php }  ?>  
                 </div>
             </td>
             <td class="col2">
@@ -243,22 +246,42 @@
                                 <strong><?php echo $this->escape($order['total_product_price']); ?></strong>
                             </td>
                        </tr>
-                        <?php if ($order['shipping_price'] > 0) { ?>
+                        <?php if ($order['total_shipping_price'] > 0) { ?>
                         <tr>
                             <td>
                                 <strong><?php _e('Shipping'); ?></strong>
                             </td>
                             <td class="align-right">
-                                <strong><?php echo $this->escape($order['shipping_price_view']); ?></strong>
+                                <strong><?php echo $this->escape($order['total_shipping_price_view']); ?></strong>
                             </td>
                         </tr>
                         <?php } ?> 
+                        <?php if ($order['total_packing_price'] > 0) { ?>
+                            <tr>
+                                <td>
+                                    <strong><?php _e('Packing'); ?></strong>
+                                </td>
+                                <td class="align-right">
+                                    <strong><?php echo $this->escape($order['total_packing_price_view']); ?></strong>
+                                </td>
+                            </tr>
+                            <?php } ?> 
+                            <?php if ($order['total_setup_price'] > 0) { ?>
+                            <tr>
+                                <td>
+                                    <strong><?php _e('Setup'); ?></strong>
+                                </td>
+                                <td class="align-right">
+                                    <strong><?php echo $this->escape($order['total_setup_price_view']); ?></strong>
+                                </td>
+                            </tr>
+                            <?php } ?> 
                         <tr>
                             <td>
                                 <strong><?php _e('Vat'); ?></strong>
                             </td>
                             <td class="align-right">
-                                <strong><?php echo $this->escape($order['vat_price_view']); ?></strong>
+                                <strong><?php echo $this->escape($order['total_vat_price_view']); ?></strong>
                             </td>
                         </tr>
                         <tr>

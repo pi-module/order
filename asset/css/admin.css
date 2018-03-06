@@ -20,3 +20,7 @@
 .order-main-icon i {
     font-size: 20px;
 }
+
+.table-installment  { border-color:transparent!important}
+.table-installment th.transparent, .table-installment td.transparent {border:none!important; border-top:none!important;background:#fff!important}
+.table-installment {margin-top:-20px}

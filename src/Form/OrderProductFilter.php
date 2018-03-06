@@ -30,9 +30,19 @@ class OrderProductFilter extends InputFilter
             ),
         ));
         
+        $this->add(array(
+            'name' => 'product_type',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
+        
         // id
         $this->add(array(
-            'name' => 'id',
+            'name' => 'product',
             'required' => true,
             'filters' => array(
                 array(
@@ -40,10 +50,76 @@ class OrderProductFilter extends InputFilter
                 ),
             ),
         ));
-        // invoice
+        
         $this->add(array(
-            'name' => 'invoice',
-            'required' => true,
+            'name' => 'module_item',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
         ));
-    }
+        
+        // product_price
+        $this->add(array(
+            'name' => 'product_price',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
+        // shipping_price
+        $this->add(array(
+            'name' => 'shipping_price',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
+        // packing_price
+        $this->add(array(
+            'name' => 'packing_price',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
+        // setup_price
+        $this->add(array(
+            'name' => 'setup_price',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
+        // vat_price
+        $this->add(array(
+            'name' => 'vat_price',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'time_start',
+            'required' => false,
+        ));
+        
+        $this->add(array(
+            'name' => 'time_end',
+            'required' => false,
+        ));
+          }
 }

@@ -171,7 +171,8 @@ class InvoiceController extends ActionController
         // Get info
         $invoice = Pi::api('invoice', 'order')->getInvoice($id);
         $order = Pi::api('order', 'order')->getOrder($invoice['order']);
-        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        $addressInvoicing = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        $addressDelivery = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'DELIVERY');
         
         // Get product list
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
@@ -180,13 +181,14 @@ class InvoiceController extends ActionController
             $this->jump(array('', 'action' => 'index'), __('The invoice not found.'));
         }
         // Get logs
-        $invoice['log'] = Pi::api('log', 'order')->getLog($invoice['id']);
+        $invoice['log'] = Pi::api('log', 'order')->getLog($invoice['order']);
         // set view
         $this->view()->setTemplate('invoice-view');
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('order', $order);
         $this->view()->assign('config', $config);
-        $this->view()->assign('address', $address);
+        $this->view()->assign('addressInvoicing', $addressInvoicing);
+        $this->view()->assign('addressDelivery', $addressDelivery);
         
     }
 
@@ -221,6 +223,12 @@ class InvoiceController extends ActionController
         // Get id
         $order = $this->params('order');
         // Get order
+        $invoices = Pi::api('invoice', 'order')->getInvoiceFromOrder($order);
+        if (Pi::api('order', 'order')->hasValidInvoice($order) ||  Pi::api('order', 'order')->hasDraftInvoice($order)) {
+            $message = __('Order already have valid invoice. You cannot add another one');
+            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order), $message);
+        }
+        
         $order = $this->getModel('order')->find($order);
         $order = Pi::api('order', 'order')->canonizeOrder($order);
         $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
@@ -232,45 +240,19 @@ class InvoiceController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                $values['time_duedate'] = strtotime($values['time_duedate']);
-                $values['total_price'] = $values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['setup_price'] + $values['vat_price'];
-                $values['random_id'] = time() + rand(100, 999);
-                $values['uid'] = $order['uid'];
-                $values['status'] = 2;
-                $values['time_create'] = time();
-                $values['order'] = $order['id'];
-                $values['discount_price'] = 0;
-                $values['paid_price'] = 0;
-                $values['credit_price'] = 0;
-                $values['gateway'] = $order['gateway'];
-                // Set extra
-                if ($order['type_payment'] == 'installment') {
-                    $extra = array();
-                    $extra['order']['type_payment'] = $order['type_payment'];
-                    $extra['order']['type_commodity'] = $order['type_commodity'];
-                    $extra['number'] = '';
-                    $extra['type'] = 'additional';
-                    $values['extra'] = json::encode($extra);
-                }
-                // Save values
-                $row = $this->getModel('invoice')->createRow();
-                $values['code'] = Pi::api('invoice', 'order')->generatCode();
-                $values['create_by'] = 'ADMIN';
-                $row->assign($values);
-                $row->save();
-                                
-                // Update order
-                $this->getModel('order')->update(
-                    array(
-                        'product_price' => $order['product_price'] + $row->product_price,
-                        'shipping_price' => $order['shipping_price'] + $row->shipping_price,
-                        'packing_price' => $order['packing_price'] + $row->packing_price,
-                        'setup_price' => $order['setup_price'] + $row->setup_price,
-                        'vat_price' => $order['vat_price'] + $row->vat_price,
-                        'total_price' => $order['total_price'] + $row->total_price,
-                    ),
-                    array('id' => $order['id'])
+                 // Save values
+                $invoice = array(
+                    'order' => $order['id'],
+                    'time_create' => time(),
+                    'random_id' => time() + rand(100, 999),
+                    'code' => Pi::api('invoice', 'order')->generatCode(),
+                    'create_by' => 'ADMIN',
+                    'status' => \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT
                 );
+                $row = $this->getModel('invoice')->createRow();
+                $row->assign($invoice);
+                $row->save();
+                   
                 // Check it save or not
                 $message = __('New invoice data saved successfully.');
                 $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message);
@@ -282,24 +264,21 @@ class InvoiceController extends ActionController
         $this->view()->assign('order', $order);
         $this->view()->assign('address', $address);
     }
-
     public function editAction()
     {
         // Get id
         $id = $this->params('id');
         // Get invoice and order
         $invoice = Pi::api('invoice', 'order')->getInvoice($id);
-        $order = Pi::api('order', 'order')->getOrder($invoice['order']);
+        
+        if ($invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT) {
+            $message = __('Invoice was validated or cancelled. You cannont edit it.'); 
+            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order']), $message);
+        }
+                $order = Pi::api('order', 'order')->getOrder($invoice['order']);
         $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
         
-        // Check invoice
-        if ($invoice['status'] != 2) {
-            $this->jump(
-                array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order']),
-                __('This invoice paid or canceled before, than you can not edit it'),
-                'error'
-            );
-        }
+        
         // Set form
         $form = new InvoiceForm('invoice');
         if ($this->request->isPost()) {
@@ -314,18 +293,6 @@ class InvoiceController extends ActionController
                 $row = $this->getModel('invoice')->find($id);
                 $row->assign($values);
                 $row->save();
-                // Update order
-                $this->getModel('order')->update(
-                    array(
-                        'product_price' => ($order['product_price'] - $invoice['product_price']) + $row->product_price,
-                        'shipping_price' => ($order['shipping_price'] - $invoice['shipping_price']) + $row->shipping_price,
-                        'packing_price' => ($order['packing_price'] - $invoice['packing_price']) + $row->packing_price,
-                        'setup_price' => ($order['setup_price'] - $invoice['setup_price']) + $row->setup_price,
-                        'vat_price' => ($order['vat_price'] - $invoice['vat_price']) + $row->vat_price,
-                        'total_price' => ($order['total_price'] - $invoice['total_price']) + $row->total_price,
-                    ),
-                    array('id' => $order['id'])
-                );
                 // Get new invoice
                 $newInvoice = Pi::api('invoice', 'order')->getInvoice($id);
                 // Save log
@@ -346,5 +313,15 @@ class InvoiceController extends ActionController
         $this->view()->assign('invoice', $invoice);
         $this->view()->assign('order', $order);
         $this->view()->assign('address', $address);
+    }
+
+    public function printPdfAction()
+    {
+        $id = $this->params('id');
+        $ret = Pi::api('invoice', 'order')->pdf($id, false);
+        if (!$ret['status']) {
+            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), $ret['message']);
+        }
+        
     }
 }

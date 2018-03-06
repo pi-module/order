@@ -36,8 +36,7 @@ class CheckoutController extends IndexController
    {
         $values['uid'] = $uid;
         $values['ip'] = Pi::user()->getIp();
-        $values['status_order'] = 1;
-        $values['status_payment'] = 1;
+        $values['status_order'] = \Module\Order\Model\Order::STATUS_ORDER_VALIDATED;
         $values['status_delivery'] = 1;
         $values['time_create'] = time();
         
@@ -207,6 +206,8 @@ class CheckoutController extends IndexController
                     $detail->setup_price = isset($product['setup_price']) ? $product['setup_price'] : 0;
                     $detail->packing_price = isset($product['packing_price']) ? $product['packing_price'] : 0;
                     $detail->vat_price = isset($product['vat_price']) ? $product['vat_price'] : 0;
+                    $detail->time_create = time();
+                    
                     // Set price
                     if ($order->type_payment == 'installment') {
                         $detail->product_price = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
@@ -218,14 +219,7 @@ class CheckoutController extends IndexController
                     $detail->number = $product['number'];
                     // Set installment to extra
                     if ($order->type_payment == 'installment') {
-                        $extra = array();
-                        $extra['product'] = json::decode($product['extra'], true);
-                        $extra['installment'] = Pi::api('installment', 'order')->setPriceForProduct($total, $order->plan);
-                        $extra['installment_main_price'] = $price;
-                        $extra['installment_main_total'] = $total;
-                        $extra['installment_new_price'] = Pi::api('installment', 'order')->setTotlaPriceForInvoice($price, $order->plan);
-                        $extra['installment_new_total'] = Pi::api('installment', 'order')->setTotlaPriceForInvoice($total, $order->plan);
-                        $detail->extra = json::encode($extra);
+                        
                     } else {
                         $extra = array();
                         if($product['extra']){

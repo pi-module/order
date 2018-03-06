@@ -36,7 +36,7 @@ class DetailController extends IndexController
             $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This is not your order.'));
         }
         // Check order is for this user
-        if (!in_array($order['status_order'], array(1, 2, 3, 7))) {
+        if ($order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) {
             $this->jump(array('', 'controller' => 'index', 'action' => 'index'), __('This order not active.'));
         }
         // set Products
