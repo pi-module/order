@@ -100,6 +100,8 @@ $this->backbone();
                             <li class="col-xs-2 text-center">
                                 <?php if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) { ?>
                                     <span id="update-order-<?php echo $this->escape($order['id']); ?>" class="update-order btn btn-xs <?php echo $this->escape($order['orderClass']); ?>"><?php echo $this->escape($order['orderTitle']); ?></span>
+                                <?php } else if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_DRAFT) { ?>
+                                    <span class="label label-warning"><?php echo $this->escape($order['orderTitle']); ?></span>
                                 <?php } else { ?>
                                     <span class="label label-danger"><?php echo $this->escape($order['orderTitle']); ?></span>
                                 <?php } ?>

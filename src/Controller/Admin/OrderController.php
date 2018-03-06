@@ -143,10 +143,16 @@ class OrderController extends ActionController
         // Make list
         foreach ($rowset as $row) {
             $list[$row['id']] = Pi::api('order', 'order')->canonizeOrder($row);
-            $list[$row['id']]['products'] = Pi::api('order', 'order')->listProduct($row['id']);
-            
+            $products = Pi::api('order', 'order')->listProduct($row['id']);
+            $list[$row['id']]['products'] = $products;
+            $totalPrice = 0;
+            foreach ($products as $product) {
+                $totalPrice += $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'] - $product['discount_price'];
+            }
+            $list[$row['id']]['total_price_view'] = Pi::api('api', 'order')->viewPrice($totalPrice);
         }
-        
+         
+         //
         $select = Pi::db()->select();
         $select
         ->from(array('order' => $orderTable))
