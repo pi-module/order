@@ -1003,11 +1003,7 @@ EOD;
                     }
                     $select = $invoiceModel->select()->columns(array('id', 'time_duedate', 'credit_price', 'gateway'))->where(array('order' => $rowOrder->id));
                     $rowsetInvoice = $invoiceModel->selectWith($select);
-                    
-                    $orderInstallmentModel = Pi::model('invoice_installment', $this->module);
-                    $orderInstallmentTable = $orderInstallmentModel->getTable();
-                    $orderInstallmentAdapter = $orderInstallmentModel->getAdapter();
-                    
+                      
                     if ($rowsetInvoice->count()) {
                         foreach ($rowsetInvoice as $rowInvoice) {
                             $values = array(
