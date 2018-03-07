@@ -811,7 +811,7 @@ EOD;
 
         if (version_compare($moduleVersion, '2.1.0', '<')) {
            
-            $sql = sprintf("ALTER TABLE %s ADD `module` VARCHAR(64) NOT NULL DEFAULT '', ADD `product_type` VARCHAR(64) NOT NULL DEFAULT '', ADD `time_start` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD `time_end` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD `time_create` INT(10) UNSIGNED NOT NULL DEFAULT '0',", $basketTable);
+            $sql = sprintf("ALTER TABLE %s ADD `module` VARCHAR(64) NOT NULL DEFAULT '', ADD `product_type` VARCHAR(64) NOT NULL DEFAULT '', ADD `time_start` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD `time_end` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD `time_create` INT(10) UNSIGNED NOT NULL DEFAULT '0'", $basketTable);
             try {
                 $basketAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
@@ -971,10 +971,9 @@ CREATE TABLE `{invoice_installment}` (
   `due_price`      DECIMAL(16, 2)                                        NOT NULL DEFAULT '0.00',
   `credit_price`   DECIMAL(16, 8)                                        NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`id`),
-  KEY `order` (`order`)
+  KEY `invoice` (`invoice`)
 );          
 EOD;
-
 
             SqlSchema::setType($this->module);
             $sqlHandler = new SqlSchema;
@@ -1004,6 +1003,11 @@ EOD;
                     }
                     $select = $invoiceModel->select()->columns(array('id', 'time_duedate', 'credit_price', 'gateway'))->where(array('order' => $rowOrder->id));
                     $rowsetInvoice = $invoiceModel->selectWith($select);
+                    
+                    $orderInstallmentModel = Pi::model('invoice_installment', $this->module);
+                    $orderInstallmentTable = $orderInstallmentModel->getTable();
+                    $orderInstallmentAdapter = $orderInstallmentModel->getAdapter();
+                    
                     if ($rowsetInvoice->count()) {
                         foreach ($rowsetInvoice as $rowInvoice) {
                             $values = array(
