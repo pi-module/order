@@ -25,10 +25,24 @@ class Block
         $user = Pi::api('user', 'order')->getUserInformation();
         $user['orders'] = Pi::api('order', 'order')->getOrderFromUser($user['id']);
         $user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id']);
+        foreach ($user['invoices'] as &$invoice) {
+            $products = Pi::api('order', 'order')->listProduct($invoice['order']);
+            $invoice['installments'] =  Pi::api('installment', 'order')->getInstallmentsFromInvoice($invoice['id']);
+            $totalPrice = 0;
+            foreach ($products as $product) {
+                $totalPrice = $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'] - $product['discount_price'];
+                $invoice['total_price'] = $totalPrice;
+                $invoice['total_price_view'] = Pi::api('api', 'order')->viewPrice($totalPrice);
+                $user['orders'][$invoice['order']]['total_price'] = $totalPrice;
+                $user['orders'][$invoice['order']]['total_price_view'] = Pi::api('api', 'order')->viewPrice($totalPrice); 
+            }
+            
+        }
         // Set more link 
         $block['more'] = Pi::url('order');
         // Set block array
         $block['resources'] = $user;
+        $block['gateways'] = Pi::api('gateway', 'order')->getAdminGatewayList();
         return $block;
     }
 

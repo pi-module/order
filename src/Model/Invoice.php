@@ -27,6 +27,7 @@ class Invoice extends Model
     protected $columns = array(
         'id',
         'random_id',
+        'type_payment',
         'order',
         'code',
         'status',

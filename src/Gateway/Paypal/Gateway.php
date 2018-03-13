@@ -390,7 +390,7 @@ class Gateway extends AbstractGateway
             $this->gatewayPayInformation['amount_' . $i] = $product['product_price'];
             $this->gatewayPayInformation['tax_' . $i] = $product['vat_price'];
             $this->gatewayPayInformation['discount_price_' . $i] = $product['discount_price'];
-            $this->gatewayPayInformation['unconsumed_' . $i] = $product['extra']['product']['unconsumedPrice'];
+            $this->gatewayPayInformation['unconsumed_' . $i] = $product['extra']['unconsumedPrice'];
             $i++;
         }
         // Set address

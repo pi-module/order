@@ -75,38 +75,9 @@
                 <p><strong><?php _e('Time create'); ?></strong> :
                     <span><?php echo $this->escape($order['time_create_view']); ?> </span></p>
 
-                <p><strong><?php _e('Time payment'); ?></strong> :
-                    <span><?php echo $this->escape($order['time_payment_view']); ?> </span></p>
-
                 <p><strong><?php _e('Time delivery'); ?></strong> :
                     <span><?php echo $this->escape($order['time_delivery_view']); ?> </span></p>
-
-                <p><strong><?php _e('Gateway'); ?></strong> :
-                    <span><?php echo $this->escape($order['gateway']); ?> </span></p>
-                <?php if ($order['product_price'] > 0) { ?>
-                    <p><strong><?php _e('Product price'); ?></strong> :
-                        <span><?php echo $this->escape($order['product_price_view']); ?></span></p>
-                <?php } ?>
-                <?php if ($order['shipping_price'] > 0) { ?>
-                    <p><strong><?php _e('Shipping price'); ?></strong> :
-                        <span><?php echo $this->escape($order['shipping_price_view']); ?></span></p>
-                <?php } ?>
-                <?php if ($order['packing_price'] > 0) { ?>
-                    <p><strong><?php _e('Packing price'); ?></strong> :
-                        <span><?php echo $this->escape($order['packing_price_view']); ?></span></p>
-                <?php } ?>
-                <?php if ($order['vat_price'] > 0) { ?>
-                    <p><strong><?php _e('Vat price'); ?></strong> :
-                        <span><?php echo $this->escape($order['vat_price_view']); ?></span></p>
-                <?php } ?>
-                <?php if ($order['total_price'] > 0) { ?>
-                    <p><strong><?php _e('Total price'); ?></strong> :
-                        <span><?php echo $this->escape($order['total_price_view']); ?></span></p>
-                <?php } ?>
-                <?php if ($order['paid_price'] > 0) { ?>
-                    <p><strong><?php _e('Paid price'); ?></strong> :
-                        <span><?php echo $this->escape($order['paid_price_view']); ?></span></p>
-                <?php } ?>
+   
             </div>
             <?php if (!empty($order['user_note'])) { ?>
                 <div class="col-md-12">

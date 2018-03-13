@@ -10,12 +10,12 @@
         </div>
         <table class="table table-striped table-bordered table-condensed">
             <tr>
-                <th class="text-center"><?php _e('Code'); ?></th>
-                <th class="text-center"><?php _e('Product / service'); ?></th>
-                <th class="text-center"><?php _e('Time'); ?></th>
-                <th class="text-center"><?php _e('Price incl. VAT'); ?></th>
-                <th class="text-center"><?php _e('Status'); ?></th>
-                <th class="text-center"><?php _e('Action'); ?></th>
+                <th class="text-center col-md-1"><?php _e('Code'); ?></th>
+                <th class="text-center col-md-6"><?php _e('Product / service'); ?></th>
+                <th class="text-center col-md-1"><?php _e('Time'); ?></th>
+                <th class="text-center col-md-1"><?php _e('Price incl. VAT'); ?></th>
+                <th class="text-center col-md-1"><?php _e('Order status'); ?></th>
+                <th class="text-center col-md-2"><?php _e('Action'); ?></th>
             </tr>
             <?php if (count ($user['orders'])) { ?>
                 <?php foreach ($user['orders'] as $order) { ?>
@@ -32,34 +32,19 @@
                         <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
                         <td class="text-center"><span class="label <?php echo $this->escape($order['shortLabel']); ?>"><?php echo $this->escape($order['shortStatus']); ?></span></td>
                         <td class="text-center">
-                            <?php if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_NOT_PROCESSED ||
-                                $order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED ||
-                                $order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_PENDING ||
-                                $order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_FINISHED
-                            ) { ?>        
-                                <?php if ($order['status_payment'] == \Module\Order\Model\Order::STATUS_ORDER_NOT_PROCESSED) { ?>        
-                                <a class="btn btn-danger btn-xs" title="<?php _e('Cancel'); ?>" target="_blank"
-                                   href="<?php echo Pi::url($this->url('order', array('controller'=> 'index', 'action' => 'cancel', 'id' => $order['id']))); ?>"><i
-                                        class="fa fa-remove"></i> <?php _e('Cancel'); ?></a>
-                                
-                                <a class="btn btn-primary btn-xs" title="<?php _e('Cancel'); ?>" target="_blank"
-                                   href="<?php echo Pi::url($this->url('order', array('controller'=> 'payment', 'action' => 'index', 'id' => $order['id']))); ?>"><i
-                                        class="fa fa-credit-card"></i> <?php _e('Pay'); ?></a>
-                              
-                                <?php } ?>
-                                
-                                <?php if ($order['status_payment'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) { ?>
-                                    <?php if ($config['invoice_pdf_or_detail']) { ?>        
-                                    <a class="btn btn-standard btn-xs" title="<?php _e('Print'); ?>" target="_blank"
-                                       href="<?php echo Pi::url($this->url('order', array('controller'=> 'index', 'action' => 'print', 'id' => $order['id']))); ?>"><i
-                                            class="fa fa-download"></i> <?php _e('Download'); ?></a>
-                                    <?php } else { ?>
-                                        <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" target="_blank"
-                                            href="<?php echo Pi::url($this->url('order', array('controller' => 'detail', 'id' => $order['id']))); ?>"><i
-                                        class="fa fa-edit"></i> <?php _e('View'); ?></a> 
-                                    <?php } ?>
-                                <?php } ?>
-                            <?php } ?>
+                            <?php if (!$order['has_payment'] && $order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_CANCELLED) { ?>
+                            <a class="btn btn-danger btn-xs" title="<?php _e('Cancel'); ?>" target="_blank"
+                               href="<?php echo Pi::url($this->url('order', array('controller'=> 'index', 'action' => 'cancel', 'id' => $order['id']))); ?>"><i
+                                    class="fa fa-remove"></i> <?php _e('Cancel'); ?></a>
+                            
+                            <a class="btn btn-primary btn-xs" title="<?php _e('Pay'); ?>" target="_blank"
+                               href="<?php echo Pi::url($this->url('order', array('controller'=> 'payment', 'action' => 'index', 'id' => $order['id']))); ?>"><i
+                                    class="fa fa-credit-card"></i> <?php _e('Pay'); ?></a>
+                          <?php } ?>
+                            <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" target="_blank"
+                                href="<?php echo Pi::url($this->url('order', array('controller' => 'detail', 'id' => $order['id']))); ?>"><i
+                            class="fa fa-edit"></i> <?php _e('View'); ?></a> 
+                   
                         </td>
                     </tr>
                 <?php } ?>
@@ -71,5 +56,8 @@
                 </tr>
             <?php } ?>
         </table>
+        <div class="paginator">
+            <?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?>
+        </div>
     </div>
 </div>

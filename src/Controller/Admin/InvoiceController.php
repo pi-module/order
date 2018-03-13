@@ -192,32 +192,6 @@ class InvoiceController extends ActionController
         
     }
 
-    public function printAction()
-    {
-        // Get id
-        $id = $this->params('id');
-        // Get config
-        $config = Pi::service('registry')->config->read($this->getModule());
-        // Get info
-        $invoice = Pi::api('invoice', 'order')->getInvoice($id);
-        $order = Pi::api('order', 'order')->getOrder($invoice['order']);
-        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
-        
-        // Get product list
-        $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
-        // Check invoice
-        if (empty($invoice) || empty($order)) {
-            $this->jump(array('', 'action' => 'index'), __('The invoice not found.'));
-        }
-        // set view
-        $this->view()->setTemplate('invoice-print')->setLayout('layout-content');
-        $this->view()->assign('invoice', $invoice);
-        $this->view()->assign('order', $order);
-        $this->view()->assign('config', $config);
-        $this->view()->assign('address', $address);
-        
-    }
-
     public function addAction()
     {
         // Get id
@@ -247,7 +221,8 @@ class InvoiceController extends ActionController
                     'random_id' => time() + rand(100, 999),
                     'code' => Pi::api('invoice', 'order')->generatCode(),
                     'create_by' => 'ADMIN',
-                    'status' => \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT
+                    'status' => \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT,
+                    'type_payment' => $values['type_payment']
                 );
                 $row = $this->getModel('invoice')->createRow();
                 $row->assign($invoice);

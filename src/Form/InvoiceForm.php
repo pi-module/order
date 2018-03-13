@@ -36,11 +36,11 @@ class InvoiceForm extends BaseForm
     public function init()
     {  
         $this->add(array(
-            'name' => 'installments',
+            'name' => 'type_payment',
             'type' => 'select',
             'options' => array(
-                'label' => __('Installment'),
-                'value_options' => array(0 => 'onetime') + $this->_installments
+                'label' => __('Type payment'),
+                'value_options' => array('onetime' => 'onetime') + $this->_installments
             ),
         ));
         // Save

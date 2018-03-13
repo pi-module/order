@@ -42,10 +42,11 @@ class Notification extends AbstractApi
         // Get product list
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
         $productList = '';
-        $productPrice = '';
+        $totalPrice = 0;
         $typeProduct = array();
         foreach ($order['products'] as $product) {
-            $productPrice = $productPrice + $product['total_price'];
+            $productPrice = $product['product_price'] + $product['vat_price'] + $product['setup_price'] + $product['packing_price'] + $product['shipping_price'] - $product['discount_price']; 
+            $totalPrice += $productPrice;
             $productList .= $product['details']['title'] . ' , ';
             
             if ($product['module'] == 'guide') {
@@ -57,7 +58,7 @@ class Notification extends AbstractApi
             }
         }
         $typeProduct = array_unique($typeProduct);
-        $productPrice = Pi::api('api', 'order')->viewPrice($productPrice);
+        $productPrice = Pi::api('api', 'order')->viewPrice($totalPrice);
 
         // Set link
         $link = Pi::url(Pi::service('url')->assemble('order', array(

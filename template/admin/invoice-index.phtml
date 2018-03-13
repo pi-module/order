@@ -39,22 +39,12 @@
                     $labelIdClass = 'label-danger';
                 }
                 // Set row class
-                $rowClass = '';
-                if ($invoice['status'] == 1) {
-                    $rowClass = ' class="success"';
-                } elseif ($invoice['time_duedate'] < strtotime("-1 day")) {
-                    $rowClass = ' class="danger"';
-                } elseif ($invoice['time_duedate'] < strtotime("+1 day")) {
-                    $rowClass = ' class="warning"';
-                }
                 ?>
-                <tr<?php echo $rowClass; ?>>
+                <tr>
                     <td><span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($invoice['code']); ?></span></td>
                     <td><?php echo $this->escape($invoice['random_id']); ?></td>
                     <td><?php echo $this->escape($invoice['total_price_view']); ?></td>
                     <td><?php echo $this->escape($invoice['time_create_view']); ?></td>
-                    <td><?php echo $this->escape($invoice['time_duedate_view']); ?></td>
-                    <td><?php echo $this->escape($invoice['time_payment_view']); ?></td>
                     <td>
                         <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>"
                            href="<?php echo $this->url('', array('action' => 'view', 'id' => $invoice['id'])); ?>"><i

@@ -34,7 +34,6 @@ class Order extends Model
         'id',
         'uid',
         'code',
-        'type_payment',
         'type_commodity',
         'can_pay',
         'plan',

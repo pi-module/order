@@ -54,156 +54,55 @@ class Invoice extends AbstractApi
             $result['pay_credit_url'] = '';
             $result['message'] = __('Please login for create invoice');
         } else {
-            // Check type_payment
-            switch ($order['type_payment']) {
-                case 'free':
-                    // Set invoice
-                    $row = Pi::model('invoice', $this->getModule())->createRow();
-                    $row->code = Pi::api('invoice', 'order')->generatCode();
-                    $row->random_id = time() + rand(100, 999);
-                    $row->status = 1;
-                    $row->time_create = $order['time_create'];
-                    $row->time_duedate = time();
-                    $row->order = $order['id'];
-                    if ($admin) {
-                        $row->create_by = 'ADMIN';
-                    }
-                    $row->save();
-                    break;
-
-                case 'onetime':
-                case 'recurring':
-                    // Set invoice
-                    $row = Pi::model('invoice', $this->getModule())->createRow();
-                    $row->code = Pi::api('invoice', 'order')->generatCode();
-                    $row->random_id = time() + rand(100, 999);
-                    $row->status = 2;
-                    $row->time_create = $order['time_create'];
-                    $row->time_duedate = time();
-                    $row->order = $order['id'];
-                    
-                    //$row->credit_price = 0;
-                    $row->gateway = $order['gateway'];
-                    if ($admin) {
-                        $row->create_by = 'ADMIN';
-                    }
-                    $row->save();
-                   
-                    // return array
-                    $result['status'] = $row->status;
-                    $result['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                        'module' => $this->getModule(),
-                        'controller' => 'detail',
-                        'action' => 'index',
-                        'id' => $row->order,
-                    )));
-                    $result['invoice_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                        'module' => $this->getModule(),
-                        'controller' => 'invoice',
-                        'action' => 'index',
-                        'id' => $row->id,
-                    )));
-                    $result['pay_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                        'module' => $this->getModule(),
-                        'controller' => 'payment',
-                        'action' => 'index',
-                        'id' => $row->id,
-                    )));
-                    $result['pay_credit_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                        'module' => $this->getModule(),
-                        'controller' => 'payment',
-                        'action' => 'index',
-                        'id' => $row->id,
-                        'credit' => 1,
-                    )));
-                    // Set invoice information on session
-                    if ($config['order_anonymous'] == 1 && $uid == 0) {
-                        $_SESSION['payment']['process'] = 1;
-                        $_SESSION['payment']['process_start'] = time();
-                        $_SESSION['payment']['invoice_id'] = $row->id;
-                        $_SESSION['payment']['gateway'] = $row->gateway;
-                    }
-                    break;
-
-                case 'installment':
-                    // Get user
-                    $user = Pi::api('user', 'order')->getUserInformation();
-                    // Set invoices price
-                    $invoices = Pi::api('installment', 'order')->setPriceForInvoice($order['product_price'], $order['plan'], $user);
-                    $total = $invoices['total'];
-                    unset($invoices['total']);
-                    // Check allowed
-                    if ($total['allowed']) {
-                        // Set invoices
-                        foreach ($invoices as $key => $invoice) {
-                            // Set invoice
-                            $row = Pi::model('invoice', $this->getModule())->createRow();
-                            $row->code = Pi::api('invoice', 'order')->generatCode();
-                            $row->random_id = time() + rand(100, 999);
-                            $row->status = 2;
-                            $row->time_create = $order['time_create'];
-                            $row->time_duedate = $invoice['duedate'];
-                            $row->order = $order['id'];
-                            if ($admin) {
-                                $row->create_by = 'ADMIN';
-                            }
-                            $row->save();
-                            
-                            // Set return
-                            if ($key == 0) {
-                                $information = array(
-                                    'status' => $row->status,
-                                    'invoice' => $row->id,
-                                );
-                            }
-                        }
-                        // Update user credit
-                        if ($config['installment_credit']) {
-                            $message = __('Decrease credit for installment system');
-                            Pi::api('credit', 'order')->addCredit($uid, $total['installment'], 'decrease', 'automatic', $message, $message);
-                        }
-                        // Update order
-                        $totalPrice = ($total['price'] + $order['shipping_price'] + $order['packing_price'] + $order['setup_price'] + $order['vat_price']) - $order['discount_price'];
-                        Pi::model('order', 'order')->update(
-                            array('product_price' => $total['price'], 'total_price' => $totalPrice),
-                            array('id' => $order['id'])
-                        );
-                        // return array
-                        $result['status'] = $information['status'];
-                        $result['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                            'module' => $this->getModule(),
-                            'controller' => 'detail',
-                            'action' => 'index',
-                            'id' => $order['id'],
-                        )));
-                        $result['invoice_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                            'module' => $this->getModule(),
-                            'controller' => 'invoice',
-                            'action' => 'index',
-                            'id' => $information['invoice'],
-                        )));
-                        $result['pay_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                            'module' => $this->getModule(),
-                            'controller' => 'payment',
-                            'action' => 'index',
-                            'id' => $information['invoice'],
-                        )));
-                        $result['pay_credit_url'] = Pi::url(Pi::service('url')->assemble('order', array(
-                            'module' => $this->getModule(),
-                            'controller' => 'payment',
-                            'action' => 'index',
-                            'id' => $information['invoice'],
-                            'credit' => 1,
-                        )));
-                    } else {
-                        $result['status'] = 0;
-                        $result['message'] = __('Not allowed to create invoice by this user credit');
-                        $result['order_url'] = '';
-                        $result['invoice_url'] = '';
-                        $result['pay_url'] = '';
-                        $result['pay_credit_url'] = '';
-                    }
-                    break;
+             // Set invoice
+            $row = Pi::model('invoice', $this->getModule())->createRow();
+            $row->code = Pi::api('invoice', 'order')->generatCode();
+            $row->random_id = time() + rand(100, 999);
+            $row->status = \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT;
+            $row->time_create = $order['time_create'];
+            $row->time_duedate = time();
+            $row->order = $order['id'];
+            
+            //$row->credit_price = 0;
+            $row->gateway = $order['gateway'];
+            if ($admin) {
+                $row->create_by = 'ADMIN';
+            }
+            $row->save();
+           
+            // return array
+            $result['status'] = $row->status;
+            $result['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+                'module' => $this->getModule(),
+                'controller' => 'detail',
+                'action' => 'index',
+                'id' => $row->order,
+            )));
+            $result['invoice_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+                'module' => $this->getModule(),
+                'controller' => 'invoice',
+                'action' => 'index',
+                'id' => $row->id,
+            )));
+            $result['pay_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+                'module' => $this->getModule(),
+                'controller' => 'payment',
+                'action' => 'index',
+                'id' => $row->id,
+            )));
+            $result['pay_credit_url'] = Pi::url(Pi::service('url')->assemble('order', array(
+                'module' => $this->getModule(),
+                'controller' => 'payment',
+                'action' => 'index',
+                'id' => $row->id,
+                'credit' => 1,
+            )));
+            // Set invoice information on session
+            if ($config['order_anonymous'] == 1 && $uid == 0) {
+                $_SESSION['payment']['process'] = 1;
+                $_SESSION['payment']['process_start'] = time();
+                $_SESSION['payment']['invoice_id'] = $row->id;
+                $_SESSION['payment']['gateway'] = $row->gateway;
             }
         }
 
@@ -299,14 +198,14 @@ class Invoice extends AbstractApi
             $invoice->time_cancel = time();
             $invoice->save();
             // Update user credit
-            if ($config['installment_credit'] && $order['type_payment'] == 'installment') {
+            if ($config['installment_credit'] && $invoice->type_payment == 'installment') {
                 $message = __('Increase credit for cancel invoice');
                 //Pi::api('credit', 'order')->addCredit(Pi::user()->getId(), $invoice->credit_price, 'increase', 'automatic', $message, $message);
             }
         }
     }
 
-    public function updateInvoice($randomId)
+    public function updateInvoice($randomId, $gateway = '')
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
@@ -314,10 +213,12 @@ class Invoice extends AbstractApi
         $invoice = Pi::model('invoice', $this->getModule())->find($randomId, 'random_id');
         $order = Pi::api('order', 'order')->getOrder($invoice['order']);
         // Update invoice
-        $invoice->status = 1;
+        $invoice->status = \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED;
         $invoice->save();
+        $this->createInstallments($invoice->toArray(), true, $gateway);
+        
         // Update user credit
-        if ($config['installment_credit'] && $order['type_payment'] == 'installment') {
+        if ($config['installment_credit'] && $invoice->type_payment == 'installment') {
             $message = __('Increase credit for pay invoice');
             //Pi::api('credit', 'order')->addCredit(Pi::user()->getId(), $invoice->credit_price, 'increase', 'automatic', $message, $message);
         }
@@ -344,18 +245,8 @@ class Invoice extends AbstractApi
         }
         // Set time
         $invoice['time_create_view'] = _date($invoice['time_create'], array('pattern' => $pattern));
-        $invoice['time_duedate_view'] = _date($invoice['time_duedate'], array('pattern' => $pattern));
-        $invoice['time_payment_view'] = $invoice['time_payment'] ? _date($invoice['time_payment'], array('pattern' => $pattern)) : __('Not pay');
         $invoice['time_cancel_view'] = $invoice['time_cancel'] ? _date($invoice['time_cancel'], array('pattern' => $pattern)) : __('Not canceled');
-        // Set price
-        $invoice['product_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['product_price']);
-        $invoice['shipping_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['shipping_price']);
-        $invoice['discount_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['discount_price']);
-        $invoice['packing_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['packing_price']);
-        $invoice['setup_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['setup_price']);
-        $invoice['vat_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['vat_price']);
-        $invoice['total_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['total_price']);
-        $invoice['paid_price_view'] = Pi::api('api', 'order')->viewPrice($invoice['paid_price']);
+       
         // Set url
         $invoice['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
             'module' => $this->getModule(),
@@ -565,7 +456,7 @@ class Invoice extends AbstractApi
         $template = 'order:front/print';
         $data = array('order' => $order, 'address' => $address, 'config' => $config);
         
-        $name = sprintf("%s-%s.pdf", $config['order_filename_prefix'], current($order['invoices'])['code']);
+        $name = sprintf("%s-%s.pdf", $config['order_filename_prefix'], $invoice['code']);
         Pi::service('html2pdf')->pdf($template, $data, $name);
     }
 
@@ -607,7 +498,7 @@ class Invoice extends AbstractApi
         
         $installment = Pi::model('invoice_installment', 'order')->createRow();
         $installment->count = 1;
-        $installment->gateway = 1;
+        $installment->gateway = 'manual';
         $installment->status_payment = \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID;
         $installment->due_price = -$totalPrice;
         $installment->invoice = $row->id;
@@ -615,5 +506,26 @@ class Invoice extends AbstractApi
         $installment->save();
                
     }
-
+    public function createInstallments($invoice, $paid = false, $gateway = '')
+    {
+        // Find due price
+        $products = Pi::api('order', 'order')->listProduct($invoice['order']);
+        $duePrice = 0;
+        foreach ($products as $product) {
+            $duePrice += $product['product_price'] - $product['discount_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'];      
+        }
+        
+        $invoiceInstallment = Pi::model('invoice_installment', 'order')->createRow();
+        $installment = array(
+            'invoice' => $invoice['id'],
+            'count' => 1,
+            'gateway' => $gateway ,
+            'status_payment' => $paid ? \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID : \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID,
+            'time_payment' => $paid ? time() : 0,
+            'due_price' => $duePrice,
+        );
+        
+        $invoiceInstallment->assign($installment);
+        $invoiceInstallment->save();
+    }
 }

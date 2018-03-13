@@ -18,6 +18,10 @@ return array(
             'name' => 'admin'
         ),
         array(
+            'title' => _a('Front'),
+            'name' => 'front'
+        ),
+        array(
             'title' => _a('Order'),
             'name' => 'order'
         ),
@@ -67,6 +71,15 @@ return array(
             'edit' => 'text',
             'filter' => 'number_int',
             'value' => 50
+        ),
+         // Front
+        'view_perpage' => array(
+            'category' => 'front',
+            'title' => _a('Perpage'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 10
         ),
         // Order
         'order_active' => array(
@@ -965,13 +978,6 @@ return array(
             'title' => _a('Invoice header logo path'),
             'description' => 'Square',
             'edit' => 'text',
-        ),
-        'invoice_pdf_or_detail' => array(
-            'category' => 'invoice',
-            'title' => _a('Invoice : PDF or page details ? (check for PDF)'),
-            'edit' => 'checkbox',
-            'filter' => 'number_int',
-            'value' => 1
         ),
     ),
 );

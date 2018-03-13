@@ -11,12 +11,12 @@
             <div class="order-block-installment">
                 <div class="order-block-detail-tab" role="tabpanel">
                     <ul class="nav nav-tabs">
-                        <?php if ($orderInstallmentCount > 0) { ?>
+                        <?php if ($invoiceInstallmentCount > 0) { ?>
                             <li role="presentation" class="active">
                                 <a href="#summery" aria-controls="summery" role="tab" data-toggle="tab"><?php _e('Summery'); ?></a>
                             </li>
                         <?php } ?>
-                        <li role="presentation"<?php if ($orderInstallmentCount == 0) { ?> class="active"<?php } ?>>
+                        <li role="presentation"<?php if ($invoiceInstallmentCount == 0) { ?> class="active"<?php } ?>>
                             <a href="#invoice" aria-controls="invoice" role="tab" data-toggle="tab">
                                 <?php _e('Payable invoices'); ?>
                                 <?php if (count($user['invoices']) > 0) { ?>
@@ -31,7 +31,7 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <?php if ($orderInstallmentCount > 0) { ?>
+                        <?php if ($invoiceInstallmentCount > 0) { ?>
                         <div role="tabpanel" class="tab-pane active" id="summery">
                             <h3 class="text-center"><?php _e('List of installment'); ?></h3>
                             <table class="table table-striped table-bordered table-condensed small">
@@ -236,7 +236,7 @@
                             </table>
                         </div>
                         <?php } ?>
-                        <div role="tabpanel" class="tab-pane<?php if ($orderInstallmentCount == 0) { ?> active<?php } ?>" id="invoice">
+                        <div role="tabpanel" class="tab-pane<?php if ($invoiceInstallmentCount == 0) { ?> active<?php } ?>" id="invoice">
                             <h3 class="text-center"><?php _e('Invoices list'); ?></h3>
                             <?php if ($user['invoices']) { ?>
                                 <table class="table table-striped table-bordered table-condensed small">

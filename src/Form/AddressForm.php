@@ -150,6 +150,21 @@ class AddressForm extends BaseForm
             ));
         }
         
+        // address 2
+        if ($this->config['order_address2']) {
+            $this->add(array(
+                'name' => 'address2',
+                'options' => array(
+                    'label' => __('Address addition'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    'required' => false,
+                )
+            ));
+        }
+        
         // zip_code
         if ($this->config['order_zip']) {
             $this->add(array(
@@ -234,21 +249,7 @@ class AddressForm extends BaseForm
                     'type' => 'html',
                 )
             ));
-            // address 2
-            if ($this->config['order_address2']) {
-                $this->add(array(
-                    'name' => 'address2',
-                    'options' => array(
-                        'label' => __('Address addition'),
-                    ),
-                    'attributes' => array(
-                        'class' => 'complementary',
-                        'type' => 'text',
-                        'description' => '',
-                        'required' => false,
-                    )
-                ));
-            }
+            
             // company
             if ($this->config['order_company']) {
                 // company

@@ -6,6 +6,7 @@ $this->css(array(
 $this->jQuery();
 $this->backbone();
 ?>
+
 <div id="js-order" class="order-view clearfix">
     <div class="order-form" data-id="<?php echo $this->escape($order['id']); ?>"
          data-order="<?php echo $this->escape($order['url_update_order']); ?>"
@@ -44,8 +45,8 @@ $this->backbone();
                 <?php } ?>
             </ul>
         </div>
-
-        <?php if ($order['gateway'] == 'Offline') { ?>
+    
+        <?php if ($offline) { ?>
             <div class="alert alert-danger">
                 <ul class="list-inline">
                     <li class="order-main-icon"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></li>
@@ -56,11 +57,24 @@ $this->backbone();
 
         <div class="alert alert-info">
             <ul class="list-inline">
-                <li class="order-main-icon"><i class="fa fa-user" aria-hidden="true"></i></li>
+                <li class="order-main-icon">
+                    <a class="" title="<?php _e('User information'); ?>" href="<?php echo $this->url('admin', array(
+                        'module' => 'user',
+                        'controller' => 'edit',
+                        'action' => 'index',
+                        'uid' => $order['uid'],
+                    )); ?>" target="_blank"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+
+                <li class=""><strong><?php _e('ID'); ?></strong>
+                    : <?php echo $this->escape($order['user']['id']); ?></li>
+                           
                 <?php if (!empty($addressInvoicing['first_name']) && !empty($addressInvoicing['last_name'])) { ?>
                     <li><strong><?php _e('Name'); ?></strong> :
                         <span><?php echo $this->escape($addressInvoicing['first_name']); ?> <?php echo $this->escape($addressInvoicing['last_name']); ?></span>
                     </li>
+                <?php } else {?>
+                    <li class=""><strong><?php _e('Name'); ?></strong>
+                                : <?php echo $this->escape($order['user']['name']); ?></li>
                 <?php } ?>
                 <?php if (!empty($addressInvoicing['email'])) { ?>
                     <li><strong><?php _e('Email'); ?></strong> :
@@ -140,178 +154,154 @@ $this->backbone();
                         </a>
                     </h4>
                 </div>
-                <div id="collapseInformation" class="panel-collapse collapse" role="tabpanel">
+                <div id="collapseInformation" class="panel-collapse collapse in" role="tabpanel">
                     <div class="panel-body">
                         <div class="clearfix">
                             <div class="col-md-4">
                                 <p><strong><?php _e('Invoicing address') ?></strong></p>
                                 <hr/>
-                                <?php if (!empty($addressInvoicing['first_name']) && !empty($addressInvoicing['last_name'])) { ?>
-                                    <p><strong><?php _e('Name'); ?></strong> :
-                                        <span><?php echo $this->escape($addressInvoicing['first_name']); ?> <?php echo $this->escape($addressInvoicing['last_name']); ?></span>
-                                    </p>
-                                <?php } ?>
-                                <?php if (!empty($addressInvoicing['id_number'])) { ?>
-                                    <p><strong><?php _e('ID number'); ?></strong> :
-                                        <span><?php echo $this->escape($addressInvoicing['id_number']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressInvoicing['address1'])) { ?>
-                                    <p><strong><?php _e('Address'); ?></strong> :
-                                        <span><?php echo $this->escape($addressInvoicing['address1']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressInvoicing['address2'])) { ?>
-                                    <p><strong><?php _e('Address addition'); ?></strong> :
-                                        <span><?php echo $this->escape($addressInvoicing['address2']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressInvoicing['city'])) { ?>
-                                    <p><strong><?php _e('City'); ?></strong> :
-                                        <span><?php echo $this->escape($addressInvoicing['city']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressInvoicing['state'])) { ?>
-                                    <p><strong><?php _e('State'); ?></strong> :
-                                        <span><?php echo $this->escape($addressInvoicing['state']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressInvoicing['country'])) { ?>
-                                    <p><strong><?php _e('Country'); ?></strong> :
-                                        <span><?php echo $this->escape($addressInvoicing['country']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressInvoicing['zip_code'])) { ?>
-                                    <p><strong><?php _e('Zip code'); ?></strong> :
-                                        <span><?php echo $this->escape($addressInvoicing['zip_code']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressInvoicing['email'])) { ?>
-                                    <p><strong><?php _e('Email'); ?></strong> :
-                                        <span><?php echo $this->escape($addressInvoicing['email']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressInvoicing['phone'])) { ?>
-                                    <p><strong><?php _e('Phone'); ?></strong> :
-                                        <span><?php echo $this->escape($addressInvoicing['phone']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressInvoicing['mobile'])) { ?>
-                                    <p><strong><?php _e('Mobile'); ?></strong> :
-                                        <span><?php echo $this->escape($addressInvoicing['mobile']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressInvoicing['company'])) { ?>
-                                    <p><strong><?php _e('Company'); ?></strong> :
-                                        <span><?php echo $this->escape($addressInvoicing['company']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressInvoicing['company_id'])) { ?>
-                                    <p><strong><?php _e('Company ID'); ?></strong> :
-                                        <span><?php echo $this->escape($addressInvoicing['company_id']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressInvoicing['company_vat'])) { ?>
-                                    <p><strong><?php _e('Company VAT'); ?></strong> :
-                                        <span><?php echo $this->escape($addressInvoicing['company_vat']); ?></span></p>
-                                <?php } ?>
+                                <p>
+                                    <?php if (!empty($addressInvoicing['first_name']) && !empty($addressInvoicing['last_name'])) { ?>
+                                        <?php echo $this->escape($addressInvoicing['first_name']); ?> <?php echo $this->escape($addressInvoicing['last_name']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressInvoicing['id_number'])) { ?>
+                                        <?php echo $this->escape($addressInvoicing['id_number']); ?><br/>
+                                    <?php } ?>
+                                </p>
+                                <p>
+                                    <?php if (!empty($addressInvoicing['address1'])) { ?>
+                                        <?php echo $this->escape($addressInvoicing['address1']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressInvoicing['address2'])) { ?>
+                                        <?php echo $this->escape($addressInvoicing['address2']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressInvoicing['city'])) { ?>
+                                        <?php echo $this->escape($addressInvoicing['city']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressInvoicing['state'])) { ?>
+                                        <?php echo $this->escape($addressInvoicing['state']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressInvoicing['country'])) { ?>
+                                        <?php echo $this->escape($addressInvoicing['country']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressInvoicing['zip_code'])) { ?>
+                                        <?php echo $this->escape($addressInvoicing['zip_code']); ?><br/>
+                                    <?php } ?>
+                                </p>
+                                <p>
+                                    <?php if (!empty($addressInvoicing['email'])) { ?>
+                                        <?php _e('Email'); ?> : <?php echo $this->escape($addressInvoicing['email']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressInvoicing['phone'])) { ?>
+                                        <?php _e('Phone'); ?> : <?php echo $this->escape($addressInvoicing['phone']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressInvoicing['mobile'])) { ?>
+                                        <?php _e('Mobile'); ?> : <?php echo $this->escape($addressInvoicing['mobile']); ?><br/>
+                                    <?php } ?>
+                                </p>
+                                <p>
+                                    <?php if (!empty($addressInvoicing['company'])) { ?>
+                                        <?php echo $this->escape($addressInvoicing['company']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressInvoicing['company_id'])) { ?>
+                                        <?php echo $this->escape($addressInvoicing['company_id']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressInvoicing['company_vat'])) { ?>
+                                        <?php echo $this->escape($addressInvoicing['company_vat']); ?><br/>
+                                    <?php } ?>
+                                </p>
                             </div>
                             <div class="col-md-4">
                                 <p><strong><?php _e('Delivery address') ?></strong></p>
                                 <hr/>
-                                <?php if (!empty($addressDelivery['first_name']) && !empty($addressDelivery['last_name'])) { ?>
-                                    <p><strong><?php _e('Name'); ?></strong> :
-                                        <span><?php echo $this->escape($addressDelivery['first_name']); ?> <?php echo $this->escape($addressDelivery['last_name']); ?></span>
-                                    </p>
-                                <?php } ?>
-                                <?php if (!empty($addressDelivery['id_number'])) { ?>
-                                    <p><strong><?php _e('ID number'); ?></strong> :
-                                        <span><?php echo $this->escape($addressDelivery['id_number']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressDelivery['address1'])) { ?>
-                                    <p><strong><?php _e('Address'); ?></strong> :
-                                        <span><?php echo $this->escape($addressDelivery['address1']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressDelivery['address2'])) { ?>
-                                    <p><strong><?php _e('Address addition'); ?></strong> :
-                                        <span><?php echo $this->escape($addressDelivery['address2']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressDelivery['city'])) { ?>
-                                    <p><strong><?php _e('City'); ?></strong> :
-                                        <span><?php echo $this->escape($addressDelivery['city']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressDelivery['state'])) { ?>
-                                    <p><strong><?php _e('State'); ?></strong> :
-                                        <span><?php echo $this->escape($addressDelivery['state']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressDelivery['country'])) { ?>
-                                    <p><strong><?php _e('Country'); ?></strong> :
-                                        <span><?php echo $this->escape($addressDelivery['country']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressDelivery['zip_code'])) { ?>
-                                    <p><strong><?php _e('Zip code'); ?></strong> :
-                                        <span><?php echo $this->escape($addressDelivery['zip_code']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressDelivery['email'])) { ?>
-                                    <p><strong><?php _e('Email'); ?></strong> :
-                                        <span><?php echo $this->escape($addressDelivery['email']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressDelivery['phone'])) { ?>
-                                    <p><strong><?php _e('Phone'); ?></strong> :
-                                        <span><?php echo $this->escape($addressDelivery['phone']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressDelivery['mobile'])) { ?>
-                                    <p><strong><?php _e('Mobile'); ?></strong> :
-                                        <span><?php echo $this->escape($addressDelivery['mobile']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressDelivery['company'])) { ?>
-                                    <p><strong><?php _e('Company'); ?></strong> :
-                                        <span><?php echo $this->escape($addressDelivery['company']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressDelivery['company_id'])) { ?>
-                                    <p><strong><?php _e('Company ID'); ?></strong> :
-                                        <span><?php echo $this->escape($addressDelivery['company_id']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($addressDelivery['company_vat'])) { ?>
-                                    <p><strong><?php _e('Company VAT'); ?></strong> :
-                                        <span><?php echo $this->escape($addressDelivery['company_vat']); ?></span></p>
-                                <?php } ?>
+                                <p>
+                                    <?php if (!empty($addressDelivery['first_name']) && !empty($addressDelivery['last_name'])) { ?>
+                                        <?php echo $this->escape($addressDelivery['first_name']); ?> <?php echo $this->escape($addressDelivery['last_name']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressDelivery['id_number'])) { ?>
+                                        <?php echo $this->escape($addressDelivery['id_number']); ?><br/>
+                                    <?php } ?>
+                                </p>
+                                <p>
+                                    <?php if (!empty($addressDelivery['address1'])) { ?>
+                                        <?php echo $this->escape($addressDelivery['address1']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressDelivery['address2'])) { ?>
+                                        <?php echo $this->escape($addressDelivery['address2']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressDelivery['city'])) { ?>
+                                        <?php echo $this->escape($addressDelivery['city']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressDelivery['state'])) { ?>
+                                        <?php echo $this->escape($addressDelivery['state']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressDelivery['country'])) { ?>
+                                        <?php echo $this->escape($addressDelivery['country']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressDelivery['zip_code'])) { ?>
+                                        <?php echo $this->escape($addressDelivery['zip_code']); ?><br/>
+                                    <?php } ?>
+                                </p>
+                                <p>
+                                    <?php if (!empty($addressDelivery['email'])) { ?>
+                                        <?php _e('Email'); ?> : <?php echo $this->escape($addressDelivery['email']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressDelivery['phone'])) { ?>
+                                        <?php _e('Phone'); ?> : <?php echo $this->escape($addressDelivery['phone']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressDelivery['mobile'])) { ?>
+                                        <?php _e('Mobile'); ?> : <?php echo $this->escape($addressDelivery['mobile']); ?><br/>
+                                    <?php } ?>
+                                </p>
+                                <p>
+                                    <?php if (!empty($addressDelivery['company'])) { ?>
+                                        <?php echo $this->escape($addressDelivery['company']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressDelivery['company_id'])) { ?>
+                                        <?php echo $this->escape($addressDelivery['company_id']); ?><br/>
+                                    <?php } ?>
+                                    <?php if (!empty($addressDelivery['company_vat'])) { ?>
+                                        <?php echo $this->escape($addressDelivery['company_vat']); ?><br/>
+                                    <?php } ?>
+                                </p>
                             </div>
                             <div class="col-md-4">
                                 <p><strong><?php _e('Informations') ?></strong></p>
                                 <hr/>
-                                <p><strong><?php _e('Order status'); ?></strong> :
-                                    <span><?php echo $this->escape($order['orderTitle']); ?> </span></p>
-
-                                <p><strong><?php _e('Payment status'); ?></strong> :
-                                    <span><?php echo $this->escape($order['paymentTitle']); ?> </span></p>
-
-                                <p><strong><?php _e('Delivery status'); ?></strong> :
-                                    <span><?php echo $this->escape($order['deliveryTitle']); ?> </span></p>
-
                                 <p><strong><?php _e('Time create'); ?></strong> :
                                     <span><?php echo $this->escape($order['time_create_view']); ?> </span></p>
 
-                                <p><strong><?php _e('Time payment'); ?></strong> :
-                                    <span><?php echo $this->escape($order['time_payment_view']); ?> </span></p>
-
-                                <p><strong><?php _e('Time delivery'); ?></strong> :
-                                    <span><?php echo $this->escape($order['time_delivery_view']); ?> </span></p>
-
-                                <p><strong><?php _e('Gateway'); ?></strong> :
-                                    <span><?php echo $this->escape($order['gateway']); ?> </span></p>
-                                <?php if ($order['product_price'] > 0) { ?>
-                                    <p><strong><?php _e('Product price'); ?></strong> :
-                                        <span><?php echo $this->escape($order['product_price_view']); ?></span></p>
-                                <?php } ?>
-                                <?php if ($order['shipping_price'] > 0) { ?>
-                                    <p><strong><?php _e('Shipping price'); ?></strong> :
-                                        <span><?php echo $this->escape($order['shipping_price_view']); ?></span></p>
-                                <?php } ?>
-                                <?php if ($order['packing_price'] > 0) { ?>
-                                    <p><strong><?php _e('Packing price'); ?></strong> :
-                                        <span><?php echo $this->escape($order['packing_price_view']); ?></span></p>
-                                <?php } ?>
-                                <?php if ($order['vat_price'] > 0) { ?>
-                                    <p><strong><?php _e('Vat price'); ?></strong> :
-                                        <span><?php echo $this->escape($order['vat_price_view']); ?></span></p>
-                                <?php } ?>
-                                <?php if ($order['total_price'] > 0) { ?>
-                                    <p><strong><?php _e('Total price'); ?></strong> :
-                                        <span><?php echo $this->escape($order['total_price_view']); ?></span></p>
-                                <?php } ?>
-                                <?php if ($order['paid_price'] > 0) { ?>
-                                    <p><strong><?php _e('Paid price'); ?></strong> :
-                                        <span><?php echo $this->escape($order['paid_price_view']); ?></span></p>
-                                <?php } ?>
+                               <?php 
+                                $orderClass = '';
+                                switch ($order['status_order']) {
+                                    case Module\Order\Model\Order::STATUS_ORDER_DRAFT:
+                                        $orderClass = 'btn-warning';
+                                        break;
+                                    case Module\Order\Model\Order::STATUS_ORDER_VALIDATED:
+                                        $orderClass = 'btn-success';
+                                        break;
+                                    case Module\Order\Model\Order::STATUS_ORDER_CANCELLED:
+                                        $orderClass = 'btn-danger';
+                                        break;
+                                }
+                                ?>
+                                 <p><strong><?php _e('Order status'); ?></strong> : <span
+                                            id="update-order-<?php echo $this->escape($order['id']); ?>"
+                                            class=" <?php echo ($order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_VALIDATED || !$hasValidInvoice) ? 'btn update-order' : ''?> <?php echo $orderClass; ?> btn-xs">
+                                            <?php echo Module\Order\Model\Order::getStatusList()[$order['status_order']]; ?>
+                                            </span>
+                                </p>
+                                 <p><strong><?php _e('Can pay?'); ?></strong> : <span
+                                            id="update-canPay-<?php echo $this->escape($order['id']); ?>"
+                                            class="update-canPay btn <?php echo $this->escape($order['canPayClass']); ?> btn-xs"><?php echo $this->escape($order['canPayTitle']); ?></span>
+                                </p>
+                                <p><strong><?php _e('Delivery status'); ?></strong> : <span
+                                        id="update-delivery-<?php echo $this->escape($order['id']); ?>"
+                                        class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-xs"><?php echo $this->escape($order['deliveryTitle']); ?></span>
+                                </p>
+                                <p"><strong><?php _e('Time delivery'); ?></strong> : <span
+                                            id="update-delivery-<?php echo $this->escape($order['id']); ?>-time"><?php echo $this->escape($order['time_delivery_view']); ?></span>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -339,10 +329,29 @@ $this->backbone();
                                 <th><?php _e('Shipping'); ?></th>
                                 <th><?php _e('Packing'); ?></th>
                                 <th><?php _e('Setup'); ?></th>
+                                <th><?php _e('Discount'); ?></th>
                                 <th><?php _e('Vat'); ?></th>
                                 <th><?php _e('Total'); ?></th>
                             </tr>
-                            <?php foreach ($order['products'] as $product) { ?>
+                            <?php 
+                                $totalProductPrice = 0;
+                                $totalShippingPrice = 0;
+                                $totalPackingPrice = 0;
+                                $totalSetupPrice = 0;
+                                $totalDiscountPrice = 0;
+                                $totalVatPrice = 0;
+                                $totalPrice = 0;
+                            
+                            foreach ($order['products'] as $product) {
+                                
+                                $totalProductPrice += $product['product_price'];
+                                $totalShippingPrice += $product['shipping_price'];
+                                $totalPackingPrice += $product['packing_price'];
+                                $totalSetupPrice += $product['setup_price'];
+                                $totalDiscountPrice += $product['discount_price'];
+                                $totalVatPrice += $product['vat_price'];
+                                $totalPrice += $product['total_price'];
+                            ?>
                                 <tr>
                                     <td>
                                         <div class="productItem">
@@ -365,28 +374,25 @@ $this->backbone();
                                     <td><?php echo $product['time_start'] ? _date($product['time_start']) : ''; ?></td>
                                     <td><?php echo $product['time_end'] ? _date($product['time_end']) : ''; ?></td>
                                     <td><?php echo $product['number'] ?></td>
-                                    <td>
-                                        <?php if ($order['type_payment'] == 'installment') { ?>
-                                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['extra']['installment_new_price'])); ?>
-                                            ( <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['extra']['installment_main_price'])); ?> )
-                                        <?php } else { ?>
-                                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
-                                        <?php } ?>
-                                    </td>
+                                    <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?></td>
                                     <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['shipping_price'])); ?></td>
                                     <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['packing_price'])); ?></td>
                                     <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['setup_price'])); ?></td>
+                                    <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?></td>
                                     <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['vat_price'])); ?></td>
-                                    <td>
-                                        <?php if ($order['type_payment'] == 'installment') { ?>
-                                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['extra']['installment_new_total'])); ?>
-                                            ( <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['extra']['installment_main_total'])); ?> )
-                                        <?php } else { ?>
-                                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['total_price'])); ?>
-                                        <?php } ?>
-                                    </td>
+                                    <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['total_price'])); ?></td>
                                 </tr>
                             <?php } ?>
+                            <tr>
+                                <td colspan=4><strong><?php _e ('Total') ?></strong></td>
+                                <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalProductPrice)); ?></strong></td>
+                                <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalShippingPrice)); ?></strong></td>
+                                <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalPackingPrice)); ?></strong></td>
+                                <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalSetupPrice)); ?></strong></td>
+                                <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalDiscountPrice)); ?></strong></td>
+                                <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalVatPrice)); ?></strong></td>
+                                <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalPrice)); ?></strong></td>
+                            </tr>
                         </table>
                         <hr />
                         <?php if (!$hasValidInvoice) { ?> 
@@ -425,8 +431,9 @@ $this->backbone();
                                         <tr>
                                             <th class="col-md-1"><?php _e('System ID'); ?></th>
                                             <th class="col-md-1"><?php _e('Bank ID'); ?></th>
+                                            <th class="col-md-1"><?php _e('Type'); ?></th>
                                             <th class="col-md-2"><?php _e('Time Create'); ?></th>
-                                            <th class="col-md-8 text-right"><?php _e('Action'); ?></th>
+                                            <th class="col-md-7 text-right"><?php _e('Action'); ?></th>
                                         </tr>
                                         
                                     <?php
@@ -444,6 +451,7 @@ $this->backbone();
                                     <tr>
                                         <td><span id="update-invoice-<?php echo $invoice['id'] ?>" data-invoice="<?php echo $invoice['id'] ?>" class="label <?php echo $invoice['type'] != 'CREDIT' && $invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED ? 'update-invoice btn' : '' ?>  <?php echo $labelIdClass; ?>"><?php echo $this->escape($invoice['code']); ?></span></td>
                                         <td><?php echo $this->escape($invoice['random_id']); ?></td>
+                                        <td><?php echo $this->escape($invoice['type']); ?></td>
                                         <td><?php echo $this->escape($invoice['time_create_view']) . ' ' . date('H:m', $invoice['time_create']); ?></td>
                                         <td class="text-right">
                                             <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>"
@@ -493,9 +501,15 @@ $this->backbone();
                                             <td><?php echo $this->escape($installment['credit_price_view']); ?></td>
                                             <td><?php echo $this->escape($installment['time_duedate_view']); ?></td>
                                             <td><?php echo $this->escape($installment['time_payment_view']); ?></td>
-                                            <td><?php echo $gateways[$installment['gateway']]; ?></td>
+                                            <td><?php echo isset($gateways[$installment['gateway']]) ? $gateways[$installment['gateway']] : ''; ?></td >
                                             <td class="text-right">
-                                                <?php if ($invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) { ?> 
+                                                <?php 
+                                                $type = '';
+                                                if (isset($gatewaysInfo[$installment['gateway']])) {
+                                                    $type = $gatewaysInfo[$installment['gateway']]['type'];
+                                                }
+                                                $readonly = $installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID && $type == 'online';
+                                                if ($invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED && !$readonly) { ?> 
                                                     <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
                                                        href="<?php echo $this->url('', array('controller' => 'installment', 'action' => 'edit', 'id' => $installment['id'])); ?>">
                                                         <i class="fa fa-pencil"></i> <?php _e('Edit'); ?></a>
@@ -576,155 +590,8 @@ $this->backbone();
                     </div>
                 </div>
             </div>
-
-            <!-- accordion -->
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingUser">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" href="#collapseUser" aria-expanded="false" aria-controls="collapseUser">
-                            <i class="fa fa-plus"></i> <?php _e('User'); ?>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseUser" class="panel-collapse collapse" role="tabpanel">
-                    <div class="panel-body">
-                        <ul class="clearfix list-unstyled">
-                            <li class="col-md-3"><strong><?php _e('ID'); ?></strong>
-                                : <?php echo $this->escape($order['user']['id']); ?></li>
-                            <li class="col-md-3"><strong><?php _e('Email'); ?></strong>
-                                : <?php echo $this->escape($order['user']['email']); ?></li>
-                            <li class="col-md-3"><strong><?php _e('Identity'); ?></strong>
-                                : <?php echo $this->escape($order['user']['identity']); ?></li>
-                            <li class="col-md-3"><strong><?php _e('Name'); ?></strong>
-                                : <?php echo $this->escape($order['user']['name']); ?></li>
-                        </ul>
-                        <hr />
-                        <ul class="list-inline clearfix">
-                            <li class="pull-left"><?php _e('You can view / edit full user information'); ?></li>
-                            <li class="pull-right">
-                                <a class="btn btn-success" title="<?php _e('User information'); ?>" href="<?php echo $this->url('admin', array(
-                                    'module' => 'user',
-                                    'controller' => 'edit',
-                                    'action' => 'index',
-                                    'uid' => $order['uid'],
-                                )); ?>" target="_blank"><i class="fa fa-user"></i> <?php _e('User information'); ?></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- accordion -->
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingPrice">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" href="#collapsePrice" aria-expanded="false" aria-controls="collapsePrice">
-                            <i class="fa fa-plus"></i> <?php _e('Price'); ?>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapsePrice" class="panel-collapse collapse" role="tabpanel">
-                    <div class="panel-body">
-                        <ul class="clearfix list-unstyled">
-                            <li class="col-md-4"><strong><?php _e('Price'); ?></strong>
-                                : <?php echo $this->escape($order['product_price_view']); ?></li>
-                            <li class="col-md-4"><strong><?php _e('Discount'); ?></strong>
-                                : <?php echo $this->escape($order['discount_price_view']); ?></li>
-                            <li class="col-md-4"><strong><?php _e('Shipping'); ?></strong>
-                                : <?php echo $this->escape($order['shipping_price_view']); ?></li>
-                            <li class="col-md-4"><strong><?php _e('Packing'); ?></strong>
-                                : <?php echo $this->escape($order['packing_price_view']); ?></li>
-                            <li class="col-md-4"><strong><?php _e('Total'); ?></strong>
-                                : <?php echo $this->escape($order['total_price_view']); ?></li>
-                            <li class="col-md-4"><strong><?php _e('Paid'); ?></strong>
-                                : <?php echo $this->escape($order['paid_price_view']); ?></li>
-                            <?php if ($order['type_payment'] == 'installment') { ?>
-                                <li class="col-md-4"><strong><?php _e('Installment numbers'); ?></strong>
-                                    : <?php echo _number(count($order['invoices']) - 1); ?></li>
-                            <?php } ?>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- accordion -->
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOrder">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" href="#collapseOrder" aria-expanded="false" aria-controls="collapseOrder">
-                            <i class="fa fa-plus"></i> <?php _e('Order'); ?>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOrder" class="panel-collapse collapse" role="tabpanel">
-                    <div class="panel-body">
-                        <ul class="clearfix list-unstyled">
-                            <?php 
-                                $orderClass = '';
-                                switch ($order['status_order']) {
-                                    case Module\Order\Model\Order::STATUS_ORDER_DRAFT:
-                                        $orderClass = 'btn-warning';
-                                        break;
-                                    case Module\Order\Model\Order::STATUS_ORDER_VALIDATED:
-                                        $orderClass = 'btn-success';
-                                        break;
-                                    case Module\Order\Model\Order::STATUS_ORDER_CANCELLED:
-                                        $orderClass = 'btn-danger';
-                                        break;
-                                }
-                            ?>
-                             
-                            <li class="col-md-4"><strong><?php _e('Status'); ?></strong> : <span
-                                        id="update-order-<?php echo $this->escape($order['id']); ?>"
-                                        class=" <?php echo ($order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_VALIDATED || !$hasValidInvoice) ? 'btn update-order' : ''?> <?php echo $orderClass; ?> btn-xs">
-                                        <?php echo Module\Order\Model\Order::getStatusList()[$order['status_order']]; ?>
-                                        </span>
-                            </li>
-                            <li class="col-md-3"><strong><?php _e('Can pay?'); ?></strong> : <span
-                                        id="update-canPay-<?php echo $this->escape($order['id']); ?>"
-                                        class="update-canPay btn <?php echo $this->escape($order['canPayClass']); ?> btn-xs"><?php echo $this->escape($order['canPayTitle']); ?></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- accordion -->
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingDelivery">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" href="#collapseDelivery" aria-expanded="false" aria-controls="collapseDelivery">
-                            <i class="fa fa-plus"></i> <?php _e('Delivery'); ?>
-                        </a>
-                    </h4>
-                </div>
-
-                <div id="collapseDelivery" class="panel-collapse collapse" role="tabpanel">
-                    <div class="panel-body">
-                        <ul class="clearfix list-unstyled">
-                            <li class="col-md-3"><strong><?php _e('Status'); ?></strong> : <span
-                                        id="update-delivery-<?php echo $this->escape($order['id']); ?>"
-                                        class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-xs"><?php echo $this->escape($order['deliveryTitle']); ?></span>
-                            </li>
-                            <li class="col-md-3"><strong><?php _e('Time'); ?></strong> : <span
-                                        id="update-delivery-<?php echo $this->escape($order['id']); ?>-time"><?php echo $this->escape($order['time_delivery_view']); ?></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
-    <?php if ($order['type_payment'] == 'installment') { ?>
-        <div class="clearfix">
-            <div class="col-md-12 text-right">
-                <a class="btn btn-success btn-lg" title="<?php _e('Print'); ?>"
-                   href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'print', 'id' => $order['id'])); ?>"><i
-                            class="fa fa-print"></i> <?php _e('Print'); ?></a>
-            </div>
-        </div>
-    <?php } ?>
 </div>
 <script>
     (function ($) {

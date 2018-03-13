@@ -88,19 +88,6 @@
                     <p><strong><?php _e('Order'); ?></strong> :
                         <span><?php echo $this->escape($order['code']); ?></span></p>
 
-                    <p><strong><?php _e('Status'); ?></strong> :
-                        <?php if ($invoice['status'] == 1) { ?>
-                            <span class="label label-success"><?php _e('Paid'); ?></span>
-                            <span><?php _e('On'); ?> : <?php echo $this->escape($invoice['time_payment_view']) ?></span>
-                        <?php } elseif ($invoice['status'] == 2) { ?>
-                            <span class="label label-warning"><?php _e('Unpaid'); ?></span>
-                            <span><?php _e('Due date'); ?>
-                                : <?php echo $this->escape($invoice['time_duedate_view']) ?></span>
-                        <?php } else { ?>
-                            <span class="label label-danger"><?php _e('Canceled'); ?></span>
-                            <span><?php _e('On'); ?> : <?php echo $this->escape($invoice['time_cancel_view']) ?></span>
-                        <?php } ?>
-                    </p>
                     <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
                         <p><strong><?php _e('Name'); ?></strong> :
                             <span><?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></span>
@@ -177,14 +164,6 @@
                                 <?php echo $this->escape($product['details']['title']); ?>
                             </a>
                         </div>
-                        <?php if (isset($product['extra']['product']) && !empty($product['extra']['product'])) { ?>
-                            <?php foreach ($product['extra']['product'] as $extraProduct) { ?>
-                                <div class="productItem">
-                                    <span><?php echo $this->escape($extraProduct['title']); ?></span> :
-                                    <strong><?php echo $this->escape($extraProduct['value']); ?></strong>
-                                </div>
-                            <?php } ?>
-                        <?php } ?>
                     </td>
                     <td><?php echo _number($this->escape($product['number'])); ?></td>
                     <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?></td>
@@ -194,7 +173,7 @@
                 </tr>
             <?php } ?>
         </table>
-        <?php if ($order['type_payment'] == 'installment') { ?>
+        <?php if ($invoice['type_payment'] == 'installment') { ?>
             <div class="alert alert-success" role="alert">
                 <h2><?php _e('Payment price'); ?> :
                     <strong><?php echo $this->escape($invoice['total_price_view']); ?></strong></h2>

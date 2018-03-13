@@ -306,8 +306,10 @@ $this->footScript()->appendScript($script);
                                 <th class="col-md-2 text-right"><?php _e('Total') ?></th>
                             </tr>
                             <?php $totalDiscount = 0 ?>
+                            <?php $count = 0 ?>
                             <?php foreach ($cart['product'] as $key => $product) { ?>
                                 <?php 
+                                    $count++;
                                     $extra = json_decode($product['extra'], true);
                                     $unconsumedPrice = $extra['unconsumedPrice']; 
                                 ?>
@@ -316,14 +318,14 @@ $this->footScript()->appendScript($script);
                                     <td>
                                         <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
                                            target="_blank">
-                                            <b>#<?php echo ($key + 1) . ' ' . $this->escape($product['details']['title']); ?></b>
+                                            <b>#<?php echo $count . ' ' . $this->escape($product['details']['title']); ?></b>
                                         </a>
-                                        <?php if (!empty($extra['time_start'])) { ?>
+                                        <?php if (!empty($product['time_start'])) { ?>
                                             <p>
-                                                <?php if ($extra['time_end'] == strtotime("2030-01-01")) { ?>
-                                                   <?php echo __('Unlimited from') . ' ' . _date($extra['time_start'])?>
+                                                <?php if ($product['time_end'] == strtotime("2030-01-01")) { ?>
+                                                   <?php echo __('Unlimited from') . ' ' . _date($product['time_start'])?>
                                                 <?php } else { ?> 
-                                                    <?php echo __('From') . ' ' . _date($extra['time_start']) . ' ' . __('to') . ' ' . _date($extra['time_end']) ?>
+                                                    <?php echo __('From') . ' ' . _date($product['time_start']) . ' ' . __('to') . ' ' . _date($product['time_end']) ?>
                                                 <?php } ?>
                                             </p>
                                         <?php } ?>

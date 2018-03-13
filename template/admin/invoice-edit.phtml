@@ -25,10 +25,7 @@
 
                 <p><strong><?php _e('Create'); ?></strong> :
                     <span><?php echo $this->escape($invoice['time_create_view']); ?> </span></p>
-                <?php if ($invoice['product_price'] > 0) { ?>
-                    <p><strong><?php _e('Product price'); ?></strong> :
-                        <span><?php echo $this->escape($invoice['product_price_view']); ?></span></p>
-                <?php } ?>
+                
                 <?php if ($invoice['shipping_price'] > 0) { ?>
                     <p><strong><?php _e('Shipping price'); ?></strong> :
                         <span><?php echo $this->escape($invoice['shipping_price_view']); ?></span></p>

@@ -22,7 +22,7 @@ class InvoiceFilter extends InputFilter
     {
         // product_price
         $this->add(array(
-            'name' => 'installments',
+            'name' => 'type_payment',
             'required' => false,
             
         ));

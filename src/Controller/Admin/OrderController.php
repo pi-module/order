@@ -134,6 +134,7 @@ class OrderController extends ActionController
         ->join(array('invoice_installment' => $invoiceInstallmentTable), new Expression('invoice_installment.invoice = invoice.id AND invoice_installment.time_duedate <' . time()), array('status_payment' => new Expression("MIN(status_payment)")), 'left')
         ->join(array('detail' => $detailTable), 'detail.order = order.id', array('total_price' =>new Expression("(SUM(product_price) + SUM(shipping_price) + SUM(packing_price) + SUM(setup_price) + SUM(vat_price) - SUM(discount_price))")), 'left')
         ->group('detail.order')
+        ->where(array('invoice.type' => 'NORMAL', 'invoice.status = ?' => \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED))
         ->where ($where)
         ->having ($having)
         ->order ($order)
@@ -161,10 +162,10 @@ class OrderController extends ActionController
         ->join(array('invoice_installment' => $invoiceInstallmentTable), 'invoice_installment.invoice = invoice.id', array('status_payment' => new Expression("MIN(status_payment)")), 'left')
         ->join(array('detail' => $detailTable), 'detail.order = order.id', array('total_price' =>new Expression("(SUM(product_price) + SUM(shipping_price) + SUM(packing_price) + SUM(setup_price) + SUM(vat_price) - SUM(discount_price))")), 'left')
         ->group('detail.order')
+        
         ->where ($where)
         ->having ($having)
         ->order ($order);
-        
         $count = Pi::db()->query($select)->count();
         
         // Set paginator
@@ -348,24 +349,8 @@ class OrderController extends ActionController
                     
                     if ($values['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) {
                         
-                        // Find due price
-                        $products = Pi::api('order', 'order')->listProduct($invoice->order);
-                        $duePrice = 0;
-                        foreach ($products as $product) {
-                            $duePrice += $product['product_price'] - $product['discount_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'];      
-                        }
-                        
-                        $invoiceInstallment = $this->getModel('invoice_installment')->createRow();
-                        $installment = array(
-                            'invoice' => $invoice->id,
-                            'count' => 1,
-                            'gateway' => '',
-                            'status_payment' => \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID,
-                            'time_payment' => 0,
-                            'due_price' => $duePrice,
-                        );
-                        $invoiceInstallment->assign($installment);
-                        $invoiceInstallment->save();  
+                        Pi::api('invoice', 'order')->createInstallments($invoice->toArray());
+                          
                     }     
 
                     // Send notification
@@ -533,11 +518,21 @@ class OrderController extends ActionController
         
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
         $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
+        $offline = false;
+        $order['totalInstallments'] = 0;
+        $order['paidInstallments'] = 0;
+        $order['unPaidInstallments'] = 0;
         // Get installments and count paid and unpaid payment 
         foreach($order['invoices'] as &$invoice) {
             $installments = Pi::api('installment', 'order')->getInstallmentsFromInvoice($invoice['id']);
             $invoice['installments'] = $installments;
             foreach($installments as $installment) {
+                if (Pi::api('gateway', 'order')->getGateway($installment['gateway'])) {
+                    if (Pi::api('gateway', 'order')->getGateway($installment['gateway'])->gatewayRow['type'] == 'offline') {
+                        $offline = true;
+                    }    
+                }
+                
                 $order['totalInstallments']++;
                 if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
                     $order['paidInstallments']++;
@@ -571,12 +566,14 @@ class OrderController extends ActionController
         // Set view
         $this->view()->setTemplate('order-view');
         $this->view()->assign('gateways', Pi::api('gateway', 'order')->getAdminGatewayList());
+        $this->view()->assign('gatewaysInfo', Pi::api('gateway', 'order')->getAllGatewayList());
         $this->view()->assign('order', $order);
         $this->view()->assign('addressDelivery', $addressDelivery);
         $this->view()->assign('addressInvoicing', $addressInvoicing);
         $this->view()->assign('config', $config);
         $this->view()->assign('hasValidInvoice', Pi::api('order', 'order')->hasValidInvoice($order['id']));
         $this->view()->assign('hasDraftInvoice', Pi::api('order', 'order')->hasDraftInvoice($order['id']));
+        $this->view()->assign('offline', $offline);
         
     }
 
@@ -700,9 +697,7 @@ class OrderController extends ActionController
                 $detail->time_create = time();
                 $detail->extra = json_encode(
                     array(
-                        'product' => array (
-                            'item' => $values['module_item']
-                        ) 
+                       'item' => $values['module_item']
                     )
                 );
                 $detail->save();
@@ -936,24 +931,24 @@ class OrderController extends ActionController
         // Set order ids
         $orderIds = array();
         $orderInstallmentCount = 1;
-        foreach ($user['orders'] as $order) {
-            $orderIds[] = $order['id'];
-            if ($order['type_payment'] == 'installment') {
-                $orderInstallmentCount++;
-            }
-        }
+        
         // Get invoice
         $user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id'], true, $orderIds);
+        foreach ($user['invoices'] as $invoice) {
+            if ($invoice['type_payment'] == 'installment') {
+                $invoiceInstallmentCount++;
+            }
+        }
         // Table view
         $tableView = array();
-        if ($orderInstallmentCount > 0) {
+        if ($invoiceInstallmentCount > 0) {
             $tableView = Pi::api('installment', 'order')->blockTable($user, $orderIds);
         }
         // Set view
         $this->view()->setTemplate('order-list-user');
         $this->view()->assign('user', $user);
         $this->view()->assign('tableView', $tableView);
-        $this->view()->assign('orderInstallmentCount', $orderInstallmentCount);
+        $this->view()->assign('invoiceInstallmentCount', $invoiceInstallmentCount);
     }
 
     public function printPdfAction()

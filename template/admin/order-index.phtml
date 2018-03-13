@@ -78,7 +78,7 @@ $this->backbone();
                                 <?php echo $this->escape($order['first_name']); ?>
                                 <?php echo $this->escape($order['last_name']); ?>
                             </li>
-                            <?php if ($order['type_payment'] == 'installment') { ?>
+                            <?php if ($invoice['type_payment'] == 'installment') { ?>
                                 <li class="label label-info">
                                     <?php _e('Installment'); ?>
                                 </li>

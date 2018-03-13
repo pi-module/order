@@ -17,23 +17,54 @@ use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Module\Order\Form\RemoveForm;
 use Zend\Json\Json;
+use Pi\Paginator\Paginator;
 
 class IndexController extends ActionController
 {
     public function indexAction()
     {
-        // Check user is login or not
         Pi::service('authentication')->requireLogin();
-        // Get config
+        
         $config = Pi::service('registry')->config->read($this->getModule());
-        // Get user info
         $user = Pi::api('user', 'order')->getUserInformation();
-        // Get order
-        $orders = Pi::api('order', 'order')->getOrderFromUser($user['id'], false);
+        
+        $page = $this->params('page', 1);
+        $offset = (int)($page - 1) * $this->config('view_perpage');
+        $limit = intval($this->config('view_perpage'));
+        
+        $options = array (
+            'limit' => $limit,
+            'offset' => $offset,
+            'draft' => false
+        );
+        $orders = Pi::api('order', 'order')->getOrderFromUser($user['id'], false, $options);
         foreach ($orders as $order) {
+            $order['has_payment'] = Pi::api('order', 'order')->hasPayment($order['id']);
             $user['orders'][$order['id']] = $order;
-            $user['orders'][$order['id']]['products'] = Pi::api('order', 'order')->listProduct($order['id']);
+            $products = Pi::api('order', 'order')->listProduct($order['id']);
+            $user['orders'][$order['id']]['products'] = $products;
+            $totalPrice = 0;
+            foreach ($products as $product) {
+                $totalPrice += $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'] - $product['discount_price'];
+            }
+            $user['orders'][$order['id']]['total_price_view'] = Pi::api('api', 'order')->viewPrice($totalPrice);
         }
+        
+        // Set paginator
+        $count = count(Pi::api('order', 'order')->getOrderFromUser($user['id'], false));
+        $paginator = Paginator::factory(intval($count));
+        $paginator->setItemCountPerPage($this->config('admin_perpage'));
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setUrlOptions(array(
+            'router' => $this->getEvent()->getRouter(),
+            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params' => array_filter(array(
+                'module' => 'order',
+                'controller' => 'index',
+                'action' => 'index',
+            )),
+        ));
+        
         // Set order ids
         /* $orderIds = array();
         foreach ($user['orders'] as $order) {
@@ -52,6 +83,8 @@ class IndexController extends ActionController
         $this->view()->setTemplate('list');
         $this->view()->assign('user', $user);
         $this->view()->assign('config', $config);
+        $this->view()->assign('paginator', $paginator);
+        
     }
 
     public function errorAction()
@@ -71,9 +104,6 @@ class IndexController extends ActionController
         }
         // Check
         if (!Pi::service('authentication')->hasIdentity()) {
-            if (!isset($_SESSION['payment']['process']) || $_SESSION['payment']['process'] != 1) {
-                $this->jump(array('', 'controller' => 'index', 'action' => 'error'));
-            }
             // Set session
             $_SESSION['payment']['process_update'] = time();
         }
@@ -84,6 +114,10 @@ class IndexController extends ActionController
     public function cancelAction()
     {
         $id = $this->params('id');
+        if (Pi::api('order', 'order')->hasPayment($id)) {
+            $this->jump(array('', 'action' => 'index'), __('Order has payment. You cannont cancel it'));    
+        }
+        
         Pi::api('order', 'order')->cancelOrder($id);
         $this->jump(array('', 'action' => 'index'), __('Order canceled'));
         

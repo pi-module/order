@@ -848,7 +848,7 @@ EOD;
                 return false;
             }
             
-            $sql = sprintf("ALTER TABLE %s  DROP `module_name`, DROP `module_table`,   DROP `module_item`, DROP `time_start`, DROP `time_end`, DROP `time_finish`", $orderTable);
+            $sql = sprintf("ALTER TABLE %s  DROP `module_name`, DROP `module_table`, DROP `module_item`, DROP `time_start`, DROP `time_end`, DROP `time_finish`", $orderTable);
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
@@ -1074,6 +1074,82 @@ EOD;
                 $this->setResult('db', array(
                     'status' => false,
                     'message' => 'Table alter query for detail failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+        
+        if (version_compare($moduleVersion, '2.2.0', '<')) {
+            try {
+                $select = $detailModel->select();
+                $rowset = $detailModel->selectWith($select);
+                foreach ($rowset as $row) {
+                    if ($row->extra != null) {
+                        $extra = json_decode($row->extra, true);
+                        $arr = $extra['product'];
+                        unset($extra['product']);
+                        $extra = array_merge($extra, $arr);
+                        $row->time_start = $extra['time_start'];
+                        $row->time_end = $extra['time_end'];
+                        unset($extra['time_start']);
+                        unset($extra['time_end']);
+                        $row->extra = json_encode($extra);
+                        $row->save();
+                    }
+                }
+            } catch (\Exception $exception) {
+             
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'data transfer failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;   
+            }
+            
+            $sql = sprintf("ALTER TABLE %s ADD `type_payment` ENUM ('free', 'onetime', 'recurring', 'installment') NOT NULL DEFAULT 'onetime'", $invoiceTable);
+            try {
+                $invoiceAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+            $sql = sprintf("UPDATE %s invoice INNER JOIN %s `order` on invoice.`order` = `order`.id SET invoice.type_payment = `order`.type_payment", $invoiceTable, $orderTable);
+             try {
+                $invoiceAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for basket failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            $sql = sprintf("ALTER TABLE %s DROP `type_payment`", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+            $sql = sprintf("ALTER TABLE %s  CHANGE `time_end` `time_end` INT(10) UNSIGNED NULL DEFAULT '0',  CHANGE `time_start` `time_start` INT(10) UNSIGNED NULL DEFAULT '0'", $detailTable);
+            try {
+                $detailAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
                 ));
                 return false;

@@ -45,12 +45,12 @@ class Order extends AbstractApi
 
     public function getOrder($id)
     {
-        $order = Pi::model('order', $this->getModule())->find($id);
+        $order = Pi::model('order', 'order')->find($id);
         $order = $this->canonizeOrder($order);
         return $order;
     }
 
-    public function getOrderFromUser($uid, $compressed = false)
+    public function getOrderFromUser($uid, $compressed = false, $options = array())
     {
         $orders = array();
         // Check compressed
@@ -59,9 +59,19 @@ class Order extends AbstractApi
         } else {
             $where = array('uid' => $uid);
         }
+        if (!$options['draft']) {
+            $where = array('status_order != ?' => \Module\Order\Model\Order::STATUS_ORDER_DRAFT);
+        }
+        
         $order = array('time_create DESC', 'id DESC');
         // Select
-        $select = Pi::model('order', $this->getModule())->select()->where($where)->order($order);;
+        $select = Pi::model('order', $this->getModule())->select()->where($where)->order($order);
+        if (isset($options['limit'])) {
+            $select->limit($options['limit']);
+        }
+        if (isset($options['offset'])) {
+            $select->offset($options['offset']);
+        }
         $rowset = Pi::model('order', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $orders[$row->id] = $this->canonizeOrder($row);
@@ -283,24 +293,9 @@ class Order extends AbstractApi
         } elseif ($order['type_commodity'] == 'service') {
             $order['type_commodity_view'] = __('Service');
         }
-        //
-        if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) {
-            if ($order['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
-                if ($order['status_delivery'] == 1) {
-                    $order['shortStatus'] = $order['paymentTitle'];
-                    $order['shortLabel'] = $order['paymentLabel'];
-                } else {
-                    $order['shortStatus'] = $order['deliveryTitle'];
-                    $order['shortLabel'] = $order['deliveryLabel'];
-                }
-            } else {
-                $order['shortStatus'] = $order['paymentTitle'];
-                $order['shortLabel'] = $order['paymentLabel'];
-            }
-        } else {
-            $order['shortStatus'] = $order['orderTitle'];
-            $order['shortLabel'] = $order['orderLabel'];
-        }
+      
+        $order['shortStatus'] = $order['orderTitle'];
+        $order['shortLabel'] = $order['orderLabel'];
         // Set text_summary
         $order['user_note'] = Pi::service('markup')->render($order['user_note'], 'html', 'text');
         // Set text_summary
@@ -313,10 +308,12 @@ class Order extends AbstractApi
     {
         $list = array();
         $where = array('order' => $id);
-        $select = Pi::model('detail', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('detail', $this->getModule())->selectWith($select);
+        $select = Pi::model('detail', 'order')->select()->where($where);
+        $rowset = Pi::model('detail', 'order')->selectWith($select);
         foreach ($rowset as $row) {
-            
+            if (isset($options['module']) && $options['module'] != $row->module) {
+                continue;
+            }
             if ($options['credit']) {
                 if ($row->product_type != 'credit' || $row->module != 'order') {
                     continue;
@@ -344,27 +341,14 @@ class Order extends AbstractApi
                     'thumbUrl' => '',
                 );
             }
+        }   
 
-            if (empty($row->extra)) {
-                $list[$row->id]['extra'] = array();
-            } else {
-                $list[$row->id]['extra'] = json::decode($row->extra, true);
-                // Set template and view
-                if (isset($list[$row->id]['extra']['view_type']) && $list[$row->id]['extra']['view_type'] == 'template') {
-                    $list[$row->id]['extra']['view_type'] = 'template';
-                    if (!isset($list[$row->id]['extra']['view_template']) || empty($list[$row->id]['extra']['view_template'])) {
-                        $list[$row->id]['extra']['view_template'] = 'order-detail';
-                    }
-                } else {
-                    $list[$row->id]['extra']['view_type'] = 'simple';
-                    $list[$row->id]['extra']['view_template'] = '';
-                }
-                // Get detail
-                if (isset($list[$row->id]['extra']['getDetail']) && $list[$row->id]['extra']['getDetail']) {
-                    $list[$row->id]['extra']['orderDetail'] = Pi::api('order', $row->module)->getOrder($id, 'order');
-                }
-            }
+        if (empty($row->extra)) {
+            $list[$row->id]['extra'] = array();
+        } else {
+            $list[$row->id]['extra'] = json::decode($row->extra, true);
         }
+        
         return $list;
     }
 
@@ -401,8 +385,8 @@ class Order extends AbstractApi
         // Get order detail
         $detail = array();
         $where = array('order' => $orderId);
-        $select = Pi::model('detail', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('detail', $this->getModule())->selectWith($select);
+        $select = Pi::model('detail', 'order')->select()->where($where);
+        $rowset = Pi::model('detail', 'order')->selectWith($select);
         foreach ($rowset as $row) {
             $detail[$row->id] = $row->toArray();
             if (empty($row->extra)) {
@@ -531,16 +515,43 @@ class Order extends AbstractApi
         $select = Pi::db()->select();
         $select
         ->from(array('order' => $orderTable))
-        ->join(array('invoice' => $invoiceTable), 'invoice.order = order.id', array())
+        ->join(array('invoice' => $invoiceTable), 'invoice.order = order.id', array('status'))
         ->join(array('invoice_installment' => $invoiceInstallmentTable), 'invoice_installment.invoice = invoice.id')
         ->where (array('order.id' => $id));
         
         $rowset = Pi::db()->query($select);
         foreach ($rowset as $row) {
-            if ($row['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
+            if ($row['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED && $row['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
                 return true;
             }
         }
         return false;
     }
+    public function getTimePayment($id) 
+    {
+        $orderTable = Pi::model('order', 'order')->getTable();
+        $invoiceTable = Pi::model("invoice", 'order')->getTable();
+        $invoiceInstallmentTable = Pi::model("invoice_installment", 'order')->getTable();
+     
+        $select = Pi::db()->select();
+        $select
+        ->from(array('order' => $orderTable))->columns(array())
+        ->join(array('invoice' => $invoiceTable), 'invoice.order = order.id', array())
+        ->join(array('invoice_installment' => $invoiceInstallmentTable), 'invoice_installment.invoice = invoice.id', array('time_payment'))
+        ->where (
+            array(
+                'order.id' => $id,
+                'invoice.status' => \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED
+            )
+        )
+        ->order(array('invoice.id DESC', 'invoice_installment.id'));
+        
+        $row = Pi::db()->query($select)->current();
+        if ($row) {
+            return $row['time_payment']; 
+        }
+        
+        return 0; 
+    }
+    
 }
