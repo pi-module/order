@@ -26,7 +26,7 @@ msgstr "Détail des commandes simples"
 
 #: config/block.php:23 config/config.php:57
 msgid "Installment"
-msgstr "Paiement fractionné"
+msgstr "Echéancier"
 
 #: config/block.php:24
 msgid "Installment orders detail"

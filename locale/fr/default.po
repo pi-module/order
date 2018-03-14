@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2018-03-14 16:21+0100\n"
+"POT-Creation-Date: 2018-03-14 16:44+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -1978,8 +1978,8 @@ msgid "List of invoices"
 msgstr "Liste des Factures"
 
 #: template/admin/invoice-index.phtml:23 template/admin/order-view.phtml:432
-msgid "System ID"
-msgstr "System ID"
+msgid "Invoice ID"
+msgstr "N° facture"
 
 #: template/admin/invoice-index.phtml:26 template/admin/invoice-view.phtml:27
 #: template/admin/log-index.phtml:12 template/admin/order-list-user.phtml:245
@@ -2772,6 +2772,9 @@ msgstr "Facture réglée"
 #, php-format
 msgid "credit card / %s"
 msgstr "carte bancaire / %s"
+
+#~ msgid "System ID"
+#~ msgstr "System ID"
 
 #~ msgid "This order products or services list"
 #~ msgstr "Liste des commandes de produits ou services"
