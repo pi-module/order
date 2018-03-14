@@ -1045,7 +1045,7 @@ EOD;
                 ));
                 return false;   
             }
-            $sql = sprintf("ALTER TABLE %s DROP `status_payment`, DROP `time_payment`, DROP `product_price`, DROP `discount_price`, DROP `shipping_price`, DROP `packing_price`, DROP `setup_price`, DROP `vat_price`, DROP `total_price`, DROP `paid_price`, DROP `gateway`, DROP `extra`", $orderTable);
+            $sql = sprintf("ALTER TABLE %s DROP `status_payment`, DROP `time_payment`, DROP `product_price`, DROP `discount_price`, DROP `shipping_price`, DROP `packing_price`, DROP `setup_price`, DROP `vat_price`, DROP `total_price`, DROP `paid_price`, DROP `gateway`", $orderTable);
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {

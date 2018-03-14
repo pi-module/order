@@ -31,7 +31,8 @@ CREATE TABLE `{order}` (
   # promotion as gift
   `promotion_type`  VARCHAR(64)                                          NOT NULL DEFAULT '',
   `promotion_value` VARCHAR(64)                                          NOT NULL DEFAULT '',
-  `create_by`        ENUM ('ADMIN', 'USER') NOT NULL DEFAULT 'USER',
+  `create_by`       ENUM ('ADMIN', 'USER') NOT NULL DEFAULT 'USER',
+  `extra`           TEXT,
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`)
 );
