@@ -156,7 +156,11 @@ class PaymentController extends IndexController
             $totalPrice = $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'];
         }
         if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED  && $totalPrice == 0) {
-            $invoice = Pi::api('invoice', 'order')->createInvoice($order['id'], Pi::user()->getId());
+            $uid = Pi::user()->getId();
+            if (!$uid) {
+                  $uid = $_SESSION['order']['uid']; 
+            }
+            $invoice = Pi::api('invoice', 'order')->createInvoice($order['id'], $uid);
             $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id'], $cart['gateway']);
             $url = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
             // Remove processing

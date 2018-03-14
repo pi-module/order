@@ -60,7 +60,7 @@ class Order extends AbstractApi
             $where = array('uid' => $uid);
         }
         if (!$options['draft']) {
-            $where = array('status_order != ?' => \Module\Order\Model\Order::STATUS_ORDER_DRAFT);
+            $where['status_order != ?'] = \Module\Order\Model\Order::STATUS_ORDER_DRAFT;
         }
         
         $order = array('time_create DESC', 'id DESC');
@@ -410,6 +410,8 @@ class Order extends AbstractApi
                 'id' => $order->id,
             )));
         }
+        
+       
 
         return $backUrl;
     }
