@@ -134,7 +134,7 @@ class OrderController extends ActionController
         ->join(array('invoice_installment' => $invoiceInstallmentTable), new Expression('invoice_installment.invoice = invoice.id AND invoice_installment.time_duedate <' . time()), array('status_payment' => new Expression("MIN(status_payment)")), 'left')
         ->join(array('detail' => $detailTable), 'detail.order = order.id', array('total_price' =>new Expression("(SUM(product_price) + SUM(shipping_price) + SUM(packing_price) + SUM(setup_price) + SUM(vat_price) - SUM(discount_price))")), 'left')
         ->group('detail.order')
-        ->where(array('invoice.type' => 'NORMAL', 'invoice.status = ?' => \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED))
+        ->where(array('(invoice.type IS NULL OR invoice.type = ? )' => 'NORMAL', '(invoice.status IS NULL OR invoice.status = ? )'=> \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) )
         ->where ($where)
         ->having ($having)
         ->order ($order)
