@@ -526,6 +526,12 @@ class OrderController extends ActionController
         foreach($order['invoices'] as &$invoice) {
             $installments = Pi::api('installment', 'order')->getInstallmentsFromInvoice($invoice['id']);
             $invoice['installments'] = $installments;
+            
+            $installment = current($installments);
+            if ($order['type_commodity'] == 'service' && $installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
+                $order['time_delivery_view'] = _date($installment['time_payment']);
+            }
+            
             foreach($installments as $installment) {
                 if (Pi::api('gateway', 'order')->getGateway($installment['gateway'])) {
                     if (Pi::api('gateway', 'order')->getGateway($installment['gateway'])->gatewayRow['type'] == 'offline') {

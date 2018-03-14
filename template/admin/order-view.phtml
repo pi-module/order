@@ -291,13 +291,20 @@ $this->backbone();
                                             <?php echo Module\Order\Model\Order::getStatusList()[$order['status_order']]; ?>
                                             </span>
                                 </p>
-                                 <p><strong><?php _e('Can pay?'); ?></strong> : <span
+                                 <p><strong><?php _e('Block payment ?'); ?></strong> : <span
                                             id="update-canPay-<?php echo $this->escape($order['id']); ?>"
-                                            class="update-canPay btn <?php echo $this->escape($order['canPayClass']); ?> btn-xs"><?php echo $this->escape($order['canPayTitle']); ?></span>
+                                            class="update-canPay btn <?php echo $this->escape($order['canPayClass']); ?> btn-xs"><?php echo $order['can_pay'] ? __('No') : __('Yes'); ?></span>
                                 </p>
-                                <p><strong><?php _e('Delivery status'); ?></strong> : <span
-                                        id="update-delivery-<?php echo $this->escape($order['id']); ?>"
-                                        class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-xs"><?php echo $this->escape($order['deliveryTitle']); ?></span>
+                                <p><strong><?php _e('Delivery status'); ?></strong> : 
+                                    <?php if ($order['type_commodity'] == 'product') { ?>
+                                        <span
+                                            id="update-delivery-<?php echo $this->escape($order['id']); ?>"
+                                            class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-xs">
+                                            
+                                        </span>
+                                    <?php } else { ?>
+                                        <span class="label label-default"><?php _e('Its service'); ?></span>
+                                    <?php } ?>
                                 </p>
                                 <p"><strong><?php _e('Time delivery'); ?></strong> : <span
                                             id="update-delivery-<?php echo $this->escape($order['id']); ?>-time"><?php echo $this->escape($order['time_delivery_view']); ?></span>

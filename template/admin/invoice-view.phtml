@@ -22,8 +22,6 @@
                 <p><strong><?php _e('Order'); ?></strong> : <span><?php echo $this->escape($order['code']); ?></span>
                 </p>
 
-               <span><?php echo $this->escape($invoice['gateway']); ?></span></p>
-
                 <p><strong><?php _e('Time Create'); ?></strong> :
                     <span><?php echo $this->escape($invoice['time_create_view']) . ' ' . date('H:i', $invoice['time_create']) ; ?> </span></p>
                 

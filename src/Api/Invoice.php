@@ -445,6 +445,12 @@ class Invoice extends AbstractApi
                 break;        
             }
         }
+        
+        if ($order['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
+            $installment = current($installments);
+            $order['time_payment_view'] = _date($installment['time_payment']);
+        }
+        
         $gateway = array();
         foreach ($installments as $installment) {
             $gateway[] = $installment['gateway'];         
