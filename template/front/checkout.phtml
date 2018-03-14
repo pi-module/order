@@ -224,21 +224,22 @@ $this->footScript()->appendScript($script);
                 </div>
                 <?php if (!empty($addresses)) { ?>
                     <div class="col-md-6">
-                        <?php if ($addressInvoicing['id'] == $addressDelivery['id']) { ?>
-                            <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal">
-                            <input type="checkbox" checked="checked" /> <?php _e("Same address"); ?>
-                            </a>
-                        <?php } else { ?>
-                    
-                            <div class="col-md-12 address-single">
-                                 <div class="clearfix">
-                                    <div class="info">
-                                        <p>
-                                            <span class="fa fa-map-marker"></span> <strong><?php _e('Delivery address'); ?></strong>
+                        <div class="col-md-12 address-single">
+                             <div class="clearfix">
+                                <div class="info">
+                                    <p>
+                                        <span class="fa fa-map-marker"></span> <strong><?php _e('Delivery address'); ?></strong>
+                                        <?php if ($addressInvoicing['id'] != $addressDelivery['id']) { ?>
                                             <a class="modify-address" href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal">
                                                 <?php _e('Modify') ?>
                                             </a>
-                                        </p>
+                                        <?php } ?>
+                                    </p>
+                                    <?php if ($addressInvoicing['id'] == $addressDelivery['id']) { ?>
+                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal">
+                                        <input type="checkbox" checked="checked" /> <?php _e("Same address"); ?>
+                                        </a>
+                                    <?php } else { ?>
                                         <div>
                                             <?php echo $this->escape($addressDelivery['first_name']); ?>  <?php echo $this->escape($addressDelivery['last_name']); ?>
                                         </div>
@@ -276,30 +277,30 @@ $this->footScript()->appendScript($script);
                                             <?php _e('Mobile'); ?> :
                                             <?php echo $this->escape($addressDelivery['mobile']); ?>
                                         </div>
+                                        <?php } ?>
+                                        <?php if (!empty($addressDelivery['email'])) { ?>
+                                            <div>
+                                                <?php _e('Email'); ?> :
+                                                <?php echo $this->escape($addressDelivery['email']); ?>
+                                            </div>
+                                        <?php } ?>
+                                        <?php if (!empty($addressDelivery['phone'])) { ?>
+                                            <div>
+                                                <?php _e('Phone'); ?> :
+                                                <?php echo $this->escape($addressDelivery['phone']); ?>
+                                            </div>
+                                        <?php } ?>
+                                        <?php if (!empty($addressDelivery['mobile'])) { ?>
+                                            <div>
+                                                <?php _e('Mobile'); ?> :
+                                                <?php echo $this->escape($addressDelivery['mobile']); ?>
+                                            </div>
+                                        <?php } ?>
                                     <?php } ?>
-                                    <?php if (!empty($addressDelivery['email'])) { ?>
-                                        <div>
-                                            <?php _e('Email'); ?> :
-                                            <?php echo $this->escape($addressDelivery['email']); ?>
-                                        </div>
-                                    <?php } ?>
-                                    <?php if (!empty($addressDelivery['phone'])) { ?>
-                                        <div>
-                                            <?php _e('Phone'); ?> :
-                                            <?php echo $this->escape($addressDelivery['phone']); ?>
-                                        </div>
-                                    <?php } ?>
-                                    <?php if (!empty($addressDelivery['mobile'])) { ?>
-                                        <div>
-                                            <?php _e('Mobile'); ?> :
-                                            <?php echo $this->escape($addressDelivery['mobile']); ?>
-                                        </div>
-                                    <?php } ?>
-                                        <br />
-                                    </div>
+                                    <br />
                                 </div>
                             </div>
-                        <?php } ?>
+                        </div>
                     </div>
                 <?php } ?>
             </div>
