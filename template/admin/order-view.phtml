@@ -291,7 +291,7 @@ $this->backbone();
                                             <?php echo Module\Order\Model\Order::getStatusList()[$order['status_order']]; ?>
                                             </span>
                                 </p>
-                                 <p><strong><?php _e('Block payment ?'); ?></strong> : <span
+                                 <p><strong><?php _e('Blocked payments ?'); ?></strong> : <span
                                             id="update-canPay-<?php echo $this->escape($order['id']); ?>"
                                             class="update-canPay btn <?php echo $this->escape($order['canPayClass']); ?> btn-xs"><?php echo $order['can_pay'] ? __('No') : __('Yes'); ?></span>
                                 </p>
