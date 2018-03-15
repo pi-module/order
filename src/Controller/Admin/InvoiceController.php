@@ -69,18 +69,33 @@ class InvoiceController extends ActionController
         // Select
         $invoiceTable = Pi::model('invoice', 'order')->getTable();
         $orderTable = Pi::model("order", 'order')->getTable();
+        $invoiceInstallmentTable = Pi::model("invoice_installment", 'order')->getTable();
      
         $select = Pi::db()->select();
         $select
         ->from(array('invoice' => $invoiceTable))
         ->join(array('order' => $orderTable), 'invoice.order = order.id', array())
-        ->where ($where)->order($order)->offset($offset)->limit($limit);
+        ->join(array('invoice_installment' => $invoiceInstallmentTable), new Expression('invoice_installment.invoice = invoice.id AND invoice_installment.time_duedate <' . time()), array('status_payment' => new Expression("MIN(status_payment)")), 'left')
+        ->where ($where)->order($order)->offset($offset)->limit($limit)
+        ->group('invoice.id');
         
         $rowset = Pi::db()->query($select);
         
         // Make list
         foreach ($rowset as $row) {
+            
             $list[$row['id']] = Pi::api('invoice', 'order')->canonizeInvoice($row);
+            // set Products
+            $options = array(
+                'invoice' => $row['id'],
+                'time_create' => $row['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED ? $row['time_cancel'] : time() 
+            );
+            $products = Pi::api('order', 'order')->listProduct($row['order'], $options);
+            $totalPrice = 0;
+            foreach ($products as $product) {
+                $totalPrice += $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'] - $product['discount_price'];
+            }
+            $list[$row['id']]['total_price_view'] = Pi::api('api', 'order')->viewPrice($totalPrice);
         }
         // Set paginator
         $count = array('count' => new Expression('count(*)'));
@@ -90,7 +105,7 @@ class InvoiceController extends ActionController
         ->join(array('order' => $orderTable), 'invoice.order = order.id', array())
         ->where ($where);
         
-        $count = Pi::db()->query($select)->current()->count;
+        $count = Pi::db()->query($select)->current()['count'];
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
@@ -170,6 +185,7 @@ class InvoiceController extends ActionController
         $config = Pi::service('registry')->config->read($this->getModule());
         // Get info
         $invoice = Pi::api('invoice', 'order')->getInvoice($id);
+        $invoice['installments'] = Pi::api('installment', 'order')->getInstallmentsFromInvoice($invoice['id']);
         $order = Pi::api('order', 'order')->getOrder($invoice['order']);
         $addressInvoicing = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
         $addressDelivery = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'DELIVERY');
@@ -189,6 +205,7 @@ class InvoiceController extends ActionController
         $this->view()->assign('config', $config);
         $this->view()->assign('addressInvoicing', $addressInvoicing);
         $this->view()->assign('addressDelivery', $addressDelivery);
+        $this->view()->assign('gateways', Pi::api('gateway', 'order')->getAdminGatewayList());
         
     }
 

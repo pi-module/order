@@ -314,7 +314,7 @@ class Order extends AbstractApi
             if (isset($options['module']) && $options['module'] != $row->module) {
                 continue;
             }
-            if ($options['credit']) {
+            if (isset($options['credit']) && $options['credit']) {
                 if ($row->product_type != 'credit' || $row->module != 'order') {
                     continue;
                 }

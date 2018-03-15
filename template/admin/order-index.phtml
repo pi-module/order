@@ -65,7 +65,6 @@ $this->backbone();
                     data-id="<?php echo $this->escape($order['id']); ?>"
                     data-order="<?php echo $this->escape($order['url_update_order']); ?>"
                     data-canPay="<?php echo $this->escape($order['url_update_canPay']); ?>"
-                    data-payment="<?php echo $this->escape($order['url_update_payment']); ?>"
                     data-delivery="<?php echo $this->escape($order['url_update_delivery']); ?>"
                     data-listUser="<?php echo $this->escape($order['url_list_user']); ?>"
                 >
@@ -78,14 +77,6 @@ $this->backbone();
                                 <?php echo $this->escape($order['first_name']); ?>
                                 <?php echo $this->escape($order['last_name']); ?>
                             </li>
-                            <?php if ($invoice['type_payment'] == 'installment') { ?>
-                                <li class="label label-info">
-                                    <?php _e('Installment'); ?>
-                                </li>
-                                <button type="button" class="btn btn-link btn-xs show-list-user">
-                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                </button>
-                            <?php } ?>
                         </ul>
                     </td>
                     <td class="text-center small">
@@ -116,11 +107,11 @@ $this->backbone();
                                 <?php } */ ?>
                             <li class="col-xs-1 text-center">
                                 <?php if ($class == '') { ?>
-                                    <span class="label label-warning" data-toggle="tooltip" data-placement="top" title="<?php echo $this->escape($order['statusInvoice']); ?>"><?php _e('Pending'); ?></span>
+                                    <span class="label label-warning" data-toggle="tooltip" data-placement="top" title="<?php _e('Pending'); ?>"><?php _e('Pending'); ?></span>
                                 <?php } elseif ($class == 'success') { ?>
-                                    <span class="label label-success" data-toggle="tooltip" data-placement="top" title="<?php echo $this->escape($order['statusInvoice']); ?>"><?php _e('Paid'); ?></span>
+                                    <span class="label label-success" data-toggle="tooltip" data-placement="top" title="<?php _e('Paid'); ?>"><?php _e('Paid'); ?></span>
                                 <?php } else { ?>
-                                    <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="<?php echo $this->escape($order['statusInvoice']); ?>"><?php _e('Unpaid'); ?></span>
+                                    <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="<?php _e('Unpaid'); ?>"><?php _e('Unpaid'); ?></span>
                                 <?php } ?>
                             </li>
                             <li class="col-xs-2 text-center">
