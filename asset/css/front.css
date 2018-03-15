@@ -207,3 +207,7 @@ ul.progtrckr li.progtrckr-pending:before {
     margin-left:-1px;
     padding:5px!important;
 }
+
+.table-installment  { border-color:transparent!important}
+.table-installment th.transparent, .table-installment td.transparent {border:none!important; border-top:none!important;background:#fff!important}
+.table-installment {margin-top:-20px}

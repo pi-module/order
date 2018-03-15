@@ -123,16 +123,4 @@ class IndexController extends ActionController
         
     }
     
-    public function printAction()
-    {
-        // Check user
-        $this->checkUser();
-        
-        $id = $this->params('id');
-        $ret = Pi::api('order', 'order')->pdf($id);
-        if (!$ret['status']) {
-            $this->jump(array('', 'controller' => 'index', 'action' => 'index'), $ret['message']);
-        }
-    }
-    
 }

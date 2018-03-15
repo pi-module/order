@@ -85,7 +85,12 @@ class Order extends Standard
                     break;
 
                 case 'detail':
-                    $matches['id'] = intval($parts[1]);
+                    if (isset($parts[1]) && $parts[1] == 'print') {
+                        $matches['id'] = intval($parts[2]);
+                        $matches['action'] = 'print';
+                    } else {
+                       $matches['id'] = intval($parts[1]);
+                    }
                     break;
 
                 case 'index':
