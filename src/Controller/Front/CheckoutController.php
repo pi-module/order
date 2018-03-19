@@ -593,15 +593,15 @@ class CheckoutController extends IndexController
     
     public function addressAction()
     {
+        $id = $this->params('id');
         $form = new AddressForm('address');
-        $form->setAttribute('action', Pi::url(Pi::service('url')->assemble('order', array('module'=> 'order', 'controller' => 'checkout', 'action' => 'address'))));
+        $form->setAttribute('action', Pi::url(Pi::service('url')->assemble('order', array('module'=> 'order', 'controller' => 'checkout', 'action' => 'address', 'id' => $id))));
         $form->setInputFilter(new AddressFilter($option));
-        
         if ($this->request->isPost()) {
+            
             $data = $this->request->getPost();
             $form->setData($data);
             if ($form->isValid()) {
-               
                 // Check user informations
                 $uid = Pi::user()->getId();
                 $user = Pi::api('user', 'order')->getUserInformation();
@@ -614,7 +614,8 @@ class CheckoutController extends IndexController
                 $values['city'] = strtoupper($values['city']);
                 
                 if ($values['address_id'] == 0) {
-                    Pi::api('customerAddress', 'order')->addAddress($values);
+                    $address = Pi::api('customerAddress', 'order')->addAddress($values);
+                    $_SESSION['order'][$id . '_address'] = $address['id'];
                 } else {
                     Pi::api('customerAddress', 'order')->updateAddress($values);
                 }
@@ -625,9 +626,9 @@ class CheckoutController extends IndexController
                 
             } 
         } else {
-            $id = $this->params('id');
-            if ($id) {
+            if ($id && is_numeric($id)) {
                 $form = new AddressForm('address', $id);
+                $form->setAttribute('action', Pi::url(Pi::service('url')->assemble('order', array('module'=> 'order', 'controller' => 'checkout', 'action' => 'address', 'id' => $id))));
                 $form->setInputFilter(new AddressFilter($option));
                 $values = Pi::api('customerAddress', 'order')->getAddress($id);
                 $values['address_id'] = $id;

@@ -27,7 +27,7 @@ $( document ).ready(function() {
         function ()
         {
             $.post( 
-                "<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address')); ?>", 
+                $('form#address').attr('action'), 
                 $('form#address').serialize(),
                 function(data)
                 {   

@@ -534,6 +534,14 @@ $this->footScript()->appendScript($script);
 <script>
     $( document ).ready(function() {
         
+        // Fix for bootstrap bug. When you open 2 modals (first open second), there no scrollbar
+        $('body').on('hidden.bs.modal', function () {
+            if($('.modal.in').length > 0)
+            {
+                $('body').addClass('modal-open');
+            }
+        });
+        
         $("#addressModal").on("show.bs.modal", function(e) {
             var link = $(e.relatedTarget);
             $(this).find(".modal-body").load(link.attr("href"));
