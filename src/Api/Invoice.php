@@ -523,6 +523,7 @@ class Invoice extends AbstractApi
             'gateway' => $gateway ,
             'status_payment' => $paid ? \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID : \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID,
             'time_payment' => $paid ? time() : 0,
+            'time_duedate' => time(),
             'due_price' => $duePrice,
         );
         
