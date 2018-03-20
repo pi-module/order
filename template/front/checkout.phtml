@@ -4,6 +4,7 @@ $this->css(array(
     $this->assetModule('script/system-ui.css', 'system'),
 ));
 $this->jQuery();
+$this->backbone();
 $script = <<<'EOT'
 (function($) {
     var page = {
@@ -156,7 +157,7 @@ $this->footScript()->appendScript($script);
                                 <p>
                                     <span class="fa fa-file"></span> <strong><?php _e('Invoicing address'); ?></strong>
                                     <?php if (!empty($addresses)) { ?>
-                                        <a class="modify-address" href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'invoicing'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal">
+                                        <a class="modify-address" href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'invoicing'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal" data-type="<?php _e('Invoicing address') ?>">
                                             <?php _e('Modify') ?>
                                         </a>
                                     <?php } ?>   
@@ -229,13 +230,13 @@ $this->footScript()->appendScript($script);
                                     <p>
                                         <span class="fa fa-map-marker"></span> <strong><?php _e('Delivery address'); ?></strong>
                                         <?php if ($addressInvoicing['id'] != $addressDelivery['id']) { ?>
-                                            <a class="modify-address" href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal">
+                                            <a class="modify-address" href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal" data-type="<?php _e('Delivery address') ?>">
                                                 <?php _e('Modify') ?>
                                             </a>
                                         <?php } ?>
                                     </p>
                                     <?php if ($addressInvoicing['id'] == $addressDelivery['id']) { ?>
-                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal">
+                                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal" data-title="<?php _e('Delivery address') ?>">
                                         <input type="checkbox" checked="checked" /> <?php _e("Same address"); ?>
                                         </a>
                                     <?php } else { ?>
@@ -499,16 +500,34 @@ $this->footScript()->appendScript($script);
 </div>
 
 <div class="modal fade" id="addressListModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="<?php _e('Close'); ?>">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">&nbsp;</h4>
+                <h2 class="modal-title">&nbsp;</h2>
+            </div>
+            <div class="panel">
+                <div class="col-md-8">
+                    <h2 class="delivery hide"><?php _e('Delivery Address') ?></h2>
+                    <h2 class="invoicing hide"><?php _e('Invoincing Address') ?></h2>  
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-simple btn-sm col-md-12 invoicing hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
+                    <a class="btn btn-simple btn-sm col-md-12 delivery hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'delivery')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
+                </div>
+                <div class="clearfix"></div>
             </div>
             <div class="modal-body">
                 <?php _e('Please, wait ...') ?>
+            </div>
+            <div class="panel bottom">
+                <div class="col-md-offset-8 col-md-4">
+                    <a class="btn btn-simple btn-sm col-md-12 invoicing hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
+                    <a class="btn btn-simple btn-sm col-md-12 delivery hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'delivery')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
+                </div>
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>
@@ -549,6 +568,8 @@ $this->footScript()->appendScript($script);
         $("#addressListModal").on("show.bs.modal", function(e) {
             var link = $(e.relatedTarget);
             $(this).find(".modal-body").load(link.attr("href"));
+             $(this).find('.invoicing').addClass('hide');
+             $(this).find('.delivery').addClass('hide');
         }); 
         
         $('.complementary').parent().parent().hide();

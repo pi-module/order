@@ -211,3 +211,11 @@ ul.progtrckr li.progtrckr-pending:before {
 .table-installment  { border-color:transparent!important}
 .table-installment th.transparent, .table-installment td.transparent {border:none!important; border-top:none!important;background:#fff!important}
 .table-installment {margin-top:-20px}
+
+#addressListModal .panel {margin-bottom:0px; margin-top:-1px; background:#f5f5f5; border:1px solid #e3e3e3;padding:15px 20px}
+#addressListModal .panel.bottom{margin-top:-21px; border-radius:0 0 8px 8px}
+#addressListModal .panel h2 {margin:0; line-height:30px}
+#addressListModal .address hr,
+#addressListModal .address .col-md-4,
+#addressListModal .address {margin-top:10px;}
+#addressListModal .address-single .info {min-height:0}
