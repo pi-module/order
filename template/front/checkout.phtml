@@ -1,7 +1,7 @@
 <?php
 $this->css(array(
-    $this->assetModule('css/front.css'),
-    $this->assetModule('script/system-ui.css', 'system'),
+    $this->assetModule('css/front.css') => array('defer' => 'defer'),
+    $this->assetModule('script/system-ui.css', 'system') => array('defer' => 'defer')
 ));
 $this->jQuery();
 $this->backbone();
@@ -243,7 +243,7 @@ $this->footScript()->appendScript($script);
                                         <div>
                                             <?php echo $this->escape($addressDelivery['first_name']); ?>  <?php echo $this->escape($addressDelivery['last_name']); ?>
                                         </div>
-                                        <?php if (!empty($addressDelivery['company'])) { ?>
+                                        <?php if (!empty($addressDelivery['company'])) {1262 ?>
                                             <div><?php echo $this->escape($addressDelivery['company']); ?></div>
                                         <?php } ?>
                                         <?php if (!empty($addressDelivery['company_id'])) { ?>
