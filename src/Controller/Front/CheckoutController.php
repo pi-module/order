@@ -843,9 +843,11 @@ class CheckoutController extends IndexController
         $uid = Pi::user()->getId();
         if ($address->uid == $uid) {
             $address->delete();
+            return array('status' => 1);
+            
         }
-        $url = array('', 'controller' => 'checkout', 'action' => 'index');
-        $this->jump($url, __('Address deleted'));       
+        return array('status' => 0);
+        
     }
     private function updatePrice($cart)
     {

@@ -165,9 +165,11 @@ ul.progtrckr li.progtrckr-pending:before {
 
 .selected-address {
     display: inline-block;
-    padding: 9px 5px 9px 5px;
+    padding: 10px 5px;
     border-radius: 0px;
     margin-right:-3px;
+    font-size:14px;
+    font-weight: 400;
 }
 
 .text-loyalty {

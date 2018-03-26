@@ -78,7 +78,7 @@
                             </a>
                        </div>
                        <div class="row">
-                            <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'delete', 'address' => $address['id']))) ?>" class=" btn btn-delete btn-sm col-md-12" data-address="<?php echo $address['id']; ?>" onclick="return confirm('<?php _e('Are you sure you want delete this address?'); ?>');">
+                            <a href="#" data-delete="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'delete', 'address' => $address['id']))) ?>" class="btn btn-delete btn-sm col-md-12" data-address="<?php echo $address['id']; ?>">
                                 <i class="fa fa-trash"></i> <?php _e('Delete'); ?>
                             </a>
                        </div>
@@ -94,4 +94,28 @@
             
 <script>
     $('.hide.<?php echo $type?>').removeClass('hide');
+    $('.btn-delete').click(
+        function () {
+            if (!confirm('<?php _e('Are you sure you want delete this address?'); ?>')) {
+                return;
+            }
+            var a = this;
+            $.ajax({
+                type: "GET",
+                url: $(this).data('delete'),
+                success: function(data) {
+                    if (data.status) {
+                        if ($(a).closest('.address').find('.selected-address').length) {
+                            needReload = true;   
+                                                    
+                        }
+                        $(a).closest('.address').remove();
+                    }
+                },
+                dataType: 'json'
+            });
+        }
+    );
+    
+    
 </script>
