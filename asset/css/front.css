@@ -144,9 +144,9 @@ ul.progtrckr li.progtrckr-pending:before {
 }
 
 .btn-simple {
-    color: #333;
+    color: #525251;
     background: #fff;
-    border: 1px solid #333;
+    border: 1px solid #525251;
 }
 
 .btn-simple:hover {
@@ -156,9 +156,9 @@ ul.progtrckr li.progtrckr-pending:before {
 
 .btn-address-delete,
 .btn-address-edit {
-    color: #333;
+    color: #525251;
     background: #fff;
-    border: 1px solid #333;
+    border: 1px solid #525251;
     border-radius:0;
 }
 
@@ -170,7 +170,7 @@ ul.progtrckr li.progtrckr-pending:before {
 
 .btn-address-delete:hover {
     background:#ccc;
-    color:#000;
+    color:#525251;
     border-color: #ccc;
 }
 
