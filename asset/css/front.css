@@ -154,6 +154,26 @@ ul.progtrckr li.progtrckr-pending:before {
     border: 1px solid #000;
 }
 
+.btn-address-delete,
+.btn-address-edit {
+    color: #333;
+    background: #fff;
+    border: 1px solid #333;
+    border-radius:0;
+}
+
+.btn-address-edit:hover {
+    color: #ffffff;
+    background:#03A9F4;
+    border-color: #03A9F4;
+}
+
+.btn-address-delete:hover {
+    background:#ccc;
+    color:#000;
+    border-color: #ccc;
+}
+
 .address-single .fa-check {
     color: #fff;
     font-size: 12px

@@ -73,12 +73,12 @@
                            </div>
                        <?php } ?> 
                        <div class="row">
-                            <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => $address['id']))) ?>" class=" btn btn-primary btn-sm col-md-12" data-address="<?php echo $address['id']; ?>" data-remote="false" data-toggle="modal" data-target="#addressModal" data-dismiss="modal">
+                            <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => $address['id']))) ?>" class=" btn btn-address-edit btn-sm col-md-12" data-address="<?php echo $address['id']; ?>" data-remote="false" data-toggle="modal" data-target="#addressModal" data-dismiss="modal">
                                 <i class="fa fa-edit"></i> <?php _e('Edit'); ?>
                             </a>
                        </div>
                        <div class="row">
-                            <a href="#" data-delete="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'delete', 'address' => $address['id']))) ?>" class="btn btn-delete btn-sm col-md-12" data-address="<?php echo $address['id']; ?>">
+                            <a href="#" data-delete="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'delete', 'address' => $address['id']))) ?>" class="btn btn-address-delete btn-sm col-md-12" data-address="<?php echo $address['id']; ?>">
                                 <i class="fa fa-trash"></i> <?php _e('Delete'); ?>
                             </a>
                        </div>
@@ -94,7 +94,7 @@
             
 <script>
     $('.hide.<?php echo $type?>').removeClass('hide');
-    $('.btn-delete').click(
+    $('.btn-address-delete').click(
         function () {
             if (!confirm('<?php _e('Are you sure you want delete this address?'); ?>')) {
                 return;
