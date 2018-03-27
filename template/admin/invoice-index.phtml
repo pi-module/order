@@ -22,7 +22,6 @@
             <tr>
                 <th class="col-md-1"><?php _e('Invoice ID'); ?></th>
                 <th class="col-md-1"><?php _e('Status'); ?></th>
-                <th class="col-md-1"><?php _e('Bank ID'); ?></th>
                 <th class="col-md-1"><?php _e('Total price'); ?></th>
                 <th class="col-md-1"><?php _e('Time Create'); ?></th>
                 <th class="col-md-7"><?php _e('Action'); ?></th>
@@ -41,19 +40,18 @@
                 <tr>
                     <td><?php echo $this->escape($invoice['code']); ?></td>
                     <td><span class="label <?php echo $labelIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']]; ?></span></td>
-                    <td><?php echo $this->escape($invoice['random_id']); ?></td>
                     <td><?php echo $this->escape($invoice['total_price_view']); ?></td>
                     <td><?php echo $this->escape($invoice['time_create_view']); ?></td>
                     <td class="text-right">
+                        <a class="btn btn-primary btn-xs" title="<?php _e('Download'); ?>"
+                           href="<?php echo $this->url('', array('action' => 'print-pdf', 'id' => $invoice['id'])); ?>"
+                           target="_blank"><i class="fa fa-download"></i> <?php _e('Download'); ?></a>
+                        <a class="btn btn-primary btn-xs" title="<?php _e('Order'); ?>"
+                           href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>"
+                           target="_blank"><i class="fa fa-eye"></i> <?php _e('Order'); ?></a>
                         <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>"
                            href="<?php echo $this->url('', array('action' => 'view', 'id' => $invoice['id'])); ?>"><i
                                 class="fa fa-eye" target="_blank"></i> <?php _e('View'); ?></a>
-                        <a class="btn btn-primary btn-xs" title="<?php _e('View order'); ?>"
-                           href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>"
-                           target="_blank"><i class="fa fa-eye"></i> <?php _e('View order'); ?></a>
-                        <a class="btn btn-primary btn-xs" title="<?php _e('Print invoice'); ?>"
-                           href="<?php echo $this->url('', array('action' => 'print-pdf', 'id' => $invoice['id'])); ?>"
-                           target="_blank"><i class="fa fa-print"></i> <?php _e('Print invoice'); ?></a>
                     </td>
                 </tr>
             <?php } ?>

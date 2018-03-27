@@ -173,6 +173,9 @@ $this->backbone();
                                     <?php if (!empty($addressInvoicing['address2'])) { ?>
                                         <?php echo $this->escape($addressInvoicing['address2']); ?><br/>
                                     <?php } ?>
+                                    <?php if (!empty($addressInvoicing['zip_code'])) { ?>
+                                        <?php echo $this->escape($addressInvoicing['zip_code']); ?><br/>
+                                    <?php } ?>
                                     <?php if (!empty($addressInvoicing['city'])) { ?>
                                         <?php echo $this->escape($addressInvoicing['city']); ?><br/>
                                     <?php } ?>
@@ -181,9 +184,6 @@ $this->backbone();
                                     <?php } ?>
                                     <?php if (!empty($addressInvoicing['country'])) { ?>
                                         <?php echo $this->escape($addressInvoicing['country']); ?><br/>
-                                    <?php } ?>
-                                    <?php if (!empty($addressInvoicing['zip_code'])) { ?>
-                                        <?php echo $this->escape($addressInvoicing['zip_code']); ?><br/>
                                     <?php } ?>
                                 </p>
                                 <p>
@@ -227,6 +227,9 @@ $this->backbone();
                                     <?php if (!empty($addressDelivery['address2'])) { ?>
                                         <?php echo $this->escape($addressDelivery['address2']); ?><br/>
                                     <?php } ?>
+                                    <?php if (!empty($addressDelivery['zip_code'])) { ?>
+                                        <?php echo $this->escape($addressDelivery['zip_code']); ?><br/>
+                                    <?php } ?>
                                     <?php if (!empty($addressDelivery['city'])) { ?>
                                         <?php echo $this->escape($addressDelivery['city']); ?><br/>
                                     <?php } ?>
@@ -235,9 +238,6 @@ $this->backbone();
                                     <?php } ?>
                                     <?php if (!empty($addressDelivery['country'])) { ?>
                                         <?php echo $this->escape($addressDelivery['country']); ?><br/>
-                                    <?php } ?>
-                                    <?php if (!empty($addressDelivery['zip_code'])) { ?>
-                                        <?php echo $this->escape($addressDelivery['zip_code']); ?><br/>
                                     <?php } ?>
                                 </p>
                                 <p>
@@ -432,10 +432,9 @@ $this->backbone();
                                         <tr>
                                             <th class="col-md-1"><?php _e('Invoice ID'); ?></th>
                                             <th class="col-md-1"><?php _e('Status'); ?></th>
-                                            <th class="col-md-1"><?php _e('Bank ID'); ?></th>
                                             <th class="col-md-1"><?php _e('Type'); ?></th>
                                             <th class="col-md-2"><?php _e('Time Create'); ?></th>
-                                            <th class="col-md-6 text-right"><?php _e('Action'); ?></th>
+                                            <th class="col-md-7 text-right"><?php _e('Action'); ?></th>
                                         </tr>
                                         
                                     <?php
@@ -453,7 +452,6 @@ $this->backbone();
                                     <tr>
                                         <td><?php echo $this->escape($invoice['code']); ?></td>
                                         <td><span id="update-invoice-<?php echo $invoice['id'] ?>" data-invoice="<?php echo $invoice['id'] ?>" class="label <?php echo $invoice['type'] != 'CREDIT' && $invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED ? 'update-invoice btn' : '' ?>  <?php echo $labelIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']]; ?></span></td>
-                                        <td><?php echo $this->escape($invoice['random_id']); ?></td>
                                         <td><?php echo $this->escape($invoice['type']); ?></td>
                                         <td><?php echo $this->escape($invoice['time_create_view']) . ' ' . date('H:m', $invoice['time_create']); ?></td>
                                         <td class="text-right">

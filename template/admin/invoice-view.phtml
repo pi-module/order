@@ -22,6 +22,9 @@
                     <?php if (!empty($addressInvoicing['address2'])) { ?>
                         <?php echo $this->escape($addressInvoicing['address2']); ?><br/>
                     <?php } ?>
+                    <?php if (!empty($addressInvoicing['zip_code'])) { ?>
+                        <?php echo $this->escape($addressInvoicing['zip_code']); ?><br/>
+                    <?php } ?>
                     <?php if (!empty($addressInvoicing['city'])) { ?>
                         <?php echo $this->escape($addressInvoicing['city']); ?><br/>
                     <?php } ?>
@@ -30,9 +33,6 @@
                     <?php } ?>
                     <?php if (!empty($addressInvoicing['country'])) { ?>
                         <?php echo $this->escape($addressInvoicing['country']); ?><br/>
-                    <?php } ?>
-                    <?php if (!empty($addressInvoicing['zip_code'])) { ?>
-                        <?php echo $this->escape($addressInvoicing['zip_code']); ?><br/>
                     <?php } ?>
                 </p>
                 <p>
@@ -76,6 +76,9 @@
                     <?php if (!empty($addressDelivery['address2'])) { ?>
                         <?php echo $this->escape($addressDelivery['address2']); ?><br/>
                     <?php } ?>
+                    <?php if (!empty($addressDelivery['zip_code'])) { ?>
+                        <?php echo $this->escape($addressDelivery['zip_code']); ?><br/>
+                    <?php } ?>
                     <?php if (!empty($addressDelivery['city'])) { ?>
                         <?php echo $this->escape($addressDelivery['city']); ?><br/>
                     <?php } ?>
@@ -84,9 +87,6 @@
                     <?php } ?>
                     <?php if (!empty($addressDelivery['country'])) { ?>
                         <?php echo $this->escape($addressDelivery['country']); ?><br/>
-                    <?php } ?>
-                    <?php if (!empty($addressDelivery['zip_code'])) { ?>
-                        <?php echo $this->escape($addressDelivery['zip_code']); ?><br/>
                     <?php } ?>
                 </p>
                 <p>
@@ -124,8 +124,6 @@
                         <span class="label label-danger"><?php _e('Canceled'); ?></span>
                     <?php } ?>
                 </p>
-
-                <p><strong><?php _e('Bank ID'); ?></strong> : <?php echo $this->escape($invoice['random_id']); ?></p>
 
                 <p><strong><?php _e('Order'); ?></strong> : <span><?php echo $this->escape($order['code']); ?></span>
                 </p>
