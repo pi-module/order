@@ -26,7 +26,7 @@ class Cron extends AbstractApi
     
     public function start()
     {
-        // TODO - #1278
+        // TODO - #1278 : Need to check due date in the installment table
         /*
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
