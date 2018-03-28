@@ -158,7 +158,7 @@ ul.progtrckr li.progtrckr-pending:before {
 .btn-address-edit {
     color: #525251;
     background: #fff;
-    border: 1px solid #525251;
+    border: 1px solid #ccc;
     border-radius:0;
 }
 
