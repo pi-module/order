@@ -4,6 +4,7 @@ CREATE TABLE `{order}` (
   `uid`             INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   `code`            VARCHAR(16)                                          NOT NULL DEFAULT '',
   `type_commodity`  ENUM ('product', 'service')                          NOT NULL DEFAULT 'product',
+`default_gateway` VARCHAR(64) 						 NOT NULL,
   `can_pay`         TINYINT(1) UNSIGNED                                  NOT NULL DEFAULT '1',
   `plan`            INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   # Customer information
@@ -299,6 +300,7 @@ CREATE TABLE `{invoice_installment}` (
   `time_duedate`   INT(10) UNSIGNED    					 NOT NULL DEFAULT '0',
   `due_price`      DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
   `credit_price`   DECIMAL(16, 8)      NOT NULL DEFAULT '0.00',
+  `comment` TEXT,
   PRIMARY KEY (`id`),
   KEY `order` (`order`)
 );

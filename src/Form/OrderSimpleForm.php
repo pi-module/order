@@ -99,7 +99,7 @@ class OrderSimpleForm extends BaseForm
                         $gatewayList = array_keys($gatewayList);
                         // gateway
                         $this->add(array(
-                            'name' => 'gateway',
+                            'name' => 'default_gateway',
                             'attributes' => array(
                                 'id' => 'address-select-payment',
                                 'type' => 'hidden',
@@ -109,7 +109,7 @@ class OrderSimpleForm extends BaseForm
                     } else {
                         // gateway
                         $this->add(array(
-                            'name' => 'gateway',
+                            'name' => 'default_gateway',
                             'type' => 'radio',
                             'options' => array(
                                 'label' => __('Adapter'),
@@ -126,7 +126,7 @@ class OrderSimpleForm extends BaseForm
                         $gatewayList = array_keys($gatewayList);
                         // gateway
                         $this->add(array(
-                            'name' => 'gateway',
+                            'name' => 'default_gateway',
                             'attributes' => array(
                                 'id' => 'address-select-payment',
                                 'type' => 'hidden',
@@ -136,7 +136,7 @@ class OrderSimpleForm extends BaseForm
                     } else {
                         // gateway
                         $this->add(array(
-                            'name' => 'gateway',
+                            'name' => 'default_gateway',
                             'type' => 'radio',
                             'options' => array(
                                 'label' => __('Adapter'),
@@ -156,7 +156,7 @@ class OrderSimpleForm extends BaseForm
                     $gatewayList = array_keys($gatewayList);
                     // gateway
                     $this->add(array(
-                        'name' => 'gateway',
+                        'name' => 'default_gateway',
                         'attributes' => array(
                             'type' => 'hidden',
                             'value' => $gatewayList['0'],
@@ -165,7 +165,7 @@ class OrderSimpleForm extends BaseForm
                 } else {
                     // gateway
                     $this->add(array(
-                        'name' => 'gateway',
+                        'name' => 'default_gateway',
                         'type' => 'radio',
                         'options' => array(
                             'label' => __('Adapter'),

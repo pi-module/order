@@ -35,6 +35,7 @@ class Order extends Model
         'uid',
         'code',
         'type_commodity',
+        'default_gateway',
         'can_pay',
         'plan',
         'ip',

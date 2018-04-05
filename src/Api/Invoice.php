@@ -445,11 +445,14 @@ class Invoice extends AbstractApi
             $installment = current($installments);
             $order['time_payment_view'] = _date($installment['time_payment']);
         }
-        
+        $gateways = Pi::api('gateway', 'order')->getAllGatewayList();
         $gateway = array();
         foreach ($installments as $installment) {
-            $gateway[] = $installment['gateway'];         
-            
+            if (isset($gateways[$installment['gateway']]) && isset($gateways[$installment['gateway']]['option']['invoice_name']) && $gateways[$installment['gateway']]['option']['invoice_name'] != null) {
+                $gateway[] = $gateways[$installment['gateway']]['option']['invoice_name'];
+            } else {
+                $gateway[] = __($installment['gateway']);
+            }   
         }
         $order['gateway'] = join(', ', $gateway);
         
@@ -507,7 +510,7 @@ class Invoice extends AbstractApi
         $installment->save();
                
     }
-    public function createInstallments($invoice, $paid = false, $gateway = '')
+    public function createInstallments($invoice, $paid = false, $gateway = 'manual')
     {
         // Find due price
         $products = Pi::api('order', 'order')->listProduct($invoice['order']);

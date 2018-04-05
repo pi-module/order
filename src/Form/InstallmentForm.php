@@ -60,6 +60,33 @@ class InstallmentForm extends BaseForm
             )
         ));
         
+        $this->add(array(
+            'name' => 'time_payment',
+            'type' => 'datepicker',
+            'options' => array(
+                'label' => __('Payment date'),
+                'datepicker' => array(
+                    'format' => 'yyyy-mm-dd',
+                ),
+            ),
+            'attributes' => array(
+                'id' => 'time-create',
+                'required' => true,
+            )
+        ));
+        
+        $this->add(array(
+            'name' => 'comment',
+            'options' => array(
+                'label' => __('Comment'),
+            ),
+            'attributes' => array(
+                'type' => 'textarea',
+                'rows' => '5',
+                'cols' => '40',
+            )
+        ));
+        
         // Save
         $this->add(array(
             'name' => 'submit',

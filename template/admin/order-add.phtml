@@ -6,3 +6,22 @@
     </div>
     <?php echo $this->form($form); ?>
 </div>
+
+<script>
+    $(function () {
+        var changeModule = function() {
+            $('.specific:first').closest('fieldset').show();
+            var moduleName = $('[name=module_name]').val();
+            $('.specific').parent().parent().parent().parent().hide();
+            $('.specific.' + moduleName).parent().parent().parent().parent().show();
+
+            if ($('.specific:visible').length == 0) {
+                $('.specific:first').closest('fieldset').hide();
+            } else {
+                $('.specific:first').closest('fieldset').show();
+            }
+        };
+        $('[name=module_name]').change(changeModule);
+        changeModule();
+    });
+</script>

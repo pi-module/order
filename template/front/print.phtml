@@ -231,7 +231,7 @@
                     <?php if ($order['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) { ?>
                     <strong><?php _e('Unpaid invoice') ?></strong>
                     <?php } else { ?>
-                    <strong><?php _e('Paid invoice') ?> (<?php echo sprintf(__('credit card / %s'), $order['gateway']) ?>)</strong>
+                    <strong><?php _e('Paid invoice') ?> (<?php echo $order['gateway'] ?>)</strong>
                     <?php }  ?>  
                 </div>
             </td>

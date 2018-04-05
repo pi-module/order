@@ -61,6 +61,14 @@ class OrderUpdateForm extends BaseForm
                 ),
             ));
             
+            $elemsForGroup = array();
+            foreach (array('order', 'shop', 'guide', 'event') as $module) {
+                $elems = Pi::api('order', $module)->getExtraFieldsFormForOrder();
+                foreach ($elems as $elem) {
+                    $this->add($elem);
+                    $elemsForGroup[] = $elem['name'];     
+                }
+            } 
             $this->add(array(
                 'name' => 'product_type',
                 'options' => array(
@@ -205,6 +213,19 @@ class OrderUpdateForm extends BaseForm
         
         }
         
+        $gatewayList = Pi::api('gateway', 'order')->getAdminGatewayList();
+        $this->add(array(
+            'name' => 'default_gateway',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Adapter'),
+                'value_options' => $gatewayList,
+            ),
+            'attributes' => array(
+                'id' => 'address-select-payment',
+                'required' => true,
+            )
+        ));
         
         // name
         if ($this->option['config']['order_name']) {
@@ -637,9 +658,17 @@ class OrderUpdateForm extends BaseForm
                 'label' => __('Invoicing address'),
                 'elements' => array('invoicing_first_name', 'invoicing_last_name', 'invoicing_email', 'invoicing_mobile', 'invoicing_address1', 'invoicing_city', 'invoicing_zip_code', 'invoicing_country', 'invoicing_address2', 'invoicing_company', 'invoicing_company_id', 'invoicing_company_vat')
             ),
+            'payment' => array (
+                "label" => __('Payment'),
+                "elements" => array('default_gateway')
+            ),
             'product' => array (
                 "label" => __('Product'),
                 "elements" => array('type_commodity', 'module_name', 'product_type', 'product', 'module_item', 'time_create', 'time_start', 'time_end', 'product_price', 'shipping_price', 'packing_price', 'setup_price', 'vat_price')
+            ),
+            'specific_module' => array (
+                "label" => __('Dependent options of module'),
+                "elements" => $elemsForGroup
             ),
        );
        

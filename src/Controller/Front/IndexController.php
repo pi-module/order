@@ -39,7 +39,25 @@ class IndexController extends ActionController
         );
         $orders = Pi::api('order', 'order')->getOrderFromUser($user['id'], false, $options);
         foreach ($orders as $order) {
-            $order['has_payment'] = Pi::api('order', 'order')->hasPayment($order['id']);
+            if ($order['can_pay']) {
+                $order['installments'] = Pi::api('installment', 'order')->getInstallmentsFromOrder($order['id']);
+                $countInstallment = 0;
+                foreach ($order['installments'] as $installment) {
+                    if ($installment['status_invoice'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
+                        $countInstallment++;
+                        if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID || ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID && $installment['gateway'] == 'manual')) {
+                            $order['can_pay'] = false;
+                            break;
+                        }
+                    }
+                }
+                if ($countInstallment == 0) {
+                    if ($order['default_gateway'] == 'manual') {
+                        $order['can_pay'] = false;
+                    }
+                }
+            }
+            
             $user['orders'][$order['id']] = $order;
             $products = Pi::api('order', 'order')->listProduct($order['id']);
             $user['orders'][$order['id']]['products'] = $products;
@@ -53,7 +71,7 @@ class IndexController extends ActionController
         // Set paginator
         $count = count(Pi::api('order', 'order')->getOrderFromUser($user['id'], false));
         $paginator = Paginator::factory(intval($count));
-        $paginator->setItemCountPerPage($this->config('admin_perpage'));
+        $paginator->setItemCountPerPage($limit);
         $paginator->setCurrentPageNumber($page);
         $paginator->setUrlOptions(array(
             'router' => $this->getEvent()->getRouter(),

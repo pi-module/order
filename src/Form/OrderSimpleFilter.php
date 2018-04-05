@@ -70,7 +70,7 @@ class OrderSimpleFilter extends InputFilter
                     ));
                     // gateway
                     $this->add(array(
-                        'name' => 'gateway',
+                        'name' => 'default_gateway',
                         'required' => true,
                         'filters' => array(
                             array(
@@ -81,7 +81,7 @@ class OrderSimpleFilter extends InputFilter
                 } else {
                     // gateway
                     $this->add(array(
-                        'name' => 'gateway',
+                        'name' => 'default_gateway',
                         'required' => true,
                         'filters' => array(
                             array(
@@ -95,7 +95,7 @@ class OrderSimpleFilter extends InputFilter
             case 'service':
                 // gateway
                 $this->add(array(
-                    'name' => 'gateway',
+                    'name' => 'default_gateway',
                     'required' => true,
                     'filters' => array(
                         array(

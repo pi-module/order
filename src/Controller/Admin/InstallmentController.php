@@ -50,6 +50,7 @@ class InstallmentController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+                $values['time_payment'] = strtotime($values['time_payment']);
                 
                 // Save values
                 $row = $this->getModel('invoice_installment')->find($id);
@@ -62,7 +63,9 @@ class InstallmentController extends ActionController
                 $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order']), $message);
             }
         } else {
-            $form->setData($installment->toArray());
+            $data = $installment->toArray();
+            $data['time_payment'] = date('Y-m-d', $data['time_payment']); 
+            $form->setData($data);
         }
         // Set view
         $this->view()->setTemplate('installment-edit');

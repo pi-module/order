@@ -196,6 +196,12 @@ class OrderUpdateFilter extends InputFilter
                 ),
             ));
         }
+
+        $this->add(array(
+            'name' => 'default_gateway',
+            'required' => true,
+        ));
+            
         // id_number
         if ($option['config']['order_idnumber']) {
             $this->add(array(
@@ -515,5 +521,15 @@ class OrderUpdateFilter extends InputFilter
             
         }
         
+        // extra options
+        foreach (array('order', 'shop', 'guide', 'event') as $module) {
+            $elems = Pi::api('order', $module)->getExtraFieldsFormForOrder();
+            foreach ($elems as $elem) {
+                $this->add(array(
+                    'name' => $elem['name'],
+                    'required' => false,
+                ));     
+            }
+        } 
     }
 }

@@ -1155,7 +1155,31 @@ EOD;
                 return false;
             }
         }
-        
+        if (version_compare($moduleVersion, '2.2.1', '<')) {
+            $sql = sprintf("ALTER TABLE %s ADD `default_gateway` varchar(64) NOT NULL", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+            $sql = sprintf("ALTER TABLE %s ADD `comment` TEXT", $orderInstallmentTable);
+            try {
+                $orderInstallmentAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
         return true;
     }
 }

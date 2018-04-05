@@ -34,6 +34,7 @@ class Installment extends Model
         'time_duedate',
         'due_price',
         'credit_price',
+        'comment'
     );
     
     public static function getStatusList()

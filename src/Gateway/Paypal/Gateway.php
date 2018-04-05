@@ -320,6 +320,13 @@ class Gateway extends AbstractGateway
             'type' => 'text',
             'required' => true,
         );
+         
+        $form['invoice_name'] = array(
+            'name' => 'invoice_name',
+            'label' => __('Invoice name'),
+            'type' => 'text',
+            'required' => false,
+        );
         // currency
         $form['currency'] = array(
             'name' => 'currency',

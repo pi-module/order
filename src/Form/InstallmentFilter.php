@@ -32,5 +32,15 @@ class InstallmentFilter extends InputFilter
             
         ));
         
+        $this->add(array(
+            'name' => 'time_payment',
+            'required' => true,
+        ));
+        
+        $this->add(array(
+            'name' => 'comment',
+            'required' => false,
+        ));
+        
     }
 }

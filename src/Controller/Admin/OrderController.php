@@ -698,11 +698,7 @@ class OrderController extends ActionController
                 $detail->time_end = $values['time_end'] ? strtotime($values['time_end']) : 0;
                 $detail->number = 1;
                 $detail->time_create = time();
-                $detail->extra = json_encode(
-                    array(
-                       'item' => $values['module_item']
-                    )
-                );
+                $detail->extra = Pi::api('order', $values['module_name'])->createExtraDetailForProduct($values);
                 $detail->save();
                 //
 

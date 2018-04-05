@@ -47,7 +47,25 @@ class PaymentController extends IndexController
         }
         
         // Check offline
-        if ($order['gateway'] == 'Offline') {
+        $cart = Pi::api('order', 'order')->getOrderInfo();
+        if (!is_array($cart)) {
+            $cart = array();
+        }
+        if (!isset($cart['gateway']) || $cart['gateway'] == null) {
+            $order['installments'] = Pi::api('installment', 'order')->getInstallmentsFromOrder($order['id']);
+            $cart['gateway'] = $order['default_gateway'];
+            
+            foreach ($order['installments'] as $installment) {
+                if ($installment['status_invoice'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
+                    if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
+                        $cart['gateway'] = $installment['gateway'];
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if ($cart['gateway'] == 'Offline') {
             $this->jump(array('', 'controller' => 'detail', 'action' => 'index', 'id' => $id), $config['payment_offline_description']);
         }
         // Check invoice is for this user
@@ -139,11 +157,10 @@ class PaymentController extends IndexController
             Pi::api('processing', 'order')->removeProcessing();
         }
         
-        $cart = Pi::api('order', 'order')->getOrderInfo();
         
         // Set pay processing
         Pi::api('processing', 'order')->setProcessing($order, $cart['gateway']);
-        
+        $processing = Pi::api('processing', 'order')->getProcessing();
         if ($config['order_testmode']) {
             return $this->redirect()->toRoute('', array(
                 'controller' => 'payment',

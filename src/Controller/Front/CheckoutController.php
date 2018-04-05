@@ -137,17 +137,16 @@ class CheckoutController extends IndexController
         $values = $this->validValues($values, $cart, $uid);
         $_SESSION['order']['uid'] = $uid;
         // Check gateway
-        if (is_array($values['gateway'])) {
-            $values['gateway'] = $values['gateway'][0]; 
+        if (is_array($values['default_gateway'])) {
+            $values['default_gateway'] = $values['default_gateway'][0]; 
         }
-        
-        $_SESSION['order']['gateway'] = $values['gateway'];
-        $gateway = Pi::api('gateway', 'order')->getGateway($values['gateway']);
+        $_SESSION['order']['gateway'] = $values['default_gateway'];
+        $gateway = Pi::api('gateway', 'order')->getGateway($values['default_gateway']);
         if ($gateway->getType() == AbstractGateway::TYPE_REST) {
             $_SESSION['order']['redirect'] = $cart['redirect']; 
         }
         
-        $gateway = Pi::api('gateway', 'order')->getGatewayInfo($values['gateway']);
+        $gateway = Pi::api('gateway', 'order')->getGatewayInfo($values['default_gateway']);
         $gatewayOptions = json_decode($gateway['option'], true);
             
         // Save values to order

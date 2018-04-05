@@ -32,7 +32,7 @@
                         <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
                         <td class="text-center"><span class="label <?php echo $this->escape($order['shortLabel']); ?>"><?php echo $this->escape($order['shortStatus']); ?></span></td>
                         <td class="text-center">
-                            <?php if (!$order['has_payment'] && $order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_CANCELLED) { ?>
+                            <?php if ($order['can_pay'] && $order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_CANCELLED) { ?>
                             <a class="btn btn-danger btn-xs" title="<?php _e('Cancel'); ?>" target="_blank"
                                href="<?php echo Pi::url($this->url('order', array('controller'=> 'index', 'action' => 'cancel', 'id' => $order['id']))); ?>"><i
                                     class="fa fa-remove"></i> <?php _e('Cancel'); ?></a>
