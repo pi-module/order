@@ -63,10 +63,12 @@ class OrderUpdateForm extends BaseForm
             
             $elemsForGroup = array();
             foreach (array('order', 'shop', 'guide', 'event') as $module) {
-                $elems = Pi::api('order', $module)->getExtraFieldsFormForOrder();
-                foreach ($elems as $elem) {
-                    $this->add($elem);
-                    $elemsForGroup[] = $elem['name'];     
+                if (Pi::service('module')->isActive($module)) {
+                    $elems = Pi::api('order', $module)->getExtraFieldsFormForOrder();
+                    foreach ($elems as $elem) {
+                        $this->add($elem);
+                        $elemsForGroup[] = $elem['name'];     
+                    }
                 }
             } 
             $this->add(array(

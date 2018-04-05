@@ -523,12 +523,14 @@ class OrderUpdateFilter extends InputFilter
         
         // extra options
         foreach (array('order', 'shop', 'guide', 'event') as $module) {
-            $elems = Pi::api('order', $module)->getExtraFieldsFormForOrder();
-            foreach ($elems as $elem) {
-                $this->add(array(
-                    'name' => $elem['name'],
-                    'required' => false,
-                ));     
+            if (Pi::service('module')->isActive($module)) {
+                $elems = Pi::api('order', $module)->getExtraFieldsFormForOrder();
+                foreach ($elems as $elem) {
+                    $this->add(array(
+                        'name' => $elem['name'],
+                        'required' => false,
+                    ));     
+                }
             }
         } 
     }
