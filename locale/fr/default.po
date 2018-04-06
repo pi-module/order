@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2018-04-05 22:44+0200\n"
+"POT-Creation-Date: 2018-04-06 12:29+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -2012,7 +2012,9 @@ msgid "Canceled"
 msgstr "Annulé"
 
 #: template/admin/invoice-index.phtml:66
-msgid "No invoice is not created yet"
+#, fuzzy
+#| msgid "No invoice is not created yet"
+msgid "No invoice is created yet"
 msgstr "La facture n'est pas encore crée"
 
 #: template/admin/invoice-view.phtml:3 template/front/invoice.phtml:9
@@ -2067,8 +2069,8 @@ msgid "Log details"
 msgstr "Details Logs"
 
 #: template/admin/log-index.phtml:84
-msgid "No invoice is not set yet"
-msgstr "La facture n'est pas encore crée"
+msgid "No invoice is set yet"
+msgstr "Aucune facture n'a encore été créée."
 
 #: template/admin/order-add.phtml:3 template/admin/order-edit.phtml:3
 #: template/admin/order-index.phtml:28 template/admin/order-index.phtml:29
@@ -2542,8 +2544,8 @@ msgid "Amount new credit"
 msgstr "Nouveau montant Crédit"
 
 #: template/front/detail.phtml:362
-msgid "No invoice."
-msgstr "Numéro facture"
+msgid "No invoice yet."
+msgstr "Aucune facture n'a été créée pour l'instant."
 
 #: template/front/error.phtml:4
 msgid "Error on order processing, please contact to website admin"
