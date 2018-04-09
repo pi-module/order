@@ -326,7 +326,7 @@ class Order extends AbstractApi
                 if ($row->product_type == 'credit' && $row->module == 'order') {
                     continue;
                 }
-                if ($options['time_create'] > 0 && $row->time_create > $options['time_create']) {
+                if (isset($options['time_create']) && $options['time_create'] > 0 && $row->time_create > $options['time_create']) {
                     continue;
                 }
             }
