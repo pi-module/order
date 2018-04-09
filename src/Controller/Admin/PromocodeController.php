@@ -97,5 +97,11 @@ class PromocodeController extends ActionController
         $this->view()->assign('form', $form);
     }
     
-    
+    public function deleteAction()
+    {
+        $id = $this->params('id');
+        Pi::model('promocode', 'order')->delete(array('id' => $id));
+        $this->jump(array('action' => 'index'));
+        
+    }
 }
