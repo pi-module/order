@@ -63,7 +63,7 @@ class Order extends AbstractApi
             $where['status_order != ?'] = \Module\Order\Model\Order::STATUS_ORDER_DRAFT;
         }
         
-        $order = array('time_create DESC', 'id DESC');
+        $order = array('id DESC');
         // Select
         $select = Pi::model('order', $this->getModule())->select()->where($where)->order($order);
         if (isset($options['limit'])) {
@@ -341,13 +341,13 @@ class Order extends AbstractApi
                     'thumbUrl' => '',
                 );
             }
+            
+            if (empty($row->extra)) {
+                $list[$row->id]['extra'] = array();
+            } else {
+                $list[$row->id]['extra'] = json::decode($row->extra, true);
+            }
         }   
-
-        if (empty($row->extra)) {
-            $list[$row->id]['extra'] = array();
-        } else {
-            $list[$row->id]['extra'] = json::decode($row->extra, true);
-        }
         
         return $list;
     }

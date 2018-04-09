@@ -85,7 +85,7 @@ class OrderProductForm extends BaseForm
         $this->add(array(
             'name' => 'product_price',
             'options' => array(
-                'label' => __('Product price'),
+                'label' => __('Price ext VAT'),
             ),
             'attributes' => array(
                 'type' => 'text',
@@ -144,6 +144,10 @@ class OrderProductForm extends BaseForm
                 'label' => __('Time start'),
                 'datepicker' => array(
                     'format' => 'yyyy-mm-dd',
+                    'autoclose' => true,
+                    'todayBtn' => true,
+                    'todayHighlight' => true,
+                    'weekStart' => 1,
                 ),
             ),
             'attributes' => array(
@@ -158,13 +162,26 @@ class OrderProductForm extends BaseForm
                 'label' => __('Time end'),
                 'datepicker' => array(
                     'format' => 'yyyy-mm-dd',
+                    'autoclose' => true,
+                    'todayBtn' => true,
+                    'todayHighlight' => true,
+                    'weekStart' => 1,
                 ),
             ),
             'attributes' => array(
                 'required' => false,
             )
         ));
-        
+        $elemsForGroup = array();
+        foreach (array('order', 'shop', 'guide', 'event') as $module) {
+            if (Pi::service('module')->isActive($module)) {
+                $elems = Pi::api('order', $module)->getExtraFieldsFormForOrder();
+                foreach ($elems as $elem) {
+                    $this->add($elem);
+                    $elemsForGroup[] = $elem['name'];     
+                }
+            }
+        } 
         // Save order
         $this->add(array(
             'name' => 'submit',

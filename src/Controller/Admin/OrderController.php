@@ -458,7 +458,7 @@ class OrderController extends ActionController
         }
         // Set view
         $this->view()->setTemplate('system:component/form-popup');
-        $this->view()->assign('title', __('Add / edit admin note'));
+        $this->view()->assign('title', __('Can pay ?'));
         $this->view()->assign('form', $form);
     }
 
@@ -619,34 +619,6 @@ class OrderController extends ActionController
                     $values['time_create'] = time();
                 }
                 
-                // Check user company_vat
-                switch ($values['module']) {
-                    case 'order';
-                        $values['product_type'] = 'manual';
-                        $values['module_item'] = 1;
-                        break;
-
-                    case 'shop';
-                        $values['product_type'] = 'product';
-                        $values['module_item'] = intval($values['module_item']);
-                        break;
-
-                    case 'guide';
-                        $values['product_type'] = 'package';
-                        $values['module_item'] = intval($values['module_item']);
-                        break;
-
-                       case 'event';
-                        $values['product_type'] = 'event';
-                        $values['module_item'] = intval($values['module_item']);
-                        break;
-                }
-                // Set additional price
-                if ($values['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
-                    $values['shipping_price'] = $values['shipping_price'] + $config['order_additional_price_product'];
-                } elseif ($values['type_commodity'] == 'service' && $config['order_additional_price_service'] > 0) {
-                    $values['setup_price'] = $values['setup_price'] + $config['order_additional_price_service'];
-                }
                  // Save values to order
                 $order = $this->getModel('order')->createRow();
                 $values['status_order'] = \Module\Order\Model\Order::STATUS_ORDER_DRAFT;
@@ -682,26 +654,6 @@ class OrderController extends ActionController
                 $orderAddress->save();
                 //
                 
-                // Save detail
-                $detail = $this->getModel('detail')->createRow();
-                $detail->order = $order->id;
-                $detail->module = $values['module_name'];
-                $detail->product_type = $values['product_type'];
-                $detail->product = $values['product'];
-                $detail->discount_price = $values['discount_price'] ?: 0;
-                $detail->shipping_price = $values['shipping_price'] ?: 0;
-                $detail->packing_price = $values['packing_price'] ?: 0;
-                $detail->setup_price = $values['setup_price'] ?: 0;
-                $detail->vat_price = $values['vat_price'] ?: 0;
-                $detail->product_price = $values['product_price'] ?: 0;
-                $detail->time_start = $values['time_start'] ? strtotime($values['time_start']) : 0;
-                $detail->time_end = $values['time_end'] ? strtotime($values['time_end']) : 0;
-                $detail->number = 1;
-                $detail->time_create = time();
-                $detail->extra = Pi::api('order', $values['module_name'])->createExtraDetailForProduct($values);
-                $detail->save();
-                //
-
                 // Jump
                 $message = __('New order added and data saved successfully.');
                 $url = array('controller' => 'order', 'action' => 'view', 'id' => $order->id);
@@ -846,26 +798,18 @@ class OrderController extends ActionController
         $option = array();
         // Get id
         $order = $this->params('order');
+        $id = $this->params('id');
+        
         if (Pi::api('order', 'order')->hasValidInvoice($order)) {
             $message = __('There valid invoices for this order. You cannot edit it.');
             $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order), $message);
         }
-        $order = Pi::api('order', 'order')->getOrder($order);
-        // Check module
-        switch ($order['module_name']) {
-            case 'order':
-                $order['moduleTitle'] = __('Order module');
-                break;
-
-            case 'shop':
-                $order['moduleTitle'] = __('Shop module');
-                break;
-
-            case 'guide':
-                $order['moduleTitle'] = __('Guide module');
-                break;
-
+        
+        if ($id) {
+            $detail = $this->getModel('detail')->find($id);
         }
+
+        $order = Pi::api('order', 'order')->getOrder($order);
         
         // Set form
         $form = new OrderProductForm('product', $option);
@@ -876,13 +820,15 @@ class OrderController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 // Get product
-                if (!Pi::api('order', $values['module'] )->checkProduct($values['id'], $values['product_type'] )) {
+                if (!Pi::api('order', $values['module'] )->checkProduct($values['product'], $values['product_type'] )) {
                     $message = __('Your selected product not active / exist');
                     $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message, 'error');
                 }
                 
                 // Add to detail
-                $detail = $this->getModel('detail')->createRow();
+                if (!$id) {
+                    $detail = $this->getModel('detail')->createRow();
+                }
                 $detail->order = $order['id'];
                 $detail->module = $values['module'];
                 $detail->product = $values['product'];
@@ -897,19 +843,19 @@ class OrderController extends ActionController
                 $detail->time_end = $values['time_end'] ? strtotime($values['time_end']) : 0;
                 $detail->number = 1;
                 $detail->time_create = time();
-                $detail->extra = json_encode(
-                    array(
-                        'product' => array (
-                            'item' => $values['module_item']
-                        ) 
-                    )
-                );
+                $detail->extra = Pi::api('order', $values['module'])->createExtraDetailForProduct($values);
                 $detail->save();
-                
                 // Check it save or not
                 $message = __('New product / service added to your order');
                 $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message);
             }
+        }  else  {
+            $data = $detail->toArray();
+            foreach (json_decode($data['extra'], true) as $key => $extra) {
+                $data['extra_' . $key] = $extra;    
+            }
+            $form->setData($data);
+            
         }
 
         // Set view
@@ -918,6 +864,27 @@ class OrderController extends ActionController
         $this->view()->assign('invoices', $invoices);
         $this->view()->assign('form', $form);
     }
+    
+    public function productDeleteAction()
+    {
+        // Set option
+        $option = array();
+        // Get id
+        $id = $this->params('id');
+        $detail = $this->getModel('detail')->find($id);
+        
+        if (Pi::api('order', 'order')->hasValidInvoice($detail->order)) {
+            $message = __('There valid invoices for this order. You cannot edit it.');
+            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $detail->order), $message);
+        }
+        
+        Pi::model('detail', 'order')->delete(array('id' => $id));
+        
+        $message = __('Product deleted');
+        $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $detail->order), $message);
+
+    }
+    
     
     public function listUserAction()
     {

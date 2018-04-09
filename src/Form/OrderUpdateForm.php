@@ -47,60 +47,7 @@ class OrderUpdateForm extends BaseForm
                     'required' => true,
                 )
             ));
-            // module_name
-            $this->add(array(
-                'name' => 'module_name',
-                'type' => 'select',
-                'options' => array(
-                    'label' => __('Join to module'),
-                    'value_options' => array(
-                        'order' => __('Order module'),
-                        'shop' => __('Shop module'),
-                        'guide' => __('Guide module'),
-                    ),
-                ),
-            ));
-            
-            $elemsForGroup = array();
-            foreach (array('order', 'shop', 'guide', 'event') as $module) {
-                if (Pi::service('module')->isActive($module)) {
-                    $elems = Pi::api('order', $module)->getExtraFieldsFormForOrder();
-                    foreach ($elems as $elem) {
-                        $this->add($elem);
-                        $elemsForGroup[] = $elem['name'];     
-                    }
-                }
-            } 
-            $this->add(array(
-                'name' => 'product_type',
-                'options' => array(
-                    'label' => __('Product type'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                )
-            ));
-            // module_item
-            $this->add(array(
-                'name' => 'product',
-                'options' => array(
-                    'label' => __('Product id'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => __('Put service / product id and join order to module'),
-                )
-            ));
-            // module_item
-            $this->add(array(
-                'name' => 'module_item',
-                'options' => array(
-                    'label' => __('Module item associated to the product'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                )
-            ));
+           
             // time_create
             $this->add(array(
                 'name' => 'time_create',
@@ -109,6 +56,10 @@ class OrderUpdateForm extends BaseForm
                     'label' => __('Order date'),
                     'datepicker' => array(
                         'format' => 'yyyy-mm-dd',
+                        'autoclose' => true,
+                        'todayBtn' => true,
+                        'todayHighlight' => true,
+                        'weekStart' => 1,
                     ),
                 ),
                 'attributes' => array(
@@ -116,103 +67,6 @@ class OrderUpdateForm extends BaseForm
                     'required' => true,
                 )
             ));
-            // product_price
-            $this->add(array(
-                'name' => 'product_price',
-                'options' => array(
-                    'label' => __('Product price'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                )
-            ));
-            // shipping_price
-            $this->add(array(
-                'name' => 'shipping_price',
-                'options' => array(
-                    'label' => __('Shipping price'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                )
-            ));
-            // packing_price
-            $this->add(array(
-                'name' => 'packing_price',
-                'options' => array(
-                    'label' => __('Packing price'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                )
-            ));
-            // setup_price
-            $this->add(array(
-                'name' => 'setup_price',
-                'options' => array(
-                    'label' => __('Setup price'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                )
-            ));
-            // vat_price
-            $this->add(array(
-                'name' => 'vat_price',
-                'options' => array(
-                    'label' => __('Vat price'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                )
-            ));
-            
-            // type_commodity
-            $this->add(array(
-                'name' => 'type_commodity',
-                'type' => 'select',
-                'options' => array(
-                    'label' => __('Type commodity'),
-                    'value_options' => array(
-                        'product' => __('Product'),
-                        'service' => __('Service'),
-                    ),
-                ),
-            ));
-            
-            $this->add(array(
-                'name' => 'time_start',
-                'type' => 'datepicker',
-                'options' => array(
-                    'label' => __('Time start'),
-                    'datepicker' => array(
-                        'format' => 'yyyy-mm-dd',
-                    ),
-                ),
-                'attributes' => array(
-                    'required' => false,
-                )
-            ));
-            
-            $this->add(array(
-                'name' => 'time_end',
-                'type' => 'datepicker',
-                'options' => array(
-                    'label' => __('Time end'),
-                    'datepicker' => array(
-                        'format' => 'yyyy-mm-dd',
-                    ),
-                ),
-                'attributes' => array(
-                    'required' => false,
-                )
-            ));
-        
         }
         
         $gatewayList = Pi::api('gateway', 'order')->getAdminGatewayList();
@@ -582,6 +436,8 @@ class OrderUpdateForm extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
+                    'required' => true,
+                    
 
                 )
             ));
@@ -593,6 +449,8 @@ class OrderUpdateForm extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
+                    'required' => true,
+                
 
                 )
             ));
@@ -650,7 +508,7 @@ class OrderUpdateForm extends BaseForm
         $groups = array(
             'order' => array (
                 "label" => __('Order'),
-                "elements" => array('uid', 'status_order')
+                "elements" => array('uid', 'status_order', 'time_create')
             ),
             'delivery_address' => array(
                 'label' => __('Delivery address'),
@@ -663,15 +521,7 @@ class OrderUpdateForm extends BaseForm
             'payment' => array (
                 "label" => __('Payment'),
                 "elements" => array('default_gateway')
-            ),
-            'product' => array (
-                "label" => __('Product'),
-                "elements" => array('type_commodity', 'module_name', 'product_type', 'product', 'module_item', 'time_create', 'time_start', 'time_end', 'product_price', 'shipping_price', 'packing_price', 'setup_price', 'vat_price')
-            ),
-            'specific_module' => array (
-                "label" => __('Dependent options of module'),
-                "elements" => $elemsForGroup
-            ),
+            )
        );
        
        foreach ($groups as $key => &$group) {
@@ -680,8 +530,8 @@ class OrderUpdateForm extends BaseForm
                     unset($group['elements'][$key]);
                 }
             }   
-            
-       }
+      }
+
       foreach ($groups as $key => &$group) {
           if (count($group['elements']) == 0) {
                 unset($groups[$key]);

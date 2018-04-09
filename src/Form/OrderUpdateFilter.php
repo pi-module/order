@@ -36,121 +36,13 @@ class OrderUpdateFilter extends InputFilter
                 ),
             ));
         
-            // type_commodity
-            $this->add(array(
-                'name' => 'type_commodity',
-                'required' => true,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
-            
-            // module_name
-            $this->add(array(
-                'name' => 'module_name',
-                'required' => false,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
-            $this->add(array(
-                'name' => 'product_type',
-                'required' => true,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
-            // module_item
-            $this->add(array(
-                'name' => 'module_item',
-                'required' => false,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
-            // module_item
-            $this->add(array(
-                'name' => 'product',
-                'required' => false,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
+           
             // time_create
             $this->add(array(
                 'name' => 'time_create',
                 'required' => true,
             ));
             
-            $this->add(array(
-                'name' => 'time_start',
-                'required' => false,
-            ));
-            
-            $this->add(array(
-                'name' => 'time_end',
-                'required' => false,
-            ));
-            // product_price
-            $this->add(array(
-                'name' => 'product_price',
-                'required' => false,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
-            // shipping_price
-            $this->add(array(
-                'name' => 'shipping_price',
-                'required' => false,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
-            // packing_price
-            $this->add(array(
-                'name' => 'packing_price',
-                'required' => false,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
-            // setup_price
-            $this->add(array(
-                'name' => 'setup_price',
-                'required' => false,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
-            // vat_price
-            $this->add(array(
-                'name' => 'vat_price',
-                'required' => false,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
         }
         
         // name
@@ -469,7 +361,7 @@ class OrderUpdateFilter extends InputFilter
         if ($option['config']['order_city']) {
             $this->add(array(
                 'name' => 'delivery_city',
-                'required' => false,
+                'required' => true,
                 'filters' => array(
                     array(
                         'name' => 'StringTrim',
@@ -478,7 +370,7 @@ class OrderUpdateFilter extends InputFilter
             ));
             $this->add(array(
                 'name' => 'invoicing_city',
-                'required' => false,
+                'required' => true,
                 'filters' => array(
                     array(
                         'name' => 'StringTrim',
@@ -520,18 +412,5 @@ class OrderUpdateFilter extends InputFilter
             ));
             
         }
-        
-        // extra options
-        foreach (array('order', 'shop', 'guide', 'event') as $module) {
-            if (Pi::service('module')->isActive($module)) {
-                $elems = Pi::api('order', $module)->getExtraFieldsFormForOrder();
-                foreach ($elems as $elem) {
-                    $this->add(array(
-                        'name' => $elem['name'],
-                        'required' => false,
-                    ));     
-                }
-            }
-        } 
     }
 }

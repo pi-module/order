@@ -121,5 +121,18 @@ class OrderProductFilter extends InputFilter
             'name' => 'time_end',
             'required' => false,
         ));
-          }
+        
+        // extra options
+        foreach (array('order', 'shop', 'guide', 'event') as $module) {
+            if (Pi::service('module')->isActive($module)) {
+                $elems = Pi::api('order', $module)->getExtraFieldsFormForOrder();
+                foreach ($elems as $elem) {
+                    $this->add(array(
+                        'name' => $elem['name'],
+                        'required' => false,
+                    ));     
+                }
+            }
+        } 
+    }
 }
