@@ -850,18 +850,24 @@ class OrderController extends ActionController
                 $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message);
             }
         }  else  {
-            $data = $detail->toArray();
-            foreach (json_decode($data['extra'], true) as $key => $extra) {
-                $data['extra_' . $key] = $extra;    
-            }
-            $form->setData($data);
+             if ($id) {
+                $data = $detail->toArray();
+                 
+                $extra = json_decode($data['extra'], true);
+                foreach ($extra as $key => $value) {
+                    $data['extra_' . $key] = $value;    
+                }
+                $data['module_item'] = $extra['item'];
+                $data['time_start'] = date('Y-m-d', $data['time_start']);
+                $data['time_end'] = date('Y-m-d', $data['time_end']);
+                $form->setData($data);
+             }
             
         }
 
         // Set view
         $this->view()->setTemplate('order-product');
         $this->view()->assign('order', $order);
-        $this->view()->assign('invoices', $invoices);
         $this->view()->assign('form', $form);
     }
     
