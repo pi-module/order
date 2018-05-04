@@ -92,6 +92,18 @@ class OrderProductForm extends BaseForm
                 'description' => '',
             )
         ));
+        // product_price
+        $this->add(array(
+            'name' => 'discount_price',
+            'options' => array(
+                'label' => __('Discount'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+            )
+        ));
+        
         // shipping_price
         $this->add(array(
             'name' => 'shipping_price',

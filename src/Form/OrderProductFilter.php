@@ -71,6 +71,16 @@ class OrderProductFilter extends InputFilter
                 ),
             ),
         ));
+        
+        $this->add(array(
+            'name' => 'discount_price',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
         // shipping_price
         $this->add(array(
             'name' => 'shipping_price',

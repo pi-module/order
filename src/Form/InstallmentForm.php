@@ -59,7 +59,23 @@ class InstallmentForm extends BaseForm
                 'disabled' => $this->_options['readonly']
             )
         ));
-        
+        $this->add(array(
+            'name' => 'time_duedate',
+            'type' => 'datepicker',
+            'options' => array(
+                'label' => __('Due date'),
+                'datepicker' => array(
+                    'format' => 'yyyy-mm-dd',
+                    'autoclose' => true,
+                    'todayBtn' => true,
+                    'todayHighlight' => true,
+                    'weekStart' => 1,
+                ),
+            ),
+            'attributes' => array(
+                'required' => true,
+            )
+        ));
         $this->add(array(
             'name' => 'time_payment',
             'type' => 'datepicker',

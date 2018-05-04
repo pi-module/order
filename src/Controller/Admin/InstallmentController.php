@@ -51,6 +51,7 @@ class InstallmentController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 $values['time_payment'] = strtotime($values['time_payment']);
+                $values['time_duedate'] = strtotime($values['time_duedate']);
                 
                 // Save values
                 $row = $this->getModel('invoice_installment')->find($id);
@@ -64,6 +65,7 @@ class InstallmentController extends ActionController
             }
         } else {
             $data = $installment->toArray();
+            $data['time_duedate'] = date('Y-m-d', $data['time_duedate']);
             $data['time_payment'] = date('Y-m-d', $data['time_payment']); 
             $form->setData($data);
         }

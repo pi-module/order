@@ -440,10 +440,15 @@ class Invoice extends AbstractApi
                 break;        
             }
         }
-        
+        if (count($installments) == 0) {
+            $order['status_payment'] = \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID;
+        }
         if ($order['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
             $installment = current($installments);
             $order['time_payment_view'] = _date($installment['time_payment']);
+        } else {
+            
+            $order['time_duedate_view'] = _date($installment['time_duedate']);
         }
         $gateways = Pi::api('gateway', 'order')->getAllGatewayList();
         $gateway = array();

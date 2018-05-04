@@ -31,7 +31,11 @@ class InstallmentFilter extends InputFilter
             'required' => $options['readonly'] ? false : true,
             
         ));
-        
+        $this->add(array(
+            'name' => 'time_duedate',
+            'required' => true,
+            
+        ));
         $this->add(array(
             'name' => 'time_payment',
             'required' => true,

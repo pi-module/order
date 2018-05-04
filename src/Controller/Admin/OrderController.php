@@ -132,12 +132,12 @@ class OrderController extends ActionController
         ->join(array('invoice' => $invoiceTable), 'invoice.order = order.id', array(), 'left')
         ->join(array('invoice_installment' => $invoiceInstallmentTable), new Expression('invoice_installment.invoice = invoice.id AND invoice_installment.time_duedate <' . time()), array('status_payment' => new Expression("MIN(status_payment)")), 'left')
         ->group('order.id')
-        ->where(array('(invoice.type IS NULL OR invoice.type = ? )' => 'NORMAL', '(invoice.status IS NULL OR invoice.status = ? )'=> \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) )
         ->where ($where)
         ->having ($having)
         ->order ($order)
         ->limit($limit)
         ->offset($offset);
+        
         $rowset = Pi::db()->query($select);
         // Make list
         foreach ($rowset as $row) {
@@ -159,7 +159,6 @@ class OrderController extends ActionController
         ->join(array('invoice' => $invoiceTable), 'invoice.order = order.id', array(), 'left')
         ->join(array('invoice_installment' => $invoiceInstallmentTable), 'invoice_installment.invoice = invoice.id', array('status_payment' => new Expression("MIN(status_payment)")), 'left')
         ->group('order.id')
-        
         ->where ($where)
         ->having ($having)
         ->order ($order);
