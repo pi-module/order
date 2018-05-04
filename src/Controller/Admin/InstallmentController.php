@@ -65,8 +65,16 @@ class InstallmentController extends ActionController
             }
         } else {
             $data = $installment->toArray();
-            $data['time_duedate'] = date('Y-m-d', $data['time_duedate']);
-            $data['time_payment'] = date('Y-m-d', $data['time_payment']); 
+            if ($data['time_duedate']) { 
+                $data['time_duedate'] = date('Y-m-d', $data['time_duedate']);
+            } else {
+                $data['time_duedate'] = null;
+            }
+            if ($data['time_payment']) { 
+                $data['time_payment'] = date('Y-m-d', $data['time_payment']);
+            } else {
+                $data['time_payment'] = null;    
+            } 
             $form->setData($data);
         }
         // Set view

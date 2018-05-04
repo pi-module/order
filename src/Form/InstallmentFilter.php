@@ -33,12 +33,12 @@ class InstallmentFilter extends InputFilter
         ));
         $this->add(array(
             'name' => 'time_duedate',
-            'required' => true,
+            'required' => false,
             
         ));
         $this->add(array(
             'name' => 'time_payment',
-            'required' => true,
+            'required' => false,
         ));
         
         $this->add(array(

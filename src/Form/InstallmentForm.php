@@ -73,7 +73,7 @@ class InstallmentForm extends BaseForm
                 ),
             ),
             'attributes' => array(
-                'required' => true,
+                'required' => false,
             )
         ));
         $this->add(array(
@@ -87,7 +87,7 @@ class InstallmentForm extends BaseForm
             ),
             'attributes' => array(
                 'id' => 'time-create',
-                'required' => true,
+                'required' => false,
             )
         ));
         
