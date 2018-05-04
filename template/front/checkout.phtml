@@ -356,12 +356,12 @@ $this->footScript()->appendScript($script);
                                         <?php } ?>
                                     </td>
                                     <td class="text-right">
-                                        <strong><?php echo  Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'] - $product['discount_price'] - $unconsumedPrice)); ?></strong>
+                                        <strong class="data-total-price"><?php echo  Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'] - $product['discount_price'] - $unconsumedPrice)); ?></strong>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Price ext VAT'); ?></td>
-                                    <td class="data-total-price">
+                                    <td class="data-normal-price">
                                         <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
                                     </td>
                                 </tr>
@@ -403,8 +403,8 @@ $this->footScript()->appendScript($script);
                                         <?php _e('Total Price ext VAT'); ?>
                                     </strong>
                                 </td>
-                                <td class="text-right data-total-price">
-                                    <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $totalDiscount)); ?></strong>
+                                <td class="text-right">
+                                    <strong class="data-total-price"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $totalDiscount)); ?></strong>
                                 </td>
                             </tr>
                             <tr>
@@ -416,8 +416,8 @@ $this->footScript()->appendScript($script);
                                         <?php } ?>
                                     </strong>
                                 </td>
-                                <td class="text-right test data-total-vat">
-                                    <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?></strong>
+                                <td class="text-right">
+                                    <strong class="data-total-vat"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?></strong>
                                 </td>
                             </tr>
                             <?php if ($price['shipping'] > 0) { ?>
@@ -563,8 +563,8 @@ $this->footScript()->appendScript($script);
                 $('body').addClass('modal-open');
             } else {
                 if (needReload) {
-                    $('.invoicing-address').html('<?php _e('Please wait ...') ?>');
-                    $('.delivery-address').html('<?php _e('Please wait ...') ?>');
+                    $('.invoicing-address').html("<?php _e('Please wait ...') ?>");
+                    $('.delivery-address').html("<?php _e('Please wait ...') ?>");
                     window.location.reload();
                 }
             }
@@ -615,7 +615,7 @@ $this->footScript()->appendScript($script);
                       function(i, product)
                       {
                           $('.cart-product span[data-discount-for=' + product.product + ']').html(product.discount);
-                          $('.cart-product td[data-discount-price-for=' + product.product + ']').html(product.discount_price_view);
+                          $('.cart-product td[data-discount-price-for=' + product.product + ']').html('-' + product.discount_price_view);
                       }
                   );
                   $('.cart-product .data-total-price').html(data.price.total_price_view);
