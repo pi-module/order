@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2018-05-07 13:01+0200\n"
+"POT-Creation-Date: 2018-05-07 21:20+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -2739,12 +2739,15 @@ msgid "Time payment"
 msgstr "Date de paiement"
 
 #: template/front/print.phtml:243
-msgid "Unpaid invoice"
-msgstr "Facture impayée"
+msgid "Payment due upon receipt"
+msgstr "En votre aimable règlement, à réception"
 
 #: template/front/print.phtml:245
 msgid "Paid invoice"
 msgstr "Facture réglée"
+
+#~ msgid "Unpaid invoice"
+#~ msgstr "Facture impayée"
 
 #~ msgid "Order module"
 #~ msgstr "Module Order"
