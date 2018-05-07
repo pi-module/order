@@ -240,7 +240,7 @@
             <td class="col1">
                 <div class="paid-status">
                     <?php if ($order['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) { ?>
-                    <strong><?php _e('Unpaid invoice') ?></strong>
+                    <strong><?php _e('Payment due upon receipt') ?></strong>
                     <?php } else { ?>
                     <strong><?php _e('Paid invoice') ?> (<?php echo $order['gateway'] ?>)</strong>
                     <?php }  ?>  
