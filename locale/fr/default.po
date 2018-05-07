@@ -2740,7 +2740,7 @@ msgstr "Date de paiement"
 
 #: template/front/print.phtml:243
 msgid "Payment due upon receipt"
-msgstr "En votre aimable règlement, à réception"
+msgstr "En votre aimable règlement à réception de facture"
 
 #: template/front/print.phtml:245
 msgid "Paid invoice"
