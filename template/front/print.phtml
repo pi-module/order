@@ -141,6 +141,16 @@
                                 <?php echo $this->escape($order['time_create_view']); ?>
                             </td>
                         </tr>
+                        <?php if ($order['status_payment'] = \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) { ?>
+                            <tr>
+                                <td class="col1">
+                                    <?php _e('Time due date'); ?>
+                                </td>
+                                <td class="align-right col2">
+                                    <?php echo $this->escape($order['time_duedate_view']); ?>
+                                </td>
+                            </tr>
+                        <?php } else { ?>
                         <tr>
                             <td class="col1">
                                 <?php _e('Time payment'); ?>
@@ -149,6 +159,7 @@
                                 <?php echo $this->escape($order['time_payment_view']); ?>
                             </td>
                         </tr>
+                        <?php } ?>
                         <tr>
                             <td class="color1 col1">
                                 <?php _e('Total all taxes included'); ?>
