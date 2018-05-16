@@ -27,6 +27,7 @@ class Promocode extends Model
         'time_start',
         'time_end',
         'module',
+        'showcode',
     );
     
     public function getModules()

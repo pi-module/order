@@ -100,6 +100,9 @@ class Update extends BasicUpdate
         $orderInstallmentTable = $orderInstallmentModel->getTable();
         $orderInstallmentAdapter = $orderInstallmentModel->getAdapter();
         
+        $promocodeModel = Pi::model('promocode', $this->module);
+        $promocodeTable = $promocodeModel->getTable();
+        $promocodeAdapter = $promocodeModel->getAdapter();
         
         
         if (version_compare($moduleVersion, '1.3.6', '<')) {
@@ -1180,6 +1183,21 @@ EOD;
                 return false;
             }
         }
+
+        if (version_compare($moduleVersion, '2.2.2', '<')) {
+            $sql = sprintf("ALTER TABLE %s ADD `showcode` tinyint(1) NOT NULL", $promocodeTable);
+            try {
+                $promocodeAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }
 }

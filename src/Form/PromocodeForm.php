@@ -122,7 +122,14 @@ class PromocodeForm extends BaseForm
                 'multiple' => 1
             )
         ));
-        
+        $this->add(array(
+            'name' => 'showcode',
+            'type' => 'checkbox',
+            'options' => array(
+                'label' => __('Show Promo Code on front CTA'),
+            ),
+            
+        ));
         
         $this->add(array(
             'name' => 'submit',
