@@ -70,11 +70,13 @@ class InvoiceController extends ActionController
         $invoiceTable = Pi::model('invoice', 'order')->getTable();
         $orderTable = Pi::model("order", 'order')->getTable();
         $invoiceInstallmentTable = Pi::model("invoice_installment", 'order')->getTable();
+        $orderAddressTable = Pi::model("order_address", 'order')->getTable();
      
         $select = Pi::db()->select();
         $select
         ->from(array('invoice' => $invoiceTable))
         ->join(array('order' => $orderTable), 'invoice.order = order.id', array())
+        ->join(array('order_address' => $orderAddressTable), 'order_address.order = order.id', array('id_number', 'first_name','last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 'delivery', 'location'))
         ->join(array('invoice_installment' => $invoiceInstallmentTable), new Expression('invoice_installment.invoice = invoice.id AND invoice_installment.time_duedate <' . time()), array('status_payment' => new Expression("MIN(status_payment)")), 'left')
         ->where ($where)->order($order)->offset($offset)->limit($limit)
         ->group('invoice.id');

@@ -512,11 +512,11 @@ class OrderUpdateForm extends BaseForm
             ),
             'delivery_address' => array(
                 'label' => __('Delivery address'),
-                'elements' => array('delivery_first_name', 'delivery_last_name', 'delivery_email', 'delivery_mobile', 'delivery_address1', 'delivery_city', 'delivery_zip_code', 'delivery_country', 'delivery_address2', 'delivery_company', 'delivery_company_id', 'delivery_company_vat')
+                'elements' => array('delivery_first_name', 'delivery_last_name', 'delivery_email', 'delivery_mobile', 'delivery_address1', 'delivery_address2', 'delivery_city', 'delivery_zip_code', 'delivery_country', 'delivery_company', 'delivery_company_id', 'delivery_company_vat')
             ),
             'invoicing_address' => array(
                 'label' => __('Invoicing address'),
-                'elements' => array('invoicing_first_name', 'invoicing_last_name', 'invoicing_email', 'invoicing_mobile', 'invoicing_address1', 'invoicing_city', 'invoicing_zip_code', 'invoicing_country', 'invoicing_address2', 'invoicing_company', 'invoicing_company_id', 'invoicing_company_vat')
+                'elements' => array('invoicing_first_name', 'invoicing_last_name', 'invoicing_email', 'invoicing_mobile', 'invoicing_address1', 'invoicing_address2', 'invoicing_city', 'invoicing_zip_code', 'invoicing_country', 'invoicing_company', 'invoicing_company_id', 'invoicing_company_vat')
             ),
             'payment' => array (
                 "label" => __('Payment'),

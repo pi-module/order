@@ -293,19 +293,26 @@ $this->backbone();
                                             id="update-canPay-<?php echo $this->escape($order['id']); ?>"
                                             class="update-canPay btn <?php echo $this->escape($order['canPayClass']); ?> btn-xs"><?php echo $order['can_pay'] ? __('No') : __('Yes'); ?></span>
                                 </p>
-                                <p><strong><?php _e('Delivery status'); ?></strong> : 
-                                    <?php if ($order['type_commodity'] == 'product') { ?>
-                                        <span
-                                            id="update-delivery-<?php echo $this->escape($order['id']); ?>"
-                                            class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-xs">
-                                            
-                                        </span>
+                                <p><strong><?php _e('Delivery status'); ?></strong> :
+                                    <?php if (count($order['products'])) { ?>   
+                                        <?php if ($order['type_commodity'] == 'product') { ?>
+                                            <span
+                                                id="update-delivery-<?php echo $this->escape($order['id']); ?>"
+                                                class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-xs">
+                                                
+                                            </span>
+                                        <?php } else { ?>
+                                            <span class="label label-default"><?php _e('Its service'); ?></span>
+                                        <?php } ?>
                                     <?php } else { ?>
-                                        <span class="label label-default"><?php _e('Its service'); ?></span>
+                                        <?php _e('NA') ?>
                                     <?php } ?>
                                 </p>
-                                <p"><strong><?php _e('Time delivery'); ?></strong> : <span
+                                <p><strong><?php _e('Time delivery'); ?></strong> : <span
                                             id="update-delivery-<?php echo $this->escape($order['id']); ?>-time"><?php echo $this->escape($order['time_delivery_view']); ?></span>
+                                </p>
+                                <p>
+                                    <strong><?php _e('Default gateway'); ?></strong> : <?php echo $order['default_gateway'] ?>
                                 </p>
                             </div>
                         </div>
@@ -336,6 +343,7 @@ $this->backbone();
                                     <th><?php _e('Discount'); ?></th>
                                     <th><?php _e('Vat'); ?></th>
                                     <th><?php _e('Total all taxes included'); ?></th>
+                                    <th><?php _e('Extra'); ?></th>
                                     <th></th>
                                 </tr>
                                 <?php 
@@ -385,7 +393,13 @@ $this->backbone();
                                         <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['setup_price'])); ?></td>
                                         <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?></td>
                                         <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['vat_price'])); ?></td>
-                                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['total_price'])); ?></td>
+                                        <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['total_price'])); ?></td><br />
+                                        <td>
+                                            <?php foreach ($product['extra'] as $key => $value) {
+                                                echo $key . ' : ' . ($value ? $value : 0) . '<br>';     
+                                            } ?> 
+                                        </td>
+        
                                         <td>
                                             <?php if (!$hasValidInvoice) { ?>
                                                 <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
@@ -407,6 +421,7 @@ $this->backbone();
                                     <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalDiscountPrice)); ?></strong></td>
                                     <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalVatPrice)); ?></strong></td>
                                     <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalPrice)); ?></strong></td>
+                                    <td></td>
                                     <td></td>
                                 </tr>
                             </table>
@@ -450,6 +465,7 @@ $this->backbone();
                                             <th class="col-md-1"><?php _e('Invoice ID'); ?></th>
                                             <th class="col-md-1"><?php _e('Status'); ?></th>
                                             <th class="col-md-1"><?php _e('Type'); ?></th>
+                                            <th class="col-md-1"><?php _e('Type paiement'); ?></th>
                                             <th class="col-md-2"><?php _e('Time Create'); ?></th>
                                             <th class="col-md-7 text-right"><?php _e('Action'); ?></th>
                                         </tr>
@@ -470,6 +486,7 @@ $this->backbone();
                                         <td><?php echo $this->escape($invoice['code']); ?></td>
                                         <td><span id="update-invoice-<?php echo $invoice['id'] ?>" data-invoice="<?php echo $invoice['id'] ?>" class="label <?php echo $invoice['type'] != 'CREDIT' && $invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED ? 'update-invoice btn' : '' ?>  <?php echo $labelIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']]; ?></span></td>
                                         <td><?php echo $this->escape($invoice['type']); ?></td>
+                                        <td><?php echo $this->escape($invoice['type_payment']); ?></td>
                                         <td><?php echo $this->escape($invoice['time_create_view']) . ' ' . date('H:m', $invoice['time_create']); ?></td>
                                         <td class="text-right">
                                             <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>"

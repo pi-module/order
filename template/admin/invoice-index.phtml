@@ -22,8 +22,11 @@
             <tr>
                 <th class="col-md-1"><?php _e('Invoice ID'); ?></th>
                 <th class="col-md-1"><?php _e('Status'); ?></th>
-                <th class="col-md-1"><?php _e('Total price'); ?></th>
+                <th class="col-md-1"><?php _e('Type'); ?></th>
+                <th class="col-md-1"><?php _e('Type payment'); ?></th>
                 <th class="col-md-1"><?php _e('Time Create'); ?></th>
+                <th class="col-md-1"><?php _e('Total price'); ?></th>
+                <th class="col-md-1"><?php _e('Information'); ?></th>
                 <th class="col-md-7"><?php _e('Action'); ?></th>
             </tr>
             <?php foreach ($list as $invoice) { ?>
@@ -37,11 +40,22 @@
                         $labelIdClass = 'label-danger';
                     }
                 ?>
-                <tr>
+                <tr class="<?php echo $invoice['type'] == 'NORMAL' && $invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED && $invoice['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID ? 'danger' : '' ?>">
                     <td><?php echo $this->escape($invoice['code']); ?></td>
                     <td><span class="label <?php echo $labelIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']]; ?></span></td>
-                    <td><?php echo $this->escape($invoice['total_price_view']); ?></td>
+                    <td><?php echo $this->escape($invoice['type']); ?></td>
+                    <td><?php echo $this->escape($invoice['type_payment']); ?></td>
                     <td><?php echo $this->escape($invoice['time_create_view']); ?></td>
+                    <td><?php echo $this->escape($invoice['total_price_view']); ?></td>
+                    <td>
+                        <ul class="list-inline">
+                            <li>
+                                <?php echo $this->escape($invoice['first_name']); ?>
+                                <?php echo $this->escape($invoice['last_name']); ?>
+                            </li>
+                        </ul>
+                    </td>
+                    
                     <td class="text-right">
                         <a class="btn btn-primary btn-xs" title="<?php _e('Download'); ?>"
                            href="<?php echo $this->url('', array('action' => 'print-pdf', 'id' => $invoice['id'])); ?>"

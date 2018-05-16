@@ -124,12 +124,30 @@ class OrderController extends ActionController
         $orderAddressTable = Pi::model("order_address", 'order')->getTable();
         $invoiceTable = Pi::model("invoice", 'order')->getTable();
         $invoiceInstallmentTable = Pi::model("invoice_installment", 'order')->getTable();
+        $detailTable = Pi::model("detail", 'order')->getTable();
      
         $select = Pi::db()->select();
         $select
         ->from(array('order' => $orderTable))
+        ->join(array('detail' => $detailTable), 'detail.order = order.id', array('total_price' => new Expression("SUM(product_price) - SUM(discount_price) + SUM(shipping_price) + SUM(packing_price) + SUM(setup_price) +SUM(vat_price) ")))
+        ->join(array('invoice' => $invoiceTable), new Expression('invoice.order = order.id AND invoice.type= "NORMAL" AND invoice.status = ' . \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED), array('invoice' => 'id'), 'left')
+        ->group('order.id')
+        ->where (array('order.time_create >= ' . mktime(0, 0, 0, 1, 1, date('Y'))));
+        $rowset = Pi::db()->query($select);
+        $totalBilled = 0;
+        $totalOrdered = 0;
+        foreach ($rowset as $row) {
+            $totalOrdered += $row['total_price'];
+            if ($row['invoice']) {
+                $totalBilled += $row['total_price'];
+            }
+        }
+        
+        $select = Pi::db()->select();
+        $select
+        ->from(array('order' => $orderTable))
         ->join(array('order_address' => $orderAddressTable), 'order_address.order = order.id', array('id_number', 'first_name','last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 'delivery', 'location'))
-        ->join(array('invoice' => $invoiceTable), 'invoice.order = order.id', array(), 'left')
+        ->join(array('invoice' => $invoiceTable), new Expression('invoice.order = order.id AND invoice.type= "NORMAL" AND invoice.status = ' . \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED), array(), 'left')
         ->join(array('invoice_installment' => $invoiceInstallmentTable), new Expression('invoice_installment.invoice = invoice.id AND invoice_installment.time_duedate <' . time()), array('status_payment' => new Expression("MIN(status_payment)")), 'left')
         ->group('order.id')
         ->where ($where)
@@ -137,10 +155,9 @@ class OrderController extends ActionController
         ->order ($order)
         ->limit($limit)
         ->offset($offset);
-        
         $rowset = Pi::db()->query($select);
-        // Make list
-        foreach ($rowset as $row) {
+        
+foreach ($rowset as $row) {
             $list[$row['id']] = Pi::api('order', 'order')->canonizeOrder($row);
             $products = Pi::api('order', 'order')->listProduct($row['id']);
             $list[$row['id']]['products'] = $products;
@@ -150,13 +167,12 @@ class OrderController extends ActionController
             }
             $list[$row['id']]['total_price_view'] = Pi::api('api', 'order')->viewPrice($totalPrice);
         }
-         
          //
         $select = Pi::db()->select();
         $select
         ->from(array('order' => $orderTable))
         ->join(array('order_address' => $orderAddressTable), 'order_address.order = order.id', array('id_number', 'first_name','last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 'delivery', 'location'))
-        ->join(array('invoice' => $invoiceTable), 'invoice.order = order.id', array(), 'left')
+        ->join(array('invoice' => $invoiceTable), new Expression('invoice.order = order.id AND invoice.type= "NORMAL" AND invoice.status = ' . \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED), array(), 'left')
         ->join(array('invoice_installment' => $invoiceInstallmentTable), 'invoice_installment.invoice = invoice.id', array('status_payment' => new Expression("MIN(status_payment)")), 'left')
         ->group('order.id')
         ->where ($where)
@@ -220,6 +236,10 @@ class OrderController extends ActionController
         $this->view()->assign('list', $list);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('form', $form);
+        
+        $this->view()->assign('totalOrdered', $totalOrdered);
+        $this->view()->assign('totalBilled', $totalBilled);
+        $this->view()->assign('totalNonOrdered', $totalOrdered-$totalBilled);
     }
 
     public function processAction()
@@ -844,6 +864,8 @@ class OrderController extends ActionController
                 $detail->time_create = time();
                 $detail->extra = Pi::api('order', $values['module'])->createExtraDetailForProduct($values);
                 $detail->save();
+                
+                $this->updateOrderType($order['id']);
                 // Check it save or not
                 $message = __('New product / service added to your order');
                 $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message);
@@ -877,17 +899,35 @@ class OrderController extends ActionController
         // Get id
         $id = $this->params('id');
         $detail = $this->getModel('detail')->find($id);
-        
         if (Pi::api('order', 'order')->hasValidInvoice($detail->order)) {
             $message = __('There valid invoices for this order. You cannot edit it.');
             $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $detail->order), $message);
         }
         
+        $order = Pi::api('order', 'order')->getOrder($detail->order);
         Pi::model('detail', 'order')->delete(array('id' => $id));
+        $this->updateOrderType($order['id']);
         
         $message = __('Product deleted');
         $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $detail->order), $message);
 
+    }
+    
+    private function updateOrderType($order)
+    {
+        $order = Pi::model('order', 'order')->find($order);
+        $products = Pi::api('order', 'order')->listProduct($order->id);
+        $typeCommodity = 'service';
+        foreach($products as $product) {
+            if ($product['module'] == 'shop') {
+                $typeCommodity = 'product';
+                break;        
+            }
+        }
+        if ($order->type_commodity != $typeCommodity) {
+            $order->type_commodity = $typeCommodity;
+            $order->save();
+        }    
     }
     
     

@@ -69,7 +69,7 @@ class Installment extends AbstractApi
             $installment = $installment->toArray();
         }
         
-        $installment['time_payment_view'] = _date($installment['time_payment'], array('pattern' => $pattern));
+        $installment['time_payment_view'] = $installment['time_payment'] ? _date($installment['time_payment'], array('pattern' => $pattern)) : __('NA');
         $installment['time_duedate_view'] = _date($installment['time_duedate'], array('pattern' => $pattern));
         $installment['due_price_view'] = Pi::api('api', 'order')->viewPrice($installment['due_price']);
         $installment['credit_price_view'] = Pi::api('api', 'order')->viewPrice($installment['credit_price']);
