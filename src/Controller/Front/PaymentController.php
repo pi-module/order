@@ -520,6 +520,7 @@ class PaymentController extends IndexController
                 
                 $log = array();
                 $log['gateway'] = $gateway->gatewayAdapter;
+                $log['value'] = '{}';
                 $log['message'] = 'cancel';
                 $log['invoice'] = $invoice['random_id'];
                 Pi::api('log', 'order')->setLog($log);
