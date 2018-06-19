@@ -75,7 +75,7 @@ class Gateway extends AbstractGateway
         
     }
 
-    public function getApproval($invoice)
+    public function getApproval($order)
     {
         $token = $this->getToken();
         $url = $this->getUrl() . '/payments/payment';
@@ -189,14 +189,13 @@ class Gateway extends AbstractGateway
             $result = json_decode($result);
         }
         
-        
-        $extra = json_decode($order['extra']);
+        $extra = json_decode($order['extra'], true);
         $extra['paypal_payment_id'] = $result->id;
         Pi::model('order', 'order')->update(
             array('extra' => json_encode($extra)),
             array('id' => $order['id'])
         );
-
+        
         foreach ($result->links as $link) {
             if ($link->rel == 'approval_url') {
                return $link->href;
@@ -216,7 +215,7 @@ class Gateway extends AbstractGateway
             "Authorization: Bearer " . $token
         );
         
-        $this->setLog($paymentId, 'payment_detail_start');
+        $this->setLog(json_encode(array('paymentId' => $paymentId)), 'payment_detail_start');
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -453,8 +452,8 @@ class Gateway extends AbstractGateway
     public function verifyPayment($request, $processing)
     {
         $order = Pi::api('order', 'order')->getOrder($processing['order']);
-        $extra = $order['extra'];
-        $paymentId = $extra['paypal_payment_id'];
+        $extra = json_decode($order['extra']);
+        $paymentId = $extra->paypal_payment_id;
         if (!empty($paymentId)) {
             $payment = $this->getPayment($paymentId);
         }
@@ -465,6 +464,8 @@ class Gateway extends AbstractGateway
             $result['order'] = $order['id'];
         } else {
             $result['status'] = 0;
+            $result['state'] = $payment->state;
+            $this->gatewayError = __('An error occured with Paypal. Please contact administrator');
         }
         
         return $result;

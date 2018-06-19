@@ -48,7 +48,8 @@ class Order extends Model
         'packing',
         'promotion_type',
         'promotion_value',
-        'create_by'
+        'create_by',
+        'extra'
     );
     
     public static function getStatusList($onlyValidated = false) 
