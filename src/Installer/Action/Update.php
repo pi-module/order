@@ -1211,7 +1211,7 @@ EOD;
                 ));
                 return false;
             }
-            $sql = sprintf("UPDATE %s ADD `time_order` = `time_create`", $orderTable);
+            $sql = sprintf("UPDATE %s SET `time_order` = `time_create`", $orderTable);
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
@@ -1235,7 +1235,7 @@ EOD;
                 return false;
             }
             
-            $sql = sprintf("UPDATE %s ADD `time_invoice` = `time_create`", $invoiceTable);
+            $sql = sprintf("UPDATE %s SET `time_invoice` = `time_create`", $invoiceTable);
             try {
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
