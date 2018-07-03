@@ -249,7 +249,7 @@
                                                         <?php echo $this->escape($product['details']['title']); ?>
                                                     <?php } ?>
                                                 </div>
-                                                
+                                                <?php echo nl2br($this->escape($product['admin_note'])); ?> 
                                             </td>
                                             <td><?php echo $product['time_start'] ? _date($product['time_start']) : ''; ?></td>
                                             <td><?php echo $product['time_end'] ? _date($product['time_end']) : ''; ?></td>
