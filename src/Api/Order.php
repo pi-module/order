@@ -300,6 +300,10 @@ class Order extends AbstractApi
         $order['user_note'] = Pi::service('markup')->render($order['user_note'], 'html', 'text');
         // Set text_summary
         $order['admin_note'] = Pi::service('markup')->render($order['admin_note'], 'html', 'text');
+        
+        $order['time_order'] = date('Y-m-d', $order['time_order']);
+        $order['time_order_view'] = _date($order['time_order']);
+        
         // return order
         return $order;
     }

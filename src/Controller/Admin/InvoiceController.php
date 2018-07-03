@@ -237,6 +237,7 @@ class InvoiceController extends ActionController
                 $invoice = array(
                     'order' => $order['id'],
                     'time_create' => time(),
+                    'time_invoice' => strtotime($values['time_invoice']),
                     'random_id' => time() + rand(100, 999),
                     'code' => Pi::api('invoice', 'order')->generatCode(),
                     'create_by' => 'ADMIN',
@@ -269,7 +270,7 @@ class InvoiceController extends ActionController
             $message = __('Invoice was validated or cancelled. You cannont edit it.'); 
             $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order']), $message);
         }
-                $order = Pi::api('order', 'order')->getOrder($invoice['order']);
+        $order = Pi::api('order', 'order')->getOrder($invoice['order']);
         $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
         
         
@@ -283,6 +284,7 @@ class InvoiceController extends ActionController
                 $values = $form->getData();
                 $values['time_duedate'] = strtotime($values['time_duedate']);
                 $values['total_price'] = $values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['setup_price'] + $values['vat_price'];
+                $values['time_invoice'] = strtotime($values['time_invoice']);
                 // Save values
                 $row = $this->getModel('invoice')->find($id);
                 $row->assign($values);

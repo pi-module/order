@@ -42,6 +42,7 @@ class Order extends Model
         'user_note',
         'admin_note',
         'time_create',
+        'time_order',
         'time_delivery',
         'status_order',
         'status_delivery',

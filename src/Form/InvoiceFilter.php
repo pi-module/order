@@ -26,6 +26,10 @@ class InvoiceFilter extends InputFilter
             'required' => false,
             
         ));
-        
+         $this->add(array(
+            'name' => 'time_invoice',
+            'required' => false,
+            
+        ));
     }
 }

@@ -184,6 +184,18 @@ class OrderProductForm extends BaseForm
                 'required' => false,
             )
         ));
+        
+        $this->add(array(
+            'name' => 'admin_note',
+            'options' => array(
+                'label' => __('Admin note'),
+            ),
+            'attributes' => array(
+                'type' => 'textarea',
+                'description' => '',
+            )
+        ));
+        
         $elemsForGroup = array();
         foreach (array('order', 'shop', 'guide', 'event') as $module) {
             if (Pi::service('module')->isActive($module)) {

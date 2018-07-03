@@ -60,6 +60,7 @@ class Invoice extends AbstractApi
             $row->random_id = time() + rand(100, 999);
             $row->status = \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT;
             $row->time_create = $order['time_create'];
+            $row->time_invoice = $order['time_create'];
             $row->time_duedate = time();
             $row->order = $order['id'];
             
@@ -246,7 +247,10 @@ class Invoice extends AbstractApi
         // Set time
         $invoice['time_create_view'] = _date($invoice['time_create'], array('pattern' => $pattern));
         $invoice['time_cancel_view'] = $invoice['time_cancel'] ? _date($invoice['time_cancel'], array('pattern' => $pattern)) : __('Not canceled');
-       
+        $invoice['time_invoice'] = date('Y-m-d', $invoice['time_invoice']);
+        $invoice['time_invoice_view'] = _date($invoice['time_invoice']);
+        
+        
         // Set url
         $invoice['order_url'] = Pi::url(Pi::service('url')->assemble('order', array(
             'module' => $this->getModule(),
@@ -475,6 +479,7 @@ class Invoice extends AbstractApi
         $row->random_id = time() + rand(100, 999);
         $row->status = \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED;
         $row->time_create = time();
+        $row->time_invoice = time();
         $row->order = $invoice['order'];
         $row->create_by = 'ADMIN';
         $row->type = 'CREDIT';

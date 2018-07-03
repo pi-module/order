@@ -37,5 +37,6 @@ class Detail extends Model
         'vat_price',
         'number',
         'extra',
+        'admin_note'
     );
 }

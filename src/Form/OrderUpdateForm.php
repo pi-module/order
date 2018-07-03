@@ -48,27 +48,32 @@ class OrderUpdateForm extends BaseForm
                 )
             ));
            
-            // time_create
             $this->add(array(
                 'name' => 'time_create',
-                'type' => 'datepicker',
-                'options' => array(
-                    'label' => __('Order date'),
-                    'datepicker' => array(
-                        'format' => 'yyyy-mm-dd',
-                        'autoclose' => true,
-                        'todayBtn' => true,
-                        'todayHighlight' => true,
-                        'weekStart' => 1,
-                    ),
-                ),
+                'type' => 'hidden',
                 'attributes' => array(
-                    'id' => 'time-create',
-                    'required' => true,
-                )
+                    'value' => time(),
+                ),
             ));
         }
         
+        $this->add(array(
+            'name' => 'time_order',
+            'type' => 'datepicker',
+            'options' => array(
+                'label' => __('Order date'),
+                'datepicker' => array(
+                    'format' => 'yyyy-mm-dd',
+                    'autoclose' => true,
+                    'todayBtn' => true,
+                    'todayHighlight' => true,
+                    'weekStart' => 1,
+                ),
+            ),
+            'attributes' => array(
+                'required' => true,
+            )
+        ));
         $gatewayList = Pi::api('gateway', 'order')->getAdminGatewayList();
         $this->add(array(
             'name' => 'default_gateway',
@@ -508,7 +513,7 @@ class OrderUpdateForm extends BaseForm
         $groups = array(
             'order' => array (
                 "label" => __('Order'),
-                "elements" => array('uid', 'status_order', 'time_create')
+                "elements" => array('uid', 'status_order', 'time_order')
             ),
             'delivery_address' => array(
                 'label' => __('Delivery address'),

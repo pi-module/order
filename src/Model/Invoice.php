@@ -33,6 +33,7 @@ class Invoice extends Model
         'status',
         'time_create',
         'time_cancel',
+        'time_invoice',
         'back_url',
         'create_by',
         'type'

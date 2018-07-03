@@ -1197,7 +1197,69 @@ EOD;
                 return false;
             }
         }
+        
+        if (version_compare($moduleVersion, '2.2.3', '<')) {
 
+            $sql = sprintf("ALTER TABLE %s ADD `time_order` int(10) UNSIGNED NOT NULL", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            $sql = sprintf("UPDATE %s ADD `time_order` = `time_create`", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+            $sql = sprintf("ALTER TABLE %s ADD `time_invoice` int(10) UNSIGNED NOT NULL", $invoiceTable);
+            try {
+                $invoiceAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+            $sql = sprintf("UPDATE %s ADD `time_invoice` = `time_create`", $invoiceTable);
+            try {
+                $invoiceAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+            $sql = sprintf("ALTER TABLE %s ADD `admin_note` VARCHAR(511) NULL DEFAULT ''", $detailTable);
+            try {
+                $detailAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            
+        }
         return true;
     }
 }

@@ -157,7 +157,7 @@ class OrderController extends ActionController
         ->offset($offset);
         $rowset = Pi::db()->query($select);
         
-foreach ($rowset as $row) {
+        foreach ($rowset as $row) {
             $list[$row['id']] = Pi::api('order', 'order')->canonizeOrder($row);
             $products = Pi::api('order', 'order')->listProduct($row['id']);
             $list[$row['id']]['products'] = $products;
@@ -637,6 +637,8 @@ foreach ($rowset as $row) {
                 } else {
                     $values['time_create'] = time();
                 }
+                $values['time_order'] = strtotime($values['time_order']);
+
                 
                  // Save values to order
                 $order = $this->getModel('order')->createRow();
@@ -737,6 +739,7 @@ foreach ($rowset as $row) {
                 $values = $form->getData();
                 
                 $order = $this->getModel('order')->find($id);
+                $values['time_order'] = strtotime($values['time_order']);
                 $order->assign($values);
                 $order->save();
                 
@@ -863,6 +866,7 @@ foreach ($rowset as $row) {
                 $detail->number = 1;
                 $detail->time_create = time();
                 $detail->extra = Pi::api('order', $values['module'])->createExtraDetailForProduct($values);
+                $detail->admin_note = $values['admin_note'];
                 $detail->save();
                 
                 $this->updateOrderType($order['id']);

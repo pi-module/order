@@ -132,6 +132,11 @@ class OrderProductFilter extends InputFilter
             'required' => false,
         ));
         
+        $this->add(array(
+            'name' => 'admin_note',
+            'required' => false,
+        ));
+        
         // extra options
         foreach (array('order', 'shop', 'guide', 'event') as $module) {
             if (Pi::service('module')->isActive($module)) {

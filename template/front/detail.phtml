@@ -145,8 +145,8 @@
                                     <div class="col-md-4">
                                         <p><strong><?php _e('Informations') ?></strong></p>
                                         <hr/>
-                                        <p><strong><?php _e('Time create'); ?></strong> :
-                                            <span><?php echo $this->escape($order['time_create_view']); ?> </span></p>
+                                        <p><strong><?php _e('Time order'); ?></strong> :
+                                            <span><?php echo $this->escape($order['time_order_view']); ?> </span></p>
         
                                        <?php 
                                         $orderClass = '';
@@ -295,7 +295,7 @@
                                                 <th class="col-md-1"><?php _e('Invoice ID'); ?></th>
                                                 <th class="col-md-1"><?php _e('Status'); ?></th>
                                                 <th class="col-md-1"><?php _e('Type'); ?></th>
-                                                <th class="col-md-2"><?php _e('Time Create'); ?></th>
+                                                <th class="col-md-2"><?php _e('Time invoice'); ?></th>
                                                 <th class="col-md-7 text-right"><?php _e('Action'); ?></th>
                                             </tr>
                                                 
@@ -314,7 +314,7 @@
                                                 <td><?php echo $this->escape($invoice['code']); ?></td>
                                                 <td><span class="label <?php echo $labelIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']]; ?></span></td>
                                                 <td><?php echo $this->escape($invoice['type']); ?></td>
-                                                <td><?php echo $this->escape($invoice['time_create_view']) . ' ' . date('H:m', $invoice['time_create']); ?></td>
+                                                <td><?php echo $this->escape($invoice['time_invoice_view']) ?></td>
                                                 <td class="text-right">
                                                     <a class="btn btn-primary btn-xs" title="<?php _e('Print'); ?>"
                                                        href="<?php echo $this->url('', array('controller' => 'detail', 'action' => 'print', 'id' => $invoice['id'])); ?>">

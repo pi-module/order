@@ -45,6 +45,11 @@ class OrderUpdateFilter extends InputFilter
             
         }
         
+        $this->add(array(
+            'name' => 'time_order',
+            'required' => true,
+        ));
+        
         // name
         if ($option['config']['order_name']) {
             // first_name

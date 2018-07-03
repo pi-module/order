@@ -37,7 +37,7 @@ $urlMessage = $this->url('', array(
                     <td><?php echo _date($promocode['time_start']) . ' ' . date('H:i', $promocode['time_start']); ?></td>
                     <td><?php echo _date($promocode['time_end']) . ' ' . date('H:i', $promocode['time_end']); ?></td>
                     <td><?php echo join(', ', json_decode($promocode['module'])); ?></td>
-                    <td><?php echo $promocode->showcode ? __('Yes') : __('No') ?></td>
+                    <td><span class="fa <?php echo $promocode->showcode ? 'fa-check text-success' : 'fa-times text-danger' ?>"></span></td>
                     <td>
                          <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'manage', 'id' => $promocode['id'])); ?>">
                              <i class="fa fa-edit"></i> <?php _e('Manage'); ?>

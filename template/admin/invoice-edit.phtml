@@ -23,8 +23,11 @@
                 <p><strong><?php _e('Gateway'); ?></strong> :
                     <span><?php echo $this->escape($invoice['gateway']); ?></span></p>
 
-                <p><strong><?php _e('Create'); ?></strong> :
+                <p><strong><?php _e('Time create'); ?></strong> :
                     <span><?php echo $this->escape($invoice['time_create_view']); ?> </span></p>
+                
+                <p><strong><?php _e('Time invoice'); ?></strong> :
+                    <span><?php echo $this->escape($invoice['time_invoice_view']); ?> </span></p>
                 
                 <?php if ($invoice['shipping_price'] > 0) { ?>
                     <p><strong><?php _e('Shipping price'); ?></strong> :

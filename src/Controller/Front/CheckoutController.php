@@ -38,6 +38,7 @@ class CheckoutController extends IndexController
         $values['status_order'] = \Module\Order\Model\Order::STATUS_ORDER_VALIDATED;
         $values['status_delivery'] = 1;
         $values['time_create'] = time();
+        $values['time_order'] = time();
         
         // Set type_payment values
         if (isset($cart['type_commodity']) && in_array($cart['type_commodity'], array('product', 'service'))) {

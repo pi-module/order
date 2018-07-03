@@ -267,8 +267,11 @@ $this->backbone();
                                 <p><strong><?php _e('Informations') ?></strong></p>
                                 <hr/>
                                 <p><strong><?php _e('Time create'); ?></strong> :
-                                    <span><?php echo $this->escape($order['time_create_view']); ?> </span></p>
-
+                                    <span><?php echo $this->escape($order['time_create_view']); ?> </span>
+                                </p>
+                                <p><strong><?php _e('Time order'); ?></strong> :
+                                    <span><?php echo $this->escape($order['time_order_view']); ?> </span>
+                                </p>
                                <?php 
                                 $orderClass = '';
                                 switch ($order['status_order']) {
@@ -394,13 +397,13 @@ $this->backbone();
                                         <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?></td>
                                         <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['vat_price'])); ?></td>
                                         <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['total_price'])); ?></td><br />
-                                        <td>
+                                        <td rowspan=2>
                                             <?php foreach ($product['extra'] as $key => $value) {
                                                 echo $key . ' : ' . ($value ? $value : 0) . '<br>';     
                                             } ?> 
                                         </td>
         
-                                        <td>
+                                        <td rowspan=2>
                                             <?php if (!$hasValidInvoice) { ?>
                                                 <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
                                                href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'product', 'order' => $order['id'], 'id' => $product['id'])); ?>">
@@ -409,6 +412,11 @@ $this->backbone();
                                                href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'product-delete', 'id' => $product['id'])); ?>">
                                                 <i class="fa fa-close"></i> <?php _e('Delete'); ?></a>
                                             <?php } ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan=11>
+                                            <?php echo nl2br($this->escape($product['admin_note'])) ?>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -465,8 +473,9 @@ $this->backbone();
                                             <th class="col-md-1"><?php _e('Invoice ID'); ?></th>
                                             <th class="col-md-1"><?php _e('Status'); ?></th>
                                             <th class="col-md-1"><?php _e('Type'); ?></th>
-                                            <th class="col-md-1"><?php _e('Type paiement'); ?></th>
+                                            <th class="col-md-1"><?php _e('Type payment'); ?></th>
                                             <th class="col-md-2"><?php _e('Time Create'); ?></th>
+                                            <th class="col-md-2"><?php _e('Time invoice'); ?></th>
                                             <th class="col-md-7 text-right"><?php _e('Action'); ?></th>
                                         </tr>
                                         
@@ -487,7 +496,8 @@ $this->backbone();
                                         <td><span id="update-invoice-<?php echo $invoice['id'] ?>" data-invoice="<?php echo $invoice['id'] ?>" class="label <?php echo $invoice['type'] != 'CREDIT' && $invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED ? 'update-invoice btn' : '' ?>  <?php echo $labelIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']]; ?></span></td>
                                         <td><?php echo $this->escape($invoice['type']); ?></td>
                                         <td><?php echo $this->escape($invoice['type_payment']); ?></td>
-                                        <td><?php echo $this->escape($invoice['time_create_view']) . ' ' . date('H:m', $invoice['time_create']); ?></td>
+                                        <td><?php echo $this->escape($invoice['time_create_view']) . ' ' . date('H:i', $invoice['time_create']); ?></td>
+                                        <td><?php echo $this->escape($invoice['time_invoice_view']) ?></td>
                                         <td class="text-right">
                                             <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>"
                                                href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'view', 'id' => $invoice['id'])); ?>">

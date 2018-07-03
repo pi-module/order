@@ -14,6 +14,7 @@ CREATE TABLE `{order}` (
   `admin_note`      TEXT,
   # Needed times
   `time_create`     INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
+  `time_order `     INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   `time_delivery`   INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   # Needed status
   `status_order`    TINYINT(1) UNSIGNED                                  NOT NULL DEFAULT '0',
@@ -55,6 +56,7 @@ CREATE TABLE `{detail}` (
   `vat_price`      DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
   `number`         INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `extra`          TEXT,
+  `admin_note`     VARCHAR(511)     NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `order` (`order`),
   KEY `product` (`product`)
@@ -70,6 +72,7 @@ CREATE TABLE `{invoice}` (
   `status`         TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
   `time_create`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `time_cancel`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `time_invoice `  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `back_url`       VARCHAR(255)        NOT NULL DEFAULT '',
   `create_by`        ENUM ('ADMIN', 'USER') NOT NULL DEFAULT 'USER',
   PRIMARY KEY (`id`),

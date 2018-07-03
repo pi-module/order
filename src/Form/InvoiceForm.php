@@ -36,6 +36,24 @@ class InvoiceForm extends BaseForm
     public function init()
     {  
         $this->add(array(
+            'name' => 'time_invoice',
+            'type' => 'datepicker',
+            'options' => array(
+                'label' => __('Invoice date'),
+                'datepicker' => array(
+                    'format' => 'yyyy-mm-dd',
+                    'autoclose' => true,
+                    'todayBtn' => true,
+                    'todayHighlight' => true,
+                    'weekStart' => 1,
+                ),
+            ),
+            'attributes' => array(
+                'required' => true,
+            )
+        ));
+        
+        $this->add(array(
             'name' => 'type_payment',
             'type' => 'select',
             'options' => array(
