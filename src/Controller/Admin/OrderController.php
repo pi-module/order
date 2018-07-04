@@ -132,7 +132,8 @@ class OrderController extends ActionController
         ->join(array('detail' => $detailTable), 'detail.order = order.id', array('total_price' => new Expression("SUM(product_price) - SUM(discount_price) + SUM(shipping_price) + SUM(packing_price) + SUM(setup_price) +SUM(vat_price) ")))
         ->join(array('invoice' => $invoiceTable), new Expression('invoice.order = order.id AND invoice.type= "NORMAL" AND invoice.status = ' . \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED), array('invoice' => 'id'), 'left')
         ->group('order.id')
-        ->where (array('order.time_create >= ' . mktime(0, 0, 0, 1, 1, date('Y'))));
+        ->where (array('order.time_create >= ' . mktime(0, 0, 0, 1, 1, date('Y'))))
+        ->where (array('order.status_order = ' . \Module\Order\Model\Order::STATUS_ORDER_VALIDATED));
         $rowset = Pi::db()->query($select);
         $totalBilled = 0;
         $totalOrdered = 0;

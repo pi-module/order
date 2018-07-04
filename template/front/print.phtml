@@ -119,26 +119,10 @@
                     <tbody>
                         <tr>
                             <td class="col1">
-                                <?php _e('Order number'); ?>
-                            </td>
-                            <td class="align-right col2">
-                                <?php echo $order['code'] ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col1">
                                 <?php _e('Invoice number'); ?>
                             </td>
                             <td class="align-right col2">
                                 <?php echo $order['invoice']['code'] ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col1">
-                                <?php _e('Time order'); ?>
-                            </td>
-                            <td class="align-right col2">
-                                <?php echo $this->escape($order['time_order_view']); ?>
                             </td>
                         </tr>
                         <tr>

@@ -25,9 +25,11 @@ $this->backbone();
             <h3><?php _e('List of orders'); ?></h3>
         </div>
         <div class="col-xs-6 text-center totalOrder">
-            <strong><?php echo __('Billed') . ' ' . date('Y') . ' : '?></strong> <?php echo $totalBilled . ' € - ' ?>
-            <strong><?php echo __('Ordered') . ' ' . date('Y') . ' : '?></strong> <?php echo $totalOrdered . ' € - ' ?>
-            <strong><?php echo __('Non ordered') . ' ' . date('Y') . ' : '?></strong> <?php echo $totalNonOrdered . ' €' ?>
+            <strong><?php echo __('Ordered') . ' ' . date('Y') . ' : '?></strong> <?php echo $totalOrdered . ' €' ?>
+            -
+            <strong><?php echo __('Invoiced') . ' ' . date('Y') . ' : '?></strong> <?php echo $totalBilled . ' €' ?>
+            == 
+            <strong><?php echo __('Non invoiced') . ' ' . date('Y') . ' : '?></strong> <?php echo $totalNonOrdered . ' €' ?>
         </div>
         <div class="col-xs-3 text-right">
             <a class="btn btn-success" title="<?php _e('New order'); ?>" href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'add')); ?>">
