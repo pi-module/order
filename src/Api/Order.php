@@ -59,7 +59,8 @@ class Order extends AbstractApi
         } else {
             $where = array('uid' => $uid);
         }
-        if (!$options['draft']) {
+        
+        if (!isset($options['draft']) || !$options['draft']) {
             $where['status_order != ?'] = \Module\Order\Model\Order::STATUS_ORDER_DRAFT;
         }
         

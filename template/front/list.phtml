@@ -40,10 +40,16 @@
                             <a class="btn btn-primary btn-xs" title="<?php _e('Pay'); ?>" target="_blank"
                                href="<?php echo Pi::url($this->url('order', array('controller'=> 'payment', 'action' => 'index', 'id' => $order['id']))); ?>"><i
                                     class="fa fa-credit-card"></i> <?php _e('Pay'); ?></a>
-                          <?php } ?>
+                                    
                             <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" target="_blank"
                                 href="<?php echo Pi::url($this->url('order', array('controller' => 'detail', 'id' => $order['id']))); ?>"><i
                             class="fa fa-edit"></i> <?php _e('View'); ?></a> 
+                          <?php } else { ?>
+                              <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" target="_blank"
+                                href="<?php echo Pi::url($this->url('order', array('controller' => 'detail', 'id' => $order['id']))); ?>"><i
+                            class="fa fa-edit"></i> <?php _e('Details / Invoice'); ?></a> 
+                          <?php } ?>
+                            
                    
                         </td>
                     </tr>
