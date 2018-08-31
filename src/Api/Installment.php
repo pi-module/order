@@ -27,6 +27,55 @@ use Pi\Application\Api\AbstractApi;
 
 class Installment extends AbstractApi
 {
+    public function getInstallmentsFromInvoice($id)
+    {
+        $installments = array();
+        $where = array('invoice' => $id);
+        $select = Pi::model('invoice_installment', 'order')->select()->where($where);
+        $rowset = Pi::model('invoice_installment', 'order')->selectWith($select);
+        foreach ($rowset as $row) {
+            $installments[$row->id] = $this->canonize($row);
+        }
+        return $installments;
+    }
+    public function getInstallmentsFromOrder($id)
+    {
+        $installments = array();
+        
+        $orderTable = Pi::model('order', 'order')->getTable();
+        $invoiceTable = Pi::model("invoice", 'order')->getTable();
+        $invoiceInstallmentTable = Pi::model("invoice_installment", 'order')->getTable();
+     
+        $select = Pi::db()->select();
+        $select
+        ->from(array('order' => $orderTable))->columns(array())
+        ->join(array('invoice' => $invoiceTable), 'invoice.order = order.id', array('status_invoice' => 'status'))
+        ->join(array('invoice_installment' => $invoiceInstallmentTable), 'invoice_installment.invoice = invoice.id')
+        ->where (array('order.id' => $id));
+        
+        $rowset = Pi::db()->query($select);
+        foreach ($rowset as $row) {
+            $installments[] = $row;
+        }
+        
+        return $installments;
+    }
+    
+    public function canonize($installment) {
+            
+        $pattern = !empty($config['date_format']) ? $config['date_format'] : 'yyyy-MM-dd';
+
+        if (!is_array($installment)) {
+            $installment = $installment->toArray();
+        }
+        
+        $installment['time_payment_view'] = $installment['time_payment'] ? _date($installment['time_payment'], array('pattern' => $pattern)) : __('NA');
+        $installment['time_duedate_view'] = _date($installment['time_duedate'], array('pattern' => $pattern));
+        $installment['due_price_view'] = Pi::api('api', 'order')->viewPrice($installment['due_price']);
+        $installment['credit_price_view'] = Pi::api('api', 'order')->viewPrice($installment['credit_price']);
+        
+        return $installment;
+    }
     public function planList()
     {
         // Get config

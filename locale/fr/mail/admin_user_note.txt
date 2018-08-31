@@ -1,0 +1,5 @@
+[comment]Partial view : Admin user note[/comment]
+
+[body]
+    <div style="padding: 3px 0; margin: 1px 0;">Here is the user note  : %user_note%</div>
+[/body]

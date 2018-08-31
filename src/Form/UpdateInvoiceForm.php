@@ -16,56 +16,51 @@ namespace Module\Order\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class OrderProductAddForm extends BaseForm
+class UpdateInvoiceForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    protected $_options = array();
+    
+    public function __construct($name = null, $options = array())
     {
-        $this->option = $option;
+        $this->_options = $options;
         parent::__construct($name);
     }
 
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new OrderProductAddFilter($this->option);
+            $this->filter = new UpdateInvoiceFilter;
         }
         return $this->filter;
     }
 
     public function init()
     {
-        // id
+        // status_payment
         $this->add(array(
-            'name' => 'id',
+            'name' => 'status',
+            'type' => 'select',
             'options' => array(
-                'label' => __('Product / service ID'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'required' => true,
-            )
-        ));
-        // invoice
-        $this->add(array(
-            'name' => 'invoice',
-            'options' => array(
-                'label' => __('Select invoice to add fee'),
-                'value_options' => $this->option['invoice'],
-            ),
-            'type' => 'radio',
-            'attributes' => array(
-                'required' => true,
+                'label' => __('Payment'),
+                    'value_options' => \Module\Order\Model\Invoice::getStatusList($this->_options['status']),
             ),
         ));
-
-
-        // Save order
+        // gateway
+        /* $this->add(array(
+            'name' => 'gateway',
+            'type' => 'Module\Order\Form\Element\Gateway',
+            'options' => array(
+                'label' => __('Adapter'),
+                'gateway' => '',
+            ),
+        )); */
+        // Save
         $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
-                'value' => __('Save'),
-                'class' => 'btn btn-success',
+                'value' => __('Update'),
+                'class' => 'btn btn-primary',
             )
         ));
     }

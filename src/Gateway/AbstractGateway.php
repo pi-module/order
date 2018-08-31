@@ -270,9 +270,15 @@ abstract class AbstractGateway
     
     protected function setLog($value, $message)
     {
+        $amount = 0;
+        for ($i = 1; $i < $this->gatewayPayInformation['nb_product']; ++$i) {
+            $amount += $this->gatewayPayInformation['amount_' . $i] - $this->gatewayPayInformation['discount_price_' . $i] - $this->gatewayPayInformation['unconsumed_' .$i];
+        }
+
         $log = array();
         $log['gateway'] = $this->gatewayAdapter;
         $log['value'] = $value;
+        $log['amount'] = $amount;
         $log['message'] = $message;
         $log['order'] = $this->gatewayOrder['id'];
         Pi::api('log', 'order')->setLog($log);

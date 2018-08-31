@@ -1,0 +1,45 @@
+<?php
+$this->css(array(
+    $this->assetModule('css/front.css'),
+    $this->assetModule('script/system-ui.css', 'system'),
+));
+$this->jQuery();
+$this->js($this->assetModule('script/system-msg.js', 'system'));
+$this->headMeta('noindex', 'robots');
+?>
+<div id="address-form" class="clearfix">
+    <div class="col-md-12">
+        <h3><?php echo $this->escape($title); ?></h3>
+        <?php echo $this->form($form, 'modal'); ?>
+    </div>
+</div>
+<script>
+$( document ).ready(function() {
+    $('.complementary').parent().parent().hide();
+    $('#complementary').click(
+        function(e) {
+            e.preventDefault();
+            $('.complementary').parent().parent().toggle();        
+        }  
+    );
+        
+    $('form#address').submit(
+        function ()
+        {
+            $.post( 
+                $('form#address').attr('action'), 
+                $('form#address').serialize(),
+                function(data)
+                {   
+                    if (data.status == 1) {
+                        window.location.reload();
+                    } else {
+                        $("#addressModal").find(".modal-body").html(data);
+                    }
+                }
+            );
+            return false;
+        }
+    )
+});
+</script>

@@ -15,23 +15,14 @@ namespace Module\Order\Model;
 
 use Pi\Application\Model\Model;
 
-class Basket extends Model
+class Installment extends Model
 {
     /**
      * {@inheritDoc}
      */
     protected $columns = array(
         'id',
-        'order',
-        'product',
-        'product_price',
-        'discount_price',
-        'shipping_price',
-        'packing_price',
-        'setup_price',
-        'vat_price',
-        'total_price',
         'number',
-        'extra',
+        'commission',
     );
 }

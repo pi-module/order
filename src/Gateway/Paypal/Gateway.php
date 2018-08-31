@@ -75,7 +75,7 @@ class Gateway extends AbstractGateway
         
     }
 
-    public function getApproval($invoice)
+    public function getApproval($order)
     {
         $token = $this->getToken();
         $url = $this->getUrl() . '/payments/payment';
@@ -189,14 +189,13 @@ class Gateway extends AbstractGateway
             $result = json_decode($result);
         }
         
-        
-        $extra = json_decode($order['extra']);
+        $extra = json_decode($order['extra'], true);
         $extra['paypal_payment_id'] = $result->id;
         Pi::model('order', 'order')->update(
             array('extra' => json_encode($extra)),
             array('id' => $order['id'])
         );
-
+        
         foreach ($result->links as $link) {
             if ($link->rel == 'approval_url') {
                return $link->href;
@@ -216,7 +215,7 @@ class Gateway extends AbstractGateway
             "Authorization: Bearer " . $token
         );
         
-        $this->setLog($paymentId, 'payment_detail_start');
+        $this->setLog(json_encode(array('paymentId' => $paymentId)), 'payment_detail_start');
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -308,7 +307,7 @@ class Gateway extends AbstractGateway
         
         $form['onemail'] = array(
             'name' => 'onemail',
-            'label' => __('Send only 1 mail after payment'),
+            'label' => __('Send only 1 mail after payment (only for end user, not for admin)'),
             'type' => 'checkbox',
             'required' => false,
         );
@@ -319,6 +318,13 @@ class Gateway extends AbstractGateway
             'label' => __('Paypal email address'),
             'type' => 'text',
             'required' => true,
+        );
+         
+        $form['invoice_name'] = array(
+            'name' => 'invoice_name',
+            'label' => __('Gateway Name on the Invoice'),
+            'type' => 'text',
+            'required' => false,
         );
         // currency
         $form['currency'] = array(
@@ -380,7 +386,7 @@ class Gateway extends AbstractGateway
         // Get order
         $order = Pi::api('order', 'order')->getOrder($this->gatewayOrder['id']);
         // Get product list
-        $products = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        $products = Pi::api('order', 'order')->listProduct($order['id']);
         // Set products to payment
         $i = 1;
         foreach ($products as $product) {
@@ -390,36 +396,37 @@ class Gateway extends AbstractGateway
             $this->gatewayPayInformation['amount_' . $i] = $product['product_price'];
             $this->gatewayPayInformation['tax_' . $i] = $product['vat_price'];
             $this->gatewayPayInformation['discount_price_' . $i] = $product['discount_price'];
-            $this->gatewayPayInformation['unconsumed_' . $i] = $product['extra']['product']['unconsumedPrice'];
+            $this->gatewayPayInformation['unconsumed_' . $i] = $product['extra']['unconsumedPrice'];
             $i++;
         }
         // Set address
-        $address = '';
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        $addressCompose = '';
         if ($config['order_address1'] && $config['order_address2']) {
-            if (!empty($order['address1'])) {
-                $address = $order['address1'];
-            } elseif (!empty($order['address2'])) {
-                $address = $order['address2'];
+            if (!empty($address['address1'])) {
+                $addressCompose = $address['address1'];
+            } elseif (!empty($address['address2'])) {
+                $addressCompose = $address['address2'];
             }
         } elseif ($config['order_address1']) {
-            $address = $order['address1'];
+            $addressCompose = $address['address1'];
         } elseif ($config['order_address2']) {
-            $address = $order['address2'];
+            $addressCompose = $address['address2'];
         }
         // Set payment information
         $this->gatewayPayInformation['nb_product'] = $i;
         $this->gatewayPayInformation['no_shipping'] = count($products);
-        $this->gatewayPayInformation['first_name'] = $order['first_name'];
-        $this->gatewayPayInformation['last_name'] = $order['last_name'];
-        $this->gatewayPayInformation['address1'] = $address;
-        $this->gatewayPayInformation['address2'] = $order['address2'];
+        $this->gatewayPayInformation['first_name'] = $address['first_name'];
+        $this->gatewayPayInformation['last_name'] = $address['last_name'];
+        $this->gatewayPayInformation['address1'] = $addressCompose;
+        $this->gatewayPayInformation['address2'] = $address['address2'];
         $this->gatewayPayInformation['address_override'] = 1;
-        $this->gatewayPayInformation['city'] = $order['city'];
-        $this->gatewayPayInformation['state'] = $order['state'];
-        $this->gatewayPayInformation['country'] = $order['country'];
-        $this->gatewayPayInformation['zip'] = $order['zip_code'];
-        $this->gatewayPayInformation['email'] = $order['email'];
-        $this->gatewayPayInformation['night_phone_b'] = $order['mobile'];
+        $this->gatewayPayInformation['city'] = $address['city'];
+        $this->gatewayPayInformation['state'] = $address['state'];
+        $this->gatewayPayInformation['country'] = $address['country'];
+        $this->gatewayPayInformation['zip'] = $address['zip_code'];
+        $this->gatewayPayInformation['email'] = $address['email'];
+        $this->gatewayPayInformation['night_phone_b'] = $address['mobile'];
         $this->gatewayPayInformation['cmd'] = '_cart';
         $this->gatewayPayInformation['upload'] = 1;
         $this->gatewayPayInformation['return'] = $this->gatewayFinishUrl;
@@ -445,8 +452,8 @@ class Gateway extends AbstractGateway
     public function verifyPayment($request, $processing)
     {
         $order = Pi::api('order', 'order')->getOrder($processing['order']);
-        $extra = $order['extra'];
-        $paymentId = $extra['paypal_payment_id'];
+        $extra = json_decode($order['extra']);
+        $paymentId = $extra->paypal_payment_id;
         if (!empty($paymentId)) {
             $payment = $this->getPayment($paymentId);
         }
@@ -457,6 +464,8 @@ class Gateway extends AbstractGateway
             $result['order'] = $order['id'];
         } else {
             $result['status'] = 0;
+            $result['state'] = $payment->state;
+            $this->gatewayError = __('An error occured with Paypal. Please contact administrator');
         }
         
         return $result;

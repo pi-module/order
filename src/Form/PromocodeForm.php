@@ -38,7 +38,6 @@ class PromocodeForm extends BaseForm
     public function init()
     {
        
-        // customer_id
         $this->add(array(
             'name' => 'id',
             'attributes' => array(
@@ -69,36 +68,47 @@ class PromocodeForm extends BaseForm
             )
         ));
         
+         // time_start
         $this->add(array(
-            'name' => 'time_start',
-            'type' => 'datepicker',
+            'name' => 'datetimepicker_start',
+            'type' => 'text',
             'options' => array(
                 'label' => __('Start from'),
-                'datepicker' => array(
-                    'format' => 'yyyy-mm-dd',
-                    'orientation' => 'bottom',
-                    'autoclose' => true,
-                    'todayBtn' => true,
-                    'todayHighlight' => true,
-                ),
+              
+            ),
+            'attributes' => array(
+                'required' => true,
             )
         ));
         
-        // end
-        $this->add(array(
-            'name' => 'time_end',
-            'type' => 'datepicker',
-            'options' => array(
-                'label' => __('End to'),
-                'datepicker' => array(
-                    'format' => 'yyyy-mm-dd',
-                    'orientation' => 'bottom',
-                    'autoclose' => true,
-                    'todayBtn' => true,
-                    'todayHighlight' => true,
-                ),
+         $this->add(array(
+            'name' => 'time_start',
+            'type' => 'hidden',
+            'attributes' => array(
+                'required' => true,
             )
         ));
+         $this->add(array(
+            'name' => 'datetimepicker_end',
+            'type' => 'text',
+            'options' => array(
+                'label' => __('End to'),
+              
+            ),
+            'attributes' => array(
+                'required' => true,
+            )
+        ));
+        
+         $this->add(array(
+            'name' => 'time_end',
+            'type' => 'hidden',
+            'attributes' => array(
+                'required' => true,
+            )
+        ));
+        
+        
 
         $this->add(array(
             'name' => 'module',
@@ -112,7 +122,14 @@ class PromocodeForm extends BaseForm
                 'multiple' => 1
             )
         ));
-        
+        $this->add(array(
+            'name' => 'showcode',
+            'type' => 'checkbox',
+            'options' => array(
+                'label' => __('Show Promo Code on front CTA'),
+            ),
+            
+        ));
         
         $this->add(array(
             'name' => 'submit',

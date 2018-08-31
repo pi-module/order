@@ -2,7 +2,26 @@
 <div class="clearfix">
     <h3><?php _e('Manage order product / service'); ?></h3>
     <div class="alert alert-info">
-        <?php echo sprintf(__('Please add product / service id from %s module, your selected product / service should be active. if user still didnt pay invoice, this product price add to current invoice and if pay, new invoice generated !'), $order['moduleTitle']); ?>
+        <?php echo __('Please add product / service id from module, your selected product / service should be active. This product price add to current invoice'); ?>
     </div>
     <?php echo $this->form($form); ?>
 </div>
+
+<script>
+    $(function () {
+        var changeModule = function() {
+            $('.specific:first').closest('fieldset').show();
+            var moduleName = $('[name=module]').val();
+            $('.specific').parent().parent().parent().parent().hide();
+            $('.specific.' + moduleName).parent().parent().parent().parent().show();
+
+            if ($('.specific:visible').length == 0) {
+                $('.specific:first').closest('fieldset').hide();
+            } else {
+                $('.specific:first').closest('fieldset').show();
+            }
+        };
+        $('[name=module]').change(changeModule);
+        changeModule();
+    });
+</script>

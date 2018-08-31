@@ -8,23 +8,23 @@
  */
 
 /**
- * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
+ * @author Mickaël STAMM <contact@sta2m.com>
  */
 
-namespace Module\Order\Model;
+namespace Module\Order\Model\Order;
 
 use Pi\Application\Model\Model;
 
-class Customer extends Model
+class Address extends Model
 {
     /**
      * {@inheritDoc}
      */
     protected $columns = array(
         'id',
-        'uid',
-        'ip',
+        'order',
         'id_number',
+        'type',
         'first_name',
         'last_name',
         'email',
@@ -32,7 +32,6 @@ class Customer extends Model
         'mobile',
         'address1',
         'address2',
-        'address_type',
         'country',
         'state',
         'city',
@@ -40,10 +39,6 @@ class Customer extends Model
         'company',
         'company_id',
         'company_vat',
-        'user_note',
-        'time_create',
-        'time_update',
-        'status',
         'delivery',
         'location',
     );

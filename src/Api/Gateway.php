@@ -28,6 +28,16 @@ use Module\Order\Gateway\AbstractGateway;
 
 class Gateway extends AbstractApi
 {
+    public function getAdminGatewayList()
+    {
+        $gatewaysList = $this->getActiveGatewayList();
+        $gateways = array('manual' => __('Manual'));
+        foreach ($gatewaysList as $gateway) {
+            $gateways[$gateway['path']] = $gateway['title'];
+        }
+        return $gateways;
+    }
+    
     public function getAllGatewayList()
     {
         return AbstractGateway::getAllList();

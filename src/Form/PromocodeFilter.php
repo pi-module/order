@@ -71,5 +71,11 @@ class PromocodeFilter extends InputFilter
             'name' => 'module',
             'required' => true,
         ));
+        
+        $this->add(array(
+            'name' => 'showcode',
+            'required' => true,
+        ));
+        
     }
 }	

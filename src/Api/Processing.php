@@ -27,7 +27,7 @@ use Zend\Math\Rand;
 
 class Processing extends AbstractApi
 {
-    public function setProcessing($order)
+    public function setProcessing($order, $gateway)
     {
         $rand = Rand::getInteger(10, 99);
          
@@ -37,7 +37,7 @@ class Processing extends AbstractApi
         $row->ip = Pi::user()->getIp();
         $row->order = $order['id'];
         $row->random_id = sprintf('%s%s', $order['id'], $rand);
-        $row->gateway = $order['gateway'];
+        $row->gateway = $gateway;
         $row->time_create = time();
         $row->save();
     }
@@ -54,8 +54,7 @@ class Processing extends AbstractApi
             if ($uid) {
                 $row = Pi::model('processing', $this->getModule())->find($uid, 'uid');
             } elseif ($config['order_anonymous']) {
-                $invoice = $_SESSION['order']['invoice_id'];
-                $row = Pi::model('processing', $this->getModule())->find($invoice, 'invoice');
+                $row = Pi::model('processing', $this->getModule())->find($_SESSION['order']['id'], 'order');
             }
         }
         // check
@@ -77,8 +76,7 @@ class Processing extends AbstractApi
         if ($uid) {
             $row = Pi::model('processing', $this->getModule())->find($uid, 'uid');
         } elseif ($config['order_anonymous']) {
-            $invoice = $_SESSION['order']['invoice_id'];
-            $row = Pi::model('processing', $this->getModule())->find($invoice, 'invoice');
+            $row = Pi::model('processing', $this->getModule())->find($_SESSION['order']['id'], 'order');
         } else {
             return false;
         }
@@ -108,8 +106,7 @@ class Processing extends AbstractApi
             if ($uid) {
                 $row = Pi::model('processing', $this->getModule())->find($uid, 'uid');
             } elseif ($config['order_anonymous']) {
-                $invoice = $_SESSION['order']['invoice_id'];
-                $row = Pi::model('processing', $this->getModule())->find($invoice, 'invoice');
+                $row = Pi::model('processing', $this->getModule())->find($_SESSION['order']['id'], 'order');
             }
         }
         // delete

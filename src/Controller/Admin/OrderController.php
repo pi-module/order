@@ -16,10 +16,8 @@ namespace Module\Order\Controller\Admin;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Module\Order\Form\OrderAddFilter;
-use Module\Order\Form\OrderAddForm;
-use Module\Order\Form\OrderEditFilter;
-use Module\Order\Form\OrderEditForm;
+use Module\Order\Form\OrderUpdateFilter;
+use Module\Order\Form\OrderUpdateForm;
 use Module\Order\Form\OrderProductFilter;
 use Module\Order\Form\OrderProductForm;
 use Module\Order\Form\OrderSettingFilter;
@@ -30,11 +28,12 @@ use Module\Order\Form\UpdateDeliveryFilter;
 use Module\Order\Form\UpdateDeliveryForm;
 use Module\Order\Form\UpdateNoteFilter;
 use Module\Order\Form\UpdateNoteForm;
-use Module\Order\Form\UpdateOrderFilter;
-use Module\Order\Form\UpdateOrderForm;
-use Module\Order\Form\UpdatePaymentFilter;
-use Module\Order\Form\UpdatePaymentForm;
+use Module\Order\Form\UpdateOrderStatusFilter;
+use Module\Order\Form\UpdateOrderStatusForm;
+use Module\Order\Form\UpdateInvoiceFilter;
+use Module\Order\Form\UpdateInvoiceForm;
 use Zend\Db\Sql\Predicate\Expression;
+use Zend\Db\Sql\Predicate\In;
 
 class OrderController extends ActionController
 {
@@ -43,41 +42,46 @@ class OrderController extends ActionController
         // Get page
         $page = $this->params('page', 1);
         $status_order = $this->params('status_order');
-        $status_payment = $this->params('status_payment');
         $status_delivery = $this->params('status_delivery');
         $can_pay = $this->params('can_pay');
+        $code = $this->params('code');
+        $uid = $this->params('uid');
         $type_payment = $this->params('type_payment');
         $type_commodity = $this->params('type_commodity');
-        $code = $this->params('code');
+        
+        // address
         $mobile = $this->params('mobile');
         $email = $this->params('email');
         $city = $this->params('city');
-        $uid = $this->params('uid');
         $id_number = $this->params('id_number');
         $first_name = $this->params('first_name');
         $last_name = $this->params('last_name');
         $zip_code = $this->params('zip_code');
         $company = $this->params('company');
+        
+        // installment 
+        $status_payment = $this->params('status_payment');
+        
         // Get info
         $list = array();
-        $order = array('id DESC', 'time_create DESC');
+        $order = array('order.id DESC', 'order.time_create DESC');
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit = intval($this->config('admin_perpage'));
         $where = array();
+        $having = array();
+        
         // Set where
         if ($status_order) {
             $where['status_order'] = $status_order;
-        } else {
-            $where['status_order'] = array(1, 2, 3, 7);
         }
         if ($status_payment) {
-            $where['status_payment'] = $status_payment;
+            $having['status_payment'] = $status_payment;
         }
         if ($status_delivery) {
             $where['status_delivery'] = $status_delivery;
         }
         if ($can_pay) {
-            $where['can_pay'] = $can_pay;
+            $where['order.can_pay'] = $can_pay;
         }
         if (in_array($type_payment, array('free', 'onetime', 'recurring', 'installment'))) {
             $where['type_payment'] = $type_payment;
@@ -86,7 +90,7 @@ class OrderController extends ActionController
             $where['type_commodity'] = $type_commodity;
         }
         if ($code) {
-            $where['code LIKE ?'] = '%' . $code . '%';
+            $where['order.code LIKE ?'] = '%' . $code . '%';
         }
         if ($mobile) {
             $where['mobile LIKE ?'] = '%' . $mobile . '%';
@@ -116,42 +120,68 @@ class OrderController extends ActionController
             $where['company LIKE ?'] = '%' . $company . '%';
         }
         // Select
-        $select = $this->getModel('order')->select()->where($where)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('order')->selectWith($select);
-        // Make list
+        $orderTable = Pi::model('order', 'order')->getTable();
+        $orderAddressTable = Pi::model("order_address", 'order')->getTable();
+        $invoiceTable = Pi::model("invoice", 'order')->getTable();
+        $invoiceInstallmentTable = Pi::model("invoice_installment", 'order')->getTable();
+        $detailTable = Pi::model("detail", 'order')->getTable();
+     
+        $select = Pi::db()->select();
+        $select
+        ->from(array('order' => $orderTable))
+        ->join(array('detail' => $detailTable), 'detail.order = order.id', array('total_price' => new Expression("SUM(product_price) - SUM(discount_price) + SUM(shipping_price) + SUM(packing_price) + SUM(setup_price) +SUM(vat_price) ")))
+        ->join(array('invoice' => $invoiceTable), new Expression('invoice.order = order.id AND invoice.type= "NORMAL" AND invoice.status = ' . \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED), array('invoice' => 'id'), 'left')
+        ->group('order.id')
+        ->where (array('order.time_create >= ' . mktime(0, 0, 0, 1, 1, date('Y'))))
+        ->where (array('order.status_order = ' . \Module\Order\Model\Order::STATUS_ORDER_VALIDATED));
+        $rowset = Pi::db()->query($select);
+        $totalBilled = 0;
+        $totalOrdered = 0;
         foreach ($rowset as $row) {
-            $invoiceList = Pi::api('invoice', 'order')->getInvoiceFromOrder($row->id, false);
-            $productList = Pi::api('order', 'order')->listProduct($row->id, $row->module_name);
-            $list[$row->id] = Pi::api('order', 'order')->canonizeOrder($row);
-            $list[$row->id]['products'] = $productList;
-            $list[$row->id]['invoiceList'] = $invoiceList;
-            $list[$row->id]['totalInvoice'] = 0;
-            $list[$row->id]['paidInvoice'] = 0;
-            $list[$row->id]['unPaidInvoice'] = 0;
-            foreach ($invoiceList as $invoice) {
-
-                echo '<pre>';
-                print_r($invoice);
-                echo '</pre>';
-
-                $list[$row->id]['totalInvoice']++;
-                if ($invoice['status'] == 1) {
-                    $list[$row->id]['paidInvoice']++;
-                } elseif ($invoice['status'] == 2) {
-                    $list[$row->id]['unPaidInvoice']++;
-                }
+            $totalOrdered += $row['total_price'];
+            if ($row['invoice']) {
+                $totalBilled += $row['total_price'];
             }
-            $list[$row->id]['statusInvoice'] = sprintf(
-                __('Total : %s / paid : %s / unPaid : %s'),
-                _number($list[$row->id]['totalInvoice']),
-                _number($list[$row->id]['paidInvoice']),
-                _number($list[$row->id]['unPaidInvoice'])
-            );
         }
+        
+        $select = Pi::db()->select();
+        $select
+        ->from(array('order' => $orderTable))
+        ->join(array('order_address' => $orderAddressTable), 'order_address.order = order.id', array('id_number', 'first_name','last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 'delivery', 'location'))
+        ->join(array('invoice' => $invoiceTable), new Expression('invoice.order = order.id AND invoice.type= "NORMAL" AND invoice.status = ' . \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED), array(), 'left')
+        ->join(array('invoice_installment' => $invoiceInstallmentTable), new Expression('invoice_installment.invoice = invoice.id AND invoice_installment.time_duedate <' . time()), array('status_payment' => new Expression("MIN(status_payment)")), 'left')
+        ->group('order.id')
+        ->where ($where)
+        ->having ($having)
+        ->order ($order)
+        ->limit($limit)
+        ->offset($offset);
+        $rowset = Pi::db()->query($select);
+        
+        foreach ($rowset as $row) {
+            $list[$row['id']] = Pi::api('order', 'order')->canonizeOrder($row);
+            $products = Pi::api('order', 'order')->listProduct($row['id']);
+            $list[$row['id']]['products'] = $products;
+            $totalPrice = 0;
+            foreach ($products as $product) {
+                $totalPrice += $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'] - $product['discount_price'];
+            }
+            $list[$row['id']]['total_price_view'] = Pi::api('api', 'order')->viewPrice($totalPrice);
+        }
+         //
+        $select = Pi::db()->select();
+        $select
+        ->from(array('order' => $orderTable))
+        ->join(array('order_address' => $orderAddressTable), 'order_address.order = order.id', array('id_number', 'first_name','last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 'delivery', 'location'))
+        ->join(array('invoice' => $invoiceTable), new Expression('invoice.order = order.id AND invoice.type= "NORMAL" AND invoice.status = ' . \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED), array(), 'left')
+        ->join(array('invoice_installment' => $invoiceInstallmentTable), 'invoice_installment.invoice = invoice.id', array('status_payment' => new Expression("MIN(status_payment)")), 'left')
+        ->group('order.id')
+        ->where ($where)
+        ->having ($having)
+        ->order ($order);
+        $count = Pi::db()->query($select)->count();
+        
         // Set paginator
-        $count = array('count' => new Expression('count(*)'));
-        $select = $this->getModel('order')->select()->columns($count)->where($where);
-        $count = $this->getModel('order')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
@@ -207,6 +237,10 @@ class OrderController extends ActionController
         $this->view()->assign('list', $list);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('form', $form);
+        
+        $this->view()->assign('totalOrdered', $totalOrdered);
+        $this->view()->assign('totalBilled', $totalBilled);
+        $this->view()->assign('totalNonOrdered', $totalOrdered-$totalBilled);
     }
 
     public function processAction()
@@ -218,7 +252,7 @@ class OrderController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                $message = __('Go to filter');
+                $message = __('Filtered list');
                 $url = array(
                     'action' => 'index',
                     'status_order' => $values['status_order'],
@@ -255,121 +289,103 @@ class OrderController extends ActionController
 
     public function updateOrderAction()
     {
-        // Get id
         $id = $this->params('id');
         $module = $this->params('module');
+        
         $return = array();
-        // Get order
+       
         $order = $this->getModel('order')->find($id);
-        if (in_array($order->status_order, array(4, 5, 6))) {
-            $return['status'] = 0;
-            $return['data'] = '';
-            return $return;
-        } else {
-            // Set form
-            $form = new UpdateOrderForm('updateOrder');
-            if ($this->request->isPost()) {
-                $data = $this->request->getPost();
-                $form->setInputFilter(new UpdateOrderFilter);
-                $form->setData($data);
-                if ($form->isValid()) {
-                    $values = $form->getData();
-                    $order->status_order = $values['status_order'];
-                    if ($values['status_order'] == 7) {
-                        $order->time_finish = time();
-                    } else {
-                        $order->time_finish = 0;
-                    }
-                    $order->save();
-                    // Check order status
-                    if (in_array($values['status_order'], array(4, 5, 6))) {
-                        Pi::api('invoice', 'order')->cancelInvoiceFromOrder($order->toArray());
-                    }
-                    // Add log
-                    //Pi::api('log', 'shop')->addLog('order', $order->id, 'update');
-                    // Send notification
-                    Pi::api('notification', 'order')->processOrder($order->toArray(), 'order');
-                    // Set return
-                    $return['status'] = 1;
-                    $return['data'] = Pi::api('order', 'order')->orderStatus($order->status_order);
-                    $return['data']['time_finish_view'] = ($order->time_finish) ? _date($order->time_finish) : __('Not Finish');
-                } else {
-                    $return['status'] = 0;
-                    $return['data'] = '';
-                }
-                return $return;
-            } else {
-                $values['status_order'] = $order->status_order;
-                $form->setData($values);
-                $form->setAttribute('action', $this->url('', array('action' => 'updateOrder', 'id' => $order->id)));
-            }
-        }
-        // Set view
-        $this->view()->setTemplate('system:component/form-popup');
-        $this->view()->assign('title', __('Update order'));
-        $this->view()->assign('form', $form);
-    }
-
-    public function updatePaymentAction()
-    {
-        // Get id
-        $id = $this->params('id');
-        $module = $this->params('module');
-        $return = array();
-        // Get order
-        $order = $this->getModel('order')->find($id);
+        $options = array(
+            'has_valid_invoice' => Pi::api('order', 'order')->hasValidInvoice($order['id']) 
+        );
         // Set form
-        $form = new UpdatePaymentForm('updateOrder');
+        $form = new UpdateOrderStatusForm('updateOrder', $options);
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            $form->setInputFilter(new UpdatePaymentFilter);
+            $form->setInputFilter(new UpdateOrderStatusFilter);
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                // Check status_payment
-                if ($values['status_payment'] != $order->status_payment) {
-                    switch ($values['status_payment']) {
-                        // Set order is not pay
-                        case 1:
-                            $order->status_payment = 1;
-                            $order->time_payment = 0;
-                            // Update invoice
-                            $this->getModel('invoice')->update(
-                                array('status' => 2),
-                                array('order' => $order->id)
-                            );
-                            break;
-
-                        // Set order is pay
-                        case 2:
-                            $order->status_payment = 2;
-                            $order->time_payment = time();
-                            $order->gateway = 'Offline';
-                            // Update invoice
-                            $this->getModel('invoice')->update(
-                                array('status' => 1, 'gateway' => 'Offline'),
-                                array('order' => $order->id)
-                            );
-                            break;
-                    }
-                    $order->save();
-                    // Send notification
-                    Pi::api('notification', 'order')->processOrder($order->toArray(), 'payment');
-                }
+                $order->status_order = $values['status_order'];
+                $order->save();
+               
+                Pi::api('notification', 'order')->processOrder($order->toArray(), 'order');
+                
                 // Set return
                 $return['status'] = 1;
-                $return['data'] = Pi::api('order', 'order')->paymentStatus($order->status_payment);
-                $return['data']['gateway'] = $order->gateway;
-                $return['data']['time_payment_view'] = ($order->time_payment) ? _date($order->time_payment) : __('Not Paid');
+                $return['data'] = Pi::api('order', 'order')->orderStatus($order->status_order);
             } else {
                 $return['status'] = 0;
                 $return['data'] = '';
             }
             return $return;
         } else {
-            $values['status_payment'] = $order->status_payment;
+            $values['status_order'] = $order->status_order;
             $form->setData($values);
-            $form->setAttribute('action', $this->url('', array('action' => 'updatePayment', 'id' => $order->id)));
+            $form->setAttribute('action', $this->url('', array('action' => 'updateOrder', 'id' => $order->id)));
+        }
+      
+        $this->view()->setTemplate('system:component/form-popup');
+        $this->view()->assign('title', __('Update order'));
+        $this->view()->assign('form', $form);
+    }
+    public function updateInvoiceAction()
+    {
+        // Get id
+        $id = $this->params('id');
+        $module = $this->params('module');
+        $return = array();
+        // Get order 
+        $invoice = $this->getModel('invoice')->find($id);
+        if ($invoice['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED || $invoice['type'] == 'CREDIT') {
+            $return['status'] = 0;
+            $return['data'] = '';
+            return $return;
+        }
+        
+        // Set form
+        $options = array(
+            'status' => $invoice['status'],
+        );
+        
+        $form = new UpdateInvoiceForm('updateInvoice', $options);
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new UpdateInvoiceFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Check status_payment
+                if ($values['status'] != $invoice->status) {
+                    if ($invoice->status == \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED && $values['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
+                        Pi::api('invoice', 'order')->generateCreditInvoice($invoice);
+                        $invoice->time_cancel = time();
+                    }
+                    $invoice->status = $values['status'];
+                    $invoice->save();
+                    
+                    if ($values['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) {
+                        
+                        Pi::api('invoice', 'order')->createInstallments($invoice->toArray());
+                          
+                    }     
+
+                    // Send notification
+                    $values = Pi::api('order', 'order')->getOrder($invoice['order']);
+                    Pi::api('notification', 'order')->processOrder($values, 'payment');
+                }
+                // Set return
+                $return['status'] = 1;
+                $return['data'] = Pi::api('order', 'order')->invoiceStatus($invoice->status);
+            } else {
+                $return['status'] = 0;
+                $return['data'] = '';
+            }
+            return $return;
+        } else {
+            $values['status'] = $invoice->status;
+            $form->setData($values);
+            $form->setAttribute('action', $this->url('', array('action' => 'updateInvoice', 'id' => $invoice->id)));
         }
         // Set view
         $this->view()->setTemplate('system:component/form-popup');
@@ -379,18 +395,17 @@ class OrderController extends ActionController
 
     public function updateDeliveryAction()
     {
-        // Get id
         $id = $this->params('id');
         $module = $this->params('module');
-        $return = array();
-        // Get order
+        
         $order = $this->getModel('order')->find($id);
-        // Set form
+        
         $form = new UpdateDeliveryForm('updateOrder');
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
             $form->setInputFilter(new UpdateDeliveryFilter);
             $form->setData($data);
+            $return = array();
             if ($form->isValid()) {
                 $values = $form->getData();
                 $order->status_delivery = $values['status_delivery'];
@@ -400,11 +415,9 @@ class OrderController extends ActionController
                     $order->time_delivery = 0;
                 }
                 $order->save();
-                // Add log
-                //Pi::api('log', 'shop')->addLog('delivery', $order->id, 'update');
-                // Send notification
+                
                 Pi::api('notification', 'order')->processOrder($order->toArray(), 'delivery');
-                // Set return
+                
                 $return['status'] = 1;
                 $return['data'] = Pi::api('order', 'order')->deliveryStatus($order->status_delivery);
                 $return['data']['time_delivery_view'] = ($order->time_delivery) ? _date($order->time_delivery) : __('Not Delivery');
@@ -426,18 +439,18 @@ class OrderController extends ActionController
 
     public function updateCanPayAction()
     {
-        // Get id
         $id = $this->params('id');
         $module = $this->params('module');
-        $return = array();
-        // Get order
+        
         $order = $this->getModel('order')->find($id);
-        // Set form
+        
         $form = new UpdateCanPayForm('updateOrder');
+        
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
             $form->setInputFilter(new UpdateCanPayFilter);
             $form->setData($data);
+            $return = array();
             if ($form->isValid()) {
                 $values = $form->getData();
                 // Update order
@@ -465,24 +478,23 @@ class OrderController extends ActionController
         }
         // Set view
         $this->view()->setTemplate('system:component/form-popup');
-        $this->view()->assign('title', __('Add / edit admin note'));
+        $this->view()->assign('title', __('Can pay ?'));
         $this->view()->assign('form', $form);
     }
 
     public function updateNoteAction()
     {
-        // Get id
         $id = $this->params('id');
         $module = $this->params('module');
-        $return = array();
-        // Get order
+        
         $order = $this->getModel('order')->find($id);
-        // Set form
+        
         $form = new UpdateNoteForm('updateOrder');
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
             $form->setInputFilter(new UpdateNoteFilter);
             $form->setData($data);
+            $return = array();
             if ($form->isValid()) {
                 $values = $form->getData();
                 $order->admin_note = $values['admin_note'];
@@ -510,195 +522,160 @@ class OrderController extends ActionController
 
     public function viewAction()
     {
-        // Get id
         $id = $this->params('id');
         $module = $this->params('module');
-        // Get config
+        
         $config = Pi::service('registry')->config->read($module);
-        // Get order
+        
         $order = $this->getModel('order')->find($id);
         $order = Pi::api('order', 'order')->canonizeOrder($order);
-        // set Products
-        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
-        // set Products
+        
+        $addressInvoicing = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        $addressDelivery = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'DELIVERY');
+        
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
         $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
-        // Set status Invoice
-        foreach ($order['invoices'] as $invoice) {
-            $order['totalInvoice']++;
-            if ($invoice['status'] == 1) {
-                $order['paidInvoice']++;
-            } elseif ($invoice['status'] == 2) {
-                $order['unPaidInvoice']++;
+        $offline = false;
+        $order['totalInstallments'] = 0;
+        $order['paidInstallments'] = 0;
+        $order['unPaidInstallments'] = 0;
+        // Get installments and count paid and unpaid payment 
+        foreach($order['invoices'] as &$invoice) {
+            $installments = Pi::api('installment', 'order')->getInstallmentsFromInvoice($invoice['id']);
+            $invoice['installments'] = $installments;
+            
+            $installment = current($installments);
+            if ($order['type_commodity'] == 'service' && $installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
+                $order['time_delivery_view'] = _date($installment['time_payment']);
+            }
+            
+            foreach($installments as $installment) {
+                if (Pi::api('gateway', 'order')->getGateway($installment['gateway'])) {
+                    if (Pi::api('gateway', 'order')->getGateway($installment['gateway'])->gatewayRow['type'] == 'offline') {
+                        $offline = true;
+                    }    
+                }
+                
+                $order['totalInstallments']++;
+                if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
+                    $order['paidInstallments']++;
+                } elseif ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
+                    $order['unPaidInstallments']++;
+                }
             }
         }
-        $order['statusInvoice'] = sprintf(
+        $order['statusInstallments'] = sprintf(
             __('Total : %s / paid : %s / unPaid : %s'),
-            _number($order['totalInvoice']),
-            _number($order['paidInvoice']),
-            _number($order['unPaidInvoice'])
+            _number($order['totalInstallments']),
+            _number($order['paidInstallments']),
+            _number($order['unPaidInstallments'])
         );
+        //
+        
+        // get total price
+        $order['total_price'] = 0;
+        foreach ($order['products'] as &$product) {
+            $totalPrice = $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'] - $product['discount_price'];
+            $product['total_price'] = $totalPrice;
+            $order['total_price'] += $totalPrice;
+        }
+        $order['total_price_view'] = Pi::api('api', 'order')->viewPrice($order['total_price']);
+        //
+        
         // credit
         if ($config['credit_active']) {
             $order['credit'] = Pi::api('credit', 'order')->getCredit($order['uid']);
         }
-        // Add log
-        //Pi::api('log', 'shop')->addLog('order', $order['id'], 'view');
         // Set view
         $this->view()->setTemplate('order-view');
+        $this->view()->assign('gateways', Pi::api('gateway', 'order')->getAdminGatewayList());
+        $this->view()->assign('gatewaysInfo', Pi::api('gateway', 'order')->getAllGatewayList());
         $this->view()->assign('order', $order);
+        $this->view()->assign('addressDelivery', $addressDelivery);
+        $this->view()->assign('addressInvoicing', $addressInvoicing);
         $this->view()->assign('config', $config);
+        $this->view()->assign('hasValidInvoice', Pi::api('order', 'order')->hasValidInvoice($order['id']));
+        $this->view()->assign('hasDraftInvoice', Pi::api('order', 'order')->hasDraftInvoice($order['id']));
+        $this->view()->assign('offline', $offline);
+        
     }
 
     public function addAction()
     {
-        // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
-        // Set option
         $option = array(
             'config' => $config,
+            'mode' => 'add'
         );
-        // Set form
-        $form = new OrderAddForm('addOrder', $option);
+        
+        $form = new OrderUpdateForm('addOrder', $option);
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            $form->setInputFilter(new OrderAddFilter($option));
+            $form->setInputFilter(new OrderUpdateFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
                 $values['ip'] = Pi::user()->getIp();
-                $values['status_order'] = 1;
-                $values['status_payment'] = 1;
+                $values['status_order'] = \Module\Order\Model\Order::STATUS_ORDER_DRAFT;
                 $values['status_delivery'] = 1;
                 $values['can_pay'] = 1;
-                // Get user
+                
+                // Check addresses
                 $user = Pi::api('user', 'order')->getUserInformation($values['uid']);
-                // Check user email
-                if (!isset($values['email']) || empty($values['email'])) {
-                    $values['email'] = $user['email'];
+                $checkField = array('email', 'id_number', 'first_name', 'last_name', 'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city','zip_code', 'company', 'company_id', 'company_vat');
+                foreach ($checkField as $field) {
+                    if (!isset($values['delivery_' . $field]) || empty($values['delivery_' . $field])) {
+                       $values['delivery_' . $field] = $user[$field];
+                    }    
+                    if (!isset($values['invoicing_' . $field]) || empty($values['invoicing_' . $field])) {
+                       $values['invoicing_' . $field] = $user[$field];
+                    }
                 }
-                // Check user id_number
-                if (!isset($values['id_number']) || empty($values['id_number'])) {
-                    $values['id_number'] = $user['id_number'];
-                }
-                // Check user first_name
-                if (!isset($values['first_name']) || empty($values['first_name'])) {
-                    $values['first_name'] = $user['first_name'];
-                }
-                // Check user last_name
-                if (!isset($values['last_name']) || empty($values['last_name'])) {
-                    $values['last_name'] = $user['last_name'];
-                }
-                // Check user phone
-                if (!isset($values['phone']) || empty($values['phone'])) {
-                    $values['phone'] = $user['phone'];
-                }
-                // Check user mobile
-                if (!isset($values['mobile']) || empty($values['mobile'])) {
-                    $values['mobile'] = $user['mobile'];
-                }
-                // Check user address1
-                if (!isset($values['address1']) || empty($values['address1'])) {
-                    $values['address1'] = $user['address1'];
-                }
-                // Check user address2
-                if (!isset($values['address2']) || empty($values['address2'])) {
-                    $values['address2'] = $user['address2'];
-                }
-                // Check user country
-                if (!isset($values['country']) || empty($values['country'])) {
-                    $values['country'] = $user['country'];
-                }
-                // Check user state
-                if (!isset($values['state']) || empty($values['state'])) {
-                    $values['state'] = $user['state'];
-                }
-                // Check user city
-                if (!isset($values['city']) || empty($values['city'])) {
-                    $values['city'] = $user['city'];
-                }
-                // Check user zip_code
-                if (!isset($values['zip_code']) || empty($values['zip_code'])) {
-                    $values['zip_code'] = $user['zip_code'];
-                }
-                // Check user company
-                if (!isset($values['company']) || empty($values['company'])) {
-                    $values['company'] = $user['company'];
-                }
-                // Check user company_id
-                if (!isset($values['company_id']) || empty($values['company_id'])) {
-                    $values['company_id'] = $user['company_id'];
-                }
-                // Check user company_vat
-                if (!isset($values['company_vat']) || empty($values['company_vat'])) {
-                    $values['company_vat'] = $user['company_vat'];
-                }
+                
                 // Check time create
                 if (isset($values['time_create']) && !empty($values['time_create'])) {
                     $values['time_create'] = strtotime($values['time_create']);
                 } else {
                     $values['time_create'] = time();
                 }
-                // Check user company_vat
-                switch ($values['module_name']) {
-                    case 'order';
-                        $values['module_table'] = 'manual';
-                        $values['module_item'] = 1;
-                        break;
+                $values['time_order'] = strtotime($values['time_order']);
 
-                    case 'shop';
-                        $values['module_table'] = 'product';
-                        $values['module_item'] = intval($values['module_item']);
-                        break;
-
-                    case 'guide';
-                        $values['module_table'] = 'package';
-                        $values['module_item'] = intval($values['module_item']);
-                        break;
-
-                    case 'plans';
-                        $values['module_table'] = 'plans';
-                        $values['module_item'] = intval($values['module_item']);
-                        break;
-
-                    case 'event';
-                        $values['module_table'] = 'event';
-                        $values['module_item'] = intval($values['module_item']);
-                        break;
-                }
-                // Set additional price
-                if ($values['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
-                    $values['shipping_price'] = $values['shipping_price'] + $config['order_additional_price_product'];
-                } elseif ($values['type_commodity'] == 'service' && $config['order_additional_price_service'] > 0) {
-                    $values['setup_price'] = $values['setup_price'] + $config['order_additional_price_service'];
-                }
-                // Set total
-                $values['total_price'] = $values['product_price'] + $values['shipping_price'] + $values['packing_price'] + $values['setup_price'] + $values['vat_price'];
-                // Save values to order
+                
+                 // Save values to order
                 $order = $this->getModel('order')->createRow();
+                $values['status_order'] = \Module\Order\Model\Order::STATUS_ORDER_DRAFT;
+                $values['code'] = Pi::api('order', 'order')->generatCode();
+                $values['create_by'] = 'ADMIN';
                 $order->assign($values);
                 $order->save();
-                // Set order ID
-                $code = Pi::api('order', 'order')->generatCode($order->id);
-                $this->getModel('order')->update(
-                    array('code' => $code),
-                    array('id' => $order->id)
-                );
-
-                // Save basket
-                $basket = $this->getModel('basket')->createRow();
-                $basket->order = $order->id;
-                $basket->product = $order->module_item;
-                $basket->discount_price = $order->discount_price;
-                $basket->shipping_price = $order->shipping_price;
-                $basket->setup_price = $order->setup_price;
-                $basket->vat_price = $order->vat_price;
-                $basket->product_price = $order->product_price;
-                $basket->total_price = $order->total_price;
-                $basket->number = 1;
-                $basket->save();
-
-                // Set invoice
-                Pi::api('invoice', 'order')->createInvoice($order->id, $order->uid);
+                
+                // Save address
+                $columns = array('first_name', 'last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 'delivery', 'location');
+                $orderAddress = $this->getModel('order_address')->createRow();
+                $deliveryAddress = array();
+                foreach ($columns as $column) {
+                    if (array_key_exists('delivery_' . $column, $values)) {
+                        $deliveryAddress[$column] = $values['delivery_' . $column]; 
+                    }
+                }
+                $deliveryAddress['order'] = $order->id;
+                $deliveryAddress['type'] = 'DELIVERY';
+                $orderAddress->assign($deliveryAddress);
+                $orderAddress->save();
+                
+                $orderAddress = $this->getModel('order_address')->createRow();
+                $invoicingAddress = array();
+                foreach ($columns as $column) {
+                    if (array_key_exists('invoicing_' . $column, $values)) {
+                        $invoicingAddress[$column] = $values['invoicing_' . $column]; 
+                    }
+                }
+                $invoicingAddress['order'] = $order->id;
+                $invoicingAddress['type'] = 'INVOICING';
+                $orderAddress->assign($invoicingAddress);
+                $orderAddress->save();
+                //
+                
                 // Jump
                 $message = __('New order added and data saved successfully.');
                 $url = array('controller' => 'order', 'action' => 'view', 'id' => $order->id);
@@ -711,38 +688,106 @@ class OrderController extends ActionController
         $this->view()->assign('form', $form);
     }
 
+    public function deleteAction()
+    {
+        $id = $this->params('id');
+        if (Pi::api('order', 'order')->hasValidInvoice($id)) {
+            $message = __('There valid invoices for this order. You cannot edit it.');
+            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $id), $message);
+        }
+        
+        $order = $this->getModel('order')->find($id);
+        if ($order['create_by'] != 'ADMIN') {
+            $message = __('Order not created by admin. You cannot delete it.');
+            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $id), $message);
+        }
+        
+        $installments = Pi::api('installment', 'order')->getInstallmentsFromOrder($order['id']);
+        foreach ($installments as $installment) {
+           Pi::model('invoice_installment', 'order')->delete(array('id' => $installment['id']));
+        }
+        
+        Pi::model('invoice', 'order')->delete(array('order' => $order['id']));
+        Pi::model('order_address', 'order')->delete(array('order' => $order['id']));
+        Pi::model('order', 'order')->delete(array('id' => $order['id']));
+        
+        $message = __('Order deleted');
+        $this->jump(array('controller' => 'order', 'action' => 'index'), $message);
+        
+    }
+     
     public function editAction()
     {
-        // Get config
-        $config = Pi::service('registry')->config->read($this->getModule());
-        // Get id
         $id = $this->params('id');
-        // Set option
+        
+        if (Pi::api('order', 'order')->hasValidInvoice($id)) {
+            $message = __('There valid invoices for this order. You cannot edit it.');
+            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $id), $message);
+        }
+        
+        $config = Pi::service('registry')->config->read($this->getModule());
         $option = array(
             'config' => $config,
+            'mode' => 'edit',
         );
-        // Set form
-        $form = new OrderEditForm('editOrder', $option);
+        
+        $form = new OrderUpdateForm('editOrder', $option);
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            $form->setInputFilter(new OrderEditFilter($option));
+            $form->setInputFilter(new OrderUpdateFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                // Save order
+                
                 $order = $this->getModel('order')->find($id);
+                $values['time_order'] = strtotime($values['time_order']);
                 $order->assign($values);
                 $order->save();
-                // Check it save or not
+                
+                // Save address
+                $this->getModel('order_address')->delete(array('order' => $order->id));
+                $columns = array('first_name', 'last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat', 'delivery', 'location');
+                $orderAddress = $this->getModel('order_address')->createRow();
+                $deliveryAddress = array();
+                foreach ($columns as $column) {
+                    if (array_key_exists('delivery_' . $column, $values)) {
+                        $deliveryAddress[$column] = $values['delivery_' . $column]; 
+                    }
+                }
+                $deliveryAddress['order'] = $order->id;
+                $deliveryAddress['type'] = 'DELIVERY';
+                $orderAddress->assign($deliveryAddress);
+                $orderAddress->save();
+                
+                $orderAddress = $this->getModel('order_address')->createRow();
+                $invoicingAddress = array();
+                foreach ($columns as $column) {
+                    if (array_key_exists('invoicing_' . $column, $values)) {
+                        $invoicingAddress[$column] = $values['invoicing_' . $column]; 
+                    }
+                }
+                $invoicingAddress['order'] = $order->id;
+                $invoicingAddress['type'] = 'INVOICING';
+                $orderAddress->assign($invoicingAddress);
+                $orderAddress->save();
+                //
+                
                 $message = __('Order information saved successfully.');
                 $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order->id), $message);
             }
         } else {
-            // Get order
-            $order = Pi::api('order', 'order')->getOrder($id);
-            $form->setData($order);
+            $values = Pi::api('order', 'order')->getOrder($id);
+            $addressInvoicing = Pi::api('orderAddress', 'order')->findOrderAddress($values['id'], 'INVOICING');
+            foreach ($addressInvoicing as $key => $value) {
+                $values['invoicing_' . $key] = $value; 
+            }
+            $addressDelivery = Pi::api('orderAddress', 'order')->findOrderAddress($values['id'], 'DELIVERY');
+            foreach ($addressDelivery as $key => $value) {
+                $values['delivery_' . $key] = $value; 
+            }
+            $form->setData($values);
         }
-        // Set view
+
         $this->view()->setTemplate('order-edit');
         $this->view()->assign('form', $form);
     }
@@ -754,8 +799,10 @@ class OrderController extends ActionController
         // Get order
         $order = $this->getModel('order')->find($id);
         $order = Pi::api('order', 'order')->canonizeOrder($order);
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        
         // Set Products
-        $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $order['module_name']);
+        $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
         // Set Products
         $order['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
         // Set installment
@@ -765,6 +812,7 @@ class OrderController extends ActionController
         // Set view
         $this->view()->setTemplate('order-print')->setLayout('layout-content');
         $this->view()->assign('order', $order);
+        $this->view()->assign('address', $address);
     }
 
     public function productAction()
@@ -773,42 +821,19 @@ class OrderController extends ActionController
         $option = array();
         // Get id
         $order = $this->params('order');
+        $id = $this->params('id');
+        
+        if (Pi::api('order', 'order')->hasValidInvoice($order)) {
+            $message = __('There valid invoices for this order. You cannot edit it.');
+            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order), $message);
+        }
+        
+        if ($id) {
+            $detail = $this->getModel('detail')->find($id);
+        }
+
         $order = Pi::api('order', 'order')->getOrder($order);
-        // Check module
-        if (in_array($order['module_name'], array('shop'/* ,'order', 'guide', 'plans'*/))) {
-            switch ($order['module_name']) {
-                case 'order':
-                    $order['moduleTitle'] = __('Order module');
-                    break;
-
-                case 'shop':
-                    $order['moduleTitle'] = __('Shop module');
-                    break;
-
-                case 'guide':
-                    $order['moduleTitle'] = __('Guide module');
-                    break;
-
-                case 'plans':
-                    $order['moduleTitle'] = __('Plans module');
-                    break;
-            }
-        } else {
-            $message = __('This order not supported add manual product');
-            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message, 'error');
-        }
-        // Get
-        $invoices = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
-        foreach ($invoices as $invoice) {
-            if ($invoice['status'] == 2) {
-                $option['invoice'][$invoice['id']] = sprintf(__('Invoice %s by %s price and %s due date'),
-                    $invoice['code'],
-                    $invoice['total_price_view'],
-                    $invoice['time_duedate_view']
-                );
-            }
-        }
-        $option['invoice'][0] = __('Generate new invoice');
+        
         // Set form
         $form = new OrderProductForm('product', $option);
         if ($this->request->isPost()) {
@@ -818,81 +843,98 @@ class OrderController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 // Get product
-                switch ($order['module_name']) {
-                    case 'shop':
-                        // Get product
-                        $product = Pi::api('product', 'shop')->getProductLight($values['id']);
-                        if (!$product || $product['status'] != 1) {
-                            $message = __('Your selected product not active / exist');
-                            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message, 'error');
-                        }
-                        // Add to basket
-                        $basket = $this->getModel('basket')->createRow();
-                        $basket->order = $order['id'];
-                        $basket->product = $product['id'];
-                        $basket->product_price = $product['price'];
-                        $basket->total_price = $product['price'];
-                        $basket->number = 1;
-                        $basket->save();
-                        // Add to invoice
-                        if ($values['invoice'] == 0) {
-                            $invoice = array();
-                            $invoice['product_price'] = $product['price'];
-                            $invoice['total_price'] = $product['price'];
-                            $invoice['time_duedate'] = time();
-                            $invoice['random_id'] = time() + rand(100, 999);
-                            $invoice['uid'] = $order['uid'];
-                            $invoice['ip'] = Pi::user()->getIp();
-                            $invoice['status'] = 2;
-                            $invoice['time_create'] = time();
-                            $invoice['order'] = $order['id'];
-                            $invoice['gateway'] = $order['gateway'];
-                            // Set extra
-                            if ($order['type_payment'] == 'installment') {
-                                $extra = array();
-                                $extra['order']['type_payment'] = $order['type_payment'];
-                                $extra['order']['type_commodity'] = $order['type_commodity'];
-                                $extra['number'] = '';
-                                $extra['type'] = 'additional';
-                                $invoice['extra'] = json::encode($extra);
-                            }
-                            // Save invoice
-                            $row = $this->getModel('invoice')->createRow();
-                            $row->assign($invoice);
-                            $row->save();
-                        } else {
-                            $row = $this->getModel('invoice')->find($values['invoice']);
-                            $row->product_price = $row->product_price + $product['price'];
-                            $row->total_price = $row->total_price + $product['price'];
-                            $row->save();
-                        }
-                        // Update order price
-                        $this->getModel('order')->update(
-                            array(
-                                'product_price' => $order['product_price'] + $product['price'],
-                                'total_price' => $order['total_price'] + $product['price'],
-                            ),
-                            array('id' => $order['id'])
-                        );
-                        break;
-
-                    default:
-                        $message = __('This order not supported add manual product');
-                        $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message, 'error');
-                        break;
+                if (!Pi::api('order', $values['module'] )->checkProduct($values['product'], $values['product_type'] )) {
+                    $message = __('Your selected product not active / exist');
+                    $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message, 'error');
                 }
+                
+                // Add to detail
+                if (!$id) {
+                    $detail = $this->getModel('detail')->createRow();
+                }
+                $detail->order = $order['id'];
+                $detail->module = $values['module'];
+                $detail->product = $values['product'];
+                $detail->product_type = $values['product_type'];
+                $detail->discount_price = $values['discount_price'] ?: 0;
+                $detail->shipping_price = $values['shipping_price'] ?: 0;
+                $detail->packing_price = $values['packing_price'] ?: 0;
+                $detail->setup_price = $values['setup_price'] ?: 0;
+                $detail->vat_price = $values['vat_price'] ?: 0;
+                $detail->product_price = $values['product_price'] ?: 0;
+                $detail->time_start = $values['time_start'] ? strtotime($values['time_start']) : 0;
+                $detail->time_end = $values['time_end'] ? strtotime($values['time_end']) : 0;
+                $detail->number = 1;
+                $detail->time_create = time();
+                $detail->extra = Pi::api('order', $values['module'])->createExtraDetailForProduct($values);
+                $detail->admin_note = $values['admin_note'];
+                $detail->save();
+                
+                $this->updateOrderType($order['id']);
                 // Check it save or not
                 $message = __('New product / service added to your order');
                 $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $order['id']), $message);
             }
+        }  else  {
+             if ($id) {
+                $data = $detail->toArray();
+                 
+                $extra = json_decode($data['extra'], true);
+                foreach ($extra as $key => $value) {
+                    $data['extra_' . $key] = $value;    
+                }
+                $data['module_item'] = $extra['item'];
+                $data['time_start'] = date('Y-m-d', $data['time_start']);
+                $data['time_end'] = date('Y-m-d', $data['time_end']);
+                $form->setData($data);
+             }
+            
         }
 
         // Set view
         $this->view()->setTemplate('order-product');
         $this->view()->assign('order', $order);
-        $this->view()->assign('invoices', $invoices);
         $this->view()->assign('form', $form);
     }
+    
+    public function productDeleteAction()
+    {
+        // Set option
+        $option = array();
+        // Get id
+        $id = $this->params('id');
+        $detail = $this->getModel('detail')->find($id);
+        if (Pi::api('order', 'order')->hasValidInvoice($detail->order)) {
+            $message = __('There valid invoices for this order. You cannot edit it.');
+            $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $detail->order), $message);
+        }
+        
+        $order = Pi::api('order', 'order')->getOrder($detail->order);
+        Pi::model('detail', 'order')->delete(array('id' => $id));
+        $this->updateOrderType($order['id']);
+        
+        $message = __('Product deleted');
+        $this->jump(array('controller' => 'order', 'action' => 'view', 'id' => $detail->order), $message);
+
+    }
+    
+    private function updateOrderType($order)
+    {
+        $order = Pi::model('order', 'order')->find($order);
+        $products = Pi::api('order', 'order')->listProduct($order->id);
+        $typeCommodity = 'service';
+        foreach($products as $product) {
+            if ($product['module'] == 'shop') {
+                $typeCommodity = 'product';
+                break;        
+            }
+        }
+        if ($order->type_commodity != $typeCommodity) {
+            $order->type_commodity = $typeCommodity;
+            $order->save();
+        }    
+    }
+    
     
     public function listUserAction()
     {
@@ -905,24 +947,24 @@ class OrderController extends ActionController
         // Set order ids
         $orderIds = array();
         $orderInstallmentCount = 1;
-        foreach ($user['orders'] as $order) {
-            $orderIds[] = $order['id'];
-            if ($order['type_payment'] == 'installment') {
-                $orderInstallmentCount++;
-            }
-        }
+        
         // Get invoice
         $user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id'], true, $orderIds);
+        foreach ($user['invoices'] as $invoice) {
+            if ($invoice['type_payment'] == 'installment') {
+                $invoiceInstallmentCount++;
+            }
+        }
         // Table view
         $tableView = array();
-        if ($orderInstallmentCount > 0) {
+        if ($invoiceInstallmentCount > 0) {
             $tableView = Pi::api('installment', 'order')->blockTable($user, $orderIds);
         }
         // Set view
         $this->view()->setTemplate('order-list-user');
         $this->view()->assign('user', $user);
         $this->view()->assign('tableView', $tableView);
-        $this->view()->assign('orderInstallmentCount', $orderInstallmentCount);
+        $this->view()->assign('invoiceInstallmentCount', $invoiceInstallmentCount);
     }
 
     public function printPdfAction()

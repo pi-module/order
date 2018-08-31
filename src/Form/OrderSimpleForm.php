@@ -35,26 +35,21 @@ class OrderSimpleForm extends BaseForm
 
     public function init()
     {
-        // customer_id
         $this->add(array(
-            'name' => 'customer_id',
+            'name' => 'address_delivery_id',
             'attributes' => array(
                 'type' => 'hidden',
+                'value' => $this->option['delivery_address']
             ),
         ));
-        // id_number
-        /* if ($this->config['order_idnumber']) {
-            $this->add(array(
-                'name' => 'id_number',
-                'options' => array(
-                    'label' => __('ID number'),
-                ),
-                'attributes' => array(
-                    'type' => 'hidden',
-                    'required' => true,
-                )
-            ));
-        } */
+        $this->add(array(
+            'name' => 'address_invoicing_id',
+            'attributes' => array(
+                'type' => 'hidden',
+                'value' => $this->option['invoicing_address']
+            ),
+        ));
+        
         // packing
         if ($this->config['order_packing']) {
             $this->add(array(
@@ -94,7 +89,7 @@ class OrderSimpleForm extends BaseForm
                             'location' => $this->option['location'],
                         ),
                         'attributes' => array(
-                            'id' => 'customer-select-delivery',
+                            'id' => 'address-select-delivery',
                             'size' => 3,
                             'required' => true,
                         )
@@ -104,9 +99,9 @@ class OrderSimpleForm extends BaseForm
                         $gatewayList = array_keys($gatewayList);
                         // gateway
                         $this->add(array(
-                            'name' => 'gateway',
+                            'name' => 'default_gateway',
                             'attributes' => array(
-                                'id' => 'customer-select-payment',
+                                'id' => 'address-select-payment',
                                 'type' => 'hidden',
                                 'value' => $gatewayList['0'],
                             ),
@@ -114,14 +109,14 @@ class OrderSimpleForm extends BaseForm
                     } else {
                         // gateway
                         $this->add(array(
-                            'name' => 'gateway',
+                            'name' => 'default_gateway',
                             'type' => 'radio',
                             'options' => array(
                                 'label' => __('Adapter'),
                                 'value_options' => array(),
                             ),
                             'attributes' => array(
-                                'id' => 'customer-select-payment',
+                                'id' => 'address-select-payment',
                                 'required' => true,
                             )
                         ));
@@ -131,9 +126,9 @@ class OrderSimpleForm extends BaseForm
                         $gatewayList = array_keys($gatewayList);
                         // gateway
                         $this->add(array(
-                            'name' => 'gateway',
+                            'name' => 'default_gateway',
                             'attributes' => array(
-                                'id' => 'customer-select-payment',
+                                'id' => 'address-select-payment',
                                 'type' => 'hidden',
                                 'value' => $gatewayList['0'],
                             ),
@@ -141,14 +136,14 @@ class OrderSimpleForm extends BaseForm
                     } else {
                         // gateway
                         $this->add(array(
-                            'name' => 'gateway',
+                            'name' => 'default_gateway',
                             'type' => 'radio',
                             'options' => array(
                                 'label' => __('Adapter'),
                                 'value_options' => $gatewayList,
                             ),
                             'attributes' => array(
-                                'id' => 'customer-select-payment',
+                                'id' => 'address-select-payment',
                                 'required' => true,
                             )
                         ));
@@ -161,7 +156,7 @@ class OrderSimpleForm extends BaseForm
                     $gatewayList = array_keys($gatewayList);
                     // gateway
                     $this->add(array(
-                        'name' => 'gateway',
+                        'name' => 'default_gateway',
                         'attributes' => array(
                             'type' => 'hidden',
                             'value' => $gatewayList['0'],
@@ -170,14 +165,14 @@ class OrderSimpleForm extends BaseForm
                 } else {
                     // gateway
                     $this->add(array(
-                        'name' => 'gateway',
+                        'name' => 'default_gateway',
                         'type' => 'radio',
                         'options' => array(
                             'label' => __('Adapter'),
                             'value_options' => $gatewayList,
                         ),
                         'attributes' => array(
-                            'id' => 'customer-select-payment',
+                            'id' => 'address-select-payment',
                             'required' => true,
                         )
                     ));
@@ -221,12 +216,18 @@ class OrderSimpleForm extends BaseForm
         } else {
             $title = __('Save order');
         }
+        $class = 'btn btn-success submit_order_simple';
+        if (!$this->option['delivery_address'] && !$this->option['invoicing_address']) {
+            $class .= ' fortooltip disabled';
+        }
+        
         $this->add(array(
             'name' => 'submit_order_simple',
             'type' => 'submit',
             'attributes' => array(
                 'value' => $title,
-                'class' => 'btn btn-success hidden submit_order_simple',
+                'class' => $class,
+                'title' => __('You need to create an address before pay')
             )
         ));
     }

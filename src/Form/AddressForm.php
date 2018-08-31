@@ -19,12 +19,12 @@ use Pi\Form\Form as BaseForm;
 class AddressForm extends BaseForm
 {
     protected $_id;
-    public function __construct($id = null, $option = array())
+    public function __construct($name = null, $id = null, $option = array())
     {
         $this->option = $option;
         $this->config = Pi::service('registry')->config->read('order', 'order');
         $this->_id = $id;
-        parent::__construct();
+        parent::__construct($name);
     }
 
     public function getInputFilter()
@@ -38,9 +38,8 @@ class AddressForm extends BaseForm
     public function init()
     {
        
-        // customer_id
         $this->add(array(
-            'name' => 'customer_id',
+            'name' => 'address_id',
             'attributes' => array(
                 'type' => 'hidden',
             ),
@@ -135,46 +134,7 @@ class AddressForm extends BaseForm
                 )
             ));
         }
-        // company
-        if ($this->config['order_company']) {
-            // company
-            $this->add(array(
-                'name' => 'company',
-                'options' => array(
-                    'label' => __('Company'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                )
-            ));
-        }
-        // company extra
-        if ($this->config['order_company_extra']) {
-            // company_id
-            $this->add(array(
-                'name' => 'company_id',
-                'options' => array(
-                    'label' => __('Company id'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                )
-            ));
-            
-            // company_vat
-            $this->add(array(
-                'name' => 'company_vat',
-                'options' => array(
-                    'label' => __('Company vat'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                )
-            ));
-        }
+       
         // address
         if ($this->config['order_address1']) {
             $this->add(array(
@@ -189,6 +149,7 @@ class AddressForm extends BaseForm
                 )
             ));
         }
+        
         // address 2
         if ($this->config['order_address2']) {
             $this->add(array(
@@ -203,6 +164,7 @@ class AddressForm extends BaseForm
                 )
             ));
         }
+        
         // zip_code
         if ($this->config['order_zip']) {
             $this->add(array(
@@ -274,6 +236,59 @@ class AddressForm extends BaseForm
                         'type' => 'text',
                         'description' => '',
                         'required' => true,
+                    )
+                ));
+            }
+        }
+        
+        if ($this->config['order_address2'] || $this->config['order_company'] || $this->config['order_company_extra']) {
+            $this->add(array(
+                'name' => 'html',
+                'attributes' => array(
+                    'value' => '<a href="#" id="complementary">' . __('Complementary fields') . '</a>',
+                    'type' => 'html',
+                )
+            ));
+            
+            // company
+            if ($this->config['order_company']) {
+                // company
+                $this->add(array(
+                    'name' => 'company',
+                    'options' => array(
+                        'label' => __('Company'),
+                    ),
+                    'attributes' => array(
+                        'class' => 'complementary',
+                        'type' => 'text',
+                        'description' => '',
+                    )
+                ));
+            }
+            // company extra
+            if ($this->config['order_company_extra']) {
+                // company_id
+                $this->add(array(
+                    'name' => 'company_id',
+                    'options' => array(
+                        'label' => __('Company id'),
+                    ),
+                    'attributes' => array(
+                        'class' => 'complementary',
+                        'type' => 'text',
+                        'description' => '',
+                    )
+                ));
+                // company_vat
+                $this->add(array(
+                    'name' => 'company_vat',
+                    'options' => array(
+                        'label' => __('Company vat'),
+                    ),
+                    'attributes' => array(
+                        'class' => 'complementary',
+                        'type' => 'text',
+                        'description' => '',
                     )
                 ));
             }

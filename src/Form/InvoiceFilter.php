@@ -22,63 +22,14 @@ class InvoiceFilter extends InputFilter
     {
         // product_price
         $this->add(array(
-            'name' => 'product_price',
+            'name' => 'type_payment',
             'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
+            
         ));
-        // shipping_price
-        $this->add(array(
-            'name' => 'shipping_price',
+         $this->add(array(
+            'name' => 'time_invoice',
             'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // packing_price
-        $this->add(array(
-            'name' => 'packing_price',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // setup_price
-        $this->add(array(
-            'name' => 'setup_price',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // vat_price
-        $this->add(array(
-            'name' => 'vat_price',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // time_duedate
-        $this->add(array(
-            'name' => 'time_duedate',
-            'required' => true,
-        ));
-        // status_payment
-        $this->add(array(
-            'name' => 'status_payment',
-            'required' => true,
+            
         ));
     }
 }

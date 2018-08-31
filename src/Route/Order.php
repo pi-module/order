@@ -28,8 +28,8 @@ class Order extends Standard
     );
 
     protected $controllerList = array(
-        'checkout', 'credit', 'index', 'invoice', 'payment', 'promocode'
-    );
+        'checkout', 'credit', 'detail', 'index', 'invoice', 'payment', 'promocode'  
+      );
 
     /**
      * {@inheritDoc}
@@ -66,16 +66,31 @@ class Order extends Standard
                         $matches['action'] = 'installment';
                     } elseif (isset($parts[1]) && $parts[1] == 'promocode') {
                         $matches['action'] = 'promocode';
+                    } elseif (isset($parts[1]) && $parts[1] == 'address-list') {
+                        $matches['action'] = 'address-list';
+                        $matches['type'] = $this->decode($parts[2]);
+                    } elseif (isset($parts[1]) && $parts[1] == 'change-address') {
+                        $matches['action'] = 'change-address';
+                        $matches['id'] = $this->decode($parts[2]);
+                        $matches['type'] = $this->decode($parts[3]);
                     } elseif (isset($parts[1]) && $parts[1] == 'delete') {
                         $matches['action'] = 'delete';
-                        $matches['customer'] = $this->decode($parts[2]);
+                        $matches['address'] = $this->decode($parts[2]);
+                    } elseif (isset($parts[1]) && $parts[1] == 'address') {
+                        $matches['action'] = 'address';
+                        $matches['id'] = $this->decode($parts[2]);
                     } elseif (isset($parts[1])) {
-                        $matches['customer'] = $parts[1];
+                        $matches['address'] = $parts[1];
                     }  
                     break;
 
                 case 'detail':
-                    $matches['id'] = intval($parts[1]);
+                    if (isset($parts[1]) && $parts[1] == 'print') {
+                        $matches['id'] = intval($parts[2]);
+                        $matches['action'] = 'print';
+                    } else {
+                       $matches['id'] = intval($parts[1]);
+                    }
                     break;
 
                 case 'index':
@@ -150,7 +165,7 @@ class Order extends Standard
 
         //print_r($parts);
         //print_r($matches);
-
+       
         return $matches;
     }
 
@@ -184,7 +199,6 @@ class Order extends Standard
         ) {
             $url['controller'] = $mergedParams['controller'];
         }
-
         // Set action
         if (!empty($mergedParams['action'])
             && $mergedParams['action'] != 'index'
@@ -202,8 +216,8 @@ class Order extends Standard
             $url['id'] = $mergedParams['id'];
         }
         
-        if (isset($mergedParams['customer'])) {
-            $url['customer'] = $mergedParams['customer'];
+        if (isset($mergedParams['address'])) {
+            $url['address'] = $mergedParams['address'];
         }
 
         // Set credit
@@ -219,6 +233,10 @@ class Order extends Standard
         // Set token
         if (isset($mergedParams['token'])) {
             $url['token'] = 'token' . $this->paramDelimiter . $mergedParams['token'];
+        }
+        
+        if (isset($mergedParams['type'])) {
+            $url['type'] = $mergedParams['type'];
         }
 
         // Make url

@@ -16,34 +16,35 @@ namespace Module\Order\Form;
 use Pi;
 use Zend\InputFilter\InputFilter;
 
-class OrderProductDeleteFilter extends InputFilter
+class InstallmentFilter extends InputFilter
 {
-    public function __construct($option = array())
+    public function __construct($options = array())
     {
-        // id
         $this->add(array(
-            'name' => 'id',
-            'required' => true,
+            'name' => 'gateway',
+            'required' => $options['readonly'] ? false : true,
+            
         ));
-        // invoice
+        
         $this->add(array(
-            'name' => 'invoice',
-            'required' => true,
+            'name' => 'status_payment',
+            'required' => $options['readonly'] ? false : true,
+            
         ));
-        // order
         $this->add(array(
-            'name' => 'order',
-            'required' => true,
+            'name' => 'time_duedate',
+            'required' => false,
+            
         ));
-        // count
         $this->add(array(
-            'name' => 'count',
-            'required' => true,
+            'name' => 'time_payment',
+            'required' => false,
         ));
-        // confirm
+        
         $this->add(array(
-            'name' => 'confirm',
-            'required' => true,
+            'name' => 'comment',
+            'required' => false,
         ));
+        
     }
 }

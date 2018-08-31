@@ -34,9 +34,32 @@ class OrderProductForm extends BaseForm
 
     public function init()
     {
-        // id
+        
         $this->add(array(
-            'name' => 'id',
+            'name' => 'module',
+            'options' => array(
+                'label' => __('Module name'),
+                'value_options' => array('order' => 'order', 'shop' => 'shop', 'guide' => 'guide'),
+            ),
+            'type' => 'select',
+            'attributes' => array(
+                'required' => true,
+            ),
+        ));
+        
+         
+        $this->add(array(
+            'name' => 'product_type',
+            'options' => array(
+                'label' => __('Product type'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+            )
+        ));
+        
+       $this->add(array(
+            'name' => 'product',
             'options' => array(
                 'label' => __('Product / service ID'),
             ),
@@ -45,20 +68,144 @@ class OrderProductForm extends BaseForm
                 'required' => true,
             )
         ));
-        // invoice
+        
+        // module_item
         $this->add(array(
-            'name' => 'invoice',
+            'name' => 'module_item',
             'options' => array(
-                'label' => __('Select invoice to add fee'),
-                'value_options' => $this->option['invoice'],
+                'label' => __('Module item associated to the product'),
             ),
-            'type' => 'radio',
             'attributes' => array(
-                'required' => true,
-            ),
+                'type' => 'text',
+            )
         ));
-
-
+        
+        
+        // product_price
+        $this->add(array(
+            'name' => 'product_price',
+            'options' => array(
+                'label' => __('Price ext VAT'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+            )
+        ));
+        // product_price
+        $this->add(array(
+            'name' => 'discount_price',
+            'options' => array(
+                'label' => __('Discount'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+            )
+        ));
+        
+        // shipping_price
+        $this->add(array(
+            'name' => 'shipping_price',
+            'options' => array(
+                'label' => __('Shipping price'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+            )
+        ));
+        // packing_price
+        $this->add(array(
+            'name' => 'packing_price',
+            'options' => array(
+                'label' => __('Packing price'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+            )
+        ));
+        // setup_price
+        $this->add(array(
+            'name' => 'setup_price',
+            'options' => array(
+                'label' => __('Setup price'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+            )
+        ));
+        // vat_price
+        $this->add(array(
+            'name' => 'vat_price',
+            'options' => array(
+                'label' => __('Vat price'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+            )
+        ));
+        
+        $this->add(array(
+            'name' => 'time_start',
+            'type' => 'datepicker',
+            'options' => array(
+                'label' => __('Time start'),
+                'datepicker' => array(
+                    'format' => 'yyyy-mm-dd',
+                    'autoclose' => true,
+                    'todayBtn' => true,
+                    'todayHighlight' => true,
+                    'weekStart' => 1,
+                ),
+            ),
+            'attributes' => array(
+                'required' => false,
+            )
+        ));
+        
+        $this->add(array(
+            'name' => 'time_end',
+            'type' => 'datepicker',
+            'options' => array(
+                'label' => __('Time end'),
+                'datepicker' => array(
+                    'format' => 'yyyy-mm-dd',
+                    'autoclose' => true,
+                    'todayBtn' => true,
+                    'todayHighlight' => true,
+                    'weekStart' => 1,
+                ),
+            ),
+            'attributes' => array(
+                'required' => false,
+            )
+        ));
+        
+        $this->add(array(
+            'name' => 'admin_note',
+            'options' => array(
+                'label' => __('Admin note'),
+            ),
+            'attributes' => array(
+                'type' => 'textarea',
+                'description' => '',
+            )
+        ));
+        
+        $elemsForGroup = array();
+        foreach (array('order', 'shop', 'guide', 'event') as $module) {
+            if (Pi::service('module')->isActive($module)) {
+                $elems = Pi::api('order', $module)->getExtraFieldsFormForOrder();
+                foreach ($elems as $elem) {
+                    $this->add($elem);
+                    $elemsForGroup[] = $elem['name'];     
+                }
+            }
+        } 
         // Save order
         $this->add(array(
             'name' => 'submit',

@@ -50,9 +50,8 @@ class OrderForm extends BaseForm
                 }
             }
         }
-        // customer_id
         $this->add(array(
-            'name' => 'customer_id',
+            'name' => 'address_id',
             'attributes' => array(
                 'type' => 'hidden',
             ),

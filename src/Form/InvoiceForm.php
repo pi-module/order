@@ -18,8 +18,10 @@ use Pi\Form\Form as BaseForm;
 
 class InvoiceForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    protected $_installments;
+    public function __construct($name = null, $installments = array())
     {
+        $this->_installments = $installments;
         parent::__construct($name);
     }
 
@@ -32,87 +34,31 @@ class InvoiceForm extends BaseForm
     }
 
     public function init()
-    {
-        // product_price
+    {  
         $this->add(array(
-            'name' => 'product_price',
-            'options' => array(
-                'label' => __('Product price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
-        // shipping_price
-        $this->add(array(
-            'name' => 'shipping_price',
-            'options' => array(
-                'label' => __('Shipping price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
-        // packing_price
-        $this->add(array(
-            'name' => 'packing_price',
-            'options' => array(
-                'label' => __('Packing price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
-        // setup_price
-        $this->add(array(
-            'name' => 'setup_price',
-            'options' => array(
-                'label' => __('Setup price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
-        // vat_price
-        $this->add(array(
-            'name' => 'vat_price',
-            'options' => array(
-                'label' => __('Vat price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
-        // time_duedate
-        $this->add(array(
-            'name' => 'time_duedate',
+            'name' => 'time_invoice',
             'type' => 'datepicker',
             'options' => array(
-                'label' => __('Due date'),
+                'label' => __('Invoice date'),
                 'datepicker' => array(
                     'format' => 'yyyy-mm-dd',
+                    'autoclose' => true,
+                    'todayBtn' => true,
+                    'todayHighlight' => true,
+                    'weekStart' => 1,
                 ),
             ),
             'attributes' => array(
-                'id' => 'time-start',
                 'required' => true,
             )
         ));
-        // status_payment
+        
         $this->add(array(
-            'name' => 'status_payment',
+            'name' => 'type_payment',
             'type' => 'select',
             'options' => array(
-                'label' => __('Payment'),
-                'value_options' => array(
-                    1 => __('UnPaid'),
-                    2 => __('Paid'),
-                ),
+                'label' => __('Type payment'),
+                'value_options' => array('onetime' => 'onetime') + $this->_installments
             ),
         ));
         // Save

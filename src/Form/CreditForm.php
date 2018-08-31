@@ -86,10 +86,6 @@ class CreditForm extends BaseForm
             if (isset($moduleList['guide'])) {
                 $valueOptions['guide'] = $moduleList['guide']['title'];
             }
-            if (isset($moduleList['plans'])) {
-                $valueOptions['plans'] = $moduleList['plans']['title'];
-            }
-
         } else {
             $valueOptions['system'] = $moduleList['system']['title'];
         }

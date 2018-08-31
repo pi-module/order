@@ -16,7 +16,7 @@ namespace Module\Order\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class UpdateOrderForm extends BaseForm
+class UpdateOrderStatusForm extends BaseForm
 {
     public function __construct($name = null)
     {
@@ -26,7 +26,7 @@ class UpdateOrderForm extends BaseForm
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new UpdateOrderFilter;
+            $this->filter = new UpdateOrderStatusFilter;
         }
         return $this->filter;
     }
@@ -39,15 +39,8 @@ class UpdateOrderForm extends BaseForm
             'type' => 'select',
             'options' => array(
                 'label' => __('Order'),
-                'value_options' => array(
-                    1 => __('Not processed'),
-                    2 => __('Orders validated'),
-                    3 => __('Orders pending'),
-                    4 => __('Orders failed'),
-                    5 => __('Orders cancelled'),
-                    6 => __('Fraudulent orders'),
-                    7 => __('Orders finished'),
-                ),
+                    'value_options' => \Module\Order\Model\Order::getStatusList($this->option['has_valid_invoice']),
+
             ),
         ));
         // Save

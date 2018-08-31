@@ -55,17 +55,6 @@ class InvoiceSettingForm extends BaseForm
                 'description' => '',
             )
         ));
-        // uid
-        $this->add(array(
-            'name' => 'uid',
-            'options' => array(
-                'label' => __('User ID'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
         // payment_status
         $this->add(array(
             'name' => 'payment_status',

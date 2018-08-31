@@ -16,7 +16,7 @@ namespace Module\Order\Form;
 use Pi;
 use Zend\InputFilter\InputFilter;
 
-class UpdateOrderFilter extends InputFilter
+class UpdateOrderStatusFilter extends InputFilter
 {
     public function __construct()
     {

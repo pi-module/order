@@ -22,23 +22,16 @@ class OrderSimpleFilter extends InputFilter
     public function __construct($option = array())
     {
         $config = Pi::service('registry')->config->read('order', 'order');
-        // customer_id
+
         $this->add(array(
-            'name' => 'customer_id',
+            'name' => 'address_delivery_id',
             'required' => false,
         ));
-        // id_number
-        /* if ($config['order_idnumber']) {
-            $this->add(array(
-                'name' => 'id_number',
-                'required' => true,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-            ));
-        } */
+        $this->add(array(
+            'name' => 'address_invoicing_id',
+            'required' => false,
+        ));
+        
         // packing
         if ($config['order_packing']) {
             $this->add(array(
@@ -77,7 +70,7 @@ class OrderSimpleFilter extends InputFilter
                     ));
                     // gateway
                     $this->add(array(
-                        'name' => 'gateway',
+                        'name' => 'default_gateway',
                         'required' => true,
                         'filters' => array(
                             array(
@@ -88,7 +81,7 @@ class OrderSimpleFilter extends InputFilter
                 } else {
                     // gateway
                     $this->add(array(
-                        'name' => 'gateway',
+                        'name' => 'default_gateway',
                         'required' => true,
                         'filters' => array(
                             array(
@@ -102,7 +95,7 @@ class OrderSimpleFilter extends InputFilter
             case 'service':
                 // gateway
                 $this->add(array(
-                    'name' => 'gateway',
+                    'name' => 'default_gateway',
                     'required' => true,
                     'filters' => array(
                         array(

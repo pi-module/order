@@ -18,6 +18,10 @@ return array(
             'name' => 'admin'
         ),
         array(
+            'title' => _a('Front'),
+            'name' => 'front'
+        ),
+        array(
             'title' => _a('Order'),
             'name' => 'order'
         ),
@@ -67,6 +71,15 @@ return array(
             'edit' => 'text',
             'filter' => 'number_int',
             'value' => 50
+        ),
+         // Front
+        'view_perpage' => array(
+            'category' => 'front',
+            'title' => _a('Perpage'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 10
         ),
         // Order
         'order_active' => array(
@@ -448,7 +461,7 @@ return array(
         // Notification
         'sms_order_user' => array(
             'category' => 'notification',
-            'title' => _a('New order notification to user'),
+            'title' => _a('New order notification to user (SMS)'),
             'description' => _a('Dear %s %s, you order %s product by %s price, added on %s website'),
             'edit' => 'text',
             'filter' => 'string',
@@ -456,7 +469,7 @@ return array(
         ),
         'sms_order_admin' => array(
             'category' => 'notification',
-            'title' => _a('New order notification to admin'),
+            'title' => _a('New order notification to admin (SMS)'),
             'description' => _a('Dear %s admin, %s %s User ordered %s product by %s price'),
             'edit' => 'text',
             'filter' => 'string',
@@ -464,7 +477,7 @@ return array(
         ),
         'sms_invoice_user' => array(
             'category' => 'notification',
-            'title' => _a('Pay invoice notification to user'),
+            'title' => _a('Pay invoice notification to user (SMS)'),
             'description' => _a('Dear %s %s, You paid invoice %s by %s price for %s order included % product on %s website successfully'),
             'edit' => 'text',
             'filter' => 'string',
@@ -472,7 +485,7 @@ return array(
         ),
         'sms_invoice_admin' => array(
             'category' => 'notification',
-            'title' => _a('Pay invoice notification to admin'),
+            'title' => _a('Pay invoice notification to admin (SMS)'),
             'description' => _a('Dear %s admin, %s %s User paid invoice %s by %s price for %s order included % product successfully'),
             'edit' => 'text',
             'filter' => 'string',
@@ -480,7 +493,7 @@ return array(
         ),
         'notification_cron_invoice' => array(
             'category' => 'notification',
-            'title' => _a('Set X day before due date'),
+            'title' => _a('Set X day before due date (CRON)'),
             'description' => _a('Notification invoice due date, X day before invoice time by cron'),
             'edit' => 'text',
             'filter' => 'number_int',
@@ -488,7 +501,7 @@ return array(
         ),
         'sms_invoice_duedate' => array(
             'category' => 'notification',
-            'title' => _a('Duedate invoice notification to user'),
+            'title' => _a('Duedate invoice notification to user (CRON)'),
             'description' => _a('Dear %s %s, You have duedate invoice on next %s days'),
             'edit' => 'text',
             'filter' => 'string',
@@ -496,7 +509,7 @@ return array(
         ),
         'notification_cron_expired' => array(
             'category' => 'notification',
-            'title' => _a('Set X day after expired'),
+            'title' => _a('Set X day after expired (CRON)'),
             'description' => _a('Notification invoice expired, X day after invoice time by cron'),
             'edit' => 'text',
             'filter' => 'number_int',
@@ -504,7 +517,7 @@ return array(
         ),
         'user_expired_invoice' => array(
             'category' => 'notification',
-            'title' => _a('Expired invoice notification to user'),
+            'title' => _a('Expired invoice notification to user (CRON)'),
             'description' => _a('Dear %s %s, You have expired invoice on %s days ago'),
             'edit' => 'text',
             'filter' => 'string',

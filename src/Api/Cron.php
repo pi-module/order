@@ -22,8 +22,12 @@ use Pi\Application\Api\AbstractApi;
 
 class Cron extends AbstractApi
 {
+    
+    
     public function start()
     {
+        // TODO - #1278 : Need to check due date in the installment table
+        /*
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
@@ -69,5 +73,7 @@ class Cron extends AbstractApi
             // Set log
             Pi::service('audit')->log('cron', 'order - cron system not active for this module');
         }
+         
+        */
     }
 }
