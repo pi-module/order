@@ -133,7 +133,7 @@
                                 <?php echo $this->escape($order['time_invoice_view']); ?>
                             </td>
                         </tr>
-                        <?php if ($order['status_payment'] = \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) { ?>
+                        <?php if ($order['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) { ?>
                             <tr>
                                 <td class="col1">
                                     <?php _e('Time due date'); ?>

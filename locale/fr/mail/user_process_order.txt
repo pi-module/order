@@ -15,6 +15,7 @@
 	<div style="margin-top: 10px">
         <a href="%site_url%" title="%site_name%">%site_name%</a>
     </div>
+    <div>%site_mail_footer%</div>
     <div style="text-align:center; font-size:0.9em; color:#777"> %sellerinfo% </div>
 
 </div>
