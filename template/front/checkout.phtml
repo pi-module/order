@@ -634,6 +634,17 @@ $this->footScript()->appendScript($script);
                 e.preventDefault();
             }
         );
+
+        $('form#order').submit(
+            function() {
+                if ($('.submit_order_simple').hasClass('disabled')) {
+                    return false;
+                }
+
+                $('.submit_order_simple').addClass('disabled');
+                return true;
+            }
+        );
         
     });
 </script>

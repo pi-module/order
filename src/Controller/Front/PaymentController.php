@@ -156,8 +156,8 @@ class PaymentController extends IndexController
         if (!$processing) {
             Pi::api('processing', 'order')->removeProcessing();
         }
-        
-        
+
+
         // Set pay processing
         Pi::api('processing', 'order')->setProcessing($order, $cart['gateway']);
         $processing = Pi::api('processing', 'order')->getProcessing();
@@ -196,7 +196,7 @@ class PaymentController extends IndexController
             Pi::api('processing', 'order')->removeProcessing();
             $this->jump(array('', 'controller' => 'payment', 'action' => 'result'), $gateway->gatewayError);
         }
-        
+
         if ($gateway->getType() == AbstractGateway::TYPE_REST) {
             $approvalUrl = $gateway->getApproval($order);
             if (!$approvalUrl) {
@@ -204,7 +204,7 @@ class PaymentController extends IndexController
             }
             return $this->redirect()->toUrl($approvalUrl);
         }
-        
+
         // Set form values
         if (!empty($gateway->gatewayPayInformation)) {
             foreach ($gateway->gatewayPayInformation as $key => $value) {
@@ -248,12 +248,13 @@ class PaymentController extends IndexController
         } else {
             $request = _get()->toArray();
         }
+        $processing = Pi::api('processing', 'order')->getProcessing();
+
         // Check request
-        if (!empty($request)) {
+        if (!empty($processing)) {
             // Get processing
-            $processing = Pi::api('processing', 'order')->getProcessing();
             Pi::api('order', 'order')->unsetOrderInfo();
-            
+
             // Check processing
             if (!$processing) {
                 $message = __('Your running pay processing not set');

@@ -143,11 +143,11 @@ class Gateway extends AbstractGateway
             "transactions":[
                 {
                     "amount": {
-                        "total": "' . ($subtotal + $tax) . '",
+                        "total": "' . number_format($subtotal + $tax, 2, '.', '') . '",
                         "currency": "' . $this->gatewayPayInformation['currency_code'] . '",
                         "details": {
-                            "subtotal": "' . $subtotal . '",
-                            "tax": "' . $tax . '"
+                            "subtotal": "' . number_format($subtotal, 2, '.', '') . '",
+                            "tax": "' . number_format($tax , 2, '.', ''). '"
                         }
                     },
                     "description": "",
