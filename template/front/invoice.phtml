@@ -211,14 +211,14 @@
                        href="<?php echo $this->escape($invoice['order_url']); ?>"><?php _e('Back to order'); ?></a>
                     <a class="btn btn-primary btn-sm" title="<?php _e('Print invoice'); ?>"
                        href="<?php echo $this->escape($invoice['print_url']); ?>" target="_blank"><i
-                            class="fa fa-print"></i> <?php _e('Print invoice'); ?></a>
+                            class="fas fa-print"></i> <?php _e('Print invoice'); ?></a>
                 </div>
             </div>
             <div class="col-md-6 text-right">
                 <?php if ($invoice['status'] == 2 && $order['can_pay'] == 1) { ?>
                         <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>"
                            href="<?php echo $this->escape($invoice['pay_url']); ?>"><i
-                                class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
+                                class="fas fa-external-link-alt"></i> <?php _e('Pay'); ?></a>
                 <?php } elseif ($invoice['status'] == 2 && $order['can_pay'] != 1) { ?>
                     <span class="label label-danger">
                             <?php _e('You can pay this invoice after admin review'); ?>

@@ -28,7 +28,7 @@ $this->backbone();
                                    'controller' => 'order',
                                    'action' => 'delete',
                                    'id' => $order['id']
-                               )); ?>"><i class="fa fa-close"></i> <?php _e('Delete'); ?>
+                               )); ?>"><i class="fas fa-times"></i> <?php _e('Delete'); ?>
                             </a>
                         </li>
                     <?php } ?> 
@@ -39,7 +39,7 @@ $this->backbone();
                                'controller' => 'order',
                                'action' => 'edit',
                                'id' => $order['id']
-                           )); ?>"><i class="fa fa-edit"></i> <?php _e('Edit'); ?>
+                           )); ?>"><i class="fas fa-edit"></i> <?php _e('Edit'); ?>
                         </a>
                     </li>
                 <?php } ?>
@@ -49,7 +49,7 @@ $this->backbone();
         <?php if ($offline) { ?>
             <div class="alert alert-danger">
                 <ul class="list-inline">
-                    <li class="order-main-icon"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></li>
+                    <li class="order-main-icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></li>
                     <li><?php _e('This order have offline payment'); ?></li>
                 </ul>
             </div>
@@ -63,7 +63,7 @@ $this->backbone();
                         'controller' => 'edit',
                         'action' => 'index',
                         'uid' => $order['uid'],
-                    )); ?>" target="_blank"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                    )); ?>" target="_blank"><i class="fas fa-user" aria-hidden="true"></i></a></li>
 
                 <li class=""><strong><?php _e('ID'); ?></strong>
                     : <?php echo $this->escape($order['user']['id']); ?></li>
@@ -104,7 +104,7 @@ $this->backbone();
             } ?>
             <div class="alert <?php echo $classAlert; ?>">
                 <ul class="list-inline clearfix">
-                    <li class="order-main-icon"><i class="fa fa-calculator" aria-hidden="true"></i></li>
+                    <li class="order-main-icon"><i class="fas fa-calculator" aria-hidden="true"></i></li>
                     <li><strong><?php _e('Pay installments status'); ?></strong> :</li>
                     <li><?php echo $this->escape($order['statusInstallments']); ?></li>
                 </ul>
@@ -115,7 +115,7 @@ $this->backbone();
             <?php $score = Pi::api('invoice', 'order')->getInvoiceScore($order['uid']); ?>
             <div class="alert alert-info">
                 <ul class="list-inline clearfix">
-                    <li class="order-main-icon"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                    <li class="order-main-icon"><i class="far fa-star" aria-hidden="true"></i></li>
                     <li><strong><?php _e('User score'); ?></strong> :</li>
                     <li><?php echo sprintf(__('Type : %s - Amount : %s'), $score['type_view'], $score['amount_view']); ?></li>
                 </ul>
@@ -125,7 +125,7 @@ $this->backbone();
         <?php if ($config['credit_active']) { ?>
             <div class="alert alert-info">
                 <ul class="list-inline clearfix">
-                    <li class="order-main-icon"><i class="fa fa-money" aria-hidden="true"></i></li>
+                    <li class="order-main-icon"><i class="fas fa-money-bill-alt" aria-hidden="true"></i></li>
                     <li><strong><?php _e('Credit'); ?></strong> :</li>
                     <li><?php echo $this->escape($order['credit']['amount_view']); ?></li>
                     <li>( <?php echo $this->escape($order['credit']['time_update_view']); ?> )</li>
@@ -133,11 +133,11 @@ $this->backbone();
                         <a class="btn btn-info btn-xs"
                            href="<?php echo $this->url('', array('controller' => 'credit', 'action' => 'update', 'uid' => $order['uid'])); ?>"
                            title="<?php _e('Update credit'); ?>" target="_blank"><i
-                                    class="fa fa-plus"></i> <?php _e('Update credit'); ?></a>
+                                    class="fas fa-plus"></i> <?php _e('Update credit'); ?></a>
                         <a class="btn btn-info btn-xs"
                            href="<?php echo $this->url('', array('controller' => 'credit', 'action' => 'history', 'uid' => $order['uid'])); ?>"
                            title="<?php _e('History'); ?>" target="_blank"><i
-                                    class="fa fa-plus"></i> <?php _e('History'); ?></a>
+                                    class="fas fa-plus"></i> <?php _e('History'); ?></a>
                     </li>
                 </ul>
             </div>
@@ -407,10 +407,10 @@ $this->backbone();
                                             <?php if (!$hasValidInvoice) { ?>
                                                 <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
                                                href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'product', 'order' => $order['id'], 'id' => $product['id'])); ?>">
-                                                <i class="fa fa-pencil"></i> <?php _e('Edit'); ?></a>
+                                                <i class="fas fa-pencil-alt"></i> <?php _e('Edit'); ?></a>
                                                 <a class="btn btn-primary btn-xs" title="<?php _e('Delete'); ?>"
                                                href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'product-delete', 'id' => $product['id'])); ?>">
-                                                <i class="fa fa-close"></i> <?php _e('Delete'); ?></a>
+                                                <i class="fas fa-times"></i> <?php _e('Delete'); ?></a>
                                             <?php } ?>
                                         </td>
                                     </tr>
@@ -447,7 +447,7 @@ $this->backbone();
                                         'action' => 'product',
                                         'order' => $order['id']
                                     )); ?>">
-                                        <i class="fa fa-plus"></i> <?php _e('Add product / service'); ?>
+                                        <i class="fas fa-plus"></i> <?php _e('Add product / service'); ?>
                                     </a>
                                 </li>
                             </ul>
@@ -501,14 +501,14 @@ $this->backbone();
                                         <td class="text-right">
                                             <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>"
                                                href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'view', 'id' => $invoice['id'])); ?>">
-                                                <i class="fa fa-eye"></i> <?php _e('View'); ?></a>
+                                                <i class="far fa-eye"></i> <?php _e('View'); ?></a>
                                             <a class="btn btn-primary btn-xs" title="<?php _e('Print'); ?>"
                                                href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'print-pdf', 'id' => $invoice['id'])); ?>">
-                                                <i class="fa fa-print"></i> <?php _e('Print'); ?></a>
+                                                <i class="fas fa-print"></i> <?php _e('Print'); ?></a>
                                                 <?php if ($invoice['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT) { ?> 
                                             <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
                                                href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'edit', 'id' => $invoice['id'])); ?>">
-                                                <i class="fa fa-pencil"></i> <?php _e('Edit'); ?></a>
+                                                <i class="fas fa-pencil-alt"></i> <?php _e('Edit'); ?></a>
                                                 <?php } ?> 
                                         </td>
                                     </tr>
@@ -554,7 +554,7 @@ $this->backbone();
                                                 if ($invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) { ?> 
                                                     <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
                                                        href="<?php echo $this->url('', array('controller' => 'installment', 'action' => 'edit', 'id' => $installment['id'])); ?>">
-                                                        <i class="fa fa-pencil"></i> <?php _e('Edit'); ?></a>
+                                                        <i class="fas fa-pencil-alt"></i> <?php _e('Edit'); ?></a>
                                                 <?php } ?>
                                             </td>
                                         </tr>
@@ -568,7 +568,7 @@ $this->backbone();
                                         <a class="btn btn-success pull-right"
                                            href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'add', 'order' => $order['id'])); ?>"
                                            title="<?php _e('New invoice'); ?>"><i
-                                                    class="fa fa-plus"></i> <?php _e('New invoice'); ?></a>
+                                                    class="fas fa-plus"></i> <?php _e('New invoice'); ?></a>
                                     </li>
                                 </ul>
                             <?php } ?>
@@ -577,7 +577,7 @@ $this->backbone();
                                 <div class="">
                                     <p><a class="btn btn-success pull-right"
                                           href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'add', 'order' => $order['id'])); ?>"
-                                          title="<?php _e('New invoice'); ?>"><i class="fa fa-plus"></i> <?php _e('New invoice'); ?></a></p>
+                                          title="<?php _e('New invoice'); ?>"><i class="fas fa-plus"></i> <?php _e('New invoice'); ?></a></p>
                                 </div>
                             <?php } else { ?>
                                 <p><?php _e('Order is not validated, you cannot add an invoice.') ?></p>
@@ -616,7 +616,7 @@ $this->backbone();
                                 <li class="pull-left"><?php _e('You can set any note for user'); ?></li>
                                 <li class="pull-right">
                                     <a class="pull-right update-note btn btn-success">
-                                        <i class="fa fa-plus"></i> <?php _e('Add / edit admin note'); ?>
+                                        <i class="fas fa-plus"></i> <?php _e('Add / edit admin note'); ?>
                                     </a>
                                 </li>
                             </ul>

@@ -5,7 +5,7 @@
             <div class="panel-heading" role="tab" id="headingForm">
                 <h4 class="panel-title">
                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
-                        <i class="fa fa-plus"></i> <?php _e('Filter invoices'); ?>
+                        <i class="fas fa-plus"></i> <?php _e('Filter invoices'); ?>
                     </a>
                 </h4>
             </div>
@@ -68,13 +68,13 @@
                     <td class="text-right">
                         <a class="btn btn-primary btn-xs" title="<?php _e('Download'); ?>"
                            href="<?php echo $this->url('', array('action' => 'print-pdf', 'id' => $invoice['id'])); ?>"
-                           target="_blank"><i class="fa fa-download"></i> <?php _e('Download'); ?></a>
+                           target="_blank"><i class="fas fa-download"></i> <?php _e('Download'); ?></a>
                         <a class="btn btn-primary btn-xs" title="<?php _e('Order'); ?>"
                            href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>"
-                           target="_blank"><i class="fa fa-eye"></i> <?php _e('Order'); ?></a>
+                           target="_blank"><i class="far fa-eye"></i> <?php _e('Order'); ?></a>
                         <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>"
                            href="<?php echo $this->url('', array('action' => 'view', 'id' => $invoice['id'])); ?>"><i
-                                class="fa fa-eye" target="_blank"></i> <?php _e('View'); ?></a>
+                                class="far fa-eye" target="_blank"></i> <?php _e('View'); ?></a>
                     </td>
                 </tr>
             <?php } ?>

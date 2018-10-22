@@ -155,7 +155,7 @@ $this->footScript()->appendScript($script);
                          <div class="clearfix">
                             <div class="info">
                                 <p>
-                                    <span class="fa fa-file"></span> <strong><?php _e('Invoicing address'); ?></strong>
+                                    <span class="fas fa-file"></span> <strong><?php _e('Invoicing address'); ?></strong>
                                     <?php if (!empty($addresses)) { ?>
                                         <a class="modify-address" href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'invoicing'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal" data-type="<?php _e('Invoicing address') ?>">
                                             <?php _e('Modify') ?>
@@ -229,7 +229,7 @@ $this->footScript()->appendScript($script);
                              <div class="clearfix">
                                 <div class="info">
                                     <p>
-                                        <span class="fa fa-map-marker"></span> <strong><?php _e('Delivery address'); ?></strong>
+                                        <span class="fas fa-map-marker-alt"></span> <strong><?php _e('Delivery address'); ?></strong>
                                         <?php if ($addressInvoicing['id'] != $addressDelivery['id']) { ?>
                                             <a class="modify-address" href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal" data-type="<?php _e('Delivery address') ?>">
                                                 <?php _e('Modify') ?>

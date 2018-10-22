@@ -159,10 +159,10 @@
             <div class="col-md-12 text-right">
                 <a class="btn btn-primary" title="<?php _e('View order'); ?>"
                    href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>"
-                   target="_blank"><i class="fa fa-eye"></i> <?php _e('View order'); ?></a>
+                   target="_blank"><i class="far fa-eye"></i> <?php _e('View order'); ?></a>
                 <a class="btn btn-primary" title="<?php _e('Print'); ?>"
                    href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'print-pdf', 'id' => $invoice['id'])); ?>"
-                   target="_blank"><i class="fa fa-print"></i> <?php _e('Print'); ?></a>
+                   target="_blank"><i class="fas fa-print"></i> <?php _e('Print'); ?></a>
             </div>
         </div>
         
@@ -210,7 +210,7 @@
                             if ($invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED && !$readonly) { ?> 
                                 <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
                                    href="<?php echo $this->url('', array('controller' => 'installment', 'action' => 'edit', 'id' => $installment['id'])); ?>">
-                                    <i class="fa fa-pencil"></i> <?php _e('Edit'); ?></a>
+                                    <i class="fas fa-pencil-alt"></i> <?php _e('Edit'); ?></a>
                             <?php } ?>
                         </td>
                     </tr>

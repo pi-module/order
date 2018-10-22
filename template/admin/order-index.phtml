@@ -8,7 +8,7 @@ $this->backbone();
             <div class="panel-heading" role="tab" id="headingForm">
                 <h4 class="panel-title">
                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
-                        <i class="fa fa-plus"></i> <?php _e('Filter orders'); ?>
+                        <i class="fas fa-plus"></i> <?php _e('Filter orders'); ?>
                     </a>
                 </h4>
             </div>
@@ -33,7 +33,7 @@ $this->backbone();
         </div>
         <div class="col-xs-3 text-right">
             <a class="btn btn-success" title="<?php _e('New order'); ?>" href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'add')); ?>">
-                <i class="fa fa-plus"></i> <?php _e('New order'); ?>
+                <i class="fas fa-plus"></i> <?php _e('New order'); ?>
             </a>
         </div>
     </div>
@@ -130,11 +130,11 @@ $this->backbone();
                             </li>
                             <li class="col-xs-1 text-center">
                                 <?php if($order['user_note']) { ?>
-                                        <span class="fa fa-comments-o"></span> 
+                                        <span class="far fa-comments"></span>
                                     <?php } ?> 
                             </li> 
                             <li class="col-xs-4 text-center">
-                                <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i class="fa fa-eye"></i> 
+                                <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i class="far fa-eye"></i>
                                     <?php _e('View'); ?>
                                 </a>
                             </li> 

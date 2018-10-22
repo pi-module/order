@@ -1,10 +1,5 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="clearfix">
-    <?php /* <p>
-        <a class="btn btn-primary" title="<?php _e('Add Location'); ?>"
-           href="<?php echo $this->url('', array('action' => 'update')); ?>"><i
-                class="fa fa-folder-open"></i> <?php _e('Add Location'); ?></a>
-    </p> */ ?>
     <h3><?php _e('List of Location'); ?></h3>
     <?php if (!empty($list)) { ?>
         <table class="table table-striped table-bordered table-condensed">
@@ -29,7 +24,7 @@
                     <td>
                         <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
                            href="<?php echo $this->url('', array('action' => 'update', 'id' => $location['id'])); ?>"><i
-                                class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
+                                class="fas fa-edit"></i> <?php _e('Edit'); ?></a>
                     </td>
                 </tr>
             <?php } ?>

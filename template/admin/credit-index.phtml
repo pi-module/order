@@ -5,7 +5,7 @@
             <div class="panel-heading" role="tab" id="headingForm">
                 <h4 class="panel-title">
                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
-                        <i class="fa fa-plus"></i> <?php _e('Filter users'); ?>
+                        <i class="fas fa-plus"></i> <?php _e('Filter users'); ?>
                     </a>
                 </h4>
             </div>
@@ -38,7 +38,7 @@
             <td>
                 <?php echo $this->escape($credit['amount_view']); ?>
                 <button type="button" class="btn btn-link btn-xs text-right" data-toggle="modal" data-target="#creditModal<?php echo $this->escape($credit['id']); ?>">
-                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <i class="fas fa-info-circle" aria-hidden="true"></i>
                 </button>
                 <div class="modal fade" id="creditModal<?php echo $this->escape($credit['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="creditModalLabel<?php echo $this->escape($credit['id']); ?>">
                     <div class="modal-dialog" role="document">
