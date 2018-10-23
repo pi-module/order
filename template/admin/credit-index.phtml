@@ -37,7 +37,7 @@
             </td>
             <td>
                 <?php echo $this->escape($credit['amount_view']); ?>
-                <button type="button" class="btn btn-link btn-xs text-right" data-toggle="modal" data-target="#creditModal<?php echo $this->escape($credit['id']); ?>">
+                <button type="button" class="btn btn-link btn-sm text-right" data-toggle="modal" data-target="#creditModal<?php echo $this->escape($credit['id']); ?>">
                     <i class="fas fa-info-circle" aria-hidden="true"></i>
                 </button>
                 <div class="modal fade" id="creditModal<?php echo $this->escape($credit['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="creditModalLabel<?php echo $this->escape($credit['id']); ?>">
@@ -58,17 +58,17 @@
             </td>
             <td><?php echo $this->escape($credit['time_update_view']); ?></td>
             <td>
-                <a class="btn btn-primary btn-xs" title="<?php _e('Update credit'); ?>" href="<?php echo $this->url('admin', array(
+                <a class="btn btn-primary btn-sm" title="<?php _e('Update credit'); ?>" href="<?php echo $this->url('admin', array(
                     'controller' => 'credit',
                     'action' => 'update',
                     'uid' => $credit['uid'],
                 )); ?>"><?php _e('Update credit'); ?></a>
-                <a class="btn btn-success btn-xs" title="<?php _e('History'); ?>" href="<?php echo $this->url('admin', array(
+                <a class="btn btn-success btn-sm" title="<?php _e('History'); ?>" href="<?php echo $this->url('admin', array(
                     'controller' => 'credit',
                     'action' => 'history',
                     'uid' => $credit['uid'],
                 )); ?>"><?php _e('History'); ?></a>
-                <a class="btn btn-success btn-xs" title="<?php _e('User information'); ?>" href="<?php echo $this->url('admin', array(
+                <a class="btn btn-success btn-sm" title="<?php _e('User information'); ?>" href="<?php echo $this->url('admin', array(
                     'module' => 'user',
                     'controller' => 'edit',
                     'action' => 'index',

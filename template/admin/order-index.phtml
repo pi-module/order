@@ -95,7 +95,7 @@ $this->backbone();
                         <ul class="list-inline">
                             <li class="list-inline-item col-xs-2 text-center">
                                 <?php if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED) { ?>
-                                    <span id="update-order-<?php echo $this->escape($order['id']); ?>" class="update-order btn btn-xs <?php echo $this->escape($order['orderClass']); ?>"><?php echo $this->escape($order['orderTitle']); ?></span>
+                                    <span id="update-order-<?php echo $this->escape($order['id']); ?>" class="update-order btn btn-sm <?php echo $this->escape($order['orderClass']); ?>"><?php echo $this->escape($order['orderTitle']); ?></span>
                                 <?php } else if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_DRAFT) { ?>
                                     <span class="label label-warning"><?php echo $this->escape($order['orderTitle']); ?></span>
                                 <?php } else { ?>
@@ -103,12 +103,12 @@ $this->backbone();
                                 <?php } ?>
                             </li>
                             <li class="list-inline-item col-xs-2 text-center">
-                                <span id="update-canPay-<?php echo $this->escape($order['id']); ?>" class="update-canPay btn btn-xs <?php echo $this->escape($order['canPayClass']); ?>"><?php echo $this->escape($order['canPayTitle']); ?></span>
+                                <span id="update-canPay-<?php echo $this->escape($order['id']); ?>" class="update-canPay btn btn-sm <?php echo $this->escape($order['canPayClass']); ?>"><?php echo $this->escape($order['canPayTitle']); ?></span>
                             </li>
                             <?php /* if ($order['type_payment'] == 'installment') { ?>
-                                    <li class="col-xs-2 text-center"><span class="btn btn-xs <?php echo $this->escape($order['paymentClass']); ?>"><?php echo $this->escape($order['paymentTitle']); ?></span></li>
+                                    <li class="col-xs-2 text-center"><span class="btn btn-sm <?php echo $this->escape($order['paymentClass']); ?>"><?php echo $this->escape($order['paymentTitle']); ?></span></li>
                                 <?php } else { ?>
-                                    <li class="col-xs-2 text-center"><span id="update-payment-<?php echo $this->escape($order['id']); ?>" class="update-payment btn btn-xs <?php echo $this->escape($order['paymentClass']); ?>"><?php echo $this->escape($order['paymentTitle']); ?></span></li>
+                                    <li class="col-xs-2 text-center"><span id="update-payment-<?php echo $this->escape($order['id']); ?>" class="update-payment btn btn-sm <?php echo $this->escape($order['paymentClass']); ?>"><?php echo $this->escape($order['paymentTitle']); ?></span></li>
                                 <?php } */ ?>
                             <li class="list-inline-item col-xs-1 text-center">
                                 <?php if ($class == '') { ?>
@@ -121,7 +121,7 @@ $this->backbone();
                             </li>
                             <li class="list-inline-item col-xs-2 text-center">
                                 <?php if ($order['type_commodity'] == 'product') { ?>
-                                    <span id="update-delivery-<?php echo $this->escape($order['id']); ?>" class="update-delivery btn btn-xs <?php echo $this->escape($order['deliveryClass']); ?>"><?php echo $this->escape($order['deliveryTitle']); ?></span>
+                                    <span id="update-delivery-<?php echo $this->escape($order['id']); ?>" class="update-delivery btn btn-sm <?php echo $this->escape($order['deliveryClass']); ?>"><?php echo $this->escape($order['deliveryTitle']); ?></span>
                                 <?php } else { ?>
                                     <span class="label label-default"><?php _e('Its service'); ?></span>
                                 <?php } ?>
@@ -132,7 +132,7 @@ $this->backbone();
                                     <?php } ?> 
                             </li> 
                             <li class="list-inline-item col-xs-4 text-center">
-                                <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i class="far fa-eye"></i>
+                                <a class="btn btn-primary btn-sm" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><i class="far fa-eye"></i>
                                     <?php _e('View'); ?>
                                 </a>
                             </li> 
@@ -184,7 +184,7 @@ $this->backbone();
                     formModule.success = function (res) {
                         var d = res.data;
                         self.modal.html(res).modal('hide');
-                        $('#update-order-' + p.attr('data-id')).attr('class', 'update-order btn btn-xs ' + d.orderClass).html(d.orderTitle);
+                        $('#update-order-' + p.attr('data-id')).attr('class', 'update-order btn btn-sm ' + d.orderClass).html(d.orderTitle);
                     };
                 });
             },
@@ -196,7 +196,7 @@ $this->backbone();
                     formModule.success = function (res) {
                         var d = res.data;
                         self.modal.html(res).modal('hide');
-                        $('#update-payment-' + p.attr('data-id')).attr('class', 'update-payment btn btn-xs ' + d.paymentClass).html(d.paymentTitle);
+                        $('#update-payment-' + p.attr('data-id')).attr('class', 'update-payment btn btn-sm ' + d.paymentClass).html(d.paymentTitle);
                     };
                 });
             },
@@ -208,7 +208,7 @@ $this->backbone();
                     formModule.success = function (res) {
                         var d = res.data;
                         self.modal.html(res).modal('hide');
-                        $('#update-delivery-' + p.attr('data-id')).attr('class', 'update-delivery btn btn-xs ' + d.deliveryClass).html(d.deliveryTitle);
+                        $('#update-delivery-' + p.attr('data-id')).attr('class', 'update-delivery btn btn-sm ' + d.deliveryClass).html(d.deliveryTitle);
                     };
                 });
             },
@@ -220,7 +220,7 @@ $this->backbone();
                     formModule.success = function (res) {
                         var d = res.data;
                         self.modal.html(res).modal('hide');
-                        $('#update-canPay-' + p.attr('data-id')).attr('class', 'update-canPay btn btn-xs ' + d.canPayClass).html(d.canPayTitle);
+                        $('#update-canPay-' + p.attr('data-id')).attr('class', 'update-canPay btn btn-sm ' + d.canPayClass).html(d.canPayTitle);
                     };
                 });
             },

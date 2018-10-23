@@ -130,11 +130,11 @@ $this->backbone();
                     <li class="list-inline-item"><?php echo $this->escape($order['credit']['amount_view']); ?></li>
                     <li class="list-inline-item">( <?php echo $this->escape($order['credit']['time_update_view']); ?> )</li>
                     <li class="list-inline-item pull-right">
-                        <a class="btn btn-info btn-xs"
+                        <a class="btn btn-info btn-sm"
                            href="<?php echo $this->url('', array('controller' => 'credit', 'action' => 'update', 'uid' => $order['uid'])); ?>"
                            title="<?php _e('Update credit'); ?>" target="_blank"><i
                                     class="fas fa-plus"></i> <?php _e('Update credit'); ?></a>
-                        <a class="btn btn-info btn-xs"
+                        <a class="btn btn-info btn-sm"
                            href="<?php echo $this->url('', array('controller' => 'credit', 'action' => 'history', 'uid' => $order['uid'])); ?>"
                            title="<?php _e('History'); ?>" target="_blank"><i
                                     class="fas fa-plus"></i> <?php _e('History'); ?></a>
@@ -288,20 +288,20 @@ $this->backbone();
                                 ?>
                                  <p><strong><?php _e('Order status'); ?></strong> : <span
                                             id="update-order-<?php echo $this->escape($order['id']); ?>"
-                                            class=" <?php echo ($order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_VALIDATED || !$hasValidInvoice) ? 'btn update-order' : ''?> <?php echo $orderClass; ?> btn-xs">
+                                            class=" <?php echo ($order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_VALIDATED || !$hasValidInvoice) ? 'btn update-order' : ''?> <?php echo $orderClass; ?> btn-sm">
                                             <?php echo Module\Order\Model\Order::getStatusList()[$order['status_order']]; ?>
                                             </span>
                                 </p>
                                  <p><strong><?php _e('Blocked payments ?'); ?></strong> : <span
                                             id="update-canPay-<?php echo $this->escape($order['id']); ?>"
-                                            class="update-canPay btn <?php echo $this->escape($order['canPayClass']); ?> btn-xs"><?php echo $order['can_pay'] ? __('No') : __('Yes'); ?></span>
+                                            class="update-canPay btn <?php echo $this->escape($order['canPayClass']); ?> btn-sm"><?php echo $order['can_pay'] ? __('No') : __('Yes'); ?></span>
                                 </p>
                                 <p><strong><?php _e('Delivery status'); ?></strong> :
                                     <?php if (count($order['products'])) { ?>   
                                         <?php if ($order['type_commodity'] == 'product') { ?>
                                             <span
                                                 id="update-delivery-<?php echo $this->escape($order['id']); ?>"
-                                                class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-xs">
+                                                class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-sm">
                                                 
                                             </span>
                                         <?php } else { ?>
@@ -405,10 +405,10 @@ $this->backbone();
         
                                         <td rowspan=2>
                                             <?php if (!$hasValidInvoice) { ?>
-                                                <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
+                                                <a class="btn btn-primary btn-sm" title="<?php _e('Edit'); ?>"
                                                href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'product', 'order' => $order['id'], 'id' => $product['id'])); ?>">
                                                 <i class="fas fa-pencil-alt"></i> <?php _e('Edit'); ?></a>
-                                                <a class="btn btn-primary btn-xs" title="<?php _e('Delete'); ?>"
+                                                <a class="btn btn-primary btn-sm" title="<?php _e('Delete'); ?>"
                                                href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'product-delete', 'id' => $product['id'])); ?>">
                                                 <i class="fas fa-times"></i> <?php _e('Delete'); ?></a>
                                             <?php } ?>
@@ -499,14 +499,14 @@ $this->backbone();
                                         <td><?php echo $this->escape($invoice['time_create_view']) . ' ' . date('H:i', $invoice['time_create']); ?></td>
                                         <td><?php echo $this->escape($invoice['time_invoice_view']) ?></td>
                                         <td class="text-right">
-                                            <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>"
+                                            <a class="btn btn-primary btn-sm" title="<?php _e('View'); ?>"
                                                href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'view', 'id' => $invoice['id'])); ?>">
                                                 <i class="far fa-eye"></i> <?php _e('View'); ?></a>
-                                            <a class="btn btn-primary btn-xs" title="<?php _e('Print'); ?>"
+                                            <a class="btn btn-primary btn-sm" title="<?php _e('Print'); ?>"
                                                href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'print-pdf', 'id' => $invoice['id'])); ?>">
                                                 <i class="fas fa-print"></i> <?php _e('Print'); ?></a>
                                                 <?php if ($invoice['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT) { ?> 
-                                            <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
+                                            <a class="btn btn-primary btn-sm" title="<?php _e('Edit'); ?>"
                                                href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'edit', 'id' => $invoice['id'])); ?>">
                                                 <i class="fas fa-pencil-alt"></i> <?php _e('Edit'); ?></a>
                                                 <?php } ?> 
@@ -552,7 +552,7 @@ $this->backbone();
                                                 }
                                                 $readonly = $installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID && $type == 'online';
                                                 if ($invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) { ?> 
-                                                    <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
+                                                    <a class="btn btn-primary btn-sm" title="<?php _e('Edit'); ?>"
                                                        href="<?php echo $this->url('', array('controller' => 'installment', 'action' => 'edit', 'id' => $installment['id'])); ?>">
                                                         <i class="fas fa-pencil-alt"></i> <?php _e('Edit'); ?></a>
                                                 <?php } ?>

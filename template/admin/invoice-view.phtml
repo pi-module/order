@@ -208,7 +208,7 @@
                             }
                             $readonly = $installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID && $type == 'online';
                             if ($invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED && !$readonly) { ?> 
-                                <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
+                                <a class="btn btn-primary btn-sm" title="<?php _e('Edit'); ?>"
                                    href="<?php echo $this->url('', array('controller' => 'installment', 'action' => 'edit', 'id' => $installment['id'])); ?>">
                                     <i class="fas fa-pencil-alt"></i> <?php _e('Edit'); ?></a>
                             <?php } ?>

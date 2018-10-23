@@ -21,7 +21,7 @@
                     <?php } ?>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#<?php echo $item['path']; ?>Modal">
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#<?php echo $item['path']; ?>Modal">
                         <?php _e('Gateway detail'); ?>
                     </button>
                     <div class="modal fade" id="<?php echo $item['path']; ?>Modal" tabindex="-1" role="dialog" aria-labelledby="<?php echo $item['path']; ?>ModalLabel">
@@ -59,13 +59,13 @@
                 </td>
                 <td>
                     <?php if (isset($item['status']) && $item['status'] == 1) { ?>
-                        <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Edit'); ?></a>
-                        <a class="btn btn-warning btn-xs" title="<?php _e('Inactive'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'status', 'path' => $item['path'])); ?>"><?php _e('Inactive'); ?></a>
+                        <a class="btn btn-primary btn-sm" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Edit'); ?></a>
+                        <a class="btn btn-warning btn-sm" title="<?php _e('Inactive'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'status', 'path' => $item['path'])); ?>"><?php _e('Inactive'); ?></a>
                     <?php } elseif (isset($item['status']) && $item['status'] == 0) { ?>
-                        <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Edit'); ?></a>
-                        <a class="btn btn-success btn-xs" title="<?php _e('Active'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'status', 'path' => $item['path'])); ?>"><?php _e('Active'); ?></a>
+                        <a class="btn btn-primary btn-sm" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Edit'); ?></a>
+                        <a class="btn btn-success btn-sm" title="<?php _e('Active'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'status', 'path' => $item['path'])); ?>"><?php _e('Active'); ?></a>
                     <?php } else { ?>
-                        <a class="btn btn-success btn-xs" title="<?php _e('Install'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Install'); ?></a>
+                        <a class="btn btn-success btn-sm" title="<?php _e('Install'); ?>" href="<?php echo $this->url('', array('controller' => 'gateway', 'action' => 'update', 'path' => $item['path'])); ?>"><?php _e('Install'); ?></a>
                     <?php } ?>
                 </td>
             </tr>

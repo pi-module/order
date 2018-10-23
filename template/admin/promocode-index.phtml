@@ -39,10 +39,10 @@ $urlMessage = $this->url('', array(
                     <td><?php echo join(', ', json_decode($promocode['module'])); ?></td>
                     <td><span class="fa <?php echo $promocode->showcode ? 'fa-check text-success' : 'fa-times text-danger' ?>"></span></td>
                     <td>
-                         <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'manage', 'id' => $promocode['id'])); ?>">
+                         <a class="btn btn-primary btn-sm" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'manage', 'id' => $promocode['id'])); ?>">
                              <i class="fas fa-edit"></i> <?php _e('Manage'); ?>
                          </a>
-                         <a class="btn btn-primary btn-xs" title="<?php _e('Delete'); ?>" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $promocode['id'])); ?>">
+                         <a class="btn btn-primary btn-sm" title="<?php _e('Delete'); ?>" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $promocode['id'])); ?>">
                              <i class="fas fa-times"></i> <?php _e('Delete'); ?>
                          </a>
                     </td>

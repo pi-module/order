@@ -16,7 +16,7 @@
                         </li>
                         <?php if (!$order['has_payment'] && $order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_CANCELLED) { ?>
                             <li class="list-inline-item pull-right">
-                                <a class="btn btn-primary btn-xs" title="<?php _e('Pay'); ?>" target="_blank"
+                                <a class="btn btn-primary btn-sm" title="<?php _e('Pay'); ?>" target="_blank"
                                    href="<?php echo Pi::url($this->url('order', array('controller'=> 'payment', 'action' => 'index', 'id' => $order['id']))); ?>"><i
                                         class="fas fa-credit-card"></i> <?php _e('Pay'); ?></a>
                             </li>
@@ -174,7 +174,7 @@
                                             <?php if ($order['type_commodity'] == 'product') { ?>
                                                 <span
                                                     id="update-delivery-<?php echo $this->escape($order['id']); ?>"
-                                                    class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-xs">
+                                                    class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-sm">
                                                     
                                                 </span>
                                             <?php } else { ?>
@@ -316,7 +316,7 @@
                                                 <td><?php echo $this->escape($invoice['type']); ?></td>
                                                 <td><?php echo $this->escape($invoice['time_invoice_view']) ?></td>
                                                 <td class="text-right">
-                                                    <a class="btn btn-primary btn-xs" title="<?php _e('Print'); ?>"
+                                                    <a class="btn btn-primary btn-sm" title="<?php _e('Print'); ?>"
                                                        href="<?php echo $this->url('', array('controller' => 'detail', 'action' => 'print', 'id' => $invoice['id'])); ?>">
                                                         <i class="fas fa-print"></i> <?php _e('Print'); ?></a>
                                                 </td>
