@@ -349,7 +349,7 @@ $this->footScript()->appendScript($script);
                                             <div class="col-xs-5">
                                                 <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
                                                    target="_blank">
-                                                    <img class="img-responsive"
+                                                    <img class="img-fluid"
                                                          src="<?php echo $this->escape($product['details']['thumbUrl']); ?>">
                                                 </a>
                                             </div>
@@ -506,10 +506,10 @@ $this->footScript()->appendScript($script);
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+                <h2 class="modal-title">&nbsp;</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="<?php _e('Close'); ?>">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h2 class="modal-title">&nbsp;</h2>
             </div>
             <div class="panel">
                 <div class="col-md-8">
@@ -540,10 +540,10 @@ $this->footScript()->appendScript($script);
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title">&nbsp;</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="<?php _e('Close'); ?>">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">&nbsp;</h4>
             </div>
             <div class="modal-body">
                 <?php _e('Please, wait ...') ?>
