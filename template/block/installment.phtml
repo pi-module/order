@@ -21,7 +21,7 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="summery">
                 <h3 class="text-center"><?php echo _b('Desc'); ?> <small>قیمت ها به تومان می باشد</small></h3>
-                <table class="table table-striped table-bordered table-condensed small">
+                <table class="table table-striped table-bordered table-sm small">
                     <tr>
                         <th class="text-center col-md-table-16"><?php echo _b('10 th'); ?></th>
                         <th class="text-center col-md-table-16"><?php echo _b('Debt'); ?></th>
@@ -79,7 +79,7 @@
                         <td class="text-center"><?php echo $block['d']['all']['10-sun-view']; ?></td>
                     </tr>
                 </table>
-                <table class="table table-striped table-bordered table-condensed small">
+                <table class="table table-striped table-bordered table-sm small">
                     <tr>
                         <th class="text-center col-md-table-16"><?php echo _b('20 th'); ?></th>
                         <th class="text-center col-md-table-16"><?php echo _b('Debt'); ?></th>
@@ -137,7 +137,7 @@
                         <td class="text-center"><?php echo $block['d']['all']['20-sun-view']; ?></td>
                     </tr>
                 </table>
-                <table class="table table-striped table-bordered table-condensed small">
+                <table class="table table-striped table-bordered table-sm small">
                     <tr>
                         <th class="text-center col-md-table-16"><?php echo _b('30 th'); ?></th>
                         <th class="text-center col-md-table-16"><?php echo _b('Debt'); ?></th>
@@ -196,7 +196,7 @@
                     </tr>
                 </table>
                 <?php if (isset($block['d']['additional']['invoice']) && !empty($block['d']['additional']['invoice'])) { ?>
-                    <table class="table table-striped table-bordered table-condensed small">
+                    <table class="table table-striped table-bordered table-sm small">
                         <tr>
                             <th colspan="3" class="text-center col-md-3"><?php echo _b('Additional invoices'); ?></th>
                             <th colspan="12" class="text-center col-md-8"><?php echo _b('Due date'); ?></th>
@@ -215,7 +215,7 @@
                         </tr>
                     </table>
                 <?php } ?>
-                <table class="table table-striped table-bordered table-condensed small">
+                <table class="table table-striped table-bordered table-sm small">
                     <tr>
                         <th class="text-center col-md-11">جمع کل</th>
                         <th class="text-center col-md-1"><?php echo $block['d']['total-view']; ?></th>
@@ -225,7 +225,7 @@
             <div role="tabpanel" class="tab-pane" id="invoice">
                 <h3 class="text-center"><?php echo _b('Invoices list'); ?></h3>
                 <?php if ($block['resources']['invoices']) { ?>
-                    <table class="table table-striped table-bordered table-condensed small">
+                    <table class="table table-striped table-bordered table-sm small">
                         <tr>
                             <th class="text-center"><?php echo _b('Amount'); ?></th>
                             <td class="text-center"><?php echo _b('Product / service'); ?></td>
@@ -257,7 +257,7 @@
                 <h3 class="text-center"><?php echo _b('Orders list'); ?></h3>
                 <?php if ($block['resources']['orders']) { ?>
 
-                    <table class="table table-striped table-bordered table-condensed">
+                    <table class="table table-striped table-bordered table-sm">
                         <tr>
                             <th class="text-center"><?php echo _b('ID'); ?></th>
                             <th class="text-center"><?php echo _b('Code'); ?></th>
