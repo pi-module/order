@@ -17,12 +17,12 @@ $this->backbone();
 
         <div class="page-header">
             <ul class="list-inline clearfix">
-                <li class="pull-left">
+                <li class="list-inline-item pull-left">
                     <h1><?php echo sprintf(__('Order %s details'), $order['code']); ?></h1>
                 </li>
                 <?php if (!$hasValidInvoice) { ?>
                     <?php if ($order['create_by'] == 'ADMIN' && count($order['invoices']) == 0) { ?>
-                        <li class="pull-right">
+                        <li class="list-inline-item pull-right">
                             <a class="btn btn-danger" title="<?php _e('Delete'); ?>"
                                href="<?php echo $this->url('', array(
                                    'controller' => 'order',
@@ -33,7 +33,7 @@ $this->backbone();
                         </li>
                     <?php } ?> 
                     
-                    <li class="pull-right">
+                    <li class="list-inline-item pull-right">
                         <a class="btn btn-success" title="<?php _e('Edit'); ?>"
                            href="<?php echo $this->url('', array(
                                'controller' => 'order',
@@ -49,15 +49,15 @@ $this->backbone();
         <?php if ($offline) { ?>
             <div class="alert alert-danger">
                 <ul class="list-inline">
-                    <li class="order-main-icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></li>
-                    <li><?php _e('This order have offline payment'); ?></li>
+                    <li class="list-inline-item order-main-icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></li>
+                    <li class="list-inline-item"><?php _e('This order have offline payment'); ?></li>
                 </ul>
             </div>
         <?php } ?>
 
         <div class="alert alert-info">
             <ul class="list-inline">
-                <li class="order-main-icon">
+                <li class="list-inline-item order-main-icon">
                     <a class="" title="<?php _e('User information'); ?>" href="<?php echo $this->url('admin', array(
                         'module' => 'user',
                         'controller' => 'edit',
@@ -65,31 +65,31 @@ $this->backbone();
                         'uid' => $order['uid'],
                     )); ?>" target="_blank"><i class="fas fa-user" aria-hidden="true"></i></a></li>
 
-                <li class=""><strong><?php _e('ID'); ?></strong>
+                <li class="list-inline-item"><strong><?php _e('ID'); ?></strong>
                     : <?php echo $this->escape($order['user']['id']); ?></li>
                            
                 <?php if (!empty($addressInvoicing['first_name']) && !empty($addressInvoicing['last_name'])) { ?>
-                    <li><strong><?php _e('Name'); ?></strong> :
+                    <li class="list-inline-item"><strong><?php _e('Name'); ?></strong> :
                         <span><?php echo $this->escape($addressInvoicing['first_name']); ?> <?php echo $this->escape($addressInvoicing['last_name']); ?></span>
                     </li>
                 <?php } else {?>
-                    <li class=""><strong><?php _e('Name'); ?></strong>
+                    <li class="list-inline-item"><strong><?php _e('Name'); ?></strong>
                                 : <?php echo $this->escape($order['user']['name']); ?></li>
                 <?php } ?>
                 <?php if (!empty($addressInvoicing['email'])) { ?>
-                    <li><strong><?php _e('Email'); ?></strong> :
+                    <li class="list-inline-item"><strong><?php _e('Email'); ?></strong> :
                         <span><?php echo $this->escape($addressInvoicing['email']); ?></span></li>
                 <?php } ?>
                 <?php if (!empty($addressInvoicing['phone'])) { ?>
-                    <li><strong><?php _e('Phone'); ?></strong> :
+                    <li class="list-inline-item"><strong><?php _e('Phone'); ?></strong> :
                         <span><?php echo $this->escape($addressInvoicing['phone']); ?></span></li>
                 <?php } ?>
                 <?php if (!empty($addressInvoicing['mobile'])) { ?>
-                    <li><strong><?php _e('Mobile'); ?></strong> :
+                    <li class="list-inline-item"><strong><?php _e('Mobile'); ?></strong> :
                         <span><?php echo $this->escape($addressInvoicing['mobile']); ?></span></li>
                 <?php } ?>
                 <?php if ($order['total_price'] > 0) { ?>
-                    <li><strong><?php _e('Total price'); ?></strong> :
+                    <li class="list-inline-item"><strong><?php _e('Total price'); ?></strong> :
                         <span><?php echo $this->escape($order['total_price_view']); ?></span></li>
                 <?php } ?>
             </ul>
@@ -104,9 +104,9 @@ $this->backbone();
             } ?>
             <div class="alert <?php echo $classAlert; ?>">
                 <ul class="list-inline clearfix">
-                    <li class="order-main-icon"><i class="fas fa-calculator" aria-hidden="true"></i></li>
-                    <li><strong><?php _e('Pay installments status'); ?></strong> :</li>
-                    <li><?php echo $this->escape($order['statusInstallments']); ?></li>
+                    <li class="list-inline-item order-main-icon"><i class="fas fa-calculator" aria-hidden="true"></i></li>
+                    <li class="list-inline-item"><strong><?php _e('Pay installments status'); ?></strong> :</li>
+                    <li class="list-inline-item"><?php echo $this->escape($order['statusInstallments']); ?></li>
                 </ul>
             </div>
         <?php } ?>
@@ -115,9 +115,9 @@ $this->backbone();
             <?php $score = Pi::api('invoice', 'order')->getInvoiceScore($order['uid']); ?>
             <div class="alert alert-info">
                 <ul class="list-inline clearfix">
-                    <li class="order-main-icon"><i class="far fa-star" aria-hidden="true"></i></li>
-                    <li><strong><?php _e('User score'); ?></strong> :</li>
-                    <li><?php echo sprintf(__('Type : %s - Amount : %s'), $score['type_view'], $score['amount_view']); ?></li>
+                    <li class="list-inline-item order-main-icon"><i class="far fa-star" aria-hidden="true"></i></li>
+                    <li class="list-inline-item"><strong><?php _e('User score'); ?></strong> :</li>
+                    <li class="list-inline-item"><?php echo sprintf(__('Type : %s - Amount : %s'), $score['type_view'], $score['amount_view']); ?></li>
                 </ul>
             </div>
         <?php } ?>
@@ -125,11 +125,11 @@ $this->backbone();
         <?php if ($config['credit_active']) { ?>
             <div class="alert alert-info">
                 <ul class="list-inline clearfix">
-                    <li class="order-main-icon"><i class="fas fa-money-bill-alt" aria-hidden="true"></i></li>
-                    <li><strong><?php _e('Credit'); ?></strong> :</li>
-                    <li><?php echo $this->escape($order['credit']['amount_view']); ?></li>
-                    <li>( <?php echo $this->escape($order['credit']['time_update_view']); ?> )</li>
-                    <li class="pull-right">
+                    <li class="list-inline-item order-main-icon"><i class="fas fa-money-bill-alt" aria-hidden="true"></i></li>
+                    <li class="list-inline-item"><strong><?php _e('Credit'); ?></strong> :</li>
+                    <li class="list-inline-item"><?php echo $this->escape($order['credit']['amount_view']); ?></li>
+                    <li class="list-inline-item">( <?php echo $this->escape($order['credit']['time_update_view']); ?> )</li>
+                    <li class="list-inline-item pull-right">
                         <a class="btn btn-info btn-xs"
                            href="<?php echo $this->url('', array('controller' => 'credit', 'action' => 'update', 'uid' => $order['uid'])); ?>"
                            title="<?php _e('Update credit'); ?>" target="_blank"><i
@@ -440,8 +440,8 @@ $this->backbone();
                         <hr />
                         <?php if (!$hasValidInvoice) { ?> 
                             <ul class="list-inline clearfix">
-                                <li class="pull-left"><?php _e('You can add new product / service to this order'); ?></li>
-                                <li class="pull-right">
+                                <li class="list-inline-item pull-left"><?php _e('You can add new product / service to this order'); ?></li>
+                                <li class="list-inline-item pull-right">
                                     <a class="btn btn-success" title="<?php _e('Add product / service'); ?>" href="<?php echo $this->url('', array(
                                         'controller' => 'order',
                                         'action' => 'product',
@@ -564,7 +564,7 @@ $this->backbone();
                             <hr />
                             <?php if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED && !$hasValidInvoice && !$hasDraftInvoice) { ?>
                                 <ul class="list-inline clearfix">
-                                    <li class="pull-right">
+                                    <li class="list-inline-item pull-right">
                                         <a class="btn btn-success pull-right"
                                            href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'add', 'order' => $order['id'])); ?>"
                                            title="<?php _e('New invoice'); ?>"><i
@@ -613,8 +613,8 @@ $this->backbone();
                             </div>
                             <hr />
                             <ul class="list-inline clearfix">
-                                <li class="pull-left"><?php _e('You can set any note for user'); ?></li>
-                                <li class="pull-right">
+                                <li class="list-inline-item pull-left"><?php _e('You can set any note for user'); ?></li>
+                                <li class="list-inline-item pull-right">
                                     <a class="pull-right update-note btn btn-success">
                                         <i class="fas fa-plus"></i> <?php _e('Add / edit admin note'); ?>
                                     </a>

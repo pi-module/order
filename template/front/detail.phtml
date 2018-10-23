@@ -11,11 +11,11 @@
         
                 <div class="page-header">
                     <ul class="list-inline clearfix">
-                        <li class="pull-left">
+                        <li class="list-inline-item pull-left">
                             <h1><?php echo sprintf(__('Order %s details'), $order['code']); ?></h1>
                         </li>
                         <?php if (!$order['has_payment'] && $order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_CANCELLED) { ?>
-                            <li class="pull-right">
+                            <li class="list-inline-item pull-right">
                                 <a class="btn btn-primary btn-xs" title="<?php _e('Pay'); ?>" target="_blank"
                                    href="<?php echo Pi::url($this->url('order', array('controller'=> 'payment', 'action' => 'index', 'id' => $order['id']))); ?>"><i
                                         class="fas fa-credit-card"></i> <?php _e('Pay'); ?></a>
