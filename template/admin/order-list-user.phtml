@@ -12,12 +12,12 @@
                 <div class="order-block-detail-tab" role="tabpanel">
                     <ul class="nav nav-tabs">
                         <?php if ($invoiceInstallmentCount > 0) { ?>
-                            <li role="presentation" class="active">
-                                <a href="#summery" aria-controls="summery" role="tab" data-toggle="tab"><?php _e('Summery'); ?></a>
+                            <li role="presentation" class="nav-item">
+                                <a class="nav-link active" href="#summery" aria-controls="summery" role="tab" data-toggle="tab"><?php _e('Summery'); ?></a>
                             </li>
                         <?php } ?>
-                        <li role="presentation"<?php if ($invoiceInstallmentCount == 0) { ?> class="active"<?php } ?>>
-                            <a href="#invoice" aria-controls="invoice" role="tab" data-toggle="tab">
+                        <li role="presentation" class="nav-item">
+                            <a class="nav-link <?php if ($invoiceInstallmentCount == 0) echo 'active'; ?>" href="#invoice" aria-controls="invoice" role="tab" data-toggle="tab">
                                 <?php _e('Payable invoices'); ?>
                                 <?php if (count($user['invoices']) > 0) { ?>
                                     <span class="label label-danger"><?php echo _number(count($user['invoices'])); ?></span>
@@ -26,8 +26,8 @@
                                 <?php } ?>
                             </a>
                         </li>
-                        <li role="presentation">
-                            <a href="#order" aria-controls="order" role="tab" data-toggle="tab"><?php _e('Orders'); ?></a>
+                        <li role="presentation" class="nav-item">
+                            <a class="nav-link href="#order" aria-controls="order" role="tab" data-toggle="tab"><?php _e('Orders'); ?></a>
                         </li>
                     </ul>
                     <div class="tab-content">

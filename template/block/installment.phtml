@@ -1,11 +1,11 @@
 <div class="order-block-installment">
     <div class="order-block-detail-tab" role="tabpanel">
         <ul class="nav nav-tabs">
-            <li role="presentation" class="active">
-                <a href="#summery" aria-controls="summery" role="tab" data-toggle="tab"><?php echo _b('Summery'); ?></a>
+            <li role="presentation" class="nav-item">
+                <a class="nav-link active" href="#summery" aria-controls="summery" role="tab" data-toggle="tab"><?php echo _b('Summery'); ?></a>
             </li>
-            <li role="presentation">
-                <a href="#invoice" aria-controls="invoice" role="tab" data-toggle="tab">
+            <li role="presentation" class="nav-item">
+                <a class="nav-link" href="#invoice" aria-controls="invoice" role="tab" data-toggle="tab">
                     <?php echo _b('Payable invoices'); ?>
                     <?php if (count($block['resources']['invoices']) > 0) { ?>
                         <span class="label label-danger"><?php echo _number(count($block['resources']['invoices'])); ?></span>
@@ -14,8 +14,8 @@
                     <?php } ?>
                 </a>
             </li>
-            <li role="presentation">
-                <a href="#order" aria-controls="order" role="tab" data-toggle="tab"><?php echo _b('Orders'); ?></a>
+            <li role="presentation" class="nav-item">
+                <a class="nav-link" href="#order" aria-controls="order" role="tab" data-toggle="tab"><?php echo _b('Orders'); ?></a>
             </li>
         </ul>
         <div class="tab-content">
