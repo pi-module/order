@@ -81,9 +81,9 @@
         </table>
         <div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
         <p>
-            <span class="label label-success"><?php _e('Paid'); ?></span>
-            <span class="label label-warning"><?php _e('Unpaid'); ?></span>
-            <span class="label label-danger"><?php _e('Canceled'); ?></span>
+            <span class="badge badge-success"><?php _e('Paid'); ?></span>
+            <span class="badge badge-warning"><?php _e('Unpaid'); ?></span>
+            <span class="badge badge-danger"><?php _e('Canceled'); ?></span>
         </p>
     <?php } else { ?>
         <div class="alert alert-warning" role="alert"><?php _e('No invoice is created yet'); ?></div>

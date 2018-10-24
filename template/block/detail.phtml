@@ -81,9 +81,9 @@
                         <?php } ?>
                      <?php } ?>
                     <p>
-                        <span class="label label-success"><?php echo _b('Paid'); ?></span>
-                        <span class="label label-warning"><?php echo _b('Unpaid'); ?></span>
-                        <span class="label label-danger"><?php echo _b('Canceled'); ?></span>
+                        <span class="badge badge-success"><?php echo _b('Paid'); ?></span>
+                        <span class="badge badge-warning"><?php echo _b('Unpaid'); ?></span>
+                        <span class="badge badge-danger"><?php echo _b('Canceled'); ?></span>
                     </p>
                 <?php } else { ?>
                     <div class="alert alert-warning"
@@ -122,7 +122,7 @@
                         <div class="col-md-6">
                             <?php if (!empty($block['resources']['credit'])) { ?>
                                 <p><strong><?php echo _b('Credit'); ?></strong> : <span
-                                        class="label label-success"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($block['resources']['credit'])); ?></span>
+                                        class="badge badge-success"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($block['resources']['credit'])); ?></span>
                                 </p>
                             <?php } ?>
                             <?php if (!empty($block['resources']['first_name']) && !empty($block['resources']['last_name'])) { ?>

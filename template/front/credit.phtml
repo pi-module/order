@@ -23,7 +23,7 @@
                     <p><strong><?php _e('Email'); ?></strong> : <span><?php echo $this->escape($user['email']); ?></span></p>
                 </div>
                 <div class="col-md-6">
-                    <p><strong><?php _e('Total credit amount'); ?></strong> : <span class="label label-success"><?php echo $this->escape($credit['amount_view']); ?></span></p>
+                    <p><strong><?php _e('Total credit amount'); ?></strong> : <span class="badge badge-success"><?php echo $this->escape($credit['amount_view']); ?></span></p>
                     <?php if ($config['credit_type'] == 'module') { ?>
                         <?php foreach ($credit['amount_detail_view'] as $amountDetail) { ?>
                             <p><strong><?php echo $amountDetail['module_title']; ?></strong> : <?php echo $amountDetail['amount_view']; ?></p>

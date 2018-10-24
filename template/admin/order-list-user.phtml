@@ -20,9 +20,9 @@
                             <a class="nav-link <?php if ($invoiceInstallmentCount == 0) echo 'active'; ?>" href="#invoice" aria-controls="invoice" role="tab" data-toggle="tab">
                                 <?php _e('Payable invoices'); ?>
                                 <?php if (count($user['invoices']) > 0) { ?>
-                                    <span class="label label-danger"><?php echo _number(count($user['invoices'])); ?></span>
+                                    <span class="badge badge-danger"><?php echo _number(count($user['invoices'])); ?></span>
                                 <?php } else { ?>
-                                    <span class="label label-success"><?php echo _number(count($user['invoices'])); ?></span>
+                                    <span class="badge badge-success"><?php echo _number(count($user['invoices'])); ?></span>
                                 <?php } ?>
                             </a>
                         </li>

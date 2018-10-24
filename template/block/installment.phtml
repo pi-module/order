@@ -8,9 +8,9 @@
                 <a class="nav-link" href="#invoice" aria-controls="invoice" role="tab" data-toggle="tab">
                     <?php echo _b('Payable invoices'); ?>
                     <?php if (count($block['resources']['invoices']) > 0) { ?>
-                        <span class="label label-danger"><?php echo _number(count($block['resources']['invoices'])); ?></span>
+                        <span class="badge badge-danger"><?php echo _number(count($block['resources']['invoices'])); ?></span>
                     <?php } else { ?>
-                        <span class="label label-success"><?php echo _number(count($block['resources']['invoices'])); ?></span>
+                        <span class="badge badge-success"><?php echo _number(count($block['resources']['invoices'])); ?></span>
                     <?php } ?>
                 </a>
             </li>

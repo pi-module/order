@@ -62,12 +62,12 @@ class CreditController extends IndexController
             switch ($row->status_fluctuation) {
                 case 'increase':
                     $list[$row->id]['status_fluctuation_view'] = __('Increase');
-                    $list[$row->id]['status_fluctuation_class'] = 'label label-success';
+                    $list[$row->id]['status_fluctuation_class'] = 'badge badge-success';
                     break;
 
                 case 'decrease':
                     $list[$row->id]['status_fluctuation_view'] = __('Decrease');
-                    $list[$row->id]['status_fluctuation_class'] = 'label label-danger';
+                    $list[$row->id]['status_fluctuation_class'] = 'badge badge-danger';
                     break;
             }
 

@@ -13,11 +13,11 @@
                 <td><?php echo $item['title']; ?></td>
                 <td>
                     <?php if (isset($item['status']) && $item['status'] == 1) { ?>
-                        <span class="label label-success"><?php _e('Active'); ?></span>
+                        <span class="badge badge-success"><?php _e('Active'); ?></span>
                     <?php } elseif (isset($item['status']) && $item['status'] == 0) { ?>
-                        <span class="label label-warning"><?php _e('Inactive'); ?></span>
+                        <span class="badge badge-warning"><?php _e('Inactive'); ?></span>
                     <?php } else { ?>
-                        <span class="label label-danger"><?php _e('Not installed'); ?></span>
+                        <span class="badge badge-danger"><?php _e('Not installed'); ?></span>
                     <?php } ?>
                 </td>
                 <td>

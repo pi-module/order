@@ -14,7 +14,7 @@
                             $class = "danger";
                         }
                     ?>                    
-                    <span class="label label-<?php echo $class ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']] ?></span>
+                    <span class="badge badge-<?php echo $class ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']] ?></span>
                 </p>
 
                 <p><strong><?php _e('Order'); ?></strong> : <span><?php echo $this->escape($order['code']); ?></span>

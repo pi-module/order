@@ -117,11 +117,11 @@
                 <hr/>
                 <p><strong><?php _e('Status'); ?></strong> :
                     <?php if ($invoice['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) { ?>
-                        <span class="label label-success"><?php _e('Validated'); ?></span>
+                        <span class="badge badge-success"><?php _e('Validated'); ?></span>
                     <?php } elseif ($invoice['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT) { ?>
-                        <span class="label label-warning"><?php _e('Draft'); ?></span>
+                        <span class="badge badge-warning"><?php _e('Draft'); ?></span>
                     <?php } else { ?>
-                        <span class="label label-danger"><?php _e('Canceled'); ?></span>
+                        <span class="badge badge-danger"><?php _e('Canceled'); ?></span>
                     <?php } ?>
                 </p>
 
