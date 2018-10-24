@@ -100,7 +100,7 @@ ul.progtrckr li.progtrckr-pending:before {
     border-top: 3px solid #ccc;
 }
 
-.cart-product .cart-product-list .label-success {
+.cart-product .cart-product-list .badge-success {
     font-size: 14px;
 }
 
