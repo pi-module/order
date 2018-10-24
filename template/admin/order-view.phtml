@@ -17,12 +17,12 @@ $this->backbone();
 
         <div class="page-header">
             <ul class="list-inline clearfix">
-                <li class="list-inline-item pull-left">
+                <li class="list-inline-item float-left">
                     <h1><?php echo sprintf(__('Order %s details'), $order['code']); ?></h1>
                 </li>
                 <?php if (!$hasValidInvoice) { ?>
                     <?php if ($order['create_by'] == 'ADMIN' && count($order['invoices']) == 0) { ?>
-                        <li class="list-inline-item pull-right">
+                        <li class="list-inline-item float-right">
                             <a class="btn btn-danger" title="<?php _e('Delete'); ?>"
                                href="<?php echo $this->url('', array(
                                    'controller' => 'order',
@@ -33,7 +33,7 @@ $this->backbone();
                         </li>
                     <?php } ?> 
                     
-                    <li class="list-inline-item pull-right">
+                    <li class="list-inline-item float-right">
                         <a class="btn btn-success" title="<?php _e('Edit'); ?>"
                            href="<?php echo $this->url('', array(
                                'controller' => 'order',
@@ -129,7 +129,7 @@ $this->backbone();
                     <li class="list-inline-item"><strong><?php _e('Credit'); ?></strong> :</li>
                     <li class="list-inline-item"><?php echo $this->escape($order['credit']['amount_view']); ?></li>
                     <li class="list-inline-item">( <?php echo $this->escape($order['credit']['time_update_view']); ?> )</li>
-                    <li class="list-inline-item pull-right">
+                    <li class="list-inline-item float-right">
                         <a class="btn btn-info btn-sm"
                            href="<?php echo $this->url('', array('controller' => 'credit', 'action' => 'update', 'uid' => $order['uid'])); ?>"
                            title="<?php _e('Update credit'); ?>" target="_blank"><i
@@ -440,8 +440,8 @@ $this->backbone();
                         <hr />
                         <?php if (!$hasValidInvoice) { ?> 
                             <ul class="list-inline clearfix">
-                                <li class="list-inline-item pull-left"><?php _e('You can add new product / service to this order'); ?></li>
-                                <li class="list-inline-item pull-right">
+                                <li class="list-inline-item float-left"><?php _e('You can add new product / service to this order'); ?></li>
+                                <li class="list-inline-item float-right">
                                     <a class="btn btn-success" title="<?php _e('Add product / service'); ?>" href="<?php echo $this->url('', array(
                                         'controller' => 'order',
                                         'action' => 'product',
@@ -564,8 +564,8 @@ $this->backbone();
                             <hr />
                             <?php if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED && !$hasValidInvoice && !$hasDraftInvoice) { ?>
                                 <ul class="list-inline clearfix">
-                                    <li class="list-inline-item pull-right">
-                                        <a class="btn btn-success pull-right"
+                                    <li class="list-inline-item float-right">
+                                        <a class="btn btn-success float-right"
                                            href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'add', 'order' => $order['id'])); ?>"
                                            title="<?php _e('New invoice'); ?>"><i
                                                     class="fas fa-plus"></i> <?php _e('New invoice'); ?></a>
@@ -575,7 +575,7 @@ $this->backbone();
                         <?php } else { ?>
                             <?php if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED && !$hasValidInvoice && !$hasDraftInvoice) { ?>
                                 <div class="">
-                                    <p><a class="btn btn-success pull-right"
+                                    <p><a class="btn btn-success float-right"
                                           href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'add', 'order' => $order['id'])); ?>"
                                           title="<?php _e('New invoice'); ?>"><i class="fas fa-plus"></i> <?php _e('New invoice'); ?></a></p>
                                 </div>
@@ -613,9 +613,9 @@ $this->backbone();
                             </div>
                             <hr />
                             <ul class="list-inline clearfix">
-                                <li class="list-inline-item pull-left"><?php _e('You can set any note for user'); ?></li>
-                                <li class="list-inline-item pull-right">
-                                    <a class="pull-right update-note btn btn-success">
+                                <li class="list-inline-item float-left"><?php _e('You can set any note for user'); ?></li>
+                                <li class="list-inline-item float-right">
+                                    <a class="float-right update-note btn btn-success">
                                         <i class="fas fa-plus"></i> <?php _e('Add / edit admin note'); ?>
                                     </a>
                                 </li>
