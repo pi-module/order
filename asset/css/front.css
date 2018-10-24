@@ -75,7 +75,7 @@ ul.progtrckr li.progtrckr-pending:before {
 }
 
 /* Checkout page */
-.cart-product .panel-body {
+.cart-product .card-body {
     padding: 5px 20px 20px 20px;
 }
 

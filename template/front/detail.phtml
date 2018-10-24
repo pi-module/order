@@ -25,14 +25,14 @@
                 </div>
                 <div class="panel-group" id="accordion">
                     <!-- accordion -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingInformation">
-                            <h4 class="panel-title">
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingInformation">
+                            <h4 class="card-title">
                                 <?php _e('Main information of order'); ?>
                             </h4>
                         </div>
                         <div id="collapseInformation" class="panel-collapse collapse in" role="tabpanel">
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <div class="clearfix">
                                     <div class="col-md-4">
                                         <p><strong><?php _e('Invoicing address') ?></strong></p>
@@ -191,14 +191,14 @@
                     </div>
         
                     <!-- accordion -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingProducts">
-                            <h4 class="panel-title">
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingProducts">
+                            <h4 class="card-title">
                                 <?php _e('List of ordered services/products'); ?>
                             </h4>
                         </div>
                         <div id="collapseProducts" class="panel-collapse collapse in" role="tabpanel">
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <table class="table table-striped table-bordered table-sm">
                                     <tr>
                                         <th><?php _e('Product'); ?></th>
@@ -280,14 +280,14 @@
                     </div>
         
                     <!-- accordion -->
-                    <div class="panel panel-success">
-                        <div class="panel-heading" role="tab" id="headingInvoice">
-                            <h4 class="panel-title">
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingInvoice">
+                            <h4 class="card-title">
                                 <?php _e('This order invoices list'); ?>
                             </h4>
                         </div>
                         <div id="collapseInvoice" class="panel-collapse collapse in" role="tabpanel">
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <?php if (!empty($order['invoices'])) { ?>
                                     <?php foreach ($order['invoices'] as $invoice) { ?>
                                         <table class="table table-striped table-bordered table-sm">
@@ -368,14 +368,14 @@
         
                     <!-- accordion -->
                     <?php if (!empty($order['user_note']) || !empty($order['admin_note'])) { ?>
-                    <div class="panel panel-info">
-                        <div class="panel-heading" role="tab" id="headingNote">
-                            <h4 class="panel-title">
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingNote">
+                            <h4 class="card-title">
                                 <?php _e('Note'); ?>
                             </h4>
                         </div>
                         <div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <?php if (!empty($order['user_note'])) { ?>
                                     <div class="clearfix">
                                         <h4><?php _e('User note'); ?></h4>

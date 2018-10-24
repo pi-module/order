@@ -311,9 +311,9 @@ $this->footScript()->appendScript($script);
         
         <div class="col-md-4">
             <div class="cart-product">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><?php _e('Your order'); ?></h3>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"><?php _e('Your order'); ?></h3>
                     </div>
                     <div class="clearfix">
                         <table class="cart-product-list">
@@ -429,7 +429,7 @@ $this->footScript()->appendScript($script);
                                 </tr>
                             <?php } ?>
                             <?php if ($cart['type_payment'] != 'installment') { ?>
-                                <tr class="panel-footer footer">
+                                <tr class="card-footer footer">
                                     <td>
                                         <strong>
                                             <?php _e('Final Price incl. VAT'); ?>
