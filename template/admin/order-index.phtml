@@ -123,7 +123,7 @@ $this->backbone();
                                 <?php if ($order['type_commodity'] == 'product') { ?>
                                     <span id="update-delivery-<?php echo $this->escape($order['id']); ?>" class="update-delivery btn btn-sm <?php echo $this->escape($order['deliveryClass']); ?>"><?php echo $this->escape($order['deliveryTitle']); ?></span>
                                 <?php } else { ?>
-                                    <span class="badge badge-default"><?php _e('Its service'); ?></span>
+                                    <span class="badge badge-secondary"><?php _e('Its service'); ?></span>
                                 <?php } ?>
                             </li>
                             <li class="list-inline-item col-xs-1 text-center">
