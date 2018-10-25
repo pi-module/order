@@ -31,9 +31,9 @@
                                 <?php _e('Main information of order'); ?>
                             </h4>
                         </div>
-                        <div id="collapseInformation" class="panel-collapse collapse in" role="tabpanel">
+                        <div id="collapseInformation" class="collapse show" role="tabpanel">
                             <div class="card-body">
-                                <div class="clearfix">
+                                <div class="clearfix row">
                                     <div class="col-md-4">
                                         <p><strong><?php _e('Invoicing address') ?></strong></p>
                                         <hr/>
@@ -197,7 +197,7 @@
                                 <?php _e('List of ordered services/products'); ?>
                             </h4>
                         </div>
-                        <div id="collapseProducts" class="panel-collapse collapse in" role="tabpanel">
+                        <div id="collapseProducts" class="collapse show" role="tabpanel">
                             <div class="card-body">
                                 <table class="table table-striped table-bordered table-sm">
                                     <tr>
@@ -286,7 +286,7 @@
                                 <?php _e('This order invoices list'); ?>
                             </h4>
                         </div>
-                        <div id="collapseInvoice" class="panel-collapse collapse in" role="tabpanel">
+                        <div id="collapseInvoice" class="collapse show" role="tabpanel">
                             <div class="card-body">
                                 <?php if (!empty($order['invoices'])) { ?>
                                     <?php foreach ($order['invoices'] as $invoice) { ?>
