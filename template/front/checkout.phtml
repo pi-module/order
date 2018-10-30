@@ -526,7 +526,7 @@ $this->footScript()->appendScript($script);
                 <?php _e('Please, wait ...') ?>
             </div>
             <div class="panel bottom">
-                <div class="col-md-offset-8 col-md-4">
+                <div class="offset-md-8 col-md-4">
                     <a class="btn btn-simple btn-sm col-md-12 invoicing hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
                     <a class="btn btn-simple btn-sm col-md-12 delivery hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'delivery')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
                 </div>
