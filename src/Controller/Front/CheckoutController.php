@@ -240,6 +240,11 @@ class CheckoutController extends IndexController
                 Pi::api('credit', 'order')->addHistory($cart['credit'], $order->id);
             }
 
+            /**
+             * Save order entity again for triggering observers
+             */
+            $order->save();
+
             // Send notification
             Pi::api('notification', 'order')->addOrder($order->toArray(), $addressInvoicing, $gatewayOptions['onemail']);
             
