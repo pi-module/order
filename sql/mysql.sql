@@ -14,20 +14,11 @@ CREATE TABLE `{order}` (
   `admin_note`      TEXT,
   # Needed times
   `time_create`     INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
-  `time_order `     INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
+  `time_order`     INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   `time_delivery`   INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   # Needed status
   `status_order`    TINYINT(1) UNSIGNED                                  NOT NULL DEFAULT '0',
   `status_delivery` TINYINT(1) UNSIGNED                                  NOT NULL DEFAULT '0',
-  # Needed prices
-  `product_price`   DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
-  `discount_price`  DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
-  `shipping_price`  DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
-  `packing_price`   DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
-  `setup_price`     DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
-  `vat_price`       DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
-  `total_price`     DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
-  `paid_price`      DECIMAL(16, 2)                                       NOT NULL DEFAULT '0.00',
   # Checkout
   `packing`         TINYINT(1) UNSIGNED                                  NOT NULL DEFAULT '0',
   # promotion as gift
@@ -72,7 +63,7 @@ CREATE TABLE `{invoice}` (
   `status`         TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
   `time_create`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `time_cancel`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `time_invoice `  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `time_invoice`  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `back_url`       VARCHAR(255)        NOT NULL DEFAULT '',
   `create_by`        ENUM ('ADMIN', 'USER') NOT NULL DEFAULT 'USER',
   PRIMARY KEY (`id`),
@@ -191,7 +182,7 @@ CREATE TABLE `{location_delivery}` (
 CREATE TABLE `{log}` (
   `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
   `uid`         INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `order`    	INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `order`    	  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `gateway`     VARCHAR(64)         NOT NULL DEFAULT '',
   `time_create` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `amount`      DOUBLE(16, 2)       NOT NULL DEFAULT '0.00',
@@ -245,6 +236,7 @@ CREATE TABLE `{promocode}` (
   `time_start`      INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   `time_end`        INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   `module`          VARCHAR(255) NOT NULL,
+  `showcode` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -297,7 +289,7 @@ CREATE TABLE `{invoice_installment}` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `order` int(10) UNSIGNED NOT NULL,
   `count`  smallint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `gateway`         VARCHAR(64)                                          NOT NULL DEFAULT '',
+  `gateway`         VARCHAR(64)                                          NOT NULL DEFAULT 'offline',
   `status_payment`  TINYINT(1) UNSIGNED                                  NOT NULL DEFAULT '0',
   `time_payment`    INT(10) UNSIGNED                                     NOT NULL DEFAULT '0',
   `time_duedate`   INT(10) UNSIGNED    					 NOT NULL DEFAULT '0',
