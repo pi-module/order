@@ -66,6 +66,7 @@ CREATE TABLE `{invoice}` (
   `time_invoice`  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `back_url`       VARCHAR(255)        NOT NULL DEFAULT '',
   `create_by`        ENUM ('ADMIN', 'USER') NOT NULL DEFAULT 'USER',
+  `extra`         TEXT,
   PRIMARY KEY (`id`),
   UNIQUE KEY `random_id` (`random_id`),
   KEY `order` (`order`),
