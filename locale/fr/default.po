@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2018-12-20 13:27+0100\n"
+"POT-Creation-Date: 2019-01-01 13:06+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -171,8 +171,12 @@ msgstr "Produit retourné"
 
 #: src/Api/Notification.php:235
 #, php-format
-msgid "Your order by %s ID %s on %s website"
-msgstr "Votre commande %s N° %s sur le site %s"
+msgid ""
+"The status of the order ID %s you placed on %s website changed to the value "
+"%s"
+msgstr ""
+"Le statut de la commande N°%s que vous avez effectuée sur le site %s vient "
+"d'évoluer pour passer à la valeur %s"
 
 #: src/Api/Notification.php:243
 #, php-format
@@ -2810,6 +2814,11 @@ msgstr "En votre aimable règlement à réception de facture"
 #: template/front/print.phtml:245
 msgid "Paid invoice"
 msgstr "Facture réglée"
+
+#~ msgid "Your order by %s ID %s on %s website"
+#~ msgstr ""
+#~ "Le statut de la commande N°%s que vous avez effectuée sur le site %s "
+#~ "vient d'évoluer pour passer à la valeur %s "
 
 #~ msgid "Billed"
 #~ msgstr "Facturé"
