@@ -256,11 +256,15 @@ class Notification extends AbstractApi
         )));
 
         // Set mail information
+        $config = Pi::service('registry')->config->read($this->getModule());
+
         $information = array(
             'first_name' => $address['first_name'],
             'last_name' => $address['last_name'],
             'order_link' => $link,
             'text' => $text,
+            'sellerinfo' => $config['order_sellerinfo']
+
         );
 
         // Send mail to user
