@@ -232,10 +232,10 @@ class Notification extends AbstractApi
 
         // Set mail text
         $text = sprintf(
-            __('Your order by %s ID %s on %s website'),
+            __('The status of the order ID %s you placed on %s website changed to the value %s'),
             $order['code'],
-            $status,
-            $sitename
+            $sitename,
+            $status
         );
 
         // Set sms content
