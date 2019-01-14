@@ -632,12 +632,7 @@ class OrderController extends ActionController
                     }
                 }
                 
-                // Check time create
-                if (isset($values['time_create']) && !empty($values['time_create'])) {
-                    $values['time_create'] = strtotime($values['time_create']);
-                } else {
-                    $values['time_create'] = time();
-                }
+                $values['time_create'] = time();
                 $values['time_order'] = strtotime($values['time_order']);
 
                 

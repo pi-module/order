@@ -76,7 +76,7 @@ $this->backbone();
                     data-listUser="<?php echo $this->escape($order['url_list_user']); ?>"
                 >
                     <td class="text-center small"><?php echo $this->escape($order['code']); ?></td>
-                    <td class="text-center small"><?php echo _date($order['time_create']) . '<br>' . date('H:m', $order['time_create']); ?></td>
+                    <td class="text-center small"><?php echo _date($order['time_create']) . '<br>' . date('H:i', $order['time_create']); ?></td>
                     <td class="text-center small"><?php echo $this->escape($order['total_price_view']); ?></td>
                     <td class="text-center small">
                         <ul class="list-inline">
