@@ -389,7 +389,7 @@ class OrderController extends ActionController
         }
         // Set view
         $this->view()->setTemplate('system:component/form-popup');
-        $this->view()->assign('title', __('Update payment'));
+        $this->view()->assign('title', __('Update invoice'));
         $this->view()->assign('form', $form);
     }
 
