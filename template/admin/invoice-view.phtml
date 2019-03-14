@@ -1,6 +1,6 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="clearfix">
-    <h3><?php echo sprintf(__('Invoice %s'), $this->escape($invoice['code'])); ?></h3>
+    <h3><?php echo sprintf($invoice['type'] == 'CREDIT' ? __('Credit Note %s') : __('Invoice %s'), $this->escape($invoice['code'])); ?></h3>
 
     <div class="well">
         <div class="clearfix">

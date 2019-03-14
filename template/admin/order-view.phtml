@@ -470,13 +470,13 @@ $this->backbone();
                                 <?php foreach ($order['invoices'] as $invoice) { ?>
                                     <table class="table table-striped table-bordered table-sm">
                                         <tr>
-                                            <th class="col-md-1"><?php _e('Invoice ID'); ?></th>
+                                            <th class="col-md-2"><?php echo $invoice['type'] == 'CREDIT' ? __('Credit Note number') : __('Invoice ID'); ?></th>
                                             <th class="col-md-1"><?php _e('Status'); ?></th>
                                             <th class="col-md-1"><?php _e('Type'); ?></th>
                                             <th class="col-md-1"><?php _e('Type payment'); ?></th>
                                             <th class="col-md-2"><?php _e('Time Create'); ?></th>
-                                            <th class="col-md-2"><?php _e('Time invoice'); ?></th>
-                                            <th class="col-md-7 text-right"><?php _e('Action'); ?></th>
+                                            <th class="col-md-2"><?php echo $invoice['type'] == 'CREDIT' ? __('Credit Note time') : __('Time invoice'); ?></th>
+                                            <th class="col-md-6 text-right"><?php _e('Action'); ?></th>
                                         </tr>
                                         
                                     <?php
@@ -517,8 +517,8 @@ $this->backbone();
                                 <?php foreach ($invoice['installments'] as $installment) { ?>
                                     <table class="table table-striped table-installment table-bordered table-sm">
                                         <tr>
-                                            <th class="col-md-1 transparent"></th>
-                                            <th class="col-md-2"><?php _e('Installment'); ?></th>
+                                            <th class="col-md-2 transparent"></th>
+                                            <th class="col-md-1"><?php _e('Installment'); ?></th>
                                             <th class="col-md-1"><?php _e('Price'); ?></th>
                                             <th class="col-md-1"><?php _e('Credit price'); ?></th>
                                             <th class="col-md-1"><?php _e('Due date'); ?></th>

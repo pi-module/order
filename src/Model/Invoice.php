@@ -36,7 +36,8 @@ class Invoice extends Model
         'time_invoice',
         'back_url',
         'create_by',
-        'type'
+        'type',
+        'extra'
     );
     
     public static function getStatusList($status = 0) 
