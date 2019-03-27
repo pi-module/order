@@ -232,10 +232,10 @@ class Notification extends AbstractApi
 
         // Set mail text
         $text = sprintf(
-            __('Your order by %s ID %s on %s website'),
+            __('The status of the order ID %s you placed on %s website changed to the value %s'),
             $order['code'],
-            $status,
-            $sitename
+            $sitename,
+            $status
         );
 
         // Set sms content
@@ -256,11 +256,15 @@ class Notification extends AbstractApi
         )));
 
         // Set mail information
+        $config = Pi::service('registry')->config->read($this->getModule());
+
         $information = array(
             'first_name' => $address['first_name'],
             'last_name' => $address['last_name'],
             'order_link' => $link,
             'text' => $text,
+            'sellerinfo' => $config['order_sellerinfo']
+
         );
 
         // Send mail to user

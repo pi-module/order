@@ -1260,6 +1260,21 @@ EOD;
             }
             
         }
+
+        if (version_compare($moduleVersion, '2.2.4', '<')) {
+
+            $sql = sprintf("ALTER TABLE %s ADD `extra` TEXT", $invoiceTable);
+            try {
+                $invoiceAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query for order failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
         return true;
     }
 }

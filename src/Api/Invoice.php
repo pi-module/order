@@ -426,7 +426,7 @@ class Invoice extends AbstractApi
         $order['total_setup_price_view'] = Pi::api('api', 'order')->viewPrice($order['total_setup_price']);
         $order['total_vat_price_view'] = Pi::api('api', 'order')->viewPrice($order['total_vat_price']);
         $order['total_unconsommed_price_view'] = Pi::api('api', 'order')->viewPrice($order['total_unconsommed_price']);
-        $order['total_price_view'] = Pi::api('api', 'order')->viewPrice($order['total_product_price'] + $order['total_shipping_price'] + $order['total_packing_price'] + $order['total_setup_price'] + $order['total_vat_price'] - $order['total_discount_price'] - $order['total_unconsommed_price']); 
+        $order['total_price_view'] = Pi::api('api', 'order')->viewPrice($order['total_product_price'] + $order['total_shipping_price'] + $order['total_packing_price'] + $order['total_setup_price'] + $order['total_vat_price'] - $order['total_discount_price'] - $order['total_unconsommed_price']);
 
         // set Products
         $order['invoice'] = $invoice;
@@ -468,7 +468,7 @@ class Invoice extends AbstractApi
         $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
         $template = 'order:front/print';
         $data = array('order' => $order, 'address' => $address, 'config' => $config);
-        
+
         $name = sprintf("%s-%s.pdf", $config['order_filename_prefix'], $invoice['code']);
         Pi::service('html2pdf')->pdf($template, $data, $name);
     }
@@ -483,6 +483,7 @@ class Invoice extends AbstractApi
         $row->order = $invoice['order'];
         $row->create_by = 'ADMIN';
         $row->type = 'CREDIT';
+        $row->extra = json_encode(array('initial_invoice' => $invoice['code']));
         $row->save(); 
         
         $products = Pi::api('order', 'order')->listProduct($invoice['order']);
@@ -491,30 +492,33 @@ class Invoice extends AbstractApi
             if ($product['module'] == 'order' && $product['product_type'] == 'credit') {
                 continue;
             }
-        
+
+            $detail = Pi::model('detail', 'order')->createRow();
+            $detail->order = $invoice['order'];
+            $detail->module = 'order';
+            $detail->product = 0;
+            $detail->product_type = 'credit';
+            $detail->product_price = $product['product_price'];
+            $detail->vat_price = $product['vat_price'];
+            $detail->setup_price = $product['setup_price'];
+            $detail->packing_price = $product['packing_price'];
+            $detail->shipping_price = $product['shipping_price'];
+            $detail->discount_price = $product['discount_price'];
+            $detail->time_start = $product['time_start'];
+            $detail->time_end = $product['time_end'];
+
+            $detail->number = 1;
+            $detail->extra = json_encode(array('invoice' => $row->id));
+            $detail->save();
+
             $totalPrice += $product['product_price'] + $product['vat_price'] + $product['setup_price'] + $product['packing_price'] + $product['shipping_price'] - $product['discount_price'];
         }
-        
-        $detail = Pi::model('detail', 'order')->createRow();
-        $detail->order = $invoice['order'];
-        $detail->module = 'order';
-        $detail->product = 0;
-        $detail->product_type = 'credit';
-        $detail->discount_price = 0;
-        $detail->shipping_price = 0;
-        $detail->packing_price = 0;
-        $detail->setup_price = 0;
-        $detail->vat_price = 0;
-        $detail->product_price = -$totalPrice;
-        $detail->number = 1;
-        $detail->extra = json_encode(array('invoice' => $row->id));
-        $detail->save();
-        
+
         $installment = Pi::model('invoice_installment', 'order')->createRow();
         $installment->count = 1;
         $installment->gateway = 'manual';
         $installment->status_payment = \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID;
-        $installment->due_price = -$totalPrice;
+        $installment->due_price = $totalPrice;
         $installment->invoice = $row->id;
         $installment->time_duedate = time();
         $installment->save();

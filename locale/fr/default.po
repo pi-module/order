@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2018-09-25 18:04+0200\n"
+"POT-Creation-Date: 2019-01-01 13:06+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ../..\n"
@@ -171,8 +171,12 @@ msgstr "Produit retourné"
 
 #: src/Api/Notification.php:235
 #, php-format
-msgid "Your order by %s ID %s on %s website"
-msgstr "Votre commande %s N° %s sur le site %s"
+msgid ""
+"The status of the order ID %s you placed on %s website changed to the value "
+"%s"
+msgstr ""
+"Le statut de la commande N°%s que vous avez effectuée sur le site %s vient "
+"d'évoluer pour passer à la valeur %s"
 
 #: src/Api/Notification.php:243
 #, php-format
@@ -224,7 +228,7 @@ msgstr "Non livré"
 
 #: src/Api/Order.php:293 src/Form/OrderSettingForm.php:119
 #: template/admin/order-view.phtml:338 template/front/detail.phtml:204
-#: template/front/invoice.phtml:144 template/front/print.phtml:172
+#: template/front/invoice.phtml:144 template/front/print.phtml:173
 msgid "Product"
 msgstr "Produit"
 
@@ -412,47 +416,47 @@ msgstr "Un nouveau produit/service a été ajouté à votre commande"
 msgid "Product deleted"
 msgstr "Produit supprimé"
 
-#: src/Controller/Front/CheckoutController.php:314
-#: src/Controller/Front/CheckoutController.php:341
-#: src/Controller/Front/CheckoutController.php:665
+#: src/Controller/Front/CheckoutController.php:319
+#: src/Controller/Front/CheckoutController.php:346
+#: src/Controller/Front/CheckoutController.php:670
 msgid "Your cart is empty."
 msgstr "Votre caddy est vide."
 
-#: src/Controller/Front/CheckoutController.php:320
-#: src/Controller/Front/CheckoutController.php:670
+#: src/Controller/Front/CheckoutController.php:325
+#: src/Controller/Front/CheckoutController.php:675
 msgid "So sorry, At this moment order is inactive"
 msgstr "Désolé. Les commandes ne sont actuellement pas ouvertes."
 
-#: src/Controller/Front/CheckoutController.php:454
+#: src/Controller/Front/CheckoutController.php:459
 msgid "User information was not completed and user account was not saved."
 msgstr ""
 "Les informations utilisateurs n'ont pas été toutes fournies, le compte n'a "
 "pas été enregistré."
 
-#: src/Controller/Front/CheckoutController.php:477
+#: src/Controller/Front/CheckoutController.php:482
 msgid "User account was not saved."
 msgstr "Le compte utilisateur n'a pas été sauvegardé."
 
-#: src/Controller/Front/CheckoutController.php:622
+#: src/Controller/Front/CheckoutController.php:627
 msgid "Address saved successfully."
 msgstr "L'adresse a été sauvegardée."
 
-#: src/Controller/Front/CheckoutController.php:681
+#: src/Controller/Front/CheckoutController.php:686
 msgid ""
 "Your installment plan save, please complete your information and payment."
 msgstr ""
 "Votre échéancier de paiements fractionnés a été sauvegardé, merci de "
 "compléter vos informations de facturation et de paiement."
 
-#: src/Controller/Front/CheckoutController.php:912
+#: src/Controller/Front/CheckoutController.php:917
 msgid "This code has expired."
 msgstr "Ce code a expiré."
 
-#: src/Controller/Front/CheckoutController.php:919
+#: src/Controller/Front/CheckoutController.php:924
 msgid "This code cannot be applied on this product."
 msgstr "Ce code ne peut être appliqué sur ce produit"
 
-#: src/Controller/Front/CheckoutController.php:936
+#: src/Controller/Front/CheckoutController.php:941
 msgid ""
 "You are trying to use a promo code on a product that already has a discount. "
 "We have automatically applied the most advantageous discount for you (it is "
@@ -462,11 +466,11 @@ msgstr ""
 "d'une remise. Nous avons automatiquement appliqué la remise la plus "
 "avantageuse pour vous (il n'est pas possible de cumuler les remises)."
 
-#: src/Controller/Front/CheckoutController.php:952
+#: src/Controller/Front/CheckoutController.php:957
 msgid "Promo code accepted"
 msgstr "Le code avantage est valide"
 
-#: src/Controller/Front/CheckoutController.php:960
+#: src/Controller/Front/CheckoutController.php:965
 msgid "This code doesn't exist"
 msgstr "Ce code n'existe pas"
 
@@ -479,7 +483,7 @@ msgid "Order has payment. You cannont cancel it"
 msgstr "La commande est associée à un paiement. Vous ne pouvez pas l'annuler."
 
 #: src/Controller/Front/IndexController.php:140
-#: src/Controller/Front/PaymentController.php:471
+#: src/Controller/Front/PaymentController.php:472
 msgid "Order canceled"
 msgstr "Commande annulée"
 
@@ -508,8 +512,8 @@ msgstr "Utiliser le crédit en compte pour payer la commande %s"
 #: src/Controller/Front/PaymentController.php:134
 #: src/Controller/Front/PaymentController.php:149
 #: src/Controller/Front/PaymentController.php:187
-#: src/Controller/Front/PaymentController.php:290
-#: src/Controller/Front/PaymentController.php:568
+#: src/Controller/Front/PaymentController.php:291
+#: src/Controller/Front/PaymentController.php:569
 msgid "Your payment were successfully. Back to module"
 msgstr "Votre paiement a été un succès. Retour au module."
 
@@ -523,33 +527,33 @@ msgstr "Impossible de récupérer l'information"
 msgid "Error to get %s."
 msgstr "Impossible d'obtenir %s."
 
-#: src/Controller/Front/PaymentController.php:259
+#: src/Controller/Front/PaymentController.php:260
 msgid "Your running pay processing not set"
 msgstr "Votre process de paimeent n'est pas défini"
 
-#: src/Controller/Front/PaymentController.php:264
+#: src/Controller/Front/PaymentController.php:265
 msgid "Your IP address changed and processing not valid"
 msgstr "Votre adresse IP a a changé : le process de paiement n'est pas valide"
 
-#: src/Controller/Front/PaymentController.php:307
+#: src/Controller/Front/PaymentController.php:308
 msgid "Your payment wont successfully."
 msgstr "Votre paiement a échoué."
 
-#: src/Controller/Front/PaymentController.php:313
+#: src/Controller/Front/PaymentController.php:314
 msgid "Did not set any request"
 msgstr "Aucune demande effectuée."
 
-#: src/Controller/Front/PaymentController.php:496
+#: src/Controller/Front/PaymentController.php:497
 #: src/Gateway/Dargahpardakht/Gateway.php:173
 #: src/Gateway/Mellat/Gateway.php:160 src/Gateway/Zarinpal/Gateway.php:134
 msgid "Your payment were successfully."
 msgstr "Votre paiement a réussi."
 
-#: src/Controller/Front/PaymentController.php:529
+#: src/Controller/Front/PaymentController.php:530
 msgid "Payment canceled"
 msgstr "Paiement annulé"
 
-#: src/Controller/Front/PaymentController.php:555
+#: src/Controller/Front/PaymentController.php:556
 msgid "Test mode not active."
 msgstr "Mode Test non actif."
 
@@ -776,7 +780,7 @@ msgid "Pending review"
 msgstr "En attente de revision"
 
 #: src/Form/DeliveryForm.php:65 src/Form/LocationForm.php:76
-#: src/Model/Invoice.php:45 src/Model/Order.php:64
+#: src/Model/Invoice.php:46 src/Model/Order.php:64
 #: template/admin/invoice-view.phtml:122
 msgid "Draft"
 msgstr "Brouillon"
@@ -802,7 +806,7 @@ msgstr "Soumettre"
 #: template/admin/invoice-view.phtml:179 template/admin/order-view.phtml:522
 #: template/block/detail.phtml:51 template/front/detail.phtml:208
 #: template/front/detail.phtml:331 template/front/invoice.phtml:146
-#: template/front/print.phtml:178
+#: template/front/print.phtml:179
 msgid "Price"
 msgstr "Prix"
 
@@ -914,7 +918,7 @@ msgstr "Adresses de facturation"
 
 #: src/Form/OrderForm.php:304 src/Form/OrderSimpleForm.php:59
 #: src/Form/OrderUpdateForm.php:495 template/admin/order-view.phtml:344
-#: template/front/detail.phtml:210 template/front/print.phtml:265
+#: template/front/detail.phtml:210 template/front/print.phtml:273
 msgid "Packing"
 msgstr "Emballage/Conditionnement"
 
@@ -986,13 +990,13 @@ msgid "Module item associated to the product"
 msgstr "Elément du module associé au produit"
 
 #: src/Form/OrderProductForm.php:88 template/admin/order-view.phtml:342
-#: template/front/checkout.phtml:363 template/front/print.phtml:200
+#: template/front/checkout.phtml:363 template/front/print.phtml:208
 msgid "Price ext VAT"
 msgstr "Prix HT"
 
 #: src/Form/OrderProductForm.php:99 src/Gateway/Paypal/Gateway.php:107
 #: template/admin/order-view.phtml:346 template/front/detail.phtml:212
-#: template/front/print.phtml:210
+#: template/front/print.phtml:218
 msgid "Discount"
 msgstr "Remise"
 
@@ -1516,7 +1520,7 @@ msgid "Bank Pasargad error %s"
 msgstr "Bank Pasargad error %s"
 
 #: src/Gateway/Paypal/Gateway.php:118 template/front/checkout.phtml:386
-#: template/front/print.phtml:220
+#: template/front/print.phtml:228
 msgid "Old package recovery"
 msgstr "Reprise ancien abonnement"
 
@@ -1612,12 +1616,12 @@ msgstr "La transaction a échoué. Statut: %s"
 msgid "Transaction canceled by user"
 msgstr "La transaction a été annulée par l'utilisateur"
 
-#: src/Model/Invoice.php:46 src/Model/Order.php:60 src/Model/Order.php:65
+#: src/Model/Invoice.php:47 src/Model/Order.php:60 src/Model/Order.php:65
 #: template/admin/invoice-view.phtml:120
 msgid "Validated"
 msgstr "Validé"
 
-#: src/Model/Invoice.php:47 src/Model/Order.php:66
+#: src/Model/Invoice.php:48 src/Model/Order.php:66
 msgid "Cancelled"
 msgstr "Annulé"
 
@@ -1935,7 +1939,7 @@ msgstr "Mettre à jour la facture %s"
 
 #: template/admin/invoice-edit.phtml:29 template/admin/invoice-view.phtml:134
 #: template/admin/order-view.phtml:478 template/front/detail.phtml:298
-#: template/front/print.phtml:130
+#: template/front/print.phtml:131
 msgid "Time invoice"
 msgstr "Date facture"
 
@@ -2331,29 +2335,29 @@ msgstr "Liste des produits ou services commandés"
 
 #: template/admin/order-view.phtml:341 template/front/detail.phtml:207
 #: template/front/installment.phtml:101 template/front/invoice.phtml:145
-#: template/front/print.phtml:175
+#: template/front/print.phtml:176
 msgid "Number"
 msgstr "Quantité"
 
 #: template/admin/order-view.phtml:343 template/front/detail.phtml:209
 #: template/front/invoice.phtml:147 template/front/invoice.phtml:193
-#: template/front/print.phtml:255
+#: template/front/print.phtml:263
 msgid "Shipping"
 msgstr "Transport"
 
 #: template/admin/order-view.phtml:345 template/front/detail.phtml:211
-#: template/front/print.phtml:275
+#: template/front/print.phtml:283
 msgid "Setup"
 msgstr "Coût installation"
 
 #: template/admin/order-view.phtml:347 template/front/detail.phtml:213
 #: template/front/invoice.phtml:148 template/front/invoice.phtml:197
-#: template/front/print.phtml:284
+#: template/front/print.phtml:292
 msgid "Vat"
 msgstr "TVA 20%"
 
 #: template/admin/order-view.phtml:348 template/front/invoice.phtml:201
-#: template/front/print.phtml:157 template/front/print.phtml:292
+#: template/front/print.phtml:158 template/front/print.phtml:300
 msgid "Total all taxes included"
 msgstr "Total TTC"
 
@@ -2731,7 +2735,7 @@ msgstr "Prix à régler"
 msgid "Total invoice price"
 msgstr "Prix total facture"
 
-#: template/front/invoice.phtml:189 template/front/print.phtml:246
+#: template/front/invoice.phtml:189 template/front/print.phtml:254
 msgid "Product price ex VAT"
 msgstr "Prix HT"
 
@@ -2779,34 +2783,48 @@ msgstr "Vous allez être redirigé dans quelques secondes à la page de Paiement
 msgid "To the attention of"
 msgstr "A l'attention de"
 
-#: template/front/print.phtml:122
+#: template/front/print.phtml:115
+msgid "Credit Note"
+msgstr "AVOIR"
+
+#: template/front/print.phtml:123
+msgid "Credit Note number"
+msgstr "N° Avoir"
+
+#: template/front/print.phtml:123
 msgid "Invoice number"
 msgstr "N° facture"
 
-#: template/front/print.phtml:139
+#: template/front/print.phtml:131
+msgid "Credit Note time"
+msgstr "Date Avoir"
+
+#: template/front/print.phtml:140
 msgid "Time due date"
 msgstr "Date échéance"
 
-#: template/front/print.phtml:148
+#: template/front/print.phtml:149
 msgid "Time payment"
 msgstr "Date de paiement"
 
-#: template/front/print.phtml:235
+#: template/front/print.phtml:243
 msgid "Payment due upon receipt"
 msgstr "En votre aimable règlement à réception de facture"
 
-#: template/front/print.phtml:237
+#: template/front/print.phtml:245
 msgid "Paid invoice"
 msgstr "Facture réglée"
+
+#~ msgid "Your order by %s ID %s on %s website"
+#~ msgstr ""
+#~ "Le statut de la commande N°%s que vous avez effectuée sur le site %s "
+#~ "vient d'évoluer pour passer à la valeur %s "
 
 #~ msgid "Billed"
 #~ msgstr "Facturé"
 
 #~ msgid "Non ordered"
 #~ msgstr "Non commandé"
-
-#~ msgid "Order number"
-#~ msgstr "N° Commande"
 
 #~ msgid "Unpaid invoice"
 #~ msgstr "Facture impayée"
