@@ -11,14 +11,14 @@
             <?php foreach ($list as $delivery) { ?>
                 <?php
                 if ($delivery['status'] == 1) {
-                    $labelIdClass = 'label-success';
+                    $badgeIdClass = 'badge-success';
                 } else {
-                    $labelIdClass = 'label-warning';
+                    $badgeIdClass = 'badge-warning';
                 }
                 ?>
                 <tr>
                     <td><span
-                            class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($delivery['id']); ?></span>
+                            class="badge <?php echo $badgeIdClass; ?>"><?php echo $this->escape($delivery['id']); ?></span>
                     </td>
                     <td><?php echo $this->escape($delivery['title']); ?></td>
                     <td>

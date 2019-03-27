@@ -75,17 +75,17 @@ $script = <<<'EOT'
             
             e.preventDefault();
             
-            $('#addressFromNew').addClass('hidden');
+            $('#addressFromNew').addClass('d-none');
             
             $('form#order [name=address_delivery_id]').val(%s);
             $('form#order [name=address_invoicing_id]').val(%s);
             $('form#order [name=submit_order_simple]').removeClass('disabled');
             $('form#order [name=submit_order_simple]').removeAttr('title');
             
-            $('.selected-address').addClass('hidden');
+            $('.selected-address').addClass('d-none');
             
-            $(e.target).addClass('hidden');
-            $(e.target).parent().parent().find('.selected-address').removeClass('hidden');
+            $(e.target).addClass('d-none');
+            $(e.target).parent().parent().find('.selected-address').removeClass('d-none');
         }
         
         
@@ -473,7 +473,7 @@ $this->footScript()->appendScript($script);
                             </div>
                         <?php } ?>
                         
-                        <div class="clearfix alert hidden" role="alert">
+                        <div class="clearfix alert d-none" role="alert">
                             <span></span>
                         </div>
                             
@@ -507,13 +507,15 @@ $this->footScript()->appendScript($script);
                 </button>
             </div>
             <div class="panel">
-                <div class="col-md-8">
-                    <h2 class="delivery hide"><?php _e('Delivery Address') ?></h2>
-                    <h2 class="invoicing hide"><?php _e('Invoicing Address') ?></h2>  
-                </div>
-                <div class="col-md-4">
-                    <a class="btn btn-simple btn-sm col-md-12 invoicing hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
-                    <a class="btn btn-simple btn-sm col-md-12 delivery hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'delivery')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
+                <div class="row">
+                    <div class="col-md-7">
+                        <h2 class="delivery hide"><?php _e('Delivery Address') ?></h2>
+                        <h2 class="invoicing hide"><?php _e('Invoicing Address') ?></h2>
+                    </div>
+                    <div class="col-md-5">
+                        <a class="btn btn-simple btn-sm col-md-12 invoicing hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
+                        <a class="btn btn-simple btn-sm col-md-12 delivery hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'delivery')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
+                    </div>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -521,7 +523,7 @@ $this->footScript()->appendScript($script);
                 <?php _e('Please, wait ...') ?>
             </div>
             <div class="panel bottom">
-                <div class="offset-md-8 col-md-4">
+                <div class="offset-md-7 col-md-5">
                     <a class="btn btn-simple btn-sm col-md-12 invoicing hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
                     <a class="btn btn-simple btn-sm col-md-12 delivery hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'delivery')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
                 </div>
@@ -530,9 +532,9 @@ $this->footScript()->appendScript($script);
         </div>
     </div>
 </div>
-          
-<div class="modal fade" id="addressModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+
+<div class="modal fade" id="addressModal" tabindex="-1" role="dialog" style="overflow-y: auto !important;">
+    <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">&nbsp;</h4>
@@ -550,10 +552,10 @@ $this->footScript()->appendScript($script);
 <script>
     var needReload = false;
     $( document ).ready(function() {
-        
+
         // Fix for bootstrap bug. When you open 2 modals (first open second), there no scrollbar
         $('body').on('hidden.bs.modal', function () {
-            if($('.modal.in').length > 0)
+            if($('.modal.show').length > 0)
             {
                 $('body').addClass('modal-open');
             } else {
@@ -598,7 +600,7 @@ $this->footScript()->appendScript($script);
               data: {code: code},
               success: function(data) {
                   $('#promoCheckout').parent().find('.alert')
-                  .removeClass('hidden')
+                  .removeClass('d-none')
                   .removeClass('alert-info')
                   .removeClass('alert-success')
                   .addClass('alert-' + data.msgPromoCode.type);

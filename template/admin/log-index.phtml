@@ -15,16 +15,16 @@
             <?php foreach ($list as $log) { ?>
                 <?php
                 if ($log['status'] == 1) {
-                    $labelIdClass = 'label-success';
+                    $badgeIdClass = 'badge-success';
                 } elseif ($log['status'] == 2) {
-                    $labelIdClass = 'label-warning';
+                    $badgeIdClass = 'badge-warning';
                 } elseif ($log['status'] == 0) {
-                    $labelIdClass = 'label-danger';
+                    $badgeIdClass = 'badge-danger';
                 }
                 ?>
                 <tr>
                     <td>
-                        <span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($log['id']); ?></span>
+                        <span class="badge <?php echo $badgeIdClass; ?>"><?php echo $this->escape($log['id']); ?></span>
                     </td>
                     <td>
                         <a target="_blank" href="<?php echo $this->escape($log['user_url']); ?>">

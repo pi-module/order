@@ -31,13 +31,13 @@
             </tr>
             <?php foreach ($list as $invoice) { ?>
                 <?php
-                    $labelIdClass = '';
+                    $badgeIdClass = '';
                     if ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) {
-                        $labelIdClass = 'label-success';
+                        $badgeIdClass = 'badge-success';
                     } elseif ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT) {
-                        $labelIdClass = 'label-warning';
+                        $badgeIdClass = 'badge-warning';
                     } elseif ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
-                        $labelIdClass = 'label-danger';
+                        $badgeIdClass = 'badge-danger';
                     }
                     $class = '';
                     if ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) {
@@ -51,7 +51,7 @@
                 
                 <tr class="<?php echo $class ?>">
                     <td><?php echo $this->escape($invoice['code']); ?></td>
-                    <td><span class="label <?php echo $labelIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']]; ?></span></td>
+                    <td><span class="badge <?php echo $badgeIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']]; ?></span></td>
                     <td><?php echo $this->escape($invoice['type']); ?></td>
                     <td><?php echo $this->escape($invoice['type_payment']); ?></td>
                     <td><?php echo $this->escape($invoice['time_create_view']); ?></td>

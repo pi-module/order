@@ -480,20 +480,20 @@ $this->backbone();
                                         </tr>
                                         
                                     <?php
-                                    $labelIdClass = '';
+                                    $badgeIdClass = '';
                                     if ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) {
-                                        $labelIdClass = 'label-success';
+                                        $badgeIdClass = 'badge-success';
                                     } elseif ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT) {
-                                        $labelIdClass = 'label-warning';
+                                        $badgeIdClass = 'badge-warning';
                                     } elseif ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
-                                        $labelIdClass = 'label-danger';
+                                        $badgeIdClass = 'badge-danger';
                                     }
                                     ?>
                                     
                                     
                                     <tr>
                                         <td><?php echo $this->escape($invoice['code']); ?></td>
-                                        <td><span id="update-invoice-<?php echo $invoice['id'] ?>" data-invoice="<?php echo $invoice['id'] ?>" class="label <?php echo $invoice['type'] != 'CREDIT' && $invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED ? 'update-invoice btn' : '' ?>  <?php echo $labelIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']]; ?></span></td>
+                                        <td><span id="update-invoice-<?php echo $invoice['id'] ?>" data-invoice="<?php echo $invoice['id'] ?>" class="badge <?php echo $invoice['type'] != 'CREDIT' && $invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED ? 'update-invoice btn' : '' ?>  <?php echo $badgeIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']]; ?></span></td>
                                         <td><?php echo $this->escape($invoice['type']); ?></td>
                                         <td><?php echo $this->escape($invoice['type_payment']); ?></td>
                                         <td><?php echo $this->escape($invoice['time_create_view']) . ' ' . date('H:i', $invoice['time_create']); ?></td>
@@ -530,9 +530,9 @@ $this->backbone();
                                         <?php
                                         $rowClass = '';
                                         if ($installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
-                                            $labelIdClass = 'label-warning';
+                                            $badgeIdClass = 'badge-warning';
                                         } elseif ($installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
-                                            $labelIdClass = 'label-success';                                        
+                                            $badgeIdClass = 'badge-success';
                                         } 
                                         ?>
                                         <tr>
@@ -543,7 +543,7 @@ $this->backbone();
                                             <td><?php echo $this->escape($installment['time_duedate_view']); ?></td>
                                             <td><?php echo $this->escape($installment['time_payment_view']); ?></td>
                                             <td><?php echo isset($gateways[$installment['gateway']]) ? $gateways[$installment['gateway']] : ''; ?></td >
-                                            <td><span class="label <?php echo $labelIdClass; ?>"><?php echo $installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID ? __('Paid') : __('Unpaid') ?></span></td>
+                                            <td><span class="badge <?php echo $badgeIdClass; ?>"><?php echo $installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID ? __('Paid') : __('Unpaid') ?></span></td>
                                             <td class="text-right">
                                                 <?php 
                                                 $type = '';

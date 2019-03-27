@@ -187,9 +187,9 @@
                     <?php
                     $rowClass = '';
                     if ($installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
-                        $labelIdClass = 'label-warning';
+                        $badgeIdClass = 'badge-warning';
                     } elseif ($installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
-                        $labelIdClass = 'label-success';                                        
+                        $badgeIdClass = 'badge-success';
                     } 
                     ?>
                     <tr>
@@ -199,7 +199,7 @@
                         <td><?php echo $this->escape($installment['time_duedate_view']); ?></td>
                         <td><?php echo $this->escape($installment['time_payment_view']); ?></td>
                         <td><?php echo isset($gateways[$installment['gateway']]) ? $gateways[$installment['gateway']] : ''; ?></td >
-                        <td><span class="label <?php echo $labelIdClass; ?>"><?php echo $installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID ? __('Paid') : __('Unpaid') ?></span></td>
+                        <td><span class="badge <?php echo $badgeIdClass; ?>"><?php echo $installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID ? __('Paid') : __('Unpaid') ?></span></td>
                         <td class="text-right">
                             <?php 
                             $type = '';
