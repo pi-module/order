@@ -2,8 +2,8 @@
 <div class="clearfix">
     <h3><?php echo sprintf($invoice['type'] == 'CREDIT' ? __('Credit Note %s') : __('Invoice %s'), $this->escape($invoice['code'])); ?></h3>
 
-    <div class="well">
-        <div class="clearfix">
+    <div class="card">
+        <div class="card-header clearfix row">
             <div class="col-md-4">
                 <p><strong><?php _e('Invoicing address') ?></strong></p>
                 <hr/>
@@ -167,7 +167,7 @@
         </div>
         
     </div>
-     <div class="clearfix">
+     <div class="clearfix mt-3">
         <h3><?php _e('Installments'); ?></h3>
         <?php if (count($invoice['installments']) == 0) { ?>
             <?php _e('You did not validate your invoice yet, installment are not generated !') ?>
@@ -175,14 +175,14 @@
             <?php foreach ($invoice['installments'] as $installment) { ?>
                 <table class="table table-striped table-bordered table-sm">
                     <tr>
-                        <th class="col-md-2"><?php _e('Installment'); ?></th>
-                        <th class="col-md-1"><?php _e('Price'); ?></th>
-                        <th class="col-md-1"><?php _e('Credit price'); ?></th>
-                        <th class="col-md-2"><?php _e('Due date'); ?></th>
-                        <th class="col-md-2"><?php _e('Time pay'); ?></th>
-                        <th class="col-md-2"><?php _e('Gateway'); ?></th>
-                        <th class="col-md-1"><?php _e('Status'); ?></th>
-                        <th class="col-md-1 text-right"><?php _e('Action'); ?></th>
+                        <th class="table-col-md-2"><?php _e('Installment'); ?></th>
+                        <th class="table-col-md-1"><?php _e('Price'); ?></th>
+                        <th class="table-col-md-1"><?php _e('Credit price'); ?></th>
+                        <th class="table-col-md-2"><?php _e('Due date'); ?></th>
+                        <th class="table-col-md-2"><?php _e('Time pay'); ?></th>
+                        <th class="table-col-md-2"><?php _e('Gateway'); ?></th>
+                        <th class="table-col-md-1"><?php _e('Status'); ?></th>
+                        <th class="table-col-md-1 text-right"><?php _e('Action'); ?></th>
                     </tr>
                     <?php
                     $rowClass = '';
@@ -221,32 +221,38 @@
     <?php if (!empty($invoice['log'])) { ?>
         <div class="clearfix">
             <h3><?php _e('Logs'); ?></h3>
-            <?php foreach ($invoice['log'] as $log) { ?>
-                <div class="well">
-                    <p><strong><?php _e('Id'); ?></strong> : <?php echo $this->escape($log['id']); ?></p>
 
-                    <p><strong><?php _e('Invoice'); ?></strong> : <?php echo $this->escape($log['invoice']); ?></p>
+                    <?php foreach ($invoice['log'] as $log) { ?>
+            <div class="card">
+                <div class="card-header clearfix row">
+                        <div class="well">
+                            <p><strong><?php _e('Id'); ?></strong> : <?php echo $this->escape($log['id']); ?></p>
 
-                    <p><strong><?php _e('Gateway'); ?></strong> : <?php echo $this->escape($log['gateway']); ?></p>
+                            <p><strong><?php _e('Invoice'); ?></strong> : <?php echo $this->escape($log['invoice']); ?></p>
 
-                    <p><strong><?php _e('Create'); ?></strong> : <?php echo $this->escape($log['time_create_view']); ?>
-                    </p>
+                            <p><strong><?php _e('Gateway'); ?></strong> : <?php echo $this->escape($log['gateway']); ?></p>
 
-                    <p><strong><?php _e('User'); ?></strong> : <?php echo $this->escape($log['uid']); ?></p>
+                            <p><strong><?php _e('Create'); ?></strong> : <?php echo $this->escape($log['time_create_view']); ?>
+                            </p>
 
-                    <p><strong><?php _e('Amount'); ?></strong> : <?php echo $this->escape($log['amount_view']); ?></p>
+                            <p><strong><?php _e('User'); ?></strong> : <?php echo $this->escape($log['uid']); ?></p>
 
-                    <p><strong><?php _e('Authority'); ?></strong> : <?php echo $this->escape($log['authority']); ?></p>
+                            <p><strong><?php _e('Amount'); ?></strong> : <?php echo $this->escape($log['amount_view']); ?></p>
 
-                    <p><strong><?php _e('Status'); ?></strong> : <?php echo $this->escape($log['status']); ?></p>
+                            <p><strong><?php _e('Authority'); ?></strong> : <?php echo $this->escape($log['authority']); ?></p>
 
-                    <p><strong><?php _e('Ip'); ?></strong> : <?php echo $this->escape($log['ip']); ?></p>
+                            <p><strong><?php _e('Status'); ?></strong> : <?php echo $this->escape($log['status']); ?></p>
 
-                    <p><strong><?php _e('Message'); ?></strong> : <?php echo $this->escape($log['message']); ?></p>
-                    <pre><?php print_r($log['value']); ?></pre>
+                            <p><strong><?php _e('Ip'); ?></strong> : <?php echo $this->escape($log['ip']); ?></p>
+
+                            <p><strong><?php _e('Message'); ?></strong> : <?php echo $this->escape($log['message']); ?></p>
+                            <pre><code><?php print_r($log['value']); ?></code></pre>
+                        </div>
                 </div>
-                <hr/>
-            <?php } ?>
+            </div>
+                        <hr/>
+                    <?php } ?>
+
         </div>
     <?php } ?>
 </div>
