@@ -77,7 +77,11 @@ class PromocodeForm extends BaseForm
               
             ),
             'attributes' => array(
+                'class' => 'datetimepicker-input',
                 'required' => true,
+                'id' => 'datetimepicker_start',
+                'data-toggle'=>"datetimepicker",
+                'data-target'=>"#datetimepicker_start"
             )
         ));
         
@@ -96,7 +100,11 @@ class PromocodeForm extends BaseForm
               
             ),
             'attributes' => array(
+                'class' => 'datetimepicker-input',
                 'required' => true,
+                'id' => 'datetimepicker_end',
+                'data-toggle'=>"datetimepicker",
+                'data-target'=>"#datetimepicker_end"
             )
         ));
         

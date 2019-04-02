@@ -1,6 +1,6 @@
 <?php 
 $this->css(array(
-    $this->assetModule('css/bootstrap-datetimepicker.min.css'),
+    $this->assetModule('css/tempusdominus-bootstrap-4.min.css'),
     $this->assetModule('css/admin.css'), 
     $this->assetModule('script/system-ui.css', 'system'),
 ));
@@ -13,7 +13,9 @@ $this->jQuery(array(
 $this->js(array(
         $this->assetModule('js/moment.js'),
         $this->assetModule('js/bootstrap-datetimepicker.min.js'),
-        $this->assetModule('script/system-msg.js', 'system')
+        $this->assetModule('script/system-msg.js', 'system'),
+        $this->assetModule('js/tempusdominus-bootstrap-4.min.js')
+
     )
 );
 $this->Backbone();
@@ -30,27 +32,40 @@ $this->Backbone();
 $(
     function() 
     {
+        $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
+            icons: {
+                time: 'far fa-clock',
+                date: 'far fa-calendar',
+                up: 'fas fa-angle-up',
+                down: 'fas fa-angle-down',
+                previous: 'fas fa-angle-left',
+                next: 'fas fa-angle-right',
+                today: 'far fa-calendar-check-o',
+                clear: 'far fa-trash',
+                close: 'far fa-times'
+            }
+        });
         var datetime_start = $('input[name=time_start]').val();
-        var dp = $('input[name=datetimepicker_start]').datetimepicker(
+        $('input[name=datetimepicker_start]').datetimepicker(
             {
                 defaultDate : datetime_start == 0 ? false : moment(new Date(1000 * datetime_start)), 
                 locale: 'fr',
             }
         );
-         
-        dp.on('dp.change', function() {
+
+        $('input[name=datetimepicker_start]').on('change.datetimepicker', function() {
             $('input[name=time_start]').val($('input[name=datetimepicker_start]').datetimepicker('date').unix());
         });
         
         var datetime_end = $('input[name=time_end]').val();
-        var dp = $('input[name=datetimepicker_end]').datetimepicker(
+        $('input[name=datetimepicker_end]').datetimepicker(
             {
                 defaultDate : datetime_end == 0 ? false : moment(new Date(1000 * datetime_end)), 
                 locale: 'fr',
             }
         );
-         
-        dp.on('dp.change', function() {
+
+        $('input[name=datetimepicker_end]').on('change.datetimepicker', function() {
             $('input[name=time_end]').val($('input[name=datetimepicker_end]').datetimepicker('date').unix());
         });
         
