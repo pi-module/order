@@ -94,11 +94,11 @@ class Gateway extends AbstractGateway
         $tax = 0;
         for ($i = 1; $i < $this->gatewayPayInformation['nb_product']; ++$i) {
             $item = array();
-            $item["name"] = $this->gatewayPayInformation['item_name_' . $i];
+            $item["name"] = addcslashes($this->gatewayPayInformation['item_name_' . $i], '"');
             $item["price"] = $this->gatewayPayInformation['amount_' . $i];
             $item["currency"] = $this->gatewayPayInformation['currency_code'];
             $item["quantity"] = $this->gatewayPayInformation['quantity_' . $i];
-            $item["description"] = $this->gatewayPayInformation['item_name_' . $i];
+            $item["description"] = addcslashes($this->gatewayPayInformation['item_name_' . $i], '"');
             $item["tax"] = $this->gatewayPayInformation['tax_' . $i];
             $items[] = $item;
             
@@ -129,39 +129,39 @@ class Gateway extends AbstractGateway
         $data ='{
             "intent":"sale",
             "redirect_urls":{
-                "return_url":"' . $this->gatewayFinishUrl . '",
-                "cancel_url":"' . $this->gatewayCancelUrl . '"
+                "return_url":"' . addcslashes($this->gatewayFinishUrl, '"') . '",
+                "cancel_url":"' . addcslashes($this->gatewayCancelUrl, '"') . '"
             },
             "payer":{
                 "payment_method":"paypal",
                 "payer_info":{
-                    "first_name":"' . $this->gatewayPayInformation['first_name'] . '",
-                    "last_name":"' . $this->gatewayPayInformation['last_name'] . '",
-                    "email":"' . $this->gatewayPayInformation['email'] . '"
+                    "first_name":"' . addcslashes($this->gatewayPayInformation['first_name'], '"') . '",
+                    "last_name":"' . addcslashes($this->gatewayPayInformation['last_name'], '"') . '",
+                    "email":"' . addcslashes($this->gatewayPayInformation['email'], '"') . '"
                 }
             },
             "transactions":[
                 {
                     "amount": {
-                        "total": "' . number_format($subtotal + $tax, 2, '.', '') . '",
-                        "currency": "' . $this->gatewayPayInformation['currency_code'] . '",
+                        "total": "' . addcslashes(number_format($subtotal + $tax, 2, '.', ''), '"') . '",
+                        "currency": "' . addcslashes($this->gatewayPayInformation['currency_code'], '"') . '",
                         "details": {
-                            "subtotal": "' . number_format($subtotal, 2, '.', '') . '",
-                            "tax": "' . number_format($tax , 2, '.', ''). '"
+                            "subtotal": "' . addcslashes(number_format($subtotal, 2, '.', ''), '"') . '",
+                            "tax": "' . addcslashes(number_format($tax , 2, '.', ''), '"') . '"
                         }
                     },
                     "description": "",
                     "item_list": {
                         "items": ' . json_encode($items) . ',
                         "shipping_address": {
-                            "recipient_name": "' . $this->gatewayPayInformation['first_name'] . ' ' . $this->gatewayPayInformation['last_name'] . '",
-                            "line1": "' . $this->gatewayPayInformation['address1'] . '",
-                            "line2": "' . $this->gatewayPayInformation['address2'] . '",
-                            "city": "' . $this->gatewayPayInformation['city'] . '",
-                            "state": "' . $this->gatewayPayInformation['state'] . '",
-                            "phone": "' . $this->gatewayPayInformation['night_phone_b'] . '",
-                            "postal_code": "' . $this->gatewayPayInformation['zip'] . '",
-                            "country_code": "' . $this->gatewayOption['location'] . '"
+                            "recipient_name": "' . addcslashes($this->gatewayPayInformation['first_name'] . ' ' . $this->gatewayPayInformation['last_name'], '"') . '",
+                            "line1": "' . addcslashes($this->gatewayPayInformation['address1'], '"') . '",
+                            "line2": "' . addcslashes($this->gatewayPayInformation['address2'], '"') . '",
+                            "city": "' . addcslashes($this->gatewayPayInformation['city'], '"') . '",
+                            "state": "' . addcslashes($this->gatewayPayInformation['state'], '"') . '",
+                            "phone": "' . addcslashes($this->gatewayPayInformation['night_phone_b'], '"') . '",
+                            "postal_code": "' . addcslashes($this->gatewayPayInformation['zip'], '"') . '",
+                            "country_code": "' . addcslashes($this->gatewayOption['location'], '"') . '"
                         }
                     }
                 }
