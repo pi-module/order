@@ -27,12 +27,12 @@ $locale = 'fa';
 <div id="print">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12 print-title">
+            <div class="col-12 print-title">
                 <?php _e('Order invoice'); ?>
             </div>
-            <div class="col-xs-12 print-user">
+            <div class="col-12 print-user">
                 <div class="clearfix text-normal">
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <?php if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
                             <p><strong><?php _e('Name'); ?></strong> :
                                 <span><?php echo $this->escape($address['first_name']); ?> <?php echo $this->escape($address['last_name']); ?></span>
@@ -47,7 +47,7 @@ $locale = 'fa';
                                 <span><?php echo $this->escape($address['company']); ?></span></p>
                         <?php } ?>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <?php if (!empty($address['email'])) { ?>
                             <p><strong><?php _e('Email'); ?></strong> :
                                 <span><?php echo $this->escape($address['email']); ?></span></p>
@@ -62,7 +62,7 @@ $locale = 'fa';
                         <?php } ?>
 
                     </div>
-                    <div class="col-xs-12">
+                    <div class="col-12">
                         <?php if (!empty($address['city'])) { ?>
                             <strong><?php _e('City'); ?></strong> :
                             <span><?php echo $this->escape($address['city']); ?></span>

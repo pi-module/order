@@ -47,14 +47,6 @@ class OrderUpdateForm extends BaseForm
                     'required' => true,
                 )
             ));
-           
-            $this->add(array(
-                'name' => 'time_create',
-                'type' => 'hidden',
-                'attributes' => array(
-                    'value' => time(),
-                ),
-            ));
         }
         
         $this->add(array(

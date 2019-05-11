@@ -75,17 +75,17 @@ $script = <<<'EOT'
             
             e.preventDefault();
             
-            $('#addressFromNew').addClass('hidden');
+            $('#addressFromNew').addClass('d-none');
             
             $('form#order [name=address_delivery_id]').val(%s);
             $('form#order [name=address_invoicing_id]').val(%s);
             $('form#order [name=submit_order_simple]').removeClass('disabled');
             $('form#order [name=submit_order_simple]').removeAttr('title');
             
-            $('.selected-address').addClass('hidden');
+            $('.selected-address').addClass('d-none');
             
-            $(e.target).addClass('hidden');
-            $(e.target).parent().parent().find('.selected-address').removeClass('hidden');
+            $(e.target).addClass('d-none');
+            $(e.target).parent().parent().find('.selected-address').removeClass('d-none');
         }
         
         
@@ -155,7 +155,7 @@ $this->footScript()->appendScript($script);
                          <div class="clearfix">
                             <div class="info">
                                 <p>
-                                    <span class="fa fa-file"></span> <strong><?php _e('Invoicing address'); ?></strong>
+                                    <span class="fas fa-file"></span> <strong><?php _e('Invoicing address'); ?></strong>
                                     <?php if (!empty($addresses)) { ?>
                                         <a class="modify-address" href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'invoicing'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal" data-type="<?php _e('Invoicing address') ?>">
                                             <?php _e('Modify') ?>
@@ -229,7 +229,7 @@ $this->footScript()->appendScript($script);
                              <div class="clearfix">
                                 <div class="info">
                                     <p>
-                                        <span class="fa fa-map-marker"></span> <strong><?php _e('Delivery address'); ?></strong>
+                                        <span class="fas fa-map-marker-alt"></span> <strong><?php _e('Delivery address'); ?></strong>
                                         <?php if ($addressInvoicing['id'] != $addressDelivery['id']) { ?>
                                             <a class="modify-address" href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal" data-type="<?php _e('Delivery address') ?>">
                                                 <?php _e('Modify') ?>
@@ -311,9 +311,9 @@ $this->footScript()->appendScript($script);
         
         <div class="col-md-4">
             <div class="cart-product">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><?php _e('Your order'); ?></h3>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"><?php _e('Your order'); ?></h3>
                     </div>
                     <div class="clearfix">
                         <table class="cart-product-list">
@@ -346,10 +346,10 @@ $this->footScript()->appendScript($script);
                                             </p>
                                         <?php } ?>
                                         <?php if (!empty($product['details']['thumbUrl'])) { ?>
-                                            <div class="col-xs-5">
+                                            <div class="col-5">
                                                 <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
                                                    target="_blank">
-                                                    <img class="img-responsive"
+                                                    <img class="img-fluid"
                                                          src="<?php echo $this->escape($product['details']['thumbUrl']); ?>">
                                                 </a>
                                             </div>
@@ -429,14 +429,14 @@ $this->footScript()->appendScript($script);
                                 </tr>
                             <?php } ?>
                             <?php if ($cart['type_payment'] != 'installment') { ?>
-                                <tr class="panel-footer footer">
+                                <tr class="card-footer footer">
                                     <td>
                                         <strong>
                                             <?php _e('Final Price incl. VAT'); ?>
                                         </strong>
                                     </td>
                                     <td class="text-right">
-                                        <span class="label label-success data-total-price-ttc">
+                                        <span class="badge badge-success data-total-price-ttc">
                                             <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['total'])); ?>
                                         </span>
                                     </td>
@@ -449,25 +449,20 @@ $this->footScript()->appendScript($script);
                     <?php if (isset($forms['promoCheckout'])) { ?>
                         <?php echo $this->form()->openTag($forms['promoCheckout']); ?>
                             <div class="col-md-4 nopadding">
-                                <div class="form-group has-feedback" data-name="code">
-                                    <label class=" control-label">
+                                <div class="form-group" data-name="code">
+                                    <label class=" col-form-label">
                                         <?php _e('Your promo code') ?>
                                     </label>
-                                    <div class=" js-form-element">
-                                        <?php echo $this->formElement($forms['promoCheckout']->get('code')); ?>
-                                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                                        <span style="display:block;" class="text-muted"></span>
-                                    </div>
+                                    <?php echo $this->formElement($forms['promoCheckout']->get('code')); ?>
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                                 </div>
                             </div>
                             <div class="col-md-2 nopadding">
-                                <label class=" control-label">
+                                <label class=" col-form-label">
                                     &nbsp;
                                  </label>
-                                <div class="form-group has-feedback" data-name="code">
-                                    <div class=" js-form-element">
-                                        <?php echo $this->formElement($forms['promoCheckout']->get('submit_promo')); ?>
-                                    </div>
+                                <div class="form-group" data-name="code">
+                                    <?php echo $this->formElement($forms['promoCheckout']->get('submit_promo')); ?>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
@@ -478,7 +473,7 @@ $this->footScript()->appendScript($script);
                             </div>
                         <?php } ?>
                         
-                        <div class="clearfix alert hidden" role="alert">
+                        <div class="clearfix alert d-none" role="alert">
                             <span></span>
                         </div>
                             
@@ -506,19 +501,21 @@ $this->footScript()->appendScript($script);
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+                <h2 class="modal-title">&nbsp;</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="<?php _e('Close'); ?>">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h2 class="modal-title">&nbsp;</h2>
             </div>
             <div class="panel">
-                <div class="col-md-8">
-                    <h2 class="delivery hide"><?php _e('Delivery Address') ?></h2>
-                    <h2 class="invoicing hide"><?php _e('Invoicing Address') ?></h2>  
-                </div>
-                <div class="col-md-4">
-                    <a class="btn btn-simple btn-sm col-md-12 invoicing hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
-                    <a class="btn btn-simple btn-sm col-md-12 delivery hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'delivery')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
+                <div class="row">
+                    <div class="col-md-7">
+                        <h2 class="delivery hide"><?php _e('Delivery Address') ?></h2>
+                        <h2 class="invoicing hide"><?php _e('Invoicing Address') ?></h2>
+                    </div>
+                    <div class="col-md-5">
+                        <a class="btn btn-simple btn-sm col-md-12 invoicing hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
+                        <a class="btn btn-simple btn-sm col-md-12 delivery hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'delivery')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
+                    </div>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -526,7 +523,7 @@ $this->footScript()->appendScript($script);
                 <?php _e('Please, wait ...') ?>
             </div>
             <div class="panel bottom">
-                <div class="col-md-offset-8 col-md-4">
+                <div class="offset-md-7 col-md-5">
                     <a class="btn btn-simple btn-sm col-md-12 invoicing hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
                     <a class="btn btn-simple btn-sm col-md-12 delivery hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'delivery')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
                 </div>
@@ -535,15 +532,15 @@ $this->footScript()->appendScript($script);
         </div>
     </div>
 </div>
-          
-<div class="modal fade" id="addressModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+
+<div class="modal fade" id="addressModal" tabindex="-1" role="dialog" style="overflow-y: auto !important;">
+    <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title">&nbsp;</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="<?php _e('Close'); ?>">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">&nbsp;</h4>
             </div>
             <div class="modal-body">
                 <?php _e('Please, wait ...') ?>
@@ -555,10 +552,10 @@ $this->footScript()->appendScript($script);
 <script>
     var needReload = false;
     $( document ).ready(function() {
-        
+
         // Fix for bootstrap bug. When you open 2 modals (first open second), there no scrollbar
         $('body').on('hidden.bs.modal', function () {
-            if($('.modal.in').length > 0)
+            if($('.modal.show').length > 0)
             {
                 $('body').addClass('modal-open');
             } else {
@@ -603,7 +600,7 @@ $this->footScript()->appendScript($script);
               data: {code: code},
               success: function(data) {
                   $('#promoCheckout').parent().find('.alert')
-                  .removeClass('hidden')
+                  .removeClass('d-none')
                   .removeClass('alert-info')
                   .removeClass('alert-success')
                   .addClass('alert-' + data.msgPromoCode.type);

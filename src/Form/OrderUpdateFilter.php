@@ -35,14 +35,7 @@ class OrderUpdateFilter extends InputFilter
                     new \Module\Order\Validator\User,
                 ),
             ));
-        
-           
-            // time_create
-            $this->add(array(
-                'name' => 'time_create',
-                'required' => true,
-            ));
-            
+
         }
         
         $this->add(array(

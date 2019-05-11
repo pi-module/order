@@ -66,9 +66,9 @@
                 <div class="col-md-6">
                     <div class="clearfix">
                         <?php if (!empty($config['order_sellerlogo'])) { ?>
-                            <img class="img-responsive" src="<?php echo $config['order_sellerlogo']; ?>" alt="">
+                            <img class="img-fluid" src="<?php echo $config['order_sellerlogo']; ?>" alt="">
                         <?php } else { ?>
-                            <img class="img-responsive" src="<?php echo $this->logo(); ?>" alt="">
+                            <img class="img-fluid" src="<?php echo $this->logo(); ?>" alt="">
                         <?php } ?>
                         <br>
                     </div>
@@ -138,7 +138,7 @@
             </div>
         </div>
         <h3><?php _e('List of ordered services/products'); ?></h3>
-        <table class="table table-striped table-bordered table-condensed small">
+        <table class="table table-striped table-bordered table-sm small">
             <tr>
                 <th><?php _e('Row'); ?></th>
                 <th><?php _e('Product'); ?></th>
@@ -180,7 +180,7 @@
             </div>
         <?php } else { ?>
             <h3><?php _e('Total invoice price'); ?></h3>
-            <table class="table table-striped table-bordered table-condensed">
+            <table class="table table-striped table-bordered table-sm">
                 <tr>
                     <th class="col-md-4"><?php _e('Title'); ?></th>
                     <th class="col-md-8"><?php _e('Amount'); ?></th>
@@ -211,16 +211,16 @@
                        href="<?php echo $this->escape($invoice['order_url']); ?>"><?php _e('Back to order'); ?></a>
                     <a class="btn btn-primary btn-sm" title="<?php _e('Print invoice'); ?>"
                        href="<?php echo $this->escape($invoice['print_url']); ?>" target="_blank"><i
-                            class="fa fa-print"></i> <?php _e('Print invoice'); ?></a>
+                            class="fas fa-print"></i> <?php _e('Print invoice'); ?></a>
                 </div>
             </div>
             <div class="col-md-6 text-right">
                 <?php if ($invoice['status'] == 2 && $order['can_pay'] == 1) { ?>
                         <a class="btn btn-success btn-lg" title="<?php _e('Pay'); ?>"
                            href="<?php echo $this->escape($invoice['pay_url']); ?>"><i
-                                class="fa fa-external-link"></i> <?php _e('Pay'); ?></a>
+                                class="fas fa-external-link-alt"></i> <?php _e('Pay'); ?></a>
                 <?php } elseif ($invoice['status'] == 2 && $order['can_pay'] != 1) { ?>
-                    <span class="label label-danger">
+                    <span class="badge badge-danger">
                             <?php _e('You can pay this invoice after admin review'); ?>
                         </span>
                 <?php } ?>

@@ -15,12 +15,12 @@ return array(
     'meta' => array(
         'title' => _a('Orders'),
         'description' => _a('Manage order process and payment'),
-        'version' => '2.2.3',
+        'version' => '2.2.4',
         'license' => 'New BSD',
         'logo' => 'image/logo.png',
         'readme' => 'docs/readme.txt',
         'demo' => 'http://pialog.org',
-        'icon' => 'fa-money',
+        'icon' => 'fa-money-bill-alt',
     ),
     // Author information
     'author' => array(

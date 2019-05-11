@@ -10,13 +10,13 @@
         <div class="media">
             <div class="media-left col-md-1">
                 <a href="<?php echo $this->escape($editProduct['details']['productUrl']); ?>">
-                    <img class="media-object img-responsive" src="<?php echo $this->escape($editProduct['details']['thumbUrl']); ?>" alt="<?php echo $this->escape($editProduct['title']['details']['title']); ?>">
+                    <img class="media-object img-fluid" src="<?php echo $this->escape($editProduct['details']['thumbUrl']); ?>" alt="<?php echo $this->escape($editProduct['title']['details']['title']); ?>">
                 </a>
             </div>
             <div class="media-body clearfix">
                 <h4 class="media-heading"><?php echo $this->escape($editProduct['details']['title']); ?></h4>
                 <div class="clearfix">
-                    <a target="_blank" href="<?php echo $this->escape($editProduct['details']['productUrl']); ?>"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
+                    <a target="_blank" href="<?php echo $this->escape($editProduct['details']['productUrl']); ?>"><i class="far fa-eye"></i> <?php _e('View'); ?></a>
                 </div>
             </div>
         </div>

@@ -2,18 +2,18 @@
 <div class="order-block-detail">
     <div class="order-block-detail-tab" role="tabpanel">
         <ul class="nav nav-tabs">
-            <li role="presentation" class="active"><a href="#invoice" aria-controls="invoice" role="tab"
+            <li role="presentation" class="nav-item"><a class="nav-link active" href="#invoice" aria-controls="invoice" role="tab"
                                                       data-toggle="tab"><?php echo _b('Invoices'); ?></a></li>
-            <li role="presentation"><a href="#order" aria-controls="order" role="tab"
+            <li role="presentation" class="nav-item"><a class="nav-link" href="#order" aria-controls="order" role="tab"
                                        data-toggle="tab"><?php echo _b('Orders'); ?></a></li>
-            <li role="presentation"><a href="#user" aria-controls="user" role="tab"
+            <li role="presentation" class="nav-item"><a class="nav-link" href="#user" aria-controls="user" role="tab"
                                        data-toggle="tab"><?php echo _b('User informations'); ?></a></li>
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="invoice">
                 <?php if ($block['resources']['invoices']) { ?>
                     <?php foreach ($block['resources']['invoices'] as $invoice) { ?>
-                        <table class="table table-striped table-bordered table-condensed">
+                        <table class="table table-striped table-bordered table-sm">
                             <tr>
                                 <th class="col-md-1"><?php echo _b('ID'); ?></th>
                                 <th class="col-md-1"><?php echo _b('Type'); ?></th>
@@ -22,29 +22,29 @@
                             </tr>
                             <?php
                             if ($invoice['status'] == 1) {
-                                $labelIdClass = 'label-success';
+                                $badgeIdClass = 'badge-success';
                             } elseif ($invoice['status'] == 2) {
-                                $labelIdClass = 'label-warning';
+                                $badgeIdClass = 'badge-warning';
                             } elseif ($invoice['status'] == 3) {
-                                $labelIdClass = 'label-danger';
+                                $badgeIdClass = 'badge-danger';
                             }
                             ?>
                             <tr>
                                 <td><span
-                                        class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($invoice['code']); ?></span>
+                                        class="badge <?php echo $badgeIdClass; ?>"><?php echo $this->escape($invoice['code']); ?></span>
                                 </td>
                                 <td><?php echo $this->escape($invoice['type']); ?></td>
                                 <td><?php echo $this->escape($invoice['time_create_view']); ?></td>
                                 <td class="text-right">
-                                    <a class="btn btn-primary btn-xs" title="<?php echo _b('View / Pay'); ?>"
+                                    <a class="btn btn-primary btn-sm" title="<?php echo _b('View / Pay'); ?>"
                                        href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $invoice['order'])); ?>"><i
-                                            class="fa fa-edit"></i> <?php echo _b('View / Pay'); ?></a>
+                                            class="fas fa-edit"></i> <?php echo _b('View / Pay'); ?></a>
                                 </td>
                             </tr>
                         </table>
                    
                         <?php foreach ($invoice['installments'] as $installment) { ?>
-                            <table class="table table-striped table-installment table-bordered table-condensed">
+                            <table class="table table-striped table-installment table-bordered table-sm">
                                 <tr>
                                     <th class="col-md-1 transparent"></th>
                                     <th class="col-md-1"><?php _e('Installment'); ?></th>
@@ -57,13 +57,13 @@
                                 <?php
                                 $rowClass = '';
                                 if ($installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
-                                    $labelIdClass = 'label-warning';
+                                    $badgeIdClass = 'badge-warning';
                                     $rowClass = ' class="warning"';
                                     if ($installment['time_duedate'] < strtotime("-1 day")) {
                                         $rowClass = ' class="danger"';
                                     }
                                 } elseif ($installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
-                                    $labelIdClass = 'label-success';
+                                    $badgeIdClass = 'badge-success';
                                     $rowClass = ' class="success"';                                        
                                 } 
                                 ?>
@@ -81,9 +81,9 @@
                         <?php } ?>
                      <?php } ?>
                     <p>
-                        <span class="label label-success"><?php echo _b('Paid'); ?></span>
-                        <span class="label label-warning"><?php echo _b('Unpaid'); ?></span>
-                        <span class="label label-danger"><?php echo _b('Canceled'); ?></span>
+                        <span class="badge badge-success"><?php echo _b('Paid'); ?></span>
+                        <span class="badge badge-warning"><?php echo _b('Unpaid'); ?></span>
+                        <span class="badge badge-danger"><?php echo _b('Canceled'); ?></span>
                     </p>
                 <?php } else { ?>
                     <div class="alert alert-warning"
@@ -92,7 +92,7 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="order">
                 <?php if ($block['resources']['orders']) { ?>
-                    <table class="table table-striped table-bordered table-condensed">
+                    <table class="table table-striped table-bordered table-sm">
                         <tr>
                             <th><?php echo _b('ID'); ?></th>
                             <th><?php echo _b('Time create'); ?></th>
@@ -105,9 +105,9 @@
                                 <td><?php echo $this->escape($order['time_create_view']); ?></td>
                                 <td><?php echo $this->escape($order['total_price_view']); ?></td>
                                 <td>
-                                    <a class="btn btn-primary btn-xs" title="<?php echo _b('View'); ?>"
+                                    <a class="btn btn-primary btn-sm" title="<?php echo _b('View'); ?>"
                                        href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $order['id'])); ?>"><i
-                                            class="fa fa-edit"></i> <?php echo _b('View'); ?></a>
+                                            class="fas fa-edit"></i> <?php echo _b('View'); ?></a>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -122,7 +122,7 @@
                         <div class="col-md-6">
                             <?php if (!empty($block['resources']['credit'])) { ?>
                                 <p><strong><?php echo _b('Credit'); ?></strong> : <span
-                                        class="label label-success"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($block['resources']['credit'])); ?></span>
+                                        class="badge badge-success"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($block['resources']['credit'])); ?></span>
                                 </p>
                             <?php } ?>
                             <?php if (!empty($block['resources']['first_name']) && !empty($block['resources']['last_name'])) { ?>
@@ -189,7 +189,7 @@
         </div>
     </div>
     <div class="order-block-detail-more text-right">
-        <a class="btn btn-success btn-xs" title="<?php echo _b('More informations'); ?>"
+        <a class="btn btn-success btn-sm" title="<?php echo _b('More informations'); ?>"
            href="<?php echo $this->escape($block['more']); ?>"><?php echo _b('More informations'); ?></a>
     </div>
 </div>

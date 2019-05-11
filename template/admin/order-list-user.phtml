@@ -12,46 +12,46 @@
                 <div class="order-block-detail-tab" role="tabpanel">
                     <ul class="nav nav-tabs">
                         <?php if ($invoiceInstallmentCount > 0) { ?>
-                            <li role="presentation" class="active">
-                                <a href="#summery" aria-controls="summery" role="tab" data-toggle="tab"><?php _e('Summery'); ?></a>
+                            <li role="presentation" class="nav-item">
+                                <a class="nav-link active" href="#summery" aria-controls="summery" role="tab" data-toggle="tab"><?php _e('Summery'); ?></a>
                             </li>
                         <?php } ?>
-                        <li role="presentation"<?php if ($invoiceInstallmentCount == 0) { ?> class="active"<?php } ?>>
-                            <a href="#invoice" aria-controls="invoice" role="tab" data-toggle="tab">
+                        <li role="presentation" class="nav-item">
+                            <a class="nav-link <?php if ($invoiceInstallmentCount == 0) echo 'active'; ?>" href="#invoice" aria-controls="invoice" role="tab" data-toggle="tab">
                                 <?php _e('Payable invoices'); ?>
                                 <?php if (count($user['invoices']) > 0) { ?>
-                                    <span class="label label-danger"><?php echo _number(count($user['invoices'])); ?></span>
+                                    <span class="badge badge-pill badge-danger"><?php echo _number(count($user['invoices'])); ?></span>
                                 <?php } else { ?>
-                                    <span class="label label-success"><?php echo _number(count($user['invoices'])); ?></span>
+                                    <span class="badge badge-pill badge-success"><?php echo _number(count($user['invoices'])); ?></span>
                                 <?php } ?>
                             </a>
                         </li>
-                        <li role="presentation">
-                            <a href="#order" aria-controls="order" role="tab" data-toggle="tab"><?php _e('Orders'); ?></a>
+                        <li role="presentation" class="nav-item">
+                            <a class="nav-link href="#order" aria-controls="order" role="tab" data-toggle="tab"><?php _e('Orders'); ?></a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <?php if ($invoiceInstallmentCount > 0) { ?>
                         <div role="tabpanel" class="tab-pane active" id="summery">
                             <h3 class="text-center"><?php _e('List of installment'); ?></h3>
-                            <table class="table table-striped table-bordered table-condensed small">
+                            <table class="table table-striped table-bordered table-sm small">
                                 <tr>
-                                    <th class="text-center col-md-table-16"><?php _e('10 th'); ?></th>
-                                    <th class="text-center col-md-table-16"><?php _e('Debt'); ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[0]['10-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[1]['10-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[2]['10-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[3]['10-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[4]['10-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[5]['10-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[6]['10-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[7]['10-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[8]['10-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[9]['10-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[10]['10-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[11]['10-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[12]['10-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php _e('Total'); ?></td>
+                                    <th class="text-center"><?php _e('10 th'); ?></th>
+                                    <th class="text-center"><?php _e('Debt'); ?></th>
+                                    <th class="text-center"><?php echo $tableView[0]['10-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[1]['10-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[2]['10-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[3]['10-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[4]['10-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[5]['10-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[6]['10-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[7]['10-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[8]['10-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[9]['10-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[10]['10-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[11]['10-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[12]['10-view']; ?></th>
+                                    <th class="text-center"><?php _e('Total'); ?></td>
                                 </tr>
                                 <?php foreach ($tableView['all']['10-order'] as $orderItem) { ?>
                                     <tr class="text-muted">
@@ -92,24 +92,24 @@
                                     <td class="text-center"><?php echo $tableView['all']['10-sun-view']; ?></td>
                                 </tr>
                             </table>
-                            <table class="table table-striped table-bordered table-condensed small">
+                            <table class="table table-striped table-bordered table-sm small">
                                 <tr>
-                                    <th class="text-center col-md-table-16"><?php _e('20 th'); ?></th>
-                                    <th class="text-center col-md-table-16"><?php _e('Debt'); ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[0]['20-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[1]['20-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[2]['20-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[3]['20-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[4]['20-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[5]['20-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[6]['20-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[7]['20-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[8]['20-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[9]['20-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[10]['20-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[11]['20-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[12]['20-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php _e('Total'); ?></td>
+                                    <th class="text-center"><?php _e('20 th'); ?></th>
+                                    <th class="text-center"><?php _e('Debt'); ?></th>
+                                    <th class="text-center"><?php echo $tableView[0]['20-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[1]['20-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[2]['20-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[3]['20-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[4]['20-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[5]['20-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[6]['20-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[7]['20-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[8]['20-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[9]['20-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[10]['20-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[11]['20-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[12]['20-view']; ?></th>
+                                    <th class="text-center"><?php _e('Total'); ?></td>
                                 </tr>
                                 <?php foreach ($tableView['all']['20-order'] as $orderItem) { ?>
                                     <tr class="text-muted">
@@ -150,24 +150,24 @@
                                     <td class="text-center"><?php echo $tableView['all']['20-sun-view']; ?></td>
                                 </tr>
                             </table>
-                            <table class="table table-striped table-bordered table-condensed small">
+                            <table class="table table-striped table-bordered table-sm small">
                                 <tr>
-                                    <th class="text-center col-md-table-16"><?php _e('30 th'); ?></th>
-                                    <th class="text-center col-md-table-16"><?php _e('Debt'); ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[0]['30-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[1]['30-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[2]['30-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[3]['30-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[4]['30-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[5]['30-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[6]['30-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[7]['30-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[8]['30-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[9]['30-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[10]['30-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[11]['30-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php echo $tableView[12]['30-view']; ?></th>
-                                    <th class="text-center col-md-table-16"><?php _e('Total'); ?></td>
+                                    <th class="text-center"><?php _e('30 th'); ?></th>
+                                    <th class="text-center"><?php _e('Debt'); ?></th>
+                                    <th class="text-center"><?php echo $tableView[0]['30-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[1]['30-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[2]['30-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[3]['30-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[4]['30-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[5]['30-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[6]['30-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[7]['30-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[8]['30-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[9]['30-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[10]['30-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[11]['30-view']; ?></th>
+                                    <th class="text-center"><?php echo $tableView[12]['30-view']; ?></th>
+                                    <th class="text-center"><?php _e('Total'); ?></td>
                                 </tr>
                                 <?php foreach ($tableView['all']['30-order'] as $orderItem) { ?>
                                     <tr class="text-muted">
@@ -209,11 +209,11 @@
                                 </tr>
                             </table>
                             <?php if (isset($tableView['additional']['invoice']) && !empty($tableView['additional']['invoice'])) { ?>
-                                <table class="table table-striped table-bordered table-condensed small">
+                                <table class="table table-striped table-bordered table-sm small">
                                     <tr>
-                                        <th colspan="3" class="text-center col-md-3"><?php _e('Additional invoices'); ?></th>
-                                        <th colspan="12" class="text-center col-md-8"><?php _e('Due date'); ?></th>
-                                        <th colspan="1" class="text-center col-md-1"><?php _e('Total'); ?></td>
+                                        <th colspan="3" class="text-center"><?php _e('Additional invoices'); ?></th>
+                                        <th colspan="12" class="text-center"><?php _e('Due date'); ?></th>
+                                        <th colspan="1" class="text-center"><?php _e('Total'); ?></td>
                                     </tr>
                                     <?php foreach ($tableView['additional']['invoice'] as $invoiceItem) { ?>
                                         <tr class="text-muted">
@@ -228,10 +228,10 @@
                                     </tr>
                                 </table>
                             <?php } ?>
-                            <table class="table table-striped table-bordered table-condensed small">
+                            <table class="table table-striped table-bordered table-sm small">
                                 <tr>
-                                    <th class="text-center col-md-11">جمع کل</th>
-                                    <th class="text-center col-md-1"><?php echo $tableView['total-view']; ?></th>
+                                    <th class="text-center">جمع کل</th>
+                                    <th class="text-center"><?php echo $tableView['total-view']; ?></th>
                                 </tr>
                             </table>
                         </div>
@@ -239,7 +239,7 @@
                         <div role="tabpanel" class="tab-pane<?php if ($invoiceInstallmentCount == 0) { ?> active<?php } ?>" id="invoice">
                             <h3 class="text-center"><?php _e('Invoices list'); ?></h3>
                             <?php if ($user['invoices']) { ?>
-                                <table class="table table-striped table-bordered table-condensed small">
+                                <table class="table table-striped table-bordered table-sm small">
                                     <tr>
                                         <th class="text-center"><?php _e('Amount'); ?></th>
                                         <th class="text-center"><?php _e('Time Create'); ?></th>
@@ -252,7 +252,7 @@
                                             <td class="text-center"><?php echo $this->escape($invoice['time_create_view']); ?></td>
                                             <td class="text-center"><?php echo $this->escape($invoice['time_duedate_view']); ?></td>
                                             <td class="text-center">
-                                                <a class="btn btn-primary btn-xs" target="_blank" title="<?php _e('View'); ?>" href="<?php echo $this->url('admin', array('module' => 'order', 'controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>"><i class="fa fa-edit"></i> <?php _e('View'); ?></a>
+                                                <a class="btn btn-primary btn-sm" target="_blank" title="<?php _e('View'); ?>" href="<?php echo $this->url('admin', array('module' => 'order', 'controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>"><i class="fas fa-edit"></i> <?php _e('View'); ?></a>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -264,7 +264,7 @@
                         <div role="tabpanel" class="tab-pane" id="order">
                             <h3 class="text-center"><?php _e('Orders list'); ?></h3>
                             <?php if ($user['orders']) { ?>
-                                <table class="table table-striped table-bordered table-condensed small">
+                                <table class="table table-striped table-bordered table-sm small">
                                     <tr>
                                         <th class="text-center"><?php _e('ID'); ?></th>
                                         <th class="text-center"><?php _e('Time create'); ?></th>
@@ -279,7 +279,7 @@
                                             <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
                                             <td class="text-center"><?php echo $this->escape($order['gateway']); ?></td>
                                             <td class="text-center">
-                                                <a class="btn btn-primary btn-xs" target="_blank" title="<?php _e('View'); ?>" href="<?php echo $this->url('admin', array('module' => 'order', 'controller' => 'order', 'action' => 'view', 'id' => $order['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('View'); ?></a>
+                                                <a class="btn btn-primary btn-sm" target="_blank" title="<?php _e('View'); ?>" href="<?php echo $this->url('admin', array('module' => 'order', 'controller' => 'order', 'action' => 'view', 'id' => $order['id'])); ?>"><i class="fas fa-edit"></i> <?php _e('View'); ?></a>
                                             </td>
                                         </tr>
                                     <?php } ?>

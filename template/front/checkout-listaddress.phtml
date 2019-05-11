@@ -1,11 +1,11 @@
 <?php if (!empty($addresses)) { ?>
     <div class="clearfix row">
         <?php foreach ($addresses as $address) { ?>
-            <div class="col-md-12 address   "
+            <div class="col-md-12 address"
                  data-id="addressFrom<?php echo $address['id']; ?>"
                  data-button="addressFromButton<?php echo $address['id']; ?>">
-                 <div class="clearfix">
-                    <div class="info col-md-8">
+                 <div class="clearfix row">
+                    <div class="info col-md-7">
                         <div>
                             <?php echo $this->escape($address['first_name']); ?>  <?php echo $this->escape($address['last_name']); ?>
                         </div>
@@ -58,30 +58,22 @@
                         <?php } ?>
                         
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <?php if ($_SESSION['order'][$type . '_address'] == $address['id']) { ?>
-                            <div class="row">
-                                <div class="label label-success selected-address col-md-12">
-                                    <i class="fa fa-check"></i> <?php _e('Selected address') ?>
+                                <div class="badge badge-success selected-address col-md-12">
+                                    <i class="fas fa-check"></i> <?php _e('Selected address') ?>
                                 </div>
-                            </div>
-                        <?php } else { ?> 
-                            <div class="row">
+                        <?php } else { ?>
                                 <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'change-address', 'id' => $address['id'], 'type' => $type))) ?>" class=" btn btn-success btn-sm col-md-12" data-address="<?php echo $address['id']; ?>">
                                    <?php _e('Use it'); ?>
                                 </a>
-                           </div>
-                       <?php } ?> 
-                       <div class="row">
+                       <?php } ?>
                             <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => $address['id']))) ?>" class=" btn btn-address-edit btn-sm col-md-12" data-address="<?php echo $address['id']; ?>" data-remote="false" data-toggle="modal" data-target="#addressModal" data-dismiss="modal">
-                                <i class="fa fa-edit"></i> <?php _e('Edit'); ?>
+                                <i class="fas fa-edit"></i> <?php _e('Edit'); ?>
                             </a>
-                       </div>
-                       <div class="row">
                             <a href="#" data-delete="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'delete', 'address' => $address['id']))) ?>" class="btn btn-address-delete btn-sm col-md-12" data-address="<?php echo $address['id']; ?>">
-                                <i class="fa fa-trash"></i> <?php _e('Delete'); ?>
+                                <i class="fas fa-trash-alt"></i> <?php _e('Delete'); ?>
                             </a>
-                       </div>
                     </div>
                 </div>
                  <hr />

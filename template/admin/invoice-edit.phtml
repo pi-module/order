@@ -14,7 +14,7 @@
                             $class = "danger";
                         }
                     ?>                    
-                    <span class="label label-<?php echo $class ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']] ?></span>
+                    <span class="badge badge-<?php echo $class ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']] ?></span>
                 </p>
 
                 <p><strong><?php _e('Order'); ?></strong> : <span><?php echo $this->escape($order['code']); ?></span>
@@ -100,10 +100,10 @@
             <div class="col-md-12 text-right">
                 <a class="btn btn-primary" title="<?php _e('View order'); ?>"
                    href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>"
-                   target="_blank"><i class="fa fa-eye"></i> <?php _e('View order'); ?></a>
+                   target="_blank"><i class="far fa-eye"></i> <?php _e('View order'); ?></a>
                 <a class="btn btn-primary" title="<?php _e('Print'); ?>"
                    href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'print', 'id' => $invoice['id'])); ?>"
-                   target="_blank"><i class="fa fa-print"></i> <?php _e('Print'); ?></a>
+                   target="_blank"><i class="fas fa-print"></i> <?php _e('Print'); ?></a>
             </div>
         </div>
     </div>

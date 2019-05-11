@@ -41,7 +41,7 @@ class UpdateInvoiceForm extends BaseForm
             'name' => 'status',
             'type' => 'select',
             'options' => array(
-                'label' => __('Payment'),
+                'label' => __('Status'),
                     'value_options' => \Module\Order\Model\Invoice::getStatusList($this->_options['status']),
             ),
         ));
