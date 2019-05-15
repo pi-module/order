@@ -6,6 +6,8 @@
         <?php include $this->templateModule('front/user-profile-sidebar.phtml', 'user'); ?>
     </div>
     <div class="col-md-9">
+        <?php include $this->template('flash-messenger'); ?>
+
         <div id="js-order" class="order-view clearfix">
             <div class="order-form" data-id="<?php echo $this->escape($order['id']); ?>">
         
