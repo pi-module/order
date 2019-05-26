@@ -1,11 +1,13 @@
 
 <?php $this->css($this->assetModule('css/front.css')); ?>
 <div class="clearfix row">
-    <div class="col-md-3">
+    <div class="col-md-3 user-section-wrapper">
         <?php $sideActive = 'order'; ?>
         <?php include $this->templateModule('front/user-profile-sidebar.phtml', 'user'); ?>
     </div>
     <div class="col-md-9">
+        <?php include $this->template('flash-messenger'); ?>
+
         <div id="js-order" class="order-view clearfix">
             <div class="order-form" data-id="<?php echo $this->escape($order['id']); ?>">
         
