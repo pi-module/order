@@ -12,6 +12,6 @@
  *
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-return array(
+return [
     'sqlfile' => 'sql/mysql.sql',
-);
+];

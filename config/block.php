@@ -10,26 +10,26 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-return array(
-    'detail' => array(
-        'name' => 'detail',
-        'title' => _a('Orders detail'),
+return [
+    'detail'      => [
+        'name'        => 'detail',
+        'title'       => _a('Orders detail'),
         'description' => _a('Simple orders detail'),
-        'render' => array('block', 'detail'),
-        'template' => 'detail',
-    ),
-    'installment' => array(
-        'name' => 'installment',
-        'title' => _a('Installment'),
+        'render'      => ['block', 'detail'],
+        'template'    => 'detail',
+    ],
+    'installment' => [
+        'name'        => 'installment',
+        'title'       => _a('Installment'),
         'description' => _a('Installment orders detail'),
-        'render' => array('block', 'installment'),
-        'template' => 'installment',
-    ),
-    'credit' => array(
-        'name' => 'credit',
-        'title' => _a('Credit'),
+        'render'      => ['block', 'installment'],
+        'template'    => 'installment',
+    ],
+    'credit'      => [
+        'name'        => 'credit',
+        'title'       => _a('Credit'),
         'description' => _a('User credit information'),
-        'render' => array('block', 'credit'),
-        'template' => 'credit',
-    ),
-);
+        'render'      => ['block', 'credit'],
+        'template'    => 'credit',
+    ],
+];

@@ -10,34 +10,34 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-return array(
+return [
     // Module meta
-    'meta' => array(
-        'title' => _a('Orders'),
+    'meta'     => [
+        'title'       => _a('Orders'),
         'description' => _a('Manage order process and payment'),
-        'version' => '2.2.4',
-        'license' => 'New BSD',
-        'logo' => 'image/logo.png',
-        'readme' => 'docs/readme.txt',
-        'demo' => 'http://piengine.org',
-        'icon' => 'fa-money-bill-alt',
-    ),
+        'version'     => '2.2.4',
+        'license'     => 'New BSD',
+        'logo'        => 'image/logo.png',
+        'readme'      => 'docs/readme.txt',
+        'demo'        => 'http://piengine.org',
+        'icon'        => 'fa-money-bill-alt',
+    ],
     // Author information
-    'author' => array(
-		'Dev'      => 'Hossein Azizabadi; Marc Desrousseaux; Frederic Tissot; Mickael Stamm',
-        'Fonctionnal Design'     => '@marc-pi, @voltan',
-        'QA'        => '@marc-pi',
-        'website' => 'http://pialog',
-        'credits' => 'Pi Engine Team'
-    ),
+    'author'   => [
+        'Dev'                => 'Hossein Azizabadi; Marc Desrousseaux; Frederic Tissot; Mickael Stamm',
+        'Fonctionnal Design' => '@marc-pi, @voltan',
+        'QA'                 => '@marc-pi',
+        'website'            => 'http://pialog',
+        'credits'            => 'Pi Engine Team',
+    ],
     // Resource
-    'resource' => array(
-        'database' => 'database.php',
-        'config' => 'config.php',
+    'resource' => [
+        'database'   => 'database.php',
+        'config'     => 'config.php',
         'permission' => 'permission.php',
-        'page' => 'page.php',
+        'page'       => 'page.php',
         'navigation' => 'navigation.php',
-        'block' => 'block.php',
-        'route' => 'route.php',
-    ),
-);
+        'block'      => 'block.php',
+        'route'      => 'route.php',
+    ],
+];

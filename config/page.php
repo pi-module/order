@@ -10,70 +10,70 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-return array(
+return [
     // Admin section
-    'admin' => array(
-        array(
-            'label' => _a('Orders'),
+    'admin' => [
+        [
+            'label'      => _a('Orders'),
             'controller' => 'order',
             'permission' => 'order',
-        ),
-        array(
-            'label' => _a('Invoice'),
+        ],
+        [
+            'label'      => _a('Invoice'),
             'controller' => 'invoice',
             'permission' => 'invoice',
-        ),
-        array(
-            'label' => _a('Logs'),
+        ],
+        [
+            'label'      => _a('Logs'),
             'controller' => 'logs',
             'permission' => 'logs',
-        ),
-        array(
-            'label' => _a('Gateway'),
+        ],
+        [
+            'label'      => _a('Gateway'),
             'controller' => 'gateway',
             'permission' => 'gateway',
-        ),
-        array(
-            'label' => _a('Delivery'),
+        ],
+        [
+            'label'      => _a('Delivery'),
             'controller' => 'delivery',
             'permission' => 'delivery',
-        ),
-        array(
-            'label' => _a('Location'),
+        ],
+        [
+            'label'      => _a('Location'),
             'controller' => 'location',
             'permission' => 'location',
-        ),
-        array(
-            'label' => _a('Credit'),
+        ],
+        [
+            'label'      => _a('Credit'),
             'controller' => 'credit',
             'permission' => 'credit',
-        ),
-    ),
+        ],
+    ],
     // Front section
-    'front' => array(
-        array(
-            'title' => _a('Index page'),
+    'front' => [
+        [
+            'title'      => _a('Index page'),
             'controller' => 'index',
             'permission' => 'public',
-            'block' => 1,
-        ),
-        array(
-            'title' => _a('Checkout'),
+            'block'      => 1,
+        ],
+        [
+            'title'      => _a('Checkout'),
             'controller' => 'checkout',
             'permission' => 'public',
-            'block' => 1,
-        ),
-        array(
-            'title' => _a('Detail'),
+            'block'      => 1,
+        ],
+        [
+            'title'      => _a('Detail'),
             'controller' => 'detail',
             'permission' => 'public',
-            'block' => 1,
-        ),
-        array(
-            'title' => _a('Credit'),
+            'block'      => 1,
+        ],
+        [
+            'title'      => _a('Credit'),
             'controller' => 'credit',
             'permission' => 'public',
-            'block' => 1,
-        ),
-    ),
-);
+            'block'      => 1,
+        ],
+    ],
+];

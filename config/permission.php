@@ -10,53 +10,53 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-return array(
+return [
     // Admin section
-    'admin' => array(
-        'order' => array(
-            'title' => _a('Orders'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'invoice' => array(
-            'title' => _a('Invoice'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'logs' => array(
-            'title' => _a('Logs'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'gateway' => array(
-            'title' => _a('Gateway'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'delivery' => array(
-            'title' => _a('Delivery'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'location' => array(
-            'title' => _a('Location'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'credit' => array(
-            'title' => _a('Credit'),
-            'access' => array(//'admin',
-            ),
-        ),
-    ),
+    'admin' => [
+        'order'    => [
+            'title'  => _a('Orders'),
+            'access' => [//'admin',
+            ],
+        ],
+        'invoice'  => [
+            'title'  => _a('Invoice'),
+            'access' => [//'admin',
+            ],
+        ],
+        'logs'     => [
+            'title'  => _a('Logs'),
+            'access' => [//'admin',
+            ],
+        ],
+        'gateway'  => [
+            'title'  => _a('Gateway'),
+            'access' => [//'admin',
+            ],
+        ],
+        'delivery' => [
+            'title'  => _a('Delivery'),
+            'access' => [//'admin',
+            ],
+        ],
+        'location' => [
+            'title'  => _a('Location'),
+            'access' => [//'admin',
+            ],
+        ],
+        'credit'   => [
+            'title'  => _a('Credit'),
+            'access' => [//'admin',
+            ],
+        ],
+    ],
     // Front section
-    'front' => array(
-        'public' => array(
-            'title' => _a('Global public resource'),
-            'access' => array(
+    'front' => [
+        'public' => [
+            'title'  => _a('Global public resource'),
+            'access' => [
                 'guest',
                 'member',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

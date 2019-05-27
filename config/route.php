@@ -10,18 +10,18 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-return array(
+return [
     // route name
-    'order' => array(
-        'name' => 'order',
-        'type' => 'Module\Order\Route\Order',
-        'options' => array(
-            'route' => '/order',
-            'defaults' => array(
-                'module' => 'order',
+    'order' => [
+        'name'    => 'order',
+        'type'    => 'Module\Order\Route\Order',
+        'options' => [
+            'route'    => '/order',
+            'defaults' => [
+                'module'     => 'order',
                 'controller' => 'index',
-                'action' => 'index'
-            )
-        ),
-    )
-);
+                'action'     => 'index',
+            ],
+        ],
+    ],
+];
