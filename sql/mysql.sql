@@ -257,7 +257,6 @@ CREATE TABLE `{order_address}` (
   KEY `order` (`order`)
 );
 
-
 CREATE TABLE `{installment}` (
   `id`         int(10) UNSIGNED     NOT NULL AUTO_INCREMENT,
   `number`     smallint(3) UNSIGNED NOT NULL DEFAULT '1',
