@@ -1,4 +1,3 @@
-
 <?php $this->css($this->assetModule('css/front.css')); ?>
 <div class="clearfix row">
     <div class="col-md-3 user-section-wrapper">
@@ -10,7 +9,7 @@
 
         <div id="js-order" class="order-view clearfix">
             <div class="order-form" data-id="<?php echo $this->escape($order['id']); ?>">
-        
+
                 <div class="page-header">
                     <ul class="list-inline clearfix">
                         <li class="list-inline-item float-left">
@@ -19,8 +18,8 @@
                         <?php if (!$order['has_payment'] && $order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_CANCELLED) { ?>
                             <li class="list-inline-item float-right">
                                 <a class="btn btn-primary btn-sm" title="<?php _e('Pay'); ?>" target="_blank"
-                                   href="<?php echo Pi::url($this->url('order', array('controller'=> 'payment', 'action' => 'index', 'id' => $order['id']))); ?>"><i
-                                        class="fas fa-credit-card"></i> <?php _e('Pay'); ?></a>
+                                   href="<?php echo Pi::url($this->url('order', ['controller' => 'payment', 'action' => 'index', 'id' => $order['id']])); ?>"><i
+                                            class="fas fa-credit-card"></i> <?php _e('Pay'); ?></a>
                             </li>
                         <?php } ?>
                     </ul>
@@ -41,7 +40,9 @@
                                         <hr/>
                                         <p>
                                             <?php if (!empty($addressInvoicing['first_name']) && !empty($addressInvoicing['last_name'])) { ?>
-                                                <?php echo $this->escape($addressInvoicing['first_name']); ?> <?php echo $this->escape($addressInvoicing['last_name']); ?><br/>
+                                                <?php echo $this->escape($addressInvoicing['first_name']); ?><?php echo $this->escape(
+                                                    $addressInvoicing['last_name']
+                                                ); ?><br/>
                                             <?php } ?>
                                             <?php if (!empty($addressInvoicing['id_number'])) { ?>
                                                 <?php echo $this->escape($addressInvoicing['id_number']); ?><br/>
@@ -65,7 +66,7 @@
                                             <?php } ?>
                                             <?php if (!empty($addressInvoicing['country'])) { ?>
                                                 <?php echo $this->escape($addressInvoicing['country']); ?><br/>
-                                            <?php } ?>                                            
+                                            <?php } ?>
                                         </p>
                                         <p>
                                             <?php if (!empty($addressInvoicing['email'])) { ?>
@@ -95,7 +96,9 @@
                                         <hr/>
                                         <p>
                                             <?php if (!empty($addressDelivery['first_name']) && !empty($addressDelivery['last_name'])) { ?>
-                                                <?php echo $this->escape($addressDelivery['first_name']); ?> <?php echo $this->escape($addressDelivery['last_name']); ?><br/>
+                                                <?php echo $this->escape($addressDelivery['first_name']); ?><?php echo $this->escape(
+                                                    $addressDelivery['last_name']
+                                                ); ?><br/>
                                             <?php } ?>
                                             <?php if (!empty($addressDelivery['id_number'])) { ?>
                                                 <?php echo $this->escape($addressDelivery['id_number']); ?><br/>
@@ -149,8 +152,8 @@
                                         <hr/>
                                         <p><strong><?php _e('Time order'); ?></strong> :
                                             <span><?php echo $this->escape($order['time_order_view']); ?> </span></p>
-        
-                                       <?php 
+
+                                        <?php
                                         $orderClass = '';
                                         switch ($order['status_order']) {
                                             case Module\Order\Model\Order::STATUS_ORDER_DRAFT:
@@ -164,19 +167,20 @@
                                                 break;
                                         }
                                         ?>
-                                         <p><strong><?php _e('Order status'); ?></strong> : <span
+                                        <p><strong><?php _e('Order status'); ?></strong> : <span
                                                     class="badge <?php echo $orderClass; ?>">
                                                     <?php echo Module\Order\Model\Order::getStatusList()[$order['status_order']]; ?>
                                                     </span>
                                         </p>
-                                         <p><strong><?php _e('Blocked payments ?'); ?></strong> : <span
-                                                    class="badge <?php echo $order['can_pay'] ? 'badge-success' : 'badge-danger'; ?>"><?php echo $order['can_pay'] ? __('No') : __('Yes'); ?></span>
+                                        <p><strong><?php _e('Blocked payments ?'); ?></strong> : <span
+                                                    class="badge <?php echo $order['can_pay'] ? 'badge-success'
+                                                        : 'badge-danger'; ?>"><?php echo $order['can_pay'] ? __('No') : __('Yes'); ?></span>
                                         </p>
-                                        <p><strong><?php _e('Delivery status'); ?></strong> : 
+                                        <p><strong><?php _e('Delivery status'); ?></strong> :
                                             <?php if ($order['type_commodity'] == 'product') { ?>
                                                 <span
-                                                    id="update-delivery-<?php echo $this->escape($order['id']); ?>"
-                                                    class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-sm">
+                                                        id="update-delivery-<?php echo $this->escape($order['id']); ?>"
+                                                        class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-sm">
                                                     
                                                 </span>
                                             <?php } else { ?>
@@ -184,14 +188,16 @@
                                             <?php } ?>
                                         </p>
                                         <p"><strong><?php _e('Time delivery'); ?></strong> : <span
-                                                    id="update-delivery-<?php echo $this->escape($order['id']); ?>-time"><?php echo $this->escape($order['time_delivery_view']); ?></span>
+                                                id="update-delivery-<?php echo $this->escape($order['id']); ?>-time"><?php echo $this->escape(
+                                                $order['time_delivery_view']
+                                            ); ?></span>
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-        
+
                     <!-- accordion -->
                     <div class="card">
                         <div class="card-header" role="tab" id="headingProducts">
@@ -215,25 +221,25 @@
                                         <th><?php _e('Vat'); ?></th>
                                         <th><?php _e('Total'); ?></th>
                                     </tr>
-                                    <?php 
-                                        $totalProductPrice = 0;
-                                        $totalShippingPrice = 0;
-                                        $totalPackingPrice = 0;
-                                        $totalSetupPrice = 0;
-                                        $totalDiscountPrice = 0;
-                                        $totalVatPrice = 0;
-                                        $totalPrice = 0;
-                                    
+                                    <?php
+                                    $totalProductPrice  = 0;
+                                    $totalShippingPrice = 0;
+                                    $totalPackingPrice  = 0;
+                                    $totalSetupPrice    = 0;
+                                    $totalDiscountPrice = 0;
+                                    $totalVatPrice      = 0;
+                                    $totalPrice         = 0;
+
                                     foreach ($order['products'] as $product) {
-                                        
-                                        $totalProductPrice += $product['product_price'];
+
+                                        $totalProductPrice  += $product['product_price'];
                                         $totalShippingPrice += $product['shipping_price'];
-                                        $totalPackingPrice += $product['packing_price'];
-                                        $totalSetupPrice += $product['setup_price'];
+                                        $totalPackingPrice  += $product['packing_price'];
+                                        $totalSetupPrice    += $product['setup_price'];
                                         $totalDiscountPrice += $product['discount_price'];
-                                        $totalVatPrice += $product['vat_price'];
-                                        $totalPrice += $product['total_price'];
-                                    ?>
+                                        $totalVatPrice      += $product['vat_price'];
+                                        $totalPrice         += $product['total_price'];
+                                        ?>
                                         <tr>
                                             <td>
                                                 <div class="productItem">
@@ -251,7 +257,7 @@
                                                         <?php echo $this->escape($product['details']['title']); ?>
                                                     <?php } ?>
                                                 </div>
-                                                <?php echo nl2br($this->escape($product['admin_note'])); ?> 
+                                                <?php echo nl2br($this->escape($product['admin_note'])); ?>
                                             </td>
                                             <td><?php echo $product['time_start'] ? _date($product['time_start']) : ''; ?></td>
                                             <td><?php echo $product['time_end'] ? _date($product['time_end']) : ''; ?></td>
@@ -266,7 +272,7 @@
                                         </tr>
                                     <?php } ?>
                                     <tr>
-                                        <td colspan=4><strong><?php _e ('Total') ?></strong></td>
+                                        <td colspan=4><strong><?php _e('Total') ?></strong></td>
                                         <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalProductPrice)); ?></strong></td>
                                         <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalShippingPrice)); ?></strong></td>
                                         <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalPackingPrice)); ?></strong></td>
@@ -276,11 +282,11 @@
                                         <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalPrice)); ?></strong></td>
                                     </tr>
                                 </table>
-                                <hr />
+                                <hr/>
                             </div>
                         </div>
                     </div>
-        
+
                     <!-- accordion -->
                     <div class="card mt-3">
                         <div role="tab" id="headingInvoice">
@@ -294,13 +300,21 @@
                                     <?php foreach ($order['invoices'] as $invoice) { ?>
                                         <table class="table table-striped table-bordered table-sm">
                                             <tr>
-                                                <th class="table-col-md-2"><?php echo $invoice['type'] == 'CREDIT' ? __('Credit Note number') : __('Invoice ID'); ?></th>
+                                                <th class="table-col-md-2"><?php echo $invoice['type'] == 'CREDIT'
+                                                        ? __('Credit Note number')
+                                                        : __(
+                                                            'Invoice ID'
+                                                        ); ?></th>
                                                 <th class="table-col-md-1"><?php _e('Status'); ?></th>
                                                 <th class="table-col-md-1"><?php _e('Type'); ?></th>
-                                                <th class="table-col-md-2"><?php echo $invoice['type'] == 'CREDIT' ? __('Credit Note time') : __('Time invoice'); ?></th>
+                                                <th class="table-col-md-2"><?php echo $invoice['type'] == 'CREDIT'
+                                                        ? __('Credit Note time')
+                                                        : __(
+                                                            'Time invoice'
+                                                        ); ?></th>
                                                 <th class="table-col-md-6 text-right"><?php _e('Action'); ?></th>
                                             </tr>
-                                                
+
                                             <?php
                                             $badgeIdClass = '';
                                             if ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) {
@@ -311,20 +325,23 @@
                                                 $badgeIdClass = 'badge-danger';
                                             }
                                             ?>
-                                            
+
                                             <tr>
                                                 <td><?php echo $this->escape($invoice['code']); ?></td>
-                                                <td><span class="badge <?php echo $badgeIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']]; ?></span></td>
+                                                <td><span class="badge <?php echo $badgeIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList(
+                                                        )[$invoice['status']]; ?></span></td>
                                                 <td><?php echo $this->escape($invoice['type']); ?></td>
                                                 <td><?php echo $this->escape($invoice['time_invoice_view']) ?></td>
                                                 <td class="text-right">
                                                     <a class="btn btn-primary btn-sm" title="<?php _e('Print'); ?>"
-                                                       href="<?php echo $this->url('', array('controller' => 'detail', 'action' => 'print', 'id' => $invoice['id'])); ?>">
+                                                       href="<?php echo $this->url(
+                                                           '', ['controller' => 'detail', 'action' => 'print', 'id' => $invoice['id']]
+                                                       ); ?>">
                                                         <i class="fas fa-print"></i> <?php _e('Print'); ?></a>
                                                 </td>
                                             </tr>
                                         </table>
-                                    
+
                                         <?php foreach ($invoice['installments'] as $installment) { ?>
                                             <table class="table table-striped table-installment table-bordered table-sm">
                                                 <tr>
@@ -343,7 +360,7 @@
                                                     $badgeIdClass = 'badge-warning';
                                                 } elseif ($installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
                                                     $badgeIdClass = 'badge-success';
-                                                } 
+                                                }
                                                 ?>
                                                 <tr>
                                                     <td class="transparent"></td>
@@ -352,53 +369,55 @@
                                                     <td><?php echo $this->escape($installment['credit_price_view']); ?></td>
                                                     <td><?php echo $this->escape($installment['time_duedate_view']); ?></td>
                                                     <td><?php echo $this->escape($installment['time_payment_view']); ?></td>
-                                                    <td><?php echo isset($gateways[$installment['gateway']]) ? $gateways[$installment['gateway']] : ''; ?></td >
-                                                    <td><span class="badge <?php echo $badgeIdClass; ?>"><?php echo $installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID ? __('Paid') : __('Unpaid') ?></span></td>
-                                                    
+                                                    <td><?php echo isset($gateways[$installment['gateway']]) ? $gateways[$installment['gateway']] : ''; ?></td>
+                                                    <td><span class="badge <?php echo $badgeIdClass; ?>"><?php echo $installment['status_payment']
+                                                            == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID ? __('Paid') : __('Unpaid') ?></span>
+                                                    </td>
+
                                                 </tr>
                                             </table>
                                         <?php } ?>
-                                     <?php } ?>
-                                    <hr />
+                                    <?php } ?>
+                                    <hr/>
                                 <?php } else { ?>
-                                <?php _e('No invoice yet.') ?>    
+                                    <?php _e('No invoice yet.') ?>
                                 <?php } ?>
-        
+
                             </div>
                         </div>
                     </div>
-        
+
                     <!-- accordion -->
                     <?php if (!empty($order['user_note']) || !empty($order['admin_note'])) { ?>
-                    <div class="card">
-                        <div class="card-header" role="tab" id="headingNote">
-                            <h4 class="card-title">
-                                <?php _e('Note'); ?>
-                            </h4>
-                        </div>
-                        <div>
-                            <div class="card-body">
-                                <?php if (!empty($order['user_note'])) { ?>
-                                    <div class="clearfix">
-                                        <h4><?php _e('User note'); ?></h4>
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingNote">
+                                <h4 class="card-title">
+                                    <?php _e('Note'); ?>
+                                </h4>
+                            </div>
+                            <div>
+                                <div class="card-body">
+                                    <?php if (!empty($order['user_note'])) { ?>
                                         <div class="clearfix">
-                                            <?php echo $order['user_note']; ?>
+                                            <h4><?php _e('User note'); ?></h4>
+                                            <div class="clearfix">
+                                                <?php echo $order['user_note']; ?>
+                                            </div>
+                                            <hr/>
                                         </div>
-                                        <hr />
-                                    </div>
-                                <?php } ?>
-                                <?php if ($order['admin_note']) { ?> 
-                                    <div class="clearfix">
-                                        <h4><?php _e('Admin note'); ?></h4>
-                                        <div id="update-note-<?php echo $this->escape($order['id']); ?>" class="clearfix">
-                                            <?php echo $order['admin_note']; ?>
+                                    <?php } ?>
+                                    <?php if ($order['admin_note']) { ?>
+                                        <div class="clearfix">
+                                            <h4><?php _e('Admin note'); ?></h4>
+                                            <div id="update-note-<?php echo $this->escape($order['id']); ?>" class="clearfix">
+                                                <?php echo $order['admin_note']; ?>
+                                            </div>
+                                            <hr/>
                                         </div>
-                                        <hr />
-                                    </div>
-                                <?php } ?>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <?php } ?>
                 </div>
             </div>
@@ -437,7 +456,7 @@
             invoiceAction: function (e) {
                 var p = $(e.target).parents('div.order-form'),
                     self = this;
-                $.get(p.attr('data-invoice'), {'id' : $(e.target).data('invoice')}).done(function (res) {
+                $.get(p.attr('data-invoice'), {'id': $(e.target).data('invoice')}).done(function (res) {
                     self.modal.html(res).modal('show');
                     formModule.success = function (res) {
                         var d = res.data;

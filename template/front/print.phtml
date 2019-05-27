@@ -1,42 +1,142 @@
 <style>
-    * {color:#525251}
-    
-    .align-right {text-align:right; right:5mm}
-    .align-center {text-align:center}
-    .align-justify {text-align:justify}
-    .clearfix {clear:both}
-    
-    hr {margin:0; height:1px; color:#d6dce1;}
-    table {width:100%}
+    * {
+        color: #525251
+    }
+
+    .align-right {
+        text-align: right;
+        right: 5mm
+    }
+
+    .align-center {
+        text-align: center
+    }
+
+    .align-justify {
+        text-align: justify
+    }
+
+    .clearfix {
+        clear: both
+    }
+
+    hr {
+        margin: 0;
+        height: 1px;
+        color: #d6dce1;
+    }
+
+    table {
+        width: 100%
+    }
+
     table.withborder td,
-    table.withborder {border:1px solid #e3e3e3}
-    th, td {padding:10px 5px}
-    
-    .header {position:relative; height:75mm; width:210.5mm;}
-    .header div {position:absolute; bottom:15mm;right:15mm; }
-    .header img.header {width:100%; height:100%}
-    .header img.logo {width:30mm; height:30mm; position:absolute; top:5mm; left:10mm}
-    
-    .header .align-right {line-height:5mm}
-    .small1 .col1 {width:117mm; padding:4mm 0mm 4mm 5mm;vertical-align:bottom}
-    .small1 .col2{width:75mm}
-    
-    .small2 {width:75mm;border:2px solid #fff}
-    .small2 .col1 {width:66%; padding:3mm 3mm 3mm 1mm}
-    .small2 .col2{width:34%}
-    
-    .big {margin-left:5mm;;width:200mm;}
-    .big .col1{width:75%}
-    .big .col2{width:12%}
-    .big .col3{width:13%}
-    
-    .color1{background-color:#d6dce1; font-weight:bold; color:#76767a}
-    .color2{background-color:#058cca; color:#fff; font-weight:bold}
-    .borderbottom{border-bottom:1px solid #d6dce1}
-    
-    .paid-status {padding:5px; text-align:center;width:70mm;border:2px solid #525251}
-    .text-footer {margin-left:5mm; width:200mm}
-    
+    table.withborder {
+        border: 1px solid #e3e3e3
+    }
+
+    th, td {
+        padding: 10px 5px
+    }
+
+    .header {
+        position: relative;
+        height: 75mm;
+        width: 210.5mm;
+    }
+
+    .header div {
+        position: absolute;
+        bottom: 15mm;
+        right: 15mm;
+    }
+
+    .header img.header {
+        width: 100%;
+        height: 100%
+    }
+
+    .header img.logo {
+        width: 30mm;
+        height: 30mm;
+        position: absolute;
+        top: 5mm;
+        left: 10mm
+    }
+
+    .header .align-right {
+        line-height: 5mm
+    }
+
+    .small1 .col1 {
+        width: 117mm;
+        padding: 4mm 0mm 4mm 5mm;
+        vertical-align: bottom
+    }
+
+    .small1 .col2 {
+        width: 75mm
+    }
+
+    .small2 {
+        width: 75mm;
+        border: 2px solid #fff
+    }
+
+    .small2 .col1 {
+        width: 66%;
+        padding: 3mm 3mm 3mm 1mm
+    }
+
+    .small2 .col2 {
+        width: 34%
+    }
+
+    .big {
+        margin-left: 5mm;;
+        width: 200mm;
+    }
+
+    .big .col1 {
+        width: 75%
+    }
+
+    .big .col2 {
+        width: 12%
+    }
+
+    .big .col3 {
+        width: 13%
+    }
+
+    .color1 {
+        background-color: #d6dce1;
+        font-weight: bold;
+        color: #76767a
+    }
+
+    .color2 {
+        background-color: #058cca;
+        color: #fff;
+        font-weight: bold
+    }
+
+    .borderbottom {
+        border-bottom: 1px solid #d6dce1
+    }
+
+    .paid-status {
+        padding: 5px;
+        text-align: center;
+        width: 70mm;
+        border: 2px solid #525251
+    }
+
+    .text-footer {
+        margin-left: 5mm;
+        width: 200mm
+    }
+
 </style>
 <page backleft="-20px" backtop="81mm" backbottom="100px">
     <page_footer>
@@ -51,14 +151,18 @@
                 <?php if (!empty($order['company'])) { ?>
                     <b><?php echo $this->escape($order['company']); ?></b>
                     <br>
-                     <?php if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
-                        <?php echo __('To the attention of') . ' ' . $this->escape($address['first_name']); ?> <?php echo $this->escape($address['last_name']); ?>
-                        <br>        
-                     <?php } ?>
-                <?php } else if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
-                    <b><?php echo $this->escape($address['first_name']); ?> <?php echo $this->escape($address['last_name']); ?></b>
-                    <br>        
-                <?php } ?>
+                    <?php if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
+                        <?php echo __('To the attention of') . ' ' . $this->escape($address['first_name']); ?><?php echo $this->escape(
+                            $address['last_name']
+                        ); ?>
+                        <br>
+                    <?php } ?>
+                <?php } else {
+                    if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
+                        <b><?php echo $this->escape($address['first_name']); ?><?php echo $this->escape($address['last_name']); ?></b>
+                        <br>
+                    <?php }
+                } ?>
                 <?php if (!empty($address['address1'])) { ?>
                     <?php echo $this->escape($address['address1']); ?>
                     <br>
@@ -67,22 +171,22 @@
                     <?php echo $this->escape($address['address2']); ?>
                     <br>
                 <?php } ?>
-                <?php 
-                    $addressCompose = array();
-                    if (!empty($address['zip_code'])) {
-                        $addressCompose[] = $this->escape($address['zip_code']);
-                    }
-                    if (!empty($address['city'])) {
-                        $addressCompose[] = $this->escape($address['city']);
-                    }
-                    echo $this->escape(join(', ', $addressCompose));
+                <?php
+                $addressCompose = [];
+                if (!empty($address['zip_code'])) {
+                    $addressCompose[] = $this->escape($address['zip_code']);
+                }
+                if (!empty($address['city'])) {
+                    $addressCompose[] = $this->escape($address['city']);
+                }
+                echo $this->escape(join(', ', $addressCompose));
                 ?>
                 <br>
                 <?php if (!empty($address['state'])) { ?>
                     <?php echo $this->escape($address['state']); ?>
                     <br>
                 <?php } ?>
-                
+
                 <?php if (!empty($address['country'])) { ?>
                     <?php echo $this->escape($address['country']); ?>
                     <br>
@@ -99,51 +203,51 @@
                     N° TVA UE <?php echo $this->escape($address['company_vat']); ?>
                     <br>
                 <?php } ?>
-            </div>   
-        </div>    
+            </div>
+        </div>
     </page_header>
-        <table class="first small1">
+    <table class="first small1">
         <tr>
             <td class="col1">
                 <?php echo nl2br($config['invoice_text_description']); ?>
             </td>
             <td class="col2">
-               <table cellspacing="0" class="small2">
+                <table cellspacing="0" class="small2">
                     <thead>
-                        <tr class="borderbottom">
-                            <th colspan=2 class="borderbottom">
-                                <?php echo $order['invoice']['type'] == 'CREDIT' ? __('Credit Note') : __('Invoice'); ?>
+                    <tr class="borderbottom">
+                        <th colspan=2 class="borderbottom">
+                            <?php echo $order['invoice']['type'] == 'CREDIT' ? __('Credit Note') : __('Invoice'); ?>
 
-                            </th>
-                        </tr>
+                        </th>
+                    </tr>
                     </thead>
                     <tbody>
+                    <tr>
+                        <td class="col1">
+                            <?php echo $order['invoice']['type'] == 'CREDIT' ? __('Credit Note number') : __('Invoice number'); ?>
+                        </td>
+                        <td class="align-right col2">
+                            <?php echo $order['invoice']['code'] ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col1">
+                            <?php echo $order['invoice']['type'] == 'CREDIT' ? __('Credit Note time') : __('Time invoice'); ?>
+                        </td>
+                        <td class="align-right col2">
+                            <?php echo $this->escape($order['time_invoice_view']); ?>
+                        </td>
+                    </tr>
+                    <?php if ($order['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) { ?>
                         <tr>
                             <td class="col1">
-                                <?php echo $order['invoice']['type'] == 'CREDIT' ? __('Credit Note number') : __('Invoice number'); ?>
+                                <?php _e('Time due date'); ?>
                             </td>
                             <td class="align-right col2">
-                                <?php echo $order['invoice']['code'] ?>
+                                <?php echo $this->escape($order['time_duedate_view']); ?>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="col1">
-                                <?php echo $order['invoice']['type'] == 'CREDIT' ? __('Credit Note time') : __('Time invoice'); ?>
-                            </td>
-                            <td class="align-right col2">
-                                <?php echo $this->escape($order['time_invoice_view']); ?>
-                            </td>
-                        </tr>
-                        <?php if ($order['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) { ?>
-                            <tr>
-                                <td class="col1">
-                                    <?php _e('Time due date'); ?>
-                                </td>
-                                <td class="align-right col2">
-                                    <?php echo $this->escape($order['time_duedate_view']); ?>
-                                </td>
-                            </tr>
-                        <?php } else { ?>
+                    <?php } else { ?>
                         <tr>
                             <td class="col1">
                                 <?php _e('Time payment'); ?>
@@ -152,15 +256,15 @@
                                 <?php echo $this->escape($order['time_payment_view']); ?>
                             </td>
                         </tr>
-                        <?php } ?>
-                        <tr>
-                            <td class="color1 col1">
-                                <?php _e('Total all taxes included'); ?>
-                            </td>
-                            <td class="align-right color2 col2">
-                                <?php echo $this->escape($order['total_price_view']); ?>
-                            </td>
-                        </tr>
+                    <?php } ?>
+                    <tr>
+                        <td class="color1 col1">
+                            <?php _e('Total all taxes included'); ?>
+                        </td>
+                        <td class="align-right color2 col2">
+                            <?php echo $this->escape($order['total_price_view']); ?>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </td>
@@ -168,71 +272,73 @@
     </table>
     <table cellspacing="0" class="withborder big">
         <thead>
-            <tr>
-                <th class="col1 color1">
-                    <?php _e('Product'); ?>
-                </th>
-                <th class="col2 color1">
-                    <?php _e('Number'); ?>
-                </th>
-                <th class="align-right col3 color2">
-                    <?php _e('Price'); ?>
-                </th>
-            </tr>
+        <tr>
+            <th class="col1 color1">
+                <?php _e('Product'); ?>
+            </th>
+            <th class="col2 color1">
+                <?php _e('Number'); ?>
+            </th>
+            <th class="align-right col3 color2">
+                <?php _e('Price'); ?>
+            </th>
+        </tr>
         </thead>
         <tbody>
-            <?php $count = 0; ?>
-            <?php foreach ($order['products'] as $product) { ?>
-                <?php $unconsumedPrice = $product['extra']['unconsumedPrice'];?> 
-                <?php $count++ ?>
-                <tr>
-                    <td>
-                        <strong>#<?php echo $count . ' '?>
-                            <?php $extra = json_decode($order['invoice']['extra'], true); ?>
-                            <?php if ($order['invoice']['type'] == 'CREDIT') { ?>
-                                <?php echo sprintf(__("Credit note on Invoice n°%s"), $extra['initial_invoice']) ?>
-                            <?php } else { ?>
-                                <?php echo $this->escape($product['details']['title']); ?>
-                            <?php } ?>
-                        </strong>
-                    </td>
-                    <td class="align-center">
-                        <strong><?php echo _number($this->escape($product['number'])); ?></strong>
-                    </td>
-                    <td class="align-right">
-                        <strong><?php echo Pi::api('api', 'order')->viewPrice($product['product_price'] - $product['discount_price'] - $unconsumedPrice); ?></strong>
-                    </td>
-                </tr>
+        <?php $count = 0; ?>
+        <?php foreach ($order['products'] as $product) { ?>
+            <?php $unconsumedPrice = $product['extra']['unconsumedPrice']; ?>
+            <?php $count++ ?>
+            <tr>
+                <td>
+                    <strong>#<?php echo $count . ' ' ?>
+                        <?php $extra = json_decode($order['invoice']['extra'], true); ?>
+                        <?php if ($order['invoice']['type'] == 'CREDIT') { ?>
+                            <?php echo sprintf(__("Credit note on Invoice n°%s"), $extra['initial_invoice']) ?>
+                        <?php } else { ?>
+                            <?php echo $this->escape($product['details']['title']); ?>
+                        <?php } ?>
+                    </strong>
+                </td>
+                <td class="align-center">
+                    <strong><?php echo _number($this->escape($product['number'])); ?></strong>
+                </td>
+                <td class="align-right">
+                    <strong><?php echo Pi::api('api', 'order')->viewPrice(
+                            $product['product_price'] - $product['discount_price'] - $unconsumedPrice
+                        ); ?></strong>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=2>
+                    <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Price ext VAT'); ?>
+                </td>
+                <td>
+                    <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
+                </td>
+            </tr>
+
+            <?php if ($product['discount_price'] > 0) { ?>
                 <tr>
                     <td colspan=2>
-                        <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Price ext VAT'); ?>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Discount'); ?>
                     </td>
                     <td>
-                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
+                        -<?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
                     </td>
                 </tr>
-                
-                <?php if ($product['discount_price'] > 0) { ?>
-                    <tr>
-                        <td colspan=2>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Discount'); ?>
-                        </td>
-                        <td>
-                            -<?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
-                        </td>
-                    </tr>
-                <?php } ?>
-                <?php if ($unconsumedPrice > 0) { ?>
-                    <tr>
-                        <td colspan=2>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Old package recovery'); ?>
-                        </td>
-                        <td>
-                            -<?php echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice)); ?>
-                        </td>
-                    </tr>
-                <?php } ?>
             <?php } ?>
+            <?php if ($unconsumedPrice > 0) { ?>
+                <tr>
+                    <td colspan=2>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Old package recovery'); ?>
+                    </td>
+                    <td>
+                        -<?php echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice)); ?>
+                    </td>
+                </tr>
+            <?php } ?>
+        <?php } ?>
         </tbody>
     </table>
     <table class="small1">
@@ -241,25 +347,27 @@
                 <div class="paid-status">
                     <?php if ($order['invoice']['type'] == 'CREDIT') { ?>
                         <strong><?php _e('A votre crédit') ?></strong>
-                    <?php } else if ($order['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) { ?>
-                        <strong><?php _e('En votre aimable règlement à réception de facture') ?></strong>
-                    <?php } else { ?>
-                        <strong><?php echo sprintf(__('Facture réglée (%s)'), $order['gateway']) ?></strong>
-                    <?php }  ?>
+                    <?php } else {
+                        if ($order['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) { ?>
+                            <strong><?php _e('En votre aimable règlement à réception de facture') ?></strong>
+                        <?php } else { ?>
+                            <strong><?php echo sprintf(__('Facture réglée (%s)'), $order['gateway']) ?></strong>
+                        <?php }
+                    } ?>
                 </div>
             </td>
             <td class="col2">
                 <table cellspacing="0" class="small2">
-                   <tbody>
-                        <tr>
-                            <td class="col1 borderbottom">
-                                <strong><?php _e('Product price ex VAT'); ?></strong>
-                            </td>
-                            <td class="align-right col2 borderbottom">
-                                <strong><?php echo $this->escape($order['total_product_price']); ?></strong>
-                            </td>
-                       </tr>
-                        <?php if ($order['total_shipping_price'] > 0) { ?>
+                    <tbody>
+                    <tr>
+                        <td class="col1 borderbottom">
+                            <strong><?php _e('Product price ex VAT'); ?></strong>
+                        </td>
+                        <td class="align-right col2 borderbottom">
+                            <strong><?php echo $this->escape($order['total_product_price']); ?></strong>
+                        </td>
+                    </tr>
+                    <?php if ($order['total_shipping_price'] > 0) { ?>
                         <tr>
                             <td>
                                 <strong><?php _e('Shipping'); ?></strong>
@@ -268,43 +376,43 @@
                                 <strong><?php echo $this->escape($order['total_shipping_price_view']); ?></strong>
                             </td>
                         </tr>
-                        <?php } ?> 
-                        <?php if ($order['total_packing_price'] > 0) { ?>
-                            <tr>
-                                <td>
-                                    <strong><?php _e('Packing'); ?></strong>
-                                </td>
-                                <td class="align-right">
-                                    <strong><?php echo $this->escape($order['total_packing_price_view']); ?></strong>
-                                </td>
-                            </tr>
-                            <?php } ?> 
-                            <?php if ($order['total_setup_price'] > 0) { ?>
-                            <tr>
-                                <td>
-                                    <strong><?php _e('Setup'); ?></strong>
-                                </td>
-                                <td class="align-right">
-                                    <strong><?php echo $this->escape($order['total_setup_price_view']); ?></strong>
-                                </td>
-                            </tr>
-                            <?php } ?> 
+                    <?php } ?>
+                    <?php if ($order['total_packing_price'] > 0) { ?>
                         <tr>
                             <td>
-                                <strong><?php _e('Vat'); ?></strong>
+                                <strong><?php _e('Packing'); ?></strong>
                             </td>
                             <td class="align-right">
-                                <strong><?php echo $this->escape($order['total_vat_price_view']); ?></strong>
+                                <strong><?php echo $this->escape($order['total_packing_price_view']); ?></strong>
                             </td>
                         </tr>
+                    <?php } ?>
+                    <?php if ($order['total_setup_price'] > 0) { ?>
                         <tr>
-                            <td class="color1">
-                                <strong><?php _e('Total all taxes included'); ?></strong>
+                            <td>
+                                <strong><?php _e('Setup'); ?></strong>
                             </td>
-                            <td class="align-right color2">
-                                <?php echo $this->escape($order['total_price_view']); ?>
+                            <td class="align-right">
+                                <strong><?php echo $this->escape($order['total_setup_price_view']); ?></strong>
                             </td>
                         </tr>
+                    <?php } ?>
+                    <tr>
+                        <td>
+                            <strong><?php _e('Vat'); ?></strong>
+                        </td>
+                        <td class="align-right">
+                            <strong><?php echo $this->escape($order['total_vat_price_view']); ?></strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="color1">
+                            <strong><?php _e('Total all taxes included'); ?></strong>
+                        </td>
+                        <td class="align-right color2">
+                            <?php echo $this->escape($order['total_price_view']); ?>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </td>
@@ -314,4 +422,4 @@
     <p class="align-justify text-footer">
         <?php echo nl2br($config['invoice_text_footer']); ?>
     </p>
- </page>
+</page>

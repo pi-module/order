@@ -13,10 +13,11 @@
     </div>
     <?php echo $this->form($form); ?>
     <script>
-        function formAutoSubmit () {
+        function formAutoSubmit() {
             var frm = document.getElementById("pay");
             frm.submit();
         }
+
         window.onload = window.setTimeout(formAutoSubmit, 100);
 
     </script>

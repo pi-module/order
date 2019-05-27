@@ -19,47 +19,49 @@
                 <th class="text-center"><?php _e('Order status'); ?></th>
                 <th class="text-center"><?php _e('Action'); ?></th>
             </tr>
-            <?php if (count ($user['orders'])) { ?>
+            <?php if (count($user['orders'])) { ?>
                 <?php foreach ($user['orders'] as $order) { ?>
                     <tr>
                         <td class="text-center"><?php echo $this->escape($order['code']); ?></td>
                         <td class="text-center">
-                            <?php $productsList = array();
+                            <?php $productsList = [];
                             foreach ($order['products'] as $product) {
                                 $productsList[] = $product['details']['title'];
                             }
-                            echo implode(' , ',$productsList); ?>
+                            echo implode(' , ', $productsList); ?>
                         </td>
                         <td class="text-center"><?php echo $this->escape($order['time_create_view']); ?></td>
                         <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
-                        <td class="text-center"><span class="badge <?php echo $this->escape($order['shortLabel']); ?>"><?php echo $this->escape($order['shortStatus']); ?></span></td>
+                        <td class="text-center"><span class="badge <?php echo $this->escape($order['shortLabel']); ?>"><?php echo $this->escape(
+                                    $order['shortStatus']
+                                ); ?></span></td>
                         <td class="text-center">
                             <?php if ($order['can_pay'] && $order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_CANCELLED) { ?>
-                            <a class="btn btn-danger btn-sm" title="<?php _e('Cancel'); ?>" target="_blank"
-                               href="<?php echo Pi::url($this->url('order', array('controller'=> 'index', 'action' => 'cancel', 'id' => $order['id']))); ?>"><i
-                                    class="fas fa-times"></i> <?php _e('Cancel'); ?></a>
-                            
-                            <a class="btn btn-primary btn-sm" title="<?php _e('Pay'); ?>" target="_blank"
-                               href="<?php echo Pi::url($this->url('order', array('controller'=> 'payment', 'action' => 'index', 'id' => $order['id']))); ?>"><i
-                                    class="fas fa-credit-card"></i> <?php _e('Pay'); ?></a>
-                                    
-                            <a class="btn btn-primary btn-sm" title="<?php _e('View'); ?>" target="_blank"
-                                href="<?php echo Pi::url($this->url('order', array('controller' => 'detail', 'id' => $order['id']))); ?>"><i
-                            class="fas fa-edit"></i> <?php _e('View'); ?></a>
-                          <?php } else { ?>
-                              <a class="btn btn-primary btn-sm" title="<?php _e('View'); ?>" target="_blank"
-                                href="<?php echo Pi::url($this->url('order', array('controller' => 'detail', 'id' => $order['id']))); ?>"><i
-                            class="fas fa-edit"></i> <?php _e('Details / Invoice'); ?></a>
-                          <?php } ?>
-                            
-                   
+                                <a class="btn btn-danger btn-sm" title="<?php _e('Cancel'); ?>" target="_blank"
+                                   href="<?php echo Pi::url($this->url('order', ['controller' => 'index', 'action' => 'cancel', 'id' => $order['id']])); ?>"><i
+                                            class="fas fa-times"></i> <?php _e('Cancel'); ?></a>
+
+                                <a class="btn btn-primary btn-sm" title="<?php _e('Pay'); ?>" target="_blank"
+                                   href="<?php echo Pi::url($this->url('order', ['controller' => 'payment', 'action' => 'index', 'id' => $order['id']])); ?>"><i
+                                            class="fas fa-credit-card"></i> <?php _e('Pay'); ?></a>
+
+                                <a class="btn btn-primary btn-sm" title="<?php _e('View'); ?>" target="_blank"
+                                   href="<?php echo Pi::url($this->url('order', ['controller' => 'detail', 'id' => $order['id']])); ?>"><i
+                                            class="fas fa-edit"></i> <?php _e('View'); ?></a>
+                            <?php } else { ?>
+                                <a class="btn btn-primary btn-sm" title="<?php _e('View'); ?>" target="_blank"
+                                   href="<?php echo Pi::url($this->url('order', ['controller' => 'detail', 'id' => $order['id']])); ?>"><i
+                                            class="fas fa-edit"></i> <?php _e('Details / Invoice'); ?></a>
+                            <?php } ?>
+
+
                         </td>
                     </tr>
                 <?php } ?>
             <?php } else { ?>
                 <tr>
                     <td colspan="6" class="text-center">
-                        <?php _e('You did not yet place an order yet'); ?>   
+                        <?php _e('You did not yet place an order yet'); ?>
                     </td>
                 </tr>
             <?php } ?>

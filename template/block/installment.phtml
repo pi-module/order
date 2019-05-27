@@ -20,7 +20,9 @@
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="summery">
-                <h3 class="text-center"><?php echo _b('Desc'); ?> <small>قیمت ها به تومان می باشد</small></h3>
+                <h3 class="text-center"><?php echo _b('Desc'); ?>
+                    <small>قیمت ها به تومان می باشد</small>
+                </h3>
                 <table class="table table-striped table-bordered table-sm small">
                     <tr>
                         <th class="text-center"><?php echo _b('10 th'); ?></th>
@@ -38,25 +40,56 @@
                         <th class="text-center"><?php echo $block['d'][10]['10-view']; ?></th>
                         <th class="text-center"><?php echo $block['d'][11]['10-view']; ?></th>
                         <th class="text-center"><?php echo $block['d'][12]['10-view']; ?></th>
-                        <th class="text-center"><?php echo _b('Total'); ?></td>
+                        <th class="text-center">
+                        <?php echo _b('Total'); ?></td>
                     </tr>
                     <?php foreach ($block['d']['all']['10-order'] as $orderItem) { ?>
                         <tr class="text-muted">
-                            <td class="text-center"><a title="<?php echo $block['resources']['orders'][$orderItem]['code']; ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $block['resources']['orders'][$orderItem]['id'])); ?>"><?php echo $block['resources']['orders'][$orderItem]['code']; ?></a></td>
-                            <td class="text-center"><?php if ($block['d']['m']['10-invoice'][$orderItem]['total_price_view']) {echo $block['d']['m']['10-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if ($block['d'][0]['10-invoice'][$orderItem]['total_price_view']) {echo $block['d'][0]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if ($block['d'][1]['10-invoice'][$orderItem]['total_price_view']) {echo $block['d'][1]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if ($block['d'][2]['10-invoice'][$orderItem]['total_price_view']) {echo $block['d'][2]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if ($block['d'][3]['10-invoice'][$orderItem]['total_price_view']) {echo $block['d'][3]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if ($block['d'][4]['10-invoice'][$orderItem]['total_price_view']) {echo $block['d'][4]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if ($block['d'][5]['10-invoice'][$orderItem]['total_price_view']) {echo $block['d'][5]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if ($block['d'][6]['10-invoice'][$orderItem]['total_price_view']) {echo $block['d'][6]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if ($block['d'][7]['10-invoice'][$orderItem]['total_price_view']) {echo $block['d'][7]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if ($block['d'][8]['10-invoice'][$orderItem]['total_price_view']) {echo $block['d'][8]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if ($block['d'][9]['10-invoice'][$orderItem]['total_price_view']) {echo $block['d'][9]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if ($block['d'][10]['10-invoice'][$orderItem]['total_price_view']) {echo $block['d'][10]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if ($block['d'][11]['10-invoice'][$orderItem]['total_price_view']) {echo $block['d'][11]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if ($block['d'][12]['10-invoice'][$orderItem]['total_price_view']) {echo $block['d'][12]['10-invoice'][$orderItem]['total_price_view'];} ?></td>
+                            <td class="text-center"><a title="<?php echo $block['resources']['orders'][$orderItem]['code']; ?>" href="<?php echo $this->url(
+                                    'order', ['module' => 'order', 'controller' => 'detail', 'id' => $block['resources']['orders'][$orderItem]['id']]
+                                ); ?>"><?php echo $block['resources']['orders'][$orderItem]['code']; ?></a></td>
+                            <td class="text-center"><?php if ($block['d']['m']['10-invoice'][$orderItem]['total_price_view']) {
+                                    echo $block['d']['m']['10-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if ($block['d'][0]['10-invoice'][$orderItem]['total_price_view']) {
+                                    echo $block['d'][0]['10-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if ($block['d'][1]['10-invoice'][$orderItem]['total_price_view']) {
+                                    echo $block['d'][1]['10-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if ($block['d'][2]['10-invoice'][$orderItem]['total_price_view']) {
+                                    echo $block['d'][2]['10-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if ($block['d'][3]['10-invoice'][$orderItem]['total_price_view']) {
+                                    echo $block['d'][3]['10-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if ($block['d'][4]['10-invoice'][$orderItem]['total_price_view']) {
+                                    echo $block['d'][4]['10-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if ($block['d'][5]['10-invoice'][$orderItem]['total_price_view']) {
+                                    echo $block['d'][5]['10-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if ($block['d'][6]['10-invoice'][$orderItem]['total_price_view']) {
+                                    echo $block['d'][6]['10-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if ($block['d'][7]['10-invoice'][$orderItem]['total_price_view']) {
+                                    echo $block['d'][7]['10-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if ($block['d'][8]['10-invoice'][$orderItem]['total_price_view']) {
+                                    echo $block['d'][8]['10-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if ($block['d'][9]['10-invoice'][$orderItem]['total_price_view']) {
+                                    echo $block['d'][9]['10-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if ($block['d'][10]['10-invoice'][$orderItem]['total_price_view']) {
+                                    echo $block['d'][10]['10-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if ($block['d'][11]['10-invoice'][$orderItem]['total_price_view']) {
+                                    echo $block['d'][11]['10-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if ($block['d'][12]['10-invoice'][$orderItem]['total_price_view']) {
+                                    echo $block['d'][12]['10-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
                             <td class="text-center"></td>
                         </tr>
                     <?php } ?>
@@ -96,25 +129,56 @@
                         <th class="text-center"><?php echo $block['d'][10]['20-view']; ?></th>
                         <th class="text-center"><?php echo $block['d'][11]['20-view']; ?></th>
                         <th class="text-center"><?php echo $block['d'][12]['20-view']; ?></th>
-                        <th class="text-center"><?php echo _b('Total'); ?></td>
+                        <th class="text-center">
+                        <?php echo _b('Total'); ?></td>
                     </tr>
                     <?php foreach ($block['d']['all']['20-order'] as $orderItem) { ?>
                         <tr class="text-muted">
-                            <td class="text-center"><a title="<?php echo $block['resources']['orders'][$orderItem]['code']; ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $block['resources']['orders'][$orderItem]['id'])); ?>"><?php echo $block['resources']['orders'][$orderItem]['code']; ?></a></td>
-                            <td class="text-center"><?php if (isset($block['d']['m']['20-invoice'][$orderItem]['total_price_view'])) {echo $block['d']['m']['20-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][0]['20-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][0]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][1]['20-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][1]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][2]['20-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][2]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][3]['20-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][3]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][4]['20-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][4]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][5]['20-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][5]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][6]['20-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][6]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][7]['20-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][7]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][8]['20-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][8]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][9]['20-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][9]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][10]['20-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][10]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][11]['20-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][11]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][12]['20-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][12]['20-invoice'][$orderItem]['total_price_view'];} ?></td>
+                            <td class="text-center"><a title="<?php echo $block['resources']['orders'][$orderItem]['code']; ?>" href="<?php echo $this->url(
+                                    'order', ['module' => 'order', 'controller' => 'detail', 'id' => $block['resources']['orders'][$orderItem]['id']]
+                                ); ?>"><?php echo $block['resources']['orders'][$orderItem]['code']; ?></a></td>
+                            <td class="text-center"><?php if (isset($block['d']['m']['20-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d']['m']['20-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][0]['20-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][0]['20-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][1]['20-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][1]['20-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][2]['20-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][2]['20-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][3]['20-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][3]['20-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][4]['20-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][4]['20-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][5]['20-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][5]['20-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][6]['20-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][6]['20-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][7]['20-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][7]['20-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][8]['20-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][8]['20-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][9]['20-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][9]['20-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][10]['20-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][10]['20-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][11]['20-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][11]['20-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][12]['20-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][12]['20-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
                             <td class="text-center"></td>
                         </tr>
                     <?php } ?>
@@ -154,25 +218,56 @@
                         <th class="text-center"><?php echo $block['d'][10]['30-view']; ?></th>
                         <th class="text-center"><?php echo $block['d'][11]['30-view']; ?></th>
                         <th class="text-center"><?php echo $block['d'][12]['30-view']; ?></th>
-                        <th class="text-center"><?php echo _b('Total'); ?></td>
+                        <th class="text-center">
+                        <?php echo _b('Total'); ?></td>
                     </tr>
                     <?php foreach ($block['d']['all']['30-order'] as $orderItem) { ?>
                         <tr class="text-muted">
-                            <td class="text-center"><a title="<?php echo $block['resources']['orders'][$orderItem]['code']; ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $block['resources']['orders'][$orderItem]['id'])); ?>"><?php echo $block['resources']['orders'][$orderItem]['code']; ?></a></td>
-                            <td class="text-center"><?php if (isset($block['d']['m']['30-invoice'][$orderItem]['total_price_view'])) { echo $block['d']['m']['30-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][0]['30-invoice'][$orderItem]['total_price_view'])) { echo $block['d'][0]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][1]['30-invoice'][$orderItem]['total_price_view'])) { echo $block['d'][1]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][2]['30-invoice'][$orderItem]['total_price_view'])) { echo $block['d'][2]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][3]['30-invoice'][$orderItem]['total_price_view'])) { echo $block['d'][3]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][4]['30-invoice'][$orderItem]['total_price_view'])) { echo $block['d'][4]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][5]['30-invoice'][$orderItem]['total_price_view'])) { echo $block['d'][5]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][6]['30-invoice'][$orderItem]['total_price_view'])) { echo $block['d'][6]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][7]['30-invoice'][$orderItem]['total_price_view'])) { echo $block['d'][7]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][8]['30-invoice'][$orderItem]['total_price_view'])) { echo $block['d'][8]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][9]['30-invoice'][$orderItem]['total_price_view'])) { echo $block['d'][9]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][10]['30-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][10]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][11]['30-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][11]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
-                            <td class="text-center"><?php if (isset($block['d'][12]['30-invoice'][$orderItem]['total_price_view'])) {echo $block['d'][12]['30-invoice'][$orderItem]['total_price_view'];} ?></td>
+                            <td class="text-center"><a title="<?php echo $block['resources']['orders'][$orderItem]['code']; ?>" href="<?php echo $this->url(
+                                    'order', ['module' => 'order', 'controller' => 'detail', 'id' => $block['resources']['orders'][$orderItem]['id']]
+                                ); ?>"><?php echo $block['resources']['orders'][$orderItem]['code']; ?></a></td>
+                            <td class="text-center"><?php if (isset($block['d']['m']['30-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d']['m']['30-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][0]['30-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][0]['30-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][1]['30-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][1]['30-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][2]['30-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][2]['30-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][3]['30-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][3]['30-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][4]['30-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][4]['30-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][5]['30-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][5]['30-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][6]['30-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][6]['30-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][7]['30-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][7]['30-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][8]['30-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][8]['30-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][9]['30-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][9]['30-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][10]['30-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][10]['30-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][11]['30-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][11]['30-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
+                            <td class="text-center"><?php if (isset($block['d'][12]['30-invoice'][$orderItem]['total_price_view'])) {
+                                    echo $block['d'][12]['30-invoice'][$orderItem]['total_price_view'];
+                                } ?></td>
                             <td class="text-center"></td>
                         </tr>
                     <?php } ?>
@@ -200,13 +295,18 @@
                         <tr>
                             <th colspan="3" class="text-center"><?php echo _b('Additional invoices'); ?></th>
                             <th colspan="12" class="text-center"><?php echo _b('Due date'); ?></th>
-                            <th colspan="1" class="text-center"><?php echo _b('Total'); ?></td>
+                            <th colspan="1" class="text-center">
+                            <?php echo _b('Total'); ?></td>
                         </tr>
                         <?php foreach ($block['d']['additional']['invoice'] as $invoiceItem) { ?>
                             <tr class="text-muted">
-                                <td colspan="3" class="text-center"><a title="<?php echo $invoiceItem['id']; ?>" href="<?php echo $invoiceItem['order_url']; ?>"><?php echo $block['resources']['orders'][$invoiceItem['order']]['code']; ?> - <?php echo $invoiceItem['id']; ?></a></td>
+                                <td colspan="3" class="text-center"><a title="<?php echo $invoiceItem['id']; ?>"
+                                                                       href="<?php echo $invoiceItem['order_url']; ?>"><?php echo $block['resources']['orders'][$invoiceItem['order']]['code']; ?>
+                                        - <?php echo $invoiceItem['id']; ?></a></td>
                                 <td colspan="12" class="text-center"><?php echo $invoiceItem['time_duedate_view']; ?></td>
-                                <td colspan="1" class="text-center"><?php if (isset($invoiceItem['total_price_view'])) { echo $invoiceItem['total_price_view'];} ?></td>
+                                <td colspan="1" class="text-center"><?php if (isset($invoiceItem['total_price_view'])) {
+                                        echo $invoiceItem['total_price_view'];
+                                    } ?></td>
                             </tr>
                         <?php } ?>
                         <tr>
@@ -232,19 +332,21 @@
                             <th class="text-center"><?php echo _b('Due date'); ?></th>
                             <th class="text-center"><?php echo _b('Action'); ?></th>
                         </tr>
-                        <?php foreach($block['resources']['invoices'] as $invoice) { ?>
+                        <?php foreach ($block['resources']['invoices'] as $invoice) { ?>
                             <tr>
                                 <td class="text-center"><?php echo $this->escape($invoice['total_price_view']); ?></td>
                                 <td class="text-center">
-                                    <?php $productsList = array();
+                                    <?php $productsList = [];
                                     foreach ($block['resources']['orders'][$invoice['order']]['products'] as $product) {
                                         $productsList[] = $product['details']['title'];
                                     }
-                                    echo implode(' , ',$productsList); ?>
+                                    echo implode(' , ', $productsList); ?>
                                 </td>
                                 <td class="text-center"><?php echo $this->escape($invoice['time_duedate_view']); ?></td>
                                 <td class="text-center">
-                                    <a class="btn btn-primary btn-sm" title="<?php echo _b('View / Pay'); ?>" href="<?php echo $this->url('order', array('module' => 'order', 'controller' => 'detail', 'id' => $invoice['order'])); ?>"><i class="fas fa-edit"></i> <?php echo _b('View / Pay'); ?></a>
+                                    <a class="btn btn-primary btn-sm" title="<?php echo _b('View / Pay'); ?>"
+                                       href="<?php echo $this->url('order', ['module' => 'order', 'controller' => 'detail', 'id' => $invoice['order']]); ?>"><i
+                                                class="fas fa-edit"></i> <?php echo _b('View / Pay'); ?></a>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -272,17 +374,17 @@
                                 <td class="text-center"><?php echo _number($i); ?></td>
                                 <td class="text-center"><?php echo $this->escape($order['code']); ?></td>
                                 <td class="text-center">
-                                    <?php $productsList = array();
+                                    <?php $productsList = [];
                                     foreach ($order['products'] as $product) {
                                         $productsList[] = $product['details']['title'];
                                     }
-                                    echo implode(' , ',$productsList); ?>
+                                    echo implode(' , ', $productsList); ?>
                                 </td>
                                 <td class="text-center"><?php echo $this->escape($order['time_create_view']); ?></td>
                                 <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
                                 <td class="text-center">
                                     <a class="btn btn-primary btn-sm" title="<?php echo _b('View'); ?>" target="_blank"
-                                       href="<?php echo Pi::url($this->url('order', array('controller' => 'detail', 'id' => $order['id']))); ?>"><i
+                                       href="<?php echo Pi::url($this->url('order', ['controller' => 'detail', 'id' => $order['id']])); ?>"><i
                                                 class="fas fa-edit"></i> <?php echo _b('View'); ?></a>
                                 </td>
                             </tr>
@@ -296,6 +398,8 @@
         </div>
     </div>
     <div class="order-block-detail-more text-right">
-        <a class="btn btn-success btn-sm" title="<?php echo _b('More informations'); ?>" href="<?php echo $this->escape($block['more']); ?>"><?php echo _b('More informations'); ?></a>
+        <a class="btn btn-success btn-sm" title="<?php echo _b('More informations'); ?>" href="<?php echo $this->escape($block['more']); ?>"><?php echo _b(
+                'More informations'
+            ); ?></a>
     </div>
 </div>

@@ -9,7 +9,7 @@
                 <hr/>
                 <p>
                     <?php if (!empty($addressInvoicing['first_name']) && !empty($addressInvoicing['last_name'])) { ?>
-                        <?php echo $this->escape($addressInvoicing['first_name']); ?> <?php echo $this->escape($addressInvoicing['last_name']); ?><br/>
+                        <?php echo $this->escape($addressInvoicing['first_name']); ?><?php echo $this->escape($addressInvoicing['last_name']); ?><br/>
                     <?php } ?>
                     <?php if (!empty($addressInvoicing['id_number'])) { ?>
                         <?php echo $this->escape($addressInvoicing['id_number']); ?><br/>
@@ -63,7 +63,7 @@
                 <hr/>
                 <p>
                     <?php if (!empty($addressDelivery['first_name']) && !empty($addressDelivery['last_name'])) { ?>
-                        <?php echo $this->escape($addressDelivery['first_name']); ?> <?php echo $this->escape($addressDelivery['last_name']); ?><br/>
+                        <?php echo $this->escape($addressDelivery['first_name']); ?><?php echo $this->escape($addressDelivery['last_name']); ?><br/>
                     <?php } ?>
                     <?php if (!empty($addressDelivery['id_number'])) { ?>
                         <?php echo $this->escape($addressDelivery['id_number']); ?><br/>
@@ -129,12 +129,12 @@
                 </p>
 
                 <p><strong><?php _e('Time Create'); ?></strong> :
-                    <span><?php echo $this->escape($invoice['time_create_view']) . ' ' . date('H:i', $invoice['time_create']) ; ?> </span></p>
-                
+                    <span><?php echo $this->escape($invoice['time_create_view']) . ' ' . date('H:i', $invoice['time_create']); ?> </span></p>
+
                 <p><strong><?php _e('Time invoice'); ?></strong> :
                     <span><?php echo $this->escape($invoice['time_invoice_view']) ?> </span>
                 </p>
-                
+
                 <?php if ($invoice['shipping_price'] > 0) { ?>
                     <p><strong><?php _e('Shipping price'); ?></strong> :
                         <span><?php echo $this->escape($invoice['shipping_price_view']); ?></span></p>
@@ -158,20 +158,20 @@
             </div>
             <div class="col-md-12 text-right">
                 <a class="btn btn-primary" title="<?php _e('View order'); ?>"
-                   href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>"
+                   href="<?php echo $this->url('', ['controller' => 'order', 'action' => 'view', 'id' => $invoice['order']]); ?>"
                    target="_blank"><i class="far fa-eye"></i> <?php _e('View order'); ?></a>
                 <a class="btn btn-primary" title="<?php _e('Print'); ?>"
-                   href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'print-pdf', 'id' => $invoice['id'])); ?>"
+                   href="<?php echo $this->url('', ['controller' => 'invoice', 'action' => 'print-pdf', 'id' => $invoice['id']]); ?>"
                    target="_blank"><i class="fas fa-print"></i> <?php _e('Print'); ?></a>
             </div>
         </div>
-        
+
     </div>
-     <div class="clearfix mt-3">
+    <div class="clearfix mt-3">
         <h3><?php _e('Installments'); ?></h3>
         <?php if (count($invoice['installments']) == 0) { ?>
             <?php _e('You did not validate your invoice yet, installment are not generated !') ?>
-        <?php } else { ?> 
+        <?php } else { ?>
             <?php foreach ($invoice['installments'] as $installment) { ?>
                 <table class="table table-striped table-bordered table-sm">
                     <tr>
@@ -190,7 +190,7 @@
                         $badgeIdClass = 'badge-warning';
                     } elseif ($installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
                         $badgeIdClass = 'badge-success';
-                    } 
+                    }
                     ?>
                     <tr>
                         <td><?php echo $installment['count'] . ' / ' . count($invoice['installments']) ?></td>
@@ -198,18 +198,19 @@
                         <td><?php echo $this->escape($installment['credit_price_view']); ?></td>
                         <td><?php echo $this->escape($installment['time_duedate_view']); ?></td>
                         <td><?php echo $this->escape($installment['time_payment_view']); ?></td>
-                        <td><?php echo isset($gateways[$installment['gateway']]) ? $gateways[$installment['gateway']] : ''; ?></td >
-                        <td><span class="badge <?php echo $badgeIdClass; ?>"><?php echo $installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID ? __('Paid') : __('Unpaid') ?></span></td>
+                        <td><?php echo isset($gateways[$installment['gateway']]) ? $gateways[$installment['gateway']] : ''; ?></td>
+                        <td><span class="badge <?php echo $badgeIdClass; ?>"><?php echo $installment['status_payment']
+                                == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID ? __('Paid') : __('Unpaid') ?></span></td>
                         <td class="text-right">
-                            <?php 
+                            <?php
                             $type = '';
                             if (isset($gatewaysInfo[$installment['gateway']])) {
                                 $type = $gatewaysInfo[$installment['gateway']]['type'];
                             }
                             $readonly = $installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID && $type == 'online';
-                            if ($invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED && !$readonly) { ?> 
+                            if ($invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED && !$readonly) { ?>
                                 <a class="btn btn-primary btn-sm" title="<?php _e('Edit'); ?>"
-                                   href="<?php echo $this->url('', array('controller' => 'installment', 'action' => 'edit', 'id' => $installment['id'])); ?>">
+                                   href="<?php echo $this->url('', ['controller' => 'installment', 'action' => 'edit', 'id' => $installment['id']]); ?>">
                                     <i class="fas fa-pencil-alt"></i> <?php _e('Edit'); ?></a>
                             <?php } ?>
                         </td>
@@ -222,9 +223,9 @@
         <div class="clearfix">
             <h3><?php _e('Logs'); ?></h3>
 
-                    <?php foreach ($invoice['log'] as $log) { ?>
-            <div class="card">
-                <div class="card-header clearfix row">
+            <?php foreach ($invoice['log'] as $log) { ?>
+                <div class="card">
+                    <div class="card-header clearfix row">
                         <div class="well">
                             <p><strong><?php _e('Id'); ?></strong> : <?php echo $this->escape($log['id']); ?></p>
 
@@ -248,10 +249,10 @@
                             <p><strong><?php _e('Message'); ?></strong> : <?php echo $this->escape($log['message']); ?></p>
                             <pre><code><?php print_r($log['value']); ?></code></pre>
                         </div>
+                    </div>
                 </div>
-            </div>
-                        <hr/>
-                    <?php } ?>
+                <hr/>
+            <?php } ?>
 
         </div>
     <?php } ?>

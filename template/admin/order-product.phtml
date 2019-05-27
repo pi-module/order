@@ -2,14 +2,16 @@
 <div class="clearfix">
     <h3><?php _e('Manage order product / service'); ?></h3>
     <div class="alert alert-info">
-        <?php echo __('Please add product / service id from module, your selected product / service should be active. This product price add to current invoice'); ?>
+        <?php echo __(
+            'Please add product / service id from module, your selected product / service should be active. This product price add to current invoice'
+        ); ?>
     </div>
     <?php echo $this->form($form); ?>
 </div>
 
 <script>
     $(function () {
-        var changeModule = function() {
+        var changeModule = function () {
             $('.specific:first').closest('fieldset').show();
             var moduleName = $('[name=module]').val();
             $('.specific').parent().parent().parent().parent().hide();

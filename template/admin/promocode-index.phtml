@@ -1,14 +1,16 @@
-<?php $this->css($this->assetModule('css/admin.css')); 
-$urlMessage = $this->url('', array(
+<?php $this->css($this->assetModule('css/admin.css'));
+$urlMessage = $this->url(
+    '', [
     'controller' => 'booking',
-    'action' => 'message',
-));
+    'action'     => 'message',
+]
+);
 ?>
 <div class="clearfix">
 
     <ul class="nav nav-pills bg-light border shadow-sm p-1 mb-3">
         <li>
-            <a href="<?php echo $this->url('', array('action' => 'manage')); ?>" type="button" class="btn btn-success ">
+            <a href="<?php echo $this->url('', ['action' => 'manage']); ?>" type="button" class="btn btn-success ">
                 <?php _e('Add'); ?>
             </a>
         </li>
@@ -24,9 +26,9 @@ $urlMessage = $this->url('', array(
             <th><?php _e('Show'); ?></th>
             <th></th>
         </tr>
-        <?php if (count($paginator)) { ?> 
+        <?php if (count($paginator)) { ?>
             <?php foreach ($paginator as $promocode) { ?>
-               
+
                 <tr>
                     <td><?php echo $this->escape($promocode['code']); ?></td>
                     <td><?php echo $this->escape($promocode['promo']); ?>%</td>
@@ -35,12 +37,14 @@ $urlMessage = $this->url('', array(
                     <td><?php echo join(', ', json_decode($promocode['module'])); ?></td>
                     <td><span class="fa <?php echo $promocode->showcode ? 'fa-check text-success' : 'fa-times text-danger' ?>"></span></td>
                     <td>
-                         <a class="btn btn-primary btn-sm" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'manage', 'id' => $promocode['id'])); ?>">
-                             <i class="fas fa-edit"></i> <?php _e('Manage'); ?>
-                         </a>
-                         <a class="btn btn-primary btn-sm" title="<?php _e('Delete'); ?>" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $promocode['id'])); ?>">
-                             <i class="fas fa-times"></i> <?php _e('Delete'); ?>
-                         </a>
+                        <a class="btn btn-primary btn-sm" title="<?php _e('Edit'); ?>"
+                           href="<?php echo $this->url('', ['action' => 'manage', 'id' => $promocode['id']]); ?>">
+                            <i class="fas fa-edit"></i> <?php _e('Manage'); ?>
+                        </a>
+                        <a class="btn btn-primary btn-sm" title="<?php _e('Delete'); ?>"
+                           href="<?php echo $this->url('', ['action' => 'delete', 'id' => $promocode['id']]); ?>">
+                            <i class="fas fa-times"></i> <?php _e('Delete'); ?>
+                        </a>
                     </td>
                 </tr>
             <?php } ?>
@@ -49,7 +53,7 @@ $urlMessage = $this->url('', array(
                 <td colspan="6" class="text-center">
                     <?php _e('No promo code') ?>
                 </td>
-            </tr> 
+            </tr>
         <?php } ?>
     </table>
     <div class="paginator">

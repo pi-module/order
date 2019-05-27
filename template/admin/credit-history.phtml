@@ -29,7 +29,7 @@
                     <td><?php echo $this->escape($history['id']); ?></td>
                     <td>
                         <?php if (!empty($history['user']['first_name']) && !empty($history['user']['last_name'])) { ?>
-                            <span><?php echo $this->escape($history['user']['first_name']); ?> <?php echo $this->escape($history['user']['last_name']); ?></span>
+                            <span><?php echo $this->escape($history['user']['first_name']); ?><?php echo $this->escape($history['user']['last_name']); ?></span>
                         <?php } else { ?>
                             <span><?php echo $this->escape($history['user']['name']); ?></span>
                         <?php } ?>
@@ -58,7 +58,9 @@
                                                 <td><strong><?php _e('Name'); ?></strong></td>
                                                 <td>
                                                     <?php if (!empty($history['user']['first_name']) && !empty($history['user']['last_name'])) { ?>
-                                                        <span><?php echo $this->escape($history['user']['first_name']); ?> <?php echo $this->escape($history['user']['last_name']); ?></span>
+                                                        <span><?php echo $this->escape($history['user']['first_name']); ?><?php echo $this->escape(
+                                                                $history['user']['last_name']
+                                                            ); ?></span>
                                                     <?php } else { ?>
                                                         <span><?php echo $this->escape($history['user']['name']); ?></span>
                                                     <?php } ?>
@@ -94,7 +96,9 @@
                                             </tr>
                                             <tr>
                                                 <td><strong><?php _e('Fluctuation status'); ?></strong></td>
-                                                <td><span class="<?php echo $history['status_fluctuation_class']; ?>"><?php echo $this->escape($history['status_fluctuation_view']); ?></span></td>
+                                                <td><span class="<?php echo $history['status_fluctuation_class']; ?>"><?php echo $this->escape(
+                                                            $history['status_fluctuation_view']
+                                                        ); ?></span></td>
                                             </tr>
                                             <tr>
                                                 <td><strong><?php _e('Action status'); ?></strong></td>
@@ -108,25 +112,31 @@
                                     </div>
                                     <div class="modal-footer">
                                         <?php if ($history['order']) { ?>
-                                            <a class="btn btn-primary" title="<?php _e('View order'); ?>" href="<?php echo $this->url('admin', array(
+                                            <a class="btn btn-primary" title="<?php _e('View order'); ?>" href="<?php echo $this->url(
+                                                'admin', [
                                                 'controller' => 'order',
-                                                'action' => 'view',
-                                                'id' => $history['order'],
-                                            )); ?>" target="_blank"><?php _e('View order'); ?></a>
+                                                'action'     => 'view',
+                                                'id'         => $history['order'],
+                                            ]
+                                            ); ?>" target="_blank"><?php _e('View order'); ?></a>
                                         <?php } ?>
                                         <?php if ($history['invoice']) { ?>
-                                            <a class="btn btn-primary" title="<?php _e('View invoice'); ?>" href="<?php echo $this->url('admin', array(
+                                            <a class="btn btn-primary" title="<?php _e('View invoice'); ?>" href="<?php echo $this->url(
+                                                'admin', [
                                                 'controller' => 'invoice',
-                                                'action' => 'view',
-                                                'id' => $history['invoice'],
-                                            )); ?>" target="_blank"><?php _e('View invoice'); ?></a>
+                                                'action'     => 'view',
+                                                'id'         => $history['invoice'],
+                                            ]
+                                            ); ?>" target="_blank"><?php _e('View invoice'); ?></a>
                                         <?php } ?>
-                                        <a class="btn btn-success" title="<?php _e('User information'); ?>" href="<?php echo $this->url('admin', array(
+                                        <a class="btn btn-success" title="<?php _e('User information'); ?>" href="<?php echo $this->url(
+                                            'admin', [
                                             'module' => 'user',
                                             'controller' => 'edit',
                                             'action' => 'index',
                                             'uid' => $credit['uid'],
-                                        )); ?>" target="_blank"><?php _e('User information'); ?></a>
+                                        ]
+                                        ); ?>" target="_blank"><?php _e('User information'); ?></a>
                                     </div>
                                 </div>
                             </div>

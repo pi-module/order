@@ -4,7 +4,8 @@
         <div class="card">
             <div class="card-header" role="tab" id="headingForm">
                 <h4 class="card-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseForm" aria-expanded="false"
+                       aria-controls="collapseForm">
                         <i class="fas fa-plus"></i> <?php _e('Filter invoices'); ?>
                     </a>
                 </h4>
@@ -31,27 +32,30 @@
             </tr>
             <?php foreach ($list as $invoice) { ?>
                 <?php
-                    $badgeIdClass = '';
-                    if ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) {
-                        $badgeIdClass = 'badge-success';
-                    } elseif ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT) {
-                        $badgeIdClass = 'badge-warning';
-                    } elseif ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
-                        $badgeIdClass = 'badge-danger';
+                $badgeIdClass = '';
+                if ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) {
+                    $badgeIdClass = 'badge-success';
+                } elseif ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT) {
+                    $badgeIdClass = 'badge-warning';
+                } elseif ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
+                    $badgeIdClass = 'badge-danger';
+                }
+                $class = '';
+                if ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) {
+                    if ($invoice['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
+                        $class = 'danger';
+                    } else {
+                        if ($invoice['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
+                            $class = 'success';
+                        }
                     }
-                    $class = '';
-                    if ($invoice['status'] == Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) {
-                        if ($invoice['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
-                            $class = 'danger';
-                        } else if ($invoice['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
-                           $class = 'success';
-                        }  
-                    } 
+                }
                 ?>
-                
+
                 <tr class="table-<?php echo $class ?>">
                     <td><?php echo $this->escape($invoice['code']); ?></td>
-                    <td><span class="badge <?php echo $badgeIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']]; ?></span></td>
+                    <td><span class="badge <?php echo $badgeIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']]; ?></span>
+                    </td>
                     <td><?php echo $this->escape($invoice['type']); ?></td>
                     <td><?php echo $this->escape($invoice['type_payment']); ?></td>
                     <td><?php echo $this->escape($invoice['time_create_view']); ?></td>
@@ -64,17 +68,17 @@
                             </li>
                         </ul>
                     </td>
-                    
+
                     <td class="text-right">
                         <a class="btn btn-primary btn-sm" title="<?php _e('Download'); ?>"
-                           href="<?php echo $this->url('', array('action' => 'print-pdf', 'id' => $invoice['id'])); ?>"
+                           href="<?php echo $this->url('', ['action' => 'print-pdf', 'id' => $invoice['id']]); ?>"
                            target="_blank"><i class="fas fa-download"></i> <?php _e('Download'); ?></a>
                         <a class="btn btn-primary btn-sm" title="<?php _e('Order'); ?>"
-                           href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>"
+                           href="<?php echo $this->url('', ['controller' => 'order', 'action' => 'view', 'id' => $invoice['order']]); ?>"
                            target="_blank"><i class="far fa-eye"></i> <?php _e('Order'); ?></a>
                         <a class="btn btn-primary btn-sm" title="<?php _e('View'); ?>"
-                           href="<?php echo $this->url('', array('action' => 'view', 'id' => $invoice['id'])); ?>"><i
-                                class="far fa-eye" target="_blank"></i> <?php _e('View'); ?></a>
+                           href="<?php echo $this->url('', ['action' => 'view', 'id' => $invoice['id']]); ?>"><i
+                                    class="far fa-eye" target="_blank"></i> <?php _e('View'); ?></a>
                     </td>
                 </tr>
             <?php } ?>

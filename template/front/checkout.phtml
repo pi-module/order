@@ -1,11 +1,14 @@
 <?php
-$this->css(array(
-    $this->assetModule('css/front.css') => array('defer' => 'defer'),
-    $this->assetModule('script/system-ui.css', 'system') => array('defer' => 'defer')
-));
+$this->css(
+    [
+        $this->assetModule('css/front.css')                  => ['defer' => 'defer'],
+        $this->assetModule('script/system-ui.css', 'system') => ['defer' => 'defer'],
+    ]
+);
 $this->jQuery();
 $this->backbone();
-$script = <<<'EOT'
+$script
+        = <<<'EOT'
 (function($) {
     var page = {
         el: $('#js-order'),
@@ -95,13 +98,13 @@ $script = <<<'EOT'
 EOT;
 $script = sprintf(
     $script,
-    Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'level', 'process' => 'location', 'id' => ''))),
+    Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'level', 'process' => 'location', 'id' => ''])),
     __('Price : '),
     __('Time : '),
     __('Days'),
-    Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'level', 'process' => 'delivery', 'id' => ''))),
-    Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'level', 'process' => 'payment', 'id' => ''))),
-    $addressDelivery['id'] ?: 0 ,
+    Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'level', 'process' => 'delivery', 'id' => ''])),
+    Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'level', 'process' => 'payment', 'id' => ''])),
+    $addressDelivery['id'] ?: 0,
     $addressInvoicing['id'] ?: 0
 );
 $this->footScript()->appendScript($script);
@@ -115,14 +118,20 @@ $this->footScript()->appendScript($script);
             <div class="col-md-12">
                 <div class="alert alert-info" role="alert">
                     <h2><?php _e('Terms of payment'); ?></h2>
-                    <p><?php echo sprintf(__('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2), Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])), Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))); ?></p>
+                    <p><?php echo sprintf(
+                            __('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2),
+                            Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])),
+                            Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))
+                        ); ?></p>
                 </div>
             </div>
         <?php } ?>
         <?php if (isset($cart['can_pay']) && $cart['can_pay'] == 2) { ?>
             <div class="col-md-12">
                 <div class="alert alert-danger" role="alert">
-                    <p><?php echo __('One of your select products or services have variable stock, than your payment option is disable, we will review your order and if your selected products or services be in stock we active payment option and send notification for you'); ?></p>
+                    <p><?php echo __(
+                            'One of your select products or services have variable stock, than your payment option is disable, we will review your order and if your selected products or services be in stock we active payment option and send notification for you'
+                        ); ?></p>
                 </div>
             </div>
         <?php } ?>
@@ -131,7 +140,9 @@ $this->footScript()->appendScript($script);
         <div class="col-md-8">
             <?php if (isset($formLogin) && !empty($formLogin)) { ?>
                 <div class="alert alert-info" role="alert">
-                    <?php _e('If you registered on website before this time and have user account, please login to system and continue ordering, and if you dont have user account here, please fill register new user account and make order form'); ?>
+                    <?php _e(
+                        'If you registered on website before this time and have user account, please login to system and continue ordering, and if you dont have user account here, please fill register new user account and make order form'
+                    ); ?>
                 </div>
                 <div class="page-header">
                     <h3><?php _e('Login'); ?></h3>
@@ -145,29 +156,36 @@ $this->footScript()->appendScript($script);
                 <?php if (!empty($addresses)) { ?>
                     <h4><?php _e('Select the needed address for your order. You can also add a new address') ?></h4>
                 <?php } else { ?>
-                    <h4><?php _e('You don\'t have set an address yet. Please create your address we will use for your order. You will be able then to manage several addresses') ?></h4>
+                    <h4><?php _e(
+                            'You don\'t have set an address yet. Please create your address we will use for your order. You will be able then to manage several addresses'
+                        ) ?></h4>
                 <?php } ?>
             </div>
-            
+
             <div class="clearfix row">
                 <div class="col-md-6">
                     <div class="col-md-12 address-single">
-                         <div class="clearfix">
+                        <div class="clearfix">
                             <div class="info">
                                 <p>
                                     <span class="fas fa-file"></span> <strong><?php _e('Invoicing address'); ?></strong>
                                     <?php if (!empty($addresses)) { ?>
-                                        <a class="modify-address" href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'invoicing'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal" data-type="<?php _e('Invoicing address') ?>">
+                                        <a class="modify-address" href="<?php echo Pi::url(
+                                            $this->url('', ['controller' => 'checkout', 'action' => 'address-list', 'type' => 'invoicing'])
+                                        ) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal"
+                                           data-type="<?php _e('Invoicing address') ?>">
                                             <?php _e('Modify') ?>
                                         </a>
-                                    <?php } ?>   
+                                    <?php } ?>
                                 </p>
                                 <div class="invoicing-address">
                                     <?php if (empty($addresses)) { ?>
                                         <?php echo $this->form($forms['new'], 'vertical'); ?>
                                     <?php } else { ?>
                                         <div>
-                                            <?php echo $this->escape($addressInvoicing['first_name']); ?>  <?php echo $this->escape($addressInvoicing['last_name']); ?>
+                                            <?php echo $this->escape($addressInvoicing['first_name']); ?><?php echo $this->escape(
+                                                $addressInvoicing['last_name']
+                                            ); ?>
                                         </div>
                                         <?php if (!empty($addressInvoicing['company'])) { ?>
                                             <div><?php echo $this->escape($addressInvoicing['company']); ?></div>
@@ -216,34 +234,42 @@ $this->footScript()->appendScript($script);
                                                 <?php echo $this->escape($addressDelivery['mobile']); ?>
                                             </div>
                                         <?php } ?>
-                                        <br />
+                                        <br/>
                                     <?php } ?>
                                 </div>
                             </div>
-                         </div>
+                        </div>
                     </div>
                 </div>
                 <?php if (!empty($addresses)) { ?>
                     <div class="col-md-6">
                         <div class="col-md-12 address-single">
-                             <div class="clearfix">
+                            <div class="clearfix">
                                 <div class="info">
                                     <p>
                                         <span class="fas fa-map-marker-alt"></span> <strong><?php _e('Delivery address'); ?></strong>
                                         <?php if ($addressInvoicing['id'] != $addressDelivery['id']) { ?>
-                                            <a class="modify-address" href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal" data-type="<?php _e('Delivery address') ?>">
+                                            <a class="modify-address" href="<?php echo Pi::url(
+                                                $this->url('', ['controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'])
+                                            ) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal"
+                                               data-type="<?php _e('Delivery address') ?>">
                                                 <?php _e('Modify') ?>
                                             </a>
                                         <?php } ?>
                                     </p>
                                     <div class="delivery-address">
                                         <?php if ($addressInvoicing['id'] == $addressDelivery['id']) { ?>
-                                            <a href="<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'))) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal" data-title="<?php _e('Delivery address') ?>">
-                                            <input type="checkbox" checked="checked" /> <?php _e("Same address"); ?>
+                                            <a href="<?php echo Pi::url(
+                                                $this->url('', ['controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'])
+                                            ) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal"
+                                               data-title="<?php _e('Delivery address') ?>">
+                                                <input type="checkbox" checked="checked"/> <?php _e("Same address"); ?>
                                             </a>
                                         <?php } else { ?>
                                             <div>
-                                                <?php echo $this->escape($addressDelivery['first_name']); ?>  <?php echo $this->escape($addressDelivery['last_name']); ?>
+                                                <?php echo $this->escape($addressDelivery['first_name']); ?><?php echo $this->escape(
+                                                    $addressDelivery['last_name']
+                                                ); ?>
                                             </div>
                                             <?php if (!empty($addressDelivery['company'])) { ?>
                                                 <div><?php echo $this->escape($addressDelivery['company']); ?></div>
@@ -275,10 +301,10 @@ $this->footScript()->appendScript($script);
                                                 <?php } ?>
                                             </div>
                                             <?php if (!empty($addressDelivery['mobile'])) { ?>
-                                            <div>
-                                                <?php _e('Mobile'); ?> :
-                                                <?php echo $this->escape($addressDelivery['mobile']); ?>
-                                            </div>
+                                                <div>
+                                                    <?php _e('Mobile'); ?> :
+                                                    <?php echo $this->escape($addressDelivery['mobile']); ?>
+                                                </div>
                                             <?php } ?>
                                             <?php if (!empty($addressDelivery['email'])) { ?>
                                                 <div>
@@ -299,7 +325,7 @@ $this->footScript()->appendScript($script);
                                                 </div>
                                             <?php } ?>
                                         <?php } ?>
-                                        <br />
+                                        <br/>
                                     </div>
                                 </div>
                             </div>
@@ -308,7 +334,7 @@ $this->footScript()->appendScript($script);
                 <?php } ?>
             </div>
         </div>
-        
+
         <div class="col-md-4">
             <div class="cart-product">
                 <div class="card">
@@ -324,10 +350,10 @@ $this->footScript()->appendScript($script);
                             <?php $totalDiscount = 0 ?>
                             <?php $count = 0 ?>
                             <?php foreach ($cart['product'] as $key => $product) { ?>
-                                <?php 
-                                    $count++;
-                                    $extra = json_decode($product['extra'], true);
-                                    $unconsumedPrice = $extra['unconsumedPrice']; 
+                                <?php
+                                $count++;
+                                $extra           = json_decode($product['extra'], true);
+                                $unconsumedPrice = $extra['unconsumedPrice'];
                                 ?>
 
                                 <tr>
@@ -339,9 +365,11 @@ $this->footScript()->appendScript($script);
                                         <?php if (!empty($product['time_start'])) { ?>
                                             <p>
                                                 <?php if ($product['time_end'] == strtotime("2030-01-01")) { ?>
-                                                   <?php echo __('Unlimited from') . ' ' . _date($product['time_start'])?>
-                                                <?php } else { ?> 
-                                                    <?php echo __('From') . ' ' . _date($product['time_start']) . ' ' . __('to') . ' ' . _date($product['time_end']) ?>
+                                                    <?php echo __('Unlimited from') . ' ' . _date($product['time_start']) ?>
+                                                <?php } else { ?>
+                                                    <?php echo __('From') . ' ' . _date($product['time_start']) . ' ' . __('to') . ' ' . _date(
+                                                            $product['time_end']
+                                                        ) ?>
                                                 <?php } ?>
                                             </p>
                                         <?php } ?>
@@ -356,7 +384,9 @@ $this->footScript()->appendScript($script);
                                         <?php } ?>
                                     </td>
                                     <td class="text-right">
-                                        <strong class="data-total-price"><?php echo  Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'] - $product['discount_price'] - $unconsumedPrice)); ?></strong>
+                                        <strong class="data-total-price"><?php echo Pi::api('api', 'order')->viewPrice(
+                                                $this->escape($product['product_price'] - $product['discount_price'] - $unconsumedPrice)
+                                            ); ?></strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -375,8 +405,8 @@ $this->footScript()->appendScript($script);
                                         </td>
                                         <td data-discount-price-for="<?php echo $product['product'] ?>">
                                             <?php
-                                                echo $product['discount_price'] > 0 ? '-' : ''; 
-                                                echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
+                                            echo $product['discount_price'] > 0 ? '-' : '';
+                                            echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -387,12 +417,12 @@ $this->footScript()->appendScript($script);
                                         </td>
                                         <td data-discount-price-for="<?php echo $product['product'] ?>">
                                             <?php
-                                                echo $unconsumedPrice > 0 ? '-' : ''; 
-                                                echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice)); 
+                                            echo $unconsumedPrice > 0 ? '-' : '';
+                                            echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice));
                                             ?>
                                         </td>
                                     </tr>
-                                <?php } ?> 
+                                <?php } ?>
                                 <?php $totalDiscount += $product['discount_price']; ?>
                                 <?php $totalDiscount += $unconsumedPrice; ?>
                             <?php } ?>
@@ -404,7 +434,9 @@ $this->footScript()->appendScript($script);
                                     </strong>
                                 </td>
                                 <td class="text-right">
-                                    <strong class="data-total-price"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $totalDiscount)); ?></strong>
+                                    <strong class="data-total-price"><?php echo Pi::api('api', 'order')->viewPrice(
+                                            $this->escape($price['product'] - $totalDiscount)
+                                        ); ?></strong>
                                 </td>
                             </tr>
                             <tr>
@@ -448,35 +480,35 @@ $this->footScript()->appendScript($script);
                 <div class="clearfix">
                     <?php if (isset($forms['promoCheckout'])) { ?>
                         <?php echo $this->form()->openTag($forms['promoCheckout']); ?>
-                            <div class="col-md-4 nopadding">
-                                <div class="form-group" data-name="code">
-                                    <label class=" col-form-label">
-                                        <?php _e('Your promo code') ?>
-                                    </label>
-                                    <?php echo $this->formElement($forms['promoCheckout']->get('code')); ?>
-                                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-2 nopadding">
+                        <div class="col-md-4 nopadding">
+                            <div class="form-group" data-name="code">
                                 <label class=" col-form-label">
-                                    &nbsp;
-                                 </label>
-                                <div class="form-group" data-name="code">
-                                    <?php echo $this->formElement($forms['promoCheckout']->get('submit_promo')); ?>
-                                </div>
+                                    <?php _e('Your promo code') ?>
+                                </label>
+                                <?php echo $this->formElement($forms['promoCheckout']->get('code')); ?>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             </div>
-                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-md-2 nopadding">
+                            <label class=" col-form-label">
+                                &nbsp;
+                            </label>
+                            <div class="form-group" data-name="code">
+                                <?php echo $this->formElement($forms['promoCheckout']->get('submit_promo')); ?>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
                         <?php echo $this->form()->closeTag($forms['promoCheckout']); ?>
                         <?php if ($msgPromoCode) { ?>
                             <div class="clearfix alert alert-<?php echo $msgPromoCode['type'] ?>" role="alert">
-                                    <span><?php echo $msgPromoCode['message'] ?></span>
+                                <span><?php echo $msgPromoCode['message'] ?></span>
                             </div>
                         <?php } ?>
-                        
+
                         <div class="clearfix alert d-none" role="alert">
                             <span></span>
                         </div>
-                            
+
                     <?php } ?>
                     <?php if (isset($forms['order'])) { ?>
                         <?php echo $this->form($forms['order'], 'vertical'); ?>
@@ -513,8 +545,12 @@ $this->footScript()->appendScript($script);
                         <h2 class="invoicing hide"><?php _e('Invoicing Address') ?></h2>
                     </div>
                     <div class="col-md-5">
-                        <a class="btn btn-simple btn-sm col-md-12 invoicing hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
-                        <a class="btn btn-simple btn-sm col-md-12 delivery hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'delivery')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
+                        <a class="btn btn-simple btn-sm col-md-12 invoicing hide"
+                           href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing']); ?>" data-remote="false"
+                           data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
+                        <a class="btn btn-simple btn-sm col-md-12 delivery hide"
+                           href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'delivery']); ?>" data-remote="false"
+                           data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -524,8 +560,12 @@ $this->footScript()->appendScript($script);
             </div>
             <div class="panel bottom">
                 <div class="offset-md-7 col-md-5">
-                    <a class="btn btn-simple btn-sm col-md-12 invoicing hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
-                    <a class="btn btn-simple btn-sm col-md-12 delivery hide" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'address', 'id' => 'delivery')); ?>" data-remote="false" data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
+                    <a class="btn btn-simple btn-sm col-md-12 invoicing hide"
+                       href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing']); ?>" data-remote="false"
+                       data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
+                    <a class="btn btn-simple btn-sm col-md-12 delivery hide"
+                       href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'delivery']); ?>" data-remote="false"
+                       data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -547,16 +587,15 @@ $this->footScript()->appendScript($script);
             </div>
         </div>
     </div>
-</div>        
-         
+</div>
+
 <script>
     var needReload = false;
-    $( document ).ready(function() {
+    $(document).ready(function () {
 
         // Fix for bootstrap bug. When you open 2 modals (first open second), there no scrollbar
         $('body').on('hidden.bs.modal', function () {
-            if($('.modal.show').length > 0)
-            {
+            if ($('.modal.show').length > 0) {
                 $('body').addClass('modal-open');
             } else {
                 if (needReload) {
@@ -566,74 +605,73 @@ $this->footScript()->appendScript($script);
                 }
             }
         });
-        
-        $("#addressModal").on("show.bs.modal", function(e) {
+
+        $("#addressModal").on("show.bs.modal", function (e) {
             var link = $(e.relatedTarget);
             $(this).find(".modal-body").load(link.attr("href"));
-        });      
-        
-        $("#addressListModal").on("show.bs.modal", function(e) {
+        });
+
+        $("#addressListModal").on("show.bs.modal", function (e) {
             var link = $(e.relatedTarget);
             $(this).find(".modal-body").load(link.attr("href"));
-             $(this).find('.invoicing').addClass('hide');
-             $(this).find('.delivery').addClass('hide');
-        }); 
-        
+            $(this).find('.invoicing').addClass('hide');
+            $(this).find('.delivery').addClass('hide');
+        });
+
         $('.complementary').parent().parent().hide();
         $('#complementary').click(
-            function(e) {
+            function (e) {
                 e.preventDefault();
-                $('.complementary').parent().parent().toggle();        
-            }  
+                $('.complementary').parent().parent().toggle();
+            }
         );
-        
-        $('#promoCheckout').on('submit', function() {
+
+        $('#promoCheckout').on('submit', function () {
             var code = $('#promoCheckout input[name=code]').val();
             if (code == null) {
                 return false;
             }
             $('#promoCheckout input[name=code]').val('');
-        
+
             $.ajax({
-              type: "POST",
-              url: "<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'promocode'))) ?>",
-              data: {code: code},
-              success: function(data) {
-                  $('#promoCheckout').parent().find('.alert')
-                  .removeClass('d-none')
-                  .removeClass('alert-info')
-                  .removeClass('alert-success')
-                  .addClass('alert-' + data.msgPromoCode.type);
-                  
-                  $('#promoCheckout').parent().find('.alert span').html(data.msgPromoCode.message);
-                  
-                  var totalDiscount = 0;
-                  $.each(data.cart.product, 
-                      function(i, product)
-                      {
-                          $('.cart-product span[data-discount-for=' + product.product + ']').html(product.discount);
-                          $('.cart-product td[data-discount-price-for=' + product.product + ']').html('-' + product.discount_price_view);
-                      }
-                  );
-                  $('.cart-product .data-total-price').html(data.price.total_price_view);
-                  $('.cart-product .data-total-vat').html(data.price.vat_view);
-                  $('.cart-product .data-total-price-ttc').html(data.price.total_price_ttc_view);       
-                  //$('[data-total-vat-for=445]').val()
-              },
-              dataType: 'json'
+                type: "POST",
+                url: "<?php echo Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'promocode'])) ?>",
+                data: {code: code},
+                success: function (data) {
+                    $('#promoCheckout').parent().find('.alert')
+                        .removeClass('d-none')
+                        .removeClass('alert-info')
+                        .removeClass('alert-success')
+                        .addClass('alert-' + data.msgPromoCode.type);
+
+                    $('#promoCheckout').parent().find('.alert span').html(data.msgPromoCode.message);
+
+                    var totalDiscount = 0;
+                    $.each(data.cart.product,
+                        function (i, product) {
+                            $('.cart-product span[data-discount-for=' + product.product + ']').html(product.discount);
+                            $('.cart-product td[data-discount-price-for=' + product.product + ']').html('-' + product.discount_price_view);
+                        }
+                    );
+                    $('.cart-product .data-total-price').html(data.price.total_price_view);
+                    $('.cart-product .data-total-vat').html(data.price.vat_view);
+                    $('.cart-product .data-total-price-ttc').html(data.price.total_price_ttc_view);
+                    //$('[data-total-vat-for=445]').val()
+                },
+                dataType: 'json'
             });
-            return false; 
+            return false;
         });
-        
+
         $('.fortooltip').tooltip({container: 'body', html: true});
         $('.fortooltip').click(
-            function(e) {
+            function (e) {
                 e.preventDefault();
             }
         );
 
         $('form#order').submit(
-            function() {
+            function () {
                 if ($('.submit_order_simple').hasClass('disabled')) {
                     return false;
                 }
@@ -642,6 +680,6 @@ $this->footScript()->appendScript($script);
                 return true;
             }
         );
-        
+
     });
 </script>

@@ -18,13 +18,13 @@
                 ?>
                 <tr>
                     <td><span
-                            class="badge <?php echo $badgeIdClass; ?>"><?php echo $this->escape($location['id']); ?></span>
+                                class="badge <?php echo $badgeIdClass; ?>"><?php echo $this->escape($location['id']); ?></span>
                     </td>
                     <td><?php echo $this->escape($location['title']); ?></td>
                     <td>
                         <a class="btn btn-primary btn-sm" title="<?php _e('Edit'); ?>"
-                           href="<?php echo $this->url('', array('action' => 'update', 'id' => $location['id'])); ?>"><i
-                                class="fas fa-edit"></i> <?php _e('Edit'); ?></a>
+                           href="<?php echo $this->url('', ['action' => 'update', 'id' => $location['id']]); ?>"><i
+                                    class="fas fa-edit"></i> <?php _e('Edit'); ?></a>
                     </td>
                 </tr>
             <?php } ?>

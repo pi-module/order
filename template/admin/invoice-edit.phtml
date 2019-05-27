@@ -5,15 +5,15 @@
         <div class="clearfix">
             <div class="col-md-6">
                 <p><strong><?php _e('Status'); ?></strong> :
-                    <?php 
-                        if ($invoice['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT) {
-                            $class = "warning";
-                        } elseif ($invoice['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) {
-                            $class = "success";
-                        } else {
-                            $class = "danger";
-                        }
-                    ?>                    
+                    <?php
+                    if ($invoice['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT) {
+                        $class = "warning";
+                    } elseif ($invoice['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) {
+                        $class = "success";
+                    } else {
+                        $class = "danger";
+                    }
+                    ?>
                     <span class="badge badge-<?php echo $class ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']] ?></span>
                 </p>
 
@@ -25,10 +25,10 @@
 
                 <p><strong><?php _e('Time create'); ?></strong> :
                     <span><?php echo $this->escape($invoice['time_create_view']); ?> </span></p>
-                
+
                 <p><strong><?php _e('Time invoice'); ?></strong> :
                     <span><?php echo $this->escape($invoice['time_invoice_view']); ?> </span></p>
-                
+
                 <?php if ($invoice['shipping_price'] > 0) { ?>
                     <p><strong><?php _e('Shipping price'); ?></strong> :
                         <span><?php echo $this->escape($invoice['shipping_price_view']); ?></span></p>
@@ -53,7 +53,7 @@
             <div class="col-md-6">
                 <?php if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
                     <p><strong><?php _e('Name'); ?></strong> :
-                        <span><?php echo $this->escape($address['first_name']); ?> <?php echo $this->escape($address['last_name']); ?></span>
+                        <span><?php echo $this->escape($address['first_name']); ?><?php echo $this->escape($address['last_name']); ?></span>
                     </p>
                 <?php } ?>
                 <?php if (!empty($address['id_number'])) { ?>
@@ -99,10 +99,10 @@
             </div>
             <div class="col-md-12 text-right">
                 <a class="btn btn-primary" title="<?php _e('View order'); ?>"
-                   href="<?php echo $this->url('', array('controller' => 'order', 'action' => 'view', 'id' => $invoice['order'])); ?>"
+                   href="<?php echo $this->url('', ['controller' => 'order', 'action' => 'view', 'id' => $invoice['order']]); ?>"
                    target="_blank"><i class="far fa-eye"></i> <?php _e('View order'); ?></a>
                 <a class="btn btn-primary" title="<?php _e('Print'); ?>"
-                   href="<?php echo $this->url('', array('controller' => 'invoice', 'action' => 'print', 'id' => $invoice['id'])); ?>"
+                   href="<?php echo $this->url('', ['controller' => 'invoice', 'action' => 'print', 'id' => $invoice['id']]); ?>"
                    target="_blank"><i class="fas fa-print"></i> <?php _e('Print'); ?></a>
             </div>
         </div>
