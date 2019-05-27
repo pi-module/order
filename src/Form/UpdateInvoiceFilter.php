@@ -21,10 +21,12 @@ class UpdateInvoiceFilter extends InputFilter
     public function __construct()
     {
         // status_payment
-        $this->add(array(
-            'name' => 'status',
-            'required' => true,
-        ));
+        $this->add(
+            [
+                'name'     => 'status',
+                'required' => true,
+            ]
+        );
         // gateway
         /* $this->add(array(
             'name' => 'gateway',

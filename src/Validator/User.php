@@ -23,18 +23,18 @@ class User extends AbstractValidator
     /**
      * @var array
      */
-    protected $messageTemplates = array();
+    protected $messageTemplates = [];
 
-    protected $options = array();
+    protected $options = [];
 
     /**
      * {@inheritDoc}
      */
     public function __construct($options = null)
     {
-        $this->messageTemplates = array(
+        $this->messageTemplates = [
             self::TAKEN => __('Select user ID not exist on system'),
-        );
+        ];
 
         parent::__construct($options);
     }
@@ -44,6 +44,7 @@ class User extends AbstractValidator
      *
      * @param  mixed $value
      * @param  array $context
+     *
      * @return boolean
      */
     public function isValid($value, $context = null)

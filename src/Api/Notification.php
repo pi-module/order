@@ -35,71 +35,77 @@ class Notification extends AbstractApi
         $config = Pi::service('registry')->config->read($this->getModule());
 
         // Get admin main
-        $sitename = Pi::config('sitename');
+        $sitename  = Pi::config('sitename');
         $adminmail = Pi::config('adminmail');
         $adminname = Pi::config('adminname');
 
         // Get product list
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
-        $productList = '';
-        $totalPrice = 0;
-        $typeProduct = array();
+        $productList       = '';
+        $totalPrice        = 0;
+        $typeProduct       = [];
         foreach ($order['products'] as $product) {
-            $productPrice = $product['product_price'] + $product['vat_price'] + $product['setup_price'] + $product['packing_price'] + $product['shipping_price'] - $product['discount_price']; 
-            $totalPrice += $productPrice;
-            $productList .= $product['details']['title'] . ' , ';
-            
+            $productPrice = $product['product_price'] + $product['vat_price'] + $product['setup_price'] + $product['packing_price'] + $product['shipping_price']
+                - $product['discount_price'];
+            $totalPrice   += $productPrice;
+            $productList  .= $product['details']['title'] . ' , ';
+
             if ($product['module'] == 'guide') {
                 $typeProduct[] = __('package');
-            } else if ($product['module'] == 'shop') {
-                $typeProduct[] = __('product');
             } else {
-                $typeProduct[] = __($product['module']);
+                if ($product['module'] == 'shop') {
+                    $typeProduct[] = __('product');
+                } else {
+                    $typeProduct[] = __($product['module']);
+                }
             }
         }
-        $typeProduct = array_unique($typeProduct);
+        $typeProduct  = array_unique($typeProduct);
         $productPrice = Pi::api('api', 'order')->viewPrice($totalPrice);
 
         // Set link
-        $link = Pi::url(Pi::service('url')->assemble('order', array(
-            'module' => $this->getModule(),
-            'controller' => 'index',
-            'action' => 'print',
-            'id' => $order['id'],
-        )));
+        $link = Pi::url(
+            Pi::service('url')->assemble(
+                'order', [
+                'module'     => $this->getModule(),
+                'controller' => 'index',
+                'action'     => 'print',
+                'id'         => $order['id'],
+            ]
+            )
+        );
 
-        
-        
+
         $userNote = '';
         if ($order['user_note']) {
             $userNote = Pi::service('mail')->template(
-                array(
-                    'file'      => 'admin_user_note',
-                    'module'    => 'order',
-                ),
-                array(
-                    'user_note' => $order['user_note'],                    
-                )
+                [
+                    'file'   => 'admin_user_note',
+                    'module' => 'order',
+                ],
+                [
+                    'user_note' => $order['user_note'],
+                ]
             );
         }
         // Set mail information
-        $information = array(
-            'first_name' => $addressInvoicing['first_name'],
-            'last_name' => $addressInvoicing['last_name'],
-            'order_id' => (!empty($order['code'])) ? $order['code'] : $order['id'],
-            'order_link' => $link,
-            'product_list' => $productList,
+        $information = [
+            'first_name'    => $addressInvoicing['first_name'],
+            'last_name'     => $addressInvoicing['last_name'],
+            'order_id'      => (!empty($order['code'])) ? $order['code'] : $order['id'],
+            'order_link'    => $link,
+            'product_list'  => $productList,
             'product_price' => $productPrice,
-            'type_product' => join(', ', $typeProduct),
-            'sellerinfo' => $config['order_sellerinfo'],
-            'user_note' => $userNote['body']
-            
-        );
+            'type_product'  => join(', ', $typeProduct),
+            'sellerinfo'    => $config['order_sellerinfo'],
+            'user_note'     => $userNote['body'],
+
+        ];
 
         // Send mail to admin
-        $toAdmin = array(
+        $toAdmin = [
             $adminmail => $adminname,
-        );
+        ];
         Pi::service('notification')->send(
             $toAdmin,
             'admin_add_order',
@@ -114,9 +120,9 @@ class Notification extends AbstractApi
                 $list = explode(",", $items);
                 if (in_array($list[0], $typeProduct)) {
                     // Send mail to admin
-                    $toAdmin = array(
+                    $toAdmin = [
                         $list[1] => $adminname,
-                    );
+                    ];
                     Pi::service('notification')->send(
                         $toAdmin,
                         'admin_add_order',
@@ -127,11 +133,11 @@ class Notification extends AbstractApi
             }
         }
 
-        if (!$oneMail) {   
+        if (!$oneMail) {
             // Send mail to user
-            $toUser = array(
+            $toUser = [
                 $addressInvoicing['email'] => sprintf('%s %s', $addressInvoicing['first_name'], $addressInvoicing['last_name']),
-            );
+            ];
             Pi::service('notification')->send(
                 $toUser,
                 'user_add_order',
@@ -169,7 +175,7 @@ class Notification extends AbstractApi
     public function processOrder($order, $type)
     {
         $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
-        
+
         // Get sitename
         $sitename = Pi::config('sitename');
 
@@ -248,29 +254,33 @@ class Notification extends AbstractApi
         );
 
         // Set link
-        $link = Pi::url(Pi::service('url')->assemble('order', array(
-            'module' => $this->getModule(),
-            'controller' => 'index',
-            'action' => 'print',
-            'id' => $order['id'],
-        )));
+        $link = Pi::url(
+            Pi::service('url')->assemble(
+                'order', [
+                'module'     => $this->getModule(),
+                'controller' => 'index',
+                'action'     => 'print',
+                'id'         => $order['id'],
+            ]
+            )
+        );
 
         // Set mail information
         $config = Pi::service('registry')->config->read($this->getModule());
 
-        $information = array(
+        $information = [
             'first_name' => $address['first_name'],
-            'last_name' => $address['last_name'],
+            'last_name'  => $address['last_name'],
             'order_link' => $link,
-            'text' => $text,
-            'sellerinfo' => $config['order_sellerinfo']
+            'text'       => $text,
+            'sellerinfo' => $config['order_sellerinfo'],
 
-        );
+        ];
 
         // Send mail to user
-        $toUser = array(
+        $toUser = [
             $address['email'] => sprintf('%s %s', $address['first_name'], $address['last_name']),
-        );
+        ];
         Pi::service('notification')->send(
             $toUser,
             'user_process_order',
@@ -286,10 +296,10 @@ class Notification extends AbstractApi
     public function processOrderNote($order)
     {
         $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
-        
+
         // Get sitename
         $sitename = Pi::config('sitename');
-        $config = Pi::service('registry')->config->read($this->getModule());
+        $config   = Pi::service('registry')->config->read($this->getModule());
 
         // Set mail text
         $text = sprintf(
@@ -307,27 +317,31 @@ class Notification extends AbstractApi
         );
 
         // Set link
-        $link = Pi::url(Pi::service('url')->assemble('order', array(
-            'module' => $this->getModule(),
-            'controller' => 'index',
-            'action' => 'print',
-            'id' => $order['id'],
-        )));
+        $link = Pi::url(
+            Pi::service('url')->assemble(
+                'order', [
+                'module'     => $this->getModule(),
+                'controller' => 'index',
+                'action'     => 'print',
+                'id'         => $order['id'],
+            ]
+            )
+        );
 
         // Set mail information
-        $information = array(
+        $information = [
             'first_name' => $address['first_name'],
-            'last_name' => $address['last_name'],
+            'last_name'  => $address['last_name'],
             'order_link' => $link,
-            'text' => $text,
-            'sellerinfo' => $config['order_sellerinfo']
-            
-        );
+            'text'       => $text,
+            'sellerinfo' => $config['order_sellerinfo'],
+
+        ];
 
         // Send mail to user
-        $toUser = array(
+        $toUser = [
             $address['email'] => sprintf('%s %s', $address['first_name'], $address['last_name']),
-        );
+        ];
         Pi::service('notification')->send(
             $toUser,
             'user_process_order',
@@ -343,9 +357,9 @@ class Notification extends AbstractApi
     public function processOrderCanPay($order)
     {
         $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
-        
+
         $config = Pi::service('registry')->config->read($this->getModule());
-        
+
         if ($order['can_pay'] == 1) {
             // Get sitename
             $sitename = Pi::config('sitename');
@@ -367,27 +381,31 @@ class Notification extends AbstractApi
             );
 
             // Set link
-            $link = Pi::url(Pi::service('url')->assemble('order', array(
-                'module' => $this->getModule(),
-                'controller' => 'index',
-                'action' => 'print',
-                'id' => $order['id'],
-            )));
+            $link = Pi::url(
+                Pi::service('url')->assemble(
+                    'order', [
+                    'module'     => $this->getModule(),
+                    'controller' => 'index',
+                    'action'     => 'print',
+                    'id'         => $order['id'],
+                ]
+                )
+            );
 
             // Set mail information
-            $information = array(
+            $information = [
                 'first_name' => $address['first_name'],
-                'last_name' => $address['last_name'],
+                'last_name'  => $address['last_name'],
                 'order_link' => $link,
-                'text' => $text,
-                'sellerinfo' => $config['order_sellerinfo']
-                
-            );
+                'text'       => $text,
+                'sellerinfo' => $config['order_sellerinfo'],
+
+            ];
 
             // Send mail to user
-            $toUser = array(
+            $toUser = [
                 $address['email'] => sprintf('%s %s', $address['first_name'], $address['last_name']),
-            );
+            ];
             Pi::service('notification')->send(
                 $toUser,
                 'user_process_order',
@@ -405,58 +423,64 @@ class Notification extends AbstractApi
     public function payInvoice($order, $invoice)
     {
         $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
-        
+
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
         // Get admin main
-        $sitename = Pi::config('sitename');
+        $sitename  = Pi::config('sitename');
         $adminmail = Pi::config('adminmail');
         $adminname = Pi::config('adminname');
 
         // Get product list
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id']);
-        $productList = array();
-        $typeProduct = array();
+        $productList       = [];
+        $typeProduct       = [];
         foreach ($order['products'] as $product) {
             $productList[] = $product['details']['title'];
             if ($product['module'] == 'guide') {
                 $typeProduct[] = __('package');
-            } else if ($product['module'] == 'shop') {
-                $typeProduct[] = __('product');
             } else {
-                $typeProduct[] = __($product['module']);
+                if ($product['module'] == 'shop') {
+                    $typeProduct[] = __('product');
+                } else {
+                    $typeProduct[] = __($product['module']);
+                }
             }
         }
         $productList = join(', ', $productList);
-        
-        // Set link
-        $link = Pi::url(Pi::service('url')->assemble('order', array(
-            'module' => $this->getModule(),
-            'controller' => 'index',
-            'action' => 'print',
-            'id' => $order['id'],
-        )));
 
-        
-        // Set mail information
-        $information = array(
-            'first_name' => $address['first_name'],
-            'last_name' => $address['last_name'],
-            'order_id' => $order['code'],
-            'invoice_id' => $invoice['code'],
-            'order_link' => $link,
-            'invoice_price' => Pi::api('api', 'order')->viewPrice($invoice['total_price']),
-            'product_list' => $productList,
-            'type_product' => join(', ', $typeProduct),
-            'sellerinfo' => $config['order_sellerinfo']
-            
+        // Set link
+        $link = Pi::url(
+            Pi::service('url')->assemble(
+                'order', [
+                'module'     => $this->getModule(),
+                'controller' => 'index',
+                'action'     => 'print',
+                'id'         => $order['id'],
+            ]
+            )
         );
+
+
+        // Set mail information
+        $information = [
+            'first_name'    => $address['first_name'],
+            'last_name'     => $address['last_name'],
+            'order_id'      => $order['code'],
+            'invoice_id'    => $invoice['code'],
+            'order_link'    => $link,
+            'invoice_price' => Pi::api('api', 'order')->viewPrice($invoice['total_price']),
+            'product_list'  => $productList,
+            'type_product'  => join(', ', $typeProduct),
+            'sellerinfo'    => $config['order_sellerinfo'],
+
+        ];
 
         // Send mail to admin
-        $toAdmin = array(
+        $toAdmin = [
             $adminmail => $adminname,
-        );
+        ];
         Pi::service('notification')->send(
             $toAdmin,
             'admin_pay_invoice',
@@ -465,9 +489,9 @@ class Notification extends AbstractApi
         );
 
         // Send mail to user
-        $toUser = array(
+        $toUser = [
             $address['email'] => sprintf('%s %s', $address['first_name'], $address['last_name']),
-        );
+        ];
         Pi::service('notification')->send(
             $toUser,
             'user_pay_invoice',
@@ -506,33 +530,37 @@ class Notification extends AbstractApi
     public function duedateInvoice($order, $invoice)
     {
         $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
-        
+
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
         // Set link
-        $link = Pi::url(Pi::service('url')->assemble('order', array(
-            'module' => $this->getModule(),
-            'controller' => 'index',
-            'action' => 'print',
-            'id' => $order['id'],
-        )));
+        $link = Pi::url(
+            Pi::service('url')->assemble(
+                'order', [
+                'module'     => $this->getModule(),
+                'controller' => 'index',
+                'action'     => 'print',
+                'id'         => $order['id'],
+            ]
+            )
+        );
 
         // Set mail information
-        $information = array(
+        $information = [
             'first_name' => $address['first_name'],
-            'last_name' => $address['last_name'],
+            'last_name'  => $address['last_name'],
             'invoice_id' => $invoice['id'],
             'order_link' => $link,
-            'day' => $config['notification_cron_invoice'],
-            'sellerinfo' => $config['order_sellerinfo']
-            
-        );
+            'day'        => $config['notification_cron_invoice'],
+            'sellerinfo' => $config['order_sellerinfo'],
+
+        ];
 
         // Send mail to user
-        $toUser = array(
+        $toUser = [
             $address['email'] => sprintf('%s %s', $address['first_name'], $address['last_name']),
-        );
+        ];
         Pi::service('notification')->send(
             $toUser,
             'user_duedate_invoice',
@@ -549,33 +577,37 @@ class Notification extends AbstractApi
     public function expiredInvoice($order, $invoice)
     {
         $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
-        
+
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
         // Set link
-        $link = Pi::url(Pi::service('url')->assemble('order', array(
-            'module' => $this->getModule(),
-            'controller' => 'index',
-            'action' => 'print',
-            'id' => $order['id'],
-        )));
+        $link = Pi::url(
+            Pi::service('url')->assemble(
+                'order', [
+                'module'     => $this->getModule(),
+                'controller' => 'index',
+                'action'     => 'print',
+                'id'         => $order['id'],
+            ]
+            )
+        );
 
         // Set mail information
-        $information = array(
+        $information = [
             'first_name' => $address['first_name'],
-            'last_name' => $address['last_name'],
+            'last_name'  => $address['last_name'],
             'invoice_id' => $invoice['id'],
             'order_link' => $link,
-            'day' => $config['notification_cron_expired'],
-            'sellerinfo' => $config['order_sellerinfo']
-            
-        );
+            'day'        => $config['notification_cron_expired'],
+            'sellerinfo' => $config['order_sellerinfo'],
+
+        ];
 
         // Send mail to user
-        $toUser = array(
+        $toUser = [
             $address['email'] => sprintf('%s %s', $address['first_name'], $address['last_name']),
-        );
+        ];
         Pi::service('notification')->send(
             $toUser,
             'user_expired_invoice',

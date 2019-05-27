@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class OrderForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         $this->option = $option;
         $this->config = Pi::service('registry')->config->read('order', 'order');
@@ -36,7 +36,7 @@ class OrderForm extends BaseForm
     public function init()
     {
         // Check for load register form
-        $registerFieldsName = array();
+        $registerFieldsName = [];
         if (Pi::service('module')->isActive('user')
             && !Pi::service('authentication')->hasIdentity()
             && isset($_SESSION['session_order'])
@@ -50,218 +50,248 @@ class OrderForm extends BaseForm
                 }
             }
         }
-        $this->add(array(
-            'name' => 'address_id',
-            'attributes' => array(
-                'type' => 'hidden',
-            ),
-        ));
+        $this->add(
+            [
+                'name'       => 'address_id',
+                'attributes' => [
+                    'type' => 'hidden',
+                ],
+            ]
+        );
         // name
         if ($this->config['order_name']) {
             // first_name
             if (!in_array('first_name', $registerFieldsName)) {
-                $this->add(array(
-                    'name' => 'first_name',
-                    'options' => array(
-                        'label' => __('First name'),
-                    ),
-                    'attributes' => array(
-                        'type' => 'text',
-                        'description' => '',
-                        'required' => true,
-                    )
-                ));
+                $this->add(
+                    [
+                        'name'       => 'first_name',
+                        'options'    => [
+                            'label' => __('First name'),
+                        ],
+                        'attributes' => [
+                            'type'        => 'text',
+                            'description' => '',
+                            'required'    => true,
+                        ],
+                    ]
+                );
             }
             // last_name
             if (!in_array('last_name', $registerFieldsName)) {
-                $this->add(array(
-                    'name' => 'last_name',
-                    'options' => array(
-                        'label' => __('Last name'),
-                    ),
-                    'attributes' => array(
-                        'type' => 'text',
-                        'description' => '',
-                        'required' => true,
-                    )
-                ));
+                $this->add(
+                    [
+                        'name'       => 'last_name',
+                        'options'    => [
+                            'label' => __('Last name'),
+                        ],
+                        'attributes' => [
+                            'type'        => 'text',
+                            'description' => '',
+                            'required'    => true,
+                        ],
+                    ]
+                );
             }
         }
         // id_number
         if ($this->config['order_idnumber'] && !in_array('id_number', $registerFieldsName)) {
-            $this->add(array(
-                'name' => 'id_number',
-                'options' => array(
-                    'label' => __('ID number'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                    'required' => true,
-                )
-            ));
+            $this->add(
+                [
+                    'name'       => 'id_number',
+                    'options'    => [
+                        'label' => __('ID number'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'text',
+                        'description' => '',
+                        'required'    => true,
+                    ],
+                ]
+            );
         }
         // email
         if ($this->config['order_email'] && !in_array('email', $registerFieldsName)) {
-            $this->add(array(
-                'name' => 'email',
-                'options' => array(
-                    'label' => __('Email'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                    'required' => true,
-                )
-            ));
+            $this->add(
+                [
+                    'name'       => 'email',
+                    'options'    => [
+                        'label' => __('Email'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'text',
+                        'description' => '',
+                        'required'    => true,
+                    ],
+                ]
+            );
         }
         // phone
         if ($this->config['order_phone'] && !in_array('phone', $registerFieldsName)) {
-            $this->add(array(
-                'name' => 'phone',
-                'options' => array(
-                    'label' => __('Phone'),
-                ),
-                'attributes' => array(
-                    'type' => 'tel',
-                    'pattern'=> "^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$",
-                    'description' => '','description' => '',
+            $this->add(
+                [
+                    'name'       => 'phone',
+                    'options'    => [
+                        'label' => __('Phone'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'tel',
+                        'pattern'     => "^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$",
+                        'description' => '', 'description' => '',
 
-                )
-            ));
+                    ],
+                ]
+            );
         }
         // mobile
         if ($this->config['order_mobile'] && !in_array('mobile', $registerFieldsName)) {
-            $this->add(array(
-                'name' => 'mobile',
-                'options' => array(
-                    'label' => __('Mobile'),
-                ),
-                'attributes' => array(
-                    'type' => 'tel',
-                    'pattern'=> "^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$",
-                    'description' => '',
-                    'required' => true,
-                )
-            ));
+            $this->add(
+                [
+                    'name'       => 'mobile',
+                    'options'    => [
+                        'label' => __('Mobile'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'tel',
+                        'pattern'     => "^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$",
+                        'description' => '',
+                        'required'    => true,
+                    ],
+                ]
+            );
         }
         // company
         if ($this->config['order_company'] && !in_array('company', $registerFieldsName)) {
             // company
-            $this->add(array(
-                'name' => 'company',
-                'options' => array(
-                    'label' => __('Company'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                )
-            ));
+            $this->add(
+                [
+                    'name'       => 'company',
+                    'options'    => [
+                        'label' => __('Company'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'text',
+                        'description' => '',
+                    ],
+                ]
+            );
         }
         // company extra
         if ($this->config['order_company_extra']) {
             // company_id
             if (!in_array('company_id', $registerFieldsName)) {
-                $this->add(array(
-                    'name' => 'company_id',
-                    'options' => array(
-                        'label' => __('Company id'),
-                    ),
-                    'attributes' => array(
-                        'type' => 'text',
-                        'description' => '',
-                    )
-                ));
+                $this->add(
+                    [
+                        'name'       => 'company_id',
+                        'options'    => [
+                            'label' => __('Company id'),
+                        ],
+                        'attributes' => [
+                            'type'        => 'text',
+                            'description' => '',
+                        ],
+                    ]
+                );
             }
             // company_vat
             if (!in_array('company_vat', $registerFieldsName)) {
-                $this->add(array(
-                    'name' => 'company_vat',
-                    'options' => array(
-                        'label' => __('Company vat'),
-                    ),
-                    'attributes' => array(
-                        'type' => 'text',
-                        'description' => '',
-                    )
-                ));
+                $this->add(
+                    [
+                        'name'       => 'company_vat',
+                        'options'    => [
+                            'label' => __('Company vat'),
+                        ],
+                        'attributes' => [
+                            'type'        => 'text',
+                            'description' => '',
+                        ],
+                    ]
+                );
             }
         }
         // address
         if ($this->config['order_address1'] && !in_array('address1', $registerFieldsName)) {
-            $this->add(array(
-                'name' => 'address1',
-                'options' => array(
-                    'label' => __('Delivery address'),
-                ),
-                'attributes' => array(
-                    'type' => 'textarea',
-                    'rows' => '3',
-                    'cols' => '40',
-                    'description' => '',
-                    'required' => true,
-                )
-            ));
+            $this->add(
+                [
+                    'name'       => 'address1',
+                    'options'    => [
+                        'label' => __('Delivery address'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'textarea',
+                        'rows'        => '3',
+                        'cols'        => '40',
+                        'description' => '',
+                        'required'    => true,
+                    ],
+                ]
+            );
         }
         // address 2
         if ($this->config['order_address2'] && !in_array('address2', $registerFieldsName)) {
-            $this->add(array(
-                'name' => 'address2',
-                'options' => array(
-                    'label' => __('Invoicing Address'),
-                ),
-                'attributes' => array(
-                    'type' => 'textarea',
-                    'rows' => '3',
-                    'cols' => '40',
-                    'description' => '',
-                    'required' => true,
-                )
-            ));
+            $this->add(
+                [
+                    'name'       => 'address2',
+                    'options'    => [
+                        'label' => __('Invoicing Address'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'textarea',
+                        'rows'        => '3',
+                        'cols'        => '40',
+                        'description' => '',
+                        'required'    => true,
+                    ],
+                ]
+            );
         }
         // zip_code
         if ($this->config['order_zip'] && !in_array('zip_code', $registerFieldsName)) {
-            $this->add(array(
-                'name' => 'zip_code',
-                'options' => array(
-                    'label' => __('Zip code'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                    'required' => true,
-                )
-            ));
+            $this->add(
+                [
+                    'name'       => 'zip_code',
+                    'options'    => [
+                        'label' => __('Zip code'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'text',
+                        'description' => '',
+                        'required'    => true,
+                    ],
+                ]
+            );
         }
         // city
         if ($this->config['order_city'] && !in_array('city', $registerFieldsName)) {
-            $this->add(array(
-                'name' => 'city',
-                'options' => array(
-                    'label' => __('City'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                    'required' => true,
+            $this->add(
+                [
+                    'name'       => 'city',
+                    'options'    => [
+                        'label' => __('City'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'text',
+                        'description' => '',
+                        'required'    => true,
 
-                )
-            ));
+                    ],
+                ]
+            );
         }
         // state
         if ($this->config['order_state'] && !in_array('state', $registerFieldsName)) {
-            $this->add(array(
-                'name' => 'state',
-                'options' => array(
-                    'label' => __('State'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                    'required' => true,
-                )
-            ));
+            $this->add(
+                [
+                    'name'       => 'state',
+                    'options'    => [
+                        'label' => __('State'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'text',
+                        'description' => '',
+                        'required'    => true,
+                    ],
+                ]
+            );
         }
         // country
         if ($this->config['order_country'] && !in_array('country', $registerFieldsName)) {
@@ -272,41 +302,47 @@ class OrderForm extends BaseForm
                     $countryList[$country] = $country;
                 }
                 // Make form
-                $this->add(array(
-                    'name' => 'country',
-                    'type' => 'select',
-                    'options' => array(
-                        'label' => __('Country'),
-                        'value_options' => $countryList,
-                        'required' => true,
-                    ),
-                ));
+                $this->add(
+                    [
+                        'name'    => 'country',
+                        'type'    => 'select',
+                        'options' => [
+                            'label'         => __('Country'),
+                            'value_options' => $countryList,
+                            'required'      => true,
+                        ],
+                    ]
+                );
             } else {
-                $this->add(array(
-                    'name' => 'country',
-                    'options' => array(
-                        'label' => __('Country'),
-                    ),
-                    'attributes' => array(
-                        'type' => 'text',
-                        'description' => '',
-                        'required' => true,
-                    )
-                ));
+                $this->add(
+                    [
+                        'name'       => 'country',
+                        'options'    => [
+                            'label' => __('Country'),
+                        ],
+                        'attributes' => [
+                            'type'        => 'text',
+                            'description' => '',
+                            'required'    => true,
+                        ],
+                    ]
+                );
             }
         }
         // packing
         if ($this->config['order_packing']) {
-            $this->add(array(
-                'name' => 'packing',
-                'type' => 'checkbox',
-                'options' => array(
-                    'label' => __('Packing'),
-                ),
-                'attributes' => array(
-                    'description' => '',
-                )
-            ));
+            $this->add(
+                [
+                    'name'       => 'packing',
+                    'type'       => 'checkbox',
+                    'options'    => [
+                        'label' => __('Packing'),
+                    ],
+                    'attributes' => [
+                        'description' => '',
+                    ],
+                ]
+            );
         }
         // Check type_commodity
         $gatewayList = Pi::api('gateway', 'order')->getActiveGatewayName();
@@ -314,87 +350,99 @@ class OrderForm extends BaseForm
             case 'product':
                 if ($this->config['order_location_delivery']) {
                     // location
-                    $this->add(array(
-                        'name' => 'location',
-                        'type' => 'Module\Order\Form\Element\Location',
-                        'options' => array(
-                            'label' => __('Location'),
-                            'parent' => 1,
-                        ),
-                        'attributes' => array(
-                            'id' => 'select-location',
-                            'required' => true,
-                        )
-                    ));
+                    $this->add(
+                        [
+                            'name'       => 'location',
+                            'type'       => 'Module\Order\Form\Element\Location',
+                            'options'    => [
+                                'label'  => __('Location'),
+                                'parent' => 1,
+                            ],
+                            'attributes' => [
+                                'id'       => 'select-location',
+                                'required' => true,
+                            ],
+                        ]
+                    );
                     // delivery
-                    $this->add(array(
-                        'name' => 'delivery',
-                        'type' => 'select',
-                        'options' => array(
-                            'label' => __('Delivery methods'),
-                            'value_options' => array(),
-                        ),
-                        'attributes' => array(
-                            'id' => 'select-delivery',
-                            'size' => 3,
-                            'required' => true,
-                        )
-                    ));
+                    $this->add(
+                        [
+                            'name'       => 'delivery',
+                            'type'       => 'select',
+                            'options'    => [
+                                'label'         => __('Delivery methods'),
+                                'value_options' => [],
+                            ],
+                            'attributes' => [
+                                'id'       => 'select-delivery',
+                                'size'     => 3,
+                                'required' => true,
+                            ],
+                        ]
+                    );
                     // check gateway
                     if (count($gatewayList) == 1) {
                         $gatewayList = array_keys($gatewayList);
                         // gateway
-                        $this->add(array(
-                            'name' => 'gateway',
-                            'attributes' => array(
-                                'id' => 'select-payment',
-                                'type' => 'hidden',
-                                'value' => $gatewayList['0'],
-                            ),
-                        ));
+                        $this->add(
+                            [
+                                'name'       => 'gateway',
+                                'attributes' => [
+                                    'id'    => 'select-payment',
+                                    'type'  => 'hidden',
+                                    'value' => $gatewayList['0'],
+                                ],
+                            ]
+                        );
                     } else {
                         // gateway
-                        $this->add(array(
-                            'name' => 'gateway',
-                            'type' => 'select',
-                            'options' => array(
-                                'label' => __('Adapter'),
-                                'value_options' => array(),
-                            ),
-                            'attributes' => array(
-                                'id' => 'select-payment',
-                                'size' => 3,
-                                'required' => true,
-                            )
-                        ));
+                        $this->add(
+                            [
+                                'name'       => 'gateway',
+                                'type'       => 'select',
+                                'options'    => [
+                                    'label'         => __('Adapter'),
+                                    'value_options' => [],
+                                ],
+                                'attributes' => [
+                                    'id'       => 'select-payment',
+                                    'size'     => 3,
+                                    'required' => true,
+                                ],
+                            ]
+                        );
                     }
                 } else {
                     if (count($gatewayList) == 1) {
                         $gatewayList = array_keys($gatewayList);
                         // gateway
-                        $this->add(array(
-                            'name' => 'gateway',
-                            'attributes' => array(
-                                'id' => 'select-payment',
-                                'type' => 'hidden',
-                                'value' => $gatewayList['0'],
-                            ),
-                        ));
+                        $this->add(
+                            [
+                                'name'       => 'gateway',
+                                'attributes' => [
+                                    'id'    => 'select-payment',
+                                    'type'  => 'hidden',
+                                    'value' => $gatewayList['0'],
+                                ],
+                            ]
+                        );
                     } else {
                         // gateway
-                        $this->add(array(
-                            'name' => 'gateway',
-                            'type' => 'select',
-                            'options' => array(
-                                'label' => __('Adapter'),
-                                'value_options' => $gatewayList,
-                            ),
-                            'attributes' => array(
-                                'id' => 'select-payment',
-                                'size' => 1,
-                                'required' => true,
-                            )
-                        ));
+                        $this->add(
+                            [
+                                'name'       => 'gateway',
+                                'type'       => 'select',
+                                'options'    => [
+                                    'label'         => __('Adapter'),
+                                    'value_options' => $gatewayList,
+                                ],
+                                'attributes' => [
+                                    'id'       => 'select-payment',
+                                    'size'     => 1,
+                                    'required' => true,
+                                ],
+                            ]
+                        );
                     }
                 }
                 break;
@@ -403,74 +451,84 @@ class OrderForm extends BaseForm
                 if (count($gatewayList) == 1) {
                     $gatewayList = array_keys($gatewayList);
                     // gateway
-                    $this->add(array(
-                        'name' => 'gateway',
-                        'attributes' => array(
-                            'type' => 'hidden',
-                            'value' => $gatewayList['0'],
-                        ),
-                    ));
+                    $this->add(
+                        [
+                            'name'       => 'gateway',
+                            'attributes' => [
+                                'type'  => 'hidden',
+                                'value' => $gatewayList['0'],
+                            ],
+                        ]
+                    );
                 } else {
                     // gateway
-                    $this->add(array(
-                        'name' => 'gateway',
-                        'type' => 'select',
-                        'options' => array(
-                            'label' => __('Adapter'),
-                            'value_options' => $gatewayList,
-                        ),
-                        'attributes' => array(
-                            'id' => 'select-payment',
-                            'size' => 1,
-                            'required' => true,
-                        )
-                    ));
+                    $this->add(
+                        [
+                            'name'       => 'gateway',
+                            'type'       => 'select',
+                            'options'    => [
+                                'label'         => __('Adapter'),
+                                'value_options' => $gatewayList,
+                            ],
+                            'attributes' => [
+                                'id'       => 'select-payment',
+                                'size'     => 1,
+                                'required' => true,
+                            ],
+                        ]
+                    );
                 }
                 break;
         }
         // user_note
         if ($this->config['order_usernote']) {
-            $this->add(array(
-                'name' => 'user_note',
-                'options' => array(
-                    'label' => __('User note'),
-                ),
-                'attributes' => array(
-                    'type' => 'textarea',
-                    'rows' => '5',
-                    'cols' => '40',
-                    'description' => __('Give here more details you think we need to know about'),
-                )
-            ));
+            $this->add(
+                [
+                    'name'       => 'user_note',
+                    'options'    => [
+                        'label' => __('User note'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'textarea',
+                        'rows'        => '5',
+                        'cols'        => '40',
+                        'description' => __('Give here more details you think we need to know about'),
+                    ],
+                ]
+            );
         }
         // Update profile confirmation
         if ($this->config['order_update_user'] && empty($registerFieldsName)) {
-            $this->add(array(
-                'name' => 'update_user',
-                'type' => 'checkbox',
-                'options' => array(
-                    'label' => __('Update your profile by this information?'),
-                ),
-                'attributes' => array(
-                    'description' => '',
-                )
-            ));
+            $this->add(
+                [
+                    'name'       => 'update_user',
+                    'type'       => 'checkbox',
+                    'options'    => [
+                        'label' => __('Update your profile by this information?'),
+                    ],
+                    'attributes' => [
+                        'description' => '',
+                    ],
+                ]
+            );
         }
         // order_term
         if ($this->config['order_term'] && !empty($this->config['order_termurl'])) {
             $term = sprintf('<a href="%s" target="_blank">%s</a>', $this->config['order_termurl'], __('Terms & Conditions'));
             $term = sprintf(__('I accept %s'), $term);
-            $this->add(array(
-                'name' => 'order_term',
-                'type' => 'checkbox',
-                'options' => array(
-                    'label' => '',
-                ),
-                'attributes' => array(
-                    'description' => $term,
-                    'required' => true,
-                )
-            ));
+            $this->add(
+                [
+                    'name'       => 'order_term',
+                    'type'       => 'checkbox',
+                    'options'    => [
+                        'label' => '',
+                    ],
+                    'attributes' => [
+                        'description' => $term,
+                        'required'    => true,
+                    ],
+                ]
+            );
         }
         // Save
         if (Pi::service('module')->isActive('user')
@@ -490,13 +548,15 @@ class OrderForm extends BaseForm
                 $title = __('Save order');
             }
         }
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
-                'value' => $title,
-                'class' => 'btn btn-success',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => $title,
+                    'class' => 'btn btn-success',
+                ],
+            ]
+        );
     }
 }

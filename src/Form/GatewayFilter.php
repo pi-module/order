@@ -22,10 +22,12 @@ class GatewayFilter extends InputFilter
     {
         if (!empty($field)) {
             foreach ($field as $item) {
-                $this->add(array(
-                    'name' => $item['name'],
-                    'required' => $item['required'],
-                ));
+                $this->add(
+                    [
+                        'name'     => $item['name'],
+                        'required' => $item['required'],
+                    ]
+                );
             }
         }
     }

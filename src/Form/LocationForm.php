@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class LocationForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         $this->delivery = $option['delivery'];
         parent::__construct($name);
@@ -27,9 +27,9 @@ class LocationForm extends BaseForm
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $option = array();
+            $option             = [];
             $option['delivery'] = $this->delivery;
-            $this->filter = new LocationFilter($option);
+            $this->filter       = new LocationFilter($option);
         }
         return $this->filter;
     }
@@ -37,98 +37,116 @@ class LocationForm extends BaseForm
     public function init()
     {
         // id
-        $this->add(array(
-            'name' => 'id',
-            'attributes' => array(
-                'type' => 'hidden',
-            ),
-        ));
+        $this->add(
+            [
+                'name'       => 'id',
+                'attributes' => [
+                    'type' => 'hidden',
+                ],
+            ]
+        );
         // title
-        $this->add(array(
-            'name' => 'title',
-            'options' => array(
-                'label' => __('Title'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
+        $this->add(
+            [
+                'name'       => 'title',
+                'options'    => [
+                    'label' => __('Title'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => '',
 
-            )
-        ));
+                ],
+            ]
+        );
         // parent
-        $this->add(array(
-            'name' => 'parent',
-            'type' => 'Module\Order\Form\Element\Location',
-            'options' => array(
-                'label' => __('Parent'),
-                'parent' => 1,
-            ),
-        ));
+        $this->add(
+            [
+                'name'    => 'parent',
+                'type'    => 'Module\Order\Form\Element\Location',
+                'options' => [
+                    'label'  => __('Parent'),
+                    'parent' => 1,
+                ],
+            ]
+        );
         // status
-        $this->add(array(
-            'name' => 'status',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Status'),
-                'value_options' => array(
-                    1 => __('Published'),
-                    2 => __('Pending review'),
-                    3 => __('Draft'),
-                    4 => __('Private'),
-                ),
-            ),
-        ));
+        $this->add(
+            [
+                'name'    => 'status',
+                'type'    => 'select',
+                'options' => [
+                    'label'         => __('Status'),
+                    'value_options' => [
+                        1 => __('Published'),
+                        2 => __('Pending review'),
+                        3 => __('Draft'),
+                        4 => __('Private'),
+                    ],
+                ],
+            ]
+        );
         // delivery
         foreach ($this->delivery as $delivery) {
             // delivery fieldset
-            $this->add(array(
-                'name' => sprintf('delivery_fieldset_%s', $delivery['id']),
-                'type' => 'fieldset',
-                'options' => array(
-                    'label' => $delivery['title'],
-                ),
-            ));
+            $this->add(
+                [
+                    'name'    => sprintf('delivery_fieldset_%s', $delivery['id']),
+                    'type'    => 'fieldset',
+                    'options' => [
+                        'label' => $delivery['title'],
+                    ],
+                ]
+            );
             // active
-            $this->add(array(
-                'name' => sprintf('delivery_active_%s', $delivery['id']),
-                'type' => 'checkbox',
-                'options' => array(
-                    'label' => sprintf(__('Is active %s ?'), $delivery['title']),
-                ),
-                'attributes' => array(
-                    'description' => '',
-                )
-            ));
+            $this->add(
+                [
+                    'name'       => sprintf('delivery_active_%s', $delivery['id']),
+                    'type'       => 'checkbox',
+                    'options'    => [
+                        'label' => sprintf(__('Is active %s ?'), $delivery['title']),
+                    ],
+                    'attributes' => [
+                        'description' => '',
+                    ],
+                ]
+            );
             // price
-            $this->add(array(
-                'name' => sprintf('delivery_price_%s', $delivery['id']),
-                'options' => array(
-                    'label' => __('Price'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                )
-            ));
+            $this->add(
+                [
+                    'name'       => sprintf('delivery_price_%s', $delivery['id']),
+                    'options'    => [
+                        'label' => __('Price'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'text',
+                        'description' => '',
+                    ],
+                ]
+            );
             // delivery_time
-            $this->add(array(
-                'name' => sprintf('delivery_time_%s', $delivery['id']),
-                'options' => array(
-                    'label' => __('Time ( days )'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
-                )
-            ));
+            $this->add(
+                [
+                    'name'       => sprintf('delivery_time_%s', $delivery['id']),
+                    'options'    => [
+                        'label' => __('Time ( days )'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'text',
+                        'description' => '',
+                    ],
+                ]
+            );
         }
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
-                'value' => __('Submit'),
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Submit'),
+                ],
+            ]
+        );
     }
 }

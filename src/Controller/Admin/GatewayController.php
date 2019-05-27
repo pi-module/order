@@ -13,17 +13,18 @@
 
 namespace Module\Order\Controller\Admin;
 
+use Module\Order\Form\GatewayFilter;
+use Module\Order\Form\GatewayForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Module\Order\Form\GatewayForm;
-use Module\Order\Form\GatewayFilter;
 use Zend\Json\Json;
 
 class GatewayController extends ActionController
 {
-    protected $gatewayColumns = array(
-        'id', 'title', 'path', 'description', 'image', 'status', 'type', 'option'
-    );
+    protected $gatewayColumns
+        = [
+            'id', 'title', 'path', 'description', 'image', 'status', 'type', 'option',
+        ];
 
     public function indexAction()
     {
@@ -57,10 +58,10 @@ class GatewayController extends ActionController
                     }
                 }
                 // Set values
-                $values['title'] = $gateway->gatewayInformation['title'];
+                $values['title']       = $gateway->gatewayInformation['title'];
                 $values['description'] = $gateway->gatewayInformation['description'];
-                $values['status'] = 1;
-                $values['option'] = Json::encode($values['option']);
+                $values['status']      = 1;
+                $values['option']      = Json::encode($values['option']);
                 // Save values
                 if ($gateway->gatewayIsActive == -1) {
                     $row = $this->getModel('gateway')->createRow();
@@ -71,7 +72,7 @@ class GatewayController extends ActionController
                 $row->save();
                 // Set jump
                 $message = __('Gateway data saved successfully.');
-                $url = array('controller' => 'gateway', 'action' => 'index');
+                $url     = ['controller' => 'gateway', 'action' => 'index'];
                 $this->jump($url, $message);
             } else {
                 $message = __('Invalid data, please check and re-submit.');
@@ -105,12 +106,12 @@ class GatewayController extends ActionController
             $gateway->save();
             // Set jump
             $message = __('Gateway data saved successfully.');
-            $url = array('controller' => 'gateway', 'action' => 'index');
+            $url     = ['controller' => 'gateway', 'action' => 'index'];
             $this->jump($url, $message);
         } else {
             // Set jump
             $message = __('Please select installed gateway');
-            $url = array('controller' => 'gateway', 'action' => 'index');
+            $url     = ['controller' => 'gateway', 'action' => 'index'];
             $this->jump($url, $message);
         }
     }

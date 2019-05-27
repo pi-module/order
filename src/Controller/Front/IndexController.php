@@ -13,39 +13,42 @@
 
 namespace Module\Order\Controller\Front;
 
+use Module\Order\Form\RemoveForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Module\Order\Form\RemoveForm;
-use Zend\Json\Json;
 use Pi\Paginator\Paginator;
+use Zend\Json\Json;
 
 class IndexController extends ActionController
 {
     public function indexAction()
     {
         Pi::service('authentication')->requireLogin();
-        
+
         $config = Pi::service('registry')->config->read($this->getModule());
-        $user = Pi::api('user', 'order')->getUserInformation();
-        
-        $page = $this->params('page', 1);
+        $user   = Pi::api('user', 'order')->getUserInformation();
+
+        $page   = $this->params('page', 1);
         $offset = (int)($page - 1) * $this->config('view_perpage');
-        $limit = intval($this->config('view_perpage'));
-        
-        $options = array (
-            'limit' => $limit,
+        $limit  = intval($this->config('view_perpage'));
+
+        $options = [
+            'limit'  => $limit,
             'offset' => $offset,
-            'draft' => false
-        );
-        $orders = Pi::api('order', 'order')->getOrderFromUser($user['id'], false, $options);
+            'draft'  => false,
+        ];
+        $orders  = Pi::api('order', 'order')->getOrderFromUser($user['id'], false, $options);
         foreach ($orders as $order) {
             if ($order['can_pay']) {
                 $order['installments'] = Pi::api('installment', 'order')->getInstallmentsFromOrder($order['id']);
-                $countInstallment = 0;
+                $countInstallment      = 0;
                 foreach ($order['installments'] as $installment) {
                     if ($installment['status_invoice'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
                         $countInstallment++;
-                        if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID || ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID && $installment['gateway'] == 'manual')) {
+                        if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID
+                            || ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID
+                                && $installment['gateway'] == 'manual')
+                        ) {
                             $order['can_pay'] = false;
                             break;
                         }
@@ -57,32 +60,37 @@ class IndexController extends ActionController
                     }
                 }
             }
-            
-            $user['orders'][$order['id']] = $order;
-            $products = Pi::api('order', 'order')->listProduct($order['id']);
+
+            $user['orders'][$order['id']]             = $order;
+            $products                                 = Pi::api('order', 'order')->listProduct($order['id']);
             $user['orders'][$order['id']]['products'] = $products;
-            $totalPrice = 0;
+            $totalPrice                               = 0;
             foreach ($products as $product) {
-                $totalPrice += $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'] - $product['discount_price'];
+                $totalPrice += $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price']
+                    + $product['vat_price'] - $product['discount_price'];
             }
             $user['orders'][$order['id']]['total_price_view'] = Pi::api('api', 'order')->viewPrice($totalPrice);
         }
-        
+
         // Set paginator
-        $count = count(Pi::api('order', 'order')->getOrderFromUser($user['id'], false));
+        $count     = count(Pi::api('order', 'order')->getOrderFromUser($user['id'], false));
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($limit);
         $paginator->setCurrentPageNumber($page);
-        $paginator->setUrlOptions(array(
-            'router' => $this->getEvent()->getRouter(),
-            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params' => array_filter(array(
-                'module' => 'order',
-                'controller' => 'index',
-                'action' => 'index',
-            )),
-        ));
-        
+        $paginator->setUrlOptions(
+            [
+                'router' => $this->getEvent()->getRouter(),
+                'route'  => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+                'params' => array_filter(
+                    [
+                        'module'     => 'order',
+                        'controller' => 'index',
+                        'action'     => 'index',
+                    ]
+                ),
+            ]
+        );
+
         // Set order ids
         /* $orderIds = array();
         foreach ($user['orders'] as $order) {
@@ -102,7 +110,7 @@ class IndexController extends ActionController
         $this->view()->assign('user', $user);
         $this->view()->assign('config', $config);
         $this->view()->assign('paginator', $paginator);
-        
+
     }
 
     public function errorAction()
@@ -128,17 +136,17 @@ class IndexController extends ActionController
         //
         return true;
     }
-    
+
     public function cancelAction()
     {
         $id = $this->params('id');
         if (Pi::api('order', 'order')->hasPayment($id)) {
-            $this->jump(array('', 'action' => 'index'), __('Order has payment. You cannont cancel it'));    
+            $this->jump(['', 'action' => 'index'], __('Order has payment. You cannont cancel it'));
         }
-        
+
         Pi::api('order', 'order')->cancelOrder($id);
-        $this->jump(array('', 'action' => 'index'), __('Order canceled'));
-        
+        $this->jump(['', 'action' => 'index'], __('Order canceled'));
+
     }
-    
+
 }

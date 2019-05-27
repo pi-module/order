@@ -18,64 +18,78 @@ use Zend\InputFilter\InputFilter;
 
 class PromocodeFilter extends InputFilter
 {
-    public function __construct($option = array())
+    public function __construct($option = [])
     {
-        $this->add(array(
-            'name' => 'id',
-            'required' => false,
-        ));        
-        $this->add(array(
-            'name' => 'code',
-            'required' => true,
-            'validators' => array(
-                array(
-                    'name' => 'Db/NoRecordExists',
-                    'options' => array(
-                        'table' => Pi::model('promocode', 'order')->getTable(),
-                        'field' => 'code',
-                        'adapter' => Pi::model('promocode', 'order')->getAdapter(),
-                        'exclude' => array(
-                            'field' => 'id',
-                            'value' => isset($option['id']) ? $option['id'] : null
-                        )                            
-                    )
-                )
-            ),
-        ));
-        
-        $this->add(array(
-            'name' => 'promo',
-            'required' => true,
-            'validators' => array(
-                array(
-                    'name' => 'IsInt'
-                ),
-                array(
-                    'name' => 'Between',
-                    'options' => array('min' => 0, 'max' => 100)
-                )
-            ),
-        ));
-        
-        $this->add(array(
-            'name' => 'time_start',
-            'required' => true,
-        ));
-        
-        $this->add(array(
-            'name' => 'time_end',
-            'required' => true,
-        ));
-        
-        $this->add(array(
-            'name' => 'module',
-            'required' => true,
-        ));
-        
-        $this->add(array(
-            'name' => 'showcode',
-            'required' => true,
-        ));
-        
+        $this->add(
+            [
+                'name'     => 'id',
+                'required' => false,
+            ]
+        );
+        $this->add(
+            [
+                'name'       => 'code',
+                'required'   => true,
+                'validators' => [
+                    [
+                        'name'    => 'Db/NoRecordExists',
+                        'options' => [
+                            'table'   => Pi::model('promocode', 'order')->getTable(),
+                            'field'   => 'code',
+                            'adapter' => Pi::model('promocode', 'order')->getAdapter(),
+                            'exclude' => [
+                                'field' => 'id',
+                                'value' => isset($option['id']) ? $option['id'] : null,
+                            ],
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        $this->add(
+            [
+                'name'       => 'promo',
+                'required'   => true,
+                'validators' => [
+                    [
+                        'name' => 'IsInt',
+                    ],
+                    [
+                        'name'    => 'Between',
+                        'options' => ['min' => 0, 'max' => 100],
+                    ],
+                ],
+            ]
+        );
+
+        $this->add(
+            [
+                'name'     => 'time_start',
+                'required' => true,
+            ]
+        );
+
+        $this->add(
+            [
+                'name'     => 'time_end',
+                'required' => true,
+            ]
+        );
+
+        $this->add(
+            [
+                'name'     => 'module',
+                'required' => true,
+            ]
+        );
+
+        $this->add(
+            [
+                'name'     => 'showcode',
+                'required' => true,
+            ]
+        );
+
     }
 }	

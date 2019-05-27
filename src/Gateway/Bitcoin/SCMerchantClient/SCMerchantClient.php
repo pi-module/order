@@ -17,161 +17,180 @@ include_once('messages/CreateOrderResponse.php');
 class SCMerchantClient
 {
 
-	private $merchantApiUrl;
-	private $privateMerchantCertLocation;
-	private $publicSpectroCoinCertLocation;
+    private $merchantApiUrl;
+    private $privateMerchantCertLocation;
+    private $publicSpectroCoinCertLocation;
 
-	private $merchantId;
-	private $apiId;
-	private $debug;
+    private $merchantId;
+    private $apiId;
+    private $debug;
 
-	private $privateMerchantKey;
-	/**
-	 * @param $merchantApiUrl
-	 * @param $merchantId
-	 * @param $apiId
-	 * @param bool $debug
-	 */
-	function __construct($merchantApiUrl, $merchantId, $apiId, $debug = false)
-	{
-		$this->privateMerchantCertLocation = dirname(__FILE__) . '/../cert/mprivate.pem';
-		$this->publicSpectroCoinCertLocation = 'https://spectrocoin.com/files/merchant.public.pem';
-		$this->merchantApiUrl = $merchantApiUrl;
-		$this->merchantId = $merchantId;
-		$this->apiId = $apiId;
-		$this->debug = $debug;
-	}
+    private $privateMerchantKey;
 
-	/**
-	 * @param $privateKey
-	 */
-	public function setPrivateMerchantKey($privateKey) {
-		$this->privateMerchantKey = $privateKey;
-	}
-	/**
-	 * @param CreateOrderRequest $request
-	 * @return ApiError|CreateOrderResponse
-	 */
-	public function createOrder(CreateOrderRequest $request)
-	{
-		$payload = array(
-			'merchantId' => $this->merchantId,
-			'apiId' => $this->apiId,
-			'orderId' => $request->getOrderId(),
-			'payCurrency' => $request->getPayCurrency(),
-			'payAmount' => $request->getPayAmount(),
-			'receiveCurrency' => $request->getReceiveCurrency(),
-			'receiveAmount' => $request->getReceiveAmount(),
-			'description' => $request->getDescription(),
-			'culture' => $request->getCulture(),
-			'callbackUrl' => $request->getCallbackUrl(),
-			'successUrl' => $request->getSuccessUrl(),
-			'failureUrl' => $request->getFailureUrl()
-		);
+    /**
+     * @param      $merchantApiUrl
+     * @param      $merchantId
+     * @param      $apiId
+     * @param bool $debug
+     */
+    function __construct($merchantApiUrl, $merchantId, $apiId, $debug = false)
+    {
+        $this->privateMerchantCertLocation   = dirname(__FILE__) . '/../cert/mprivate.pem';
+        $this->publicSpectroCoinCertLocation = 'https://spectrocoin.com/files/merchant.public.pem';
+        $this->merchantApiUrl                = $merchantApiUrl;
+        $this->merchantId                    = $merchantId;
+        $this->apiId                         = $apiId;
+        $this->debug                         = $debug;
+    }
 
-		$formHandler = new \Httpful\Handlers\FormHandler();
-		$data = $formHandler->serialize($payload);
-		$signature = $this->generateSignature($data);
-		$payload['sign'] = $signature;
-		if (!$this->debug) {
-			$response = \Httpful\Request::post($this->merchantApiUrl . '/createOrder', $payload, \Httpful\Mime::FORM)->expects(\Httpful\Mime::JSON)->send();
-			if ($response != null) {
-				$body = $response->body;
-				if ($body != null) {
-					if (is_array($body) && count($body) > 0 && isset($body[0]->code)) {
-						return new ApiError($body[0]->code, $body[0]->message);
-					} else if (isset($body->orderRequestId)) {
-						return new CreateOrderResponse($body->orderRequestId, $body->orderId, $body->depositAddress, $body->payAmount, $body->payCurrency, $body->receiveAmount, $body->receiveCurrency, $body->validUntil, $body->redirectUrl);
-					}
-				}
-			}
-		} else {
-			$response = \Httpful\Request::post($this->merchantApiUrl . '/createOrder', $payload, \Httpful\Mime::FORM)->send();
-			exit('<pre>'.print_r($response, true).'</pre>');
-		}
-	}
+    /**
+     * @param $privateKey
+     */
+    public function setPrivateMerchantKey($privateKey)
+    {
+        $this->privateMerchantKey = $privateKey;
+    }
 
-	private function generateSignature($data)
-	{
-		$privateKey = $this->privateMerchantKey != null ? $this->privateMerchantKey : file_get_contents($this->privateMerchantCertLocation);
-		$pkeyid = openssl_pkey_get_private($privateKey);
+    /**
+     * @param CreateOrderRequest $request
+     *
+     * @return ApiError|CreateOrderResponse
+     */
+    public function createOrder(CreateOrderRequest $request)
+    {
+        $payload = [
+            'merchantId'      => $this->merchantId,
+            'apiId'           => $this->apiId,
+            'orderId'         => $request->getOrderId(),
+            'payCurrency'     => $request->getPayCurrency(),
+            'payAmount'       => $request->getPayAmount(),
+            'receiveCurrency' => $request->getReceiveCurrency(),
+            'receiveAmount'   => $request->getReceiveAmount(),
+            'description'     => $request->getDescription(),
+            'culture'         => $request->getCulture(),
+            'callbackUrl'     => $request->getCallbackUrl(),
+            'successUrl'      => $request->getSuccessUrl(),
+            'failureUrl'      => $request->getFailureUrl(),
+        ];
 
-		// compute signature
-		$s = openssl_sign($data, $signature, $pkeyid, OPENSSL_ALGO_SHA1);
-		$encodedSignature = base64_encode($signature);
-		// free the key from memory
-		openssl_free_key($pkeyid);
+        $formHandler     = new \Httpful\Handlers\FormHandler();
+        $data            = $formHandler->serialize($payload);
+        $signature       = $this->generateSignature($data);
+        $payload['sign'] = $signature;
+        if (!$this->debug) {
+            $response = \Httpful\Request::post($this->merchantApiUrl . '/createOrder', $payload, \Httpful\Mime::FORM)->expects(\Httpful\Mime::JSON)->send();
+            if ($response != null) {
+                $body = $response->body;
+                if ($body != null) {
+                    if (is_array($body) && count($body) > 0 && isset($body[0]->code)) {
+                        return new ApiError($body[0]->code, $body[0]->message);
+                    } else {
+                        if (isset($body->orderRequestId)) {
+                            return new CreateOrderResponse(
+                                $body->orderRequestId, $body->orderId, $body->depositAddress, $body->payAmount, $body->payCurrency, $body->receiveAmount,
+                                $body->receiveCurrency, $body->validUntil, $body->redirectUrl
+                            );
+                        }
+                    }
+                }
+            }
+        } else {
+            $response = \Httpful\Request::post($this->merchantApiUrl . '/createOrder', $payload, \Httpful\Mime::FORM)->send();
+            exit('<pre>' . print_r($response, true) . '</pre>');
+        }
+    }
 
-		return $encodedSignature;
-	}
+    private function generateSignature($data)
+    {
+        $privateKey = $this->privateMerchantKey != null ? $this->privateMerchantKey : file_get_contents($this->privateMerchantCertLocation);
+        $pkeyid     = openssl_pkey_get_private($privateKey);
 
-	/**
-	 * @param $r $_REQUEST
-	 * @return OrderCallback|null
-	 */
-	public function parseCreateOrderCallback($r)
-	{
-		$result = null;
+        // compute signature
+        $s                = openssl_sign($data, $signature, $pkeyid, OPENSSL_ALGO_SHA1);
+        $encodedSignature = base64_encode($signature);
+        // free the key from memory
+        openssl_free_key($pkeyid);
 
-		if ($r != null && isset($r['merchantId'], $r['apiId'], $r['orderId'], $r['payCurrency'], $r['payAmount'], $r['receiveCurrency'], $r['receiveAmount'], $r['receivedAmount'], $r['description'], $r['orderRequestId'], $r['status'], $r['sign'])) {
-			$result = new OrderCallback($r['merchantId'], $r['apiId'], $r['orderId'], $r['payCurrency'], $r['payAmount'], $r['receiveCurrency'], $r['receiveAmount'], $r['receivedAmount'], $r['description'], $r['orderRequestId'], $r['status'], $r['sign']);
-		}
+        return $encodedSignature;
+    }
 
-		return $result;
-	}
+    /**
+     * @param $r $_REQUEST
+     *
+     * @return OrderCallback|null
+     */
+    public function parseCreateOrderCallback($r)
+    {
+        $result = null;
 
-	/**
-	 * @param OrderCallback $c
-	 * @return bool
-	 */
-	public function validateCreateOrderCallback(OrderCallback $c)
-	{
-		$valid = false;
+        if ($r != null
+            && isset($r['merchantId'], $r['apiId'], $r['orderId'], $r['payCurrency'], $r['payAmount'], $r['receiveCurrency'], $r['receiveAmount'], $r['receivedAmount'], $r['description'], $r['orderRequestId'], $r['status'], $r['sign'])
+        ) {
+            $result = new OrderCallback(
+                $r['merchantId'], $r['apiId'], $r['orderId'], $r['payCurrency'], $r['payAmount'], $r['receiveCurrency'], $r['receiveAmount'],
+                $r['receivedAmount'], $r['description'], $r['orderRequestId'], $r['status'], $r['sign']
+            );
+        }
 
-		if ($c != null) {
+        return $result;
+    }
 
-			if ($this->merchantId != $c->getMerchantId() || $this->apiId != $c->getApiId())
-				return $valid;
+    /**
+     * @param OrderCallback $c
+     *
+     * @return bool
+     */
+    public function validateCreateOrderCallback(OrderCallback $c)
+    {
+        $valid = false;
 
-			if (!$c->validate())
-				return $valid;
+        if ($c != null) {
 
-			$payload = array(
-				'merchantId' => $c->getMerchantId(),
-				'apiId' => $c->getApiId(),
-				'orderId' => $c->getOrderId(),
-				'payCurrency' => $c->getPayCurrency(),
-				'payAmount' => $c->getPayAmount(),
-				'receiveCurrency' => $c->getReceiveCurrency(),
-				'receiveAmount' => $c->getReceiveAmount(),
-				'receivedAmount' => $c->getReceivedAmount(),
-				'description' => $c->getDescription(),
-				'orderRequestId' => $c->getOrderRequestId(),
-				'status' => $c->getStatus(),
-			);
+            if ($this->merchantId != $c->getMerchantId() || $this->apiId != $c->getApiId()) {
+                return $valid;
+            }
 
-			$formHandler = new \Httpful\Handlers\FormHandler();
-			$data = $formHandler->serialize($payload);
-			$valid = $this->validateSignature($data, $c->getSign());
-		}
+            if (!$c->validate()) {
+                return $valid;
+            }
 
-		return $valid;
-	}
+            $payload = [
+                'merchantId'      => $c->getMerchantId(),
+                'apiId'           => $c->getApiId(),
+                'orderId'         => $c->getOrderId(),
+                'payCurrency'     => $c->getPayCurrency(),
+                'payAmount'       => $c->getPayAmount(),
+                'receiveCurrency' => $c->getReceiveCurrency(),
+                'receiveAmount'   => $c->getReceiveAmount(),
+                'receivedAmount'  => $c->getReceivedAmount(),
+                'description'     => $c->getDescription(),
+                'orderRequestId'  => $c->getOrderRequestId(),
+                'status'          => $c->getStatus(),
+            ];
 
-	/**
-	 * @param $data
-	 * @param $signature
-	 * @return int
-	 */
-	private function validateSignature($data, $signature)
-	{
-		$sig = base64_decode($signature);
-		$publicKey = file_get_contents($this->publicSpectroCoinCertLocation);
-		$public_key_pem = openssl_pkey_get_public($publicKey);
-		$r = openssl_verify($data, $sig, $public_key_pem, OPENSSL_ALGO_SHA1);
-		openssl_free_key($public_key_pem);
+            $formHandler = new \Httpful\Handlers\FormHandler();
+            $data        = $formHandler->serialize($payload);
+            $valid       = $this->validateSignature($data, $c->getSign());
+        }
 
-		return $r;
-	}
+        return $valid;
+    }
+
+    /**
+     * @param $data
+     * @param $signature
+     *
+     * @return int
+     */
+    private function validateSignature($data, $signature)
+    {
+        $sig            = base64_decode($signature);
+        $publicKey      = file_get_contents($this->publicSpectroCoinCertLocation);
+        $public_key_pem = openssl_pkey_get_public($publicKey);
+        $r              = openssl_verify($data, $sig, $public_key_pem, OPENSSL_ALGO_SHA1);
+        openssl_free_key($public_key_pem);
+
+        return $r;
+    }
 
 }

@@ -18,17 +18,21 @@ use Zend\InputFilter\InputFilter;
 
 class PromoCheckoutFilter extends InputFilter
 {
-    public function __construct($option = array())
+    public function __construct($option = [])
     {
-       $this->add(array(
-            'name' => 'code',
-            'required' => true,
-        ));
-        
-        $this->add(array(
-            'name' => 'submit_promo',
-            'required' => false,
-        ));
-        
+        $this->add(
+            [
+                'name'     => 'code',
+                'required' => true,
+            ]
+        );
+
+        $this->add(
+            [
+                'name'     => 'submit_promo',
+                'required' => false,
+            ]
+        );
+
     }
 }	

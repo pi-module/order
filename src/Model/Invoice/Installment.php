@@ -18,30 +18,31 @@ use Pi\Application\Model\Model;
 class Installment extends Model
 {
     const STATUS_PAYMENT_UNPAID = 1;
-    const STATUS_PAYMENT_PAID = 2;
-    
-    
+    const STATUS_PAYMENT_PAID   = 2;
+
+
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
-        'id',
-        'invoice',
-        'count',
-        'gateway',
-        'status_payment',
-        'time_payment',
-        'time_duedate',
-        'due_price',
-        'credit_price',
-        'comment'
-    );
-    
+    protected $columns
+        = [
+            'id',
+            'invoice',
+            'count',
+            'gateway',
+            'status_payment',
+            'time_payment',
+            'time_duedate',
+            'due_price',
+            'credit_price',
+            'comment',
+        ];
+
     public static function getStatusList()
     {
-        return array(
+        return [
             self::STATUS_PAYMENT_UNPAID => __('Unpaid'),
-            self::STATUS_PAYMENT_PAID => __('Paid'),
-        );        
+            self::STATUS_PAYMENT_PAID   => __('Paid'),
+        ];
     }
 }

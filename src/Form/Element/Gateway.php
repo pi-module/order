@@ -35,11 +35,11 @@ class Gateway extends Select
      */
     public function getAttributes()
     {
-        $this->Attributes = array(
-            'size' => 5,
+        $this->Attributes = [
+            'size'     => 5,
             'multiple' => 0,
-            'class' => 'form-control',
-        );
+            'class'    => 'form-control',
+        ];
         // check form size
         if (isset($this->attributes['size'])) {
             $this->Attributes['size'] = $this->attributes['size'];

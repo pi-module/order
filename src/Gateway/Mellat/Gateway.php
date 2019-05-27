@@ -13,8 +13,8 @@
 
 namespace Module\Order\Gateway\Mellat;
 
-use Pi;
 use Module\Order\Gateway\AbstractGateway;
+use Pi;
 use Zend\Json\Json;
 
 class Gateway extends AbstractGateway
@@ -26,62 +26,62 @@ class Gateway extends AbstractGateway
 
     public function setInformation()
     {
-        $gateway = array();
-        $gateway['title'] = __('Bank Mellat (Iran)');
-        $gateway['path'] = 'Mellat';
-        $gateway['type'] = 'online';
-        $gateway['version'] = '1.0';
-        $gateway['description'] = '';
-        $gateway['author'] = 'Hossein Azizabadi <azizabadi@faragostaresh.com>';
-        $gateway['credits'] = '@voltan';
-        $gateway['releaseDate'] = 1380802565;
+        $gateway                  = [];
+        $gateway['title']         = __('Bank Mellat (Iran)');
+        $gateway['path']          = 'Mellat';
+        $gateway['type']          = 'online';
+        $gateway['version']       = '1.0';
+        $gateway['description']   = '';
+        $gateway['author']        = 'Hossein Azizabadi <azizabadi@faragostaresh.com>';
+        $gateway['credits']       = '@voltan';
+        $gateway['releaseDate']   = 1380802565;
         $this->gatewayInformation = $gateway;
         return $gateway;
     }
 
     public function setSettingForm()
     {
-        $form = array();
+        $form = [];
         // form path
-        $form['path'] = array(
-            'name' => 'path',
-            'label' => __('path'),
-            'type' => 'hidden',
+        $form['path'] = [
+            'name'     => 'path',
+            'label'    => __('path'),
+            'type'     => 'hidden',
             'required' => true,
-        );
+        ];
         // form pin
-        $form['pin'] = array(
-            'name' => 'pin',
-            'label' => __('pin'),
-            'type' => 'text',
+        $form['pin'] = [
+            'name'     => 'pin',
+            'label'    => __('pin'),
+            'type'     => 'text',
             'required' => true,
-        );
+        ];
         // form username
-        $form['username'] = array(
-            'name' => 'username',
-            'label' => __('username'),
-            'type' => 'text',
+        $form['username'] = [
+            'name'     => 'username',
+            'label'    => __('username'),
+            'type'     => 'text',
             'required' => true,
-        );
+        ];
         // form password
-        $form['password'] = array(
-            'name' => 'password',
-            'label' => __('password'),
-            'type' => 'text',
+        $form['password']         = [
+            'name'     => 'password',
+            'label'    => __('password'),
+            'type'     => 'text',
             'required' => true,
-        );
+        ];
         $this->gatewaySettingForm = $form;
         return $this;
     }
 
     public function setPayForm()
     {
-        $form = array();
+        $form = [];
         // form RefId
-        $form['RefId'] = array(
+        $form['RefId']        = [
             'name' => 'RefId',
             'type' => 'hidden',
-        );
+        ];
         $this->gatewayPayForm = $form;
         return $this;
     }
@@ -98,17 +98,17 @@ class Gateway extends AbstractGateway
 
     public function getAuthority()
     {
-        $parameters = array();
-        $parameters['terminalId'] = $this->gatewayOption['pin'];
-        $parameters['userName'] = $this->gatewayOption['username'];
-        $parameters['userPassword'] = $this->gatewayOption['password'];
-        $parameters['orderId'] = $this->gatewayInvoice['random_id'];
-        $parameters['amount'] = intval($this->gatewayInvoice['total_price']);
-        $parameters['localDate'] = date('Ymd');
-        $parameters['localTime'] = date('His');
+        $parameters                   = [];
+        $parameters['terminalId']     = $this->gatewayOption['pin'];
+        $parameters['userName']       = $this->gatewayOption['username'];
+        $parameters['userPassword']   = $this->gatewayOption['password'];
+        $parameters['orderId']        = $this->gatewayInvoice['random_id'];
+        $parameters['amount']         = intval($this->gatewayInvoice['total_price']);
+        $parameters['localDate']      = date('Ymd');
+        $parameters['localTime']      = date('His');
         $parameters['additionalData'] = isset($this->gatewayOption['additionalData']) ? $this->gatewayOption['additionalData'] : '';
-        $parameters['callBackUrl'] = $this->gatewayBackUrl;
-        $parameters['payerId'] = 0;
+        $parameters['callBackUrl']    = $this->gatewayBackUrl;
+        $parameters['payerId']        = 0;
         // Check bank
         $result = $this->call('bpPayRequest', $parameters);
         $result = explode(',', $result);
@@ -117,14 +117,14 @@ class Gateway extends AbstractGateway
         } else {
             $this->setPaymentError($result[0]);
             // set log
-            $log = array();
-            $log['gateway'] = $this->gatewayAdapter;
+            $log              = [];
+            $log['gateway']   = $this->gatewayAdapter;
             $log['authority'] = $result[0];
-            $log['value'] = Json::encode($this->gatewayInvoice);
-            $log['invoice'] = $this->gatewayInvoice['id'];
-            $log['amount'] = intval($this->gatewayInvoice['total_price']);
-            $log['status'] = 0;
-            $log['message'] = $this->gatewayError;
+            $log['value']     = Json::encode($this->gatewayInvoice);
+            $log['invoice']   = $this->gatewayInvoice['id'];
+            $log['amount']    = intval($this->gatewayInvoice['total_price']);
+            $log['status']    = 0;
+            $log['message']   = $this->gatewayError;
             Pi::api('log', 'order')->setLog($log);
         }
     }
@@ -138,17 +138,17 @@ class Gateway extends AbstractGateway
     public function verifyPayment($request, $processing)
     {
         // Set result
-        $result = array();
+        $result = [];
         // Set parameters
-        $parameters = array();
-        $parameters['terminalId'] = $this->gatewayOption['pin'];
-        $parameters['userName'] = $this->gatewayOption['username'];
-        $parameters['userPassword'] = $this->gatewayOption['password'];
-        $parameters['orderId'] = $request['SaleOrderId'];
-        $parameters['saleOrderId'] = $request['SaleOrderId'];
+        $parameters                    = [];
+        $parameters['terminalId']      = $this->gatewayOption['pin'];
+        $parameters['userName']        = $this->gatewayOption['username'];
+        $parameters['userPassword']    = $this->gatewayOption['password'];
+        $parameters['orderId']         = $request['SaleOrderId'];
+        $parameters['saleOrderId']     = $request['SaleOrderId'];
         $parameters['saleReferenceId'] = $request['SaleReferenceId'];
         // Get invoice
-        $invoice = Pi::api('invoice', 'order')->getInvoice($request['SaleOrderId'], 'random_id');
+        $invoice          = Pi::api('invoice', 'order')->getInvoice($request['SaleOrderId'], 'random_id');
         $result['status'] = 0;
         // Check 
         if ($processing['random_id'] == $request['SaleOrderId'] && $request['ResCode'] == 0) {
@@ -159,81 +159,81 @@ class Gateway extends AbstractGateway
                     // Get invoice
                     $message = __('Your payment were successfully.');
                     // Set log value
-                    $value = array();
-                    $value['request'] = $request;
+                    $value                    = [];
+                    $value['request']         = $request;
                     $value['bpVerifyRequest'] = $call;
-                    $value = Json::encode($value);
+                    $value                    = Json::encode($value);
                     // Set log
-                    $log = array();
-                    $log['gateway'] = $this->gatewayAdapter;
+                    $log              = [];
+                    $log['gateway']   = $this->gatewayAdapter;
                     $log['authority'] = $request['authority'];
-                    $log['value'] = $value;
-                    $log['invoice'] = $invoice['id'];
-                    $log['amount'] = $invoice['total_price'];
-                    $log['status'] = 1;
-                    $log['message'] = $message;
-                    $logResult = Pi::api('log', 'order')->setLog($log);
+                    $log['value']     = $value;
+                    $log['invoice']   = $invoice['id'];
+                    $log['amount']    = $invoice['total_price'];
+                    $log['status']    = 1;
+                    $log['message']   = $message;
+                    $logResult        = Pi::api('log', 'order')->setLog($log);
                     // Update invoice
                     if ($logResult) {
-                        $invoice = Pi::api('invoice', 'order')->updateInvoice($request['SaleOrderId']);
+                        $invoice          = Pi::api('invoice', 'order')->updateInvoice($request['SaleOrderId']);
                         $result['status'] = 1;
                     }
                 } else {
                     $error = $this->setPaymentError($call);
                     // Set log value
-                    $value = array();
-                    $value['request'] = $request;
+                    $value                    = [];
+                    $value['request']         = $request;
                     $value['bpVerifyRequest'] = $call;
-                    $value = Json::encode($value);
+                    $value                    = Json::encode($value);
                     // Set log
-                    $log = array();
-                    $log['gateway'] = $this->gatewayAdapter;
+                    $log              = [];
+                    $log['gateway']   = $this->gatewayAdapter;
                     $log['authority'] = $request['authority'];
-                    $log['value'] = $value;
-                    $log['invoice'] = $invoice['id'];
-                    $log['amount'] = $invoice['total_price'];
-                    $log['status'] = 0;
-                    $log['message'] = $error;
+                    $log['value']     = $value;
+                    $log['invoice']   = $invoice['id'];
+                    $log['amount']    = $invoice['total_price'];
+                    $log['status']    = 0;
+                    $log['message']   = $error;
                     Pi::api('log', 'order')->setLog($log);
                 }
             } else {
                 // Set log value
-                $value = array();
-                $value['request'] = $request;
+                $value                    = [];
+                $value['request']         = $request;
                 $value['bpVerifyRequest'] = $call;
-                $value = Json::encode($value);
+                $value                    = Json::encode($value);
                 // Set log
-                $log = array();
-                $log['gateway'] = $this->gatewayAdapter;
+                $log              = [];
+                $log['gateway']   = $this->gatewayAdapter;
                 $log['authority'] = $request['authority'];
-                $log['value'] = $value;
-                $log['invoice'] = $invoice['id'];
-                $log['amount'] = $invoice['total_price'];
-                $log['status'] = 0;
-                $log['message'] = __('bpVerifyRequest method is null');
+                $log['value']     = $value;
+                $log['invoice']   = $invoice['id'];
+                $log['amount']    = $invoice['total_price'];
+                $log['status']    = 0;
+                $log['message']   = __('bpVerifyRequest method is null');
                 Pi::api('log', 'order')->setLog($log);
             }
         } elseif ($request['ResCode'] > 0) {
             $error = $this->setPaymentError($request['ResCode']);
             // Set log value
-            $value = array();
+            $value            = [];
             $value['request'] = $request;
-            $value = Json::encode($value);
+            $value            = Json::encode($value);
             // Set log
-            $log = array();
-            $log['gateway'] = $this->gatewayAdapter;
+            $log              = [];
+            $log['gateway']   = $this->gatewayAdapter;
             $log['authority'] = $request['authority'];
-            $log['value'] = $value;
-            $log['invoice'] = $invoice['id'];
-            $log['amount'] = $invoice['total_price'];
-            $log['status'] = 0;
-            $log['message'] = $error;
+            $log['value']     = $value;
+            $log['invoice']   = $invoice['id'];
+            $log['amount']    = $invoice['total_price'];
+            $log['status']    = 0;
+            $log['message']   = $error;
             Pi::api('log', 'order')->setLog($log);
         }
         // Set result
         $result['adapter'] = $this->gatewayAdapter;
         $result['invoice'] = $invoice['id'];
-        $result['order'] = $invoice['order'];
+        $result['order']   = $invoice['order'];
         return $result;
     }
 

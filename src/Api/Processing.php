@@ -30,14 +30,14 @@ class Processing extends AbstractApi
     public function setProcessing($order, $gateway)
     {
         $rand = Rand::getInteger(10, 99);
-         
+
         // create processing
-        $row = Pi::model('processing', $this->getModule())->createRow();
-        $row->uid = Pi::user()->getId();
-        $row->ip = Pi::user()->getIp();
-        $row->order = $order['id'];
-        $row->random_id = sprintf('%s%s', $order['id'], $rand);
-        $row->gateway = $gateway;
+        $row              = Pi::model('processing', $this->getModule())->createRow();
+        $row->uid         = Pi::user()->getId();
+        $row->ip          = Pi::user()->getIp();
+        $row->order       = $order['id'];
+        $row->random_id   = sprintf('%s%s', $order['id'], $rand);
+        $row->gateway     = $gateway;
         $row->time_create = time();
         $row->save();
     }

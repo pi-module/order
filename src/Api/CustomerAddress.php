@@ -33,74 +33,75 @@ class CustomerAddress extends AbstractApi
     public function updateFavouriteDelivery($id)
     {
         Pi::model('customer_address', 'order')->update(
-            array('delivery_favourite' => 0),
-            array('uid' => $uid)
+            ['delivery_favourite' => 0],
+            ['uid' => $uid]
         );
-        
+
         Pi::model('customer_address', 'order')->update(
-            array('delivery_favourite' => 1),
-            array('uid' => $uid, 'id' => $id)
+            ['delivery_favourite' => 1],
+            ['uid' => $uid, 'id' => $id]
         );
     }
-    
+
     public function updateFavouriteInvoicing($id)
     {
         Pi::model('customer_address', 'order')->update(
-            array('invoicing_favourite' => 0),
-            array('uid' => $uid)
+            ['invoicing_favourite' => 0],
+            ['uid' => $uid]
         );
-        
+
         Pi::model('customer_address', 'order')->update(
-            array('invoicing_favourite' => 1),
-            array('uid' => $uid, 'id' => $id)
+            ['invoicing_favourite' => 1],
+            ['uid' => $uid, 'id' => $id]
         );
     }
-    
+
     public function getFavouriteDelivery()
     {
         // Check uid
         $uid = Pi::user()->getId();
-       
+
         // Select
-        $addresss = array();
-        $where = array('uid' => $uid, 'delivery_favourite' => 1);
-        $select = Pi::model('customer_address', $this->getModule())->select()->where($where)->order('id DESC');
-        $row = Pi::model('customer_address', $this->getModule())->selectWith($select)->current();
+        $addresss = [];
+        $where    = ['uid' => $uid, 'delivery_favourite' => 1];
+        $select   = Pi::model('customer_address', $this->getModule())->select()->where($where)->order('id DESC');
+        $row      = Pi::model('customer_address', $this->getModule())->selectWith($select)->current();
         if ($row) {
             $address = $this->canonizeAddress($row);
             return $address;
         }
-        return array();
+        return [];
     }
+
     public function getFavouriteInvoicing()
     {
         // Check uid
         $uid = Pi::user()->getId();
 
         // Select
-        $addresss = array();
-        $where = array('uid' => $uid, 'invoicing_favourite' => 1);
-        $select = Pi::model('customer_address', $this->getModule())->select()->where($where)->order('id DESC');
-        $row = Pi::model('customer_address', $this->getModule())->selectWith($select)->current();
+        $addresss = [];
+        $where    = ['uid' => $uid, 'invoicing_favourite' => 1];
+        $select   = Pi::model('customer_address', $this->getModule())->select()->where($where)->order('id DESC');
+        $row      = Pi::model('customer_address', $this->getModule())->selectWith($select)->current();
         if ($row) {
             $address = $this->canonizeAddress($row);
             return $address;
         }
-        return array();
+        return [];
     }
-    
+
     public function addAddress($values)
     {
         // Set values
         $values['time_update'] = $values['time_create'];
-        $values['status'] = 1;
+        $values['status']      = 1;
         unset($values['user_note']);
         // Save address info
-        
+
         $address = Pi::model('customer_address', $this->getModule())->createRow();
         $address->assign($values);
         $address->save();
-        
+
         // return
         $address = $this->canonizeAddress($address);
         return $address;
@@ -111,7 +112,7 @@ class CustomerAddress extends AbstractApi
     {
         // Set values
         $values['time_update'] = time();
-        $values['status'] = 1;
+        $values['status']      = 1;
         unset($values['user_note']);
         // Find address info
         $address = Pi::model('customer_address', $this->getModule())->find($values['address_id']);
@@ -119,7 +120,7 @@ class CustomerAddress extends AbstractApi
         if ($address->uid != Pi::user()->getId()) {
             return false;
         } else {
-            
+
             // Save address info
             $address->assign($values);
             $address->save();
@@ -128,19 +129,19 @@ class CustomerAddress extends AbstractApi
             return $address;
         }
     }
-    
+
     public function getAddress($id)
     {
         // Check uid
         if (empty($uid)) {
             $uid = Pi::user()->getId();
         }
-        
+
         $row = Pi::model('customer_address', 'order')->find($id, 'id');
         if ($row->uid != $uid) {
-            return array();
+            return [];
         }
-        
+
         // return
         return $this->canonizeAddress($row);
     }
@@ -152,10 +153,10 @@ class CustomerAddress extends AbstractApi
             $uid = Pi::user()->getId();
         }
         // Select
-        $addresses = array();
-        $where = array('uid' => $uid);
-        $select = Pi::model('customer_address', $this->getModule())->select()->where($where)->order('id DESC');
-        $rowset = Pi::model('customer_address', $this->getModule())->selectWith($select);
+        $addresses = [];
+        $where     = ['uid' => $uid];
+        $select    = Pi::model('customer_address', $this->getModule())->select()->where($where)->order('id DESC');
+        $rowset    = Pi::model('customer_address', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $addresses[$row->id] = $this->canonizeAddress($row);
         }
@@ -178,8 +179,8 @@ class CustomerAddress extends AbstractApi
         // Set address id
         $address['address_id'] = $address['id'];
         // Set time
-        $address['time_create_view'] = _date($address['time_create'], array('pattern' => $pattern));
-        $address['time_update_view'] = _date($address['time_update'], array('pattern' => $pattern));
+        $address['time_create_view'] = _date($address['time_create'], ['pattern' => $pattern]);
+        $address['time_update_view'] = _date($address['time_update'], ['pattern' => $pattern]);
         // address
         return $address;
     }

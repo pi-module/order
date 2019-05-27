@@ -18,9 +18,9 @@ use Pi\Form\Form as BaseForm;
 
 class UpdateInvoiceForm extends BaseForm
 {
-    protected $_options = array();
-    
-    public function __construct($name = null, $options = array())
+    protected $_options = [];
+
+    public function __construct($name = null, $options = [])
     {
         $this->_options = $options;
         parent::__construct($name);
@@ -37,14 +37,16 @@ class UpdateInvoiceForm extends BaseForm
     public function init()
     {
         // status_payment
-        $this->add(array(
-            'name' => 'status',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Status'),
+        $this->add(
+            [
+                'name'    => 'status',
+                'type'    => 'select',
+                'options' => [
+                    'label'         => __('Status'),
                     'value_options' => \Module\Order\Model\Invoice::getStatusList($this->_options['status']),
-            ),
-        ));
+                ],
+            ]
+        );
         // gateway
         /* $this->add(array(
             'name' => 'gateway',
@@ -55,13 +57,15 @@ class UpdateInvoiceForm extends BaseForm
             ),
         )); */
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
-                'value' => __('Update'),
-                'class' => 'btn btn-primary',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Update'),
+                    'class' => 'btn btn-primary',
+                ],
+            ]
+        );
     }
 }

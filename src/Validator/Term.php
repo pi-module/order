@@ -23,18 +23,18 @@ class Term extends AbstractValidator
     /**
      * @var array
      */
-    protected $messageTemplates = array();
+    protected $messageTemplates = [];
 
-    protected $options = array();
+    protected $options = [];
 
     /**
      * {@inheritDoc}
      */
     public function __construct($options = null)
     {
-        $this->messageTemplates = $this->messageTemplates + array(
+        $this->messageTemplates = $this->messageTemplates + [
                 self::TAKEN => __('You need accept our Terms & Conditions for checkout'),
-            );
+            ];
 
         parent::__construct($options);
     }
@@ -44,6 +44,7 @@ class Term extends AbstractValidator
      *
      * @param  mixed $value
      * @param  array $context
+     *
      * @return boolean
      */
     public function isValid($value, $context = null)

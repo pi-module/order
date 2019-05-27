@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Order\Api;
 
 use Pi;
@@ -28,34 +29,38 @@ class Breadcrumbs extends AbstractBreadcrumbs
         $moduleData = Pi::registry('module')->read($this->getModule());
         // Set index
         if ($params['controller'] == 'index' && $params['action'] == 'index') {
-            $result = array(
-                array(
+            $result = [
+                [
                     'label' => $moduleData['title'],
-                ),
-            );
+                ],
+            ];
         } else {
-            $result = array(
-                array(
+            $result = [
+                [
                     'label' => $moduleData['title'],
-                    'href' => Pi::url(Pi::service('url')->assemble('order', array(
-                        'module' => $this->getModule(),
-                    ))),
-                ),
-            );
+                    'href'  => Pi::url(
+                        Pi::service('url')->assemble(
+                            'order', [
+                            'module' => $this->getModule(),
+                        ]
+                        )
+                    ),
+                ],
+            ];
 
             switch ($params['controller']) {
                 case 'index':
                     switch ($params['action']) {
                         case 'remove':
-                            $result[] = array(
+                            $result[] = [
                                 'label' => __('Remove cache'),
-                            );
+                            ];
                             break;
 
                         case 'error':
-                            $result[] = array(
+                            $result[] = [
                                 'label' => __('Error'),
-                            );
+                            ];
                             break;
                     }
                     break;
@@ -63,9 +68,9 @@ class Breadcrumbs extends AbstractBreadcrumbs
                 case 'detail':
                     switch ($params['action']) {
                         case 'index':
-                            $result[] = array(
+                            $result[] = [
                                 'label' => __('Order detail'),
-                            );
+                            ];
                             break;
                     }
 
@@ -74,25 +79,25 @@ class Breadcrumbs extends AbstractBreadcrumbs
                 case 'checkout':
                     switch ($params['action']) {
                         case 'index':
-                            $result[] = array(
+                            $result[] = [
                                 'label' => __('Checkout'),
-                            );
+                            ];
                             break;
                     }
 
                     switch ($params['action']) {
                         case 'installment':
-                            $result[] = array(
+                            $result[] = [
                                 'label' => __('Installment plans'),
-                            );
+                            ];
                             break;
                     }
                     break;
 
                 case 'credit':
-                    $result[] = array(
+                    $result[] = [
                         'label' => __('Credit'),
-                    );
+                    ];
                     break;
             }
         }

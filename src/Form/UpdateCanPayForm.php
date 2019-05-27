@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class UpdateCanPayForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         parent::__construct($name);
     }
@@ -34,25 +34,29 @@ class UpdateCanPayForm extends BaseForm
     public function init()
     {
         // status_delivery
-        $this->add(array(
-            'name' => 'can_pay',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Customer can make payment ?'),
-                'value_options' => array(
-                    1 => __('Yes'),
-                    2 => __('No'),
-                ),
-            ),
-        ));
+        $this->add(
+            [
+                'name'    => 'can_pay',
+                'type'    => 'select',
+                'options' => [
+                    'label'         => __('Customer can make payment ?'),
+                    'value_options' => [
+                        1 => __('Yes'),
+                        2 => __('No'),
+                    ],
+                ],
+            ]
+        );
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
-                'value' => __('Update'),
-                'class' => 'btn btn-primary',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Update'),
+                    'class' => 'btn btn-primary',
+                ],
+            ]
+        );
     }
 }

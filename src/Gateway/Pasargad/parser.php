@@ -2,13 +2,13 @@
 /* ------------------------------------- XML PARSE ------------------------------------- */
 function makeXMLTree($data)
 {
-    $ret = array();
+    $ret    = [];
     $parser = xml_parser_create();
     xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
     xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);
     xml_parse_into_struct($parser, $data, $values, $tags);
     xml_parser_free($parser);
-    $hash_stack = array();
+    $hash_stack = [];
     foreach ($values as $key => $val) {
         switch ($val['type']) {
             case 'open':
@@ -47,7 +47,7 @@ function post2https($fields_arr, $url)
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_POST, count($fields_arr));
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 

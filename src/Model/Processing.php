@@ -20,13 +20,14 @@ class Processing extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
-        'id',
-        'uid',
-        'ip',
-        'order',
-        'random_id',
-        'gateway',
-        'time_create',
-    );
+    protected $columns
+        = [
+            'id',
+            'uid',
+            'ip',
+            'order',
+            'random_id',
+            'gateway',
+            'time_create',
+        ];
 }

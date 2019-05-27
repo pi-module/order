@@ -18,33 +18,43 @@ use Zend\InputFilter\InputFilter;
 
 class InstallmentFilter extends InputFilter
 {
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
-        $this->add(array(
-            'name' => 'gateway',
-            'required' => $options['readonly'] ? false : true,
-            
-        ));
-        
-        $this->add(array(
-            'name' => 'status_payment',
-            'required' => $options['readonly'] ? false : true,
-            
-        ));
-        $this->add(array(
-            'name' => 'time_duedate',
-            'required' => false,
-            
-        ));
-        $this->add(array(
-            'name' => 'time_payment',
-            'required' => false,
-        ));
-        
-        $this->add(array(
-            'name' => 'comment',
-            'required' => false,
-        ));
-        
+        $this->add(
+            [
+                'name'     => 'gateway',
+                'required' => $options['readonly'] ? false : true,
+
+            ]
+        );
+
+        $this->add(
+            [
+                'name'     => 'status_payment',
+                'required' => $options['readonly'] ? false : true,
+
+            ]
+        );
+        $this->add(
+            [
+                'name'     => 'time_duedate',
+                'required' => false,
+
+            ]
+        );
+        $this->add(
+            [
+                'name'     => 'time_payment',
+                'required' => false,
+            ]
+        );
+
+        $this->add(
+            [
+                'name'     => 'comment',
+                'required' => false,
+            ]
+        );
+
     }
 }

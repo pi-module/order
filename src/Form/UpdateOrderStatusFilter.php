@@ -21,9 +21,11 @@ class UpdateOrderStatusFilter extends InputFilter
     public function __construct()
     {
         // status_order
-        $this->add(array(
-            'name' => 'status_order',
-            'required' => true,
-        ));
+        $this->add(
+            [
+                'name'     => 'status_order',
+                'required' => true,
+            ]
+        );
     }
 }    	

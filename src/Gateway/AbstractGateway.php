@@ -20,29 +20,29 @@ abstract class AbstractGateway
 {
     const TYPE_FORM = 0;
     const TYPE_REST = 1;
-    
-    protected $_type = AbstractGateway::TYPE_FORM;
+
+    protected $_type      = AbstractGateway::TYPE_FORM;
     protected $_needToken = false;
-     
+
     public $gatewayAdapter = '';
 
     public $gatewayRow = '';
 
     public $gatewayIsActive = '';
 
-    public $gatewayOption = array();
+    public $gatewayOption = [];
 
-    public $gatewayPayInformation = array();
+    public $gatewayPayInformation = [];
 
-    public $gatewaySettingForm = array();
+    public $gatewaySettingForm = [];
 
-    public $gatewayPayForm = array();
+    public $gatewayPayForm = [];
 
-    public $gatewayInformation = array();
+    public $gatewayInformation = [];
 
-    public $gatewayInvoice = array();
-    
-    public $gatewayOrder = array();
+    public $gatewayInvoice = [];
+
+    public $gatewayOrder = [];
 
     public $gatewayRedirectUrl = '';
 
@@ -80,10 +80,10 @@ abstract class AbstractGateway
 
     static public function getAllList()
     {
-        $list = array();
+        $list        = [];
         $gatewayPath = 'usr/module/order/src/Gateway';
-        $fullPath = Pi::path($gatewayPath);
-        $allPath = scandir($fullPath);
+        $fullPath    = Pi::path($gatewayPath);
+        $allPath     = scandir($fullPath);
         foreach ($allPath as $path) {
             $dir = sprintf(Pi::path('usr/module/order/src/Gateway/%s'), $path);
             if (is_dir($dir)) {
@@ -101,15 +101,15 @@ abstract class AbstractGateway
 
     static public function getActiveList()
     {
-        $where = array('status' => 1);
+        $where = ['status' => 1];
         // Get list of story
         $select = Pi::model('gateway', 'order')->select()->where($where);
         $rowset = Pi::model('gateway', 'order')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
-            $item[$row->id] = $row->toArray();
+            $item[$row->id]           = $row->toArray();
             $item[$row->id]['option'] = Json::decode($item[$row->id]['option'], true);
-            $dir = sprintf(Pi::path('usr/module/order/src/Gateway/%s'), $item[$row->id]['path']);
+            $dir                      = sprintf(Pi::path('usr/module/order/src/Gateway/%s'), $item[$row->id]['path']);
             if (is_dir($dir)) {
                 $class = sprintf('Module\Order\Gateway\%s\Gateway', $item[$row->id]['path']);
                 if (class_exists($class)) {
@@ -125,7 +125,7 @@ abstract class AbstractGateway
 
     static public function getActiveName()
     {
-        $where = array('status' => 1);
+        $where = ['status' => 1];
         // Get list of story
         $select = Pi::model('gateway', 'order')->select()->where($where);
         $rowset = Pi::model('gateway', 'order')->selectWith($select);
@@ -179,14 +179,14 @@ abstract class AbstractGateway
 
     protected function canonize()
     {
-        $canonize = array();
+        $canonize = [];
         if ($this->gatewayIsActive == -1) {
             $canonize = $this->gatewayInformation;
         } else {
             $canonize = array_merge($this->gatewayRow, $this->gatewayInformation);
         }
-        $canonize['status'] = $this->gatewayIsActive;
-        $canonize['option'] = $this->gatewayOption;
+        $canonize['status']  = $this->gatewayIsActive;
+        $canonize['option']  = $this->gatewayOption;
         $canonize['adapter'] = $this->gatewayAdapter;
         return $canonize;
     }
@@ -220,42 +220,58 @@ abstract class AbstractGateway
 
     protected function setBackUrl()
     {
-        $this->gatewayBackUrl = Pi::url(Pi::service('url')->assemble('order', array(
-            'module' => 'order',
-            'controller' => 'payment',
-            'action' => 'result',
-        )));
+        $this->gatewayBackUrl = Pi::url(
+            Pi::service('url')->assemble(
+                'order', [
+                'module'     => 'order',
+                'controller' => 'payment',
+                'action'     => 'result',
+            ]
+            )
+        );
     }
 
     protected function setCancelUrl()
     {
-        $this->gatewayCancelUrl = Pi::url(Pi::service('url')->assemble('order', array(
-            'module' => 'order',
-            'controller' => 'payment',
-            'action' => 'cancel',
-        )));
+        $this->gatewayCancelUrl = Pi::url(
+            Pi::service('url')->assemble(
+                'order', [
+                'module'     => 'order',
+                'controller' => 'payment',
+                'action'     => 'cancel',
+            ]
+            )
+        );
     }
 
     protected function setFinishUrl()
     {
-        $this->gatewayFinishUrl = Pi::url(Pi::service('url')->assemble('order', array(
-            'module' => 'order',
-            'controller' => 'payment',
-            'action' => 'finish',
-            'id' => (new Pi\Filter\Slug())->filter($this->gatewayAdapter)
-        )));
+        $this->gatewayFinishUrl = Pi::url(
+            Pi::service('url')->assemble(
+                'order', [
+                'module'     => 'order',
+                'controller' => 'payment',
+                'action'     => 'finish',
+                'id'         => (new Pi\Filter\Slug())->filter($this->gatewayAdapter),
+            ]
+            )
+        );
     }
 
     protected function setNotifyUrl()
     {
-        $this->gatewayNotifyUrl = Pi::url(Pi::service('url')->assemble('order', array(
-            'module' => 'order',
-            'controller' => 'payment',
-            'action' => 'notify',
-        )));
+        $this->gatewayNotifyUrl = Pi::url(
+            Pi::service('url')->assemble(
+                'order', [
+                'module'     => 'order',
+                'controller' => 'payment',
+                'action'     => 'notify',
+            ]
+            )
+        );
     }
 
-    public function setOrder($order = array())
+    public function setOrder($order = [])
     {
         if (is_array($order) && !empty($order)) {
             $this->gatewayOrder = $order;
@@ -267,25 +283,29 @@ abstract class AbstractGateway
         }
         return $this;
     }
-    
+
     protected function setLog($value, $message)
     {
         $amount = 0;
         for ($i = 1; $i < $this->gatewayPayInformation['nb_product']; ++$i) {
-            $amount += $this->gatewayPayInformation['amount_' . $i] - $this->gatewayPayInformation['discount_price_' . $i] - $this->gatewayPayInformation['unconsumed_' .$i];
+            $amount += $this->gatewayPayInformation['amount_' . $i] - $this->gatewayPayInformation['discount_price_' . $i]
+                - $this->gatewayPayInformation['unconsumed_' . $i];
         }
 
-        $log = array();
+        $log            = [];
         $log['gateway'] = $this->gatewayAdapter;
-        $log['value'] = $value;
-        $log['amount'] = $amount;
+        $log['value']   = $value;
+        $log['amount']  = $amount;
         $log['message'] = $message;
-        $log['order'] = $this->gatewayOrder['id'];
+        $log['order']   = $this->gatewayOrder['id'];
         Pi::api('log', 'order')->setLog($log);
-        
+
     }
-    
-    public function getDescription() { return null; }
-    
-    
+
+    public function getDescription()
+    {
+        return null;
+    }
+
+
 }

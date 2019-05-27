@@ -20,12 +20,13 @@ class Product extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
-        'id',
-        'installment',
-        'module',
-        'product',
-        'product_type',
-    );
-    
+    protected $columns
+        = [
+            'id',
+            'installment',
+            'module',
+            'product',
+            'product_type',
+        ];
+
 }

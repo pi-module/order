@@ -26,27 +26,27 @@ class Delivery extends AbstractApi
     public function getDeliveryInformation($location, $delivery)
     {
         // Get product
-        $where = array('location' => $location, 'delivery' => $delivery);
-        $select = Pi::model('location_delivery', $this->getModule())->select()->where($where)->limit(1);
-        $row = Pi::model('location_delivery', $this->getModule())->selectWith($select)->current()->toArray();
+        $where               = ['location' => $location, 'delivery' => $delivery];
+        $select              = Pi::model('location_delivery', $this->getModule())->select()->where($where)->limit(1);
+        $row                 = Pi::model('location_delivery', $this->getModule())->selectWith($select)->current()->toArray();
         $row['deliveryInfo'] = Pi::model('delivery', $this->getModule())->find($delivery)->toArray();
         $row['locationInfo'] = Pi::model('location', $this->getModule())->find($location)->toArray();
         // Set result
-        $result = array(
-            'price_view' => Pi::api('api', 'order')->viewPrice($row['price']),
+        $result = [
+            'price_view'         => Pi::api('api', 'order')->viewPrice($row['price']),
             'delivery_time_view' => sprintf('%s Days', _number($row['delivery_time'])),
-            'delivery_title' => $row['deliveryInfo']['title'],
-            'location_title' => $row['locationInfo']['title'],
-        );
+            'delivery_title'     => $row['deliveryInfo']['title'],
+            'location_title'     => $row['locationInfo']['title'],
+        ];
         return $result;
     }
 
     public function getPrice($location, $delivery)
     {
         // Get product
-        $where = array('location' => $location, 'delivery' => $delivery);
+        $where  = ['location' => $location, 'delivery' => $delivery];
         $select = Pi::model('location_delivery', $this->getModule())->select()->where($where)->limit(1);
-        $row = Pi::model('location_delivery', $this->getModule())->selectWith($select)->current();
+        $row    = Pi::model('location_delivery', $this->getModule())->selectWith($select)->current();
         return $row->price;
     }
 }

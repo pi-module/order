@@ -34,23 +34,27 @@ class UpdateOrderStatusForm extends BaseForm
     public function init()
     {
         // status_order
-        $this->add(array(
-            'name' => 'status_order',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Order'),
+        $this->add(
+            [
+                'name'    => 'status_order',
+                'type'    => 'select',
+                'options' => [
+                    'label'         => __('Order'),
                     'value_options' => \Module\Order\Model\Order::getStatusList($this->option['has_valid_invoice']),
 
-            ),
-        ));
+                ],
+            ]
+        );
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
-                'value' => __('Update'),
-                'class' => 'btn btn-primary',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Update'),
+                    'class' => 'btn btn-primary',
+                ],
+            ]
+        );
     }
 }

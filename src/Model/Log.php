@@ -20,17 +20,18 @@ class Log extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
-        'id',
-        'uid',
-        'order',
-        'gateway',
-        'time_create',
-        'amount',
-        'authority',
-        'status',
-        'ip',
-        'value',
-        'message',
-    );
+    protected $columns
+        = [
+            'id',
+            'uid',
+            'order',
+            'gateway',
+            'time_create',
+            'amount',
+            'authority',
+            'status',
+            'ip',
+            'value',
+            'message',
+        ];
 }

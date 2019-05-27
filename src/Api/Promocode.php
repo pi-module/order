@@ -21,31 +21,34 @@ class Promocode extends AbstractApi
 {
     public function get($code)
     {
-        $select = Pi::model('promocode', 'order')->select()->where(array('code' => $code));
-        $row = Pi::model('promocode', 'order')->selectWith($select)->current();
-        return $row;        
+        $select = Pi::model('promocode', 'order')->select()->where(['code' => $code]);
+        $row    = Pi::model('promocode', 'order')->selectWith($select)->current();
+        return $row;
     }
-    
+
     public function hasActiveCode()
     {
-        $where = array(
+        $where = [
             'time_start <= ' . time(),
             'time_end >= ' . time(),
-        );
-        
+        ];
+
         $select = Pi::model('promocode', 'order')->select()->where($where);
-        $count = Pi::model('promocode', 'order')->selectWith($select)->count();
-        return $count;        
+        $count  = Pi::model('promocode', 'order')->selectWith($select)->count();
+        return $count;
     }
 
-    public function getLastActiveCode(){
-        $model = Pi::model('promocode', 'order');
+    public function getLastActiveCode()
+    {
+        $model  = Pi::model('promocode', 'order');
         $select = $model->select();
 
-        $select->where(array(
-            'time_start <= ' . time(),
-            'time_end >= ' . time(),
-        ));
+        $select->where(
+            [
+                'time_start <= ' . time(),
+                'time_end >= ' . time(),
+            ]
+        );
 
         $select->order('id DESC');
 

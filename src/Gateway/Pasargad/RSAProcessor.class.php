@@ -3,10 +3,10 @@ require_once("rsa.class.php");
 
 class RSAProcessor
 {
-    private $public_key = null;
+    private $public_key  = null;
     private $private_key = null;
-    private $modulus = null;
-    private $key_length = "1024";
+    private $modulus     = null;
+    private $key_length  = "1024";
 
     public function __construct($xmlRsakey = null, $type = null)
     {
@@ -18,10 +18,10 @@ class RSAProcessor
         } else {
             $xmlObj = simplexml_load_string($xmlRsakey);
         }
-        $this->modulus = RSA::binary_to_number(base64_decode($xmlObj->Modulus));
-        $this->public_key = RSA::binary_to_number(base64_decode($xmlObj->Exponent));
+        $this->modulus     = RSA::binary_to_number(base64_decode($xmlObj->Modulus));
+        $this->public_key  = RSA::binary_to_number(base64_decode($xmlObj->Exponent));
         $this->private_key = RSA::binary_to_number(base64_decode($xmlObj->D));
-        $this->key_length = strlen(base64_decode($xmlObj->Modulus)) * 8;
+        $this->key_length  = strlen(base64_decode($xmlObj->Modulus)) * 8;
     }
 
     public function getPublicKey()
@@ -67,6 +67,6 @@ class RSAProcessor
 
 class RSAKeyType
 {
-    const XMLFile = 0;
+    const XMLFile   = 0;
     const XMLString = 1;
 }

@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class PromoCheckoutForm extends BaseForm
 {
-    
+
     public function getInputFilter()
     {
         if (!$this->filter) {
@@ -26,28 +26,32 @@ class PromoCheckoutForm extends BaseForm
         }
         return $this->filter;
     }
-    
+
     public function init()
     {
-         $this->add(array(
-            'name' => 'code',
-            'options' => array(
-                'label' => __('Your promo code'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                'class' => 'form-control'
-            )
-        ));
-        
-        $this->add(array(
-            'name' => 'submit_promo',
-            'type' => 'submit',
-            'attributes' => array(
-                'value' => __('Apply'),
-                'class' => 'btn btn-refresh form-control',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'code',
+                'options'    => [
+                    'label' => __('Your promo code'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => '',
+                    'class'       => 'form-control',
+                ],
+            ]
+        );
+
+        $this->add(
+            [
+                'name'       => 'submit_promo',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Apply'),
+                    'class' => 'btn btn-refresh form-control',
+                ],
+            ]
+        );
     }
 }

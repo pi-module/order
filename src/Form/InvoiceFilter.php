@@ -21,15 +21,19 @@ class InvoiceFilter extends InputFilter
     public function __construct()
     {
         // product_price
-        $this->add(array(
-            'name' => 'type_payment',
-            'required' => false,
-            
-        ));
-         $this->add(array(
-            'name' => 'time_invoice',
-            'required' => false,
-            
-        ));
+        $this->add(
+            [
+                'name'     => 'type_payment',
+                'required' => false,
+
+            ]
+        );
+        $this->add(
+            [
+                'name'     => 'time_invoice',
+                'required' => false,
+
+            ]
+        );
     }
 }

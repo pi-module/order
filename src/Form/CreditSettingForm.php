@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class CreditSettingForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         $this->option = $option;
         parent::__construct($name);
@@ -35,68 +35,80 @@ class CreditSettingForm extends BaseForm
     public function init()
     {
         // uid
-        $this->add(array(
-            'name' => 'uid',
-            'options' => array(
-                'label' => __('User ID'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'uid',
+                'options'    => [
+                    'label' => __('User ID'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => '',
+                ],
+            ]
+        );
         // first_name
-        $this->add(array(
-            'name' => 'first_name',
-            'options' => array(
-                'label' => __('First name'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'first_name',
+                'options'    => [
+                    'label' => __('First name'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => '',
+                ],
+            ]
+        );
         // last_name
-        $this->add(array(
-            'name' => 'last_name',
-            'options' => array(
-                'label' => __('Last name'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'last_name',
+                'options'    => [
+                    'label' => __('Last name'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => '',
+                ],
+            ]
+        );
         // email
-        $this->add(array(
-            'name' => 'email',
-            'options' => array(
-                'label' => __('Email'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'email',
+                'options'    => [
+                    'label' => __('Email'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => '',
+                ],
+            ]
+        );
         // company
-        $this->add(array(
-            'name' => 'company',
-            'options' => array(
-                'label' => __('Company'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'company',
+                'options'    => [
+                    'label' => __('Company'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => '',
+                ],
+            ]
+        );
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
-                'value' => __('Filter'),
-                'class' => 'btn btn-primary',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Filter'),
+                    'class' => 'btn btn-primary',
+                ],
+            ]
+        );
     }
 }

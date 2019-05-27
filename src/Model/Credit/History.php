@@ -20,21 +20,22 @@ class History extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
-        'id',
-        'uid',
-        'time_create',
-        'order',
-        'invoice',
-        'amount',
-        'amount_old',
-        'amount_new',
-        'status',
-        'status_fluctuation',
-        'status_action',
-        'message_user',
-        'message_admin',
-        'ip',
-        'module',
-    );
+    protected $columns
+        = [
+            'id',
+            'uid',
+            'time_create',
+            'order',
+            'invoice',
+            'amount',
+            'amount_old',
+            'amount_new',
+            'status',
+            'status_fluctuation',
+            'status_action',
+            'message_user',
+            'message_admin',
+            'ip',
+            'module',
+        ];
 }

@@ -20,23 +20,24 @@ class Detail extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
-        'id',
-        'order',
-        'module',
-        'product_type',
-        'product',
-        'time_create',
-        'time_start',
-        'time_end',
-        'product_price',
-        'discount_price',
-        'shipping_price',
-        'packing_price',
-        'setup_price',
-        'vat_price',
-        'number',
-        'extra',
-        'admin_note'
-    );
+    protected $columns
+        = [
+            'id',
+            'order',
+            'module',
+            'product_type',
+            'product',
+            'time_create',
+            'time_start',
+            'time_end',
+            'product_price',
+            'discount_price',
+            'shipping_price',
+            'packing_price',
+            'setup_price',
+            'vat_price',
+            'number',
+            'extra',
+            'admin_note',
+        ];
 }

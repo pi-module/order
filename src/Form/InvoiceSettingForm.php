@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class InvoiceSettingForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         parent::__construct($name);
     }
@@ -34,77 +34,89 @@ class InvoiceSettingForm extends BaseForm
     public function init()
     {
         // orderid
-        $this->add(array(
-            'name' => 'orderid',
-            'options' => array(
-                'label' => __('Order ID'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'orderid',
+                'options'    => [
+                    'label' => __('Order ID'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => '',
+                ],
+            ]
+        );
         // randomid
-        $this->add(array(
-            'name' => 'randomid',
-            'options' => array(
-                'label' => __('Bank ID'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'randomid',
+                'options'    => [
+                    'label' => __('Bank ID'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => '',
+                ],
+            ]
+        );
         // payment_status
-        $this->add(array(
-            'name' => 'payment_status',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Payment status'),
-                'value_options' => array(
-                    '' => __('All'),
-                    1 => __('Paid'),
-                    2 => __('UnPaid'),
-                    'delayed' => __('Delayed'),
-                ),
-            ),
-        ));
+        $this->add(
+            [
+                'name'    => 'payment_status',
+                'type'    => 'select',
+                'options' => [
+                    'label'         => __('Payment status'),
+                    'value_options' => [
+                        ''        => __('All'),
+                        1         => __('Paid'),
+                        2         => __('UnPaid'),
+                        'delayed' => __('Delayed'),
+                    ],
+                ],
+            ]
+        );
         // start
-        $this->add(array(
-            'name' => 'start',
-            'type' => 'datepicker',
-            'options' => array(
-                'label' => __('Start from'),
-                'datepicker' => array(
-                    'format' => 'yyyy-mm-dd',
-                ),
-            ),
-            'attributes' => array(
-                'id' => 'time-start',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'start',
+                'type'       => 'datepicker',
+                'options'    => [
+                    'label'      => __('Start from'),
+                    'datepicker' => [
+                        'format' => 'yyyy-mm-dd',
+                    ],
+                ],
+                'attributes' => [
+                    'id' => 'time-start',
+                ],
+            ]
+        );
         // end
-        $this->add(array(
-            'name' => 'end',
-            'type' => 'datepicker',
-            'options' => array(
-                'label' => __('End to'),
-                'datepicker' => array(
-                    'format' => 'yyyy-mm-dd',
-                ),
-            ),
-            'attributes' => array(
-                'id' => 'time-end',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'end',
+                'type'       => 'datepicker',
+                'options'    => [
+                    'label'      => __('End to'),
+                    'datepicker' => [
+                        'format' => 'yyyy-mm-dd',
+                    ],
+                ],
+                'attributes' => [
+                    'id' => 'time-end',
+                ],
+            ]
+        );
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
-                'value' => __('Filter'),
-                'class' => 'btn btn-primary',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Filter'),
+                    'class' => 'btn btn-primary',
+                ],
+            ]
+        );
     }
 }

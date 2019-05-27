@@ -21,9 +21,11 @@ class UpdateNoteFilter extends InputFilter
     public function __construct()
     {
         // admin_note
-        $this->add(array(
-            'name' => 'admin_note',
-            'required' => true,
-        ));
+        $this->add(
+            [
+                'name'     => 'admin_note',
+                'required' => true,
+            ]
+        );
     }
 }

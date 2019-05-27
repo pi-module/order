@@ -20,11 +20,12 @@ class Credit extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
-        'id',
-        'uid',
-        'time_update',
-        'amount',
-        'amount_detail',
-    );
+    protected $columns
+        = [
+            'id',
+            'uid',
+            'time_update',
+            'amount',
+            'amount_detail',
+        ];
 }

@@ -13,33 +13,35 @@
 
 namespace Module\Order\Controller\Admin;
 
+use Module\Order\Form\DeliveryFilter;
+use Module\Order\Form\DeliveryForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Module\Order\Form\DeliveryForm;
-use Module\Order\Form\DeliveryFilter;
 
 class DeliveryController extends ActionController
 {
     /**
      * delivery Columns
      */
-    protected $deliveryColumns = array(
-        'id', 'title', 'status'
-    );
+    protected $deliveryColumns
+        = [
+            'id', 'title', 'status',
+        ];
 
     /**
      * delivery_gateway Columns
      */
-    protected $deliverygatewayColumns = array(
-        'id', 'delivery', 'gateway'
-    );
+    protected $deliverygatewayColumns
+        = [
+            'id', 'delivery', 'gateway',
+        ];
 
     public function indexAction()
     {
         // Get info
-        $list = array();
-        $order = array('id DESC');
+        $list   = [];
+        $order  = ['id DESC'];
         $select = $this->getModel('delivery')->select()->order($order);
         $rowset = $this->getModel('delivery')->selectWith($select);
         // Make list
@@ -80,18 +82,18 @@ class DeliveryController extends ActionController
                 $row->assign($values);
                 $row->save();
                 // Save gateway
-                $this->getModel('delivery_gateway')->delete(array('delivery' => $row->id));
+                $this->getModel('delivery_gateway')->delete(['delivery' => $row->id]);
                 if (is_array($gateways)) {
                     foreach ($gateways as $gateway) {
-                        $delivery_gateway = $this->getModel('delivery_gateway')->createRow();
+                        $delivery_gateway           = $this->getModel('delivery_gateway')->createRow();
                         $delivery_gateway->delivery = $row->id;
-                        $delivery_gateway->gateway = $gateway;
+                        $delivery_gateway->gateway  = $gateway;
                         $delivery_gateway->save();
                     }
                 } else {
-                    $delivery_gateway = $this->getModel('delivery_gateway')->createRow();
+                    $delivery_gateway           = $this->getModel('delivery_gateway')->createRow();
                     $delivery_gateway->delivery = $row->id;
-                    $delivery_gateway->gateway = $gateways;
+                    $delivery_gateway->gateway  = $gateways;
                     $delivery_gateway->save();
                 }
                 // Add log
@@ -99,15 +101,15 @@ class DeliveryController extends ActionController
                 //Pi::api('log', 'shop')->addLog('delivery', $row->id, $operation);
                 // Check it save or not
                 $message = __('Delivery data saved successfully.');
-                $this->jump(array('action' => 'index'), $message);
+                $this->jump(['action' => 'index'], $message);
             }
         } else {
             if ($id) {
                 $values = $this->getModel('delivery')->find($id)->toArray();
                 // Get gateways
-                $where = array('delivery' => $id);
-                $select = $this->getModel('delivery_gateway')->select()->where($where)->limit(1);
-                $gateway = $this->getModel('delivery_gateway')->selectWith($select)->current();
+                $where             = ['delivery' => $id];
+                $select            = $this->getModel('delivery_gateway')->select()->where($where)->limit(1);
+                $gateway           = $this->getModel('delivery_gateway')->selectWith($select)->current();
                 $values['gateway'] = $gateway['gateway'];
                 // Set form data
                 $form->setData($values);

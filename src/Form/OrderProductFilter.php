@@ -18,136 +18,164 @@ use Zend\InputFilter\InputFilter;
 
 class OrderProductFilter extends InputFilter
 {
-    public function __construct($option = array())
+    public function __construct($option = [])
     {
-        $this->add(array(
-            'name' => 'module',
-            'required' => true,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        
-        $this->add(array(
-            'name' => 'product_type',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        
+        $this->add(
+            [
+                'name'     => 'module',
+                'required' => true,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+            ]
+        );
+
+        $this->add(
+            [
+                'name'     => 'product_type',
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+            ]
+        );
+
         // id
-        $this->add(array(
-            'name' => 'product',
-            'required' => true,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        
-        $this->add(array(
-            'name' => 'module_item',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        
+        $this->add(
+            [
+                'name'     => 'product',
+                'required' => true,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+            ]
+        );
+
+        $this->add(
+            [
+                'name'     => 'module_item',
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+            ]
+        );
+
         // product_price
-        $this->add(array(
-            'name' => 'product_price',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        
-        $this->add(array(
-            'name' => 'discount_price',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
+        $this->add(
+            [
+                'name'     => 'product_price',
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+            ]
+        );
+
+        $this->add(
+            [
+                'name'     => 'discount_price',
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+            ]
+        );
         // shipping_price
-        $this->add(array(
-            'name' => 'shipping_price',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
+        $this->add(
+            [
+                'name'     => 'shipping_price',
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+            ]
+        );
         // packing_price
-        $this->add(array(
-            'name' => 'packing_price',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
+        $this->add(
+            [
+                'name'     => 'packing_price',
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+            ]
+        );
         // setup_price
-        $this->add(array(
-            'name' => 'setup_price',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
+        $this->add(
+            [
+                'name'     => 'setup_price',
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+            ]
+        );
         // vat_price
-        $this->add(array(
-            'name' => 'vat_price',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        
-        $this->add(array(
-            'name' => 'time_start',
-            'required' => false,
-        ));
-        
-        $this->add(array(
-            'name' => 'time_end',
-            'required' => false,
-        ));
-        
-        $this->add(array(
-            'name' => 'admin_note',
-            'required' => false,
-        ));
-        
+        $this->add(
+            [
+                'name'     => 'vat_price',
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+            ]
+        );
+
+        $this->add(
+            [
+                'name'     => 'time_start',
+                'required' => false,
+            ]
+        );
+
+        $this->add(
+            [
+                'name'     => 'time_end',
+                'required' => false,
+            ]
+        );
+
+        $this->add(
+            [
+                'name'     => 'admin_note',
+                'required' => false,
+            ]
+        );
+
         // extra options
-        foreach (array('order', 'shop', 'guide', 'event') as $module) {
+        foreach (['order', 'shop', 'guide', 'event'] as $module) {
             if (Pi::service('module')->isActive($module)) {
                 $elems = Pi::api('order', $module)->getExtraFieldsFormForOrder();
                 foreach ($elems as $elem) {
-                    $this->add(array(
-                        'name' => $elem['name'],
-                        'required' => false,
-                    ));     
+                    $this->add(
+                        [
+                            'name'     => $elem['name'],
+                            'required' => false,
+                        ]
+                    );
                 }
             }
-        } 
+        }
     }
 }

@@ -21,9 +21,11 @@ class UpdateDeliveryFilter extends InputFilter
     public function __construct()
     {
         // status_delivery
-        $this->add(array(
-            'name' => 'status_delivery',
-            'required' => true,
-        ));
+        $this->add(
+            [
+                'name'     => 'status_delivery',
+                'required' => true,
+            ]
+        );
     }
 }    	

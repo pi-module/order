@@ -20,14 +20,15 @@ class Gateway extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
-        'id',
-        'title',
-        'path',
-        'description',
-        'image',
-        'status',
-        'type',
-        'option',
-    );
+    protected $columns
+        = [
+            'id',
+            'title',
+            'path',
+            'description',
+            'image',
+            'status',
+            'type',
+            'option',
+        ];
 }

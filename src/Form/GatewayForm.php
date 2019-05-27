@@ -38,40 +38,48 @@ class GatewayForm extends BaseForm
         if (!empty($this->field)) {
             foreach ($this->field as $field) {
                 if ($field['type'] == 'hidden') {
-                    $this->add(array(
-                        'name' => $field['name'],
-                        'attributes' => array(
-                            'type' => 'hidden',
-                        ),
-                    ));
+                    $this->add(
+                        [
+                            'name'       => $field['name'],
+                            'attributes' => [
+                                'type' => 'hidden',
+                            ],
+                        ]
+                    );
                 } elseif ($field['type'] == 'checkbox') {
-                    $this->add(array(
-                        'name' => $field['name'],
-                        'type' => 'checkbox',
-                        'options' => array(
-                            'label' => $field['label'],
-                        ),
-                    ));
+                    $this->add(
+                        [
+                            'name'    => $field['name'],
+                            'type'    => 'checkbox',
+                            'options' => [
+                                'label' => $field['label'],
+                            ],
+                        ]
+                    );
                 } else {
-                    $this->add(array(
-                        'name' => $field['name'],
-                        'options' => array(
-                            'label' => $field['label'],
-                        ),
-                        'attributes' => array(
-                            'type' => $field['type'],
-                        ),
-                    ));
+                    $this->add(
+                        [
+                            'name'       => $field['name'],
+                            'options'    => [
+                                'label' => $field['label'],
+                            ],
+                            'attributes' => [
+                                'type' => $field['type'],
+                            ],
+                        ]
+                    );
                 }
             }
         }
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
-                'value' => __('Submit'),
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Submit'),
+                ],
+            ]
+        );
     }
 }   

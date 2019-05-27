@@ -32,21 +32,21 @@ class User extends AbstractApi
         }
         // Check user id
         if (!$uid || $uid == 0) {
-            return array();
+            return [];
         }
         // Check type
         switch ($type) {
             case 'normal':
-                $fields = array(
+                $fields = [
                     'id', 'identity', 'name', 'email', 'first_name', 'last_name', 'id_number', 'phone', 'mobile', 'credit',
                     'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat',
-                );
+                ];
                 break;
 
             case 'light':
-                $fields = array(
-                    'id', 'identity', 'name', 'email'
-                );
+                $fields = [
+                    'id', 'identity', 'name', 'email',
+                ];
                 break;
         }
         // Get user info
@@ -130,7 +130,7 @@ class User extends AbstractApi
         }
         // From user module
         $user['last_modified'] = time();
-        $status = Pi::api('user', 'user')->updateUser($uid, $user);
+        $status                = Pi::api('user', 'user')->updateUser($uid, $user);
         if ($status == 1) {
             Pi::service('event')->trigger('user_update', $uid);
         }

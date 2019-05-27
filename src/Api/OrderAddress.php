@@ -25,13 +25,13 @@ class OrderAddress extends AbstractApi
     public function findOrderAddress($id, $type = 'INVOICING')
     {
         // Select
-        $where = array('order' => $id, 'type' => $type);
+        $where  = ['order' => $id, 'type' => $type];
         $select = Pi::model('order_address', 'order')->select()->where($where);
-        $row = Pi::model('order_address', 'order')->selectWith($select)->current();
+        $row    = Pi::model('order_address', 'order')->selectWith($select)->current();
         if ($row) {
             return $row->toArray();
         }
-        
-        return array();
+
+        return [];
     }
 }

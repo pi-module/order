@@ -13,9 +13,9 @@
 
 namespace Module\Order\Api;
 
+use Module\Order\Gateway\AbstractGateway;
 use Pi;
 use Pi\Application\Api\AbstractApi;
-use Module\Order\Gateway\AbstractGateway;
 
 /*
  * Pi::api('gateway', 'order')->getAllGatewayList();
@@ -31,13 +31,13 @@ class Gateway extends AbstractApi
     public function getAdminGatewayList()
     {
         $gatewaysList = $this->getActiveGatewayList();
-        $gateways = array('manual' => __('Manual'));
+        $gateways     = ['manual' => __('Manual')];
         foreach ($gatewaysList as $gateway) {
             $gateways[$gateway['path']] = $gateway['title'];
         }
         return $gateways;
     }
-    
+
     public function getAllGatewayList()
     {
         return AbstractGateway::getAllList();
@@ -63,7 +63,7 @@ class Gateway extends AbstractApi
         return AbstractGateway::getGatewayInfo($adapter);
     }
 
-    public function getGatewayMessage($adapter = '', $log = array())
+    public function getGatewayMessage($adapter = '', $log = [])
     {
         return AbstractGateway::getGatewayMessage($adapter, $log);
     }

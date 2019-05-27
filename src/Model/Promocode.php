@@ -20,21 +20,22 @@ class Promocode extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
-        'id',
-        'code',
-        'promo',
-        'time_start',
-        'time_end',
-        'module',
-        'showcode',
-    );
-    
+    protected $columns
+        = [
+            'id',
+            'code',
+            'promo',
+            'time_start',
+            'time_end',
+            'module',
+            'showcode',
+        ];
+
     public function getModules()
     {
-       return array(
-            'guide' => 'guide', 
-            'event' => 'event'
-       );
+        return [
+            'guide' => 'guide',
+            'event' => 'event',
+        ];
     }
 }

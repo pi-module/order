@@ -13,8 +13,8 @@
 
 namespace Module\Order\Gateway\Bitcoin;
 
-use Pi;
 use Module\Order\Gateway\AbstractGateway;
+use Pi;
 use Zend\Json\Json;
 
 /*
@@ -22,6 +22,7 @@ use Zend\Json\Json;
  * https://spectrofinance.github.io/SpectroCoin-Merchant-API
  * https://github.com/SpectroFinance/SpectroCoin-Merchant-PHP
  */
+
 class Gateway extends AbstractGateway
 {
     public function setAdapter()
@@ -31,14 +32,14 @@ class Gateway extends AbstractGateway
 
     public function setInformation()
     {
-        $gateway = array();
-        $gateway['title'] = __('Bitcoin (blockchain)');
-        $gateway['path'] = 'Bitcoin';
-        $gateway['type'] = 'online';
-        $gateway['version'] = '1.0';
+        $gateway                = [];
+        $gateway['title']       = __('Bitcoin (blockchain)');
+        $gateway['path']        = 'Bitcoin';
+        $gateway['type']        = 'online';
+        $gateway['version']     = '1.0';
         $gateway['description'] = '';
-        $gateway['author'] = 'Hossein Azizabadi <azizabadi@faragostaresh.com>';
-        $gateway['credits'] = '@voltan';
+        $gateway['author']      = 'Hossein Azizabadi <azizabadi@faragostaresh.com>';
+        $gateway['credits']     = '@voltan';
         $gateway['releaseDate'] = 1480802565;
 
         $this->gatewayInformation = $gateway;
@@ -48,42 +49,42 @@ class Gateway extends AbstractGateway
 
     public function setSettingForm()
     {
-        $form = array();
+        $form = [];
         // form path
-        $form['path'] = array(
-            'name' => 'path',
-            'label' => __('path'),
-            'type' => 'hidden',
+        $form['path'] = [
+            'name'     => 'path',
+            'label'    => __('path'),
+            'type'     => 'hidden',
             'required' => true,
-        );
+        ];
         // form merchantId
-        $form['merchantId'] = array(
-            'name' => 'merchantId',
-            'label' => __('Merchant ID'),
-            'type' => 'text',
+        $form['merchantId'] = [
+            'name'     => 'merchantId',
+            'label'    => __('Merchant ID'),
+            'type'     => 'text',
             'required' => true,
-        );
+        ];
         // form apiId
-        $form['apiId'] = array(
-            'name' => 'apiId',
-            'label' => __('Project (API) ID'),
-            'type' => 'text',
+        $form['apiId'] = [
+            'name'     => 'apiId',
+            'label'    => __('Project (API) ID'),
+            'type'     => 'text',
             'required' => true,
-        );
+        ];
         // form signature
-        $form['signature'] = array(
-            'name' => 'signature',
-            'label' => __('Signature (private key)'),
-            'type' => 'textarea',
+        $form['signature']        = [
+            'name'     => 'signature',
+            'label'    => __('Signature (private key)'),
+            'type'     => 'textarea',
             'required' => true,
-        );
+        ];
         $this->gatewaySettingForm = $form;
         return $this;
     }
 
     public function setPayForm()
     {
-        $form = array();
+        $form                 = [];
         $this->gatewayPayForm = $form;
         return $this;
     }
@@ -93,16 +94,16 @@ class Gateway extends AbstractGateway
         // Call SCMerchantClient
         include_once Pi::path('module') . '/order/src/Gateway/Bitcoin/SCMerchantClient/SCMerchantClient.php';
 
-        $url = sprintf('https://blockchain.info/tobtc?currency=USD&value=%s', $this->gatewayInvoice['total_price']);
+        $url    = sprintf('https://blockchain.info/tobtc?currency=USD&value=%s', $this->gatewayInvoice['total_price']);
         $amount = Pi::service('remote')->get($url);
 
-        $orderId = $this->gatewayInvoice['random_id'];
-        $payCurrency = 'BTC';
-        $payAmount = $amount;
+        $orderId         = $this->gatewayInvoice['random_id'];
+        $payCurrency     = 'BTC';
+        $payAmount       = $amount;
         $receiveCurrency = 'USD';
-        $receiveAmount = $this->gatewayInvoice['total_price'];
-        $description = 'Far War Art payment';
-        $culture = "en";
+        $receiveAmount   = $this->gatewayInvoice['total_price'];
+        $description     = 'Far War Art payment';
+        $culture         = "en";
 
         $scMerchantClient = new \SCMerchantClient(
             'https://spectrocoin.com/api/merchant/1',
@@ -112,12 +113,13 @@ class Gateway extends AbstractGateway
 
         $scMerchantClient->setPrivateMerchantKey($this->gatewayOption['signature']);
 
-        $backUrl = sprintf('%s?gatewayName=Bitcoin&invoice=%s',
+        $backUrl = sprintf(
+            '%s?gatewayName=Bitcoin&invoice=%s',
             $this->gatewayNotifyUrl,
             $this->gatewayInvoice['random_id']
         );
 
-        $createOrderRequest = new \CreateOrderRequest(
+        $createOrderRequest  = new \CreateOrderRequest(
             $orderId,
             $payCurrency,
             $payAmount,
@@ -133,10 +135,12 @@ class Gateway extends AbstractGateway
 
         if ($createOrderResponse instanceof \ApiError) {
             $this->gatewayError = 'Error occurred. ' . $createOrderResponse->getCode() . ': ' . $createOrderResponse->getMessage();
-        } else if ($createOrderResponse instanceof \CreateOrderResponse) {
-            $this->gatewayRedirectUrl = $createOrderResponse->getRedirectUrl();
         } else {
-            $this->gatewayError = 'error';
+            if ($createOrderResponse instanceof \CreateOrderResponse) {
+                $this->gatewayRedirectUrl = $createOrderResponse->getRedirectUrl();
+            } else {
+                $this->gatewayError = 'error';
+            }
         }
     }
 
@@ -146,22 +150,22 @@ class Gateway extends AbstractGateway
         include_once Pi::path('module') . '/order/src/Gateway/Bitcoin/SCMerchantClient/SCMerchantClient.php';
 
         // Set result
-        $result = array();
+        $result           = [];
         $result['status'] = 0;
 
         // Get invoice
         $invoice = Pi::api('invoice', 'order')->getInvoice($processing['random_id'], 'random_id');
 
         // Set log
-        $log = array();
-        $log['gateway'] = $this->gatewayAdapter;
+        $log              = [];
+        $log['gateway']   = $this->gatewayAdapter;
         $log['authority'] = '';
-        $log['value'] = Json::encode($request);
-        $log['invoice'] = $invoice['id'];
-        $log['amount'] = $invoice['total_price'];
-        $log['status'] = $result['status'];
-        $log['uid'] = $processing['uid'];
-        $log['message'] = 'test1';
+        $log['value']     = Json::encode($request);
+        $log['invoice']   = $invoice['id'];
+        $log['amount']    = $invoice['total_price'];
+        $log['status']    = $result['status'];
+        $log['uid']       = $processing['uid'];
+        $log['message']   = 'test1';
         Pi::api('log', 'order')->setLog($log);
 
         //
@@ -184,7 +188,7 @@ class Gateway extends AbstractGateway
         $log['message'] = 'test4';
         Pi::api('log', 'order')->setLog($log);
 
-        if ($callback != null && $scMerchantClient->validateCreateOrderCallback($callback)){
+        if ($callback != null && $scMerchantClient->validateCreateOrderCallback($callback)) {
 
             $log['message'] = 'Status' . $callback->getStatus();
             Pi::api('log', 'order')->setLog($log);
@@ -199,10 +203,10 @@ class Gateway extends AbstractGateway
                     break;
 
                 case 3:
-                    $log['message'] = __('Order is complete');
-                    $invoice = Pi::api('invoice', 'order')->updateInvoice($request['invoice']);
+                    $log['message']   = __('Order is complete');
+                    $invoice          = Pi::api('invoice', 'order')->updateInvoice($request['invoice']);
                     $result['status'] = 1;
-                    $log['status'] = 1;
+                    $log['status']    = 1;
                     break;
 
                 case 4:
@@ -218,7 +222,7 @@ class Gateway extends AbstractGateway
                     break;
 
                 default:
-                    $log['message'] = 'Unknown order status: '.$callback->getStatus();
+                    $log['message'] = 'Unknown order status: ' . $callback->getStatus();
                     break;
             }
 
@@ -232,7 +236,7 @@ class Gateway extends AbstractGateway
         // Set result
         $result['adapter'] = $this->gatewayAdapter;
         $result['invoice'] = $invoice['id'];
-        $result['order'] = $invoice['order'];
+        $result['order']   = $invoice['order'];
         return $result;
     }
 

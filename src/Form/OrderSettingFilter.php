@@ -21,84 +21,116 @@ class OrderSettingFilter extends InputFilter
     public function __construct()
     {
         // status_order
-        $this->add(array(
-            'name' => 'status_order',
-            'required' => true,
-        ));
+        $this->add(
+            [
+                'name'     => 'status_order',
+                'required' => true,
+            ]
+        );
         // status_payment
-        $this->add(array(
-            'name' => 'status_payment',
-            'required' => true,
-        ));
+        $this->add(
+            [
+                'name'     => 'status_payment',
+                'required' => true,
+            ]
+        );
         // status_delivery
-        $this->add(array(
-            'name' => 'status_delivery',
-            'required' => true,
-        ));
+        $this->add(
+            [
+                'name'     => 'status_delivery',
+                'required' => true,
+            ]
+        );
         // can_pay
-        $this->add(array(
-            'name' => 'can_pay',
-            'required' => true,
-        ));
+        $this->add(
+            [
+                'name'     => 'can_pay',
+                'required' => true,
+            ]
+        );
         // type_payment
-        $this->add(array(
-            'name' => 'type_payment',
-            'required' => true,
-        ));
+        $this->add(
+            [
+                'name'     => 'type_payment',
+                'required' => true,
+            ]
+        );
         // type_commodity
-        $this->add(array(
-            'name' => 'type_commodity',
-            'required' => true,
-        ));
+        $this->add(
+            [
+                'name'     => 'type_commodity',
+                'required' => true,
+            ]
+        );
         // code
-        $this->add(array(
-            'name' => 'code',
-            'required' => false,
-        ));
+        $this->add(
+            [
+                'name'     => 'code',
+                'required' => false,
+            ]
+        );
         // mobile
-        $this->add(array(
-            'name' => 'mobile',
-            'required' => false,
-        ));
+        $this->add(
+            [
+                'name'     => 'mobile',
+                'required' => false,
+            ]
+        );
         // email
-        $this->add(array(
-            'name' => 'email',
-            'required' => false,
-        ));
+        $this->add(
+            [
+                'name'     => 'email',
+                'required' => false,
+            ]
+        );
         // city
-        $this->add(array(
-            'name' => 'city',
-            'required' => false,
-        ));
+        $this->add(
+            [
+                'name'     => 'city',
+                'required' => false,
+            ]
+        );
         // uid
-        $this->add(array(
-            'name' => 'uid',
-            'required' => false,
-        ));
+        $this->add(
+            [
+                'name'     => 'uid',
+                'required' => false,
+            ]
+        );
         // id_number
-        $this->add(array(
-            'name' => 'id_number',
-            'required' => false,
-        ));
+        $this->add(
+            [
+                'name'     => 'id_number',
+                'required' => false,
+            ]
+        );
         // first_name
-        $this->add(array(
-            'name' => 'first_name',
-            'required' => false,
-        ));
+        $this->add(
+            [
+                'name'     => 'first_name',
+                'required' => false,
+            ]
+        );
         // last_name
-        $this->add(array(
-            'name' => 'last_name',
-            'required' => false,
-        ));
+        $this->add(
+            [
+                'name'     => 'last_name',
+                'required' => false,
+            ]
+        );
         // zip_code
-        $this->add(array(
-            'name' => 'zip_code',
-            'required' => false,
-        ));
+        $this->add(
+            [
+                'name'     => 'zip_code',
+                'required' => false,
+            ]
+        );
         // company
-        $this->add(array(
-            'name' => 'company',
-            'required' => false,
-        ));
+        $this->add(
+            [
+                'name'     => 'company',
+                'required' => false,
+            ]
+        );
     }
 }    	

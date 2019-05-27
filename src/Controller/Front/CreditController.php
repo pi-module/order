@@ -40,18 +40,18 @@ class CreditController extends IndexController
         $credit = Pi::api('credit', 'order')->getCredit($user['id']);
         // Get info
         $perPage = 50;
-        $list = array();
-        $order = array('time_create DESC', 'id DESC');
-        $offset = (int)($page - 1) * $perPage;
-        $limit = intval($perPage);
-        $where = array('uid' => $user['id']);
+        $list    = [];
+        $order   = ['time_create DESC', 'id DESC'];
+        $offset  = (int)($page - 1) * $perPage;
+        $limit   = intval($perPage);
+        $where   = ['uid' => $user['id']];
         // Select
         $select = $this->getModel('credit_history')->select()->where($where)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('credit_history')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
-            $list[$row->id] = $row->toArray();
-            $list[$row->id]['amount_view'] = Pi::api('api', 'order')->viewPrice($row->amount);
+            $list[$row->id]                    = $row->toArray();
+            $list[$row->id]['amount_view']     = Pi::api('api', 'order')->viewPrice($row->amount);
             $list[$row->id]['amount_old_view'] = Pi::api('api', 'order')->viewPrice($row->amount_old);
             $list[$row->id]['amount_new_view'] = Pi::api('api', 'order')->viewPrice($row->amount_new);
 
@@ -61,12 +61,12 @@ class CreditController extends IndexController
 
             switch ($row->status_fluctuation) {
                 case 'increase':
-                    $list[$row->id]['status_fluctuation_view'] = __('Increase');
+                    $list[$row->id]['status_fluctuation_view']  = __('Increase');
                     $list[$row->id]['status_fluctuation_class'] = 'badge badge-success';
                     break;
 
                 case 'decrease':
-                    $list[$row->id]['status_fluctuation_view'] = __('Decrease');
+                    $list[$row->id]['status_fluctuation_view']  = __('Decrease');
                     $list[$row->id]['status_fluctuation_class'] = 'badge badge-danger';
                     break;
             }
@@ -82,36 +82,48 @@ class CreditController extends IndexController
             }
 
             if ($row->order > 0) {
-                $list[$row->id]['orderLink'] = Pi::url($this->url('order', array(
-                    'controller' => 'detail',
-                    'id' => $row->order
-                )));
+                $list[$row->id]['orderLink'] = Pi::url(
+                    $this->url(
+                        'order', [
+                        'controller' => 'detail',
+                        'id'         => $row->order,
+                    ]
+                    )
+                );
             } elseif ($row->invoice > 0) {
-                $invoice = Pi::api('invoice', 'order')->getInvoice($row->invoice);
-                $list[$row->id]['orderLink'] = Pi::url($this->url('order', array(
-                    'controller' => 'detail',
-                    'id' => $invoice['order'],
-                )));
+                $invoice                     = Pi::api('invoice', 'order')->getInvoice($row->invoice);
+                $list[$row->id]['orderLink'] = Pi::url(
+                    $this->url(
+                        'order', [
+                        'controller' => 'detail',
+                        'id'         => $invoice['order'],
+                    ]
+                    )
+                );
             } else {
                 $list[$row->id]['orderLink'] = '';
             }
         }
         // Set paginator
-        $count = array('count' => new Expression('count(*)'));
-        $select = $this->getModel('credit_history')->select()->columns($count);
-        $count = $this->getModel('credit_history')->selectWith($select)->current()->count;
+        $count     = ['count' => new Expression('count(*)')];
+        $select    = $this->getModel('credit_history')->select()->columns($count);
+        $count     = $this->getModel('credit_history')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($perPage);
         $paginator->setCurrentPageNumber($page);
-        $paginator->setUrlOptions(array(
-            'router' => $this->getEvent()->getRouter(),
-            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params' => array_filter(array(
-                'module' => $this->getModule(),
-                'controller' => 'credit',
-                'action' => 'index',
-            )),
-        ));
+        $paginator->setUrlOptions(
+            [
+                'router' => $this->getEvent()->getRouter(),
+                'route'  => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+                'params' => array_filter(
+                    [
+                        'module'     => $this->getModule(),
+                        'controller' => 'credit',
+                        'action'     => 'index',
+                    ]
+                ),
+            ]
+        );
         // Set view
         $this->view()->setTemplate('credit');
         $this->view()->assign('user', $user);

@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class UpdateDeliveryForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         parent::__construct($name);
     }
@@ -34,28 +34,32 @@ class UpdateDeliveryForm extends BaseForm
     public function init()
     {
         // status_delivery
-        $this->add(array(
-            'name' => 'status_delivery',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Delivery'),
-                'value_options' => array(
-                    1 => __('Not processed'),
-                    2 => __('Packed'),
-                    3 => __('Posted'),
-                    4 => __('Delivered'),
-                    5 => __('Back eaten'),
-                ),
-            ),
-        ));
+        $this->add(
+            [
+                'name'    => 'status_delivery',
+                'type'    => 'select',
+                'options' => [
+                    'label'         => __('Delivery'),
+                    'value_options' => [
+                        1 => __('Not processed'),
+                        2 => __('Packed'),
+                        3 => __('Posted'),
+                        4 => __('Delivered'),
+                        5 => __('Back eaten'),
+                    ],
+                ],
+            ]
+        );
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
-                'value' => __('Update'),
-                'class' => 'btn btn-primary',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Update'),
+                    'class' => 'btn btn-primary',
+                ],
+            ]
+        );
     }
 }

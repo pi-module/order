@@ -20,9 +20,10 @@ class Installment extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
-        'id',
-        'number',
-        'commission',
-    );
+    protected $columns
+        = [
+            'id',
+            'number',
+            'commission',
+        ];
 }

@@ -24,14 +24,15 @@ class Delivery extends Select
     public function getValueOptions()
     {
         if (empty($this->valueOptions)) {
-            $list = array();
-            $where = array('location' => $this->options['location']);
+            $list   = [];
+            $where  = ['location' => $this->options['location']];
             $select = Pi::model('location_delivery', 'order')->select()->where($where);
             $rowset = Pi::model('location_delivery', 'order')->selectWith($select);
             foreach ($rowset as $row) {
                 $delivery = Pi::model('delivery', 'order')->find($row->delivery)->toArray();
                 if ($delivery['status']) {
-                    $list[$delivery['id']] = sprintf('%s - %s : %s - %s : %s %s' ,
+                    $list[$delivery['id']] = sprintf(
+                        '%s - %s : %s - %s : %s %s',
                         $delivery['title'],
                         __('Price'),
                         Pi::api('api', 'order')->viewPrice($row->price),

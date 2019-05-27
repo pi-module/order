@@ -21,9 +21,11 @@ class UpdateCanPayFilter extends InputFilter
     public function __construct()
     {
         // status_delivery
-        $this->add(array(
-            'name' => 'can_pay',
-            'required' => true,
-        ));
+        $this->add(
+            [
+                'name'     => 'can_pay',
+                'required' => true,
+            ]
+        );
     }
 }    	

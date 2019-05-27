@@ -22,10 +22,12 @@ class PayFilter extends InputFilter
     {
         if (!empty($field)) {
             foreach ($field as $item) {
-                $this->add(array(
-                    'name' => $item['name'],
-                    'required' => true,
-                ));
+                $this->add(
+                    [
+                        'name'     => $item['name'],
+                        'required' => true,
+                    ]
+                );
             }
         }
     }

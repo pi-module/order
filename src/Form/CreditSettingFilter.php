@@ -18,32 +18,42 @@ use Zend\InputFilter\InputFilter;
 
 class CreditSettingFilter extends InputFilter
 {
-    public function __construct($option = array())
+    public function __construct($option = [])
     {
         // uid
-        $this->add(array(
-            'name' => 'uid',
-            'required' => false,
-        ));
+        $this->add(
+            [
+                'name'     => 'uid',
+                'required' => false,
+            ]
+        );
         // first_name
-        $this->add(array(
-            'name' => 'first_name',
-            'required' => false,
-        ));
+        $this->add(
+            [
+                'name'     => 'first_name',
+                'required' => false,
+            ]
+        );
         // last_name
-        $this->add(array(
-            'name' => 'last_name',
-            'required' => false,
-        ));
+        $this->add(
+            [
+                'name'     => 'last_name',
+                'required' => false,
+            ]
+        );
         // email
-        $this->add(array(
-            'name' => 'email',
-            'required' => false,
-        ));
+        $this->add(
+            [
+                'name'     => 'email',
+                'required' => false,
+            ]
+        );
         // company
-        $this->add(array(
-            'name' => 'company',
-            'required' => false,
-        ));
+        $this->add(
+            [
+                'name'     => 'company',
+                'required' => false,
+            ]
+        );
     }
 }

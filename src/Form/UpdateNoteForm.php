@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class UpdateNoteForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         parent::__construct($name);
     }
@@ -34,27 +34,31 @@ class UpdateNoteForm extends BaseForm
     public function init()
     {
         // admin_note
-        $this->add(array(
-            'name' => 'admin_note',
-            'options' => array(
-                'label' => __('Note'),
-            ),
-            'attributes' => array(
-                'type' => 'textarea',
-                'rows' => '5',
-                'cols' => '40',
-                'description' => '',
-                'required' => true,
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'admin_note',
+                'options'    => [
+                    'label' => __('Note'),
+                ],
+                'attributes' => [
+                    'type'        => 'textarea',
+                    'rows'        => '5',
+                    'cols'        => '40',
+                    'description' => '',
+                    'required'    => true,
+                ],
+            ]
+        );
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
-                'value' => __('Update'),
-                'class' => 'btn btn-primary',
-            )
-        ));
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Update'),
+                    'class' => 'btn btn-primary',
+                ],
+            ]
+        );
     }
 }

@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Order\Installer\Action;
 
 use Pi;
@@ -25,7 +26,7 @@ class Update extends BasicUpdate
     protected function attachDefaultListeners()
     {
         $events = $this->events;
-        $events->attach('update.pre', array($this, 'updateSchema'));
+        $events->attach('update.pre', [$this, 'updateSchema']);
         parent::attachDefaultListeners();
 
         return $this;
@@ -39,83 +40,85 @@ class Update extends BasicUpdate
         $moduleVersion = $e->getParam('version');
 
         // Set order model
-        $orderModel = Pi::model('order', $this->module);
-        $orderTable = $orderModel->getTable();
+        $orderModel   = Pi::model('order', $this->module);
+        $orderTable   = $orderModel->getTable();
         $orderAdapter = $orderModel->getAdapter();
 
         // Set invoice model
-        $invoiceModel = Pi::model('invoice', $this->module);
-        $invoiceTable = $invoiceModel->getTable();
+        $invoiceModel   = Pi::model('invoice', $this->module);
+        $invoiceTable   = $invoiceModel->getTable();
         $invoiceAdapter = $invoiceModel->getAdapter();
 
         // Set basket model
-        $basketModel = Pi::model('basket', $this->module);
-        $basketTable = $basketModel->getTable();
+        $basketModel   = Pi::model('basket', $this->module);
+        $basketTable   = $basketModel->getTable();
         $basketAdapter = $basketModel->getAdapter();
 
         // Set customer model
-        $customerModel = Pi::model('customer', $this->module);
-        $customerTable = $customerModel->getTable();
+        $customerModel   = Pi::model('customer', $this->module);
+        $customerTable   = $customerModel->getTable();
         $customerAdapter = $customerModel->getAdapter();
 
         // Set credit model
-        $creditModel = Pi::model('credit', $this->module);
-        $creditTable = $creditModel->getTable();
+        $creditModel   = Pi::model('credit', $this->module);
+        $creditTable   = $creditModel->getTable();
         $creditAdapter = $creditModel->getAdapter();
 
         // Set history model
-        $historyModel = Pi::model('history', $this->module);
-        $historyTable = $historyModel->getTable();
+        $historyModel   = Pi::model('history', $this->module);
+        $historyTable   = $historyModel->getTable();
         $historyAdapter = $historyModel->getAdapter();
 
-        $processModel = Pi::model('processing', $this->module);
-        $processTable = $processModel->getTable();
+        $processModel   = Pi::model('processing', $this->module);
+        $processTable   = $processModel->getTable();
         $processAdapter = $processModel->getAdapter();
-        
-        $logModel = Pi::model('log', $this->module);
-        $logTable = $logModel->getTable();
+
+        $logModel   = Pi::model('log', $this->module);
+        $logTable   = $logModel->getTable();
         $logAdapter = $logModel->getAdapter();
 
-        $orderAddressModel = Pi::model('order_address', $this->module);
-        $orderAddressTable = $orderAddressModel->getTable();
+        $orderAddressModel   = Pi::model('order_address', $this->module);
+        $orderAddressTable   = $orderAddressModel->getTable();
         $orderAddressAdapter = $orderAddressModel->getAdapter();
 
-        $customerAddressModel = Pi::model('customer_address', $this->module);
-        $customerAddressTable = $customerAddressModel->getTable();
+        $customerAddressModel   = Pi::model('customer_address', $this->module);
+        $customerAddressTable   = $customerAddressModel->getTable();
         $customerAddressAdapter = $customerAddressModel->getAdapter();
-        
-        $detailModel = Pi::model('detail', $this->module);
-        $detailTable = $detailModel->getTable();
+
+        $detailModel   = Pi::model('detail', $this->module);
+        $detailTable   = $detailModel->getTable();
         $detailAdapter = $detailModel->getAdapter();
-        
-        $accessModel = Pi::model('access', $this->module);
-        $accessTable = $accessModel->getTable();
+
+        $accessModel   = Pi::model('access', $this->module);
+        $accessTable   = $accessModel->getTable();
         $accessAdapter = $accessModel->getAdapter();
-        
-        $creditHistoryModel = Pi::model('credit_history', $this->module);
-        $creditHistoryTable = $creditHistoryModel->getTable();
+
+        $creditHistoryModel   = Pi::model('credit_history', $this->module);
+        $creditHistoryTable   = $creditHistoryModel->getTable();
         $creditHistoryAdapter = $creditHistoryModel->getAdapter();
-        
-        $orderInstallmentModel = Pi::model('invoice_installment', $this->module);
-        $orderInstallmentTable = $orderInstallmentModel->getTable();
+
+        $orderInstallmentModel   = Pi::model('invoice_installment', $this->module);
+        $orderInstallmentTable   = $orderInstallmentModel->getTable();
         $orderInstallmentAdapter = $orderInstallmentModel->getAdapter();
-        
-        $promocodeModel = Pi::model('promocode', $this->module);
-        $promocodeTable = $promocodeModel->getTable();
+
+        $promocodeModel   = Pi::model('promocode', $this->module);
+        $promocodeTable   = $promocodeModel->getTable();
         $promocodeAdapter = $promocodeModel->getAdapter();
-        
-        
+
+
         if (version_compare($moduleVersion, '1.3.6', '<')) {
             // Alter table field add id_number
             $sql = sprintf("ALTER TABLE %s ADD `id_number` varchar(255) NOT NULL default ''", $orderTable);
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
@@ -126,26 +129,32 @@ class Update extends BasicUpdate
             try {
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
 
         if (version_compare($moduleVersion, '1.4.3', '<')) {
             // Alter table field change type_payment
-            $sql = sprintf("ALTER TABLE %s CHANGE `type` `type_payment` enum('free','onetime','recurring','installment') NOT NULL default 'onetime'", $orderTable);
+            $sql = sprintf(
+                "ALTER TABLE %s CHANGE `type` `type_payment` enum('free','onetime','recurring','installment') NOT NULL default 'onetime'", $orderTable
+            );
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
             // Alter table field add id_number
@@ -153,11 +162,13 @@ class Update extends BasicUpdate
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
@@ -168,11 +179,13 @@ class Update extends BasicUpdate
             try {
                 $basketAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
@@ -183,11 +196,13 @@ class Update extends BasicUpdate
             try {
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
@@ -198,11 +213,13 @@ class Update extends BasicUpdate
             try {
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
 
@@ -217,7 +234,8 @@ class Update extends BasicUpdate
 
         if (version_compare($moduleVersion, '1.6.2', '<')) {
             // Add table : customer
-            $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{customer}` (
     `id` int(10) unsigned NOT NULL auto_increment,
     `uid` int(10) unsigned NOT NULL default '0',
@@ -252,11 +270,13 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
 
                 return false;
             }
@@ -268,11 +288,13 @@ EOD;
             try {
                 $customerAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
@@ -283,11 +305,13 @@ EOD;
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
 
@@ -296,11 +320,13 @@ EOD;
             try {
                 $basketAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
 
@@ -309,11 +335,13 @@ EOD;
             try {
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
@@ -324,11 +352,13 @@ EOD;
             try {
                 $customerAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
             // Alter table field add
@@ -336,11 +366,13 @@ EOD;
             try {
                 $customerAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
@@ -351,11 +383,13 @@ EOD;
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
             // Alter table field add
@@ -363,11 +397,13 @@ EOD;
             try {
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
@@ -378,11 +414,13 @@ EOD;
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
             // Alter table field CHANGE
@@ -390,18 +428,21 @@ EOD;
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
 
         if (version_compare($moduleVersion, '1.7.8', '<')) {
             // Add table : credit
-            $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{credit}` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `uid`         INT(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -416,17 +457,20 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
 
                 return false;
             }
 
             // Add table : history
-            $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{history}` (
   `id`                 INT(10) UNSIGNED              NOT NULL AUTO_INCREMENT,
   `uid`                INT(10) UNSIGNED              NOT NULL DEFAULT '0',
@@ -453,11 +497,13 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
 
                 return false;
             }
@@ -469,11 +515,13 @@ EOD;
             try {
                 $creditAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
@@ -484,18 +532,21 @@ EOD;
             try {
                 $historyAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
 
         if (version_compare($moduleVersion, '1.8.8', '<')) {
             // Add table : access
-            $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{access}` (
   `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
   `uid`         INT(10) UNSIGNED    NOT NULL DEFAULT '0',
@@ -520,11 +571,13 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
 
                 return false;
             }
@@ -536,18 +589,21 @@ EOD;
             try {
                 $historyAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
 
 
-         if (version_compare($moduleVersion, '1.10.0', '<')) {
-            $sql = <<<'EOD'
+        if (version_compare($moduleVersion, '1.10.0', '<')) {
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{promocode}` (
   `id`            INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `code`          VARCHAR(16) NOT NULL,
@@ -563,11 +619,13 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
 
                 return false;
             }
@@ -579,125 +637,138 @@ EOD;
             try {
                 $customerAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
-        
+
         if (version_compare($moduleVersion, '1.11.0', '<')) {
             // Alter table field add amount_new
             $sql = sprintf("ALTER TABLE %s CHANGE `invoice` `order` INT(10) NOT NULL ", $processTable);
             try {
                 $processAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
-           $sql = sprintf("ALTER TABLE %s ADD `extra` TEXT NULL", $orderTable);
+
+            $sql = sprintf("ALTER TABLE %s ADD `extra` TEXT NULL", $orderTable);
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
+
             $sql = sprintf("ALTER TABLE %s CHANGE `invoice` `order` INT(10) NOT NULL ", $logTable);
             try {
                 $logAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
+
         }
-        
+
         if (version_compare($moduleVersion, '2.0.2', '<')) {
             try {
                 $select = $orderModel->select();
                 $rowset = $orderModel->selectWith($select);
                 $config = Pi::service('registry')->config->read('order');
-                
+
                 foreach ($rowset as $row) {
                     // Set value
-                    $year = date('Y', $row->time_create);
+                    $year  = date('Y', $row->time_create);
                     $count = Pi::model('order', 'order')->count(
-                        array(
+                        [
                             'time_create >= ' . strtotime('01-01-' . $year),
-                            'id < ' . $row->id 
-                        )
+                            'id < ' . $row->id,
+                        ]
                     );
-                    $num = $year .  sprintf('%03d', ($count+1));  
-                    $code = sprintf('%s-%s', $config['order_code_prefix'], $num);
-            
+                    $num   = $year . sprintf('%03d', ($count + 1));
+                    $code  = sprintf('%s-%s', $config['order_code_prefix'], $num);
+
                     $row->code = $code;
                     $row->save();
                 }
-                
+
                 $select = $invoiceModel->select();
                 $rowset = $invoiceModel->selectWith($select);
                 $config = Pi::service('registry')->config->read('order');
-                
+
                 foreach ($rowset as $row) {
                     // Set value
-                    $year = date('Y', $row->time_create);
+                    $year  = date('Y', $row->time_create);
                     $count = Pi::model('invoice', 'order')->count(
-                        array(
+                        [
                             'time_create >= ' . strtotime('01-01-' . $year),
-                            'id < ' . $row->id 
-                        )
+                            'id < ' . $row->id,
+                        ]
                     );
-                    $num = $year .  sprintf('%03d', ($count+1));  
-                    $code = sprintf('%s-%s', $config['invoice_code_prefix'], $num);
-            
+                    $num   = $year . sprintf('%03d', ($count + 1));
+                    $code  = sprintf('%s-%s', $config['invoice_code_prefix'], $num);
+
                     $row->code = $code;
                     $row->save();
                 }
-                
+
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table update query failed: '
                         . $exception->getMessage(),
-                ));
-                return false;   
+                ]
+                );
+                return false;
             }
         }
-         
+
         if (version_compare($moduleVersion, '2.0.4', '<')) {
             $sql = sprintf("RENAME TABLE %s TO %s;", $customerTable, $customerAddressTable);
-            
+
             SqlSchema::setType($this->module);
             $sqlHandler = new SqlSchema;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'SQL schema query for rename customer table failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
 
                 return false;
             }
-            
-            $sql = <<<'EOD'
+
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{order_address}` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `order` int(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -728,16 +799,18 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'SQL schema query for order_address table failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
 
                 return false;
             }
-            
-            $columns = array(
+
+            $columns = [
                 'id',
                 'id_number',
                 'first_name',
@@ -756,194 +829,239 @@ EOD;
                 'company_vat',
                 'delivery',
                 'location',
-            );
-            
+            ];
+
             try {
                 $select = $orderModel->select()->columns($columns);
                 $rowset = $orderModel->selectWith($select);
                 foreach ($rowset as $row) {
-                    $values = $row->toArray();
+                    $values          = $row->toArray();
                     $values['order'] = $values['id'];
                     unset($values['id']);
-                    
-                    $orderAddress = $orderAddressModel->createRow();
+
+                    $orderAddress   = $orderAddressModel->createRow();
                     $values['type'] = 'INVOICING';
                     $orderAddress->assign($values);
                     $orderAddress->save(false);
-                    
-                    $orderAddress = $orderAddressModel->createRow();
+
+                    $orderAddress   = $orderAddressModel->createRow();
                     $values['type'] = 'DELIVERY';
                     $orderAddress->assign($values);
                     $orderAddress->save(false);
-                    
+
                 }
             } catch (\Exception $exception) {
-             
-                $this->setResult('db', array(
-                    'status' => false,
+
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'data transfer failed: '
                         . $exception->getMessage(),
-                ));
-                return false;   
+                ]
+                );
+                return false;
             }
-            
-            $sql = sprintf("ALTER TABLE %s  DROP `id_number`, DROP `first_name`,   DROP `last_name`,  DROP `email`,  DROP `phone`,  DROP `mobile`,  DROP `address1`,  DROP `address2`,  DROP `country`,  DROP `state`,  DROP `city`,  DROP `zip_code`,  DROP `company`,  DROP `company_id`,  DROP `company_vat`,  DROP `delivery`,  DROP `location`;", $orderTable);
+
+            $sql = sprintf(
+                "ALTER TABLE %s  DROP `id_number`, DROP `first_name`,   DROP `last_name`,  DROP `email`,  DROP `phone`,  DROP `mobile`,  DROP `address1`,  DROP `address2`,  DROP `country`,  DROP `state`,  DROP `city`,  DROP `zip_code`,  DROP `company`,  DROP `company_id`,  DROP `company_vat`,  DROP `delivery`,  DROP `location`;",
+                $orderTable
+            );
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
-            $sql = sprintf("ALTER TABLE %s ADD `delivery_favourite` TINYINT(1) UNSIGNED, ADD `invoicing_favourite` TINYINT(1) UNSIGNED, DROP `address_type`", $customerAddressTable);
+
+            $sql = sprintf(
+                "ALTER TABLE %s ADD `delivery_favourite` TINYINT(1) UNSIGNED, ADD `invoicing_favourite` TINYINT(1) UNSIGNED, DROP `address_type`",
+                $customerAddressTable
+            );
             try {
                 $customerAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for customer failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
 
         if (version_compare($moduleVersion, '2.1.0', '<')) {
-           
-            $sql = sprintf("ALTER TABLE %s ADD `module` VARCHAR(64) NOT NULL DEFAULT '', ADD `product_type` VARCHAR(64) NOT NULL DEFAULT '', ADD `time_start` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD `time_end` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD `time_create` INT(10) UNSIGNED NOT NULL DEFAULT '0'", $basketTable);
+
+            $sql = sprintf(
+                "ALTER TABLE %s ADD `module` VARCHAR(64) NOT NULL DEFAULT '', ADD `product_type` VARCHAR(64) NOT NULL DEFAULT '', ADD `time_start` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD `time_end` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD `time_create` INT(10) UNSIGNED NOT NULL DEFAULT '0'",
+                $basketTable
+            );
             try {
                 $basketAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for basket failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
+
             $sql = sprintf("UPDATE %s SET time_create = UNIX_TIMESTAMP()", $basketTable);
-             try {
+            try {
                 $basketAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table update query for basket failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
-            
-            $sql = sprintf("UPDATE %s basket INNER JOIN %s `order` on basket.`order` = `order`.id SET basket.module = `order`.module_name, basket.product_type = `order`.module_table", $basketTable, $orderTable);
-             try {
+
+
+            $sql = sprintf(
+                "UPDATE %s basket INNER JOIN %s `order` on basket.`order` = `order`.id SET basket.module = `order`.module_name, basket.product_type = `order`.module_table",
+                $basketTable, $orderTable
+            );
+            try {
                 $basketAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for basket failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
-            $sql = sprintf("ALTER TABLE %s  DROP `module_name`, DROP `module_table`, DROP `module_item`, DROP `time_start`, DROP `time_end`, DROP `time_finish`", $orderTable);
+
+            $sql = sprintf(
+                "ALTER TABLE %s  DROP `module_name`, DROP `module_table`, DROP `module_item`, DROP `time_start`, DROP `time_end`, DROP `time_finish`",
+                $orderTable
+            );
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
+
             $sql = sprintf("ALTER TABLE %s  DROP `uid`, DROP `ip`", $invoiceTable);
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
+
             $sql = sprintf("RENAME TABLE %s TO %s;", $basketTable, $detailTable);
             SqlSchema::setType($this->module);
             $sqlHandler = new SqlSchema;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'SQL schema query for rename basket table failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
 
                 return false;
             }
-            
-            $sql = sprintf("ALTER TABLE %s ADD `create_by` ENUM ('ADMIN', 'USER') NOT NULL DEFAULT 'USER', ADD `type` ENUM ('NORMAL', 'CREDIT') NOT NULL DEFAULT 'NORMAL'", $invoiceTable);
+
+            $sql = sprintf(
+                "ALTER TABLE %s ADD `create_by` ENUM ('ADMIN', 'USER') NOT NULL DEFAULT 'USER', ADD `type` ENUM ('NORMAL', 'CREDIT') NOT NULL DEFAULT 'NORMAL'",
+                $invoiceTable
+            );
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for invoice failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
             $sql = sprintf("ALTER TABLE %s ADD `create_by` ENUM ('ADMIN', 'USER') NOT NULL DEFAULT 'USER'", $orderTable);
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
+
             $sql = sprintf("DROP TABLE %s;", $accessTable);
             SqlSchema::setType($this->module);
             $sqlHandler = new SqlSchema;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'SQL schema query for drop access table failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
 
                 return false;
             }
-            
+
             $sql = sprintf("RENAME TABLE %s TO %s;", $historyTable, $creditHistoryTable);
             SqlSchema::setType($this->module);
             $sqlHandler = new SqlSchema;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'SQL schema query for rename history table failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
 
                 return false;
             }
 
-    $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{installment}` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `number` smallint(3) UNSIGNED NOT NULL DEFAULT '1',
@@ -983,106 +1101,124 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'SQL schema query for installment tables failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
 
                 return false;
             }
-           
+
             try {
-                $select = $orderModel->select()->columns(array('id', 'status_payment', 'time_payment', 'paid_price', 'status_order'));
+                $select      = $orderModel->select()->columns(['id', 'status_payment', 'time_payment', 'paid_price', 'status_order']);
                 $rowsetOrder = $orderModel->selectWith($select);
                 foreach ($rowsetOrder as $rowOrder) {
-                    if (in_array($rowOrder->status_order, array(1,3,4,6,7))) {
+                    if (in_array($rowOrder->status_order, [1, 3, 4, 6, 7])) {
                         $rowOrder->status_order = \Module\Order\Model\Order::STATUS_ORDER_VALIDATED;
                         $rowOrder->save();
                     }
-                    if (in_array($rowOrder->status_order, array(5))) {
+                    if (in_array($rowOrder->status_order, [5])) {
                         $rowOrder->status_order = \Module\Order\Model\Order::STATUS_ORDER_CANCELLED;
                         $rowOrder->save();
                     }
-                    $select = $invoiceModel->select()->columns(array('id', 'time_duedate', 'credit_price', 'gateway'))->where(array('order' => $rowOrder->id));
+                    $select        = $invoiceModel->select()->columns(['id', 'time_duedate', 'credit_price', 'gateway'])->where(['order' => $rowOrder->id]);
                     $rowsetInvoice = $invoiceModel->selectWith($select);
-                      
+
                     if ($rowsetInvoice->count()) {
                         foreach ($rowsetInvoice as $rowInvoice) {
-                            $values = array(
-                                'invoice' => $rowInvoice->id,
-                                'count' => 1,
-                                'gateway' => $rowInvoice->gateway,
-                                'status_payment' => $rowOrder->status_payment == 2 ? \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID : \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID,
-                                'time_payment' => $rowOrder->time_payment,
-                                'time_duedate' => $rowInvoice->time_duedate,
-                                'due_price' => $rowOrder->paid_price,
-                                'credit_price' => $rowInvoice->credit_price,
-                            );
+                            $values           = [
+                                'invoice'        => $rowInvoice->id,
+                                'count'          => 1,
+                                'gateway'        => $rowInvoice->gateway,
+                                'status_payment' => $rowOrder->status_payment == 2 ? \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID
+                                    : \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID,
+                                'time_payment'   => $rowOrder->time_payment,
+                                'time_duedate'   => $rowInvoice->time_duedate,
+                                'due_price'      => $rowOrder->paid_price,
+                                'credit_price'   => $rowInvoice->credit_price,
+                            ];
                             $orderInstallment = $orderInstallmentModel->createRow();
                             $orderInstallment->assign($values);
                             $orderInstallment->save(false);
                         }
                     } else {
-                        $values = array(
-                            'invoice' => 0,
-                            'count' => 1,
-                            'gateway' => '',
-                            'status_payment' => $rowOrder->status_payment == 2 ? \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID : \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID,
-                            'time_duedate' => $rowInvoice->time_duedate,
-                            'time_payment' => $rowOrder->time_payment,
-                            'due_price' => $rowOrder->paid_price,
-                            'credit_price' => 0,
-                        );
+                        $values           = [
+                            'invoice'        => 0,
+                            'count'          => 1,
+                            'gateway'        => '',
+                            'status_payment' => $rowOrder->status_payment == 2 ? \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID
+                                : \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID,
+                            'time_duedate'   => $rowInvoice->time_duedate,
+                            'time_payment'   => $rowOrder->time_payment,
+                            'due_price'      => $rowOrder->paid_price,
+                            'credit_price'   => 0,
+                        ];
                         $orderInstallment = $orderInstallmentModel->createRow();
                         $orderInstallment->assign($values);
-                        $orderInstallment->save(false);    
+                        $orderInstallment->save(false);
                     }
                 }
             } catch (\Exception $exception) {
-             
-                $this->setResult('db', array(
-                    'status' => false,
+
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'data transfer failed: '
                         . $exception->getMessage(),
-                ));
-                return false;   
+                ]
+                );
+                return false;
             }
-            $sql = sprintf("ALTER TABLE %s DROP `status_payment`, DROP `time_payment`, DROP `product_price`, DROP `discount_price`, DROP `shipping_price`, DROP `packing_price`, DROP `setup_price`, DROP `vat_price`, DROP `total_price`, DROP `paid_price`, DROP `gateway`", $orderTable);
+            $sql = sprintf(
+                "ALTER TABLE %s DROP `status_payment`, DROP `time_payment`, DROP `product_price`, DROP `discount_price`, DROP `shipping_price`, DROP `packing_price`, DROP `setup_price`, DROP `vat_price`, DROP `total_price`, DROP `paid_price`, DROP `gateway`",
+                $orderTable
+            );
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            $sql = sprintf("ALTER TABLE %s  DROP `time_payment`, DROP `product_price`, DROP `discount_price`, DROP `shipping_price`, DROP `packing_price`, DROP `setup_price`, DROP `vat_price`, DROP `total_price`, DROP `paid_price`, DROP `gateway`, DROP `time_duedate`, DROP `can_pay`, DROP `extra`, DROP `credit_price`", $invoiceTable);
+            $sql = sprintf(
+                "ALTER TABLE %s  DROP `time_payment`, DROP `product_price`, DROP `discount_price`, DROP `shipping_price`, DROP `packing_price`, DROP `setup_price`, DROP `vat_price`, DROP `total_price`, DROP `paid_price`, DROP `gateway`, DROP `time_duedate`, DROP `can_pay`, DROP `extra`, DROP `credit_price`",
+                $invoiceTable
+            );
             try {
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for invoice failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
             $sql = sprintf("ALTER TABLE %s DROP `total_price`", $detailTable);
             try {
                 $detailAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for detail failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
-        
+
         if (version_compare($moduleVersion, '2.2.0', '<')) {
             try {
                 $select = $detailModel->select();
@@ -1090,11 +1226,11 @@ EOD;
                 foreach ($rowset as $row) {
                     if ($row->extra != null) {
                         $extra = json_decode($row->extra, true);
-                        $arr = $extra['product'];
+                        $arr   = $extra['product'];
                         unset($extra['product']);
-                        $extra = array_merge($extra, $arr);
+                        $extra           = array_merge($extra, $arr);
                         $row->time_start = $extra['time_start'];
-                        $row->time_end = $extra['time_end'];
+                        $row->time_end   = $extra['time_end'];
                         unset($extra['time_start']);
                         unset($extra['time_end']);
                         $row->extra = json_encode($extra);
@@ -1102,59 +1238,75 @@ EOD;
                     }
                 }
             } catch (\Exception $exception) {
-             
-                $this->setResult('db', array(
-                    'status' => false,
+
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'data transfer failed: '
                         . $exception->getMessage(),
-                ));
-                return false;   
+                ]
+                );
+                return false;
             }
-            
+
             $sql = sprintf("ALTER TABLE %s ADD `type_payment` ENUM ('free', 'onetime', 'recurring', 'installment') NOT NULL DEFAULT 'onetime'", $invoiceTable);
             try {
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
-            $sql = sprintf("UPDATE %s invoice INNER JOIN %s `order` on invoice.`order` = `order`.id SET invoice.type_payment = `order`.type_payment", $invoiceTable, $orderTable);
-             try {
+
+            $sql = sprintf(
+                "UPDATE %s invoice INNER JOIN %s `order` on invoice.`order` = `order`.id SET invoice.type_payment = `order`.type_payment", $invoiceTable,
+                $orderTable
+            );
+            try {
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for basket failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
             $sql = sprintf("ALTER TABLE %s DROP `type_payment`", $orderTable);
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
-            $sql = sprintf("ALTER TABLE %s  CHANGE `time_end` `time_end` INT(10) UNSIGNED NULL DEFAULT '0',  CHANGE `time_start` `time_start` INT(10) UNSIGNED NULL DEFAULT '0'", $detailTable);
+
+            $sql = sprintf(
+                "ALTER TABLE %s  CHANGE `time_end` `time_end` INT(10) UNSIGNED NULL DEFAULT '0',  CHANGE `time_start` `time_start` INT(10) UNSIGNED NULL DEFAULT '0'",
+                $detailTable
+            );
             try {
                 $detailAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
@@ -1163,23 +1315,27 @@ EOD;
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
+
             $sql = sprintf("ALTER TABLE %s ADD `comment` TEXT", $orderInstallmentTable);
             try {
                 $orderInstallmentAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
@@ -1189,76 +1345,88 @@ EOD;
             try {
                 $promocodeAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }
-        
+
         if (version_compare($moduleVersion, '2.2.3', '<')) {
 
             $sql = sprintf("ALTER TABLE %s ADD `time_order` int(10) UNSIGNED NOT NULL", $orderTable);
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
             $sql = sprintf("UPDATE %s SET `time_order` = `time_create`", $orderTable);
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
+
             $sql = sprintf("ALTER TABLE %s ADD `time_invoice` int(10) UNSIGNED NOT NULL", $invoiceTable);
             try {
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
+
             $sql = sprintf("UPDATE %s SET `time_invoice` = `time_create`", $invoiceTable);
             try {
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
+
             $sql = sprintf("ALTER TABLE %s ADD `admin_note` VARCHAR(511) NULL DEFAULT ''", $detailTable);
             try {
                 $detailAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
-            
+
         }
 
         if (version_compare($moduleVersion, '2.2.4', '<')) {
@@ -1267,11 +1435,13 @@ EOD;
             try {
                 $invoiceAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', array(
-                    'status' => false,
+                $this->setResult(
+                    'db', [
+                    'status'  => false,
                     'message' => 'Table alter query for order failed: '
                         . $exception->getMessage(),
-                ));
+                ]
+                );
                 return false;
             }
         }

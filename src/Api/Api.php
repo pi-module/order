@@ -32,12 +32,12 @@ class Api extends AbstractApi
             switch (Pi::config('number_currency')) {
                 // Set for Iran Rial
                 case 'IRR':
-                    $price = ((int)($price / 1000)) * 100;
+                    $price     = ((int)($price / 1000)) * 100;
                     $viewPrice = $short ? _number($price) : sprintf('%s %s', _number($price), __('Toman'));
                     break;
 
                 case 'EUR':
-                    $viewPrice = _currency($price);
+                    $viewPrice      = _currency($price);
                     $viewPriceArray = explode(",", $viewPrice);
                     if ($viewPriceArray[1] == 00) {
                         $viewPrice = $viewPriceArray[0] . " €";
@@ -69,7 +69,7 @@ class Api extends AbstractApi
         }
         return $price;
     }
-    
+
     public function patternPhone()
     {
         $locale = Pi::service('i18n')->getLocale();
@@ -85,5 +85,5 @@ class Api extends AbstractApi
         }
         return $pattern;
     }
-    
+
 }
