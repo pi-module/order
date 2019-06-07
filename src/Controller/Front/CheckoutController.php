@@ -35,6 +35,10 @@ class CheckoutController extends IndexController
 {
     private function validValues($values, $cart, $uid)
     {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+
+        // Set information on values
         $values['uid']             = $uid;
         $values['ip']              = Pi::user()->getIp();
         $values['status_order']    = \Module\Order\Model\Order::STATUS_ORDER_VALIDATED;
@@ -274,12 +278,14 @@ class CheckoutController extends IndexController
                         'module'     => $this->getModule(),
                         'controller' => 'detail',
                         'action'     => 'index',
-                        'id'         => $order->order,
+                        'id'         => $order->id,
                     ]
                     )
                 );
             }
-            $this->jump($url, $result['message'], 'success');
+
+            // Redirect
+            Pi::service('url')->redirect($url);
         } else {
             $error = [
                 'values' => $values,
@@ -289,7 +295,6 @@ class CheckoutController extends IndexController
             ];
             $this->view()->assign('error', $error);
         }
-
     }
 
     public function indexAction()
@@ -297,6 +302,7 @@ class CheckoutController extends IndexController
         // Set check
         $check       = false;
         $editAddress = false;
+
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
@@ -617,6 +623,9 @@ class CheckoutController extends IndexController
     public function addressAction()
     {
         $id   = $this->params('id');
+
+        $option = [];
+
         $form = new AddressForm('address');
         $form->setAttribute(
             'action', Pi::url(Pi::service('url')->assemble('order', ['module' => 'order', 'controller' => 'checkout', 'action' => 'address', 'id' => $id]))
@@ -880,6 +889,9 @@ class CheckoutController extends IndexController
 
     private function updatePrice($cart)
     {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+
         $price             = [];
         $price['discount'] = isset($cart['total_discount']) ? $cart['total_discount'] : 0;
         $price['shipping'] = isset($cart['total_shipping']) ? $cart['total_shipping'] : 0;
@@ -925,6 +937,7 @@ class CheckoutController extends IndexController
     public function promocodeAction()
     {
         if ($this->request->isPost()) {
+            $option = [];
             $cart              = Pi::api('order', 'order')->getOrderInfo();
             $formPromoCheckout = new PromoCheckoutForm('promoCheckout', $option);
             $formPromoCheckout->setInputFilter(new PromoCheckoutFilter($option));
