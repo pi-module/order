@@ -29,7 +29,7 @@
                     <td><?php echo $this->escape($history['id']); ?></td>
                     <td>
                         <?php if (!empty($history['user']['first_name']) && !empty($history['user']['last_name'])) { ?>
-                            <span><?php echo $this->escape($history['user']['first_name']); ?><?php echo $this->escape($history['user']['last_name']); ?></span>
+                            <span><?php echo $this->escape($history['user']['first_name']) . ' ' . $this->escape($history['user']['last_name']); ?></span>
                         <?php } else { ?>
                             <span><?php echo $this->escape($history['user']['name']); ?></span>
                         <?php } ?>

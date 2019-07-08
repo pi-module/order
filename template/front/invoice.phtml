@@ -92,7 +92,7 @@
 
                     <?php if (!empty($order['first_name']) && !empty($order['last_name'])) { ?>
                         <p><strong><?php _e('Name'); ?></strong> :
-                            <span><?php echo $this->escape($order['first_name']); ?><?php echo $this->escape($order['last_name']); ?></span>
+                            <span><?php echo $this->escape($order['first_name']) . ' ' . $this->escape($order['last_name']); ?></span>
                         </p>
                     <?php } ?>
                     <?php if (!empty($address['id_number'])) { ?>

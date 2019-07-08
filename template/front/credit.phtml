@@ -17,7 +17,7 @@
                     <p>
                         <strong><?php _e('Name'); ?></strong> :
                         <?php if (!empty($user['first_name']) && !empty($user['last_name'])) { ?>
-                            <span><?php echo $this->escape($user['first_name']); ?><?php echo $this->escape($user['last_name']); ?></span>
+                            <span><?php echo $this->escape($user['first_name']) . ' ' . $this->escape($user['last_name']); ?></span>
                         <?php } else { ?>
                             <span><?php echo $this->escape($user['name']); ?></span>
                         <?php } ?>

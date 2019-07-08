@@ -159,7 +159,7 @@
                     <?php } ?>
                 <?php } else {
                     if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
-                        <b><?php echo $this->escape($address['first_name']); ?><?php echo $this->escape($address['last_name']); ?></b>
+                        <b><?php echo $this->escape($address['first_name']) . ' ' . $this->escape($address['last_name']); ?></b>
                         <br>
                     <?php }
                 } ?>

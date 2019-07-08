@@ -78,7 +78,7 @@ $this->backbone();
 
                 <?php if (!empty($addressInvoicing['first_name']) && !empty($addressInvoicing['last_name'])) { ?>
                     <li class="list-inline-item"><strong><?php _e('Name'); ?></strong> :
-                        <span><?php echo $this->escape($addressInvoicing['first_name']); ?><?php echo $this->escape($addressInvoicing['last_name']); ?></span>
+                        <span><?php echo $this->escape($addressInvoicing['first_name']) . ' ' . $this->escape($addressInvoicing['last_name']); ?></span>
                     </li>
                 <?php } else { ?>
                     <li class="list-inline-item"><strong><?php _e('Name'); ?></strong>
@@ -224,7 +224,7 @@ $this->backbone();
                                 <hr/>
                                 <p>
                                     <?php if (!empty($addressDelivery['first_name']) && !empty($addressDelivery['last_name'])) { ?>
-                                        <?php echo $this->escape($addressDelivery['first_name']); ?><?php echo $this->escape($addressDelivery['last_name']); ?>
+                                        <?php echo $this->escape($addressDelivery['first_name']) . ' ' . $this->escape($addressDelivery['last_name']); ?>
                                         <br/>
                                     <?php } ?>
                                     <?php if (!empty($addressDelivery['id_number'])) { ?>

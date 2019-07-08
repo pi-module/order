@@ -7,7 +7,7 @@
                 <div class="clearfix row">
                     <div class="info col-md-7">
                         <div>
-                            <?php echo $this->escape($address['first_name']); ?><?php echo $this->escape($address['last_name']); ?>
+                            <?php echo $this->escape($address['first_name']) . ' ' . $this->escape($address['last_name']); ?>
                         </div>
                         <?php if (!empty($address['company'])) { ?>
                             <div><?php echo $this->escape($address['company']); ?></div>

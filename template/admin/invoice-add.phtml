@@ -6,7 +6,7 @@
             <div class="col-md-6">
                 <?php if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
                     <p><strong><?php _e('Name'); ?></strong> :
-                        <span><?php echo $this->escape($address['first_name']); ?><?php echo $this->escape($address['last_name']); ?></span>
+                        <span><?php echo $this->escape($address['first_name']) . ' ' . $this->escape($address['last_name']); ?></span>
                     </p>
                 <?php } ?>
                 <?php if (!empty($address['id_number'])) { ?>

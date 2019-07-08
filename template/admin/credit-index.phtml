@@ -30,7 +30,7 @@
                 <tr>
                     <td>
                         <?php if (!empty($credit['user']['first_name']) && !empty($credit['user']['last_name'])) { ?>
-                            <span><?php echo $this->escape($credit['user']['first_name']); ?><?php echo $this->escape($credit['user']['last_name']); ?></span>
+                            <span><?php echo $this->escape($credit['user']['first_name']) . ' ' .  $this->escape($credit['user']['last_name']); ?></span>
                         <?php } else { ?>
                             <span><?php echo $this->escape($credit['user']['name']); ?></span>
                         <?php } ?>

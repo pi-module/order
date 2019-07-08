@@ -9,7 +9,7 @@
                 <hr/>
                 <p>
                     <?php if (!empty($addressInvoicing['first_name']) && !empty($addressInvoicing['last_name'])) { ?>
-                        <?php echo $this->escape($addressInvoicing['first_name']); ?><?php echo $this->escape($addressInvoicing['last_name']); ?><br/>
+                        <?php echo $this->escape($addressInvoicing['first_name']) . ' ' .  $this->escape($addressInvoicing['last_name']); ?><br/>
                     <?php } ?>
                     <?php if (!empty($addressInvoicing['id_number'])) { ?>
                         <?php echo $this->escape($addressInvoicing['id_number']); ?><br/>
@@ -63,7 +63,7 @@
                 <hr/>
                 <p>
                     <?php if (!empty($addressDelivery['first_name']) && !empty($addressDelivery['last_name'])) { ?>
-                        <?php echo $this->escape($addressDelivery['first_name']); ?><?php echo $this->escape($addressDelivery['last_name']); ?><br/>
+                        <?php echo $this->escape($addressDelivery['first_name']) . ' ' . $this->escape($addressDelivery['last_name']); ?><br/>
                     <?php } ?>
                     <?php if (!empty($addressDelivery['id_number'])) { ?>
                         <?php echo $this->escape($addressDelivery['id_number']); ?><br/>
