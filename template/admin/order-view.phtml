@@ -168,7 +168,7 @@ $this->backbone();
                                 <hr/>
                                 <p>
                                     <?php if (!empty($addressInvoicing['first_name']) && !empty($addressInvoicing['last_name'])) { ?>
-                                        <?php echo $this->escape($addressInvoicing['first_name']); ?><?php echo $this->escape(
+                                        <?php echo $this->escape($addressInvoicing['first_name']) . ' ' . $this->escape(
                                             $addressInvoicing['last_name']
                                         ); ?><br/>
                                     <?php } ?>
