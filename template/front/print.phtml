@@ -179,7 +179,7 @@
                 if (!empty($address['city'])) {
                     $addressCompose[] = $this->escape($address['city']);
                 }
-                echo $this->escape(join(', ', $addressCompose));
+                echo join(', ', $addressCompose);
                 ?>
                 <br>
                 <?php if (!empty($address['state'])) { ?>

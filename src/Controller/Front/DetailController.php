@@ -73,6 +73,15 @@ class DetailController extends IndexController
                 } elseif ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
                     $order['unPaidInstallments']++;
                 }
+
+                if ($installment['status_invoice'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
+                    if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID
+                        || ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID
+                            && $installment['gateway'] == 'manual')
+                    ) {
+                        $order['can_pay'] = false;
+                    }
+                }
             }
         }
         $order['statusInstallments'] = sprintf(
