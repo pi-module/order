@@ -129,6 +129,7 @@ class OrderSettingForm extends BaseForm
                         'all'     => __('All'),
                         'product' => __('Product'),
                         'service' => __('Service'),
+                        'booking' => __('Booking'),
                     ],
                 ],
             ]

@@ -86,7 +86,7 @@ class OrderController extends ActionController
         if (in_array($type_payment, ['free', 'onetime', 'recurring', 'installment'])) {
             $where['type_payment'] = $type_payment;
         }
-        if (in_array($type_commodity, ['product', 'service'])) {
+        if (in_array($type_commodity, ['product', 'service', 'booking'])) {
             $where['type_commodity'] = $type_commodity;
         }
         if ($code) {

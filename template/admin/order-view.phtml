@@ -317,6 +317,8 @@ $this->backbone();
                                                     class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-sm">
                                                 
                                             </span>
+                                        <?php } else if ($order['type_commodity'] == 'product') { ?>
+                                            <span class="badge badge-secondary"><?php _e('Its a booking'); ?></span>
                                         <?php } else { ?>
                                             <span class="badge badge-secondary"><?php _e('Its service'); ?></span>
                                         <?php } ?>

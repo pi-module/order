@@ -139,6 +139,8 @@ $this->backbone();
                                           class="update-delivery btn btn-sm <?php echo $this->escape($order['deliveryClass']); ?>"><?php echo $this->escape(
                                             $order['deliveryTitle']
                                         ); ?></span>
+                                <?php } else if ($order['type_commodity'] == 'booking') { ?>
+                                    <span class="badge badge-secondary"><?php _e('Its a booking'); ?></span>
                                 <?php } else { ?>
                                     <span class="badge badge-secondary"><?php _e('Its service'); ?></span>
                                 <?php } ?>

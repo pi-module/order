@@ -56,7 +56,7 @@ class DetailController extends IndexController
             $invoice['installments'] = $installments;
 
             $installment = current($installments);
-            if ($order['type_commodity'] == 'service' && $installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
+            if (in_array($order['type_commodity'], ['service', 'booking']) && $installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
                 $order['time_delivery_view'] = _date($installment['time_payment']);
             }
 

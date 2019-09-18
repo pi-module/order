@@ -2,7 +2,7 @@ CREATE TABLE `{order}` (
   `id`              INT(10) UNSIGNED            NOT NULL AUTO_INCREMENT,
   `uid`             INT(10) UNSIGNED            NOT NULL DEFAULT '0',
   `code`            VARCHAR(16)                 NOT NULL DEFAULT '',
-  `type_commodity`  ENUM ('product', 'service') NOT NULL DEFAULT 'product',
+  `type_commodity`  ENUM ('product', 'service', 'booking') NOT NULL DEFAULT 'product',
   `default_gateway` VARCHAR(64)                 NOT NULL,
   `can_pay`         TINYINT(1) UNSIGNED         NOT NULL DEFAULT '1',
   `plan`            INT(10) UNSIGNED            NOT NULL DEFAULT '0',

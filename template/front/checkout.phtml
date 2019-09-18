@@ -360,7 +360,7 @@ $this->footScript()->appendScript($script);
                                     <td>
                                         <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
                                            target="_blank">
-                                            <b>#<?php echo $count . ' ' . $this->escape($product['details']['title']); ?></b>
+                                            <b>#<?php echo $count . ' ' . $product['details']['title']; ?></b>
                                         </a>
                                         <?php if (!empty($product['time_start'])) { ?>
                                             <p>

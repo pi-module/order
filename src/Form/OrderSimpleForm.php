@@ -169,6 +169,7 @@ class OrderSimpleForm extends BaseForm
                 }
                 break;
 
+            case 'booking':
             case 'service':
                 if (count($gatewayList) == 1) {
                     $gatewayList = array_keys($gatewayList);

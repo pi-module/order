@@ -1,0 +1,15 @@
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    const stripe = Stripe("<?php echo $public_key ?>");
+
+    stripe.redirectToCheckout({
+        // Make the id field from the Checkout Session creation API response
+        // available to this file, so you can provide it as parameter here
+        // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+        sessionId: '<?php echo $session['id'] ?>'
+    }).then(function (result) {
+        console.log(result);
+
+    });
+
+</script>

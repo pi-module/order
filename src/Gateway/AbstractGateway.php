@@ -20,6 +20,7 @@ abstract class AbstractGateway
 {
     const TYPE_FORM = 0;
     const TYPE_REST = 1;
+    const TYPE_STRIPE = 2;
 
     protected $_type      = AbstractGateway::TYPE_FORM;
     protected $_needToken = false;

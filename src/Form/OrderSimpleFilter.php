@@ -104,7 +104,7 @@ class OrderSimpleFilter extends InputFilter
                     );
                 }
                 break;
-
+            case 'booking':
             case 'service':
                 // gateway
                 $this->add(

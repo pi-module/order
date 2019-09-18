@@ -1445,6 +1445,26 @@ EOD;
                 return false;
             }
         }
+
+
+        if (version_compare($moduleVersion, '2.2.5', '<')) {
+            // Alter table field change type_payment
+            $sql = sprintf("ALTER TABLE %s CHANGE `type_commodity` `type_commodity` enum('product','service', 'booking') NOT NULL default 'product'", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+        }
+
+
         return true;
     }
 }

@@ -329,6 +329,8 @@ class Order extends AbstractApi
             $order['type_commodity_view'] = __('Product');
         } elseif ($order['type_commodity'] == 'service') {
             $order['type_commodity_view'] = __('Service');
+        } elseif ($order['type_commodity'] == 'booking') {
+            $order['type_commodity_view'] = __('Booking');
         }
 
         $order['shortStatus'] = $order['orderTitle'];

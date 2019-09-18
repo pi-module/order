@@ -43,7 +43,7 @@ class CheckoutController extends IndexController
         $values['time_order']      = time();
 
         // Set type_payment values
-        if (isset($cart['type_commodity']) && in_array($cart['type_commodity'], ['product', 'service'])) {
+        if (isset($cart['type_commodity']) && in_array($cart['type_commodity'], ['product', 'service', 'booking'])) {
             $values['type_commodity'] = $cart['type_commodity'];
         }
         // Set plan values
@@ -59,7 +59,11 @@ class CheckoutController extends IndexController
             $values['product_type'] = $cart['module_table'];
         } else {
             if ($cart['module_name'] == 'guide') {
-                $values['product_type'] = 'package';
+                if ($values['type_commodity'] == 'booking') {
+                    $values['product_type'] = 'booking';
+                } else {
+                    $values['product_type'] = 'package';
+                }
             } else {
                 if ($cart['module_name'] == 'event') {
                     $values['product_type'] = 'event';
@@ -92,6 +96,7 @@ class CheckoutController extends IndexController
         $values['packing_price']  = isset($cart['total_packing']) ? $cart['total_packing'] : 0;
         $values['setup_price']    = isset($cart['total_setup']) ? $cart['total_setup'] : 0;
         $values['vat_price']      = isset($cart['total_vat']) ? $cart['total_vat'] : 0;
+        $values['extra']      = isset($cart['extra']) ? json_encode($cart['extra']) : null;
         $values['product_price']  = 0;
         $values['total_price']    = 0;
         $values['unconsumed']     = 0;
@@ -125,7 +130,7 @@ class CheckoutController extends IndexController
         // Set additional price
         if ($values['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
             $values['shipping_price'] = $values['shipping_price'] + $config['order_additional_price_product'];
-        } elseif ($values['type_commodity'] == 'service' && $config['order_additional_price_service'] > 0) {
+        } elseif (in_array($values['type_commodity'], ['service', 'booking']) && $config['order_additional_price_service'] > 0) {
             $values['setup_price'] = $values['setup_price'] + $config['order_additional_price_service'];
         }
 
@@ -324,6 +329,12 @@ class CheckoutController extends IndexController
 
         // Set cart
         $cart = Pi::api('order', 'order')->getOrderInfo();
+        // Set products
+        foreach ($cart['product'] as $key => $product) {
+            $cart['product'][$key]['details']           = Pi::api('order', $cart['module_name'])->getProductDetails($product['product'], $product['extra']);
+            $cart['product'][$key]['product_price_view'] = Pi::api('api', 'order')->viewPrice($product['product_price']);
+        }
+        Pi::api('order', 'order')->setOrderInfo($cart);
 
         if (empty($cart) && !$config['order_anonymous']) {
             $url = ['route' => 'home'];
@@ -403,6 +414,7 @@ class CheckoutController extends IndexController
             }
             $formAddress->setData($user);
         }
+
 
         // Check post
         $check = count($addresses) == 0 ? true : false;
@@ -558,11 +570,7 @@ class CheckoutController extends IndexController
         // Set price
         $price = $this->updatePrice($cart);
 
-        // Set products
-        foreach ($cart['product'] as $key => $product) {
-            $cart['product'][$key]['details']            = Pi::api('order', $cart['module_name'])->getProductDetails($product['product'], $product['extra']);
-            $cart['product'][$key]['product_price_view'] = Pi::api('api', 'order')->viewPrice($product['product_price']);
-        }
+
 
         // Get credit
         /* if ($config['credit_active'] && Pi::user()->getId() > 0) {
@@ -907,7 +915,7 @@ class CheckoutController extends IndexController
         // Set additional price
         if ($cart['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
             $price['shipping'] = $price['shipping'] + $config['order_additional_price_product'];
-        } elseif ($cart['type_commodity'] == 'service' && $config['order_additional_price_service'] > 0) {
+        } elseif (in_array($cart['type_commodity'], ['service', 'booking']) && $config['order_additional_price_service'] > 0) {
             $price['setup'] = $price['setup'] + $config['order_additional_price_service'];
         }
 

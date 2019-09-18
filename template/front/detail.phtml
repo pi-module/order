@@ -181,8 +181,10 @@
                                                 <span
                                                         id="update-delivery-<?php echo $this->escape($order['id']); ?>"
                                                         class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-sm">
-                                                    
+
                                                 </span>
+                                            <?php } else if ($order['type_commodity'] == 'booking') { ?>
+                                                <span class="badge badge-secondary"><?php _e('Its a booking'); ?></span>
                                             <?php } else { ?>
                                                 <span class="badge badge-secondary"><?php _e('Its service'); ?></span>
                                             <?php } ?>
