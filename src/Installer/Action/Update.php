@@ -1464,7 +1464,55 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '2.2.6', '<')) {
 
+            $sql = sprintf("
+              ALTER TABLE %s 
+              ADD `birthday`            INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+              ADD `account_type`        ENUM ('none', 'individual', 'company') NULL DEFAULT 'none',
+              ADD `company_address1`    VARCHAR(255)        NOT NULL DEFAULT '',
+              ADD `company_address2`    VARCHAR(255)        NOT NULL DEFAULT '',
+              ADD `company_country`     VARCHAR(64)         NOT NULL DEFAULT '',
+              ADD `company_state`       VARCHAR(64)         NOT NULL DEFAULT '',
+              ADD `company_city`        VARCHAR(64)         NOT NULL DEFAULT '',
+              ADD `company_zip_code`    VARCHAR(16)         NOT NULL DEFAULT ''", $orderAddressTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+
+            $sql = sprintf("
+              ALTER TABLE %s 
+              ADD `birthday`            INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+              ADD `account_type`        ENUM ('none', 'individual', 'company') NULL DEFAULT 'none',
+              ADD `company_address1`    VARCHAR(255)        NOT NULL DEFAULT '',
+              ADD `company_address2`    VARCHAR(255)        NOT NULL DEFAULT '',
+              ADD `company_country`     VARCHAR(64)         NOT NULL DEFAULT '',
+              ADD `company_state`       VARCHAR(64)         NOT NULL DEFAULT '',
+              ADD `company_city`        VARCHAR(64)         NOT NULL DEFAULT '',
+              ADD `company_zip_code`    VARCHAR(16)         NOT NULL DEFAULT ''", $customerAddressTable);
+            try {
+                $customerAddressAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+
+        }
         return true;
     }
 }

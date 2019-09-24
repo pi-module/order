@@ -151,58 +151,94 @@
                 <?php if (!empty($order['company'])) { ?>
                     <b><?php echo $this->escape($order['company']); ?></b>
                     <br>
-                    <?php if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
-                        <?php echo __('To the attention of') . ' ' . $this->escape($address['first_name']); ?><?php echo $this->escape(
-                            $address['last_name']
-                        ); ?>
+
+                    <?php if ($addressDelivery['account_type'] === 'company') { ?>
+                        <?php if (!empty($address['company'])) { ?>
+                            <?php echo __('To the attention of') . ' ' . $this->escape($address['company_first_name']); ?><?php echo $this->escape(
+                                $address['company_last_name']
+                            ); ?>
+                            <br>
+                        <?php } ?>
+
+                        <?php if (!empty($address['company_address1'])) { ?>
+                            <?php echo $this->escape($address['company_address1']); ?>
+                            <br>
+                        <?php } ?>
+                        <?php if (!empty($address['company_address2'])) { ?>
+                            <?php echo $this->escape($address['company_address2']); ?>
+                            <br>
+                        <?php } ?>
+                        <?php
+                        $addressCompose = [];
+                        if (!empty($address['company_zip_code'])) {
+                            $addressCompose[] = $this->escape($address['company_zip_code']);
+                        }
+                        if (!empty($address['company_city'])) {
+                            $addressCompose[] = $this->escape($address['company_city']);
+                        }
+                        echo join(', ', $addressCompose);
+                        ?>
                         <br>
+                        <?php if (!empty($address['company_state'])) { ?>
+                            <?php echo $this->escape($address['company_state']); ?>
+                            <br>
+                        <?php } ?>
+
+                        <?php if (!empty($address['company_country'])) { ?>
+                            <?php echo $this->escape($address['company_country']); ?>
+                            <br>
+                        <?php } ?>
+
+                        <?php if (!empty($address['company_id'])) { ?>
+                            <?php echo $this->escape($address['company_id']); ?>
+                            <br>
+                        <?php } ?>
+                        <?php if (!empty($address['company_vat'])) { ?>
+                            N° TVA UE <?php echo $this->escape($address['company_vat']); ?>
+                            <br>
+                        <?php } ?>
+
+                    <?php } else {
+                        if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
+                            <b><?php echo $this->escape($address['first_name']) . ' ' . $this->escape($address['last_name']); ?></b>
+                            <br>
+
+                            <?php if (!empty($address['address1'])) { ?>
+                                <?php echo $this->escape($address['address1']); ?>
+                                <br>
+                            <?php } ?>
+                            <?php if (!empty($address['address2'])) { ?>
+                                <?php echo $this->escape($address['address2']); ?>
+                                <br>
+                            <?php } ?>
+                            <?php
+                            $addressCompose = [];
+                            if (!empty($address['zip_code'])) {
+                                $addressCompose[] = $this->escape($address['zip_code']);
+                            }
+                            if (!empty($address['city'])) {
+                                $addressCompose[] = $this->escape($address['city']);
+                            }
+                            echo join(', ', $addressCompose);
+                            ?>
+                            <br>
+                            <?php if (!empty($address['state'])) { ?>
+                                <?php echo $this->escape($address['state']); ?>
+                                <br>
+                            <?php } ?>
+
+                            <?php if (!empty($address['country'])) { ?>
+                                <?php echo $this->escape($address['country']); ?>
+                                <br>
+                            <?php } ?>
+                            <?php if (!empty($address['id_number'])) { ?>
+                                <?php echo $this->escape($address['id_number']); ?>
+                                <br>
+                            <?php } ?>
+                        <?php } ?>
                     <?php } ?>
-                <?php } else {
-                    if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
-                        <b><?php echo $this->escape($address['first_name']) . ' ' . $this->escape($address['last_name']); ?></b>
-                        <br>
-                    <?php }
-                } ?>
-                <?php if (!empty($address['address1'])) { ?>
-                    <?php echo $this->escape($address['address1']); ?>
-                    <br>
-                <?php } ?>
-                <?php if (!empty($address['address2'])) { ?>
-                    <?php echo $this->escape($address['address2']); ?>
-                    <br>
-                <?php } ?>
-                <?php
-                $addressCompose = [];
-                if (!empty($address['zip_code'])) {
-                    $addressCompose[] = $this->escape($address['zip_code']);
-                }
-                if (!empty($address['city'])) {
-                    $addressCompose[] = $this->escape($address['city']);
-                }
-                echo join(', ', $addressCompose);
-                ?>
-                <br>
-                <?php if (!empty($address['state'])) { ?>
-                    <?php echo $this->escape($address['state']); ?>
-                    <br>
                 <?php } ?>
 
-                <?php if (!empty($address['country'])) { ?>
-                    <?php echo $this->escape($address['country']); ?>
-                    <br>
-                <?php } ?>
-                <?php if (!empty($address['id_number'])) { ?>
-                    <?php echo $this->escape($address['id_number']); ?>
-                    <br>
-                <?php } ?>
-                <?php if (!empty($address['company_id'])) { ?>
-                    <?php echo $this->escape($address['company_id']); ?>
-                    <br>
-                <?php } ?>
-                <?php if (!empty($address['company_vat'])) { ?>
-                    N° TVA UE <?php echo $this->escape($address['company_vat']); ?>
-                    <br>
-                <?php } ?>
             </div>
         </div>
     </page_header>
@@ -296,7 +332,7 @@
                         <?php if ($order['invoice']['type'] == 'CREDIT') { ?>
                             <?php echo sprintf(__("Credit note on Invoice n°%s"), $extra['initial_invoice']) ?>
                         <?php } else { ?>
-                            <?php echo $this->escape($product['details']['title']); ?>
+                            <?php echo $product['details']['title']; ?>
                         <?php } ?>
                     </strong>
                 </td>

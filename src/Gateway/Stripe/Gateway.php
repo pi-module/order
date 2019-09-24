@@ -232,13 +232,6 @@ class Gateway extends AbstractGateway
             'required' => false,
         ];
 
-        // test_mode
-        $form['error_mode']       = [
-            'name'     => 'error_mode',
-            'label'    => __('Force error (for testing only)'),
-            'type'     => 'checkbox',
-            'required' => false,
-        ];
         $this->gatewaySettingForm = $form;
         return $this;
     }

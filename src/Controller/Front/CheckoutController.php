@@ -631,7 +631,6 @@ class CheckoutController extends IndexController
         );
         $form->setInputFilter(new AddressFilter($option));
         if ($this->request->isPost()) {
-
             $data = $this->request->getPost();
             $form->setData($data);
             if ($form->isValid()) {
@@ -641,7 +640,8 @@ class CheckoutController extends IndexController
 
                 $values                = $form->getData();
                 $values['time_create'] = time();
-
+                $birthday = explode('/', $values['birthday']);
+                $values['birthday'] = strtotime($birthday[2] . '-' . $birthday[1] . '-' . $birthday[0]);
                 $values['uid']       = $uid;
                 $values['last_name'] = strtoupper($values['last_name']);
                 $values['city']      = strtoupper($values['city']);
@@ -668,6 +668,8 @@ class CheckoutController extends IndexController
                 $form->setInputFilter(new AddressFilter($option));
                 $values               = Pi::api('customerAddress', 'order')->getAddress($id);
                 $values['address_id'] = $id;
+                $values['birthday'] = date('d/m/Y', $values['birthday']);
+
                 $form->setData($values);
             } else {
                 // Get user base info

@@ -37,10 +37,18 @@ class Address extends Model
             'state',
             'city',
             'zip_code',
+            'birthday',
             'company',
             'company_id',
             'company_vat',
             'delivery',
             'location',
+            'account_type',
+            'company_address1',
+            'company_address2',
+            'company_country',
+            'company_state',
+            'company_city',
+            'company_zip_code',
         ];
 }

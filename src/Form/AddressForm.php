@@ -39,6 +39,23 @@ class AddressForm extends BaseForm
     public function init()
     {
 
+
+        $this->add(array(
+            'name' => 'account_type',
+            'type'       => 'radio',
+            'options' => array(
+                'label' => __('Account type'),
+                'value_options' => array(
+                    'individual' => __('Individual'),
+                    'company' => __('Company'),
+                ),
+            ),
+            'attributes' => array(
+                'required' => true,
+                'value' => 0,
+            )
+        ));
+
         $this->add(
             [
                 'name'       => 'address_id',
@@ -47,6 +64,205 @@ class AddressForm extends BaseForm
                 ],
             ]
         );
+
+
+        // company
+        if ($this->config['order_company']) {
+            // company
+            $this->add(
+                [
+                    'name' => 'company',
+                    'options' => [
+                        'label' => __('Company'),
+                    ],
+                    'attributes' => [
+                        'class' => 'complementary',
+                        'type' => 'text',
+                        'description' => '',
+                    ],
+                ]
+            );
+        }
+
+        if ($this->config['order_address1']) {
+            $this->add(
+                [
+                    'name'       => 'company_address1',
+                    'options'    => [
+                        'label' => __('Address'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'text',
+                        'description' => '',
+                        'required'    => true,
+                    ],
+                ]
+            );
+        }
+
+        // address 2
+        if ($this->config['order_address2']) {
+            $this->add(
+                [
+                    'name'       => 'company_address2',
+                    'options'    => [
+                        'label' => __('Address addition'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'text',
+                        'description' => '',
+                        'required'    => false,
+                    ],
+                ]
+            );
+        }
+
+        // zip_code
+        if ($this->config['order_zip']) {
+            $this->add(
+                [
+                    'name'       => 'company_zip_code',
+                    'options'    => [
+                        'label' => __('Zip code'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'text',
+                        'description' => '',
+                        'required'    => true,
+                    ],
+                ]
+            );
+        }
+        // city
+        if ($this->config['order_city']) {
+            $this->add(
+                [
+                    'name'       => 'company_city',
+                    'options'    => [
+                        'label' => __('City'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'text',
+                        'description' => '',
+                        'required'    => true,
+
+                    ],
+                ]
+            );
+        }
+        // state
+        if ($this->config['order_state']) {
+            $this->add(
+                [
+                    'name'       => 'company_state',
+                    'options'    => [
+                        'label' => __('State'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'text',
+                        'description' => '',
+                        'required'    => true,
+                    ],
+                ]
+            );
+        }
+        // country
+        if ($this->config['order_country']) {
+            if (!empty($this->config['order_countrylist'])) {
+                // Set list
+                $countries = explode('|', $this->config['order_countrylist']);
+                foreach ($countries as $country) {
+                    $countryList[$country] = $country;
+                }
+                // Make form
+                $this->add(
+                    [
+                        'name'    => 'company_country',
+                        'type'    => 'select',
+                        'options' => [
+                            'label'         => __('Country'),
+                            'value_options' => $countryList,
+                            'required'      => true,
+                        ],
+                    ]
+                );
+            } else {
+                $this->add(
+                    [
+                        'name'       => 'company_country',
+                        'options'    => [
+                            'label' => __('Country'),
+                        ],
+                        'attributes' => [
+                            'type'        => 'text',
+                            'description' => '',
+                            'required'    => true,
+                        ],
+                    ]
+                );
+            }
+        }
+
+        if ($this->config['order_address2'] || $this->config['order_company_extra']) {
+
+            // company extra
+            if ($this->config['order_company_extra']) {
+                // company_id
+                $this->add(
+                    [
+                        'name'       => 'company_id',
+                        'options'    => [
+                            'label' => __('Company id'),
+                        ],
+                        'attributes' => [
+                            'class'       => 'complementary',
+                            'type'        => 'text',
+                            'description' => '',
+                        ],
+                    ]
+                );
+                // company_vat
+                $this->add(
+                    [
+                        'name'       => 'company_vat',
+                        'options'    => [
+                            'label' => __('Company vat'),
+                        ],
+                        'attributes' => [
+                            'class'       => 'complementary',
+                            'type'        => 'text',
+                            'description' => '',
+                        ],
+                    ]
+                );
+            }
+        }
+
+        $this->add(
+            [
+                'name'       => 'html-raw',
+                'attributes' => [
+                    'value' => '<hr class="html-raw" />',
+                    'type'  => 'html-raw',
+                ],
+            ]
+        );
+
+        $this->add(
+            [
+                'name'       => 'html-raw2',
+                'attributes' => [
+                    'value' => '<p class="html-raw">Merci de renseigner les informations suivantes</p>',
+                    'type'  => 'html-raw',
+                    'class' => 'html-raw'
+                ],
+            ]
+        );
+
+
+
+
+
         // name
         if ($this->config['order_name']) {
             // first_name
@@ -80,6 +296,27 @@ class AddressForm extends BaseForm
             );
 
         }
+
+        // time_start
+        $this->add(array(
+            'name' => 'birthday',
+            'type' => 'datepicker',
+            'options' => array(
+                'label' => __('Birthday'),
+                'datepicker' => array(
+                    'format' => 'dd/mm/yyyy',
+                    'autoclose' => true,
+                    'todayBtn' => true,
+                    'todayHighlight' => true,
+                    'weekStart' => 1,
+                    'orientation' => 'bottom'
+                ),
+            ),
+            'attributes' => array(
+                'required' => true,
+                'autocomplete' => false
+            )
+        ));
 
         // id_number
         if ($this->config['order_idnumber']) {
@@ -270,66 +507,7 @@ class AddressForm extends BaseForm
             }
         }
 
-        if ($this->config['order_address2'] || $this->config['order_company'] || $this->config['order_company_extra']) {
-            $this->add(
-                [
-                    'name'       => 'html',
-                    'attributes' => [
-                        'value' => '<a href="#" id="complementary">' . __('Complementary fields') . '</a>',
-                        'type'  => 'html',
-                    ],
-                ]
-            );
 
-            // company
-            if ($this->config['order_company']) {
-                // company
-                $this->add(
-                    [
-                        'name'       => 'company',
-                        'options'    => [
-                            'label' => __('Company'),
-                        ],
-                        'attributes' => [
-                            'class'       => 'complementary',
-                            'type'        => 'text',
-                            'description' => '',
-                        ],
-                    ]
-                );
-            }
-            // company extra
-            if ($this->config['order_company_extra']) {
-                // company_id
-                $this->add(
-                    [
-                        'name'       => 'company_id',
-                        'options'    => [
-                            'label' => __('Company id'),
-                        ],
-                        'attributes' => [
-                            'class'       => 'complementary',
-                            'type'        => 'text',
-                            'description' => '',
-                        ],
-                    ]
-                );
-                // company_vat
-                $this->add(
-                    [
-                        'name'       => 'company_vat',
-                        'options'    => [
-                            'label' => __('Company vat'),
-                        ],
-                        'attributes' => [
-                            'class'       => 'complementary',
-                            'type'        => 'text',
-                            'description' => '',
-                        ],
-                    ]
-                );
-            }
-        }
 
         $this->add(
             [

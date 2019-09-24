@@ -23,6 +23,12 @@ class AddressFilter extends InputFilter
     {
         // Get config
         $config = Pi::service('registry')->config->read('order', 'order');
+
+        $this->add(array(
+            'name' => 'account_type',
+            'required' => true,
+        ));
+
         $this->add(
             [
                 'name'     => 'address_id',
@@ -30,6 +36,106 @@ class AddressFilter extends InputFilter
             ]
         );
 
+        // company
+        if ($config['order_company']) {
+            // company
+            $this->add(
+                [
+                    'name'     => 'company',
+                    'required' => false,
+                    'filters'  => [
+                        [
+                            'name' => 'StringTrim',
+                        ],
+                    ],
+                ]
+            );
+        }
+
+        // address1
+        if ($config['order_address1']) {
+            $this->add(
+                [
+                    'name'     => 'company_address1',
+                    'required' => true,
+                    'filters'  => [
+                        [
+                            'name' => 'StringTrim',
+                        ],
+                    ],
+                ]
+            );
+        }
+        // address 2
+        if ($config['order_address2']) {
+            $this->add(
+                [
+                    'name'     => 'company_address2',
+                    'required' => false,
+                    'filters'  => [
+                        [
+                            'name' => 'StringTrim',
+                        ],
+                    ],
+                ]
+            );
+        }
+        // country
+        if ($config['order_country']) {
+            $this->add(
+                [
+                    'name'     => 'company_country',
+                    'required' => true,
+                    'filters'  => [
+                        [
+                            'name' => 'StringTrim',
+                        ],
+                    ],
+                ]
+            );
+        }
+        // state
+        if ($config['order_state']) {
+            $this->add(
+                [
+                    'name'     => 'company_state',
+                    'required' => true,
+                    'filters'  => [
+                        [
+                            'name' => 'StringTrim',
+                        ],
+                    ],
+                ]
+            );
+        }
+        // city
+        if ($config['order_city']) {
+            $this->add(
+                [
+                    'name'     => 'company_city',
+                    'required' => true,
+                    'filters'  => [
+                        [
+                            'name' => 'StringTrim',
+                        ],
+                    ],
+                ]
+            );
+        }
+        // zip_code
+        if ($config['order_zip']) {
+            $this->add(
+                [
+                    'name'     => 'company_zip_code',
+                    'required' => true,
+                    'filters'  => [
+                        [
+                            'name' => 'StringTrim',
+                        ],
+                    ],
+                ]
+            );
+        }
         // name
         if ($config['order_name']) {
             // first_name
@@ -131,21 +237,7 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
-        // company
-        if ($config['order_company']) {
-            // company
-            $this->add(
-                [
-                    'name'     => 'company',
-                    'required' => false,
-                    'filters'  => [
-                        [
-                            'name' => 'StringTrim',
-                        ],
-                    ],
-                ]
-            );
-        }
+
         // company extra
         if ($config['order_company_extra']) {
             // company_id
@@ -259,5 +351,17 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
+
+        $this->add(
+            [
+                'name'     => 'birthday',
+                'required' => true,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+            ]
+        );
     }
 }

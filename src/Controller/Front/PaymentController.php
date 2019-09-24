@@ -88,6 +88,17 @@ class PaymentController extends IndexController
         $products   = Pi::api('order', 'order')->listProduct($order['id']);
         $processing = Pi::api('processing', 'order')->getProcessing();
 
+        $modulesOrder = array_unique(array_map(
+            function ($product) { return $product['module'];},
+            $products
+        ));
+
+        foreach ($modulesOrder as $moduleOrder) {
+            if (!Pi::api('order',  $moduleOrder)->isAlwaysAvailable($order)) {
+                $this->jump(['', 'controller' => 'index', 'action' => 'error'], __('This product is no more available.'));
+            }
+        }
+
         // process credit
         if ($credit == 1 && $config['credit_active'] && Pi::service('authentication')->hasIdentity()) {
 

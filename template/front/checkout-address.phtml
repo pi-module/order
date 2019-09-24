@@ -17,13 +17,40 @@ $this->headMeta('noindex', 'robots');
 </div>
 <script>
     $(document).ready(function () {
-        $('.complementary').parent().parent().hide();
-        $('#complementary').click(
-            function (e) {
-                e.preventDefault();
-                $('.complementary').parent().parent().toggle();
+
+        var accountTypeChange = function() {
+
+            var show = $('[name=account_type]:checked').val() == 'company';
+            if (show) {
+                $('[name=company]').closest('.row').show();
+                $('[name=company_address1]').closest('.row').show();
+                $('[name=company_address2]').closest('.row').show();
+                $('[name=company_zip_code]').closest('.row').show();
+                $('[name=company_city]').closest('.row').show();
+                $('[name=company_state]').closest('.row').show();
+                $('[name=company_country]').closest('.row').show();
+                $('[name=company_id]').closest('.row').show();
+                $('[name=company_vat]').closest('.row').show();
+                $('.html-raw').show();
+                $('.html-raw').show();
+
+            } else {
+                $('[name=company]').closest('.row').hide();
+                $('[name=company_address1]').closest('.row').hide();
+                $('[name=company_address2]').closest('.row').hide();
+                $('[name=company_zip_code]').closest('.row').hide();
+                $('[name=company_city]').closest('.row').hide();
+                $('[name=company_state]').closest('.row').hide();
+                $('[name=company_country]').closest('.row').hide();
+                $('[name=company_id]').closest('.row').hide();
+                $('[name=company_vat]').closest('.row').hide();
+                $('.html-raw').hide();
+                $('.html-raw').hide();
             }
-        );
+        };
+
+        $('[name=account_type]').change(accountTypeChange);
+        accountTypeChange();
 
         $('form#address').submit(
             function () {
