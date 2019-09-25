@@ -87,12 +87,22 @@ class Gateway extends AbstractGateway
         $this->gatewayPayInformation['business']         = $this->gatewayOption['business'];
         $this->gatewayPayInformation['currency_code']    = $this->gatewayOption['currency'];
         $this->gatewayPayInformation['image_url']        = $config['payment_image'];
-        // Set for test mode
-        if ($this->gatewayOption['test_mode']) {
-            $this->gatewayPayInformation['username']  = $this->gatewayOption['username'];
-            $this->gatewayPayInformation['password']  = $this->gatewayOption['password'];
-            $this->gatewayPayInformation['signature'] = $this->gatewayOption['signature'];
+
+        if ($order['type_commodity'] == 'booking') {
+            $extra = json_decode($order['extra'], true);
+            $item = Pi::api('item', 'guide')->getItem($extra['item']);
+            $item = Pi::api('item', 'guide')->addPolicies($item);
+            $this->gatewayPayInformation['stripe_id'] = $item['stripe_id'];
+            $commission = $item['commission_percentage_owner'];
+            if ((int) $commission == null) {
+                $business = Pi::api('business', 'guide')->getBusiness($item['business']);
+                $commission = $business['commission_percentage_owner'];
+            }
+            $this->gatewayPayInformation['commission_percentage_owner'] = $commission;
+
         }
+
+
     }
 
     public function getSession($order)
@@ -117,40 +127,35 @@ class Gateway extends AbstractGateway
             $tax      += $this->gatewayPayInformation['tax_' . $i];
         }
 
-
-/*
-            if ($this->gatewayPayInformation['discount_price_' . $i] > 0) {
-                $item             = [];
-                $item["name"]     = __('Discount');
-                $item["price"]    = -$this->gatewayPayInformation['discount_price_' . $i];
-                $item["currency"] = $this->gatewayPayInformation['currency_code'];
-                $item["quantity"] = 1;
-                $item["tax"]      = 0;
-                $items[]          = $item;
-            }
-
-            if ($this->gatewayPayInformation['unconsumed_' . $i] > 0) {
-
-                $item             = [];
-                $item["name"]     = __('Old package recovery');
-                $item["price"]    = -$this->gatewayPayInformation['unconsumed_' . $i];
-                $item["currency"] = $this->gatewayPayInformation['currency_code'];
-                $item["quantity"] = 1;
-                $item["tax"]      = 0;
-                $items[]          = $item;
-            }
-
-*/
-
-
-        $session = \Stripe\Checkout\Session::create([
+        $data = [
             'payment_method_types' => ['card'],
             'line_items' => $items,
             'success_url' => $this->gatewayPayInformation['return'] . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => $this->gatewayPayInformation['cancel_return'],
             'client_reference_id' => 'order-' . $order['id'] . '-uid-' . $order['uid'],
-            //'mode' => 'setup'
-        ]);
+
+
+        ];
+
+        if (isset($this->gatewayPayInformation['stripe_id'])) {
+            $fee = ($subtotal + $tax) * $this->gatewayPayInformation['commission_percentage_owner'];
+            $data['payment_intent_data'] = [
+                'transfer_data' => [
+                    'destination' => $this->gatewayPayInformation['stripe_id'],
+                ],
+                'metadata' =>
+                [
+                    'order' => $order['uid'],
+                    'ht' => $subtotal,
+                    'vat' => $tax,
+                    'fee' => $fee
+                ],
+                'application_fee_amount' => $fee
+
+            ];
+        }
+
+        $session = \Stripe\Checkout\Session::create($data);
 
         return $session;
 
@@ -258,12 +263,24 @@ class Gateway extends AbstractGateway
 
 
         $order     = Pi::api('order', 'order')->getOrder($processing['order']);
-        $extra     = json_decode($order['extra']);
+        $extra     = json_decode($order['extra'], true);
 
         if ($payment['status'] == 'succeeded') {
             $result['status']  = 1;
             $result['adapter'] = $this->gatewayAdapter;
             $result['order']   = $order['id'];
+
+            $extra['stripe'] = [
+                'payment_intent'    => $payment['id'],
+                'transfer'          => $payment['charges']['data'][0]['transfer'],
+                'metadata'          => $payment['charges']['data'][0]['metadata']->__toArray()
+            ];
+
+
+            $orderRow = Pi::model('order', 'order')->find($order['id']);
+            $orderRow->extra = json_encode($extra);
+            $orderRow->save();
+
         } else {
             $result['status']   = 0;
             $result['state']    = $payment['status'] ;
@@ -271,17 +288,6 @@ class Gateway extends AbstractGateway
         }
 
         return $result;
-
-
-        /*
-                $setup = \Stripe\SetupIntent::retrieve($session['setup_intent']);
-                $ayment = \Stripe\PaymentIntent::create([
-                    'amount' => 2000,
-                    'currency' => 'eur',
-                    'payment_method_types' => ['card'],
-                ]);*/
-        return false;
-        // Need
     }
 
     public function setMessage($log)
