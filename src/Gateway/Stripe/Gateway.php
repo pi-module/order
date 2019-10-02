@@ -91,8 +91,8 @@ class Gateway extends AbstractGateway
         if ($order['type_commodity'] == 'booking') {
             $extra = json_decode($order['extra'], true);
             $item = Pi::api('item', 'guide')->getItem($extra['item']);
-            $item = Pi::api('item', 'guide')->addPolicies($item);
-            $this->gatewayPayInformation['stripe_id'] = $item['stripe_id'];
+            $item = Pi::api('item', 'guide')->addBankPaymentCoordinates($item);
+            $this->gatewayPayInformation['gateway_id'] = $item['gateway_id'];
             $commission = $item['commission_percentage_owner'];
             if ((int) $commission == null) {
                 $business = Pi::api('business', 'guide')->getBusiness($item['business']);
@@ -137,11 +137,11 @@ class Gateway extends AbstractGateway
 
         ];
 
-        if (isset($this->gatewayPayInformation['stripe_id'])) {
+        if (isset($this->gatewayPayInformation['gateway_id'])) {
             $fee = ($subtotal + $tax) * $this->gatewayPayInformation['commission_percentage_owner'];
             $data['payment_intent_data'] = [
                 'transfer_data' => [
-                    'destination' => $this->gatewayPayInformation['stripe_id'],
+                    'destination' => $this->gatewayPayInformation['gateway_id'],
                 ],
                 'metadata' =>
                 [
