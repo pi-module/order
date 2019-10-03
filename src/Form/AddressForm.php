@@ -79,6 +79,7 @@ class AddressForm extends BaseForm
                         'class' => 'complementary',
                         'type' => 'text',
                         'description' => '',
+                        'required'    => true,
                     ],
                 ]
             );
@@ -218,6 +219,7 @@ class AddressForm extends BaseForm
                             'class'       => 'complementary',
                             'type'        => 'text',
                             'description' => '',
+                            'required'    => true,
                         ],
                     ]
                 );
@@ -232,6 +234,7 @@ class AddressForm extends BaseForm
                             'class'       => 'complementary',
                             'type'        => 'text',
                             'description' => '',
+                            'required'    => true,
                         ],
                     ]
                 );

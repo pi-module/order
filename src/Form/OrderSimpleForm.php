@@ -125,7 +125,7 @@ class OrderSimpleForm extends BaseForm
                                 'name'       => 'default_gateway',
                                 'type'       => 'radio',
                                 'options'    => [
-                                    'label'         => __('Adapter'),
+                                    'label'         => __('Choose your payment method'),
                                     'value_options' => [],
                                 ],
                                 'attributes' => [
@@ -156,7 +156,7 @@ class OrderSimpleForm extends BaseForm
                                 'name'       => 'default_gateway',
                                 'type'       => 'radio',
                                 'options'    => [
-                                    'label'         => __('Adapter'),
+                                    'label'         => __('Choose your payment method'),
                                     'value_options' => $gatewayList,
                                 ],
                                 'attributes' => [
@@ -190,7 +190,7 @@ class OrderSimpleForm extends BaseForm
                             'name'       => 'default_gateway',
                             'type'       => 'radio',
                             'options'    => [
-                                'label'         => __('Adapter'),
+                                'label'         => __('Choose your payment method'),
                                 'value_options' => $gatewayList,
                             ],
                             'attributes' => [

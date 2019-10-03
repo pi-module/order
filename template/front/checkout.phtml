@@ -109,6 +109,7 @@ $script = sprintf(
 );
 $this->footScript()->appendScript($script);
 ?>
+
 <div id="js-order" class="clearfix order-checkout">
     <div class="page-header">
         <h1><?php _e('Checkout'); ?></h1>
@@ -152,16 +153,23 @@ $this->footScript()->appendScript($script);
                     <h3><?php _e('Register new user account and make order'); ?></h3>
                 </div>
             <?php } ?>
-            <div class="clearfix alert alert-info" role="alert">
-                <?php if (!empty($addresses)) { ?>
-                    <h4><?php _e('Select the needed address for your order. You can also add a new address') ?></h4>
-                <?php } else { ?>
-                    <h4><?php _e(
-                            'You don\'t have set an address yet. Please create your address we will use for your order. You will be able then to manage several addresses'
-                        ) ?></h4>
-                <?php } ?>
-            </div>
+            <?php if ($invalidAddress) { ?>
+                <div class="alert alert-dismissable alert-danger text-center">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <div><?php _e('Your address has to be completed. Please, edit it.'); ?></div>
+                </div>
+            <?php } else { ?>
+                <div class="clearfix alert alert-info" role="alert">
 
+                    <?php if (!empty($addresses)) { ?>
+                        <h4><?php _e('Select the needed address for your order. You can also add a new address') ?></h4>
+                    <?php } else { ?>
+                        <h4><?php _e(
+                                'You don\'t have set an address yet. Please create your address we will use for your order. You will be able then to manage several addresses'
+                            ) ?></h4>
+                    <?php } ?>
+                </div>
+            <?php } ?>
             <div class="clearfix row">
                 <div class="col-md-6">
                     <div class="col-md-12 address-single">

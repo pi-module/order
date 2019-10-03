@@ -21,30 +21,33 @@ $this->headMeta('noindex', 'robots');
         var accountTypeChange = function() {
 
             var show = $('[name=account_type]:checked').val() == 'company';
+            var elements = [
+                'company',
+                'company_address1',
+                'company_address2',
+                'company_zip_code',
+                'company_city',
+                'company_state',
+                'company_country',
+                'company_id',
+                'company_vat'
+            ];
             if (show) {
-                $('[name=company]').closest('.row').show();
-                $('[name=company_address1]').closest('.row').show();
-                $('[name=company_address2]').closest('.row').show();
-                $('[name=company_zip_code]').closest('.row').show();
-                $('[name=company_city]').closest('.row').show();
-                $('[name=company_state]').closest('.row').show();
-                $('[name=company_country]').closest('.row').show();
-                $('[name=company_id]').closest('.row').show();
-                $('[name=company_vat]').closest('.row').show();
-                $('.html-raw').show();
+                for (var i = 0; i < elements.length; ++i) {
+                    var element = $('[name=' + elements[i] + ']');
+                    element.closest('.row').show();
+                    if (element.closest('.row').find('label i').length) {
+                        element.attr('required', true);
+                    }
+                }
                 $('.html-raw').show();
 
             } else {
-                $('[name=company]').closest('.row').hide();
-                $('[name=company_address1]').closest('.row').hide();
-                $('[name=company_address2]').closest('.row').hide();
-                $('[name=company_zip_code]').closest('.row').hide();
-                $('[name=company_city]').closest('.row').hide();
-                $('[name=company_state]').closest('.row').hide();
-                $('[name=company_country]').closest('.row').hide();
-                $('[name=company_id]').closest('.row').hide();
-                $('[name=company_vat]').closest('.row').hide();
-                $('.html-raw').hide();
+                for (var i = 0; i < elements.length; ++i) {
+                    var element = $('[name=' + elements[i] + ']');
+                    element.closest('.row').hide();
+                    element.attr('required', false);
+                }
                 $('.html-raw').hide();
             }
         };

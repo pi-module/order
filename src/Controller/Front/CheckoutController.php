@@ -418,6 +418,7 @@ class CheckoutController extends IndexController
 
         // Check post
         $check = count($addresses) == 0 ? true : false;
+        $invalidAddress = false;
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
 
@@ -460,9 +461,13 @@ class CheckoutController extends IndexController
                         $addressDelivery  = $addresses[$values['address_delivery_id']];
                         $addressInvoicing = $addresses[$values['address_invoicing_id']];
 
-                        $this->order($values, $addressDelivery, $addressInvoicing, $cart, $config, $uid);
-                        Pi::api('customerAddress', 'order')->updateFavouriteDelivery($_SESSION['order']['delivery_address']);
-                        Pi::api('customerAddress', 'order')->updateFavouriteInvoicing($_SESSION['order']['invoicing_address']);
+                        if ($addressDelivery['account_type'] == 'none' || $addressInvoicing['account_type'] == 'none') {
+                            $invalidAddress = true;
+                        } else {
+                            $this->order($values, $addressDelivery, $addressInvoicing, $cart, $config, $uid);
+                            Pi::api('customerAddress', 'order')->updateFavouriteDelivery($_SESSION['order']['delivery_address']);
+                            Pi::api('customerAddress', 'order')->updateFavouriteInvoicing($_SESSION['order']['invoicing_address']);
+                        }
 
                     }
                 } else {
@@ -535,10 +540,11 @@ class CheckoutController extends IndexController
                             }
                             $addresses = Pi::api('customerAddress', 'order')->findAddresses($uid);
                             $address   = current($addresses);
-
-
-                            $this->order($values, $address, $address, $cart, $config, $uid);
-
+                            if ($address['account_type'] == 'none') {
+                                $invalidAddress = true;
+                            } else {
+                                $this->order($values, $address, $address, $cart, $config, $uid);
+                            }
                         }
                     }
                 }
@@ -592,6 +598,7 @@ class CheckoutController extends IndexController
         $this->view()->assign('msgPromoCode', $msgPromoCode);
         $this->view()->assign('addressDelivery', $addressDelivery);
         $this->view()->assign('addressInvoicing', $addressInvoicing);
+        $this->view()->assign('invalidAddress', $invalidAddress);
 
     }
 

@@ -79,7 +79,7 @@ class DeliveryForm extends BaseForm
                 'name'    => 'gateway',
                 'type'    => 'Module\Order\Form\Element\Gateway',
                 'options' => [
-                    'label' => __('Adapter'),
+                    'label' => __('Choose your payment method'),
                 ],
             ]
         );

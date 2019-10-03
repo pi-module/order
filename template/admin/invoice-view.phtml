@@ -192,23 +192,23 @@
                     <span><?php echo $this->escape($invoice['time_invoice_view']) ?> </span>
                 </p>
 
-                <?php if ($invoice['shipping_price'] > 0) { ?>
+                <?php if (isset($invoice['shipping_price']) && $invoice['shipping_price'] > 0) { ?>
                     <p><strong><?php _e('Shipping price'); ?></strong> :
                         <span><?php echo $this->escape($invoice['shipping_price_view']); ?></span></p>
                 <?php } ?>
-                <?php if ($invoice['packing_price'] > 0) { ?>
+                <?php if (isset($invoice['packing_price']) && $invoice['packing_price'] > 0) { ?>
                     <p><strong><?php _e('Packing price'); ?></strong> :
                         <span><?php echo $this->escape($invoice['packing_price_view']); ?></span></p>
                 <?php } ?>
-                <?php if ($invoice['vat_price'] > 0) { ?>
+                <?php if (isset($invoice['vat_price']) && $invoice['vat_price'] > 0) { ?>
                     <p><strong><?php _e('Vat price'); ?></strong> :
                         <span><?php echo $this->escape($invoice['vat_price_view']); ?></span></p>
                 <?php } ?>
-                <?php if ($invoice['total_price'] > 0) { ?>
+                <?php if (isset($invoice['total_price']) && $invoice['total_price'] > 0) { ?>
                     <p><strong><?php _e('Total price'); ?></strong> :
                         <span><?php echo $this->escape($invoice['total_price_view']); ?></span></p>
                 <?php } ?>
-                <?php if ($invoice['paid_price'] > 0) { ?>
+                <?php if (isset($invoice['paid_price']) && $invoice['paid_price'] > 0) { ?>
                     <p><strong><?php _e('Paid price'); ?></strong> :
                         <span><?php echo $this->escape($invoice['paid_price_view']); ?></span></p>
                 <?php } ?>

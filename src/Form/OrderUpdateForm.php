@@ -76,7 +76,7 @@ class OrderUpdateForm extends BaseForm
                 'name'       => 'default_gateway',
                 'type'       => 'select',
                 'options'    => [
-                    'label'         => __('Adapter'),
+                    'label'         => __('Choose your payment method'),
                     'value_options' => $gatewayList,
                 ],
                 'attributes' => [

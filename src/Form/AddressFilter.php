@@ -364,4 +364,16 @@ class AddressFilter extends InputFilter
             ]
         );
     }
+
+    public function isValid($context = null)
+    {
+        foreach (['company', 'company_address1', 'company_zip_code', 'company_city', 'company_state', 'company_country', 'company_id', 'company_vat'] as $name) {
+            if ($this->has($name)) {
+                $this->get($name)->setRequired($this->data['account_type'] != 'individual');
+            }
+        }
+
+        return parent::isValid($context);
+    }
+
 }

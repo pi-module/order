@@ -401,7 +401,7 @@ class OrderForm extends BaseForm
                                 'name'       => 'gateway',
                                 'type'       => 'select',
                                 'options'    => [
-                                    'label'         => __('Adapter'),
+                                    'label'         => __('Choose your payment method'),
                                     'value_options' => [],
                                 ],
                                 'attributes' => [
@@ -433,7 +433,7 @@ class OrderForm extends BaseForm
                                 'name'       => 'gateway',
                                 'type'       => 'select',
                                 'options'    => [
-                                    'label'         => __('Adapter'),
+                                    'label'         => __('Choose your payment method'),
                                     'value_options' => $gatewayList,
                                 ],
                                 'attributes' => [
@@ -467,7 +467,7 @@ class OrderForm extends BaseForm
                             'name'       => 'gateway',
                             'type'       => 'select',
                             'options'    => [
-                                'label'         => __('Adapter'),
+                                'label'         => __('Choose your payment method'),
                                 'value_options' => $gatewayList,
                             ],
                             'attributes' => [
