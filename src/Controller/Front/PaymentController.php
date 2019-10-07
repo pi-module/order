@@ -143,7 +143,7 @@ class PaymentController extends IndexController
                     // Remove processing
                     Pi::api('processing', 'order')->removeProcessing();
                     // jump to module
-                    $message = __('Your payment were successfully. Back to module');
+                    $message = __('Your payment were successfully.');
                     $this->jump($url, $message);
                 } elseif ($order['total_price'] == $creditAmount) {
                     // Set credit
@@ -158,7 +158,7 @@ class PaymentController extends IndexController
                     // Remove processing
                     Pi::api('processing', 'order')->removeProcessing();
                     // jump to module
-                    $message = __('Your payment were successfully. Back to module');
+                    $message = __('Your payment were successfully.');
                     $this->jump($url, $message);
                 }
             }
@@ -198,7 +198,7 @@ class PaymentController extends IndexController
             // Remove processing
             Pi::api('processing', 'order')->removeProcessing();
             // jump to module
-            $message = __('Your payment were successfully. Back to module');
+            $message = __('Your payment were successfully.');
             $this->jump($url, $message);
         }
         // Get gateway object
@@ -311,7 +311,7 @@ class PaymentController extends IndexController
                 $url     = Pi::api('order', 'order')->updateOrder($verify['order'], $invoice['id']);
 
                 // jump to module
-                $message = __('Your payment were successfully. Back to module');
+                $message = __('Your payment were successfully.');
                 $this->jump($url, $message);
             } else {
                 // Check error
@@ -629,7 +629,7 @@ class PaymentController extends IndexController
         // Remove processing
         Pi::api('processing', 'order')->removeProcessing();
         // jump to module
-        $message = __('Your payment were successfully. Back to module');
+        $message = __('Your payment were successfully.');
         $this->jump($url, $message);
     }
 }

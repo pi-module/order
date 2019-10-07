@@ -222,9 +222,9 @@
                                                     <?php echo Module\Order\Model\Order::getStatusList()[$order['status_order']]; ?>
                                                     </span>
                                         </p>
-                                        <p><strong><?php _e('Blocked payments ?'); ?></strong> : <span
-                                                    class="badge <?php echo $order['can_pay'] ? 'badge-success'
-                                                        : 'badge-danger'; ?>"><?php echo $order['can_pay'] ? __('No') : __('Yes'); ?></span>
+                                        <p><strong><?php _e('Paid payments ?'); ?></strong> : <span
+                                                    class="badge <?php echo $order['can_pay'] ? 'badge-danger'
+                                                        : 'badge-success'; ?>"><?php echo $order['can_pay'] ? __('No') : __('Yes'); ?></span>
                                         </p>
                                         <p><strong><?php _e('Delivery status'); ?></strong> :
                                             <?php if ($order['type_commodity'] == 'product') { ?>
@@ -258,8 +258,8 @@
                             </h4>
                         </div>
                         <div id="collapseProducts" class="collapse show" role="tabpanel">
-                            <div class="card-body">
-                                <table class="table table-striped table-bordered table-sm table-responsive">
+                            <div class="card-body table-responsive">
+                                <table class="table table-striped table-bordered table-sm  w-100">
                                     <tr>
                                         <th><?php _e('Product'); ?></th>
                                         <th><?php _e('Time start'); ?></th>
@@ -323,7 +323,7 @@
                                             <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['total_price'])); ?></td>
                                         </tr>
                                     <?php } ?>
-                                    <tr>
+                                    <tr class="w-100">
                                         <td colspan=4><strong><?php _e('Total') ?></strong></td>
                                         <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalProductPrice)); ?></strong></td>
                                         <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalShippingPrice)); ?></strong></td>

@@ -51,7 +51,11 @@ class Notification extends AbstractApi
             $productList  .= $product['details']['title'] . ' , ';
 
             if ($product['module'] == 'guide') {
-                $typeProduct[] = __('package');
+                if ($product['product_type'] == 'booking') {
+                    $typeProduct[] = __('booking');
+                } else {
+                    $typeProduct[] = __('package');
+                }
             } else {
                 if ($product['module'] == 'shop') {
                     $typeProduct[] = __('product');
