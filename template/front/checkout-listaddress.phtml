@@ -35,9 +35,7 @@
                             <div><?php echo $this->escape($address['company_vat']); ?></div>
                         <?php } else { ?>
                             <div>
-                                <?php echo $this->escape($address['first_name']); ?><?php echo $this->escape(
-                                    $address['last_name']
-                                ); ?>
+                                <?php echo $this->escape($address['first_name']); ?>&nbsp;<?php echo $this->escape($address['last_name']); ?>
                             </div>
                             <?php if (!empty($address['address1'])) { ?>
                                 <div><?php echo $this->escape($address['address1']); ?></div>

@@ -220,9 +220,7 @@ $this->footScript()->appendScript($script);
                                             <div><?php echo $this->escape($addressInvoicing['company_vat']); ?></div>
                                         <?php } else { ?>
                                             <div>
-                                                <?php echo $this->escape($addressInvoicing['first_name']); ?><?php echo $this->escape(
-                                                    $addressInvoicing['last_name']
-                                                ); ?>
+                                                <?php echo $this->escape($addressInvoicing['first_name']); ?>&nbsp;<?php echo $this->escape($addressInvoicing['last_name']); ?>
                                             </div>
                                             <?php if (!empty($addressInvoicing['address1'])) { ?>
                                                 <div><?php echo $this->escape($addressInvoicing['address1']); ?></div>
@@ -328,9 +326,7 @@ $this->footScript()->appendScript($script);
                                                     <div><?php echo $this->escape($addressDelivery['company_vat']); ?></div>
                                                 <?php } else { ?>
                                                     <div>
-                                                        <?php echo $this->escape($addressDelivery['first_name']); ?><?php echo $this->escape(
-                                                            $addressDelivery['last_name']
-                                                        ); ?>
+                                                        <?php echo $this->escape($addressDelivery['first_name']); ?>&nbsp;<?php echo $this->escape($addressDelivery['last_name']); ?>
                                                     </div>
                                                     <?php if (!empty($addressDelivery['address1'])) { ?>
                                                         <div><?php echo $this->escape($addressDelivery['address1']); ?></div>

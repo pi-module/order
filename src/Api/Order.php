@@ -97,21 +97,21 @@ class Order extends AbstractApi
         switch ($status) {
             case \Module\Order\Model\Order::STATUS_ORDER_DRAFT:
                 $return['orderClass']   = 'btn-warning';
-                $return['orderLabel']   = 'label-warning';
+                $return['orderLabel']   = 'badge-warning';
                 $return['orderTableBg'] = 'warning';
                 $return['orderBg']      = 'bg-warning';
                 break;
 
             case \Module\Order\Model\Order::STATUS_ORDER_VALIDATED:
                 $return['orderClass']   = 'btn-success';
-                $return['orderLabel']   = 'label-success';
+                $return['orderLabel']   = 'badge-success';
                 $return['orderTableBg'] = 'success';
                 $return['orderBg']      = 'bg-success';
                 break;
 
             case \Module\Order\Model\Order::STATUS_ORDER_CANCELLED:
                 $return['orderClass']   = 'btn-danger';
-                $return['orderLabel']   = 'label-danger';
+                $return['orderLabel']   = 'badge-danger';
                 $return['orderTableBg'] = 'danger';
                 $return['orderBg']      = 'bg-danger';
                 break;
@@ -127,13 +127,13 @@ class Order extends AbstractApi
         switch ($status) {
             case '1':
                 $return['canPayClass'] = 'btn-success';
-                $return['canPayLabel'] = 'label-success';
+                $return['canPayLabel'] = 'badge-success';
                 $return['canPayTitle'] = __('Can pay');
                 break;
 
             case '2':
                 $return['canPayClass'] = 'btn-warning';
-                $return['canPayLabel'] = 'label-warning';
+                $return['canPayLabel'] = 'badge-warning';
                 $return['canPayTitle'] = __('Can not pay');
                 break;
         }
@@ -146,16 +146,16 @@ class Order extends AbstractApi
         switch ($status) {
             case \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT:
                 $return['invoiceClass'] = 'btn-warning';
-                $return['invoiceLabel'] = 'label-warning';
+                $return['invoiceLabel'] = 'badge-warning';
                 break;
 
             case \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED:
                 $return['invoiceClass'] = 'btn-success';
-                $return['invoiceLabel'] = 'label-success';
+                $return['invoiceLabel'] = 'badge-success';
                 break;
             case \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED:
                 $return['invoiceClass'] = 'btn-danger';
-                $return['invoiceLabel'] = 'label-danger';
+                $return['invoiceLabel'] = 'badge-danger';
                 break;
 
         }
@@ -171,31 +171,31 @@ class Order extends AbstractApi
         switch ($status) {
             case '1':
                 $return['deliveryClass'] = 'btn-warning';
-                $return['deliveryLabel'] = 'label-warning';
+                $return['deliveryLabel'] = 'badge-warning';
                 $return['deliveryTitle'] = __('Not processed');
                 break;
 
             case '2':
                 $return['deliveryClass'] = 'btn-info';
-                $return['deliveryLabel'] = 'label-info';
+                $return['deliveryLabel'] = 'badge-info';
                 $return['deliveryTitle'] = __('Packed');
                 break;
 
             case '3':
                 $return['deliveryClass'] = 'btn-info';
-                $return['deliveryLabel'] = 'label-info';
+                $return['deliveryLabel'] = 'badge-info';
                 $return['deliveryTitle'] = __('Posted');
                 break;
 
             case '4':
                 $return['deliveryClass'] = 'btn-success';
-                $return['deliveryLabel'] = 'label-success';
+                $return['deliveryLabel'] = 'badge-success';
                 $return['deliveryTitle'] = __('Delivered');
                 break;
 
             case '5':
                 $return['deliveryClass'] = 'btn-danger';
-                $return['deliveryLabel'] = 'label-danger';
+                $return['deliveryLabel'] = 'badge-danger';
                 $return['deliveryTitle'] = __('Back eaten');
                 break;
         }

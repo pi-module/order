@@ -62,7 +62,7 @@ $this->headMeta('noindex', 'robots');
                     $('form#address').serialize(),
                     function (data) {
                         if (data.status == 1) {
-                            window.location.reload();
+                            window.location=window.location;
                         } else {
                             $("#addressModal").find(".modal-body").html(data);
                         }
