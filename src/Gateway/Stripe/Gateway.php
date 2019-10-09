@@ -142,12 +142,10 @@ class Gateway extends AbstractGateway
             'success_url' => $this->gatewayPayInformation['return'] . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => $this->gatewayPayInformation['cancel_return'],
             'client_reference_id' => 'order-' . $order['id'] . '-uid-' . $order['uid'],
-
-
         ];
 
         if (isset($this->gatewayPayInformation['gateway_id'])) {
-            $fee = round(($subtotal + $tax) * $this->gatewayPayInformation['commission_percentage_owner']);
+            $fee = round(($subtotal) * $this->gatewayPayInformation['commission_percentage_owner']);
             $data['payment_intent_data'] = [
                 'transfer_data' => [
                     'destination' => $this->gatewayPayInformation['gateway_id'],
@@ -160,7 +158,6 @@ class Gateway extends AbstractGateway
                     'fee' => $fee
                 ],
                 'application_fee_amount' => $fee
-
             ];
         }
 
