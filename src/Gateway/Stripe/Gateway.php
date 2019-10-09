@@ -92,17 +92,26 @@ class Gateway extends AbstractGateway
             $extra = json_decode($order['extra'], true);
             $item = Pi::api('item', 'guide')->getItem($extra['item']);
             $item = Pi::api('item', 'guide')->addBankPaymentCoordinates($item);
+            $package = Pi::api('package', 'guide')->getPackageFromPeriod($item['package']);
+
             $this->gatewayPayInformation['gateway_id'] = $item['gateway_id'];
-            $commission = $item['commission_percentage_owner'];
+
+            if ($package['commission']) {
+                $commission = $item['commission_percentage_owner_fullcommission'];
+            } else {
+                $commission = $item['commission_percentage_owner_withsubscription'];
+            }
+
             if ((int) $commission == null) {
                 $business = Pi::api('business', 'guide')->getBusiness($item['business']);
-                $commission = $business['commission_percentage_owner'];
+                if ($package['commission']) {
+                    $commission = $business['commission_percentage_owner_fullcommission'];
+                } else {
+                    $commission = $business['commission_percentage_owner_withsubscription'];
+                }
             }
             $this->gatewayPayInformation['commission_percentage_owner'] = $commission;
-
         }
-
-
     }
 
     public function getSession($order)
@@ -138,7 +147,7 @@ class Gateway extends AbstractGateway
         ];
 
         if (isset($this->gatewayPayInformation['gateway_id'])) {
-            $fee = ($subtotal + $tax) * $this->gatewayPayInformation['commission_percentage_owner'];
+            $fee = round(($subtotal + $tax) * $this->gatewayPayInformation['commission_percentage_owner']);
             $data['payment_intent_data'] = [
                 'transfer_data' => [
                     'destination' => $this->gatewayPayInformation['gateway_id'],
