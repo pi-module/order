@@ -662,7 +662,7 @@ msgstr "Nom"
 
 #: src/Form/AddressForm.php:308
 msgid "Birthday"
-msgstr "Anniversaire"
+msgstr "Date Naissance"
 
 #: src/Form/AddressForm.php:330 src/Form/OrderForm.php:102
 #: src/Form/OrderSettingForm.php:207 src/Form/OrderUpdateForm.php:155
