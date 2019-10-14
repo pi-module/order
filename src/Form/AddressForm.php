@@ -312,6 +312,7 @@ class AddressForm extends BaseForm
                     'todayBtn' => true,
                     'todayHighlight' => true,
                     'weekStart' => 1,
+                    'endDate' => '-18y',
                     'orientation' => 'bottom'
                 ),
             ),

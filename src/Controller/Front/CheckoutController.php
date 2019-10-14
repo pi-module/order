@@ -419,7 +419,11 @@ class CheckoutController extends IndexController
         // Check post
         $check = count($addresses) == 0 ? true : false;
         $invalidAddress = false;
-        if ($this->request->isPost()) {
+        if ($addressDelivery['account_type'] == 'none' || $addressInvoicing['account_type'] == 'none') {
+            $invalidAddress = true;
+        }
+
+        if ($this->request->isPost() && !$invalidAddress) {
             $data = $this->request->getPost();
 
             if (isset($data['submit_address'])) {
@@ -461,13 +465,9 @@ class CheckoutController extends IndexController
                         $addressDelivery  = $addresses[$values['address_delivery_id']];
                         $addressInvoicing = $addresses[$values['address_invoicing_id']];
 
-                        if ($addressDelivery['account_type'] == 'none' || $addressInvoicing['account_type'] == 'none') {
-                            $invalidAddress = true;
-                        } else {
-                            $this->order($values, $addressDelivery, $addressInvoicing, $cart, $config, $uid);
-                            Pi::api('customerAddress', 'order')->updateFavouriteDelivery($_SESSION['order']['delivery_address']);
-                            Pi::api('customerAddress', 'order')->updateFavouriteInvoicing($_SESSION['order']['invoicing_address']);
-                        }
+                        $this->order($values, $addressDelivery, $addressInvoicing, $cart, $config, $uid);
+                        Pi::api('customerAddress', 'order')->updateFavouriteDelivery($_SESSION['order']['delivery_address']);
+                        Pi::api('customerAddress', 'order')->updateFavouriteInvoicing($_SESSION['order']['invoicing_address']);
 
                     }
                 } else {
@@ -540,11 +540,8 @@ class CheckoutController extends IndexController
                             }
                             $addresses = Pi::api('customerAddress', 'order')->findAddresses($uid);
                             $address   = current($addresses);
-                            if ($address['account_type'] == 'none') {
-                                $invalidAddress = true;
-                            } else {
-                                $this->order($values, $address, $address, $cart, $config, $uid);
-                            }
+
+                            $this->order($values, $address, $address, $cart, $config, $uid);
                         }
                     }
                 }
@@ -567,16 +564,22 @@ class CheckoutController extends IndexController
             }
         }
         if (Pi::service('authentication')->hasIdentity()) {
+            if ($invalidAddress) {
+                $elements = $formOrderSimple->getElements();
+                foreach ($elements as $element) {
+                    $formOrderSimple->get($element->getName())->setAttribute('disabled', true);
+                }
+
+            }
             $forms['order'] = $formOrderSimple;
             $forms['new']   = $formAddress;
+
         } else {
             $forms['new'] = $formOrder;
         }
 
         // Set price
         $price = $this->updatePrice($cart);
-
-
 
         // Get credit
         /* if ($config['credit_active'] && Pi::user()->getId() > 0) {
@@ -675,7 +678,11 @@ class CheckoutController extends IndexController
                 $form->setInputFilter(new AddressFilter($option));
                 $values               = Pi::api('customerAddress', 'order')->getAddress($id);
                 $values['address_id'] = $id;
-                $values['birthday'] = date('d/m/Y', $values['birthday']);
+                if ($values['birthday'] == 0) {
+                    $values['birthday'] = null;
+                } else {
+                    $values['birthday'] = date('d/m/Y', $values['birthday']);
+                }
 
                 $form->setData($values);
             } else {
