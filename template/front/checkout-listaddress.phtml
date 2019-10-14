@@ -87,7 +87,7 @@
                         <?php } else { ?>
                             <a href="<?php echo Pi::url(
                                 $this->url('', ['controller' => 'checkout', 'action' => 'change-address', 'id' => $address['id'], 'type' => $type])
-                            ) ?>" class=" btn btn-success btn-sm col-md-12" data-address="<?php echo $address['id']; ?>">
+                            ) ?>" class=" btn btn-use-it btn-sm col-md-12" data-address="<?php echo $address['id']; ?>">
                                 <?php _e('Use it'); ?>
                             </a>
                         <?php } ?>
