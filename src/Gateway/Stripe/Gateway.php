@@ -41,6 +41,9 @@ class Gateway extends AbstractGateway
         // Set products to payment
         $i = 1;
         foreach ($products as $product) {
+            if ($product['product_price'] <= 0) {
+                continue;
+            }
             $this->gatewayPayInformation['item_name_' . $i]      = str_replace('<br>', ' : ',  $product['details']['title']);
             $this->gatewayPayInformation['item_number_' . $i]    = $product['number'];
             $this->gatewayPayInformation['quantity_' . $i]       = 1;
@@ -91,6 +94,7 @@ class Gateway extends AbstractGateway
         if ($order['type_commodity'] == 'booking') {
             $extra = json_decode($order['extra'], true);
             $item = Pi::api('item', 'guide')->getItem($extra['item']);
+            $item = Pi::api('item', 'guide')->addPolicies($item);
             $item = Pi::api('item', 'guide')->addBankPaymentCoordinates($item);
             $package = Pi::api('package', 'guide')->getPackageFromPeriod($item['package']);
 

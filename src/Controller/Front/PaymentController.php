@@ -185,7 +185,7 @@ class PaymentController extends IndexController
         // Check invoice price
         $totalPrice = 0;
         foreach ($products as $product) {
-            $totalPrice = $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'];
+            $totalPrice += $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'];
         }
         if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_VALIDATED && $totalPrice == 0) {
             $uid = Pi::user()->getId();

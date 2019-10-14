@@ -28,7 +28,7 @@
                             foreach ($order['products'] as $product) {
                                 $productsList[] = $product['details']['title'];
                             }
-                            echo implode(' , ', $productsList); ?>
+                            echo implode('<br/>', $productsList); ?>
                         </td>
                         <td class="text-center"><?php echo $this->escape($order['time_create_view']); ?></td>
                         <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
