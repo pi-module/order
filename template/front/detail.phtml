@@ -222,7 +222,7 @@
                                                     <?php echo Module\Order\Model\Order::getStatusList()[$order['status_order']]; ?>
                                                     </span>
                                         </p>
-                                        <p><strong><?php _e('Paid payments ?'); ?></strong> : <span
+                                        <p><strong><?php _e('Invoice paid ?'); ?></strong> : <span
                                                     class="badge <?php echo $order['can_pay'] ? 'badge-danger'
                                                         : 'badge-success'; ?>"><?php echo $order['can_pay'] ? __('No') : __('Yes'); ?></span>
                                         </p>

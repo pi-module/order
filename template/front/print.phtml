@@ -382,12 +382,12 @@
             <td class="col1">
                 <div class="paid-status">
                     <?php if ($order['invoice']['type'] == 'CREDIT') { ?>
-                        <strong><?php _e('A votre crédit') ?></strong>
+                        <strong><?php _e('To your credit') ?></strong>
                     <?php } else {
                         if ($order['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) { ?>
-                            <strong><?php _e('En votre aimable règlement à réception de facture') ?></strong>
+                            <strong><?php _e('In your kind payment upon receipt of invoiceEn votre aimable règlement à réception de facture') ?></strong>
                         <?php } else { ?>
-                            <strong><?php echo sprintf(__('Facture réglée (%s)'), $order['gateway']) ?></strong>
+                            <strong><?php echo sprintf(__('Paid invoice (%s)'), $order['gateway']) ?></strong>
                         <?php }
                     } ?>
                 </div>
