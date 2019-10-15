@@ -372,6 +372,20 @@ class Gateway extends AbstractGateway
             'type'     => 'text',
             'required' => false,
         ];
+        $form['commission_owner_min'] = [
+            'name'     => 'commission_owner_min',
+            'label'    => __('Commission owner minimum'),
+            'type'     => 'text',
+            'required' => false,
+        ];
+
+        $form['commission_customer_min'] = [
+            'name'     => 'commission_customer_min',
+            'label'    => __('Commission customer minimum'),
+            'type'     => 'text',
+            'required' => false,
+        ];
+
         // test_mode
         $form['error_mode']       = [
             'name'     => 'error_mode',

@@ -51,6 +51,7 @@ class Gateway extends AbstractGateway
             $this->gatewayPayInformation['tax_' . $i]            = $product['vat_price'];
             $this->gatewayPayInformation['discount_price_' . $i] = $product['discount_price'];
             $this->gatewayPayInformation['unconsumed_' . $i]     = $product['extra']['unconsumedPrice'];
+            $this->gatewayPayInformation['special_fee_' . $i]     = $product['extra']['special_fee'];
             $i++;
         }
         // Set address
@@ -114,6 +115,9 @@ class Gateway extends AbstractGateway
                     $commission = $business['commission_percentage_owner_withsubscription'];
                 }
             }
+            if ($commission < $this->gatewayOption['commission_owner_min']) {
+                $commission = $this->gatewayOption['commission_owner_min'];
+            }
             $this->gatewayPayInformation['commission_percentage_owner'] = $commission;
         }
     }
@@ -124,6 +128,7 @@ class Gateway extends AbstractGateway
 
         $items    = [];
         $subtotal = 0;
+        $subtotalCommissionOwner = 0;
         $tax      = 0;
         for ($i = 1; $i < $this->gatewayPayInformation['nb_product']; ++$i) {
             $item                = [];
@@ -134,9 +139,12 @@ class Gateway extends AbstractGateway
             $item["description"] = addcslashes($this->gatewayPayInformation['item_name_' . $i], '"');
             $items[]             = $item;
 
+            $totalProduct = $this->gatewayPayInformation['amount_' . $i] - $this->gatewayPayInformation['discount_price_' . $i] - $this->gatewayPayInformation['unconsumed_' . $i];
 
-            $subtotal += $this->gatewayPayInformation['amount_' . $i] - $this->gatewayPayInformation['discount_price_' . $i]
-                - $this->gatewayPayInformation['unconsumed_' . $i];
+            if (!$this->gatewayPayInformation['special_fee_' . $i] ) {
+                $subtotalCommissionOwner += $totalProduct;
+            }
+            $subtotal += $totalProduct;
             $tax      += $this->gatewayPayInformation['tax_' . $i];
         }
 
@@ -149,7 +157,7 @@ class Gateway extends AbstractGateway
         ];
 
         if (isset($this->gatewayPayInformation['gateway_id'])) {
-            $fee = round(($subtotal) * $this->gatewayPayInformation['commission_percentage_owner']);
+            $fee = round(($subtotalCommissionOwner) * $this->gatewayPayInformation['commission_percentage_owner']);
             $data['payment_intent_data'] = [
                 'transfer_data' => [
                     'destination' => $this->gatewayPayInformation['gateway_id'],
@@ -161,8 +169,10 @@ class Gateway extends AbstractGateway
                     'vat' => $tax,
                     'fee' => $fee
                 ],
-                'application_fee_amount' => $fee
             ];
+            if ($fee > 0) {
+                $data['payment_intent_data']['application_fee_amount'] = $fee;
+            }
         }
 
         $session = \Stripe\Checkout\Session::create($data);
@@ -239,6 +249,21 @@ class Gateway extends AbstractGateway
             'type'     => 'text',
             'required' => false,
         ];
+
+        $form['commission_owner_min'] = [
+            'name'     => 'commission_owner_min',
+            'label'    => __('Commission owner minimum'),
+            'type'     => 'text',
+            'required' => false,
+        ];
+
+        $form['commission_customer_min'] = [
+            'name'     => 'commission_customer_min',
+            'label'    => __('Commission customer minimum'),
+            'type'     => 'text',
+            'required' => false,
+        ];
+
         // password
         $form['password'] = [
             'name'     => 'password',

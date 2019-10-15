@@ -408,6 +408,9 @@ $this->footScript()->appendScript($script);
                                            target="_blank">
                                             <b>#<?php echo $count . ' ' . $product['details']['title']; ?></b>
                                         </a>
+                                        <?php if ($product['tooltip']) { ?>
+                                            <button type="button" class="btn btn-tooltip tooltip-description d-inline float-none m-0" data-toggle="tooltip" data-placement="left" title="" data-original-title="<?php echo strip_tags($product['tooltip_description']) ?>">?</button>
+                                        <?php } ?>
                                         <?php if (!empty($product['time_start'])) { ?>
                                             <p>
                                                 <?php if ($product['time_end'] == strtotime("2030-01-01")) { ?>
@@ -726,6 +729,9 @@ $this->footScript()->appendScript($script);
                 return true;
             }
         );
+
+        $('.tooltip-description').tooltip();
+
 
     });
 </script>
