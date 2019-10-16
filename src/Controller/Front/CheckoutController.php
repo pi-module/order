@@ -914,7 +914,8 @@ class CheckoutController extends IndexController
         $price['total']    = 0;
         foreach ($cart['product'] as $product) {
             // Check setup price
-            $unconsumedPrice = json_decode($product['extra'], true)['unconsumedPrice'];
+            $extra = json_decode($product['extra'], true);
+            $unconsumedPrice = isset($extra['unconsumedPrice']) ? $extra['unconsumedPrice'] : null;
 
             $product['setup_price'] = isset($product['setup_price']) ? $product['setup_price'] : 0;
             // Set price
@@ -929,6 +930,7 @@ class CheckoutController extends IndexController
         }
 
         // Set additional price
+        $config = Pi::service('registry')->config->read($this->getModule());
         if ($cart['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
             $price['shipping'] = $price['shipping'] + $config['order_additional_price_product'];
         } elseif (in_array($cart['type_commodity'], ['service', 'booking']) && $config['order_additional_price_service'] > 0) {

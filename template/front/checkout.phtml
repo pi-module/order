@@ -407,7 +407,7 @@ $this->footScript()->appendScript($script);
                                 <?php
                                 $count++;
                                 $extra           = json_decode($product['extra'], true);
-                                $unconsumedPrice = $extra['unconsumedPrice'];
+                                $unconsumedPrice = isset($extra['unconsumedPrice']) ? $extra['unconsumedPrice'] : null;
                                 ?>
 
                                 <tr>
