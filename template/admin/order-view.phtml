@@ -256,6 +256,11 @@ $this->backbone();
                                         <?php } ?>
                                     </p>
                                 <?php } ?>
+                                <p>
+                                    <?php _e('Type') ?> :
+                                    <?php echo $addressInvoicing['account_type'] == 'none' ? __('ND') : __(ucfirst($addressInvoicing['account_type'])); ?>
+                                </p>
+
                             </div>
                             <div class="col-md-4">
                                 <p><strong><?php _e('Delivery address') ?></strong></p>
@@ -337,6 +342,11 @@ $this->backbone();
                                         <?php } ?>
                                     </p>
                                 <?php } ?>
+                                <p>
+                                    <?php _e('Type') ?> :
+                                    <?php echo $addressDelivery['account_type'] == 'none' ? __('ND') : __(ucfirst($addressDelivery['account_type'])); ?>
+                                </p>
+
                             </div>
                             <div class="col-md-4">
                                 <p><strong><?php _e('Informations') ?></strong></p>

@@ -6,6 +6,10 @@
                  data-button="addressFromButton<?php echo $address['id']; ?>">
                 <div class="clearfix row">
                     <div class="info col-md-7">
+                        <div>
+                            <?php _e('Type') ?> :
+                            <?php echo $address['account_type'] == 'none' ? __('ND') : __(ucfirst($address['account_type'])); ?>
+                        </div>
                         <?php if ($address['account_type'] === 'company') { ?>
                             <div><?php echo $this->escape($address['company']); ?></div>
 

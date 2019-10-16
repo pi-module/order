@@ -140,6 +140,10 @@
                             <span><?php echo $this->escape($address['mobile']); ?></span></p>
                     <?php } ?>
                 <?php }  ?>
+                <p>
+                    <strong><?php _e('Type') ?></strong> :
+                    <?php echo $address['account_type'] == 'none' ? __('ND') : __(ucfirst($address['account_type'])); ?>
+                </p>
             </div>
             <div class="col-md-12 text-right">
                 <a class="btn btn-primary" title="<?php _e('View order'); ?>"

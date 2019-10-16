@@ -191,6 +191,10 @@ $this->footScript()->appendScript($script);
                                         <?php echo $this->form($forms['new'], 'vertical'); ?>
                                     <?php } else { ?>
 
+                                        <div>
+                                            <?php _e('Type') ?> :
+                                            <?php echo $addressInvoicing['account_type'] == 'none' ? __('ND') : __(ucfirst($addressInvoicing['account_type'])); ?>
+                                        </div>
                                         <?php if ($addressInvoicing['account_type'] === 'company') { ?>
                                             <div><?php echo $this->escape($addressInvoicing['company']); ?></div>
 
@@ -297,6 +301,10 @@ $this->footScript()->appendScript($script);
                                             <?php if (empty($addresses)) { ?>
                                                 <?php echo $this->form($forms['new'], 'vertical'); ?>
                                             <?php } else { ?>
+                                                <div>
+                                                    <?php _e('Type') ?> :
+                                                    <?php echo $addressDelivery['account_type'] == 'none' ? __('ND') : __(ucfirst($addressDelivery['account_type'])); ?>
+                                                </div>
                                                 <?php if ($addressDelivery['account_type'] === 'company') { ?>
                                                     <div><?php echo $this->escape($addressDelivery['company']); ?></div>
 
