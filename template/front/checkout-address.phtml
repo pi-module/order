@@ -35,26 +35,26 @@ $this->headMeta('noindex', 'robots');
             if (show) {
                 for (var i = 0; i < elements.length; ++i) {
                     var element = $('[name=' + elements[i] + ']');
-                    element.closest('.row').show();
                     if (element.closest('.row').find('label i').length) {
                         element.attr('required', true);
                     }
                 }
-                $('.html-raw').show();
-
+                $('[name=company]').closest('fieldset').show();
             } else {
                 for (var i = 0; i < elements.length; ++i) {
                     var element = $('[name=' + elements[i] + ']');
-                    element.closest('.row').hide();
                     element.attr('required', false);
                 }
-                $('.html-raw').hide();
+                $('[name=company]').closest('fieldset').hide();
             }
         };
 
         $('[name=account_type]').change(accountTypeChange);
         accountTypeChange();
 
+        $('.edit-address').click(
+            function() { $('form#address').submit(); }
+        );
         $('form#address').submit(
             function () {
                 $.post(

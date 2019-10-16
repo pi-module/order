@@ -639,6 +639,7 @@ class CheckoutController extends IndexController
         $form->setAttribute(
             'action', Pi::url(Pi::service('url')->assemble('order', ['module' => 'order', 'controller' => 'checkout', 'action' => 'address', 'id' => $id]))
         );
+        $form->remove('submit_address');
         $form->setInputFilter(new AddressFilter($option));
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
@@ -675,6 +676,7 @@ class CheckoutController extends IndexController
                     'action',
                     Pi::url(Pi::service('url')->assemble('order', ['module' => 'order', 'controller' => 'checkout', 'action' => 'address', 'id' => $id]))
                 );
+                $form->remove('submit_address');
                 $form->setInputFilter(new AddressFilter($option));
                 $values               = Pi::api('customerAddress', 'order')->getAddress($id);
                 $values['address_id'] = $id;
