@@ -416,7 +416,7 @@ $this->footScript()->appendScript($script);
                                            target="_blank">
                                             <b>#<?php echo $count . ' ' . $product['details']['title']; ?></b>
                                         </a>
-                                        <?php if (isset($product['tooltip'])) { ?>
+                                        <?php if (isset($product['tooltip']) && $product['tooltip']) { ?>
                                             <button type="button" class="btn btn-tooltip tooltip-description d-inline float-none m-0" data-toggle="tooltip" data-placement="left" title="" data-original-title="<?php echo strip_tags($product['tooltip_description']) ?>">?</button>
                                         <?php } ?>
                                         <?php if (!empty($product['time_start'])) { ?>
