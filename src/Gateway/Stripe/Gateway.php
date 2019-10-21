@@ -250,6 +250,14 @@ class Gateway extends AbstractGateway
             'required' => false,
         ];
 
+        // password
+        $form['password'] = [
+            'name'     => 'password',
+            'label'    => __('Secret key'),
+            'type'     => 'text',
+            'required' => false,
+        ];
+
         $form['commission_owner_min'] = [
             'name'     => 'commission_owner_min',
             'label'    => __('Commission owner minimum'),
@@ -263,15 +271,7 @@ class Gateway extends AbstractGateway
             'type'     => 'text',
             'required' => false,
         ];
-
-        // password
-        $form['password'] = [
-            'name'     => 'password',
-            'label'    => __('Secret key'),
-            'type'     => 'text',
-            'required' => false,
-        ];
-
+        
         $this->gatewaySettingForm = $form;
         return $this;
     }
