@@ -150,6 +150,7 @@ class Gateway extends AbstractGateway
 
         $data = [
             'payment_method_types' => ['card'],
+            'customer_email' => $this->gatewayPayInformation['email'],
             'line_items' => $items,
             'success_url' => $this->gatewayPayInformation['return'] . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => $this->gatewayPayInformation['cancel_return'],
