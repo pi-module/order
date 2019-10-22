@@ -53,6 +53,8 @@ class AddressForm extends BaseForm
             'attributes' => array(
                 'required' => true,
                 'value' => 0,
+                'autocomplete' => 'user-password'
+
             )
         ));
 
@@ -80,6 +82,8 @@ class AddressForm extends BaseForm
                         'type' => 'text',
                         'description' => '',
                         'required'    => true,
+                        'autocomplete' => 'user-password'
+
                     ],
                 ]
             );
@@ -96,6 +100,8 @@ class AddressForm extends BaseForm
                         'type'        => 'text',
                         'description' => '',
                         'required'    => true,
+                        'autocomplete' => 'user-password'
+
                     ],
                 ]
             );
@@ -113,6 +119,8 @@ class AddressForm extends BaseForm
                         'type'        => 'text',
                         'description' => '',
                         'required'    => false,
+                        'autocomplete' => 'user-password'
+
                     ],
                 ]
             );
@@ -130,6 +138,8 @@ class AddressForm extends BaseForm
                         'type'        => 'text',
                         'description' => '',
                         'required'    => true,
+                        'autocomplete' => 'user-password'
+
                     ],
                 ]
             );
@@ -146,6 +156,8 @@ class AddressForm extends BaseForm
                         'type'        => 'text',
                         'description' => '',
                         'required'    => true,
+                        'autocomplete' => 'user-password'
+
 
                     ],
                 ]
@@ -163,6 +175,8 @@ class AddressForm extends BaseForm
                         'type'        => 'text',
                         'description' => '',
                         'required'    => true,
+                        'autocomplete' => 'user-password'
+
                     ],
                 ]
             );
@@ -198,6 +212,8 @@ class AddressForm extends BaseForm
                             'type'        => 'text',
                             'description' => '',
                             'required'    => true,
+                            'autocomplete' => 'user-password'
+
                         ],
                     ]
                 );
@@ -220,6 +236,8 @@ class AddressForm extends BaseForm
                             'type'        => 'text',
                             'description' => '',
                             'required'    => true,
+                            'autocomplete' => 'user-password'
+
                         ],
                     ]
                 );
@@ -235,6 +253,8 @@ class AddressForm extends BaseForm
                             'type'        => 'text',
                             'description' => '',
                             'required'    => true,
+                            'autocomplete' => 'user-password'
+
                         ],
                     ]
                 );
@@ -279,6 +299,8 @@ class AddressForm extends BaseForm
                         'type'        => 'text',
                         'description' => '',
                         'required'    => true,
+                        'autocomplete' => 'user-password'
+
                     ],
                 ]
             );
@@ -294,6 +316,8 @@ class AddressForm extends BaseForm
                         'type'        => 'text',
                         'description' => '',
                         'required'    => true,
+                        'autocomplete' => 'user-password'
+
                     ],
                 ]
             );
@@ -334,6 +358,8 @@ class AddressForm extends BaseForm
                         'type'        => 'text',
                         'description' => '',
                         'required'    => true,
+                        'autocomplete' => 'user-password'
+
                     ],
                 ]
             );
@@ -351,6 +377,8 @@ class AddressForm extends BaseForm
                         'type'        => 'text',
                         'description' => '',
                         'required'    => true,
+                        'autocomplete' => 'user-password'
+
                     ],
                 ]
             );
@@ -367,6 +395,7 @@ class AddressForm extends BaseForm
                         'type'        => 'tel',
                         'pattern'     => Pi::api('api', 'order')->patternPhone(),
                         'description' => Pi::service('i18n')->getLocale() == 'fa' ? '' : __('International number expected (+33123456789)'),
+                        'autocomplete' => 'user-password'
 
                     ],
                 ]
@@ -386,6 +415,8 @@ class AddressForm extends BaseForm
                         'pattern'     => Pi::api('api', 'order')->patternPhone(),
                         'description' => Pi::service('i18n')->getLocale() == 'fa' ? '' : __('International number expected (+33123456789)'),
                         'required'    => true,
+                        'autocomplete' => 'user-password'
+
                     ],
                 ]
             );
@@ -403,6 +434,8 @@ class AddressForm extends BaseForm
                         'type'        => 'text',
                         'description' => '',
                         'required'    => true,
+                        'autocomplete' => 'user-password'
+
                     ],
                 ]
             );
@@ -420,6 +453,8 @@ class AddressForm extends BaseForm
                         'type'        => 'text',
                         'description' => '',
                         'required'    => false,
+                        'autocomplete' => 'user-password'
+
                     ],
                 ]
             );
@@ -437,6 +472,8 @@ class AddressForm extends BaseForm
                         'type'        => 'text',
                         'description' => '',
                         'required'    => true,
+                        'autocomplete' => 'user-password'
+
                     ],
                 ]
             );
@@ -453,6 +490,8 @@ class AddressForm extends BaseForm
                         'type'        => 'text',
                         'description' => '',
                         'required'    => true,
+                        'autocomplete' => 'user-password'
+
 
                     ],
                 ]
@@ -470,6 +509,8 @@ class AddressForm extends BaseForm
                         'type'        => 'text',
                         'description' => '',
                         'required'    => true,
+                        'autocomplete' => 'user-password'
+
                     ],
                 ]
             );
@@ -505,6 +546,8 @@ class AddressForm extends BaseForm
                             'type'        => 'text',
                             'description' => '',
                             'required'    => true,
+                            'autocomplete' => 'user-password'
+
                         ],
                     ]
                 );
