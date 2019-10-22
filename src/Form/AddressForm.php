@@ -528,14 +528,14 @@ class AddressForm extends BaseForm
             'elements' => array('account_type'),
         );
 
-        $groups['individual'] = array(
-            'label' => __('Legal representative Information'),
-            'elements' => array('first_name', 'last_name', 'birthday', 'email', 'mobile', 'address1', 'address2', 'zip_code', 'city', 'country')
-        );
-
         $groups['company'] = array(
             'label' => __('Company Information'),
             'elements' => array('company', 'company_address1', 'company_address2', 'company_zip_code', 'company_city', 'company_country', 'company_id', 'company_vat')
+        );
+
+        $groups['individual'] = array(
+            'label' => __('Legal representative Information'),
+            'elements' => array('first_name', 'last_name', 'birthday', 'email', 'mobile', 'address1', 'address2', 'zip_code', 'city', 'country')
         );
 
         $this->setGroups($groups);
