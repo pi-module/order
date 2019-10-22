@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2019-10-22 15:25+0200\n"
+"POT-Creation-Date: 2019-10-22 17:52+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -640,12 +640,14 @@ msgstr "Pays"
 
 #: src/Form/AddressForm.php:216 src/Form/OrderForm.php:186
 #: src/Form/OrderUpdateForm.php:300 src/Form/OrderUpdateForm.php:312
-msgid "Company id"
-msgstr "N° Entreprise"
+#: template/admin/invoice-add.phtml:42 template/admin/invoice-edit.phtml:89
+msgid "Company ID"
+msgstr "N° Entreprise (SIREN ou SIRET)"
 
 #: src/Form/AddressForm.php:231 src/Form/OrderForm.php:201
 #: src/Form/OrderUpdateForm.php:325 src/Form/OrderUpdateForm.php:337
-msgid "Company vat"
+#: template/admin/invoice-add.phtml:46 template/admin/invoice-edit.phtml:93
+msgid "Company VAT"
 msgstr "N° TVA Entreprise"
 
 #: src/Form/AddressForm.php:276 src/Form/CreditSettingForm.php:55
@@ -750,12 +752,12 @@ msgid "Account Type"
 msgstr "Type de compte"
 
 #: src/Form/AddressForm.php:532
-msgid "Legal representative (Personal Information)"
-msgstr "Représentant Legal (Coordonnées Personnelles)"
-
-#: src/Form/AddressForm.php:537
 msgid "Company Information"
 msgstr "Coordonnées Entreprise"
+
+#: src/Form/AddressForm.php:537
+msgid "Legal representative (Personal Information)"
+msgstr "Représentant Legal (Coordonnées Personnelles)"
 
 #: src/Form/CreditForm.php:42 src/Form/CreditSettingForm.php:42
 #: src/Form/OrderSettingForm.php:194 src/Form/OrderUpdateForm.php:43
@@ -1275,7 +1277,8 @@ msgstr "DargahPardakht"
 
 #: src/Gateway/Dargahpardakht/Gateway.php:55
 #: template/admin/credit-history.phtml:7 template/admin/credit-index.phtml:37
-#: template/admin/delivery-index.phtml:7 template/admin/location-index.phtml:7
+#: template/admin/delivery-index.phtml:7 template/admin/invoice-edit.phtml:163
+#: template/admin/invoice-view.phtml:292 template/admin/location-index.phtml:7
 #: template/admin/log-index.phtml:7 template/admin/order-list-user.phtml:371
 #: template/admin/order-view.phtml:76
 msgid "ID"
@@ -2003,14 +2006,6 @@ msgstr "Mettre à jour l'échéance"
 msgid "Order info"
 msgstr "Information Commande"
 
-#: template/admin/invoice-add.phtml:42 template/admin/invoice-edit.phtml:89
-msgid "Company ID"
-msgstr "N° Entreprise"
-
-#: template/admin/invoice-add.phtml:46 template/admin/invoice-edit.phtml:93
-msgid "Company VAT"
-msgstr "N° TVA Entreprise"
-
 #: template/admin/invoice-add.phtml:97 template/admin/invoice-edit.phtml:144
 #: template/admin/invoice-index.phtml:26 template/admin/invoice-view.phtml:88
 #: template/admin/invoice-view.phtml:173 template/admin/order-view.phtml:260
@@ -2076,10 +2071,6 @@ msgstr "Imprimer"
 #: template/admin/invoice-edit.phtml:160 template/admin/invoice-view.phtml:286
 msgid "Logs"
 msgstr "Logs"
-
-#: template/admin/invoice-edit.phtml:163 template/admin/invoice-view.phtml:292
-msgid "Id"
-msgstr "Id"
 
 #: template/admin/invoice-edit.phtml:165 template/admin/invoice-view.phtml:294
 #: template/front/print.phtml:255
@@ -2962,6 +2953,15 @@ msgstr "Facture réglée (%s)"
 msgid "Please wait, we will redirect you to the payment platform..."
 msgstr ""
 "Veuillez patienter, nous vous redirigeons vers la plateforme de paiement…"
+
+#~ msgid "Company vat"
+#~ msgstr "N° TVA Entreprise"
+
+#~ msgid "Id"
+#~ msgstr "Id"
+
+#~ msgid "Company id"
+#~ msgstr "N° Entreprise (SIREN ou SIRET)"
 
 #, fuzzy
 #~| msgid "Paid prepayment"

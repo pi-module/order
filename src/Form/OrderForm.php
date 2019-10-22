@@ -183,7 +183,7 @@ class OrderForm extends BaseForm
                     [
                         'name'       => 'company_id',
                         'options'    => [
-                            'label' => __('Company id'),
+                            'label' => __('Company ID'),
                         ],
                         'attributes' => [
                             'type'        => 'text',
@@ -198,7 +198,7 @@ class OrderForm extends BaseForm
                     [
                         'name'       => 'company_vat',
                         'options'    => [
-                            'label' => __('Company vat'),
+                            'label' => __('Company VAT'),
                         ],
                         'attributes' => [
                             'type'        => 'text',

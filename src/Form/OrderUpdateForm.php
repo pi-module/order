@@ -297,7 +297,7 @@ class OrderUpdateForm extends BaseForm
                 [
                     'name'       => 'delivery_company_id',
                     'options'    => [
-                        'label' => __('Company id'),
+                        'label' => __('Company ID'),
                     ],
                     'attributes' => [
                         'type'        => 'text',
@@ -309,7 +309,7 @@ class OrderUpdateForm extends BaseForm
                 [
                     'name'       => 'invoicing_company_id',
                     'options'    => [
-                        'label' => __('Company id'),
+                        'label' => __('Company ID'),
                     ],
                     'attributes' => [
                         'type'        => 'text',
@@ -322,7 +322,7 @@ class OrderUpdateForm extends BaseForm
                 [
                     'name'       => 'delivery_company_vat',
                     'options'    => [
-                        'label' => __('Company vat'),
+                        'label' => __('Company VAT'),
                     ],
                     'attributes' => [
                         'type'        => 'text',
@@ -334,7 +334,7 @@ class OrderUpdateForm extends BaseForm
                 [
                     'name'       => 'invoicing_company_vat',
                     'options'    => [
-                        'label' => __('Company vat'),
+                        'label' => __('Company VAT'),
                     ],
                     'attributes' => [
                         'type'        => 'text',

@@ -229,7 +229,7 @@ class AddressForm extends BaseForm
                     [
                         'name'       => 'company_id',
                         'options'    => [
-                            'label' => __('Company id'),
+                            'label' => __('Company ID'),
                         ],
                         'attributes' => [
                             'class'       => 'complementary',
@@ -246,7 +246,7 @@ class AddressForm extends BaseForm
                     [
                         'name'       => 'company_vat',
                         'options'    => [
-                            'label' => __('Company vat'),
+                            'label' => __('Company VAT'),
                         ],
                         'attributes' => [
                             'class'       => 'complementary',
