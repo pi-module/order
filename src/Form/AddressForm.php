@@ -524,7 +524,7 @@ class AddressForm extends BaseForm
 
 
         $groups['general'] = array(
-            'label' => __(''),
+            'label' => __('Account Type'),
             'elements' => array('account_type'),
         );
 
@@ -534,7 +534,7 @@ class AddressForm extends BaseForm
         );
 
         $groups['individual'] = array(
-            'label' => __('Legal representative Information'),
+            'label' => __('Legal representative (Personal Information)'),
             'elements' => array('first_name', 'last_name', 'birthday', 'email', 'mobile', 'address1', 'address2', 'zip_code', 'city', 'country')
         );
 
