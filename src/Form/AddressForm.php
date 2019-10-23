@@ -559,7 +559,7 @@ class AddressForm extends BaseForm
                 'name'       => 'submit_address',
                 'type'       => 'submit',
                 'attributes' => [
-                    'value' => $this->_id ? __('Edit') : __('Add'),
+                    'value' => $this->_id ? __('Save') : __('Add'),
                     'class' => 'btn btn-success',
                 ],
             ]
