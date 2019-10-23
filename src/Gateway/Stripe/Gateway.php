@@ -158,7 +158,10 @@ class Gateway extends AbstractGateway
         ];
 
         if (isset($this->gatewayPayInformation['gateway_id'])) {
-            $fee = round(($subtotalCommissionOwner) * $this->gatewayPayInformation['commission_percentage_owner']);
+            $config = Pi::service('registry')->config->read('guide');
+
+            $fee = round(($subtotalCommissionOwner * $this->gatewayPayInformation['commission_percentage_owner']) * ((100 + $config['package_vat'])/100 ));
+
             $data['payment_intent_data'] = [
                 'transfer_data' => [
                     'destination' => $this->gatewayPayInformation['gateway_id'],
