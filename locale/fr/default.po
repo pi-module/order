@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2019-10-22 17:52+0200\n"
+"POT-Creation-Date: 2019-10-23 15:11+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -575,14 +575,14 @@ msgstr "Type de compte"
 msgid "Individual"
 msgstr "Individuel"
 
-#: src/Form/AddressForm.php:50 src/Form/AddressForm.php:76
+#: src/Form/AddressForm.php:50 src/Form/AddressForm.php:78
 #: src/Form/CreditSettingForm.php:94 src/Form/OrderForm.php:169
 #: src/Form/OrderSettingForm.php:259 src/Form/OrderUpdateForm.php:272
 #: src/Form/OrderUpdateForm.php:284 template/admin/order-print.phtml:39
 msgid "Company"
 msgstr "Entreprise"
 
-#: src/Form/AddressForm.php:93 src/Form/AddressForm.php:400
+#: src/Form/AddressForm.php:97 src/Form/AddressForm.php:431
 #: src/Form/OrderUpdateForm.php:352 src/Form/OrderUpdateForm.php:365
 #: template/admin/invoice-add.phtml:18 template/admin/invoice-add.phtml:60
 #: template/admin/invoice-edit.phtml:65 template/admin/invoice-edit.phtml:107
@@ -590,14 +590,14 @@ msgstr "Entreprise"
 msgid "Address"
 msgstr "Adresse"
 
-#: src/Form/AddressForm.php:110 src/Form/AddressForm.php:417
+#: src/Form/AddressForm.php:116 src/Form/AddressForm.php:450
 #: src/Form/OrderUpdateForm.php:381 src/Form/OrderUpdateForm.php:393
 #: template/admin/invoice-add.phtml:22 template/admin/invoice-add.phtml:64
 #: template/admin/invoice-edit.phtml:69 template/admin/invoice-edit.phtml:111
 msgid "Address addition"
 msgstr "Complément d'adresse"
 
-#: src/Form/AddressForm.php:127 src/Form/AddressForm.php:434
+#: src/Form/AddressForm.php:135 src/Form/AddressForm.php:469
 #: src/Form/OrderForm.php:253 src/Form/OrderSettingForm.php:246
 #: src/Form/OrderUpdateForm.php:527 src/Form/OrderUpdateForm.php:541
 #: template/admin/invoice-add.phtml:38 template/admin/invoice-add.phtml:80
@@ -607,7 +607,7 @@ msgstr "Complément d'adresse"
 msgid "Zip code"
 msgstr "Code Postal"
 
-#: src/Form/AddressForm.php:143 src/Form/AddressForm.php:450
+#: src/Form/AddressForm.php:153 src/Form/AddressForm.php:487
 #: src/Form/OrderForm.php:269 src/Form/OrderSettingForm.php:181
 #: src/Form/OrderUpdateForm.php:494 src/Form/OrderUpdateForm.php:509
 #: template/admin/invoice-add.phtml:26 template/admin/invoice-add.phtml:68
@@ -617,7 +617,7 @@ msgstr "Code Postal"
 msgid "City"
 msgstr "Ville"
 
-#: src/Form/AddressForm.php:160 src/Form/AddressForm.php:467
+#: src/Form/AddressForm.php:172 src/Form/AddressForm.php:506
 #: src/Form/OrderForm.php:286 src/Form/OrderUpdateForm.php:464
 #: src/Form/OrderUpdateForm.php:477 template/admin/invoice-add.phtml:30
 #: template/admin/invoice-add.phtml:72 template/admin/invoice-edit.phtml:77
@@ -626,8 +626,8 @@ msgstr "Ville"
 msgid "State"
 msgstr "Département-Province"
 
-#: src/Form/AddressForm.php:184 src/Form/AddressForm.php:195
-#: src/Form/AddressForm.php:491 src/Form/AddressForm.php:502
+#: src/Form/AddressForm.php:198 src/Form/AddressForm.php:209
+#: src/Form/AddressForm.php:532 src/Form/AddressForm.php:543
 #: src/Form/OrderForm.php:310 src/Form/OrderForm.php:321
 #: src/Form/OrderUpdateForm.php:416 src/Form/OrderUpdateForm.php:426
 #: src/Form/OrderUpdateForm.php:436 src/Form/OrderUpdateForm.php:448
@@ -638,35 +638,35 @@ msgstr "Département-Province"
 msgid "Country"
 msgstr "Pays"
 
-#: src/Form/AddressForm.php:216 src/Form/OrderForm.php:186
+#: src/Form/AddressForm.php:232 src/Form/OrderForm.php:186
 #: src/Form/OrderUpdateForm.php:300 src/Form/OrderUpdateForm.php:312
 #: template/admin/invoice-add.phtml:42 template/admin/invoice-edit.phtml:89
 msgid "Company ID"
 msgstr "N° Entreprise (SIREN ou SIRET)"
 
-#: src/Form/AddressForm.php:231 src/Form/OrderForm.php:201
+#: src/Form/AddressForm.php:249 src/Form/OrderForm.php:201
 #: src/Form/OrderUpdateForm.php:325 src/Form/OrderUpdateForm.php:337
 #: template/admin/invoice-add.phtml:46 template/admin/invoice-edit.phtml:93
 msgid "Company VAT"
 msgstr "N° TVA Entreprise"
 
-#: src/Form/AddressForm.php:276 src/Form/CreditSettingForm.php:55
+#: src/Form/AddressForm.php:296 src/Form/CreditSettingForm.php:55
 #: src/Form/OrderForm.php:69 src/Form/OrderSettingForm.php:220
 #: src/Form/OrderUpdateForm.php:96 src/Form/OrderUpdateForm.php:124
 msgid "First name"
 msgstr "Prénom"
 
-#: src/Form/AddressForm.php:291 src/Form/CreditSettingForm.php:68
+#: src/Form/AddressForm.php:313 src/Form/CreditSettingForm.php:68
 #: src/Form/OrderForm.php:85 src/Form/OrderSettingForm.php:233
 #: src/Form/OrderUpdateForm.php:110 src/Form/OrderUpdateForm.php:138
 msgid "Last name"
 msgstr "Nom"
 
-#: src/Form/AddressForm.php:308
+#: src/Form/AddressForm.php:332
 msgid "Birthday"
 msgstr "Date Naissance"
 
-#: src/Form/AddressForm.php:331 src/Form/OrderForm.php:102
+#: src/Form/AddressForm.php:355 src/Form/OrderForm.php:102
 #: src/Form/OrderSettingForm.php:207 src/Form/OrderUpdateForm.php:155
 #: src/Form/OrderUpdateForm.php:168 template/admin/invoice-add.phtml:14
 #: template/admin/invoice-add.phtml:56 template/admin/invoice-edit.phtml:61
@@ -675,7 +675,7 @@ msgstr "Date Naissance"
 msgid "ID number"
 msgstr "N° ID"
 
-#: src/Form/AddressForm.php:348 src/Form/CreditSettingForm.php:81
+#: src/Form/AddressForm.php:374 src/Form/CreditSettingForm.php:81
 #: src/Form/OrderForm.php:118 src/Form/OrderSettingForm.php:168
 #: src/Form/OrderUpdateForm.php:184 src/Form/OrderUpdateForm.php:197
 #: template/admin/credit-history.phtml:74 template/admin/invoice-add.phtml:84
@@ -691,7 +691,7 @@ msgstr "N° ID"
 msgid "Email"
 msgstr "Email"
 
-#: src/Form/AddressForm.php:364 src/Form/OrderForm.php:134
+#: src/Form/AddressForm.php:392 src/Form/OrderForm.php:134
 #: src/Form/OrderUpdateForm.php:213 src/Form/OrderUpdateForm.php:226
 #: template/admin/invoice-add.phtml:88 template/admin/invoice-edit.phtml:135
 #: template/admin/invoice-view.phtml:80 template/admin/invoice-view.phtml:165
@@ -704,11 +704,11 @@ msgstr "Email"
 msgid "Phone"
 msgstr "Téléphone"
 
-#: src/Form/AddressForm.php:369 src/Form/AddressForm.php:387
+#: src/Form/AddressForm.php:397 src/Form/AddressForm.php:416
 msgid "International number expected (+33123456789)"
 msgstr "Format Numérotation Internationale attendue (+33123456789)"
 
-#: src/Form/AddressForm.php:381 src/Form/OrderForm.php:151
+#: src/Form/AddressForm.php:410 src/Form/OrderForm.php:151
 #: src/Form/OrderSettingForm.php:155 src/Form/OrderUpdateForm.php:242
 #: src/Form/OrderUpdateForm.php:255 template/admin/invoice-add.phtml:92
 #: template/admin/invoice-edit.phtml:139 template/admin/invoice-view.phtml:83
@@ -722,40 +722,31 @@ msgstr "Format Numérotation Internationale attendue (+33123456789)"
 msgid "Mobile"
 msgstr "Mobile"
 
-#: src/Form/AddressForm.php:385
+#: src/Form/AddressForm.php:414
 msgid "example : +33123456789"
 msgstr "exemple : +33123456789"
 
-#: src/Form/AddressForm.php:519 src/Form/PromocodeForm.php:165
-#: template/admin/delivery-index.phtml:25
-#: template/admin/delivery-index.phtml:27 template/admin/gateway-index.phtml:65
-#: template/admin/gateway-index.phtml:67 template/admin/gateway-index.phtml:74
-#: template/admin/gateway-index.phtml:76 template/admin/invoice-view.phtml:274
-#: template/admin/invoice-view.phtml:276 template/admin/location-index.phtml:25
-#: template/admin/location-index.phtml:27 template/admin/order-view.phtml:41
-#: template/admin/order-view.phtml:48 template/admin/order-view.phtml:499
-#: template/admin/order-view.phtml:503 template/admin/order-view.phtml:618
-#: template/admin/order-view.phtml:622 template/admin/order-view.phtml:668
-#: template/admin/order-view.phtml:672 template/admin/promocode-index.phtml:40
-#: template/front/checkout-listaddress.phtml:101
+#: src/Form/AddressForm.php:562 src/Form/CreditForm.php:147
+#: src/Form/InstallmentForm.php:124 src/Form/InvoiceForm.php:75
+#: src/Form/OrderProductForm.php:241 src/Form/OrderUpdateForm.php:573
 #: template/front/checkout.phtml:647
-msgid "Edit"
-msgstr "Editer"
+msgid "Save"
+msgstr "Enregistrer"
 
-#: src/Form/AddressForm.php:519 src/Form/PromocodeForm.php:165
+#: src/Form/AddressForm.php:562 src/Form/PromocodeForm.php:165
 #: template/admin/promocode-index.phtml:14
 msgid "Add"
 msgstr "Ajouter"
 
-#: src/Form/AddressForm.php:527
+#: src/Form/AddressForm.php:570
 msgid "Account Type"
 msgstr "Type de compte"
 
-#: src/Form/AddressForm.php:532
+#: src/Form/AddressForm.php:575
 msgid "Company Information"
 msgstr "Coordonnées Entreprise"
 
-#: src/Form/AddressForm.php:537
+#: src/Form/AddressForm.php:580
 msgid "Legal representative (Personal Information)"
 msgstr "Représentant Legal (Coordonnées Personnelles)"
 
@@ -791,12 +782,6 @@ msgstr "Message utilisateur"
 #: src/Form/CreditForm.php:131 template/admin/credit-history.phtml:94
 msgid "Admin message"
 msgstr "Message Admin"
-
-#: src/Form/CreditForm.php:147 src/Form/InstallmentForm.php:124
-#: src/Form/InvoiceForm.php:75 src/Form/OrderProductForm.php:241
-#: src/Form/OrderUpdateForm.php:573
-msgid "Save"
-msgstr "Enregistrer"
 
 #: src/Form/CreditSettingForm.php:108 src/Form/InvoiceSettingForm.php:116
 #: src/Form/OrderSettingForm.php:273
@@ -1204,6 +1189,20 @@ msgstr "Module"
 #: src/Form/PromocodeForm.php:154
 msgid "Show Promo Code on front CTA"
 msgstr "Afficher le Code Promo sur le CTA front"
+
+#: src/Form/PromocodeForm.php:165 template/admin/delivery-index.phtml:25
+#: template/admin/delivery-index.phtml:27 template/admin/gateway-index.phtml:65
+#: template/admin/gateway-index.phtml:67 template/admin/gateway-index.phtml:74
+#: template/admin/gateway-index.phtml:76 template/admin/invoice-view.phtml:274
+#: template/admin/invoice-view.phtml:276 template/admin/location-index.phtml:25
+#: template/admin/location-index.phtml:27 template/admin/order-view.phtml:41
+#: template/admin/order-view.phtml:48 template/admin/order-view.phtml:499
+#: template/admin/order-view.phtml:503 template/admin/order-view.phtml:618
+#: template/admin/order-view.phtml:622 template/admin/order-view.phtml:668
+#: template/admin/order-view.phtml:672 template/admin/promocode-index.phtml:40
+#: template/front/checkout-listaddress.phtml:101
+msgid "Edit"
+msgstr "Editer"
 
 #: src/Form/UpdateCanPayForm.php:42
 msgid "Customer can make payment ?"
