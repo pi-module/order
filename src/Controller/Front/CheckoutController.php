@@ -208,7 +208,6 @@ class CheckoutController extends IndexController
             if (!empty($cart['product'])) {
                 $this->getModel('detail')->delete(['order' => $_SESSION['order']['id']]);
                 foreach ($cart['product'] as $product) {
-                    $price           = $product['product_price'];
                     $unconsumedPrice = json_decode($product['extra'], true)['unconsumedPrice'];
 
                     // Save detail
@@ -228,7 +227,13 @@ class CheckoutController extends IndexController
                     $detail->time_end       = $product['time_end'];
 
                     // Set price
-                    $detail->product_price = $price;
+                    $formatter = Pi::service('i18n')->getNumberFormatter();
+                    $formatter->setAttribute(\NumberFormatter::MAX_FRACTION_DIGITS, 2);
+                    $formatter->setSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL, '.');
+
+                    $detail->product_price = $formatter->formatCurrency($product['product_price'], Pi::config('number_currency'));
+                    $detail->vat_price = $detail->vat_price - ($detail->product_price - $product['product_price']);
+
                     $extra                 = [];
                     if ($product['extra']) {
                         $extra = json::decode($product['extra'], true);
