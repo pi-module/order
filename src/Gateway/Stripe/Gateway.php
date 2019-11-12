@@ -312,7 +312,7 @@ class Gateway extends AbstractGateway
             $extra['stripe'] = [
                 'payment_intent'    => $payment['id'],
                 'transfer'          => $payment['charges']['data'][0]['transfer'],
-                'metadata'          => $payment['charges']['data'][0]['metadata']->__toArray()
+                'metadata'          => $payment['charges']['data'][0]['metadata']->toArray()
             ];
 
 
