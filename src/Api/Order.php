@@ -462,7 +462,7 @@ class Order extends AbstractApi
         return $backUrl;
     }
 
-    public function setOrderInfo($order)
+    public function setOrderInfo($order, $completeUrl = true)
     {
         // Empty order
         if (isset($_SESSION['order'])) {
@@ -482,15 +482,17 @@ class Order extends AbstractApi
                 )
             );
         } else {
-            $checkout = Pi::url(
-                Pi::service('url')->assemble(
+            $checkout = Pi::service('url')->assemble(
                     'order', [
                     'module'     => 'order',
                     'controller' => 'checkout',
                     'action'     => 'index',
                 ]
-                )
             );
+            if ($completeUrl) {
+                $checkout = Pi::url($checkout);
+            }
+
         }
         return $checkout;
     }
