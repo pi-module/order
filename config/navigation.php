@@ -117,7 +117,18 @@ return [
             'controller' => 'promocode',
             'action'     => 'index',
             'pages'      => [
-
+                'list'    => [
+                    'label'      => _a('Promotional codes'),
+                    'route'      => 'admin',
+                    'controller' => 'promocode',
+                    'action'     => 'index',
+                ],
+                'add'     => [
+                    'label'      => _a('Add'),
+                    'route'      => 'admin',
+                    'controller' => 'promocode',
+                    'action'     => 'manage',
+                ],
             ],
         ],
     ],
