@@ -339,6 +339,13 @@ class AddressForm extends BaseForm
                     unset($groups['company']['elements'][$key]);
                 }
             }
+        } else {
+            if (($key = array_search('company_id', $groups['company']['elements'])) !== false) {
+                unset($groups['company']['elements'][$key]);
+            }
+            if (($key = array_search('company_vat', $groups['company']['elements'])) !== false) {
+                unset($groups['company']['elements'][$key]);
+            }
         }
 
         // Set html row 1
