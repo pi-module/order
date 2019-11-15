@@ -406,8 +406,7 @@ class CheckoutController extends IndexController
 
         $formAddress = null;
         if (!count($addresses)) {
-            $formAddress = new AddressForm('address');
-            $formAddress->setInputFilter(new AddressFilter($option));
+            // Set user
             $user = [];
             if (Pi::user()->getId()) {
                 $user = Pi::api('user', 'user')->get(
@@ -417,6 +416,10 @@ class CheckoutController extends IndexController
                     true
                 );
             }
+
+            // Set form
+            $formAddress = new AddressForm('address', $option);
+            $formAddress->setInputFilter(new AddressFilter($option));
             $formAddress->setData($user);
         }
 
@@ -424,7 +427,7 @@ class CheckoutController extends IndexController
         // Check post
         $check = count($addresses) == 0 ? true : false;
         $invalidAddress = false;
-        if ($addressDelivery['account_type'] == 'none' || $addressInvoicing['account_type'] == 'none') {
+        if ((isset($addressDelivery['account_type']) && $addressDelivery['account_type'] == 'none') || (isset($addressInvoicing['account_type']) && $addressInvoicing['account_type'] == 'none')) {
             $invalidAddress = true;
         }
 
@@ -639,8 +642,9 @@ class CheckoutController extends IndexController
 
     public function addressAction()
     {
+        $option = [];
         $id   = $this->params('id');
-        $form = new AddressForm('address');
+        $form = new AddressForm('address', $option);
         $form->setAttribute(
             'action', Pi::url(Pi::service('url')->assemble('order', ['module' => 'order', 'controller' => 'checkout', 'action' => 'address', 'id' => $id]))
         );
@@ -676,7 +680,7 @@ class CheckoutController extends IndexController
             }
         } else {
             if ($id && is_numeric($id)) {
-                $form = new AddressForm('address', $id);
+                $form = new AddressForm('address', $option, $id);
                 $form->setAttribute(
                     'action',
                     Pi::url(Pi::service('url')->assemble('order', ['module' => 'order', 'controller' => 'checkout', 'action' => 'address', 'id' => $id]))

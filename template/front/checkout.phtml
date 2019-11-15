@@ -104,8 +104,8 @@ $script = sprintf(
     __('Days'),
     Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'level', 'process' => 'delivery', 'id' => ''])),
     Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'level', 'process' => 'payment', 'id' => ''])),
-    $addressDelivery['id'] ?: 0,
-    $addressInvoicing['id'] ?: 0
+    isset($addressDelivery['id']) && $addressDelivery['id'] ?: 0,
+    isset($addressInvoicing['id']) && $addressInvoicing['id'] ?: 0
 );
 $this->footScript()->appendScript($script);
 ?>
