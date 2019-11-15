@@ -284,7 +284,7 @@ class CheckoutController extends IndexController
                         'module'     => $this->getModule(),
                         'controller' => 'detail',
                         'action'     => 'index',
-                        'id'         => $order->order,
+                        'id'         => $order->id,
                     ]
                     )
                 );
