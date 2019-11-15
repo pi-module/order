@@ -75,9 +75,7 @@ $script
             });
         },
         makeOrderAction: function (e) {
-            
             e.preventDefault();
-            
             $('#addressFromNew').addClass('d-none');
             
             $('form#order [name=address_delivery_id]').val(%s);
@@ -90,8 +88,6 @@ $script
             $(e.target).addClass('d-none');
             $(e.target).parent().parent().find('.selected-address').removeClass('d-none');
         }
-        
-        
     }
     page.init();
 })(jQuery)
@@ -111,45 +107,42 @@ $this->footScript()->appendScript($script);
 ?>
 
 <div id="js-order" class="clearfix order-checkout">
-    <div class="page-header">
+    <div class="mb-3">
         <h1><?php _e('Checkout'); ?></h1>
     </div>
-    <div class="row clearfix">
-        <?php if ($cart['type_payment'] == 'installment') { ?>
-            <div class="col-md-12">
-                <div class="alert alert-info" role="alert">
-                    <h2><?php _e('Terms of payment'); ?></h2>
-                    <p><?php echo sprintf(
-                            __('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2),
-                            Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])),
-                            Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))
-                        ); ?></p>
-                </div>
-            </div>
-        <?php } ?>
-        <?php if (isset($cart['can_pay']) && $cart['can_pay'] == 2) { ?>
-            <div class="col-md-12">
-                <div class="alert alert-danger" role="alert">
-                    <p><?php echo __(
-                            'One of your select products or services have variable stock, than your payment option is disable, we will review your order and if your selected products or services be in stock we active payment option and send notification for you'
-                        ); ?></p>
-                </div>
-            </div>
-        <?php } ?>
-    </div>
+
+    <?php if ($cart['type_payment'] == 'installment') { ?>
+        <div class="alert alert-info" role="alert">
+            <h2><?php _e('Terms of payment'); ?></h2>
+            <p><?php echo sprintf(
+                    __('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2),
+                    Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])),
+                    Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))
+                ); ?></p>
+        </div>
+    <?php } ?>
+
+    <?php if (isset($cart['can_pay']) && $cart['can_pay'] == 2) { ?>
+        <div class="alert alert-danger" role="alert">
+            <p><?php echo __(
+                    'One of your select products or services have variable stock, than your payment option is disable, we will review your order and if your selected products or services be in stock we active payment option and send notification for you'
+                ); ?></p>
+        </div>
+    <?php } ?>
+
     <div class="clearfix row">
-        <div class="col-md-8">
+        <div class="col-lg-8 col-md-8">
             <?php if (isset($formLogin) && !empty($formLogin)) { ?>
                 <div class="alert alert-info" role="alert">
                     <?php _e(
                         'If you registered on website before this time and have user account, please login to system and continue ordering, and if you dont have user account here, please fill register new user account and make order form'
                     ); ?>
                 </div>
-                <div class="page-header">
+                <div class="mb-3">
                     <h3><?php _e('Login'); ?></h3>
                 </div>
                 <?php echo $this->form($formLogin); ?>
-                <div class="page-header">
+                <div class="mb-3">
                     <h3><?php _e('Register new user account and make order'); ?></h3>
                 </div>
             <?php } ?>
@@ -160,7 +153,6 @@ $this->footScript()->appendScript($script);
                 </div>
             <?php } else { ?>
                 <div class="clearfix alert alert-info" role="alert">
-
                     <?php if (!empty($addresses)) { ?>
                         <h4><?php _e('Select the needed address for your order. You can also add a new address') ?></h4>
                     <?php } else { ?>
@@ -171,8 +163,8 @@ $this->footScript()->appendScript($script);
                 </div>
             <?php } ?>
             <div class="clearfix row">
-                <div class="col-md-6">
-                    <div class="col-md-12 address-single">
+                <div class="col-lg-6 col-md-6">
+                    <div class="address-single">
                         <div class="clearfix">
                             <div class="info">
                                 <p>
@@ -190,21 +182,18 @@ $this->footScript()->appendScript($script);
                                     <?php if (empty($addresses)) { ?>
                                         <?php echo $this->form($forms['new'], 'vertical'); ?>
                                     <?php } else { ?>
-
                                         <div>
                                             <?php _e('Type') ?> :
                                             <?php echo $addressInvoicing['account_type'] == 'none' ? __('ND') : __(ucfirst($addressInvoicing['account_type'])); ?>
                                         </div>
                                         <?php if ($addressInvoicing['account_type'] === 'company') { ?>
                                             <div><?php echo $this->escape($addressInvoicing['company']); ?></div>
-
                                             <?php if (!empty($addressInvoicing['company_address1'])) { ?>
                                                 <div><?php echo $this->escape($addressInvoicing['company_address1']); ?></div>
                                             <?php } ?>
                                             <?php if (!empty($addressInvoicing['company_address2'])) { ?>
                                                 <div><?php echo $this->escape($addressInvoicing['company_address2']); ?></div>
                                             <?php } ?>
-
                                             <div>
                                                 <?php if (!empty($addressInvoicing['company_zip_code'])) { ?>
                                                     <?php echo $this->escape($addressInvoicing['company_zip_code']); ?>&nbsp;
@@ -219,7 +208,6 @@ $this->footScript()->appendScript($script);
                                                     <?php echo $this->escape($addressInvoicing['company_country']); ?>&nbsp;
                                                 <?php } ?>
                                             </div>
-
                                             <div><?php echo $this->escape($addressInvoicing['company_id']); ?></div>
                                             <div><?php echo $this->escape($addressInvoicing['company_vat']); ?></div>
                                         <?php } else { ?>
@@ -232,7 +220,6 @@ $this->footScript()->appendScript($script);
                                             <?php if (!empty($addressInvoicing['address2'])) { ?>
                                                 <div><?php echo $this->escape($addressInvoicing['address2']); ?></div>
                                             <?php } ?>
-
                                             <div>
                                                 <?php if (!empty($addressInvoicing['zip_code'])) { ?>
                                                     <?php echo $this->escape($addressInvoicing['zip_code']); ?>&nbsp;
@@ -247,7 +234,6 @@ $this->footScript()->appendScript($script);
                                                     <?php echo $this->escape($addressInvoicing['country']); ?>&nbsp;
                                                 <?php } ?>
                                             </div>
-
                                             <?php if (!empty($addressInvoicing['email'])) { ?>
                                                 <div>
                                                     <?php _e('Email'); ?> :
@@ -274,8 +260,8 @@ $this->footScript()->appendScript($script);
                     </div>
                 </div>
                 <?php if (!empty($addresses)) { ?>
-                    <div class="col-md-6">
-                        <div class="col-md-12 address-single">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="address-single">
                             <div class="clearfix">
                                 <div class="info">
                                     <p>
@@ -314,7 +300,6 @@ $this->footScript()->appendScript($script);
                                                     <?php if (!empty($addressDelivery['company_address2'])) { ?>
                                                         <div><?php echo $this->escape($addressDelivery['company_address2']); ?></div>
                                                     <?php } ?>
-
                                                     <div>
                                                         <?php if (!empty($addressDelivery['company_zip_code'])) { ?>
                                                             <?php echo $this->escape($addressDelivery['company_zip_code']); ?>&nbsp;
@@ -329,7 +314,6 @@ $this->footScript()->appendScript($script);
                                                             <?php echo $this->escape($addressDelivery['company_country']); ?>&nbsp;
                                                         <?php } ?>
                                                     </div>
-
                                                     <div><?php echo $this->escape($addressDelivery['company_id']); ?></div>
                                                     <div><?php echo $this->escape($addressDelivery['company_vat']); ?></div>
                                                 <?php } else { ?>
@@ -342,7 +326,6 @@ $this->footScript()->appendScript($script);
                                                     <?php if (!empty($addressDelivery['address2'])) { ?>
                                                         <div><?php echo $this->escape($addressDelivery['address2']); ?></div>
                                                     <?php } ?>
-
                                                     <div>
                                                         <?php if (!empty($addressDelivery['zip_code'])) { ?>
                                                             <?php echo $this->escape($addressDelivery['zip_code']); ?>&nbsp;
@@ -357,7 +340,6 @@ $this->footScript()->appendScript($script);
                                                             <?php echo $this->escape($addressDelivery['country']); ?>&nbsp;
                                                         <?php } ?>
                                                     </div>
-
                                                     <?php if (!empty($addressDelivery['email'])) { ?>
                                                         <div>
                                                             <?php _e('Email'); ?> :
@@ -389,17 +371,17 @@ $this->footScript()->appendScript($script);
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-4">
             <div class="cart-product">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title"><?php _e('Your order'); ?></h3>
                     </div>
                     <div class="clearfix">
-                        <table class="cart-product-list">
+                        <table class="cart-product-list ">
                             <tr>
-                                <th class="col-md-10"><?php _e('Product name') ?></th>
-                                <th class="col-md-2 text-right"><?php _e('Total') ?></th>
+                                <th class="col-lg-10 col-md-10"><?php _e('Product name') ?></th>
+                                <th class="col-lg-2 col-md-2 text-right"><?php _e('Total') ?></th>
                             </tr>
                             <?php $totalDiscount = 0 ?>
                             <?php $count = 0 ?>
@@ -409,7 +391,6 @@ $this->footScript()->appendScript($script);
                                 $extra           = json_decode($product['extra'], true);
                                 $unconsumedPrice = isset($extra['unconsumedPrice']) ? $extra['unconsumedPrice'] : null;
                                 ?>
-
                                 <tr>
                                     <td>
                                         <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
@@ -484,7 +465,6 @@ $this->footScript()->appendScript($script);
                                 <?php $totalDiscount += $unconsumedPrice; ?>
                             <?php } ?>
                             <tr class="footer">
-
                                 <td>
                                     <strong>
                                         <?php _e('Total Price ext VAT'); ?>
@@ -537,16 +517,16 @@ $this->footScript()->appendScript($script);
                 <div class="clearfix">
                     <?php if (isset($forms['promoCheckout'])) { ?>
                         <?php echo $this->form()->openTag($forms['promoCheckout']); ?>
-                        <div class="col-md-4 nopadding">
+                        <div class="col-lg-4 col-md-4 nopadding">
                             <div class="form-group" data-name="code">
-                                <label class=" col-form-label">
+                                <label class="col-form-label">
                                     <?php _e('Your promo code') ?>
                                 </label>
                                 <?php echo $this->formElement($forms['promoCheckout']->get('code')); ?>
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             </div>
                         </div>
-                        <div class="col-md-2 nopadding">
+                        <div class="col-lg-2 col-md-2 nopadding">
                             <label class=" col-form-label">
                                 &nbsp;
                             </label>
@@ -561,11 +541,9 @@ $this->footScript()->appendScript($script);
                                 <span><?php echo $msgPromoCode['message'] ?></span>
                             </div>
                         <?php } ?>
-
                         <div class="clearfix alert d-none" role="alert">
                             <span></span>
                         </div>
-
                     <?php } ?>
                     <?php if (isset($forms['order'])) { ?>
                         <?php echo $this->form($forms['order'], 'vertical'); ?>
@@ -597,15 +575,15 @@ $this->footScript()->appendScript($script);
             </div>
             <div class="panel">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-lg-7 col-md-7">
                         <h2 class="delivery hide"><?php _e('Delivery Address') ?></h2>
                         <h2 class="invoicing hide"><?php _e('Invoicing Address') ?></h2>
                     </div>
-                    <div class="col-md-5">
-                        <a class="btn btn-simple btn-sm col-md-12 invoicing hide"
+                    <div class="col-lg-5 col-md-5">
+                        <a class="btn btn-simple btn-sm col-lg-12 col-md-12 invoicing hide"
                            href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing']); ?>" data-remote="false"
                            data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
-                        <a class="btn btn-simple btn-sm col-md-12 delivery hide"
+                        <a class="btn btn-simple btn-sm col-lg-12 col-md-12 delivery hide"
                            href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'delivery']); ?>" data-remote="false"
                            data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
                     </div>
@@ -616,11 +594,11 @@ $this->footScript()->appendScript($script);
                 <?php _e('Please, wait ...') ?>
             </div>
             <div class="panel bottom">
-                <div class="offset-md-7 col-md-5">
-                    <a class="btn btn-simple btn-sm col-md-12 invoicing hide"
+                <div class="offset-lg-5 col-lg-5 offset-md-7 col-md-5">
+                    <a class="btn btn-simple btn-sm col-lg-12 col-md-12 invoicing hide"
                        href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing']); ?>" data-remote="false"
                        data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
-                    <a class="btn btn-simple btn-sm col-md-12 delivery hide"
+                    <a class="btn btn-simple btn-sm col-lg- 12 col-md-12 delivery hide"
                        href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'delivery']); ?>" data-remote="false"
                        data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
                 </div>
