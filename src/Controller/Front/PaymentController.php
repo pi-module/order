@@ -94,8 +94,9 @@ class PaymentController extends IndexController
         ));
 
         foreach ($modulesOrder as $moduleOrder) {
-            if (!Pi::api('order',  $moduleOrder)->isAlwaysAvailable($order)) {
-                $this->jump(['', 'controller' => 'index', 'action' => 'error'], __('This product is no more available.'));
+            $alwaysAvailable = Pi::api('order',  $moduleOrder)->isAlwaysAvailable($order);
+            if (!$alwaysAvailable['status']) {
+                $this->jump(['', 'controller' => 'index', 'action' => 'error'], $alwaysAvailable['message']);
             }
         }
 
