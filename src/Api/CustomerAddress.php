@@ -138,7 +138,7 @@ class CustomerAddress extends AbstractApi
         }
 
         $row = Pi::model('customer_address', 'order')->find($id, 'id');
-        if ($row->uid != $uid) {
+        if (!$row || $row->uid != $uid) {
             return [];
         }
 
