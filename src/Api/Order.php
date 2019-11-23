@@ -633,6 +633,8 @@ class Order extends AbstractApi
 
     public function isAlwaysAvailable($order)
     {
-        return true;
+        return array(
+            'status' => 1
+        );
     }
 }
