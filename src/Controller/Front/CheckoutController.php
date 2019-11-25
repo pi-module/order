@@ -424,7 +424,7 @@ class CheckoutController extends IndexController
         // Check post
         $check = count($addresses) == 0 ? true : false;
         $invalidAddress = false;
-        if ($addressDelivery['account_type'] == 'none' || $addressInvoicing['account_type'] == 'none') {
+        if ((isset($addressDelivery['account_type']) && $addressDelivery['account_type'] == 'none') || (isset($addressInvoicing['account_type']) && $addressInvoicing['account_type'] == 'none')) {
             $invalidAddress = true;
         }
 

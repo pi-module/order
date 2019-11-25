@@ -104,8 +104,8 @@ $script = sprintf(
     __('Days'),
     Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'level', 'process' => 'delivery', 'id' => ''])),
     Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'level', 'process' => 'payment', 'id' => ''])),
-    $addressDelivery['id'] ?: 0,
-    $addressInvoicing['id'] ?: 0
+    isset($addressDelivery['id']) ? $addressDelivery['id'] : 0,
+    isset($addressInvoicing['id']) ? $addressInvoicing['id'] : 0
 );
 $this->footScript()->appendScript($script);
 ?>
@@ -613,7 +613,9 @@ $this->footScript()->appendScript($script);
                 <div class="clearfix"></div>
             </div>
             <div class="modal-body">
+                <p>
                 <?php _e('Please, wait ...') ?>
+                </p>
             </div>
             <div class="panel bottom">
                 <div class="offset-md-7 col-md-5">
@@ -668,24 +670,24 @@ $this->footScript()->appendScript($script);
         });
 
         $("#addressModal").on("show.bs.modal", function (e) {
+            if ($(e.relatedTarget).length == 0) {
+                return;
+            }
+
             var link = $(e.relatedTarget);
             $(this).find(".modal-body").load(link.attr("href"));
         });
 
         $("#addressListModal").on("show.bs.modal", function (e) {
+            if ($(e.relatedTarget).length == 0) {
+                return;
+            }
+
             var link = $(e.relatedTarget);
             $(this).find(".modal-body").load(link.attr("href"));
             $(this).find('.invoicing').addClass('hide');
             $(this).find('.delivery').addClass('hide');
         });
-
-        $('.complementary').parent().parent().hide();
-        $('#complementary').click(
-            function (e) {
-                e.preventDefault();
-                $('.complementary').parent().parent().toggle();
-            }
-        );
 
         $('#promoCheckout').on('submit', function () {
             var code = $('#promoCheckout input[name=code]').val();
@@ -749,7 +751,6 @@ $this->footScript()->appendScript($script);
             var elements = [
                 'company',
                 'company_address1',
-                'company_address2',
                 'company_zip_code',
                 'company_city',
                 'company_state',
@@ -760,15 +761,19 @@ $this->footScript()->appendScript($script);
             if (show) {
                 for (var i = 0; i < elements.length; ++i) {
                     var element = $('[name=' + elements[i] + ']');
-                    if (element.closest('.row').find('label i').length) {
-                        element.attr('required', true);
+                    if (element.length) {
+                        if (element.closest('.row').find('label i').length) {
+                            element.attr('required', true);
+                        }
                     }
                 }
                 $('[name=company]').closest('fieldset').show();
             } else {
                 for (var i = 0; i < elements.length; ++i) {
                     var element = $('[name=' + elements[i] + ']');
-                    element.attr('required', false);
+                    if (element.length) {
+                        element.attr('required', false);
+                    }
                 }
                 $('[name=company]').closest('fieldset').hide();
             }

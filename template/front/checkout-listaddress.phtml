@@ -130,9 +130,12 @@
                     if (data.status) {
                         if ($(a).closest('.address').find('.selected-address').length) {
                             needReload = true;
-
                         }
                         $(a).closest('.address').remove();
+                        if ($('.address').length == 0) {
+                            $('#addressListModal .modal-body').html("<p><?php _e('Please wait ...') ?></p>")
+                            window.location.reload();
+                        }
                     }
                 },
                 dataType: 'json'
