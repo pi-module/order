@@ -313,7 +313,7 @@ class CheckoutController extends IndexController
         // Favourites addresses
         $addresses = Pi::api('customerAddress', 'order')->findAddresses();
         if (count($addresses)) {
-            if (!isset($_SESSION['order']['delivery_address']) || !$addresses[$_SESSION['order']['delivery_address']]) {
+            if (isset($_SESSION['order']) && (!isset($_SESSION['order']['delivery_address']) || !$addresses[$_SESSION['order']['delivery_address']])) {
                 $favouriteDelivery = Pi::api('customerAddress', 'order')->getFavouriteDelivery();
                 if ($favouriteDelivery == null) {
                     $favouriteDelivery = current($addresses);
@@ -335,9 +335,11 @@ class CheckoutController extends IndexController
         // Set cart
         $cart = Pi::api('order', 'order')->getOrderInfo();
         // Set products
-        foreach ($cart['product'] as $key => $product) {
-            $cart['product'][$key]['details']           = Pi::api('order', $cart['module_name'])->getProductDetails($product['product'], $product['extra']);
-            $cart['product'][$key]['product_price_view'] = Pi::api('api', 'order')->viewPrice($product['product_price']);
+        if (isset($cart['product']) && count($cart['product'])) {
+            foreach ($cart['product'] as $key => $product) {
+                $cart['product'][$key]['details'] = Pi::api('order', $cart['module_name'])->getProductDetails($product['product'], $product['extra']);
+                $cart['product'][$key]['product_price_view'] = Pi::api('api', 'order')->viewPrice($product['product_price']);
+            }
         }
         Pi::api('order', 'order')->setOrderInfo($cart);
 
@@ -385,7 +387,7 @@ class CheckoutController extends IndexController
 
         // Sety form option
         $option          = [
-            'type_commodity'    => $cart['type_commodity'],
+            'type_commodity'    => isset($cart['type_commodity']) ? $cart['type_commodity'] : null,
             'addresses'         => $addresses,
             'delivery_address'  => $_SESSION['order']['delivery_address'],
             'invoicing_address' => $_SESSION['order']['invoicing_address'],
@@ -919,29 +921,34 @@ class CheckoutController extends IndexController
         $price['vat']      = isset($cart['total_vat']) ? $cart['total_vat'] : 0;
         $price['product']  = 0;
         $price['total']    = 0;
-        foreach ($cart['product'] as $product) {
-            // Check setup price
-            $extra = json_decode($product['extra'], true);
-            $unconsumedPrice = isset($extra['unconsumedPrice']) ? $extra['unconsumedPrice'] : null;
+        $unconsumedPrice = 0;
+        if (isset($cart['product']) && count($cart['product'])) {
+            foreach ($cart['product'] as $product) {
+                // Check setup price
+                $extra = json_decode($product['extra'], true);
+                $unconsumedPrice = isset($extra['unconsumedPrice']) ? $extra['unconsumedPrice'] : null;
 
-            $product['setup_price'] = isset($product['setup_price']) ? $product['setup_price'] : 0;
-            // Set price
-            $price['product']    = ($product['product_price'] * $product['number']) + $price['product'];
-            $price['discount']   = ($product['discount_price'] * $product['number']) + $price['discount'];
-            $price['shipping']   = ($product['shipping_price'] * $product['number']) + $price['shipping'];
-            $price['setup']      = ($product['setup_price'] * $product['number']) + $price['setup'];
-            $price['packing']    = ($product['packing_price'] * $product['number']) + $price['packing'];
-            $price['vat']        = $product['vat_price'] + $price['vat'];
-            $price['unconsumed'] = $unconsumedPrice;
+                $product['setup_price'] = isset($product['setup_price']) ? $product['setup_price'] : 0;
+                // Set price
+                $price['product']    = ($product['product_price'] * $product['number']) + $price['product'];
+                $price['discount']   = ($product['discount_price'] * $product['number']) + $price['discount'];
+                $price['shipping']   = ($product['shipping_price'] * $product['number']) + $price['shipping'];
+                $price['setup']      = ($product['setup_price'] * $product['number']) + $price['setup'];
+                $price['packing']    = ($product['packing_price'] * $product['number']) + $price['packing'];
+                $price['vat']        = $product['vat_price'] + $price['vat'];
+                $price['unconsumed'] = $unconsumedPrice;
 
+            }
         }
 
         // Set additional price
         $config = Pi::service('registry')->config->read($this->getModule());
-        if ($cart['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
-            $price['shipping'] = $price['shipping'] + $config['order_additional_price_product'];
-        } elseif (in_array($cart['type_commodity'], ['service', 'booking']) && $config['order_additional_price_service'] > 0) {
-            $price['setup'] = $price['setup'] + $config['order_additional_price_service'];
+        if (isset($cart['type_commodity'])) {
+            if ($cart['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
+                $price['shipping'] = $price['shipping'] + $config['order_additional_price_product'];
+            } elseif (in_array($cart['type_commodity'], ['service', 'booking']) && $config['order_additional_price_service'] > 0) {
+                $price['setup'] = $price['setup'] + $config['order_additional_price_service'];
+            }
         }
 
         // Set total

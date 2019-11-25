@@ -115,7 +115,7 @@ $this->footScript()->appendScript($script);
         <h1><?php _e('Checkout'); ?></h1>
     </div>
     <div class="row clearfix">
-        <?php if ($cart['type_payment'] == 'installment') { ?>
+        <?php if (isset($cart['type_payment']) && $cart['type_payment'] == 'installment') { ?>
             <div class="col-md-12">
                 <div class="alert alert-info" role="alert">
                     <h2><?php _e('Terms of payment'); ?></h2>
@@ -159,10 +159,9 @@ $this->footScript()->appendScript($script);
                     <div><?php _e('Your address has to be completed. Please, edit it.'); ?></div>
                 </div>
             <?php } else { ?>
-                <div class="clearfix alert alert-info" role="alert">
-
+                <div class="clearfix alert alert-<?php echo empty($addresses) ? 'info' : 'success' ?>" role="alert">
                     <?php if (!empty($addresses)) { ?>
-                        <h4><?php _e('Select the needed address for your order. You can also add a new address') ?></h4>
+                        <h4><?php _e('Voici les adresses que vous avez sélectionnées comme adresse de facturation et de livraisons. Vous pouvez aussi ajouter une nouvelle adresse pour en choisir une autre.') ?></h4>
                     <?php } else { ?>
                         <h4><?php _e(
                                 'You don\'t have set an address yet. Please create your address we will use for your order. You will be able then to manage several addresses'
@@ -403,85 +402,87 @@ $this->footScript()->appendScript($script);
                             </tr>
                             <?php $totalDiscount = 0 ?>
                             <?php $count = 0 ?>
-                            <?php foreach ($cart['product'] as $key => $product) { ?>
-                                <?php
-                                $count++;
-                                $extra           = json_decode($product['extra'], true);
-                                $unconsumedPrice = isset($extra['unconsumedPrice']) ? $extra['unconsumedPrice'] : null;
-                                ?>
+                            <?php if (isset($cart['product']) && count($cart['product'])) { ?>
+                                <?php foreach ($cart['product'] as $key => $product) { ?>
+                                    <?php
+                                    $count++;
+                                    $extra           = json_decode($product['extra'], true);
+                                    $unconsumedPrice = isset($extra['unconsumedPrice']) ? $extra['unconsumedPrice'] : null;
+                                    ?>
 
-                                <tr>
-                                    <td>
-                                        <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
-                                           target="_blank">
-                                            <b>#<?php echo $count . ' ' . $product['details']['title']; ?></b>
-                                        </a>
-                                        <?php if (isset($product['tooltip']) && $product['tooltip']) { ?>
-                                            <button type="button" class="btn btn-tooltip tooltip-description d-inline float-none m-0" data-toggle="tooltip" data-placement="left" title="" data-original-title="<?php echo strip_tags($product['tooltip_description']) ?>">?</button>
-                                        <?php } ?>
-                                        <?php if (!empty($product['time_start'])) { ?>
-                                            <p>
-                                                <?php if ($product['time_end'] == strtotime("2030-01-01")) { ?>
-                                                    <?php echo __('Unlimited from') . ' ' . _date($product['time_start']) ?>
-                                                <?php } else { ?>
-                                                    <?php echo __('From') . ' ' . _date($product['time_start']) . ' ' . __('to') . ' ' . _date(
-                                                            $product['time_end']
-                                                        ) ?>
-                                                <?php } ?>
-                                            </p>
-                                        <?php } ?>
-                                        <?php if (!empty($product['details']['thumbUrl'])) { ?>
-                                            <div class="col-5">
-                                                <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
-                                                   target="_blank">
-                                                    <img class="img-fluid"
-                                                         src="<?php echo $this->escape($product['details']['thumbUrl']); ?>">
-                                                </a>
-                                            </div>
-                                        <?php } ?>
-                                    </td>
-                                    <td class="text-right">
-                                        <strong class="data-total-price"><?php echo Pi::api('api', 'order')->viewPrice(
-                                                $this->escape($product['product_price'] - $product['discount_price'] - $unconsumedPrice)
-                                            ); ?></strong>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Price ext VAT'); ?></td>
-                                    <td class="data-normal-price">
-                                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
-                                    </td>
-                                </tr>
-                                <?php if (isset($product['discount']) && $product['discount'] > 0) { ?>
                                     <tr>
                                         <td>
-                                            <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Total Discount'); ?>
-                                            <?php if (isset($product['discount'])) { ?>
-                                                (<span data-discount-for="<?php echo $product['product'] ?>"><?php echo $product['discount'] ?></span>%)
+                                            <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
+                                               target="_blank">
+                                                <b>#<?php echo $count . ' ' . $product['details']['title']; ?></b>
+                                            </a>
+                                            <?php if (isset($product['tooltip']) && $product['tooltip']) { ?>
+                                                <button type="button" class="btn btn-tooltip tooltip-description d-inline float-none m-0" data-toggle="tooltip" data-placement="left" title="" data-original-title="<?php echo strip_tags($product['tooltip_description']) ?>">?</button>
+                                            <?php } ?>
+                                            <?php if (!empty($product['time_start'])) { ?>
+                                                <p>
+                                                    <?php if ($product['time_end'] == strtotime("2030-01-01")) { ?>
+                                                        <?php echo __('Unlimited from') . ' ' . _date($product['time_start']) ?>
+                                                    <?php } else { ?>
+                                                        <?php echo __('From') . ' ' . _date($product['time_start']) . ' ' . __('to') . ' ' . _date(
+                                                                $product['time_end']
+                                                            ) ?>
+                                                    <?php } ?>
+                                                </p>
+                                            <?php } ?>
+                                            <?php if (!empty($product['details']['thumbUrl'])) { ?>
+                                                <div class="col-5">
+                                                    <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
+                                                       target="_blank">
+                                                        <img class="img-fluid"
+                                                             src="<?php echo $this->escape($product['details']['thumbUrl']); ?>">
+                                                    </a>
+                                                </div>
                                             <?php } ?>
                                         </td>
-                                        <td data-discount-price-for="<?php echo $product['product'] ?>">
-                                            <?php
-                                            echo $product['discount_price'] > 0 ? '-' : '';
-                                            echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
+                                        <td class="text-right">
+                                            <strong class="data-total-price"><?php echo Pi::api('api', 'order')->viewPrice(
+                                                    $this->escape($product['product_price'] - $product['discount_price'] - $unconsumedPrice)
+                                                ); ?></strong>
                                         </td>
                                     </tr>
-                                <?php } ?>
-                                <?php if ($unconsumedPrice) { ?>
                                     <tr>
-                                        <td>
-                                            <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Old package recovery'); ?>
-                                        </td>
-                                        <td data-discount-price-for="<?php echo $product['product'] ?>">
-                                            <?php
-                                            echo $unconsumedPrice > 0 ? '-' : '';
-                                            echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice));
-                                            ?>
+                                        <td><?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Price ext VAT'); ?></td>
+                                        <td class="data-normal-price">
+                                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
                                         </td>
                                     </tr>
+                                    <?php if (isset($product['discount']) && $product['discount'] > 0) { ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Total Discount'); ?>
+                                                <?php if (isset($product['discount'])) { ?>
+                                                    (<span data-discount-for="<?php echo $product['product'] ?>"><?php echo $product['discount'] ?></span>%)
+                                                <?php } ?>
+                                            </td>
+                                            <td data-discount-price-for="<?php echo $product['product'] ?>">
+                                                <?php
+                                                echo $product['discount_price'] > 0 ? '-' : '';
+                                                echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                    <?php if ($unconsumedPrice) { ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Old package recovery'); ?>
+                                            </td>
+                                            <td data-discount-price-for="<?php echo $product['product'] ?>">
+                                                <?php
+                                                echo $unconsumedPrice > 0 ? '-' : '';
+                                                echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice));
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                    <?php $totalDiscount += $product['discount_price']; ?>
+                                    <?php $totalDiscount += $unconsumedPrice; ?>
                                 <?php } ?>
-                                <?php $totalDiscount += $product['discount_price']; ?>
-                                <?php $totalDiscount += $unconsumedPrice; ?>
                             <?php } ?>
                             <tr class="footer">
 
@@ -517,7 +518,7 @@ $this->footScript()->appendScript($script);
                                     </td>
                                 </tr>
                             <?php } ?>
-                            <?php if ($cart['type_payment'] != 'installment') { ?>
+                            <?php if (isset($cart['type_payment']) && $cart['type_payment'] != 'installment') { ?>
                                 <tr class="card-footer footer">
                                     <td>
                                         <strong>
