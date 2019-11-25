@@ -178,6 +178,14 @@ return [
             'filter'      => 'number_int',
             'value'       => 1,
         ],
+        'order_birthday'                 => [
+            'category'    => 'order',
+            'title'       => _a('Show birthday'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 1,
+        ],
         'order_company'                  => [
             'category'    => 'order',
             'title'       => _a('Show company'),

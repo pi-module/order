@@ -31,20 +31,19 @@ $this->footScript()->appendScript($script2);
     </div>
     <div class="alert alert-success" role="alert">
         <h1><?php _e('Thanks you for your payment !'); ?></h1>
-
-        <p><?php echo sprintf(
+        <p>
+            <?php echo sprintf(
                 __('Your payment ends successfully, we just need %s to obtain payment confirmation.'), '<strong><span id="timer"></span></strong>'
-            ); ?></p>
-
+            ); ?>
+        </p>
         <p><?php _e('Once received, youll be redirected automatically to your dashboard, and will be able to create your item !'); ?></p>
-
         <?php if ($paypal) { ?>
-            <p><?php _e(
+            <p>
+                <?php _e(
                     'You will additionally receive a confirmation mail from Paypal, telling that your transaction has been completed, and giving you a receipt for your purchase. You may log into your account at www.paypal.com to view details of this transaction.'
-                ); ?></p>
+                ); ?>
+            </p>
         <?php } ?>
-
         <p><?php _e('Please wait !'); ?></p>
-
     </div>
 </div>

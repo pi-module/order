@@ -2,12 +2,21 @@
 <div class="order-block-detail">
     <div class="order-block-detail-tab" role="tabpanel">
         <ul class="nav nav-tabs">
-            <li role="presentation" class="nav-item"><a class="nav-link active" href="#invoice" aria-controls="invoice" role="tab"
-                                                        data-toggle="tab"><?php echo _b('Invoices'); ?></a></li>
-            <li role="presentation" class="nav-item"><a class="nav-link" href="#order" aria-controls="order" role="tab"
-                                                        data-toggle="tab"><?php echo _b('Orders'); ?></a></li>
-            <li role="presentation" class="nav-item"><a class="nav-link" href="#user" aria-controls="user" role="tab"
-                                                        data-toggle="tab"><?php echo _b('User informations'); ?></a></li>
+            <li role="presentation" class="nav-item">
+                <a class="nav-link active" href="#invoice" aria-controls="invoice" role="tab" data-toggle="tab">
+                    <?php echo _b('Invoices'); ?>
+                </a>
+            </li>
+            <li role="presentation" class="nav-item">
+                <a class="nav-link" href="#order" aria-controls="order" role="tab"  data-toggle="tab">
+                    <?php echo _b('Orders'); ?>
+                </a>
+            </li>
+            <li role="presentation" class="nav-item">
+                <a class="nav-link" href="#user" aria-controls="user" role="tab" data-toggle="tab">
+                    <?php echo _b('User informations'); ?>
+                </a>
+            </li>
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="invoice">
@@ -15,10 +24,10 @@
                     <?php foreach ($block['resources']['invoices'] as $invoice) { ?>
                         <table class="table table-striped table-bordered table-sm">
                             <tr>
-                                <th class="col-md-1"><?php echo _b('ID'); ?></th>
-                                <th class="col-md-1"><?php echo _b('Type'); ?></th>
-                                <th class="col-md-1"><?php echo _b('Time Create'); ?></th>
-                                <th class="col-md-9 text-right"><?php echo _b('Action'); ?></th>
+                                <th class="col-lg-1 col-md-1"><?php echo _b('ID'); ?></th>
+                                <th class="col-lg-1 col-md-1"><?php echo _b('Type'); ?></th>
+                                <th class="col-lg-1 col-md-1"><?php echo _b('Time Create'); ?></th>
+                                <th class="col-lg-9 col-md-9 text-right"><?php echo _b('Action'); ?></th>
                             </tr>
                             <?php
                             if ($invoice['status'] == 1) {
@@ -30,29 +39,32 @@
                             }
                             ?>
                             <tr>
-                                <td><span
-                                            class="badge <?php echo $badgeIdClass; ?>"><?php echo $this->escape($invoice['code']); ?></span>
+                                <td>
+                                    <span class="badge <?php echo $badgeIdClass; ?>">
+                                        <?php echo $this->escape($invoice['code']); ?>
+                                    </span>
                                 </td>
                                 <td><?php echo $this->escape($invoice['type']); ?></td>
                                 <td><?php echo $this->escape($invoice['time_create_view']); ?></td>
                                 <td class="text-right">
                                     <a class="btn btn-primary btn-sm" title="<?php echo _b('View / Pay'); ?>"
-                                       href="<?php echo $this->url('order', ['module' => 'order', 'controller' => 'detail', 'id' => $invoice['order']]); ?>"><i
-                                                class="fas fa-edit"></i> <?php echo _b('View / Pay'); ?></a>
+                                       href="<?php echo $this->url('order', ['module' => 'order', 'controller' => 'detail', 'id' => $invoice['order']]); ?>">
+                                        <i class="fas fa-edit"></i> <?php echo _b('View / Pay'); ?>
+                                    </a>
                                 </td>
                             </tr>
                         </table>
 
                         <?php foreach ($invoice['installments'] as $installment) { ?>
-                            <table class="table table-striped table-installment table-bordered table-sm">
+                            <table class="table table-striped table-bordered table-hover table-sm mt-3 mb-3 table-installment">
                                 <tr>
-                                    <th class="col-md-1 transparent"></th>
-                                    <th class="col-md-1"><?php _e('Installment'); ?></th>
-                                    <th class="col-md-1"><?php _e('Price'); ?></th>
-                                    <th class="col-md-1"><?php _e('Credit price'); ?></th>
-                                    <th class="col-md-2"><?php _e('Due date'); ?></th>
-                                    <th class="col-md-2"><?php _e('Time pay'); ?></th>
-                                    <th class="col-md-4"><?php _e('Gateway'); ?></th>
+                                    <th class="col-lg-1 col-md-1 transparent"></th>
+                                    <th class="col-lg-1 col-md-1"><?php _e('Installment'); ?></th>
+                                    <th class="col-lg-1 col-md-1"><?php _e('Price'); ?></th>
+                                    <th class="col-lg-1 col-md-1"><?php _e('Credit price'); ?></th>
+                                    <th class="col-lg-2 col-md-2"><?php _e('Due date'); ?></th>
+                                    <th class="col-lg-2 col-md-2"><?php _e('Time pay'); ?></th>
+                                    <th class="col-lg-4 col-md-4"><?php _e('Gateway'); ?></th>
                                 </tr>
                                 <?php
                                 $rowClass = '';
@@ -74,9 +86,7 @@
                                     <td><?php echo $this->escape($installment['credit_price_view']); ?></td>
                                     <td><?php echo $this->escape($installment['time_duedate_view']); ?></td>
                                     <td><?php echo $this->escape($installment['time_payment_view']); ?></td>
-                                    <td><?php echo isset($block['gateways'][$installment['gateway']]) ? $block['gateways'][$installment['gateway']]
-                                            : ''; ?></td>
-
+                                    <td><?php echo isset($block['gateways'][$installment['gateway']]) ? $block['gateways'][$installment['gateway']] : ''; ?></td>
                                 </tr>
                             </table>
                         <?php } ?>
@@ -120,7 +130,7 @@
             <div role="tabpanel" class="tab-pane" id="user">
                 <div class="well">
                     <div class="clearfix">
-                        <div class="col-md-6">
+                        <div class="col-lg-6 col-md-6">
                             <?php if (!empty($block['resources']['credit'])) { ?>
                                 <p><strong><?php echo _b('Credit'); ?></strong> : <span
                                             class="badge badge-success"><?php echo Pi::api('api', 'order')->viewPrice(
@@ -152,7 +162,7 @@
                                     <span><?php echo $this->escape($block['resources']['zip_code']); ?></span></p>
                             <?php } ?>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-lg-6 col-md-6">
                             <?php if (!empty($block['resources']['email'])) { ?>
                                 <p><strong><?php echo _b('Email'); ?></strong> :
                                     <span><?php echo $this->escape($block['resources']['email']); ?></span></p>
@@ -178,7 +188,7 @@
                                     <span><?php echo $this->escape($block['resources']['company_vat']); ?></span></p>
                             <?php } ?>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-lg-12 col-md-12">
                             <?php if (!empty($block['resources']['address1'])) { ?>
                                 <p><strong><?php echo _b('Delivery address'); ?></strong> :
                                     <span><?php echo $this->escape($block['resources']['address1']); ?></span></p>

@@ -20,7 +20,7 @@ class AddressForm extends BaseForm
 {
     protected $_id;
 
-    public function __construct($name = null, $id = null, $option = [])
+    public function __construct($name = null, $option = [], $id = null)
     {
         $this->option = $option;
         $this->config = Pi::service('registry')->config->read('order', 'order');
@@ -38,26 +38,69 @@ class AddressForm extends BaseForm
 
     public function init()
     {
+        // Set group
+        $groups = [];
 
+        // Set general group
+        $groups['general'] = [
+            'label'    => __('Account Type'),
+            'elements' => ['account_type'],
+        ];
 
-        $this->add(array(
-            'name' => 'account_type',
-            'type'       => 'radio',
-            'options' => array(
-                'label' => __('Account type'),
-                'value_options' => array(
-                    'individual' => __('Individual'),
-                    'company' => __('Company'),
-                ),
-            ),
-            'attributes' => array(
-                'required' => true,
-                'value' => 0,
-                'autocomplete' => 'user-password'
+        // Set company group
+        $groups['company'] = [
+            'label'    => __('Company Information'),
+            'elements' => [
+                'company',
+                'company_address1',
+                'company_address2',
+                'company_zip_code',
+                'company_city',
+                'company_country',
+                'company_id',
+                'company_vat',
+            ],
+        ];
 
-            )
-        ));
+        // Set individual group
+        $groups['individual'] = [
+            'label'    => __('Legal representative (Personal Information)'),
+            'elements' => [
+                'first_name',
+                'last_name',
+                'birthday',
+                'email',
+                'mobile',
+                'address1',
+                'address2',
+                'zip_code',
+                'city',
+                'country',
+            ],
+        ];
 
+        // account_type
+        $this->add(
+            [
+                'name'       => 'account_type',
+                'type'       => 'radio',
+                'options'    => [
+                    'label'         => __('Account type'),
+                    'value_options' => [
+                        'individual' => __('Individual'),
+                        'company'    => __('Company'),
+                    ],
+                ],
+                'attributes' => [
+                    'required'     => true,
+                    'value'        => 0,
+                    'autocomplete' => 'user-password',
+
+                ],
+            ]
+        );
+
+        //address_id
         $this->add(
             [
                 'name'       => 'address_id',
@@ -70,25 +113,29 @@ class AddressForm extends BaseForm
 
         // company
         if ($this->config['order_company']) {
-            // company
             $this->add(
                 [
-                    'name' => 'company',
-                    'options' => [
+                    'name'       => 'company',
+                    'options'    => [
                         'label' => __('Company'),
                     ],
                     'attributes' => [
-                        'class' => 'complementary',
-                        'type' => 'text',
-                        'description' => '',
-                        'required'    => true,
-                        'autocomplete' => 'user-password'
+                        'class'        => 'complementary',
+                        'type'         => 'text',
+                        'description'  => '',
+                        'required'     => true,
+                        'autocomplete' => 'user-password',
 
                     ],
                 ]
             );
+        } else {
+            if (($key = array_search('company', $groups['company']['elements'])) !== false) {
+                unset($groups['company']['elements'][$key]);
+            }
         }
 
+        // company_address1
         if ($this->config['order_address1']) {
             $this->add(
                 [
@@ -97,17 +144,21 @@ class AddressForm extends BaseForm
                         'label' => __('Address'),
                     ],
                     'attributes' => [
-                        'type'        => 'text',
-                        'description' => '',
-                        'required'    => true,
-                        'autocomplete' => 'user-password'
+                        'type'         => 'text',
+                        'description'  => '',
+                        'required'     => true,
+                        'autocomplete' => 'user-password',
 
                     ],
                 ]
             );
+        } else {
+            if (($key = array_search('company_address1', $groups['company']['elements'])) !== false) {
+                unset($groups['company']['elements'][$key]);
+            }
         }
 
-        // address 2
+        // company_address2
         if ($this->config['order_address2']) {
             $this->add(
                 [
@@ -116,17 +167,21 @@ class AddressForm extends BaseForm
                         'label' => __('Address addition'),
                     ],
                     'attributes' => [
-                        'type'        => 'text',
-                        'description' => '',
-                        'required'    => false,
-                        'autocomplete' => 'user-password'
+                        'type'         => 'text',
+                        'description'  => '',
+                        'required'     => false,
+                        'autocomplete' => 'user-password',
 
                     ],
                 ]
             );
+        } else {
+            if (($key = array_search('company_address2', $groups['company']['elements'])) !== false) {
+                unset($groups['company']['elements'][$key]);
+            }
         }
 
-        // zip_code
+        // company_zip_code
         if ($this->config['order_zip']) {
             $this->add(
                 [
@@ -135,16 +190,21 @@ class AddressForm extends BaseForm
                         'label' => __('Zip code'),
                     ],
                     'attributes' => [
-                        'type'        => 'text',
-                        'description' => '',
-                        'required'    => true,
-                        'autocomplete' => 'user-password'
+                        'type'         => 'text',
+                        'description'  => '',
+                        'required'     => true,
+                        'autocomplete' => 'user-password',
 
                     ],
                 ]
             );
+        } else {
+            if (($key = array_search('company_zip_code', $groups['company']['elements'])) !== false) {
+                unset($groups['company']['elements'][$key]);
+            }
         }
-        // city
+
+        // company_city
         if ($this->config['order_city']) {
             $this->add(
                 [
@@ -153,17 +213,22 @@ class AddressForm extends BaseForm
                         'label' => __('City'),
                     ],
                     'attributes' => [
-                        'type'        => 'text',
-                        'description' => '',
-                        'required'    => true,
-                        'autocomplete' => 'user-password'
+                        'type'         => 'text',
+                        'description'  => '',
+                        'required'     => true,
+                        'autocomplete' => 'user-password',
 
 
                     ],
                 ]
             );
+        } else {
+            if (($key = array_search('company_city', $groups['company']['elements'])) !== false) {
+                unset($groups['company']['elements'][$key]);
+            }
         }
-        // state
+
+        // order_state
         if ($this->config['order_state']) {
             $this->add(
                 [
@@ -172,15 +237,20 @@ class AddressForm extends BaseForm
                         'label' => __('State'),
                     ],
                     'attributes' => [
-                        'type'        => 'text',
-                        'description' => '',
-                        'required'    => true,
-                        'autocomplete' => 'user-password'
+                        'type'         => 'text',
+                        'description'  => '',
+                        'required'     => true,
+                        'autocomplete' => 'user-password',
 
                     ],
                 ]
             );
+        } else {
+            if (($key = array_search('company_state', $groups['company']['elements'])) !== false) {
+                unset($groups['company']['elements'][$key]);
+            }
         }
+
         // country
         if ($this->config['order_country']) {
             if (!empty($this->config['order_countrylist'])) {
@@ -209,19 +279,22 @@ class AddressForm extends BaseForm
                             'label' => __('Country'),
                         ],
                         'attributes' => [
-                            'type'        => 'text',
-                            'description' => '',
-                            'required'    => true,
-                            'autocomplete' => 'user-password'
+                            'type'         => 'text',
+                            'description'  => '',
+                            'required'     => true,
+                            'autocomplete' => 'user-password',
 
                         ],
                     ]
                 );
             }
+        } else {
+            if (($key = array_search('company_country', $groups['company']['elements'])) !== false) {
+                unset($groups['company']['elements'][$key]);
+            }
         }
 
         if ($this->config['order_address2'] || $this->config['order_company_extra']) {
-
             // company extra
             if ($this->config['order_company_extra']) {
                 // company_id
@@ -232,11 +305,11 @@ class AddressForm extends BaseForm
                             'label' => __('Company ID'),
                         ],
                         'attributes' => [
-                            'class'       => 'complementary',
-                            'type'        => 'text',
-                            'description' => '',
-                            'required'    => true,
-                            'autocomplete' => 'user-password'
+                            'class'        => 'complementary',
+                            'type'         => 'text',
+                            'description'  => '',
+                            'required'     => true,
+                            'autocomplete' => 'user-password',
 
                         ],
                     ]
@@ -249,18 +322,33 @@ class AddressForm extends BaseForm
                             'label' => __('Company VAT'),
                         ],
                         'attributes' => [
-                            'class'       => 'complementary',
-                            'type'        => 'text',
-                            'description' => '',
-                            'required'    => true,
-                            'autocomplete' => 'user-password'
+                            'class'        => 'complementary',
+                            'type'         => 'text',
+                            'description'  => '',
+                            'required'     => true,
+                            'autocomplete' => 'user-password',
 
                         ],
                     ]
                 );
+            } else {
+                if (($key = array_search('company_id', $groups['company']['elements'])) !== false) {
+                    unset($groups['company']['elements'][$key]);
+                }
+                if (($key = array_search('company_vat', $groups['company']['elements'])) !== false) {
+                    unset($groups['company']['elements'][$key]);
+                }
+            }
+        } else {
+            if (($key = array_search('company_id', $groups['company']['elements'])) !== false) {
+                unset($groups['company']['elements'][$key]);
+            }
+            if (($key = array_search('company_vat', $groups['company']['elements'])) !== false) {
+                unset($groups['company']['elements'][$key]);
             }
         }
 
+        // Set html row 1
         $this->add(
             [
                 'name'       => 'html-raw',
@@ -271,19 +359,17 @@ class AddressForm extends BaseForm
             ]
         );
 
+        // Set html row 2
         $this->add(
             [
                 'name'       => 'html-raw2',
                 'attributes' => [
-                    'value' => '<p class="html-raw">Merci de renseigner les informations suivantes</p>',
+                    'value' => sprintf('<p class="html-raw">%s</p>', __('Please fill in the following information')),
                     'type'  => 'html-raw',
-                    'class' => 'html-raw'
+                    'class' => 'html-raw',
                 ],
             ]
         );
-
-
-
 
 
         // name
@@ -296,10 +382,10 @@ class AddressForm extends BaseForm
                         'label' => __('First name'),
                     ],
                     'attributes' => [
-                        'type'        => 'text',
-                        'description' => '',
-                        'required'    => true,
-                        'autocomplete' => 'user-password'
+                        'type'         => 'text',
+                        'description'  => '',
+                        'required'     => true,
+                        'autocomplete' => 'user-password',
 
                     ],
                 ]
@@ -313,38 +399,53 @@ class AddressForm extends BaseForm
                         'label' => __('Last name'),
                     ],
                     'attributes' => [
-                        'type'        => 'text',
-                        'description' => '',
-                        'required'    => true,
-                        'autocomplete' => 'user-password'
+                        'type'         => 'text',
+                        'description'  => '',
+                        'required'     => true,
+                        'autocomplete' => 'user-password',
 
                     ],
                 ]
             );
 
+        } else {
+            if (($key = array_search('first_name', $groups['individual']['elements'])) !== false) {
+                unset($groups['individual']['elements'][$key]);
+            }
+            if (($key = array_search('last_name', $groups['individual']['elements'])) !== false) {
+                unset($groups['individual']['elements'][$key]);
+            }
         }
 
-        // time_start
-        $this->add(array(
-            'name' => 'birthday',
-            'type' => 'datepicker',
-            'options' => array(
-                'label' => __('Birthday'),
-                'datepicker' => array(
-                    'format' => 'dd/mm/yyyy',
-                    'autoclose' => true,
-                    'todayBtn' => true,
-                    'todayHighlight' => true,
-                    'weekStart' => 1,
-                    'endDate' => '-18y',
-                    'orientation' => 'bottom'
-                ),
-            ),
-            'attributes' => array(
-                'required' => true,
-                'autocomplete' => false
-            )
-        ));
+        // birthday
+        if ($this->config['order_birthday']) {
+            $this->add(
+                [
+                    'name'       => 'birthday',
+                    'type'       => 'datepicker',
+                    'options'    => [
+                        'label'      => __('Birthday'),
+                        'datepicker' => [
+                            'format'         => 'dd/mm/yyyy',
+                            'autoclose'      => true,
+                            'todayBtn'       => true,
+                            'todayHighlight' => true,
+                            'weekStart'      => 1,
+                            'endDate'        => '-18y',
+                            'orientation'    => 'bottom',
+                        ],
+                    ],
+                    'attributes' => [
+                        'required'     => true,
+                        'autocomplete' => false,
+                    ],
+                ]
+            );
+        } else {
+            if (($key = array_search('birthday', $groups['individual']['elements'])) !== false) {
+                unset($groups['individual']['elements'][$key]);
+            }
+        }
 
         // id_number
         if ($this->config['order_idnumber']) {
@@ -355,14 +456,18 @@ class AddressForm extends BaseForm
                         'label' => __('ID number'),
                     ],
                     'attributes' => [
-                        'type'        => 'text',
-                        'description' => '',
-                        'required'    => true,
-                        'autocomplete' => 'user-password'
+                        'type'         => 'text',
+                        'description'  => '',
+                        'required'     => true,
+                        'autocomplete' => 'user-password',
 
                     ],
                 ]
             );
+        } else {
+            if (($key = array_search('id_number', $groups['individual']['elements'])) !== false) {
+                unset($groups['individual']['elements'][$key]);
+            }
         }
 
         // email
@@ -374,15 +479,20 @@ class AddressForm extends BaseForm
                         'label' => __('Email'),
                     ],
                     'attributes' => [
-                        'type'        => 'text',
-                        'description' => '',
-                        'required'    => true,
-                        'autocomplete' => 'user-password'
+                        'type'         => 'text',
+                        'description'  => '',
+                        'required'     => true,
+                        'autocomplete' => 'user-password',
 
                     ],
                 ]
             );
+        } else {
+            if (($key = array_search('email', $groups['individual']['elements'])) !== false) {
+                unset($groups['individual']['elements'][$key]);
+            }
         }
+
         // phone
         if ($this->config['order_phone']) {
             $this->add(
@@ -392,15 +502,20 @@ class AddressForm extends BaseForm
                         'label' => __('Phone'),
                     ],
                     'attributes' => [
-                        'type'        => 'tel',
-                        'pattern'     => Pi::api('api', 'order')->patternPhone(),
-                        'description' => Pi::service('i18n')->getLocale() == 'fa' ? '' : __('International number expected (+33123456789)'),
-                        'autocomplete' => 'user-password'
+                        'type'         => 'tel',
+                        'pattern'      => Pi::api('api', 'order')->patternPhone(),
+                        'description'  => Pi::service('i18n')->getLocale() == 'fa' ? '' : __('International number expected (+33123456789)'),
+                        'autocomplete' => 'user-password',
 
                     ],
                 ]
             );
+        } else {
+            if (($key = array_search('phone', $groups['individual']['elements'])) !== false) {
+                unset($groups['individual']['elements'][$key]);
+            }
         }
+
         // mobile
         if ($this->config['order_mobile']) {
             $this->add(
@@ -410,16 +525,20 @@ class AddressForm extends BaseForm
                         'label' => __('Mobile'),
                     ],
                     'attributes' => [
-                        'type'        => 'tel',
-                        'title'       => __("example : +33123456789"),
-                        'pattern'     => Pi::api('api', 'order')->patternPhone(),
-                        'description' => Pi::service('i18n')->getLocale() == 'fa' ? '' : __('International number expected (+33123456789)'),
-                        'required'    => true,
-                        'autocomplete' => 'user-password'
+                        'type'         => 'tel',
+                        'title'        => __("example : +33123456789"),
+                        'pattern'      => Pi::api('api', 'order')->patternPhone(),
+                        'description'  => Pi::service('i18n')->getLocale() == 'fa' ? '' : __('International number expected (+33123456789)'),
+                        'required'     => true,
+                        'autocomplete' => 'user-password',
 
                     ],
                 ]
             );
+        } else {
+            if (($key = array_search('mobile', $groups['individual']['elements'])) !== false) {
+                unset($groups['individual']['elements'][$key]);
+            }
         }
 
         // address
@@ -431,14 +550,18 @@ class AddressForm extends BaseForm
                         'label' => __('Address'),
                     ],
                     'attributes' => [
-                        'type'        => 'text',
-                        'description' => '',
-                        'required'    => true,
-                        'autocomplete' => 'user-password'
+                        'type'         => 'text',
+                        'description'  => '',
+                        'required'     => true,
+                        'autocomplete' => 'user-password',
 
                     ],
                 ]
             );
+        } else {
+            if (($key = array_search('address1', $groups['individual']['elements'])) !== false) {
+                unset($groups['individual']['elements'][$key]);
+            }
         }
 
         // address 2
@@ -450,14 +573,18 @@ class AddressForm extends BaseForm
                         'label' => __('Address addition'),
                     ],
                     'attributes' => [
-                        'type'        => 'text',
-                        'description' => '',
-                        'required'    => false,
-                        'autocomplete' => 'user-password'
+                        'type'         => 'text',
+                        'description'  => '',
+                        'required'     => false,
+                        'autocomplete' => 'user-password',
 
                     ],
                 ]
             );
+        } else {
+            if (($key = array_search('address2', $groups['individual']['elements'])) !== false) {
+                unset($groups['individual']['elements'][$key]);
+            }
         }
 
         // zip_code
@@ -469,15 +596,20 @@ class AddressForm extends BaseForm
                         'label' => __('Zip code'),
                     ],
                     'attributes' => [
-                        'type'        => 'text',
-                        'description' => '',
-                        'required'    => true,
-                        'autocomplete' => 'user-password'
+                        'type'         => 'text',
+                        'description'  => '',
+                        'required'     => true,
+                        'autocomplete' => 'user-password',
 
                     ],
                 ]
             );
+        } else {
+            if (($key = array_search('zip_code', $groups['individual']['elements'])) !== false) {
+                unset($groups['individual']['elements'][$key]);
+            }
         }
+
         // city
         if ($this->config['order_city']) {
             $this->add(
@@ -487,16 +619,21 @@ class AddressForm extends BaseForm
                         'label' => __('City'),
                     ],
                     'attributes' => [
-                        'type'        => 'text',
-                        'description' => '',
-                        'required'    => true,
-                        'autocomplete' => 'user-password'
+                        'type'         => 'text',
+                        'description'  => '',
+                        'required'     => true,
+                        'autocomplete' => 'user-password',
 
 
                     ],
                 ]
             );
+        } else {
+            if (($key = array_search('city', $groups['individual']['elements'])) !== false) {
+                unset($groups['individual']['elements'][$key]);
+            }
         }
+
         // state
         if ($this->config['order_state']) {
             $this->add(
@@ -506,15 +643,20 @@ class AddressForm extends BaseForm
                         'label' => __('State'),
                     ],
                     'attributes' => [
-                        'type'        => 'text',
-                        'description' => '',
-                        'required'    => true,
-                        'autocomplete' => 'user-password'
+                        'type'         => 'text',
+                        'description'  => '',
+                        'required'     => true,
+                        'autocomplete' => 'user-password',
 
                     ],
                 ]
             );
+        } else {
+            if (($key = array_search('state', $groups['individual']['elements'])) !== false) {
+                unset($groups['individual']['elements'][$key]);
+            }
         }
+
         // country
         if ($this->config['order_country']) {
             if (!empty($this->config['order_countrylist'])) {
@@ -543,17 +685,22 @@ class AddressForm extends BaseForm
                             'label' => __('Country'),
                         ],
                         'attributes' => [
-                            'type'        => 'text',
-                            'description' => '',
-                            'required'    => true,
-                            'autocomplete' => 'user-password'
+                            'type'         => 'text',
+                            'description'  => '',
+                            'required'     => true,
+                            'autocomplete' => 'user-password',
 
                         ],
                     ]
                 );
             }
+        } else {
+            if (($key = array_search('country', $groups['individual']['elements'])) !== false) {
+                unset($groups['individual']['elements'][$key]);
+            }
         }
 
+        // submit
         $this->add(
             [
                 'name'       => 'submit_address',
@@ -565,23 +712,7 @@ class AddressForm extends BaseForm
             ]
         );
 
-
-        $groups['general'] = array(
-            'label' => __('Account Type'),
-            'elements' => array('account_type'),
-        );
-
-        $groups['company'] = array(
-            'label' => __('Company Information'),
-            'elements' => array('company', 'company_address1', 'company_address2', 'company_zip_code', 'company_city', 'company_country', 'company_id', 'company_vat')
-        );
-
-        $groups['individual'] = array(
-            'label' => __('Legal representative (Personal Information)'),
-            'elements' => array('first_name', 'last_name', 'birthday', 'email', 'mobile', 'address1', 'address2', 'zip_code', 'city', 'country')
-        );
-
+        // Set group
         $this->setGroups($groups);
-
     }
 }

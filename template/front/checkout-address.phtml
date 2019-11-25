@@ -10,16 +10,14 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
 $this->headMeta('noindex', 'robots');
 ?>
 <div id="address-form" class="clearfix">
-    <div class="col-md-12">
+    <div class="col-lg-12 col-md-12">
         <h3><?php echo $this->escape($title); ?></h3>
         <?php echo $this->form($form, 'modal-simple'); ?>
     </div>
 </div>
 <script>
     $(document).ready(function () {
-
         var accountTypeChange = function() {
-
             var show = $('[name=account_type]:checked').val() == 'company';
             var elements = [
                 'company',

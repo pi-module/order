@@ -1,16 +1,16 @@
 <?php $this->css($this->assetModule('css/front.css')); ?>
 <div class="clearfix row user-section-wrapper">
-    <div class="col-md-3">
+    <div class="col-lg-3 col-md-3">
         <?php $sideActive = 'order'; ?>
         <?php include $this->templateModule('front/user-profile-sidebar.phtml', 'user'); ?>
     </div>
-    <div class="col-md-9">
+    <div class="col-lg-9 col-md-9">
         <?php include $this->template('flash-messenger'); ?>
 
         <div id="js-order" class="order-view clearfix">
             <div class="order-form" data-id="<?php echo $this->escape($order['id']); ?>">
 
-                <div class="page-header">
+                <div class="mb-3">
                     <ul class="list-inline clearfix">
                         <li class="list-inline-item float-left">
                             <h1><?php echo sprintf(__('Order %s details'), $order['code']); ?></h1>
@@ -35,7 +35,7 @@
                         <div id="collapseInformation" class="collapse show" role="tabpanel">
                             <div class="card-body">
                                 <div class="clearfix row">
-                                    <div class="col-md-4">
+                                    <div class="col-lg-4 col-md-4">
                                         <p><strong><?php _e('Invoicing address') ?></strong></p>
                                         <hr/>
                                         <?php if ($addressInvoicing['account_type'] === 'company') { ?>
@@ -64,7 +64,6 @@
                                                     <?php echo $this->escape($addressInvoicing['company_country']); ?><br/>
                                                 <?php } ?>
                                             </p>
-
                                             <p>
                                                 <?php if (!empty($addressInvoicing['company_id'])) { ?>
                                                     <?php echo $this->escape($addressInvoicing['company_id']); ?><br/>
@@ -73,7 +72,6 @@
                                                     <?php echo $this->escape($addressInvoicing['company_vat']); ?><br/>
                                                 <?php } ?>
                                             </p>
-
                                         <?php } else { ?>
                                             <p>
                                                 <?php if (!empty($addressInvoicing['first_name']) && !empty($addressInvoicing['last_name'])) { ?>
@@ -116,7 +114,7 @@
                                             </p>
                                         <?php } ?>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-lg-4 col-md-4">
                                         <p><strong><?php _e('Delivery address') ?></strong></p>
                                         <hr/>
                                         <?php if ($addressDelivery['account_type'] === 'company') { ?>
@@ -145,7 +143,6 @@
                                                     <?php echo $this->escape($addressDelivery['company_country']); ?><br/>
                                                 <?php } ?>
                                             </p>
-
                                             <p>
                                                 <?php if (!empty($addressDelivery['company_id'])) { ?>
                                                     <?php echo $this->escape($addressDelivery['company_id']); ?><br/>
@@ -197,12 +194,13 @@
                                             </p>
                                         <?php } ?>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-lg-4 col-md-4">
                                         <p><strong><?php _e('Informations') ?></strong></p>
                                         <hr/>
-                                        <p><strong><?php _e('Time order'); ?></strong> :
-                                            <span><?php echo $this->escape($order['time_order_view']); ?> </span></p>
-
+                                        <p>
+                                            <strong><?php _e('Time order'); ?></strong> :
+                                            <span><?php echo $this->escape($order['time_order_view']); ?> </span>
+                                        </p>
                                         <?php
                                         $orderClass = '';
                                         switch ($order['status_order']) {
@@ -259,7 +257,7 @@
                         </div>
                         <div id="collapseProducts" class="collapse show" role="tabpanel">
                             <div class="card-body table-responsive">
-                                <table class="table table-striped table-bordered table-sm  w-100">
+                                <table class="table table-striped table-bordered table-hover table-sm mt-3 mb-3 w-100">
                                     <tr>
                                         <th><?php _e('Product'); ?></th>
                                         <th><?php _e('Time start'); ?></th>
@@ -350,7 +348,7 @@
                             <div class="card-body">
                                 <?php if (!empty($order['invoices'])) { ?>
                                     <?php foreach ($order['invoices'] as $invoice) { ?>
-                                        <table class="table table-striped table-bordered table-sm">
+                                        <table class="table table-striped table-bordered table-hover table-sm mt-3 mb-3">
                                             <tr>
                                                 <th class="table-col-md-2"><?php echo $invoice['type'] == 'CREDIT'
                                                         ? __('Credit Note number')
@@ -395,7 +393,7 @@
                                         </table>
 
                                         <?php foreach ($invoice['installments'] as $installment) { ?>
-                                            <table class="table table-striped table-installment table-bordered table-sm">
+                                            <table class="table table-striped table-bordered table-hover table-sm mt-3 mb-3 table-installment">
                                                 <tr>
                                                     <th class="table-col-md-2 transparent"></th>
                                                     <th class="table-col-md-1"><?php _e('Installment'); ?></th>
