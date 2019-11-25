@@ -24,11 +24,15 @@ class AddressFilter extends InputFilter
         // Get config
         $config = Pi::service('registry')->config->read('order', 'order');
 
-        $this->add(array(
-            'name' => 'account_type',
-            'required' => true,
-        ));
+        // account_type
+        $this->add(
+            [
+                'name'     => 'account_type',
+                'required' => true,
+            ]
+        );
 
+        // address_id
         $this->add(
             [
                 'name'     => 'address_id',
@@ -66,6 +70,7 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
+
         // address 2
         if ($config['order_address2']) {
             $this->add(
@@ -80,6 +85,7 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
+
         // country
         if ($config['order_country']) {
             $this->add(
@@ -94,6 +100,7 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
+
         // state
         if ($config['order_state']) {
             $this->add(
@@ -108,6 +115,7 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
+
         // city
         if ($config['order_city']) {
             $this->add(
@@ -122,6 +130,7 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
+
         // zip_code
         if ($config['order_zip']) {
             $this->add(
@@ -136,6 +145,7 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
+
         // name
         if ($config['order_name']) {
             // first_name
@@ -165,6 +175,7 @@ class AddressFilter extends InputFilter
             );
 
         }
+
         // id_number
         if ($config['order_idnumber']) {
             $this->add(
@@ -179,6 +190,7 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
+
         // email
         if ($config['order_email']) {
             $this->add(
@@ -209,6 +221,7 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
+
         // phone
         if ($config['order_phone']) {
             $this->add(
@@ -223,6 +236,7 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
+
         // mobile
         if ($config['order_mobile']) {
             $this->add(
@@ -267,6 +281,7 @@ class AddressFilter extends InputFilter
             );
 
         }
+
         // address1
         if ($config['order_address1']) {
             $this->add(
@@ -281,6 +296,7 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
+
         // address 2
         if ($config['order_address2']) {
             $this->add(
@@ -295,6 +311,7 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
+
         // country
         if ($config['order_country']) {
             $this->add(
@@ -309,6 +326,7 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
+
         // state
         if ($config['order_state']) {
             $this->add(
@@ -323,6 +341,7 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
+
         // city
         if ($config['order_city']) {
             $this->add(
@@ -337,6 +356,7 @@ class AddressFilter extends InputFilter
                 ]
             );
         }
+
         // zip_code
         if ($config['order_zip']) {
             $this->add(
@@ -352,22 +372,26 @@ class AddressFilter extends InputFilter
             );
         }
 
-        $this->add(
-            [
-                'name'     => 'birthday',
-                'required' => true,
-                'filters'  => [
-                    [
-                        'name' => 'StringTrim',
+        // birthday
+        if ($config['order_birthday']) {
+            $this->add(
+                [
+                    'name'     => 'birthday',
+                    'required' => true,
+                    'filters'  => [
+                        [
+                            'name' => 'StringTrim',
+                        ],
                     ],
-                ],
-            ]
-        );
+                ]
+            );
+        }
     }
 
     public function isValid($context = null)
     {
-        foreach (['company', 'company_address1', 'company_zip_code', 'company_city', 'company_state', 'company_country', 'company_id', 'company_vat'] as $name) {
+        foreach (['company', 'company_address1', 'company_zip_code', 'company_city', 'company_state', 'company_country', 'company_id', 'company_vat'] as $name)
+        {
             if ($this->has($name)) {
                 $this->get($name)->setRequired($this->data['account_type'] != 'individual');
             }

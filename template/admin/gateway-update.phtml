@@ -1,12 +1,14 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="clearfix">
-    <h3><?php echo $this->escape($title); ?></h3>
-
+    <h1 class="mb-3"><?php echo $this->escape($title); ?></h1>
     <?php if ($description) { ?>
-        <hr/>
-        <p><?php echo $description ?></p>
-        <hr/>
+        <div class="card mb-3 bg-light">
+            <div class="card-body">
+                <div class="card-text">
+                    <?php echo $description ?>
+                </div>
+            </div>
+        </div>
     <?php } ?>
-
     <?php echo $this->form($form); ?>
 </div>

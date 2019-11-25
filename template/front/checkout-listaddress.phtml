@@ -1,11 +1,11 @@
 <?php if (!empty($addresses)) { ?>
     <div class="clearfix row">
         <?php foreach ($addresses as $address) { ?>
-            <div class="col-md-12 address"
+            <div class="col-lg-12 col-md-12 address"
                  data-id="addressFrom<?php echo $address['id']; ?>"
                  data-button="addressFromButton<?php echo $address['id']; ?>">
                 <div class="clearfix row">
-                    <div class="info col-md-7">
+                    <div class="info col-lg-7 col-md-7">
                         <div>
                             <?php _e('Type') ?> :
                             <?php echo $address['account_type'] == 'none' ? __('ND') : __(ucfirst($address['account_type'])); ?>
@@ -83,26 +83,26 @@
                             <?php } ?>
                         <?php } ?>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-lg-5 col-md-5">
                         <?php if ($_SESSION['order'][$type . '_address'] == $address['id']) { ?>
-                            <div class="badge badge-success selected-address col-md-12">
+                            <div class="badge badge-success selected-address col-lg-12 col-md-12">
                                 <i class="fas fa-check"></i> <?php _e('Selected address') ?>
                             </div>
                         <?php } else { ?>
                             <a href="<?php echo Pi::url(
                                 $this->url('', ['controller' => 'checkout', 'action' => 'change-address', 'id' => $address['id'], 'type' => $type])
-                            ) ?>" class=" btn btn-use-it btn-sm col-md-12" data-address="<?php echo $address['id']; ?>">
+                            ) ?>" class=" btn btn-use-it btn-sm col-lg-12 col-md-12" data-address="<?php echo $address['id']; ?>">
                                 <?php _e('Use it'); ?>
                             </a>
                         <?php } ?>
                         <a href="<?php echo Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => $address['id']])) ?>"
-                           class=" btn btn-address-edit btn-sm col-md-12" data-address="<?php echo $address['id']; ?>" data-remote="false" data-toggle="modal"
+                           class=" btn btn-address-edit btn-sm col-lg-12 col-md-12" data-address="<?php echo $address['id']; ?>" data-remote="false" data-toggle="modal"
                            data-target="#addressModal" data-dismiss="modal">
                             <i class="fas fa-edit"></i> <?php _e('Edit'); ?>
                         </a>
                         <a href="#"
                            data-delete="<?php echo Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'delete', 'address' => $address['id']])) ?>"
-                           class="btn btn-address-delete btn-sm col-md-12" data-address="<?php echo $address['id']; ?>">
+                           class="btn btn-address-delete btn-sm col-lg-12 col-md-12" data-address="<?php echo $address['id']; ?>">
                             <i class="fas fa-trash-alt"></i> <?php _e('Delete'); ?>
                         </a>
                     </div>
@@ -114,7 +114,6 @@
         <?php } ?>
     </div>
 <?php } ?>
-
 <script>
     $('.hide.<?php echo $type?>').removeClass('hide');
     $('.btn-address-delete').click(
@@ -142,6 +141,4 @@
             });
         }
     );
-
-
 </script>

@@ -284,7 +284,7 @@ class CheckoutController extends IndexController
                         'module'     => $this->getModule(),
                         'controller' => 'detail',
                         'action'     => 'index',
-                        'id'         => $order->order,
+                        'id'         => $order->id,
                     ]
                     )
                 );
@@ -406,8 +406,7 @@ class CheckoutController extends IndexController
 
         $formAddress = null;
         if (!count($addresses)) {
-            $formAddress = new AddressForm('address');
-            $formAddress->setInputFilter(new AddressFilter($option));
+            // Set user
             $user = [];
             if (Pi::user()->getId()) {
                 $user = Pi::api('user', 'user')->get(
@@ -417,6 +416,10 @@ class CheckoutController extends IndexController
                     true
                 );
             }
+
+            // Set form
+            $formAddress = new AddressForm('address', $option);
+            $formAddress->setInputFilter(new AddressFilter($option));
             $formAddress->setData($user);
         }
 
@@ -639,8 +642,9 @@ class CheckoutController extends IndexController
 
     public function addressAction()
     {
+        $option = [];
         $id   = $this->params('id');
-        $form = new AddressForm('address');
+        $form = new AddressForm('address', $option);
         $form->setAttribute(
             'action', Pi::url(Pi::service('url')->assemble('order', ['module' => 'order', 'controller' => 'checkout', 'action' => 'address', 'id' => $id]))
         );
@@ -676,7 +680,7 @@ class CheckoutController extends IndexController
             }
         } else {
             if ($id && is_numeric($id)) {
-                $form = new AddressForm('address', $id);
+                $form = new AddressForm('address', $option, $id);
                 $form->setAttribute(
                     'action',
                     Pi::url(Pi::service('url')->assemble('order', ['module' => 'order', 'controller' => 'checkout', 'action' => 'address', 'id' => $id]))

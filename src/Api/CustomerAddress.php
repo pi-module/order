@@ -32,6 +32,9 @@ class CustomerAddress extends AbstractApi
 {
     public function updateFavouriteDelivery($id)
     {
+        // Get uid
+        $uid = Pi::user()->getId();
+
         Pi::model('customer_address', 'order')->update(
             ['delivery_favourite' => 0],
             ['uid' => $uid]
@@ -45,6 +48,9 @@ class CustomerAddress extends AbstractApi
 
     public function updateFavouriteInvoicing($id)
     {
+        // Get uid
+        $uid = Pi::user()->getId();
+
         Pi::model('customer_address', 'order')->update(
             ['invoicing_favourite' => 0],
             ['uid' => $uid]
@@ -62,7 +68,6 @@ class CustomerAddress extends AbstractApi
         $uid = Pi::user()->getId();
 
         // Select
-        $addresss = [];
         $where    = ['uid' => $uid, 'delivery_favourite' => 1];
         $select   = Pi::model('customer_address', $this->getModule())->select()->where($where)->order('id DESC');
         $row      = Pi::model('customer_address', $this->getModule())->selectWith($select)->current();
@@ -132,13 +137,12 @@ class CustomerAddress extends AbstractApi
 
     public function getAddress($id)
     {
-        // Check uid
-        if (empty($uid)) {
-            $uid = Pi::user()->getId();
-        }
+        // Get uid
+        $uid = Pi::user()->getId();
 
         $row = Pi::model('customer_address', 'order')->find($id, 'id');
         if (!$row || $row->uid != $uid) {
+
             return [];
         }
 
