@@ -23,7 +23,7 @@ class AddressForm extends BaseForm
     public function __construct($name = null, $option = [], $id = null)
     {
         $this->option = $option;
-        $this->config = Pi::service('registry')->config->read('order', 'order');
+        $this->config = Pi::service('registry')->config->read('order');
         $this->_id    = $id;
         parent::__construct($name);
     }
@@ -93,9 +93,8 @@ class AddressForm extends BaseForm
                 ],
                 'attributes' => [
                     'required'     => true,
-                    'value'        => 0,
+                    'value'        => $this->config['address_type'],
                     'autocomplete' => 'user-password',
-
                 ],
             ]
         );

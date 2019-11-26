@@ -15,7 +15,7 @@ return [
     'meta'     => [
         'title'       => _a('Orders'),
         'description' => _a('Manage order process and payment'),
-        'version'     => '2.2.9',
+        'version'     => '2.2.10',
         'license'     => 'New BSD',
         'logo'        => 'image/logo.png',
         'readme'      => 'docs/readme.txt',

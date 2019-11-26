@@ -22,7 +22,7 @@ class AddressFilter extends InputFilter
     public function __construct($option = [])
     {
         // Get config
-        $config = Pi::service('registry')->config->read('order', 'order');
+        $config = Pi::service('registry')->config->read('order');
 
         // account_type
         $this->add(

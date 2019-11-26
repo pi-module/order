@@ -20,7 +20,7 @@ class OrderSimpleFilter extends InputFilter
 {
     public function __construct($option = [])
     {
-        $config = Pi::service('registry')->config->read('order', 'order');
+        $config = Pi::service('registry')->config->read('order');
 
         $this->add(
             [
