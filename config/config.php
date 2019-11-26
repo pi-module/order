@@ -201,6 +201,23 @@ return [
         
         // Checkout
         'address_type'                  => [
+            'title'       => _a('Address type'),
+            'description' => '',
+            'edit'        => [
+                'type'    => 'select',
+                'options' => [
+                    'options' => [
+                        'both' => __('Both'),
+                        'individual' => __('Individual'),
+                        'company'    => __('Company'),
+                    ],
+                ],
+            ],
+            'filter'      => 'text',
+            'value'       => 'both',
+            'category'    => 'checkout',
+        ],
+        'address_type_default'                  => [
             'title'       => _a('Default address type'),
             'description' => '',
             'edit'        => [
