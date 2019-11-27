@@ -634,6 +634,6 @@ class PaymentController extends IndexController
 
         // jump to module
         $message = __('Your payment were successfully.');
-        //$this->jump($backUrl, $message);
+        $this->jump($backUrl, $message);
     }
 }
