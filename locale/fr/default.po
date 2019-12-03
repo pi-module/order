@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2019-11-25 17:29+0100\n"
+"POT-Creation-Date: 2019-12-03 15:34+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -829,7 +829,7 @@ msgstr "Privé"
 msgid "Choose your payment method"
 msgstr "Choisissez votre méthode de paiement"
 
-#: src/Form/DeliveryForm.php:92 src/Form/GatewayForm.php:80
+#: src/Form/DeliveryForm.php:92 src/Form/GatewayForm.php:81
 #: src/Form/LocationForm.php:147
 msgid "Submit"
 msgstr "Soumettre"
@@ -1224,7 +1224,7 @@ msgstr "Bitcoin (blockchain)"
 
 #: src/Gateway/Bitcoin/Gateway.php:56 src/Gateway/Dargahpardakht/Gateway.php:48
 #: src/Gateway/Mellat/Gateway.php:48 src/Gateway/Pasargad/Gateway.php:52
-#: src/Gateway/Paypal/Gateway.php:307 src/Gateway/Stripe/Gateway.php:215
+#: src/Gateway/Paypal/Gateway.php:307 src/Gateway/Stripe/Gateway.php:222
 #: src/Gateway/Zarinpal/Gateway.php:49
 msgid "path"
 msgstr "chemin"
@@ -1576,7 +1576,7 @@ msgstr "Reprise ancien abonnement"
 msgid "Paypal (REST API)"
 msgstr "Paypal (REST API)"
 
-#: src/Gateway/Paypal/Gateway.php:314 src/Gateway/Stripe/Gateway.php:222
+#: src/Gateway/Paypal/Gateway.php:314 src/Gateway/Stripe/Gateway.php:229
 msgid "Send only 1 mail after payment (only for end user, not for admin)"
 msgstr ""
 "Envoyer seulement 1 mail après paiement (seulement pour l'utilisateur, pas "
@@ -1586,7 +1586,7 @@ msgstr ""
 msgid "Paypal email address"
 msgstr "Adresse email Paypal"
 
-#: src/Gateway/Paypal/Gateway.php:329 src/Gateway/Stripe/Gateway.php:237
+#: src/Gateway/Paypal/Gateway.php:329 src/Gateway/Stripe/Gateway.php:244
 msgid "Gateway Name on the Invoice"
 msgstr "Nom passerelle sur la facture"
 
@@ -1614,11 +1614,11 @@ msgstr "ID Client"
 msgid "Secret"
 msgstr "Secret"
 
-#: src/Gateway/Paypal/Gateway.php:377 src/Gateway/Stripe/Gateway.php:267
+#: src/Gateway/Paypal/Gateway.php:377 src/Gateway/Stripe/Gateway.php:274
 msgid "Commission owner minimum"
 msgstr "Commission owner minimum"
 
-#: src/Gateway/Paypal/Gateway.php:384 src/Gateway/Stripe/Gateway.php:274
+#: src/Gateway/Paypal/Gateway.php:384 src/Gateway/Stripe/Gateway.php:284
 msgid "Commission customer minimum"
 msgstr "Commission customer minimum"
 
@@ -1655,32 +1655,36 @@ msgstr ""
 "You can use the pass of your normal account<br>\n"
 "        "
 
-#: src/Gateway/Stripe/Gateway.php:197
+#: src/Gateway/Stripe/Gateway.php:204
 msgid "Stripe"
 msgstr "Stripe"
 
-#: src/Gateway/Stripe/Gateway.php:230
+#: src/Gateway/Stripe/Gateway.php:237
 msgid "Stripe email address"
 msgstr "Adresse email Stripe"
 
-#: src/Gateway/Stripe/Gateway.php:244
+#: src/Gateway/Stripe/Gateway.php:251
 msgid "Stripe currency"
 msgstr "Devise Stripe"
 
-#: src/Gateway/Stripe/Gateway.php:252
+#: src/Gateway/Stripe/Gateway.php:259
 msgid "Public key"
 msgstr "Clef publique"
 
-#: src/Gateway/Stripe/Gateway.php:260
+#: src/Gateway/Stripe/Gateway.php:267
 msgid "Secret key"
 msgstr "Clef secrète"
 
-#: src/Gateway/Stripe/Gateway.php:326
+#: src/Gateway/Stripe/Gateway.php:276 src/Gateway/Stripe/Gateway.php:286
+msgid "Use dots for decimal numbers - no comma"
+msgstr "Utiliser le point comme séparateur de décimale - pas de virgule"
+
+#: src/Gateway/Stripe/Gateway.php:339
 msgid "An error occured with Stripe. Please contact administrator"
 msgstr ""
 "Une erreur est survenue avec Stripe. Merci de contacter l'administrateur."
 
-#: src/Gateway/Stripe/Gateway.php:348
+#: src/Gateway/Stripe/Gateway.php:361
 msgid ""
 "To install the Stripe Driver : <br>\n"
 "Get yours credentials on stripe. <br>\n"

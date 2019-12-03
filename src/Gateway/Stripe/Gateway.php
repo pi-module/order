@@ -273,7 +273,7 @@ class Gateway extends AbstractGateway
             'name'     => 'commission_owner_min',
             'label'    => __('Commission owner minimum'),
             'attributes' => [
-                'description' => __("Mettre les nombre décimal avec un point")
+                'description' => __("Use dots for decimal numbers - no comma")
             ],
             'type'     => 'text',
             'required' => false,
@@ -283,7 +283,7 @@ class Gateway extends AbstractGateway
             'name'     => 'commission_customer_min',
             'label'    => __('Commission customer minimum'),
             'attributes' => [
-                'description' => __("Mettre les nombre décimal avec un point")
+                'description' => __("Use dots for decimal numbers - no comma")
             ],
             'type'     => 'text',
             'required' => false,
