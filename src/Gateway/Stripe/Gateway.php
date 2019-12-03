@@ -52,6 +52,7 @@ class Gateway extends AbstractGateway
             $this->gatewayPayInformation['discount_price_' . $i] = $product['discount_price'];
             $this->gatewayPayInformation['unconsumed_' . $i]     = $product['extra']['unconsumedPrice'];
             $this->gatewayPayInformation['special_fee_' . $i]     = $product['extra']['special_fee'];
+            $this->gatewayPayInformation['id_' . $i]     = $product['product'];
             $i++;
         }
         // Set address
@@ -129,6 +130,7 @@ class Gateway extends AbstractGateway
         $items    = [];
         $subtotal = 0;
         $subtotalCommissionOwner = 0;
+        $feeCustomer = 0;
         $tax      = 0;
         for ($i = 1; $i < $this->gatewayPayInformation['nb_product']; ++$i) {
             $item                = [];
@@ -144,6 +146,11 @@ class Gateway extends AbstractGateway
             if (!$this->gatewayPayInformation['special_fee_' . $i] ) {
                 $subtotalCommissionOwner += $totalProduct;
             }
+
+            if ($this->gatewayPayInformation['id_' . $i] == 'commission') {
+                $feeCustomer += $totalProduct + $this->gatewayPayInformation['tax_' . $i];
+            }
+
             $subtotal += $totalProduct;
             $tax      += $this->gatewayPayInformation['tax_' . $i];
         }
@@ -160,8 +167,8 @@ class Gateway extends AbstractGateway
         if (isset($this->gatewayPayInformation['gateway_id'])) {
             $config = Pi::service('registry')->config->read('guide');
 
-            $fee = round(($subtotalCommissionOwner * $this->gatewayPayInformation['commission_percentage_owner']) * ((100 + $config['package_vat'])/100 ));
-
+            $feeOwner = round(($subtotalCommissionOwner * $this->gatewayPayInformation['commission_percentage_owner']) * ((100 + $config['package_vat'])/100 ));
+            $totalFee = $feeOwner + ($feeCustomer * 100);
             $data['payment_intent_data'] = [
                 'transfer_data' => [
                     'destination' => $this->gatewayPayInformation['gateway_id'],
@@ -174,8 +181,8 @@ class Gateway extends AbstractGateway
                     'fee' => $fee
                 ],
             ];
-            if ($fee > 0) {
-                $data['payment_intent_data']['application_fee_amount'] = $fee;
+            if ($totalFee > 0) {
+                $data['payment_intent_data']['application_fee_amount'] = $totalFee;
             }
         }
 
@@ -265,6 +272,9 @@ class Gateway extends AbstractGateway
         $form['commission_owner_min'] = [
             'name'     => 'commission_owner_min',
             'label'    => __('Commission owner minimum'),
+            'attributes' => [
+                'description' => __("Mettre les nombre décimal avec un point")
+            ],
             'type'     => 'text',
             'required' => false,
         ];
@@ -272,6 +282,9 @@ class Gateway extends AbstractGateway
         $form['commission_customer_min'] = [
             'name'     => 'commission_customer_min',
             'label'    => __('Commission customer minimum'),
+            'attributes' => [
+                'description' => __("Mettre les nombre décimal avec un point")
+            ],
             'type'     => 'text',
             'required' => false,
         ];
