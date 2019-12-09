@@ -1530,6 +1530,23 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '2.2.10', '<')) {
+            // Alter table field change type_payment
+            $sql = sprintf("ALTER TABLE %s ADD `cancel_reason` TEXT", $orderTable);
+            try {
+                $orderAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+        }
+
         return true;
     }
 }

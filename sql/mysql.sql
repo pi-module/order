@@ -18,6 +18,7 @@ CREATE TABLE `{order}`
     `packing`         TINYINT(1) UNSIGNED                    NOT NULL DEFAULT '0',
     `promotion_type`  VARCHAR(64)                            NOT NULL DEFAULT '',
     `promotion_value` VARCHAR(64)                            NOT NULL DEFAULT '',
+    `cancel_reason`   TEXT,
     `create_by`       ENUM ('ADMIN', 'USER')                 NOT NULL DEFAULT 'USER',
     `extra`           TEXT,
     PRIMARY KEY (`id`),
