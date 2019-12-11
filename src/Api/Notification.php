@@ -489,7 +489,7 @@ class Notification extends AbstractApi
             $toAdmin,
             'admin_pay_invoice',
             $information,
-            Pi::service('module')->current()
+            'order'
         );
 
         // Send mail to user
@@ -500,7 +500,7 @@ class Notification extends AbstractApi
             $toUser,
             'user_pay_invoice',
             $information,
-            Pi::service('module')->current(),
+            'order',
             $order['uid']
         );
 

@@ -1547,6 +1547,22 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '2.2.11', '<')) {
+            // Alter table field change type_payment
+            $sql = sprintf("ALTER TABLE %s CHANGE `product` `product` VARCHAR(64) NOT NULL DEFAULT '0'", $detailTable);
+            try {
+                $detailAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+        }
         return true;
     }
 }

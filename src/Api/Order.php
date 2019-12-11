@@ -376,7 +376,9 @@ class Order extends AbstractApi
 
             $list[$row->id] = $row->toArray();
             if ($row->module != 'order' && Pi::service('module')->isActive($row->module)) {
-                $list[$row->id]['details'] = Pi::api('order', $row->module)->getProductDetails($row->product, $row->extra);
+                $extra = json_decode($row->extra, true);
+                $extra['order'] = $options['order'];
+                $list[$row->id]['details'] = Pi::api('order', $row->module)->getProductDetails($row->product, $extra);
             } else {
                 $list[$row->id]['details'] = [
                     'title'      => __('Manually order'),
@@ -402,7 +404,7 @@ class Order extends AbstractApi
         $rowset = Pi::model('detail', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $list[$row->id]            = $row->toArray();
-            $list[$row->id]['details'] = Pi::api('order', $module)->getProductDetails($row->product, $row->extra);
+            $list[$row->id]['details'] = Pi::api('order', $module)->getProductDetails($row->product, json_decode($row->extra, true));
             if (empty($row->extra)) {
                 $list[$row->id]['extra'] = [];
             } else {

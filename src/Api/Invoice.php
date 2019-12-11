@@ -448,9 +448,16 @@ class Invoice extends AbstractApi
             'credit'      => $invoice['type'] == 'CREDIT',
             'invoice'     => $id,
             'time_create' => $invoice['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED ? $invoice['time_cancel'] : time(),
+            'order'       => $order // used in guide module
         ];
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $options);
+
         foreach ($order['products'] as $key => $product) {
+            if ($order['type_commodity'] == 'booking' && $product['product'] != 'commission') {
+                unset($order['products'][$key]);
+                continue;
+            }
+
             $order['total_product_price']     += $product['product_price'] - $product['discount_price'];
             $order['total_shipping_price']    += $product['shipping_price'];
             $order['total_packing_price']     += $product['packing_price'];

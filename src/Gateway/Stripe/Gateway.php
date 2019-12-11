@@ -168,7 +168,8 @@ class Gateway extends AbstractGateway
             $config = Pi::service('registry')->config->read('guide');
 
             $feeOwner = round(($subtotalCommissionOwner * $this->gatewayPayInformation['commission_percentage_owner']) * ((100 + $config['package_vat'])/100 ));
-            $totalFee = $feeOwner + ($feeCustomer * 100);
+            $feeCustomer = $feeCustomer * 100;
+            $totalFee = $feeOwner + $feeCustomer;
             $data['payment_intent_data'] = [
                 'transfer_data' => [
                     'destination' => $this->gatewayPayInformation['gateway_id'],
@@ -178,7 +179,8 @@ class Gateway extends AbstractGateway
                     'order' => $order['uid'],
                     'ht' => $subtotal,
                     'vat' => $tax,
-                    'fee' => $fee
+                    'fee_owner' => $feeOwner,
+                    'fee_customer' => $feeCustomer
                 ],
             ];
             if ($totalFee > 0) {

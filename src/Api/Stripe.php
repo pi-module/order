@@ -35,8 +35,29 @@ class Stripe extends AbstractApi
         $rowset = Pi::model('order', 'order')->selectWith($select);
         $list = [];
         foreach ($rowset as $row) {
-            $list[] = $row->toArray();
+            $list[$row->id] = $row->toArray();
         }
         return $list;
     }
+
+    public function getOrderByPaymentIntentIds($paymentIntentIds)
+    {
+        if (empty($paymentIntentIds) || count($paymentIntentIds) == 0) {
+            return [];
+        }
+
+        foreach ($paymentIntentIds as $paymentIntent) {
+            $whereId[]  = 'extra LIKE "%\"payment_intent\":\"' . $paymentIntent . '\"%"';
+        }
+        $where = implode(' OR ', $whereId);
+
+        $select = Pi::model('order', 'order')->select()->where($where);
+        $rowset = Pi::model('order', 'order')->selectWith($select);
+        $list = [];
+        foreach ($rowset as $row) {
+            $list[$row->id] = $row->toArray();
+        }
+        return $list;
+    }
+
 }	

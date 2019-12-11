@@ -31,7 +31,7 @@ CREATE TABLE `{detail}`
     `order`          INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `module`         VARCHAR(64)      NOT NULL DEFAULT '',
     `product_type`   VARCHAR(64)      NOT NULL DEFAULT '',
-    `product`        VARCHAR(10)      NOT NULL DEFAULT '0',
+    `product`        VARCHAR(64)      NOT NULL DEFAULT '0',
     `time_create`    INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `time_start`     INT(10) UNSIGNED NULL     DEFAULT '0',
     `time_end`       INT(10) UNSIGNED NULL     DEFAULT '0',
