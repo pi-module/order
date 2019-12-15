@@ -50,6 +50,7 @@ class Order extends Model
             'packing',
             'promotion_type',
             'promotion_value',
+            'cancel_reason',
             'create_by',
             'extra',
         ];

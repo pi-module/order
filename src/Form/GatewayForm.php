@@ -37,35 +37,36 @@ class GatewayForm extends BaseForm
         // Set extra field
         if (!empty($this->field)) {
             foreach ($this->field as $field) {
+
+                $attributes = isset($field['attributes']) ? $field['attributes'] : [];
+                $options = isset($field['options']) ? $field['options'] : [];
+
                 if ($field['type'] == 'hidden') {
+                    $attributes['type'] = 'hidden';
                     $this->add(
                         [
                             'name'       => $field['name'],
-                            'attributes' => [
-                                'type' => 'hidden',
-                            ],
+                            'attributes' => $attributes,
+                            'options' => $options,
                         ]
                     );
                 } elseif ($field['type'] == 'checkbox') {
+                    $options['label'] = $field['label'];
                     $this->add(
                         [
                             'name'    => $field['name'],
                             'type'    => 'checkbox',
-                            'options' => [
-                                'label' => $field['label'],
-                            ],
+                            'options' => $options,
                         ]
                     );
                 } else {
+                    $options['label'] = $field['label'];
+                    $attributes['type'] = $field['type'];
                     $this->add(
                         [
                             'name'       => $field['name'],
-                            'options'    => [
-                                'label' => $field['label'],
-                            ],
-                            'attributes' => [
-                                'type' => $field['type'],
-                            ],
+                            'options'    => $options,
+                            'attributes' => $attributes,
                         ]
                     );
                 }
