@@ -457,13 +457,13 @@ class Invoice extends AbstractApi
                 unset($order['products'][$key]);
                 continue;
             }
+            $unconsumedPrice                  = $product['extra']['unconsumedPrice'];
 
-            $order['total_product_price']     += $product['product_price'] - $product['discount_price'];
+            $order['total_product_price']     += $product['product_price'] - $product['discount_price'] - $unconsumedPrice;
             $order['total_shipping_price']    += $product['shipping_price'];
             $order['total_packing_price']     += $product['packing_price'];
             $order['total_setup_price']       += $product['setup_price'];
             $order['total_vat_price']         += $product['vat_price'];
-            $unconsumedPrice                  = json_decode($product['extra'], true)['unconsumedPrice'];
             $order['total_unconsommed_price'] += $unconsumedPrice ?: 0;
         }
 
@@ -475,7 +475,7 @@ class Invoice extends AbstractApi
         $order['total_unconsommed_price_view'] = Pi::api('api', 'order')->viewPrice($order['total_unconsommed_price']);
         $order['total_price_view']             = Pi::api('api', 'order')->viewPrice(
             $order['total_product_price'] + $order['total_shipping_price'] + $order['total_packing_price'] + $order['total_setup_price']
-            + $order['total_vat_price'] - $order['total_discount_price'] - $order['total_unconsommed_price']
+            + $order['total_vat_price'] - $order['total_discount_price']
         );
 
         // set Products

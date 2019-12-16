@@ -209,7 +209,7 @@ class CheckoutController extends IndexController
                 $this->getModel('detail')->delete(['order' => $_SESSION['order']['id']]);
                 foreach ($cart['product'] as $product) {
                     $unconsumedPrice = json_decode($product['extra'], true)['unconsumedPrice'];
-
+                    $product['discount_price'] += $unconsumedPrice;
                     // Save detail
                     $detail                 = $this->getModel('detail')->createRow();
                     $detail->order          = $order->id;
