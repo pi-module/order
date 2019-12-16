@@ -238,11 +238,13 @@ class CheckoutController extends IndexController
                     if ($product['extra']) {
                         $extra = json::decode($product['extra'], true);
                     }
+
+
+                    $detail->extra = json::encode($extra);
                     if (array_key_exists('unconsumedPrice', $extra)) {
                         unset($extra['unconsumedPrice']);
                     }
 
-                    $detail->extra = json::encode($extra);
                     $detail->save();
                 }
             }
