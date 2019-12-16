@@ -337,7 +337,7 @@ class CheckoutController extends IndexController
         // Set products
         if (isset($cart['product']) && count($cart['product'])) {
             foreach ($cart['product'] as $key => $product) {
-                $cart['product'][$key]['details'] = Pi::api('order', $cart['module_name'])->getProductDetails($product['product'], json_decode($product['extra']));
+                $cart['product'][$key]['details'] = Pi::api('order', $cart['module_name'])->getProductDetails($product['product'], json_decode($product['extra'], true));
                 $cart['product'][$key]['product_price_view'] = Pi::api('api', 'order')->viewPrice($product['product_price']);
             }
         }
