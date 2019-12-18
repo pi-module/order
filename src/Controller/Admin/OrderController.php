@@ -137,7 +137,8 @@ class OrderController extends ActionController
             )
             ->group(new Expression('order.id DESC'))
             ->where(['order.time_create >= ' . mktime(0, 0, 0, 1, 1, date('Y'))])
-            ->where(['order.status_order = ' . \Module\Order\Model\Order::STATUS_ORDER_VALIDATED]);
+            ->where(['order.status_order != ' . \Module\Order\Model\Order::STATUS_ORDER_DRAFT])
+        ;
 
         $rowset       = Pi::db()->query($select);
 
@@ -173,6 +174,7 @@ class OrderController extends ActionController
                 }
             }
 
+            $orders[$row['order']]['total_ordered'] += $totalPrice;
             if (Pi::api('order', $row['module'])->showInInvoice($order, $row)) {
                 $totalOwnOrdered += $totalPrice;
                 $orders[$row['order']]['total_own_ordered'] += $totalPrice;
@@ -216,6 +218,7 @@ class OrderController extends ActionController
             $list[$row['id']]['total_own_ordered_view'] = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_own_ordered']);
             $list[$row['id']]['total_third_billed_view'] = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_third_billed']);
             $list[$row['id']]['total_third_ordered_view'] = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_third_ordered']);
+            $list[$row['id']]['total_ordered_view'] = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_ordered']);
         }
         //
         $select = Pi::db()->select();

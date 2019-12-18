@@ -609,7 +609,7 @@ $this->backbone();
                                             <a class="btn btn-primary btn-sm" title="<?php _e('View'); ?>"
                                                href="<?php echo $this->url('', ['controller' => 'invoice', 'action' => 'view', 'id' => $invoice['id']]); ?>">
                                                 <i class="far fa-eye"></i> <?php _e('View'); ?></a>
-                                            <a class="btn btn-primary btn-sm" title="<?php _e('Print'); ?>"
+                                            <a class="btn btn-primary btn-sm" target="_blank" title="<?php _e('Print'); ?>"
                                                href="<?php echo $this->url(
                                                    '', ['controller' => 'invoice', 'action' => 'print-pdf', 'id' => $invoice['id']]
                                                ); ?>">
