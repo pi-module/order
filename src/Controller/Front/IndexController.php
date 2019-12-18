@@ -62,7 +62,7 @@ class IndexController extends ActionController
             }
 
             $user['orders'][$order['id']]             = $order;
-            $products                                 = Pi::api('order', 'order')->listProduct($order['id']);
+            $products                                 = Pi::api('order', 'order')->listProduct($order['id'], ['order' => $order]);
             $user['orders'][$order['id']]['products'] = $products;
             $totalPrice                               = 0;
             foreach ($products as $product) {
