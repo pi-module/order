@@ -44,7 +44,7 @@ class DetailController extends IndexController
         $addressInvoicing = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
         $addressDelivery  = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'DELIVERY');
 
-        $order['products']           = Pi::api('order', 'order')->listProduct($order['id']);
+        $order['products']           = Pi::api('order', 'order')->listProduct($order['id'], ['order' => $order]);
         $order['invoices']           = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
         $offline                     = false;
         $order['totalInstallments']  = 0;

@@ -64,7 +64,7 @@ class OrderController extends ActionController
 
         // Get info
         $list   = [];
-        $order  = ['order.id DESC', 'order.time_create DESC'];
+        $ordering  = ['order.id DESC', 'order.time_create DESC'];
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit  = intval($this->config('admin_perpage'));
         $where  = [];
@@ -121,6 +121,7 @@ class OrderController extends ActionController
         }
         // Select
         $orderTable              = Pi::model('order', 'order')->getTable();
+        $orderDetailTable        = Pi::model('detail', 'order')->getTable();
         $orderAddressTable       = Pi::model("order_address", 'order')->getTable();
         $invoiceTable            = Pi::model("invoice", 'order')->getTable();
         $invoiceInstallmentTable = Pi::model("invoice_installment", 'order')->getTable();
@@ -130,25 +131,57 @@ class OrderController extends ActionController
         $select
             ->from(['order' => $orderTable])
             ->join(
-                ['detail' => $detailTable], 'detail.order = order.id', ['total_price' => new Expression(
-                "SUM(product_price) - SUM(discount_price) + SUM(shipping_price) + SUM(packing_price) + SUM(setup_price) +SUM(vat_price) "
-            )]
-            )
-            ->join(
                 ['invoice' => $invoiceTable], new Expression(
                 'invoice.order = order.id AND invoice.type= "NORMAL" AND invoice.status = ' . \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED
             ), ['invoice' => 'id'], 'left'
             )
-            ->group('order.id')
+            ->group(new Expression('order.id DESC'))
             ->where(['order.time_create >= ' . mktime(0, 0, 0, 1, 1, date('Y'))])
-            ->where(['order.status_order = ' . \Module\Order\Model\Order::STATUS_ORDER_VALIDATED]);
+            ->where(['order.status_order != ' . \Module\Order\Model\Order::STATUS_ORDER_DRAFT])
+        ;
+
         $rowset       = Pi::db()->query($select);
-        $totalBilled  = 0;
-        $totalOrdered = 0;
+
+        $totalOwnBilled  = 0;
+        $totalOwnOrdered = 0;
+        $totalThirdBilled  = 0;
+        $totalThirdOrdered = 0;
+        $orders = [];
+        $orderIds = [];
         foreach ($rowset as $row) {
-            $totalOrdered += $row['total_price'];
-            if ($row['invoice']) {
-                $totalBilled += $row['total_price'];
+            $orders[$row['id']] = $row;
+            $orderIds[] = $row['id'];
+        }
+        $orderIds[] = -1;
+
+        $select = Pi::db()->select();
+        $select->from(['order_detail' => $orderDetailTable])->where(['`order` IN (' . join(', ', $orderIds) . ')']);
+        $rowset       = Pi::db()->query($select);
+
+        foreach ($rowset as $row) {
+            $order = $orders[$row['order']];
+            $totalPrice = $row['product_price'] - $row['discount_price'] + $row['shipping_price'] + $row['packing_price'] + $row['setup_price'] + $row['vat_price'];
+
+            if (!$totalPrice) {
+                continue;
+            }
+            if (Pi::api('order', $row['module'])->showInInvoice($order, $row, true)) {
+                $totalThirdOrdered += $totalPrice;
+                $orders[$row['order']]['total_third_ordered'] += $totalPrice;
+                if ($order['invoice']) {
+                    $totalThirdBilled += $totalPrice;
+                    $orders[$row['order']]['total_third_billed'] += $totalPrice;
+                }
+            }
+
+            $orders[$row['order']]['total_ordered'] += $totalPrice;
+            if (Pi::api('order', $row['module'])->showInInvoice($order, $row)) {
+                $totalOwnOrdered += $totalPrice;
+                $orders[$row['order']]['total_own_ordered'] += $totalPrice;
+                if ($order['invoice']) {
+                    $totalOwnBilled += $totalPrice;
+                    $orders[$row['order']]['total_own_billed'] += $totalPrice;
+                }
             }
         }
 
@@ -173,21 +206,19 @@ class OrderController extends ActionController
             ->group('order.id')
             ->where($where)
             ->having($having)
-            ->order($order)
+            ->order($ordering)
             ->limit($limit)
             ->offset($offset);
         $rowset = Pi::db()->query($select);
 
         foreach ($rowset as $row) {
             $list[$row['id']]             = Pi::api('order', 'order')->canonizeOrder($row);
-            $products                     = Pi::api('order', 'order')->listProduct($row['id']);
-            $list[$row['id']]['products'] = $products;
-            $totalPrice                   = 0;
-            foreach ($products as $product) {
-                $totalPrice += $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price']
-                    + $product['vat_price'] - $product['discount_price'];
-            }
-            $list[$row['id']]['total_price_view'] = Pi::api('api', 'order')->viewPrice($totalPrice);
+            $list[$row['id']]['products'] = Pi::api('order', 'order')->listProduct($row['id'], ['order' => $row]);
+            $list[$row['id']]['total_own_billed_view'] = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_own_billed']);
+            $list[$row['id']]['total_own_ordered_view'] = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_own_ordered']);
+            $list[$row['id']]['total_third_billed_view'] = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_third_billed']);
+            $list[$row['id']]['total_third_ordered_view'] = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_third_ordered']);
+            $list[$row['id']]['total_ordered_view'] = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_ordered']);
         }
         //
         $select = Pi::db()->select();
@@ -210,7 +241,7 @@ class OrderController extends ActionController
             ->group('order.id')
             ->where($where)
             ->having($having)
-            ->order($order);
+            ->order($ordering);
         $count = Pi::db()->query($select)->count();
 
         // Set paginator
@@ -274,9 +305,10 @@ class OrderController extends ActionController
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('form', $form);
 
-        $this->view()->assign('totalOrdered', $totalOrdered);
-        $this->view()->assign('totalBilled', $totalBilled);
-        $this->view()->assign('totalNonOrdered', $totalOrdered - $totalBilled);
+        $this->view()->assign('totalOwnOrdered', $totalOwnOrdered);
+        $this->view()->assign('totalOwnBilled', $totalOwnBilled);
+        $this->view()->assign('totalThirdOrdered', $totalThirdOrdered);
+        $this->view()->assign('totalThirdBilled', $totalThirdBilled);
     }
 
     public function processAction()
@@ -572,7 +604,7 @@ class OrderController extends ActionController
         $addressInvoicing = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
         $addressDelivery  = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'DELIVERY');
 
-        $order['products']           = Pi::api('order', 'order')->listProduct($order['id']);
+        $order['products']           = Pi::api('order', 'order')->listProduct($order['id'], ['order' => $order]);
         $order['invoices']           = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
         $offline                     = false;
         $order['totalInstallments']  = 0;

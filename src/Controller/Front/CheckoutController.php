@@ -208,7 +208,8 @@ class CheckoutController extends IndexController
             if (!empty($cart['product'])) {
                 $this->getModel('detail')->delete(['order' => $_SESSION['order']['id']]);
                 foreach ($cart['product'] as $product) {
-                    //$unconsumedPrice = json_decode($product['extra'], true)['unconsumedPrice'];
+                    $unconsumedPrice = json_decode($product['extra'], true)['unconsumedPrice'];
+                    $product['discount_price'] += $unconsumedPrice;
 
                     // Save detail
                     $detail                 = $this->getModel('detail')->createRow();
@@ -238,11 +239,13 @@ class CheckoutController extends IndexController
                     if ($product['extra']) {
                         $extra = json::decode($product['extra'], true);
                     }
+
+
+                    $detail->extra = json::encode($extra);
                     if (array_key_exists('unconsumedPrice', $extra)) {
                         unset($extra['unconsumedPrice']);
                     }
 
-                    $detail->extra = json::encode($extra);
                     $detail->save();
                 }
             }
@@ -337,7 +340,7 @@ class CheckoutController extends IndexController
         // Set products
         if (isset($cart['product']) && count($cart['product'])) {
             foreach ($cart['product'] as $key => $product) {
-                $cart['product'][$key]['details'] = Pi::api('order', $cart['module_name'])->getProductDetails($product['product'], json_decode($product['extra']));
+                $cart['product'][$key]['details'] = Pi::api('order', $cart['module_name'])->getProductDetails($product['product'], json_decode($product['extra'], true));
                 $cart['product'][$key]['product_price_view'] = Pi::api('api', 'order')->viewPrice($product['product_price']);
             }
         }

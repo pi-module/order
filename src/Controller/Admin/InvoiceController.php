@@ -75,7 +75,7 @@ class InvoiceController extends ActionController
         $select = Pi::db()->select();
         $select
             ->from(['invoice' => $invoiceTable])
-            ->join(['order' => $orderTable], 'invoice.order = order.id', [])
+            ->join(['order' => $orderTable], 'invoice.order = order.id', ['type_commodity'])
             ->join(
                 ['order_address' => $orderAddressTable], 'order_address.order = order.id',
                 ['id_number', 'first_name', 'last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company',
@@ -103,8 +103,10 @@ class InvoiceController extends ActionController
             $products   = Pi::api('order', 'order')->listProduct($row['order'], $options);
             $totalPrice = 0;
             foreach ($products as $product) {
-                $totalPrice += $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price']
-                    + $product['vat_price'] - $product['discount_price'];
+                if (Pi::api('order', $product['module'])->showInInvoice($row, $product)) {
+                    $totalPrice += $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price']
+                        + $product['vat_price'] - $product['discount_price'];
+                }
             }
             $list[$row['id']]['total_price_view'] = Pi::api('api', 'order')->viewPrice($totalPrice);
         }

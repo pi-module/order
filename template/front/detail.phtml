@@ -282,13 +282,13 @@
 
                                     foreach ($order['products'] as $product) {
 
-                                        $totalProductPrice  += $product['product_price'];
+                                        $totalProductPrice  += $product['product_price'] - $product['extra']['unconsumedPrice'];
                                         $totalShippingPrice += $product['shipping_price'];
                                         $totalPackingPrice  += $product['packing_price'];
                                         $totalSetupPrice    += $product['setup_price'];
-                                        $totalDiscountPrice += $product['discount_price'];
+                                        $totalDiscountPrice += $product['discount_price'] + $product['extra']['unconsumedPrice'];
                                         $totalVatPrice      += $product['vat_price'];
-                                        $totalPrice         += $product['total_price'];
+                                        $totalPrice         += $product['total_price'] - $product['extra']['unconsumedPrice'];
                                         ?>
                                         <tr>
                                             <td>
@@ -312,13 +312,13 @@
                                             <td><?php echo $product['time_start'] ? _date($product['time_start']) : ''; ?></td>
                                             <td><?php echo $product['time_end'] ? _date($product['time_end']) : ''; ?></td>
                                             <td><?php echo $product['number'] ?></td>
-                                            <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?></td>
+                                            <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'] - $product['extra']['unconsumedPrice'])); ?></td>
                                             <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['shipping_price'])); ?></td>
                                             <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['packing_price'])); ?></td>
                                             <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['setup_price'])); ?></td>
-                                            <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?></td>
+                                            <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'] + $product['extra']['unconsumedPrice'])); ?></td>
                                             <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['vat_price'])); ?></td>
-                                            <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['total_price'])); ?></td>
+                                            <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['total_price'] - $product['extra']['unconsumedPrice'])); ?></td>
                                         </tr>
                                     <?php } ?>
                                     <tr class="w-100">
@@ -383,7 +383,7 @@
                                                 <td><?php echo $this->escape($invoice['type']); ?></td>
                                                 <td><?php echo $this->escape($invoice['time_invoice_view']) ?></td>
                                                 <td class="text-right">
-                                                    <a class="btn btn-primary btn-sm" title="<?php _e('Print'); ?>"
+                                                    <a class="btn btn-primary btn-sm" target="_blank" title="<?php _e('Print'); ?>"
                                                        href="<?php echo $this->url(
                                                            '', ['controller' => 'detail', 'action' => 'print', 'id' => $invoice['id']]
                                                        ); ?>">

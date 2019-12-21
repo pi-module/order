@@ -224,7 +224,7 @@
                 <a class="btn btn-primary" title="<?php _e('View order'); ?>"
                    href="<?php echo $this->url('', ['controller' => 'order', 'action' => 'view', 'id' => $invoice['order']]); ?>"
                    target="_blank"><i class="far fa-eye"></i> <?php _e('View order'); ?></a>
-                <a class="btn btn-primary" title="<?php _e('Print'); ?>"
+                <a class="btn btn-primary" target="_blank" title="<?php _e('Print'); ?>"
                    href="<?php echo $this->url('', ['controller' => 'invoice', 'action' => 'print-pdf', 'id' => $invoice['id']]); ?>"
                    target="_blank"><i class="fas fa-print"></i> <?php _e('Print'); ?></a>
             </div>

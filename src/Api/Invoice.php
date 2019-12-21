@@ -453,17 +453,17 @@ class Invoice extends AbstractApi
         $order['products'] = Pi::api('order', 'order')->listProduct($order['id'], $options);
 
         foreach ($order['products'] as $key => $product) {
-            if ($order['type_commodity'] == 'booking' && $product['product'] != 'commission') {
+            if (!Pi::api('order', $product['module'])->showInInvoice($order, $product)) {
                 unset($order['products'][$key]);
                 continue;
             }
+            $unconsumedPrice                  = $product['extra']['unconsumedPrice'];
 
-            $order['total_product_price']     += $product['product_price'] - $product['discount_price'];
+            $order['total_product_price']     += $product['product_price'] - $product['discount_price'] - $unconsumedPrice;
             $order['total_shipping_price']    += $product['shipping_price'];
             $order['total_packing_price']     += $product['packing_price'];
             $order['total_setup_price']       += $product['setup_price'];
             $order['total_vat_price']         += $product['vat_price'];
-            $unconsumedPrice                  = json_decode($product['extra'], true)['unconsumedPrice'];
             $order['total_unconsommed_price'] += $unconsumedPrice ?: 0;
         }
 
@@ -473,10 +473,10 @@ class Invoice extends AbstractApi
         $order['total_setup_price_view']       = Pi::api('api', 'order')->viewPrice($order['total_setup_price']);
         $order['total_vat_price_view']         = Pi::api('api', 'order')->viewPrice($order['total_vat_price']);
         $order['total_unconsommed_price_view'] = Pi::api('api', 'order')->viewPrice($order['total_unconsommed_price']);
-        $order['total_price_view']             = Pi::api('api', 'order')->viewPrice(
-            $order['total_product_price'] + $order['total_shipping_price'] + $order['total_packing_price'] + $order['total_setup_price']
-            + $order['total_vat_price'] - $order['total_discount_price'] - $order['total_unconsommed_price']
-        );
+        $order['total_price']             = $order['total_product_price'] + $order['total_shipping_price'] + $order['total_packing_price'] + $order['total_setup_price']
+            + $order['total_vat_price'] - $order['total_discount_price'];
+
+        $order['total_price_view']             = Pi::api('api', 'order')->viewPrice($order['total_price']);
 
         // set Products
         $order['invoice'] = $invoice;
@@ -519,7 +519,8 @@ class Invoice extends AbstractApi
 
         $address  = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
         $template = 'order:front/print';
-        $data     = ['order' => $order, 'address' => $address, 'config' => $config];
+        $isCredit = $order['invoice']['type'] == 'CREDIT' || $order['total_price'] < 0;
+        $data     = ['order' => $order, 'address' => $address, 'config' => $config, 'isCredit' => $isCredit];
 
         $name = sprintf("%s-%s.pdf", $config['order_filename_prefix'], $invoice['code']);
         Pi::service('html2pdf')->pdf($template, $data, $name);

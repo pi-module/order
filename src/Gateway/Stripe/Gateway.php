@@ -135,7 +135,7 @@ class Gateway extends AbstractGateway
         for ($i = 1; $i < $this->gatewayPayInformation['nb_product']; ++$i) {
             $item                = [];
             $item["name"]        = addcslashes($this->gatewayPayInformation['item_name_' . $i], '"');
-            $item["amount"]       = ($this->gatewayPayInformation['amount_' . $i] + $this->gatewayPayInformation['tax_' . $i] - $this->gatewayPayInformation['discount_price_' . $i]) * 100;
+            $item["amount"]       = ($this->gatewayPayInformation['amount_' . $i] + $this->gatewayPayInformation['tax_' . $i] - $this->gatewayPayInformation['discount_price_' . $i]- $this->gatewayPayInformation['unconsumed_' . $i]) * 100;
             $item["currency"]    = $this->gatewayPayInformation['currency_code'];
             $item["quantity"]    = $this->gatewayPayInformation['quantity_' . $i];
             $item["description"] = addcslashes($this->gatewayPayInformation['item_name_' . $i], '"');
