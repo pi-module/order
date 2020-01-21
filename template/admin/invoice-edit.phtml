@@ -93,6 +93,18 @@
                         <p><strong><?php _e('Company VAT'); ?></strong> :
                             <span><?php echo $this->escape($address['company_vat']); ?></span></p>
                     <?php } ?>
+                    <?php if (!empty($address['email'])) { ?>
+                        <p><strong><?php _e('Email'); ?></strong> :
+                            <span><?php echo $this->escape($address['email']); ?></span></p>
+                    <?php } ?>
+                    <?php if (!empty($address['phone'])) { ?>
+                        <p><strong><?php _e('Phone'); ?></strong> :
+                            <span><?php echo $this->escape($address['phone']); ?></span></p>
+                    <?php } ?>
+                    <?php if (!empty($address['mobile'])) { ?>
+                        <p><strong><?php _e('Mobile'); ?></strong> :
+                            <span><?php echo $this->escape($address['mobile']); ?></span></p>
+                    <?php } ?>
                 <?php } else { ?>
                     <?php if (!empty($address['first_name']) && !empty($address['last_name'])) { ?>
                         <p><strong><?php _e('Name'); ?></strong> :
