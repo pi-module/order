@@ -80,11 +80,11 @@ class Order extends AbstractApi
         return $orders;
     }
 
-    public function generatCode()
+    public function generatCode($year = null)
     {
         $config = Pi::service('registry')->config->read($this->getModule());
 
-        $year  = date('Y');
+        $year  = $year ?: date('Y');
         $count = Pi::model('order', 'order')->count(['time_create >= ' . strtotime('01-01-' . $year)]);
         $num   = $year . sprintf('%03d', ($count + 1));
 
