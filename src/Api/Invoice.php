@@ -56,7 +56,7 @@ class Invoice extends AbstractApi
         } else {
             // Set invoice
             $row               = Pi::model('invoice', $this->getModule())->createRow();
-            $row->code         = Pi::api('invoice', 'order')->generatCode();
+            $row->code         = Pi::api('invoice', 'order')->generatCode(date('Y', $order['time_create']));
             $row->random_id    = time() + rand(100, 999);
             $row->status       = \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT;
             $row->time_create  = $order['time_create'];
@@ -127,12 +127,13 @@ class Invoice extends AbstractApi
         return $result;
     }
 
-    public function generatCode()
+    public function generatCode($year = null)
     {
         $config = Pi::service('registry')->config->read($this->getModule());
 
-        $year  = date('Y');
-        $count = Pi::model('invoice', 'order')->count(['time_create >= ' . strtotime('01-01-' . $year)]);
+        $year  = $year ?: date('Y');
+        $count = Pi::model('invoice', 'order')->count(['time_create >= ' . strtotime('01-01-' . $year) . ' AND time_create < ' . strtotime('01-01-' . ($year + 1))]);
+
         $num   = $year . sprintf('%03d', ($count + 1));
 
         return sprintf('%s-%s', $config['invoice_code_prefix'], $num);
