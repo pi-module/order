@@ -292,7 +292,7 @@ class CheckoutController extends IndexController
                     )
                 );
             }
-            $this->jump($url, __('Order information save successfully, please start payment !'), 'success');
+            $this->jump($url, __('Order information saved successfully, you can now finalize payment !'), 'success');
         } else {
             $error = [
                 'values' => $values,
