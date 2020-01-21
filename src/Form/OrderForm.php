@@ -21,7 +21,7 @@ class OrderForm extends BaseForm
     public function __construct($name = null, $option = [])
     {
         $this->option = $option;
-        $this->config = Pi::service('registry')->config->read('order', 'order');
+        $this->config = Pi::service('registry')->config->read('order');
         parent::__construct($name);
     }
 

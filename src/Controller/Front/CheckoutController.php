@@ -33,7 +33,7 @@ use Zend\Json\Json;
 
 class CheckoutController extends IndexController
 {
-    private function validValues($values, $cart, $uid)
+    private function validValues($values, $cart, $uid, $config)
     {
         $values['uid']             = $uid;
         $values['ip']              = Pi::user()->getIp();
@@ -111,9 +111,9 @@ class CheckoutController extends IndexController
                 $values['discount_price']  = ($product['discount_price'] * $product['number']) + $values['discount_price'];
                 $values['shipping_price']  = ($product['shipping_price'] * $product['number']) + $values['shipping_price'];
                 $values['packing_price']   = ($product['packing_price'] * $product['number']) + $values['packing_price'];
-                $values['setup_price']     = ($product['setup_price'] * $product['number']) + $values['setup_price'];
+                $values['setup_price']     = isset($product['setup_price']) ? ($product['setup_price'] * $product['number']) + $values['setup_price'] : $values['setup_price'];
                 $values['vat_price']       = ($product['vat_price'] * $product['number']) + $values['vat_price'];
-                $values['unconsumedPrice'] = $unconsumedPrice + $values['unconsumedPrice'];
+                $values['unconsumedPrice'] = $unconsumedPrice + isset($values['unconsumedPrice']) ? $values['unconsumedPrice'] : 0;
             }
         }
 
@@ -147,7 +147,7 @@ class CheckoutController extends IndexController
 
     private function order($values, $addressDelivery, $addressInvoicing, $cart, $config, $uid)
     {
-        $values                   = $this->validValues($values, $cart, $uid);
+        $values                   = $this->validValues($values, $cart, $uid, $config);
         $_SESSION['order']['uid'] = $uid;
         // Check gateway
         if (is_array($values['default_gateway'])) {
@@ -210,6 +210,7 @@ class CheckoutController extends IndexController
                 foreach ($cart['product'] as $product) {
                     $unconsumedPrice = json_decode($product['extra'], true)['unconsumedPrice'];
                     $product['discount_price'] += $unconsumedPrice;
+
                     // Save detail
                     $detail                 = $this->getModel('detail')->createRow();
                     $detail->order          = $order->id;
@@ -223,8 +224,8 @@ class CheckoutController extends IndexController
                     $detail->vat_price      = isset($product['vat_price']) ? $product['vat_price'] : 0;
                     $detail->time_create    = time();
                     $detail->number         = $product['number'];
-                    $detail->time_start     = $product['time_start'];
-                    $detail->time_end       = $product['time_end'];
+                    $detail->time_start     = isset($product['time_start']) ? $product['time_start'] : 0;
+                    $detail->time_end       = isset($product['time_end']) ? $product['time_end'] : 0;
 
                     // Set price
                     $formatter = Pi::service('i18n')->getNumberFormatter();
@@ -291,7 +292,7 @@ class CheckoutController extends IndexController
                     )
                 );
             }
-            $this->jump($url, $result['message'], 'success');
+            $this->jump($url, __('Order information save successfully, please start payment !'), 'success');
         } else {
             $error = [
                 'values' => $values,
@@ -442,16 +443,12 @@ class CheckoutController extends IndexController
                 $formAddress->setData($data);
                 if ($formAddress->isValid()) {
 
-                    // Check user informations
-                    $uid  = Pi::user()->getId();
-                    $user = Pi::api('user', 'order')->getUserInformation();
-
+                    // Check user information
                     $values                = $formAddress->getData();
                     $values['time_create'] = time();
-
-                    $values['uid']       = $uid;
-                    $values['last_name'] = strtoupper($values['last_name']);
-                    $values['city']      = strtoupper($values['city']);
+                    $values['uid']       = Pi::user()->getId();
+                    $values['last_name'] = isset($values['last_name']) ? strtoupper($values['last_name']) : '';
+                    $values['city']      = isset($values['city']) ? strtoupper($values['city']) : '';
 
                     if ($values['address_id'] == 0) {
                         Pi::api('customerAddress', 'order')->addAddress($values);

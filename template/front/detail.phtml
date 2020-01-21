@@ -26,7 +26,7 @@
                 </div>
                 <div id="accordion">
                     <!-- accordion -->
-                    <div class="card">
+                    <div class="card mb-3">
                         <div class="card-header" role="tab" id="headingInformation">
                             <h4 class="card-title">
                                 <?php _e('Main information of order'); ?>
@@ -271,7 +271,7 @@
                     </div>
 
                     <!-- accordion -->
-                    <div class="card">
+                    <div class="card mb-3">
                         <div class="card-header" role="tab" id="headingProducts">
                             <h4 class="card-title">
                                 <?php _e('List of ordered services/products'); ?>
@@ -360,11 +360,11 @@
                     </div>
 
                     <!-- accordion -->
-                    <div class="card mt-3">
+                    <div class="card mb-3">
                         <div role="tab" id="headingInvoice">
-                            <h4 class="card-title alert alert-success">
+                            <h5 class="card-title alert alert-success">
                                 <?php _e('This order invoices list'); ?>
-                            </h4>
+                            </h5>
                         </div>
                         <div id="collapseInvoice" class="collapse show" role="tabpanel">
                             <div class="card-body">
@@ -461,7 +461,7 @@
 
                     <!-- accordion -->
                     <?php if (!empty($order['user_note']) || !empty($order['admin_note'])) { ?>
-                        <div class="card">
+                        <div class="card mb-3">
                             <div class="card-header" role="tab" id="headingNote">
                                 <h4 class="card-title">
                                     <?php _e('Note'); ?>
