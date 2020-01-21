@@ -85,7 +85,7 @@ class Order extends AbstractApi
         $config = Pi::service('registry')->config->read($this->getModule());
 
         $year  = $year ?: date('Y');
-        $count = Pi::model('order', 'order')->count(['time_create >= ' . strtotime('01-01-' . $year)]);
+        $count = Pi::model('order', 'order')->count(['time_create >= ' . strtotime('01-01-' . $year) . ' AND time_create < ' . strtotime('01-01-' . $year + 1)]);
         $num   = $year . sprintf('%03d', ($count + 1));
 
         return sprintf('%s-%s', $config['order_code_prefix'], $num);
