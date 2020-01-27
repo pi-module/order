@@ -177,10 +177,10 @@ class PaymentController extends IndexController
         if ($config['order_testmode']) {
             return $this->redirect()->toRoute(
                 '', [
-                'controller' => 'payment',
-                'action'     => 'test',
-                'id'         => $order['id'],
-            ]
+                    'controller' => 'payment',
+                    'action'     => 'test',
+                    'id'         => $order['id'],
+                ]
             );
         }
         // Check invoice price
@@ -314,7 +314,33 @@ class PaymentController extends IndexController
                 // jump to module
                 $message = __('Your payment were successfully.');
                 $this->jump($url, $message);
-            } else {
+            } else if ($verify['status'] == 2) {
+                // jump to module
+                Pi::api('processing', 'order')->removeProcessing();
+
+                $where  = ['order' => $verify['order']];
+                $select = Pi::model('detail', 'order')->select()->where($where);
+                $rowset = Pi::model('detail', 'order')->selectWith($select);
+                foreach ($rowset as $row) {
+                    $detail[$row->id] = $row->toArray();
+                    if (empty($row->extra)) {
+                        $detail[$row->id]['extra'] = [];
+                    } else {
+                        $detail[$row->id]['extra'] = json::decode($row->extra, true);
+                    }
+                    $module = $row->module;
+                }
+
+                $order = Pi::model('order', $this->getModule())->find($verify['order']);
+                $order->status_order = \Module\Order\Model\Order::STATUS_ORDER_PENDING;
+                $order->save();
+
+                $backUrl = Pi::api('order', $module)->postPaymentUpdate($order, $detail);
+
+                $message = __('Votre moyen de paiement a été accepté. Votre réservation est en attente de validation.');
+                $this->jump($backUrl, $message);
+
+            } {
                 // Check error
                 if ($gateway->gatewayError) {
                     // Remove processing
@@ -360,8 +386,8 @@ class PaymentController extends IndexController
         if (!empty($request)
             && in_array(
                 $gatewayName, [
-                'Paypal', 'paypal', 'Bitcoin', 'bitcoin',
-            ]
+                    'Paypal', 'paypal', 'Bitcoin', 'bitcoin',
+                ]
             )
         ) {
             // Get random_id
@@ -475,10 +501,10 @@ class PaymentController extends IndexController
                     $url     = Pi::url(
                         $this->url(
                             '', [
-                            'module'     => $this->getModule(),
-                            'controller' => 'payment',
-                            'action'     => 'process',
-                        ]
+                                'module'     => $this->getModule(),
+                                'controller' => 'payment',
+                                'action'     => 'process',
+                            ]
                         )
                     );
                     $url .= '?order=' . $order['id'];
@@ -496,10 +522,10 @@ class PaymentController extends IndexController
                     $url = Pi::url(
                         $this->url(
                             '', [
-                            'module'     => $this->getModule(),
-                            'controller' => 'payment',
-                            'action'     => 'result',
-                        ]
+                                'module'     => $this->getModule(),
+                                'controller' => 'payment',
+                                'action'     => 'result',
+                            ]
                         )
                     );
                     $url .= '?order=' . $order['id'];
@@ -611,10 +637,8 @@ class PaymentController extends IndexController
     {
         // Check user
         $this->checkUser();
-
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
-
         // Check test mode
         if (!$config['order_testmode']) {
             // jump to module
@@ -622,18 +646,17 @@ class PaymentController extends IndexController
             $message = __('Test mode not active.');
             $this->jump($url, $message);
         }
-
         // Get invoice
+        $id         = $this->params('id');
         $processing = Pi::api('processing', 'order')->getProcessing();
-        $result  = Pi::api('invoice', 'order')->createInvoice($processing['order'], $processing['uid']);
-        $invoice = Pi::api('invoice', 'order')->updateInvoice($result['random_id'], $processing['gateway']);
-        $backUrl = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
-
+        $invoice    = Pi::api('invoice', 'order')->getInvoiceFromOrder($processing['order']);
+        $invoice    = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id'], $processing['gateway']);
+        // Update module order / invoice and get back url
+        $url = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
         // Remove processing
         Pi::api('processing', 'order')->removeProcessing();
-
         // jump to module
         $message = __('Your payment were successfully.');
-        $this->jump($backUrl, $message);
+        $this->jump($url, $message);
     }
 }

@@ -117,7 +117,7 @@ $this->backbone();
                                             $order['orderTitle']
                                         ); ?></span>
                                 <?php } else {
-                                    if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_DRAFT) { ?>
+                                    if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_DRAFT || $order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_PENDING) { ?>
                                         <span class="badge badge-warning"><?php echo $this->escape($order['orderTitle']); ?></span>
                                     <?php } else { ?>
                                         <span class="badge badge-danger"><?php echo $this->escape($order['orderTitle']); ?></span>

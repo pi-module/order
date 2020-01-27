@@ -101,6 +101,7 @@ class Gateway extends AbstractGateway
             $package = Pi::api('package', 'guide')->getPackageFromPeriod($item['package']);
 
             $this->gatewayPayInformation['gateway_id'] = $item['gateway_id'];
+            $this->gatewayPayInformation['booking_payment_delay'] = $item['booking_payment_delay'];
 
             if ($package['commission']) {
                 $commission = $item['commission_percentage_owner_fullcommission'];
@@ -186,8 +187,11 @@ class Gateway extends AbstractGateway
             if ($totalFee > 0) {
                 $data['payment_intent_data']['application_fee_amount'] = $totalFee;
             }
-        }
 
+            if ($this->gatewayPayInformation['booking_payment_delay']) {
+                $data['payment_intent_data']['capture_method'] = 'manual';
+            }
+        }
         $session = \Stripe\Checkout\Session::create($data);
 
         return $session;
@@ -319,8 +323,8 @@ class Gateway extends AbstractGateway
         $order     = Pi::api('order', 'order')->getOrder($processing['order']);
         $extra     = json_decode($order['extra'], true);
 
-        if ($payment['status'] == 'succeeded') {
-            $result['status']  = 1;
+        if ($payment['status'] == 'succeeded' || $payment['status'] == 'requires_capture') {
+            $result['status']  = $payment['status'] == 'succeeded' ? 1 : 2;
             $result['adapter'] = $this->gatewayAdapter;
             $result['order']   = $order['id'];
 

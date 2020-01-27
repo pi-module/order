@@ -379,6 +379,7 @@ $this->backbone();
                                 <?php
                                 $orderClass = '';
                                 switch ($order['status_order']) {
+                                    case Module\Order\Model\Order::STATUS_ORDER_PENDING:
                                     case Module\Order\Model\Order::STATUS_ORDER_DRAFT:
                                         $orderClass = 'btn-warning';
                                         break;

@@ -35,7 +35,7 @@
                                     $order['shortStatus']
                                 ); ?></span></td>
                         <td class="text-center">
-                            <?php if ($order['can_pay'] && $order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_CANCELLED) { ?>
+                            <?php if ($order['can_pay'] && $order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_CANCELLED && $order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_PENDING) { ?>
                                 <a class="btn btn-danger btn-sm" title="<?php _e('Cancel'); ?>" target="_blank"
                                    href="<?php echo Pi::url($this->url('order', ['controller' => 'index', 'action' => 'cancel', 'id' => $order['id']])); ?>"><i
                                             class="fas fa-times"></i> <?php _e('Cancel'); ?></a>
