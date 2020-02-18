@@ -322,6 +322,7 @@ CREATE TABLE `{invoice_installment}`
     `due_price`      DECIMAL(16, 2)       NOT NULL DEFAULT '0.00',
     `credit_price`   DECIMAL(16, 8)       NOT NULL DEFAULT '0.00',
     `comment`        TEXT,
+    `extra`        TEXT,
     PRIMARY KEY (`id`),
     KEY `invoice` (`invoice`)
 );

@@ -694,4 +694,25 @@ class Installment extends AbstractApi
 
         return $d;
     }
+
+    public function updateInstallment($invoice)
+    {
+        $where        = ['invoice' => $invoice];
+        $select       = Pi::model('invoice_installment', 'order')->select()->where($where);
+        $rowset       = Pi::model('invoice_installment', 'order')->selectWith($select);
+        foreach ($rowset as $row) {
+            if ($row->status_payment == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
+                $row->status_payment = \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID;
+                $row->save();
+                break;
+            }
+        }
+    }
+
+    public function removeInstallments($invoice)
+    {
+        $where        = ['invoice' => $invoice];
+        $select       = Pi::model('invoice_installment', 'order')->delete($where);
+    }
+
 }

@@ -15,7 +15,7 @@
                         <li class="list-inline-item float-left">
                             <h1><?php echo sprintf(__('Order %s details'), $order['code']); ?></h1>
                         </li>
-                        <?php if ($order['can_pay'] && !$order['has_payment'] && $order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_CANCELLED) { ?>
+                        <?php if ($order['can_pay'] && !$order['has_unpaid_installment'] && $order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_CANCELLED) { ?>
                             <li class="list-inline-item float-right">
                                 <a class="btn btn-primary btn-sm" title="<?php _e('Pay'); ?>" target="_blank"
                                    href="<?php echo Pi::url($this->url('order', ['controller' => 'payment', 'action' => 'index', 'id' => $order['id']])); ?>"><i

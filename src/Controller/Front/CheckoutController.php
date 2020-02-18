@@ -172,6 +172,7 @@ class CheckoutController extends IndexController
         }
         $order->assign($values);
         $order->save();
+
         $_SESSION['order']['id'] = $order['id'];
 
         $orderAddress = $this->getModel('order_address')->createRow();
@@ -248,6 +249,19 @@ class CheckoutController extends IndexController
 
                     $detail->save();
                 }
+
+                $invoices = Pi::api('invoice', 'order')->getInvoiceFromOrder($order->id);
+                if (!count($invoices)) {
+                    $result = Pi::api('invoice', 'order')->createInvoice($order->id, Pi::user()->getId());
+                } else {
+                    $result = reset($invoices);
+                    Pi::api('installment', 'order')->removeInstallments($result['id']);
+                }
+                $randomId = $result['random_id'];
+
+                $composition = Pi::api('order', $cart['module_name'])->getInstallmentComposition(json_decode($cart['product'][0]['extra'], true));
+                $invoice = Pi::api('invoice', 'order')->updateInvoice($randomId, $gateway['title'], $composition);
+                //
             }
             // Update user information
             if ($config['order_update_user'] && isset($values['update_user']) && $values['update_user']) {

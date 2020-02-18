@@ -321,9 +321,9 @@ class Order extends AbstractApi
         $order['deliveryTitle'] = $status_delivery['deliveryTitle'];
         //
         $can_pay              = $this->canPayStatus($order['can_pay']);
-        $order['canPayClass'] = $can_pay['canPayClass'];
-        $order['canPayLabel'] = $can_pay['canPayLabel'];
-        $order['canPayTitle'] = $can_pay['canPayTitle'];
+        $order['canPayClass'] = isset($can_pay['canPayClass']) ? $can_pay['canPayClass'] : null;
+        $order['canPayLabel'] = isset($can_pay['canPayLabel']) ? $can_pay['canPayLabel'] : null;
+        $order['canPayTitle'] = isset($can_pay['canPayTitle']) ? $can_pay['canPayTitle'] : null;
         //
         if ($order['type_commodity'] == 'product') {
             $order['type_commodity_view'] = __('Product');
@@ -590,6 +590,23 @@ class Order extends AbstractApi
             }
         }
         return false;
+    }
+
+    public function hasUnpaidInstallment($id)
+    {
+        $orderTable              = Pi::model('order', 'order')->getTable();
+        $invoiceTable            = Pi::model("invoice", 'order')->getTable();
+        $invoiceInstallmentTable = Pi::model("invoice_installment", 'order')->getTable();
+
+        $select = Pi::db()->select();
+        $select
+            ->from(['order' => $orderTable])
+            ->join(['invoice' => $invoiceTable], 'invoice.order = order.id', ['status'])
+            ->join(['invoice_installment' => $invoiceInstallmentTable], 'invoice_installment.invoice = invoice.id')
+            ->where(['order.id' => $id, 'invoice.status != ' . \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED, 'invoice_installment.status_payment' =>  \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID]);
+
+        $rowset = Pi::db()->query($select);
+        return count($rowset);
     }
 
     public function getTimePayment($id)

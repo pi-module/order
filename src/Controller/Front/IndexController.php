@@ -39,24 +39,15 @@ class IndexController extends ActionController
         ];
         $orders  = Pi::api('order', 'order')->getOrderFromUser($user['id'], false, $options);
         foreach ($orders as $order) {
-            if ($order['can_pay']) {
-                $order['installments'] = Pi::api('installment', 'order')->getInstallmentsFromOrder($order['id']);
-                $countInstallment      = 0;
-                foreach ($order['installments'] as $installment) {
-                    if ($installment['status_invoice'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
-                        $countInstallment++;
-                        if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID
-                            || ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID
-                                && $installment['gateway'] == 'manual')
-                        ) {
-                            $order['can_pay'] = false;
-                            break;
-                        }
-                    }
-                }
-                if ($countInstallment == 0) {
-                    if ($order['default_gateway'] == 'manual') {
-                        $order['can_pay'] = false;
+            $order['installments'] = Pi::api('installment', 'order')->getInstallmentsFromOrder($order['id']);
+            $countInstallment      = 0;
+            $order['can_pay'] = false;
+            foreach ($order['installments'] as $installment) {
+                if ($installment['status_invoice'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
+                    $countInstallment++;
+                    if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID && $installment['gateway'] != 'manual') {
+                        $order['can_pay'] = true;
+                        break;
                     }
                 }
             }

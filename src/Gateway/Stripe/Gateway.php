@@ -133,6 +133,29 @@ class Gateway extends AbstractGateway
         $subtotalCommissionOwner = 0;
         $feeCustomer = 0;
         $tax      = 0;
+
+        $firstPaid = false;
+        $installments = Pi::api('installment', 'order')->getInstallmentsFromOrder($order['id']);
+        foreach ($installments as $installment) {
+            if ($installment['status_invoice'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
+                if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
+                    $firstPaid = true;
+                }
+                if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
+                    if (count($installments) > 1) {
+                        $item = [];
+                        $item["name"] = $installment['count'] == 1 ? __("Premier accompte pour la réservation") : __("Finalisation du paiement pour la réservation");
+                        $item["description"] = $installment['count'] == 1 ? __("Premier accompte pour la réservation") : __("Finalisation du paiement pour la réservation");
+                        $item["amount"] = $installment['due_price'] * 100;
+                        $item["currency"] = $this->gatewayPayInformation['currency_code'];
+                        $item["quantity"] = 1;
+                        $items[] = $item;
+                    }
+                    break;
+                }
+            }
+        }
+
         for ($i = 1; $i < $this->gatewayPayInformation['nb_product']; ++$i) {
             $item                = [];
             $item["name"]        = addcslashes($this->gatewayPayInformation['item_name_' . $i], '"');
@@ -140,22 +163,24 @@ class Gateway extends AbstractGateway
             $item["currency"]    = $this->gatewayPayInformation['currency_code'];
             $item["quantity"]    = $this->gatewayPayInformation['quantity_' . $i];
             $item["description"] = addcslashes($this->gatewayPayInformation['item_name_' . $i], '"');
-            $items[]             = $item;
 
             $totalProduct = $this->gatewayPayInformation['amount_' . $i] - $this->gatewayPayInformation['discount_price_' . $i] - $this->gatewayPayInformation['unconsumed_' . $i];
 
             if (!$this->gatewayPayInformation['special_fee_' . $i] ) {
                 $subtotalCommissionOwner += $totalProduct;
             }
-
             if ($this->gatewayPayInformation['id_' . $i] == 'commission') {
                 $feeCustomer += $totalProduct + $this->gatewayPayInformation['tax_' . $i];
             }
-
             $subtotal += $totalProduct;
             $tax      += $this->gatewayPayInformation['tax_' . $i];
+
+            if (count($installments) == 1) {
+                $items[] = $item;
+            }
         }
 
+        //
         $data = [
             'payment_method_types' => ['card'],
             'customer_email' => $this->gatewayPayInformation['email'],
@@ -170,7 +195,7 @@ class Gateway extends AbstractGateway
 
             $feeOwner = round(($subtotalCommissionOwner * $this->gatewayPayInformation['commission_percentage_owner']) * ((100 + $config['package_vat'])/100 ));
             $feeCustomer = $feeCustomer * 100;
-            $totalFee = $feeOwner + $feeCustomer;
+            $totalFee = $firstPaid ? $feeOwner + $feeCustomer : 0;
             $data['payment_intent_data'] = [
                 'transfer_data' => [
                     'destination' => $this->gatewayPayInformation['gateway_id'],
@@ -188,8 +213,8 @@ class Gateway extends AbstractGateway
                 $data['payment_intent_data']['application_fee_amount'] = $totalFee;
             }
 
-            if ($this->gatewayPayInformation['booking_payment_delay']) {
-                $data['payment_intent_data']['capture_method'] = 'manual';
+            if ($this->gatewayPayInformation['booking_payment_delay'] && !$firstPaid) {
+                 $data['payment_intent_data']['capture_method'] = 'manual';
             }
         }
         $session = \Stripe\Checkout\Session::create($data);
@@ -320,24 +345,39 @@ class Gateway extends AbstractGateway
         $payment = \Stripe\PaymentIntent::retrieve($pi);
 
 
-        $order     = Pi::api('order', 'order')->getOrder($processing['order']);
-        $extra     = json_decode($order['extra'], true);
+
 
         if ($payment['status'] == 'succeeded' || $payment['status'] == 'requires_capture') {
+
+            $order     = Pi::api('order', 'order')->getOrder($processing['order']);
+            $extra     = json_decode($order['extra'], true);
+
             $result['status']  = $payment['status'] == 'succeeded' ? 1 : 2;
             $result['adapter'] = $this->gatewayAdapter;
             $result['order']   = $order['id'];
-
             $extra['stripe'] = [
-                'payment_intent'    => $payment['id'],
-                'transfer'          => $payment['charges']['data'][0]['transfer'],
                 'metadata'          => $payment['charges']['data'][0]['metadata']->toArray()
             ];
-
-
             $orderRow = Pi::model('order', 'order')->find($order['id']);
             $orderRow->extra = json_encode($extra);
             $orderRow->save();
+
+            $installments = Pi::api('installment', 'order')->getInstallmentsFromOrder($order['id']);
+            foreach ($installments as $installment) {
+                $extra = json_decode($installment['extra'], true);
+                if (!isset($extra['stripe'])) {
+                    $extra['stripe'] = [
+                        'payment_intent'    => $payment['id'],
+                        'transfer'          => $payment['charges']['data'][0]['transfer'],
+                    ];
+                    $installmentRow = Pi::model('invoice_installment', 'order')->find($installment['id']);
+                    $installmentRow->extra = json_encode($extra);
+                    $installmentRow->save();
+
+                    break;
+                }
+            }
+
 
         } else {
             $result['status']   = 0;
