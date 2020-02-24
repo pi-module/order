@@ -335,7 +335,7 @@ msgid ""
 "Below of this amount, the invoice is paid throught in a single transaction "
 "(1 installment only)"
 msgstr ""
-"En dessous de cette valeur, la facture est payé en 1 seule transaction "
+"En dessous de cette valeur, la facture est payée en 1 seule transaction "
 "(paiement en 1 fois, 1 seul installment)"
 
 #: config/config.php:480
