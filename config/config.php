@@ -471,6 +471,14 @@ return [
             'filter'      => 'string',
             'value'       => _a('Admin make contact about payment whit you after review your order'),
         ],
+        'payment_minimum_for_installment'    => [
+            'category'    => 'payment',
+            'title'       => _a('Minimum value for fractionned payment'),
+            'description' => '',
+            'edit'        => 'text',
+            'filter'      => 'string',
+            'value'       => _a('100'),
+        ],
         
         // Credit
         'credit_active'                  => [

@@ -258,8 +258,7 @@ class CheckoutController extends IndexController
                     Pi::api('installment', 'order')->removeInstallments($result['id']);
                 }
                 $randomId = $result['random_id'];
-
-                $composition = Pi::api('order', $cart['module_name'])->getInstallmentComposition(json_decode($cart['product'][0]['extra'], true));
+                $composition = Pi::api('order', $cart['module_name'])->getInstallmentComposition($cart, true);
                 $invoice = Pi::api('invoice', 'order')->updateInvoice($randomId, $gateway['title'], $composition);
                 //
             }
