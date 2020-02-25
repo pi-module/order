@@ -148,7 +148,7 @@ class Gateway extends AbstractGateway
                         $extra = json_decode($order['extra'], true);
                         $itemObj = Pi::model("item", 'guide')->find($extra['values']['item'], 'id');
 
-                        $name = $installment['count'] == 1 ? sprintf(__("Réservation %s du %s au %s - Première échéance"), $itemObj['title'], _date(strtotime($extra['values']['date_start'])), _date(strtotime($extra['values']['date_end']))) : sprintf(__("Réservation %s du %s au %s - Deuxième échéance"), $item['title'], _date(strtotime($extra['values']['date_start'])), _date(strtotime($extra['values']['date_end'])));
+                        $name = $installment['count'] == 1 ? sprintf(__("Booking %s from %s to %s - First Installment"), $itemObj['title'], _date(strtotime($extra['values']['date_start'])), _date(strtotime($extra['values']['date_end']))) : sprintf(__("Booking %s from %s to %s - Second Installment"), $item['title'], _date(strtotime($extra['values']['date_start'])), _date(strtotime($extra['values']['date_end'])));
                         $item["name"] = $name;
                         $item["description"] = $name;
                         $item["amount"] = $installment['due_price'] * 100;
