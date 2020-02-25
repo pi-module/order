@@ -67,7 +67,7 @@ class Order extends Model
             Order::STATUS_ORDER_DRAFT     => __('Draft'),
             Order::STATUS_ORDER_VALIDATED => __('Validated'),
             Order::STATUS_ORDER_CANCELLED => __('Cancelled'),
-            Order::STATUS_ORDER_PENDING => __('Pending'),
+            Order::STATUS_ORDER_PENDING => __('Validation Pending'),
         ];
     }
 }

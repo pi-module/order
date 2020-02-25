@@ -142,10 +142,15 @@ class Gateway extends AbstractGateway
                     $firstPaid = true;
                 }
                 if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
-                    if (count($installments) > 1) {
+                    if (count($installments) > 1 && $order['type_commodity'] == 'booking') {
+
                         $item = [];
-                        $item["name"] = $installment['count'] == 1 ? __("Premier accompte pour la réservation") : __("Finalisation du paiement pour la réservation");
-                        $item["description"] = $installment['count'] == 1 ? __("Premier accompte pour la réservation") : __("Finalisation du paiement pour la réservation");
+                        $extra = json_decode($order['extra'], true);
+                        $itemObj = Pi::model("item", 'guide')->find($extra['values']['item'], 'id');
+
+                        $name = $installment['count'] == 1 ? sprintf(__("Réservation %s du %s au %s - Première échéance"), $itemObj['title'], _date(strtotime($extra['values']['date_start'])), _date(strtotime($extra['values']['date_end']))) : sprintf(__("Réservation %s du %s au %s - Deuxième échéance"), $item['title'], _date(strtotime($extra['values']['date_start'])), _date(strtotime($extra['values']['date_end'])));
+                        $item["name"] = $name;
+                        $item["description"] = $name;
                         $item["amount"] = $installment['due_price'] * 100;
                         $item["currency"] = $this->gatewayPayInformation['currency_code'];
                         $item["quantity"] = 1;

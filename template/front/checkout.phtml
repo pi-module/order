@@ -466,12 +466,14 @@ $this->footScript()->appendScript($script);
                                                 ); ?></strong>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td><?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Price ext VAT'); ?></td>
-                                        <td class="data-normal-price">
-                                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
-                                        </td>
-                                    </tr>
+                                    <?php if ($unconsumedPrice || (isset($product['discount']) && $product['discount'] > 0)) { ?>
+                                        <tr>
+                                            <td><?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Price ext VAT'); ?></td>
+                                            <td class="data-normal-price">
+                                                <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
                                     <?php if (isset($product['discount']) && $product['discount'] > 0) { ?>
                                         <tr>
                                             <td>

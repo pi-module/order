@@ -223,7 +223,7 @@ class Invoice extends AbstractApi
         }
     }
 
-    public function updateInvoice($randomId, $gateway = '', $composition = [100])
+    public function updateInvoice($randomId, $gateway = '', $composition = [100], $dates = null)
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
@@ -234,7 +234,7 @@ class Invoice extends AbstractApi
         // Update invoice
         $invoice->status = \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED;
         $invoice->save();
-        $this->createInstallments($invoice->toArray(), $gateway, null, $composition);
+        $this->createInstallments($invoice->toArray(), $gateway, $dates, $composition);
 
         // Update user credit
         if ($config['installment_credit'] && $invoice->type_payment == 'installment') {
@@ -582,11 +582,8 @@ class Invoice extends AbstractApi
 
     }
 
-    public function createInstallments($invoice, $gateway = 'manual', $time = null, $composition = array('100'))
+    public function createInstallments($invoice, $gateway = 'manual', $dates = null, $composition = array('100'))
     {
-        if ($time == null) {
-            $time = time();
-        }
         // Find due price
         $products = Pi::api('order', 'order')->listProduct($invoice['order']);
         $duePrice = 0;
@@ -608,7 +605,7 @@ class Invoice extends AbstractApi
                 'gateway'        => $gateway,
                 'status_payment' => \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID,
                 'time_payment'   => 0,
-                'time_duedate'   => $time,
+                'time_duedate'   => isset($dates[$key]) ? $dates[$key] : time(),
                 'due_price'      => $key + 1 == count($composition) ? $duePrice - $total: $duePriceInstallment,
             ];
 

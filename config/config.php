@@ -476,8 +476,8 @@ return [
             'title'       => _a('Minimum value for fractionned payment'),
             'description' => '',
             'edit'        => 'text',
-            'filter'      => 'string',
-            'value'       => _a('100'),
+            'filter'      => 'number_int',
+            'value'       => 100,
         ],
         
         // Credit

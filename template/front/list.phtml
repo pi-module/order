@@ -15,6 +15,7 @@
                 <th class="text-center"><?php _e('Product / service'); ?></th>
                 <th class="text-center"><?php _e('Time'); ?></th>
                 <th class="text-center"><?php _e('Price incl. VAT'); ?></th>
+                <th class="text-center"><?php _e('To paid incl. VAT'); ?></th>
                 <th class="text-center"><?php _e('Order status'); ?></th>
                 <th class="text-center"><?php _e('Action'); ?></th>
             </tr>
@@ -31,6 +32,7 @@
                         </td>
                         <td class="text-center"><?php echo $this->escape($order['time_create_view']); ?></td>
                         <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
+                        <td class="text-center"><?php echo $this->escape($order['to_paid_view']); ?></td>
                         <td class="text-center"><span class="badge <?php echo $this->escape($order['shortLabel']); ?>"><?php echo $this->escape(
                                     $order['shortStatus']
                                 ); ?></span></td>

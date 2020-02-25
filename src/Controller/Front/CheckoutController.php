@@ -259,7 +259,8 @@ class CheckoutController extends IndexController
                 }
                 $randomId = $result['random_id'];
                 $composition = Pi::api('order', $cart['module_name'])->getInstallmentComposition($cart, true);
-                $invoice = Pi::api('invoice', 'order')->updateInvoice($randomId, $gateway['title'], $composition);
+                $dates = Pi::api('order', $cart['module_name'])->getInstallmentDueDate($cart, $composition);
+                $invoice = Pi::api('invoice', 'order')->updateInvoice($randomId, $gateway['title'], $composition, $dates);
                 //
             }
             // Update user information
@@ -401,13 +402,38 @@ class CheckoutController extends IndexController
         $addressDelivery  = Pi::api('customerAddress', 'order')->getAddress($cart['delivery_address']);
         $addressInvoicing = Pi::api('customerAddress', 'order')->getAddress($cart['invoicing_address']);
 
+        $payAll = $cart['extra']['values']['pay_all'];
+        $composition = Pi::api('order', $cart['module_name'])->getInstallmentComposition($cart, true);
+        $duePrice = 0;
+        foreach ($cart['product'] as $product) {
+            $duePrice += $product['product_price'] - $product['discount_price'] + $product['shipping_price'] + $product['packing_price']
+                + $product['setup_price'] + $product['vat_price'];
+        }
+
         // Sety form option
         $option          = [
             'type_commodity'    => isset($cart['type_commodity']) ? $cart['type_commodity'] : null,
             'addresses'         => $addresses,
             'delivery_address'  => $_SESSION['order']['delivery_address'],
             'invoicing_address' => $_SESSION['order']['invoicing_address'],
+            'pay_all' => $payAll,
+            'composition' => $composition,
+            'due_price' => number_format($duePrice, 2, '.', '')
+
         ];
+
+        if (!$payAll && $composition[0] < 100) {
+            $extra = json_decode($cart['product'][0]['extra'], true);
+            $item = Pi::api('item', 'guide')->getItem($extra['item']);
+            $item = Pi::api('item', 'guide')->addPolicies($item);
+            $business = Pi::api('business', 'guide')->getBusiness($item['business']);
+            $condition = Pi::api('item', 'guide')->getCancelCondition($business, $item);
+            $limitDate = strtotime ($cart['extra']['values']['date_end'] . ' - ' . $condition['time_limit_2'] . ' DAYS');
+
+            $option['limit_date'] = $limitDate;
+        }
+
+
         $formOrderSimple = new OrderSimpleForm('order', $option);
         $formOrderSimple->setInputFilter(new OrderSimpleFilter($option));
 
@@ -611,6 +637,11 @@ class CheckoutController extends IndexController
             $this->view()->assign('credit', $credit);
         } */
 
+
+        $payAll = $cart['extra']['values']['pay_all'];
+        if (!$payAll) {
+            $composition = Pi::api('order', $cart['module_name'])->getInstallmentComposition($cart, true);
+        }
         // Set view
         $this->view()->setTemplate('checkout');
         $this->view()->assign('forms', $forms);
