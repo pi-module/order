@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2020-02-24 14:13+0100\n"
+"POT-Creation-Date: 2020-02-25 19:22+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -337,10 +337,6 @@ msgid ""
 msgstr ""
 "En dessous de cette valeur, la facture est payée en 1 seule transaction "
 "(paiement en 1 fois, 1 seul installment)"
-
-#: config/config.php:480
-msgid "100"
-msgstr "100"
 
 #: config/config.php:486
 msgid "Active credit system"
@@ -803,6 +799,9 @@ msgstr "Détails"
 #: config/permission.php:55
 msgid "Global public resource"
 msgstr "Ressource publique globale"
+
+#~ msgid "100"
+#~ msgstr "100"
 
 #~ msgid "Show delivery address"
 #~ msgstr "Afficher l'adresse de livraison"

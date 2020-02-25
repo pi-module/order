@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2020-02-25 19:21+0100\n"
+"POT-Creation-Date: 2020-02-25 19:29+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -1185,6 +1185,11 @@ msgstr "Type de bien"
 #: template/front/list.phtml:14
 msgid "Code"
 msgstr "Code"
+
+#: src/Form/OrderSimpleForm.php:229
+#, php-format
+msgid "You chose to pay through 2 installments : %s € now, and %s € before %s"
+msgstr "Vous avez choisi de payer en 2 fois : %s € now, et %s € avant le %s"
 
 #: src/Form/OrderSimpleForm.php:237
 #, php-format
