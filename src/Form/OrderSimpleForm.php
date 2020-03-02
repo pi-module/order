@@ -226,7 +226,7 @@ class OrderSimpleForm extends BaseForm
                 'type' => 'html-raw',
 
                 'attributes' => array(
-                    'value'=> '<div class="mt-2 mb-3">' .  sprintf('You choose to pay through 2 installments : %s € now, and %s € before %s', number_format($this->option['due_price'] * $this->option['composition'][0] / 100, 2, '.', ''), number_format($this->option['due_price'] - number_format($this->option['due_price'] * $this->option['composition'][0] / 100, 2, '.', ''), 2, '.', ''), _date($this->option['limit_date'])) . '</div>',
+                    'value'=> '<div class="mt-2 mb-3 p-2 border-success border">' .  sprintf('You choose to pay through 2 installments : %s now, and %s before %s', _currency(number_format($this->option['due_price'] * $this->option['composition'][0] / 100, 2, '.', '')), _currency(number_format($this->option['due_price'] - number_format($this->option['due_price'] * $this->option['composition'][0] / 100, 2, '.', ''), 2, '.', '')), _date($this->option['limit_date'])) . '</div>',
                 ),
             ));
         }
@@ -251,7 +251,7 @@ class OrderSimpleForm extends BaseForm
         }
         // Save
         if ($this->config['order_payment'] == 'payment') {
-            $title = sprintf(__('Pay %s €'), number_format($this->option['due_price'] * $this->option['composition'][0] / 100, 2, '.', ''));
+            $title = sprintf(__('Pay %s'), _currency(number_format($this->option['due_price'] * $this->option['composition'][0] / 100, 2, '.', '')));
         } else {
             $title = __('Save order');
         }

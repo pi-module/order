@@ -428,7 +428,7 @@ class CheckoutController extends IndexController
             $item = Pi::api('item', 'guide')->addPolicies($item);
             $business = Pi::api('business', 'guide')->getBusiness($item['business']);
             $condition = Pi::api('item', 'guide')->getCancelCondition($business, $item);
-            $limitDate = strtotime ($cart['extra']['values']['date_end'] . ' - ' . $condition['time_limit_2'] . ' DAYS');
+            $limitDate = strtotime ($cart['extra']['values']['date_start'] . ' - ' . $condition['time_limit_2'] . ' DAYS');
 
             $option['limit_date'] = $limitDate;
         }

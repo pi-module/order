@@ -536,3 +536,5 @@ ul.progtrckr li.progtrckr-pending:before {
 .btn-use-it:hover {background:#28a745; color:#fff}
 
 .flash-messenger {margin-top:10px}
+
+.border-success {border-color: #EC407A!important}
