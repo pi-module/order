@@ -341,7 +341,7 @@ class PaymentController extends IndexController
 
                 $backUrl = Pi::api('order', $module)->postPaymentUpdate($order, $detail);
 
-                $message = __("Votre moyen de paiement a été accepté. Votre réservation est en attente de validation, vous ne serez débité qu'une fois la réservation validée par le propriétaire/gérant.");
+                $message = __("Your payment method has been accepted. Your reservation is awaiting validation, you will only be debited once the reservation has been confirmed by the owner.");
                 $this->jump($backUrl, $message);
 
             } {
