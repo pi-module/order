@@ -223,7 +223,7 @@ class Invoice extends AbstractApi
         }
     }
 
-    public function updateInvoice($randomId, $gateway = '', $composition = [100], $dates = null)
+    public function updateInvoice($randomId, $gateway = '', $composition = [100], $dates = null, $notification = true)
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
@@ -244,7 +244,10 @@ class Invoice extends AbstractApi
         // Canonize invoice
         $invoice = $this->canonizeInvoice($invoice);
         // Send notification
-        Pi::api('notification', 'order')->payInvoice($order, $invoice);
+        if ($notification) {
+            Pi::api('notification', 'order')->payInvoice($order, $invoice);
+        }
+
         return $invoice;
     }
 

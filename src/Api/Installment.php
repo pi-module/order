@@ -700,12 +700,21 @@ class Installment extends AbstractApi
         $where        = ['invoice' => $invoice];
         $select       = Pi::model('invoice_installment', 'order')->select()->where($where);
         $rowset       = Pi::model('invoice_installment', 'order')->selectWith($select);
+        $first = true;
         foreach ($rowset as $row) {
             if ($row->status_payment == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
                 $row->status_payment = \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID;
                 $row->save();
                 break;
+            } else {
+                $first = false;
             }
+        }
+        if ($first) {
+            $invoice = Pi::api('invoice', 'order')->getInvoice($invoice);
+            $order = Pi::api('order', 'order')->getOrder($invoice['order']);
+            Pi::api('notification', 'order')->payInvoice($order, $invoice);
+
         }
     }
 

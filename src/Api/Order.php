@@ -95,6 +95,7 @@ class Order extends AbstractApi
     {
         $return = [];
         switch ($status) {
+            case \Module\Order\Model\Order::STATUS_ORDER_PENDING:
             case \Module\Order\Model\Order::STATUS_ORDER_DRAFT:
                 $return['orderClass']   = 'btn-warning';
                 $return['orderLabel']   = 'badge-warning';

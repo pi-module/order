@@ -220,7 +220,7 @@ class OrderSimpleForm extends BaseForm
             );
         }
 
-        if (!$this->option['pay_all']) {
+        if (!$this->option['pay_all'] && count($this->option['composition']) > 1) {
             $this->add(array(
                 'name' => 'html1',
                 'type' => 'html-raw',

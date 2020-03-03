@@ -260,7 +260,7 @@ class CheckoutController extends IndexController
                 $randomId = $result['random_id'];
                 $composition = Pi::api('order', $cart['module_name'])->getInstallmentComposition($cart, true);
                 $dates = Pi::api('order', $cart['module_name'])->getInstallmentDueDate($cart, $composition);
-                $invoice = Pi::api('invoice', 'order')->updateInvoice($randomId, $gateway['title'], $composition, $dates);
+                $invoice = Pi::api('invoice', 'order')->updateInvoice($randomId, $gateway['title'], $composition, $dates, false);
                 //
             }
             // Update user information

@@ -134,12 +134,12 @@ class Gateway extends AbstractGateway
         $feeCustomer = 0;
         $tax      = 0;
 
-        $firstPaid = false;
+        $firstPaid = true;
         $installments = Pi::api('installment', 'order')->getInstallmentsFromOrder($order['id']);
         foreach ($installments as $installment) {
             if ($installment['status_invoice'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
                 if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
-                    $firstPaid = true;
+                    $firstPaid = false;
                 }
                 if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
                     if (count($installments) > 1 && $order['type_commodity'] == 'booking') {
@@ -218,7 +218,7 @@ class Gateway extends AbstractGateway
                 $data['payment_intent_data']['application_fee_amount'] = $totalFee;
             }
 
-            if ($this->gatewayPayInformation['booking_payment_delay'] && !$firstPaid) {
+            if ($this->gatewayPayInformation['booking_payment_delay'] && $firstPaid) {
                  $data['payment_intent_data']['capture_method'] = 'manual';
             }
         }
@@ -350,18 +350,19 @@ class Gateway extends AbstractGateway
         $payment = \Stripe\PaymentIntent::retrieve($pi);
 
 
-
-
         if ($payment['status'] == 'succeeded' || $payment['status'] == 'requires_capture') {
 
             $order     = Pi::api('order', 'order')->getOrder($processing['order']);
+
             $extra     = json_decode($order['extra'], true);
 
             $result['status']  = $payment['status'] == 'succeeded' ? 1 : 2;
             $result['adapter'] = $this->gatewayAdapter;
             $result['order']   = $order['id'];
             $extra['stripe'] = [
-                'metadata'          => $payment['charges']['data'][0]['metadata']->toArray()
+                'metadata'          => $payment['charges']['data'][0]['metadata']->toArray(),
+                'customer'          => $payment->customer,
+                'payment_method'    => $payment->payment_method
             ];
             $orderRow = Pi::model('order', 'order')->find($order['id']);
             $orderRow->extra = json_encode($extra);
