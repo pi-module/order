@@ -51,7 +51,6 @@ class IndexController extends ActionController
                     }
                     if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID && $installment['gateway'] != 'manual') {
                         $order['can_pay'] = true;
-                        break;
                     }
                 }
             }
