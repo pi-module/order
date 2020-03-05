@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2020-03-03 16:22+0100\n"
+"POT-Creation-Date: 2020-03-05 16:19+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Marc Desrousseaux\n"
 "Language-Team: Pi\n"
@@ -1185,6 +1185,11 @@ msgstr "Type de bien"
 #: template/front/list.phtml:14
 msgid "Code"
 msgstr "Code"
+
+#: src/Form/OrderSimpleForm.php:229
+#, php-format
+msgid "You chose to pay through 2 installments : %s now, and %s before %s"
+msgstr "Vous avez choisi de payer en 2 fois : %s maintenant, et %s avant le %s"
 
 #: src/Form/OrderSimpleForm.php:237
 #, php-format
@@ -3047,12 +3052,6 @@ msgstr ""
 msgid "Please wait, we will redirect you to the payment platform..."
 msgstr ""
 "Veuillez patienter, nous vous redirigeons vers la plateforme de paiement…"
-
-#, php-format
-#~ msgid ""
-#~ "You chose to pay through 2 installments : %s € now, and %s € before %s"
-#~ msgstr ""
-#~ "Vous avez choisi de payer en 2 fois : %s € maintenant, et %s € avant le %s"
 
 #~ msgid ""
 #~ "Votre moyen de paiement a été accepté. Votre réservation est en attente "
