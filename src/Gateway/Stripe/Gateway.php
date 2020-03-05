@@ -362,7 +362,8 @@ class Gateway extends AbstractGateway
             $extra['stripe'] = [
                 'metadata'          => $payment['charges']['data'][0]['metadata']->toArray(),
                 'customer'          => $payment->customer,
-                'payment_method'    => $payment->payment_method
+                'payment_method'    => $payment->payment_method,
+                'destination'       => $payment['transfer_data']['destination']
             ];
             $orderRow = Pi::model('order', 'order')->find($order['id']);
             $orderRow->extra = json_encode($extra);
