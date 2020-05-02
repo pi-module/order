@@ -19,6 +19,17 @@ use Zend\Json\Json;
 
 class Gateway extends AbstractGateway
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_type = AbstractGateway::TYPE_FORM;
+    }
+
+    public function getType()
+    {
+        return $this->_type;
+    }
+
     public function setAdapter()
     {
         $this->gatewayAdapter = 'Mellat';
@@ -26,15 +37,17 @@ class Gateway extends AbstractGateway
 
     public function setInformation()
     {
-        $gateway                  = [];
-        $gateway['title']         = __('Bank Mellat (Iran)');
-        $gateway['path']          = 'Mellat';
-        $gateway['type']          = 'online';
-        $gateway['version']       = '1.0';
-        $gateway['description']   = '';
-        $gateway['author']        = 'Hossein Azizabadi <azizabadi@faragostaresh.com>';
-        $gateway['credits']       = '@voltan';
-        $gateway['releaseDate']   = 1380802565;
+        $gateway = [
+            'title'       => __('Bank Mellat'),
+            'path'        => 'Mellat',
+            'type'        => 'online',
+            'version'     => '1.0',
+            'description' => '',
+            'author'      => 'Hossein Azizabadi <azizabadi@faragostaresh.com>',
+            'credits'     => '@voltan',
+            'releaseDate' => 1380802565,
+        ];
+
         $this->gatewayInformation = $gateway;
         return $gateway;
     }
@@ -42,6 +55,7 @@ class Gateway extends AbstractGateway
     public function setSettingForm()
     {
         $form = [];
+
         // form path
         $form['path'] = [
             'name'     => 'path',
@@ -49,6 +63,7 @@ class Gateway extends AbstractGateway
             'type'     => 'hidden',
             'required' => true,
         ];
+
         // form pin
         $form['pin'] = [
             'name'     => 'pin',
@@ -56,6 +71,7 @@ class Gateway extends AbstractGateway
             'type'     => 'text',
             'required' => true,
         ];
+
         // form username
         $form['username'] = [
             'name'     => 'username',
@@ -63,13 +79,15 @@ class Gateway extends AbstractGateway
             'type'     => 'text',
             'required' => true,
         ];
+
         // form password
-        $form['password']         = [
+        $form['password'] = [
             'name'     => 'password',
             'label'    => __('password'),
             'type'     => 'text',
             'required' => true,
         ];
+
         $this->gatewaySettingForm = $form;
         return $this;
     }
@@ -77,11 +95,13 @@ class Gateway extends AbstractGateway
     public function setPayForm()
     {
         $form = [];
+
         // form RefId
-        $form['RefId']        = [
+        $form['RefId'] = [
             'name' => 'RefId',
             'type' => 'hidden',
         ];
+
         $this->gatewayPayForm = $form;
         return $this;
     }
@@ -96,62 +116,90 @@ class Gateway extends AbstractGateway
         return 'http://interfaces.core.sw.bps.com/';
     }
 
-    public function getAuthority()
+    public function setRedirectUrl()
     {
-        $parameters                   = [];
-        $parameters['terminalId']     = $this->gatewayOption['pin'];
-        $parameters['userName']       = $this->gatewayOption['username'];
-        $parameters['userPassword']   = $this->gatewayOption['password'];
-        $parameters['orderId']        = $this->gatewayInvoice['random_id'];
-        $parameters['amount']         = intval($this->gatewayInvoice['total_price']);
-        $parameters['localDate']      = date('Ymd');
-        $parameters['localTime']      = date('His');
-        $parameters['additionalData'] = isset($this->gatewayOption['additionalData']) ? $this->gatewayOption['additionalData'] : '';
-        $parameters['callBackUrl']    = $this->gatewayBackUrl;
-        $parameters['payerId']        = 0;
+        // Get order
+        $order = Pi::api('order', 'order')->getOrder($this->gatewayOrder['id']);
+
+        // Get product list
+        $products = Pi::api('order', 'order')->listProduct($order['id']);
+
+        // Set total price
+        $total = 0;
+        foreach ($products as $product) {
+            $total = $total + $product['vat_price'];
+        }
+
+        // Set parameters
+        $parameters = [
+            'terminalId'     => $this->gatewayOption['pin'],
+            'userName'       => $this->gatewayOption['username'],
+            'userPassword'   => $this->gatewayOption['password'],
+            'orderId'        => $order['id'],
+            'amount'         => intval($total),
+            'localDate'      => date('Ymd'),
+            'localTime'      => date('His'),
+            'additionalData' => isset($this->gatewayOption['additionalData']) ? $this->gatewayOption['additionalData'] : '',
+            'callBackUrl'    => $this->gatewayBackUrl,
+            'payerId'        => 0,
+        ];
+
         // Check bank
         $result = $this->call('bpPayRequest', $parameters);
         $result = explode(',', $result);
+
+        // Check result
         if ($result[0] == 0) {
-            $this->gatewayPayInformation['RefId'] = $result[1];
+            $this->gatewayPayInformation = [
+                'RefId' => $result[1],
+            ];
+            $this->gatewayRedirectUrl    = 'https://bpm.shaparak.ir/pgwchannel/startpay.mellat';
         } else {
             $this->setPaymentError($result[0]);
             // set log
             $log              = [];
             $log['gateway']   = $this->gatewayAdapter;
             $log['authority'] = $result[0];
-            $log['value']     = Json::encode($this->gatewayInvoice);
-            $log['invoice']   = $this->gatewayInvoice['id'];
-            $log['amount']    = intval($this->gatewayInvoice['total_price']);
+            $log['value']     = Json::encode($this->gatewayOrder);
+            $log['order']     = $this->gatewayOrder['id'];
+            $log['amount']    = intval($total);
             $log['status']    = 0;
             $log['message']   = $this->gatewayError;
             Pi::api('log', 'order')->setLog($log);
         }
     }
 
-    public function setRedirectUrl()
-    {
-        $this->getAuthority();
-        $this->gatewayRedirectUrl = 'https://bpm.shaparak.ir/pgwchannel/startpay.mellat';
-    }
-
     public function verifyPayment($request, $processing)
     {
         // Set result
-        $result = [];
+        $result = [
+            'status' => 0,
+        ];
+
+        // Get order
+        $order = Pi::api('order', 'order')->getOrder($processing['order']);
+
+        // Get product list
+        $products = Pi::api('order', 'order')->listProduct($order['id']);
+
+        $total = 0;
+        foreach ($products as $product) {
+            $total = $total + $product['vat_price'];
+        }
+
         // Set parameters
-        $parameters                    = [];
-        $parameters['terminalId']      = $this->gatewayOption['pin'];
-        $parameters['userName']        = $this->gatewayOption['username'];
-        $parameters['userPassword']    = $this->gatewayOption['password'];
-        $parameters['orderId']         = $request['SaleOrderId'];
-        $parameters['saleOrderId']     = $request['SaleOrderId'];
-        $parameters['saleReferenceId'] = $request['SaleReferenceId'];
-        // Get invoice
-        $invoice          = Pi::api('invoice', 'order')->getInvoice($request['SaleOrderId'], 'random_id');
-        $result['status'] = 0;
-        // Check 
-        if ($processing['random_id'] == $request['SaleOrderId'] && $request['ResCode'] == 0) {
+        $parameters = [
+            'terminalId'      => $this->gatewayOption['pin'],
+            'userName'        => $this->gatewayOption['username'],
+            'userPassword'    => $this->gatewayOption['password'],
+            'orderId'         => $request['SaleOrderId'],
+            'saleOrderId'     => $request['SaleOrderId'],
+            'saleReferenceId' => $request['SaleReferenceId'],
+        ];
+
+        // Check
+        if ($order['id'] == $request['SaleOrderId'] && $request['ResCode'] == 0) {
+
             // Check bank
             $call = $this->call('bpVerifyRequest', $parameters);
             if (!is_null($call)) {
@@ -168,16 +216,11 @@ class Gateway extends AbstractGateway
                     $log['gateway']   = $this->gatewayAdapter;
                     $log['authority'] = $request['authority'];
                     $log['value']     = $value;
-                    $log['invoice']   = $invoice['id'];
-                    $log['amount']    = $invoice['total_price'];
+                    $log['order']     = $order['id'];
+                    $log['amount']    = $total;
                     $log['status']    = 1;
                     $log['message']   = $message;
                     $logResult        = Pi::api('log', 'order')->setLog($log);
-                    // Update invoice
-                    if ($logResult) {
-                        $invoice          = Pi::api('invoice', 'order')->updateInvoice($request['SaleOrderId']);
-                        $result['status'] = 1;
-                    }
                 } else {
                     $error = $this->setPaymentError($call);
                     // Set log value
@@ -185,13 +228,14 @@ class Gateway extends AbstractGateway
                     $value['request']         = $request;
                     $value['bpVerifyRequest'] = $call;
                     $value                    = Json::encode($value);
+
                     // Set log
                     $log              = [];
                     $log['gateway']   = $this->gatewayAdapter;
                     $log['authority'] = $request['authority'];
                     $log['value']     = $value;
-                    $log['invoice']   = $invoice['id'];
-                    $log['amount']    = $invoice['total_price'];
+                    $log['order']     = $order['id'];
+                    $log['amount']    = $total;
                     $log['status']    = 0;
                     $log['message']   = $error;
                     Pi::api('log', 'order')->setLog($log);
@@ -207,8 +251,8 @@ class Gateway extends AbstractGateway
                 $log['gateway']   = $this->gatewayAdapter;
                 $log['authority'] = $request['authority'];
                 $log['value']     = $value;
-                $log['invoice']   = $invoice['id'];
-                $log['amount']    = $invoice['total_price'];
+                $log['order']     = $order['id'];
+                $log['amount']    = $total;
                 $log['status']    = 0;
                 $log['message']   = __('bpVerifyRequest method is null');
                 Pi::api('log', 'order')->setLog($log);
@@ -224,16 +268,15 @@ class Gateway extends AbstractGateway
             $log['gateway']   = $this->gatewayAdapter;
             $log['authority'] = $request['authority'];
             $log['value']     = $value;
-            $log['invoice']   = $invoice['id'];
-            $log['amount']    = $invoice['total_price'];
+            $log['order']     = $order['id'];
+            $log['amount']    = $total;
             $log['status']    = 0;
             $log['message']   = $error;
             Pi::api('log', 'order')->setLog($log);
         }
         // Set result
         $result['adapter'] = $this->gatewayAdapter;
-        $result['invoice'] = $invoice['id'];
-        $result['order']   = $invoice['order'];
+        $result['order']   = $order['id'];
         return $result;
     }
 
