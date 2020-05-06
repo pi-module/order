@@ -372,7 +372,6 @@ $this->footScript()->appendScript($script);
                 <?php } ?>
             </div>
         </div>
-
         <div class="col-lg-4 col-md-4">
             <div class="cart-product">
                 <div class="card">
@@ -387,6 +386,7 @@ $this->footScript()->appendScript($script);
                             </tr>
                             <?php $totalDiscount = 0 ?>
                             <?php $count = 0 ?>
+                            <?php $countOfProducts = count($cart['product']); ?>
                             <?php if (isset($cart['product']) && count($cart['product'])) { ?>
                                 <?php foreach ($cart['product'] as $key => $product) { ?>
                                     <?php
@@ -396,9 +396,12 @@ $this->footScript()->appendScript($script);
                                     ?>
                                     <tr>
                                         <td>
-                                            <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
-                                               target="_blank">
-                                                <b>#<?php echo $count . ' ' . $product['details']['title']; ?></b>
+                                            <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
+                                                <?php if ($countOfProducts > 1) { ?>
+                                                    <b>#<?php echo $count . ' ' . $product['details']['title']; ?></b>
+                                                <?php } else { ?>
+                                                    <b><?php echo $product['details']['title']; ?></b>
+                                                <?php } ?>
                                             </a>
                                             <?php if (isset($product['tooltip']) && $product['tooltip']) { ?>
                                                 <button type="button" class="btn btn-tooltip tooltip-description d-inline float-none m-0" data-toggle="tooltip" data-placement="left" title="" data-original-title="<?php echo strip_tags($product['tooltip_description']) ?>">?</button>
