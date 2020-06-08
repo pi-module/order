@@ -24,6 +24,7 @@ class Subscription extends Model
         = [
             'id',
             'uid',
+            'order',
             'subscription_id',
             'subscription_plan',
             'subscription_interval',
