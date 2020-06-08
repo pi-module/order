@@ -23,7 +23,8 @@ class Plan extends Model
     protected $columns
         = [
             'id',
-            'plan_id',
+            'stripe_product_id',
+            'stripe_price_id',
             'product_id',
             'product_name',
             'product_type',

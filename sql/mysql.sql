@@ -341,6 +341,7 @@ CREATE TABLE `{subscription_detail}`
     `current_period_start`     INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `current_period_end`       INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `time_create`              INT(10) UNSIGNED NOT NULL DEFAULT '0',
+    `extra`          TEXT,
     PRIMARY KEY (`id`),
     KEY `uid` (`uid`)
 );
@@ -355,17 +356,18 @@ CREATE TABLE `{subscription_customer}`
     UNIQUE KEY `customer` (`customer`)
 );
 
-CREATE TABLE `{subscription_plan}`
+CREATE TABLE `{subscription_product}`
 (
-    `id`           int(11)          NOT NULL AUTO_INCREMENT,
-    `plan_id`      VARCHAR(64)      NOT NULL DEFAULT '',
-    `product_id`   INT(10) UNSIGNED NOT NULL DEFAULT 0,
-    `product_name` INT(10) UNSIGNED NOT NULL DEFAULT 0,
-    `product_type` VARCHAR(64)      NOT NULL DEFAULT 'service',
-    `module`       VARCHAR(64)      NOT NULL DEFAULT '',
-    `amount`       DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
-    `interval`     VARCHAR(64)      NOT NULL DEFAULT '',
+    `id`                int(11)          NOT NULL AUTO_INCREMENT,
+    `stripe_product_id` VARCHAR(64)      NOT NULL DEFAULT '',
+    `stripe_price_id`   VARCHAR(64)      NOT NULL DEFAULT '',
+    `product_id`        INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    `product_name`      INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    `product_type`      VARCHAR(64)      NOT NULL DEFAULT 'service',
+    `module`            VARCHAR(64)      NOT NULL DEFAULT '',
+    `amount`            DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+    `interval`          VARCHAR(64)      NOT NULL DEFAULT '',
     PRIMARY KEY (`id`),
     UNIQUE KEY `product_id` (`product_id`),
-    UNIQUE KEY `plan_id` (`plan_id`)
+    UNIQUE KEY `stripe_product_id` (`stripe_product_id`)
 );

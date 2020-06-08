@@ -107,7 +107,7 @@ class Gateway extends AbstractGateway
         $this->gatewayPayInformation['currency_code']    = $this->gatewayOption['currency'];
         $this->gatewayPayInformation['image_url']        = $config['payment_image'];
         $this->gatewayPayInformation['type_payment']     = $invoice['type_payment'];
-        $this->gatewayPayInformation['interval']  = 'month';
+        $this->gatewayPayInformation['interval']         = 'month';
 
         if ($order['type_commodity'] == 'booking') {
             $extra   = json_decode($order['extra'], true);
@@ -149,7 +149,7 @@ class Gateway extends AbstractGateway
         $subtotalCommissionOwner = 0;
         $feeCustomer             = 0;
         $tax                     = 0;
-        $names                    = [];
+        $names                   = [];
 
         $firstPaid    = true;
         $installments = Pi::api('installment', 'order')->getInstallmentsFromOrder($order['id']);
@@ -189,12 +189,14 @@ class Gateway extends AbstractGateway
         for ($i = 1; $i < $this->gatewayPayInformation['nb_product']; ++$i) {
             $item                = [];
             $item["name"]        = addcslashes($this->gatewayPayInformation['item_name_' . $i], '"');
-            $item["amount"]      = ($this->gatewayPayInformation['amount_' . $i] + $this->gatewayPayInformation['tax_' . $i] - $this->gatewayPayInformation['discount_price_' . $i] - $this->gatewayPayInformation['unconsumed_' . $i]) * 100;
+            $item["amount"]      = ($this->gatewayPayInformation['amount_' . $i] + $this->gatewayPayInformation['tax_' . $i]
+                                    - $this->gatewayPayInformation['discount_price_' . $i] - $this->gatewayPayInformation['unconsumed_' . $i]) * 100;
             $item["currency"]    = $this->gatewayPayInformation['currency_code'];
             $item["quantity"]    = $this->gatewayPayInformation['quantity_' . $i];
             $item["description"] = addcslashes($this->gatewayPayInformation['item_name_' . $i], '"');
 
-            $totalProduct = $this->gatewayPayInformation['amount_' . $i] - $this->gatewayPayInformation['discount_price_' . $i] - $this->gatewayPayInformation['unconsumed_' . $i];
+            $totalProduct = $this->gatewayPayInformation['amount_' . $i] - $this->gatewayPayInformation['discount_price_' . $i]
+                            - $this->gatewayPayInformation['unconsumed_' . $i];
 
             if (!$this->gatewayPayInformation['special_fee_' . $i]) {
                 $subtotalCommissionOwner += $totalProduct;
@@ -223,28 +225,18 @@ class Gateway extends AbstractGateway
         ];
 
         // Set subscription
-        // ToDo :  Check this method
+        // ToDo : still not true, more check needed
         if (isset($this->gatewayPayInformation['type_payment']) && $this->gatewayPayInformation['type_payment'] == 'recurring') {
 
-            // Set subscription array
-            $subscription = [
-                'amount'   => $subtotal,
-                'currency' => $this->gatewayPayInformation['currency_code'],
-                'interval' => $this->gatewayPayInformation['interval'],
-                'product'  => [
-                    'name' => implode(', ', $names),
-                ],
-            ];
-
-            // Create plan
-            $plan = \Stripe\Plan::create($subscription);
+            $params = [];
+            Pi::api('stripe', 'order')->preparingSubscription($params);
 
             // Set plan to subscription_data
-            $data['subscription_data'] = [
+            /* $data['subscription_data'] = [
                 [
                     'plan' => $plan,
                 ],
-            ];
+            ]; */
         }
 
         if (isset($this->gatewayPayInformation['gateway_id'])) {

@@ -21,6 +21,8 @@ use Pi\Application\Api\AbstractApi;
  * Pi::api('stripe', 'order')->getOrderByTransfertIds($transfertIds);
  * Pi::api('stripe', 'order')->getOrderByPaymentIntentIds($paymentIntentIds);
  * Pi::api('stripe', 'order')->getStripeResponse();
+ * Pi::api('stripe', 'order')->preparingSubscription($params);
+ *
  * Pi::api('stripe', 'order')->updateInvoiceStatus($params);
  * Pi::api('stripe', 'order')->updateInvoice($params);
  */
@@ -115,15 +117,28 @@ class Stripe extends AbstractApi
         $customer = $customer->toArray();
 
         // Check and create product
-        /* $where  = ['module' => $params['module'], 'product_id' => $params['product_id']];
-        $select = Pi::model('subscription_product', $this->getModule())->select()->where($where);
+        $where  = ['module' => $params['module'], 'product_id' => $params['product_id']];
+        $select = Pi::model('subscription_productn', $this->getModule())->select()->where($where);
         $rowset = Pi::model('subscription_product', $this->getModule())->selectWith($select);
         if (!$rowset) {
             // create product on stripe
             $productStripe = \Stripe\Product::create(
                 [
-                    'name' => $params['product_name'], // ToDo : set true field
-                    'type' => $params['product_type'], // ToDo : set true field
+                    'name'        => $params['product_name'], // ToDo : set true field
+                    'type'        => $params['product_type'], // ToDo : set true field
+                    'description' => $params['product_description'],
+                ]
+            );
+
+            // create product price on stripe
+            $priceStripe = \Stripe\Price::create(
+                [
+                    'product'     => $productStripe->id,
+                    'unit_amount' => $params['amount'],
+                    'currency'    => $params['currency'],
+                    'recurring'   => [
+                        'interval' => $params['interval'],
+                    ],
                 ]
             );
 
@@ -131,10 +146,13 @@ class Stripe extends AbstractApi
             $product = Pi::model('subscription_product', $this->getModule())->createRow();
             $product->assign(
                 [
-                    'module'         => $params['module'], // ToDo : set true field
-                    'product_type'   => $params['product_type'], // ToDo : set true field
-                    'product_id'     => $params['product_id'], // ToDo : set true field
-                    'product_stripe' => $productStripe->id,
+                    'module'            => $params['module'], // ToDo : set true field
+                    'product_type'      => $params['product_type'], // ToDo : set true field
+                    'product_id'        => $params['product_id'], // ToDo : set true field
+                    'amount'            => $params['amount'],
+                    'interval'          => $params['interval'],
+                    'stripe_product_id' => $productStripe->id,
+                    'stripe_price_id'   => $priceStripe->id,
                 ]
             );
             $product->save();
@@ -142,44 +160,10 @@ class Stripe extends AbstractApi
         } else {
             $product = $rowset->current();
         }
-        $product = $product->toArray(); */
-
-        // Check and create plan
-        $where  = ['module' => $params['module'], 'product_id' => $params['product_id']];
-        $select = Pi::model('subscription_plan', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('subscription_plan', $this->getModule())->selectWith($select);
-        if (!$rowset) {
-            // create plan on stripe
-            $planStripe = \Stripe\Plan::create(
-                [
-                    'amount'   => 2000,
-                    'currency' => 'usd',
-                    'interval' => 'month',
-                    'product'  => ['name' => $params['product_name']],
-                ]
-            );
-
-            // Save plan to database
-            $plan = Pi::model('subscription_plan', $this->getModule())->createRow();
-            $plan->assign(
-                [
-                    'module'       => $params['module'], // ToDo : set true field
-                    'product_type' => $params['product_type'], // ToDo : set true field
-                    'product_id'   => $params['product_id'], // ToDo : set true field
-                    'plan_id'      => $planStripe,
-                    'amount'       => $params['amount'],
-                    'interval'     => $params['interval'],
-                ]
-            );
-            $plan->save();
-
-        } else {
-            $plan = $rowset->current();
-        }
-        $plan = $plan->toArray();
+        $product = $product->toArray();
 
 
-        //
+        // Set
 
 
         $where  = ['order' => $params['order'], 'uid' => $uid];
@@ -193,40 +177,30 @@ class Stripe extends AbstractApi
         $subscriptionStripe = \Stripe\Subscriptions::create(
             [
                 'customer' => $customer['customer'],
-                'items' => [
+                'items'    => [
                     [
-                        'price_data' => [
-                            'currency',
-                            'product',
-                            'recurring'
-                        ],
+                        'price' => $product['stripe_price_id'],
                     ],
                 ],
             ]
         );
 
 
-
         // Save plan to database
         $detail = Pi::model('subscription_detail', $this->getModule())->createRow();
         $detail->assign(
             [
-                'uid' => $uid,
-                'order' => $params['order'],
-                'subscription_id',
-                'subscription_plan',
-                'subscription_interval',
-                'subscription_status',
-                'subscription_customer',
-                'subscription_create_time',
-                'current_period_start',
-                'current_period_end',
-                'time_create',
+                'uid'             => $uid,
+                'order'           => $params['order'],
+                'subscription_id' => $subscriptionStripe->id,
+                'time_create'     => time(),
+                'extra'           => json_encode($subscriptionStripe),
             ]
         );
         $detail->save();
 
 
+        return $detail->toArray();
     }
 
     public function updateInvoiceStatus($params)
