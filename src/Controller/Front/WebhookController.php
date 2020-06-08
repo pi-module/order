@@ -56,7 +56,7 @@ class WebhookController extends IndexController
                     $params["current_period_end"]        = date("Y-m-d H:i:s", $response->data->object->current_period_end);
                     $params["subscription_created_date"] = date("Y-m-d H:i:s", $response->data->object->created);
 
-                    Pi::api('stripe', 'order')->addSubscription($params);
+                    Pi::api('stripe', 'order')->createSubscription($params);
 
                     break;
 

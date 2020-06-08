@@ -327,19 +327,45 @@ CREATE TABLE `{invoice_installment}`
     KEY `invoice` (`invoice`)
 );
 
-CREATE TABLE `{subscription}`
+CREATE TABLE `{subscription_detail}`
 (
-    `id`                       int(11)          NOT NULL AUTO_INCREMENT,
-    `uid`                      int(11)          NOT NULL DEFAULT '0',
+    `id`                       int(10)          NOT NULL AUTO_INCREMENT,
+    `uid`                      int(10)          NOT NULL DEFAULT '0',
     `order`                    INT(10) UNSIGNED NOT NULL DEFAULT '0',
-    `subscription_id`          VARCHAR(255)     NOT NULL DEFAULT '', /* ToDo : add this field in order table too */
+    `subscription_id`          VARCHAR(255)     NOT NULL DEFAULT '',
     `subscription_plan`        VARCHAR(255)     NOT NULL DEFAULT '',
     `subscription_interval`    VARCHAR(255)     NOT NULL DEFAULT '',
     `subscription_status`      VARCHAR(255)     NOT NULL DEFAULT '',
+    `subscription_customer`    VARCHAR(255)     NOT NULL DEFAULT '',
     `subscription_create_time` VARCHAR(255)     NOT NULL DEFAULT '',
     `current_period_start`     INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `current_period_end`       INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `time_create`              INT(10) UNSIGNED NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`),
     KEY `uid` (`uid`)
+);
+
+CREATE TABLE `{subscription_customer}`
+(
+    `id`       int(10)      NOT NULL AUTO_INCREMENT,
+    `uid`      int(10)      NOT NULL DEFAULT 0,
+    `customer` VARCHAR(255) NOT NULL DEFAULT '',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uid` (`uid`),
+    UNIQUE KEY `customer` (`customer`)
+);
+
+CREATE TABLE `{subscription_plan}`
+(
+    `id`           int(11)          NOT NULL AUTO_INCREMENT,
+    `plan_id`      VARCHAR(64)      NOT NULL DEFAULT '',
+    `product_id`   INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    `product_name` INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    `product_type` VARCHAR(64)      NOT NULL DEFAULT 'service',
+    `module`       VARCHAR(64)      NOT NULL DEFAULT '',
+    `amount`       DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+    `interval`     VARCHAR(64)      NOT NULL DEFAULT '',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `product_id` (`product_id`),
+    UNIQUE KEY `plan_id` (`plan_id`)
 );

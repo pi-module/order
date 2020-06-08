@@ -11,11 +11,11 @@
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 
-namespace Module\Order\Model;
+namespace Module\Order\Model\Subscription;
 
 use Pi\Application\Model\Model;
 
-class Subscription extends Model
+class Customer extends Model
 {
     /**
      * {@inheritDoc}
@@ -24,14 +24,6 @@ class Subscription extends Model
         = [
             'id',
             'uid',
-            'order',
-            'subscription_id',
-            'subscription_plan',
-            'subscription_interval',
-            'subscription_status',
-            'subscription_create_time',
-            'current_period_start',
-            'current_period_end',
-            'time_create',
+            'customer',
         ];
 }
