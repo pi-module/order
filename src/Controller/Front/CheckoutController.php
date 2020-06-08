@@ -778,9 +778,13 @@ class CheckoutController extends IndexController
         $values['time_create']     = time();
         $values['time_order']      = time();
 
-        // Set type_payment values
+        // Set type_commodity values
         if (isset($cart['type_commodity']) && in_array($cart['type_commodity'], ['product', 'service', 'booking'])) {
             $values['type_commodity'] = $cart['type_commodity'];
+        }
+        // Set type_payment values
+        if (isset($cart['type_payment']) && in_array($cart['type_payment'], ['free', 'onetime', 'recurring', 'installment'])) {
+            $values['type_payment'] = $cart['type_payment'];
         }
         // Set plan values
         if (isset($cart['plan']) && !empty($cart['plan'])) {
@@ -997,7 +1001,7 @@ class CheckoutController extends IndexController
                 $randomId    = $result['random_id'];
                 $composition = Pi::api('order', $cart['module_name'])->getInstallmentComposition($cart, true);
                 $dates       = Pi::api('order', $cart['module_name'])->getInstallmentDueDate($cart, $composition);
-                $invoice     = Pi::api('invoice', 'order')->updateInvoice($randomId, $gateway['title'], $composition, $dates, false);
+                $invoice     = Pi::api('invoice', 'order')->updateInvoice($randomId, $gateway['title'], $composition, $dates, false, $values['type_payment']);
                 //
             }
             // Update user information

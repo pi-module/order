@@ -239,7 +239,7 @@ return [
             'description' => '',
             'edit'        => 'checkbox',
             'filter'      => 'number_int',
-            'value'       => 1,
+            'value'       => 0,
         ],
         'order_name'                     => [
             'category'    => 'checkout',
@@ -263,7 +263,7 @@ return [
             'description' => '',
             'edit'        => 'checkbox',
             'filter'      => 'number_int',
-            'value'       => 1,
+            'value'       => 0,
         ],
         'order_mobile'                   => [
             'category'    => 'checkout',
@@ -279,7 +279,7 @@ return [
             'description' => '',
             'edit'        => 'checkbox',
             'filter'      => 'number_int',
-            'value'       => 1,
+            'value'       => 0,
         ],
         'order_company'                  => [
             'category'    => 'checkout',
@@ -287,7 +287,7 @@ return [
             'description' => '',
             'edit'        => 'checkbox',
             'filter'      => 'number_int',
-            'value'       => 1,
+            'value'       => 0,
         ],
         'order_company_extra'            => [
             'category'    => 'checkout',
@@ -295,7 +295,7 @@ return [
             'description' => '',
             'edit'        => 'checkbox',
             'filter'      => 'number_int',
-            'value'       => 1,
+            'value'       => 0,
         ],
         'order_address1'                 => [
             'category'    => 'checkout',
@@ -319,7 +319,7 @@ return [
             'description' => '',
             'edit'        => 'checkbox',
             'filter'      => 'number_int',
-            'value'       => 1,
+            'value'       => 0,
         ],
         'order_countrylist'              => [
             'category'    => 'checkout',
@@ -333,7 +333,7 @@ return [
             'description' => '',
             'edit'        => 'checkbox',
             'filter'      => 'number_int',
-            'value'       => 1,
+            'value'       => 0,
         ],
         'order_city'                     => [
             'category'    => 'checkout',
@@ -341,7 +341,7 @@ return [
             'description' => '',
             'edit'        => 'checkbox',
             'filter'      => 'number_int',
-            'value'       => 1,
+            'value'       => 0,
         ],
         'order_zip'                      => [
             'category'    => 'checkout',
@@ -349,7 +349,7 @@ return [
             'description' => '',
             'edit'        => 'checkbox',
             'filter'      => 'number_int',
-            'value'       => 1,
+            'value'       => 0,
         ],
         'order_packing'                  => [
             'category'    => 'checkout',
@@ -357,7 +357,7 @@ return [
             'description' => '',
             'edit'        => 'checkbox',
             'filter'      => 'number_int',
-            'value'       => 1,
+            'value'       => 0,
         ],
         'order_location_delivery'        => [
             'category'    => 'checkout',
@@ -365,7 +365,7 @@ return [
             'description' => '',
             'edit'        => 'checkbox',
             'filter'      => 'number_int',
-            'value'       => 1,
+            'value'       => 0,
         ],
         'order_usernote'                 => [
             'category'    => 'checkout',
@@ -599,7 +599,7 @@ return [
         ],
         
         // Installment
-        'installment_credit'             => [
+        /* 'installment_credit'             => [
             'category'    => 'installment',
             'title'       => _a('Reduce from user credit'),
             'description' => '',
@@ -1006,7 +1006,7 @@ return [
             'edit'        => 'text',
             'filter'      => 'string',
             'value'       => 10,
-        ],
+        ], */
         
         // head_meta
         'text_description_checkup'       => [

@@ -273,15 +273,17 @@ class Gateway extends AbstractGateway
 
     public function setInformation()
     {
-        $gateway                  = [];
-        $gateway['title']         = __('Stripe');
-        $gateway['path']          = 'Stripe';
-        $gateway['type']          = 'online';
-        $gateway['version']       = '1.0';
-        $gateway['description']   = '';
-        $gateway['author']        = 'Mickael STAMM <contact@sta2m.com>';
-        $gateway['credits']       = '@sta2m';
-        $gateway['releaseDate']   = 1567692940;
+        $gateway = [
+            'title'       => __('Stripe'),
+            'path'        => 'Stripe',
+            'type'        => 'online',
+            'version'     => '1.0',
+            'description' => '',
+            'author'      => 'Mickael STAMM <contact@sta2m.com>',
+            'credits'     => '@sta2m',
+            'releaseDate' => 1567692940,
+        ];
+
         $this->gatewayInformation = $gateway;
         return $gateway;
     }

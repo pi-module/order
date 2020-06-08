@@ -223,7 +223,7 @@ class Invoice extends AbstractApi
         }
     }
 
-    public function updateInvoice($randomId, $gateway = '', $composition = [100], $dates = null, $notification = true)
+    public function updateInvoice($randomId, $gateway = '', $composition = [100], $dates = null, $notification = true, $paymentType = '')
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
@@ -232,6 +232,9 @@ class Invoice extends AbstractApi
         $order   = Pi::api('order', 'order')->getOrder($invoice['order']);
 
         // Update invoice
+        if (isset($paymentType) && in_array($paymentType, ['free', 'onetime', 'recurring', 'installment'])) {
+            $invoice->type_payment = $paymentType;
+        }
         $invoice->status = \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED;
         $invoice->save();
         $this->createInstallments($invoice->toArray(), $gateway, $dates, $composition);
