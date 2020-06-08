@@ -251,7 +251,6 @@ class Gateway extends AbstractGateway
 
     }
 
-
     public function setAdapter()
     {
         $this->gatewayAdapter = 'Stripe';
@@ -429,7 +428,6 @@ class Gateway extends AbstractGateway
         // Set error
         $this->gatewayError = '';
     }
-
 
     public function getDescription()
     {
