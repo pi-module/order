@@ -45,16 +45,6 @@ class WebhookController extends IndexController
 
                     break;
 
-                // ToDo : need it ?
-                /* 
-                case "customer.created":
-                    $params                   = [];
-                    $params["customer_id"]    = $response->data->object->id;
-                    $params["customer_email"] = $response->data->object->email;
-                    // ToDo : insertCustomer($params);
-                    break; 
-                */
-
                 case "customer.subscription.created":
                     $params                              = [];
                     $params["id"]                        = $response->data->object->id;
@@ -79,6 +69,26 @@ class WebhookController extends IndexController
 
                     break;
 
+                case "invoice.finalized":
+                    $params                   = [];
+                    $params["id"]                     = $response->data->object->id;
+                    $params["invoice_finalized_date"] = date("Y-m-d H:i:s", $response->data->object->finalized_at);
+                    $params["invoice_status"]         = $response->data->object->status;
+
+                    Pi::api('stripe', 'order')->updateInvoice($params);
+
+                    break;
+
+                // ToDo : need it ?
+                /*
+                case "customer.created":
+                    $params                   = [];
+                    $params["customer_id"]    = $response->data->object->id;
+                    $params["customer_email"] = $response->data->object->email;
+                    // ToDo : insertCustomer($params);
+                    break;
+                */
+
                 // ToDo : need it ?
                 /* case "invoice.created":
                     $params                         = [];
@@ -102,16 +112,6 @@ class WebhookController extends IndexController
 
                     // ToDo : insertInvoice($params);
                     break; */
-
-                case "invoice.finalized":
-                    $params                   = [];
-                    $params["id"]                     = $response->data->object->id;
-                    $params["invoice_finalized_date"] = date("Y-m-d H:i:s", $response->data->object->finalized_at);
-                    $params["invoice_status"]         = $response->data->object->status;
-
-                    Pi::api('stripe', 'order')->updateInvoice($params);
-
-                    break;
             }
         }
     }
