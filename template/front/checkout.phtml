@@ -212,6 +212,24 @@ $this->footScript()->appendScript($script);
                                             </div>
                                             <div><?php echo $this->escape($addressInvoicing['company_id']); ?></div>
                                             <div><?php echo $this->escape($addressInvoicing['company_vat']); ?></div>
+                                            <?php if (!empty($addressInvoicing['email'])) { ?>
+                                                <div>
+                                                    <?php _e('Email'); ?> :
+                                                    <?php echo $this->escape($addressInvoicing['email']); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <?php if (!empty($addressInvoicing['phone'])) { ?>
+                                                <div>
+                                                    <?php _e('Phone'); ?> :
+                                                    <?php echo $this->escape($addressInvoicing['phone']); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <?php if (!empty($addressInvoicing['mobile'])) { ?>
+                                                <div>
+                                                    <?php _e('Mobile'); ?> :
+                                                    <?php echo $this->escape($addressInvoicing['mobile']); ?>
+                                                </div>
+                                            <?php } ?>
                                         <?php } else { ?>
                                             <div>
                                                 <?php echo $this->escape($addressInvoicing['first_name']); ?>&nbsp;<?php echo $this->escape($addressInvoicing['last_name']); ?>
@@ -251,7 +269,7 @@ $this->footScript()->appendScript($script);
                                             <?php if (!empty($addressInvoicing['mobile'])) { ?>
                                                 <div>
                                                     <?php _e('Mobile'); ?> :
-                                                    <?php echo $this->escape($addressDelivery['mobile']); ?>
+                                                    <?php echo $this->escape($addressInvoicing['mobile']); ?>
                                                 </div>
                                             <?php } ?>
                                         <?php } ?>
@@ -318,6 +336,24 @@ $this->footScript()->appendScript($script);
                                                     </div>
                                                     <div><?php echo $this->escape($addressDelivery['company_id']); ?></div>
                                                     <div><?php echo $this->escape($addressDelivery['company_vat']); ?></div>
+                                                    <?php if (!empty($addressDelivery['email'])) { ?>
+                                                        <div>
+                                                            <?php _e('Email'); ?> :
+                                                            <?php echo $this->escape($addressDelivery['email']); ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                    <?php if (!empty($addressDelivery['phone'])) { ?>
+                                                        <div>
+                                                            <?php _e('Phone'); ?> :
+                                                            <?php echo $this->escape($addressDelivery['phone']); ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                    <?php if (!empty($addressDelivery['mobile'])) { ?>
+                                                        <div>
+                                                            <?php _e('Mobile'); ?> :
+                                                            <?php echo $this->escape($addressDelivery['mobile']); ?>
+                                                        </div>
+                                                    <?php } ?>
                                                 <?php } else { ?>
                                                     <div>
                                                         <?php echo $this->escape($addressDelivery['first_name']); ?>&nbsp;<?php echo $this->escape($addressDelivery['last_name']); ?>
@@ -433,12 +469,14 @@ $this->footScript()->appendScript($script);
                                                 ); ?></strong>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td><?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Price ext VAT'); ?></td>
-                                        <td class="data-normal-price">
-                                            <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
-                                        </td>
-                                    </tr>
+                                    <?php if ($unconsumedPrice || (isset($product['discount']) && $product['discount'] > 0)) { ?>
+                                        <tr>
+                                            <td><?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Base Price ex VAT'); ?></td>
+                                            <td class="data-normal-price">
+                                                <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
                                     <?php if (isset($product['discount']) && $product['discount'] > 0) { ?>
                                         <tr>
                                             <td>

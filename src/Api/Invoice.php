@@ -56,7 +56,7 @@ class Invoice extends AbstractApi
         } else {
             // Set invoice
             $row               = Pi::model('invoice', $this->getModule())->createRow();
-            $row->code         = Pi::api('invoice', 'order')->generatCode();
+            $row->code         = Pi::api('invoice', 'order')->generatCode(date('Y', $order['time_create']));
             $row->random_id    = time() + rand(100, 999);
             $row->status       = \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT;
             $row->time_create  = $order['time_create'];
@@ -127,12 +127,13 @@ class Invoice extends AbstractApi
         return $result;
     }
 
-    public function generatCode()
+    public function generatCode($year = null)
     {
         $config = Pi::service('registry')->config->read($this->getModule());
 
-        $year  = date('Y');
-        $count = Pi::model('invoice', 'order')->count(['time_create >= ' . strtotime('01-01-' . $year)]);
+        $year  = $year ?: date('Y');
+        $count = Pi::model('invoice', 'order')->count(['time_create >= ' . strtotime('01-01-' . $year) . ' AND time_create < ' . strtotime('01-01-' . ($year + 1))]);
+
         $num   = $year . sprintf('%03d', ($count + 1));
 
         return sprintf('%s-%s', $config['invoice_code_prefix'], $num);
@@ -222,17 +223,18 @@ class Invoice extends AbstractApi
         }
     }
 
-    public function updateInvoice($randomId, $gateway = '')
+    public function updateInvoice($randomId, $gateway = '', $composition = [100], $dates = null, $notification = true)
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Get invoice
         $invoice = Pi::model('invoice', $this->getModule())->find($randomId, 'random_id');
         $order   = Pi::api('order', 'order')->getOrder($invoice['order']);
+
         // Update invoice
         $invoice->status = \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED;
         $invoice->save();
-        $this->createInstallments($invoice->toArray(), true, $gateway);
+        $this->createInstallments($invoice->toArray(), $gateway, $dates, $composition);
 
         // Update user credit
         if ($config['installment_credit'] && $invoice->type_payment == 'installment') {
@@ -242,7 +244,10 @@ class Invoice extends AbstractApi
         // Canonize invoice
         $invoice = $this->canonizeInvoice($invoice);
         // Send notification
-        Pi::api('notification', 'order')->payInvoice($order, $invoice);
+        if ($notification) {
+            Pi::api('notification', 'order')->payInvoice($order, $invoice);
+        }
+
         return $invoice;
     }
 
@@ -580,7 +585,7 @@ class Invoice extends AbstractApi
 
     }
 
-    public function createInstallments($invoice, $paid = false, $gateway = 'manual')
+    public function createInstallments($invoice, $gateway = 'manual', $dates = null, $composition = array('100'))
     {
         // Find due price
         $products = Pi::api('order', 'order')->listProduct($invoice['order']);
@@ -589,20 +594,29 @@ class Invoice extends AbstractApi
             $duePrice += $product['product_price'] - $product['discount_price'] + $product['shipping_price'] + $product['packing_price']
                 + $product['setup_price'] + $product['vat_price'];
         }
+        $count = 1;
 
-        $invoiceInstallment = Pi::model('invoice_installment', 'order')->createRow();
-        $installment        = [
-            'invoice'        => $invoice['id'],
-            'count'          => 1,
-            'gateway'        => $gateway,
-            'status_payment' => $paid ? \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID
-                : \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID,
-            'time_payment'   => $paid ? time() : 0,
-            'time_duedate'   => time(),
-            'due_price'      => $duePrice,
-        ];
+        $total = 0;
+        foreach ($composition as $key => $compose) {
 
-        $invoiceInstallment->assign($installment);
-        $invoiceInstallment->save();
+            $duePriceInstallment = number_format($duePrice * $compose / 100, 2, '.', '');
+
+            $invoiceInstallment = Pi::model('invoice_installment', 'order')->createRow();
+            $installment        = [
+                'invoice'        => $invoice['id'],
+                'count'          => $count,
+                'gateway'        => $gateway,
+                'status_payment' => \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID,
+                'time_payment'   => 0,
+                'time_duedate'   => isset($dates[$key]) ? $dates[$key] : time(),
+                'due_price'      => $key + 1 == count($composition) ? $duePrice - $total: $duePriceInstallment,
+            ];
+
+            $total += $duePriceInstallment;
+
+            $invoiceInstallment->assign($installment);
+            $invoiceInstallment->save();
+            $count++;
+        }
     }
 }

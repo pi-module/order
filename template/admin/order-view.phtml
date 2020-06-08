@@ -205,13 +205,23 @@ $this->backbone();
                                             <?php echo $this->escape($addressInvoicing['company_country']); ?><br/>
                                         <?php } ?>
                                     </p>
-
                                     <p>
                                         <?php if (!empty($addressInvoicing['company_id'])) { ?>
                                             <?php echo $this->escape($addressInvoicing['company_id']); ?><br/>
                                         <?php } ?>
                                         <?php if (!empty($addressInvoicing['company_vat'])) { ?>
                                             <?php echo $this->escape($addressInvoicing['company_vat']); ?><br/>
+                                        <?php } ?>
+                                    </p>
+                                    <p>
+                                        <?php if (!empty($addressInvoicing['email'])) { ?>
+                                            <?php _e('Email'); ?> : <?php echo $this->escape($addressInvoicing['email']); ?><br/>
+                                        <?php } ?>
+                                        <?php if (!empty($addressInvoicing['phone'])) { ?>
+                                            <?php _e('Phone'); ?> : <?php echo $this->escape($addressInvoicing['phone']); ?><br/>
+                                        <?php } ?>
+                                        <?php if (!empty($addressInvoicing['mobile'])) { ?>
+                                            <?php _e('Mobile'); ?> : <?php echo $this->escape($addressInvoicing['mobile']); ?><br/>
                                         <?php } ?>
                                     </p>
 
@@ -291,7 +301,6 @@ $this->backbone();
                                             <?php echo $this->escape($addressDelivery['company_country']); ?><br/>
                                         <?php } ?>
                                     </p>
-
                                     <p>
                                         <?php if (!empty($addressDelivery['company_id'])) { ?>
                                             <?php echo $this->escape($addressDelivery['company_id']); ?><br/>
@@ -300,7 +309,17 @@ $this->backbone();
                                             <?php echo $this->escape($addressDelivery['company_vat']); ?><br/>
                                         <?php } ?>
                                     </p>
-
+                                    <p>
+                                        <?php if (!empty($addressDelivery['email'])) { ?>
+                                            <?php _e('Email'); ?> : <?php echo $this->escape($addressDelivery['email']); ?><br/>
+                                        <?php } ?>
+                                        <?php if (!empty($addressDelivery['phone'])) { ?>
+                                            <?php _e('Phone'); ?> : <?php echo $this->escape($addressDelivery['phone']); ?><br/>
+                                        <?php } ?>
+                                        <?php if (!empty($addressDelivery['mobile'])) { ?>
+                                            <?php _e('Mobile'); ?> : <?php echo $this->escape($addressDelivery['mobile']); ?><br/>
+                                        <?php } ?>
+                                    </p>
                                 <?php } else { ?>
                                     <p>
                                         <?php if (!empty($addressDelivery['first_name']) && !empty($addressDelivery['last_name'])) { ?>
@@ -360,6 +379,7 @@ $this->backbone();
                                 <?php
                                 $orderClass = '';
                                 switch ($order['status_order']) {
+                                    case Module\Order\Model\Order::STATUS_ORDER_PENDING:
                                     case Module\Order\Model\Order::STATUS_ORDER_DRAFT:
                                         $orderClass = 'btn-warning';
                                         break;
@@ -378,11 +398,37 @@ $this->backbone();
                                             <?php echo Module\Order\Model\Order::getStatusList()[$order['status_order']]; ?>
                                             </span>
                                 </p>
-                                <p><strong><?php _e('Invoice paid ?'); ?></strong> : <span
-                                            id="update-canPay-<?php echo $this->escape($order['id']); ?>"
-                                            class="update-canPay btn <?php echo $order['can_pay'] ? 'badge-danger'
-                                                : 'badge-success'; ?> btn-sm"><?php echo $order['can_pay']
-                                            ? __('No') : __('Yes'); ?></span>
+                                <p><strong><?php _e('Invoice paid ?'); ?></strong> :
+
+
+                                    <?php
+                                        $countPaid = 0;
+                                        $countUnpaid = 0;
+
+                                        foreach ($order['invoices'] as $invoice) {
+                                            foreach ($invoice['installments'] as $installment) {
+                                                if ($installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
+                                                    $countUnpaid++;
+                                                } else {
+                                                    $countPaid++;
+                                                }
+                                            }
+                                        }
+
+                                        if ($countPaid == 0) {
+                                            $label = __('No');
+                                            $badge = "danger";
+                                        } else if ($countUnpaid == 0) {
+                                            $label = __('Yes');
+                                            $badge = "success";
+                                        } else {
+                                            $label = __('Partially');
+                                            $badge = "warning";
+                                    }
+                                    ?>
+                                    <span id="update-canPay-<?php echo $this->escape($order['id']); ?>"
+                                        class="update-canPay btn badge badge-<?php echo $badge?> btn-sm"><?php echo $label ?></span>
+
                                 </p>
                                 <p><strong><?php _e('Delivery status'); ?></strong> :
                                     <?php if (count($order['products'])) { ?>

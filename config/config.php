@@ -471,6 +471,14 @@ return [
             'filter'      => 'string',
             'value'       => _a('Admin make contact about payment whit you after review your order'),
         ],
+        'payment_minimum_for_installment'    => [
+            'category'    => 'payment',
+            'title'       => _a('Minimum value for split payments'),
+            'description' => _a('Below of this amount, the invoice is paid throught in a single transaction (1 installment only)'),
+            'edit'        => 'text',
+            'filter'      => 'number_int',
+            'value'       => 100,
+        ],
         
         // Credit
         'credit_active'                  => [

@@ -80,12 +80,12 @@ class Order extends AbstractApi
         return $orders;
     }
 
-    public function generatCode()
+    public function generatCode($year = null)
     {
         $config = Pi::service('registry')->config->read($this->getModule());
 
-        $year  = date('Y');
-        $count = Pi::model('order', 'order')->count(['time_create >= ' . strtotime('01-01-' . $year)]);
+        $year  = $year ?: date('Y');
+        $count = Pi::model('order', 'order')->count(['time_create >= ' . strtotime('01-01-' . $year) . ' AND time_create < ' . strtotime('01-01-' . ($year + 1))]);
         $num   = $year . sprintf('%03d', ($count + 1));
 
         return sprintf('%s-%s', $config['order_code_prefix'], $num);
@@ -95,6 +95,7 @@ class Order extends AbstractApi
     {
         $return = [];
         switch ($status) {
+            case \Module\Order\Model\Order::STATUS_ORDER_PENDING:
             case \Module\Order\Model\Order::STATUS_ORDER_DRAFT:
                 $return['orderClass']   = 'btn-warning';
                 $return['orderLabel']   = 'badge-warning';
@@ -321,9 +322,9 @@ class Order extends AbstractApi
         $order['deliveryTitle'] = $status_delivery['deliveryTitle'];
         //
         $can_pay              = $this->canPayStatus($order['can_pay']);
-        $order['canPayClass'] = $can_pay['canPayClass'];
-        $order['canPayLabel'] = $can_pay['canPayLabel'];
-        $order['canPayTitle'] = $can_pay['canPayTitle'];
+        $order['canPayClass'] = isset($can_pay['canPayClass']) ? $can_pay['canPayClass'] : null;
+        $order['canPayLabel'] = isset($can_pay['canPayLabel']) ? $can_pay['canPayLabel'] : null;
+        $order['canPayTitle'] = isset($can_pay['canPayTitle']) ? $can_pay['canPayTitle'] : null;
         //
         if ($order['type_commodity'] == 'product') {
             $order['type_commodity_view'] = __('Product');
@@ -590,6 +591,23 @@ class Order extends AbstractApi
             }
         }
         return false;
+    }
+
+    public function hasUnpaidInstallment($id)
+    {
+        $orderTable              = Pi::model('order', 'order')->getTable();
+        $invoiceTable            = Pi::model("invoice", 'order')->getTable();
+        $invoiceInstallmentTable = Pi::model("invoice_installment", 'order')->getTable();
+
+        $select = Pi::db()->select();
+        $select
+            ->from(['order' => $orderTable])
+            ->join(['invoice' => $invoiceTable], 'invoice.order = order.id', ['status'])
+            ->join(['invoice_installment' => $invoiceInstallmentTable], 'invoice_installment.invoice = invoice.id')
+            ->where(['order.id' => $id, 'invoice.status != ' . \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED, 'invoice_installment.status_payment' =>  \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID]);
+
+        $rowset = Pi::db()->query($select);
+        return count($rowset);
     }
 
     public function getTimePayment($id)

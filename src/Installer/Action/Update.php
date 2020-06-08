@@ -1563,6 +1563,34 @@ EOD;
                 return false;
             }
         }
+
+        if (version_compare($moduleVersion, '2.3.0', '<')) {
+            // Alter table field change type_payment
+            $sql = sprintf("ALTER TABLE %s ADD `extra` TEXT", $orderInstallmentTable);
+
+
+            try {
+                $orderInstallmentAdapter->query($sql, 'execute');
+                $sql = sprintf("UPDATE `%s` inst
+JOIN `%s` invoice ON invoice.id = inst.invoice
+JOIN `%s` ord ON ord.id = invoice.order
+SET inst.extra = ord.extra", $orderInstallmentTable, $invoiceTable, $orderTable);
+
+                $orderInstallmentAdapter->query($sql, 'execute');
+
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+
+
+        }
         return true;
     }
 }

@@ -39,7 +39,7 @@ class DetailController extends IndexController
             $this->jump(['', 'controller' => 'index', 'action' => 'index'], __('This order not active.'));
         }
 
-        $order['has_payment'] = Pi::api('order', 'order')->hasPayment($order['id']);
+        $order['has_unpaid_installment'] = Pi::api('order', 'order')->hasUnpaidInstallment($order['id']);
 
         $addressInvoicing = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
         $addressDelivery  = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'DELIVERY');

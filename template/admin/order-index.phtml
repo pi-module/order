@@ -26,11 +26,11 @@ $this->backbone();
             <h3><?php _e('List of orders'); ?></h3>
         </div>
         <div class="col-6 text-center totalOrder">
-            <strong><?php echo __('{Own}') . ' ' . __('Ordered') . ' ' . date('Y') . ' : ' ?></strong> <?php echo $totalOwnOrdered . ' €' ?>
+            <strong><?php echo __('{Own}') . ' ' . __('Ordered') . ' ' . date('Y') . ' : ' ?></strong> <?php echo _currency($totalOwnOrdered) ?>
             -
-            <strong><?php echo __('Invoiced') . ' ' . date('Y') . ' : ' ?></strong> <?php echo $totalOwnBilled . ' €' ?>
+            <strong><?php echo __('Invoiced') . ' ' . date('Y') . ' : ' ?></strong> <?php echo _currency($totalOwnBilled) ?>
             ==
-            <strong><?php echo __('Non invoiced') . ' ' . date('Y') . ' : ' ?></strong> <?php echo $totalOwnOrdered - $totalOwnBilled . ' €' ?>
+            <strong><?php echo __('Non invoiced') . ' ' . date('Y') . ' : ' ?></strong> <?php echo _currency($totalOwnOrdered - $totalOwnBilled) ?>
         </div>
         <div class="col-3 text-right">
             <a class="btn btn-success" title="<?php _e('New order'); ?>" href="<?php echo $this->url('', ['controller' => 'order', 'action' => 'add']); ?>">
@@ -42,11 +42,11 @@ $this->backbone();
         <div class="col-3">
         </div>
         <div class="col-6 text-center totalOrder">
-            <strong><?php echo __('{Third}') . ' ' . __('Ordered') . ' ' . date('Y') . ' : ' ?></strong> <?php echo $totalThirdOrdered . ' €' ?>
+            <strong><?php echo __('{Third}') . ' ' . __('Ordered') . ' ' . date('Y') . ' : ' ?></strong> <?php echo _currency($totalThirdOrdered) ?>
             -
-            <strong><?php echo __('Invoiced') . ' ' . date('Y') . ' : ' ?></strong> <?php echo $totalThirdBilled . ' €' ?>
+            <strong><?php echo __('Invoiced') . ' ' . date('Y') . ' : ' ?></strong> <?php echo _currency($totalThirdBilled) ?>
             ==
-            <strong><?php echo __('Non invoiced') . ' ' . date('Y') . ' : ' ?></strong> <?php echo $totalThirdOrdered - $totalThirdBilled . ' €' ?>
+            <strong><?php echo __('Non invoiced') . ' ' . date('Y') . ' : ' ?></strong> <?php echo _currency($totalThirdOrdered - $totalThirdBilled) ?>
         </div>
     </div>
     <?php if (!empty($list)) { ?>
@@ -117,7 +117,7 @@ $this->backbone();
                                             $order['orderTitle']
                                         ); ?></span>
                                 <?php } else {
-                                    if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_DRAFT) { ?>
+                                    if ($order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_DRAFT || $order['status_order'] == \Module\Order\Model\Order::STATUS_ORDER_PENDING) { ?>
                                         <span class="badge badge-warning"><?php echo $this->escape($order['orderTitle']); ?></span>
                                     <?php } else { ?>
                                         <span class="badge badge-danger"><?php echo $this->escape($order['orderTitle']); ?></span>
