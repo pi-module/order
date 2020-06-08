@@ -208,8 +208,8 @@ class Stripe extends AbstractApi
 
 
         // Save plan to database
-        $plan = Pi::model('subscription_detail', $this->getModule())->createRow();
-        $plan->assign(
+        $detail = Pi::model('subscription_detail', $this->getModule())->createRow();
+        $detail->assign(
             [
                 'uid' => $uid,
                 'order' => $params['order'],
@@ -224,7 +224,7 @@ class Stripe extends AbstractApi
                 'time_create',
             ]
         );
-        $plan->save();
+        $detail->save();
 
 
     }
