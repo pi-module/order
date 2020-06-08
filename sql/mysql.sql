@@ -257,8 +257,8 @@ CREATE TABLE `{promocode}`
 
 CREATE TABLE `{order_address}`
 (
-    `id`               int(10) UNSIGNED                       NOT NULL AUTO_INCREMENT,
-    `order`            int(10) UNSIGNED                       NOT NULL DEFAULT '0',
+    `id`               INT(10) UNSIGNED                       NOT NULL AUTO_INCREMENT,
+    `order`            INT(10) UNSIGNED                       NOT NULL DEFAULT '0',
     `id_number`        VARCHAR(255)                           NOT NULL DEFAULT '',
     `type`             ENUM ('DELIVERY', 'INVOICING'),
     `first_name`       varchar(255)                           NOT NULL DEFAULT '',
@@ -283,15 +283,15 @@ CREATE TABLE `{order_address}`
     `company_zip_code` VARCHAR(16)                            NOT NULL DEFAULT '',
     `company_id`       VARCHAR(255)                           NOT NULL DEFAULT '',
     `company_vat`      VARCHAR(255)                           NOT NULL DEFAULT '',
-    `delivery`         int(10) UNSIGNED                       NOT NULL DEFAULT '0',
-    `location`         int(10) UNSIGNED                       NOT NULL DEFAULT '0',
+    `delivery`         INT(10) UNSIGNED                       NOT NULL DEFAULT '0',
+    `location`         INT(10) UNSIGNED                       NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`),
     KEY `order` (`order`)
 );
 
 CREATE TABLE `{installment}`
 (
-    `id`         int(10) UNSIGNED     NOT NULL AUTO_INCREMENT,
+    `id`         INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT,
     `number`     smallint(3) UNSIGNED NOT NULL DEFAULT '1',
     `commission` DECIMAL(16, 2)       NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`)
@@ -299,11 +299,11 @@ CREATE TABLE `{installment}`
 
 CREATE TABLE `{installment_product}`
 (
-    `id`           int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `installment`  int(10) UNSIGNED NOT NULL,
+    `id`           INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `installment`  INT(10) UNSIGNED NOT NULL,
     `module`       VARCHAR(64)      NOT NULL DEFAULT '',
     `product_type` VARCHAR(64)      NOT NULL DEFAULT '',
-    `product`      int(10) UNSIGNED NOT NULL,
+    `product`      INT(10) UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     KEY `module` (`module`),
     KEY `product_type` (`product_type`),
@@ -312,8 +312,8 @@ CREATE TABLE `{installment_product}`
 
 CREATE TABLE `{invoice_installment}`
 (
-    `id`             int(10) UNSIGNED     NOT NULL AUTO_INCREMENT,
-    `invoice`        int(10) UNSIGNED     NOT NULL DEFAULT '0',
+    `id`             INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT,
+    `invoice`        INT(10) UNSIGNED     NOT NULL DEFAULT '0',
     `count`          smallint(3) UNSIGNED NOT NULL DEFAULT '1',
     `gateway`        VARCHAR(64)          NOT NULL DEFAULT 'offline',
     `status_payment` TINYINT(1) UNSIGNED  NOT NULL DEFAULT '0',
@@ -322,7 +322,7 @@ CREATE TABLE `{invoice_installment}`
     `due_price`      DECIMAL(16, 2)       NOT NULL DEFAULT '0.00',
     `credit_price`   DECIMAL(16, 8)       NOT NULL DEFAULT '0.00',
     `comment`        TEXT,
-    `extra`        TEXT,
+    `extra`          TEXT,
     PRIMARY KEY (`id`),
     KEY `invoice` (`invoice`)
 );
