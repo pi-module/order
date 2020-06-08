@@ -22,6 +22,11 @@ use Pi\Application\Api\AbstractApi;
  * Pi::api('stripe', 'order')->getOrderByPaymentIntentIds($paymentIntentIds);
  * Pi::api('stripe', 'order')->createProduct($key, $params);
  * Pi::api('stripe', 'order')->createPlan($key, $params);
+ * Pi::api('stripe', 'order')->getStripeResponse();
+ * Pi::api('stripe', 'order')->addSubscription($params);
+ * Pi::api('stripe', 'order')->updateSubscription($params);
+ * Pi::api('stripe', 'order')->updateInvoiceStatus($params);
+ * Pi::api('stripe', 'order')->updateInvoice($params);
  */
 
 class Stripe extends AbstractApi
@@ -34,7 +39,7 @@ class Stripe extends AbstractApi
         }
 
         foreach ($transfertIds as $transfert) {
-            $whereId[]  = 'invoice_installment.extra LIKE "%\"transfer\":\"' . $transfert . '\"%"';
+            $whereId[] = 'invoice_installment.extra LIKE "%\"transfer\":\"' . $transfert . '\"%"';
         }
         $where = implode(' OR ', $whereId);
 
@@ -64,13 +69,13 @@ class Stripe extends AbstractApi
         }
 
         foreach ($paymentIntentIds as $paymentIntent) {
-            $whereId[]  = 'extra LIKE "%\"payment_intent\":\"' . $paymentIntent . '\"%"';
+            $whereId[] = 'extra LIKE "%\"payment_intent\":\"' . $paymentIntent . '\"%"';
         }
         $where = implode(' OR ', $whereId);
 
         $select = Pi::model('order', 'order')->select()->where($where);
         $rowset = Pi::model('order', 'order')->selectWith($select);
-        $list = [];
+        $list   = [];
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
         }
@@ -117,4 +122,25 @@ class Stripe extends AbstractApi
         return $event_json;
     }
 
+    public function addSubscription($params)
+    {
+        // $row = Pi::model('subscription', $this->getModule())->createRow();
+        // $row->assign($params);
+        // $row->save();
+    }
+
+    public function updateSubscription($params)
+    {
+        // $row = Pi::model('subscription', $this->getModule())->find($params['id']);
+        // $row->assign($params);
+        // $row->save();
+    }
+
+    public function updateInvoiceStatus($params)
+    {
+
+    }
+
+    public function updateInvoice($params)
+    {}
 }

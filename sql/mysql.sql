@@ -335,7 +335,7 @@ CREATE TABLE `{subscription}`
     `subscription_plan`        VARCHAR(255)     NOT NULL DEFAULT '',
     `subscription_interval`    VARCHAR(255)     NOT NULL DEFAULT '',
     `subscription_status`      VARCHAR(255)     NOT NULL DEFAULT '',
-    `subscription_create_time` VARCHAR(64)      NOT NULL DEFAULT '',
+    `subscription_create_time` VARCHAR(255)      NOT NULL DEFAULT '',
     `current_period_start`     INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `current_period_end`       INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `time_create`              INT(10) UNSIGNED NOT NULL DEFAULT '0',
