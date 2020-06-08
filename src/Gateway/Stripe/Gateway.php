@@ -135,7 +135,7 @@ class Gateway extends AbstractGateway
         }
     }
 
-    public function getSession($order)
+    public function getSession($order, $subscription = [])
     {
         \Stripe\Stripe::setApiKey($this->gatewayOption['password']);
 
@@ -206,6 +206,7 @@ class Gateway extends AbstractGateway
             }
         }
 
+
         //
         $data = [
             'payment_method_types' => ['card'],
@@ -215,6 +216,20 @@ class Gateway extends AbstractGateway
             'cancel_url'           => $this->gatewayPayInformation['cancel_return'],
             'client_reference_id'  => 'order-' . $order['id'] . '-uid-' . $order['uid'],
         ];
+
+        // Set subscription
+        // ToDo :  Check this method
+        if (isset($subscription) && !empty($subscription)) {
+
+            $product = Pi::api('stripe', 'order')->createProduct($this->gatewayOption['password'], $subscription);
+            $planId  = Pi::api('stripe', 'order')->createPlan($this->gatewayOption['password'], $product);
+
+            $data['subscription_data'] = [
+                [
+                    'plan' => $planId,
+                ],
+            ];
+        }
 
         if (isset($this->gatewayPayInformation['gateway_id'])) {
             $config = Pi::service('registry')->config->read('guide');

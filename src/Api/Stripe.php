@@ -17,6 +17,12 @@ use Module\Order\Gateway\AbstractGateway;
 use Pi;
 use Pi\Application\Api\AbstractApi;
 
+/*
+ * Pi::api('stripe', 'order')->getOrderByTransfertIds($transfertIds);
+ * Pi::api('stripe', 'order')->getOrderByPaymentIntentIds($paymentIntentIds);
+ * Pi::api('stripe', 'order')->createProduct($key, $params);
+ * Pi::api('stripe', 'order')->createPlan($key, $params);
+ */
 
 class Stripe extends AbstractApi
 {
@@ -71,4 +77,44 @@ class Stripe extends AbstractApi
         return $list;
     }
 
-}	
+    public function createProduct($key, $params)
+    {
+        // Set api key
+        \Stripe\Stripe::setApiKey($key);
+
+        $product = \Stripe\Product::create(
+            [
+                'name' => $params['name'],
+                'type' => $params['type'],
+            ]
+        );
+
+        return $product;
+    }
+
+    public function createPlan($key, $params)
+    {
+        // Set api key
+        \Stripe\Stripe::setApiKey($key);
+
+        $plan = \Stripe\Plan::create(
+            [
+                'amount'   => $params['amount'],
+                'currency' => $params['currency'] ?: 'usd',
+                'interval' => $params['interval'] ?: 'month',
+                'product'  => [
+                    'name' => $params['name'],
+                ],
+            ]
+        );
+        return $plan;
+    }
+
+    public function getStripeResponse()
+    {
+        $body       = @file_get_contents('php://input');
+        $event_json = json_decode($body);
+        return $event_json;
+    }
+
+}
