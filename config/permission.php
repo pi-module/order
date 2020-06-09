@@ -48,6 +48,16 @@ return [
             'access' => [//'admin',
             ],
         ],
+        'promocode'   => [
+            'title'  => _a('Credit'),
+            'access' => [//'admin',
+            ],
+        ],
+        'subscription'   => [
+            'title'  => _a('Credit'),
+            'access' => [//'admin',
+            ],
+        ],
     ],
     // Front section
     'front' => [
