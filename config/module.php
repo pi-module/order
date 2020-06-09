@@ -27,7 +27,7 @@ return [
         'Dev'                => 'Hossein Azizabadi; Marc Desrousseaux; Frederic Tissot; Mickael Stamm',
         'Fonctionnal Design' => '@marc-pi, @voltan',
         'QA'                 => '@marc-pi',
-        'website'            => 'http://pialog',
+        'website'            => 'http://piengine.org',
         'credits'            => 'Pi Engine Team',
     ],
     // Resource
