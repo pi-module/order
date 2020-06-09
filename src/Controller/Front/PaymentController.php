@@ -17,8 +17,8 @@ use Module\Order\Form\PayForm;
 use Module\Order\Gateway\AbstractGateway;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Zend\Json\Json;
-use Zend\View\Model\ViewModel;
+use Laminas\Json\Json;
+use Laminas\View\Model\ViewModel;
 
 class PaymentController extends IndexController
 {

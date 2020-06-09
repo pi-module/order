@@ -17,7 +17,7 @@ use Module\Order\Form\RemoveForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 class IndexController extends ActionController
 {

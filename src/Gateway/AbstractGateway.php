@@ -14,7 +14,7 @@
 namespace Module\Order\Gateway;
 
 use Pi;
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 abstract class AbstractGateway
 {

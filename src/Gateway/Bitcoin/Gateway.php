@@ -15,7 +15,7 @@ namespace Module\Order\Gateway\Bitcoin;
 
 use Module\Order\Gateway\AbstractGateway;
 use Pi;
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 /*
  * https://spectrocoin.com

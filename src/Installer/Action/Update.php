@@ -16,7 +16,7 @@ namespace Module\Order\Installer\Action;
 use Pi;
 use Pi\Application\Installer\Action\Update as BasicUpdate;
 use Pi\Application\Installer\SqlSchema;
-use Zend\EventManager\Event;
+use Laminas\EventManager\Event;
 
 class Update extends BasicUpdate
 {

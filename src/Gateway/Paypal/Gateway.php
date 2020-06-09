@@ -15,7 +15,7 @@ namespace Module\Order\Gateway\Paypal;
 
 use Module\Order\Gateway\AbstractGateway;
 use Pi;
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 class Gateway extends AbstractGateway
 {

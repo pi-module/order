@@ -30,8 +30,8 @@ class PromocodeController extends ActionController
         $select = Pi::model('promocode', 'order')->select()->order('id DESC');
 
         // Set paginator
-        $resultSetPrototype = new  \Zend\Db\ResultSet\ResultSet();
-        $paginatorAdapter   = new \Zend\Paginator\Adapter\DbSelect(
+        $resultSetPrototype = new  \Laminas\Db\ResultSet\ResultSet();
+        $paginatorAdapter   = new \Laminas\Paginator\Adapter\DbSelect(
             $select,
             Pi::model('promocode', 'order')->getAdapter(),
             $resultSetPrototype

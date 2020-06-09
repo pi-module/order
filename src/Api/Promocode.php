@@ -15,7 +15,7 @@ namespace Module\Order\Api;
 
 use Pi;
 use Pi\Application\Api\AbstractApi;
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 class Promocode extends AbstractApi
 {

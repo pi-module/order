@@ -14,7 +14,7 @@
 namespace Module\Order\Validator;
 
 use Pi;
-use Zend\Validator\AbstractValidator;
+use Laminas\Validator\AbstractValidator;
 
 class Term extends AbstractValidator
 {

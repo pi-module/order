@@ -17,7 +17,7 @@ use Module\Order\Form\GatewayFilter;
 use Module\Order\Form\GatewayForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 class GatewayController extends ActionController
 {

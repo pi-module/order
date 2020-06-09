@@ -16,8 +16,8 @@ namespace Module\Order\Controller\Admin;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Zend\Db\Sql\Predicate\Expression;
-use Zend\Json\Json;
+use Laminas\Db\Sql\Predicate\Expression;
+use Laminas\Json\Json;
 
 class LogsController extends ActionController
 {

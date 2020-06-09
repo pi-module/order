@@ -20,8 +20,8 @@ use Module\Order\Form\CreditSettingForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Zend\Db\Sql\Predicate\Expression;
-use Zend\Json\Json;
+use Laminas\Db\Sql\Predicate\Expression;
+use Laminas\Json\Json;
 
 class CreditController extends ActionController
 {

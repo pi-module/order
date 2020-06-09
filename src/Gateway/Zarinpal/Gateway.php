@@ -15,8 +15,8 @@ namespace Module\Order\Gateway\Zarinpal;
 
 use Module\Order\Gateway\AbstractGateway;
 use Pi;
-use Zend\Json\Json;
-use Zend\Soap\Client as ZendSoapClient;
+use Laminas\Json\Json;
+use Laminas\Soap\Client as LaminasSoapClient;
 
 class Gateway extends AbstractGateway
 {
@@ -120,7 +120,7 @@ class Gateway extends AbstractGateway
         ];
 
         // Call
-        $client = new ZendSoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
+        $client = new LaminasSoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
         $call   = $client->PaymentRequest($parameters);
 
         // Check result
@@ -176,7 +176,7 @@ class Gateway extends AbstractGateway
             ];
 
             // Call
-            $client = new ZendSoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
+            $client = new LaminasSoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
             $call   = $client->PaymentVerification($parameters);
 
             // Check

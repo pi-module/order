@@ -26,7 +26,7 @@ use Module\System\Form\LoginFilter;
 use Module\System\Form\LoginForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 //use Pi\Authentication\Result;
 
