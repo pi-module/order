@@ -224,21 +224,6 @@ class Gateway extends AbstractGateway
             'client_reference_id'  => 'order-' . $order['id'] . '-uid-' . $order['uid'],
         ];
 
-        // Set subscription
-        // ToDo : still not true, more check needed
-        if (isset($this->gatewayPayInformation['type_payment']) && $this->gatewayPayInformation['type_payment'] == 'recurring') {
-
-            $params = [];
-            Pi::api('stripe', 'order')->preparingSubscription($params);
-
-            // Set plan to subscription_data
-            /* $data['subscription_data'] = [
-                [
-                    'plan' => $plan,
-                ],
-            ]; */
-        }
-
         if (isset($this->gatewayPayInformation['gateway_id'])) {
             $config = Pi::service('registry')->config->read('guide');
 
@@ -456,10 +441,7 @@ class Gateway extends AbstractGateway
     public function getDescription()
     {
         return __(
-            'To install the Stripe Driver : <br>
-Get yours credentials on stripe. <br>
-You can use the developper mode with developpers keys proveded by stripe for your test and also check the error mode (no payment), to fine tune your code<br>
-        '
+            'To install the Stripe Driver : <br> Get yours credentials on stripe. <br> You can use the developer mode with developers keys provided by stripe for your test and also check the error mode (no payment), to fine tune your code<br>'
         );
     }
 }
