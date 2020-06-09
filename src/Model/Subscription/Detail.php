@@ -26,7 +26,7 @@ class Detail extends Model
             'uid',
             'order',
             'subscription_id',
-            'subscription_plan',
+            'subscription_product',
             'subscription_interval',
             'subscription_status',
             'subscription_customer',

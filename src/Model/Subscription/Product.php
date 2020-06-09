@@ -15,7 +15,7 @@ namespace Module\Order\Model\Subscription;
 
 use Pi\Application\Model\Model;
 
-class Plan extends Model
+class Product extends Model
 {
     /**
      * {@inheritDoc}
@@ -25,11 +25,10 @@ class Plan extends Model
             'id',
             'stripe_product_id',
             'stripe_price_id',
-            'product_id',
-            'product_name',
-            'product_type',
-            'module',
-            'amount',
-            'interval',
+            'service_id',
+            'service_title',
+            'service_module',
+            'service_amount',
+            'service_interval',
         ];
 }

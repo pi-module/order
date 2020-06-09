@@ -333,7 +333,7 @@ CREATE TABLE `{subscription_detail}`
     `uid`                      int(10)          NOT NULL DEFAULT '0',
     `order`                    INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `subscription_id`          VARCHAR(255)     NOT NULL DEFAULT '',
-    `subscription_plan`        VARCHAR(255)     NOT NULL DEFAULT '',
+    `subscription_product`     VARCHAR(255)     NOT NULL DEFAULT '',
     `subscription_interval`    VARCHAR(255)     NOT NULL DEFAULT '',
     `subscription_status`      VARCHAR(255)     NOT NULL DEFAULT '',
     `subscription_customer`    VARCHAR(255)     NOT NULL DEFAULT '',
@@ -343,6 +343,8 @@ CREATE TABLE `{subscription_detail}`
     `time_create`              INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `extra`                    TEXT,
     PRIMARY KEY (`id`),
+    KEY `subscription_id` (`subscription_id`),
+    KEY `subscription_product` (`subscription_product`),
     KEY `uid` (`uid`)
 );
 
@@ -361,13 +363,12 @@ CREATE TABLE `{subscription_product}`
     `id`                int(11)          NOT NULL AUTO_INCREMENT,
     `stripe_product_id` VARCHAR(64)      NOT NULL DEFAULT '',
     `stripe_price_id`   VARCHAR(64)      NOT NULL DEFAULT '',
-    `product_id`        INT(10) UNSIGNED NOT NULL DEFAULT 0,
-    `product_name`      INT(10) UNSIGNED NOT NULL DEFAULT 0,
-    `product_type`      VARCHAR(64)      NOT NULL DEFAULT 'service',
-    `module`            VARCHAR(64)      NOT NULL DEFAULT '',
-    `amount`            DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
-    `interval`          VARCHAR(64)      NOT NULL DEFAULT '',
+    `service_id`        INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    `service_title`     VARCHAR(64)      NOT NULL DEFAULT '',
+    `service_module`    VARCHAR(64)      NOT NULL DEFAULT '',
+    `service_amount`    DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+    `service_interval`  VARCHAR(64)      NOT NULL DEFAULT '',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `product_id` (`product_id`),
+    UNIQUE KEY `service_id` (`service_id`),
     UNIQUE KEY `stripe_product_id` (`stripe_product_id`)
 );
