@@ -341,7 +341,7 @@ CREATE TABLE `{subscription_detail}`
     `current_period_start`     INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `current_period_end`       INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `time_create`              INT(10) UNSIGNED NOT NULL DEFAULT '0',
-    `extra`          TEXT,
+    `extra`                    TEXT,
     PRIMARY KEY (`id`),
     KEY `uid` (`uid`)
 );
