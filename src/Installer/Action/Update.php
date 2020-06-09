@@ -1607,7 +1607,7 @@ CREATE TABLE `{subscription_detail}`
     `uid`                      int(10)          NOT NULL DEFAULT '0',
     `order`                    INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `subscription_id`          VARCHAR(255)     NOT NULL DEFAULT '',
-    `subscription_product`        VARCHAR(255)     NOT NULL DEFAULT '',
+    `subscription_product`     VARCHAR(255)     NOT NULL DEFAULT '',
     `subscription_interval`    VARCHAR(255)     NOT NULL DEFAULT '',
     `subscription_status`      VARCHAR(255)     NOT NULL DEFAULT '',
     `subscription_customer`    VARCHAR(255)     NOT NULL DEFAULT '',
@@ -1617,6 +1617,8 @@ CREATE TABLE `{subscription_detail}`
     `time_create`              INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `extra`                    TEXT,
     PRIMARY KEY (`id`),
+    KEY `subscription_id` (`subscription_id`),
+    KEY `subscription_product` (`subscription_product`),
     KEY `uid` (`uid`)
 );
 
