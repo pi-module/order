@@ -114,10 +114,10 @@ class Update extends BasicUpdate
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -131,10 +131,10 @@ class Update extends BasicUpdate
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -150,10 +150,10 @@ class Update extends BasicUpdate
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -164,10 +164,10 @@ class Update extends BasicUpdate
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -181,10 +181,10 @@ class Update extends BasicUpdate
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -198,10 +198,10 @@ class Update extends BasicUpdate
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -215,10 +215,10 @@ class Update extends BasicUpdate
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -272,10 +272,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'SQL schema query for author table failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'SQL schema query for author table failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
 
                 return false;
@@ -290,10 +290,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -307,10 +307,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -322,10 +322,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -337,10 +337,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -354,10 +354,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -368,10 +368,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -385,10 +385,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -399,10 +399,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -416,10 +416,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -430,10 +430,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -459,10 +459,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'SQL schema query for author table failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'SQL schema query for author table failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
 
                 return false;
@@ -499,10 +499,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'SQL schema query for author table failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'SQL schema query for author table failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
 
                 return false;
@@ -517,10 +517,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -534,10 +534,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -573,10 +573,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'SQL schema query for author table failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'SQL schema query for author table failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
 
                 return false;
@@ -591,10 +591,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -621,10 +621,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'SQL schema query for author table failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'SQL schema query for author table failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
 
                 return false;
@@ -639,10 +639,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -656,10 +656,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -670,10 +670,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -684,10 +684,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -739,10 +739,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table update query failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table update query failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -758,10 +758,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'SQL schema query for rename customer table failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'SQL schema query for rename customer table failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
 
                 return false;
@@ -801,10 +801,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'SQL schema query for order_address table failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'SQL schema query for order_address table failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
 
                 return false;
@@ -854,10 +854,10 @@ EOD;
 
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'data transfer failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'data transfer failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -871,10 +871,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -888,10 +888,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for customer failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for customer failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -908,10 +908,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for basket failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for basket failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -922,10 +922,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table update query for basket failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table update query for basket failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -940,10 +940,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for basket failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for basket failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -957,10 +957,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -971,10 +971,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -987,10 +987,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'SQL schema query for rename basket table failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'SQL schema query for rename basket table failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
 
                 return false;
@@ -1005,10 +1005,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for invoice failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for invoice failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1018,10 +1018,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1034,10 +1034,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'SQL schema query for drop access table failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'SQL schema query for drop access table failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
 
                 return false;
@@ -1051,10 +1051,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'SQL schema query for rename history table failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'SQL schema query for rename history table failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
 
                 return false;
@@ -1103,10 +1103,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'SQL schema query for installment tables failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'SQL schema query for installment tables failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
 
                 return false;
@@ -1165,10 +1165,10 @@ EOD;
 
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'data transfer failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'data transfer failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1181,10 +1181,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1197,10 +1197,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for invoice failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for invoice failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1210,10 +1210,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for detail failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for detail failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1241,10 +1241,10 @@ EOD;
 
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'data transfer failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'data transfer failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1255,10 +1255,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1272,10 +1272,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for basket failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for basket failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1285,10 +1285,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1302,10 +1302,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1317,10 +1317,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1331,10 +1331,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1347,10 +1347,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1364,10 +1364,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1377,10 +1377,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1391,10 +1391,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1405,10 +1405,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1419,10 +1419,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1437,10 +1437,10 @@ EOD;
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [
-                    'status'  => false,
-                    'message' => 'Table alter query for order failed: '
-                        . $exception->getMessage(),
-                ]
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                                     . $exception->getMessage(),
+                    ]
                 );
                 return false;
             }
@@ -1449,7 +1449,9 @@ EOD;
 
         if (version_compare($moduleVersion, '2.2.5', '<')) {
             // Alter table field change type_payment
-            $sql = sprintf("ALTER TABLE %s CHANGE `type_commodity` `type_commodity` enum('product','service', 'booking') NOT NULL default 'product'", $orderTable);
+            $sql = sprintf(
+                "ALTER TABLE %s CHANGE `type_commodity` `type_commodity` enum('product','service', 'booking') NOT NULL default 'product'", $orderTable
+            );
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
@@ -1457,7 +1459,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                            . $exception->getMessage(),
+                                     . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1466,7 +1468,8 @@ EOD;
 
         if (version_compare($moduleVersion, '2.2.6', '<')) {
 
-            $sql = sprintf("
+            $sql = sprintf(
+                "
               ALTER TABLE %s 
               ADD `birthday`            INT(10) UNSIGNED    NOT NULL DEFAULT '0',
               ADD `account_type`        ENUM ('none', 'individual', 'company') NULL DEFAULT 'none',
@@ -1475,7 +1478,8 @@ EOD;
               ADD `company_country`     VARCHAR(64)         NOT NULL DEFAULT '',
               ADD `company_state`       VARCHAR(64)         NOT NULL DEFAULT '',
               ADD `company_city`        VARCHAR(64)         NOT NULL DEFAULT '',
-              ADD `company_zip_code`    VARCHAR(16)         NOT NULL DEFAULT ''", $orderAddressTable);
+              ADD `company_zip_code`    VARCHAR(16)         NOT NULL DEFAULT ''", $orderAddressTable
+            );
             try {
                 $orderAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
@@ -1483,13 +1487,14 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                            . $exception->getMessage(),
+                                     . $exception->getMessage(),
                     ]
                 );
                 return false;
             }
 
-            $sql = sprintf("
+            $sql = sprintf(
+                "
               ALTER TABLE %s 
               ADD `birthday`            INT(10) UNSIGNED    NOT NULL DEFAULT '0',
               ADD `account_type`        ENUM ('none', 'individual', 'company') NULL DEFAULT 'none',
@@ -1498,7 +1503,8 @@ EOD;
               ADD `company_country`     VARCHAR(64)         NOT NULL DEFAULT '',
               ADD `company_state`       VARCHAR(64)         NOT NULL DEFAULT '',
               ADD `company_city`        VARCHAR(64)         NOT NULL DEFAULT '',
-              ADD `company_zip_code`    VARCHAR(16)         NOT NULL DEFAULT ''", $customerAddressTable);
+              ADD `company_zip_code`    VARCHAR(16)         NOT NULL DEFAULT ''", $customerAddressTable
+            );
             try {
                 $customerAddressAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
@@ -1506,7 +1512,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                            . $exception->getMessage(),
+                                     . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1523,7 +1529,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                            . $exception->getMessage(),
+                                     . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1540,7 +1546,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                            . $exception->getMessage(),
+                                     . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1557,7 +1563,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                            . $exception->getMessage(),
+                                     . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1571,10 +1577,12 @@ EOD;
 
             try {
                 $orderInstallmentAdapter->query($sql, 'execute');
-                $sql = sprintf("UPDATE `%s` inst
+                $sql = sprintf(
+                    "UPDATE `%s` inst
 JOIN `%s` invoice ON invoice.id = inst.invoice
 JOIN `%s` ord ON ord.id = invoice.order
-SET inst.extra = ord.extra", $orderInstallmentTable, $invoiceTable, $orderTable);
+SET inst.extra = ord.extra", $orderInstallmentTable, $invoiceTable, $orderTable
+                );
 
                 $orderInstallmentAdapter->query($sql, 'execute');
 
@@ -1583,14 +1591,78 @@ SET inst.extra = ord.extra", $orderInstallmentTable, $invoiceTable, $orderTable)
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                            . $exception->getMessage(),
+                                     . $exception->getMessage(),
                     ]
                 );
                 return false;
             }
-
-
         }
+
+        if (version_compare($moduleVersion, '2.3.5', '<')) {
+            $sql
+                = <<<'EOD'
+CREATE TABLE `{subscription_detail}`
+(
+    `id`                       int(10)          NOT NULL AUTO_INCREMENT,
+    `uid`                      int(10)          NOT NULL DEFAULT '0',
+    `order`                    INT(10) UNSIGNED NOT NULL DEFAULT '0',
+    `subscription_id`          VARCHAR(255)     NOT NULL DEFAULT '',
+    `subscription_plan`        VARCHAR(255)     NOT NULL DEFAULT '',
+    `subscription_interval`    VARCHAR(255)     NOT NULL DEFAULT '',
+    `subscription_status`      VARCHAR(255)     NOT NULL DEFAULT '',
+    `subscription_customer`    VARCHAR(255)     NOT NULL DEFAULT '',
+    `subscription_create_time` VARCHAR(255)     NOT NULL DEFAULT '',
+    `current_period_start`     INT(10) UNSIGNED NOT NULL DEFAULT '0',
+    `current_period_end`       INT(10) UNSIGNED NOT NULL DEFAULT '0',
+    `time_create`              INT(10) UNSIGNED NOT NULL DEFAULT '0',
+    `extra`                    TEXT,
+    PRIMARY KEY (`id`),
+    KEY `uid` (`uid`)
+);
+
+CREATE TABLE `{subscription_customer}`
+(
+    `id`       int(10)      NOT NULL AUTO_INCREMENT,
+    `uid`      int(10)      NOT NULL DEFAULT 0,
+    `customer` VARCHAR(255) NOT NULL DEFAULT '',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uid` (`uid`),
+    UNIQUE KEY `customer` (`customer`)
+);
+
+CREATE TABLE `{subscription_product}`
+(
+    `id`                int(11)          NOT NULL AUTO_INCREMENT,
+    `stripe_product_id` VARCHAR(64)      NOT NULL DEFAULT '',
+    `stripe_price_id`   VARCHAR(64)      NOT NULL DEFAULT '',
+    `product_id`        INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    `product_name`      INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    `product_type`      VARCHAR(64)      NOT NULL DEFAULT 'service',
+    `module`            VARCHAR(64)      NOT NULL DEFAULT '',
+    `amount`            DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+    `interval`          VARCHAR(64)      NOT NULL DEFAULT '',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `product_id` (`product_id`),
+    UNIQUE KEY `stripe_product_id` (`stripe_product_id`)
+);
+EOD;
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'SQL schema query for author table failed: '
+                                     . $exception->getMessage(),
+                    ]
+                );
+
+                return false;
+            }
+        }
+
         return true;
     }
 }
