@@ -131,5 +131,37 @@ return [
                 ],
             ],
         ],
+        'subscription'         => [
+            'label'      => _a('Subscription'),
+            'route'      => 'admin',
+            'controller' => 'subscription',
+            'action'     => 'index',
+            'pages'      => [
+                'index'    => [
+                    'label'      => _a('Subscription'),
+                    'route'      => 'admin',
+                    'controller' => 'subscription',
+                    'action'     => 'index',
+                ],
+                'detail'    => [
+                    'label'      => _a('Detail'),
+                    'route'      => 'admin',
+                    'controller' => 'subscription',
+                    'action'     => 'detail',
+                ],
+                'customer'     => [
+                    'label'      => _a('Customers'),
+                    'route'      => 'admin',
+                    'controller' => 'subscription',
+                    'action'     => 'customer',
+                ],
+                'product'     => [
+                    'label'      => _a('Products'),
+                    'route'      => 'admin',
+                    'controller' => 'subscription',
+                    'action'     => 'product',
+                ],
+            ],
+        ],
     ],
 ];

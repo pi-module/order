@@ -22,9 +22,6 @@ use Pi\Application\Api\AbstractApi;
  * Pi::api('stripe', 'order')->getOrderByPaymentIntentIds($paymentIntentIds);
  * Pi::api('stripe', 'order')->getStripeResponse();
  * Pi::api('stripe', 'order')->preparingSubscription($params);
- *
- * Pi::api('stripe', 'order')->updateInvoiceStatus($params);
- * Pi::api('stripe', 'order')->updateInvoice($params);
  */
 
 class Stripe extends AbstractApi
