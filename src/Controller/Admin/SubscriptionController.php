@@ -22,8 +22,6 @@ class SubscriptionController extends ActionController
 {
     public function indexAction()
     {
-
-
         // Set view
         $this->view()->setTemplate('subscription-index');
     }
