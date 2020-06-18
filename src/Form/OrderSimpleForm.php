@@ -226,7 +226,7 @@ class OrderSimpleForm extends BaseForm
                 'type' => 'html-raw',
 
                 'attributes' => array(
-                    'value'=> '<div class="mt-2 mb-3 p-2 border-success border">' .  sprintf('You chose to pay through 2 installments : %s now, and %s before %s', _currency(number_format($this->option['due_price'] * $this->option['composition'][0] / 100, 2, '.', '')), _currency(number_format($this->option['due_price'] - number_format($this->option['due_price'] * $this->option['composition'][0] / 100, 2, '.', ''), 2, '.', '')), _date($this->option['limit_date'])) . '</div>',
+                    'value'=> '<div class="mt-2 mb-3 p-2 border-success border">' .  sprintf(__('You chose to pay through 2 installments : %s now, and %s before %s'), _currency(number_format($this->option['due_price'] * $this->option['composition'][0] / 100, 2, '.', '')), _currency(number_format($this->option['due_price'] - number_format($this->option['due_price'] * $this->option['composition'][0] / 100, 2, '.', ''), 2, '.', '')), _date($this->option['limit_date'])) . '</div>',
                 ),
             ));
         }
