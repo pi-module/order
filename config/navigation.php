@@ -47,6 +47,12 @@ return [
                 ],
             ],
         ],
+        'report'           => [
+            'label'      => _a('Report'),
+            'route'      => 'admin',
+            'controller' => 'report',
+            'action'     => 'index',
+        ],
         'gateway'           => [
             'label'      => _a('Gateway'),
             'route'      => 'admin',

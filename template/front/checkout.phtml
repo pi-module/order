@@ -429,6 +429,7 @@ $this->footScript()->appendScript($script);
                                     $count++;
                                     $extra           = json_decode($product['extra'], true);
                                     $unconsumedPrice = isset($extra['unconsumedPrice']) ? $extra['unconsumedPrice'] : null;
+                                    $product['product_price'] = str_replace(',', '.', $product['product_price']);
                                     ?>
                                     <tr>
                                         <td>

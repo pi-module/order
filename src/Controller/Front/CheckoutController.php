@@ -233,7 +233,7 @@ class CheckoutController extends IndexController
                     $formatter->setAttribute(\NumberFormatter::MAX_FRACTION_DIGITS, 2);
                     $formatter->setSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL, '.');
 
-                    $detail->product_price = $formatter->formatCurrency($product['product_price'], Pi::config('number_currency'));
+                    $detail->product_price = number_format($product['product_price'], 2, '.', '');
                     $detail->vat_price = $detail->vat_price - ($detail->product_price - $product['product_price']);
 
                     $extra                 = [];
@@ -355,6 +355,12 @@ class CheckoutController extends IndexController
         if (isset($cart['product']) && count($cart['product'])) {
             foreach ($cart['product'] as $key => $product) {
                 $cart['product'][$key]['details'] = Pi::api('order', $cart['module_name'])->getProductDetails($product['product'], json_decode($product['extra'], true));
+                $cart['product'][$key]['product_price'] = str_replace(',', '.', $product['product_price']);
+                $cart['product'][$key]['discount_price'] = str_replace(',', '.', $product['discount_price']);
+                $cart['product'][$key]['shipping_price'] = str_replace(',', '.', $product['shipping_price']);
+                $cart['product'][$key]['packing_price'] = str_replace(',', '.', $product['packing_price']);
+                $cart['product'][$key]['setup_price'] = str_replace(',', '.', $product['setup_price']);
+                $cart['product'][$key]['vat_price'] = str_replace(',', '.', $product['vat_price']);
                 $cart['product'][$key]['product_price_view'] = Pi::api('api', 'order')->viewPrice($product['product_price']);
             }
         }
@@ -977,13 +983,13 @@ class CheckoutController extends IndexController
 
                 $product['setup_price'] = isset($product['setup_price']) ? $product['setup_price'] : 0;
                 // Set price
-                $price['product']    = ($product['product_price'] * $product['number']) + $price['product'];
-                $price['discount']   = ($product['discount_price'] * $product['number']) + $price['discount'];
-                $price['shipping']   = ($product['shipping_price'] * $product['number']) + $price['shipping'];
-                $price['setup']      = ($product['setup_price'] * $product['number']) + $price['setup'];
-                $price['packing']    = ($product['packing_price'] * $product['number']) + $price['packing'];
-                $price['vat']        = $product['vat_price'] + $price['vat'];
-                $price['unconsumed'] = $unconsumedPrice;
+                $price['product']    += round($product['product_price'] * $product['number'] * 100) / 100;
+                $price['discount']   += round($product['discount_price'] * $product['number'] * 100) / 100;
+                $price['shipping']   += round($product['shipping_price'] * $product['number'] * 100) / 100;
+                $price['setup']      += round($product['setup_price'] * $product['number'] * 100) / 100;
+                $price['packing']    += round($product['packing_price'] * $product['number'] * 100) / 100;
+                $price['vat']        += round($product['vat_price'] * 100) / 100;
+                $price['unconsumed'] += $unconsumedPrice;
 
             }
         }
