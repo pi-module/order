@@ -318,6 +318,9 @@ class Gateway extends AbstractGateway
         $form['api_version'] = [
             'name'     => 'api_version',
             'label'    => __('API Version'),
+            'attributes' => [
+                'description' => __("Use Stripe Format as their changelog doc")
+            ],
             'type'     => 'text',
             'required' => false,
         ];
