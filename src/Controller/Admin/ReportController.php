@@ -47,13 +47,15 @@ class ReportController extends ActionController
 
         $bookings = Pi::api('booking', 'guide')->getBookingsById($idsBooking);
         $items = Pi::api('item', 'guide')->getListFromId($idsItem);
-
+        $business = Pi::api('business', 'guide')->getBusinessList();
         $csv = [];
         foreach ($orders as $order) {
             $booking = $bookings[$order['id_booking']];
             $services = json_decode($booking['services'], true);
             $item = $items[$order['id_item']];
-
+            if (!$business[$item['business']]['enable_tourist_tax']) {
+                continue;
+            }
             $touristTax = 0;
 
             foreach ($services['other-fee'] as $service) {
