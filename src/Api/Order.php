@@ -378,7 +378,7 @@ class Order extends AbstractApi
             $list[$row->id] = $row->toArray();
             if ($row->module != 'order' && Pi::service('module')->isActive($row->module)) {
                 $extra = json_decode($row->extra, true);
-                $extra['order'] = $options['order'];
+                $extra['order'] = isset($options['order']) ? $options['order'] : false;
                 $list[$row->id]['details'] = Pi::api('order', $row->module)->getProductDetails($row->product, $extra);
             } else {
                 $list[$row->id]['details'] = [

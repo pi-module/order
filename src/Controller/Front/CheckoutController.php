@@ -337,7 +337,7 @@ class CheckoutController extends IndexController
                 }
                 $_SESSION['order']['delivery_address'] = $favouriteDelivery['id'];
             }
-            if (!isset($_SESSION['order']['invoicing_address']) || !$addresses[$_SESSION['order']['invoicing_address']]) {
+            if (!isset($_SESSION['order']['invoicing_address']) || !isset($addresses[$_SESSION['order']['invoicing_address']]) ||  !$addresses[$_SESSION['order']['invoicing_address']]) {
                 $favouriteInvoicing = Pi::api('customerAddress', 'order')->getFavouriteInvoicing();
                 if ($favouriteInvoicing == null) {
                     $favouriteInvoicing = current($addresses);
@@ -644,7 +644,7 @@ class CheckoutController extends IndexController
         } */
 
 
-        $payAll = $cart['extra']['values']['pay_all'];
+        $payAll = isset($cart['extra']['values']['pay_all']) ? $cart['extra']['values']['pay_all'] : false;
         if (!$payAll) {
             $composition = Pi::api('order', $cart['module_name'])->getInstallmentComposition($cart, true);
         }
