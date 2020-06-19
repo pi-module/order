@@ -330,7 +330,7 @@ class CheckoutController extends IndexController
         // Favourites addresses
         $addresses = Pi::api('customerAddress', 'order')->findAddresses();
         if (count($addresses)) {
-            if (isset($_SESSION['order']) && (!isset($_SESSION['order']['delivery_address']) || !$addresses[$_SESSION['order']['delivery_address']])) {
+            if (isset($_SESSION['order']) && (!isset($_SESSION['order']['delivery_address']) || !isset($addresses[$_SESSION['order']['delivery_address']]) || !$addresses[$_SESSION['order']['delivery_address']])) {
                 $favouriteDelivery = Pi::api('customerAddress', 'order')->getFavouriteDelivery();
                 if ($favouriteDelivery == null) {
                     $favouriteDelivery = current($addresses);
@@ -974,6 +974,7 @@ class CheckoutController extends IndexController
         $price['vat']      = isset($cart['total_vat']) ? $cart['total_vat'] : 0;
         $price['product']  = 0;
         $price['total']    = 0;
+        $price['unconsumed']    = 0;
         $unconsumedPrice = 0;
         if (isset($cart['product']) && count($cart['product'])) {
             foreach ($cart['product'] as $product) {
