@@ -494,6 +494,8 @@ class CheckoutController extends IndexController
                     $values['uid']       = Pi::user()->getId();
                     $values['last_name'] = isset($values['last_name']) ? strtoupper($values['last_name']) : '';
                     $values['city']      = isset($values['city']) ? strtoupper($values['city']) : '';
+                    $birthday = explode('/', $values['birthday']);
+                    $values['birthday'] = strtotime($birthday[2] . '-' . $birthday[1] . '-' . $birthday[0]);
 
                     if ($values['address_id'] == 0) {
                         Pi::api('customerAddress', 'order')->addAddress($values);
