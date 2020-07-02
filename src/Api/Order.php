@@ -657,4 +657,9 @@ class Order extends AbstractApi
             'status' => 1
         );
     }
+
+    public function showInInvoice($order, $product)
+    {
+        return true;
+    }
 }
