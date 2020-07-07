@@ -136,7 +136,6 @@ class OrderController extends ActionController
             ), ['invoice' => 'id'], 'left'
             )
             ->group(new Expression('order.id DESC'))
-            ->where(['order.time_create >= ' . mktime(0, 0, 0, 1, 1, date('Y'))])
             ->where(['order.status_order != ' . \Module\Order\Model\Order::STATUS_ORDER_DRAFT])
         ;
 
@@ -166,20 +165,28 @@ class OrderController extends ActionController
                 continue;
             }
             if (Pi::api('order', $row['module'])->showInInvoice($order, $row, true)) {
-                $totalThirdOrdered += $totalPrice;
+                if ($order['time_create'] >= mktime(0, 0, 0, 1, 1, date('Y'))) {
+                    $totalThirdOrdered += $totalPrice;
+                }
                 $orders[$row['order']]['total_third_ordered'] += $totalPrice;
                 if ($order['invoice']) {
-                    $totalThirdBilled += $totalPrice;
+                    if ($order['time_create'] >= mktime(0, 0, 0, 1, 1, date('Y'))) {
+                        $totalThirdBilled += $totalPrice;
+                    }
                     $orders[$row['order']]['total_third_billed'] += $totalPrice;
                 }
             }
 
             $orders[$row['order']]['total_ordered'] += $totalPrice;
             if (Pi::api('order', $row['module'])->showInInvoice($order, $row)) {
-                $totalOwnOrdered += $totalPrice;
+                if ($order['time_create'] >= mktime(0, 0, 0, 1, 1, date('Y'))) {
+                    $totalOwnOrdered += $totalPrice;
+                }
                 $orders[$row['order']]['total_own_ordered'] += $totalPrice;
                 if ($order['invoice']) {
-                    $totalOwnBilled += $totalPrice;
+                    if ($order['time_create'] >= mktime(0, 0, 0, 1, 1, date('Y'))) {
+                        $totalOwnBilled += $totalPrice;
+                    }
                     $orders[$row['order']]['total_own_billed'] += $totalPrice;
                 }
             }
