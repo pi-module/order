@@ -127,8 +127,8 @@ class Gateway extends AbstractGateway
     public function getSession($order)
     {
         \Stripe\Stripe::setApiKey($this->gatewayOption['password']);
-        if ($gateway->gatewayOption['api_version']) {
-            \Stripe\Stripe::setApiVersion($gateway->gatewayOption['api_version']);
+        if ($this->gatewayOption['api_version']) {
+            \Stripe\Stripe::setApiVersion($this->gatewayOption['api_version']);
         }
         $items    = [];
         $subtotal = 0;
@@ -365,8 +365,8 @@ class Gateway extends AbstractGateway
     {
 
         \Stripe\Stripe::setApiKey($this->gatewayOption['password']);
-        if ($gateway->gatewayOption['api_version']) {
-            \Stripe\Stripe::setApiVersion($gateway->gatewayOption['api_version']);
+        if ($this->gatewayOption['api_version']) {
+            \Stripe\Stripe::setApiVersion($this->gatewayOption['api_version']);
         }
         $session = \Stripe\Checkout\Session::Retrieve($request['stripe_session_id']);
         $pi = $session['payment_intent'];

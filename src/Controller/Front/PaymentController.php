@@ -232,7 +232,14 @@ class PaymentController extends IndexController
 
             $view = new ViewModel();
             $view->setTerminal(true);
-            $view->setVariables(array('session' => $session, 'public_key' => $gateway->gatewayOption['username']));
+            $view->setVariables(
+                array(
+                    'session' => $session,
+                    'public_key' => $gateway->gatewayOption['username'],
+                    'api_version' => $gateway->gatewayOption['api_version'],
+                )
+            );
+
             $view->setTemplate('front/stripe.phtml');
             return $view;
         }
