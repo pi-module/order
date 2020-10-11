@@ -379,8 +379,8 @@ class Order extends AbstractApi
 
             $list[$row->id] = $row->toArray();
             if ($row->module != 'order' && Pi::service('module')->isActive($row->module)) {
-                $extra                     = json_decode($row->extra, true);
-                $extra['order']            = $options['order'];
+                $extra = json_decode($row->extra, true);
+                $extra['order'] = isset($options['order']) ? $options['order'] : false;
                 $list[$row->id]['details'] = Pi::api('order', $row->module)->getProductDetails($row->product, $extra);
             } else {
                 $list[$row->id]['details'] = [
@@ -663,8 +663,8 @@ class Order extends AbstractApi
         ];
     }
 
-    public function showInInvoice($order, $product, $third = false)
+    public function showInInvoice($order, $product)
     {
-        return false;
+        return true;
     }
 }

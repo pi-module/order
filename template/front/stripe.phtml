@@ -9,7 +9,7 @@
 </html>
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-    const stripe = Stripe("<?php echo $public_key ?>");
+    const stripe = Stripe("<?php echo $public_key ?>", {apiVersion:"<?php echo $api_version ?>"});
     window.setTimeout(
         function() {
             stripe.redirectToCheckout({

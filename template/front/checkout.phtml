@@ -156,11 +156,11 @@ $this->footScript()->appendScript($script);
                     <?php if (!empty($addresses)) { ?>
                         <h4><?php _e('Here are the addresses you have selected for billing and delivery. You can manage them (add, modify, delete) to select others.') ?></h4>
                     <?php } else { ?>
-                        <h5>
+                        <h4>
                             <?php _e(
                                 'You don\'t have set an address yet. Please create your address we will use for your order. You will be able then to manage several addresses'
                             ) ?>
-                        </h5>
+                        </h4>
                     <?php } ?>
                 </div>
             <?php } ?>
@@ -429,6 +429,7 @@ $this->footScript()->appendScript($script);
                                     $count++;
                                     $extra           = json_decode($product['extra'], true);
                                     $unconsumedPrice = isset($extra['unconsumedPrice']) ? $extra['unconsumedPrice'] : null;
+                                    $product['product_price'] = str_replace(',', '.', $product['product_price']);
                                     ?>
                                     <tr>
                                         <td>

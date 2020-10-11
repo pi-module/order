@@ -495,7 +495,7 @@ $this->backbone();
                                 $totalPrice         = 0;
 
                                 foreach ($order['products'] as $product) {
-
+                                    $product['extra']['unconsumedPrice'] = isset($product['extra']['unconsumedPrice']) ? $product['extra']['unconsumedPrice'] : 0;
                                     $totalProductPrice  += $product['product_price'] - $product['extra']['unconsumedPrice'];
                                     $totalShippingPrice += $product['shipping_price'];
                                     $totalPackingPrice  += $product['packing_price'];
