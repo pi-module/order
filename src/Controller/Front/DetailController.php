@@ -50,13 +50,15 @@ class DetailController extends IndexController
         $order['totalInstallments']  = 0;
         $order['paidInstallments']   = 0;
         $order['unPaidInstallments'] = 0;
-        // Get installments and count paid and unpaid payment 
+        // Get installments and count paid and unpaid payment
         foreach ($order['invoices'] as &$invoice) {
             $installments            = Pi::api('installment', 'order')->getInstallmentsFromInvoice($invoice['id']);
             $invoice['installments'] = $installments;
 
             $installment = current($installments);
-            if (in_array($order['type_commodity'], ['service', 'booking']) && $installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
+            if (in_array($order['type_commodity'], ['service', 'booking'])
+                && $installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID
+            ) {
                 $order['time_delivery_view'] = _date($installment['time_payment']);
             }
 

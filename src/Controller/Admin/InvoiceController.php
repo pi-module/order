@@ -105,7 +105,7 @@ class InvoiceController extends ActionController
             foreach ($products as $product) {
                 if (Pi::api('order', $product['module'])->showInInvoice($row, $product)) {
                     $totalPrice += $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price']
-                        + $product['vat_price'] - $product['discount_price'] -  + $product['extra']['unconsumedPrice'];
+                        + $product['vat_price'] - $product['discount_price'] - +$product['extra']['unconsumedPrice'];
                 }
             }
             $list[$row['id']]['total_price_view'] = Pi::api('api', 'order')->viewPrice($totalPrice);

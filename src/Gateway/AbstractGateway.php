@@ -18,11 +18,11 @@ use Laminas\Json\Json;
 
 abstract class AbstractGateway
 {
-    const TYPE_FORM = 0;
-    const TYPE_REST = 1;
+    const TYPE_FORM   = 0;
+    const TYPE_REST   = 1;
     const TYPE_STRIPE = 2;
 
-    protected $_type      = AbstractGateway::TYPE_FORM;
+    protected $_type = AbstractGateway::TYPE_FORM;
     protected $_needToken = false;
 
     public $gatewayAdapter = '';
@@ -224,10 +224,10 @@ abstract class AbstractGateway
         $this->gatewayBackUrl = Pi::url(
             Pi::service('url')->assemble(
                 'order', [
-                'module'     => 'order',
-                'controller' => 'payment',
-                'action'     => 'result',
-            ]
+                    'module'     => 'order',
+                    'controller' => 'payment',
+                    'action'     => 'result',
+                ]
             )
         );
     }
@@ -237,10 +237,10 @@ abstract class AbstractGateway
         $this->gatewayCancelUrl = Pi::url(
             Pi::service('url')->assemble(
                 'order', [
-                'module'     => 'order',
-                'controller' => 'payment',
-                'action'     => 'cancel',
-            ]
+                    'module'     => 'order',
+                    'controller' => 'payment',
+                    'action'     => 'cancel',
+                ]
             )
         );
     }
@@ -250,11 +250,11 @@ abstract class AbstractGateway
         $this->gatewayFinishUrl = Pi::url(
             Pi::service('url')->assemble(
                 'order', [
-                'module'     => 'order',
-                'controller' => 'payment',
-                'action'     => 'finish',
-                'id'         => (new Pi\Filter\Slug())->filter($this->gatewayAdapter),
-            ]
+                    'module'     => 'order',
+                    'controller' => 'payment',
+                    'action'     => 'finish',
+                    'id'         => (new Pi\Filter\Slug())->filter($this->gatewayAdapter),
+                ]
             )
         );
     }
@@ -264,10 +264,10 @@ abstract class AbstractGateway
         $this->gatewayNotifyUrl = Pi::url(
             Pi::service('url')->assemble(
                 'order', [
-                'module'     => 'order',
-                'controller' => 'payment',
-                'action'     => 'notify',
-            ]
+                    'module'     => 'order',
+                    'controller' => 'payment',
+                    'action'     => 'notify',
+                ]
             )
         );
     }

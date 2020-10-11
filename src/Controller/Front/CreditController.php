@@ -85,9 +85,9 @@ class CreditController extends IndexController
                 $list[$row->id]['orderLink'] = Pi::url(
                     $this->url(
                         'order', [
-                        'controller' => 'detail',
-                        'id'         => $row->order,
-                    ]
+                            'controller' => 'detail',
+                            'id'         => $row->order,
+                        ]
                     )
                 );
             } elseif ($row->invoice > 0) {
@@ -95,9 +95,9 @@ class CreditController extends IndexController
                 $list[$row->id]['orderLink'] = Pi::url(
                     $this->url(
                         'order', [
-                        'controller' => 'detail',
-                        'id'         => $invoice['order'],
-                    ]
+                            'controller' => 'detail',
+                            'id'         => $invoice['order'],
+                        ]
                     )
                 );
             } else {

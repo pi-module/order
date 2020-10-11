@@ -55,7 +55,7 @@ class Gateway extends AbstractGateway
     public function setSettingForm()
     {
         $form = [];
-        
+
         // form path
         $form['path'] = [
             'name'     => 'path',
@@ -63,7 +63,7 @@ class Gateway extends AbstractGateway
             'type'     => 'hidden',
             'required' => true,
         ];
-        
+
         // form terminalCode
         $form['terminalCode'] = [
             'name'     => 'terminalCode',
@@ -71,15 +71,15 @@ class Gateway extends AbstractGateway
             'type'     => 'text',
             'required' => true,
         ];
-        
+
         // form merchantCode
-        $form['merchantCode']     = [
+        $form['merchantCode'] = [
             'name'     => 'merchantCode',
             'label'    => __('merchantCode'),
             'type'     => 'text',
             'required' => true,
         ];
-        
+
         $this->gatewaySettingForm = $form;
         return $this;
     }
@@ -87,61 +87,61 @@ class Gateway extends AbstractGateway
     public function setPayForm()
     {
         $form = [];
-        
+
         // form invoiceNumber
         $form['invoiceNumber'] = [
             'name' => 'invoiceNumber',
             'type' => 'hidden',
         ];
-        
+
         // form invoiceDate
         $form['invoiceDate'] = [
             'name' => 'invoiceDate',
             'type' => 'hidden',
         ];
-        
+
         // form amount
         $form['amount'] = [
             'name' => 'amount',
             'type' => 'hidden',
         ];
-        
+
         // form terminalCode
         $form['terminalCode'] = [
             'name' => 'terminalCode',
             'type' => 'hidden',
         ];
-        
+
         // form merchantCode
         $form['merchantCode'] = [
             'name' => 'merchantCode',
             'type' => 'hidden',
         ];
-        
+
         // form redirectAddress
         $form['redirectAddress'] = [
             'name' => 'redirectAddress',
             'type' => 'hidden',
         ];
-        
+
         // form timeStamp
         $form['timeStamp'] = [
             'name' => 'timeStamp',
             'type' => 'hidden',
         ];
-        
+
         // form action
         $form['action'] = [
             'name' => 'action',
             'type' => 'hidden',
         ];
-        
+
         // form sign
-        $form['sign']         = [
+        $form['sign'] = [
             'name' => 'sign',
             'type' => 'hidden',
         ];
-        
+
         $this->gatewayPayForm = $form;
         return $this;
     }

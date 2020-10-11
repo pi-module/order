@@ -116,8 +116,8 @@ class AddressForm extends BaseForm
                 [
                     'name'       => 'account_type',
                     'attributes' => [
-                        'type' => 'hidden',
-                        'value' => $this->config['address_type']
+                        'type'  => 'hidden',
+                        'value' => $this->config['address_type'],
                     ],
                 ]
             );

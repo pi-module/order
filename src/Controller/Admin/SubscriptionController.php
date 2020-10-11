@@ -29,14 +29,14 @@ class SubscriptionController extends ActionController
     public function detailAction()
     {
         // Get page
-        $page       = $this->params('page', 1);
+        $page = $this->params('page', 1);
 
         // Get info
         $list   = [];
         $order  = ['time_create DESC', 'id DESC'];
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit  = intval($this->config('admin_perpage'));
-        $where   = [];
+        $where  = [];
 
         // Select
         $select = $this->getModel('subscription_detail')->select()->where($where)->order($order)->offset($offset)->limit($limit);
@@ -44,13 +44,13 @@ class SubscriptionController extends ActionController
 
         // Make list
         foreach ($rowset as $row) {
-            $list[$row->id]                       = $row->toArray();
+            $list[$row->id] = $row->toArray();
         }
 
         // Get count
-        $count     = ['count' => new Expression('count(*)')];
-        $select    = $this->getModel('subscription_detail')->select()->columns($count);
-        $count     = $this->getModel('subscription_detail')->selectWith($select)->current()->count;
+        $count  = ['count' => new Expression('count(*)')];
+        $select = $this->getModel('subscription_detail')->select()->columns($count);
+        $count  = $this->getModel('subscription_detail')->selectWith($select)->current()->count;
 
         // Set paginator
         $paginator = Paginator::factory(intval($count));
@@ -79,14 +79,14 @@ class SubscriptionController extends ActionController
     public function customerAction()
     {
         // Get page
-        $page       = $this->params('page', 1);
+        $page = $this->params('page', 1);
 
         // Get info
         $list   = [];
         $order  = ['id DESC'];
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit  = intval($this->config('admin_perpage'));
-        $where   = [];
+        $where  = [];
 
         // Select
         $select = $this->getModel('subscription_customer')->select()->where($where)->order($order)->offset($offset)->limit($limit);
@@ -94,13 +94,13 @@ class SubscriptionController extends ActionController
 
         // Make list
         foreach ($rowset as $row) {
-            $list[$row->id]                       = $row->toArray();
+            $list[$row->id] = $row->toArray();
         }
 
         // Get count
-        $count     = ['count' => new Expression('count(*)')];
-        $select    = $this->getModel('subscription_customer')->select()->columns($count);
-        $count     = $this->getModel('subscription_customer')->selectWith($select)->current()->count;
+        $count  = ['count' => new Expression('count(*)')];
+        $select = $this->getModel('subscription_customer')->select()->columns($count);
+        $count  = $this->getModel('subscription_customer')->selectWith($select)->current()->count;
 
         // Set paginator
         $paginator = Paginator::factory(intval($count));
@@ -129,14 +129,14 @@ class SubscriptionController extends ActionController
     public function productAction()
     {
         // Get page
-        $page       = $this->params('page', 1);
+        $page = $this->params('page', 1);
 
         // Get info
         $list   = [];
         $order  = ['id DESC'];
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit  = intval($this->config('admin_perpage'));
-        $where   = [];
+        $where  = [];
 
         // Select
         $select = $this->getModel('subscription_product')->select()->where($where)->order($order)->offset($offset)->limit($limit);
@@ -144,13 +144,13 @@ class SubscriptionController extends ActionController
 
         // Make list
         foreach ($rowset as $row) {
-            $list[$row->id]                       = $row->toArray();
+            $list[$row->id] = $row->toArray();
         }
 
         // Get count
-        $count     = ['count' => new Expression('count(*)')];
-        $select    = $this->getModel('subscription_product')->select()->columns($count);
-        $count     = $this->getModel('subscription_product')->selectWith($select)->current()->count;
+        $count  = ['count' => new Expression('count(*)')];
+        $select = $this->getModel('subscription_product')->select()->columns($count);
+        $count  = $this->getModel('subscription_product')->selectWith($select)->current()->count;
 
         // Set paginator
         $paginator = Paginator::factory(intval($count));

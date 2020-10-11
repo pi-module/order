@@ -39,7 +39,7 @@ class GatewayForm extends BaseForm
             foreach ($this->field as $field) {
 
                 $attributes = isset($field['attributes']) ? $field['attributes'] : [];
-                $options = isset($field['options']) ? $field['options'] : [];
+                $options    = isset($field['options']) ? $field['options'] : [];
 
                 if ($field['type'] == 'hidden') {
                     $attributes['type'] = 'hidden';
@@ -47,7 +47,7 @@ class GatewayForm extends BaseForm
                         [
                             'name'       => $field['name'],
                             'attributes' => $attributes,
-                            'options' => $options,
+                            'options'    => $options,
                         ]
                     );
                 } elseif ($field['type'] == 'checkbox') {
@@ -60,7 +60,7 @@ class GatewayForm extends BaseForm
                         ]
                     );
                 } else {
-                    $options['label'] = $field['label'];
+                    $options['label']   = $field['label'];
                     $attributes['type'] = $field['type'];
                     $this->add(
                         [
@@ -83,4 +83,4 @@ class GatewayForm extends BaseForm
             ]
         );
     }
-}   
+}

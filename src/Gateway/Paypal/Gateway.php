@@ -366,7 +366,7 @@ class Gateway extends AbstractGateway
             'required' => false,
         ];
         // password
-        $form['password'] = [
+        $form['password']             = [
             'name'     => 'password',
             'label'    => __('Secret'),
             'type'     => 'text',

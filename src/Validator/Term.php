@@ -42,8 +42,8 @@ class Term extends AbstractValidator
     /**
      * Slug validate
      *
-     * @param  mixed $value
-     * @param  array $context
+     * @param mixed $value
+     * @param array $context
      *
      * @return boolean
      */

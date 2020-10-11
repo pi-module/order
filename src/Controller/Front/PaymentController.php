@@ -231,21 +231,23 @@ class PaymentController extends IndexController
                 $this->jump(['', 'controller' => 'payment', 'action' => 'result'], __('Error to get information.'));
             }
             return $this->redirect()->toUrl($approvalUrl);
-        } else if ($gateway->getType() == AbstractGateway::TYPE_STRIPE) {
-            $session = $gateway->getSession($order);
+        } else {
+            if ($gateway->getType() == AbstractGateway::TYPE_STRIPE) {
+                $session = $gateway->getSession($order);
 
-            $view = new ViewModel();
-            $view->setTerminal(true);
-            $view->setVariables(
-                array(
-                    'session' => $session,
-                    'public_key' => $gateway->gatewayOption['username'],
-                    'api_version' => $gateway->gatewayOption['api_version'],
-                )
-            );
+                $view = new ViewModel();
+                $view->setTerminal(true);
+                $view->setVariables(
+                    [
+                        'session'     => $session,
+                        'public_key'  => $gateway->gatewayOption['username'],
+                        'api_version' => $gateway->gatewayOption['api_version'],
+                    ]
+                );
 
-            $view->setTemplate('front/stripe.phtml');
-            return $view;
+                $view->setTemplate('front/stripe.phtml');
+                return $view;
+            }
         }
 
         // Set form values

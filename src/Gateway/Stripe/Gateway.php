@@ -146,14 +146,14 @@ class Gateway extends AbstractGateway
         if ($this->gatewayOption['api_version']) {
             \Stripe\Stripe::setApiVersion($this->gatewayOption['api_version']);
         }
-        $items    = [];
-        $subtotal = 0;
+        $items                   = [];
+        $subtotal                = 0;
         $subtotalCommissionOwner = 0;
-        $feeCustomer = 0;
-        $tax      = 0;
-        $touristTax = 0;
-        $firstPaid    = true;
-        $installments = Pi::api('installment', 'order')->getInstallmentsFromOrder($order['id']);
+        $feeCustomer             = 0;
+        $tax                     = 0;
+        $touristTax              = 0;
+        $firstPaid               = true;
+        $installments            = Pi::api('installment', 'order')->getInstallmentsFromOrder($order['id']);
         foreach ($installments as $installment) {
             if ($installment['status_invoice'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
                 if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
@@ -191,13 +191,13 @@ class Gateway extends AbstractGateway
             $item                = [];
             $item["name"]        = addcslashes($this->gatewayPayInformation['item_name_' . $i], '"');
             $item["amount"]      = ($this->gatewayPayInformation['amount_' . $i] + $this->gatewayPayInformation['tax_' . $i]
-                                    - $this->gatewayPayInformation['discount_price_' . $i] - $this->gatewayPayInformation['unconsumed_' . $i]) * 100;
+                    - $this->gatewayPayInformation['discount_price_' . $i] - $this->gatewayPayInformation['unconsumed_' . $i]) * 100;
             $item["currency"]    = $this->gatewayPayInformation['currency_code'];
             $item["quantity"]    = $this->gatewayPayInformation['quantity_' . $i];
             $item["description"] = addcslashes($this->gatewayPayInformation['item_name_' . $i], '"');
 
             $totalProduct = $this->gatewayPayInformation['amount_' . $i] - $this->gatewayPayInformation['discount_price_' . $i]
-                            - $this->gatewayPayInformation['unconsumed_' . $i];
+                - $this->gatewayPayInformation['unconsumed_' . $i];
 
             if (!$this->gatewayPayInformation['special_fee_' . $i]) {
                 $subtotalCommissionOwner += $totalProduct;
@@ -232,24 +232,26 @@ class Gateway extends AbstractGateway
         if (isset($this->gatewayPayInformation['gateway_id'])) {
             $config = Pi::service('registry')->config->read('guide');
 
-            $feeOwner = round(($subtotalCommissionOwner * $this->gatewayPayInformation['commission_percentage_owner']) * ((100 + $config['package_vat'])/100 ));
-            $feeCustomer = $feeCustomer * 100;
-            $touristTax = $touristTax * 100;
-            $totalFee = $firstPaid ? $feeOwner + $feeCustomer + $touristTax : 0;
+            $feeOwner                    = round(
+                ($subtotalCommissionOwner * $this->gatewayPayInformation['commission_percentage_owner']) * ((100 + $config['package_vat']) / 100)
+            );
+            $feeCustomer                 = $feeCustomer * 100;
+            $touristTax                  = $touristTax * 100;
+            $totalFee                    = $firstPaid ? $feeOwner + $feeCustomer + $touristTax : 0;
             $data['payment_intent_data'] = [
-                'on_behalf_of' => $this->gatewayPayInformation['gateway_id'],
+                'on_behalf_of'  => $this->gatewayPayInformation['gateway_id'],
                 'transfer_data' => [
                     'destination' => $this->gatewayPayInformation['gateway_id'],
                 ],
-                'metadata' =>
-                [
-                    'order' => $order['uid'],
-                    'ht' => $subtotal,
-                    'vat' => $tax,
-                    'fee_owner' => $feeOwner,
-                    'fee_customer' => $feeCustomer,
-                    'total_fee' => $totalFee
-                ],
+                'metadata'      =>
+                    [
+                        'order'        => $order['uid'],
+                        'ht'           => $subtotal,
+                        'vat'          => $tax,
+                        'fee_owner'    => $feeOwner,
+                        'fee_customer' => $feeCustomer,
+                        'total_fee'    => $totalFee,
+                    ],
             ];
             if ($totalFee > 0) {
                 $data['payment_intent_data']['application_fee_amount'] = $totalFee;
@@ -343,13 +345,13 @@ class Gateway extends AbstractGateway
         ];
 
         $form['api_version'] = [
-            'name'     => 'api_version',
-            'label'    => __('API Version'),
+            'name'       => 'api_version',
+            'label'      => __('API Version'),
             'attributes' => [
-                'description' => __("Use Stripe Format as their changelog doc")
+                'description' => __("Use Stripe Format as their changelog doc"),
             ],
-            'type'     => 'text',
-            'required' => false,
+            'type'       => 'text',
+            'required'   => false,
         ];
 
 

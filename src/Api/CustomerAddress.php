@@ -68,9 +68,9 @@ class CustomerAddress extends AbstractApi
         $uid = Pi::user()->getId();
 
         // Select
-        $where    = ['uid' => $uid, 'delivery_favourite' => 1];
-        $select   = Pi::model('customer_address', $this->getModule())->select()->where($where)->order('id DESC');
-        $row      = Pi::model('customer_address', $this->getModule())->selectWith($select)->current();
+        $where  = ['uid' => $uid, 'delivery_favourite' => 1];
+        $select = Pi::model('customer_address', $this->getModule())->select()->where($where)->order('id DESC');
+        $row    = Pi::model('customer_address', $this->getModule())->selectWith($select)->current();
         if ($row) {
             $address = $this->canonizeAddress($row);
             return $address;

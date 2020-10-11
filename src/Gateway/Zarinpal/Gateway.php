@@ -132,7 +132,7 @@ class Gateway extends AbstractGateway
             $this->gatewayRedirectUrl    = sprintf('https://www.zarinpal.com/pg/StartPay/%s', $call->Authority);
         } else {
             $this->setPaymentError(0);
-            
+
             // set log
             $log              = [];
             $log['gateway']   = $this->gatewayAdapter;
@@ -149,7 +149,7 @@ class Gateway extends AbstractGateway
     public function verifyPayment($request, $processing)
     {
         // Set result
-        $result           = [
+        $result = [
             'status' => 0,
         ];
 
@@ -166,13 +166,13 @@ class Gateway extends AbstractGateway
 
         // Check Status
         if ($request['Status'] == 'OK') {
-            
+
             // Set parameters
-            $parameters               = [
-                'MerchantID' =>  $this->gatewayOption['MerchantID'],
-                'Authority' => $request['Authority'],
-                'Amount' => intval($total) / 10,
-                
+            $parameters = [
+                'MerchantID' => $this->gatewayOption['MerchantID'],
+                'Authority'  => $request['Authority'],
+                'Amount'     => intval($total) / 10,
+
             ];
 
             // Call

@@ -13,47 +13,47 @@
 return [
     // Admin section
     'admin' => [
-        'order'    => [
+        'order'        => [
             'title'  => _a('Orders'),
             'access' => [//'admin',
             ],
         ],
-        'invoice'  => [
+        'invoice'      => [
             'title'  => _a('Invoice'),
             'access' => [//'admin',
             ],
         ],
-        'logs'     => [
+        'logs'         => [
             'title'  => _a('Logs'),
             'access' => [//'admin',
             ],
         ],
-        'gateway'  => [
+        'gateway'      => [
             'title'  => _a('Gateway'),
             'access' => [//'admin',
             ],
         ],
-        'delivery' => [
+        'delivery'     => [
             'title'  => _a('Delivery'),
             'access' => [//'admin',
             ],
         ],
-        'location' => [
+        'location'     => [
             'title'  => _a('Location'),
             'access' => [//'admin',
             ],
         ],
-        'credit'   => [
+        'credit'       => [
             'title'  => _a('Credit'),
             'access' => [//'admin',
             ],
         ],
-        'promocode'   => [
+        'promocode'    => [
             'title'  => _a('Credit'),
             'access' => [//'admin',
             ],
         ],
-        'subscription'   => [
+        'subscription' => [
             'title'  => _a('Credit'),
             'access' => [//'admin',
             ],

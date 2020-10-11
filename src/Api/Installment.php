@@ -697,10 +697,10 @@ class Installment extends AbstractApi
 
     public function updateInstallment($invoice)
     {
-        $where        = ['invoice' => $invoice];
-        $select       = Pi::model('invoice_installment', 'order')->select()->where($where);
-        $rowset       = Pi::model('invoice_installment', 'order')->selectWith($select);
-        $first = true;
+        $where  = ['invoice' => $invoice];
+        $select = Pi::model('invoice_installment', 'order')->select()->where($where);
+        $rowset = Pi::model('invoice_installment', 'order')->selectWith($select);
+        $first  = true;
         foreach ($rowset as $row) {
             if ($row->status_payment == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
                 $row->status_payment = \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID;
@@ -712,7 +712,7 @@ class Installment extends AbstractApi
         }
         if ($first) {
             $invoice = Pi::api('invoice', 'order')->getInvoice($invoice);
-            $order = Pi::api('order', 'order')->getOrder($invoice['order']);
+            $order   = Pi::api('order', 'order')->getOrder($invoice['order']);
             Pi::api('notification', 'order')->payInvoice($order, $invoice);
 
         }
@@ -720,8 +720,8 @@ class Installment extends AbstractApi
 
     public function removeInstallments($invoice)
     {
-        $where        = ['invoice' => $invoice];
-        $select       = Pi::model('invoice_installment', 'order')->delete($where);
+        $where  = ['invoice' => $invoice];
+        $select = Pi::model('invoice_installment', 'order')->delete($where);
     }
 
 }

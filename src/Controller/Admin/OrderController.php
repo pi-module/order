@@ -59,16 +59,16 @@ class OrderController extends ActionController
         $zip_code   = $this->params('zip_code');
         $company    = $this->params('company');
 
-        // installment 
+        // installment
         $status_payment = $this->params('status_payment');
 
         // Get info
-        $list   = [];
-        $ordering  = ['order.id DESC', 'order.time_create DESC'];
-        $offset = (int)($page - 1) * $this->config('admin_perpage');
-        $limit  = intval($this->config('admin_perpage'));
-        $where  = [];
-        $having = [];
+        $list     = [];
+        $ordering = ['order.id DESC', 'order.time_create DESC'];
+        $offset   = (int)($page - 1) * $this->config('admin_perpage');
+        $limit    = intval($this->config('admin_perpage'));
+        $where    = [];
+        $having   = [];
 
         // Set where
         if ($status_order) {
@@ -136,30 +136,30 @@ class OrderController extends ActionController
             ), ['invoice' => 'id'], 'left'
             )
             ->group(new Expression('order.id DESC'))
-            ->where(['order.status_order != ' . \Module\Order\Model\Order::STATUS_ORDER_DRAFT])
-        ;
+            ->where(['order.status_order != ' . \Module\Order\Model\Order::STATUS_ORDER_DRAFT]);
 
-        $rowset       = Pi::db()->query($select);
+        $rowset = Pi::db()->query($select);
 
-        $totalOwnBilled  = 0;
-        $totalOwnOrdered = 0;
+        $totalOwnBilled    = 0;
+        $totalOwnOrdered   = 0;
         $totalThirdBilled  = 0;
         $totalThirdOrdered = 0;
-        $orders = [];
-        $orderIds = [];
+        $orders            = [];
+        $orderIds          = [];
         foreach ($rowset as $row) {
             $orders[$row['id']] = $row;
-            $orderIds[] = $row['id'];
+            $orderIds[]         = $row['id'];
         }
         $orderIds[] = -1;
 
         $select = Pi::db()->select();
         $select->from(['order_detail' => $orderDetailTable])->where(['`order` IN (' . join(', ', $orderIds) . ')']);
-        $rowset       = Pi::db()->query($select);
+        $rowset = Pi::db()->query($select);
 
         foreach ($rowset as $row) {
-            $order = $orders[$row['order']];
-            $totalPrice = $row['product_price'] - $row['discount_price'] + $row['shipping_price'] + $row['packing_price'] + $row['setup_price'] + $row['vat_price'];
+            $order      = $orders[$row['order']];
+            $totalPrice = $row['product_price'] - $row['discount_price'] + $row['shipping_price'] + $row['packing_price'] + $row['setup_price']
+                + $row['vat_price'];
 
             if (!$totalPrice) {
                 continue;
@@ -219,13 +219,13 @@ class OrderController extends ActionController
         $rowset = Pi::db()->query($select);
 
         foreach ($rowset as $row) {
-            $list[$row['id']]             = Pi::api('order', 'order')->canonizeOrder($row);
-            $list[$row['id']]['products'] = Pi::api('order', 'order')->listProduct($row['id'], ['order' => $row]);
-            $list[$row['id']]['total_own_billed_view'] = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_own_billed']);
-            $list[$row['id']]['total_own_ordered_view'] = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_own_ordered']);
-            $list[$row['id']]['total_third_billed_view'] = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_third_billed']);
+            $list[$row['id']]                             = Pi::api('order', 'order')->canonizeOrder($row);
+            $list[$row['id']]['products']                 = Pi::api('order', 'order')->listProduct($row['id'], ['order' => $row]);
+            $list[$row['id']]['total_own_billed_view']    = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_own_billed']);
+            $list[$row['id']]['total_own_ordered_view']   = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_own_ordered']);
+            $list[$row['id']]['total_third_billed_view']  = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_third_billed']);
             $list[$row['id']]['total_third_ordered_view'] = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_third_ordered']);
-            $list[$row['id']]['total_ordered_view'] = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_ordered']);
+            $list[$row['id']]['total_ordered_view']       = Pi::api('api', 'order')->viewPrice($orders[$row['id']]['total_ordered']);
         }
         //
         $select = Pi::db()->select();
@@ -411,7 +411,7 @@ class OrderController extends ActionController
         $id     = $this->params('id');
         $module = $this->params('module');
         $return = [];
-        // Get order 
+        // Get order
         $invoice = $this->getModel('invoice')->find($id);
         if ($invoice['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED || $invoice['type'] == 'CREDIT') {
             $return['status'] = 0;
@@ -617,7 +617,7 @@ class OrderController extends ActionController
         $order['totalInstallments']  = 0;
         $order['paidInstallments']   = 0;
         $order['unPaidInstallments'] = 0;
-        // Get installments and count paid and unpaid payment 
+        // Get installments and count paid and unpaid payment
         foreach ($order['invoices'] as &$invoice) {
             $installments            = Pi::api('installment', 'order')->getInstallmentsFromInvoice($invoice['id']);
             $invoice['installments'] = $installments;

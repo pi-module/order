@@ -36,7 +36,7 @@ class Installment extends Model
             'due_price',
             'credit_price',
             'comment',
-            'extra'
+            'extra',
         ];
 
     public static function getStatusList()

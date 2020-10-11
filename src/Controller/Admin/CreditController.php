@@ -115,9 +115,9 @@ class CreditController extends ActionController
         }
 
         // Get count
-        $count     = ['count' => new Expression('count(*)')];
-        $select    = $this->getModel('credit')->select()->columns($count);
-        $count     = $this->getModel('credit')->selectWith($select)->current()->count;
+        $count  = ['count' => new Expression('count(*)')];
+        $select = $this->getModel('credit')->select()->columns($count);
+        $count  = $this->getModel('credit')->selectWith($select)->current()->count;
 
         // Set paginator
         $paginator = Paginator::factory(intval($count));

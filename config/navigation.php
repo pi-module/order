@@ -62,7 +62,7 @@ return [
                 ],
             ],
         ],
-        'report'           => [
+        'report'            => [
             'label'      => _a('Report'),
             'route'      => 'admin',
             'controller' => 'report',
@@ -171,7 +171,7 @@ return [
             'controller' => 'promocode',
             'action'     => 'index',
             'pages'      => [
-                'list'    => [
+                'list' => [
                     'label'      => _a('Promotional codes'),
                     'permission' => [
                         'resource' => 'promocode',
@@ -180,7 +180,7 @@ return [
                     'controller' => 'promocode',
                     'action'     => 'index',
                 ],
-                'add'     => [
+                'add'  => [
                     'label'      => _a('Add'),
                     'permission' => [
                         'resource' => 'promocode',
@@ -191,7 +191,7 @@ return [
                 ],
             ],
         ],
-        'subscription'         => [
+        'subscription'      => [
             'label'      => _a('Subscription'),
             'permission' => [
                 'resource' => 'subscription',
@@ -209,7 +209,7 @@ return [
                     'controller' => 'subscription',
                     'action'     => 'index',
                 ],
-                'detail'    => [
+                'detail'   => [
                     'label'      => _a('Detail'),
                     'permission' => [
                         'resource' => 'subscription',
@@ -218,7 +218,7 @@ return [
                     'controller' => 'subscription',
                     'action'     => 'detail',
                 ],
-                'customer'     => [
+                'customer' => [
                     'label'      => _a('Customers'),
                     'permission' => [
                         'resource' => 'subscription',
@@ -227,7 +227,7 @@ return [
                     'controller' => 'subscription',
                     'action'     => 'customer',
                 ],
-                'product'     => [
+                'product'  => [
                     'label'      => _a('Products'),
                     'permission' => [
                         'resource' => 'subscription',

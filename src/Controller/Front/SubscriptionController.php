@@ -98,7 +98,8 @@ class SubscriptionController extends IndexController
 
     // Ajax method
     public function cancelAction()
-    {}
+    {
+    }
 
     // Stripe webhook
     public function responseAction()
@@ -132,7 +133,7 @@ class SubscriptionController extends IndexController
                     $params                              = [];
                     $params["id"]                        = $response->data->object->id;
                     $params["customer_id"]               = $response->data->object->customer;
-                    $params["subscription_product"]         = $response->data->object->plan->id;
+                    $params["subscription_product"]      = $response->data->object->plan->id;
                     $params["subscription_interval"]     = $response->data->object->plan->interval_count . " " . $response->data->object->plan->interval;
                     $params["subscription_status"]       = $response->data->object->status;
                     $params["current_period_start"]      = date("Y-m-d H:i:s", $response->data->object->current_period_start);

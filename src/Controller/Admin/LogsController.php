@@ -42,21 +42,21 @@ class LogsController extends ActionController
             $list[$row->id]['user_url']         = Pi::url(
                 $this->url(
                     '', [
-                    'module'     => 'user',
-                    'controller' => 'edit',
-                    'action'     => 'index',
-                    'uid'        => $row->uid,
-                ]
+                        'module'     => 'user',
+                        'controller' => 'edit',
+                        'action'     => 'index',
+                        'uid'        => $row->uid,
+                    ]
                 )
             );
             $list[$row->id]['order_url']        = Pi::url(
                 $this->url(
                     '', [
-                    'module'     => 'order',
-                    'controller' => 'order',
-                    'action'     => 'view',
-                    'id'         => $row->order,
-                ]
+                        'module'     => 'order',
+                        'controller' => 'order',
+                        'action'     => 'view',
+                        'id'         => $row->order,
+                    ]
                 )
             );
         }

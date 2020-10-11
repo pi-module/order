@@ -116,7 +116,7 @@ class Update extends BasicUpdate
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -133,7 +133,7 @@ class Update extends BasicUpdate
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -152,7 +152,7 @@ class Update extends BasicUpdate
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -166,7 +166,7 @@ class Update extends BasicUpdate
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -183,7 +183,7 @@ class Update extends BasicUpdate
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -200,7 +200,7 @@ class Update extends BasicUpdate
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -217,7 +217,7 @@ class Update extends BasicUpdate
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -274,7 +274,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'SQL schema query for author table failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
 
@@ -292,7 +292,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -309,7 +309,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -324,7 +324,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -339,7 +339,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -356,7 +356,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -370,7 +370,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -387,7 +387,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -401,7 +401,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -418,7 +418,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -432,7 +432,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -461,7 +461,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'SQL schema query for author table failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
 
@@ -501,7 +501,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'SQL schema query for author table failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
 
@@ -519,7 +519,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -536,7 +536,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -575,7 +575,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'SQL schema query for author table failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
 
@@ -593,7 +593,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -623,7 +623,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'SQL schema query for author table failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
 
@@ -641,7 +641,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -658,7 +658,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -672,7 +672,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -686,7 +686,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -741,7 +741,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table update query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -760,7 +760,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'SQL schema query for rename customer table failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
 
@@ -803,7 +803,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'SQL schema query for order_address table failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
 
@@ -856,7 +856,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'data transfer failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -873,7 +873,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -890,7 +890,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for customer failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -910,7 +910,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for basket failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -924,7 +924,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table update query for basket failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -942,7 +942,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for basket failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -959,7 +959,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -973,7 +973,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -989,7 +989,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'SQL schema query for rename basket table failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
 
@@ -1007,7 +1007,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for invoice failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1020,7 +1020,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1036,7 +1036,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'SQL schema query for drop access table failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
 
@@ -1053,7 +1053,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'SQL schema query for rename history table failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
 
@@ -1105,7 +1105,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'SQL schema query for installment tables failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
 
@@ -1167,7 +1167,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'data transfer failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1183,7 +1183,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1199,7 +1199,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for invoice failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1212,7 +1212,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for detail failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1243,7 +1243,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'data transfer failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1257,7 +1257,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1274,7 +1274,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for basket failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1287,7 +1287,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1304,7 +1304,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1319,7 +1319,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1333,7 +1333,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1349,7 +1349,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1366,7 +1366,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1379,7 +1379,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1393,7 +1393,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1407,7 +1407,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1421,7 +1421,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1439,7 +1439,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query for order failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1459,7 +1459,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1487,7 +1487,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1512,7 +1512,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1529,7 +1529,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1546,7 +1546,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1563,7 +1563,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1591,7 +1591,7 @@ SET inst.extra = ord.extra", $orderInstallmentTable, $invoiceTable, $orderTable
                     'db', [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
                 return false;
@@ -1656,7 +1656,7 @@ EOD;
                     'db', [
                         'status'  => false,
                         'message' => 'SQL schema query for author table failed: '
-                                     . $exception->getMessage(),
+                            . $exception->getMessage(),
                     ]
                 );
 
