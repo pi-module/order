@@ -143,15 +143,6 @@ class Gateway extends AbstractGateway
     public function getSession($order)
     {
         \Stripe\Stripe::setApiKey($this->gatewayOption['password']);
-<<<<<<< HEAD
-
-        $items                   = [];
-        $subtotal                = 0;
-        $subtotalCommissionOwner = 0;
-        $feeCustomer             = 0;
-        $tax                     = 0;
-        $names                   = [];
-=======
         if ($this->gatewayOption['api_version']) {
             \Stripe\Stripe::setApiVersion($this->gatewayOption['api_version']);
         }
@@ -161,8 +152,6 @@ class Gateway extends AbstractGateway
         $feeCustomer = 0;
         $tax      = 0;
         $touristTax = 0;
->>>>>>> upstream/master
-
         $firstPaid    = true;
         $installments = Pi::api('installment', 'order')->getInstallmentsFromOrder($order['id']);
         foreach ($installments as $installment) {
@@ -243,33 +232,15 @@ class Gateway extends AbstractGateway
         if (isset($this->gatewayPayInformation['gateway_id'])) {
             $config = Pi::service('registry')->config->read('guide');
 
-<<<<<<< HEAD
-            $feeOwner                    = round(
-                ($subtotalCommissionOwner * $this->gatewayPayInformation['commission_percentage_owner']) * ((100 + $config['package_vat']) / 100)
-            );
-            $feeCustomer                 = $feeCustomer * 100;
-            $totalFee                    = $firstPaid ? $feeOwner + $feeCustomer : 0;
-=======
             $feeOwner = round(($subtotalCommissionOwner * $this->gatewayPayInformation['commission_percentage_owner']) * ((100 + $config['package_vat'])/100 ));
             $feeCustomer = $feeCustomer * 100;
             $touristTax = $touristTax * 100;
             $totalFee = $firstPaid ? $feeOwner + $feeCustomer + $touristTax : 0;
->>>>>>> upstream/master
             $data['payment_intent_data'] = [
                 'on_behalf_of' => $this->gatewayPayInformation['gateway_id'],
                 'transfer_data' => [
                     'destination' => $this->gatewayPayInformation['gateway_id'],
                 ],
-<<<<<<< HEAD
-                'metadata'      =>
-                    [
-                        'order'        => $order['uid'],
-                        'ht'           => $subtotal,
-                        'vat'          => $tax,
-                        'fee_owner'    => $feeOwner,
-                        'fee_customer' => $feeCustomer,
-                    ],
-=======
                 'metadata' =>
                 [
                     'order' => $order['uid'],
@@ -279,7 +250,6 @@ class Gateway extends AbstractGateway
                     'fee_customer' => $feeCustomer,
                     'total_fee' => $totalFee
                 ],
->>>>>>> upstream/master
             ];
             if ($totalFee > 0) {
                 $data['payment_intent_data']['application_fee_amount'] = $totalFee;
