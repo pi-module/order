@@ -76,42 +76,42 @@ class Invoice extends AbstractApi
             $result['order_url']      = Pi::url(
                 Pi::service('url')->assemble(
                     'order', [
-                    'module'     => $this->getModule(),
-                    'controller' => 'detail',
-                    'action'     => 'index',
-                    'id'         => $row->order,
-                ]
+                        'module'     => $this->getModule(),
+                        'controller' => 'detail',
+                        'action'     => 'index',
+                        'id'         => $row->order,
+                    ]
                 )
             );
             $result['invoice_url']    = Pi::url(
                 Pi::service('url')->assemble(
                     'order', [
-                    'module'     => $this->getModule(),
-                    'controller' => 'invoice',
-                    'action'     => 'index',
-                    'id'         => $row->id,
-                ]
+                        'module'     => $this->getModule(),
+                        'controller' => 'invoice',
+                        'action'     => 'index',
+                        'id'         => $row->id,
+                    ]
                 )
             );
             $result['pay_url']        = Pi::url(
                 Pi::service('url')->assemble(
                     'order', [
-                    'module'     => $this->getModule(),
-                    'controller' => 'payment',
-                    'action'     => 'index',
-                    'id'         => $row->id,
-                ]
+                        'module'     => $this->getModule(),
+                        'controller' => 'payment',
+                        'action'     => 'index',
+                        'id'         => $row->id,
+                    ]
                 )
             );
             $result['pay_credit_url'] = Pi::url(
                 Pi::service('url')->assemble(
                     'order', [
-                    'module'     => $this->getModule(),
-                    'controller' => 'payment',
-                    'action'     => 'index',
-                    'id'         => $row->id,
-                    'credit'     => 1,
-                ]
+                        'module'     => $this->getModule(),
+                        'controller' => 'payment',
+                        'action'     => 'index',
+                        'id'         => $row->id,
+                        'credit'     => 1,
+                    ]
                 )
             );
             // Set invoice information on session
@@ -132,9 +132,11 @@ class Invoice extends AbstractApi
         $config = Pi::service('registry')->config->read($this->getModule());
 
         $year  = $year ?: date('Y');
-        $count = Pi::model('invoice', 'order')->count(['time_create >= ' . strtotime('01-01-' . $year) . ' AND time_create < ' . strtotime('01-01-' . ($year + 1))]);
+        $count = Pi::model('invoice', 'order')->count(
+            ['time_create >= ' . strtotime('01-01-' . $year) . ' AND time_create < ' . strtotime('01-01-' . ($year + 1))]
+        );
 
-        $num   = $year . sprintf('%03d', ($count + 1));
+        $num = $year . sprintf('%03d', ($count + 1));
 
         return sprintf('%s-%s', $config['invoice_code_prefix'], $num);
 
@@ -278,65 +280,65 @@ class Invoice extends AbstractApi
         $invoice['order_url']      = Pi::url(
             Pi::service('url')->assemble(
                 'order', [
-                'module'     => $this->getModule(),
-                'controller' => 'detail',
-                'action'     => 'index',
-                'id'         => $invoice['order'],
-            ]
+                    'module'     => $this->getModule(),
+                    'controller' => 'detail',
+                    'action'     => 'index',
+                    'id'         => $invoice['order'],
+                ]
             )
         );
         $invoice['invoice_url']    = Pi::url(
             Pi::service('url')->assemble(
                 'order', [
-                'module'     => $this->getModule(),
-                'controller' => 'detail',
-                'action'     => 'index',
-                'id'         => $invoice['order'],
-            ]
+                    'module'     => $this->getModule(),
+                    'controller' => 'detail',
+                    'action'     => 'index',
+                    'id'         => $invoice['order'],
+                ]
             )
         );
         $invoice['pay_url']        = Pi::url(
             Pi::service('url')->assemble(
                 'order', [
-                'module'     => $this->getModule(),
-                'controller' => 'payment',
-                'action'     => 'index',
-                'id'         => $invoice['id'],
-            ]
+                    'module'     => $this->getModule(),
+                    'controller' => 'payment',
+                    'action'     => 'index',
+                    'id'         => $invoice['id'],
+                ]
             )
         );
         $invoice['pay_credit_url'] = Pi::url(
             Pi::service('url')->assemble(
                 'order', [
-                'module'     => $this->getModule(),
-                'controller' => 'payment',
-                'action'     => 'index',
-                'id'         => $invoice['id'],
-                'credit'     => 1,
-            ]
+                    'module'     => $this->getModule(),
+                    'controller' => 'payment',
+                    'action'     => 'index',
+                    'id'         => $invoice['id'],
+                    'credit'     => 1,
+                ]
             )
         );
         $invoice['print_url']      = Pi::url(
             Pi::service('url')->assemble(
                 'order', [
-                'module'     => $this->getModule(),
-                'controller' => 'invoice',
-                'action'     => 'print',
-                'id'         => $invoice['id'],
-            ]
+                    'module'     => $this->getModule(),
+                    'controller' => 'invoice',
+                    'action'     => 'print',
+                    'id'         => $invoice['id'],
+                ]
             )
         );
         // Set anonymous pay
         $invoice['anonymous_pay_url'] = Pi::url(
             Pi::service('url')->assemble(
                 'order', [
-                'module'     => $this->getModule(),
-                'controller' => 'payment',
-                'action'     => 'index',
-                'id'         => $invoice['id'],
-                'anonymous'  => 1,
-                'token'      => 'TOKEN_KEY',
-            ]
+                    'module'     => $this->getModule(),
+                    'controller' => 'payment',
+                    'action'     => 'index',
+                    'id'         => $invoice['id'],
+                    'anonymous'  => 1,
+                    'token'      => 'TOKEN_KEY',
+                ]
             )
         );
 
@@ -464,7 +466,7 @@ class Invoice extends AbstractApi
                 unset($order['products'][$key]);
                 continue;
             }
-            $unconsumedPrice                  = $product['extra']['unconsumedPrice'];
+            $unconsumedPrice = $product['extra']['unconsumedPrice'];
 
             $order['total_product_price']     += $product['product_price'] - $product['discount_price'] - $unconsumedPrice;
             $order['total_shipping_price']    += $product['shipping_price'];
@@ -480,10 +482,11 @@ class Invoice extends AbstractApi
         $order['total_setup_price_view']       = Pi::api('api', 'order')->viewPrice($order['total_setup_price']);
         $order['total_vat_price_view']         = Pi::api('api', 'order')->viewPrice($order['total_vat_price']);
         $order['total_unconsommed_price_view'] = Pi::api('api', 'order')->viewPrice($order['total_unconsommed_price']);
-        $order['total_price']             = $order['total_product_price'] + $order['total_shipping_price'] + $order['total_packing_price'] + $order['total_setup_price']
+        $order['total_price']                  = $order['total_product_price'] + $order['total_shipping_price'] + $order['total_packing_price']
+            + $order['total_setup_price']
             + $order['total_vat_price'] - $order['total_discount_price'];
 
-        $order['total_price_view']             = Pi::api('api', 'order')->viewPrice($order['total_price']);
+        $order['total_price_view'] = Pi::api('api', 'order')->viewPrice($order['total_price']);
 
         // set Products
         $order['invoice'] = $invoice;
@@ -587,7 +590,7 @@ class Invoice extends AbstractApi
 
     }
 
-    public function createInstallments($invoice, $gateway = 'manual', $dates = null, $composition = array('100'))
+    public function createInstallments($invoice, $gateway = 'manual', $dates = null, $composition = ['100'])
     {
         // Find due price
         $products = Pi::api('order', 'order')->listProduct($invoice['order']);
@@ -602,16 +605,16 @@ class Invoice extends AbstractApi
         foreach ($composition as $key => $compose) {
 
             $duePriceInstallment = number_format($duePrice * $compose / 100, 2, '.', '');
+            $invoiceInstallment  = Pi::model('invoice_installment', 'order')->createRow();
 
-            $invoiceInstallment = Pi::model('invoice_installment', 'order')->createRow();
-            $installment        = [
+            $installment = [
                 'invoice'        => $invoice['id'],
                 'count'          => $count,
                 'gateway'        => $gateway,
                 'status_payment' => \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID,
                 'time_payment'   => 0,
                 'time_duedate'   => isset($dates[$key]) ? $dates[$key] : time(),
-                'due_price'      => $key + 1 == count($composition) ? $duePrice - $total: $duePriceInstallment,
+                'due_price'      => $key + 1 == count($composition) ? $duePrice - $total : $duePriceInstallment,
             ];
 
             $total += $duePriceInstallment;
