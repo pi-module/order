@@ -318,7 +318,7 @@ class PaymentController extends IndexController
             // Check status
             if ($verify['status'] == 1) {
                 // Update module order / invoice and get back url
-                $invoice = reset(Pi::api('invoice', 'order')->getInvoiceFromOrder($processing['order']));
+                $invoice = current(Pi::api('invoice', 'order')->getInvoiceFromOrder($processing['order']));
                 Pi::api('installment', 'order')->updateInstallment($invoice['id']);
 
                 // Remove processing
@@ -669,9 +669,8 @@ class PaymentController extends IndexController
         // Get invoice
         $id         = $this->params('id');
         $processing = Pi::api('processing', 'order')->getProcessing();
-        $invoice    = Pi::api('invoice', 'order')->getInvoiceFromOrder($processing['order']);
-        $invoice    = array_shift($invoice);
-        $invoice    = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id'], $processing['gateway']);
+        $invoice    = current(Pi::api('invoice', 'order')->getInvoiceFromOrder($processing['order']));
+        Pi::api('installment', 'order')->updateInstallment($invoice['id']);
 
         // Update module order / invoice and get back url
         $url = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
