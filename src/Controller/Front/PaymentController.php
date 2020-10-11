@@ -654,11 +654,15 @@ class PaymentController extends IndexController
         $id         = $this->params('id');
         $processing = Pi::api('processing', 'order')->getProcessing();
         $invoice    = Pi::api('invoice', 'order')->getInvoiceFromOrder($processing['order']);
+        $invoice = array_shift($invoice);
         $invoice    = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id'], $processing['gateway']);
+
         // Update module order / invoice and get back url
         $url = Pi::api('order', 'order')->updateOrder($invoice['order'], $invoice['id']);
+
         // Remove processing
         Pi::api('processing', 'order')->removeProcessing();
+
         // jump to module
         $message = __('Your payment were successfully.');
         $this->jump($url, $message);

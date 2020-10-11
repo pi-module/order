@@ -274,7 +274,6 @@ class Invoice extends AbstractApi
         $invoice['time_invoice']      = date('Y-m-d', $invoice['time_invoice']);
         $invoice['time_invoice_view'] = _date($invoice['time_invoice']);
 
-
         // Set url
         $invoice['order_url']      = Pi::url(
             Pi::service('url')->assemble(

@@ -123,7 +123,7 @@ class CheckoutController extends IndexController
         $duePrice    = 0;
         foreach ($cart['product'] as $product) {
             $duePrice += $product['product_price'] - $product['discount_price'] + $product['shipping_price'] + $product['packing_price']
-                         + $product['setup_price'] + $product['vat_price'];
+                + $product['setup_price'] + $product['vat_price'];
         }
 
         // Sety form option
@@ -533,11 +533,11 @@ class CheckoutController extends IndexController
                     $price['vat_price']      = $product['vat_price'] + $price['vat_price'];
                     // Set total
                     $total                = (($product['product_price'] +
-                                              $product['shipping_price'] +
-                                              $product['packing_price'] +
-                                              $product['setup_price'] +
-                                              $product['vat_price']
-                                             ) - $product['discount_price'] - $unconsumedPrice) * $product['number'];
+                                $product['shipping_price'] +
+                                $product['packing_price'] +
+                                $product['setup_price'] +
+                                $product['vat_price']
+                            ) - $product['discount_price'] - $unconsumedPrice) * $product['number'];
                     $price['total_price'] = $total + $price['total_price'];
                 }
             }
@@ -851,8 +851,7 @@ class CheckoutController extends IndexController
                 $values['discount_price']  = ($product['discount_price'] * $product['number']) + $values['discount_price'];
                 $values['shipping_price']  = ($product['shipping_price'] * $product['number']) + $values['shipping_price'];
                 $values['packing_price']   = ($product['packing_price'] * $product['number']) + $values['packing_price'];
-                $values['setup_price']     = isset($product['setup_price']) ? ($product['setup_price'] * $product['number']) + $values['setup_price']
-                    : $values['setup_price'];
+                $values['setup_price']     = isset($product['setup_price']) ? ($product['setup_price'] * $product['number']) + $values['setup_price'] : $values['setup_price'];
                 $values['vat_price']       = ($product['vat_price'] * $product['number']) + $values['vat_price'];
                 $values['unconsumedPrice'] = $unconsumedPrice + isset($values['unconsumedPrice']) ? $values['unconsumedPrice'] : 0;
             }
@@ -871,17 +870,19 @@ class CheckoutController extends IndexController
         // Set additional price
         if ($values['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
             $values['shipping_price'] = $values['shipping_price'] + $config['order_additional_price_product'];
-        } else if (in_array($values['type_commodity'], ['service', 'booking']) && $config['order_additional_price_service'] > 0) {
-            $values['setup_price'] = $values['setup_price'] + $config['order_additional_price_service'];
+        } else {
+            if (in_array($values['type_commodity'], ['service', 'booking']) && $config['order_additional_price_service'] > 0) {
+                $values['setup_price'] = $values['setup_price'] + $config['order_additional_price_service'];
+            }
         }
 
         // Set total
         $values['total_price'] = (($values['product_price'] +
-                                   $values['shipping_price'] +
-                                   $values['packing_price'] +
-                                   $values['setup_price'] +
-                                   $values['vat_price']
-                                  ) - $values['discount_price'] - $values['unconsumedPrice']);
+                $values['shipping_price'] +
+                $values['packing_price'] +
+                $values['setup_price'] +
+                $values['vat_price']
+            ) - $values['discount_price'] - $values['unconsumedPrice']);
 
         return $values;
     }
@@ -959,6 +960,7 @@ class CheckoutController extends IndexController
                     $detail->module         = $values['module'];
                     $detail->product_type   = $values['product_type'];
                     $detail->product        = $product['product'];
+                    $detail->product_price  = isset($product['product_price']) ? $product['product_price'] : 0;
                     $detail->discount_price = isset($product['discount_price']) ? $product['discount_price'] : 0;
                     $detail->shipping_price = isset($product['shipping_price']) ? $product['shipping_price'] : 0;
                     $detail->setup_price    = isset($product['setup_price']) ? $product['setup_price'] : 0;
@@ -970,11 +972,15 @@ class CheckoutController extends IndexController
                     $detail->time_end       = isset($product['time_end']) ? $product['time_end'] : 0;
 
                     // Set price
-                    $formatter = Pi::service('i18n')->getNumberFormatter();
-                    $formatter->setAttribute(\NumberFormatter::MAX_FRACTION_DIGITS, 2);
-                    $formatter->setSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL, '.');
-
-                    $detail->product_price = $formatter->formatCurrency($product['product_price'], Pi::config('number_currency'));
+                    if ($config['formatter_price']) {
+                        // ToDo : its bug, make must of formats wrong, formatCurrency just make display price
+                        $formatter = Pi::service('i18n')->getNumberFormatter();
+                        $formatter->setAttribute(\NumberFormatter::MAX_FRACTION_DIGITS, 2);
+                        $formatter->setSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL, '.');
+                        $detail->product_price = $formatter->formatCurrency($product['product_price'], Pi::config('number_currency'));
+                    } else {
+                        $detail->product_price = $product['product_price'];
+                    }
                     $detail->vat_price     = $detail->vat_price - ($detail->product_price - $product['product_price']);
 
                     $extra = [];
@@ -1001,7 +1007,7 @@ class CheckoutController extends IndexController
                 $randomId    = $result['random_id'];
                 $composition = Pi::api('order', $cart['module_name'])->getInstallmentComposition($cart, true);
                 $dates       = Pi::api('order', $cart['module_name'])->getInstallmentDueDate($cart, $composition);
-                $invoice     = Pi::api('invoice', 'order')->updateInvoice($randomId, $gateway['title'], $composition, $dates, false, $values['type_payment']);
+                $invoice     = Pi::api('invoice', 'order')->updateInvoice($randomId, $gateway['path'], $composition, $dates, false, $values['type_payment']);
                 //
             }
             // Update user information
@@ -1095,18 +1101,20 @@ class CheckoutController extends IndexController
         if (isset($cart['type_commodity'])) {
             if ($cart['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
                 $price['shipping'] = $price['shipping'] + $config['order_additional_price_product'];
-            } else if (in_array($cart['type_commodity'], ['service', 'booking']) && $config['order_additional_price_service'] > 0) {
-                $price['setup'] = $price['setup'] + $config['order_additional_price_service'];
+            } else {
+                if (in_array($cart['type_commodity'], ['service', 'booking']) && $config['order_additional_price_service'] > 0) {
+                    $price['setup'] = $price['setup'] + $config['order_additional_price_service'];
+                }
             }
         }
 
         // Set total
         $price['total'] = (($price['product'] +
-                            $price['shipping'] +
-                            $price['packing'] +
-                            $price['setup'] +
-                            $price['vat']
-                           ) - $price['discount'] - $unconsumedPrice);
+                $price['shipping'] +
+                $price['packing'] +
+                $price['setup'] +
+                $price['vat']
+            ) - $price['discount'] - $unconsumedPrice);
 
         return $price;
     }

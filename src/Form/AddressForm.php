@@ -83,9 +83,10 @@ class AddressForm extends BaseForm
                     'mobile',
                     'address1',
                     'address2',
-                    'zip_code',
-                    'city',
                     'country',
+                    'state',
+                    'city',
+                    'zip_code',
                 ],
             ];
         }
