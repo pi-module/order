@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi payment module\n"
-"POT-Creation-Date: 2020-10-11 14:24+0330\n"
+"POT-Creation-Date: 2020-10-26 17:44+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -17,11 +17,11 @@ msgstr ""
 
 #: config/config.php:218
 msgid "Both"
-msgstr ""
+msgstr "هر دو"
 
 #: config/config.php:219 config/config.php:235 src/Form/AddressForm.php:103
 msgid "Individual"
-msgstr ""
+msgstr "شخصی"
 
 #: config/config.php:220 config/config.php:236 src/Form/AddressForm.php:104
 #: src/Form/AddressForm.php:144 src/Form/CreditSettingForm.php:94
@@ -62,7 +62,7 @@ msgstr "اعتبار"
 
 #: src/Api/Credit.php:159
 msgid "Your input amount is more than user credit"
-msgstr "رقم وارد شده توسط شما از مقدار اعتبار کاربر بیشتر است."
+msgstr "رقم وارد شده توسط شما از مقدار اعتبار کاربر بیشتر است"
 
 #: src/Api/Credit.php:187
 msgid ""
@@ -83,7 +83,7 @@ msgstr "دستی"
 
 #: src/Api/Installment.php:74 template/admin/order-view.phtml:447
 msgid "NA"
-msgstr ""
+msgstr "-"
 
 #: src/Api/Installment.php:91
 msgid "One time"
@@ -119,12 +119,12 @@ msgstr "خنثی"
 
 #: src/Api/Invoice.php:435 src/Controller/Front/PaymentController.php:43
 msgid "The order not found."
-msgstr "سفارش یافت نشد"
+msgstr "سفارش یافت نشد."
 
 #: src/Api/Invoice.php:443 src/Controller/Front/DetailController.php:35
 #: src/Controller/Front/PaymentController.php:75
 msgid "This is not your order."
-msgstr "این سفارش متعلق به شما نیست"
+msgstr "این سفارش متعلق به شما نیست."
 
 #: src/Api/Invoice.php:450 src/Controller/Front/DetailController.php:39
 msgid "This order not active."
@@ -132,15 +132,15 @@ msgstr "این سفارش فعال نیست."
 
 #: src/Api/Notification.php:55
 msgid "booking"
-msgstr ""
+msgstr "رزرو"
 
 #: src/Api/Notification.php:57 src/Api/Notification.php:446
 msgid "package"
-msgstr ""
+msgstr "بسته بندی"
 
 #: src/Api/Notification.php:61 src/Api/Notification.php:449
 msgid "product"
-msgstr ""
+msgstr "محصول"
 
 #: src/Api/Notification.php:193
 msgid "Confirmed"
@@ -148,7 +148,7 @@ msgstr "تایید شد"
 
 #: src/Api/Notification.php:198
 msgid "Candeled"
-msgstr ""
+msgstr "لغو شده"
 
 #: src/Api/Notification.php:208 src/Form/InvoiceSettingForm.php:71
 #: src/Form/OrderSettingForm.php:66 src/Model/Invoice/Installment.php:46
@@ -194,6 +194,7 @@ msgid ""
 "The status of the order ID %s you placed on %s website changed to the value "
 "%s"
 msgstr ""
+"وضعیت شناسه سفارش %s که در وب سایت %s قرار دادید به مقدار %s تغییر یافت"
 
 #: src/Api/Notification.php:253
 #, php-format
@@ -255,7 +256,7 @@ msgstr "خدمت"
 
 #: src/Api/Order.php:336 src/Form/OrderSettingForm.php:132
 msgid "Booking"
-msgstr ""
+msgstr "رزرو"
 
 #: src/Api/Order.php:387
 msgid "Manually order"
@@ -264,11 +265,11 @@ msgstr "سفارش دستی"
 #: src/Api/Subscription.php:149
 #: src/Controller/Front/SubscriptionController.php:30
 msgid "Nothing selected"
-msgstr ""
+msgstr "هیچ گزینه ای انتخاب نشده است"
 
 #: src/Api/Subscription.php:172
 msgid "You subscript to this server before"
-msgstr ""
+msgstr "شما قبلا مشترک شده اید"
 
 #: src/Controller/Admin/CreditController.php:173
 #: src/Controller/Admin/InvoiceController.php:172
@@ -304,11 +305,11 @@ msgstr "خودکار"
 
 #: src/Controller/Admin/CreditController.php:318
 msgid "Input amount add as user credit successfully."
-msgstr "مبلغ وارده شده به موفقیت به اعتبار کاربر اضافه / کم شد"
+msgstr "مبلغ وارده شده به موفقیت به اعتبار کاربر اضافه / کم شد."
 
 #: src/Controller/Admin/DeliveryController.php:103
 msgid "Delivery data saved successfully."
-msgstr "اطلاعات روش تحویل با موفقیت ذخیره شد"
+msgstr "اطلاعات روش تحویل با موفقیت ذخیره شد."
 
 #: src/Controller/Admin/DeliveryController.php:121
 msgid "Add a delivery"
@@ -317,16 +318,16 @@ msgstr "روش تحویل جدید"
 #: src/Controller/Admin/GatewayController.php:74
 #: src/Controller/Admin/GatewayController.php:108
 msgid "Gateway data saved successfully."
-msgstr "اطلاعات دروازه پرداخت با موفقیت ذخیره شد"
+msgstr "اطلاعات دروازه پرداخت با موفقیت ذخیره شد."
 
 #: src/Controller/Admin/GatewayController.php:78
 msgid "Invalid data, please check and re-submit."
-msgstr "اطلاعات اشتباه است، لطفا اطلاعات وارده را بررسی کرده و جددا تلاش کنید"
+msgstr "اطلاعات اشتباه است، لطفا اطلاعات وارده را بررسی کرده و جددا تلاش کنید."
 
 #: src/Controller/Admin/GatewayController.php:90
 #, php-format
 msgid "Install %s gateway"
-msgstr ""
+msgstr "نصب دروازه پرداخت %s"
 
 #: src/Controller/Admin/GatewayController.php:113
 msgid "Please select installed gateway"
@@ -334,31 +335,31 @@ msgstr "لطفا یک دروازه پرداخت نصب شده انتخاب نم�
 
 #: src/Controller/Admin/InstallmentController.php:31
 msgid "Your cannont edit installment. Invoice was cancelled."
-msgstr ""
+msgstr "شما نمی توانید اقساط را ویرایش کنید. فاکتور لغو شد."
 
 #: src/Controller/Admin/InstallmentController.php:67
 msgid "Your installment data saved successfully."
-msgstr ""
+msgstr "داده های اقساط شما با موفقیت ذخیره شد."
 
 #: src/Controller/Admin/InvoiceController.php:214
 msgid "The invoice not found."
-msgstr "فاکتور یافت نشد"
+msgstr "فاکتور یافت نشد."
 
 #: src/Controller/Admin/InvoiceController.php:236
 msgid "Order already have valid invoice. You cannot add another one"
-msgstr ""
+msgstr "سفارش قبلاً فاکتور معتبری داشته است. نمی توانید یکی دیگر اضافه کنید"
 
 #: src/Controller/Admin/InvoiceController.php:267
 msgid "New invoice data saved successfully."
-msgstr "اطلاعات فاکتور جدید با موفقیت ذخیره شد"
+msgstr "اطلاعات فاکتور جدید با موفقیت ذخیره شد."
 
 #: src/Controller/Admin/InvoiceController.php:286
 msgid "Invoice was validated or cancelled. You cannont edit it."
-msgstr ""
+msgstr "فاکتور معتبر یا لغو شد. نمی توانید ویرایش کنید."
 
 #: src/Controller/Admin/InvoiceController.php:316
 msgid "Your invoice data saved successfully."
-msgstr "تغییرات فاکتور شما با موفقیت ذخیره شد"
+msgstr "تغییرات فاکتور شما با موفقیت ذخیره شد."
 
 #: src/Controller/Admin/LocationController.php:73
 msgid "Please add delivery method first"
@@ -366,7 +367,7 @@ msgstr "لطفا ابتدا یک روش ارسال درج نمایید"
 
 #: src/Controller/Admin/LocationController.php:124
 msgid "Location data saved successfully."
-msgstr "اطلاعات مکان با موفقیت ذخیره شد"
+msgstr "اطلاعات مکان با موفقیت ذخیره شد."
 
 #: src/Controller/Admin/LocationController.php:146
 msgid "Add a location"
@@ -374,7 +375,7 @@ msgstr "مکان جدید"
 
 #: src/Controller/Admin/OrderController.php:330
 msgid "Filtered list"
-msgstr ""
+msgstr "لیست فیلتر شده"
 
 #: src/Controller/Admin/OrderController.php:404
 msgid "Update order"
@@ -391,7 +392,7 @@ msgstr "به روز رسانی تحویل"
 
 #: src/Controller/Admin/OrderController.php:559
 msgid "Can pay ?"
-msgstr ""
+msgstr "قابل پرداخت ؟"
 
 #: src/Controller/Admin/OrderController.php:597
 #: template/admin/order-view.phtml:782
@@ -413,15 +414,15 @@ msgstr "سفارش جدید ساخته شد و اطلاعات آن با موفق
 #: src/Controller/Admin/OrderController.php:911
 #: src/Controller/Admin/OrderController.php:992
 msgid "There valid invoices for this order. You cannot edit it."
-msgstr ""
+msgstr "فاکتورهای معتبری برای این سفارش وجود دارد. نمی توانید ویرایش کنید."
 
 #: src/Controller/Admin/OrderController.php:784
 msgid "Order not created by admin. You cannot delete it."
-msgstr ""
+msgstr "سفارش توسط مدیر ایجاد نشده است. نمی توانید آن را حذف کنید."
 
 #: src/Controller/Admin/OrderController.php:797
 msgid "Order deleted"
-msgstr ""
+msgstr "سفارش حذف شد"
 
 #: src/Controller/Admin/OrderController.php:859
 msgid "Order information saved successfully."
@@ -437,7 +438,7 @@ msgstr "محصول / خدمت جدید به سفارش شما اضافه شد"
 
 #: src/Controller/Admin/OrderController.php:1000
 msgid "Product deleted"
-msgstr ""
+msgstr "محصول حذف شد"
 
 #: src/Controller/Front/CheckoutController.php:97
 #: src/Controller/Front/CheckoutController.php:124
@@ -461,6 +462,7 @@ msgstr "حساب کاربری ذخیره نشده است."
 #: src/Controller/Front/CheckoutController.php:671
 msgid "Order information saved successfully, you can now finalize payment !"
 msgstr ""
+"اطلاعات سفارش با موفقیت ذخیره شد ، اکنون می توانید پرداخت را نهایی کنید!"
 
 #: src/Controller/Front/CheckoutController.php:743
 msgid "Address saved successfully."
@@ -475,11 +477,11 @@ msgstr ""
 
 #: src/Controller/Front/CheckoutController.php:1053
 msgid "This code has expired."
-msgstr ""
+msgstr "این کد منقضی شده است."
 
 #: src/Controller/Front/CheckoutController.php:1061
 msgid "This code cannot be applied on this product."
-msgstr ""
+msgstr "این کد را نمی توان روی این محصول اعمال کرد."
 
 #: src/Controller/Front/CheckoutController.php:1079
 msgid ""
@@ -487,14 +489,17 @@ msgid ""
 "We have automatically applied the most advantageous discount for you (it is "
 "not possible to cumulate the discounts)"
 msgstr ""
+"شما در حال استفاده از کد تبلیغاتی کالایی هستید که از قبل تخفیف دارد. ما به "
+"طور خودکار سودآورترین تخفیف را برای شما اعمال کرده ایم (امکان جمع آوری تخفیف "
+"ها وجود ندارد)"
 
 #: src/Controller/Front/CheckoutController.php:1096
 msgid "Promo code accepted"
-msgstr ""
+msgstr "کد تبلیغاتی پذیرفته شد"
 
 #: src/Controller/Front/CheckoutController.php:1105
 msgid "This code doesn't exist"
-msgstr ""
+msgstr "این کد وجود ندارد"
 
 #: src/Controller/Front/CreditController.php:31
 msgid "So sorry, At this moment credit is inactive"
@@ -502,20 +507,20 @@ msgstr "متاسفانه در این لحظه سیستم اعتبار غیر ف�
 
 #: src/Controller/Front/IndexController.php:142
 msgid "Order has payment. You cannont cancel it"
-msgstr ""
+msgstr "سفارش پرداخت دارد. نمی توانید آن را لغو کنید"
 
 #: src/Controller/Front/IndexController.php:146
 #: src/Controller/Front/PaymentController.php:584
 msgid "Order canceled"
-msgstr ""
+msgstr "سفارش لغو شده"
 
 #: src/Controller/Front/PaymentController.php:35
 msgid "Order has payment. You cannont access to this page"
-msgstr ""
+msgstr "سفارش پرداخت دارد. شما نمی توانید به این صفحه دسترسی پیدا کنید"
 
 #: src/Controller/Front/PaymentController.php:47
 msgid "This order not actice."
-msgstr ""
+msgstr "این سفارش فعال نیست"
 
 #: src/Controller/Front/PaymentController.php:81
 msgid "Token not true"
@@ -527,7 +532,7 @@ msgstr "توکن صحیح نیست"
 #: src/Controller/Front/PaymentController.php:156
 #, php-format
 msgid "use credit to pay order %s"
-msgstr ""
+msgstr "برای پرداخت سفارش %s از اعتبار استفاده کنید"
 
 #: src/Controller/Front/PaymentController.php:151
 #: src/Controller/Front/PaymentController.php:166
@@ -564,6 +569,8 @@ msgid ""
 "validation, you will only be debited once the reservation has been confirmed "
 "by the owner."
 msgstr ""
+"روش پرداخت شما پذیرفته شده است. رزرو شما در انتظار تأیید است ، فقط پس از "
+"تأیید رزرو توسط مالک ، از شما کسر می شود."
 
 #: src/Controller/Front/PaymentController.php:380
 msgid "Your payment wont successfully."
@@ -575,7 +582,7 @@ msgstr "هیچ درخواستی ذخیره نشده است"
 
 #: src/Controller/Front/PaymentController.php:642
 msgid "Payment canceled"
-msgstr ""
+msgstr "پرداخت لغو شد"
 
 #: src/Controller/Front/PaymentController.php:668
 msgid "Test mode not active."
@@ -583,12 +590,12 @@ msgstr "حالت تست فعال نیست."
 
 #: src/Controller/Front/SubscriptionController.php:39
 msgid "You need login to system for subscription"
-msgstr ""
+msgstr "برای اشتراک باید به سیستم وارد شوید"
 
 #: src/Controller/Front/SubscriptionController.php:61
 #, php-format
 msgid "%s not set"
-msgstr ""
+msgstr "%s تنظیم نشده"
 
 #: src/Form/AddressForm.php:47
 msgid "Account Type"
@@ -596,11 +603,11 @@ msgstr "نوع حساب کاربری"
 
 #: src/Form/AddressForm.php:57
 msgid "Company Information"
-msgstr ""
+msgstr "اطلاعات شرکت"
 
 #: src/Form/AddressForm.php:75
 msgid "Legal representative (Personal Information)"
-msgstr ""
+msgstr "نماینده قانونی (اطلاعات شخصی)"
 
 #: src/Form/AddressForm.php:101
 msgid "Account type"
@@ -619,7 +626,7 @@ msgstr "آدرس"
 #: template/admin/invoice-add.phtml:22 template/admin/invoice-add.phtml:77
 #: template/admin/invoice-edit.phtml:69 template/admin/invoice-edit.phtml:123
 msgid "Address addition"
-msgstr ""
+msgstr "آدرس ( خط دوم )"
 
 #: src/Form/AddressForm.php:220 src/Form/AddressForm.php:652
 #: src/Form/OrderForm.php:253 src/Form/OrderSettingForm.php:246
@@ -676,7 +683,7 @@ msgstr "کد مالیات"
 
 #: src/Form/AddressForm.php:406
 msgid "Please fill in the following information"
-msgstr ""
+msgstr "لطفا اطلاعات زیر را پر کنید"
 
 #: src/Form/AddressForm.php:422 src/Form/CreditSettingForm.php:55
 #: src/Form/OrderForm.php:69 src/Form/OrderSettingForm.php:220
@@ -692,7 +699,7 @@ msgstr "نام خانوادگی"
 
 #: src/Form/AddressForm.php:469
 msgid "Birthday"
-msgstr ""
+msgstr "تاریخ تولد"
 
 #: src/Form/AddressForm.php:500 src/Form/OrderForm.php:102
 #: src/Form/OrderSettingForm.php:207 src/Form/OrderUpdateForm.php:155
@@ -858,7 +865,7 @@ msgstr "خصوصی"
 #: src/Form/OrderSimpleForm.php:128 src/Form/OrderSimpleForm.php:159
 #: src/Form/OrderSimpleForm.php:193 src/Form/OrderUpdateForm.php:79
 msgid "Choose your payment method"
-msgstr ""
+msgstr "روش پرداخت خود را انتخاب کنید"
 
 #: src/Form/DeliveryForm.php:92 src/Form/GatewayForm.php:81
 #: src/Form/LocationForm.php:147
@@ -902,11 +909,11 @@ msgstr "سررسید پرداخت"
 
 #: src/Form/InstallmentForm.php:91
 msgid "Payment date"
-msgstr ""
+msgstr "تاریخ پرداخت"
 
 #: src/Form/InstallmentForm.php:108
 msgid "Comment"
-msgstr ""
+msgstr "نظر"
 
 #: src/Form/InvoiceForm.php:44 template/front/invoice.phtml:86
 msgid "Invoice date"
@@ -1037,7 +1044,7 @@ msgstr "ثبت سفارش"
 
 #: src/Form/OrderProductForm.php:42
 msgid "Module name"
-msgstr ""
+msgstr "نام ماژول"
 
 #: src/Form/OrderProductForm.php:57
 msgid "Product type"
@@ -1049,7 +1056,7 @@ msgstr "شناسه محصول / خدمت"
 
 #: src/Form/OrderProductForm.php:83
 msgid "Module item associated to the product"
-msgstr ""
+msgstr "مورد ماژول مربوط به محصول"
 
 #: src/Form/OrderProductForm.php:97 template/admin/order-view.phtml:478
 #: template/front/print.phtml:350
@@ -1183,7 +1190,7 @@ msgstr "کد"
 #: src/Form/OrderSimpleForm.php:231
 #, php-format
 msgid "You chose to pay through 2 installments : %s now, and %s before %s"
-msgstr ""
+msgstr "شما تصمیم گرفتید از طریق 2 قسط پرداخت کنید: %s اکنون و %s قبل %s"
 
 #: src/Form/OrderSimpleForm.php:247
 #, php-format
@@ -1193,11 +1200,11 @@ msgstr "پذیرش %s"
 #: src/Form/OrderSimpleForm.php:264
 #, php-format
 msgid "Pay %s"
-msgstr ""
+msgstr "پرداخت %s"
 
 #: src/Form/OrderSimpleForm.php:280
 msgid "You need to create an address before pay"
-msgstr ""
+msgstr "قبل از پرداخت باید آدرس ایجاد کنید"
 
 #: src/Form/OrderUpdateForm.php:59 template/front/invoice.phtml:83
 msgid "Order date"
@@ -1211,7 +1218,7 @@ msgstr "آدرس فاکتور"
 
 #: src/Form/PromoCheckoutForm.php:36 template/front/checkout.phtml:569
 msgid "Your promo code"
-msgstr ""
+msgstr "کد تبلیغاتی شما"
 
 #: src/Form/PromoCheckoutForm.php:51
 msgid "Apply"
@@ -1219,15 +1226,15 @@ msgstr "تایید"
 
 #: src/Form/PromocodeForm.php:69
 msgid "Promo (%)"
-msgstr ""
+msgstr "تخفیف (٪)"
 
 #: src/Form/PromocodeForm.php:140 template/admin/promocode-index.phtml:17
 msgid "Module"
-msgstr ""
+msgstr "ماژول"
 
 #: src/Form/PromocodeForm.php:154
 msgid "Show Promo Code on front CTA"
-msgstr ""
+msgstr "کد تبلیغاتی را در جلوی CTA نشان دهید"
 
 #: src/Form/PromocodeForm.php:165 template/admin/delivery-index.phtml:25
 #: template/admin/delivery-index.phtml:27 template/admin/gateway-index.phtml:65
@@ -1306,7 +1313,7 @@ msgstr "Test order"
 
 #: src/Gateway/Mellat/Gateway.php:41
 msgid "Bank Mellat"
-msgstr ""
+msgstr "بانک ملت"
 
 #: src/Gateway/Mellat/Gateway.php:70
 msgid "pin"
@@ -1336,183 +1343,183 @@ msgstr "خطا در بانک ملت ، مقدار دریافتی از بانک �
 
 #: src/Gateway/Mellat/Gateway.php:312
 msgid "Bank Mellat error 0"
-msgstr "سرور بانک دچار مشکل می باشد."
+msgstr "سرور بانک دچار مشکل می باشد"
 
 #: src/Gateway/Mellat/Gateway.php:316
 msgid "Bank Mellat error 41"
-msgstr "شماره درخواست تکراری است."
+msgstr "شماره درخواست تکراری است"
 
 #: src/Gateway/Mellat/Gateway.php:320
 msgid "Bank Mellat error 43"
-msgstr "عملیات قبلا انجام شده است."
+msgstr "عملیات قبلا انجام شده است"
 
 #: src/Gateway/Mellat/Gateway.php:324
 msgid "Bank Mellat error 17"
-msgstr "لغو عملیات پرداخت توسط کاربر صورت گرفته است."
+msgstr "لغو عملیات پرداخت توسط کاربر صورت گرفته است"
 
 #: src/Gateway/Mellat/Gateway.php:328
 msgid "Bank Mellat error 415"
-msgstr "زمان شما برای انجام عملیات پرداخت به پایان رسیده است."
+msgstr "زمان شما برای انجام عملیات پرداخت به پایان رسیده است"
 
 #: src/Gateway/Mellat/Gateway.php:332
 msgid "Bank Mellat error 417"
-msgstr "شناسه پرداخت کننده نامعتبر است."
+msgstr "شناسه پرداخت کننده نامعتبر است"
 
 #: src/Gateway/Mellat/Gateway.php:336
 msgid "Bank Mellat error 11"
-msgstr "شماره كارت نامعتبر است."
+msgstr "شماره كارت نامعتبر است"
 
 #: src/Gateway/Mellat/Gateway.php:340
 msgid "Bank Mellat error 12"
-msgstr "موجودي كافي نيست."
+msgstr "موجودي كافي نيست"
 
 #: src/Gateway/Mellat/Gateway.php:344
 msgid "Bank Mellat error 13"
-msgstr "رمز نادرست است."
+msgstr "رمز نادرست است"
 
 #: src/Gateway/Mellat/Gateway.php:348
 msgid "Bank Mellat error 14"
-msgstr "تعداد دفعات وارد كردن رمز بيش از حد مجاز است."
+msgstr "تعداد دفعات وارد كردن رمز بيش از حد مجاز است"
 
 #: src/Gateway/Mellat/Gateway.php:352
 msgid "Bank Mellat error 15"
-msgstr "كارت نامعتبر است."
+msgstr "كارت نامعتبر است"
 
 #: src/Gateway/Mellat/Gateway.php:356
 msgid "Bank Mellat error 16"
-msgstr "دفعات برداشت وجه بيش از حد مجاز است."
+msgstr "دفعات برداشت وجه بيش از حد مجاز است"
 
 #: src/Gateway/Mellat/Gateway.php:360
 msgid "Bank Mellat error 18"
-msgstr "تاريخ انقضاي كارت گذشته است."
+msgstr "تاريخ انقضاي كارت گذشته است"
 
 #: src/Gateway/Mellat/Gateway.php:364
 msgid "Bank Mellat error 19"
-msgstr "مبلغ برداشت وجه بيش از حد مجاز است."
+msgstr "مبلغ برداشت وجه بيش از حد مجاز است"
 
 #: src/Gateway/Mellat/Gateway.php:368
 msgid "Bank Mellat error 111"
-msgstr "صادر كننده كارت نامعتبر است."
+msgstr "صادر كننده كارت نامعتبر است"
 
 #: src/Gateway/Mellat/Gateway.php:372
 msgid "Bank Mellat error 112"
-msgstr "خطاي سوييچ صادر كننده كارت."
+msgstr "خطاي سوييچ صادر كننده كارت"
 
 #: src/Gateway/Mellat/Gateway.php:376
 msgid "Bank Mellat error 113"
-msgstr "پاسخي از صادر كننده كارت دريافت نشد."
+msgstr "پاسخي از صادر كننده كارت دريافت نشد"
 
 #: src/Gateway/Mellat/Gateway.php:380
 msgid "Bank Mellat error 114"
-msgstr "دارنده كارت مجاز به انجام اين تراكنش نيست."
+msgstr "دارنده كارت مجاز به انجام اين تراكنش نيست"
 
 #: src/Gateway/Mellat/Gateway.php:384
 msgid "Bank Mellat error 21"
-msgstr "پذيرنده نامعتبر است."
+msgstr "پذيرنده نامعتبر است"
 
 #: src/Gateway/Mellat/Gateway.php:388
 msgid "Bank Mellat error 23"
-msgstr "خطاي امنيتي رخ داده است."
+msgstr "خطاي امنيتي رخ داده است"
 
 #: src/Gateway/Mellat/Gateway.php:392
 msgid "Bank Mellat error 24"
-msgstr "اطلاعات كاربري پذيرنده نامعتبر است."
+msgstr "اطلاعات كاربري پذيرنده نامعتبر است"
 
 #: src/Gateway/Mellat/Gateway.php:396
 msgid "Bank Mellat error 25"
-msgstr "مبلغ نامعتبر است."
+msgstr "مبلغ نامعتبر است"
 
 #: src/Gateway/Mellat/Gateway.php:400
 msgid "Bank Mellat error 31"
-msgstr "پاسخ نامعتبر است."
+msgstr "پاسخ نامعتبر است"
 
 #: src/Gateway/Mellat/Gateway.php:404
 msgid "Bank Mellat error 32"
-msgstr "فرمت اطلاعات وارد شده صحيح نمي باشد."
+msgstr "فرمت اطلاعات وارد شده صحيح نمي باشد"
 
 #: src/Gateway/Mellat/Gateway.php:408
 msgid "Bank Mellat error 33"
-msgstr "حساب نامعتبر است."
+msgstr "حساب نامعتبر است"
 
 #: src/Gateway/Mellat/Gateway.php:412
 msgid "Bank Mellat error 34"
-msgstr "خطاي سيستمي."
+msgstr "خطاي سيستمي"
 
 #: src/Gateway/Mellat/Gateway.php:416
 msgid "Bank Mellat error 35"
-msgstr "تاريخ نامعتبر است."
+msgstr "تاريخ نامعتبر است"
 
 #: src/Gateway/Mellat/Gateway.php:420
 msgid "Bank Mellat error 42"
-msgstr "خریدی با این شماره درخواست یافت نشد."
+msgstr "خریدی با این شماره درخواست یافت نشد"
 
 #: src/Gateway/Mellat/Gateway.php:424
 msgid "Bank Mellat error 44"
-msgstr "کسر پول از حساب مشتری صورت نگرفته است."
+msgstr "کسر پول از حساب مشتری صورت نگرفته است"
 
 #: src/Gateway/Mellat/Gateway.php:428
 msgid "Bank Mellat error 45"
-msgstr "واریز پول قبلا انجام شده است."
+msgstr "واریز پول قبلا انجام شده است"
 
 #: src/Gateway/Mellat/Gateway.php:432
 msgid "Bank Mellat error 46"
-msgstr "واریز پول به حساب پذیرنده انجام نشده است."
+msgstr "واریز پول به حساب پذیرنده انجام نشده است"
 
 #: src/Gateway/Mellat/Gateway.php:436
 msgid "Bank Mellat error 47"
-msgstr "واریز پول به حساب پذیرنده انجام نشده است."
+msgstr "واریز پول به حساب پذیرنده انجام نشده است"
 
 #: src/Gateway/Mellat/Gateway.php:440
 msgid "Bank Mellat error 48"
-msgstr "پول مشتری به حساب او بازگشت داده شده است."
+msgstr "پول مشتری به حساب او بازگشت داده شده است"
 
 #: src/Gateway/Mellat/Gateway.php:444
 msgid "Bank Mellat error 49"
-msgstr "تراکنش استرداد وجه دلخواه یافت نشد."
+msgstr "تراکنش استرداد وجه دلخواه یافت نشد"
 
 #: src/Gateway/Mellat/Gateway.php:448
 msgid "Bank Mellat error 412"
-msgstr "شناسه قبض نادرست است."
+msgstr "شناسه قبض نادرست است"
 
 #: src/Gateway/Mellat/Gateway.php:452
 msgid "Bank Mellat error 413"
-msgstr "شناسه پرداخت نادرست است."
+msgstr "شناسه پرداخت نادرست است"
 
 #: src/Gateway/Mellat/Gateway.php:456
 msgid "Bank Mellat error 414"
-msgstr "سازمان صادر كننده قبض نامعتبر است."
+msgstr "سازمان صادر كننده قبض نامعتبر است"
 
 #: src/Gateway/Mellat/Gateway.php:460
 msgid "Bank Mellat error 416"
-msgstr "در ثبت اطلاعات پرداخت شما در بانک ملت خطایی رخ داده است."
+msgstr "در ثبت اطلاعات پرداخت شما در بانک ملت خطایی رخ داده است"
 
 #: src/Gateway/Mellat/Gateway.php:464
 msgid "Bank Mellat error 418"
-msgstr "در تعریف اطلاعات شما نزد بانک ملت خطایی پدید آمده است."
+msgstr "در تعریف اطلاعات شما نزد بانک ملت خطایی پدید آمده است"
 
 #: src/Gateway/Mellat/Gateway.php:468
 msgid "Bank Mellat error 419"
-msgstr "تعداد دفعات ورود اطلاعات از حد مجاز گذشته است."
+msgstr "تعداد دفعات ورود اطلاعات از حد مجاز گذشته است"
 
 #: src/Gateway/Mellat/Gateway.php:472
 msgid "Bank Mellat error 421"
-msgstr "IP نامعتبر است."
+msgstr "IP نامعتبر است"
 
 #: src/Gateway/Mellat/Gateway.php:476
 msgid "Bank Mellat error 51"
-msgstr "تراکنش تکراری است."
+msgstr "تراکنش تکراری است"
 
 #: src/Gateway/Mellat/Gateway.php:480
 msgid "Bank Mellat error 54"
-msgstr "تراکنش مرجع موجود نیست."
+msgstr "تراکنش مرجع موجود نیست"
 
 #: src/Gateway/Mellat/Gateway.php:484
 msgid "Bank Mellat error 55"
-msgstr "تراکنش نامعتبر است."
+msgstr "تراکنش نامعتبر است"
 
 #: src/Gateway/Mellat/Gateway.php:488
 msgid "Bank Mellat error 61"
-msgstr "خطا در واریز وجه."
+msgstr "خطا در واریز وجه"
 
 #: src/Gateway/Mellat/Gateway.php:492
 #, php-format
@@ -1521,7 +1528,7 @@ msgstr "شماره خطای اعلام شده توسط بانک: %s"
 
 #: src/Gateway/Pasargad/Gateway.php:41
 msgid "Bank Pasargad"
-msgstr ""
+msgstr "بانک پاسارگاد"
 
 #: src/Gateway/Pasargad/Gateway.php:70
 msgid "terminalCode"
@@ -1551,15 +1558,15 @@ msgstr "خطای شماره %s بانک پاسارگاد"
 #: src/Gateway/Paypal/Gateway.php:117 template/front/checkout.phtml:499
 #: template/front/print.phtml:370
 msgid "Old package recovery"
-msgstr ""
+msgstr "بازیابی بسته قدیمی"
 
 #: src/Gateway/Paypal/Gateway.php:289
 msgid "Paypal (REST API)"
-msgstr ""
+msgstr "پی پل ( رست )"
 
 #: src/Gateway/Paypal/Gateway.php:314 src/Gateway/Stripe/Gateway.php:304
 msgid "Send only 1 mail after payment (only for end user, not for admin)"
-msgstr ""
+msgstr "ارسال فقط 1 نامه پس از پرداخت (فقط برای کاربر نهایی ، نه برای سرپرست)"
 
 #: src/Gateway/Paypal/Gateway.php:322
 msgid "Paypal email address"
@@ -1567,7 +1574,7 @@ msgstr "آدرس ایمیل Paypal"
 
 #: src/Gateway/Paypal/Gateway.php:329 src/Gateway/Stripe/Gateway.php:319
 msgid "Gateway Name on the Invoice"
-msgstr ""
+msgstr "نام دروازه پرداخت در فاکتور"
 
 #: src/Gateway/Paypal/Gateway.php:336
 msgid "Paypal currency"
@@ -1587,27 +1594,27 @@ msgstr "روش تستی با sandbox"
 
 #: src/Gateway/Paypal/Gateway.php:364
 msgid "Client ID"
-msgstr ""
+msgstr "Client ID"
 
 #: src/Gateway/Paypal/Gateway.php:371
 msgid "Secret"
-msgstr ""
+msgstr "Secret"
 
 #: src/Gateway/Paypal/Gateway.php:377 src/Gateway/Stripe/Gateway.php:360
 msgid "Commission owner minimum"
-msgstr ""
+msgstr "Commission owner minimum"
 
 #: src/Gateway/Paypal/Gateway.php:384 src/Gateway/Stripe/Gateway.php:370
 msgid "Commission customer minimum"
-msgstr ""
+msgstr "Commission customer minimum"
 
 #: src/Gateway/Paypal/Gateway.php:392
 msgid "Force error for sandbox"
-msgstr ""
+msgstr "Force error for sandbox"
 
 #: src/Gateway/Paypal/Gateway.php:486
 msgid "An error occured with Paypal. Please contact administrator"
-msgstr ""
+msgstr "An error occured with Paypal. Please contact administrator"
 
 #: src/Gateway/Paypal/Gateway.php:512
 msgid ""
@@ -1622,52 +1629,62 @@ msgid ""
 "You can use the pass of your normal account<br>\n"
 "        "
 msgstr ""
+"To install the Paypal Driver (Rest API) : <br>\n"
+"Declare your REST API App on https://developer.paypal.com/developer/"
+"applications/ : you will get the API Credentials (Client ID and Secret "
+"Key)<br>\n"
+"You can use the sandbox mode for your test and also check the error mode (no "
+"payment), to fine tune your code<br>\n"
+"You can get testing accounts from https://developer.paypal.com/developer/"
+"accounts/ : xxx-facilitator@xxx.com (seller) and xxx-buyer@xxx.com (buyer). "
+"You can use the pass of your normal account<br>\n"
+"        "
 
 #: src/Gateway/Stripe/Gateway.php:171
 #, php-format
 msgid "Booking %s from %s to %s - First Installment"
-msgstr ""
+msgstr "Booking %s from %s to %s - First Installment"
 
 #: src/Gateway/Stripe/Gateway.php:175
 #, php-format
 msgid "Booking %s from %s to %s - Second Installment"
-msgstr ""
+msgstr "Booking %s from %s to %s - Second Installment"
 
 #: src/Gateway/Stripe/Gateway.php:277
 msgid "Stripe"
-msgstr ""
+msgstr "Stripe"
 
 #: src/Gateway/Stripe/Gateway.php:312
 msgid "Stripe email address"
-msgstr ""
+msgstr "Stripe email address"
 
 #: src/Gateway/Stripe/Gateway.php:326
 msgid "Stripe currency"
-msgstr ""
+msgstr "Stripe currency"
 
 #: src/Gateway/Stripe/Gateway.php:334
 msgid "Public key"
-msgstr ""
+msgstr "Public key"
 
 #: src/Gateway/Stripe/Gateway.php:342
 msgid "Secret key"
-msgstr ""
+msgstr "Secret key"
 
 #: src/Gateway/Stripe/Gateway.php:349
 msgid "API Version"
-msgstr ""
+msgstr "API Version"
 
 #: src/Gateway/Stripe/Gateway.php:351
 msgid "Use Stripe Format as their changelog doc"
-msgstr ""
+msgstr "Use Stripe Format as their changelog doc"
 
 #: src/Gateway/Stripe/Gateway.php:362 src/Gateway/Stripe/Gateway.php:372
 msgid "Use dots for decimal numbers - no comma"
-msgstr ""
+msgstr "Use dots for decimal numbers - no comma"
 
 #: src/Gateway/Stripe/Gateway.php:444
 msgid "An error occured with Stripe. Please contact administrator"
-msgstr ""
+msgstr "An error occured with Stripe. Please contact administrator"
 
 #: src/Gateway/Stripe/Gateway.php:465
 msgid ""
@@ -1676,6 +1693,10 @@ msgid ""
 "your test and also check the error mode (no payment), to fine tune your "
 "code<br>"
 msgstr ""
+"To install the Stripe Driver : <br> Get yours credentials on stripe. <br> "
+"You can use the developer mode with developers keys provided by stripe for "
+"your test and also check the error mode (no payment), to fine tune your "
+"code<br>"
 
 #: src/Gateway/Zarinpal/Gateway.php:42
 msgid "Zarinpal"
@@ -1712,7 +1733,7 @@ msgstr "پرداخت نشده"
 
 #: src/Model/Order.php:70
 msgid "Validation Pending"
-msgstr ""
+msgstr "اعتبار سنجی در انتظار است"
 
 #: src/Validator/Term.php:36
 msgid "You need accept our Terms & Conditions for checkout"
@@ -1983,7 +2004,7 @@ msgstr "نصب"
 
 #: template/admin/installment-edit.phtml:2
 msgid "Update installment"
-msgstr ""
+msgstr "قسط را به روز کنید"
 
 #: template/admin/invoice-add.phtml:5
 msgid "Order info"
@@ -2005,7 +2026,7 @@ msgstr "نوع"
 #: template/front/checkout-listaddress.phtml:11
 #: template/front/checkout.phtml:189 template/front/checkout.phtml:312
 msgid "ND"
-msgstr ""
+msgstr "-"
 
 #: template/admin/invoice-add.phtml:115 template/admin/order-index.phtml:63
 #: template/admin/order-view.phtml:394 template/front/detail.phtml:241
@@ -2032,7 +2053,7 @@ msgstr "به روز رسانی فاکتور %s"
 #: template/admin/order-view.phtml:626 template/front/detail.phtml:410
 #: template/front/print.phtml:271
 msgid "Time invoice"
-msgstr ""
+msgstr "فاکتور زمان"
 
 #: template/admin/invoice-edit.phtml:45 template/admin/invoice-index.phtml:29
 #: template/admin/invoice-view.phtml:234 template/admin/order-view.phtml:112
@@ -2087,7 +2108,7 @@ msgstr "فهرست فاکتور ها"
 #: template/admin/invoice-index.phtml:24 template/admin/order-view.phtml:617
 #: template/front/detail.phtml:403
 msgid "Invoice ID"
-msgstr ""
+msgstr "شناسه فاکتور"
 
 #: template/admin/invoice-index.phtml:28 template/admin/invoice-view.phtml:214
 #: template/admin/log-index.phtml:12 template/admin/order-list-user.phtml:345
@@ -2101,7 +2122,7 @@ msgstr "اطلاعات"
 
 #: template/admin/invoice-index.phtml:73 template/admin/invoice-index.phtml:75
 msgid "Download"
-msgstr ""
+msgstr "دریافت"
 
 #: template/admin/invoice-index.phtml:79 template/admin/invoice-index.phtml:81
 #: template/admin/log-index.phtml:36 template/admin/order-index.phtml:166
@@ -2124,12 +2145,12 @@ msgstr "لغو شده"
 
 #: template/admin/invoice-index.phtml:93
 msgid "No invoice is created yet"
-msgstr ""
+msgstr "هنوز فاکتور ایجاد نشده است"
 
 #: template/admin/invoice-view.phtml:4
 #, php-format
 msgid "Credit Note %s"
-msgstr ""
+msgstr "یادداشت اعتباری %s"
 
 #: template/admin/invoice-view.phtml:4 template/front/invoice.phtml:11
 #, php-format
@@ -2139,20 +2160,20 @@ msgstr "فاکتور %s"
 #: template/admin/invoice-view.phtml:199 template/admin/order-view.phtml:371
 #: template/front/detail.phtml:220
 msgid "Informations"
-msgstr ""
+msgstr "اطلاعات"
 
 #: template/admin/invoice-view.phtml:254
 msgid "Installments"
-msgstr ""
+msgstr "اقساط"
 
 #: template/admin/invoice-view.phtml:256
 msgid "You did not validate your invoice yet, installment are not generated !"
-msgstr ""
+msgstr "شما هنوز فاکتور خود را تأیید نکرده اید ، اقساط تولید نمی شود!"
 
 #: template/admin/invoice-view.phtml:263 template/admin/order-view.phtml:680
 #: template/block/detail.phtml:64 template/front/detail.phtml:448
 msgid "Credit price"
-msgstr ""
+msgstr "قیمت اعتبار"
 
 #: template/admin/invoice-view.phtml:265 template/admin/order-view.phtml:682
 #: template/block/detail.phtml:66 template/front/detail.phtml:450
@@ -2185,7 +2206,7 @@ msgstr "جزئیات گزارش"
 
 #: template/admin/log-index.phtml:88
 msgid "No invoice is set yet"
-msgstr ""
+msgstr "هنوز فاکتور تنظیم نشده است"
 
 #: template/admin/order-add.phtml:3 template/admin/order-edit.phtml:3
 #: template/admin/order-index.phtml:36 template/admin/order-index.phtml:37
@@ -2198,6 +2219,9 @@ msgid ""
 "module (service or product), and set the gateway (manual payment or online "
 "payment)"
 msgstr ""
+"می توانید سفارش دستی خود را برای مشتری خود اضافه کرده و آن را به ماژول شخص "
+"ثالث (خدمات یا محصول) پیوند دهید و دروازه (پرداخت دستی یا پرداخت آنلاین) را "
+"تنظیم کنید"
 
 #: template/admin/order-edit.phtml:5
 msgid ""
@@ -2218,35 +2242,35 @@ msgstr "فهرست سفارش ها"
 
 #: template/admin/order-index.phtml:29
 msgid "{Own}"
-msgstr ""
+msgstr "{Own}"
 
 #: template/admin/order-index.phtml:29 template/admin/order-index.phtml:45
 msgid "Ordered"
-msgstr ""
+msgstr "سفارش داده شده"
 
 #: template/admin/order-index.phtml:31 template/admin/order-index.phtml:47
 msgid "Invoiced"
-msgstr ""
+msgstr "فاکتور شده"
 
 #: template/admin/order-index.phtml:33 template/admin/order-index.phtml:49
 msgid "Non invoiced"
-msgstr ""
+msgstr "فاکتور نشده"
 
 #: template/admin/order-index.phtml:45
 msgid "{Third}"
-msgstr ""
+msgstr "{Third}"
 
 #: template/admin/order-index.phtml:56
 msgid "Date"
-msgstr ""
+msgstr "تاریخ"
 
 #: template/admin/order-index.phtml:57
 msgid "Total ordered"
-msgstr ""
+msgstr "مجموع سفارش داده شده"
 
 #: template/admin/order-index.phtml:58
 msgid "Total invoiced"
-msgstr ""
+msgstr "مجموع فاکتور شده"
 
 #: template/admin/order-index.phtml:60
 #: template/admin/subscription-product.phtml:3
@@ -2260,7 +2284,7 @@ msgstr "در انتظار تایید"
 #: template/admin/order-index.phtml:155 template/admin/order-view.phtml:442
 #: template/front/detail.phtml:282
 msgid "Its a booking"
-msgstr ""
+msgstr "این یک رزرو است"
 
 #: template/admin/order-index.phtml:157 template/admin/order-view.phtml:444
 #: template/front/detail.phtml:284
@@ -2354,11 +2378,11 @@ msgstr ""
 "لطفا شناسه ( ID ) محصول یا خدمت مورد نظر از ماژول %s را درج نمایید. محصول "
 "خدمت مورد نظر باید فعال باشد. اگرکاربر هنوز یک فاکتور پرداخت نشده داشته باشد "
 "قیمت این محصول جدید به فاکتور کاربر اضافه خواهد شد، در غیر این صورت یک "
-"فاکتور جدید صادر می شود"
+"فاکتور جدید صادر می شود !"
 
 #: template/admin/order-product-delete.phtml:3
 msgid "Delete product / service from order"
-msgstr ""
+msgstr "محصول / خدمات را از سفارش حذف کنید"
 
 #: template/admin/order-product-delete.phtml:6
 msgid ""
@@ -2366,22 +2390,29 @@ msgid ""
 "order price change and if your order just have one product, system make your "
 "order canceled !"
 msgstr ""
+"شما می توانید این محصول را از سفارش خود حذف کنید ، پس از حذف محصول ، تغییر "
+"قیمت سفارش خود تغییر می دهید و اگر سفارش شما فقط یک محصول دارد ، سیستم سفارش "
+"شما را لغو می کند!"
 
 #: template/admin/order-product-edit.phtml:3
 msgid "Edit product / service from order"
-msgstr ""
+msgstr "محصول / خدمات را از طریق سفارش ویرایش کنید"
 
 #: template/admin/order-product-edit.phtml:5
 msgid ""
 "You can edit this product price and number and selected invoice and order "
 "information will be update by your changes"
 msgstr ""
+"شما می توانید این قیمت و تعداد محصول را ویرایش کنید و فاکتورهای انتخاب شده و "
+"اطلاعات سفارش با تغییرات شما به روز می شوند"
 
 #: template/admin/order-product.phtml:6
 msgid ""
 "Please add product / service id from module, your selected product / service "
 "should be active. This product price add to current invoice"
 msgstr ""
+"لطفاً شناسه محصول / خدمات را از ماژول اضافه کنید ، محصول / خدمات انتخابی شما "
+"باید فعال باشد. این قیمت محصول به فاکتور فعلی اضافه می شود"
 
 #: template/admin/order-view.phtml:23 template/front/detail.phtml:16
 #, php-format
@@ -2402,7 +2433,7 @@ msgstr "این سفارش یک پرداخت آفلاین دارد"
 
 #: template/admin/order-view.phtml:128
 msgid "Pay installments status"
-msgstr ""
+msgstr "وضعیت پرداخت اقساط"
 
 #: template/admin/order-view.phtml:139
 msgid "User score"
@@ -2423,20 +2454,20 @@ msgstr "زمان سفارش"
 
 #: template/admin/order-view.phtml:401 template/front/detail.phtml:246
 msgid "Invoice paid ?"
-msgstr ""
+msgstr "فاکتور پرداخت شده است؟"
 
 #: template/admin/order-view.phtml:425 template/front/detail.phtml:268
 msgid "Partially"
-msgstr ""
+msgstr "تا اندازه ای"
 
 #: template/admin/order-view.phtml:456
 msgid "Default gateway"
-msgstr ""
+msgstr "دروازه پرداخت پیش فرض"
 
 #: template/admin/order-view.phtml:467 template/front/detail.phtml:302
 #: template/front/invoice.phtml:142
 msgid "List of ordered services/products"
-msgstr ""
+msgstr "فهرست محصولات و خدمات"
 
 #: template/admin/order-view.phtml:477 template/front/detail.phtml:312
 #: template/front/installment.phtml:102 template/front/invoice.phtml:147
@@ -2453,7 +2484,7 @@ msgstr "هزینه ارسال"
 #: template/admin/order-view.phtml:481 template/front/detail.phtml:316
 #: template/front/print.phtml:429
 msgid "Setup"
-msgstr ""
+msgstr "راه اندازی"
 
 #: template/admin/order-view.phtml:483 template/front/detail.phtml:318
 #: template/front/invoice.phtml:150 template/front/invoice.phtml:199
@@ -2468,11 +2499,11 @@ msgstr "مجموع قیمت"
 
 #: template/admin/order-view.phtml:485
 msgid "Extra"
-msgstr ""
+msgstr "اضافی"
 
 #: template/admin/order-view.phtml:578
 msgid "No product"
-msgstr ""
+msgstr "بدون محصول"
 
 #: template/admin/order-view.phtml:584
 msgid "You can add new product / service to this order"
@@ -2485,12 +2516,12 @@ msgstr "محصول / خدمت جدید"
 #: template/admin/order-view.phtml:615 template/front/detail.phtml:401
 #: template/front/print.phtml:263
 msgid "Credit Note number"
-msgstr ""
+msgstr "شماره یادداشت اعتبار"
 
 #: template/admin/order-view.phtml:624 template/front/detail.phtml:408
 #: template/front/print.phtml:271
 msgid "Credit Note time"
-msgstr ""
+msgstr "زمان یادداشت اعتباری"
 
 #: template/admin/order-view.phtml:733 template/admin/order-view.phtml:734
 #: template/admin/order-view.phtml:745
@@ -2499,7 +2530,7 @@ msgstr "فاکتور جدید"
 
 #: template/admin/order-view.phtml:748
 msgid "Order is not validated, you cannot add an invoice."
-msgstr ""
+msgstr "سفارش معتبر نیست ، شما نمی توانید فاکتور اضافه کنید."
 
 #: template/admin/order-view.phtml:779
 msgid "You can set any note for user"
@@ -2507,27 +2538,27 @@ msgstr "می توانید هر پیامی برای کاربر بگذارید"
 
 #: template/admin/promocode-index.phtml:10
 msgid "List promotional codes"
-msgstr ""
+msgstr "فهرست کد های تخفیف"
 
 #: template/admin/promocode-index.phtml:14
 msgid "Promo"
-msgstr ""
+msgstr "کد تخفیف"
 
 #: template/admin/promocode-index.phtml:18
 msgid "Show"
-msgstr ""
+msgstr "نمایش"
 
 #: template/admin/promocode-index.phtml:34
 msgid "Manage"
-msgstr ""
+msgstr "مدیریت"
 
 #: template/admin/promocode-index.phtml:46
 msgid "No promo code"
-msgstr ""
+msgstr "بدون کد تخفیف"
 
 #: template/admin/subscription-customer.phtml:3
 msgid "Customers"
-msgstr ""
+msgstr "مشتریان"
 
 #: template/front/checkout-listaddress.phtml:89
 msgid "Selected address"
@@ -2544,7 +2575,7 @@ msgstr "آیا اطمینان دارید که میخواهید این آدرس �
 #: template/front/checkout-listaddress.phtml:135
 #: template/front/checkout.phtml:689 template/front/checkout.phtml:690
 msgid "Please wait ..."
-msgstr ""
+msgstr "لطفا صبر کنید ..."
 
 #: template/front/checkout.phtml:98
 msgid "Price : "
@@ -2597,7 +2628,7 @@ msgstr "ساخت حساب کاربری در وب سایت و ثبت سفارش"
 
 #: template/front/checkout.phtml:152
 msgid "Your address has to be completed. Please, edit it."
-msgstr ""
+msgstr "آدرس شما باید تکمیل شود. لطفا ویرایش کنید."
 
 #: template/front/checkout.phtml:157
 msgid ""
@@ -2611,6 +2642,8 @@ msgid ""
 "You don't have set an address yet. Please create your address we will use "
 "for your order. You will be able then to manage several addresses"
 msgstr ""
+"شما هنوز آدرسی تعیین نکرده اید. لطفا آدرس خود را ایجاد کنید که ما برای سفارش "
+"شما استفاده خواهیم کرد. سپس می توانید چندین آدرس را مدیریت کنید"
 
 #: template/front/checkout.phtml:179 template/front/checkout.phtml:294
 msgid "Modify"
@@ -2642,7 +2675,7 @@ msgstr "تا"
 
 #: template/front/checkout.phtml:475
 msgid "Base Price ex VAT"
-msgstr ""
+msgstr "قیمت پایه"
 
 #: template/front/checkout.phtml:484
 msgid "Total Discount"
@@ -2745,7 +2778,7 @@ msgid ""
 "be able to create your item !"
 msgstr ""
 "بعد از دریافت اطلاعات ، شما به طور خودکار به صفحه بعدی منتقل می شوید و "
-"میتوانید مراحل سفارش را دنبال کنید"
+"میتوانید مراحل سفارش را دنبال کنید !"
 
 #: template/front/finish.phtml:43
 msgid ""
@@ -2888,39 +2921,39 @@ msgstr "محصول / خدمت"
 
 #: template/front/list.phtml:18
 msgid "Price incl. VAT"
-msgstr ""
+msgstr "قیمت"
 
 #: template/front/list.phtml:19
 msgid "To paid incl. VAT"
-msgstr ""
+msgstr "قابل پرداخت"
 
 #: template/front/list.phtml:55
 msgid "Details / Invoice"
-msgstr ""
+msgstr "جزئیات / فاکتور"
 
 #: template/front/list.phtml:63
 msgid "You did not yet place an order yet"
-msgstr ""
+msgstr "شما هنوز سفارش نداده اید"
 
 #: template/front/pay.phtml:12
 msgid "You'll be redirected in few seconds to gateway Checkout Page"
-msgstr ""
+msgstr "در چند ثانیه به صفحه درگاه ورود به سیستم هدایت می شوید"
 
 #: template/front/print.phtml:157
 msgid "To the attention of"
-msgstr ""
+msgstr "با توجه به"
 
 #: template/front/print.phtml:255
 msgid "Credit Note"
-msgstr ""
+msgstr "یادداشت اعتباری"
 
 #: template/front/print.phtml:263
 msgid "Invoice number"
-msgstr ""
+msgstr "شماره فاکتور"
 
 #: template/front/print.phtml:280
 msgid "Time due date"
-msgstr ""
+msgstr "زمان سررسید"
 
 #: template/front/print.phtml:289
 msgid "Time payment"
@@ -2929,31 +2962,33 @@ msgstr "تاریخ پرداخت"
 #: template/front/print.phtml:333
 #, php-format
 msgid "Credit note on Invoice n°%s"
-msgstr ""
+msgstr "یادداشت اعتباری در فاکتور شماره %s"
 
 #: template/front/print.phtml:385
 msgid "To your credit"
-msgstr ""
+msgstr "به اعتبار شما"
 
 #: template/front/print.phtml:388
 msgid ""
 "In your kind payment upon receipt of invoiceEn votre aimable règlement à "
 "réception de facture"
 msgstr ""
+"در قبض پرداخت خود در هنگام دریافت فاکتور ، انتخاب مناسب با توجه به شرایط "
+"موجود"
 
 #: template/front/print.phtml:390
 #, php-format
 msgid "Paid invoice (%s)"
-msgstr ""
+msgstr "فاکتور پرداخت شده (%s)"
 
 #: template/front/print.phtml:460
 msgid ""
 "Your global Trip invoice will be generated by the owner at your departure"
-msgstr ""
+msgstr "فاکتور سفر جهانی شما توسط مالک در هنگام عزیمت شما تولید می شود"
 
 #: template/front/stripe.phtml:5
 msgid "Please wait, we will redirect you to the payment platform..."
-msgstr ""
+msgstr "لطفا صبر کنید ، ما شما را به سیستم پرداخت هدایت خواهیم کرد ..."
 
 #~ msgid "Your invoice create successfully"
 #~ msgstr "فاکتور شما با موفقیت ایجاد شد"
