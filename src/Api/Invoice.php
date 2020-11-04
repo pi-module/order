@@ -25,6 +25,7 @@ use Laminas\Math\Rand;
  * Pi::api('invoice', 'order')->getInvoiceFromOrder($order, $getLog);
  * Pi::api('invoice', 'order')->getInvoiceFromUser($uid, $compressed, $orderIds);
  * Pi::api('invoice', 'order')->getInvoiceForPayment($id);
+ * Pi::api('invoice', 'order')->getIdForPayment($id);
  * Pi::api('invoice', 'order')->cancelInvoiceFromOrder($order);
  * Pi::api('invoice', 'order')->updateInvoice($randomId);
  * Pi::api('invoice', 'order')->canonizeInvoice($invoice);
@@ -203,6 +204,21 @@ class Invoice extends AbstractApi
         // Canonize invoice
         $invoice = $this->canonizeInvoice($invoice);
         return $invoice;
+    }
+
+    public function getIdForPayment($id)
+    {
+        // Set random id
+        $rand = Rand::getInteger(10, 99);
+
+        // Get invoice
+        $invoice = Pi::model('invoice', $this->getModule())->find($id);
+
+        // Update invoice
+        $invoice->random_id = sprintf('%s%s', $invoice->id, $rand);
+        $invoice->save();
+
+        return $invoice->random_id;
     }
 
     public function cancelInvoiceFromOrder($order)

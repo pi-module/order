@@ -34,6 +34,8 @@ class ReportController extends ActionController
         $rowset     = Pi::model('order', $this->getModule())->selectWith($select);
         $orders     = [];
         $idsBooking = [];
+        $items      = [];
+        $business   = [];
         $idsItem    = [];
         foreach ($rowset as $row) {
             $extra = json_decode($row->extra, true);
@@ -47,10 +49,13 @@ class ReportController extends ActionController
             }
         }
 
-        $bookings = Pi::api('booking', 'guide')->getBookingsById($idsBooking);
-        $items    = Pi::api('item', 'guide')->getListFromId($idsItem);
-        $business = Pi::api('business', 'guide')->getBusinessList();
-        $csv      = [];
+        if (isset($idsBooking) && !empty($idsBooking)) {
+            $bookings = Pi::api('booking', 'guide')->getBookingsById($idsBooking);
+            $items    = Pi::api('item', 'guide')->getListFromId($idsItem);
+            $business = Pi::api('business', 'guide')->getBusinessList();
+        }
+
+        $csv = [];
         foreach ($orders as $order) {
             $booking  = $bookings[$order['id_booking']];
             $services = json_decode($booking['services'], true);

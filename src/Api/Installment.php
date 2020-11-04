@@ -50,7 +50,7 @@ class Installment extends AbstractApi
         $select = Pi::db()->select();
         $select
             ->from(['order' => $orderTable])->columns([])
-            ->join(['invoice' => $invoiceTable], 'invoice.order = order.id', ['status_invoice' => 'status'])
+            ->join(['invoice' => $invoiceTable], 'invoice.order = order.id', ['status_invoice' => 'status', 'random_id' ])
             ->join(['invoice_installment' => $invoiceInstallmentTable], 'invoice_installment.invoice = invoice.id')
             ->where(['order.id' => $id]);
 

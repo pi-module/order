@@ -285,8 +285,10 @@ class PaymentController extends IndexController
     {
         // Check user
         $this->checkUser();
+
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+
         // Get request
         if ($this->request->isPost()) {
             $request = $this->request->getPost();
@@ -305,6 +307,7 @@ class PaymentController extends IndexController
                 $message = __('Your running pay processing not set');
                 $this->jump(['', 'controller' => 'index', 'action' => 'error'], $message);
             }
+
             // Check ip
             if ($processing['ip'] != Pi::user()->getIp()) {
                 $message = __('Your IP address changed and processing not valid');
@@ -313,10 +316,12 @@ class PaymentController extends IndexController
 
             // Get gateway
             $gateway = Pi::api('gateway', 'order')->getGateway($processing['gateway']);
+
             // verify order
-            $order = Pi::api('order', 'order')->getOrder($processing['order']);
-            $gateway->setOrder($order);
+            //$order = Pi::api('order', 'order')->getOrder($processing['order']);
+            //$gateway->setOrder($order);
             $verify = $gateway->verifyPayment($request, $processing);
+
             // Check status
             if ($verify['status'] == 1) {
                 // Update module order / invoice and get back url
@@ -362,23 +367,24 @@ class PaymentController extends IndexController
 
                 }
             }
-            {
-                // Check error
-                if ($gateway->gatewayError) {
-                    // Remove processing
-                    Pi::api('processing', 'order')->removeProcessing();
-                    // Url
-                    if (isset($config['payment_gateway_error_url']) && !empty($config['payment_gateway_error_url'])) {
-                        $url = $config['payment_gateway_error_url'];
-                        $this->jump($url);
-                    }
-                    // jump
-                    $message = $gateway->gatewayError;
-                } else {
-                    // Remove processing
-                    Pi::api('processing', 'order')->removeProcessing();
-                    $message = __('Your payment wont successfully.');
+
+            // Check error
+            if ($gateway->gatewayError) {
+                // Remove processing
+                Pi::api('processing', 'order')->removeProcessing();
+
+                // Url
+                if (isset($config['payment_gateway_error_url']) && !empty($config['payment_gateway_error_url'])) {
+                    $url = $config['payment_gateway_error_url'];
+                    $this->jump($url);
                 }
+
+                // jump
+                $message = $gateway->gatewayError;
+            } else {
+                // Remove processing
+                Pi::api('processing', 'order')->removeProcessing();
+                $message = __('Your payment wont successfully.');
             }
         } else {
             // Remove processing

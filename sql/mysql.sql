@@ -72,6 +72,23 @@ CREATE TABLE `{invoice}`
     KEY `id_time_create` (`id`, `time_create`)
 );
 
+CREATE TABLE `{invoice_installment}`
+(
+    `id`             INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT,
+    `invoice`        INT(10) UNSIGNED     NOT NULL DEFAULT '0',
+    `count`          smallint(3) UNSIGNED NOT NULL DEFAULT '1',
+    `gateway`        VARCHAR(64)          NOT NULL DEFAULT 'offline',
+    `status_payment` TINYINT(1) UNSIGNED  NOT NULL DEFAULT '0',
+    `time_payment`   INT(10) UNSIGNED     NOT NULL DEFAULT '0',
+    `time_duedate`   INT(10) UNSIGNED     NOT NULL DEFAULT '0',
+    `due_price`      DECIMAL(16, 2)       NOT NULL DEFAULT '0.00',
+    `credit_price`   DECIMAL(16, 8)       NOT NULL DEFAULT '0.00',
+    `comment`        TEXT,
+    `extra`          TEXT,
+    PRIMARY KEY (`id`),
+    KEY `invoice` (`invoice`)
+);
+
 CREATE TABLE `{processing}`
 (
     `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -308,23 +325,6 @@ CREATE TABLE `{installment_product}`
     KEY `module` (`module`),
     KEY `product_type` (`product_type`),
     KEY `product` (`product`)
-);
-
-CREATE TABLE `{invoice_installment}`
-(
-    `id`             INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT,
-    `invoice`        INT(10) UNSIGNED     NOT NULL DEFAULT '0',
-    `count`          smallint(3) UNSIGNED NOT NULL DEFAULT '1',
-    `gateway`        VARCHAR(64)          NOT NULL DEFAULT 'offline',
-    `status_payment` TINYINT(1) UNSIGNED  NOT NULL DEFAULT '0',
-    `time_payment`   INT(10) UNSIGNED     NOT NULL DEFAULT '0',
-    `time_duedate`   INT(10) UNSIGNED     NOT NULL DEFAULT '0',
-    `due_price`      DECIMAL(16, 2)       NOT NULL DEFAULT '0.00',
-    `credit_price`   DECIMAL(16, 8)       NOT NULL DEFAULT '0.00',
-    `comment`        TEXT,
-    `extra`          TEXT,
-    PRIMARY KEY (`id`),
-    KEY `invoice` (`invoice`)
 );
 
 CREATE TABLE `{subscription_detail}`

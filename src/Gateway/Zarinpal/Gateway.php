@@ -94,13 +94,13 @@ class Gateway extends AbstractGateway
     public function setRedirectUrl()
     {
         // Get order
-        $order = Pi::api('order', 'order')->getOrder($this->gatewayOrder['id']);
+        // $order = Pi::api('order', 'order')->getOrder($this->gatewayOrder['id']);
 
         // Get product list
-        $products = Pi::api('order', 'order')->listProduct($order['id']);
+        $products = Pi::api('order', 'order')->listProduct($this->gatewayOrder['id']);
 
         // Get address list
-        $address = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
+        $address = Pi::api('orderAddress', 'order')->findOrderAddress($this->gatewayOrder['id'], 'INVOICING');
 
         // Set total price
         $total = 0;
@@ -108,10 +108,17 @@ class Gateway extends AbstractGateway
             $total = $total + $product['product_price'];
         }
 
+        // Set order Id for payment
+        $orderId = $this->gatewayOrder['id'];
+        if (count($this->gatewayOrder['installments']) == 1) {
+            $installment = array_shift($this->gatewayOrder['installments']);
+            $orderId     = Pi::api('invoice', 'order')->getIdForPayment($installment['invoice']);
+        }
+
         // Set parameters
         $parameters = [
             'MerchantID'  => $this->gatewayOption['MerchantID'],
-            'Description' => sprintf('order id : %s', $this->gatewayOrder['random_id']),
+            'Description' => sprintf('order id : %s', $orderId),
             'Amount'      => intval($total) / 10,
             'Email'       => $address['email'],
             'Mobile'      => $address['mobile'],
@@ -150,7 +157,9 @@ class Gateway extends AbstractGateway
     {
         // Set result
         $result = [
-            'status' => 0,
+            'status'  => 0,
+            'adapter' => $this->gatewayAdapter,
+            'order'   => $processing['order'],
         ];
 
         // Get order
@@ -161,7 +170,7 @@ class Gateway extends AbstractGateway
 
         $total = 0;
         foreach ($products as $product) {
-            $total = $total + $product['vat_price'];
+            $total = $total + $product['product_price'];
         }
 
         // Check Status
@@ -182,80 +191,48 @@ class Gateway extends AbstractGateway
             // Check
             if ($call->Status == 100) {
                 $result['status'] = 1;
-
-                // Get invoice
-                $message = __('Your payment were successfully.');
-
-                // Set log value
-                $value                        = [];
-                $value['request']             = $request;
-                $value['PaymentVerification'] = (array)$call;
-                $value                        = Json::encode($value);
-
-                // Set log
-                $log              = [];
-                $log['gateway']   = $this->gatewayAdapter;
-                $log['authority'] = $request['authority'];
-                $log['value']     = $value;
-                $log['order']     = $order['id'];
-                $log['amount']    = $total;
-                $log['status']    = 1;
-                $log['message']   = $message;
-                $logResult        = Pi::api('log', 'order')->setLog($log);
-                // Update invoice
-                //if ($logResult) {
-                //    $invoice          = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id']);
-                //    $result['status'] = 1;
-                //}
+                $logStatus        = 1;
+                $message          = __('Your payment were successfully.');
             } else {
-                // Set log value
-                $value            = [];
-                $value['request'] = $request;
-                $value            = Json::encode($value);
-                // Set log
-                $log              = [];
-                $log['gateway']   = $this->gatewayAdapter;
-                $log['authority'] = $request['authority'];
-                $log['value']     = $value;
-                $log['invoice']   = $order['id'];
-                $log['amount']    = $total;
-                $log['status']    = 0;
-                $log['message']   = sprintf(__('Transation failed. Status: %s'), $result['Status']);
-                Pi::api('log', 'order')->setLog($log);
+                $message = sprintf(__('Transation failed. Status: %s'), $result['Status']);
             }
         } else {
-            // Set log value
-            $value            = [];
-            $value['request'] = $request;
-            $value            = Json::encode($value);
-            // Set log
-            $log              = [];
-            $log['gateway']   = $this->gatewayAdapter;
-            $log['authority'] = $request['authority'];
-            $log['value']     = $value;
-            $log['invoice']   = $order['id'];
-            $log['amount']    = $total;
-            $log['status']    = 0;
-            $log['message']   = __('Transaction canceled by user');
-            Pi::api('log', 'order')->setLog($log);
+            $message = __('Transaction canceled by user');
         }
 
-        // Set result
-        $result['adapter'] = $this->gatewayAdapter;
-        $result['invoice'] = $invoice['id'];
-        $result['order']   = $order['id'];
+        // Set log
+        $log = [
+            'gateway'   => $this->gatewayAdapter,
+            'authority' => $request['authority'],
+            'order'     => $order['id'],
+            'amount'    => intval($total),
+            'status'    => isset($logStatus) ? $logStatus : 0,
+            'message'   => isset($message) ? $message : '',
+            'value'     => json_encode(
+                [
+                    'request'         => $request,
+                    'bpVerifyRequest' => isset($call) ? (array)$call : '',
+
+                ]
+            ),
+        ];
+
+        // Save log
+        Pi::api('log', 'order')->setLog($log);
+
+        // Return result
         return $result;
     }
 
     public function setMessage($log)
     {
-        $message = '';
-        return $message;
+        return '';
     }
 
     public function setPaymentError($id = '')
     {
         $error = '';
+
         // Set error
         $this->gatewayError = $error;
         return $error;
