@@ -105,7 +105,7 @@ class Gateway extends AbstractGateway
         // Set total price
         $total = 0;
         foreach ($products as $product) {
-            $total = $total + $product['vat_price'];
+            $total = $total + $product['product_price'];
         }
 
         // Set parameters
