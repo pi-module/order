@@ -72,7 +72,7 @@ class Notification extends AbstractApi
                 'order', [
                     'module'     => $this->getModule(),
                     'controller' => 'index',
-                    'action'     => 'print',
+                    'action'     => 'detail',
                     'id'         => $order['id'],
                 ]
             )
