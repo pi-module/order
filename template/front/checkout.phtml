@@ -154,13 +154,9 @@ $this->footScript()->appendScript($script);
             <?php } else { ?>
                 <div class="clearfix alert alert-<?php echo empty($addresses) ? 'info' : 'success' ?>" role="alert">
                     <?php if (!empty($addresses)) { ?>
-                        <h4><?php _e('Here are the addresses you have selected for billing and delivery. You can manage them (add, modify, delete) to select others.') ?></h4>
+                        <p><?php _e('Here are the addresses you have selected for billing and delivery. You can manage them (add, modify, delete) to select others.') ?></p>
                     <?php } else { ?>
-                        <h4>
-                            <?php _e(
-                                'You don\'t have set an address yet. Please create your address we will use for your order. You will be able then to manage several addresses'
-                            ) ?>
-                        </h4>
+                        <p><?php _e('You don\'t have set an address yet. Please create your address we will use for your order. You will be able then to manage several addresses') ?></p>
                     <?php } ?>
                 </div>
             <?php } ?>
