@@ -34,6 +34,7 @@ use Laminas\Math\Rand;
  * Pi::api('order', 'order')->updateOrderInfo($order);
  * Pi::api('order', 'order')->unsetOrderInfo();
  * Pi::api('order', 'order')->getDetail($where);
+ * Pi::api('order', 'order')->autoCancelOrder();
  */
 
 class Order extends AbstractApi
@@ -428,8 +429,10 @@ class Order extends AbstractApi
         // Update order
         $order->time_payment = time();
         $order->save();
+
         // Canonize order
         $order = $this->canonizeOrder($order);
+
         // Get order detail
         $detail = [];
         $where  = ['order' => $orderId];
@@ -444,8 +447,10 @@ class Order extends AbstractApi
             }
             $module = $row->module;
         }
+
         // Update module and get back url
         $backUrl = Pi::api('order', $module)->postPaymentUpdate($order, $detail);
+
         // Accept Order Credit
         Pi::api('credit', 'order')->acceptOrderCredit($orderId, $invoiceId);
 
@@ -532,8 +537,53 @@ class Order extends AbstractApi
         }
         $order->status_order = \Module\Order\Model\Order::STATUS_ORDER_CANCELLED;
         $order->save();
+
+        // Canonize order
+        $order = $this->canonizeOrder($order);
+
+        // Post cancel order
+        $detail = $this->getDetail(['order' => $order['id']]);
+        if (isset($detail) && !empty($detail) && isset($detail['module']) && !empty($detail['module']) && Pi::service('module')->isActive($detail['module'])) {
+            Pi::api('order', $detail['module'])->postCancelUpdate($order, $detail);
+        }
     }
 
+    public function autoCancelOrder()
+    {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+
+        if (intval($config['order_auto_cancel_time']) > 0) {
+            // Set where
+            $where = [
+                'time_create < ?' => time() - (intval($config['order_auto_cancel_time']) * 60),
+                'can_pay'         => 1,
+                'status_order'    => [
+                    \Module\Order\Model\Order::STATUS_ORDER_CANCELLED,
+                    \Module\Order\Model\Order::STATUS_ORDER_PENDING,
+                ],
+            ];
+
+            $select = Pi::model('order', 'order')->select()->where($where);
+            $rowset    = Pi::model('detail', 'order')->selectWith($select);
+
+            foreach ($rowset as $order) {
+
+                // Cancel order
+                $order->status_order = \Module\Order\Model\Order::STATUS_ORDER_CANCELLED;
+                $order->save();
+
+                // Canonize order
+                $order = $this->canonizeOrder($order);
+
+                // Post cancel order
+                $detail = $this->getDetail(['order' => $order['id']]);
+                if (isset($detail) && !empty($detail) && isset($detail['module']) && !empty($detail['module']) && Pi::service('module')->isActive($detail['module'])) {
+                    Pi::api('order', $detail['module'])->postCancelUpdate($order, $detail);
+                }
+            }
+        }
+    }
 
     public function getDetail($where)
     {
@@ -664,6 +714,11 @@ class Order extends AbstractApi
     }
 
     public function showInInvoice($order, $product)
+    {
+        return true;
+    }
+
+    public function postCancelUpdate($order, $detail)
     {
         return true;
     }

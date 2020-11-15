@@ -580,11 +580,11 @@ class CheckoutController extends IndexController
                     $detail->module         = $values['module'];
                     $detail->product_type   = $values['product_type'];
                     $detail->product        = $product['product'];
-                    $detail->discount_price = isset($product['discount_price']) ? $product['discount_price'] : 0;
-                    $detail->shipping_price = isset($product['shipping_price']) ? $product['shipping_price'] : 0;
-                    $detail->setup_price    = isset($product['setup_price']) ? $product['setup_price'] : 0;
-                    $detail->packing_price  = isset($product['packing_price']) ? $product['packing_price'] : 0;
-                    $detail->vat_price      = isset($product['vat_price']) ? $product['vat_price'] : 0;
+                    $detail->discount_price = (isset($product['discount_price']) && !empty($product['discount_price'])) ? $product['discount_price'] : 0;
+                    $detail->shipping_price = (isset($product['shipping_price']) && !empty($product['shipping_price'])) ? $product['shipping_price'] : 0;
+                    $detail->setup_price    = (isset($product['setup_price']) && !empty($product['setup_price'])) ? $product['setup_price'] : 0;
+                    $detail->packing_price  = (isset($product['packing_price']) && !empty($product['packing_price'])) ? $product['packing_price'] : 0;
+                    $detail->vat_price      = (isset($product['vat_price']) && !empty($product['vat_price'])) ? $product['vat_price'] : 0;
                     $detail->time_create    = time();
                     $detail->number         = $product['number'];
                     $detail->time_start     = isset($product['time_start']) ? $product['time_start'] : 0;

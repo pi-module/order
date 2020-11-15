@@ -26,6 +26,18 @@ class Cron extends AbstractApi
 
     public function start()
     {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+
+        // Check cron active for this module
+        if ($config['module_cron']) {
+
+            // Check order auto cancel
+            if ($config['order_auto_cancel']) {
+                Pi::api('order', 'order')->autoCancelOrder();
+            }
+        }
+
         // TODO - #1278 : Need to check due date in the installment table
         /*
         // Get config

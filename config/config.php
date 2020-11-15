@@ -605,6 +605,22 @@ return [
             'filter'      => 'number_int',
             'value'       => 1,
         ],
+        'order_auto_cancel'                  => [
+            'category'    => 'cron',
+            'title'       => _a('Auto cancel orders'),
+            'description' => _a('Active auto cancel orders by cron after each selected minutes if not paid yet'),
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'order_auto_cancel_time'                  => [
+            'category'    => 'cron',
+            'title'       => _a('Auto cancel time'),
+            'description' => _a('Set it as minutes'),
+            'edit'        => 'text',
+            'filter'      => 'string',
+            'value'       => 30,
+        ],
 
         // Installment
         /* 'installment_credit'             => [
