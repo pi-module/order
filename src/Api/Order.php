@@ -565,7 +565,7 @@ class Order extends AbstractApi
             ];
 
             $select = Pi::model('order', 'order')->select()->where($where);
-            $rowset    = Pi::model('detail', 'order')->selectWith($select);
+            $rowset = Pi::model('detail', 'order')->selectWith($select);
 
             foreach ($rowset as $order) {
 
@@ -578,7 +578,11 @@ class Order extends AbstractApi
 
                 // Post cancel order
                 $detail = $this->getDetail(['order' => $order['id']]);
-                if (isset($detail) && !empty($detail) && isset($detail['module']) && !empty($detail['module']) && Pi::service('module')->isActive($detail['module'])) {
+                if (isset($detail) && !empty($detail) && isset($detail['module']) && !empty($detail['module'])
+                    && Pi::service('module')->isActive(
+                        $detail['module']
+                    )
+                ) {
                     Pi::api('order', $detail['module'])->postCancelUpdate($order, $detail);
                 }
             }
