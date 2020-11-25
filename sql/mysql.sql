@@ -372,3 +372,24 @@ CREATE TABLE `{subscription_product}`
     UNIQUE KEY `service_id` (`service_id`),
     UNIQUE KEY `stripe_product_id` (`stripe_product_id`)
 );
+
+# item_key role : module-itemType-itemId-userId OR module-itemId-userId OR module-userId
+CREATE TABLE `{access}`
+(
+    `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
+    `uid`         INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `item_key`    VARCHAR(128)        NOT NULL DEFAULT '',
+    `order`       INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `time_create` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `time_start`  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `time_end`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+    `ip`          CHAR(15)            NOT NULL DEFAULT '',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `item_key` (`item_key`),
+    KEY `uid` (`uid`),
+    KEY `order` (`order`),
+    KEY `status` (`status`),
+    KEY `time_start` (`time_start`),
+    KEY `time_end` (`time_end`)
+);

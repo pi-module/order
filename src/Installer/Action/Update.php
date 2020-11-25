@@ -543,46 +543,6 @@ EOD;
             }
         }
 
-        if (version_compare($moduleVersion, '1.8.8', '<')) {
-            // Add table : access
-            $sql
-                = <<<'EOD'
-CREATE TABLE `{access}` (
-  `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
-  `uid`         INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `item_key`    VARCHAR(128)        NOT NULL DEFAULT '',
-  `order`       INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `time_create` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `time_start`  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `time_end`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
-  `ip`          CHAR(15)            NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `item_key` (`item_key`),
-  KEY `uid` (`uid`),
-  KEY `order` (`order`),
-  KEY `status` (`status`),
-  KEY `time_start` (`time_start`),
-  KEY `time_end` (`time_end`)
-);
-EOD;
-            SqlSchema::setType($this->module);
-            $sqlHandler = new SqlSchema;
-            try {
-                $sqlHandler->queryContent($sql);
-            } catch (\Exception $exception) {
-                $this->setResult(
-                    'db', [
-                        'status'  => false,
-                        'message' => 'SQL schema query for author table failed: '
-                            . $exception->getMessage(),
-                    ]
-                );
-
-                return false;
-            }
-        }
-
         if (version_compare($moduleVersion, '1.9.1', '<')) {
             // Alter table field add amount_new
             $sql = sprintf("ALTER TABLE %s ADD `amount_new` DECIMAL(16, 2) NOT NULL DEFAULT '0.00'", $historyTable);
@@ -1664,6 +1624,48 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '2.3.8', '<')) {
+            // Add table : access
+            $sql
+                = <<<'EOD'
+CREATE TABLE `{access}`
+(
+    `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
+    `uid`         INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `item_key`    VARCHAR(128)        NOT NULL DEFAULT '',
+    `order`       INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `time_create` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `time_start`  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `time_end`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+    `ip`          CHAR(15)            NOT NULL DEFAULT '',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `item_key` (`item_key`),
+    KEY `uid` (`uid`),
+    KEY `order` (`order`),
+    KEY `status` (`status`),
+    KEY `time_start` (`time_start`),
+    KEY `time_end` (`time_end`)
+);
+EOD;
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'SQL schema query for author table failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+
+                return false;
+            }
+        }
+
         return true;
     }
+
 }
