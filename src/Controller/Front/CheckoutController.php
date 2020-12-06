@@ -134,7 +134,8 @@ class CheckoutController extends IndexController
         $composition = Pi::api('order', $cart['module_name'])->getInstallmentComposition($cart, true);
         $duePrice    = 0;
         foreach ($cart['product'] as $product) {
-            $duePrice += $product['product_price'] - $product['discount_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'];
+            $duePrice += $product['product_price'] - $product['discount_price'] + $product['shipping_price'] + $product['packing_price']
+                + $product['setup_price'] + $product['vat_price'];
         }
 
         // Set form option
@@ -249,7 +250,6 @@ class CheckoutController extends IndexController
                         $this->order($values, $addressDelivery, $addressInvoicing, $cart, $config, $uid);
                         Pi::api('customerAddress', 'order')->updateFavouriteDelivery($_SESSION['order']['delivery_address']);
                         Pi::api('customerAddress', 'order')->updateFavouriteInvoicing($_SESSION['order']['invoicing_address']);
-
                     }
                 } else {
                     $formOrder->setData($data);
@@ -695,7 +695,7 @@ class CheckoutController extends IndexController
     {
         if ($this->request->isPost()) {
             $cart              = Pi::api('order', 'order')->getOrderInfo();
-            $option = [];
+            $option            = [];
             $formPromoCheckout = new PromoCheckoutForm('promoCheckout', $option);
             $formPromoCheckout->setInputFilter(new PromoCheckoutFilter($option));
             $data = $this->request->getPost();
@@ -729,6 +729,7 @@ class CheckoutController extends IndexController
                                         $product['discount_price'] = $product['product_price'] * $promocode->promo / 100;
                                         $product['discount']       = $promocode->promo;
                                         $product['vat_price']      = ($product['product_price'] - $product['discount_price']) * $product['vat'] / 100;
+                                        $product['promotion_code'] = $promocode->code;
                                         Pi::api('order', 'order')->setOrderInfo($cart);
                                     }
 
@@ -747,6 +748,7 @@ class CheckoutController extends IndexController
                                     $product['discount']       = $promocode->promo;
                                     $product['discount_price'] = $product['product_price'] * $promocode->promo / 100;
                                     $product['vat_price']      = ($product['product_price'] - $product['discount_price']) * $product['vat'] / 100;
+                                    $product['promotion_code'] = $promocode->code;
                                 }
                                 Pi::api('order', 'order')->setOrderInfo($cart);
 
@@ -821,10 +823,8 @@ class CheckoutController extends IndexController
             } else {
                 if ($cart['module_name'] == 'event') {
                     $values['product_type'] = 'event';
-                } else {
-                    if ($cart['module_name'] == 'shop') {
-                        $values['product_type'] = 'product';
-                    }
+                } elseif ($cart['module_name'] == 'shop') {
+                    $values['product_type'] = 'product';
                 }
             }
         }
@@ -904,6 +904,7 @@ class CheckoutController extends IndexController
     {
         $values                   = $this->validValues($values, $cart, $uid, $config);
         $_SESSION['order']['uid'] = $uid;
+
         // Check gateway
         if (is_array($values['default_gateway'])) {
             $values['default_gateway'] = $values['default_gateway'][0];
@@ -996,10 +997,13 @@ class CheckoutController extends IndexController
                         $extra = json::decode($product['extra'], true);
                     }
 
-
                     $detail->extra = json::encode($extra);
                     if (array_key_exists('unconsumedPrice', $extra)) {
                         unset($extra['unconsumedPrice']);
+                    }
+
+                    if (isset($product['promotion_code']) && !empty($product['promotion_code'])) {
+                        $detail->promotion_code = $product['promotion_code'];
                     }
 
                     $detail->save();
@@ -1016,7 +1020,6 @@ class CheckoutController extends IndexController
                 $composition = Pi::api('order', $cart['module_name'])->getInstallmentComposition($cart, true);
                 $dates       = Pi::api('order', $cart['module_name'])->getInstallmentDueDate($cart, $composition);
                 $invoice     = Pi::api('invoice', 'order')->updateInvoice($randomId, $gateway['path'], $composition, $dates, false, $values['type_payment']);
-                //
             }
             // Update user information
             if ($config['order_update_user'] && isset($values['update_user']) && $values['update_user']) {

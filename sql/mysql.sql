@@ -41,6 +41,7 @@ CREATE TABLE `{detail}`
     `packing_price`  DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
     `setup_price`    DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
     `vat_price`      DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+    `promotion_code` VARCHAR(64)      NOT NULL DEFAULT '',
     `number`         INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `extra`          TEXT,
     `admin_note`     VARCHAR(511)     NULL     DEFAULT '',
@@ -263,7 +264,7 @@ CREATE TABLE `{credit_history}`
 CREATE TABLE `{promocode}`
 (
     `id`         INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
-    `code`       VARCHAR(16)         NOT NULL,
+    `code`       VARCHAR(64)         NOT NULL,
     `promo`      TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
     `time_start` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
     `time_end`   INT(10) UNSIGNED    NOT NULL DEFAULT '0',

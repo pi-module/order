@@ -104,9 +104,12 @@ class Gateway extends AbstractGateway
 
         // Set total price
         $total = 0;
+        $totalDiscount = 0;
         foreach ($products as $product) {
             $total = $total + $product['product_price'];
+            $totalDiscount = $totalDiscount + $product['discount_price'];
         }
+        $total = $total - $totalDiscount;
 
         // Set order Id for payment
         $orderId = $this->gatewayOrder['id'];
@@ -146,7 +149,7 @@ class Gateway extends AbstractGateway
             $log['authority'] = $call->Authority;
             $log['value']     = Json::encode([$this->gatewayInvoice, (array)$call]);
             $log['invoice']   = $this->gatewayInvoice['id'];
-            $log['amount']    = intval($this->gatewayInvoice['total_price']);
+            $log['amount']    = intval($total);
             $log['status']    = 0;
             $log['message']   = 'ERR: ' . $call->Status;
             Pi::api('log', 'order')->setLog($log);
@@ -168,10 +171,14 @@ class Gateway extends AbstractGateway
         // Get product list
         $products = Pi::api('order', 'order')->listProduct($order['id']);
 
+        // Set total price
         $total = 0;
+        $totalDiscount = 0;
         foreach ($products as $product) {
             $total = $total + $product['product_price'];
+            $totalDiscount = $totalDiscount + $product['discount_price'];
         }
+        $total = $total - $totalDiscount;
 
         // Check Status
         if ($request['Status'] == 'OK') {

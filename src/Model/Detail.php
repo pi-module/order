@@ -36,6 +36,7 @@ class Detail extends Model
             'packing_price',
             'setup_price',
             'vat_price',
+            'promotion_code',
             'number',
             'extra',
             'admin_note',

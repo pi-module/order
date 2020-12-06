@@ -126,9 +126,12 @@ class Gateway extends AbstractGateway
 
         // Set total price
         $total = 0;
+        $totalDiscount = 0;
         foreach ($products as $product) {
             $total = $total + $product['product_price'];
+            $totalDiscount = $totalDiscount + $product['discount_price'];
         }
+        $total = $total - $totalDiscount;
 
         // Set order Id for payment
         $orderId = $this->gatewayOrder['id'];
@@ -196,10 +199,14 @@ class Gateway extends AbstractGateway
         // Get product list
         $products = Pi::api('order', 'order')->listProduct($order['id']);
 
+        // Set total price
         $total = 0;
+        $totalDiscount = 0;
         foreach ($products as $product) {
             $total = $total + $product['product_price'];
+            $totalDiscount = $totalDiscount + $product['discount_price'];
         }
+        $total = $total - $totalDiscount;
 
         // Set parameters
         $parameters = [

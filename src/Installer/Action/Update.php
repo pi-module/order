@@ -1665,6 +1665,22 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '2.3.9', '<')) {
+            $sql = sprintf("ALTER TABLE %s ADD `promotion_code` VARCHAR(64) NOT NULL DEFAULT ''", $detailTable);
+            try {
+                $detailAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'Table alter query for order failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+        }
+
         return true;
     }
 

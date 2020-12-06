@@ -164,7 +164,7 @@ class OrderProductFilter extends InputFilter
         );
 
         // extra options
-        foreach (['order', 'shop', 'guide', 'event'] as $module) {
+        foreach (['order', 'shop', 'guide', 'event', 'video', 'plans'] as $module) {
             if (Pi::service('module')->isActive($module)) {
                 $elems = Pi::api('order', $module)->getExtraFieldsFormForOrder();
                 foreach ($elems as $elem) {
