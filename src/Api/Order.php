@@ -225,7 +225,8 @@ class Order extends AbstractApi
         // Set url_update_order
         $order['url_update_order'] = Pi::url(
             Pi::service('url')->assemble(
-                'admin', [
+                'admin',
+                [
                     'controller' => 'order',
                     'action'     => 'updateOrder',
                     'id'         => $order['id'],
@@ -235,7 +236,8 @@ class Order extends AbstractApi
         // Set url_update_payment
         $order['url_update_invoice'] = Pi::url(
             Pi::service('url')->assemble(
-                'admin', [
+                'admin',
+                [
                     'controller' => 'order',
                     'action'     => 'updateInvoice',
                 ]
@@ -244,7 +246,8 @@ class Order extends AbstractApi
         // Set url_update_delivery
         $order['url_update_delivery'] = Pi::url(
             Pi::service('url')->assemble(
-                'admin', [
+                'admin',
+                [
                     'controller' => 'order',
                     'action'     => 'updateDelivery',
                     'id'         => $order['id'],
@@ -254,7 +257,8 @@ class Order extends AbstractApi
         // Set url_update_delivery
         $order['url_update_canPay'] = Pi::url(
             Pi::service('url')->assemble(
-                'admin', [
+                'admin',
+                [
                     'controller' => 'order',
                     'action'     => 'updateCanPay',
                     'id'         => $order['id'],
@@ -264,7 +268,8 @@ class Order extends AbstractApi
         //
         $order['url_update_note'] = Pi::url(
             Pi::service('url')->assemble(
-                'admin', [
+                'admin',
+                [
                     'controller' => 'order',
                     'action'     => 'updateNote',
                     'id'         => $order['id'],
@@ -274,7 +279,8 @@ class Order extends AbstractApi
         // Set url_edit
         $order['url_edit'] = Pi::url(
             Pi::service('url')->assemble(
-                'admin', [
+                'admin',
+                [
                     'controller' => 'order',
                     'action'     => 'edit',
                     'id'         => $order['id'],
@@ -284,7 +290,8 @@ class Order extends AbstractApi
         // Set url_print
         $order['url_print'] = Pi::url(
             Pi::service('url')->assemble(
-                'admin', [
+                'admin',
+                [
                     'controller' => 'order',
                     'action'     => 'print',
                     'id'         => $order['id'],
@@ -294,7 +301,8 @@ class Order extends AbstractApi
         // Set url_view
         $order['url_view'] = Pi::url(
             Pi::service('url')->assemble(
-                'admin', [
+                'admin',
+                [
                     'controller' => 'order',
                     'action'     => 'view',
                     'id'         => $order['id'],
@@ -304,7 +312,8 @@ class Order extends AbstractApi
         // Set url_view
         $order['url_list_user'] = Pi::url(
             Pi::service('url')->assemble(
-                'admin', [
+                'admin',
+                [
                     'controller' => 'order',
                     'action'     => 'listUser',
                     'uid'        => $order['uid'],
@@ -458,7 +467,8 @@ class Order extends AbstractApi
         if (!isset($backUrl) || empty($backUrl)) {
             $backUrl = Pi::url(
                 Pi::service('url')->assemble(
-                    'order', [
+                    'order',
+                    [
                         'module'     => $this->getModule(),
                         'controller' => 'detail',
                         'action'     => 'index',
@@ -484,7 +494,8 @@ class Order extends AbstractApi
         if (isset($order['type_payment']) && $order['type_payment'] == 'installment') {
             $checkout = Pi::url(
                 Pi::service('url')->assemble(
-                    'order', [
+                    'order',
+                    [
                         'module'     => 'order',
                         'controller' => 'checkout',
                         'action'     => 'installment',
@@ -493,7 +504,8 @@ class Order extends AbstractApi
             );
         } else {
             $checkout = Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => 'order',
                     'controller' => 'checkout',
                     'action'     => 'index',
@@ -502,7 +514,6 @@ class Order extends AbstractApi
             if ($completeUrl) {
                 $checkout = Pi::url($checkout);
             }
-
         }
         return $checkout;
     }

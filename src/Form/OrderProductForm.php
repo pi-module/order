@@ -34,7 +34,6 @@ class OrderProductForm extends BaseForm
 
     public function init()
     {
-
         $this->add(
             [
                 'name'       => 'module',

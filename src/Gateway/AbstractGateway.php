@@ -79,7 +79,7 @@ abstract class AbstractGateway
 
     abstract public function verifyPayment($value, $processing);
 
-    static public function getAllList()
+    public static function getAllList()
     {
         $list        = [];
         $gatewayPath = 'usr/module/order/src/Gateway';
@@ -100,7 +100,7 @@ abstract class AbstractGateway
         return $list;
     }
 
-    static public function getActiveList()
+    public static function getActiveList()
     {
         $where = ['status' => 1];
         // Get list of story
@@ -124,7 +124,7 @@ abstract class AbstractGateway
         return $list;
     }
 
-    static public function getActiveName()
+    public static function getActiveName()
     {
         $where = ['status' => 1];
         // Get list of story
@@ -143,7 +143,7 @@ abstract class AbstractGateway
         return $list;
     }
 
-    static public function getGateway($adapter = '')
+    public static function getGateway($adapter = '')
     {
         if (!empty($adapter)) {
             $class = sprintf('Module\Order\Gateway\%s\Gateway', $adapter);
@@ -157,7 +157,7 @@ abstract class AbstractGateway
         return false;
     }
 
-    static public function getGatewayInfo($adapter = '')
+    public static function getGatewayInfo($adapter = '')
     {
         if (!empty($adapter)) {
             $gateway = Pi::model('gateway', 'order')->find($adapter, 'path')->toArray();
@@ -166,7 +166,7 @@ abstract class AbstractGateway
         return false;
     }
 
-    static public function getGatewayMessage($adapter, $log)
+    public static function getGatewayMessage($adapter, $log)
     {
         if (!empty($adapter)) {
             $class = sprintf('Module\Order\Gateway\%s\Gateway', $adapter);
@@ -223,7 +223,8 @@ abstract class AbstractGateway
     {
         $this->gatewayBackUrl = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => 'order',
                     'controller' => 'payment',
                     'action'     => 'result',
@@ -236,7 +237,8 @@ abstract class AbstractGateway
     {
         $this->gatewayCancelUrl = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => 'order',
                     'controller' => 'payment',
                     'action'     => 'cancel',
@@ -249,7 +251,8 @@ abstract class AbstractGateway
     {
         $this->gatewayFinishUrl = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => 'order',
                     'controller' => 'payment',
                     'action'     => 'finish',
@@ -263,7 +266,8 @@ abstract class AbstractGateway
     {
         $this->gatewayNotifyUrl = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => 'order',
                     'controller' => 'payment',
                     'action'     => 'notify',
@@ -300,13 +304,10 @@ abstract class AbstractGateway
         $log['message'] = $message;
         $log['order']   = $this->gatewayOrder['id'];
         Pi::api('log', 'order')->setLog($log);
-
     }
 
     public function getDescription()
     {
         return null;
     }
-
-
 }

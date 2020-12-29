@@ -56,4 +56,4 @@ class InvoiceSettingFilter extends InputFilter
             ]
         );
     }
-}    	
+}

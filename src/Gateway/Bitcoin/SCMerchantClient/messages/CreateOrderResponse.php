@@ -2,7 +2,6 @@
 
 class CreateOrderResponse
 {
-
     private $depositAddress;
     private $orderId;
     private $orderRequestId;
@@ -24,7 +23,7 @@ class CreateOrderResponse
      * @param $validUntil
      * @param $redirectUrl
      */
-    function __construct($orderRequestId, $orderId, $depositAddress, $payAmount, $payCurrency, $receiveAmount, $receiveCurrency, $validUntil, $redirectUrl)
+    public function __construct($orderRequestId, $orderId, $depositAddress, $payAmount, $payCurrency, $receiveAmount, $receiveCurrency, $validUntil, $redirectUrl)
     {
         $this->orderRequestId  = $orderRequestId;
         $this->orderId         = $orderId;

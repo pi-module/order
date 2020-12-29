@@ -110,7 +110,6 @@ class CustomerAddress extends AbstractApi
         // return
         $address = $this->canonizeAddress($address);
         return $address;
-
     }
 
     public function updateAddress($values)
@@ -142,7 +141,6 @@ class CustomerAddress extends AbstractApi
 
         $row = Pi::model('customer_address', 'order')->find($id, 'id');
         if (!$row || $row->uid != $uid) {
-
             return [];
         }
 

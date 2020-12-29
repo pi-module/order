@@ -85,5 +85,4 @@ class Api extends AbstractApi
         }
         return $pattern;
     }
-
 }

@@ -22,7 +22,6 @@ class OrderUpdateFilter extends InputFilter
     public function __construct($option = [])
     {
         if ($option['mode'] == 'add') {
-
             $this->add(
                 [
                     'name'       => 'uid',
@@ -37,7 +36,6 @@ class OrderUpdateFilter extends InputFilter
                     ],
                 ]
             );
-
         }
 
         $this->add(
@@ -130,7 +128,6 @@ class OrderUpdateFilter extends InputFilter
                     ],
                 ]
             );
-
         }
         // email
         if ($option['config']['order_email']) {
@@ -188,7 +185,6 @@ class OrderUpdateFilter extends InputFilter
                     ],
                 ]
             );
-
         }
         // phone
         if ($option['config']['order_phone']) {
@@ -480,7 +476,6 @@ class OrderUpdateFilter extends InputFilter
                     ],
                 ]
             );
-
         }
     }
 }

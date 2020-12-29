@@ -28,4 +28,4 @@ class UpdateCanPayFilter extends InputFilter
             ]
         );
     }
-}    	
+}

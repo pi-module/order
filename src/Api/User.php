@@ -135,5 +135,4 @@ class User extends AbstractApi
             Pi::service('event')->trigger('user_update', $uid);
         }
     }
-
-}	
+}

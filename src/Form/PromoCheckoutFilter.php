@@ -33,6 +33,5 @@ class PromoCheckoutFilter extends InputFilter
                 'required' => false,
             ]
         );
-
     }
-}	
+}

@@ -84,7 +84,8 @@ class CreditController extends IndexController
             if ($row->order > 0) {
                 $list[$row->id]['orderLink'] = Pi::url(
                     $this->url(
-                        'order', [
+                        'order',
+                        [
                             'controller' => 'detail',
                             'id'         => $row->order,
                         ]
@@ -94,7 +95,8 @@ class CreditController extends IndexController
                 $invoice                     = Pi::api('invoice', 'order')->getInvoice($row->invoice);
                 $list[$row->id]['orderLink'] = Pi::url(
                     $this->url(
-                        'order', [
+                        'order',
+                        [
                             'controller' => 'detail',
                             'id'         => $invoice['order'],
                         ]

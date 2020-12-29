@@ -3,7 +3,7 @@ define("BCCOMP_LARGER", 1);
 
 class RSA
 {
-    function rsa_encrypt($message, $public_key, $modulus, $keylength)
+    public function rsa_encrypt($message, $public_key, $modulus, $keylength)
     {
         $padded    = RSA::add_PKCS1_padding($message, true, $keylength / 8);
         $number    = RSA::binary_to_number($padded);
@@ -12,7 +12,7 @@ class RSA
         return $result;
     }
 
-    function rsa_decrypt($message, $private_key, $modulus, $keylength)
+    public function rsa_decrypt($message, $private_key, $modulus, $keylength)
     {
         $number    = RSA::binary_to_number($message);
         $decrypted = RSA::pow_mod($number, $private_key, $modulus);
@@ -20,7 +20,7 @@ class RSA
         return RSA::remove_PKCS1_padding($result, $keylength / 8);
     }
 
-    function rsa_sign($message, $private_key, $modulus, $keylength)
+    public function rsa_sign($message, $private_key, $modulus, $keylength)
     {
         $padded = RSA::add_PKCS1_padding($message, false, $keylength / 8);
         $number = RSA::binary_to_number($padded);
@@ -29,12 +29,12 @@ class RSA
         return $result;
     }
 
-    function rsa_verify($message, $public_key, $modulus, $keylength)
+    public function rsa_verify($message, $public_key, $modulus, $keylength)
     {
         return RSA::rsa_decrypt($message, $public_key, $modulus, $keylength);
     }
 
-    function rsa_kyp_verify($message, $public_key, $modulus, $keylength)
+    public function rsa_kyp_verify($message, $public_key, $modulus, $keylength)
     {
         $number    = RSA::binary_to_number($message);
         $decrypted = RSA::pow_mod($number, $public_key, $modulus);
@@ -42,7 +42,7 @@ class RSA
         return RSA::remove_KYP_padding($result, $keylength / 8);
     }
 
-    function pow_mod($p, $q, $r)
+    public function pow_mod($p, $q, $r)
     {
         $factors      = [];
         $div          = $q;
@@ -74,7 +74,7 @@ class RSA
         return $result;
     }
 
-    function add_PKCS1_padding($data, $isPublicKey, $blocksize)
+    public function add_PKCS1_padding($data, $isPublicKey, $blocksize)
     {
         $pad_length = $blocksize - 3 - strlen($data);
         if ($isPublicKey) {
@@ -91,7 +91,7 @@ class RSA
         return "\x00" . $block_type . $padding . "\x00" . $data;
     }
 
-    function remove_PKCS1_padding($data, $blocksize)
+    public function remove_PKCS1_padding($data, $blocksize)
     {
         assert(strlen($data) == $blocksize);
         $data = substr($data, 1);
@@ -103,14 +103,14 @@ class RSA
         return substr($data, $offset + 1);
     }
 
-    function remove_KYP_padding($data, $blocksize)
+    public function remove_KYP_padding($data, $blocksize)
     {
         assert(strlen($data) == $blocksize);
         $offset = strpos($data, "\0");
         return substr($data, 0, $offset);
     }
 
-    function binary_to_number($data)
+    public function binary_to_number($data)
     {
         $base   = "256";
         $radix  = "1";
@@ -124,7 +124,7 @@ class RSA
         return $result;
     }
 
-    function number_to_binary($number, $blocksize)
+    public function number_to_binary($number, $blocksize)
     {
         $base   = "256";
         $result = "";

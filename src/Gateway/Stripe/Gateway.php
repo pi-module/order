@@ -161,18 +161,21 @@ class Gateway extends AbstractGateway
                 }
                 if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
                     if (count($installments) > 1 && $order['type_commodity'] == 'booking') {
-
                         $item    = [];
                         $extra   = json_decode($order['extra'], true);
                         $itemObj = Pi::model("item", 'guide')->find($extra['values']['item'], 'id');
 
                         $name                = $installment['count'] == 1
                             ? sprintf(
-                                __("Booking %s from %s to %s - First Installment"), $itemObj['title'], _date(strtotime($extra['values']['date_start'])),
+                                __("Booking %s from %s to %s - First Installment"),
+                                $itemObj['title'],
+                                _date(strtotime($extra['values']['date_start'])),
                                 _date(strtotime($extra['values']['date_end']))
                             )
                             : sprintf(
-                                __("Booking %s from %s to %s - Second Installment"), $item['title'], _date(strtotime($extra['values']['date_start'])),
+                                __("Booking %s from %s to %s - Second Installment"),
+                                $item['title'],
+                                _date(strtotime($extra['values']['date_start'])),
                                 _date(strtotime($extra['values']['date_end']))
                             );
                         $item["name"]        = $name;
@@ -387,12 +390,10 @@ class Gateway extends AbstractGateway
     public function setRedirectUrl()
     {
         $this->getAuthority();
-
     }
 
     public function verifyPayment($request, $processing)
     {
-
         \Stripe\Stripe::setApiKey($this->gatewayOption['password']);
         if ($this->gatewayOption['api_version']) {
             \Stripe\Stripe::setApiVersion($this->gatewayOption['api_version']);
@@ -403,7 +404,6 @@ class Gateway extends AbstractGateway
 
 
         if ($payment['status'] == 'succeeded' || $payment['status'] == 'requires_capture') {
-
             $order = Pi::api('order', 'order')->getOrder($processing['order']);
 
             $extra = json_decode($order['extra'], true);
@@ -436,8 +436,6 @@ class Gateway extends AbstractGateway
                     break;
                 }
             }
-
-
         } else {
             $result['status']   = 0;
             $result['state']    = $payment['status'];

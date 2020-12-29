@@ -16,7 +16,6 @@ include_once('messages/CreateOrderResponse.php');
 
 class SCMerchantClient
 {
-
     private $merchantApiUrl;
     private $privateMerchantCertLocation;
     private $publicSpectroCoinCertLocation;
@@ -33,7 +32,7 @@ class SCMerchantClient
      * @param      $apiId
      * @param bool $debug
      */
-    function __construct($merchantApiUrl, $merchantId, $apiId, $debug = false)
+    public function __construct($merchantApiUrl, $merchantId, $apiId, $debug = false)
     {
         $this->privateMerchantCertLocation   = dirname(__FILE__) . '/../cert/mprivate.pem';
         $this->publicSpectroCoinCertLocation = 'https://spectrocoin.com/files/merchant.public.pem';
@@ -87,8 +86,15 @@ class SCMerchantClient
                     } else {
                         if (isset($body->orderRequestId)) {
                             return new CreateOrderResponse(
-                                $body->orderRequestId, $body->orderId, $body->depositAddress, $body->payAmount, $body->payCurrency, $body->receiveAmount,
-                                $body->receiveCurrency, $body->validUntil, $body->redirectUrl
+                                $body->orderRequestId,
+                                $body->orderId,
+                                $body->depositAddress,
+                                $body->payAmount,
+                                $body->payCurrency,
+                                $body->receiveAmount,
+                                $body->receiveCurrency,
+                                $body->validUntil,
+                                $body->redirectUrl
                             );
                         }
                     }
@@ -127,8 +133,18 @@ class SCMerchantClient
             && isset($r['merchantId'], $r['apiId'], $r['orderId'], $r['payCurrency'], $r['payAmount'], $r['receiveCurrency'], $r['receiveAmount'], $r['receivedAmount'], $r['description'], $r['orderRequestId'], $r['status'], $r['sign'])
         ) {
             $result = new OrderCallback(
-                $r['merchantId'], $r['apiId'], $r['orderId'], $r['payCurrency'], $r['payAmount'], $r['receiveCurrency'], $r['receiveAmount'],
-                $r['receivedAmount'], $r['description'], $r['orderRequestId'], $r['status'], $r['sign']
+                $r['merchantId'],
+                $r['apiId'],
+                $r['orderId'],
+                $r['payCurrency'],
+                $r['payAmount'],
+                $r['receiveCurrency'],
+                $r['receiveAmount'],
+                $r['receivedAmount'],
+                $r['description'],
+                $r['orderRequestId'],
+                $r['status'],
+                $r['sign']
             );
         }
 
@@ -145,7 +161,6 @@ class SCMerchantClient
         $valid = false;
 
         if ($c != null) {
-
             if ($this->merchantId != $c->getMerchantId() || $this->apiId != $c->getApiId()) {
                 return $valid;
             }
@@ -192,5 +207,4 @@ class SCMerchantClient
 
         return $r;
     }
-
 }

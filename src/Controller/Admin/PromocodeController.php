@@ -83,7 +83,6 @@ class PromocodeController extends ActionController
                 $row->save();
 
                 $this->jump(['action' => 'index']);
-
             }
         } else {
             if ($id) {
@@ -106,6 +105,5 @@ class PromocodeController extends ActionController
         $id = $this->params('id');
         Pi::model('promocode', 'order')->delete(['id' => $id]);
         $this->jump(['action' => 'index']);
-
     }
 }

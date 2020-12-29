@@ -89,4 +89,4 @@ class Log extends AbstractApi
         // return
         return $log;
     }
-}	
+}

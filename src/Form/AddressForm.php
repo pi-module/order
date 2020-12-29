@@ -447,7 +447,6 @@ class AddressForm extends BaseForm
                         ],
                     ]
                 );
-
             } else {
                 if (($key = array_search('first_name', $groups['individual']['elements'])) !== false) {
                     unset($groups['individual']['elements'][$key]);

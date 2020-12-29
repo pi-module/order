@@ -31,4 +31,4 @@ class GatewayFilter extends InputFilter
             }
         }
     }
-}    	
+}

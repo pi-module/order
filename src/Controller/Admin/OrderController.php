@@ -131,9 +131,12 @@ class OrderController extends ActionController
         $select
             ->from(['order' => $orderTable])
             ->join(
-                ['invoice' => $invoiceTable], new Expression(
-                'invoice.order = order.id AND invoice.type= "NORMAL" AND invoice.status = ' . \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED
-            ), ['invoice' => 'id'], 'left'
+                ['invoice' => $invoiceTable],
+                new Expression(
+                    'invoice.order = order.id AND invoice.type= "NORMAL" AND invoice.status = ' . \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED
+                ),
+                ['invoice' => 'id'],
+                'left'
             )
             ->group(new Expression('order.id DESC'))
             ->where(['order.status_order != ' . \Module\Order\Model\Order::STATUS_ORDER_DRAFT]);
@@ -196,19 +199,24 @@ class OrderController extends ActionController
         $select
             ->from(['order' => $orderTable])
             ->join(
-                ['order_address' => $orderAddressTable], 'order_address.order = order.id',
+                ['order_address' => $orderAddressTable],
+                'order_address.order = order.id',
                 ['id_number', 'first_name', 'last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company',
                  'company_id', 'company_vat', 'delivery', 'location']
             )
             ->join(
-                ['invoice' => $invoiceTable], new Expression(
-                'invoice.order = order.id AND invoice.type= "NORMAL" AND invoice.status = ' . \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED
-            ), [], 'left'
+                ['invoice' => $invoiceTable],
+                new Expression(
+                    'invoice.order = order.id AND invoice.type= "NORMAL" AND invoice.status = ' . \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED
+                ),
+                [],
+                'left'
             )
             ->join(
                 ['invoice_installment' => $invoiceInstallmentTable],
                 new Expression('invoice_installment.invoice = invoice.id AND invoice_installment.time_duedate <' . time()),
-                ['status_payment' => new Expression("MIN(status_payment)")], 'left'
+                ['status_payment' => new Expression("MIN(status_payment)")],
+                'left'
             )
             ->group('order.id')
             ->where($where)
@@ -232,18 +240,24 @@ class OrderController extends ActionController
         $select
             ->from(['order' => $orderTable])
             ->join(
-                ['order_address' => $orderAddressTable], 'order_address.order = order.id',
+                ['order_address' => $orderAddressTable],
+                'order_address.order = order.id',
                 ['id_number', 'first_name', 'last_name', 'email', 'phone', 'mobile', 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company',
                  'company_id', 'company_vat', 'delivery', 'location']
             )
             ->join(
-                ['invoice' => $invoiceTable], new Expression(
-                'invoice.order = order.id AND invoice.type= "NORMAL" AND invoice.status = ' . \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED
-            ), [], 'left'
+                ['invoice' => $invoiceTable],
+                new Expression(
+                    'invoice.order = order.id AND invoice.type= "NORMAL" AND invoice.status = ' . \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED
+                ),
+                [],
+                'left'
             )
             ->join(
-                ['invoice_installment' => $invoiceInstallmentTable], 'invoice_installment.invoice = invoice.id',
-                ['status_payment' => new Expression("MIN(status_payment)")], 'left'
+                ['invoice_installment' => $invoiceInstallmentTable],
+                'invoice_installment.invoice = invoice.id',
+                ['status_payment' => new Expression("MIN(status_payment)")],
+                'left'
             )
             ->group('order.id')
             ->where($where)
@@ -443,9 +457,7 @@ class OrderController extends ActionController
                     $invoice->save();
 
                     if ($values['status'] == \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED) {
-
                         Pi::api('invoice', 'order')->createInstallments($invoice->toArray());
-
                     }
 
                     // Send notification
@@ -683,7 +695,6 @@ class OrderController extends ActionController
         $this->view()->assign('hasValidInvoice', Pi::api('order', 'order')->hasValidInvoice($order['id']));
         $this->view()->assign('hasDraftInvoice', Pi::api('order', 'order')->hasDraftInvoice($order['id']));
         $this->view()->assign('offline', $offline);
-
     }
 
     public function addAction()
@@ -796,7 +807,6 @@ class OrderController extends ActionController
 
         $message = __('Order deleted');
         $this->jump(['controller' => 'order', 'action' => 'index'], $message);
-
     }
 
     public function editAction()
@@ -972,7 +982,6 @@ class OrderController extends ActionController
                 $data['time_end']    = date('Y-m-d', $data['time_end']);
                 $form->setData($data);
             }
-
         }
 
         // Set view
@@ -999,7 +1008,6 @@ class OrderController extends ActionController
 
         $message = __('Product deleted');
         $this->jump(['controller' => 'order', 'action' => 'view', 'id' => $detail->order], $message);
-
     }
 
     private function updateOrderType($order)
@@ -1058,7 +1066,5 @@ class OrderController extends ActionController
         if (!$ret['status']) {
             $this->jump(['', 'controller' => 'index', 'action' => 'index'], $ret['message']);
         }
-
     }
-
 }

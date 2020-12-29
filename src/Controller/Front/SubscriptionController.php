@@ -109,7 +109,6 @@ class SubscriptionController extends IndexController
 
         // Check response not empty
         if (!empty($response)) {
-
             switch ($response->type) {
                 case "invoice.payment_succeeded":
                     $params                   = [];

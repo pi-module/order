@@ -76,7 +76,8 @@ class Invoice extends AbstractApi
             $result['status']         = $row->status;
             $result['order_url']      = Pi::url(
                 Pi::service('url')->assemble(
-                    'order', [
+                    'order',
+                    [
                         'module'     => $this->getModule(),
                         'controller' => 'detail',
                         'action'     => 'index',
@@ -86,7 +87,8 @@ class Invoice extends AbstractApi
             );
             $result['invoice_url']    = Pi::url(
                 Pi::service('url')->assemble(
-                    'order', [
+                    'order',
+                    [
                         'module'     => $this->getModule(),
                         'controller' => 'invoice',
                         'action'     => 'index',
@@ -96,7 +98,8 @@ class Invoice extends AbstractApi
             );
             $result['pay_url']        = Pi::url(
                 Pi::service('url')->assemble(
-                    'order', [
+                    'order',
+                    [
                         'module'     => $this->getModule(),
                         'controller' => 'payment',
                         'action'     => 'index',
@@ -106,7 +109,8 @@ class Invoice extends AbstractApi
             );
             $result['pay_credit_url'] = Pi::url(
                 Pi::service('url')->assemble(
-                    'order', [
+                    'order',
+                    [
                         'module'     => $this->getModule(),
                         'controller' => 'payment',
                         'action'     => 'index',
@@ -140,7 +144,6 @@ class Invoice extends AbstractApi
         $num = $year . sprintf('%03d', ($count + 1));
 
         return sprintf('%s-%s', $config['invoice_code_prefix'], $num);
-
     }
 
     public function getInvoice($parameter, $type = 'id')
@@ -295,7 +298,8 @@ class Invoice extends AbstractApi
         // Set url
         $invoice['order_url']      = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'detail',
                     'action'     => 'index',
@@ -305,7 +309,8 @@ class Invoice extends AbstractApi
         );
         $invoice['invoice_url']    = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'detail',
                     'action'     => 'index',
@@ -315,7 +320,8 @@ class Invoice extends AbstractApi
         );
         $invoice['pay_url']        = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'payment',
                     'action'     => 'index',
@@ -325,7 +331,8 @@ class Invoice extends AbstractApi
         );
         $invoice['pay_credit_url'] = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'payment',
                     'action'     => 'index',
@@ -336,7 +343,8 @@ class Invoice extends AbstractApi
         );
         $invoice['print_url']      = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'invoice',
                     'action'     => 'print',
@@ -347,7 +355,8 @@ class Invoice extends AbstractApi
         // Set anonymous pay
         $invoice['anonymous_pay_url'] = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'payment',
                     'action'     => 'index',
@@ -402,7 +411,6 @@ class Invoice extends AbstractApi
                 $point         = ($days * $row['total_price']);
                 $amount        = $point * $pointDivision;
                 $pointNegative = $pointNegative + $amount;
-
             } elseif ($row['time_duedate'] > ($row['time_payment'] + 86400)) {
 
                 // Positive
@@ -527,7 +535,6 @@ class Invoice extends AbstractApi
             $installment                = current($installments);
             $order['time_payment_view'] = _date($installment['time_payment']);
         } else {
-
             $order['time_duedate_view'] = _date($installment['time_duedate']);
         }
         $gateways = Pi::api('gateway', 'order')->getAllGatewayList();
@@ -603,7 +610,6 @@ class Invoice extends AbstractApi
         $installment->invoice        = $row->id;
         $installment->time_duedate   = time();
         $installment->save();
-
     }
 
     public function createInstallments($invoice, $gateway = 'manual', $dates = null, $composition = ['100'])
@@ -619,7 +625,6 @@ class Invoice extends AbstractApi
 
         $total = 0;
         foreach ($composition as $key => $compose) {
-
             $duePriceInstallment = number_format($duePrice * $compose / 100, 2, '.', '');
             $invoiceInstallment  = Pi::model('invoice_installment', 'order')->createRow();
 

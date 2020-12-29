@@ -144,7 +144,6 @@ class OrderUpdateForm extends BaseForm
                     ],
                 ]
             );
-
         }
         // id_number
         if ($this->option['config']['order_idnumber']) {
@@ -483,7 +482,6 @@ class OrderUpdateForm extends BaseForm
                     ],
                 ]
             );
-
         }
         // city
         if ($this->option['config']['order_city']) {

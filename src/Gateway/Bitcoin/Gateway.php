@@ -189,7 +189,6 @@ class Gateway extends AbstractGateway
         Pi::api('log', 'order')->setLog($log);
 
         if ($callback != null && $scMerchantClient->validateCreateOrderCallback($callback)) {
-
             $log['message'] = 'Status' . $callback->getStatus();
             Pi::api('log', 'order')->setLog($log);
 
@@ -225,7 +224,6 @@ class Gateway extends AbstractGateway
                     $log['message'] = 'Unknown order status: ' . $callback->getStatus();
                     break;
             }
-
         } else {
             $log['message'] = 'Invalid callback!';
         }

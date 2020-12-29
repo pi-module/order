@@ -131,5 +131,4 @@ class DetailController extends IndexController
             $this->jump(['', 'controller' => 'index', 'action' => 'index'], $ret['message']);
         }
     }
-
 }

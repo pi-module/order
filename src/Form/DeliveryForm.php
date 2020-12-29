@@ -18,7 +18,6 @@ use Pi\Form\Form as BaseForm;
 
 class DeliveryForm extends BaseForm
 {
-
     public function __construct($name = null, $option = [])
     {
         parent::__construct($name);

@@ -41,7 +41,8 @@ class LogsController extends ActionController
             $list[$row->id]['time_create_view'] = _date($list[$row->id]['time_create']) . ' ' . date('H:i', $list[$row->id]['time_create']);
             $list[$row->id]['user_url']         = Pi::url(
                 $this->url(
-                    '', [
+                    '',
+                    [
                         'module'     => 'user',
                         'controller' => 'edit',
                         'action'     => 'index',
@@ -51,7 +52,8 @@ class LogsController extends ActionController
             );
             $list[$row->id]['order_url']        = Pi::url(
                 $this->url(
-                    '', [
+                    '',
+                    [
                         'module'     => 'order',
                         'controller' => 'order',
                         'action'     => 'view',

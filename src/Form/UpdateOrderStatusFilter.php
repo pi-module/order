@@ -28,4 +28,4 @@ class UpdateOrderStatusFilter extends InputFilter
             ]
         );
     }
-}    	
+}

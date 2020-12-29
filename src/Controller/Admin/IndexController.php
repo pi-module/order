@@ -21,7 +21,8 @@ class IndexController extends ActionController
     public function indexAction()
     {
         return $this->redirect()->toRoute(
-            '', [
+            '',
+            [
                 'controller' => 'order',
                 'action'     => 'index',
             ]

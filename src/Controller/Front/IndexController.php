@@ -108,7 +108,6 @@ class IndexController extends ActionController
         $this->view()->assign('user', $user);
         $this->view()->assign('config', $config);
         $this->view()->assign('paginator', $paginator);
-
     }
 
     public function errorAction()
@@ -144,7 +143,5 @@ class IndexController extends ActionController
 
         Pi::api('order', 'order')->cancelOrder($id);
         $this->jump(['', 'action' => 'index'], __('Order canceled'));
-
     }
-
 }

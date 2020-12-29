@@ -40,7 +40,8 @@ class Breadcrumbs extends AbstractBreadcrumbs
                     'label' => $moduleData['title'],
                     'href'  => Pi::url(
                         Pi::service('url')->assemble(
-                            'order', [
+                            'order',
+                            [
                                 'module' => $this->getModule(),
                             ]
                         )

@@ -37,7 +37,6 @@ class GatewayForm extends BaseForm
         // Set extra field
         if (!empty($this->field)) {
             foreach ($this->field as $field) {
-
                 $attributes = isset($field['attributes']) ? $field['attributes'] : [];
                 $options    = isset($field['options']) ? $field['options'] : [];
 

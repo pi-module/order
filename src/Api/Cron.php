@@ -22,8 +22,6 @@ use Pi\Application\Api\AbstractApi;
 
 class Cron extends AbstractApi
 {
-
-
     public function start()
     {
         // Get config
@@ -85,7 +83,7 @@ class Cron extends AbstractApi
             // Set log
             Pi::service('audit')->log('cron', 'order - cron system not active for this module');
         }
-         
+
         */
     }
 }

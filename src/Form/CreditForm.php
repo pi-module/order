@@ -83,7 +83,6 @@ class CreditForm extends BaseForm
         $valueOptions = [];
         $moduleList   = Pi::registry('modulelist')->read();
         if ($this->option['type'] == 'module') {
-
             if (isset($moduleList['shop'])) {
                 $valueOptions['shop'] = $moduleList['shop']['title'];
             }
@@ -99,7 +98,6 @@ class CreditForm extends BaseForm
             if (isset($moduleList['plans'])) {
                 $valueOptions['plans'] = $moduleList['plans']['title'];
             }
-
         } else {
             $valueOptions['system'] = $moduleList['system']['title'];
         }

@@ -130,7 +130,6 @@ class Subscription extends AbstractApi
                 ]
             );
             $product->save();
-
         } else {
             $product = $rowset->current();
         }

@@ -26,7 +26,6 @@ class Stripe extends AbstractApi
 {
     public function getOrderByTransfertIds($transfertIds)
     {
-
         if (empty($transfertIds) || count($transfertIds) == 0) {
             return [];
         }

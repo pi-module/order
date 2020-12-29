@@ -67,4 +67,4 @@ class Gateway extends AbstractApi
     {
         return AbstractGateway::getGatewayMessage($adapter, $log);
     }
-}	
+}

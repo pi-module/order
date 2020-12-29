@@ -180,7 +180,8 @@ class PaymentController extends IndexController
         $processing = Pi::api('processing', 'order')->getProcessing();
         if ($config['order_testmode']) {
             return $this->redirect()->toRoute(
-                '', [
+                '',
+                [
                     'controller' => 'payment',
                     'action'     => 'test',
                     'id'         => $order['id'],
@@ -364,7 +365,6 @@ class PaymentController extends IndexController
                         "Your payment method has been accepted. Your reservation is awaiting validation, you will only be debited once the reservation has been confirmed by the owner."
                     );
                     $this->jump($backUrl, $message);
-
                 }
             }
 
@@ -413,7 +413,8 @@ class PaymentController extends IndexController
         // Check request
         if (!empty($request)
             && in_array(
-                $gatewayName, [
+                $gatewayName,
+                [
                     'Paypal', 'paypal', 'Bitcoin', 'bitcoin',
                 ]
             )
@@ -528,7 +529,8 @@ class PaymentController extends IndexController
                 if ($result->state == 'approved') {
                     $url             = Pi::url(
                         $this->url(
-                            '', [
+                            '',
+                            [
                                 'module'     => $this->getModule(),
                                 'controller' => 'payment',
                                 'action'     => 'process',
@@ -549,7 +551,8 @@ class PaymentController extends IndexController
                 } else {
                     $url             = Pi::url(
                         $this->url(
-                            '', [
+                            '',
+                            [
                                 'module'     => $this->getModule(),
                                 'controller' => 'payment',
                                 'action'     => 'result',
@@ -566,7 +569,8 @@ class PaymentController extends IndexController
             } else {
                 $url             = Pi::url(
                     $this->url(
-                        '', [
+                        '',
+                        [
                             'module'     => $this->getModule(),
                             'controller' => 'payment',
                             'action'     => 'result',
@@ -581,7 +585,6 @@ class PaymentController extends IndexController
                 return $this->redirect($url);
             }
         } else {
-
             $result  = Pi::api('invoice', 'order')->createInvoice($processing['order'], Pi::user()->getId());
             $invoice = Pi::api('invoice', 'order')->updateInvoice($invoice['random_id'], $processing['gateway']);
             Pi::api('order', 'order')->unsetOrderInfo();

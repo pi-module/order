@@ -84,6 +84,5 @@ class InstallmentController extends ActionController
         // Set view
         $this->view()->setTemplate('installment-edit');
         $this->view()->assign('form', $form);
-
     }
 }

@@ -55,6 +55,5 @@ class InstallmentFilter extends InputFilter
                 'required' => false,
             ]
         );
-
     }
 }

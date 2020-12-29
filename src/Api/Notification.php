@@ -69,7 +69,8 @@ class Notification extends AbstractApi
         // Set link
         $link = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'index',
                     'action'     => 'detail',
@@ -261,7 +262,8 @@ class Notification extends AbstractApi
         // Set link
         $link = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'index',
                     'action'     => 'print',
@@ -326,7 +328,8 @@ class Notification extends AbstractApi
         // Set link
         $link = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'index',
                     'action'     => 'print',
@@ -392,7 +395,8 @@ class Notification extends AbstractApi
             // Set link
             $link = Pi::url(
                 Pi::service('url')->assemble(
-                    'order', [
+                    'order',
+                    [
                         'module'     => $this->getModule(),
                         'controller' => 'index',
                         'action'     => 'print',
@@ -427,7 +431,6 @@ class Notification extends AbstractApi
 
             // Send sms to user
             Pi::service('notification')->smsToUser($content, $address['mobile']);
-
         }
     }
 
@@ -464,7 +467,8 @@ class Notification extends AbstractApi
         // Set link
         $link = Pi::url(
             Pi::service('url')->assemble(
-                'admin', [
+                'admin',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'order',
                     'action'     => 'view',
@@ -501,7 +505,8 @@ class Notification extends AbstractApi
         // Set link
         $link                      = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'detail',
                     'action'     => 'index',
@@ -562,7 +567,8 @@ class Notification extends AbstractApi
         // Set link
         $link = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'index',
                     'action'     => 'print',
@@ -611,7 +617,8 @@ class Notification extends AbstractApi
         // Set link
         $link = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'index',
                     'action'     => 'print',

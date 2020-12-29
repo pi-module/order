@@ -75,7 +75,8 @@ class CheckoutController extends IndexController
         if (isset($cart['product']) && count($cart['product'])) {
             foreach ($cart['product'] as $key => $product) {
                 $cart['product'][$key]['details']            = Pi::api('order', $cart['module_name'])->getProductDetails(
-                    $product['product'], json_decode($product['extra'], true)
+                    $product['product'],
+                    json_decode($product['extra'], true)
                 );
                 $cart['product'][$key]['product_price']      = str_replace(',', '.', $product['product_price']);
                 $cart['product'][$key]['discount_price']     = str_replace(',', '.', $product['discount_price']);
@@ -230,7 +231,6 @@ class CheckoutController extends IndexController
                     }
                     $url = $this->url('', ['controller' => 'checkout', 'action' => 'index']);
                     $this->jump($url);
-
                 } else {
                     $check = true;
                 }
@@ -238,7 +238,6 @@ class CheckoutController extends IndexController
                 if (isset($data['submit_order_simple'])) {
                     $formOrderSimple->setData($data);
                     if ($formOrderSimple->isValid()) {
-
                         $uid  = Pi::user()->getId();
                         $user = Pi::api('user', 'order')->getUserInformation();
 
@@ -350,11 +349,9 @@ class CheckoutController extends IndexController
                 foreach ($elements as $element) {
                     $formOrderSimple->get($element->getName())->setAttribute('disabled', true);
                 }
-
             }
             $forms['order'] = $formOrderSimple;
             $forms['new']   = $formAddress;
-
         } else {
             $forms['new'] = $formOrder;
         }
@@ -388,7 +385,6 @@ class CheckoutController extends IndexController
         $this->view()->assign('addressDelivery', $addressDelivery);
         $this->view()->assign('addressInvoicing', $addressInvoicing);
         $this->view()->assign('invalidAddress', $invalidAddress);
-
     }
 
     public function changeAddressAction()
@@ -415,7 +411,6 @@ class CheckoutController extends IndexController
         $this->view()->setTemplate('checkout-listaddress');
         $this->view()->assign('addresses', $addresses);
         $this->view()->assign('type', $type);
-
     }
 
     public function addressAction()
@@ -424,7 +419,8 @@ class CheckoutController extends IndexController
         $id     = $this->params('id');
         $form   = new AddressForm('address', $option);
         $form->setAttribute(
-            'action', Pi::url(Pi::service('url')->assemble('order', ['module' => 'order', 'controller' => 'checkout', 'action' => 'address', 'id' => $id]))
+            'action',
+            Pi::url(Pi::service('url')->assemble('order', ['module' => 'order', 'controller' => 'checkout', 'action' => 'address', 'id' => $id]))
         );
         $form->remove('submit_address');
         $form->setInputFilter(new AddressFilter($option));
@@ -454,7 +450,6 @@ class CheckoutController extends IndexController
 
                 header('Content-Type: application/json');
                 return ['status' => 1];
-
             }
         } else {
             if ($id && is_numeric($id)) {
@@ -520,7 +515,6 @@ class CheckoutController extends IndexController
             // Go to checkout
             $url = ['', 'controller' => 'checkout', 'action' => 'index'];
             $this->jump($url, __('Your installment plan save, please complete your information and payment.'));
-
         } else {
             // Set user
             $user = Pi::api('user', 'order')->getUserInformation();
@@ -546,12 +540,13 @@ class CheckoutController extends IndexController
                     $price['packing_price']  = $product['packing_price'] + $price['packing_price'];
                     $price['vat_price']      = $product['vat_price'] + $price['vat_price'];
                     // Set total
-                    $total                = (($product['product_price'] +
+                    $total                = ((
+                        $product['product_price'] +
                                 $product['shipping_price'] +
                                 $product['packing_price'] +
                                 $product['setup_price'] +
                                 $product['vat_price']
-                            ) - $product['discount_price'] - $unconsumedPrice) * $product['number'];
+                    ) - $product['discount_price'] - $unconsumedPrice) * $product['number'];
                     $price['total_price'] = $total + $price['total_price'];
                 }
             }
@@ -685,10 +680,8 @@ class CheckoutController extends IndexController
         if ($address->uid == $uid) {
             $address->delete();
             return ['status' => 1];
-
         }
         return ['status' => 0];
-
     }
 
     public function promocodeAction()
@@ -711,7 +704,6 @@ class CheckoutController extends IndexController
                             'type'    => 'info',
                             'message' => __('This code has expired.'),
                         ];
-
                     } else {
                         if (!in_array($cart['module_name'], $authorizedModules)) {
                             // mauvais module
@@ -890,12 +882,13 @@ class CheckoutController extends IndexController
         }
 
         // Set total
-        $values['total_price'] = (($values['product_price'] +
+        $values['total_price'] = ((
+            $values['product_price'] +
                 $values['shipping_price'] +
                 $values['packing_price'] +
                 $values['setup_price'] +
                 $values['vat_price']
-            ) - $values['discount_price'] - $values['unconsumedPrice']);
+        ) - $values['discount_price'] - $values['unconsumedPrice']);
 
         return $values;
     }
@@ -1044,7 +1037,8 @@ class CheckoutController extends IndexController
             if ($config['order_payment'] == 'payment') {
                 $url = Pi::url(
                     Pi::service('url')->assemble(
-                        'order', [
+                        'order',
+                        [
                             'module'     => $this->getModule(),
                             'controller' => 'payment',
                             'action'     => 'index',
@@ -1055,7 +1049,8 @@ class CheckoutController extends IndexController
             } else {
                 $url = Pi::url(
                     Pi::service('url')->assemble(
-                        'order', [
+                        'order',
+                        [
                             'module'     => $this->getModule(),
                             'controller' => 'detail',
                             'action'     => 'index',
@@ -1074,7 +1069,6 @@ class CheckoutController extends IndexController
             ];
             $this->view()->assign('error', $error);
         }
-
     }
 
     private function updatePrice($cart)
@@ -1104,7 +1098,6 @@ class CheckoutController extends IndexController
                 $price['packing']    += round($product['packing_price'] * $product['number'] * 100) / 100;
                 $price['vat']        += round($product['vat_price'] * 100) / 100;
                 $price['unconsumed'] += $unconsumedPrice;
-
             }
         }
 
@@ -1119,12 +1112,13 @@ class CheckoutController extends IndexController
         }
 
         // Set total
-        $price['total'] = (($price['product'] +
+        $price['total'] = ((
+            $price['product'] +
                 $price['shipping'] +
                 $price['packing'] +
                 $price['setup'] +
                 $price['vat']
-            ) - $price['discount'] - $unconsumedPrice);
+        ) - $price['discount'] - $unconsumedPrice);
 
         return $price;
     }

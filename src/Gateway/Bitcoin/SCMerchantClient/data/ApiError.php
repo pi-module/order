@@ -9,7 +9,7 @@ class ApiError
      * @param $code
      * @param $message
      */
-    function __construct($code, $message)
+    public function __construct($code, $message)
     {
         $this->code    = $code;
         $this->message = $message;
@@ -30,6 +30,4 @@ class ApiError
     {
         return $this->message;
     }
-
-
 }

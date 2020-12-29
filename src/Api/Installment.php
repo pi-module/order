@@ -64,7 +64,6 @@ class Installment extends AbstractApi
 
     public function canonize($installment)
     {
-
         $pattern = !empty($config['date_format']) ? $config['date_format'] : 'yyyy-MM-dd';
 
         if (!is_array($installment)) {
@@ -524,7 +523,6 @@ class Installment extends AbstractApi
 
         /* Make other lines */
         for ($i = 0; $i < 13; $i++) {
-
             $subtract = 0;
             if ($i == 0) {
                 $month = pdate('m', strtotime('now'));
@@ -532,15 +530,15 @@ class Installment extends AbstractApi
             } else {
                 if (in_array(pdate('d'), [29, 30, 31])) {
                     switch (pdate('d')) {
-                        case 29 :
+                        case 29:
                             $subtract = 60 * 60 * 24 * 1;
                             break;
 
-                        case 30 :
+                        case 30:
                             $subtract = 60 * 60 * 24 * 2;
                             break;
 
-                        case 31 :
+                        case 31:
                             $subtract = 60 * 60 * 24 * 3;
                             break;
                     }
@@ -628,7 +626,6 @@ class Installment extends AbstractApi
             } else {
                 $d[$i]['30-sun'] = '';
             }
-
         }
 
         // additional
@@ -714,7 +711,6 @@ class Installment extends AbstractApi
             $invoice = Pi::api('invoice', 'order')->getInvoice($invoice);
             $order   = Pi::api('order', 'order')->getOrder($invoice['order']);
             Pi::api('notification', 'order')->payInvoice($order, $invoice);
-
         }
     }
 
@@ -723,5 +719,4 @@ class Installment extends AbstractApi
         $where  = ['invoice' => $invoice];
         $select = Pi::model('invoice_installment', 'order')->delete($where);
     }
-
 }

@@ -28,4 +28,4 @@ class UpdateDeliveryFilter extends InputFilter
             ]
         );
     }
-}    	
+}

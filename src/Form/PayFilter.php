@@ -31,4 +31,4 @@ class PayFilter extends InputFilter
             }
         }
     }
-}	
+}

@@ -90,6 +90,5 @@ class PromocodeFilter extends InputFilter
                 'required' => true,
             ]
         );
-
     }
-}	
+}
