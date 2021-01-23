@@ -38,7 +38,6 @@ class PromocodeForm extends BaseForm
 
     public function init()
     {
-
         $this->add(
             [
                 'name'       => 'id',

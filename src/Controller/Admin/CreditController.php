@@ -20,8 +20,8 @@ use Module\Order\Form\CreditSettingForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Zend\Db\Sql\Predicate\Expression;
-use Zend\Json\Json;
+use Laminas\Db\Sql\Predicate\Expression;
+use Laminas\Json\Json;
 
 class CreditController extends ActionController
 {
@@ -34,13 +34,16 @@ class CreditController extends ActionController
         $last_name  = $this->params('last_name');
         $email      = $this->params('email');
         $company    = $this->params('company');
+
         // Get module list
         $moduleList = Pi::registry('modulelist')->read();
+
         // Get info
         $list   = [];
         $order  = ['time_update DESC', 'id DESC'];
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit  = intval($this->config('admin_perpage'));
+
         // Find user
         $where   = [];
         $userIds = [];
@@ -89,8 +92,10 @@ class CreditController extends ActionController
             }
         }
 
+        // Select
         $select = $this->getModel('credit')->select()->where($where)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('credit')->selectWith($select);
+
         // Make list
         foreach ($rowset as $row) {
             $list[$row->id]                       = $row->toArray();
@@ -108,10 +113,13 @@ class CreditController extends ActionController
                 ];
             }
         }
+
+        // Get count
+        $count  = ['count' => new Expression('count(*)')];
+        $select = $this->getModel('credit')->select()->columns($count);
+        $count  = $this->getModel('credit')->selectWith($select)->current()->count;
+
         // Set paginator
-        $count     = ['count' => new Expression('count(*)')];
-        $select    = $this->getModel('credit')->select()->columns($count);
-        $count     = $this->getModel('credit')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
@@ -133,6 +141,7 @@ class CreditController extends ActionController
                 ),
             ]
         );
+
         // Set form
         $values = [
             'uid'        => $uid,
@@ -144,6 +153,7 @@ class CreditController extends ActionController
         $form   = new CreditSettingForm('setting');
         $form->setAttribute('action', $this->url('', ['action' => 'process']));
         $form->setData($values);
+
         // Set view
         $this->view()->setTemplate('credit-index');
         $this->view()->assign('list', $list);

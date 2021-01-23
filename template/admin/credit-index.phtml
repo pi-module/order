@@ -17,9 +17,9 @@
             </div>
         </div>
     </div>
-    <h3><?php _e('List of users'); ?></h3>
+    <h1 class="mb-3 mt-3"><?php _e('List of users'); ?></h1>
     <?php if (!empty($list)) { ?>
-        <table class="table table-striped table-bordered table-sm">
+        <table class="table table-striped table-bordered table-hover table-sm mt-3 mb-3">
             <tr>
                 <th><?php _e('Name'); ?></th>
                 <th><?php _e('Amount'); ?></th>
@@ -30,7 +30,7 @@
                 <tr>
                     <td>
                         <?php if (!empty($credit['user']['first_name']) && !empty($credit['user']['last_name'])) { ?>
-                            <span><?php echo $this->escape($credit['user']['first_name']); ?><?php echo $this->escape($credit['user']['last_name']); ?></span>
+                            <span><?php echo $this->escape($credit['user']['first_name']) . ' ' .  $this->escape($credit['user']['last_name']); ?></span>
                         <?php } else { ?>
                             <span><?php echo $this->escape($credit['user']['name']); ?></span>
                         <?php } ?>

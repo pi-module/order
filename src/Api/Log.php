@@ -15,7 +15,7 @@ namespace Module\Order\Api;
 
 use Pi;
 use Pi\Application\Api\AbstractApi;
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 /*
  * Pi::api('log', 'order')->setLog($log);
@@ -89,4 +89,4 @@ class Log extends AbstractApi
         // return
         return $log;
     }
-}	
+}

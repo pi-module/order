@@ -1,0 +1,25 @@
+<html style="overflow:hidden; height:100%">
+    <body>
+        <div style="height:100%; width:100%;display:flex; justify-content: center; align-items: start" >
+            <div style="display:inline-block;padding:5px 10px; background:#efefef; font-family:arial; border:1px solid #ddd; margin-top:20px">
+                <?php _e("Please wait, we will redirect you to the payment platform...") ?>
+            </div>
+        </div>
+    </body>
+</html>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    const stripe = Stripe("<?php echo $public_key ?>", {apiVersion:"<?php echo $api_version ?>"});
+    window.setTimeout(
+        function() {
+            stripe.redirectToCheckout({
+                // Make the id field from the Checkout Session creation API response
+                // available to this file, so you can provide it as parameter here
+                // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+                sessionId: '<?php echo $session['id'] ?>'
+            }).then(function (result) {
+
+            });
+        }, 2000
+    )
+</script>

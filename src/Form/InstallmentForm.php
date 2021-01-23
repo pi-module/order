@@ -79,7 +79,7 @@ class InstallmentForm extends BaseForm
                     ],
                 ],
                 'attributes' => [
-                    'required' => false,
+                    'disabled' => $this->_options['readonly'],
                 ],
             ]
         );
@@ -95,7 +95,8 @@ class InstallmentForm extends BaseForm
                 ],
                 'attributes' => [
                     'id'       => 'time-create',
-                    'required' => false,
+                    'disabled' => $this->_options['readonly'],
+
                 ],
             ]
         );

@@ -15,7 +15,7 @@ namespace Module\Order\Api;
 
 use Pi;
 use Pi\Application\Api\AbstractApi;
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 /*
  * Pi::api('user', 'order')->getUserInformation($uid, $type);
@@ -135,5 +135,4 @@ class User extends AbstractApi
             Pi::service('event')->trigger('user_update', $uid);
         }
     }
-
-}	
+}

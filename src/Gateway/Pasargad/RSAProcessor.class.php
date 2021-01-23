@@ -3,10 +3,10 @@ require_once("rsa.class.php");
 
 class RSAProcessor
 {
-    private $public_key  = null;
+    private $public_key = null;
     private $private_key = null;
-    private $modulus     = null;
-    private $key_length  = "1024";
+    private $modulus = null;
+    private $key_length = "1024";
 
     public function __construct($xmlRsakey = null, $type = null)
     {

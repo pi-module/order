@@ -16,4 +16,4 @@ class FormattingUtil
         $decimals = $decimals < 1 ? 1 : $decimals;
         return number_format($amount, $decimals, '.', '');
     }
-} 
+}

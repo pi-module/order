@@ -26,6 +26,14 @@ return [
             'name'  => 'order',
         ],
         [
+            'title' => _a('Checkout'),
+            'name'  => 'checkout',
+        ],
+        [
+            'title' => _a('Invoice'),
+            'name'  => 'invoice',
+        ],
+        [
             'title' => _a('Print'),
             'name'  => 'print',
         ],
@@ -57,14 +65,11 @@ return [
             'title' => _a('Installment'),
             'name'  => 'installment',
         ],
-        [
-            'title' => _a('Invoice'),
-            'name'  => 'invoice',
-        ],
+
     ],
     'item'     => [
         // Admin
-        'admin_perpage'                  => [
+        'admin_perpage'                   => [
             'category'    => 'admin',
             'title'       => _a('Perpage'),
             'description' => '',
@@ -72,8 +77,9 @@ return [
             'filter'      => 'number_int',
             'value'       => 50,
         ],
+
         // Front
-        'view_perpage'                   => [
+        'view_perpage'                    => [
             'category'    => 'front',
             'title'       => _a('Perpage'),
             'description' => '',
@@ -81,8 +87,9 @@ return [
             'filter'      => 'number_int',
             'value'       => 10,
         ],
+
         // Order
-        'order_active'                   => [
+        'order_active'                    => [
             'category'    => 'order',
             'title'       => _a('Order method'),
             'description' => '',
@@ -90,7 +97,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 1,
         ],
-        'order_testmode'                 => [
+        'order_testmode'                  => [
             'category'    => 'order',
             'title'       => _a('Test mode'),
             'description' => _a('By test mode , you can disable payment on bank and test order level. dont use it on active websites'),
@@ -98,7 +105,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 0,
         ],
-        'order_anonymous'                => [
+        'order_anonymous'                 => [
             'category'    => 'order',
             'title'       => _a('Anonymous users can pay'),
             'description' => '',
@@ -106,7 +113,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 0,
         ],
-        'order_filename_prefix'          => [
+        'order_filename_prefix'           => [
             'category'    => 'order',
             'title'       => _a('Order filename Prefix'),
             'description' => '',
@@ -114,7 +121,7 @@ return [
             'filter'      => 'string',
             'value'       => 'Pi',
         ],
-        'order_code_prefix'              => [
+        'order_code_prefix'               => [
             'category'    => 'order',
             'title'       => _a('Order code Prefix'),
             'description' => '',
@@ -122,7 +129,7 @@ return [
             'filter'      => 'string',
             'value'       => 'Pi',
         ],
-        'invoice_code_prefix'            => [
+        'invoice_code_prefix'             => [
             'category'    => 'order',
             'title'       => _a('Invoice code Prefix'),
             'description' => '',
@@ -130,7 +137,7 @@ return [
             'filter'      => 'string',
             'value'       => 'Pi',
         ],
-        'order_update_user'              => [
+        'order_update_user'               => [
             'category'    => 'order',
             'title'       => _a('Update user profile'),
             'description' => _a('Update user profile by order informations by user confirmation'),
@@ -138,155 +145,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 0,
         ],
-        'order_idnumber'                 => [
-            'category'    => 'order',
-            'title'       => _a('Show ID number'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_name'                     => [
-            'category'    => 'order',
-            'title'       => _a('Show name'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_email'                    => [
-            'category'    => 'order',
-            'title'       => _a('Show email'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_phone'                    => [
-            'category'    => 'order',
-            'title'       => _a('Show phone'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_mobile'                   => [
-            'category'    => 'order',
-            'title'       => _a('Show mobile'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_company'                  => [
-            'category'    => 'order',
-            'title'       => _a('Show company'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_company_extra'            => [
-            'category'    => 'order',
-            'title'       => _a('Show company extra (ID , VAT)'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_address1'                 => [
-            'category'    => 'order',
-            'title'       => _a('Show address'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_address2'                 => [
-            'category'    => 'order',
-            'title'       => _a('Show address addition'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_country'                  => [
-            'category'    => 'order',
-            'title'       => _a('Show country'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_countrylist'              => [
-            'category'    => 'order',
-            'title'       => _a('Country list'),
-            'description' => _a('Use `|` as delimiter to separate countries'),
-            'edit'        => 'textarea',
-        ],
-        'order_state'                    => [
-            'category'    => 'order',
-            'title'       => _a('Show state'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_city'                     => [
-            'category'    => 'order',
-            'title'       => _a('Show city'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_zip'                      => [
-            'category'    => 'order',
-            'title'       => _a('Show Zip code'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_packing'                  => [
-            'category'    => 'order',
-            'title'       => _a('Show packing'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_location_delivery'        => [
-            'category'    => 'order',
-            'title'       => _a('Show location and delivery'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_usernote'                 => [
-            'category'    => 'order',
-            'title'       => _a('Show user note'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 1,
-        ],
-        'order_term'                     => [
-            'category'    => 'order',
-            'title'       => _a('Show order term'),
-            'description' => '',
-            'edit'        => 'checkbox',
-            'filter'      => 'number_int',
-            'value'       => 0,
-        ],
-        'order_termurl'                  => [
-            'category'    => 'order',
-            'title'       => _a('Order term url'),
-            'description' => '',
-            'edit'        => 'text',
-        ],
-        'order_additional_price_product' => [
+        'order_additional_price_product'  => [
             'category'    => 'order',
             'title'       => _a('Product additional price'),
             'description' => _a('Additional price as ready and delivery, just for products'),
@@ -294,7 +153,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 0,
         ],
-        'order_additional_price_service' => [
+        'order_additional_price_service'  => [
             'category'    => 'order',
             'title'       => _a('Service additional price'),
             'description' => _a('Additional price as setup, just for servicies'),
@@ -302,7 +161,15 @@ return [
             'filter'      => 'number_int',
             'value'       => 0,
         ],
-        'order_payment'                  => [
+        'formatter_price'                 => [
+            'category'    => 'order',
+            'title'       => _a('Formatter price'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'order_payment'                   => [
             'title'       => _a('After save order'),
             'description' => '',
             'edit'        => [
@@ -318,29 +185,221 @@ return [
             'value'       => 'invoice',
             'category'    => 'order',
         ],
-        'order_sellerlogo'               => [
+        'order_sellerlogo'                => [
             'category'    => 'order',
             'title'       => _a('Seller logo'),
             'description' => _a('Put logo full URL'),
             'edit'        => 'text',
             'filter'      => 'string',
         ],
-        'order_sellerinfo'               => [
+        'order_sellerinfo'                => [
             'category'    => 'order',
             'title'       => _a('Seller information'),
             'description' => _a('HTML tags supported, use on invoice page'),
             'edit'        => 'textarea',
             'filter'      => 'string',
         ],
-        'order_notification_email'       => [
+        'order_notification_email'        => [
             'category'    => 'order',
             'title'       => _a('Notification email for each module'),
             'description' => _a('Setup format : shop,shop@mysite.com|guide,guide@mysite.com'),
             'edit'        => 'textarea',
             'filter'      => 'string',
         ],
+
+        // Checkout
+        'address_type'                    => [
+            'title'       => _a('Address type'),
+            'description' => '',
+            'edit'        => [
+                'type'    => 'select',
+                'options' => [
+                    'options' => [
+                        'both'       => __('Both'),
+                        'individual' => __('Individual'),
+                        'company'    => __('Company'),
+                    ],
+                ],
+            ],
+            'filter'      => 'text',
+            'value'       => 'both',
+            'category'    => 'checkout',
+        ],
+        'address_type_default'            => [
+            'title'       => _a('Default address type'),
+            'description' => '',
+            'edit'        => [
+                'type'    => 'select',
+                'options' => [
+                    'options' => [
+                        'individual' => __('Individual'),
+                        'company'    => __('Company'),
+                    ],
+                ],
+            ],
+            'filter'      => 'text',
+            'value'       => 'individual',
+            'category'    => 'checkout',
+        ],
+        'order_idnumber'                  => [
+            'category'    => 'checkout',
+            'title'       => _a('Show ID number'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'order_name'                      => [
+            'category'    => 'checkout',
+            'title'       => _a('Show name'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 1,
+        ],
+        'order_email'                     => [
+            'category'    => 'checkout',
+            'title'       => _a('Show email'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 1,
+        ],
+        'order_phone'                     => [
+            'category'    => 'checkout',
+            'title'       => _a('Show phone'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'order_mobile'                    => [
+            'category'    => 'checkout',
+            'title'       => _a('Show mobile'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 1,
+        ],
+        'order_birthday'                  => [
+            'category'    => 'checkout',
+            'title'       => _a('Show birthday'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'order_company'                   => [
+            'category'    => 'checkout',
+            'title'       => _a('Show company'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'order_company_extra'             => [
+            'category'    => 'checkout',
+            'title'       => _a('Show company extra (ID , VAT)'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'order_address1'                  => [
+            'category'    => 'checkout',
+            'title'       => _a('Show address'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 1,
+        ],
+        'order_address2'                  => [
+            'category'    => 'checkout',
+            'title'       => _a('Show address addition'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 1,
+        ],
+        'order_country'                   => [
+            'category'    => 'checkout',
+            'title'       => _a('Show country'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'order_countrylist'               => [
+            'category'    => 'checkout',
+            'title'       => _a('Country list'),
+            'description' => _a('Use `|` as delimiter to separate countries'),
+            'edit'        => 'textarea',
+        ],
+        'order_state'                     => [
+            'category'    => 'checkout',
+            'title'       => _a('Show state'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'order_city'                      => [
+            'category'    => 'checkout',
+            'title'       => _a('Show city'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'order_zip'                       => [
+            'category'    => 'checkout',
+            'title'       => _a('Show Zip code'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'order_packing'                   => [
+            'category'    => 'checkout',
+            'title'       => _a('Show packing'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'order_location_delivery'         => [
+            'category'    => 'checkout',
+            'title'       => _a('Show location and delivery'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'order_usernote'                  => [
+            'category'    => 'checkout',
+            'title'       => _a('Show user note'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 1,
+        ],
+        'order_term'                      => [
+            'category'    => 'checkout',
+            'title'       => _a('Show order term'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'order_termurl'                   => [
+            'category'    => 'checkout',
+            'title'       => _a('Order term url'),
+            'description' => '',
+            'edit'        => 'text',
+        ],
+
         // Print
-        'print_anonymous'                => [
+        'print_anonymous'                 => [
             'category'    => 'print',
             'title'       => _a('Signature zone on print'),
             'description' => '',
@@ -348,8 +407,9 @@ return [
             'filter'      => 'number_int',
             'value'       => 1,
         ],
+
         // Customize
-        'price_custom'                   => [
+        'price_custom'                    => [
             'category'    => 'customize',
             'title'       => _a('Use custom price'),
             'description' => '',
@@ -357,7 +417,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 0,
         ],
-        'date_format'                    => [
+        'date_format'                     => [
             'category'    => 'customize',
             'title'       => _a('Date format'),
             'description' => _a('For example : yyyy/MM/dd'),
@@ -365,8 +425,9 @@ return [
             'filter'      => 'string',
             'value'       => 'yyyy/MM/dd',
         ],
+
         // Payment
-        'payment_gateway_error_url'      => [
+        'payment_gateway_error_url'       => [
             'category'    => 'payment',
             'title'       => _a('Payment gateway error url'),
             'description' => _a('Set back url when gateway have error, set empty for default url'),
@@ -381,7 +442,7 @@ return [
             'filter' => 'number_int',
             'value' => 1
         ), */
-        'payment_image'                  => [
+        'payment_image'                   => [
             'category'    => 'payment',
             'title'       => _a('Website image URL'),
             'description' => _a('Use on some payment gateway like paypal.'),
@@ -394,7 +455,7 @@ return [
             'edit' => 'textarea',
             'filter' => 'string',
         ), */
-        'payment_offline'                => [
+        'payment_offline'                 => [
             'category'    => 'payment',
             'title'       => _a('Offline payment'),
             'description' => '',
@@ -402,7 +463,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 0,
         ],
-        'payment_offline_title'          => [
+        'payment_offline_title'           => [
             'category'    => 'payment',
             'title'       => _a('Title for offline payment'),
             'description' => '',
@@ -410,7 +471,7 @@ return [
             'filter'      => 'string',
             'value'       => _a('Offline payment'),
         ],
-        'payment_offline_description'    => [
+        'payment_offline_description'     => [
             'category'    => 'payment',
             'title'       => _a('Description for offline payment'),
             'description' => '',
@@ -418,8 +479,17 @@ return [
             'filter'      => 'string',
             'value'       => _a('Admin make contact about payment whit you after review your order'),
         ],
+        'payment_minimum_for_installment' => [
+            'category'    => 'payment',
+            'title'       => _a('Minimum value for split payments'),
+            'description' => _a('Below of this amount, the invoice is paid throught in a single transaction (1 installment only)'),
+            'edit'        => 'text',
+            'filter'      => 'number_int',
+            'value'       => 100,
+        ],
+
         // Credit
-        'credit_active'                  => [
+        'credit_active'                   => [
             'category'    => 'credit',
             'title'       => _a('Active credit system'),
             'description' => _a('User can use credit to pay invoice and see history'),
@@ -427,7 +497,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 1,
         ],
-        'credit_type'                    => [
+        'credit_type'                     => [
             'title'       => _a('Credit system type'),
             'description' => '',
             'edit'        => [
@@ -443,23 +513,25 @@ return [
             'value'       => 'general',
             'category'    => 'credit',
         ],
+
         // Score
-        'score_active'                   => [
+        'score_active'                    => [
             'category' => 'score',
             'title'    => _a('Active score system'),
             'edit'     => 'checkbox',
             'filter'   => 'number_int',
             'value'    => 0,
         ],
-        'score_division'                 => [
+        'score_division'                  => [
             'category' => 'score',
             'title'    => _a('Division score'),
             'edit'     => 'text',
             'filter'   => 'string',
             'value'    => '0.001',
         ],
+
         // Notification
-        'sms_order_user'                 => [
+        'sms_order_user'                  => [
             'category'    => 'notification',
             'title'       => _a('New order notification to user (SMS)'),
             'description' => _a('Dear %s %s, you order %s product by %s price, added on %s website'),
@@ -467,7 +539,7 @@ return [
             'filter'      => 'string',
             'value'       => _a('Dear %s %s, you order %s product by %s price, added on %s website'),
         ],
-        'sms_order_admin'                => [
+        'sms_order_admin'                 => [
             'category'    => 'notification',
             'title'       => _a('New order notification to admin (SMS)'),
             'description' => _a('Dear %s admin, %s %s User ordered %s product by %s price'),
@@ -475,7 +547,7 @@ return [
             'filter'      => 'string',
             'value'       => _a('Dear %s admin, %s %s User ordered %s product by %s price'),
         ],
-        'sms_invoice_user'               => [
+        'sms_invoice_user'                => [
             'category'    => 'notification',
             'title'       => _a('Pay invoice notification to user (SMS)'),
             'description' => _a('Dear %s %s, You paid invoice %s by %s price for %s order included % product on %s website successfully'),
@@ -483,7 +555,7 @@ return [
             'filter'      => 'string',
             'value'       => _a('Dear %s %s, You paid invoice %s by %s price for %s order included % product on %s website successfully'),
         ],
-        'sms_invoice_admin'              => [
+        'sms_invoice_admin'               => [
             'category'    => 'notification',
             'title'       => _a('Pay invoice notification to admin (SMS)'),
             'description' => _a('Dear %s admin, %s %s User paid invoice %s by %s price for %s order included % product successfully'),
@@ -491,7 +563,7 @@ return [
             'filter'      => 'string',
             'value'       => _a('Dear %s admin, %s %s User paid invoice %s by %s price for %s order included % product successfully'),
         ],
-        'notification_cron_invoice'      => [
+        'notification_cron_invoice'       => [
             'category'    => 'notification',
             'title'       => _a('Set X day before due date (CRON)'),
             'description' => _a('Notification invoice due date, X day before invoice time by cron'),
@@ -499,7 +571,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 2,
         ],
-        'sms_invoice_duedate'            => [
+        'sms_invoice_duedate'             => [
             'category'    => 'notification',
             'title'       => _a('Duedate invoice notification to user (CRON)'),
             'description' => _a('Dear %s %s, You have duedate invoice on next %s days'),
@@ -507,7 +579,7 @@ return [
             'filter'      => 'string',
             'value'       => _a('Dear %s %s, You have duedate invoice on next %s days'),
         ],
-        'notification_cron_expired'      => [
+        'notification_cron_expired'       => [
             'category'    => 'notification',
             'title'       => _a('Set X day after expired (CRON)'),
             'description' => _a('Notification invoice expired, X day after invoice time by cron'),
@@ -515,7 +587,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 1,
         ],
-        'user_expired_invoice'           => [
+        'user_expired_invoice'            => [
             'category'    => 'notification',
             'title'       => _a('Expired invoice notification to user (CRON)'),
             'description' => _a('Dear %s %s, You have expired invoice on %s days ago'),
@@ -523,8 +595,9 @@ return [
             'filter'      => 'string',
             'value'       => _a('Dear %s %s, You have expired invoice on %s days ago'),
         ],
+
         // Cron
-        'module_cron'                    => [
+        'module_cron'                     => [
             'category'    => 'cron',
             'title'       => _a('Active this module cron system'),
             'description' => '',
@@ -532,8 +605,25 @@ return [
             'filter'      => 'number_int',
             'value'       => 1,
         ],
+        'order_auto_cancel'                  => [
+            'category'    => 'cron',
+            'title'       => _a('Auto cancel orders'),
+            'description' => _a('Active auto cancel orders by cron after each selected minutes if not paid yet'),
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'order_auto_cancel_time'                  => [
+            'category'    => 'cron',
+            'title'       => _a('Auto cancel time'),
+            'description' => _a('Set it as minutes'),
+            'edit'        => 'text',
+            'filter'      => 'string',
+            'value'       => 30,
+        ],
+
         // Installment
-        'installment_credit'             => [
+        /* 'installment_credit'             => [
             'category'    => 'installment',
             'title'       => _a('Reduce from user credit'),
             'description' => '',
@@ -940,9 +1030,10 @@ return [
             'edit'        => 'text',
             'filter'      => 'string',
             'value'       => 10,
-        ],
+        ], */
+
         // head_meta
-        'text_description_checkup'       => [
+        'text_description_checkup'        => [
             'category'    => 'head_meta',
             'title'       => _a('Description for checkup page'),
             'description' => '',
@@ -950,8 +1041,9 @@ return [
             'filter'      => 'string',
             'value'       => '',
         ],
+
         // Invoice
-        'invoice_text_description'       => [
+        'invoice_text_description'        => [
             'category'    => 'invoice',
             'title'       => _a('Description for invoice'),
             'description' => '',
@@ -959,7 +1051,7 @@ return [
             'filter'      => 'string',
             'value'       => '',
         ],
-        'invoice_text_footer'            => [
+        'invoice_text_footer'             => [
             'category'    => 'invoice',
             'title'       => _a('Text for footer'),
             'description' => '',
@@ -967,13 +1059,13 @@ return [
             'filter'      => 'string',
             'value'       => '',
         ],
-        'invoice_header_image'           => [
+        'invoice_header_image'            => [
             'category'    => 'invoice',
             'title'       => _a('Invoice header image path'),
             'description' => '',
             'edit'        => 'text',
         ],
-        'invoice_header_logo'            => [
+        'invoice_header_logo'             => [
             'category'    => 'invoice',
             'title'       => _a('Invoice header logo path'),
             'description' => 'Square',

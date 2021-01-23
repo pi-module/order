@@ -16,7 +16,7 @@ namespace Module\Order\Controller\Front;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Zend\Db\Sql\Predicate\Expression;
+use Laminas\Db\Sql\Predicate\Expression;
 
 class CreditController extends IndexController
 {
@@ -84,20 +84,22 @@ class CreditController extends IndexController
             if ($row->order > 0) {
                 $list[$row->id]['orderLink'] = Pi::url(
                     $this->url(
-                        'order', [
-                        'controller' => 'detail',
-                        'id'         => $row->order,
-                    ]
+                        'order',
+                        [
+                            'controller' => 'detail',
+                            'id'         => $row->order,
+                        ]
                     )
                 );
             } elseif ($row->invoice > 0) {
                 $invoice                     = Pi::api('invoice', 'order')->getInvoice($row->invoice);
                 $list[$row->id]['orderLink'] = Pi::url(
                     $this->url(
-                        'order', [
-                        'controller' => 'detail',
-                        'id'         => $invoice['order'],
-                    ]
+                        'order',
+                        [
+                            'controller' => 'detail',
+                            'id'         => $invoice['order'],
+                        ]
                     )
                 );
             } else {

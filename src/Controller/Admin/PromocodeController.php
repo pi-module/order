@@ -30,8 +30,8 @@ class PromocodeController extends ActionController
         $select = Pi::model('promocode', 'order')->select()->order('id DESC');
 
         // Set paginator
-        $resultSetPrototype = new  \Zend\Db\ResultSet\ResultSet();
-        $paginatorAdapter   = new \Zend\Paginator\Adapter\DbSelect(
+        $resultSetPrototype = new  \Laminas\Db\ResultSet\ResultSet();
+        $paginatorAdapter   = new \Laminas\Paginator\Adapter\DbSelect(
             $select,
             Pi::model('promocode', 'order')->getAdapter(),
             $resultSetPrototype
@@ -83,7 +83,6 @@ class PromocodeController extends ActionController
                 $row->save();
 
                 $this->jump(['action' => 'index']);
-
             }
         } else {
             if ($id) {
@@ -106,6 +105,5 @@ class PromocodeController extends ActionController
         $id = $this->params('id');
         Pi::model('promocode', 'order')->delete(['id' => $id]);
         $this->jump(['action' => 'index']);
-
     }
 }

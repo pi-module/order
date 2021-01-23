@@ -14,7 +14,7 @@
 namespace Module\Order\Form;
 
 use Pi;
-use Zend\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilter;
 
 class PayFilter extends InputFilter
 {
@@ -31,4 +31,4 @@ class PayFilter extends InputFilter
             }
         }
     }
-}	
+}

@@ -14,7 +14,7 @@
 namespace Module\Order\Form\Element;
 
 use Pi;
-use Zend\Form\Element\Select;
+use Laminas\Form\Element\Select;
 
 class Location extends Select
 {

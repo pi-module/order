@@ -164,8 +164,9 @@ function pDate($format, $timestamp = null)
 
             case 'r':
                 $result .= (substr($pdate_week_name[$pWeek], 0, 2) . '، ' . $pDay . ' ' . substr($pdate_month_name[$pMonth], 0, 6) . ' ' . $pYear . ' ' . date(
-                        'H::i:s P', $timestamp
-                    ));
+                    'H::i:s P',
+                    $timestamp
+                ));
                 break;
 
             case 'U':
@@ -303,8 +304,9 @@ function pStrFTime($format, $timestamp = null)
                 // Time and date stamps
                 case 'c':
                     $result .= (substr($pdate_week_name[$pWeek], 0, 2) . ' ' . substr($pdate_month_name[$pMonth], 0, 6) . ' ' . $pDay . ' ' . strftime(
-                            '%T', $timestamp
-                        ) . ' ' . $pYear);
+                        '%T',
+                        $timestamp
+                    ) . ' ' . $pYear);
                     break;
 
                 case 'D':

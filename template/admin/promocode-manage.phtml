@@ -6,14 +6,11 @@ $this->css(
         $this->assetModule('script/system-ui.css', 'system'),
     ]
 );
-
 $this->jQuery(
     [
         'ui/jquery-ui.custom.min.js',
     ]
 );
-
-
 $this->js(
     [
         $this->assetModule('js/moment.js'),
@@ -24,15 +21,10 @@ $this->js(
     ]
 );
 $this->Backbone();
-
 ?>
 <div class="clearfix">
-
     <?php echo $this->form($form); ?>
-
 </div>
-
-
 <script>
     $(
         function () {
@@ -73,9 +65,7 @@ $this->Backbone();
                 $('input[name=time_end]').val($('input[name=datetimepicker_end]').datetimepicker('date').unix());
             });
 
-
             $('[data-toggle="tooltip"]').tooltip({html: true});
         }
     );
-
 </script>

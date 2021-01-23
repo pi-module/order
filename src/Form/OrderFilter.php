@@ -15,14 +15,14 @@ namespace Module\Order\Form;
 
 use Module\System\Validator\UserEmail as UserEmailValidator;
 use Pi;
-use Zend\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilter;
 
 class OrderFilter extends InputFilter
 {
     public function __construct($option = [])
     {
         // Get config
-        $config = Pi::service('registry')->config->read('order', 'order');
+        $config = Pi::service('registry')->config->read('order');
 
         // Check for load register form
         $registerFiltersName = [];
@@ -345,7 +345,7 @@ class OrderFilter extends InputFilter
                     );
                 }
                 break;
-
+            case 'booking':
             case 'service':
                 // gateway
                 $this->add(

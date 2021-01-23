@@ -1,16 +1,18 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="clearfix">
-    <h3><?php _e('Update user credit'); ?></h3>
-    <div class="clearfix well">
-        <h4><?php _e('Guide lines'); ?></h4>
-        <ol>
-            <li><?php _e('You can increase or decrease user credit amount here'); ?></li>
-            <li><?php _e('Select user ID and put user ID here'); ?></li>
-            <li><?php _e('Put amount to update increase or decrease than on user credit'); ?></li>
-            <li><?php _e('Select change type, set increase or decrease'); ?></li>
-            <li><?php _e('Set update credit reason as text, it show to user and admin'); ?></li>
-            <li><?php _e('Decrease just work if user credit is more than your input amount'); ?></li>
-        </ol>
+    <h1 class="mb-3"><?php _e('Update user credit'); ?></h1>
+    <div class="clearfix card bg-light mb-3">
+        <div class="card-body">
+            <h4 class="card-title"><?php _e('Guide lines'); ?></h4>
+            <ol>
+                <li><?php _e('You can increase or decrease user credit amount here'); ?></li>
+                <li><?php _e('Select user ID and put user ID here'); ?></li>
+                <li><?php _e('Put amount to update increase or decrease than on user credit'); ?></li>
+                <li><?php _e('Select change type, set increase or decrease'); ?></li>
+                <li><?php _e('Set update credit reason as text, it show to user and admin'); ?></li>
+                <li><?php _e('Decrease just work if user credit is more than your input amount'); ?></li>
+            </ol>
+        </div>
     </div>
     <?php if (!empty($message)) { ?>
         <div class="alert alert-danger" role="alert"><?php echo $message; ?></div>

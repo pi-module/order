@@ -17,7 +17,7 @@ use Module\Order\Form\RemoveForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 class IndexController extends ActionController
 {
@@ -39,30 +39,28 @@ class IndexController extends ActionController
         ];
         $orders  = Pi::api('order', 'order')->getOrderFromUser($user['id'], false, $options);
         foreach ($orders as $order) {
-            if ($order['can_pay']) {
-                $order['installments'] = Pi::api('installment', 'order')->getInstallmentsFromOrder($order['id']);
-                $countInstallment      = 0;
-                foreach ($order['installments'] as $installment) {
-                    if ($installment['status_invoice'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
-                        $countInstallment++;
-                        if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID
-                            || ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID
-                                && $installment['gateway'] == 'manual')
-                        ) {
-                            $order['can_pay'] = false;
-                            break;
-                        }
+            $order['installments'] = Pi::api('installment', 'order')->getInstallmentsFromOrder($order['id']);
+            $countInstallment      = 0;
+            $order['can_pay']      = false;
+            $toPaid                = 0;
+            foreach ($order['installments'] as $installment) {
+                if ($installment['status_invoice'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED) {
+                    $countInstallment++;
+                    if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
+                        $toPaid += $installment['due_price'];
                     }
-                }
-                if ($countInstallment == 0) {
-                    if ($order['default_gateway'] == 'manual') {
-                        $order['can_pay'] = false;
+                    if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID
+                        && $installment['gateway'] != 'manual'
+                    ) {
+                        $order['can_pay'] = true;
                     }
                 }
             }
 
+            $order['to_paid_view'] = Pi::api('api', 'order')->viewPrice($toPaid);
+
             $user['orders'][$order['id']]             = $order;
-            $products                                 = Pi::api('order', 'order')->listProduct($order['id']);
+            $products                                 = Pi::api('order', 'order')->listProduct($order['id'], ['order' => $order]);
             $user['orders'][$order['id']]['products'] = $products;
             $totalPrice                               = 0;
             foreach ($products as $product) {
@@ -110,7 +108,6 @@ class IndexController extends ActionController
         $this->view()->assign('user', $user);
         $this->view()->assign('config', $config);
         $this->view()->assign('paginator', $paginator);
-
     }
 
     public function errorAction()
@@ -146,7 +143,5 @@ class IndexController extends ActionController
 
         Pi::api('order', 'order')->cancelOrder($id);
         $this->jump(['', 'action' => 'index'], __('Order canceled'));
-
     }
-
 }

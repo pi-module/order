@@ -14,13 +14,13 @@
 namespace Module\Order\Form;
 
 use Pi;
-use Zend\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilter;
 
 class OrderSimpleFilter extends InputFilter
 {
     public function __construct($option = [])
     {
-        $config = Pi::service('registry')->config->read('order', 'order');
+        $config = Pi::service('registry')->config->read('order');
 
         $this->add(
             [
@@ -104,7 +104,7 @@ class OrderSimpleFilter extends InputFilter
                     );
                 }
                 break;
-
+            case 'booking':
             case 'service':
                 // gateway
                 $this->add(
@@ -152,4 +152,4 @@ class OrderSimpleFilter extends InputFilter
             );
         }
     }
-}    	
+}

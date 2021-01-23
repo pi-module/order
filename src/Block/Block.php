@@ -38,9 +38,8 @@ class Block
                 $user['orders'][$invoice['order']]['total_price']      = $totalPrice;
                 $user['orders'][$invoice['order']]['total_price_view'] = Pi::api('api', 'order')->viewPrice($totalPrice);
             }
-
         }
-        // Set more link 
+        // Set more link
         $block['more'] = Pi::url('order');
         // Set block array
         $block['resources'] = $user;
@@ -65,7 +64,7 @@ class Block
         }
         // Get invoice
         $user['invoices'] = Pi::api('invoice', 'order')->getInvoiceFromUser($user['id'], true, $orderIds);
-        // Set more link 
+        // Set more link
         $block['more'] = Pi::url('order');
         // Set block array
         $block['resources'] = $user;

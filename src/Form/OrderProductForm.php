@@ -34,13 +34,19 @@ class OrderProductForm extends BaseForm
 
     public function init()
     {
-
         $this->add(
             [
                 'name'       => 'module',
                 'options'    => [
                     'label'         => __('Module name'),
-                    'value_options' => ['order' => 'order', 'shop' => 'shop', 'guide' => 'guide'],
+                    'value_options' => [
+                        'order' => 'order',
+                        'shop'  => 'shop',
+                        'guide' => 'guide',
+                        'event' => 'event',
+                        'video' => 'video',
+                        'plans' => 'plans',
+                    ],
                 ],
                 'type'       => 'select',
                 'attributes' => [
@@ -223,7 +229,7 @@ class OrderProductForm extends BaseForm
         );
 
         $elemsForGroup = [];
-        foreach (['order', 'shop', 'guide', 'event'] as $module) {
+        foreach (['order', 'shop', 'guide', 'event', 'video', 'plans'] as $module) {
             if (Pi::service('module')->isActive($module)) {
                 $elems = Pi::api('order', $module)->getExtraFieldsFormForOrder();
                 foreach ($elems as $elem) {

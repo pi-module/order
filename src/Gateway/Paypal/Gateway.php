@@ -15,7 +15,7 @@ namespace Module\Order\Gateway\Paypal;
 
 use Module\Order\Gateway\AbstractGateway;
 use Pi;
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 class Gateway extends AbstractGateway
 {
@@ -72,7 +72,6 @@ class Gateway extends AbstractGateway
 
         $json = json_decode($result);
         return $json->access_token;
-
     }
 
     public function getApproval($order)
@@ -112,7 +111,6 @@ class Gateway extends AbstractGateway
             }
 
             if ($this->gatewayPayInformation['unconsumed_' . $i] > 0) {
-
                 $item             = [];
                 $item["name"]     = __('Old package recovery');
                 $item["price"]    = -$this->gatewayPayInformation['unconsumed_' . $i];
@@ -156,7 +154,8 @@ class Gateway extends AbstractGateway
                         "items": ' . json_encode($items) . ',
                         "shipping_address": {
                             "recipient_name": "' . addcslashes(
-                $this->gatewayPayInformation['first_name'] . ' ' . $this->gatewayPayInformation['last_name'], '"'
+                $this->gatewayPayInformation['first_name'] . ' ' . $this->gatewayPayInformation['last_name'],
+                '"'
             ) . '",
                             "line1": "' . addcslashes($this->gatewayPayInformation['address1'], '"') . '",
                             "line2": "' . addcslashes($this->gatewayPayInformation['address2'], '"') . '",
@@ -206,7 +205,6 @@ class Gateway extends AbstractGateway
         }
 
         return null;
-
     }
 
     public function getPayment($paymentId)
@@ -238,7 +236,6 @@ class Gateway extends AbstractGateway
         }
 
         return $result;
-
     }
 
     public function execute($payerId, $paymentId)
@@ -366,12 +363,26 @@ class Gateway extends AbstractGateway
             'required' => false,
         ];
         // password
-        $form['password'] = [
+        $form['password']             = [
             'name'     => 'password',
             'label'    => __('Secret'),
             'type'     => 'text',
             'required' => false,
         ];
+        $form['commission_owner_min'] = [
+            'name'     => 'commission_owner_min',
+            'label'    => __('Commission owner minimum'),
+            'type'     => 'text',
+            'required' => false,
+        ];
+
+        $form['commission_customer_min'] = [
+            'name'     => 'commission_customer_min',
+            'label'    => __('Commission customer minimum'),
+            'type'     => 'text',
+            'required' => false,
+        ];
+
         // test_mode
         $form['error_mode']       = [
             'name'     => 'error_mode',
@@ -487,7 +498,7 @@ class Gateway extends AbstractGateway
         $this->gatewayError = '';
     }
 
-    function setPayForm()
+    public function setPayForm()
     {
         return;
     }

@@ -21,7 +21,7 @@ class OrderSimpleForm extends BaseForm
     public function __construct($name = null, $option = [])
     {
         $this->option = $option;
-        $this->config = Pi::service('registry')->config->read('order', 'order');
+        $this->config = Pi::service('registry')->config->read('order');
         parent::__construct($name);
     }
 
@@ -125,7 +125,7 @@ class OrderSimpleForm extends BaseForm
                                 'name'       => 'default_gateway',
                                 'type'       => 'radio',
                                 'options'    => [
-                                    'label'         => __('Adapter'),
+                                    'label'         => __('Choose your payment method'),
                                     'value_options' => [],
                                 ],
                                 'attributes' => [
@@ -156,7 +156,7 @@ class OrderSimpleForm extends BaseForm
                                 'name'       => 'default_gateway',
                                 'type'       => 'radio',
                                 'options'    => [
-                                    'label'         => __('Adapter'),
+                                    'label'         => __('Choose your payment method'),
                                     'value_options' => $gatewayList,
                                 ],
                                 'attributes' => [
@@ -169,6 +169,7 @@ class OrderSimpleForm extends BaseForm
                 }
                 break;
 
+            case 'booking':
             case 'service':
                 if (count($gatewayList) == 1) {
                     $gatewayList = array_keys($gatewayList);
@@ -189,7 +190,7 @@ class OrderSimpleForm extends BaseForm
                             'name'       => 'default_gateway',
                             'type'       => 'radio',
                             'options'    => [
-                                'label'         => __('Adapter'),
+                                'label'         => __('Choose your payment method'),
                                 'value_options' => $gatewayList,
                             ],
                             'attributes' => [
@@ -218,6 +219,32 @@ class OrderSimpleForm extends BaseForm
                 ]
             );
         }
+
+        if (!$this->option['pay_all'] && count($this->option['composition']) > 1) {
+            $this->add(
+                [
+                    'name' => 'html1',
+                    'type' => 'html-raw',
+
+                    'attributes' => [
+                        'value' => '<div class="mt-2 mb-3 p-2 border-success border">' . sprintf(
+                            __('You chose to pay through 2 installments : %s now, and %s before %s'),
+                            _currency(number_format($this->option['due_price'] * $this->option['composition'][0] / 100, 2, '.', '')),
+                            _currency(
+                                number_format(
+                                        $this->option['due_price'] - number_format($this->option['due_price'] * $this->option['composition'][0] / 100, 2, '.', ''),
+                                        2,
+                                        '.',
+                                        ''
+                                    )
+                            ),
+                            _date($this->option['limit_date'])
+                        ) . '</div>',
+                    ],
+                ]
+            );
+        }
+
         // order_term
         if ($this->config['order_term'] && !empty($this->config['order_termurl'])) {
             $term = sprintf('<a href="%s" target="_blank">%s</a>', $this->config['order_termurl'], __('Terms & Conditions'));
@@ -238,7 +265,7 @@ class OrderSimpleForm extends BaseForm
         }
         // Save
         if ($this->config['order_payment'] == 'payment') {
-            $title = __('Pay');
+            $title = sprintf(__('Pay %s'), _currency(number_format($this->option['due_price'] * $this->option['composition'][0] / 100, 2, '.', '')));
         } else {
             $title = __('Save order');
         }

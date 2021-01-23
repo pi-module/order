@@ -15,7 +15,7 @@ return [
     'meta'     => [
         'title'       => _a('Orders'),
         'description' => _a('Manage order process and payment'),
-        'version'     => '2.2.4',
+        'version'     => '2.3.9',
         'license'     => 'New BSD',
         'logo'        => 'image/logo.png',
         'readme'      => 'docs/readme.txt',
@@ -27,7 +27,7 @@ return [
         'Dev'                => 'Hossein Azizabadi; Marc Desrousseaux; Frederic Tissot; Mickael Stamm',
         'Fonctionnal Design' => '@marc-pi, @voltan',
         'QA'                 => '@marc-pi',
-        'website'            => 'http://pialog',
+        'website'            => 'http://piengine.org',
         'credits'            => 'Pi Engine Team',
     ],
     // Resource

@@ -20,6 +20,7 @@ class Order extends Model
     const STATUS_ORDER_DRAFT     = 0;
     const STATUS_ORDER_VALIDATED = 1;
     const STATUS_ORDER_CANCELLED = 2;
+    const STATUS_ORDER_PENDING   = 3;
 
     const STATUS_DELIVERY_PENDING   = 1;
     const STATUS_DELIVERY_PACKED    = 2;
@@ -50,6 +51,7 @@ class Order extends Model
             'packing',
             'promotion_type',
             'promotion_value',
+            'cancel_reason',
             'create_by',
             'extra',
         ];
@@ -65,6 +67,7 @@ class Order extends Model
             Order::STATUS_ORDER_DRAFT     => __('Draft'),
             Order::STATUS_ORDER_VALIDATED => __('Validated'),
             Order::STATUS_ORDER_CANCELLED => __('Cancelled'),
+            Order::STATUS_ORDER_PENDING   => __('Validation Pending'),
         ];
     }
 }

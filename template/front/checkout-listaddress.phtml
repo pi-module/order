@@ -1,83 +1,108 @@
 <?php if (!empty($addresses)) { ?>
     <div class="clearfix row">
         <?php foreach ($addresses as $address) { ?>
-            <div class="col-md-12 address"
+            <div class="col-lg-12 col-md-12 address"
                  data-id="addressFrom<?php echo $address['id']; ?>"
                  data-button="addressFromButton<?php echo $address['id']; ?>">
                 <div class="clearfix row">
-                    <div class="info col-md-7">
+                    <div class="info col-lg-7 col-md-7">
                         <div>
-                            <?php echo $this->escape($address['first_name']); ?><?php echo $this->escape($address['last_name']); ?>
+                            <?php _e('Type') ?> :
+                            <?php echo $address['account_type'] == 'none' ? __('ND') : __(ucfirst($address['account_type'])); ?>
                         </div>
-                        <?php if (!empty($address['company'])) { ?>
+                        <?php if ($address['account_type'] === 'company') { ?>
                             <div><?php echo $this->escape($address['company']); ?></div>
-                        <?php } ?>
-                        <?php if (!empty($address['company_id'])) { ?>
-                            <div><?php echo $this->escape($address['company_id']); ?></div>
-                        <?php } ?>
-                        <?php if (!empty($address['company_vat'])) { ?>
-                            <div><?php echo $this->escape($address['company_vat']); ?></div>
-                        <?php } ?>
-                        <?php if (!empty($address['address1'])) { ?>
-                            <div><?php echo $this->escape($address['address1']); ?></div>
-                        <?php } ?>
-                        <?php if (!empty($address['address2'])) { ?>
-                            <div><?php echo $this->escape($address['address2']); ?></div>
-                        <?php } ?>
-                        <div>
-                            <?php if (!empty($address['zip_code'])) { ?>
-                                <?php echo $this->escape($address['zip_code']); ?>&nbsp;
-                            <?php } ?>
-                            <?php if (!empty($address['state'])) { ?>
-                                <?php echo $this->escape($address['state']); ?>&nbsp;
-                            <?php } ?>
-                            <?php if (!empty($address['city'])) { ?>
-                                <?php echo $this->escape($address['city']); ?>&nbsp;
-                            <?php } ?>
-                            <?php if (!empty($address['country'])) { ?>
-                                <?php echo $this->escape($address['country']); ?>&nbsp;
-                            <?php } ?>
-                        </div>
-                        <?php if (!empty($address['email'])) { ?>
-                            <div>
-                                <?php _e('Email'); ?> :
-                                <?php echo $this->escape($address['email']); ?>
-                            </div>
-                        <?php } ?>
-                        <?php if (!empty($address['phone'])) { ?>
-                            <div>
-                                <?php _e('Phone'); ?> :
-                                <?php echo $this->escape($address['phone']); ?>
-                            </div>
-                        <?php } ?>
-                        <?php if (!empty($address['mobile'])) { ?>
-                            <div>
-                                <?php _e('Mobile'); ?> :
-                                <?php echo $this->escape($address['mobile']); ?>
-                            </div>
-                        <?php } ?>
 
+                            <?php if (!empty($address['company_address1'])) { ?>
+                                <div><?php echo $this->escape($address['company_address1']); ?></div>
+                            <?php } ?>
+                            <?php if (!empty($address['company_address2'])) { ?>
+                                <div><?php echo $this->escape($address['company_address2']); ?></div>
+                            <?php } ?>
+
+                            <div>
+                                <?php if (!empty($address['company_zip_code'])) { ?>
+                                    <?php echo $this->escape($address['company_zip_code']); ?>&nbsp;
+                                <?php } ?>
+                                <?php if (!empty($address['company_state'])) { ?>
+                                    <?php echo $this->escape($address['company_state']); ?>&nbsp;
+                                <?php } ?>
+                                <?php if (!empty($address['company_city'])) { ?>
+                                    <?php echo $this->escape($address['company_city']); ?>&nbsp;
+                                <?php } ?>
+                                <?php if (!empty($address['company_country'])) { ?>
+                                    <?php echo $this->escape($address['company_country']); ?>&nbsp;
+                                <?php } ?>
+                            </div>
+
+                            <div><?php echo $this->escape($address['company_id']); ?></div>
+                            <div><?php echo $this->escape($address['company_vat']); ?></div>
+                        <?php } else { ?>
+                            <div>
+                                <?php echo $this->escape($address['first_name']); ?>&nbsp;<?php echo $this->escape($address['last_name']); ?>
+                            </div>
+                            <?php if (!empty($address['address1'])) { ?>
+                                <div><?php echo $this->escape($address['address1']); ?></div>
+                            <?php } ?>
+                            <?php if (!empty($address['address2'])) { ?>
+                                <div><?php echo $this->escape($address['address2']); ?></div>
+                            <?php } ?>
+
+                            <div>
+                                <?php if (!empty($address['zip_code'])) { ?>
+                                    <?php echo $this->escape($address['zip_code']); ?>&nbsp;
+                                <?php } ?>
+                                <?php if (!empty($address['state'])) { ?>
+                                    <?php echo $this->escape($address['state']); ?>&nbsp;
+                                <?php } ?>
+                                <?php if (!empty($address['city'])) { ?>
+                                    <?php echo $this->escape($address['city']); ?>&nbsp;
+                                <?php } ?>
+                                <?php if (!empty($address['country'])) { ?>
+                                    <?php echo $this->escape($address['country']); ?>&nbsp;
+                                <?php } ?>
+                            </div>
+
+                            <?php if (!empty($address['email'])) { ?>
+                                <div>
+                                    <?php _e('Email'); ?> :
+                                    <?php echo $this->escape($address['email']); ?>
+                                </div>
+                            <?php } ?>
+                            <?php if (!empty($address['phone'])) { ?>
+                                <div>
+                                    <?php _e('Phone'); ?> :
+                                    <?php echo $this->escape($address['phone']); ?>
+                                </div>
+                            <?php } ?>
+                            <?php if (!empty($address['mobile'])) { ?>
+                                <div>
+                                    <?php _e('Mobile'); ?> :
+                                    <?php echo $this->escape($address['mobile']); ?>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-lg-5 col-md-5">
                         <?php if ($_SESSION['order'][$type . '_address'] == $address['id']) { ?>
-                            <div class="badge badge-success selected-address col-md-12">
+                            <div class="badge badge-success selected-address col-lg-12 col-md-12">
                                 <i class="fas fa-check"></i> <?php _e('Selected address') ?>
                             </div>
                         <?php } else { ?>
                             <a href="<?php echo Pi::url(
                                 $this->url('', ['controller' => 'checkout', 'action' => 'change-address', 'id' => $address['id'], 'type' => $type])
-                            ) ?>" class=" btn btn-success btn-sm col-md-12" data-address="<?php echo $address['id']; ?>">
+                            ) ?>" class=" btn btn-use-it btn-sm col-lg-12 col-md-12" data-address="<?php echo $address['id']; ?>">
                                 <?php _e('Use it'); ?>
                             </a>
                         <?php } ?>
                         <a href="<?php echo Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => $address['id']])) ?>"
-                           class=" btn btn-address-edit btn-sm col-md-12" data-address="<?php echo $address['id']; ?>" data-remote="false" data-toggle="modal"
+                           class=" btn btn-address-edit btn-sm col-lg-12 col-md-12" data-address="<?php echo $address['id']; ?>" data-remote="false" data-toggle="modal"
                            data-target="#addressModal" data-dismiss="modal">
                             <i class="fas fa-edit"></i> <?php _e('Edit'); ?>
                         </a>
                         <a href="#"
                            data-delete="<?php echo Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'delete', 'address' => $address['id']])) ?>"
-                           class="btn btn-address-delete btn-sm col-md-12" data-address="<?php echo $address['id']; ?>">
+                           class="btn btn-address-delete btn-sm col-lg-12 col-md-12" data-address="<?php echo $address['id']; ?>">
                             <i class="fas fa-trash-alt"></i> <?php _e('Delete'); ?>
                         </a>
                     </div>
@@ -89,7 +114,6 @@
         <?php } ?>
     </div>
 <?php } ?>
-
 <script>
     $('.hide.<?php echo $type?>').removeClass('hide');
     $('.btn-address-delete').click(
@@ -105,15 +129,16 @@
                     if (data.status) {
                         if ($(a).closest('.address').find('.selected-address').length) {
                             needReload = true;
-
                         }
                         $(a).closest('.address').remove();
+                        if ($('.address').length == 0) {
+                            $('#addressListModal .modal-body').html("<p><?php _e('Please wait ...') ?></p>")
+                            window.location.reload();
+                        }
                     }
                 },
                 dataType: 'json'
             });
         }
     );
-
-
 </script>

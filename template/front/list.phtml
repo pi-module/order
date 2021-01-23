@@ -1,22 +1,22 @@
 <?php $this->css($this->assetModule('css/front.css')); ?>
 <div class="clearfix row user-section-wrapper">
-    <div class="col-md-3">
+    <div class="col-lg-3 col-md-3">
         <?php $sideActive = 'order'; ?>
         <?php include $this->templateModule('front/user-profile-sidebar.phtml', 'user'); ?>
     </div>
-    <div class="col-md-9">
+    <div class="col-lg-9 col-md-9">
         <?php include $this->template('flash-messenger'); ?>
-
-        <div class="page-header">
+        <div class="page-header mb-3">
             <h1><?php _e('All your orders and invoices'); ?></h1>
         </div>
-        <table class="table table-striped table-bordered table-sm">
+        <table class="table table-striped table-bordered table-hover table-sm mt-3 mb-3">
             <tr>
                 <th class="text-center"><?php _e('Code'); ?></th>
                 <th class="text-center"><?php _e('Product / service'); ?></th>
                 <th class="text-center"><?php _e('Time'); ?></th>
-                <th class="text-center"><?php _e('Price incl. VAT'); ?></th>
                 <th class="text-center"><?php _e('Order status'); ?></th>
+                <th class="text-center"><?php _e('Price incl. VAT'); ?></th>
+                <th class="text-center"><?php _e('To paid incl. VAT'); ?></th>
                 <th class="text-center"><?php _e('Action'); ?></th>
             </tr>
             <?php if (count($user['orders'])) { ?>
@@ -28,15 +28,16 @@
                             foreach ($order['products'] as $product) {
                                 $productsList[] = $product['details']['title'];
                             }
-                            echo implode(' , ', $productsList); ?>
+                            echo implode('<br/>', $productsList); ?>
                         </td>
                         <td class="text-center"><?php echo $this->escape($order['time_create_view']); ?></td>
-                        <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
                         <td class="text-center"><span class="badge <?php echo $this->escape($order['shortLabel']); ?>"><?php echo $this->escape(
                                     $order['shortStatus']
                                 ); ?></span></td>
+                        <td class="text-center"><?php echo $this->escape($order['total_price_view']); ?></td>
+                        <td class="text-center"><?php echo $this->escape($order['to_paid_view']); ?></td>
                         <td class="text-center">
-                            <?php if ($order['can_pay'] && $order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_CANCELLED) { ?>
+                            <?php if ($order['can_pay'] && $order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_CANCELLED && $order['status_order'] != \Module\Order\Model\Order::STATUS_ORDER_PENDING) { ?>
                                 <a class="btn btn-danger btn-sm" title="<?php _e('Cancel'); ?>" target="_blank"
                                    href="<?php echo Pi::url($this->url('order', ['controller' => 'index', 'action' => 'cancel', 'id' => $order['id']])); ?>"><i
                                             class="fas fa-times"></i> <?php _e('Cancel'); ?></a>
@@ -53,8 +54,6 @@
                                    href="<?php echo Pi::url($this->url('order', ['controller' => 'detail', 'id' => $order['id']])); ?>"><i
                                             class="fas fa-edit"></i> <?php _e('Details / Invoice'); ?></a>
                             <?php } ?>
-
-
                         </td>
                     </tr>
                 <?php } ?>

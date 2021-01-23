@@ -18,7 +18,6 @@ use Pi\Form\Form as BaseForm;
 
 class DeliveryForm extends BaseForm
 {
-
     public function __construct($name = null, $option = [])
     {
         parent::__construct($name);
@@ -79,7 +78,7 @@ class DeliveryForm extends BaseForm
                 'name'    => 'gateway',
                 'type'    => 'Module\Order\Form\Element\Gateway',
                 'options' => [
-                    'label' => __('Adapter'),
+                    'label' => __('Choose your payment method'),
                 ],
             ]
         );

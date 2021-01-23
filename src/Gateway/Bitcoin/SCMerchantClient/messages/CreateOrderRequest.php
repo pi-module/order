@@ -25,7 +25,7 @@ class CreateOrderRequest
      * @param $successUrl
      * @param $failureUrl
      */
-    function __construct($orderId, $payCurrency, $payAmount, $receiveCurrency, $receiveAmount, $description, $culture, $callbackUrl, $successUrl, $failureUrl)
+    public function __construct($orderId, $payCurrency, $payAmount, $receiveCurrency, $receiveAmount, $description, $culture, $callbackUrl, $successUrl, $failureUrl)
     {
         $this->orderId         = $orderId;
         $this->payCurrency     = $payCurrency;
@@ -118,6 +118,4 @@ class CreateOrderRequest
     {
         return $this->failureUrl == null ? '' : $this->failureUrl;
     }
-
-
 }

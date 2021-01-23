@@ -59,6 +59,5 @@ class Invoice extends Model
         }
 
         return $statusList;
-
     }
 }

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2017-07-06 19:15+0430\n"
+"POT-Creation-Date: 2020-10-26 18:19+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,152 +9,138 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _b\n"
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: template/block/detail.phtml:5
+#: template/block/detail.phtml:7
 msgid "Invoices"
 msgstr ""
 
-#: template/block/detail.phtml:7 template/block/installment.phtml:18
+#: template/block/detail.phtml:12 template/block/installment.phtml:18
 msgid "Orders"
 msgstr ""
 
-#: template/block/detail.phtml:9
+#: template/block/detail.phtml:17
 msgid "User informations"
 msgstr ""
 
-#: template/block/detail.phtml:16 template/block/detail.phtml:63
-#: template/block/installment.phtml:262
+#: template/block/detail.phtml:27 template/block/detail.phtml:108
+#: template/block/installment.phtml:364
 msgid "ID"
 msgstr ""
 
-#: template/block/detail.phtml:17 template/block/detail.phtml:66
-#: template/block/installment.phtml:266
-msgid "Price"
-msgstr ""
-
-#: template/block/detail.phtml:18
-msgid "Time Create"
-msgstr ""
-
-#: template/block/detail.phtml:19 template/block/installment.phtml:202
-#: template/block/installment.phtml:232
-msgid "Due date"
-msgstr ""
-
-#: template/block/detail.phtml:20
-msgid "Time pay"
-msgstr ""
-
-#: template/block/detail.phtml:21 template/block/detail.phtml:68
-#: template/block/installment.phtml:233 template/block/installment.phtml:267
-msgid "Action"
-msgstr ""
-
-#: template/block/detail.phtml:42 template/block/detail.phtml:44
-#: template/block/installment.phtml:247
-msgid "View / Pay"
-msgstr ""
-
-#: template/block/detail.phtml:50
-msgid "Paid"
-msgstr ""
-
-#: template/block/detail.phtml:51
-msgid "Unpaid"
-msgstr ""
-
-#: template/block/detail.phtml:52
-msgid "Canceled"
-msgstr ""
-
-#: template/block/detail.phtml:56 template/block/installment.phtml:253
-msgid "You dont have any invoice yet"
-msgstr ""
-
-#: template/block/detail.phtml:64
-msgid "Time create"
-msgstr ""
-
-#: template/block/detail.phtml:65
+#: template/block/detail.phtml:28
 msgid "Type"
 msgstr ""
 
-#: template/block/detail.phtml:67
-msgid "Gateway"
+#: template/block/detail.phtml:29
+msgid "Time Create"
 msgstr ""
 
-#: template/block/detail.phtml:78 template/block/detail.phtml:80
-#: template/block/installment.phtml:284 template/block/installment.phtml:286
+#: template/block/detail.phtml:30 template/block/detail.phtml:111
+#: template/block/installment.phtml:333 template/block/installment.phtml:369
+msgid "Action"
+msgstr ""
+
+#: template/block/detail.phtml:50 template/block/detail.phtml:52
+#: template/block/installment.phtml:347 template/block/installment.phtml:349
+msgid "View / Pay"
+msgstr ""
+
+#: template/block/detail.phtml:95
+msgid "Paid"
+msgstr ""
+
+#: template/block/detail.phtml:96
+msgid "Unpaid"
+msgstr ""
+
+#: template/block/detail.phtml:97
+msgid "Canceled"
+msgstr ""
+
+#: template/block/detail.phtml:101 template/block/installment.phtml:355
+msgid "You dont have any invoice yet"
+msgstr ""
+
+#: template/block/detail.phtml:109
+msgid "Time create"
+msgstr ""
+
+#: template/block/detail.phtml:110 template/block/installment.phtml:368
+msgid "Price"
+msgstr ""
+
+#: template/block/detail.phtml:119 template/block/detail.phtml:121
+#: template/block/installment.phtml:386 template/block/installment.phtml:388
 msgid "View"
 msgstr ""
 
-#: template/block/detail.phtml:86 template/block/installment.phtml:293
+#: template/block/detail.phtml:127 template/block/installment.phtml:395
 msgid "You dont have any order yet"
 msgstr ""
 
-#: template/block/detail.phtml:94
+#: template/block/detail.phtml:135
 msgid "Credit"
 msgstr ""
 
-#: template/block/detail.phtml:99
+#: template/block/detail.phtml:142
 msgid "Name"
 msgstr ""
 
-#: template/block/detail.phtml:104
+#: template/block/detail.phtml:149
 msgid "City"
 msgstr ""
 
-#: template/block/detail.phtml:108
+#: template/block/detail.phtml:153
 msgid "State"
 msgstr ""
 
-#: template/block/detail.phtml:112
+#: template/block/detail.phtml:157
 msgid "Country"
 msgstr ""
 
-#: template/block/detail.phtml:116
+#: template/block/detail.phtml:161
 msgid "Zip code"
 msgstr ""
 
-#: template/block/detail.phtml:122
+#: template/block/detail.phtml:167
 msgid "Email"
 msgstr ""
 
-#: template/block/detail.phtml:126
+#: template/block/detail.phtml:171
 msgid "Phone"
 msgstr ""
 
-#: template/block/detail.phtml:130
+#: template/block/detail.phtml:175
 msgid "Mobile"
 msgstr ""
 
-#: template/block/detail.phtml:134
+#: template/block/detail.phtml:179
 msgid "Company"
 msgstr ""
 
-#: template/block/detail.phtml:138
+#: template/block/detail.phtml:183
 msgid "Company ID"
 msgstr ""
 
-#: template/block/detail.phtml:142
+#: template/block/detail.phtml:187
 msgid "Company VAT"
 msgstr ""
 
-#: template/block/detail.phtml:148
+#: template/block/detail.phtml:193
 msgid "Delivery address"
 msgstr ""
 
-#: template/block/detail.phtml:152
+#: template/block/detail.phtml:197
 msgid "Invoicing Address"
 msgstr ""
 
-#: template/block/detail.phtml:162 template/block/detail.phtml:163
-#: template/block/installment.phtml:299
+#: template/block/detail.phtml:207 template/block/detail.phtml:208
+#: template/block/installment.phtml:401 template/block/installment.phtml:402
 msgid "More informations"
 msgstr ""
 
@@ -170,54 +156,58 @@ msgstr ""
 msgid "Desc"
 msgstr ""
 
-#: template/block/installment.phtml:26
+#: template/block/installment.phtml:28
 msgid "10 th"
 msgstr ""
 
-#: template/block/installment.phtml:27 template/block/installment.phtml:85
-#: template/block/installment.phtml:143
+#: template/block/installment.phtml:29 template/block/installment.phtml:118
+#: template/block/installment.phtml:207
 msgid "Debt"
 msgstr ""
 
-#: template/block/installment.phtml:41 template/block/installment.phtml:99
-#: template/block/installment.phtml:157 template/block/installment.phtml:203
+#: template/block/installment.phtml:44 template/block/installment.phtml:133
+#: template/block/installment.phtml:222 template/block/installment.phtml:299
 msgid "Total"
 msgstr ""
 
-#: template/block/installment.phtml:64 template/block/installment.phtml:122
-#: template/block/installment.phtml:180 template/block/installment.phtml:213
-#: template/block/installment.phtml:230
+#: template/block/installment.phtml:97 template/block/installment.phtml:186
+#: template/block/installment.phtml:275 template/block/installment.phtml:313
+#: template/block/installment.phtml:330
 msgid "Amount"
 msgstr ""
 
-#: template/block/installment.phtml:84
+#: template/block/installment.phtml:117
 msgid "20 th"
 msgstr ""
 
-#: template/block/installment.phtml:142
+#: template/block/installment.phtml:206
 msgid "30 th"
 msgstr ""
 
-#: template/block/installment.phtml:201
+#: template/block/installment.phtml:296
 msgid "Additional invoices"
 msgstr ""
 
-#: template/block/installment.phtml:226
+#: template/block/installment.phtml:297 template/block/installment.phtml:332
+msgid "Due date"
+msgstr ""
+
+#: template/block/installment.phtml:326
 msgid "Invoices list"
 msgstr ""
 
-#: template/block/installment.phtml:231 template/block/installment.phtml:264
+#: template/block/installment.phtml:331 template/block/installment.phtml:366
 msgid "Product / service"
 msgstr ""
 
-#: template/block/installment.phtml:257
+#: template/block/installment.phtml:359
 msgid "Orders list"
 msgstr ""
 
-#: template/block/installment.phtml:263
+#: template/block/installment.phtml:365
 msgid "Code"
 msgstr ""
 
-#: template/block/installment.phtml:265
+#: template/block/installment.phtml:367
 msgid "Time"
 msgstr ""

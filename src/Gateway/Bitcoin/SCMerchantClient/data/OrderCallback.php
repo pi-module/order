@@ -2,7 +2,6 @@
 
 class OrderCallback
 {
-
     private $merchantId;
     private $apiId;
     private $orderId;
@@ -16,8 +15,19 @@ class OrderCallback
     private $status;
     private $sign;
 
-    function __construct($merchantId, $apiId, $orderId, $payCurrency, $payAmount, $receiveCurrency, $receiveAmount, $receivedAmount, $description,
-        $orderRequestId, $status, $sign
+    public function __construct(
+        $merchantId,
+        $apiId,
+        $orderId,
+        $payCurrency,
+        $payAmount,
+        $receiveCurrency,
+        $receiveAmount,
+        $receivedAmount,
+        $description,
+        $orderRequestId,
+        $status,
+        $sign
     ) {
         $this->merchantId      = $merchantId;
         $this->apiId           = $apiId;
@@ -147,6 +157,4 @@ class OrderCallback
 
         return $valid;
     }
-
-
-} 
+}

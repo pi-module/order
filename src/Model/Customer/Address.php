@@ -37,6 +37,7 @@ class Address extends Model
             'state',
             'city',
             'zip_code',
+            'birthday',
             'company',
             'company_id',
             'company_vat',
@@ -48,5 +49,12 @@ class Address extends Model
             'location',
             'invoicing_favourite',
             'delivery_favourite',
+            'account_type',
+            'company_address1',
+            'company_address2',
+            'company_country',
+            'company_state',
+            'company_city',
+            'company_zip_code',
         ];
 }

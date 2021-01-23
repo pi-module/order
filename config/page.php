@@ -48,6 +48,16 @@ return [
             'controller' => 'credit',
             'permission' => 'credit',
         ],
+        [
+            'label'      => _a('Promotional codes'),
+            'controller' => 'promocode',
+            'permission' => 'promocode',
+        ],
+        [
+            'label'      => _a('Subscription'),
+            'controller' => 'subscription',
+            'permission' => 'subscription',
+        ],
     ],
     // Front section
     'front' => [

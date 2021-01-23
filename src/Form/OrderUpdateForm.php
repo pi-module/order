@@ -76,7 +76,7 @@ class OrderUpdateForm extends BaseForm
                 'name'       => 'default_gateway',
                 'type'       => 'select',
                 'options'    => [
-                    'label'         => __('Adapter'),
+                    'label'         => __('Choose your payment method'),
                     'value_options' => $gatewayList,
                 ],
                 'attributes' => [
@@ -144,7 +144,6 @@ class OrderUpdateForm extends BaseForm
                     ],
                 ]
             );
-
         }
         // id_number
         if ($this->option['config']['order_idnumber']) {
@@ -297,7 +296,7 @@ class OrderUpdateForm extends BaseForm
                 [
                     'name'       => 'delivery_company_id',
                     'options'    => [
-                        'label' => __('Company id'),
+                        'label' => __('Company ID'),
                     ],
                     'attributes' => [
                         'type'        => 'text',
@@ -309,7 +308,7 @@ class OrderUpdateForm extends BaseForm
                 [
                     'name'       => 'invoicing_company_id',
                     'options'    => [
-                        'label' => __('Company id'),
+                        'label' => __('Company ID'),
                     ],
                     'attributes' => [
                         'type'        => 'text',
@@ -322,7 +321,7 @@ class OrderUpdateForm extends BaseForm
                 [
                     'name'       => 'delivery_company_vat',
                     'options'    => [
-                        'label' => __('Company vat'),
+                        'label' => __('Company VAT'),
                     ],
                     'attributes' => [
                         'type'        => 'text',
@@ -334,7 +333,7 @@ class OrderUpdateForm extends BaseForm
                 [
                     'name'       => 'invoicing_company_vat',
                     'options'    => [
-                        'label' => __('Company vat'),
+                        'label' => __('Company VAT'),
                     ],
                     'attributes' => [
                         'type'        => 'text',
@@ -483,7 +482,6 @@ class OrderUpdateForm extends BaseForm
                     ],
                 ]
             );
-
         }
         // city
         if ($this->option['config']['order_city']) {

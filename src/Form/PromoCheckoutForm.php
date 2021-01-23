@@ -18,7 +18,6 @@ use Pi\Form\Form as BaseForm;
 
 class PromoCheckoutForm extends BaseForm
 {
-
     public function getInputFilter()
     {
         if (!$this->filter) {

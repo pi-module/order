@@ -15,14 +15,21 @@ namespace Module\Order\Gateway\Pasargad;
 
 use Module\Order\Gateway\AbstractGateway;
 use Pi;
-use Zend\Json\Json;
-
-//use Module\Order\Gateway\Pasargad\RSAProcessor;
-//use Module\Order\Gateway\Pasargad\Parser;
-//use Module\Order\Gateway\Pasargad\Rsa;
+use Laminas\Json\Json;
 
 class Gateway extends AbstractGateway
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_type = AbstractGateway::TYPE_FORM;
+    }
+
+    public function getType()
+    {
+        return $this->_type;
+    }
+
     public function setAdapter()
     {
         $this->gatewayAdapter = 'Pasargad';
@@ -30,15 +37,17 @@ class Gateway extends AbstractGateway
 
     public function setInformation()
     {
-        $gateway                  = [];
-        $gateway['title']         = __('Bank Pasargad (Iran)');
-        $gateway['path']          = 'Pasargad';
-        $gateway['type']          = 'online';
-        $gateway['version']       = '1.0';
-        $gateway['description']   = '';
-        $gateway['author']        = 'Hossein Azizabadi <azizabadi@faragostaresh.com>';
-        $gateway['credits']       = '@voltan';
-        $gateway['releaseDate']   = 1380802565;
+        $gateway = [
+            'title'       => __('Bank Pasargad'),
+            'path'        => 'Pasargad',
+            'type'        => 'online',
+            'version'     => '1.0',
+            'description' => '',
+            'author'      => 'Hossein Azizabadi <azizabadi@faragostaresh.com>',
+            'credits'     => '@voltan',
+            'releaseDate' => 1380802565,
+        ];
+
         $this->gatewayInformation = $gateway;
         return $gateway;
     }
@@ -46,6 +55,7 @@ class Gateway extends AbstractGateway
     public function setSettingForm()
     {
         $form = [];
+
         // form path
         $form['path'] = [
             'name'     => 'path',
@@ -53,6 +63,7 @@ class Gateway extends AbstractGateway
             'type'     => 'hidden',
             'required' => true,
         ];
+
         // form terminalCode
         $form['terminalCode'] = [
             'name'     => 'terminalCode',
@@ -60,13 +71,15 @@ class Gateway extends AbstractGateway
             'type'     => 'text',
             'required' => true,
         ];
+
         // form merchantCode
-        $form['merchantCode']     = [
+        $form['merchantCode'] = [
             'name'     => 'merchantCode',
             'label'    => __('merchantCode'),
             'type'     => 'text',
             'required' => true,
         ];
+
         $this->gatewaySettingForm = $form;
         return $this;
     }
@@ -74,51 +87,61 @@ class Gateway extends AbstractGateway
     public function setPayForm()
     {
         $form = [];
+
         // form invoiceNumber
         $form['invoiceNumber'] = [
             'name' => 'invoiceNumber',
             'type' => 'hidden',
         ];
+
         // form invoiceDate
         $form['invoiceDate'] = [
             'name' => 'invoiceDate',
             'type' => 'hidden',
         ];
+
         // form amount
         $form['amount'] = [
             'name' => 'amount',
             'type' => 'hidden',
         ];
+
         // form terminalCode
         $form['terminalCode'] = [
             'name' => 'terminalCode',
             'type' => 'hidden',
         ];
+
         // form merchantCode
         $form['merchantCode'] = [
             'name' => 'merchantCode',
             'type' => 'hidden',
         ];
+
         // form redirectAddress
         $form['redirectAddress'] = [
             'name' => 'redirectAddress',
             'type' => 'hidden',
         ];
+
         // form timeStamp
         $form['timeStamp'] = [
             'name' => 'timeStamp',
             'type' => 'hidden',
         ];
+
         // form action
         $form['action'] = [
             'name' => 'action',
             'type' => 'hidden',
         ];
+
         // form sign
-        $form['sign']         = [
+        $form['sign'] = [
             'name' => 'sign',
             'type' => 'hidden',
         ];
+
         $this->gatewayPayForm = $form;
         return $this;
     }

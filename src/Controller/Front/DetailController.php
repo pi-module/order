@@ -39,24 +39,26 @@ class DetailController extends IndexController
             $this->jump(['', 'controller' => 'index', 'action' => 'index'], __('This order not active.'));
         }
 
-        $order['has_payment'] = Pi::api('order', 'order')->hasPayment($order['id']);
+        $order['has_unpaid_installment'] = Pi::api('order', 'order')->hasUnpaidInstallment($order['id']);
 
         $addressInvoicing = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'INVOICING');
         $addressDelivery  = Pi::api('orderAddress', 'order')->findOrderAddress($order['id'], 'DELIVERY');
 
-        $order['products']           = Pi::api('order', 'order')->listProduct($order['id']);
+        $order['products']           = Pi::api('order', 'order')->listProduct($order['id'], ['order' => $order]);
         $order['invoices']           = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
         $offline                     = false;
         $order['totalInstallments']  = 0;
         $order['paidInstallments']   = 0;
         $order['unPaidInstallments'] = 0;
-        // Get installments and count paid and unpaid payment 
+        // Get installments and count paid and unpaid payment
         foreach ($order['invoices'] as &$invoice) {
             $installments            = Pi::api('installment', 'order')->getInstallmentsFromInvoice($invoice['id']);
             $invoice['installments'] = $installments;
 
             $installment = current($installments);
-            if ($order['type_commodity'] == 'service' && $installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID) {
+            if (in_array($order['type_commodity'], ['service', 'booking'])
+                && $installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID
+            ) {
                 $order['time_delivery_view'] = _date($installment['time_payment']);
             }
 
@@ -72,6 +74,13 @@ class DetailController extends IndexController
                     $order['paidInstallments']++;
                 } elseif ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
                     $order['unPaidInstallments']++;
+                }
+
+                if ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID
+                    || ($installment['status_payment'] == \Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID
+                        && $installment['gateway'] == 'manual')
+                ) {
+                    $order['can_pay'] = false;
                 }
             }
         }
@@ -122,5 +131,4 @@ class DetailController extends IndexController
             $this->jump(['', 'controller' => 'index', 'action' => 'index'], $ret['message']);
         }
     }
-
 }

@@ -15,8 +15,8 @@ namespace Module\Order\Api;
 
 use Pi;
 use Pi\Application\Api\AbstractApi;
-use Zend\Json\Json;
-use Zend\Math\Rand;
+use Laminas\Json\Json;
+use Laminas\Math\Rand;
 
 /*
  * Pi::api('processing', 'order')->setProcessing($invoice);

@@ -14,7 +14,7 @@
 namespace Module\Order\Form;
 
 use Pi;
-use Zend\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilter;
 
 class OrderSettingFilter extends InputFilter
 {
@@ -133,4 +133,4 @@ class OrderSettingFilter extends InputFilter
             ]
         );
     }
-}    	
+}

@@ -14,7 +14,7 @@
 namespace Module\Order\Form;
 
 use Pi;
-use Zend\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilter;
 
 class InstallmentFilter extends InputFilter
 {
@@ -23,7 +23,7 @@ class InstallmentFilter extends InputFilter
         $this->add(
             [
                 'name'     => 'gateway',
-                'required' => $options['readonly'] ? false : true,
+                'required' => isset($options['readonly']) && $options['readonly'] ? false : true,
 
             ]
         );
@@ -31,7 +31,7 @@ class InstallmentFilter extends InputFilter
         $this->add(
             [
                 'name'     => 'status_payment',
-                'required' => $options['readonly'] ? false : true,
+                'required' => isset($options['readonly']) && $options['readonly'] ? false : true,
 
             ]
         );
@@ -55,6 +55,5 @@ class InstallmentFilter extends InputFilter
                 'required' => false,
             ]
         );
-
     }
 }

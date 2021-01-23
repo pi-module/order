@@ -36,6 +36,8 @@ class Promocode extends Model
         return [
             'guide' => 'guide',
             'event' => 'event',
+            'video' => 'video',
+            'shop'  => 'shop',
         ];
     }
 }

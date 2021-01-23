@@ -21,7 +21,7 @@ class OrderForm extends BaseForm
     public function __construct($name = null, $option = [])
     {
         $this->option = $option;
-        $this->config = Pi::service('registry')->config->read('order', 'order');
+        $this->config = Pi::service('registry')->config->read('order');
         parent::__construct($name);
     }
 
@@ -183,7 +183,7 @@ class OrderForm extends BaseForm
                     [
                         'name'       => 'company_id',
                         'options'    => [
-                            'label' => __('Company id'),
+                            'label' => __('Company ID'),
                         ],
                         'attributes' => [
                             'type'        => 'text',
@@ -198,7 +198,7 @@ class OrderForm extends BaseForm
                     [
                         'name'       => 'company_vat',
                         'options'    => [
-                            'label' => __('Company vat'),
+                            'label' => __('Company VAT'),
                         ],
                         'attributes' => [
                             'type'        => 'text',
@@ -401,7 +401,7 @@ class OrderForm extends BaseForm
                                 'name'       => 'gateway',
                                 'type'       => 'select',
                                 'options'    => [
-                                    'label'         => __('Adapter'),
+                                    'label'         => __('Choose your payment method'),
                                     'value_options' => [],
                                 ],
                                 'attributes' => [
@@ -433,7 +433,7 @@ class OrderForm extends BaseForm
                                 'name'       => 'gateway',
                                 'type'       => 'select',
                                 'options'    => [
-                                    'label'         => __('Adapter'),
+                                    'label'         => __('Choose your payment method'),
                                     'value_options' => $gatewayList,
                                 ],
                                 'attributes' => [
@@ -446,7 +446,7 @@ class OrderForm extends BaseForm
                     }
                 }
                 break;
-
+            case 'booking':
             case 'service':
                 if (count($gatewayList) == 1) {
                     $gatewayList = array_keys($gatewayList);
@@ -467,7 +467,7 @@ class OrderForm extends BaseForm
                             'name'       => 'gateway',
                             'type'       => 'select',
                             'options'    => [
-                                'label'         => __('Adapter'),
+                                'label'         => __('Choose your payment method'),
                                 'value_options' => $gatewayList,
                             ],
                             'attributes' => [

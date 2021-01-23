@@ -55,10 +55,14 @@ class InstallmentController extends ActionController
 
                 // Save values
                 $row = $this->getModel('invoice_installment')->find($id);
-                $row->assign($values);
-                if (!$readonly) {
-                    $row->save();
+                if ($readonly) {
+                    $values = [
+                        'comment' => $values['comment'],
+                    ];
                 }
+                $row->assign($values);
+
+                $row->save();
 
                 $message = __('Your installment data saved successfully.');
                 $this->jump(['controller' => 'order', 'action' => 'view', 'id' => $invoice['order']], $message);
@@ -80,6 +84,5 @@ class InstallmentController extends ActionController
         // Set view
         $this->view()->setTemplate('installment-edit');
         $this->view()->assign('form', $form);
-
     }
 }

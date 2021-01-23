@@ -14,7 +14,7 @@
 namespace Module\Order\Form;
 
 use Pi;
-use Zend\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilter;
 
 class PromocodeFilter extends InputFilter
 {
@@ -90,6 +90,5 @@ class PromocodeFilter extends InputFilter
                 'required' => true,
             ]
         );
-
     }
-}	
+}

@@ -10,21 +10,49 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
 $this->headMeta('noindex', 'robots');
 ?>
 <div id="address-form" class="clearfix">
-    <div class="col-md-12">
+    <div class="col-lg-12 col-md-12">
         <h3><?php echo $this->escape($title); ?></h3>
-        <?php echo $this->form($form, 'modal'); ?>
+        <?php echo $this->form($form, 'modal-simple'); ?>
     </div>
 </div>
 <script>
     $(document).ready(function () {
-        $('.complementary').parent().parent().hide();
-        $('#complementary').click(
-            function (e) {
-                e.preventDefault();
-                $('.complementary').parent().parent().toggle();
+        var accountTypeChange = function() {
+            var show = $('[name=account_type]:checked').val() == 'company';
+            var elements = [
+                'company',
+                'company_address1',
+                'company_address2',
+                'company_zip_code',
+                'company_city',
+                'company_state',
+                'company_country',
+                'company_id',
+                'company_vat'
+            ];
+            if (show) {
+                for (var i = 0; i < elements.length; ++i) {
+                    var element = $('[name=' + elements[i] + ']');
+                    if (element.closest('.row').find('label i').length) {
+                        element.attr('required', true);
+                    }
+                }
+                $('[name=company]').closest('fieldset').show();
+            } else {
+                for (var i = 0; i < elements.length; ++i) {
+                    var element = $('[name=' + elements[i] + ']');
+                    element.attr('required', false);
+                }
+                $('[name=company]').closest('fieldset').hide();
             }
-        );
+        };
 
+        $('[name=account_type]').change(accountTypeChange);
+        accountTypeChange();
+
+        $('.edit-address').click(
+            function() { $('form#address').submit(); }
+        );
         $('form#address').submit(
             function () {
                 $.post(

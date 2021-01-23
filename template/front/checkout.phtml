@@ -75,9 +75,7 @@ $script
             });
         },
         makeOrderAction: function (e) {
-            
             e.preventDefault();
-            
             $('#addressFromNew').addClass('d-none');
             
             $('form#order [name=address_delivery_id]').val(%s);
@@ -90,8 +88,6 @@ $script
             $(e.target).addClass('d-none');
             $(e.target).parent().parent().find('.selected-address').removeClass('d-none');
         }
-        
-        
     }
     page.init();
 })(jQuery)
@@ -104,67 +100,69 @@ $script = sprintf(
     __('Days'),
     Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'level', 'process' => 'delivery', 'id' => ''])),
     Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'level', 'process' => 'payment', 'id' => ''])),
-    $addressDelivery['id'] ?: 0,
-    $addressInvoicing['id'] ?: 0
+    isset($addressDelivery['id']) && $addressDelivery['id'] ?: 0,
+    isset($addressInvoicing['id']) && $addressInvoicing['id'] ?: 0
 );
 $this->footScript()->appendScript($script);
 ?>
+
 <div id="js-order" class="clearfix order-checkout">
-    <div class="page-header">
+    <div class="mb-3">
         <h1><?php _e('Checkout'); ?></h1>
     </div>
     <div class="row clearfix">
         <?php if ($cart['type_payment'] == 'installment') { ?>
-            <div class="col-md-12">
-                <div class="alert alert-info" role="alert">
-                    <h2><?php _e('Terms of payment'); ?></h2>
-                    <p><?php echo sprintf(
-                            __('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2),
-                            Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])),
-                            Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))
-                        ); ?></p>
-                </div>
+            <div class="alert alert-info" role="alert">
+                <h2><?php _e('Terms of payment'); ?></h2>
+                <p><?php echo sprintf(
+                        __('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2),
+                        Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])),
+                        Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))
+                    ); ?></p>
             </div>
         <?php } ?>
+
         <?php if (isset($cart['can_pay']) && $cart['can_pay'] == 2) { ?>
-            <div class="col-md-12">
-                <div class="alert alert-danger" role="alert">
-                    <p><?php echo __(
-                            'One of your select products or services have variable stock, than your payment option is disable, we will review your order and if your selected products or services be in stock we active payment option and send notification for you'
-                        ); ?></p>
-                </div>
+            <div class="alert alert-danger" role="alert">
+                <p><?php echo __(
+                        'One of your select products or services have variable stock, than your payment option is disable, we will review your order and if your selected products or services be in stock we active payment option and send notification for you'
+                    ); ?></p>
             </div>
         <?php } ?>
     </div>
     <div class="clearfix row">
-        <div class="col-md-8">
+        <div class="col-lg-8 col-md-8">
             <?php if (isset($formLogin) && !empty($formLogin)) { ?>
                 <div class="alert alert-info" role="alert">
                     <?php _e(
                         'If you registered on website before this time and have user account, please login to system and continue ordering, and if you dont have user account here, please fill register new user account and make order form'
                     ); ?>
                 </div>
-                <div class="page-header">
+                <div class="mb-3">
                     <h3><?php _e('Login'); ?></h3>
                 </div>
                 <?php echo $this->form($formLogin); ?>
-                <div class="page-header">
+                <div class="mb-3">
                     <h3><?php _e('Register new user account and make order'); ?></h3>
                 </div>
             <?php } ?>
-            <div class="clearfix alert alert-info" role="alert">
-                <?php if (!empty($addresses)) { ?>
-                    <h4><?php _e('Select the needed address for your order. You can also add a new address') ?></h4>
-                <?php } else { ?>
-                    <h4><?php _e(
-                            'You don\'t have set an address yet. Please create your address we will use for your order. You will be able then to manage several addresses'
-                        ) ?></h4>
-                <?php } ?>
-            </div>
-
+            <?php if ($invalidAddress) { ?>
+                <div class="alert alert-dismissable alert-danger text-center">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <div><?php _e('Your address has to be completed. Please, edit it.'); ?></div>
+                </div>
+            <?php } else { ?>
+                <div class="clearfix alert alert-<?php echo empty($addresses) ? 'info' : 'success' ?>" role="alert">
+                    <?php if (!empty($addresses)) { ?>
+                        <p><?php _e('Here are the addresses you have selected for billing and delivery. You can manage them (add, modify, delete) to select others.') ?></p>
+                    <?php } else { ?>
+                        <p><?php _e('You don\'t have set an address yet. Please create your address we will use for your order. You will be able then to manage several addresses') ?></p>
+                    <?php } ?>
+                </div>
+            <?php } ?>
             <div class="clearfix row">
-                <div class="col-md-6">
-                    <div class="col-md-12 address-single">
+                <div class="col-lg-6 col-md-6">
+                    <div class="address-single">
                         <div class="clearfix">
                             <div class="info">
                                 <p>
@@ -183,58 +181,94 @@ $this->footScript()->appendScript($script);
                                         <?php echo $this->form($forms['new'], 'vertical'); ?>
                                     <?php } else { ?>
                                         <div>
-                                            <?php echo $this->escape($addressInvoicing['first_name']); ?><?php echo $this->escape(
-                                                $addressInvoicing['last_name']
-                                            ); ?>
+                                            <?php _e('Type') ?> :
+                                            <?php echo $addressInvoicing['account_type'] == 'none' ? __('ND') : __(ucfirst($addressInvoicing['account_type'])); ?>
                                         </div>
-                                        <?php if (!empty($addressInvoicing['company'])) { ?>
+                                        <?php if ($addressInvoicing['account_type'] === 'company') { ?>
                                             <div><?php echo $this->escape($addressInvoicing['company']); ?></div>
-                                        <?php } ?>
-                                        <?php if (!empty($addressInvoicing['company_id'])) { ?>
+                                            <?php if (!empty($addressInvoicing['company_address1'])) { ?>
+                                                <div><?php echo $this->escape($addressInvoicing['company_address1']); ?></div>
+                                            <?php } ?>
+                                            <?php if (!empty($addressInvoicing['company_address2'])) { ?>
+                                                <div><?php echo $this->escape($addressInvoicing['company_address2']); ?></div>
+                                            <?php } ?>
+                                            <div>
+                                                <?php if (!empty($addressInvoicing['company_zip_code'])) { ?>
+                                                    <?php echo $this->escape($addressInvoicing['company_zip_code']); ?>&nbsp;
+                                                <?php } ?>
+                                                <?php if (!empty($addressInvoicing['company_state'])) { ?>
+                                                    <?php echo $this->escape($addressInvoicing['company_state']); ?>&nbsp;
+                                                <?php } ?>
+                                                <?php if (!empty($addressInvoicing['company_city'])) { ?>
+                                                    <?php echo $this->escape($addressInvoicing['company_city']); ?>&nbsp;
+                                                <?php } ?>
+                                                <?php if (!empty($addressInvoicing['company_country'])) { ?>
+                                                    <?php echo $this->escape($addressInvoicing['company_country']); ?>&nbsp;
+                                                <?php } ?>
+                                            </div>
                                             <div><?php echo $this->escape($addressInvoicing['company_id']); ?></div>
-                                        <?php } ?>
-                                        <?php if (!empty($addressInvoicing['company_vat'])) { ?>
                                             <div><?php echo $this->escape($addressInvoicing['company_vat']); ?></div>
-                                        <?php } ?>
-                                        <?php if (!empty($addressInvoicing['address1'])) { ?>
-                                            <div><?php echo $this->escape($addressInvoicing['address1']); ?></div>
-                                        <?php } ?>
-                                        <?php if (!empty($addressInvoicing['address2'])) { ?>
-                                            <div><?php echo $this->escape($addressInvoicing['address2']); ?></div>
-                                        <?php } ?>
-                                        <div>
-                                            <?php if (!empty($addressInvoicing['zip_code'])) { ?>
-                                                <?php echo $this->escape($addressInvoicing['zip_code']); ?>&nbsp;
+                                            <?php if (!empty($addressInvoicing['email'])) { ?>
+                                                <div>
+                                                    <?php _e('Email'); ?> :
+                                                    <?php echo $this->escape($addressInvoicing['email']); ?>
+                                                </div>
                                             <?php } ?>
-                                            <?php if (!empty($addressInvoicing['state'])) { ?>
-                                                <?php echo $this->escape($addressInvoicing['state']); ?>&nbsp;
+                                            <?php if (!empty($addressInvoicing['phone'])) { ?>
+                                                <div>
+                                                    <?php _e('Phone'); ?> :
+                                                    <?php echo $this->escape($addressInvoicing['phone']); ?>
+                                                </div>
                                             <?php } ?>
-                                            <?php if (!empty($addressInvoicing['city'])) { ?>
-                                                <?php echo $this->escape($addressInvoicing['city']); ?>&nbsp;
+                                            <?php if (!empty($addressInvoicing['mobile'])) { ?>
+                                                <div>
+                                                    <?php _e('Mobile'); ?> :
+                                                    <?php echo $this->escape($addressInvoicing['mobile']); ?>
+                                                </div>
                                             <?php } ?>
-                                            <?php if (!empty($addressInvoicing['country'])) { ?>
-                                                <?php echo $this->escape($addressInvoicing['country']); ?>&nbsp;
-                                            <?php } ?>
-                                        </div>
-                                        <?php if (!empty($addressInvoicing['email'])) { ?>
+                                        <?php } else { ?>
                                             <div>
-                                                <?php _e('Email'); ?> :
-                                                <?php echo $this->escape($addressInvoicing['email']); ?>
+                                                <?php echo $this->escape($addressInvoicing['first_name']); ?>&nbsp;<?php echo $this->escape($addressInvoicing['last_name']); ?>
                                             </div>
-                                        <?php } ?>
-                                        <?php if (!empty($addressInvoicing['phone'])) { ?>
+                                            <?php if (!empty($addressInvoicing['address1'])) { ?>
+                                                <div><?php echo $this->escape($addressInvoicing['address1']); ?></div>
+                                            <?php } ?>
+                                            <?php if (!empty($addressInvoicing['address2'])) { ?>
+                                                <div><?php echo $this->escape($addressInvoicing['address2']); ?></div>
+                                            <?php } ?>
                                             <div>
-                                                <?php _e('Phone'); ?> :
-                                                <?php echo $this->escape($addressInvoicing['phone']); ?>
+                                                <?php if (!empty($addressInvoicing['zip_code'])) { ?>
+                                                    <?php echo $this->escape($addressInvoicing['zip_code']); ?>&nbsp;
+                                                <?php } ?>
+                                                <?php if (!empty($addressInvoicing['state'])) { ?>
+                                                    <?php echo $this->escape($addressInvoicing['state']); ?>&nbsp;
+                                                <?php } ?>
+                                                <?php if (!empty($addressInvoicing['city'])) { ?>
+                                                    <?php echo $this->escape($addressInvoicing['city']); ?>&nbsp;
+                                                <?php } ?>
+                                                <?php if (!empty($addressInvoicing['country'])) { ?>
+                                                    <?php echo $this->escape($addressInvoicing['country']); ?>&nbsp;
+                                                <?php } ?>
                                             </div>
+                                            <?php if (!empty($addressInvoicing['email'])) { ?>
+                                                <div>
+                                                    <?php _e('Email'); ?> :
+                                                    <?php echo $this->escape($addressInvoicing['email']); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <?php if (!empty($addressInvoicing['phone'])) { ?>
+                                                <div>
+                                                    <?php _e('Phone'); ?> :
+                                                    <?php echo $this->escape($addressInvoicing['phone']); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <?php if (!empty($addressInvoicing['mobile'])) { ?>
+                                                <div>
+                                                    <?php _e('Mobile'); ?> :
+                                                    <?php echo $this->escape($addressInvoicing['mobile']); ?>
+                                                </div>
+                                            <?php } ?>
                                         <?php } ?>
-                                        <?php if (!empty($addressInvoicing['mobile'])) { ?>
-                                            <div>
-                                                <?php _e('Mobile'); ?> :
-                                                <?php echo $this->escape($addressDelivery['mobile']); ?>
-                                            </div>
-                                        <?php } ?>
-                                        <br/>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -242,8 +276,8 @@ $this->footScript()->appendScript($script);
                     </div>
                 </div>
                 <?php if (!empty($addresses)) { ?>
-                    <div class="col-md-6">
-                        <div class="col-md-12 address-single">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="address-single">
                             <div class="clearfix">
                                 <div class="info">
                                     <p>
@@ -266,63 +300,99 @@ $this->footScript()->appendScript($script);
                                                 <input type="checkbox" checked="checked"/> <?php _e("Same address"); ?>
                                             </a>
                                         <?php } else { ?>
-                                            <div>
-                                                <?php echo $this->escape($addressDelivery['first_name']); ?><?php echo $this->escape(
-                                                    $addressDelivery['last_name']
-                                                ); ?>
-                                            </div>
-                                            <?php if (!empty($addressDelivery['company'])) { ?>
-                                                <div><?php echo $this->escape($addressDelivery['company']); ?></div>
-                                            <?php } ?>
-                                            <?php if (!empty($addressDelivery['company_id'])) { ?>
-                                                <div><?php echo $this->escape($addressDelivery['company_id']); ?></div>
-                                            <?php } ?>
-                                            <?php if (!empty($addressDelivery['company_vat'])) { ?>
-                                                <div><?php echo $this->escape($addressDelivery['company_vat']); ?></div>
-                                            <?php } ?>
-                                            <?php if (!empty($addressDelivery['address1'])) { ?>
-                                                <div><?php echo $this->escape($addressDelivery['address1']); ?></div>
-                                            <?php } ?>
-                                            <?php if (!empty($addressDelivery['address2'])) { ?>
-                                                <div><?php echo $this->escape($addressDelivery['address2']); ?></div>
-                                            <?php } ?>
-                                            <div>
-                                                <?php if (!empty($addressDelivery['zip_code'])) { ?>
-                                                    <?php echo $this->escape($addressDelivery['zip_code']); ?>&nbsp;
-                                                <?php } ?>
-                                                <?php if (!empty($addressDelivery['state'])) { ?>
-                                                    <?php echo $this->escape($addressDelivery['state']); ?>&nbsp;
-                                                <?php } ?>
-                                                <?php if (!empty($addressDelivery['city'])) { ?>
-                                                    <?php echo $this->escape($addressDelivery['city']); ?>&nbsp;
-                                                <?php } ?>
-                                                <?php if (!empty($addressDelivery['country'])) { ?>
-                                                    <?php echo $this->escape($addressDelivery['country']); ?>&nbsp;
-                                                <?php } ?>
-                                            </div>
-                                            <?php if (!empty($addressDelivery['mobile'])) { ?>
+                                            <?php if (empty($addresses)) { ?>
+                                                <?php echo $this->form($forms['new'], 'vertical'); ?>
+                                            <?php } else { ?>
                                                 <div>
-                                                    <?php _e('Mobile'); ?> :
-                                                    <?php echo $this->escape($addressDelivery['mobile']); ?>
+                                                    <?php _e('Type') ?> :
+                                                    <?php echo $addressDelivery['account_type'] == 'none' ? __('ND') : __(ucfirst($addressDelivery['account_type'])); ?>
                                                 </div>
-                                            <?php } ?>
-                                            <?php if (!empty($addressDelivery['email'])) { ?>
-                                                <div>
-                                                    <?php _e('Email'); ?> :
-                                                    <?php echo $this->escape($addressDelivery['email']); ?>
-                                                </div>
-                                            <?php } ?>
-                                            <?php if (!empty($addressDelivery['phone'])) { ?>
-                                                <div>
-                                                    <?php _e('Phone'); ?> :
-                                                    <?php echo $this->escape($addressDelivery['phone']); ?>
-                                                </div>
-                                            <?php } ?>
-                                            <?php if (!empty($addressDelivery['mobile'])) { ?>
-                                                <div>
-                                                    <?php _e('Mobile'); ?> :
-                                                    <?php echo $this->escape($addressDelivery['mobile']); ?>
-                                                </div>
+                                                <?php if ($addressDelivery['account_type'] === 'company') { ?>
+                                                    <div><?php echo $this->escape($addressDelivery['company']); ?></div>
+
+                                                    <?php if (!empty($addressDelivery['company_address1'])) { ?>
+                                                        <div><?php echo $this->escape($addressDelivery['company_address1']); ?></div>
+                                                    <?php } ?>
+                                                    <?php if (!empty($addressDelivery['company_address2'])) { ?>
+                                                        <div><?php echo $this->escape($addressDelivery['company_address2']); ?></div>
+                                                    <?php } ?>
+                                                    <div>
+                                                        <?php if (!empty($addressDelivery['company_zip_code'])) { ?>
+                                                            <?php echo $this->escape($addressDelivery['company_zip_code']); ?>&nbsp;
+                                                        <?php } ?>
+                                                        <?php if (!empty($addressDelivery['company_state'])) { ?>
+                                                            <?php echo $this->escape($addressDelivery['company_state']); ?>&nbsp;
+                                                        <?php } ?>
+                                                        <?php if (!empty($addressDelivery['company_city'])) { ?>
+                                                            <?php echo $this->escape($addressDelivery['company_city']); ?>&nbsp;
+                                                        <?php } ?>
+                                                        <?php if (!empty($addressDelivery['company_country'])) { ?>
+                                                            <?php echo $this->escape($addressDelivery['company_country']); ?>&nbsp;
+                                                        <?php } ?>
+                                                    </div>
+                                                    <div><?php echo $this->escape($addressDelivery['company_id']); ?></div>
+                                                    <div><?php echo $this->escape($addressDelivery['company_vat']); ?></div>
+                                                    <?php if (!empty($addressDelivery['email'])) { ?>
+                                                        <div>
+                                                            <?php _e('Email'); ?> :
+                                                            <?php echo $this->escape($addressDelivery['email']); ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                    <?php if (!empty($addressDelivery['phone'])) { ?>
+                                                        <div>
+                                                            <?php _e('Phone'); ?> :
+                                                            <?php echo $this->escape($addressDelivery['phone']); ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                    <?php if (!empty($addressDelivery['mobile'])) { ?>
+                                                        <div>
+                                                            <?php _e('Mobile'); ?> :
+                                                            <?php echo $this->escape($addressDelivery['mobile']); ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                <?php } else { ?>
+                                                    <div>
+                                                        <?php echo $this->escape($addressDelivery['first_name']); ?>&nbsp;<?php echo $this->escape($addressDelivery['last_name']); ?>
+                                                    </div>
+                                                    <?php if (!empty($addressDelivery['address1'])) { ?>
+                                                        <div><?php echo $this->escape($addressDelivery['address1']); ?></div>
+                                                    <?php } ?>
+                                                    <?php if (!empty($addressDelivery['address2'])) { ?>
+                                                        <div><?php echo $this->escape($addressDelivery['address2']); ?></div>
+                                                    <?php } ?>
+                                                    <div>
+                                                        <?php if (!empty($addressDelivery['zip_code'])) { ?>
+                                                            <?php echo $this->escape($addressDelivery['zip_code']); ?>&nbsp;
+                                                        <?php } ?>
+                                                        <?php if (!empty($addressDelivery['state'])) { ?>
+                                                            <?php echo $this->escape($addressDelivery['state']); ?>&nbsp;
+                                                        <?php } ?>
+                                                        <?php if (!empty($addressDelivery['city'])) { ?>
+                                                            <?php echo $this->escape($addressDelivery['city']); ?>&nbsp;
+                                                        <?php } ?>
+                                                        <?php if (!empty($addressDelivery['country'])) { ?>
+                                                            <?php echo $this->escape($addressDelivery['country']); ?>&nbsp;
+                                                        <?php } ?>
+                                                    </div>
+                                                    <?php if (!empty($addressDelivery['email'])) { ?>
+                                                        <div>
+                                                            <?php _e('Email'); ?> :
+                                                            <?php echo $this->escape($addressDelivery['email']); ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                    <?php if (!empty($addressDelivery['phone'])) { ?>
+                                                        <div>
+                                                            <?php _e('Phone'); ?> :
+                                                            <?php echo $this->escape($addressDelivery['phone']); ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                    <?php if (!empty($addressDelivery['mobile'])) { ?>
+                                                        <div>
+                                                            <?php _e('Mobile'); ?> :
+                                                            <?php echo $this->escape($addressDelivery['mobile']); ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                <?php } ?>
                                             <?php } ?>
                                         <?php } ?>
                                         <br/>
@@ -334,9 +404,8 @@ $this->footScript()->appendScript($script);
                 <?php } ?>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="cart-product">
+        <div class="col-lg-4 col-md-4">
+            <div class="cart-product mb-3">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title"><?php _e('Your order'); ?></h3>
@@ -344,90 +413,102 @@ $this->footScript()->appendScript($script);
                     <div class="clearfix">
                         <table class="cart-product-list">
                             <tr>
-                                <th class="col-md-10"><?php _e('Product name') ?></th>
-                                <th class="col-md-2 text-right"><?php _e('Total') ?></th>
+                                <th class="col-lg-10 col-md-10"><?php _e('Product name') ?></th>
+                                <th class="col-lg-2 col-md-2 text-right"><?php _e('Total') ?></th>
                             </tr>
                             <?php $totalDiscount = 0 ?>
                             <?php $count = 0 ?>
-                            <?php foreach ($cart['product'] as $key => $product) { ?>
-                                <?php
-                                $count++;
-                                $extra           = json_decode($product['extra'], true);
-                                $unconsumedPrice = $extra['unconsumedPrice'];
-                                ?>
+                            <?php $countOfProducts = count($cart['product']); ?>
+                            <?php if (isset($cart['product']) && count($cart['product'])) { ?>
+                                <?php foreach ($cart['product'] as $key => $product) { ?>
+                                    <?php
+                                    $count++;
+                                    $extra           = json_decode($product['extra'], true);
+                                    $unconsumedPrice = isset($extra['unconsumedPrice']) ? $extra['unconsumedPrice'] : null;
+                                    $product['product_price'] = str_replace(',', '.', $product['product_price']);
 
-                                <tr>
-                                    <td>
-                                        <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
-                                           target="_blank">
-                                            <b>#<?php echo $count . ' ' . $this->escape($product['details']['title']); ?></b>
-                                        </a>
-                                        <?php if (!empty($product['time_start'])) { ?>
-                                            <p>
-                                                <?php if ($product['time_end'] == strtotime("2030-01-01")) { ?>
-                                                    <?php echo __('Unlimited from') . ' ' . _date($product['time_start']) ?>
-                                                <?php } else { ?>
-                                                    <?php echo __('From') . ' ' . _date($product['time_start']) . ' ' . __('to') . ' ' . _date(
-                                                            $product['time_end']
-                                                        ) ?>
-                                                <?php } ?>
-                                            </p>
-                                        <?php } ?>
-                                        <?php if (!empty($product['details']['thumbUrl'])) { ?>
-                                            <div class="col-5">
-                                                <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
-                                                   target="_blank">
-                                                    <img class="img-fluid"
-                                                         src="<?php echo $this->escape($product['details']['thumbUrl']); ?>">
-                                                </a>
-                                            </div>
-                                        <?php } ?>
-                                    </td>
-                                    <td class="text-right">
-                                        <strong class="data-total-price"><?php echo Pi::api('api', 'order')->viewPrice(
-                                                $this->escape($product['product_price'] - $product['discount_price'] - $unconsumedPrice)
-                                            ); ?></strong>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Price ext VAT'); ?></td>
-                                    <td class="data-normal-price">
-                                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
-                                    </td>
-                                </tr>
-                                <?php if (isset($product['discount']) && $product['discount'] > 0) { ?>
+                                    d($product);
+                                    ?>
                                     <tr>
                                         <td>
-                                            <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Total Discount'); ?>
-                                            <?php if (isset($product['discount'])) { ?>
-                                                (<span data-discount-for="<?php echo $product['product'] ?>"><?php echo $product['discount'] ?></span>%)
+                                            <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
+                                                <?php if ($countOfProducts > 1) { ?>
+                                                    <b>#<?php echo $count . ' ' . $product['details']['title']; ?></b>
+                                                <?php } else { ?>
+                                                    <b><?php echo $product['details']['title']; ?></b>
+                                                <?php } ?>
+                                            </a>
+                                            <?php if (isset($product['tooltip']) && $product['tooltip']) { ?>
+                                                <button type="button" class="btn btn-tooltip tooltip-description d-inline float-none m-0" data-toggle="tooltip" data-placement="left" title="" data-original-title="<?php echo strip_tags($product['tooltip_description']) ?>">?</button>
+                                            <?php } ?>
+                                            <?php if (!empty($product['time_start'])) { ?>
+                                                <p>
+                                                    <?php if ($product['time_end'] == strtotime("2030-01-01")) { ?>
+                                                        <?php echo __('Unlimited from') . ' ' . _date($product['time_start']) ?>
+                                                    <?php } else { ?>
+                                                        <?php echo __('From') . ' ' . _date($product['time_start']) . ' ' . __('to') . ' ' . _date(
+                                                                $product['time_end']
+                                                            ) ?>
+                                                    <?php } ?>
+                                                </p>
+                                            <?php } ?>
+                                            <?php if (!empty($product['details']['thumbUrl'])) { ?>
+                                                <div class="col-5">
+                                                    <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
+                                                       target="_blank">
+                                                        <img class="img-fluid"
+                                                             src="<?php echo $this->escape($product['details']['thumbUrl']); ?>">
+                                                    </a>
+                                                </div>
                                             <?php } ?>
                                         </td>
-                                        <td data-discount-price-for="<?php echo $product['product'] ?>">
-                                            <?php
-                                            echo $product['discount_price'] > 0 ? '-' : '';
-                                            echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
+                                        <td class="text-right">
+                                            <strong class="data-total-price"><?php echo Pi::api('api', 'order')->viewPrice(
+                                                    $this->escape($product['product_price'] - $product['discount_price'] - $unconsumedPrice)
+                                                ); ?></strong>
                                         </td>
                                     </tr>
+                                    <?php if ($unconsumedPrice || (isset($product['discount']) && $product['discount'] > 0)) { ?>
+                                        <tr>
+                                            <td><?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Base Price ex VAT'); ?></td>
+                                            <td class="data-normal-price">
+                                                <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'])); ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                    <?php if (isset($product['discount']) && $product['discount'] > 0) { ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Total Discount'); ?>
+                                                <?php if (isset($product['discount'])) { ?>
+                                                    (<span data-discount-for="<?php echo $product['product'] ?>"><?php echo $product['discount'] ?></span>%)
+                                                <?php } ?>
+                                            </td>
+                                            <td data-discount-price-for="<?php echo $product['product'] ?>">
+                                                <?php
+                                                echo $product['discount_price'] > 0 ? '-' : '';
+                                                echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                    <?php if ($unconsumedPrice) { ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Old package recovery'); ?>
+                                            </td>
+                                            <td data-discount-price-for="<?php echo $product['product'] ?>">
+                                                <?php
+                                                echo $unconsumedPrice > 0 ? '-' : '';
+                                                echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice));
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                    <?php $totalDiscount += $product['discount_price']; ?>
+                                    <?php $totalDiscount += $unconsumedPrice; ?>
                                 <?php } ?>
-                                <?php if ($unconsumedPrice) { ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . __('Old package recovery'); ?>
-                                        </td>
-                                        <td data-discount-price-for="<?php echo $product['product'] ?>">
-                                            <?php
-                                            echo $unconsumedPrice > 0 ? '-' : '';
-                                            echo Pi::api('api', 'order')->viewPrice($this->escape($unconsumedPrice));
-                                            ?>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
-                                <?php $totalDiscount += $product['discount_price']; ?>
-                                <?php $totalDiscount += $unconsumedPrice; ?>
                             <?php } ?>
                             <tr class="footer">
-
                                 <td>
                                     <strong>
                                         <?php _e('Total Price ext VAT'); ?>
@@ -460,7 +541,7 @@ $this->footScript()->appendScript($script);
                                     </td>
                                 </tr>
                             <?php } ?>
-                            <?php if ($cart['type_payment'] != 'installment') { ?>
+                            <?php if (isset($cart['type_payment']) && $cart['type_payment'] != 'installment') { ?>
                                 <tr class="card-footer footer">
                                     <td>
                                         <strong>
@@ -479,36 +560,34 @@ $this->footScript()->appendScript($script);
                 </div>
                 <div class="clearfix">
                     <?php if (isset($forms['promoCheckout'])) { ?>
-                        <?php echo $this->form()->openTag($forms['promoCheckout']); ?>
-                        <div class="col-md-4 nopadding">
-                            <div class="form-group" data-name="code">
-                                <label class=" col-form-label">
-                                    <?php _e('Your promo code') ?>
-                                </label>
-                                <?php echo $this->formElement($forms['promoCheckout']->get('code')); ?>
-                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        <div class="card mb-3 bg-light">
+                            <div class="card-body">
+                                <?php echo $this->form()->openTag($forms['promoCheckout']); ?>
+                                <div class="clearfix row">
+                                    <div class="col-lg-7 col-md-7 col-12 nopadding">
+                                        <div class="form-group" data-name="code">
+                                            <label class="col-form-label">
+                                                <?php _e('Your promo code') ?>
+                                            </label>
+                                            <?php echo $this->formElement($forms['promoCheckout']->get('code')); ?>
+                                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-12 nopadding">
+                                        <label class="col-form-label">
+                                            &nbsp;
+                                        </label>
+                                        <div class="form-group" data-name="code">
+                                            <?php echo $this->formElement($forms['promoCheckout']->get('submit_promo')); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php echo $this->form()->closeTag($forms['promoCheckout']); ?>
+                                <div class="clearfix alert d-none" role="alert">
+                                    <span></span>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-2 nopadding">
-                            <label class=" col-form-label">
-                                &nbsp;
-                            </label>
-                            <div class="form-group" data-name="code">
-                                <?php echo $this->formElement($forms['promoCheckout']->get('submit_promo')); ?>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <?php echo $this->form()->closeTag($forms['promoCheckout']); ?>
-                        <?php if ($msgPromoCode) { ?>
-                            <div class="clearfix alert alert-<?php echo $msgPromoCode['type'] ?>" role="alert">
-                                <span><?php echo $msgPromoCode['message'] ?></span>
-                            </div>
-                        <?php } ?>
-
-                        <div class="clearfix alert d-none" role="alert">
-                            <span></span>
-                        </div>
-
                     <?php } ?>
                     <?php if (isset($forms['order'])) { ?>
                         <?php echo $this->form($forms['order'], 'vertical'); ?>
@@ -530,7 +609,7 @@ $this->footScript()->appendScript($script);
 </div>
 
 <div class="modal fade" id="addressListModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">&nbsp;</h2>
@@ -540,15 +619,15 @@ $this->footScript()->appendScript($script);
             </div>
             <div class="panel">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-lg-7 col-md-7">
                         <h2 class="delivery hide"><?php _e('Delivery Address') ?></h2>
                         <h2 class="invoicing hide"><?php _e('Invoicing Address') ?></h2>
                     </div>
-                    <div class="col-md-5">
-                        <a class="btn btn-simple btn-sm col-md-12 invoicing hide"
+                    <div class="col-lg-5 col-md-5">
+                        <a class="btn btn-simple btn-sm col-lg-12 col-md-12 invoicing hide"
                            href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing']); ?>" data-remote="false"
                            data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
-                        <a class="btn btn-simple btn-sm col-md-12 delivery hide"
+                        <a class="btn btn-simple btn-sm col-lg-12 col-md-12 delivery hide"
                            href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'delivery']); ?>" data-remote="false"
                            data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
                     </div>
@@ -556,14 +635,16 @@ $this->footScript()->appendScript($script);
                 <div class="clearfix"></div>
             </div>
             <div class="modal-body">
+                <p>
                 <?php _e('Please, wait ...') ?>
+                </p>
             </div>
             <div class="panel bottom">
-                <div class="offset-md-7 col-md-5">
-                    <a class="btn btn-simple btn-sm col-md-12 invoicing hide"
+                <div class="offset-lg-5 col-lg-5 offset-md-7 col-md-5">
+                    <a class="btn btn-simple btn-sm col-lg-12 col-md-12 invoicing hide"
                        href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing']); ?>" data-remote="false"
                        data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
-                    <a class="btn btn-simple btn-sm col-md-12 delivery hide"
+                    <a class="btn btn-simple btn-sm col-lg- 12 col-md-12 delivery hide"
                        href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'delivery']); ?>" data-remote="false"
                        data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
                 </div>
@@ -574,7 +655,7 @@ $this->footScript()->appendScript($script);
 </div>
 
 <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" style="overflow-y: auto !important;">
-    <div class="modal-dialog " role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">&nbsp;</h4>
@@ -584,6 +665,10 @@ $this->footScript()->appendScript($script);
             </div>
             <div class="modal-body">
                 <?php _e('Please, wait ...') ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php _e('Cancel') ?></button>
+                <button type="button" class="btn btn-primary edit-address"><?php _e('Save') ?></button>
             </div>
         </div>
     </div>
@@ -607,24 +692,24 @@ $this->footScript()->appendScript($script);
         });
 
         $("#addressModal").on("show.bs.modal", function (e) {
+            if ($(e.relatedTarget).length == 0) {
+                return;
+            }
+
             var link = $(e.relatedTarget);
             $(this).find(".modal-body").load(link.attr("href"));
         });
 
         $("#addressListModal").on("show.bs.modal", function (e) {
+            if ($(e.relatedTarget).length == 0) {
+                return;
+            }
+
             var link = $(e.relatedTarget);
             $(this).find(".modal-body").load(link.attr("href"));
             $(this).find('.invoicing').addClass('hide');
             $(this).find('.delivery').addClass('hide');
         });
-
-        $('.complementary').parent().parent().hide();
-        $('#complementary').click(
-            function (e) {
-                e.preventDefault();
-                $('.complementary').parent().parent().toggle();
-            }
-        );
 
         $('#promoCheckout').on('submit', function () {
             var code = $('#promoCheckout input[name=code]').val();
@@ -638,7 +723,8 @@ $this->footScript()->appendScript($script);
                 url: "<?php echo Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'promocode'])) ?>",
                 data: {code: code},
                 success: function (data) {
-                    $('#promoCheckout').parent().find('.alert')
+                    window.location.reload();
+                    /* $('#promoCheckout').parent().find('.alert')
                         .removeClass('d-none')
                         .removeClass('alert-info')
                         .removeClass('alert-success')
@@ -647,8 +733,8 @@ $this->footScript()->appendScript($script);
                     $('#promoCheckout').parent().find('.alert span').html(data.msgPromoCode.message);
 
                     var totalDiscount = 0;
-                    $.each(data.cart.product,
-                        function (i, product) {
+                    $.each(data.cart.product, function (i, product) {
+                            console.log(product);
                             $('.cart-product span[data-discount-for=' + product.product + ']').html(product.discount);
                             $('.cart-product td[data-discount-price-for=' + product.product + ']').html('-' + product.discount_price_view);
                         }
@@ -656,7 +742,7 @@ $this->footScript()->appendScript($script);
                     $('.cart-product .data-total-price').html(data.price.total_price_view);
                     $('.cart-product .data-total-vat').html(data.price.vat_view);
                     $('.cart-product .data-total-price-ttc').html(data.price.total_price_ttc_view);
-                    //$('[data-total-vat-for=445]').val()
+                    //$('[data-total-vat-for=445]').val() */
                 },
                 dataType: 'json'
             });
@@ -680,6 +766,44 @@ $this->footScript()->appendScript($script);
                 return true;
             }
         );
+
+        $('.tooltip-description').tooltip();
+        var accountTypeChange = function() {
+
+            var show = $('[name=account_type]:checked').val() == 'company';
+            var elements = [
+                'company',
+                'company_address1',
+                'company_zip_code',
+                'company_city',
+                'company_state',
+                'company_country',
+                'company_id',
+                'company_vat'
+            ];
+            if (show) {
+                for (var i = 0; i < elements.length; ++i) {
+                    var element = $('[name=' + elements[i] + ']');
+                    if (element.length) {
+                        if (element.closest('.row').find('label i').length) {
+                            element.attr('required', true);
+                        }
+                    }
+                }
+                $('[name=company]').closest('fieldset').show();
+            } else {
+                for (var i = 0; i < elements.length; ++i) {
+                    var element = $('[name=' + elements[i] + ']');
+                    if (element.length) {
+                        element.attr('required', false);
+                    }
+                }
+                $('[name=company]').closest('fieldset').hide();
+            }
+        };
+
+        $('[name=account_type]').change(accountTypeChange);
+        accountTypeChange();
 
     });
 </script>
