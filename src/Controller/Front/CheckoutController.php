@@ -38,14 +38,17 @@ class CheckoutController extends IndexController
         // Set check
         $check       = false;
         $editAddress = false;
+
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
         // Favourites addresses
         $addresses = Pi::api('customerAddress', 'order')->findAddresses();
         if (count($addresses)) {
-            if (isset($_SESSION['order'])
-                && (!isset($_SESSION['order']['delivery_address']) || !isset($addresses[$_SESSION['order']['delivery_address']])
+            if (
+                isset($_SESSION['order'])
+                && (!isset($_SESSION['order']['delivery_address'])
+                    || !isset($addresses[$_SESSION['order']['delivery_address']])
                     || !$addresses[$_SESSION['order']['delivery_address']])
             ) {
                 $favouriteDelivery = Pi::api('customerAddress', 'order')->getFavouriteDelivery();
@@ -54,7 +57,10 @@ class CheckoutController extends IndexController
                 }
                 $_SESSION['order']['delivery_address'] = $favouriteDelivery['id'];
             }
-            if (!isset($_SESSION['order']['invoicing_address']) || !isset($addresses[$_SESSION['order']['invoicing_address']])
+
+            if (
+                !isset($_SESSION['order']['invoicing_address'])
+                || !isset($addresses[$_SESSION['order']['invoicing_address']])
                 || !$addresses[$_SESSION['order']['invoicing_address']]
             ) {
                 $favouriteInvoicing = Pi::api('customerAddress', 'order')->getFavouriteInvoicing();
@@ -87,13 +93,17 @@ class CheckoutController extends IndexController
                 $cart['product'][$key]['product_price_view'] = Pi::api('api', 'order')->viewPrice($product['product_price']);
             }
         }
+
+        // Update order info
         Pi::api('order', 'order')->setOrderInfo($cart);
 
-        if (empty($cart) && !$config['order_anonymous']) {
+        // Check order anonymous
+        if (!Pi::service('authentication')->hasIdentity() && !$config['order_anonymous']) {
             $url = ['route' => 'home'];
             $this->jump($url);
         }
 
+        // Check cart not empty
         if (empty($cart)) {
             $url = ['', 'module' => $this->params('module'), 'controller' => 'index'];
             $this->jump($url, __('Your cart is empty.'), 'error');
@@ -114,6 +124,7 @@ class CheckoutController extends IndexController
                 // Load language
                 Pi::service('i18n')->load(['module/system', 'default']);
                 Pi::service('i18n')->load(['module/user', 'default']);
+
                 // Set login form
                 $formLogin = new LoginForm('login');
                 $formLogin->setAttribute(
@@ -131,13 +142,27 @@ class CheckoutController extends IndexController
         $addressDelivery  = Pi::api('customerAddress', 'order')->getAddress($cart['delivery_address']);
         $addressInvoicing = Pi::api('customerAddress', 'order')->getAddress($cart['invoicing_address']);
 
-        $payAll      = $cart['extra']['values']['pay_all'];
-        $composition = Pi::api('order', $cart['module_name'])->getInstallmentComposition($cart, true);
-        $duePrice    = 0;
-        foreach ($cart['product'] as $product) {
-            $duePrice += $product['product_price'] - $product['discount_price'] + $product['shipping_price'] + $product['packing_price']
-                + $product['setup_price'] + $product['vat_price'];
+        // Set pay all
+        $payAll = false;
+        if (isset($cart['extra']['values']['pay_all']) && !empty($cart['extra']['values']['pay_all'])) {
+            $payAll = $cart['extra']['values']['pay_all'];
         }
+
+        // Set total shipping
+        if ($config['order_location_delivery']
+            && isset($addressDelivery['delivery'])
+            && intval($addressDelivery['delivery']) > 0
+            && isset($addressDelivery['location'])
+            && intval($addressDelivery['location']) > 0
+        ) {
+            $cart['total_shipping'] = Pi::api('delivery', 'order')->getPrice($addressDelivery['location'], $addressDelivery['delivery']);
+        }
+
+        // Set price
+        $price = $this->updatePrice($cart);
+
+        // Get installment composition from source module
+        $composition = Pi::api('order', $cart['module_name'])->getInstallmentComposition($cart, true);
 
         // Set form option
         $option = [
@@ -147,9 +172,10 @@ class CheckoutController extends IndexController
             'invoicing_address' => $_SESSION['order']['invoicing_address'],
             'pay_all'           => $payAll,
             'composition'       => $composition,
-            'due_price'         => number_format($duePrice, 2, '.', ''),
+            'due_price'         => number_format($price['total'], 2, '.', ''),
         ];
 
+        // Set installment composition
         if (!$payAll && $composition[0] < 100) {
             $extra     = json_decode($cart['product'][0]['extra'], true);
             $item      = Pi::api('item', 'guide')->getItem($extra['item']);
@@ -199,7 +225,7 @@ class CheckoutController extends IndexController
             $formAddress->setData($user);
         }
 
-        // Check post
+        // Check address
         $check          = count($addresses) == 0 ? true : false;
         $invalidAddress = false;
         if ((isset($addressDelivery['account_type']) && $addressDelivery['account_type'] == 'none')
@@ -208,9 +234,11 @@ class CheckoutController extends IndexController
             $invalidAddress = true;
         }
 
+        // Check post
         if ($this->request->isPost() && !$invalidAddress) {
             $data = $this->request->getPost();
 
+            // Save address
             if (isset($data['submit_address'])) {
                 $formAddress->setData($data);
                 if ($formAddress->isValid()) {
@@ -235,6 +263,7 @@ class CheckoutController extends IndexController
                     $check = true;
                 }
             } else {
+                // Save order
                 if (isset($data['submit_order_simple'])) {
                     $formOrderSimple->setData($data);
                     if ($formOrderSimple->isValid()) {
@@ -246,11 +275,13 @@ class CheckoutController extends IndexController
                         $addressDelivery  = $addresses[$values['address_delivery_id']];
                         $addressInvoicing = $addresses[$values['address_invoicing_id']];
 
-                        $this->order($values, $addressDelivery, $addressInvoicing, $cart, $config, $uid);
+                        // Save order
+                        $this->saveOrder($values, $addressDelivery, $addressInvoicing, $cart, $config, $uid);
                         Pi::api('customerAddress', 'order')->updateFavouriteDelivery($_SESSION['order']['delivery_address']);
                         Pi::api('customerAddress', 'order')->updateFavouriteInvoicing($_SESSION['order']['invoicing_address']);
                     }
                 } else {
+                    // Register user and save order
                     $formOrder->setData($data);
 
                     if ($formOrder->isValid()) {
@@ -313,6 +344,8 @@ class CheckoutController extends IndexController
                             // Check user informations
                             $user          = Pi::api('user', 'order')->getUserInformation($uid);
                             $values['uid'] = $uid;
+
+                            // Set address
                             if ($values['address_id'] == 0) {
                                 Pi::api('customerAddress', 'order')->addAddress($values);
                             } else {
@@ -321,12 +354,14 @@ class CheckoutController extends IndexController
                             $addresses = Pi::api('customerAddress', 'order')->findAddresses($uid);
                             $address   = current($addresses);
 
-                            $this->order($values, $address, $address, $cart, $config, $uid);
+                            // Save order
+                            $this->saveOrder($values, $address, $address, $cart, $config, $uid);
                         }
                     }
                 }
             }
         }
+
         // Set new form
         $forms                  = [];
         $user                   = Pi::api('user', 'order')->getUserInformation();
@@ -355,9 +390,6 @@ class CheckoutController extends IndexController
         } else {
             $forms['new'] = $formOrder;
         }
-
-        // Set price
-        $price = $this->updatePrice($cart);
 
         // Get credit
         /* if ($config['credit_active'] && Pi::user()->getId() > 0) {
@@ -391,6 +423,7 @@ class CheckoutController extends IndexController
     {
         $type = $this->params('type');
         $id   = $this->params('id');
+
         // Get address
         if ($type == 'delivery') {
             $_SESSION['order']['delivery_address'] = $id;
@@ -399,6 +432,7 @@ class CheckoutController extends IndexController
             $_SESSION['order']['invoicing_address'] = $id;
         }
 
+        // jump
         $this->jump(['', 'module' => 'order', 'controller' => 'checkout', 'action' => 'index']);
     }
 
@@ -415,19 +449,35 @@ class CheckoutController extends IndexController
 
     public function addressAction()
     {
+        // Set id
+        $id = $this->params('id');
+
+        // Set option
         $option = [];
-        $id     = $this->params('id');
-        $form   = new AddressForm('address', $option);
+
+        // Set form
+        $form = new AddressForm('address', $option);
         $form->setAttribute(
             'action',
-            Pi::url(Pi::service('url')->assemble('order', ['module' => 'order', 'controller' => 'checkout', 'action' => 'address', 'id' => $id]))
+            Pi::url(
+                Pi::service('url')->assemble(
+                    'order', [
+                        'module'     => 'order',
+                        'controller' => 'checkout',
+                        'action'     => 'address',
+                        'id'         => $id]
+                )
+            )
         );
         $form->remove('submit_address');
         $form->setInputFilter(new AddressFilter($option));
+
+        // Check form post
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
             $form->setData($data);
             if ($form->isValid()) {
+
                 // Check user informations
                 $uid  = Pi::user()->getId();
                 $user = Pi::api('user', 'order')->getUserInformation();
@@ -492,32 +542,39 @@ class CheckoutController extends IndexController
     {
         // Check user
         $this->checkUser();
+
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+
         // Set cart
         $cart = Pi::api('order', 'order')->getOrderInfo();
         if (empty($cart)) {
             $url = ['', 'module' => $this->params('module'), 'controller' => 'index'];
             $this->jump($url, __('Your cart is empty.'), 'error');
         }
+
         // Check order is active or inactive
         if (!$config['order_active']) {
             $url = ['', 'module' => $this->params('module'), 'controller' => 'index'];
             $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
         }
+
         // check post
         if ($this->request->isPost()) {
             // Get from post
             $data = $this->request->getPost();
             $data = $data->toArray();
+
             // Update order info
             Pi::api('order', 'order')->updateOrderInfo($data);
+
             // Go to checkout
             $url = ['', 'controller' => 'checkout', 'action' => 'index'];
             $this->jump($url, __('Your installment plan save, please complete your information and payment.'));
         } else {
             // Set user
             $user = Pi::api('user', 'order')->getUserInformation();
+
             // Set price
             $price                   = [];
             $price['product_price']  = 0;
@@ -527,6 +584,7 @@ class CheckoutController extends IndexController
             $price['packing_price']  = 0;
             $price['vat_price']      = 0;
             $price['total_price']    = 0;
+
             // Check order price
             if (!empty($cart['product'])) {
                 foreach ($cart['product'] as $product) {
@@ -541,17 +599,19 @@ class CheckoutController extends IndexController
                     $price['vat_price']      = $product['vat_price'] + $price['vat_price'];
                     // Set total
                     $total                = ((
-                        $product['product_price'] +
+                                $product['product_price'] +
                                 $product['shipping_price'] +
                                 $product['packing_price'] +
                                 $product['setup_price'] +
                                 $product['vat_price']
-                    ) - $product['discount_price'] - $unconsumedPrice) * $product['number'];
+                            ) - $product['discount_price'] - $unconsumedPrice) * $product['number'];
                     $price['total_price'] = $total + $price['total_price'];
                 }
             }
+
             // Set installment
             $installments = Pi::api('installment', 'order')->setPriceForView($price['total_price'], $user);
+
             // Set view
             $this->view()->setTemplate('installment');
             $this->view()->assign('cart', $cart);
@@ -565,13 +625,15 @@ class CheckoutController extends IndexController
     public function levelAction()
     {
         // Get info from url
-        $id               = $this->params('id');
-        $process          = $this->params('process');
-        $module           = $this->params('module');
-        $return           = [];
-        $return['status'] = 0;
-        $return['data']   = '';
-        $data             = [];
+        $id      = $this->params('id');
+        $process = $this->params('process');
+        $module  = $this->params('module');
+        $data    = [];
+        $return  = [
+            'status' => 0,
+            'data'   => $data,
+        ];
+
         // Check user
         if (!Pi::service('authentication')->hasIdentity()) {
             if (!Pi::service('module')->isActive('user')
@@ -581,8 +643,10 @@ class CheckoutController extends IndexController
                 return $return;
             }
         }
+
         // Get config
         $config = Pi::service('registry')->config->read($module);
+
         // process
         switch ($process) {
             case 'location':
@@ -591,6 +655,7 @@ class CheckoutController extends IndexController
                     $location                               = $this->getModel('location')->find($id)->toArray();
                     $_SESSION['checkout']['location']       = $location['id'];
                     $_SESSION['checkout']['location_title'] = $location['title'];
+
                     // Get location
                     $where  = ['location' => $id];
                     $select = $this->getModel('location_delivery')->select()->where($where);
@@ -603,6 +668,7 @@ class CheckoutController extends IndexController
                             $data[$row->id]['status'] = $delivery['status'];
                         }
                     }
+
                     // Set return
                     $return['status']   = 1;
                     $return['data']     = $data;
@@ -616,13 +682,16 @@ class CheckoutController extends IndexController
                     $delivery                               = $this->getModel('delivery')->find($id)->toArray();
                     $_SESSION['checkout']['delivery']       = $delivery['id'];
                     $_SESSION['checkout']['delivery_title'] = $delivery['title'];
+
                     // Get location_delivery
                     $location = $_SESSION['checkout']['location'];
                     $where    = ['location' => $location, 'delivery' => $id];
                     $select   = $this->getModel('location_delivery')->select()->where($where)->limit(1);
                     $row      = $this->getModel('location_delivery')->selectWith($select)->current();
+
                     // Set shipping price
                     $_SESSION['checkout']['shipping'] = $row->price;
+
                     // Get delivery_payment
                     $where  = ['delivery' => $id];
                     $select = $this->getModel('delivery_gateway')->select()->where($where);
@@ -641,13 +710,13 @@ class CheckoutController extends IndexController
                             }
                         }
                     }
+
                     // Set return
-                    //$return['status'] = 1;
-                    //$return['data'] = $data;
-                    //$return['data']['shipping'] = $invoice['total']['shipping'];
-                    //$return['data']['total'] = $invoice['total']['total_price'];
-                    //$return['delivery'] = $delivery['title'];
-                    //$return['payment'] = ($config['order_method'] == 'offline') ? __('Offline') : '';
+                    $return['status']           = 1;
+                    $return['data']             = $data;
+                    $return['data']['shipping'] = $_SESSION['checkout']['shipping'];
+                    $return['delivery']         = $delivery['title'];
+                    $return['payment']          = ($config['order_method'] == 'offline') ? __('Offline') : '';
                 }
                 break;
 
@@ -656,18 +725,21 @@ class CheckoutController extends IndexController
                     // Set delivery
                     $_SESSION['checkout']['payment']       = $id;
                     $_SESSION['checkout']['payment_title'] = $id;
+
                     // Set return
                     $data = [
                         'location' => $_SESSION['checkout']['location_title'],
                         'delivery' => $_SESSION['checkout']['delivery_title'],
                         'payment'  => $_SESSION['checkout']['payment_title'],
                     ];
+
                     // Set return
                     $return['status'] = 1;
                     $return['data']   = $data;
                 }
                 break;
         }
+
         // return
         return $return;
     }
@@ -761,8 +833,8 @@ class CheckoutController extends IndexController
             }
         }
 
+        // Set price
         $price = $this->updatePrice($cart);
-
 
         $totalDiscount = 0;
         foreach ($cart['product'] as &$product) {
@@ -779,6 +851,7 @@ class CheckoutController extends IndexController
 
     private function validValues($values, $cart, $uid, $config)
     {
+        // Set value
         $values['uid']             = $uid;
         $values['ip']              = Pi::user()->getIp();
         $values['status_order']    = \Module\Order\Model\Order::STATUS_ORDER_VALIDATED;
@@ -790,18 +863,22 @@ class CheckoutController extends IndexController
         if (isset($cart['type_commodity']) && in_array($cart['type_commodity'], ['product', 'service', 'booking'])) {
             $values['type_commodity'] = $cart['type_commodity'];
         }
+
         // Set type_payment values
         if (isset($cart['type_payment']) && in_array($cart['type_payment'], ['free', 'onetime', 'recurring', 'installment'])) {
             $values['type_payment'] = $cart['type_payment'];
         }
+
         // Set plan values
         if (isset($cart['plan']) && !empty($cart['plan'])) {
             $values['plan'] = $cart['plan'];
         }
+
         // Set module_name values
         if (isset($cart['module_name']) && !empty($cart['module_name'])) {
             $values['module'] = $cart['module_name'];
         }
+
         // Set module_table values
         if (isset($cart['module_table']) && !empty($cart['module_table'])) {
             $values['product_type'] = $cart['module_table'];
@@ -820,22 +897,27 @@ class CheckoutController extends IndexController
                 }
             }
         }
+
         // Set module_item values
         if (isset($cart['module_item']) && !empty($cart['module_item'])) {
             $values['module_item'] = $cart['module_item'];
         }
+
         // Set can_pay values
         if (isset($cart['can_pay']) && !empty($cart['can_pay'])) {
             $values['can_pay'] = $cart['can_pay'];
         }
+
         // Set promotion_type values
         if (isset($cart['promotion_type']) && !empty($cart['promotion_type'])) {
             $values['promotion_type'] = $cart['promotion_type'];
         }
+
         // Set promotion_value values
         if (isset($cart['promotion_value']) && !empty($cart['promotion_value'])) {
             $values['promotion_value'] = $cart['promotion_value'];
         }
+
         // Set price values
         $values['discount_price'] = isset($cart['total_discount']) ? $cart['total_discount'] : 0;
         $values['shipping_price'] = isset($cart['total_shipping']) ? $cart['total_shipping'] : 0;
@@ -883,47 +965,115 @@ class CheckoutController extends IndexController
 
         // Set total
         $values['total_price'] = ((
-            $values['product_price'] +
+                $values['product_price'] +
                 $values['shipping_price'] +
                 $values['packing_price'] +
                 $values['setup_price'] +
                 $values['vat_price']
-        ) - $values['discount_price'] - $values['unconsumedPrice']);
+            ) - $values['discount_price'] - $values['unconsumedPrice']);
 
         return $values;
     }
 
-    private function order($values, $addressDelivery, $addressInvoicing, $cart, $config, $uid)
+    private function updatePrice($cart)
     {
-        $values                   = $this->validValues($values, $cart, $uid, $config);
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+
+        // Set price
+        $price               = [];
+        $price['discount']   = isset($cart['total_discount']) ? $cart['total_discount'] : 0;
+        $price['shipping']   = isset($cart['total_shipping']) ? $cart['total_shipping'] : 0;
+        $price['packing']    = isset($cart['total_packing']) ? $cart['total_packing'] : 0;
+        $price['setup']      = isset($cart['total_setup']) ? $cart['total_setup'] : 0;
+        $price['vat']        = isset($cart['total_vat']) ? $cart['total_vat'] : 0;
+        $price['product']    = 0;
+        $price['total']      = 0;
+        $price['unconsumed'] = 0;
+        $unconsumedPrice     = 0;
+
+        // Set price by product
+        if (isset($cart['product']) && count($cart['product'])) {
+            foreach ($cart['product'] as $product) {
+                // Check setup price
+                $extra           = json_decode($product['extra'], true);
+                $unconsumedPrice = isset($extra['unconsumedPrice']) ? $extra['unconsumedPrice'] : null;
+
+                // Check setup price
+                $product['setup_price'] = isset($product['setup_price']) ? $product['setup_price'] : 0;
+
+                // Set price
+                $price['product']    += round((float)$product['product_price'] * (float)$product['number'] * 100) / 100;
+                $price['discount']   += round((float)$product['discount_price'] * (float)$product['number'] * 100) / 100;
+                $price['shipping']   += round((float)$product['shipping_price'] * (float)$product['number'] * 100) / 100;
+                $price['setup']      += round((float)$product['setup_price'] * (float)$product['number'] * 100) / 100;
+                $price['packing']    += round((float)$product['packing_price'] * (float)$product['number'] * 100) / 100;
+                $price['vat']        += round((float)$product['vat_price'] * 100) / 100;
+                $price['unconsumed'] += $unconsumedPrice;
+            }
+        }
+
+        // Set additional price
+        if (isset($cart['type_commodity'])) {
+            if ($cart['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
+                $price['shipping'] = $price['shipping'] + $config['order_additional_price_product'];
+            } elseif (in_array($cart['type_commodity'], ['service', 'booking']) && $config['order_additional_price_service'] > 0) {
+                $price['setup'] = $price['setup'] + $config['order_additional_price_service'];
+            }
+        }
+
+        // Set total
+        $price['total'] = ((
+                $price['product'] +
+                $price['shipping'] +
+                $price['packing'] +
+                $price['setup'] +
+                $price['vat']
+            ) - $price['discount'] - $unconsumedPrice);
+
+        return $price;
+    }
+
+    private function saveOrder($values, $addressDelivery, $addressInvoicing, $cart, $config, $uid)
+    {
+        // Set user id to session
         $_SESSION['order']['uid'] = $uid;
 
+        // valid values
+        $values = $this->validValues($values, $cart, $uid, $config);
+
         // Check gateway
-        if (is_array($values['default_gateway'])) {
-            $values['default_gateway'] = $values['default_gateway'][0];
-        }
+        $values['default_gateway'] = is_array($values['default_gateway']) ? array_shift($values['default_gateway']) : $values['default_gateway'];
+
+        // Set gateway to session
         $_SESSION['order']['gateway'] = $values['default_gateway'];
-        $gateway                      = Pi::api('gateway', 'order')->getGateway($values['default_gateway']);
+
+        // Get gateway
+        $gateway = Pi::api('gateway', 'order')->getGateway($values['default_gateway']);
         if ($gateway->getType() == AbstractGateway::TYPE_REST) {
             $_SESSION['order']['redirect'] = $cart['redirect'];
         }
 
+        // Get gateway
         $gateway        = Pi::api('gateway', 'order')->getGatewayInfo($values['default_gateway']);
         $gatewayOptions = json_decode($gateway['option'], true);
 
-        // Save values to order
+        // Save order
         if (isset($_SESSION['order']['id'])) {
             $order = $this->getModel('order')->find($_SESSION['order']['id']);
-        }
-        if (empty($order)) {
-            $order          = $this->getModel('order')->createRow();
-            $values['code'] = Pi::api('order', 'order')->generatCode();
+        } else {
+            $order = $this->getModel('order')->createRow();
+
+            // generate order code
+            $values['code'] = Pi::api('order', 'order')->generateCode();
         }
         $order->assign($values);
         $order->save();
 
+        // Set order id to session
         $_SESSION['order']['id'] = $order['id'];
 
+        // Save order address
         $orderAddress = $this->getModel('order_address')->createRow();
         unset($addressDelivery['id']);
         $addressDelivery['type']  = 'DELIVERY';
@@ -931,6 +1081,7 @@ class CheckoutController extends IndexController
         $orderAddress->assign($addressDelivery);
         $orderAddress->save();
 
+        // Save order address
         $orderAddress = $this->getModel('order_address')->createRow();
         unset($addressInvoicing['id']);
         $addressInvoicing['type']  = 'INVOICING';
@@ -954,6 +1105,7 @@ class CheckoutController extends IndexController
 
         // Check order save
         if (isset($order->id) && intval($order->id) > 0) {
+
             // Save order detail
             if (!empty($cart['product'])) {
                 $this->getModel('detail')->delete(['order' => $_SESSION['order']['id']]);
@@ -1002,6 +1154,25 @@ class CheckoutController extends IndexController
                     $detail->save();
                 }
 
+                // Save general detail
+                $detail                 = $this->getModel('detail')->createRow();
+                $detail->order          = $order->id;
+                $detail->module         = 'order';
+                $detail->product_type   = 'service';
+                $detail->product        = 0;
+                $detail->discount_price = (isset($values['discount_price']) && !empty($values['discount_price'])) ? $values['discount_price'] : 0;
+                $detail->shipping_price = (isset($values['shipping_price']) && !empty($values['shipping_price'])) ? $values['shipping_price'] : 0;
+                $detail->setup_price    = (isset($values['setup_price']) && !empty($values['setup_price'])) ? $values['setup_price'] : 0;
+                $detail->packing_price  = (isset($values['packing_price']) && !empty($values['packing_price'])) ? $values['packing_price'] : 0;
+                $detail->vat_price      = (isset($values['vat_price']) && !empty($values['vat_price'])) ? $values['vat_price'] : 0;
+                $detail->product_price  = 0;
+                $detail->time_create    = time();
+                $detail->number         = 1;
+                $detail->time_start     = 0;
+                $detail->time_end       = 0;
+                $detail->save();
+
+                // Manage invoice
                 $invoices = Pi::api('invoice', 'order')->getInvoiceFromOrder($order->id);
                 if (!count($invoices)) {
                     $result = Pi::api('invoice', 'order')->createInvoice($order->id, Pi::user()->getId());
@@ -1014,6 +1185,7 @@ class CheckoutController extends IndexController
                 $dates       = Pi::api('order', $cart['module_name'])->getInstallmentDueDate($cart, $composition);
                 $invoice     = Pi::api('invoice', 'order')->updateInvoice($randomId, $gateway['path'], $composition, $dates, false, $values['type_payment']);
             }
+
             // Update user information
             if ($config['order_update_user'] && isset($values['update_user']) && $values['update_user']) {
                 Pi::api('user', 'order')->updateUserInformation($values);
@@ -1025,15 +1197,13 @@ class CheckoutController extends IndexController
                 Pi::api('credit', 'order')->addHistory($cart['credit'], $order->id);
             }
 
-            /**
-             * Save order entity again for triggering observers
-             */
+            // Save order entity again for triggering observers
             $order->save();
 
             // Send notification
             Pi::api('notification', 'order')->addOrder($order->toArray(), $addressInvoicing, $gatewayOptions['onemail']);
 
-            // Go to payment
+            // Set jump url
             if ($config['order_payment'] == 'payment') {
                 $url = Pi::url(
                     Pi::service('url')->assemble(
@@ -1059,67 +1229,15 @@ class CheckoutController extends IndexController
                     )
                 );
             }
+
+            // Jump to url
             $this->jump($url, __('Order information saved successfully, you can now finalize payment !'), 'success');
         } else {
             $error = [
                 'values' => $values,
                 'cart'   => $cart,
-                //'addresses' => $addresses,
-                //'user' => $user,
             ];
             $this->view()->assign('error', $error);
         }
-    }
-
-    private function updatePrice($cart)
-    {
-        $price               = [];
-        $price['discount']   = isset($cart['total_discount']) ? $cart['total_discount'] : 0;
-        $price['shipping']   = isset($cart['total_shipping']) ? $cart['total_shipping'] : 0;
-        $price['packing']    = isset($cart['total_packing']) ? $cart['total_packing'] : 0;
-        $price['setup']      = isset($cart['total_setup']) ? $cart['total_setup'] : 0;
-        $price['vat']        = isset($cart['total_vat']) ? $cart['total_vat'] : 0;
-        $price['product']    = 0;
-        $price['total']      = 0;
-        $price['unconsumed'] = 0;
-        $unconsumedPrice     = 0;
-        if (isset($cart['product']) && count($cart['product'])) {
-            foreach ($cart['product'] as $product) {
-                // Check setup price
-                $extra           = json_decode($product['extra'], true);
-                $unconsumedPrice = isset($extra['unconsumedPrice']) ? $extra['unconsumedPrice'] : null;
-
-                $product['setup_price'] = isset($product['setup_price']) ? $product['setup_price'] : 0;
-                // Set price
-                $price['product']    += round($product['product_price'] * $product['number'] * 100) / 100;
-                $price['discount']   += round($product['discount_price'] * $product['number'] * 100) / 100;
-                $price['shipping']   += round($product['shipping_price'] * $product['number'] * 100) / 100;
-                $price['setup']      += round($product['setup_price'] * $product['number'] * 100) / 100;
-                $price['packing']    += round($product['packing_price'] * $product['number'] * 100) / 100;
-                $price['vat']        += round($product['vat_price'] * 100) / 100;
-                $price['unconsumed'] += $unconsumedPrice;
-            }
-        }
-
-        // Set additional price
-        $config = Pi::service('registry')->config->read($this->getModule());
-        if (isset($cart['type_commodity'])) {
-            if ($cart['type_commodity'] == 'product' && $config['order_additional_price_product'] > 0) {
-                $price['shipping'] = $price['shipping'] + $config['order_additional_price_product'];
-            } elseif (in_array($cart['type_commodity'], ['service', 'booking']) && $config['order_additional_price_service'] > 0) {
-                $price['setup'] = $price['setup'] + $config['order_additional_price_service'];
-            }
-        }
-
-        // Set total
-        $price['total'] = ((
-            $price['product'] +
-                $price['shipping'] +
-                $price['packing'] +
-                $price['setup'] +
-                $price['vat']
-        ) - $price['discount'] - $unconsumedPrice);
-
-        return $price;
     }
 }

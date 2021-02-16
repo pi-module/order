@@ -53,7 +53,7 @@ class OrderSimpleFilter extends InputFilter
         switch ($option['type_commodity']) {
             case 'product':
                 if ($config['order_location_delivery']) {
-                    // location
+                    /* // location
                     $this->add(
                         [
                             'name'     => 'location',
@@ -76,11 +76,11 @@ class OrderSimpleFilter extends InputFilter
                                 ],
                             ],
                         ]
-                    );
-                    // gateway
-                    $this->add(
+                    ); */
+                    // location
+                    /* $this->add(
                         [
-                            'name'     => 'default_gateway',
+                            'name'     => 'location',
                             'required' => true,
                             'filters'  => [
                                 [
@@ -89,11 +89,10 @@ class OrderSimpleFilter extends InputFilter
                             ],
                         ]
                     );
-                } else {
-                    // gateway
+                    // delivery
                     $this->add(
                         [
-                            'name'     => 'default_gateway',
+                            'name'     => 'delivery',
                             'required' => true,
                             'filters'  => [
                                 [
@@ -101,25 +100,27 @@ class OrderSimpleFilter extends InputFilter
                                 ],
                             ],
                         ]
-                    );
+                    ); */
                 }
                 break;
             case 'booking':
             case 'service':
-                // gateway
-                $this->add(
-                    [
-                        'name'     => 'default_gateway',
-                        'required' => true,
-                        'filters'  => [
-                            [
-                                'name' => 'StringTrim',
-                            ],
-                        ],
-                    ]
-                );
                 break;
         }
+
+        // gateway
+        $this->add(
+            [
+                'name'     => 'default_gateway',
+                'required' => true,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+            ]
+        );
+
         // user_note
         if ($config['order_usernote']) {
             $this->add(

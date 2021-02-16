@@ -26,8 +26,10 @@ class PaymentController extends IndexController
     {
         // Check user
         $this->checkUser();
+
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+
         // Get from url
         $id = $this->params('id');
 
@@ -168,12 +170,12 @@ class PaymentController extends IndexController
                 }
             }
         }
+
         // Check running pay processing
         $processing = Pi::api('processing', 'order')->checkProcessing();
         if (!$processing) {
             Pi::api('processing', 'order')->removeProcessing();
         }
-
 
         // Set pay processing
         Pi::api('processing', 'order')->setProcessing($order, $cart['gateway']);
@@ -188,8 +190,10 @@ class PaymentController extends IndexController
                 ]
             );
         }
+
         // Check invoice price
         $totalPrice = 0;
+
         //
         $invoiceId       = 0;
         $findInstallment = false;
@@ -216,9 +220,11 @@ class PaymentController extends IndexController
             $message = __('Your payment were successfully.');
             $this->jump($url, $message);
         }
+
         // Get gateway object
         $gateway = Pi::api('gateway', 'order')->getGateway($cart['gateway']);
         $gateway->setOrder($order);
+
         // Check error
         if ($gateway->gatewayError) {
             // Remove processing
@@ -275,6 +281,7 @@ class PaymentController extends IndexController
                 $this->jump(['', 'controller' => 'payment', 'action' => 'result'], __('Error to get information.'));
             }
         }
+
         // Set view
         $this->view()->setLayout('layout-style');
         $this->view()->setTemplate('pay');

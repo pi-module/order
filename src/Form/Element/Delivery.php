@@ -14,9 +14,9 @@
 namespace Module\Order\Form\Element;
 
 use Pi;
-use Laminas\Form\Element\Select;
+use Laminas\Form\Element\Radio;
 
-class Delivery extends Select
+class Delivery extends Radio
 {
     /**
      * @return array
@@ -25,7 +25,12 @@ class Delivery extends Select
     {
         if (empty($this->valueOptions)) {
             $list   = [];
-            $where  = ['location' => $this->options['location']];
+
+            $where  = [];
+            if (isset($this->options['location']) && !empty($this->options['location'])) {
+                $where  = ['location' => $this->options['location']];
+            }
+
             $select = Pi::model('location_delivery', 'order')->select()->where($where);
             $rowset = Pi::model('location_delivery', 'order')->selectWith($select);
             foreach ($rowset as $row) {

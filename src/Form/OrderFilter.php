@@ -318,49 +318,26 @@ class OrderFilter extends InputFilter
                             ],
                         ]
                     );
-                    // gateway
-                    $this->add(
-                        [
-                            'name'     => 'gateway',
-                            'required' => true,
-                            'filters'  => [
-                                [
-                                    'name' => 'StringTrim',
-                                ],
-                            ],
-                        ]
-                    );
-                } else {
-                    // gateway
-                    $this->add(
-                        [
-                            'name'     => 'gateway',
-                            'required' => true,
-                            'filters'  => [
-                                [
-                                    'name' => 'StringTrim',
-                                ],
-                            ],
-                        ]
-                    );
                 }
                 break;
             case 'booking':
             case 'service':
-                // gateway
-                $this->add(
-                    [
-                        'name'     => 'gateway',
-                        'required' => true,
-                        'filters'  => [
-                            [
-                                'name' => 'StringTrim',
-                            ],
-                        ],
-                    ]
-                );
                 break;
         }
+
+        // gateway
+        $this->add(
+            [
+                'name'     => 'gateway',
+                'required' => true,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+            ]
+        );
+
         // user_note
         if ($config['order_usernote']) {
             $this->add(

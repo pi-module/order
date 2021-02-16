@@ -344,8 +344,7 @@ class OrderForm extends BaseForm
                 ]
             );
         }
-        // Check type_commodity
-        $gatewayList = Pi::api('gateway', 'order')->getActiveGatewayName();
+
         switch ($this->option['type_commodity']) {
             case 'product':
                 if ($this->config['order_location_delivery']) {
@@ -364,6 +363,7 @@ class OrderForm extends BaseForm
                             ],
                         ]
                     );
+
                     // delivery
                     $this->add(
                         [
@@ -380,106 +380,47 @@ class OrderForm extends BaseForm
                             ],
                         ]
                     );
-                    // check gateway
-                    if (count($gatewayList) == 1) {
-                        $gatewayList = array_keys($gatewayList);
-                        // gateway
-                        $this->add(
-                            [
-                                'name'       => 'gateway',
-                                'attributes' => [
-                                    'id'    => 'select-payment',
-                                    'type'  => 'hidden',
-                                    'value' => $gatewayList['0'],
-                                ],
-                            ]
-                        );
-                    } else {
-                        // gateway
-                        $this->add(
-                            [
-                                'name'       => 'gateway',
-                                'type'       => 'select',
-                                'options'    => [
-                                    'label'         => __('Choose your payment method'),
-                                    'value_options' => [],
-                                ],
-                                'attributes' => [
-                                    'id'       => 'select-payment',
-                                    'size'     => 3,
-                                    'required' => true,
-                                ],
-                            ]
-                        );
-                    }
-                } else {
-                    if (count($gatewayList) == 1) {
-                        $gatewayList = array_keys($gatewayList);
-                        // gateway
-                        $this->add(
-                            [
-                                'name'       => 'gateway',
-                                'attributes' => [
-                                    'id'    => 'select-payment',
-                                    'type'  => 'hidden',
-                                    'value' => $gatewayList['0'],
-                                ],
-                            ]
-                        );
-                    } else {
-                        // gateway
-                        $this->add(
-                            [
-                                'name'       => 'gateway',
-                                'type'       => 'select',
-                                'options'    => [
-                                    'label'         => __('Choose your payment method'),
-                                    'value_options' => $gatewayList,
-                                ],
-                                'attributes' => [
-                                    'id'       => 'select-payment',
-                                    'size'     => 1,
-                                    'required' => true,
-                                ],
-                            ]
-                        );
-                    }
                 }
                 break;
             case 'booking':
             case 'service':
-                if (count($gatewayList) == 1) {
-                    $gatewayList = array_keys($gatewayList);
-                    // gateway
-                    $this->add(
-                        [
-                            'name'       => 'gateway',
-                            'attributes' => [
-                                'type'  => 'hidden',
-                                'value' => $gatewayList['0'],
-                            ],
-                        ]
-                    );
-                } else {
-                    // gateway
-                    $this->add(
-                        [
-                            'name'       => 'gateway',
-                            'type'       => 'select',
-                            'options'    => [
-                                'label'         => __('Choose your payment method'),
-                                'value_options' => $gatewayList,
-                            ],
-                            'attributes' => [
-                                'id'       => 'select-payment',
-                                'size'     => 1,
-                                'required' => true,
-                            ],
-                        ]
-                    );
-                }
+
                 break;
         }
+
+        // Check type_commodity
+        $gatewayList = Pi::api('gateway', 'order')->getActiveGatewayName();
+        if (count($gatewayList) == 1) {
+            $gatewayList = array_keys($gatewayList);
+            // gateway
+            $this->add(
+                [
+                    'name'       => 'gateway',
+                    'attributes' => [
+                        'type'  => 'hidden',
+                        'value' => $gatewayList['0'],
+                    ],
+                ]
+            );
+        } else {
+            // gateway
+            $this->add(
+                [
+                    'name'       => 'gateway',
+                    'type'       => 'select',
+                    'options'    => [
+                        'label'         => __('Choose your payment method'),
+                        'value_options' => $gatewayList,
+                    ],
+                    'attributes' => [
+                        'id'       => 'select-payment',
+                        'size'     => 1,
+                        'required' => true,
+                    ],
+                ]
+            );
+        }
+
         // user_note
         if ($this->config['order_usernote']) {
             $this->add(

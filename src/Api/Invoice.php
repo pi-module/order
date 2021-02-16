@@ -20,7 +20,7 @@ use Laminas\Math\Rand;
 
 /*
  * Pi::api('invoice', 'order')->createInvoice($id);
- * Pi::api('invoice', 'order')->generatCode();
+ * Pi::api('invoice', 'order')->generateCode();
  * Pi::api('invoice', 'order')->getInvoice($id);
  * Pi::api('invoice', 'order')->getInvoiceFromOrder($order, $getLog);
  * Pi::api('invoice', 'order')->getInvoiceFromUser($uid, $compressed, $orderIds);
@@ -44,10 +44,13 @@ class Invoice extends AbstractApi
     {
         // Get order
         $order = Pi::api('order', 'order')->getOrder($id);
+
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+
         // Get user
         $uid = (is_null($uid)) ? Pi::user()->getId() : $uid;
+
         // Check user
         if ($config['order_anonymous'] == 0 && $uid == 0) {
             $result['status']         = 0;
@@ -55,9 +58,10 @@ class Invoice extends AbstractApi
             $result['pay_credit_url'] = '';
             $result['message']        = __('Please login for create invoice');
         } else {
+
             // Set invoice
             $row               = Pi::model('invoice', $this->getModule())->createRow();
-            $row->code         = Pi::api('invoice', 'order')->generatCode(date('Y', $order['time_create']));
+            $row->code         = Pi::api('invoice', 'order')->generateCode(date('Y', $order['time_create']));
             $row->random_id    = time() + rand(100, 999);
             $row->status       = \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT;
             $row->time_create  = $order['time_create'];
@@ -132,7 +136,7 @@ class Invoice extends AbstractApi
         return $result;
     }
 
-    public function generatCode($year = null)
+    public function generateCode($year = null)
     {
         $config = Pi::service('registry')->config->read($this->getModule());
 
@@ -248,6 +252,7 @@ class Invoice extends AbstractApi
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+
         // Get invoice
         $invoice = Pi::model('invoice', $this->getModule())->find($randomId, 'random_id');
         $order   = Pi::api('order', 'order')->getOrder($invoice['order']);
@@ -265,8 +270,10 @@ class Invoice extends AbstractApi
             $message = __('Increase credit for pay invoice');
             //Pi::api('credit', 'order')->addCredit(Pi::user()->getId(), $invoice->credit_price, 'increase', 'automatic', $message, $message);
         }
+
         // Canonize invoice
         $invoice = $this->canonizeInvoice($invoice);
+
         // Send notification
         if ($notification) {
             Pi::api('notification', 'order')->payInvoice($order, $invoice);
@@ -562,7 +569,7 @@ class Invoice extends AbstractApi
     public function generateCreditInvoice($invoice)
     {
         $row               = Pi::model('invoice', 'order')->createRow();
-        $row->code         = Pi::api('invoice', 'order')->generatCode();
+        $row->code         = Pi::api('invoice', 'order')->generateCode();
         $row->random_id    = time() + rand(100, 999);
         $row->status       = \Module\Order\Model\Invoice::STATUS_INVOICE_VALIDATED;
         $row->time_create  = time();
@@ -616,14 +623,16 @@ class Invoice extends AbstractApi
     {
         // Find due price
         $products = Pi::api('order', 'order')->listProduct($invoice['order']);
+
+        // Set due price
         $duePrice = 0;
         foreach ($products as $product) {
-            $duePrice += $product['product_price'] - $product['discount_price'] + $product['shipping_price'] + $product['packing_price']
-                + $product['setup_price'] + $product['vat_price'];
+            $duePrice += $product['product_price'] - $product['discount_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'];
         }
-        $count = 1;
 
+        $count = 1;
         $total = 0;
+
         foreach ($composition as $key => $compose) {
             $duePriceInstallment = number_format($duePrice * $compose / 100, 2, '.', '');
             $invoiceInstallment  = Pi::model('invoice_installment', 'order')->createRow();

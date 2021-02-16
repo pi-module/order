@@ -21,7 +21,7 @@ use Laminas\Math\Rand;
 /*
  * Pi::api('order', 'order')->getOrder($id);
  * Pi::api('order', 'order')->getOrderFromUser($uid, $compressed);
- * Pi::api('order', 'order')->generatCode($id);
+ * Pi::api('order', 'order')->generateCode($id);
  * Pi::api('order', 'order')->orderStatus($status);
  * Pi::api('order', 'order')->paymentStatus($status);
  * Pi::api('order', 'order')->deliveryStatus($status);
@@ -81,7 +81,7 @@ class Order extends AbstractApi
         return $orders;
     }
 
-    public function generatCode($year = null)
+    public function generateCode($year = null)
     {
         $config = Pi::service('registry')->config->read($this->getModule());
 
@@ -393,11 +393,20 @@ class Order extends AbstractApi
                 $extra['order']            = isset($options['order']) ? $options['order'] : false;
                 $list[$row->id]['details'] = Pi::api('order', $row->module)->getProductDetails($row->product, $extra);
             } else {
-                $list[$row->id]['details'] = [
-                    'title'      => __('Manually order'),
-                    'productUrl' => '',
-                    'thumbUrl'   => '',
-                ];
+
+                if ($row->product_type == 'service') {
+                    $list[$row->id]['details'] = [
+                        'title'      => __('Service fee'),
+                        'productUrl' => '',
+                        'thumbUrl'   => '',
+                    ];
+                } else {
+                    $list[$row->id]['details'] = [
+                        'title'      => __('Manually order'),
+                        'productUrl' => '',
+                        'thumbUrl'   => '',
+                    ];
+                }
             }
 
             if (empty($row->extra)) {

@@ -22,13 +22,7 @@ class LocationFilter extends InputFilter
     {
         // set delivery
         $this->delivery = $option['delivery'];
-        // id
-        $this->add(
-            [
-                'name'     => 'id',
-                'required' => false,
-            ]
-        );
+
         // title
         $this->add(
             [

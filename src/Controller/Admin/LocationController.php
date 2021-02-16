@@ -45,10 +45,12 @@ class LocationController extends ActionController
         $order  = ['id DESC'];
         $select = $this->getModel('location')->select()->order($order);
         $rowset = $this->getModel('location')->selectWith($select);
+
         // Make list
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
         }
+
         // Set view
         $this->view()->setTemplate('location-index');
         $this->view()->assign('list', $list);
@@ -59,20 +61,24 @@ class LocationController extends ActionController
         // Get id
         $id     = $this->params('id');
         $option = [];
+
         //
         $where  = ['status' => '1'];
         $order  = ['id DESC'];
         $select = $this->getModel('delivery')->select()->where($where)->order($order);
         $rowset = $this->getModel('delivery')->selectWith($select);
+
         // Make list
         foreach ($rowset as $row) {
             $option['delivery'][$row->id] = $row->toArray();
         }
+
         // Go to update page if empty
         if (empty($option['delivery'])) {
             $message = __('Please add delivery method first');
             $this->jump(['controller' => 'delivery', 'action' => 'update'], $message, 'error');
         }
+
         // Set form
         $form = new LocationForm('location', $option);
         if ($this->request->isPost()) {
@@ -81,6 +87,7 @@ class LocationController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+
                 // Set location_delivery array
                 $ld = [];
                 foreach ($option['delivery'] as $delivery) {
@@ -93,20 +100,23 @@ class LocationController extends ActionController
                         $ld[$delivery['id']]['delivery_time'] = $values[$delivery_time];
                     }
                 }
+
                 // Set just delivery fields
                 foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->locationColumns)) {
                         unset($values[$key]);
                     }
                 }
+
                 // Save values
-                if (!empty($values['id'])) {
-                    $row = $this->getModel('location')->find($values['id']);
+                if (!empty($id)) {
+                    $row = $this->getModel('location')->find($id);
                 } else {
                     $row = $this->getModel('location')->createRow();
                 }
                 $row->assign($values);
                 $row->save();
+
                 // Save payment
                 $this->getModel('location_delivery')->delete(['location' => $row->id]);
                 foreach ($ld as $item) {
@@ -118,7 +128,7 @@ class LocationController extends ActionController
                     $location_delivery->save();
                 }
                 // Add log
-                //$operation = (empty($values['id'])) ? 'add' : 'edit';
+                //$operation = (empty($id)) ? 'add' : 'edit';
                 //Pi::api('log', 'shop')->addLog('location', $row->id, $operation);
                 // Check it save or not
                 $message = __('Location data saved successfully.');
@@ -127,8 +137,10 @@ class LocationController extends ActionController
         } else {
             if ($id) {
                 $values = $this->getModel('location')->find($id)->toArray();
+
                 // Set location_delivery
-                $where  = ['location' => $values['id']];
+                $where  = ['location' => $id];
+
                 $select = $this->getModel('location_delivery')->select()->where($where);
                 $rowset = $this->getModel('location_delivery')->selectWith($select)->toArray();
                 foreach ($rowset as $ld) {
@@ -136,6 +148,7 @@ class LocationController extends ActionController
                     $values[sprintf('delivery_price_%s', $ld['delivery'])]  = $ld['price'];
                     $values[sprintf('delivery_time_%s', $ld['delivery'])]   = $ld['delivery_time'];
                 }
+
                 // Set to form
                 $form->setData($values);
             }

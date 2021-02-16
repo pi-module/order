@@ -87,6 +87,8 @@ class AddressForm extends BaseForm
                     'state',
                     'city',
                     'zip_code',
+                    'location',
+                    'delivery',
                 ],
             ];
         }
@@ -409,7 +411,6 @@ class AddressForm extends BaseForm
                 ],
             ]
         );
-
 
         // name
         if (in_array($this->config['address_type'], ['both', 'individual'])) {
@@ -757,6 +758,52 @@ class AddressForm extends BaseForm
                 }
             } else {
                 if (($key = array_search('country', $groups['individual']['elements'])) !== false) {
+                    unset($groups['individual']['elements'][$key]);
+                }
+            }
+        }
+
+        // state
+        if (in_array($this->config['address_type'], ['both', 'individual'])) {
+            if ($this->config['order_location_delivery']) {
+
+                // location
+                $this->add(
+                    [
+                        'name'       => 'location',
+                        'type'       => 'Module\Order\Form\Element\Location',
+                        'options'    => [
+                            'label'  => __('Location'),
+                            'parent' => 1,
+                        ],
+                        'attributes' => [
+                            'id'       => 'select-location',
+                            'required' => true,
+                        ],
+                    ]
+                );
+
+                // delivery
+                $this->add(
+                    [
+                        'name'       => 'delivery',
+                        'type'       => 'select',
+                        'options'    => [
+                            'label'         => __('Delivery methods'),
+                            'value_options' => [],
+                        ],
+                        'attributes' => [
+                            'id'       => 'select-delivery',
+                            'size'     => 3,
+                            'required' => true,
+                        ],
+                    ]
+                );
+            } else {
+                if (($key = array_search('location', $groups['individual']['elements'])) !== false) {
+                    unset($groups['individual']['elements'][$key]);
+                }
+                if (($key = array_search('delivery', $groups['individual']['elements'])) !== false) {
                     unset($groups['individual']['elements'][$key]);
                 }
             }

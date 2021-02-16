@@ -424,6 +424,36 @@ class AddressFilter extends InputFilter
                 );
             }
         }
+
+        // order_location_delivery
+        if (in_array($config['address_type'], ['both', 'individual'])) {
+            if ($config['order_location_delivery']) {
+                // location
+                $this->add(
+                    [
+                        'name'     => 'location',
+                        'required' => true,
+                        'filters'  => [
+                            [
+                                'name' => 'StringTrim',
+                            ],
+                        ],
+                    ]
+                );
+                // delivery
+                $this->add(
+                    [
+                        'name'     => 'delivery',
+                        'required' => true,
+                        'filters'  => [
+                            [
+                                'name' => 'StringTrim',
+                            ],
+                        ],
+                    ]
+                );
+            }
+        }
     }
 
     public function isValid($context = null)

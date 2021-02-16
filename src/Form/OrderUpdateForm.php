@@ -80,7 +80,7 @@ class OrderUpdateForm extends BaseForm
                     'value_options' => $gatewayList,
                 ],
                 'attributes' => [
-                    'id'       => 'address-select-payment',
+                    'id'       => 'select-payment',
                     'required' => true,
                 ],
             ]

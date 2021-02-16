@@ -737,7 +737,7 @@ class OrderController extends ActionController
                 // Save values to order
                 $order                  = $this->getModel('order')->createRow();
                 $values['status_order'] = \Module\Order\Model\Order::STATUS_ORDER_DRAFT;
-                $values['code']         = Pi::api('order', 'order')->generatCode();
+                $values['code']         = Pi::api('order', 'order')->generateCode();
                 $values['create_by']    = 'ADMIN';
                 $order->assign($values);
                 $order->save();

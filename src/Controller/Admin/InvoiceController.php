@@ -254,7 +254,7 @@ class InvoiceController extends ActionController
                     'time_create'  => time(),
                     'time_invoice' => strtotime($values['time_invoice']),
                     'random_id'    => time() + rand(100, 999),
-                    'code'         => Pi::api('invoice', 'order')->generatCode(),
+                    'code'         => Pi::api('invoice', 'order')->generateCode(),
                     'create_by'    => 'ADMIN',
                     'status'       => \Module\Order\Model\Invoice::STATUS_INVOICE_DRAFT,
                     'type_payment' => $values['type_payment'],

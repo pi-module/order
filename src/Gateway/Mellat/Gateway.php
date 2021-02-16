@@ -128,7 +128,7 @@ class Gateway extends AbstractGateway
         $total = 0;
         $totalDiscount = 0;
         foreach ($products as $product) {
-            $total = $total + $product['product_price'];
+            $total = $total + $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'];
             $totalDiscount = $totalDiscount + $product['discount_price'];
         }
         $total = $total - $totalDiscount;
@@ -203,7 +203,7 @@ class Gateway extends AbstractGateway
         $total = 0;
         $totalDiscount = 0;
         foreach ($products as $product) {
-            $total = $total + $product['product_price'];
+            $total = $total + $product['product_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'];
             $totalDiscount = $totalDiscount + $product['discount_price'];
         }
         $total = $total - $totalDiscount;

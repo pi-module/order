@@ -74,6 +74,7 @@ class OrderSimpleForm extends BaseForm
         switch ($this->option['type_commodity']) {
             case 'product':
                 if ($this->config['order_location_delivery']) {
+                    /*
                     // location
                     $this->add(
                         [
@@ -84,6 +85,7 @@ class OrderSimpleForm extends BaseForm
                             'attributes' => [
                                 'type'     => 'hidden',
                                 'required' => true,
+                                'value' => 0,
                             ],
                         ]
                     );
@@ -95,113 +97,87 @@ class OrderSimpleForm extends BaseForm
                             'options'    => [
                                 'label'         => __('Delivery methods'),
                                 'value_options' => [],
-                                'location'      => $this->option['location'],
+                                'location'      => isset($this->option['location']) ? $this->option['location'] : 0,
                             ],
                             'attributes' => [
-                                'id'       => 'address-select-delivery',
+                                'id'       => 'select-delivery',
                                 'size'     => 3,
                                 'required' => true,
                             ],
                         ]
+                    ); */
+                    // location
+                    /* $this->add(
+                        [
+                            'name'       => 'location',
+                            'type'       => 'Module\Order\Form\Element\Location',
+                            'options'    => [
+                                'label'  => __('Location'),
+                                'parent' => 1,
+                            ],
+                            'attributes' => [
+                                'id'       => 'select-location',
+                                'required' => true,
+                            ],
+                        ]
                     );
-                    // check gateway
-                    if (count($gatewayList) == 1) {
-                        $gatewayList = array_keys($gatewayList);
-                        // gateway
-                        $this->add(
-                            [
-                                'name'       => 'default_gateway',
-                                'attributes' => [
-                                    'id'    => 'address-select-payment',
-                                    'type'  => 'hidden',
-                                    'value' => $gatewayList['0'],
-                                ],
-                            ]
-                        );
-                    } else {
-                        // gateway
-                        $this->add(
-                            [
-                                'name'       => 'default_gateway',
-                                'type'       => 'radio',
-                                'options'    => [
-                                    'label'         => __('Choose your payment method'),
-                                    'value_options' => [],
-                                ],
-                                'attributes' => [
-                                    'id'       => 'address-select-payment',
-                                    'required' => true,
-                                ],
-                            ]
-                        );
-                    }
-                } else {
-                    if (count($gatewayList) == 1) {
-                        $gatewayList = array_keys($gatewayList);
-                        // gateway
-                        $this->add(
-                            [
-                                'name'       => 'default_gateway',
-                                'attributes' => [
-                                    'id'    => 'address-select-payment',
-                                    'type'  => 'hidden',
-                                    'value' => $gatewayList['0'],
-                                ],
-                            ]
-                        );
-                    } else {
-                        // gateway
-                        $this->add(
-                            [
-                                'name'       => 'default_gateway',
-                                'type'       => 'radio',
-                                'options'    => [
-                                    'label'         => __('Choose your payment method'),
-                                    'value_options' => $gatewayList,
-                                ],
-                                'attributes' => [
-                                    'id'       => 'address-select-payment',
-                                    'required' => true,
-                                ],
-                            ]
-                        );
-                    }
+
+                    // delivery
+                    $this->add(
+                        [
+                            'name'       => 'delivery',
+                            'type'       => 'select',
+                            'options'    => [
+                                'label'         => __('Delivery methods'),
+                                'value_options' => [],
+                            ],
+                            'attributes' => [
+                                'id'       => 'select-delivery',
+                                'size'     => 3,
+                                'required' => true,
+                            ],
+                        ]
+                    ); */
                 }
                 break;
 
             case 'booking':
             case 'service':
-                if (count($gatewayList) == 1) {
-                    $gatewayList = array_keys($gatewayList);
-                    // gateway
-                    $this->add(
-                        [
-                            'name'       => 'default_gateway',
-                            'attributes' => [
-                                'type'  => 'hidden',
-                                'value' => $gatewayList['0'],
-                            ],
-                        ]
-                    );
-                } else {
-                    // gateway
-                    $this->add(
-                        [
-                            'name'       => 'default_gateway',
-                            'type'       => 'radio',
-                            'options'    => [
-                                'label'         => __('Choose your payment method'),
-                                'value_options' => $gatewayList,
-                            ],
-                            'attributes' => [
-                                'id'       => 'address-select-payment',
-                                'required' => true,
-                            ],
-                        ]
-                    );
-                }
                 break;
         }
+
+        // check gateway
+        if (count($gatewayList) == 1) {
+            $gatewayList = array_keys($gatewayList);
+            // gateway
+            $this->add(
+                [
+                    'name'       => 'default_gateway',
+                    'attributes' => [
+                        'id'    => 'select-payment',
+                        'type'  => 'hidden',
+                        'value' => $gatewayList['0'],
+                    ],
+                ]
+            );
+        } else {
+            // gateway
+            $this->add(
+                [
+                    'name'       => 'default_gateway',
+                    'type'       => 'radio',
+                    'options'    => [
+                        'label'         => __('Choose your payment method'),
+                        'value_options' => [],
+                    ],
+                    'attributes' => [
+                        'id'       => 'select-payment',
+                        'required' => true,
+                    ],
+                ]
+            );
+        }
+
         // user_note
         if ($this->config['order_usernote']) {
             $this->add(

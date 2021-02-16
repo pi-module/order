@@ -23,7 +23,8 @@ $script
             this.$('.showNewAddressFrom').on("click",this.newAddressAction);
         },
         locationAction: function(e) {
-            var url = "%s";
+            console.log($('#select-location').val());
+            var url = "%s/";
             $.getJSON(url + $('#select-location').val()).done(function(result) {
                 if (result.status == 1) {
                     var htmlOptins = '';
@@ -46,7 +47,8 @@ $script
             });
         },
         deliveryAction: function(e) {
-            var url = "%s";
+                    console.log($('#select-delivery').val());
+            var url = "%s/";
             $.getJSON(url + $('#select-delivery').val()).done(function(result) {
                 if (result.status == 1) {
                     $('#cart-total-shipping').html(result.data.shipping);
@@ -65,7 +67,7 @@ $script
             });
         },
         paymentAction: function(e) {
-            var url = "%s";
+            var url = "%s/";
             $.getJSON(url + $('#select-payment').val()).done(function(result) {
                 if (result.status == 1) {
                     $('#cart-location').html(result.data.location);
@@ -111,7 +113,7 @@ $this->footScript()->appendScript($script);
         <h1><?php _e('Checkout'); ?></h1>
     </div>
     <div class="row clearfix">
-        <?php if ($cart['type_payment'] == 'installment') { ?>
+        <?php if (isset($cart['type_payment']) && $cart['type_payment'] == 'installment') { ?>
             <div class="alert alert-info" role="alert">
                 <h2><?php _e('Terms of payment'); ?></h2>
                 <p><?php echo sprintf(
@@ -124,9 +126,9 @@ $this->footScript()->appendScript($script);
 
         <?php if (isset($cart['can_pay']) && $cart['can_pay'] == 2) { ?>
             <div class="alert alert-danger" role="alert">
-                <p><?php echo __(
+                    <?php echo __(
                         'One of your select products or services have variable stock, than your payment option is disable, we will review your order and if your selected products or services be in stock we active payment option and send notification for you'
-                    ); ?></p>
+                    ); ?>
             </div>
         <?php } ?>
     </div>
@@ -426,8 +428,6 @@ $this->footScript()->appendScript($script);
                                     $extra           = json_decode($product['extra'], true);
                                     $unconsumedPrice = isset($extra['unconsumedPrice']) ? $extra['unconsumedPrice'] : null;
                                     $product['product_price'] = str_replace(',', '.', $product['product_price']);
-
-                                    d($product);
                                     ?>
                                     <tr>
                                         <td>

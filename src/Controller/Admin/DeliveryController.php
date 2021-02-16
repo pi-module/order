@@ -44,10 +44,12 @@ class DeliveryController extends ActionController
         $order  = ['id DESC'];
         $select = $this->getModel('delivery')->select()->order($order);
         $rowset = $this->getModel('delivery')->selectWith($select);
+
         // Make list
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
         }
+
         // Set view
         $this->view()->setTemplate('delivery-index');
         $this->view()->assign('list', $list);
@@ -57,6 +59,7 @@ class DeliveryController extends ActionController
     {
         // Get id
         $id = $this->params('id');
+
         // Set form
         $form = new DeliveryForm('delivery');
         if ($this->request->isPost()) {
@@ -65,22 +68,26 @@ class DeliveryController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+
                 // Get gateway
                 $gateways = $values['gateway'];
+
                 // Set just delivery fields
                 foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->deliveryColumns)) {
                         unset($values[$key]);
                     }
                 }
+
                 // Save values
-                if (!empty($values['id'])) {
-                    $row = $this->getModel('delivery')->find($values['id']);
+                if (!empty($id)) {
+                    $row = $this->getModel('delivery')->find($id);
                 } else {
                     $row = $this->getModel('delivery')->createRow();
                 }
                 $row->assign($values);
                 $row->save();
+
                 // Save gateway
                 $this->getModel('delivery_gateway')->delete(['delivery' => $row->id]);
                 if (is_array($gateways)) {
@@ -96,9 +103,11 @@ class DeliveryController extends ActionController
                     $delivery_gateway->gateway  = $gateways;
                     $delivery_gateway->save();
                 }
+
                 // Add log
-                //$operation = (empty($values['id'])) ? 'add' : 'edit';
+                //$operation = (empty($id)) ? 'add' : 'edit';
                 //Pi::api('log', 'shop')->addLog('delivery', $row->id, $operation);
+
                 // Check it save or not
                 $message = __('Delivery data saved successfully.');
                 $this->jump(['action' => 'index'], $message);

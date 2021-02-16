@@ -235,7 +235,7 @@ class Update extends BasicUpdate
             $select = $invoiceModel->select();
             $rowset = $invoiceModel->selectWith($select);
             foreach ($rowset as $row) {
-                $row->code = Pi::api('invoice', 'order')->generatCode($row->id);
+                $row->code = Pi::api('invoice', 'order')->generateCode($row->id);
                 $row->save();
             }
         }
@@ -1025,7 +1025,8 @@ EOD;
                 return false;
             }
 
-            $sql = sprintf("DROP TABLE %s;", $accessTable);
+            // access table reqiresd : voltan
+            /* $sql = sprintf("DROP TABLE %s;", $accessTable);
             SqlSchema::setType($this->module);
             $sqlHandler = new SqlSchema;
             try {
@@ -1041,7 +1042,7 @@ EOD;
                 );
 
                 return false;
-            }
+            } */
 
             $sql = sprintf("RENAME TABLE %s TO %s;", $historyTable, $creditHistoryTable);
             SqlSchema::setType($this->module);
