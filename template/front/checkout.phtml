@@ -126,29 +126,15 @@ $this->footScript()->appendScript($script);
 
         <?php if (isset($cart['can_pay']) && $cart['can_pay'] == 2) { ?>
             <div class="alert alert-danger" role="alert">
-                    <?php echo __(
-                        'One of your select products or services have variable stock, than your payment option is disable, we will review your order and if your selected products or services be in stock we active payment option and send notification for you'
-                    ); ?>
+                <?php echo __(
+                    'One of your select products or services have variable stock, than your payment option is disable, we will review your order and if your selected products or services be in stock we active payment option and send notification for you'
+                ); ?>
             </div>
         <?php } ?>
     </div>
     <div class="clearfix row">
         <div class="col-lg-8 col-md-8">
-            <?php if (isset($formLogin) && !empty($formLogin)) { ?>
-                <div class="alert alert-info" role="alert">
-                    <?php _e(
-                        'If you registered on website before this time and have user account, please login to system and continue ordering, and if you dont have user account here, please fill register new user account and make order form'
-                    ); ?>
-                </div>
-                <div class="mb-3">
-                    <h3><?php _e('Login'); ?></h3>
-                </div>
-                <?php echo $this->form($formLogin); ?>
-                <div class="mb-3">
-                    <h3><?php _e('Register new user account and make order'); ?></h3>
-                </div>
-            <?php } ?>
-            <?php if ($invalidAddress) { ?>
+            <?php if (isset($invalidAddress) && $invalidAddress) { ?>
                 <div class="alert alert-dismissable alert-danger text-center">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                     <div><?php _e('Your address has to be completed. Please, edit it.'); ?></div>
@@ -164,6 +150,11 @@ $this->footScript()->appendScript($script);
             <?php } ?>
             <div class="clearfix row">
                 <div class="col-lg-6 col-md-6">
+                    <?php if (isset($formLogin) && !empty($formLogin)) { ?>
+                        <div class="mb-3">
+                            <h4><?php _e('Register new user account and make order'); ?></h4>
+                        </div>
+                    <?php } ?>
                     <div class="address-single">
                         <div class="clearfix">
                             <div class="info">
@@ -277,6 +268,25 @@ $this->footScript()->appendScript($script);
                         </div>
                     </div>
                 </div>
+                <?php if (isset($formLogin) && !empty($formLogin)) { ?>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="alert alert-info" role="alert">
+                            <?php _e(
+                                'If you registered on website before this time and have user account, please login to system and continue ordering, and if you dont have user account here, please fill register new user account and make order form'
+                            ); ?>
+                        </div>
+                        <div class="address-single">
+                            <div class="clearfix">
+                                <div class="info">
+                                    <div class="mb-3">
+                                        <h4><?php _e('Login'); ?></h4>
+                                    </div>
+                                    <?php echo $this->form($formLogin); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
                 <?php if (!empty($addresses)) { ?>
                     <div class="col-lg-6 col-md-6">
                         <div class="address-single">
@@ -636,7 +646,7 @@ $this->footScript()->appendScript($script);
             </div>
             <div class="modal-body">
                 <p>
-                <?php _e('Please, wait ...') ?>
+                    <?php _e('Please, wait ...') ?>
                 </p>
             </div>
             <div class="panel bottom">

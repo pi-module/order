@@ -53,12 +53,15 @@ class Invoice extends AbstractApi
 
         // Check user
         if ($config['order_anonymous'] == 0 && $uid == 0) {
-            $result['status']         = 0;
-            $result['pay_url']        = '';
-            $result['pay_credit_url'] = '';
-            $result['message']        = __('Please login for create invoice');
-        } else {
 
+            $result = [
+                'status'         => 0,
+                'pay_url'        => '',
+                'pay_credit_url' => '',
+                'message'        => __('Please login for create invoice'),
+            ];
+
+        } else {
             // Set invoice
             $row               = Pi::model('invoice', $this->getModule())->createRow();
             $row->code         = Pi::api('invoice', 'order')->generateCode(date('Y', $order['time_create']));
@@ -68,16 +71,16 @@ class Invoice extends AbstractApi
             $row->time_invoice = $order['time_create'];
             $row->time_duedate = time();
             $row->order        = $order['id'];
-
-            //$row->credit_price = 0;
-            $row->gateway = $order['gateway'];
             if ($admin) {
                 $row->create_by = 'ADMIN';
             }
             $row->save();
 
             // return array
-            $result['status']         = $row->status;
+            $result = [
+                'status' => $row->status,
+            ];
+
             $result['order_url']      = Pi::url(
                 Pi::service('url')->assemble(
                     'order',
@@ -123,12 +126,13 @@ class Invoice extends AbstractApi
                     ]
                 )
             );
+
             // Set invoice information on session
             if ($config['order_anonymous'] == 1 && $uid == 0) {
                 $_SESSION['payment']['process']       = 1;
                 $_SESSION['payment']['process_start'] = time();
                 $_SESSION['payment']['invoice_id']    = $row->id;
-                $_SESSION['payment']['gateway']       = $row->gateway;
+                $_SESSION['payment']['gateway']       = $order['default_gateway'];
             }
         }
 
@@ -627,7 +631,8 @@ class Invoice extends AbstractApi
         // Set due price
         $duePrice = 0;
         foreach ($products as $product) {
-            $duePrice += $product['product_price'] - $product['discount_price'] + $product['shipping_price'] + $product['packing_price'] + $product['setup_price'] + $product['vat_price'];
+            $duePrice += $product['product_price'] - $product['discount_price'] + $product['shipping_price'] + $product['packing_price']
+                + $product['setup_price'] + $product['vat_price'];
         }
 
         $count = 1;

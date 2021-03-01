@@ -268,7 +268,7 @@ class CheckoutController extends IndexController
                     $formOrderSimple->setData($data);
                     if ($formOrderSimple->isValid()) {
                         $uid  = Pi::user()->getId();
-                        $user = Pi::api('user', 'order')->getUserInformation();
+                        //$user = Pi::api('user', 'order')->getUserInformation();
 
                         // Set values
                         $values           = $formOrderSimple->getData();
@@ -277,6 +277,8 @@ class CheckoutController extends IndexController
 
                         // Save order
                         $this->saveOrder($values, $addressDelivery, $addressInvoicing, $cart, $config, $uid);
+
+                        // Set address
                         Pi::api('customerAddress', 'order')->updateFavouriteDelivery($_SESSION['order']['delivery_address']);
                         Pi::api('customerAddress', 'order')->updateFavouriteInvoicing($_SESSION['order']['invoicing_address']);
                     }
@@ -285,65 +287,12 @@ class CheckoutController extends IndexController
                     $formOrder->setData($data);
 
                     if ($formOrder->isValid()) {
-                        $values                = $formOrder->getData();
-                        $values['time_create'] = time();
-                        /*
-                        * Register user codes from user module register controller
-                        */
-                        if (Pi::service('module')->isActive('user')
-                            && !Pi::service('authentication')->hasIdentity()
-                            && isset($_SESSION['session_order'])
-                            && !empty($_SESSION['session_order'])
-                        ) {
+                        $values = $formOrder->getData();
 
-                            /*
-                             * Register part
-                             */
-                            // Check email force set on register form
-                            if (!isset($values['email']) || empty($values['email'])) {
-                                $result['message'] = __('User information was not completed and user account was not saved.');
-                                return $result;
-                            }
-                            // Set email as identity if not set on register form
-                            if (!isset($values['identity']) || empty($values['identity'])) {
-                                $values['identity'] = $values['email'];
-                            }
-                            // Set name if not set on register form
-                            if (!isset($values['name']) || empty($values['name'])) {
-                                if (isset($values['first_name']) || isset($values['last_name'])) {
-                                    $values['name'] = $values['first_name'] . ' ' . $values['last_name'];
-                                } else {
-                                    $values['name'] = $values['identity'];
-                                }
-                            }
-                            // Set values
-                            $values['last_modified'] = time();
-                            $values['ip_register']   = Pi::user()->getIp();
+                        // Create user account
+                        $values = $this->createUserAccount($values);
 
-                            // Add user
-                            $uid = Pi::api('user', 'user')->addUser($values);
-                            if (!$uid || !is_int($uid)) {
-                                $url = Pi::url(Pi::service('user')->getUrl('register', []));
-                                $this->jump($url, __('User account was not saved.'), 'error');
-                            }
-                            // Set user role
-                            Pi::api('user', 'user')->setRole($uid, 'member');
-
-                            /*
-                             * Active user
-                             */
-                            $status = Pi::api('user', 'user')->activateUser($uid);
-                            if ($status) {
-                                // Target activate user event
-                                Pi::service('event')->trigger('user_activate', $uid);
-                            }
-
-                            /*
-                             * Get user information
-                             */
-                            // Check user informations
-                            $user          = Pi::api('user', 'order')->getUserInformation($uid);
-                            $values['uid'] = $uid;
+                        if (!empty($values)) {
 
                             // Set address
                             if ($values['address_id'] == 0) {
@@ -351,11 +300,16 @@ class CheckoutController extends IndexController
                             } else {
                                 Pi::api('customerAddress', 'order')->updateAddress($values);
                             }
-                            $addresses = Pi::api('customerAddress', 'order')->findAddresses($uid);
+                            $addresses = Pi::api('customerAddress', 'order')->findAddresses($values['uid']);
                             $address   = current($addresses);
 
+                            // Set default gateway
+                            $gatewayList               = Pi::api('gateway', 'order')->getActiveGatewayName();
+                            $gatewayList               = array_keys($gatewayList);
+                            $values['default_gateway'] = array_shift($gatewayList);
+
                             // Save order
-                            $this->saveOrder($values, $address, $address, $cart, $config, $uid);
+                            $this->saveOrder($values, $address, $address, $cart, $config, $values['uid']);
                         }
                     }
                 }
@@ -1239,5 +1193,64 @@ class CheckoutController extends IndexController
             ];
             $this->view()->assign('error', $error);
         }
+    }
+
+    private function createUserAccount($values)
+    {
+        // Set time
+        $values['time_create'] = time();
+
+        // Check user module active
+        if (Pi::service('module')->isActive('user')
+            && !Pi::service('authentication')->hasIdentity()
+            && isset($_SESSION['session_order'])
+            && !empty($_SESSION['session_order'])
+        ) {
+
+            // Check email force set on register form
+            if (!isset($values['email']) || empty($values['email'])) {
+                $result['message'] = __('User information was not completed and user account was not saved.');
+                return $result;
+            }
+
+            // Set email as identity if not set on register form
+            if (!isset($values['identity']) || empty($values['identity'])) {
+                $values['identity'] = $values['email'];
+            }
+
+            // Set name if not set on register form
+            if (!isset($values['name']) || empty($values['name'])) {
+                if (isset($values['first_name']) || isset($values['last_name'])) {
+                    $values['name'] = $values['first_name'] . ' ' . $values['last_name'];
+                } else {
+                    $values['name'] = $values['identity'];
+                }
+            }
+
+            // Set values
+            $values['last_modified'] = time();
+            $values['ip_register']   = Pi::user()->getIp();
+
+            // Add user
+            $values['uid'] = Pi::api('user', 'user')->addUser($values);
+            if (!$values['uid'] || !is_int($values['uid'])) {
+                $url = Pi::url(Pi::service('user')->getUrl('register', []));
+                $this->jump($url, __('User account was not saved.'), 'error');
+            }
+
+            // Set user role
+            Pi::api('user', 'user')->setRole($values['uid'], 'member');
+
+            // Active user
+            $status = Pi::api('user', 'user')->activateUser($values['uid']);
+            if ($status) {
+                // Target activate user event
+                Pi::service('event')->trigger('user_activate', $values['uid']);
+            }
+
+            return $values;
+        }
+
+        return [];
     }
 }
