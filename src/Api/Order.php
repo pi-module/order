@@ -216,6 +216,8 @@ class Order extends AbstractApi
         if (is_object($order)) {
             $order = $order->toArray();
         }
+
+
         // Set time_create_view
         $order['time_create_view'] = _date($order['time_create'], ['pattern' => $pattern]);
         // Set time_delivery_view
@@ -333,10 +335,12 @@ class Order extends AbstractApi
         $order['deliveryLabel'] = $status_delivery['deliveryLabel'];
         $order['deliveryTitle'] = $status_delivery['deliveryTitle'];
         //
+
         $can_pay              = $this->canPayStatus($order['can_pay']);
         $order['canPayClass'] = isset($can_pay['canPayClass']) ? $can_pay['canPayClass'] : null;
         $order['canPayLabel'] = isset($can_pay['canPayLabel']) ? $can_pay['canPayLabel'] : null;
         $order['canPayTitle'] = isset($can_pay['canPayTitle']) ? $can_pay['canPayTitle'] : null;
+
         //
         if ($order['type_commodity'] == 'product') {
             $order['type_commodity_view'] = __('Product');
@@ -349,9 +353,14 @@ class Order extends AbstractApi
         $order['shortStatus'] = $order['orderTitle'];
         $order['shortLabel']  = $order['orderLabel'];
         // Set text_summary
-        $order['user_note'] = Pi::service('markup')->render($order['user_note'], 'html', 'text');
+        if (isset($order['user_note']) && !empty($order['user_note'])) {
+            $order['user_note'] = Pi::service('markup')->render($order['user_note'], 'html', 'text');
+
+        }
         // Set text_summary
-        $order['admin_note'] = Pi::service('markup')->render($order['admin_note'], 'html', 'text');
+        if (isset($order['admin_note']) && !empty($order['admin_note'])) {
+            $order['admin_note'] = Pi::service('markup')->render($order['admin_note'], 'html', 'text');
+        }
 
         $order['time_order']      = date('Y-m-d', $order['time_order']);
         $order['time_order_view'] = _date($order['time_order']);
