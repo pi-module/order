@@ -675,8 +675,10 @@ class PaymentController extends IndexController
     {
         // Check user
         $this->checkUser();
+
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+
         // Check test mode
         if (!$config['order_testmode']) {
             // jump to module
@@ -684,6 +686,7 @@ class PaymentController extends IndexController
             $message = __('Test mode not active.');
             $this->jump($url, $message);
         }
+
         // Get invoice
         $id         = $this->params('id');
         $processing = Pi::api('processing', 'order')->getProcessing();

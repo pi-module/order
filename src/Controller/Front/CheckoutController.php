@@ -1109,7 +1109,8 @@ class CheckoutController extends IndexController
                 }
 
                 // Save general detail
-                $detail                 = $this->getModel('detail')->createRow();
+                // ToDo : fix this part for custom service price
+                /* $detail                 = $this->getModel('detail')->createRow();
                 $detail->order          = $order->id;
                 $detail->module         = 'order';
                 $detail->product_type   = 'service';
@@ -1124,7 +1125,7 @@ class CheckoutController extends IndexController
                 $detail->number         = 1;
                 $detail->time_start     = 0;
                 $detail->time_end       = 0;
-                $detail->save();
+                $detail->save(); */
 
                 // Manage invoice
                 $invoices = Pi::api('invoice', 'order')->getInvoiceFromOrder($order->id);

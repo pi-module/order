@@ -451,7 +451,6 @@ class Order extends AbstractApi
         $order = Pi::model('order', $this->getModule())->find($orderId);
         // Get invoice
         $invoice = Pi::api('invoice', 'order')->getInvoice($invoiceId);
-        // Checl for installment
 
         // Update order
         $order->time_payment = time();
