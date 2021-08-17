@@ -107,7 +107,6 @@ $script = sprintf(
 );
 $this->footScript()->appendScript($script);
 ?>
-
 <div id="js-order" class="clearfix order-checkout">
     <div class="mb-3">
         <h1><?php _e('Checkout'); ?></h1>
@@ -116,14 +115,15 @@ $this->footScript()->appendScript($script);
         <?php if (isset($cart['type_payment']) && $cart['type_payment'] == 'installment') { ?>
             <div class="alert alert-info" role="alert">
                 <h2><?php _e('Terms of payment'); ?></h2>
-                <p><?php echo sprintf(
+                <p>
+                    <?php echo sprintf(
                         __('You buy products on %s installment by %s payment on each installment and %s per payment'), _number(count($plan) - 2),
                         Pi::api('api', 'order')->viewPrice($this->escape($plan[1]['price'])),
                         Pi::api('api', 'order')->viewPrice($this->escape($plan[0]['price']))
-                    ); ?></p>
+                    ); ?>
+                </p>
             </div>
         <?php } ?>
-
         <?php if (isset($cart['can_pay']) && $cart['can_pay'] == 2) { ?>
             <div class="alert alert-danger" role="alert">
                 <?php echo __(
@@ -137,7 +137,7 @@ $this->footScript()->appendScript($script);
             <?php if (isset($invalidAddress) && $invalidAddress) { ?>
                 <div class="alert alert-dismissable alert-danger text-center">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <div><?php _e('Your address has to be completed. Please, edit it.'); ?></div>
+                    <div class="clearfix"><?php _e('Your address has to be completed. Please, edit it.'); ?></div>
                 </div>
             <?php } else { ?>
                 <div class="clearfix alert alert-<?php echo empty($addresses) ? 'info' : 'success' ?>" role="alert">
@@ -155,114 +155,116 @@ $this->footScript()->appendScript($script);
                             <h4><?php _e('Register new user account and make order'); ?></h4>
                         </div>
                     <?php } ?>
-                    <div class="address-single">
-                        <div class="clearfix">
-                            <div class="info">
-                                <p>
-                                    <span class="fas fa-file"></span> <strong><?php _e('Invoicing address'); ?></strong>
-                                    <?php if (!empty($addresses)) { ?>
-                                        <a class="modify-address" href="<?php echo Pi::url(
-                                            $this->url('', ['controller' => 'checkout', 'action' => 'address-list', 'type' => 'invoicing'])
-                                        ) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal"
-                                           data-type="<?php _e('Invoicing address') ?>">
-                                            <?php _e('Modify') ?>
-                                        </a>
-                                    <?php } ?>
-                                </p>
-                                <div class="invoicing-address">
-                                    <?php if (empty($addresses)) { ?>
-                                        <?php echo $this->form($forms['new'], 'vertical'); ?>
-                                    <?php } else { ?>
-                                        <div>
-                                            <?php _e('Type') ?> :
-                                            <?php echo $addressInvoicing['account_type'] == 'none' ? __('ND') : __(ucfirst($addressInvoicing['account_type'])); ?>
-                                        </div>
-                                        <?php if ($addressInvoicing['account_type'] === 'company') { ?>
-                                            <div><?php echo $this->escape($addressInvoicing['company']); ?></div>
-                                            <?php if (!empty($addressInvoicing['company_address1'])) { ?>
-                                                <div><?php echo $this->escape($addressInvoicing['company_address1']); ?></div>
-                                            <?php } ?>
-                                            <?php if (!empty($addressInvoicing['company_address2'])) { ?>
-                                                <div><?php echo $this->escape($addressInvoicing['company_address2']); ?></div>
-                                            <?php } ?>
-                                            <div>
-                                                <?php if (!empty($addressInvoicing['company_zip_code'])) { ?>
-                                                    <?php echo $this->escape($addressInvoicing['company_zip_code']); ?>&nbsp;
-                                                <?php } ?>
-                                                <?php if (!empty($addressInvoicing['company_state'])) { ?>
-                                                    <?php echo $this->escape($addressInvoicing['company_state']); ?>&nbsp;
-                                                <?php } ?>
-                                                <?php if (!empty($addressInvoicing['company_city'])) { ?>
-                                                    <?php echo $this->escape($addressInvoicing['company_city']); ?>&nbsp;
-                                                <?php } ?>
-                                                <?php if (!empty($addressInvoicing['company_country'])) { ?>
-                                                    <?php echo $this->escape($addressInvoicing['company_country']); ?>&nbsp;
-                                                <?php } ?>
-                                            </div>
-                                            <div><?php echo $this->escape($addressInvoicing['company_id']); ?></div>
-                                            <div><?php echo $this->escape($addressInvoicing['company_vat']); ?></div>
-                                            <?php if (!empty($addressInvoicing['email'])) { ?>
-                                                <div>
-                                                    <?php _e('Email'); ?> :
-                                                    <?php echo $this->escape($addressInvoicing['email']); ?>
-                                                </div>
-                                            <?php } ?>
-                                            <?php if (!empty($addressInvoicing['phone'])) { ?>
-                                                <div>
-                                                    <?php _e('Phone'); ?> :
-                                                    <?php echo $this->escape($addressInvoicing['phone']); ?>
-                                                </div>
-                                            <?php } ?>
-                                            <?php if (!empty($addressInvoicing['mobile'])) { ?>
-                                                <div>
-                                                    <?php _e('Mobile'); ?> :
-                                                    <?php echo $this->escape($addressInvoicing['mobile']); ?>
-                                                </div>
-                                            <?php } ?>
+                    <div class="card">
+                        <div class="card-body address-single">
+                            <div class="clearfix">
+                                <div class="info">
+                                    <div class="mb-3">
+                                        <span class="fas fa-file"></span> <strong><?php _e('Invoicing address'); ?></strong>
+                                        <?php if (!empty($addresses)) { ?>
+                                            <a class="modify-address" href="<?php echo Pi::url(
+                                                $this->url('', ['controller' => 'checkout', 'action' => 'address-list', 'type' => 'invoicing'])
+                                            ) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal"
+                                               data-type="<?php _e('Invoicing address') ?>">
+                                                <?php _e('Modify') ?>
+                                            </a>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="invoicing-address">
+                                        <?php if (empty($addresses)) { ?>
+                                            <?php echo $this->form($forms['new'], 'vertical'); ?>
                                         <?php } else { ?>
                                             <div>
-                                                <?php echo $this->escape($addressInvoicing['first_name']); ?>&nbsp;<?php echo $this->escape($addressInvoicing['last_name']); ?>
+                                                <?php _e('Type') ?> :
+                                                <?php echo $addressInvoicing['account_type'] == 'none' ? __('ND') : __(ucfirst($addressInvoicing['account_type'])); ?>
                                             </div>
-                                            <?php if (!empty($addressInvoicing['address1'])) { ?>
-                                                <div><?php echo $this->escape($addressInvoicing['address1']); ?></div>
-                                            <?php } ?>
-                                            <?php if (!empty($addressInvoicing['address2'])) { ?>
-                                                <div><?php echo $this->escape($addressInvoicing['address2']); ?></div>
-                                            <?php } ?>
-                                            <div>
-                                                <?php if (!empty($addressInvoicing['zip_code'])) { ?>
-                                                    <?php echo $this->escape($addressInvoicing['zip_code']); ?>&nbsp;
+                                            <?php if ($addressInvoicing['account_type'] === 'company') { ?>
+                                                <div><?php echo $this->escape($addressInvoicing['company']); ?></div>
+                                                <?php if (!empty($addressInvoicing['company_address1'])) { ?>
+                                                    <div><?php echo $this->escape($addressInvoicing['company_address1']); ?></div>
                                                 <?php } ?>
-                                                <?php if (!empty($addressInvoicing['state'])) { ?>
-                                                    <?php echo $this->escape($addressInvoicing['state']); ?>&nbsp;
+                                                <?php if (!empty($addressInvoicing['company_address2'])) { ?>
+                                                    <div><?php echo $this->escape($addressInvoicing['company_address2']); ?></div>
                                                 <?php } ?>
-                                                <?php if (!empty($addressInvoicing['city'])) { ?>
-                                                    <?php echo $this->escape($addressInvoicing['city']); ?>&nbsp;
-                                                <?php } ?>
-                                                <?php if (!empty($addressInvoicing['country'])) { ?>
-                                                    <?php echo $this->escape($addressInvoicing['country']); ?>&nbsp;
-                                                <?php } ?>
-                                            </div>
-                                            <?php if (!empty($addressInvoicing['email'])) { ?>
                                                 <div>
-                                                    <?php _e('Email'); ?> :
-                                                    <?php echo $this->escape($addressInvoicing['email']); ?>
+                                                    <?php if (!empty($addressInvoicing['company_zip_code'])) { ?>
+                                                        <?php echo $this->escape($addressInvoicing['company_zip_code']); ?>&nbsp;
+                                                    <?php } ?>
+                                                    <?php if (!empty($addressInvoicing['company_state'])) { ?>
+                                                        <?php echo $this->escape($addressInvoicing['company_state']); ?>&nbsp;
+                                                    <?php } ?>
+                                                    <?php if (!empty($addressInvoicing['company_city'])) { ?>
+                                                        <?php echo $this->escape($addressInvoicing['company_city']); ?>&nbsp;
+                                                    <?php } ?>
+                                                    <?php if (!empty($addressInvoicing['company_country'])) { ?>
+                                                        <?php echo $this->escape($addressInvoicing['company_country']); ?>&nbsp;
+                                                    <?php } ?>
                                                 </div>
-                                            <?php } ?>
-                                            <?php if (!empty($addressInvoicing['phone'])) { ?>
+                                                <div><?php echo $this->escape($addressInvoicing['company_id']); ?></div>
+                                                <div><?php echo $this->escape($addressInvoicing['company_vat']); ?></div>
+                                                <?php if (!empty($addressInvoicing['email'])) { ?>
+                                                    <div>
+                                                        <?php _e('Email'); ?> :
+                                                        <?php echo $this->escape($addressInvoicing['email']); ?>
+                                                    </div>
+                                                <?php } ?>
+                                                <?php if (!empty($addressInvoicing['phone'])) { ?>
+                                                    <div>
+                                                        <?php _e('Phone'); ?> :
+                                                        <?php echo $this->escape($addressInvoicing['phone']); ?>
+                                                    </div>
+                                                <?php } ?>
+                                                <?php if (!empty($addressInvoicing['mobile'])) { ?>
+                                                    <div>
+                                                        <?php _e('Mobile'); ?> :
+                                                        <?php echo $this->escape($addressInvoicing['mobile']); ?>
+                                                    </div>
+                                                <?php } ?>
+                                            <?php } else { ?>
                                                 <div>
-                                                    <?php _e('Phone'); ?> :
-                                                    <?php echo $this->escape($addressInvoicing['phone']); ?>
+                                                    <?php echo $this->escape($addressInvoicing['first_name']); ?>&nbsp;<?php echo $this->escape($addressInvoicing['last_name']); ?>
                                                 </div>
-                                            <?php } ?>
-                                            <?php if (!empty($addressInvoicing['mobile'])) { ?>
+                                                <?php if (!empty($addressInvoicing['address1'])) { ?>
+                                                    <div><?php echo $this->escape($addressInvoicing['address1']); ?></div>
+                                                <?php } ?>
+                                                <?php if (!empty($addressInvoicing['address2'])) { ?>
+                                                    <div><?php echo $this->escape($addressInvoicing['address2']); ?></div>
+                                                <?php } ?>
                                                 <div>
-                                                    <?php _e('Mobile'); ?> :
-                                                    <?php echo $this->escape($addressInvoicing['mobile']); ?>
+                                                    <?php if (!empty($addressInvoicing['zip_code'])) { ?>
+                                                        <?php echo $this->escape($addressInvoicing['zip_code']); ?>&nbsp;
+                                                    <?php } ?>
+                                                    <?php if (!empty($addressInvoicing['state'])) { ?>
+                                                        <?php echo $this->escape($addressInvoicing['state']); ?>&nbsp;
+                                                    <?php } ?>
+                                                    <?php if (!empty($addressInvoicing['city'])) { ?>
+                                                        <?php echo $this->escape($addressInvoicing['city']); ?>&nbsp;
+                                                    <?php } ?>
+                                                    <?php if (!empty($addressInvoicing['country'])) { ?>
+                                                        <?php echo $this->escape($addressInvoicing['country']); ?>&nbsp;
+                                                    <?php } ?>
                                                 </div>
+                                                <?php if (!empty($addressInvoicing['email'])) { ?>
+                                                    <div>
+                                                        <?php _e('Email'); ?> :
+                                                        <?php echo $this->escape($addressInvoicing['email']); ?>
+                                                    </div>
+                                                <?php } ?>
+                                                <?php if (!empty($addressInvoicing['phone'])) { ?>
+                                                    <div>
+                                                        <?php _e('Phone'); ?> :
+                                                        <?php echo $this->escape($addressInvoicing['phone']); ?>
+                                                    </div>
+                                                <?php } ?>
+                                                <?php if (!empty($addressInvoicing['mobile'])) { ?>
+                                                    <div>
+                                                        <?php _e('Mobile'); ?> :
+                                                        <?php echo $this->escape($addressInvoicing['mobile']); ?>
+                                                    </div>
+                                                <?php } ?>
                                             <?php } ?>
                                         <?php } ?>
-                                    <?php } ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -275,13 +277,15 @@ $this->footScript()->appendScript($script);
                                 'If you registered on website before this time and have user account, please login to system and continue ordering, and if you dont have user account here, please fill register new user account and make order form'
                             ); ?>
                         </div>
-                        <div class="address-single">
-                            <div class="clearfix">
-                                <div class="info">
-                                    <div class="mb-3">
-                                        <h4><?php _e('Login'); ?></h4>
+                        <div class="card">
+                            <div class="card-body address-single">
+                                <div class="clearfix">
+                                    <div class="info">
+                                        <div class="mb-3">
+                                            <h4><?php _e('Login'); ?></h4>
+                                        </div>
+                                        <?php echo $this->form($formLogin); ?>
                                     </div>
-                                    <?php echo $this->form($formLogin); ?>
                                 </div>
                             </div>
                         </div>
@@ -289,125 +293,127 @@ $this->footScript()->appendScript($script);
                 <?php } ?>
                 <?php if (!empty($addresses)) { ?>
                     <div class="col-lg-6 col-md-6">
-                        <div class="address-single">
-                            <div class="clearfix">
-                                <div class="info">
-                                    <p>
-                                        <span class="fas fa-map-marker-alt"></span> <strong><?php _e('Delivery address'); ?></strong>
-                                        <?php if ($addressInvoicing['id'] != $addressDelivery['id']) { ?>
-                                            <a class="modify-address" href="<?php echo Pi::url(
-                                                $this->url('', ['controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'])
-                                            ) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal"
-                                               data-type="<?php _e('Delivery address') ?>">
-                                                <?php _e('Modify') ?>
-                                            </a>
-                                        <?php } ?>
-                                    </p>
-                                    <div class="delivery-address">
-                                        <?php if ($addressInvoicing['id'] == $addressDelivery['id']) { ?>
-                                            <a href="<?php echo Pi::url(
-                                                $this->url('', ['controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'])
-                                            ) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal"
-                                               data-title="<?php _e('Delivery address') ?>">
-                                                <input type="checkbox" checked="checked"/> <?php _e("Same address"); ?>
-                                            </a>
-                                        <?php } else { ?>
-                                            <?php if (empty($addresses)) { ?>
-                                                <?php echo $this->form($forms['new'], 'vertical'); ?>
+                        <div class="card">
+                            <div class="card-body address-single">
+                                <div class="clearfix">
+                                    <div class="info">
+                                        <div class="clearfix">
+                                            <span class="fas fa-map-marker-alt"></span> <strong><?php _e('Delivery address'); ?></strong>
+                                            <?php if ($addressInvoicing['id'] != $addressDelivery['id']) { ?>
+                                                <a class="modify-address" href="<?php echo Pi::url(
+                                                    $this->url('', ['controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'])
+                                                ) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal"
+                                                   data-type="<?php _e('Delivery address') ?>">
+                                                    <?php _e('Modify') ?>
+                                                </a>
+                                            <?php } ?>
+                                        </div>
+                                        <div class="delivery-address">
+                                            <?php if ($addressInvoicing['id'] == $addressDelivery['id']) { ?>
+                                                <a href="<?php echo Pi::url(
+                                                    $this->url('', ['controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'])
+                                                ) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal"
+                                                   data-title="<?php _e('Delivery address') ?>">
+                                                    <input type="checkbox" checked="checked"/> <?php _e("Same address"); ?>
+                                                </a>
                                             <?php } else { ?>
-                                                <div>
-                                                    <?php _e('Type') ?> :
-                                                    <?php echo $addressDelivery['account_type'] == 'none' ? __('ND') : __(ucfirst($addressDelivery['account_type'])); ?>
-                                                </div>
-                                                <?php if ($addressDelivery['account_type'] === 'company') { ?>
-                                                    <div><?php echo $this->escape($addressDelivery['company']); ?></div>
-
-                                                    <?php if (!empty($addressDelivery['company_address1'])) { ?>
-                                                        <div><?php echo $this->escape($addressDelivery['company_address1']); ?></div>
-                                                    <?php } ?>
-                                                    <?php if (!empty($addressDelivery['company_address2'])) { ?>
-                                                        <div><?php echo $this->escape($addressDelivery['company_address2']); ?></div>
-                                                    <?php } ?>
-                                                    <div>
-                                                        <?php if (!empty($addressDelivery['company_zip_code'])) { ?>
-                                                            <?php echo $this->escape($addressDelivery['company_zip_code']); ?>&nbsp;
-                                                        <?php } ?>
-                                                        <?php if (!empty($addressDelivery['company_state'])) { ?>
-                                                            <?php echo $this->escape($addressDelivery['company_state']); ?>&nbsp;
-                                                        <?php } ?>
-                                                        <?php if (!empty($addressDelivery['company_city'])) { ?>
-                                                            <?php echo $this->escape($addressDelivery['company_city']); ?>&nbsp;
-                                                        <?php } ?>
-                                                        <?php if (!empty($addressDelivery['company_country'])) { ?>
-                                                            <?php echo $this->escape($addressDelivery['company_country']); ?>&nbsp;
-                                                        <?php } ?>
-                                                    </div>
-                                                    <div><?php echo $this->escape($addressDelivery['company_id']); ?></div>
-                                                    <div><?php echo $this->escape($addressDelivery['company_vat']); ?></div>
-                                                    <?php if (!empty($addressDelivery['email'])) { ?>
-                                                        <div>
-                                                            <?php _e('Email'); ?> :
-                                                            <?php echo $this->escape($addressDelivery['email']); ?>
-                                                        </div>
-                                                    <?php } ?>
-                                                    <?php if (!empty($addressDelivery['phone'])) { ?>
-                                                        <div>
-                                                            <?php _e('Phone'); ?> :
-                                                            <?php echo $this->escape($addressDelivery['phone']); ?>
-                                                        </div>
-                                                    <?php } ?>
-                                                    <?php if (!empty($addressDelivery['mobile'])) { ?>
-                                                        <div>
-                                                            <?php _e('Mobile'); ?> :
-                                                            <?php echo $this->escape($addressDelivery['mobile']); ?>
-                                                        </div>
-                                                    <?php } ?>
+                                                <?php if (empty($addresses)) { ?>
+                                                    <?php echo $this->form($forms['new'], 'vertical'); ?>
                                                 <?php } else { ?>
                                                     <div>
-                                                        <?php echo $this->escape($addressDelivery['first_name']); ?>&nbsp;<?php echo $this->escape($addressDelivery['last_name']); ?>
+                                                        <?php _e('Type') ?> :
+                                                        <?php echo $addressDelivery['account_type'] == 'none' ? __('ND') : __(ucfirst($addressDelivery['account_type'])); ?>
                                                     </div>
-                                                    <?php if (!empty($addressDelivery['address1'])) { ?>
-                                                        <div><?php echo $this->escape($addressDelivery['address1']); ?></div>
-                                                    <?php } ?>
-                                                    <?php if (!empty($addressDelivery['address2'])) { ?>
-                                                        <div><?php echo $this->escape($addressDelivery['address2']); ?></div>
-                                                    <?php } ?>
-                                                    <div>
-                                                        <?php if (!empty($addressDelivery['zip_code'])) { ?>
-                                                            <?php echo $this->escape($addressDelivery['zip_code']); ?>&nbsp;
+                                                    <?php if ($addressDelivery['account_type'] === 'company') { ?>
+                                                        <div><?php echo $this->escape($addressDelivery['company']); ?></div>
+
+                                                        <?php if (!empty($addressDelivery['company_address1'])) { ?>
+                                                            <div><?php echo $this->escape($addressDelivery['company_address1']); ?></div>
                                                         <?php } ?>
-                                                        <?php if (!empty($addressDelivery['state'])) { ?>
-                                                            <?php echo $this->escape($addressDelivery['state']); ?>&nbsp;
+                                                        <?php if (!empty($addressDelivery['company_address2'])) { ?>
+                                                            <div><?php echo $this->escape($addressDelivery['company_address2']); ?></div>
                                                         <?php } ?>
-                                                        <?php if (!empty($addressDelivery['city'])) { ?>
-                                                            <?php echo $this->escape($addressDelivery['city']); ?>&nbsp;
-                                                        <?php } ?>
-                                                        <?php if (!empty($addressDelivery['country'])) { ?>
-                                                            <?php echo $this->escape($addressDelivery['country']); ?>&nbsp;
-                                                        <?php } ?>
-                                                    </div>
-                                                    <?php if (!empty($addressDelivery['email'])) { ?>
                                                         <div>
-                                                            <?php _e('Email'); ?> :
-                                                            <?php echo $this->escape($addressDelivery['email']); ?>
+                                                            <?php if (!empty($addressDelivery['company_zip_code'])) { ?>
+                                                                <?php echo $this->escape($addressDelivery['company_zip_code']); ?>&nbsp;
+                                                            <?php } ?>
+                                                            <?php if (!empty($addressDelivery['company_state'])) { ?>
+                                                                <?php echo $this->escape($addressDelivery['company_state']); ?>&nbsp;
+                                                            <?php } ?>
+                                                            <?php if (!empty($addressDelivery['company_city'])) { ?>
+                                                                <?php echo $this->escape($addressDelivery['company_city']); ?>&nbsp;
+                                                            <?php } ?>
+                                                            <?php if (!empty($addressDelivery['company_country'])) { ?>
+                                                                <?php echo $this->escape($addressDelivery['company_country']); ?>&nbsp;
+                                                            <?php } ?>
                                                         </div>
-                                                    <?php } ?>
-                                                    <?php if (!empty($addressDelivery['phone'])) { ?>
+                                                        <div><?php echo $this->escape($addressDelivery['company_id']); ?></div>
+                                                        <div><?php echo $this->escape($addressDelivery['company_vat']); ?></div>
+                                                        <?php if (!empty($addressDelivery['email'])) { ?>
+                                                            <div>
+                                                                <?php _e('Email'); ?> :
+                                                                <?php echo $this->escape($addressDelivery['email']); ?>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <?php if (!empty($addressDelivery['phone'])) { ?>
+                                                            <div>
+                                                                <?php _e('Phone'); ?> :
+                                                                <?php echo $this->escape($addressDelivery['phone']); ?>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <?php if (!empty($addressDelivery['mobile'])) { ?>
+                                                            <div>
+                                                                <?php _e('Mobile'); ?> :
+                                                                <?php echo $this->escape($addressDelivery['mobile']); ?>
+                                                            </div>
+                                                        <?php } ?>
+                                                    <?php } else { ?>
                                                         <div>
-                                                            <?php _e('Phone'); ?> :
-                                                            <?php echo $this->escape($addressDelivery['phone']); ?>
+                                                            <?php echo $this->escape($addressDelivery['first_name']); ?>&nbsp;<?php echo $this->escape($addressDelivery['last_name']); ?>
                                                         </div>
-                                                    <?php } ?>
-                                                    <?php if (!empty($addressDelivery['mobile'])) { ?>
+                                                        <?php if (!empty($addressDelivery['address1'])) { ?>
+                                                            <div><?php echo $this->escape($addressDelivery['address1']); ?></div>
+                                                        <?php } ?>
+                                                        <?php if (!empty($addressDelivery['address2'])) { ?>
+                                                            <div><?php echo $this->escape($addressDelivery['address2']); ?></div>
+                                                        <?php } ?>
                                                         <div>
-                                                            <?php _e('Mobile'); ?> :
-                                                            <?php echo $this->escape($addressDelivery['mobile']); ?>
+                                                            <?php if (!empty($addressDelivery['zip_code'])) { ?>
+                                                                <?php echo $this->escape($addressDelivery['zip_code']); ?>&nbsp;
+                                                            <?php } ?>
+                                                            <?php if (!empty($addressDelivery['state'])) { ?>
+                                                                <?php echo $this->escape($addressDelivery['state']); ?>&nbsp;
+                                                            <?php } ?>
+                                                            <?php if (!empty($addressDelivery['city'])) { ?>
+                                                                <?php echo $this->escape($addressDelivery['city']); ?>&nbsp;
+                                                            <?php } ?>
+                                                            <?php if (!empty($addressDelivery['country'])) { ?>
+                                                                <?php echo $this->escape($addressDelivery['country']); ?>&nbsp;
+                                                            <?php } ?>
                                                         </div>
+                                                        <?php if (!empty($addressDelivery['email'])) { ?>
+                                                            <div>
+                                                                <?php _e('Email'); ?> :
+                                                                <?php echo $this->escape($addressDelivery['email']); ?>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <?php if (!empty($addressDelivery['phone'])) { ?>
+                                                            <div>
+                                                                <?php _e('Phone'); ?> :
+                                                                <?php echo $this->escape($addressDelivery['phone']); ?>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <?php if (!empty($addressDelivery['mobile'])) { ?>
+                                                            <div>
+                                                                <?php _e('Mobile'); ?> :
+                                                                <?php echo $this->escape($addressDelivery['mobile']); ?>
+                                                            </div>
+                                                        <?php } ?>
                                                     <?php } ?>
                                                 <?php } ?>
                                             <?php } ?>
-                                        <?php } ?>
-                                        <br/>
+                                            <br/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -417,12 +423,12 @@ $this->footScript()->appendScript($script);
             </div>
         </div>
         <div class="col-lg-4 col-md-4">
-            <div class="cart-product mb-3">
+            <div class="cart-product">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title"><?php _e('Your order'); ?></h3>
                     </div>
-                    <div class="clearfix">
+                    <div class="card-body clearfix">
                         <table class="cart-product-list">
                             <tr>
                                 <th class="col-lg-10 col-md-10"><?php _e('Product name') ?></th>
@@ -456,26 +462,22 @@ $this->footScript()->appendScript($script);
                                                     <?php if ($product['time_end'] == strtotime("2030-01-01")) { ?>
                                                         <?php echo __('Unlimited from') . ' ' . _date($product['time_start']) ?>
                                                     <?php } else { ?>
-                                                        <?php echo __('From') . ' ' . _date($product['time_start']) . ' ' . __('to') . ' ' . _date(
-                                                                $product['time_end']
-                                                            ) ?>
+                                                        <?php echo __('From') . ' ' . _date($product['time_start']) . ' ' . __('to') . ' ' . _date($product['time_end']) ?>
                                                     <?php } ?>
                                                 </p>
                                             <?php } ?>
                                             <?php if (!empty($product['details']['thumbUrl'])) { ?>
                                                 <div class="col-5">
-                                                    <a href="<?php echo $this->escape($product['details']['productUrl']); ?>"
-                                                       target="_blank">
-                                                        <img class="img-fluid"
-                                                             src="<?php echo $this->escape($product['details']['thumbUrl']); ?>">
+                                                    <a href="<?php echo $this->escape($product['details']['productUrl']); ?>" target="_blank">
+                                                        <img class="img-fluid" src="<?php echo $this->escape($product['details']['thumbUrl']); ?>">
                                                     </a>
                                                 </div>
                                             <?php } ?>
                                         </td>
                                         <td class="text-right">
-                                            <strong class="data-total-price"><?php echo Pi::api('api', 'order')->viewPrice(
-                                                    $this->escape($product['product_price'] - $product['discount_price'] - $unconsumedPrice)
-                                                ); ?></strong>
+                                            <strong class="data-total-price">
+                                                <?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'] - $product['discount_price'] - $unconsumedPrice)); ?>
+                                            </strong>
                                         </td>
                                     </tr>
                                     <?php if ($unconsumedPrice || (isset($product['discount']) && $product['discount'] > 0)) { ?>
@@ -497,7 +499,8 @@ $this->footScript()->appendScript($script);
                                             <td data-discount-price-for="<?php echo $product['product'] ?>">
                                                 <?php
                                                 echo $product['discount_price'] > 0 ? '-' : '';
-                                                echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'])); ?>
+                                                echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price']));
+                                                ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -525,9 +528,9 @@ $this->footScript()->appendScript($script);
                                     </strong>
                                 </td>
                                 <td class="text-right">
-                                    <strong class="data-total-price"><?php echo Pi::api('api', 'order')->viewPrice(
-                                            $this->escape($price['product'] - $totalDiscount)
-                                        ); ?></strong>
+                                    <strong class="data-total-price">
+                                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $totalDiscount)); ?>
+                                    </strong>
                                 </td>
                             </tr>
                             <tr>
@@ -618,8 +621,10 @@ $this->footScript()->appendScript($script);
     </div>
 </div>
 
-<div class="modal fade" id="addressListModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+
+
+<div class="modal fade" id="addressListModal" tabindex="-1" aria-labelledby="addressListLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">&nbsp;</h2>
@@ -627,42 +632,30 @@ $this->footScript()->appendScript($script);
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="panel">
-                <div class="row">
-                    <div class="col-lg-7 col-md-7">
-                        <h2 class="delivery hide"><?php _e('Delivery Address') ?></h2>
-                        <h2 class="invoicing hide"><?php _e('Invoicing Address') ?></h2>
-                    </div>
-                    <div class="col-lg-5 col-md-5">
-                        <a class="btn btn-simple btn-sm col-lg-12 col-md-12 invoicing hide"
-                           href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing']); ?>" data-remote="false"
-                           data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
-                        <a class="btn btn-simple btn-sm col-lg-12 col-md-12 delivery hide"
-                           href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'delivery']); ?>" data-remote="false"
-                           data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
             <div class="modal-body">
-                <p>
-                    <?php _e('Please, wait ...') ?>
-                </p>
-            </div>
-            <div class="panel bottom">
-                <div class="offset-lg-5 col-lg-5 offset-md-7 col-md-5">
-                    <a class="btn btn-simple btn-sm col-lg-12 col-md-12 invoicing hide"
-                       href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing']); ?>" data-remote="false"
-                       data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
-                    <a class="btn btn-simple btn-sm col-lg- 12 col-md-12 delivery hide"
-                       href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'delivery']); ?>" data-remote="false"
-                       data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an address'); ?></a>
+                <div class="row">
+                    <div class="col-6 text-center">
+                        <h3 class="delivery hide mb-3"><?php _e('Delivery Address') ?></h3>
+                        <a class="btn btn-simple btn-sm col-lg-12 col-md-12 delivery hide  mb-3"
+                           href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'delivery']); ?>" data-remote="false"
+                           data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an delivery address'); ?></a>
+                    </div>
+                    <div class="col-6 text-center">
+                        <h3 class="invoicing hide  mb-3"><?php _e('Invoicing Address') ?></h3>
+                        <a class="btn btn-simple btn-sm col-lg-12 col-md-12 invoicing hide  mb-3"
+                           href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing']); ?>" data-remote="false"
+                           data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an invoicing address'); ?></a>
+                    </div>
                 </div>
-                <div class="clearfix"></div>
+                <hr />
+                <div class="address-list">
+                    <?php _e('Please, wait ...') ?>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" style="overflow-y: auto !important;">
     <div class="modal-dialog modal-lg" role="document">
@@ -674,7 +667,9 @@ $this->footScript()->appendScript($script);
                 </button>
             </div>
             <div class="modal-body">
-                <?php _e('Please, wait ...') ?>
+                <div class="address-list">
+                    <?php _e('Please, wait ...') ?>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php _e('Cancel') ?></button>
@@ -685,135 +680,135 @@ $this->footScript()->appendScript($script);
 </div>
 
 <script>
-    var needReload = false;
-    $(document).ready(function () {
+  var needReload = false;
+  $(document).ready(function () {
 
-        // Fix for bootstrap bug. When you open 2 modals (first open second), there no scrollbar
-        $('body').on('hidden.bs.modal', function () {
-            if ($('.modal.show').length > 0) {
-                $('body').addClass('modal-open');
-            } else {
-                if (needReload) {
-                    $('.invoicing-address').html("<?php _e('Please wait ...') ?>");
-                    $('.delivery-address').html("<?php _e('Please wait ...') ?>");
-                    window.location.reload();
-                }
-            }
-        });
-
-        $("#addressModal").on("show.bs.modal", function (e) {
-            if ($(e.relatedTarget).length == 0) {
-                return;
-            }
-
-            var link = $(e.relatedTarget);
-            $(this).find(".modal-body").load(link.attr("href"));
-        });
-
-        $("#addressListModal").on("show.bs.modal", function (e) {
-            if ($(e.relatedTarget).length == 0) {
-                return;
-            }
-
-            var link = $(e.relatedTarget);
-            $(this).find(".modal-body").load(link.attr("href"));
-            $(this).find('.invoicing').addClass('hide');
-            $(this).find('.delivery').addClass('hide');
-        });
-
-        $('#promoCheckout').on('submit', function () {
-            var code = $('#promoCheckout input[name=code]').val();
-            if (code == null) {
-                return false;
-            }
-            $('#promoCheckout input[name=code]').val('');
-
-            $.ajax({
-                type: "POST",
-                url: "<?php echo Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'promocode'])) ?>",
-                data: {code: code},
-                success: function (data) {
-                    window.location.reload();
-                    /* $('#promoCheckout').parent().find('.alert')
-                        .removeClass('d-none')
-                        .removeClass('alert-info')
-                        .removeClass('alert-success')
-                        .addClass('alert-' + data.msgPromoCode.type);
-
-                    $('#promoCheckout').parent().find('.alert span').html(data.msgPromoCode.message);
-
-                    var totalDiscount = 0;
-                    $.each(data.cart.product, function (i, product) {
-                            console.log(product);
-                            $('.cart-product span[data-discount-for=' + product.product + ']').html(product.discount);
-                            $('.cart-product td[data-discount-price-for=' + product.product + ']').html('-' + product.discount_price_view);
-                        }
-                    );
-                    $('.cart-product .data-total-price').html(data.price.total_price_view);
-                    $('.cart-product .data-total-vat').html(data.price.vat_view);
-                    $('.cart-product .data-total-price-ttc').html(data.price.total_price_ttc_view);
-                    //$('[data-total-vat-for=445]').val() */
-                },
-                dataType: 'json'
-            });
-            return false;
-        });
-
-        $('.fortooltip').tooltip({container: 'body', html: true});
-        $('.fortooltip').click(
-            function (e) {
-                e.preventDefault();
-            }
-        );
-
-        $('form#order').submit(
-            function () {
-                if ($('.submit_order_simple').hasClass('disabled')) {
-                    return false;
-                }
-
-                $('.submit_order_simple').addClass('disabled');
-                return true;
-            }
-        );
-
-        $('.tooltip-description').tooltip();
-        var accountTypeChange = function() {
-
-            var show = $('[name=account_type]:checked').val() == 'company';
-            var elements = [
-                'company',
-                'company_address1',
-                'company_zip_code',
-                'company_city',
-                'company_state',
-                'company_country',
-                'company_id',
-                'company_vat'
-            ];
-            if (show) {
-                for (var i = 0; i < elements.length; ++i) {
-                    var element = $('[name=' + elements[i] + ']');
-                    if (element.length) {
-                        if (element.closest('.row').find('label i').length) {
-                            element.attr('required', true);
-                        }
-                    }
-                }
-                $('[name=company]').closest('fieldset').show();
-            } else {
-                for (var i = 0; i < elements.length; ++i) {
-                    var element = $('[name=' + elements[i] + ']');
-                    if (element.length) {
-                        element.attr('required', false);
-                    }
-                }
-                $('[name=company]').closest('fieldset').hide();
-            }
-        };
-
-        $('[name=account_type]').change(accountTypeChange);
-        accountTypeChange();
-
+    // Fix for bootstrap bug. When you open 2 modals (first open second), there no scrollbar
+    $('body').on('hidden.bs.modal', function () {
+      if ($('.modal.show').length > 0) {
+        $('body').addClass('modal-open');
+      } else {
+        if (needReload) {
+          $('.invoicing-address').html("<?php _e('Please wait ...') ?>");
+          $('.delivery-address').html("<?php _e('Please wait ...') ?>");
+          window.location.reload();
+        }
+      }
     });
+
+    $("#addressModal").on("show.bs.modal", function (e) {
+      if ($(e.relatedTarget).length == 0) {
+        return;
+      }
+
+      var link = $(e.relatedTarget);
+      $(this).find(".modal-body .address-list").load(link.attr("href"));
+    });
+
+    $("#addressListModal").on("show.bs.modal", function (e) {
+      if ($(e.relatedTarget).length == 0) {
+        return;
+      }
+
+      var link = $(e.relatedTarget);
+      $(this).find(".modal-body .address-list").load(link.attr("href"));
+      $(this).find('.invoicing').addClass('hide');
+      $(this).find('.delivery').addClass('hide');
+    });
+
+    $('#promoCheckout').on('submit', function () {
+      var code = $('#promoCheckout input[name=code]').val();
+      if (code == null) {
+        return false;
+      }
+      $('#promoCheckout input[name=code]').val('');
+
+      $.ajax({
+        type: "POST",
+        url: "<?php echo Pi::url($this->url('', ['controller' => 'checkout', 'action' => 'promocode'])) ?>",
+        data: {code: code},
+        success: function (data) {
+          window.location.reload();
+          /* $('#promoCheckout').parent().find('.alert')
+              .removeClass('d-none')
+              .removeClass('alert-info')
+              .removeClass('alert-success')
+              .addClass('alert-' + data.msgPromoCode.type);
+
+          $('#promoCheckout').parent().find('.alert span').html(data.msgPromoCode.message);
+
+          var totalDiscount = 0;
+          $.each(data.cart.product, function (i, product) {
+                  console.log(product);
+                  $('.cart-product span[data-discount-for=' + product.product + ']').html(product.discount);
+                  $('.cart-product td[data-discount-price-for=' + product.product + ']').html('-' + product.discount_price_view);
+              }
+          );
+          $('.cart-product .data-total-price').html(data.price.total_price_view);
+          $('.cart-product .data-total-vat').html(data.price.vat_view);
+          $('.cart-product .data-total-price-ttc').html(data.price.total_price_ttc_view);
+          //$('[data-total-vat-for=445]').val() */
+        },
+        dataType: 'json'
+      });
+      return false;
+    });
+
+    $('.fortooltip').tooltip({container: 'body', html: true});
+    $('.fortooltip').click(
+      function (e) {
+        e.preventDefault();
+      }
+    );
+
+    $('form#order').submit(
+      function () {
+        if ($('.submit_order_simple').hasClass('disabled')) {
+          return false;
+        }
+
+        $('.submit_order_simple').addClass('disabled');
+        return true;
+      }
+    );
+
+    $('.tooltip-description').tooltip();
+    var accountTypeChange = function() {
+
+      var show = $('[name=account_type]:checked').val() == 'company';
+      var elements = [
+        'company',
+        'company_address1',
+        'company_zip_code',
+        'company_city',
+        'company_state',
+        'company_country',
+        'company_id',
+        'company_vat'
+      ];
+      if (show) {
+        for (var i = 0; i < elements.length; ++i) {
+          var element = $('[name=' + elements[i] + ']');
+          if (element.length) {
+            if (element.closest('.row').find('label i').length) {
+              element.attr('required', true);
+            }
+          }
+        }
+        $('[name=company]').closest('fieldset').show();
+      } else {
+        for (var i = 0; i < elements.length; ++i) {
+          var element = $('[name=' + elements[i] + ']');
+          if (element.length) {
+            element.attr('required', false);
+          }
+        }
+        $('[name=company]').closest('fieldset').hide();
+      }
+    };
+
+    $('[name=account_type]').change(accountTypeChange);
+    accountTypeChange();
+
+  });
 </script>

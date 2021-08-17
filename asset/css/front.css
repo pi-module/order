@@ -383,10 +383,10 @@ ul.progtrckr li.progtrckr-pending:before {
 }
 
 .address-single > div {
-    margin: 0px 0px 10px 0px;
+    /* margin: 0px 0px 10px 0px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    padding: 20px;
+    padding: 20px; */
     /* min-height: 180px; */
 }
 
