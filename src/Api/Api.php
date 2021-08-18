@@ -27,6 +27,8 @@ class Api extends AbstractApi
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+
+
         // Check custom price
         if ($config['price_custom']) {
             switch (Pi::config('number_currency')) {
@@ -42,6 +44,12 @@ class Api extends AbstractApi
                     if ($viewPriceArray[1] == 00) {
                         $viewPrice = $viewPriceArray[0] . " €";
                     }
+                    break;
+
+                case 'AUD':
+                    $viewPrice      = _currency($price);
+                    $viewPrice = str_replace('A$', 'AU$', $viewPrice);
+                    $viewPrice = str_replace('.00', '', $viewPrice);
                     break;
 
                 default:
