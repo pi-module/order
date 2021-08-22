@@ -160,13 +160,13 @@ $this->footScript()->appendScript($script);
                             <div class="clearfix">
                                 <div class="info">
                                     <div class="mb-3">
-                                        <span class="fas fa-file"></span> <strong><?php _e('Invoicing address'); ?></strong>
+                                        <span class="fas fa-file"></span> <strong><?php _e('Billing  Address'); ?></strong>
                                         <?php if (!empty($addresses)) { ?>
                                             <a class="modify-address" href="<?php echo Pi::url(
                                                 $this->url('', ['controller' => 'checkout', 'action' => 'address-list', 'type' => 'invoicing'])
                                             ) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal"
-                                               data-type="<?php _e('Invoicing address') ?>">
-                                                <?php _e('Modify') ?>
+                                               data-type="<?php _e('Billing  Address') ?>">
+                                                <i class="fas fa-pen"></i> <?php _e('Modify') ?>
                                             </a>
                                         <?php } ?>
                                     </div>
@@ -304,7 +304,7 @@ $this->footScript()->appendScript($script);
                                                     $this->url('', ['controller' => 'checkout', 'action' => 'address-list', 'type' => 'delivery'])
                                                 ) ?>" data-remote="false" data-toggle="modal" data-target="#addressListModal"
                                                    data-type="<?php _e('Delivery address') ?>">
-                                                    <?php _e('Modify') ?>
+                                                    <i class="fas fa-pen"></i> <?php _e('Modify') ?>
                                                 </a>
                                             <?php } ?>
                                         </div>
@@ -524,26 +524,32 @@ $this->footScript()->appendScript($script);
                             <tr class="footer">
                                 <td>
                                     <strong>
-                                        <?php _e('Total Price ext VAT'); ?>
+                                        <?php //_e('Total Price ext VAT'); ?>
+                                        <?php _e('Price'); ?>
                                     </strong>
                                 </td>
                                 <td class="text-right">
                                     <strong class="data-total-price">
-                                        <?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['product'] - $totalDiscount)); ?>
+                                        <?php echo Pi::api('api', 'order')->viewPrice(($price['product'] - $totalDiscount) / 1.1); ?>
                                     </strong>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <strong>
-                                        <?php _e('Total Vat'); ?>
+                                        <?php //_e('Total Vat'); ?>
+                                        <?php _e('GST'); ?>
                                         <?php if (isset($product['vat'])) { ?>
                                             (<?php echo $product['vat'] ?>%)
                                         <?php } ?>
                                     </strong>
                                 </td>
                                 <td class="text-right">
-                                    <strong class="data-total-vat"><?php echo Pi::api('api', 'order')->viewPrice($this->escape($price['vat'])); ?></strong>
+                                    <strong class="data-total-vat">
+                                        <?php echo Pi::api('api', 'order')->viewPrice(
+                                            ($price['product'] - $totalDiscount) - (($price['product'] - $totalDiscount) / 1.1)
+                                        ); ?>
+                                    </strong>
                                 </td>
                             </tr>
                             <?php if ($price['shipping'] > 0) { ?>
@@ -558,7 +564,7 @@ $this->footScript()->appendScript($script);
                                 <tr class="card-footer footer">
                                     <td>
                                         <strong>
-                                            <?php _e('Final Price incl. VAT'); ?>
+                                            <?php _e('Total Price'); ?>
                                         </strong>
                                     </td>
                                     <td class="text-right">
@@ -641,10 +647,10 @@ $this->footScript()->appendScript($script);
                            data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an delivery address'); ?></a>
                     </div>
                     <div class="col-6 text-center">
-                        <h3 class="invoicing hide  mb-3"><?php _e('Invoicing Address') ?></h3>
+                        <h3 class="invoicing hide  mb-3"><?php _e('Billing  Address') ?></h3>
                         <a class="btn btn-simple btn-sm col-lg-12 col-md-12 invoicing hide  mb-3"
                            href="<?php echo $this->url('', ['controller' => 'checkout', 'action' => 'address', 'id' => 'invoicing']); ?>" data-remote="false"
-                           data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an invoicing address'); ?></a>
+                           data-toggle="modal" data-dismiss="modal" data-target="#addressModal"><?php _e('Add an billing  Address'); ?></a>
                     </div>
                 </div>
                 <hr />
