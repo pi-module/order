@@ -247,8 +247,10 @@ class CheckoutController extends IndexController
                     $values                = $formAddress->getData();
                     $values['time_create'] = time();
                     $values['uid']         = Pi::user()->getId();
-                    $values['last_name']   = isset($values['last_name']) ? strtoupper($values['last_name']) : '';
-                    $values['city']        = isset($values['city']) ? strtoupper($values['city']) : '';
+                    //$values['last_name']   = isset($values['last_name']) ? strtoupper($values['last_name']) : '';
+                    //$values['city']        = isset($values['city']) ? strtoupper($values['city']) : '';
+                    $values['last_name']   = isset($values['last_name']) ? $values['last_name'] : '';
+                    $values['city']        = isset($values['city']) ? $values['city'] : '';
                     $birthday              = explode('/', $values['birthday']);
                     $values['birthday']    = strtotime($birthday[2] . '-' . $birthday[1] . '-' . $birthday[0]);
 
@@ -441,8 +443,8 @@ class CheckoutController extends IndexController
                 $birthday              = explode('/', $values['birthday']);
                 $values['birthday']    = strtotime($birthday[2] . '-' . $birthday[1] . '-' . $birthday[0]);
                 $values['uid']         = $uid;
-                $values['last_name']   = strtoupper($values['last_name']);
-                $values['city']        = strtoupper($values['city']);
+                //$values['last_name']   = strtoupper($values['last_name']);
+                //$values['city']        = strtoupper($values['city']);
 
                 if ($values['address_id'] == 0) {
                     $address                             = Pi::api('customerAddress', 'order')->addAddress($values);

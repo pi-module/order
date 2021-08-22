@@ -2,23 +2,22 @@
 
 [format]html[/format]
 
-[subject]%site_name% - Your invoice was paid[/subject]
+[subject]%site_name% - Payment Confirmation[/subject]
 
 [body]
 <div style="padding: 1px; direction: ltr;">
 	<h3 style="font-size: 1.1em;">Dear %first_name% %last_name%</h3>
-	<div style="padding: 3px 0; margin: 1px 0;">Thanks for your purchase !</div>
+	<div style="padding: 3px 0; margin: 1px 0;">Thank you for your purchase of the following services:</div>
 	<div style="padding: 3px 0; margin: 1px 0;">Here is the list of the bought items : %product_list%</div>
 	<div style="padding: 3px 0; margin: 1px 0;">
         <a href="%order_link%" title="Invoice details">%order_link%</a>
 	</div>
-	<div style="padding: 3px 0; margin: 1px 0;">Your <strong>%invoice_id%</strong> invoice paid successfully on %site_name% website. please click on this link above to see details</div>
-	<div style="padding: 3px 0; margin: 1px 0;">Dont reply to this email</div>
+	<div style="padding: 3px 0; margin: 1px 0;">Your <strong>%invoice_id%</strong> invoice was successfully paid on %site_name%.com. Order details can be found at</div>
+	<div style="padding: 3px 0; margin: 1px 0;">Please do not reply to this email</div>
 	<div style="margin-top: 10px">
         <a href="%site_url%" title="%site_name%">%site_name%</a>
     </div>
     <div>%site_mail_footer%</div>
     <div style="text-align:center; margin:10px 0;font-size:0.8em; color:#777"> %sellerinfo% </div>
-
 </div>
 [/body]

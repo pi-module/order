@@ -9,7 +9,7 @@
 	<h3 style="font-size: 1.1em;">Dear admin</h3>
 	<div style="padding: 3px 0; margin: 1px 0;">An invoice (%type_product%) was paid on your website, please login to see details</div>
 	<div style="padding: 3px 0; margin: 1px 0;">Here is the list of bought items  : %product_list%</div>
-	<div style="padding: 3px 0; margin: 1px 0;">Dont reply to this email</div>
+	<div style="padding: 3px 0; margin: 1px 0;">Please do not reply to this email</div>
 	<div style="margin-top: 10px">
         <a href="%site_url%" title="%site_name%">%site_name%</a>
     </div>

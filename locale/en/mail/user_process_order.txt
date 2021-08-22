@@ -11,12 +11,11 @@
 	<div style="padding: 3px 0; margin: 1px 0;">
         <a href="%order_link%" title="Order details">%order_link%</a>
 	</div>
-	<div style="padding: 3px 0; margin: 1px 0;">Dont reply to this email</div>
+	<div style="padding: 3px 0; margin: 1px 0;">Please do not reply to this email</div>
 	<div style="margin-top: 10px">
         <a href="%site_url%" title="%site_name%">%site_name%</a>
     </div>
     <div>%site_mail_footer%</div>
     <div style="text-align:center; margin:10px 0;font-size:0.8em; color:#777"> %sellerinfo% </div>
-
 </div>
 [/body]

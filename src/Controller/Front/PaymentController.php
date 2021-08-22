@@ -647,14 +647,15 @@ class PaymentController extends IndexController
             if ($gateway->getType() == AbstractGateway::TYPE_REST || $gateway->getType() == AbstractGateway::TYPE_STRIPE) {
                 Pi::api('processing', 'order')->removeProcessing();
 
-                $log            = [];
-                $log['gateway'] = $gateway->gatewayAdapter;
-                $log['value']   = '{}';
-                $log['message'] = 'cancel';
-                $log['invoice'] = $invoice['random_id'];
+                $log = [
+                    'gateway' => $gateway->gatewayAdapter,
+                    'value'   => '{}',
+                    'message' => 'cancel',
+                    'order'   => $processing['order'],
+                ];
                 Pi::api('log', 'order')->setLog($log);
 
-                $url     = ['', 'controller' => 'index', 'action' => 'index'];
+                $url     = ['module' => 'order', 'controller' => 'index', 'action' => 'index'];
                 $message = __('Payment canceled');
                 return $this->jump($url, $message);
             }

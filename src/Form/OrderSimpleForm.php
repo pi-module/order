@@ -241,7 +241,7 @@ class OrderSimpleForm extends BaseForm
         }
         // Save
         if ($this->config['order_payment'] == 'payment') {
-            $title = sprintf(__('Pay %s'), _currency(number_format($this->option['due_price'] * $this->option['composition'][0] / 100, 2, '.', '')));
+            $title = sprintf(__('Pay %s'), Pi::api('api', 'order')->viewPrice(number_format($this->option['due_price'] * $this->option['composition'][0] / 100, 2, '.', '')));
         } else {
             $title = __('Save order');
         }
