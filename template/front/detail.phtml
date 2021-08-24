@@ -220,7 +220,7 @@
                                         <p><strong><?php _e('Informations') ?></strong></p>
                                         <hr/>
                                         <p>
-                                            <strong><?php _e('Time order'); ?></strong> :
+                                            <strong><?php _e('Order time'); ?></strong> :
                                             <span><?php echo $this->escape($order['time_order_view']); ?> </span>
                                         </p>
                                         <?php
@@ -271,24 +271,29 @@
                                                 ?>
                                             <span class="badge badge-<?php echo $badge?>"><?php echo $label; ?></span>
                                         </p>
-                                        <p><strong><?php _e('Delivery status'); ?></strong> :
-                                            <?php if ($order['type_commodity'] == 'product') { ?>
-                                                <span
-                                                        id="update-delivery-<?php echo $this->escape($order['id']); ?>"
-                                                        class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-sm">
+
+                                        <?php if (in_array($order['type_commodity'], ['product'])) { ?>
+                                            <p>
+                                                <strong><?php _e('Delivery status'); ?></strong> :
+                                                <?php if ($order['type_commodity'] == 'product') { ?>
+                                                    <span
+                                                            id="update-delivery-<?php echo $this->escape($order['id']); ?>"
+                                                            class="update-delivery btn <?php echo $this->escape($order['deliveryClass']); ?> btn-sm">
 
                                                 </span>
-                                            <?php } else if ($order['type_commodity'] == 'booking') { ?>
-                                                <span class="badge badge-secondary"><?php _e('Its a booking'); ?></span>
-                                            <?php } else { ?>
-                                                <span class="badge badge-secondary"><?php _e('Its service'); ?></span>
-                                            <?php } ?>
-                                        </p>
-                                        <p"><strong><?php _e('Time delivery'); ?></strong> : <span
-                                                id="update-delivery-<?php echo $this->escape($order['id']); ?>-time"><?php echo $this->escape(
-                                                $order['time_delivery_view']
-                                            ); ?></span>
-                                        </p>
+                                                <?php } else if ($order['type_commodity'] == 'booking') { ?>
+                                                    <span class="badge badge-secondary"><?php _e('Its a booking'); ?></span>
+                                                <?php } else { ?>
+                                                    <span class="badge badge-secondary"><?php _e('Its service'); ?></span>
+                                                <?php } ?>
+                                            </p>
+                                            <p>
+                                                <strong><?php _e('Time delivery'); ?></strong> : <span
+                                                        id="update-delivery-<?php echo $this->escape($order['id']); ?>-time"><?php echo $this->escape(
+                                                        $order['time_delivery_view']
+                                                    ); ?></span>
+                                            </p>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -311,8 +316,10 @@
                                         <th><?php _e('Time end'); ?></th>
                                         <th><?php _e('Number'); ?></th>
                                         <th><?php _e('Price'); ?></th>
+                                        <?php if (in_array($order['type_commodity'], ['product'])) { ?>
                                         <th><?php _e('Shipping'); ?></th>
                                         <th><?php _e('Packing'); ?></th>
+                                        <?php } ?>
                                         <th><?php _e('Setup'); ?></th>
                                         <th><?php _e('Discount'); ?></th>
                                         <th><?php _e('Vat'); ?></th>
@@ -360,8 +367,10 @@
                                             <td><?php echo $product['time_end'] ? _date($product['time_end']) : ''; ?></td>
                                             <td><?php echo $product['number'] ?></td>
                                             <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['product_price'] - $product['extra']['unconsumedPrice'])); ?></td>
+                                            <?php if (in_array($order['type_commodity'], ['product'])) { ?>
                                             <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['shipping_price'])); ?></td>
                                             <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['packing_price'])); ?></td>
+                                            <?php } ?>
                                             <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['setup_price'])); ?></td>
                                             <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['discount_price'] + $product['extra']['unconsumedPrice'])); ?></td>
                                             <td><?php echo Pi::api('api', 'order')->viewPrice($this->escape($product['vat_price'])); ?></td>
