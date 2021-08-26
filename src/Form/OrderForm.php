@@ -250,7 +250,7 @@ class OrderForm extends BaseForm
                 [
                     'name'       => 'zip_code',
                     'options'    => [
-                        'label' => __('Zip code'),
+                        'label' => __('Post code'),
                     ],
                     'attributes' => [
                         'type'        => 'text',
@@ -266,7 +266,7 @@ class OrderForm extends BaseForm
                 [
                     'name'       => 'city',
                     'options'    => [
-                        'label' => __('City'),
+                        'label' => __('Suburb'),
                     ],
                     'attributes' => [
                         'type'        => 'text',
@@ -456,7 +456,7 @@ class OrderForm extends BaseForm
         // order_term
         if ($this->config['order_term'] && !empty($this->config['order_termurl'])) {
             $term = sprintf('<a href="%s" target="_blank">%s</a>', $this->config['order_termurl'], __('Terms & Conditions'));
-            $term = sprintf(__('I accept %s'), $term);
+            $term = sprintf(__('I agree to the %s'), $term);
             $this->add(
                 [
                     'name'       => 'order_term',

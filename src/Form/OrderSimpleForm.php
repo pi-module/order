@@ -224,7 +224,7 @@ class OrderSimpleForm extends BaseForm
         // order_term
         if ($this->config['order_term'] && !empty($this->config['order_termurl'])) {
             $term = sprintf('<a href="%s" target="_blank">%s</a>', $this->config['order_termurl'], __('Terms & Conditions'));
-            $term = sprintf(__('Accept the %s'), $term);
+            $term = sprintf(__('I agree to the %s'), $term);
             $this->add(
                 [
                     'name'       => 'order_term',

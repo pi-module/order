@@ -489,7 +489,7 @@ class OrderUpdateForm extends BaseForm
                 [
                     'name'       => 'delivery_city',
                     'options'    => [
-                        'label' => __('City'),
+                        'label' => __('Suburb'),
                     ],
                     'attributes' => [
                         'type'        => 'text',
@@ -504,7 +504,7 @@ class OrderUpdateForm extends BaseForm
                 [
                     'name'       => 'invoicing_city',
                     'options'    => [
-                        'label' => __('City'),
+                        'label' => __('Suburb'),
                     ],
                     'attributes' => [
                         'type'        => 'text',
@@ -522,7 +522,7 @@ class OrderUpdateForm extends BaseForm
                 [
                     'name'       => 'delivery_zip_code',
                     'options'    => [
-                        'label' => __('Zip code'),
+                        'label' => __('Post code'),
                     ],
                     'attributes' => [
                         'type'        => 'text',
@@ -536,7 +536,7 @@ class OrderUpdateForm extends BaseForm
                 [
                     'name'       => 'invoicing_zip_code',
                     'options'    => [
-                        'label' => __('Zip code'),
+                        'label' => __('Post code'),
                     ],
                     'attributes' => [
                         'type'        => 'text',

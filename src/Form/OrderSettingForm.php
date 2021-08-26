@@ -178,7 +178,7 @@ class OrderSettingForm extends BaseForm
             [
                 'name'       => 'city',
                 'options'    => [
-                    'label' => __('City'),
+                    'label' => __('Suburb'),
                 ],
                 'attributes' => [
                     'type'        => 'text',
@@ -243,7 +243,7 @@ class OrderSettingForm extends BaseForm
             [
                 'name'       => 'zip_code',
                 'options'    => [
-                    'label' => __('Zip code'),
+                    'label' => __('Post code'),
                 ],
                 'attributes' => [
                     'type'        => 'text',

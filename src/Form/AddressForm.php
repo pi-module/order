@@ -72,7 +72,8 @@ class AddressForm extends BaseForm
         // Set individual group
         if (in_array($this->config['address_type'], ['both', 'individual'])) {
             $groups['individual'] = [
-                'label'    => __('Legal representative (Personal Information)'),
+                // 'label'    => __('Legal representative (Personal Information)'),
+                'label'    => __('Personal Information'),
                 'class'    => 'address-individual',
                 'elements' => [
                     'first_name',
@@ -219,7 +220,7 @@ class AddressForm extends BaseForm
                     [
                         'name'       => 'company_zip_code',
                         'options'    => [
-                            'label' => __('Zip code'),
+                            'label' => __('Post code'),
                         ],
                         'attributes' => [
                             'type'         => 'text',
@@ -244,7 +245,7 @@ class AddressForm extends BaseForm
                     [
                         'name'       => 'company_city',
                         'options'    => [
-                            'label' => __('City'),
+                            'label' => __('Suburb'),
                         ],
                         'attributes' => [
                             'type'         => 'text',
@@ -552,7 +553,7 @@ class AddressForm extends BaseForm
                         'attributes' => [
                             'type'         => 'tel',
                             'pattern'      => Pi::api('api', 'order')->patternPhone(),
-                            'description'  => Pi::service('i18n')->getLocale() == 'fa' ? '' : __('International number expected (+33123456789)'),
+                            'description'  => Pi::service('i18n')->getLocale() == 'fa' ? '' : __('International number expected (+61123456789)'),
                             'autocomplete' => 'user-password',
 
                         ],
@@ -576,9 +577,9 @@ class AddressForm extends BaseForm
                         ],
                         'attributes' => [
                             'type'         => 'tel',
-                            'title'        => __("example : +33123456789"),
+                            'title'        => __("example : +61123456789"),
                             'pattern'      => Pi::api('api', 'order')->patternPhone(),
-                            'description'  => Pi::service('i18n')->getLocale() == 'fa' ? '' : __('International number expected (+33123456789)'),
+                            'description'  => Pi::service('i18n')->getLocale() == 'fa' ? '' : __('International number expected (+61123456789)'),
                             'required'     => true,
                             'autocomplete' => 'user-password',
 
@@ -649,7 +650,7 @@ class AddressForm extends BaseForm
                     [
                         'name'       => 'zip_code',
                         'options'    => [
-                            'label' => __('Zip code'),
+                            'label' => __('Post code'),
                         ],
                         'attributes' => [
                             'type'         => 'text',
@@ -674,7 +675,7 @@ class AddressForm extends BaseForm
                     [
                         'name'       => 'city',
                         'options'    => [
-                            'label' => __('City'),
+                            'label' => __('Suburb'),
                         ],
                         'attributes' => [
                             'type'         => 'text',
