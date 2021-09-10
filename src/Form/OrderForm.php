@@ -250,7 +250,7 @@ class OrderForm extends BaseForm
                 [
                     'name'       => 'zip_code',
                     'options'    => [
-                        'label' => __('Post code'),
+                        'label' => __('Post Code'),
                     ],
                     'attributes' => [
                         'type'        => 'text',

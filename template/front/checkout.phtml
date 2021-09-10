@@ -134,20 +134,20 @@ $this->footScript()->appendScript($script);
     </div>
     <div class="clearfix row">
         <div class="col-lg-8 col-md-8">
-            <?php if (isset($invalidAddress) && $invalidAddress) { ?>
+            <?php /* if (isset($invalidAddress) && $invalidAddress) { ?>
                 <div class="alert alert-dismissable alert-danger text-center">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                     <div class="clearfix"><?php _e('Your address has to be completed. Please, edit it.'); ?></div>
                 </div>
             <?php } else { ?>
                 <div class="clearfix alert alert-<?php echo empty($addresses) ? 'info' : 'success' ?>" role="alert">
-                    <?php /* if (!empty($addresses)) { ?>
+                    <?php if (!empty($addresses)) { ?>
                         <p><?php _e('Here are the addresses you have selected for billing and delivery. You can manage them (add, modify, delete) to select others.') ?></p>
                     <?php } else { ?>
                         <p><?php _e('You don\'t have set an address yet. Please create your address we will use for your order. You will be able then to manage several addresses') ?></p>
-                    <?php } */ ?>
+                    <?php } ?>
                 </div>
-            <?php } ?>
+            <?php } */ ?>
             <div class="clearfix row">
                 <div class="col-lg-6 col-md-6">
                     <?php if (isset($formLogin) && !empty($formLogin)) { ?>

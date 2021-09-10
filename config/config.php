@@ -353,7 +353,7 @@ return [
         ],
         'order_zip'                       => [
             'category'    => 'checkout',
-            'title'       => _a('Show Post code'),
+            'title'       => _a('Show Post Code'),
             'description' => '',
             'edit'        => 'checkbox',
             'filter'      => 'number_int',

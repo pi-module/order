@@ -170,7 +170,7 @@ class AddressForm extends BaseForm
                     [
                         'name'       => 'company_address1',
                         'options'    => [
-                            'label' => __('Address'),
+                            'label' => __('Address line 1'),
                         ],
                         'attributes' => [
                             'type'         => 'text',
@@ -195,7 +195,7 @@ class AddressForm extends BaseForm
                     [
                         'name'       => 'company_address2',
                         'options'    => [
-                            'label' => __('Address addition'),
+                            'label' => __('Address line 2'),
                         ],
                         'attributes' => [
                             'type'         => 'text',
@@ -220,7 +220,7 @@ class AddressForm extends BaseForm
                     [
                         'name'       => 'company_zip_code',
                         'options'    => [
-                            'label' => __('Post code'),
+                            'label' => __('Post Code'),
                         ],
                         'attributes' => [
                             'type'         => 'text',
@@ -600,7 +600,7 @@ class AddressForm extends BaseForm
                     [
                         'name'       => 'address1',
                         'options'    => [
-                            'label' => __('Address'),
+                            'label' => __('Address line 1'),
                         ],
                         'attributes' => [
                             'type'         => 'text',
@@ -625,7 +625,7 @@ class AddressForm extends BaseForm
                     [
                         'name'       => 'address2',
                         'options'    => [
-                            'label' => __('Address addition'),
+                            'label' => __('Address line 2'),
                         ],
                         'attributes' => [
                             'type'         => 'text',
@@ -650,7 +650,7 @@ class AddressForm extends BaseForm
                     [
                         'name'       => 'zip_code',
                         'options'    => [
-                            'label' => __('Post code'),
+                            'label' => __('Post Code'),
                         ],
                         'attributes' => [
                             'type'         => 'text',
