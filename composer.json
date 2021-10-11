@@ -1,0 +1,16 @@
+{
+    "name": "pi-module/order",
+    "description": "Manage order process and payment for Pi Engine",
+    "type": "project",
+    "license": "New BSD",
+    "authors": [
+        {
+            "name": "Hossein Azizabadi Farahani",
+            "email": "hossein@azizabadi.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.4 || ~8.0.0"
+    }
+}

@@ -1010,24 +1010,6 @@ class OrderController extends ActionController
         $this->jump(['controller' => 'order', 'action' => 'view', 'id' => $detail->order], $message);
     }
 
-    private function updateOrderType($order)
-    {
-        $order         = Pi::model('order', 'order')->find($order);
-        $products      = Pi::api('order', 'order')->listProduct($order->id);
-        $typeCommodity = 'service';
-        foreach ($products as $product) {
-            if ($product['module'] == 'shop') {
-                $typeCommodity = 'product';
-                break;
-            }
-        }
-        if ($order->type_commodity != $typeCommodity) {
-            $order->type_commodity = $typeCommodity;
-            $order->save();
-        }
-    }
-
-
     public function listUserAction()
     {
         // Get id
@@ -1065,6 +1047,45 @@ class OrderController extends ActionController
         $ret = Pi::api('order', 'order')->pdf($id, false);
         if (!$ret['status']) {
             $this->jump(['', 'controller' => 'index', 'action' => 'index'], $ret['message']);
+        }
+    }
+
+    public function payAction()
+    {
+        $id = $this->params('id');
+
+        // Get order
+        $order = Pi::api('order', 'order')->getOrder($id);
+
+        // Get invoice
+        $invoice = current(Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']));
+
+        // Paid invoice
+        Pi::api('installment', 'order')->updateInstallment($invoice['id']);
+
+        // Update order
+        Pi::api('order', 'order')->updateOrder($order['id'], $invoice['id']);
+
+        d($url);
+        d($invoice);
+        d($order);
+        die;
+    }
+
+    private function updateOrderType($order)
+    {
+        $order         = Pi::model('order', 'order')->find($order);
+        $products      = Pi::api('order', 'order')->listProduct($order->id);
+        $typeCommodity = 'service';
+        foreach ($products as $product) {
+            if ($product['module'] == 'shop') {
+                $typeCommodity = 'product';
+                break;
+            }
+        }
+        if ($order->type_commodity != $typeCommodity) {
+            $order->type_commodity = $typeCommodity;
+            $order->save();
         }
     }
 }

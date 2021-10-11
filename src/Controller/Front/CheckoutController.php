@@ -80,16 +80,18 @@ class CheckoutController extends IndexController
         // Set products
         if (isset($cart['product']) && count($cart['product'])) {
             foreach ($cart['product'] as $key => $product) {
-                $cart['product'][$key]['details']            = Pi::api('order', $cart['module_name'])->getProductDetails(
+                $cart['product'][$key]['details'] = Pi::api('order', $cart['module_name'])->getProductDetails(
                     $product['product'],
                     json_decode($product['extra'], true)
                 );
-                $cart['product'][$key]['product_price']      = str_replace(',', '.', $product['product_price']);
-                $cart['product'][$key]['discount_price']     = str_replace(',', '.', $product['discount_price']);
-                $cart['product'][$key]['shipping_price']     = str_replace(',', '.', $product['shipping_price']);
-                $cart['product'][$key]['packing_price']      = str_replace(',', '.', $product['packing_price']);
-                $cart['product'][$key]['setup_price']        = str_replace(',', '.', $product['setup_price']);
-                $cart['product'][$key]['vat_price']          = str_replace(',', '.', $product['vat_price']);
+
+                $cart['product'][$key]['product_price']  = isset($product['product_price']) ? str_replace(',', '.', $product['product_price']) : 0;
+                $cart['product'][$key]['discount_price'] = isset($product['discount_price']) ? str_replace(',', '.', $product['discount_price']) : 0;
+                $cart['product'][$key]['shipping_price'] = isset($product['shipping_price']) ? str_replace(',', '.', $product['shipping_price']) : 0;
+                $cart['product'][$key]['packing_price']  = isset($product['packing_price']) ? str_replace(',', '.', $product['packing_price']) : 0;
+                $cart['product'][$key]['setup_price']    = isset($product['setup_price']) ? str_replace(',', '.', $product['setup_price']) : 0;
+                $cart['product'][$key]['vat_price']      = isset($product['vat_price']) ? str_replace(',', '.', $product['vat_price']) : 0;
+
                 $cart['product'][$key]['product_price_view'] = Pi::api('api', 'order')->viewPrice($product['product_price']);
             }
         }
@@ -249,10 +251,10 @@ class CheckoutController extends IndexController
                     $values['uid']         = Pi::user()->getId();
                     //$values['last_name']   = isset($values['last_name']) ? strtoupper($values['last_name']) : '';
                     //$values['city']        = isset($values['city']) ? strtoupper($values['city']) : '';
-                    $values['last_name']   = isset($values['last_name']) ? $values['last_name'] : '';
-                    $values['city']        = isset($values['city']) ? $values['city'] : '';
-                    $birthday              = explode('/', $values['birthday']);
-                    $values['birthday']    = strtotime($birthday[2] . '-' . $birthday[1] . '-' . $birthday[0]);
+                    $values['last_name'] = isset($values['last_name']) ? $values['last_name'] : '';
+                    $values['city']      = isset($values['city']) ? $values['city'] : '';
+                    $birthday            = explode('/', $values['birthday']);
+                    $values['birthday']  = strtotime($birthday[2] . '-' . $birthday[1] . '-' . $birthday[0]);
 
                     if ($values['address_id'] == 0) {
                         Pi::api('customerAddress', 'order')->addAddress($values);
@@ -269,7 +271,7 @@ class CheckoutController extends IndexController
                 if (isset($data['submit_order_simple'])) {
                     $formOrderSimple->setData($data);
                     if ($formOrderSimple->isValid()) {
-                        $uid  = Pi::user()->getId();
+                        $uid = Pi::user()->getId();
                         //$user = Pi::api('user', 'order')->getUserInformation();
 
                         // Set values

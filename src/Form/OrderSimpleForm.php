@@ -168,7 +168,7 @@ class OrderSimpleForm extends BaseForm
                     'type'       => 'radio',
                     'options'    => [
                         'label'         => __('Choose your payment method'),
-                        'value_options' => [],
+                        'value_options' => $gatewayList,
                     ],
                     'attributes' => [
                         'id'       => 'select-payment',
