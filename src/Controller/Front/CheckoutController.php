@@ -423,7 +423,8 @@ class CheckoutController extends IndexController
                         'module'     => 'order',
                         'controller' => 'checkout',
                         'action'     => 'address',
-                        'id'         => $id]
+                        'id'         => $id,
+                    ]
                 )
             )
         );
@@ -1007,14 +1008,25 @@ class CheckoutController extends IndexController
         $_SESSION['order']['gateway'] = $values['default_gateway'];
 
         // Get gateway
-        $gateway = Pi::api('gateway', 'order')->getGateway($values['default_gateway']);
-        if ($gateway->getType() == AbstractGateway::TYPE_REST) {
-            $_SESSION['order']['redirect'] = $cart['redirect'];
-        }
+        if ($values['default_gateway'] != 'Offline') {
+            $gateway = Pi::api('gateway', 'order')->getGateway($values['default_gateway']);
+            if ($gateway->getType() == AbstractGateway::TYPE_REST) {
+                $_SESSION['order']['redirect'] = $cart['redirect'];
+            }
 
-        // Get gateway
-        $gateway        = Pi::api('gateway', 'order')->getGatewayInfo($values['default_gateway']);
-        $gatewayOptions = json_decode($gateway['option'], true);
+            // Get gateway
+            $gateway        = Pi::api('gateway', 'order')->getGatewayInfo($values['default_gateway']);
+            $gatewayOptions = json_decode($gateway['option'], true);
+        } else {
+            $gateway        = [
+                'name' => __('Offline'),
+                'path' => 'Offline',
+            ];
+            $gatewayOptions = [
+                'onemail' => false,
+            ];
+            $config['order_payment'] = 'invoice';
+        }
 
         // Save order
         if (isset($_SESSION['order']['id'])) {
