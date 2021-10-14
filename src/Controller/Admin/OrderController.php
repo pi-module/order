@@ -1066,10 +1066,9 @@ class OrderController extends ActionController
         // Update order
         Pi::api('order', 'order')->updateOrder($order['id'], $invoice['id']);
 
-        d($url);
-        d($invoice);
-        d($order);
-        die;
+        // Jump
+        $message = __('Order paid successfully.');
+        $this->jump(['controller' => 'order', 'action' => 'view', 'id' => $order['id']], $message);
     }
 
     private function updateOrderType($order)

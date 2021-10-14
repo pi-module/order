@@ -28,10 +28,10 @@ $this->backbone();
                             <a class="btn btn-danger" title="<?php _e('Delete'); ?>"
                                href="<?php echo $this->url(
                                    '', [
-                                   'controller' => 'order',
-                                   'action'     => 'delete',
-                                   'id'         => $order['id'],
-                               ]
+                                       'controller' => 'order',
+                                       'action'     => 'delete',
+                                       'id'         => $order['id'],
+                                   ]
                                ); ?>"><i class="fas fa-times"></i> <?php _e('Delete'); ?>
                             </a>
                         </li>
@@ -41,10 +41,10 @@ $this->backbone();
                         <a class="btn btn-success" title="<?php _e('Edit'); ?>"
                            href="<?php echo $this->url(
                                '', [
-                               'controller' => 'order',
-                               'action'     => 'edit',
-                               'id'         => $order['id'],
-                           ]
+                                   'controller' => 'order',
+                                   'action'     => 'edit',
+                                   'id'         => $order['id'],
+                               ]
                            ); ?>"><i class="fas fa-edit"></i> <?php _e('Edit'); ?>
                         </a>
                     </li>
@@ -55,7 +55,8 @@ $this->backbone();
         <?php if ($offline) { ?>
             <div class="alert alert-danger">
                 <ul class="list-inline">
-                    <li class="list-inline-item order-main-icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></li>
+                    <li class="list-inline-item order-main-icon"><i class="fas fa-exclamation-triangle"
+                                                                    aria-hidden="true"></i></li>
                     <li class="list-inline-item"><?php _e('This order have offline payment'); ?></li>
                 </ul>
             </div>
@@ -66,11 +67,11 @@ $this->backbone();
                 <li class="list-inline-item order-main-icon">
                     <a class="" title="<?php _e('User information'); ?>" href="<?php echo $this->url(
                         'admin', [
-                        'module'     => 'user',
-                        'controller' => 'edit',
-                        'action'     => 'index',
-                        'uid'        => $order['uid'],
-                    ]
+                            'module'     => 'user',
+                            'controller' => 'edit',
+                            'action'     => 'index',
+                            'uid'        => $order['uid'],
+                        ]
                     ); ?>" target="_blank"><i class="fas fa-user" aria-hidden="true"></i></a></li>
 
                 <li class="list-inline-item"><strong><?php _e('ID'); ?></strong>
@@ -80,7 +81,7 @@ $this->backbone();
                 <?php if ($addressInvoicing['account_type'] == 'company') { ?>
                     <?php if (!empty($addressInvoicing['company'])) { ?>
                         <li class="list-inline-item"><strong><?php _e('Name'); ?></strong> :
-                            <span><?php echo $this->escape($addressInvoicing['company']) ; ?></span>
+                            <span><?php echo $this->escape($addressInvoicing['company']); ?></span>
                         </li>
                         <?php echo $this->escape($order['user']['name']); ?></li>
                     <?php } ?>
@@ -116,17 +117,30 @@ $this->backbone();
         </div>
         <?php if (!empty($order['invoices'])) { ?>
             <?php if ($order['paidInstallments'] == $order['totalInstallments']) {
-                $classAlert = 'alert-success';
+                $adminCanPay = false;
+                $classAlert  = 'alert-success';
             } elseif ($order['unPaidInstallments'] == $order['totalInstallments']) {
-                $classAlert = 'alert-danger';
+                $adminCanPay = true;
+                $classAlert  = 'alert-danger';
             } else {
-                $classAlert = 'alert-warning';
+                $adminCanPay = false;
+                $classAlert  = 'alert-warning';
             } ?>
             <div class="alert <?php echo $classAlert; ?>">
                 <ul class="list-inline clearfix">
-                    <li class="list-inline-item order-main-icon"><i class="fas fa-calculator" aria-hidden="true"></i></li>
+                    <li class="list-inline-item order-main-icon"><i class="fas fa-calculator" aria-hidden="true"></i>
+                    </li>
                     <li class="list-inline-item"><strong><?php _e('Pay installments status'); ?></strong> :</li>
                     <li class="list-inline-item"><?php echo $this->escape($order['statusInstallments']); ?></li>
+                    <?php if ($adminCanPay) { ?>
+                        <li class="list-inline-item text-right">
+                            <a class="btn btn-danger btn-sm"
+                               href="<?php echo $this->url('', ['action' => 'pay', 'id' => $order['id']]); ?>"
+                               onclick="return confirm('Are you sure you want to make this order as paid?')">
+                                <?php _e('Make as paid') ?>
+                            </a>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
         <?php } ?>
@@ -145,10 +159,13 @@ $this->backbone();
         <?php if ($config['credit_active']) { ?>
             <div class="alert alert-info">
                 <ul class="list-inline clearfix">
-                    <li class="list-inline-item order-main-icon"><i class="fas fa-money-bill-alt" aria-hidden="true"></i></li>
+                    <li class="list-inline-item order-main-icon"><i class="fas fa-money-bill-alt"
+                                                                    aria-hidden="true"></i></li>
                     <li class="list-inline-item"><strong><?php _e('Credit'); ?></strong> :</li>
                     <li class="list-inline-item"><?php echo $this->escape($order['credit']['amount_view']); ?></li>
-                    <li class="list-inline-item">( <?php echo $this->escape($order['credit']['time_update_view']); ?> )</li>
+                    <li class="list-inline-item">( <?php echo $this->escape($order['credit']['time_update_view']); ?>
+                        )
+                    </li>
                     <li class="list-inline-item float-right">
                         <a class="btn btn-info btn-sm"
                            href="<?php echo $this->url('', ['controller' => 'credit', 'action' => 'update', 'uid' => $order['uid']]); ?>"
@@ -181,7 +198,7 @@ $this->backbone();
 
                                 <?php if ($addressInvoicing['account_type'] === 'company') { ?>
                                     <p>
-                                        <?php if (!empty($addressInvoicing['company']) ) { ?>
+                                        <?php if (!empty($addressInvoicing['company'])) { ?>
                                             <?php echo $this->escape($addressInvoicing['company']); ?><br/>
                                         <?php } ?>
                                     </p>
@@ -215,20 +232,24 @@ $this->backbone();
                                     </p>
                                     <p>
                                         <?php if (!empty($addressInvoicing['email'])) { ?>
-                                            <?php _e('Email'); ?> : <?php echo $this->escape($addressInvoicing['email']); ?><br/>
+                                            <?php _e('Email'); ?> : <?php echo $this->escape($addressInvoicing['email']); ?>
+                                            <br/>
                                         <?php } ?>
                                         <?php if (!empty($addressInvoicing['phone'])) { ?>
-                                            <?php _e('Phone'); ?> : <?php echo $this->escape($addressInvoicing['phone']); ?><br/>
+                                            <?php _e('Phone'); ?> : <?php echo $this->escape($addressInvoicing['phone']); ?>
+                                            <br/>
                                         <?php } ?>
                                         <?php if (!empty($addressInvoicing['mobile'])) { ?>
-                                            <?php _e('Mobile'); ?> : <?php echo $this->escape($addressInvoicing['mobile']); ?><br/>
+                                            <?php _e('Mobile'); ?> : <?php echo $this->escape($addressInvoicing['mobile']); ?>
+                                            <br/>
                                         <?php } ?>
                                     </p>
 
                                 <?php } else { ?>
                                     <p>
                                         <?php if (!empty($addressInvoicing['first_name']) && !empty($addressInvoicing['last_name'])) { ?>
-                                            <?php echo $this->escape($addressInvoicing['first_name']) . ' ' . $this->escape($addressInvoicing['last_name']); ?><br/>
+                                            <?php echo $this->escape($addressInvoicing['first_name']) . ' ' . $this->escape($addressInvoicing['last_name']); ?>
+                                            <br/>
                                         <?php } ?>
                                         <?php if (!empty($addressInvoicing['id_number'])) { ?>
                                             <?php echo $this->escape($addressInvoicing['id_number']); ?><br/>
@@ -256,13 +277,16 @@ $this->backbone();
                                     </p>
                                     <p>
                                         <?php if (!empty($addressInvoicing['email'])) { ?>
-                                            <?php _e('Email'); ?> : <?php echo $this->escape($addressInvoicing['email']); ?><br/>
+                                            <?php _e('Email'); ?> : <?php echo $this->escape($addressInvoicing['email']); ?>
+                                            <br/>
                                         <?php } ?>
                                         <?php if (!empty($addressInvoicing['phone'])) { ?>
-                                            <?php _e('Phone'); ?> : <?php echo $this->escape($addressInvoicing['phone']); ?><br/>
+                                            <?php _e('Phone'); ?> : <?php echo $this->escape($addressInvoicing['phone']); ?>
+                                            <br/>
                                         <?php } ?>
                                         <?php if (!empty($addressInvoicing['mobile'])) { ?>
-                                            <?php _e('Mobile'); ?> : <?php echo $this->escape($addressInvoicing['mobile']); ?><br/>
+                                            <?php _e('Mobile'); ?> : <?php echo $this->escape($addressInvoicing['mobile']); ?>
+                                            <br/>
                                         <?php } ?>
                                     </p>
                                 <?php } ?>
@@ -277,7 +301,7 @@ $this->backbone();
                                 <hr/>
                                 <?php if ($addressDelivery['account_type'] === 'company') { ?>
                                     <p>
-                                        <?php if (!empty($addressDelivery['company']) ) { ?>
+                                        <?php if (!empty($addressDelivery['company'])) { ?>
                                             <?php echo $this->escape($addressDelivery['company']); ?><br/>
                                         <?php } ?>
                                     </p>
@@ -311,19 +335,23 @@ $this->backbone();
                                     </p>
                                     <p>
                                         <?php if (!empty($addressDelivery['email'])) { ?>
-                                            <?php _e('Email'); ?> : <?php echo $this->escape($addressDelivery['email']); ?><br/>
+                                            <?php _e('Email'); ?> : <?php echo $this->escape($addressDelivery['email']); ?>
+                                            <br/>
                                         <?php } ?>
                                         <?php if (!empty($addressDelivery['phone'])) { ?>
-                                            <?php _e('Phone'); ?> : <?php echo $this->escape($addressDelivery['phone']); ?><br/>
+                                            <?php _e('Phone'); ?> : <?php echo $this->escape($addressDelivery['phone']); ?>
+                                            <br/>
                                         <?php } ?>
                                         <?php if (!empty($addressDelivery['mobile'])) { ?>
-                                            <?php _e('Mobile'); ?> : <?php echo $this->escape($addressDelivery['mobile']); ?><br/>
+                                            <?php _e('Mobile'); ?> : <?php echo $this->escape($addressDelivery['mobile']); ?>
+                                            <br/>
                                         <?php } ?>
                                     </p>
                                 <?php } else { ?>
                                     <p>
                                         <?php if (!empty($addressDelivery['first_name']) && !empty($addressDelivery['last_name'])) { ?>
-                                            <?php echo $this->escape($addressDelivery['first_name']) . ' ' . $this->escape($addressDelivery['last_name']); ?><br/>
+                                            <?php echo $this->escape($addressDelivery['first_name']) . ' ' . $this->escape($addressDelivery['last_name']); ?>
+                                            <br/>
                                         <?php } ?>
                                         <?php if (!empty($addressDelivery['id_number'])) { ?>
                                             <?php echo $this->escape($addressDelivery['id_number']); ?><br/>
@@ -351,13 +379,16 @@ $this->backbone();
                                     </p>
                                     <p>
                                         <?php if (!empty($addressDelivery['email'])) { ?>
-                                            <?php _e('Email'); ?> : <?php echo $this->escape($addressDelivery['email']); ?><br/>
+                                            <?php _e('Email'); ?> : <?php echo $this->escape($addressDelivery['email']); ?>
+                                            <br/>
                                         <?php } ?>
                                         <?php if (!empty($addressDelivery['phone'])) { ?>
-                                            <?php _e('Phone'); ?> : <?php echo $this->escape($addressDelivery['phone']); ?><br/>
+                                            <?php _e('Phone'); ?> : <?php echo $this->escape($addressDelivery['phone']); ?>
+                                            <br/>
                                         <?php } ?>
                                         <?php if (!empty($addressDelivery['mobile'])) { ?>
-                                            <?php _e('Mobile'); ?> : <?php echo $this->escape($addressDelivery['mobile']); ?><br/>
+                                            <?php _e('Mobile'); ?> : <?php echo $this->escape($addressDelivery['mobile']); ?>
+                                            <br/>
                                         <?php } ?>
                                     </p>
                                 <?php } ?>
@@ -402,32 +433,32 @@ $this->backbone();
 
 
                                     <?php
-                                        $countPaid = 0;
-                                        $countUnpaid = 0;
+                                    $countPaid   = 0;
+                                    $countUnpaid = 0;
 
-                                        foreach ($order['invoices'] as $invoice) {
-                                            foreach ($invoice['installments'] as $installment) {
-                                                if ($installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
-                                                    $countUnpaid++;
-                                                } else {
-                                                    $countPaid++;
-                                                }
+                                    foreach ($order['invoices'] as $invoice) {
+                                        foreach ($invoice['installments'] as $installment) {
+                                            if ($installment['status_payment'] == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_UNPAID) {
+                                                $countUnpaid++;
+                                            } else {
+                                                $countPaid++;
                                             }
                                         }
+                                    }
 
-                                        if ($countPaid == 0) {
-                                            $label = __('No');
-                                            $badge = "danger";
-                                        } else if ($countUnpaid == 0) {
-                                            $label = __('Yes');
-                                            $badge = "success";
-                                        } else {
-                                            $label = __('Partially');
-                                            $badge = "warning";
+                                    if ($countPaid == 0) {
+                                        $label = __('No');
+                                        $badge = "danger";
+                                    } else if ($countUnpaid == 0) {
+                                        $label = __('Yes');
+                                        $badge = "success";
+                                    } else {
+                                        $label = __('Partially');
+                                        $badge = "warning";
                                     }
                                     ?>
                                     <span id="update-canPay-<?php echo $this->escape($order['id']); ?>"
-                                        class="update-canPay btn badge badge-<?php echo $badge?> btn-sm"><?php echo $label ?></span>
+                                          class="update-canPay btn badge badge-<?php echo $badge ?> btn-sm"><?php echo $label ?></span>
 
                                 </p>
                                 <p><strong><?php _e('Delivery status'); ?></strong> :
@@ -453,7 +484,8 @@ $this->backbone();
                                         ); ?></span>
                                 </p>
                                 <p>
-                                    <strong><?php _e('Default gateway'); ?></strong> : <?php echo $order['default_gateway'] ?>
+                                    <strong><?php _e('Default gateway'); ?></strong>
+                                    : <?php echo $order['default_gateway'] ?>
                                 </p>
                             </div>
                         </div>
@@ -496,13 +528,13 @@ $this->backbone();
 
                                 foreach ($order['products'] as $product) {
                                     $product['extra']['unconsumedPrice'] = isset($product['extra']['unconsumedPrice']) ? $product['extra']['unconsumedPrice'] : 0;
-                                    $totalProductPrice  += $product['product_price'] - $product['extra']['unconsumedPrice'];
-                                    $totalShippingPrice += $product['shipping_price'];
-                                    $totalPackingPrice  += $product['packing_price'];
-                                    $totalSetupPrice    += $product['setup_price'];
-                                    $totalDiscountPrice += $product['discount_price'] + $product['extra']['unconsumedPrice'];
-                                    $totalVatPrice      += $product['vat_price'];
-                                    $totalPrice         += $product['total_price'] - $product['extra']['unconsumedPrice'];
+                                    $totalProductPrice                   += $product['product_price'] - $product['extra']['unconsumedPrice'];
+                                    $totalShippingPrice                  += $product['shipping_price'];
+                                    $totalPackingPrice                   += $product['packing_price'];
+                                    $totalSetupPrice                     += $product['setup_price'];
+                                    $totalDiscountPrice                  += $product['discount_price'] + $product['extra']['unconsumedPrice'];
+                                    $totalVatPrice                       += $product['vat_price'];
+                                    $totalPrice                          += $product['total_price'] - $product['extra']['unconsumedPrice'];
                                     ?>
                                     <tr>
                                         <td>
@@ -563,13 +595,27 @@ $this->backbone();
                                 <?php } ?>
                                 <tr>
                                     <td colspan=4><strong><?php _e('Total') ?></strong></td>
-                                    <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalProductPrice)); ?></strong></td>
-                                    <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalShippingPrice)); ?></strong></td>
-                                    <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalPackingPrice)); ?></strong></td>
-                                    <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalSetupPrice)); ?></strong></td>
-                                    <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalDiscountPrice)); ?></strong></td>
-                                    <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalVatPrice)); ?></strong></td>
-                                    <td><strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalPrice)); ?></strong></td>
+                                    <td>
+                                        <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalProductPrice)); ?></strong>
+                                    </td>
+                                    <td>
+                                        <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalShippingPrice)); ?></strong>
+                                    </td>
+                                    <td>
+                                        <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalPackingPrice)); ?></strong>
+                                    </td>
+                                    <td>
+                                        <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalSetupPrice)); ?></strong>
+                                    </td>
+                                    <td>
+                                        <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalDiscountPrice)); ?></strong>
+                                    </td>
+                                    <td>
+                                        <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalVatPrice)); ?></strong>
+                                    </td>
+                                    <td>
+                                        <strong><?php echo Pi::api('api', 'order')->viewPrice($this->escape($totalPrice)); ?></strong>
+                                    </td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -583,13 +629,14 @@ $this->backbone();
                             <ul class="list-inline clearfix">
                                 <li class="list-inline-item float-left"><?php _e('You can add new product / service to this order'); ?></li>
                                 <li class="list-inline-item float-right">
-                                    <a class="btn btn-success" title="<?php _e('Add product / service'); ?>" href="<?php echo $this->url(
-                                        '', [
-                                        'controller' => 'order',
-                                        'action'     => 'product',
-                                        'order'      => $order['id'],
-                                    ]
-                                    ); ?>">
+                                    <a class="btn btn-success" title="<?php _e('Add product / service'); ?>"
+                                       href="<?php echo $this->url(
+                                           '', [
+                                               'controller' => 'order',
+                                               'action'     => 'product',
+                                               'order'      => $order['id'],
+                                           ]
+                                       ); ?>">
                                         <i class="fas fa-plus"></i> <?php _e('Add product / service'); ?>
                                     </a>
                                 </li>
@@ -642,11 +689,12 @@ $this->backbone();
 
                                     <tr>
                                         <td><?php echo $this->escape($invoice['code']); ?></td>
-                                        <td><span id="update-invoice-<?php echo $invoice['id'] ?>" data-invoice="<?php echo $invoice['id'] ?>"
+                                        <td><span id="update-invoice-<?php echo $invoice['id'] ?>"
+                                                  data-invoice="<?php echo $invoice['id'] ?>"
                                                   class="badge <?php echo $invoice['type'] != 'CREDIT'
                                                   && $invoice['status'] != \Module\Order\Model\Invoice::STATUS_INVOICE_CANCELLED ? 'update-invoice btn'
-                                                      : '' ?>  <?php echo $badgeIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList(
-                                                )[$invoice['status']]; ?></span></td>
+                                                      : '' ?>  <?php echo $badgeIdClass; ?>"><?php echo \Module\Order\Model\Invoice::getStatusList()[$invoice['status']]; ?></span>
+                                        </td>
                                         <td><?php echo $this->escape($invoice['type']); ?></td>
                                         <td><?php echo $this->escape($invoice['type_payment']); ?></td>
                                         <td><?php echo $this->escape($invoice['time_create_view']) . ' ' . date('H:i', $invoice['time_create']); ?></td>
@@ -655,7 +703,8 @@ $this->backbone();
                                             <a class="btn btn-primary btn-sm" title="<?php _e('View'); ?>"
                                                href="<?php echo $this->url('', ['controller' => 'invoice', 'action' => 'view', 'id' => $invoice['id']]); ?>">
                                                 <i class="far fa-eye"></i> <?php _e('View'); ?></a>
-                                            <a class="btn btn-primary btn-sm" target="_blank" title="<?php _e('Print'); ?>"
+                                            <a class="btn btn-primary btn-sm" target="_blank"
+                                               title="<?php _e('Print'); ?>"
                                                href="<?php echo $this->url(
                                                    '', ['controller' => 'invoice', 'action' => 'print-pdf', 'id' => $invoice['id']]
                                                ); ?>">
@@ -701,7 +750,8 @@ $this->backbone();
                                             <td><?php echo $this->escape($installment['time_payment_view']); ?></td>
                                             <td><?php echo isset($gateways[$installment['gateway']]) ? $gateways[$installment['gateway']] : ''; ?></td>
                                             <td><span class="badge <?php echo $badgeIdClass; ?>"><?php echo $installment['status_payment']
-                                                    == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID ? __('Paid') : __('Unpaid') ?></span></td>
+                                                    == Module\Order\Model\Invoice\Installment::STATUS_PAYMENT_PAID ? __('Paid') : __('Unpaid') ?></span>
+                                            </td>
                                             <td class="text-right">
                                                 <?php
                                                 $type = '';
@@ -742,7 +792,8 @@ $this->backbone();
                                 <div class="">
                                     <p><a class="btn btn-success float-right"
                                           href="<?php echo $this->url('', ['controller' => 'invoice', 'action' => 'add', 'order' => $order['id']]); ?>"
-                                          title="<?php _e('New invoice'); ?>"><i class="fas fa-plus"></i> <?php _e('New invoice'); ?></a></p>
+                                          title="<?php _e('New invoice'); ?>"><i
+                                                    class="fas fa-plus"></i> <?php _e('New invoice'); ?></a></p>
                                 </div>
                             <?php } else { ?>
                                 <p><?php _e('Order is not validated, you cannot add an invoice.') ?></p>
